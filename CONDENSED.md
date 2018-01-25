@@ -16,11 +16,6 @@ range(<from inclusive>, <to exclusive>, <step size>)  # Negative step for backwa
 random.randint(<from inclusive>, <to inclusive>)
 ```
 
-List
-----
-```python
-```
-
 Dictionary
 ----------
 ```

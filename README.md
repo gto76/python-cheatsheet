@@ -22,6 +22,7 @@ sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
 
 Dictionary
 ----------
+```
 <dict>.items()
 <dict>.get(<key>, <default>)
 <dict>.setdefault(<key>, <default>)
@@ -207,7 +208,6 @@ class <name>:
 ```
 
 ### Enum
-----
 ```
 import enum
 class <name>(enum.Enum):
