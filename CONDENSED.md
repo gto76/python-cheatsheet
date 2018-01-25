@@ -1,5 +1,5 @@
-Python and Libraries Cheatsheet
-===============================
+Minimal Python Cheatsheet
+=========================
 
 Main
 ----
@@ -8,16 +8,17 @@ if __name__ == '__main__':
     main()
 ```
 
-Range
------
+Ranges
+------
 ```python
 range(<from inclusive>, <to exclusive>, <step size>)  # Negative step for backward.
+<list>[<from inclusive>:<to exclusive>:<step size>]   # Negative step for backward.
+random.randint(<from inclusive>, <to inclusive>)
 ```
 
 List
 ----
 ```python
-<list>[<inclusive from>:<exclusive to>:<step size>]
 ```
 
 Dictionary
@@ -110,7 +111,6 @@ Random
 ```
 import random
 random.random()
-random.randint(<from inclusive>, <to inclusive>)
 random.shuffle(<list>)
 ```
 

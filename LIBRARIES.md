@@ -49,10 +49,15 @@ def draw(screen):
 Profile
 -------
 ```
+import timeit
+timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
+```
+
+```
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
 graph.output_file = <filename>
-whith pycallgraph.PyCallGraph(output=graph):
+with pycallgraph.PyCallGraph(output=graph):
     <code>
 ```
 
