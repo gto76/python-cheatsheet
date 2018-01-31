@@ -27,6 +27,11 @@ Dictionary
 <dict>.get(<key>, <default>)
 <dict>.setdefault(<key>, <default>)
 <dict>.update(<dict>)
+collections.defaultdict(<type>)  # Creates list 
+```
+Init from two lists
+```
+dict(zip(keys, values))
 ```
 
 Set
@@ -54,6 +59,30 @@ Enumerate
 for i, <el> in enumerate(<list>)
 ```
 
+Named Tuples
+------------
+```
+>>> TestResults = collections.namedtuple('TestResults', ['filed', 'attempted'])
+>>> TestResults(1, 2)
+TestResults(filed=1, attempted=2)
+```
+
+
+Iterator
+--------
+Reads input until it reaches empty line.
+```
+for line in iter(input, ''):
+    print(line)
+```
+Use partial from functools if function needs arguments.
+
+Skips first element.
+```
+next(<iter>)
+for element in <iter>:
+    ...
+```
 
 Type
 ----
@@ -103,6 +132,12 @@ re.search(<regex>, <text>)
 {:<max width>.<no of decimals>f} -> '  3.14'
 ```
 
+```python
+>>> person = {'name': 'Jean-Luc', 'height': 187.1}
+>>> '{p[height]:.0f}'.format(p=person)
+'187'
+```
+
 ### Text Wrap
 ```python
 import textwrap
@@ -134,6 +169,15 @@ now.strftime('%Y%m%d')
 now.strftime('%Y%m%d%H%M%S')
 ```
 
+Args
+----
+```
+args = (1, 2)
+kwargs = {'x': 3, 'y': 4, 'z': 5}
+func(*args, **kwargs)
+# same as
+func(1, 2, x=3, y=4, z=5)
+```
 
 Inline
 ------
@@ -154,8 +198,8 @@ lambda: <return value>
 
 ### Map, Filter, Reduce
 ```python
-A. map(lambda x: x+1, range(10))
-B. filter(lambda x: x>5, range(10))
+map(lambda x: x+1, range(10))
+filter(lambda x: x>5, range(10))
 functools.reduce(combining_function, list_of_inputs)
 ```
 
@@ -164,13 +208,18 @@ Closure
 -------
 ```python
 def mult_clos(x):
-    def wrapped(y):
+   def wrapped(y):
             return x * y
-    return wrapped
+    return wrapped 
 
 mul_by_3 = mult_clos(3)
 ```
 
+or
+```
+from functools import partial
+partial(<function>, <parameter>)
+```
 
 Decorator
 ---------
@@ -178,6 +227,22 @@ Decorator
 @closure_name
 def function_that_gets_passed_to_closure():
     ...
+```
+
+Debugger example
+```
+from functools import wraps
+
+def debug(func):
+    @wraps(func)  # Nedded for metadata copying (func name, etc)
+    def wrapper(*args, **kwargs):
+        print(func.__name__)
+        return func(*args, **kwargs)
+    return wrapper
+
+@debug
+def add(x, y):
+    return x + y
 ```
 
 
@@ -211,7 +276,7 @@ class <name>:
 ```python
 import enum
 class <name>(enum.Enum):
-    <value> = <index>
+    <value> = <index>  # or auto()
 ```
 
 ### Copy
@@ -254,6 +319,14 @@ os.popen(<command>).read()
 filename = input('Enter a file name: ')
 ```
 
+Print lines until EOF
+```
+while True:
+    try:
+        print(input())
+    except EOFError:
+        break
+```
 
 JSON
 ----
@@ -296,6 +369,17 @@ db.execute(<query>)
 db.commit()
 ```
 
+
+Exceptions
+----------
+```
+while True:
+    try:
+        x = int(input("Please enter a number: "))
+        break
+    except ValueError:
+        print("Oops!  That was no valid number.  Try again...")
+```
 
 Threading
 ---------
@@ -403,6 +487,11 @@ Inspecting code at runetime and code that generates code.
 ```python
 >>> getattr(b, 'a')
 'sdfsd'
+```
+
+same as
+```
+B.__getattribute__(b, 'a')
 ```
 
 ### Hasattr
