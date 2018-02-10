@@ -29,9 +29,18 @@ Dictionary
 <dict>.update(<dict>)
 collections.defaultdict(<type>)  # Creates list 
 ```
+
 Init from two lists
 ```
 dict(zip(keys, values))
+```
+
+Counter
+```
+>>> from collections import Counter
+>>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
+>>> Counter(z)
+Counter({'blue': 3, 'red': 2, 'yellow': 1})
 ```
 
 Set
@@ -43,6 +52,7 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
+<frozenset> - is hashable can be used as key in dictionary
 ```
 
 Range
@@ -56,7 +66,7 @@ range(<from inclusive>, <to exclusive>, <step size>)  # Negative step for backwa
 Enumerate
 ---------
 ```python
-for i, <el> in enumerate(<list>)
+for i, <el> in enumerate(<list>, [start])
 ```
 
 Named Tuples
@@ -169,8 +179,8 @@ now.strftime('%Y%m%d')
 now.strftime('%Y%m%d%H%M%S')
 ```
 
-Args
-----
+Arguments
+---------
 ```
 args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -178,6 +188,11 @@ func(*args, **kwargs)
 # same as
 func(1, 2, x=3, y=4, z=5)
 ```
+
+* is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
+
+So if uniqueCrossTabs was [ [ 1, 2 ], [ 3, 4 ] ], then itertools.chain(*uniqueCrossTabs) is the same as saying itertools.chain([ 1, 2 ], [ 3, 4 ])
+
 
 Inline
 ------
@@ -191,9 +206,16 @@ lambda: <return value>
 ```python
 [i+1 for i in range(10)]
 [i for i in range(10) if i>5]
+{i: i*2 for i in range(10)} - dictionary
+(x+5 for x in range(0, 10)) - generator
+```
+
+```
 [i+j for i in range(10) for j in range(10)]
-{i: i*2 for i in range(10)}
-(x+5 for x in range(0, 10)) - generator!
+# Same as:
+for i in range(10):
+    for j in range(10):
+        out.append(i+j)
 ```
 
 ### Map, Filter, Reduce
@@ -203,6 +225,15 @@ filter(lambda x: x>5, range(10))
 functools.reduce(combining_function, list_of_inputs)
 ```
 
+### Any, All
+```
+any(a[1] for a in aaa)
+```
+
+### If - Else
+```
+expression_if_true if condition else expression_if_false
+```
 
 Closure
 -------
@@ -276,7 +307,7 @@ class <name>:
 ```python
 import enum
 class <name>(enum.Enum):
-    <value> = <index>  # or auto()
+    <value> = <index>  # or enum.auto()
 ```
 
 ### Copy
@@ -300,6 +331,11 @@ sys.argv
 ```python
 with open(<filename>, encoding='utf-8') as file:
     return file.readlines()
+```
+```
+def get_file_contents(file_name):
+    with open(file_name, encoding='utf-8') as f:
+        return f.readlines()
 ```
 
 ### Write to File
@@ -401,7 +437,6 @@ lock.acquire()
 lock.release()
 ```
 
-
 Itertools
 ---------
 Every function returns an generator and can accept any collection.
@@ -427,6 +462,12 @@ from itertools import *
 ```python
 >>> permutations("abc", 2)
 [('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c'), ('c', 'a'), ('c', 'b')]
+```
+
+### Product
+```python
+>>> list(product('ab', [1,2]))
+[('a', 1), ('a', 2), ('b', 1), ('b', 2)]
 ```
 
 ### Compress
@@ -461,11 +502,12 @@ from itertools import *
 {'bob': [{'id': 1, 'name': 'bob'}, {'id': 2, 'name': 'bob'}], 'peter': [{'id': 3, 'name': 'peter'}]}
 ```
 
-### Product
-```python
->>> list(product('ab', [1,2]))
-[('a', 1), ('a', 2), ('b', 1), ('b', 2)]
+### Islice
 ```
+islice([1, 2, 3], 1, None)
+[2, 3]
+```
+
 
 ### ifilter/imap/izip
 Filter, map and zip functions that return generators instead of iterators
@@ -550,12 +592,117 @@ class BlaBla:
     __metaclass__ = Bla
 ```
 
+Eval
+----
+```
+import ast
+import operator as op
+
+# supported operators
+operators = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul,
+             ast.Div: op.truediv, ast.Pow: op.pow, ast.BitXor: op.xor,
+             ast.USub: op.neg}
+
+def eval_expr(expr):
+    """
+    >>> eval_expr('2^6')
+    4
+    >>> eval_expr('2**6')
+    64
+    >>> eval_expr('1 + 2*3**(4^5) / (6 + -7)')
+    -5.0
+    """
+    print(expr)
+    return eval_(ast.parse(expr, mode='eval').body)
+
+def eval_(node):
+    if isinstance(node, ast.Num): # <number>
+        return node.n
+    elif isinstance(node, ast.BinOp): # <left> <operator> <right>
+        return operators[type(node.op)](eval_(node.left), eval_(node.right))
+    elif isinstance(node, ast.UnaryOp): # <operator> <operand> e.g., -1
+        return operators[type(node.op)](eval_(node.operand))
+    else:
+        raise TypeError(node)
+```
+
+
+Ascii
+-----
+Get char from int.
+```
+chr(<int>)
+```
+
+Flatten List
+------------
+```
+[item for sublist in a_list for item in sublist]
+```
+
+
+Libraries
+=========
+
+
+Plot
+----
+```
+import matplotlib
+matplotlib.pyplot.plot(<data>, ...)
+matplotlib.pyplot.show()
+matplotlib.pyplot.savefig(<filename>)
+```
+
+
+Web
+---
+```
+import bottle
+```
+
+### Run
+```
+bottle.run(host='localhost', port=8080)
+bottle.run(host='0.0.0.0', port=80, server='cherypy')
+```
+
+### Static request
+
+### Dynamic request
+
+### REST request
+
+
+Curses
+------
+```
+import curses
+def main():
+    curses.wrapper(draw)
+def draw(screen):
+    screen.clear()
+    screen.addstr(0, 0, "Press ESC to quit.")
+    while screen.getch() != 27:
+        pass
+```
 
 
 
+Profile
+-------
+```
+import timeit
+timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
+```
 
-
-
+```
+import pycallgraph
+graph = pycallgraph.output.GraphvizOutput()
+graph.output_file = <filename>
+with pycallgraph.PyCallGraph(output=graph):
+    <code>
+```
 
 
 
