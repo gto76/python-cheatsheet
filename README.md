@@ -306,8 +306,17 @@ class <name>:
 ### Enum
 ```python
 import enum
-class <name>(enum.Enum):
-    <value> = <index>  # or enum.auto()
+class <enum-name>(enum.Enum):
+    <name> = <value>  # or enum.auto()
+
+<enum-name>.<name> == <enum>
+<enum-name>(value) == <enum>
+<enum>.name == <name>
+<enum>.value == <value>
+
+Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
+list(<enum-name>) == [<enum1>, <enum2>, ...]
+random.choice(list(<enum-name>)) == random <enum>
 ```
 
 ### Copy
@@ -382,8 +391,6 @@ with open(<filename>, 'w', enconding='utf-8') as file:
     file.write(json.dumps(<object>))
 ```
 
-
-
 SQLite
 ------
 ```python
@@ -404,7 +411,6 @@ db.close()
 db.execute(<query>)
 db.commit()
 ```
-
 
 Exceptions
 ----------
@@ -644,7 +650,6 @@ Flatten List
 Libraries
 =========
 
-
 Plot
 ----
 ```
@@ -653,7 +658,6 @@ matplotlib.pyplot.plot(<data>, ...)
 matplotlib.pyplot.show()
 matplotlib.pyplot.savefig(<filename>)
 ```
-
 
 Web
 ---
@@ -699,12 +703,44 @@ timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
-graph.output_file = <filename>
+graph.output_file = "{}-{}.png".format("profile",
+                                       get_current_datetime_string())
 with pycallgraph.PyCallGraph(output=graph):
     <code>
+
+def get_current_datetime_string():
+    now = datetime.datetime.now()
+    return get_datetime_string(now)
+
+def get_datetime_string(a_datetime):
+    return a_datetime.strftime('%Y%m%d%H%M%S')
 ```
 
+Audio
+-----
+Saves list of floats of size 0 to 1 to a wav file.
+```
+import wave
+import struct
+frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
+wf = wave.open(<filename>, 'wb')
+wf.setnchannels(1)
+wf.setsampwidth(4)
+wf.setframerate(44100)
+wf.writeframes(b''.join(frames))
+wf.close()
+```
 
+Coockboock
+==========
+
+Dictionary
+----------
+
+Filter by keys:
+```
+{k: v for k, v in d.iteritems() if k in [2,3]}
+```
 
 
 
