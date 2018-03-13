@@ -1,4 +1,4 @@
-Python and Libraries Cheatsheet
+Comprehensive Python Cheatsheet
 ===============================
 
 Main
@@ -20,6 +20,11 @@ sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
 ```
 
+Flatten List
+```
+[item for sublist in list for item in sublist]
+```
+
 Dictionary
 ----------
 ```python
@@ -33,6 +38,11 @@ collections.defaultdict(<type>)  # Creates list
 Init from two lists
 ```
 dict(zip(keys, values))
+```
+
+Filter by keys
+```
+{k: v for k, v in d.iteritems() if k in [2,3]}
 ```
 
 Counter
@@ -52,7 +62,7 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
-<frozenset> - is hashable can be used as key in dictionary
+<frozenset> - Is hashable and can be used as key in dictionary
 ```
 
 Range
@@ -514,14 +524,13 @@ islice([1, 2, 3], 1, None)
 [2, 3]
 ```
 
-
-### ifilter/imap/izip
+### Ifilter/imap/izip
 Filter, map and zip functions that return generators instead of iterators
 
 
 Introspection and Metaprograming
 --------------------------------
-Inspecting code at runetime and code that generates code.
+Inspecting code at runtime and code that generates code.
 
 ```python
 >>> class B:
@@ -566,6 +575,7 @@ BB = type('B', (), {'a': 'sdfsd', 'b': 123324}
 b = BB()
 ```
 
+
 MetaClass
 ---------
 Classes that creates classes.
@@ -582,6 +592,7 @@ class MyMetaClass(type):
         return type.__new__(klass, name, parents, attrs)
 ```
 
+
 Do Stuff
 --------
 * Look at the attributes
@@ -590,6 +601,7 @@ Do Stuff
 * Traverse the parent classes
 * Change values in the class
 
+
 Metaclass Attr
 --------------
 When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type.
@@ -597,6 +609,7 @@ When class is created it checks if it has metaclass defined. If not, it recursiv
 class BlaBla:
     __metaclass__ = Bla
 ```
+
 
 Eval
 ----
@@ -630,20 +643,6 @@ def eval_(node):
         return operators[type(node.op)](eval_(node.operand))
     else:
         raise TypeError(node)
-```
-
-
-Ascii
------
-Get char from int.
-```
-chr(<int>)
-```
-
-Flatten List
-------------
-```
-[item for sublist in a_list for item in sublist]
 ```
 
 
@@ -691,7 +690,10 @@ def draw(screen):
         pass
 ```
 
-
+Get char from int
+```
+chr(<int>)
+```
 
 Profile
 -------
@@ -718,7 +720,7 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-Saves list of floats of size 0 to 1 to a wav file.
+Saves list of floats of size 0 to 1 to a WAV file.
 ```
 import wave
 import struct
@@ -731,16 +733,6 @@ wf.writeframes(b''.join(frames))
 wf.close()
 ```
 
-Coockboock
-==========
-
-Dictionary
-----------
-
-Filter by keys:
-```
-{k: v for k, v in d.iteritems() if k in [2,3]}
-```
 
 
 
