@@ -29,18 +29,18 @@ Dictionary
 ----------
 ```python
 <dict>.items()
-<dict>.get(<key>, <default>)
-<dict>.setdefault(<key>, <default>)
+<dict>.get(key, default)
+<dict>.setdefault(key, default)
 <dict>.update(<dict>)
 collections.defaultdict(<type>)
 ```
 
-#### Initiates dict from two lists.
+#### Initiates dict from two lists
 ```python
 dict(zip(keys, values))
 ```
 
-#### Filter by keys
+#### Filters by keys
 ```python
 {k: v for k, v in <dict>.iteritems() if k in keys}
 ```
@@ -62,7 +62,7 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
-<frozenset> - Is hashable and can be used as key in dictionary
+<frozenset>  # Is hashable and can be used as key in dictionary
 ```
 
 Range
@@ -122,12 +122,12 @@ str.replace(<text>, <old>, <new>)
 <str>.isnumeric()
 <str>.split()
 <str>.strip()
-'<str>'.join(<list>)
+<str>.join(<list>)
 ```
 
 ### Print
 ```python
-print(<el1>, <el2>, end='', sep='', file=<file>)
+print(<el>, <el>, end='', sep='', file=<file>)
 ```
 
 ### Regex
