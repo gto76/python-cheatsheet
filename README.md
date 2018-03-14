@@ -16,9 +16,12 @@ List
 <list>.extend(<list>)
 <list>.sort()
 <list>.reverse()
+```
+
+```python
 sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
-[item for sublist in <list> for item in sublist]  # Flattens List
+[item for sublist in <list> for item in sublist]  # Flattens List.
 ```
 
 Dictionary
@@ -28,9 +31,12 @@ Dictionary
 <dict>.get(key, default)
 <dict>.setdefault(key, default)
 <dict>.update(<dict>)
-collections.defaultdict(<type>)
-dict(zip(keys, values))  # Initiates a dict from two lists
-{k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys
+```
+
+```python
+collections.defaultdict(<type>)  # Creates a dictionary with default values.
+dict(zip(keys, values))  # Initiates a dict from two lists.
+{k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys.
 ```
 
 #### Counter
@@ -50,7 +56,7 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
-<frozenset>  # Is hashable and can be used as key in dictionary
+<frozenset>  # Is hashable and can be used as key in dictionary.
 ```
 
 Range
@@ -58,7 +64,7 @@ Range
 ```python
 range(to_exclusive)
 range(from_inclusive, to_exclusive)
-range(from_inclusive, to_exclusive, step_size)  # Negative step for backward
+range(from_inclusive, to_exclusive, step_size)  # Negative step_size for backward
 ```
 
 Enumerate
@@ -98,16 +104,17 @@ def step(start, step):
     while True:
         yield start
         start += step
-
+```
+```python
 stepper = step(10, 2)
-next(stepper)  # -> 10 (, 12, 14, ...)
+next(stepper)  # 10 (, 12, 14, ...)
 ```
 
 
 Type
 ----
 ```python
-type(<el>)  # is int/str/set/list/...
+type(<el>)  # int/str/set/list/...
 ```
 ```python
 import numbers
@@ -139,17 +146,17 @@ re.search(<regex>, text)
 
 ### Format
 ```python
-'{}'.format(<el>)
+'{}'.format(<el> [, <el>, ...])
 ```
 
 ```python
-{:min_width}   # -> '<el>    '
-{:>min_width}  # -> '    <el>'
-{:^min_width}  # -> '  <el>  '
-{:_min_width}  # -> '<el>____'
-{:.max_width}  # -> '<e>'
-{:max_widht.min_width}        # -> '    <e>'
-{:max_width.no_of_decimalsf}  # -> '   3.14'
+{:min_width}   # '<el>    '
+{:>min_width}  # '    <el>'
+{:^min_width}  # '  <el>  '
+{:_min_width}  # '<el>____'
+{:.max_width}  # '<e>'
+{:max_widht.min_width}        # '    <e>'
+{:max_width.no_of_decimalsf}  # '   3.14'
 ```
 
 ```python
@@ -198,16 +205,15 @@ func(*args, **kwargs)  # Is same as
 func(1, 2, x=3, y=4, z=5)
 ```
 
-##### "*" is the "splat" operator, that takes a list as input, and expands it 
-into actual positional arguments in the function call.
+#### "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.
 
 
 Inline
 ------
 ### Lambda
 ```python
-lambda <argument1>, <argument2>: <return value>
-lambda: <return value>
+lambda <argument1>, <argument2>: <return_value>
+lambda: <return_value>
 ```
 
 ### Comprehension
