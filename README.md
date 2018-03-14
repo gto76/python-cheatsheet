@@ -64,7 +64,7 @@ Range
 ```python
 range(to_exclusive)
 range(from_inclusive, to_exclusive)
-range(from_inclusive, to_exclusive, step_size)  # Negative step_size for backward
+range(from_inclusive, to_exclusive, step_size)  # Negative step_size for backward.
 ```
 
 Enumerate
@@ -263,7 +263,8 @@ def multiply_closure(x):
     def wrapped(y):
         return x * y
     return wrapped 
-
+```
+```python
 multiply_by_3 = multiply_closure(3)
 ```
 
@@ -444,7 +445,7 @@ import threading
 
 ### Thread
 ```python
-thread = threading.Thread(target=<function>, args=(<first arg>, ))
+thread = threading.Thread(target=<function>, args=(<first_arg>, ))
 thread.start()
 thread.join()
 ```
@@ -588,14 +589,14 @@ type(class_name, parents<tuple>, attributes<dict>)
 #### Classes that create classes.
 ```python
 def my_meta_class(name, parents, attrs):
-    # do stuff
+    ...
     return type(name, parents, attrs)
 ```
 ##### or
 ```python
 class MyMetaClass(type):
     def __new__(klass, name, parents, attrs):
-        # do stuff
+        ...
         return type.__new__(klass, name, parents, attrs)
 ```
 
