@@ -88,7 +88,7 @@ Iterator
 for line in iter(input, ''):
     pass
 ```
-Use partial from functools if function needs arguments.
+Use _partial_ from functools if function needs arguments.
 
 #### Skips first element
 ```python
@@ -248,12 +248,12 @@ functools.reduce(combining_function, list_of_inputs)
 
 ### Any, All
 ```python
-any(el[1] for el in <collection>)  # <boolean>
+any(el[1] for el in <collection>)
 ```
 
 ### If - Else
 ```python
-expression_if_true if condition else expression_if_false
+<expression_if_true> if <condition> else <expression_if_false>
 ```
 
 Closure
@@ -314,7 +314,7 @@ class <name>:
 ```python
 import enum
 class <enum_name>(enum.Enum):
-    <name1> = <value1>  # Or "= enum.auto()"" for automatic indexing.
+    <name1> = <value1>  # Or "= enum.auto()" for automatic indexing.
     <name2> = <value2>
     ...
 ```
