@@ -12,7 +12,7 @@ if __name__ == '__main__':
 List
 ----
 ```python
-<list>[<from inclusive>:<to exclusive>:<step size>]
+<list>[from_inclusive : to_exclusive : step_size]
 <list>.extend(<list>)
 <list>.sort()
 <list>.reverse()
@@ -22,7 +22,7 @@ sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
 
 #### Flatten List
 ```python
-[item for sublist in list for item in sublist]
+[item for sublist in <list> for item in sublist]
 ```
 
 Dictionary
@@ -32,20 +32,20 @@ Dictionary
 <dict>.get(<key>, <default>)
 <dict>.setdefault(<key>, <default>)
 <dict>.update(<dict>)
-collections.defaultdict(<type>)  # Creates list 
+collections.defaultdict(<type>)
 ```
 
-Init from two lists
+#### Initiates dict from two lists.
 ```python
 dict(zip(keys, values))
 ```
 
-Filter by keys
+#### Filter by keys
 ```python
-{k: v for k, v in d.iteritems() if k in [2,3]}
+{k: v for k, v in <dict>.iteritems() if k in keys}
 ```
 
-Counter
+#### Counter
 ```python
 >>> from collections import Counter
 >>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
@@ -90,14 +90,14 @@ TestResults(filed=1, attempted=2)
 
 Iterator
 --------
-Reads input until it reaches empty line.
+#### Reads input until it reaches empty line.
 ```python
 for line in iter(input, ''):
     print(line)
 ```
 Use partial from functools if function needs arguments.
 
-Skips first element.
+#### Skips first element
 ```python
 next(<iter>)
 for element in <iter>:
@@ -191,7 +191,7 @@ now.strftime('%Y%m%d%H%M%S')
 
 Arguments
 ---------
-```
+```python
 args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
 func(*args, **kwargs)
@@ -220,7 +220,7 @@ lambda: <return value>
 (x+5 for x in range(0, 10)) - generator
 ```
 
-```
+```python
 [i+j for i in range(10) for j in range(10)]
 # Same as:
 for i in range(10):
@@ -236,12 +236,12 @@ functools.reduce(combining_function, list_of_inputs)
 ```
 
 ### Any, All
-```
+```python
 any(a[1] for a in aaa)
 ```
 
 ### If - Else
-```
+```python
 expression_if_true if condition else expression_if_false
 ```
 
@@ -256,8 +256,8 @@ def mult_clos(x):
 mul_by_3 = mult_clos(3)
 ```
 
-or
-```
+#### or
+```python
 from functools import partial
 partial(<function>, <parameter>)
 ```
@@ -270,8 +270,8 @@ def function_that_gets_passed_to_closure():
     ...
 ```
 
-Debugger example
-```
+#### Debugger example
+```python
 from functools import wraps
 
 def debug(func):
@@ -351,7 +351,7 @@ sys.argv
 with open(<filename>, encoding='utf-8') as file:
     return file.readlines()
 ```
-```
+```python
 def get_file_contents(file_name):
     with open(file_name, encoding='utf-8') as f:
         return f.readlines()
@@ -375,7 +375,7 @@ filename = input('Enter a file name: ')
 ```
 
 Print lines until EOF
-```
+```python
 while True:
     try:
         print(input())
@@ -424,7 +424,7 @@ db.commit()
 
 Exceptions
 ----------
-```
+```python
 while True:
     try:
         x = int(input("Please enter a number: "))
@@ -519,7 +519,7 @@ from itertools import *
 ```
 
 ### Islice
-```
+```python
 islice([1, 2, 3], 1, None)
 [2, 3]
 ```
@@ -530,7 +530,7 @@ Filter, map and zip functions that return generators instead of iterators
 
 Introspection and Metaprograming
 --------------------------------
-Inspecting code at runtime and code that generates code.
+#### Inspecting code at runtime and code that generates code.
 
 ```python
 >>> class B:
@@ -547,7 +547,7 @@ Inspecting code at runtime and code that generates code.
 ```
 
 same as
-```
+```python
 B.__getattribute__(b, 'a')
 ```
 
@@ -578,7 +578,7 @@ b = BB()
 
 MetaClass
 ---------
-Classes that creates classes.
+#### Classes that creates classes.
 ```python
 def my_meta_class(name, parents, attrs):
     ... do stuff
@@ -613,7 +613,7 @@ class BlaBla:
 
 Eval
 ----
-```
+```python
 import ast
 import operator as op
 
@@ -651,7 +651,7 @@ Libraries
 
 Plot
 ----
-```
+```python
 import matplotlib
 matplotlib.pyplot.plot(<data>, ...)
 matplotlib.pyplot.show()
@@ -660,12 +660,12 @@ matplotlib.pyplot.savefig(<filename>)
 
 Web
 ---
-```
+```python
 import bottle
 ```
 
 ### Run
-```
+```python
 bottle.run(host='localhost', port=8080)
 bottle.run(host='0.0.0.0', port=80, server='cherypy')
 ```
@@ -679,7 +679,7 @@ bottle.run(host='0.0.0.0', port=80, server='cherypy')
 
 Curses
 ------
-```
+```python
 import curses
 def main():
     curses.wrapper(draw)
@@ -690,19 +690,19 @@ def draw(screen):
         pass
 ```
 
-Get char from int
-```
+#### Gets char from int
+```python
 chr(<int>)
 ```
 
 Profile
 -------
-```
+```python
 import timeit
 timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```
 
-```
+```python
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
 graph.output_file = "{}-{}.png".format("profile",
@@ -720,8 +720,8 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-Saves list of floats of size 0 to 1 to a WAV file.
-```
+#### Saves list of floats of size 0 to 1 to a WAV file.
+```python
 import wave
 import struct
 frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
