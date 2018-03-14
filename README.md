@@ -198,8 +198,8 @@ func(*args, **kwargs)  # Is same as
 func(1, 2, x=3, y=4, z=5)
 ```
 
-"*" is the "splat" operator, that takes a list as input, and expands it into 
-actual positional arguments in the function call.
+##### "*" is the "splat" operator, that takes a list as input, and expands it 
+into actual positional arguments in the function call.
 
 
 Inline
@@ -212,10 +212,10 @@ lambda: <return value>
 
 ### Comprehension
 ```python
-[i+1 for i in range(10)]       # 1, 2, ..., 10
-[i for i in range(10) if i>5]  # 6, 7, ..., 9
+[i+1 for i in range(10)]       # [1, 2, ..., 10]
+[i for i in range(10) if i>5]  # [6, 7, ..., 9]
 {i: i*2 for i in range(10)}    # {0: 0, 1: 2, ..., 9: 18}
-(x+5 for x in range(0, 10))    # -> Generator
+(x+5 for x in range(0, 10))    # <generator>
 ```
 
 ```python
@@ -231,17 +231,17 @@ for i in range(10):
 
 ### Map, Filter, Reduce
 ```python
-map(lambda x: x+1, range(10))     # 1, 2, ..., 10
-filter(lambda x: x>5, range(10))  # 6, 7, ..., 9
+map(lambda x: x+1, range(10))     # [1, 2, ..., 10]
+filter(lambda x: x>5, range(10))  # [6, 7, ..., 9]
 functools.reduce(combining_function, list_of_inputs)
 ```
 
 ### Any, All
 ```python
-any(el[1] for el in <collection>)  # -> Boolean
+any(el[1] for el in <collection>)  # <boolean>
 ```
 
-### If - Else
+### If — Else
 ```python
 expression_if_true if condition else expression_if_false
 ```
@@ -304,7 +304,8 @@ class <name>:
 ```python
 import enum
 class <enum_name>(enum.Enum):
-    <name> = <value>  # Or enum.auto() for automatic indexing.
+    <name> = <value>  # Or "= enum.auto()"" for automatic indexing.
+    ...
 ```
 
 ```python
@@ -403,7 +404,7 @@ db = sqlite3.connect(file_name)
 ```python
 cursor = db.execute(<query>)
 if cursor:
-    cursor.<fetchone/fetchall>()
+    cursor.fetchall()  # or cursor.fetchone()
 db.close()
 ```
 
@@ -516,7 +517,7 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter/imap/izip
-Filter, map and zip functions that return generators instead of iterators
+##### Filter, map and zip functions that return generators instead of iterators
 
 
 Introspection and Metaprograming
@@ -543,7 +544,7 @@ Introspection and Metaprograming
 'sdfsd'
 ```
 
-Is the same as
+##### Is the same as
 
 ```python
 B.__getattribute__(b, 'a')
@@ -579,7 +580,7 @@ def my_meta_class(name, parents, attrs):
     # do stuff
     return type(name, parents, attrs)
 ```
-or
+##### or
 ```python
 class MyMetaClass(type):
     def __new__(klass, name, parents, attrs):
@@ -607,7 +608,6 @@ operators = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul,
              ast.USub: op.neg}
 
 def eval_expr(expr):
-    print(expr)
     return eval_(ast.parse(expr, mode='eval').body)
 
 def eval_(node):
@@ -675,7 +675,7 @@ def draw(screen):
         pass
 ```
 
-#### Gets char from int
+##### Gets char from int
 ```python
 chr(<int>)
 ```
@@ -694,7 +694,7 @@ graph.output_file = get_file_name()
 with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
-##### Utility code for unique PNG filenames.
+##### Utility code for unique PNG filenames
 ```python
 def get_file_name():
     return "{}-{}.png".format("profile", get_current_datetime_string())
@@ -709,7 +709,7 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-#### Saves list of floats of size 0 to 1 to a WAV file.
+#### Saves list of floats of size 0 to 1 to a WAV file
 ```python
 import wave, struct
 frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
