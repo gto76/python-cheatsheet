@@ -21,7 +21,7 @@ List
 ```python
 sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
-[item for sublist in <list> for item in sublist]  # Flattens List.
+flattened_list = [item for sublist in <list> for item in sublist]
 ```
 
 Dictionary
@@ -34,8 +34,8 @@ Dictionary
 ```
 
 ```python
-collections.defaultdict(<type>)  # Creates a dictionary with default values.
-dict(zip(keys, values))  # Initiates a dict from two lists.
+collections.defaultdict(<type>)                       # Creates a dictionary with default values.
+dict(zip(keys, values))                               # Initiates a dict from two lists.
 {k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys.
 ```
 
@@ -56,16 +56,19 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
-<frozenset>  # Is hashable and can be used as key in dictionary.
 ```
+#### Frozenset 
+##### Is hashable and can be used as a key in dictionary.
+
 
 Range
 -----
 ```python
 range(to_exclusive)
 range(from_inclusive, to_exclusive)
-range(from_inclusive, to_exclusive, step_size)  # Negative step_size for backward.
+range(from_inclusive, to_exclusive, step_size)
 ```
+##### Negative step_size can be used for backward range.
 
 Enumerate
 ---------
@@ -83,18 +86,18 @@ TestResults(filed=1, attempted=2)
 
 Iterator
 --------
-#### Reads input until it reaches empty line
+#### Reads input until it reaches an empty line.
 ```python
 for line in iter(input, ''):
-    pass
+    ...
 ```
 Use _partial_ from functools if function needs arguments.
 
-#### Skips first element
+#### Skips first element.
 ```python
 next(<iter>)
 for element in <iter>:
-    pass
+    ...
 ```
 
 Generator
@@ -114,7 +117,7 @@ next(stepper)  # 10 (, 12, 14, ...)
 Type
 ----
 ```python
-type(<el>)  # int/str/set/list/...
+type(<el>)  # <class 'int'>/<class 'str'>/...
 ```
 ```python
 import numbers
@@ -155,6 +158,8 @@ re.search(<regex>, text)
 {:^min_width}  # '  <el>  '
 {:_min_width}  # '<el>____'
 {:.max_width}  # '<e>'
+```
+```python
 {:max_widht.min_width}        # '    <e>'
 {:max_width.no_of_decimalsf}  # '   3.14'
 ```
@@ -203,7 +208,7 @@ args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
 func(*args, **kwargs)  
 ```
-##### Is same as
+#### Is the same as
 ```python
 func(1, 2, x=3, y=4, z=5)
 ```
@@ -231,7 +236,7 @@ lambda <argument1>, <argument2>: <return_value>
 ```python
 [i+j for i in range(10) for j in range(10)]
 ```
-##### Is same as
+#### Is the same as
 ```python
 out = []
 for i in range(10):
@@ -315,10 +320,11 @@ class <name>:
 ```python
 import enum
 class <enum_name>(enum.Enum):
-    <name1> = <value1>  # Or "= enum.auto()" for automatic indexing.
+    <name1> = <value1>  
     <name2> = <value2>
     ...
 ```
+##### Also "<name3> = enum.auto()" can be used for automatic indexing.
 
 ```python
 <enum_name>.<name>  # == <enum>
@@ -329,8 +335,8 @@ class <enum_name>(enum.Enum):
 
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
-list(<enum_name>)  # == [<enum1>, <enum2>, ...]
-random.choice(list(<enum_name>))  # == random <enum>
+list(<enum_name>)                                      # == [<enum1>, <enum2>, ...]
+random.choice(list(<enum_name>))                       # == random <enum>
 ```
 
 ### Copy
@@ -459,7 +465,7 @@ lock.release()
 
 Itertools
 ---------
-Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to list() 
+Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to _list()_ 
 function.
 
 ```python
@@ -529,7 +535,7 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter/imap/izip
-##### Filter, map and zip functions that return generators instead of iterators
+##### Filter, map and zip functions that return generators instead of iterators.
 
 
 Introspection and Metaprograming
@@ -694,6 +700,7 @@ chr(<int>)
 
 Profile
 -------
+#### Times execution of the passed code.
 ```python
 import timeit
 timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
@@ -721,7 +728,7 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-#### Saves list of floats of size 0 to 1 to a WAV file
+#### Saves list of floats of size 0 to 1 to a WAV file.
 ```python
 import wave, struct
 frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
