@@ -57,8 +57,7 @@ Set
 <set>.intersection(<set>)
 <set>.difference(<set>)
 ```
-#### Frozenset 
-##### Is hashable and can be used as a key in dictionary.
+#### Frozenset — Is hashable and can be used as a key in dictionary.
 
 
 Range
@@ -68,7 +67,7 @@ range(to_exclusive)
 range(from_inclusive, to_exclusive)
 range(from_inclusive, to_exclusive, step_size)
 ```
-##### Negative step_size can be used for backward range.
+##### Negative _step_size_ can be used for backward range.
 
 Enumerate
 ---------
