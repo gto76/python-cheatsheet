@@ -12,7 +12,7 @@ if __name__ == '__main__':
 List
 ----
 ```python
-<list>[<inclusive from>:<exclusive to>:<step size>]
+<list>[<from inclusive>:<to exclusive>:<step size>]
 <list>.extend(<list>)
 <list>.sort()
 <list>.reverse()
@@ -20,8 +20,8 @@ sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
 ```
 
-Flatten List
-```
+#### Flatten List
+```python
 [item for sublist in list for item in sublist]
 ```
 
@@ -36,17 +36,17 @@ collections.defaultdict(<type>)  # Creates list
 ```
 
 Init from two lists
-```
+```python
 dict(zip(keys, values))
 ```
 
 Filter by keys
-```
+```python
 {k: v for k, v in d.iteritems() if k in [2,3]}
 ```
 
 Counter
-```
+```python
 >>> from collections import Counter
 >>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
 >>> Counter(z)
@@ -81,7 +81,7 @@ for i, <el> in enumerate(<list>, [start])
 
 Named Tuples
 ------------
-```
+```python
 >>> TestResults = collections.namedtuple('TestResults', ['filed', 'attempted'])
 >>> TestResults(1, 2)
 TestResults(filed=1, attempted=2)
@@ -91,14 +91,14 @@ TestResults(filed=1, attempted=2)
 Iterator
 --------
 Reads input until it reaches empty line.
-```
+```python
 for line in iter(input, ''):
     print(line)
 ```
 Use partial from functools if function needs arguments.
 
 Skips first element.
-```
+```python
 next(<iter>)
 for element in <iter>:
     ...
