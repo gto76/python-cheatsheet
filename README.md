@@ -621,7 +621,7 @@ def eval_(node):
         raise TypeError(node)
 ```
 
-```
+```python
 >>> eval_expr('2^6')
 4
 >>> eval_expr('2**6')
@@ -694,7 +694,7 @@ graph.output_file = get_file_name()
 with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
-#### Utility code for unique PNG filenames.
+##### Utility code for unique PNG filenames.
 ```python
 def get_file_name():
     return "{}-{}.png".format("profile", get_current_datetime_string())
