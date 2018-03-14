@@ -201,7 +201,10 @@ Arguments
 ```python
 args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
-func(*args, **kwargs)  # Is same as
+func(*args, **kwargs)  
+```
+##### Is same as
+```python
 func(1, 2, x=3, y=4, z=5)
 ```
 
@@ -212,8 +215,8 @@ Inline
 ------
 ### Lambda
 ```python
-lambda <argument1>, <argument2>: <return_value>
 lambda: <return_value>
+lambda <argument1>, <argument2>: <return_value>
 ```
 
 ### Comprehension
@@ -221,14 +224,15 @@ lambda: <return_value>
 [i+1 for i in range(10)]       # [1, 2, ..., 10]
 [i for i in range(10) if i>5]  # [6, 7, ..., 9]
 {i: i*2 for i in range(10)}    # {0: 0, 1: 2, ..., 9: 18}
-(x+5 for x in range(0, 10))    # <generator>
+(x+5 for x in range(0, 10))    # (5, 6, ..., 14)
 ```
+##### Last one creates a generator.
 
 ```python
 [i+j for i in range(10) for j in range(10)]
 ```
-Is same as:
-```
+##### Is same as
+```python
 out = []
 for i in range(10):
     for j in range(10):
@@ -247,7 +251,7 @@ functools.reduce(combining_function, list_of_inputs)
 any(el[1] for el in <collection>)  # <boolean>
 ```
 
-### If — Else
+### If - Else
 ```python
 expression_if_true if condition else expression_if_false
 ```
@@ -282,7 +286,7 @@ def function_that_gets_passed_to_closure():
 from functools import wraps
 
 def debug(func):
-    @wraps(func)  # Needed for metadata copying (func name, ...)
+    @wraps(func)  # Needed for metadata copying (func name, ...).
     def wrapper(*args, **kwargs):
         print(func.__name__)
         return func(*args, **kwargs)
@@ -310,7 +314,8 @@ class <name>:
 ```python
 import enum
 class <enum_name>(enum.Enum):
-    <name> = <value>  # Or "= enum.auto()"" for automatic indexing.
+    <name1> = <value1>  # Or "= enum.auto()"" for automatic indexing.
+    <name2> = <value2>
     ...
 ```
 
@@ -410,7 +415,7 @@ db = sqlite3.connect(file_name)
 ```python
 cursor = db.execute(<query>)
 if cursor:
-    cursor.fetchall()  # or cursor.fetchone()
+    cursor.fetchall()  # Or "cursor.fetchone()"
 db.close()
 ```
 
