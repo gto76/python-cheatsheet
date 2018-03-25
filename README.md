@@ -615,9 +615,7 @@ class MyMetaClass(type):
 ```
 
 ### Metaclass Attr
-#### When class is created it checks if it has metaclass defined. If not, it 
-#### recursively checks if any of his parents has it defined, and eventually 
-#### comes to type:
+*When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:*
 ```python
 class BlaBla:
     __metaclass__ = Bla
