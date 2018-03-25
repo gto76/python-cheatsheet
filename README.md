@@ -1,6 +1,8 @@
 Comprehensive Python Cheatsheet
 ===============================
 
+![Monty Python](web/image_720.jpg)
+
 Main
 ----
 ```python
