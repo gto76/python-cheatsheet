@@ -1,7 +1,7 @@
 Comprehensive Python Cheatsheet
 ===============================
 
-![Monty Python](web/image_720.jpg)
+![Monty Python](web/image_720.jpeg)
 
 Main
 ----
@@ -546,12 +546,12 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter, imap and izip
-**Filter, map and zip functions that return generators instead of iterators.**
+#### Filter, map and zip functions that return generators instead of iterators.
 
 
 Introspection and Metaprograming
 --------------------------------
-#### Inspecting code at runtime and code that generates code. You can:
+**Inspecting code at runtime and code that generates code. You can:**
 * **Look at the attributes**
 * **Set new attributes**
 * **Create functions dynamically**
