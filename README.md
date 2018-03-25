@@ -66,8 +66,8 @@ Range
 range(to_exclusive)
 range(from_inclusive, to_exclusive)
 range(from_inclusive, to_exclusive, step_size)
+range(from_inclusive, to_exclusive, -step_size)
 ```
-* Negative `step_size` can be used for backward range.
 
 Enumerate
 ---------
@@ -89,19 +89,26 @@ TestResults(filed=1, attempted=2)
 
 Iterator
 --------
-#### Reads input until it reaches an empty line:
-```python
-for line in iter(input, ''):
-    ...
-```
-* Use `partial` from functools if function needs arguments.
-
 #### Skips first element:
 ```python
 next(<iter>)
 for element in <iter>:
     ...
 ```
+
+#### Reads input until it reaches an empty line:
+```python
+for line in iter(input, ''):
+    ...
+```
+
+#### Same, but prints a message every time:
+```python
+from functools import partial
+for line in iter(partial(input, 'Please enter value'), ''):
+    ...
+```
+
 
 Generator
 ---------
@@ -207,17 +214,17 @@ now.strftime('%Y%m%d%H%M%S')   # 20180315002834
 
 Arguments
 ---------
+#### "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call:
 ```python
 args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
 func(*args, **kwargs)  
 ```
+
 #### Is the same as:
 ```python
 func(1, 2, x=3, y=4, z=5)
 ```
-
-* "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.
 
 
 Inline
@@ -464,7 +471,7 @@ lock.release()
 
 Itertools
 ---------
-Every function returns a generator and can accept any collection. If you want to 
+#### Every function returns a generator and can accept any collection. If you want to 
 print an output of generator, as in examples, you need to pass it to _list()_ 
 function.
 
@@ -534,7 +541,7 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter, imap and izip
-* Filter, map and zip functions that return generators instead of iterators.
+* #### Filter, map and zip functions that return generators instead of iterators.
 
 
 Introspection and Metaprograming
@@ -579,7 +586,7 @@ False
 ```
 
 ### Type
-Type is the root class. If only passed the object it returns it's type.
+EEEE Type is the root class. If only passed the object it returns it's type.
 Otherwise it creates a new class (and not the instance!).
 ```python
 type(class_name, parents<tuple>, attributes<dict>)
@@ -606,7 +613,7 @@ class MyMetaClass(type):
 ```
 
 ### Metaclass Attr
-When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type.
+#### When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type.
 ```python
 class BlaBla:
     __metaclass__ = Bla
