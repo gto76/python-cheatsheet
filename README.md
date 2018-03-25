@@ -219,7 +219,7 @@ now.strftime('%Y%m%d%H%M%S')   # 20180315002834
 
 Arguments
 ---------
-#### "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call:
+**"*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call:**
 ```python
 args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -476,7 +476,7 @@ lock.release()
 
 Itertools
 ---------
-#### Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to the list() function.
+**Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to the list() function.**
 
 ```python
 from itertools import *
@@ -544,17 +544,17 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter, imap and izip
-#### Filter, map and zip functions that return generators instead of iterators.
+**Filter, map and zip functions that return generators instead of iterators.**
 
 
 Introspection and Metaprograming
 --------------------------------
 #### Inspecting code at runtime and code that generates code. You can:
-* Look at the attributes
-* Set new attributes
-* Create functions dynamically
-* Traverse the parent classes
-* Change values in the class
+* **Look at the attributes**
+* **Set new attributes**
+* **Create functions dynamically**
+* **Traverse the parent classes**
+* **Change values in the class**
 
 
 ```python
@@ -589,7 +589,7 @@ False
 ```
 
 ### Type
-#### Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):
+**Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):**
 ```python
 type(class_name, parents<tuple>, attributes<dict>)
 ```
@@ -615,7 +615,7 @@ class MyMetaClass(type):
 ```
 
 ### Metaclass Attr
-*When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:*
+**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:**
 ```python
 class BlaBla:
     __metaclass__ = Bla
