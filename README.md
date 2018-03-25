@@ -664,6 +664,7 @@ Web
 ---
 ```python
 import bottle
+import urllib
 ```
 
 ### Run
@@ -673,10 +674,38 @@ bottle.run(host='0.0.0.0', port=80, server='cherypy')
 ```
 
 ### Static request
+```python
+@route('/img/<image>')
+def send_image(image):
+    return static_file(image, 'images/', mimetype='image/png')
+```
 
 ### Dynamic request
+```python
+@route('/<sport>')
+def send_page(sport):
+    sport = urllib.parse.unquote(sport).lower()
+    page = read_file(sport)
+    return template(page)
+```
 
 ### REST request
+```python
+@post('/p/<sport>')
+def p_handler(sport):
+    team_1 = request.forms.get('team_1')
+    team_2 = request.forms.get('team_2')
+    team_1 = urllib.parse.unquote(team_1).lower()
+    team_2 = urllib.parse.unquote(team_2).lower()
+
+    db = sqlite3.connect(conf.DB_PATH)
+    p_h, p_a = get_p(db, sport, team_1, team_2)
+    db.close()
+
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Cache-Control'] = 'no-cache'
+    return json.dumps([p_h, p_a])
+```
 
 
 Curses
