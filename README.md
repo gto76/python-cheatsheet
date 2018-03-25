@@ -1,7 +1,7 @@
 Comprehensive Python Cheatsheet
 ===============================
 
-![Monty Python](web/image_960.jpeg)
+![Monty Python](web/image_888.jpeg)
 
 Main
 ----
