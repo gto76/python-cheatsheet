@@ -3,7 +3,7 @@ Comprehensive Python Cheatsheet
 
 Main
 ----
-```javascript
+```python
 if __name__ == '__main__':
     main()
 ```
