@@ -59,6 +59,11 @@ Set
 frozenset()  # Is hashable and can be used as a key in dictionary.
 ```
 
+### Frozenset
+#### Is hashable and can be used as a key in dictionary:
+```python
+<set> = frozenset()
+```
 
 Range
 -----
@@ -390,7 +395,7 @@ os.popen(<command>).read()
 file_name = input('Enter a file name: ')
 ```
 
-### Print lines until EOF
+#### Prints lines until EOF:
 ```python
 while True:
     try:
@@ -471,9 +476,7 @@ lock.release()
 
 Itertools
 ---------
-#### Every function returns a generator and can accept any collection. If you want to 
-print an output of generator, as in examples, you need to pass it to _list()_ 
-function.
+#### Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to `list()` function.
 
 ```python
 from itertools import *
@@ -541,7 +544,7 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter, imap and izip
-* #### Filter, map and zip functions that return generators instead of iterators.
+#### Filter, map and zip functions that return generators instead of iterators.
 
 
 Introspection and Metaprograming
@@ -586,8 +589,7 @@ False
 ```
 
 ### Type
-EEEE Type is the root class. If only passed the object it returns it's type.
-Otherwise it creates a new class (and not the instance!).
+#### Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):
 ```python
 type(class_name, parents<tuple>, attributes<dict>)
 ```
@@ -613,7 +615,7 @@ class MyMetaClass(type):
 ```
 
 ### Metaclass Attr
-#### When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type.
+#### When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:
 ```python
 class BlaBla:
     __metaclass__ = Bla
@@ -700,13 +702,11 @@ def send_page(sport):
 ```python
 @post('/p/<sport>')
 def p_handler(sport):
-    team_1 = request.forms.get('team_1')
-    team_2 = request.forms.get('team_2')
-    team_1 = urllib.parse.unquote(team_1).lower()
-    team_2 = urllib.parse.unquote(team_2).lower()
+    team = request.forms.get('team')
+    team = urllib.parse.unquote(team).lower()
 
     db = sqlite3.connect(conf.DB_PATH)
-    p_h, p_a = get_p(db, sport, team_1, team_2)
+    p_h, p_a = get_p(db, sport, team)
     db.close()
 
     response.headers['Content-Type'] = 'application/json'
