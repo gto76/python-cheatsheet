@@ -94,9 +94,9 @@ Iterator
 for line in iter(input, ''):
     ...
 ```
-* Use `partial` from functools if function needs arguments:
+* Use `partial` from functools if function needs arguments.
 
-#### Skips first element.
+#### Skips first element:
 ```python
 next(<iter>)
 for element in <iter>:
@@ -360,19 +360,16 @@ sys.argv
 
 ### Read File
 ```python
-with open(file_name, encoding='utf-8') as file:
-    return file.readlines()
-```
-```python
-def get_file_contents(file_name):
-    with open(file_name, encoding='utf-8') as file:
+def read_file(filename):
+    with open(filename, encoding='utf-8') as file:
         return file.readlines()
 ```
 
 ### Write to File
 ```python
-with open(file_name, 'w', enconding='utf-8') as file:
-    file.write(text)
+def write_to_file(filename, text):
+    with open(filename, 'w', enconding='utf-8') as file:
+        file.write(text)
 ```
 
 ### Execute Command
@@ -424,7 +421,7 @@ db = sqlite3.connect(file_name)
 ```python
 cursor = db.execute(<query>)
 if cursor:
-    cursor.fetchall()  # Or "cursor.fetchone()"
+    cursor.fetchall()  # Or cursor.fetchone()
 db.close()
 ```
 
@@ -536,7 +533,7 @@ islice([1, 2, 3], 1, None)
 [2, 3]
 ```
 
-### Ifilter/imap/izip
+### Ifilter, imap and izip
 * Filter, map and zip functions that return generators instead of iterators.
 
 
@@ -583,7 +580,7 @@ False
 
 ### Type
 Type is the root class. If only passed the object it returns it's type.
-Otherwise it creates new class (and not the instance!).
+Otherwise it creates a new class (and not the instance!).
 ```python
 type(class_name, parents<tuple>, attributes<dict>)
 ```
@@ -594,7 +591,7 @@ type(class_name, parents<tuple>, attributes<dict>)
 ```
 
 ### MetaClass
-#### Classes that create classes.
+#### Class that creates class:
 ```python
 def my_meta_class(name, parents, attrs):
     ...
