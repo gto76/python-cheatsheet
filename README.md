@@ -476,7 +476,7 @@ lock.release()
 
 Itertools
 ---------
-#### Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to `list()` function.
+#### Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to the list() function.
 
 ```python
 from itertools import *
@@ -615,7 +615,9 @@ class MyMetaClass(type):
 ```
 
 ### Metaclass Attr
-#### When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:
+#### When class is created it checks if it has metaclass defined. If not, it 
+#### recursively checks if any of his parents has it defined, and eventually 
+#### comes to type:
 ```python
 class BlaBla:
     __metaclass__ = Bla
