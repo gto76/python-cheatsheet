@@ -3,7 +3,7 @@ Comprehensive Python Cheatsheet
 
 Main
 ----
-```python
+```javascript
 if __name__ == '__main__':
     main()
 ```
@@ -34,8 +34,8 @@ Dictionary
 ```
 
 ```python
-collections.defaultdict(<type>)                       # Creates a dictionary with default values.
-dict(zip(keys, values))                               # Initiates a dict from two lists.
+collections.defaultdict(<type>)  # Creates a dictionary with default values.
+dict(zip(keys, values))          # Initiates a dict from two lists.
 {k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys.
 ```
 
@@ -79,8 +79,12 @@ Named Tuple
 -----------
 ```python
 >>> TestResults = collections.namedtuple('TestResults', ['filed', 'attempted'])
->>> TestResults(1, 2)
+>>> a = TestResults(1, attempted=2)
 TestResults(filed=1, attempted=2)
+>>> a.filed
+1
+>>> getattr(a, 'attempted')
+2
 ```
 
 Iterator
@@ -196,8 +200,9 @@ Datetime
 ```python
 import datetime
 now = datetime.datetime.now()
-now.strftime('%Y%m%d')
-now.strftime('%Y%m%d%H%M%S')
+now.month                      # 3
+now.strftime('%Y%m%d')         # 20180315
+now.strftime('%Y%m%d%H%M%S')   # 20180315002834
 ```
 
 Arguments
@@ -212,7 +217,8 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-#### "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.
+#### "*" is the splat operator, that takes a list as input, and expands it into 
+actual positional arguments in the function call.
 
 
 Inline
@@ -334,8 +340,8 @@ class <enum_name>(enum.Enum):
 
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
-list(<enum_name>)                                      # == [<enum1>, <enum2>, ...]
-random.choice(list(<enum_name>))                       # == random <enum>
+list(<enum_name>)                 # == [<enum1>, <enum2>, ...]
+random.choice(list(<enum_name>))  # == random <enum>
 ```
 
 ### Copy
@@ -464,7 +470,8 @@ lock.release()
 
 Itertools
 ---------
-Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to _list()_ 
+Every function returns a generator and can accept any collection. If you want to 
+print an output of generator, as in examples, you need to pass it to _list()_ 
 function.
 
 ```python
@@ -517,14 +524,13 @@ from itertools import *
 
 ### Groupby
 ```python
->>> {k: list(v) for k, v in groupby("aabbbc")}
-{'a': ['a', 'a'], 'b': ['b', 'b', 'b'], 'c': ['c']}
-```
-
-```python
->>> a = [{"id": 1, "name": "bob"}, {"id": 2, "name": "bob"}, {"id": 3, "name": "peter"}]
+>>> a = [{"id": 1, "name": "bob"}, 
+         {"id": 2, "name": "bob"}, 
+         {"id": 3, "name": "peter"}]
 >>> {k: list(v) for k, v in groupby(a, key=lambda x: x["name"])}
-{'bob': [{'id': 1, 'name': 'bob'}, {'id': 2, 'name': 'bob'}], 'peter': [{'id': 3, 'name': 'peter'}]}
+{'bob': [{'id': 1, 'name': 'bob'}, 
+         {'id': 2, 'name': 'bob'}], 
+ 'peter': [{'id': 3, 'name': 'peter'}]}
 ```
 
 ### Islice
