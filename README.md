@@ -39,7 +39,7 @@ dict(zip(keys, values))          # Initiates a dict from two lists.
 {k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys.
 ```
 
-#### Counter
+### Counter
 ```python
 >>> from collections import Counter
 >>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
@@ -56,8 +56,8 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
+frozenset()  # Is hashable and can be used as a key in dictionary.
 ```
-#### Frozenset — Is hashable and can be used as a key in dictionary.
 
 
 Range
@@ -67,7 +67,7 @@ range(to_exclusive)
 range(from_inclusive, to_exclusive)
 range(from_inclusive, to_exclusive, step_size)
 ```
-##### Negative _step_size_ can be used for backward range.
+* Negative `step_size` can be used for backward range.
 
 Enumerate
 ---------
@@ -89,12 +89,12 @@ TestResults(filed=1, attempted=2)
 
 Iterator
 --------
-#### Reads input until it reaches an empty line.
+#### Reads input until it reaches an empty line:
 ```python
 for line in iter(input, ''):
     ...
 ```
-Use _partial_ from functools if function needs arguments.
+* Use `partial` from functools if function needs arguments:
 
 #### Skips first element.
 ```python
@@ -212,13 +212,12 @@ args = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
 func(*args, **kwargs)  
 ```
-#### Is the same as
+#### Is the same as:
 ```python
 func(1, 2, x=3, y=4, z=5)
 ```
 
-#### "*" is the splat operator, that takes a list as input, and expands it into 
-actual positional arguments in the function call.
+* "*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.
 
 
 Inline
@@ -234,14 +233,13 @@ lambda <argument1>, <argument2>: <return_value>
 [i+1 for i in range(10)]       # [1, 2, ..., 10]
 [i for i in range(10) if i>5]  # [6, 7, ..., 9]
 {i: i*2 for i in range(10)}    # {0: 0, 1: 2, ..., 9: 18}
-(x+5 for x in range(0, 10))    # (5, 6, ..., 14)
+(x+5 for x in range(0, 10))    # (5, 6, ..., 14) -> Generator
 ```
-##### Last one creates a generator.
 
 ```python
 [i+j for i in range(10) for j in range(10)]
 ```
-#### Is the same as
+#### Is the same as:
 ```python
 out = []
 for i in range(10):
@@ -273,12 +271,11 @@ def multiply_closure(x):
     def wrapped(y):
         return x * y
     return wrapped 
-```
-```python
+
 multiply_by_3 = multiply_closure(3)
 ```
 
-#### or
+#### Or:
 ```python
 from functools import partial
 partial(<function>, <argument>)
@@ -292,7 +289,7 @@ def function_that_gets_passed_to_closure():
     pass
 ```
 
-#### Debugger example
+#### Debugger example:
 ```python
 from functools import wraps
 
@@ -327,9 +324,9 @@ import enum
 class <enum_name>(enum.Enum):
     <name1> = <value1>  
     <name2> = <value2>
+    <name3> = enum.auto()  # Can be used for automatic indexing.
     ...
 ```
-##### Also "<name3> = enum.auto()" can be used for automatic indexing.
 
 ```python
 <enum_name>.<name>  # == <enum>
@@ -540,7 +537,7 @@ islice([1, 2, 3], 1, None)
 ```
 
 ### Ifilter/imap/izip
-##### Filter, map and zip functions that return generators instead of iterators.
+* Filter, map and zip functions that return generators instead of iterators.
 
 
 Introspection and Metaprograming
@@ -561,25 +558,25 @@ Introspection and Metaprograming
 >>> b = B()
 ```
 
-#### Getattr
+### Getattr
 ```python
 >>> getattr(b, 'a')
 'sdfsd'
 ```
 
-##### Is the same as
+#### Is the same as:
 
 ```python
 B.__getattribute__(b, 'a')
 ```
 
-#### Hasattr
+### Hasattr
 ```python
 >>> hasattr(b, 'c')
 False
 ```
 
-#### Setattr
+### Setattr
 ```python
 >>> setattr(b, 'c', 10)
 ```
@@ -603,7 +600,7 @@ def my_meta_class(name, parents, attrs):
     ...
     return type(name, parents, attrs)
 ```
-##### or
+#### Or:
 ```python
 class MyMetaClass(type):
     def __new__(klass, name, parents, attrs):
@@ -698,19 +695,19 @@ def draw(screen):
         pass
 ```
 
-##### Gets char from int
+#### Gets char from int:
 ```python
 chr(<int>)
 ```
 
 Profile
 -------
-#### Times execution of the passed code.
+#### Times execution of the passed code:
 ```python
 import timeit
 timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```
-#### Generates a PNG image of call graph and highlights the bottlenecks.
+#### Generates a PNG image of call graph and highlights the bottlenecks:
 ```python
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
@@ -718,7 +715,7 @@ graph.output_file = get_file_name()
 with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
-##### Utility code for unique PNG filenames
+#### Utility code for unique PNG filenames:
 ```python
 def get_file_name():
     return "{}-{}.png".format("profile", get_current_datetime_string())
@@ -733,7 +730,7 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-#### Saves list of floats of size 0 to 1 to a WAV file.
+#### Saves list of floats of size 0 to 1 to a WAV file:
 ```python
 import wave, struct
 frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
