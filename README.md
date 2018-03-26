@@ -429,6 +429,12 @@ JSON
 import json
 ```
 
+### Serialize/Deserialize
+```python
+<str> = json.dumps(<object>)
+<object> = json.loads(<str>)
+```
+
 ### Read File
 ```python
 with open(filename, encoding='utf-8') as file:
@@ -438,7 +444,7 @@ with open(filename, encoding='utf-8') as file:
 ### Write to File
 ```python
 with open(filename, 'w', encoding='utf-8') as file:
-    json.dump(<object>, file)  # Or: file.write(json.dumps(<object>))  
+    json.dump(<object>, file)
 ```
 
 SQLite
