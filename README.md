@@ -429,7 +429,7 @@ JSON
 import json
 ```
 
-### Serialize/Deserialize
+### Serialization
 ```python
 <str> = json.dumps(<object>)
 <object> = json.loads(<str>)
