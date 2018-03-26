@@ -15,6 +15,7 @@ List
 ----
 ```python
 <list>[from_inclusive : to_exclusive : step_size]
+<list>.append(<el>)
 <list>.extend(<list>)
 <list>.sort()
 <list>.reverse()
@@ -58,7 +59,6 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
-frozenset()  # Is hashable and can be used as a key in dictionary.
 ```
 
 ### Frozenset
@@ -184,6 +184,8 @@ re.search(<regex>, text)
 ```python
 >>> person = {'name': 'Jean-Luc', 'height': 187.1}
 >>> '{p[height]:.0f}'.format(p=person)
+'187'
+>>> f"{person['height']:.0f}"
 '187'
 ```
 
@@ -392,9 +394,20 @@ import os
 os.popen(<command>).read()
 ```
 
+#### Or:
+```python
+>>> import subprocess
+>>> a = subprocess.run(['ls', '-a'], stdout=subprocess.PIPE)
+>>> a.stdout
+b'.\n..\nfile1.txt\nfile2.txt\n'
+>>> a.returncode
+0
+```
+
+
 ### Input
 ```python
-file_name = input('Enter a file name: ')
+filename = input('Enter a file name: ')
 ```
 
 #### Prints lines until EOF:
@@ -414,13 +427,15 @@ import json
 
 ### Read File
 ```python
-with open(file_name, encoding='utf-8') as file:
+with open(filename, encoding='utf-8') as file:
     return json.load(file)
 ```
 
 ### Write to File
 ```python
-with open(file_name, 'w', enconding='utf-8') as file:
+with open(filename, 'w', encoding='utf-8') as file:
+    json.dump(<object>, file)
+    # Or
     file.write(json.dumps(<object>))
 ```
 
@@ -428,7 +443,7 @@ SQLite
 ------
 ```python
 import sqlite3
-db = sqlite3.connect(file_name)
+db = sqlite3.connect(filename)
 ```
 
 ### Read
@@ -746,13 +761,13 @@ timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```python
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
-graph.output_file = get_file_name()
+graph.output_file = get_filename()
 with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
 #### Utility code for unique PNG filenames:
 ```python
-def get_file_name():
+def get_filename():
     return "{}-{}.png".format("profile", get_current_datetime_string())
 
 def get_current_datetime_string():
@@ -769,7 +784,7 @@ Audio
 ```python
 import wave, struct
 frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
-wf = wave.open(file_name, 'wb')
+wf = wave.open(filename, 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(4)
 wf.setframerate(44100)
