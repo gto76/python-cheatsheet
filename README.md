@@ -177,7 +177,7 @@ re.search(<regex>, text)
 {:.max_width}  # '<e>'
 ```
 ```python
-{:max_widht.min_width}        # '    <e>'
+{:max_width.min_width}        # '    <e>'
 {:max_width.no_of_decimalsf}  # '   3.14'
 ```
 
@@ -681,7 +681,7 @@ import urllib
 ### Run
 ```python
 bottle.run(host='localhost', port=8080)
-bottle.run(host='0.0.0.0', port=80, server='cherypy')
+bottle.run(host='0.0.0.0', port=80, server='cherrypy')
 ```
 
 ### Static request
