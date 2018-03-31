@@ -168,7 +168,7 @@ re.findall(<regex>, text)
 re.split(<regex>, text)  # Use brackets in regex to keep the matches.
 ```
 
-#### Parameter flags=re.IGNORECASE can be used with all functions.
+* **Parameter 'flags=re.IGNORECASE' can be used with all functions.**
 
 ### Format
 ```python
