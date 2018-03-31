@@ -147,9 +147,10 @@ String
 ```python
 str.replace(text, old, new)
 <str>.isnumeric()
-<str>.split()
+<str>.split(sep=None, maxsplit=-1)
 <str>.strip()
 <str>.join(<list>)
+<str>.startswith(<str>)
 ```
 
 ### Print
@@ -160,9 +161,14 @@ print(<el> [, <el>, end='', sep='', file=<file>])
 ### Regex
 ```python
 import re
-re.sub(<regex>, new, text)
+re.sub(<regex>, new, text)  # Use r'\1' for backreference.
 re.search(<regex>, text)
+re.match(<regex>, text)  # Searches only at the beginning of the string.
+re.findall(<regex>, text)
+re.split(<regex>, text)  # Use brackets in regex to keep the matches.
 ```
+
+#### Parameter flags=re.IGNORECASE can be used with all functions.
 
 ### Format
 ```python
@@ -431,7 +437,7 @@ import json
 
 ### Serialization
 ```python
-<str> = json.dumps(<object>)
+<str> = json.dumps(<object>, ensure_ascii=False, indent=2)
 <object> = json.loads(<str>)
 ```
 
@@ -444,7 +450,7 @@ with open(filename, encoding='utf-8') as file:
 ### Write to File
 ```python
 with open(filename, 'w', encoding='utf-8') as file:
-    json.dump(<object>, file)
+    json.dump(<object>, file, ensure_ascii=False, indent=2)
 ```
 
 SQLite
@@ -688,10 +694,10 @@ Libraries
 Plot
 ----
 ```python
-import matplotlib
-matplotlib.pyplot.plot(<data> [, <data>])
-matplotlib.pyplot.show()
-matplotlib.pyplot.savefig(filename)
+from matplotlib import pyplot
+pyplot.plot(<data> [, <data>])
+pyplot.show()
+pyplot.savefig(filename)
 ```
 
 Web
