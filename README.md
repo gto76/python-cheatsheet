@@ -161,14 +161,15 @@ print(<el> [, <el>, end='', sep='', file=<file>])
 ### Regex
 ```python
 import re
-re.sub(<regex>, new, text)  # Use r'\1' for backreference.
-re.search(<regex>, text)
+re.sub(<regex>, new, text, count=0)
+re.search(<regex>, text)  # Searches for first occurance of pattern.
 re.match(<regex>, text)  # Searches only at the beginning of the string.
 re.findall(<regex>, text)
-re.split(<regex>, text)  # Use brackets in regex to keep the matches.
+re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 ```
 
-* **Parameter 'flags=re.IGNORECASE' can be used with all functions.**
+**Parameter 'flags=re.IGNORECASE' can be used with all functions.**
+**Use r'\1' for backreference.**
 
 ### Format
 ```python
