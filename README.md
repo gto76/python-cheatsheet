@@ -438,7 +438,7 @@ import json
 
 ### Serialization
 ```python
-<str> = json.dumps(<object>, ensure_ascii=False, indent=2)
+<str> = json.dumps(<object>, ensure_ascii=True, indent=None)
 <object> = json.loads(<str>)
 ```
 
@@ -451,7 +451,7 @@ with open(filename, encoding='utf-8') as file:
 ### Write to File
 ```python
 with open(filename, 'w', encoding='utf-8') as file:
-    json.dump(<object>, file, ensure_ascii=False, indent=2)
+    json.dump(<object>, file, ensure_ascii=True, indent=None)
 ```
 
 SQLite
