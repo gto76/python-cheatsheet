@@ -453,7 +453,7 @@ def read_json_file(filename):
 ```python
 def write_to_json_file(filename, an_object):
     with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(an_object, file, ensure_ascii=True, indent=None)
+        json.dump(an_object, file, ensure_ascii=False, indent=2)
 ```
 
 SQLite
