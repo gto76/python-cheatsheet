@@ -168,9 +168,9 @@ re.findall(<regex>, text)
 re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 ```
 
-* **_Search_ and _match_ return a 'Match' object. Use '.group()' method on it to get the match.**  
-* **Parameter 'flags=re.IGNORECASE' can be used with all functions.**  
-* **Use r'\1' for backreference.**  
+**_Search_ and _match_ return a 'Match' object. Use '.group()' method on it to get the match.**  
+**Parameter 'flags=re.IGNORECASE' can be used with all functions.**  
+**Use r'\1' for backreference.**  
 
 #### Special Sequences:
 ```python
