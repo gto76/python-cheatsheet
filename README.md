@@ -172,6 +172,15 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 **Parameter 'flags=re.IGNORECASE' can be used with all functions.**  
 **Use r'\1' for backreference.**
 
+#### Special Sequences
+```
+\d  == [0-9]          # Digit
+\s  == [ \t\n\r\f\v]  # Whitespace
+\w  == [a-zA-Z0-9_]   # Alphanumeric
+```
+**Use capital letter for negation**
+
+
 ### Format
 ```python
 '{}'.format(<el> [, <el>, ...])
