@@ -23,7 +23,7 @@ List
 
 ```python
 sum(<list>)
-sorted_by_second = sorted(<list>, key=lambda tup: tup[1])
+sorted_by_second = sorted(<list>, key=lambda el: el[1])
 flattened_list = [item for sublist in <list> for item in sublist]
 ```
 
@@ -64,7 +64,7 @@ Set
 ### Frozenset
 #### Is hashable and can be used as a key in dictionary:
 ```python
-<set> = frozenset()
+<frozenset> = frozenset()
 ```
 
 Range
@@ -85,12 +85,12 @@ for i, <el> in enumerate(<collection> [, i_start])
 Named Tuple
 -----------
 ```python
->>> TestResults = collections.namedtuple('TestResults', ['filed', 'attempted'])
->>> a = TestResults(1, attempted=2)
-TestResults(filed=1, attempted=2)
->>> a.filed
+>>> Point = collections.namedtuple('Point', ['x', 'y'])
+>>> a = Point(1, y=2)
+Point(x=1, y=2)
+>>> a.x
 1
->>> getattr(a, 'attempted')
+>>> getattr(a, 'y')
 2
 ```
 
@@ -134,7 +134,7 @@ next(stepper)  # 10 (, 12, 14, ...)
 Type
 ----
 ```python
-type(<el>)  # <class 'int'>/<class 'str'>/...
+type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```
 ```python
 import numbers
@@ -163,14 +163,13 @@ print(<el> [, <el>, end='', sep='', file=<file>])
 import re
 re.sub(<regex>, new, text, count=0)
 re.search(<regex>, text)  # Searches for first occurrence of pattern.
-re.match(<regex>, text)  # Searches only at the beginning of the string.
+re.match(<regex>, text)   # Searches only at the beginning of the string.
 re.findall(<regex>, text)
 re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 ```
 
-**'Search' and 'match' functions return a 'Match' object. Use '.group()' method on it to get the match.**  
-**Parameter 'flags=re.IGNORECASE' can be used with all functions.**
-**Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
+**'Search' and 'match' functions return a 'Match' object. Use '.group()' method on it to get the whole match, or '.group(1)' to get the part in first bracket.**  
+**Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
 **Use '\\\\1' or r'\1' for backreference.**  
 
 #### Special Sequences:
