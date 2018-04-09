@@ -39,7 +39,7 @@ Dictionary
 ```python
 collections.defaultdict(<type>)  # Creates a dictionary with default values.
 dict(zip(keys, values))          # Initiates a dict from two lists.
-{k: v for k, v in <dict>.iteritems() if k in <list>}  # Filters a dict by keys.
+{k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
 
 ### Counter
@@ -138,7 +138,7 @@ type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```
 ```python
 import numbers
-isinstance(<el>, numbers.Number)
+isinstance(<el>, numbers.Number)  # numbers.Integral, numbers.Real
 ```
 
 
@@ -404,8 +404,17 @@ def read_file(filename):
 ### Write to File
 ```python
 def write_to_file(filename, text):
-    with open(filename, 'w', enconding='utf-8') as file:
+    with open(filename, 'w', encoding='utf-8') as file:
         file.write(text)
+```
+
+### Path
+```python
+imort os
+os.path.exists(<path>)
+os.path.isfile(<path>)
+os.path.isdir(<path>)
+os.listdir(<path>)
 ```
 
 ### Execute Command
