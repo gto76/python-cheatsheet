@@ -37,9 +37,9 @@ Dictionary
 ```
 
 ```python
->>> a = [(1, 4), (3, 50)]
+>>> a = [('x', 4), ('y', 5)]
 >>> dict(a)
-{1: 4, 3: 50}
+{'x': 4, 'y': 5}
 ```
 
 ```python
@@ -66,7 +66,7 @@ Set
 <set>.intersection(<set>)
 <set>.difference(<set>)
 <set>.issubset(<set>)
-<set>..issuperset(<set>)
+<set>.issuperset(<set>)
 ```
 
 ### Frozenset
