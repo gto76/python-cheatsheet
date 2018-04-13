@@ -37,6 +37,12 @@ Dictionary
 ```
 
 ```python
+>>> a = [(1, 4), (3, 50)]
+>>> dict(a)
+{1: 4, 3: 50}
+```
+
+```python
 collections.defaultdict(<type>)  # Creates a dictionary with default values.
 dict(zip(keys, values))          # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
@@ -59,6 +65,8 @@ Set
 <set>.union(<set>)
 <set>.intersection(<set>)
 <set>.difference(<set>)
+<set>.issubset(<set>)
+<set>..issuperset(<set>)
 ```
 
 ### Frozenset
@@ -223,6 +231,7 @@ import random
 random.random()
 random.randint(from_inclusive, to_inclusive)
 random.shuffle(<list>)
+random.choice(<list>)
 ```
 
 Infinity
