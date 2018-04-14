@@ -809,8 +809,8 @@ Profile
 ```python
 from time import time
 start_time = time()
-...
-duration = (time() - start_time)
+<code>
+duration = time() - start_time
 ```
 
 #### Times execution of the passed code:
