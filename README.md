@@ -19,6 +19,8 @@ List
 <list>.extend(<list>)
 <list>.sort()
 <list>.reverse()
+<list> = sorted(<list>)
+<list> = reversed(<list>)
 ```
 
 ```python
@@ -146,7 +148,7 @@ type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```
 ```python
 import numbers
-isinstance(<el>, numbers.Number)  # numbers.Integral, numbers.Real
+isinstance(<el>, numbers.Number)  # Integral, Real, Rational, Complex
 ```
 
 
@@ -780,13 +782,20 @@ Curses
 ------
 ```python
 import curses
+
 def main():
     curses.wrapper(draw)
+
 def draw(screen):
     screen.clear()
     screen.addstr(0, 0, "Press ESC to quit.")
     while screen.getch() != 27:
         pass
+
+def get_border(screen):
+    Coords = collections.namedtuple('Coords', ['x', 'y'])
+    height, width = screen.getmaxyx()
+    return Coords(width - 1, height - 1)
 ```
 
 #### Gets char from int:
@@ -796,11 +805,20 @@ chr(<int>)
 
 Profile
 -------
+#### Basic
+```python
+from time import time
+start_time = time()
+...
+duration = (time() - start_time)
+```
+
 #### Times execution of the passed code:
 ```python
 import timeit
 timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```
+
 #### Generates a PNG image of call graph and highlights the bottlenecks:
 ```python
 import pycallgraph
@@ -809,6 +827,7 @@ graph.output_file = get_filename()
 with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
+
 #### Utility code for unique PNG filenames:
 ```python
 def get_filename():
