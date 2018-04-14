@@ -805,7 +805,7 @@ chr(<int>)
 
 Profile
 -------
-#### Basic
+#### Basic:
 ```python
 from time import time
 start_time = time()
