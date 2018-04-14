@@ -815,8 +815,8 @@ duration = time() - start_time
 
 #### Times execution of the passed code:
 ```python
-import timeit
-timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
+from timeit import timeit
+timeit('"-".join(str(n) for n in range(100))', number=10000)
 ```
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
