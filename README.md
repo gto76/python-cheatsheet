@@ -29,6 +29,11 @@ sorted_by_second = sorted(<list>, key=lambda el: el[1])
 flattened_list = [item for sublist in <list> for item in sublist]
 ```
 
+```python
+>>> list('ABC')
+['A', 'B', 'C']
+```
+
 Dictionary
 ----------
 ```python
@@ -156,11 +161,11 @@ String
 ------
 ```python
 str.replace(text, old, new)
-<str>.isnumeric()
 <str>.split(sep=None, maxsplit=-1)
 <str>.strip()
 <str>.join(<list>)
 <str>.startswith(<str>)
+<str>.isnumeric()
 ```
 
 ### Print
@@ -199,7 +204,7 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 {:min_width}   # '<el>    '
 {:>min_width}  # '    <el>'
 {:^min_width}  # '  <el>  '
-{:_min_width}  # '<el>____'
+{:_<min_width} # '<el>____'
 {:.max_width}  # '<e>'
 ```
 ```python
@@ -218,6 +223,19 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 >>> f"{person['height']:.0f}"
 '187'
 ```
+
+```python
+>>> f'{123:020b}'
+'00000000000001111011'
+```
+
+#### Integer presentation types:
+* 'b' - binary
+* 'c' - character
+* 'o' - octal
+* 'x' - hex
+* 'X' - HEX
+
 
 ### Text Wrap
 ```python
@@ -239,7 +257,7 @@ random.choice(<list>)
 Infinity
 --------
 ```python
-float("inf")
+float('inf')
 ```
 
 Datetime
@@ -512,9 +530,11 @@ Exceptions
 while True:
     try:
         x = int(input("Please enter a number: "))
-        break
     except ValueError:
         print("Oops!  That was no valid number.  Try again...")
+    else:
+        print("Thank you.")
+        break
 ```
 
 Threading
