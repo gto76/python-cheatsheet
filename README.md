@@ -27,7 +27,7 @@ List
 sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda el: el[1])
 flattened_list = [item for sublist in <list> for item in sublist]
-list(<str>)  # Creates list of chars.
+list(<str>)  # Creates a list of chars.
 ```
 
 
