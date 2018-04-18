@@ -721,6 +721,7 @@ Libraries
 Plot
 ----
 ```python
+# pip3 install matplotlib
 from matplotlib import pyplot
 pyplot.plot(<data> [, <data>])
 pyplot.show()
@@ -730,6 +731,7 @@ pyplot.savefig(filename)
 Web
 ---
 ```python
+# pip3 install bottle
 import bottle
 import urllib
 ```
@@ -776,6 +778,7 @@ def p_handler(sport):
 Curses
 ------
 ```python
+# pip3 install curses
 import curses
 
 def main():
@@ -816,6 +819,7 @@ timeit('"-".join(str(n) for n in range(100))', number=10000)
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
 ```python
+# pip3 install pycallgraph
 import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
 graph.output_file = get_filename()
@@ -875,7 +879,25 @@ class Progressbar():
             sys.stdout.write("\n")
 ```
 
+```python
+steps = 100
+bar = Progressbar(steps)
+for i in range(steps):
+    <code>
+    bar.tick()
+```
 
+#### Progress:
+```python
+# pip3 install progress
+from progress.bar import Bar
+steps = 100
+bar = Bar('Processing', max=steps)
+for i in range(steps):
+    <code>
+    bar.next()
+bar.finish()
+```
 
 
 
