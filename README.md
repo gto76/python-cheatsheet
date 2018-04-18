@@ -26,8 +26,8 @@ List
 ```python
 sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda el: el[1])
-flattened_list = [item for sublist in <list> for item in sublist]
-list_of_chars = list(<str>)
+flattened_list   = [item for sublist in <list> for item in sublist]
+list_of_chars    = list(<str>)
 ```
 
 
