@@ -204,8 +204,6 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 {:^min_width}  # '  <el>  '
 {:_<min_width} # '<el>____'
 {:.max_width}  # '<e>'
-```
-```python
 {:max_width.min_width}        # '    <e>'
 {:max_width.no_of_decimalsf}  # '   3.14'
 ```
