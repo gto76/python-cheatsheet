@@ -33,7 +33,7 @@ list_of_chars    = list(<str>)
 ```python
 index = <list>.index(<el>, [start, [stop]]) 
 <list>.insert(index, <el>)  # Inserts item at index and moves the rest right.
-<el> = <list>.pop([index])  # Removes and returns item at index.
+<el> = <list>.pop([index])  # Removes and returns item at index or from the end.
 <list>.remove(<el>)         # Removes first occurance of item.
 <list>.clear()              # Removes all items.   
 ```
@@ -166,7 +166,7 @@ str.replace(text, old, new)
 <str>.strip()
 <str>.join(<list>)
 <str>.startswith(<str>)
-<str>.isnumeric()
+<str>.isnumeric()   # True if str contains only numeric characters.
 ```
 
 ### Print
@@ -811,7 +811,8 @@ def get_border(screen):
 
 #### Gets char from int:
 ```python
-chr(<int>)
+<ch> = chr(<int>)
+<int> = ord(<ch>)
 ```
 
 Profile
