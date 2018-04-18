@@ -31,9 +31,9 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-<list>.insert(index, <el>) 
-<el> = <list>.pop([index])  
-<list>.remove(<el>) 
+<list>.insert(index, <el>)  # Inserts item at index and moves the rest right.
+<el> = <list>.pop([index])  # Removes and returns item at index.
+<list>.remove(<el>)         # Removes first occurance of item.
 index = <list>.index(<el>, [start, [stop]])    
 ```
 
