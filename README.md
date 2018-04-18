@@ -628,22 +628,22 @@ Introspection and Metaprograming
 
 
 ```python
->>> class B:
+>>> class Z:
 ...     def __init__(self):
 ...             self.a = 'abcde'
 ...             self.b = 12345
->>> b = B()
+>>> z = Z()
 ```
 
 ### Getattr, Hasattr, Setattr
 ```python
->>> getattr(b, 'a')  # Same as B.__getattribute__(b, 'a')
+>>> getattr(z, 'a')  # Same as Z.__getattribute__(z, 'a')
 'abcde'
 
->>> hasattr(b, 'c')
+>>> hasattr(z, 'c')
 False
 
->>> setattr(b, 'c', 10)
+>>> setattr(z, 'c', 10)
 ```
 
 ### Type
@@ -653,8 +653,8 @@ type(class_name, parents<tuple>, attributes<dict>)
 ```
 
 ```python
->>> BB = type('B', (), {'a': 'abcde', 'b': 12345})
->>> b = BB()
+>>> Z = type('Z', (), {'a': 'abcde', 'b': 12345})
+>>> z = Z()
 ```
 
 ### MetaClass
