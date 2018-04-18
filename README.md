@@ -850,6 +850,28 @@ wf.writeframes(b''.join(frames))
 wf.close()
 ```
 
+Progress Bar
+------------
+#### Basic:
+```python
+class Progressbar():
+    def __init__(self, steps, width=40):
+        self.steps = steps
+        self.width = width
+        self.filled = 0
+        self.counter = 0
+        sys.stdout.write(f"[{' ' * width}]")
+        sys.stdout.flush()
+        sys.stdout.write('\b' * (width + 1))
+    def tick(self):
+        self.counter += 1
+        while self.counter > self.filled * self.steps / self.width:
+            self.filled += 1
+            sys.stdout.write("-")
+            sys.stdout.flush()
+        if self.counter == self.steps:
+            sys.stdout.write("\n")
+```
 
 
 
