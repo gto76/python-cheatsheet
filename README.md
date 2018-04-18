@@ -41,13 +41,8 @@ Dictionary
 ```
 
 ```python
->>> a = [('x', 4), ('y', 5)]
->>> dict(a)
-{'x': 4, 'y': 5}
-```
-
-```python
 collections.defaultdict(<type>)  # Creates a dictionary with default values.
+dict(<list>)                     # Initiates a dict from list of key/value pairs.
 dict(zip(keys, values))          # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
