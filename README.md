@@ -630,31 +630,19 @@ Introspection and Metaprograming
 ```python
 >>> class B:
 ...     def __init__(self):
-...             self.a= 'sdfsd'
-...             self.b = 123324
+...             self.a = 'abcde'
+...             self.b = 12345
 >>> b = B()
 ```
 
-### Getattr
+### Getattr, Hasattr, Setattr
 ```python
->>> getattr(b, 'a')
-'sdfsd'
-```
+>>> getattr(b, 'a')  # Same as B.__getattribute__(b, 'a')
+'abcde'
 
-#### Is the same as:
-
-```python
-B.__getattribute__(b, 'a')
-```
-
-### Hasattr
-```python
 >>> hasattr(b, 'c')
 False
-```
 
-### Setattr
-```python
 >>> setattr(b, 'c', 10)
 ```
 
