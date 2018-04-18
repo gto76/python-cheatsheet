@@ -860,13 +860,15 @@ class Progressbar():
         self.width = width
         self.filled = 0
         self.counter = 0
+        self.treshold = self.filled * self.steps / self.width
         sys.stdout.write(f"[{' ' * width}]")
         sys.stdout.flush()
         sys.stdout.write('\b' * (width + 1))
     def tick(self):
         self.counter += 1
-        while self.counter > self.filled * self.steps / self.width:
+        while self.counter > self.treshold:
             self.filled += 1
+            self.treshold = self.filled * self.steps / self.width
             sys.stdout.write("-")
             sys.stdout.flush()
         if self.counter == self.steps:
