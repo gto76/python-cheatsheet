@@ -222,10 +222,10 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 ```
 
 #### Integer presentation types:
-* 'b' - binary
-* 'c' - character
-* 'o' - octal
-* 'x' - hex
+* 'b' - Binary
+* 'c' - Character
+* 'o' - Octal
+* 'x' - Hex
 * 'X' - HEX
 
 
