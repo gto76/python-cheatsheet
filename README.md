@@ -431,7 +431,7 @@ def write_to_file(filename, text):
 
 ### Path
 ```python
-imort os
+import os
 os.path.exists(<path>)
 os.path.isfile(<path>)
 os.path.isdir(<path>)
