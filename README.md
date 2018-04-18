@@ -31,11 +31,11 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-<list>.clear()              # Removes all items.
+index = <list>.index(<el>, [start, [stop]]) 
 <list>.insert(index, <el>)  # Inserts item at index and moves the rest right.
 <el> = <list>.pop([index])  # Removes and returns item at index.
 <list>.remove(<el>)         # Removes first occurance of item.
-index = <list>.index(<el>, [start, [stop]])    
+<list>.clear()              # Removes all items.   
 ```
 
 
