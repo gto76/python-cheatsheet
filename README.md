@@ -214,10 +214,6 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 >>> person = {'name': 'Jean-Luc', 'height': 187.1}
 >>> '{p[height]:.0f}'.format(p=person)
 '187'
-```
-
-#### Or:
-```python
 >>> f"{person['height']:.0f}"
 '187'
 ```
