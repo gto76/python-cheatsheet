@@ -34,7 +34,7 @@ list_of_chars    = list(<str>)
 <list>.insert(index, <el>) 
 <el> = <list>.pop([index])  
 <list>.remove(<el>) 
-<int> = <list>.index(<el>)    
+index = <list>.index(<el>, [start, [stop]])    
 ```
 
 
