@@ -653,7 +653,7 @@ type(class_name, parents<tuple>, attributes<dict>)
 ```
 
 ```python
->>> BB = type('B', (), {'a': 'abcde', 'b': 12345}
+>>> BB = type('B', (), {'a': 'abcde', 'b': 12345})
 >>> b = BB()
 ```
 
