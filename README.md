@@ -30,6 +30,13 @@ flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
 ```
 
+```python
+a.insert(index, <el>) 
+<el> = a.pop([index])  
+a.remove(<el>) 
+<int> = a.index(<el>)    
+```
+
 
 Dictionary
 ----------
