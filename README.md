@@ -839,7 +839,7 @@ duration = time() - start_time
 #### Times execution of the passed code:
 ```python
 from timeit import timeit
-timeit('"-".join(str(n) for n in range(100))', number=10000)
+timeit('"-".join(str(n) for n in range(100))', number=1000000)
 ```
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
@@ -883,32 +883,33 @@ Progress Bar
 ------------
 #### Basic:
 ```python
-class Progressbar():
-    def __init__(self, steps, width=40):
-        self.steps = steps
-        self.width = width
-        self.filled = 0
-        self.counter = 0
-        self.treshold = self.filled * self.steps / self.width
-        sys.stdout.write(f"[{' ' * width}]")
+import sys
+
+class Bar():
+    def __init__(s, steps, width=40):
+        s.st, s.wi, s.fl, s.i = steps, width, 0, 0
+        s.th = s.fl * s.st / s.wi
+        s.p(f"[{' ' * s.wi}]")
+        s.p('\b' * (s.wi + 1))
+    def tick(s):
+        s.i += 1
+        while s.i > s.th:
+            s.fl += 1
+            s.th = s.fl * s.st / s.wi
+            s.p('-')
+        if s.i == s.st:
+            s.p('\n')
+    def p(s, t):
+        sys.stdout.write(t)
         sys.stdout.flush()
-        sys.stdout.write('\b' * (width + 1))
-    def tick(self):
-        self.counter += 1
-        while self.counter > self.treshold:
-            self.filled += 1
-            self.treshold = self.filled * self.steps / self.width
-            sys.stdout.write("-")
-            sys.stdout.flush()
-        if self.counter == self.steps:
-            sys.stdout.write("\n")
 ```
 
 ```python
+from time import sleep
 STEPS = 100
-bar = Progressbar(STEPS)
+bar = Bar(STEPS)
 for i in range(STEPS):
-    <code>
+    sleep(0.02)
     bar.tick()
 ```
 
@@ -916,10 +917,11 @@ for i in range(STEPS):
 ```python
 # pip3 install progress
 from progress.bar import Bar
+from time import sleep
 STEPS = 100
 bar = Bar('Processing', max=STEPS)
 for i in range(STEPS):
-    <code>
+    sleep(0.02)
     bar.next()
 bar.finish()
 ```
