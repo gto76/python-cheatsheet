@@ -727,6 +727,8 @@ def eval_(node):
 -5.0
 ```
 
+<br><br><br><br>
+<hr>
 
 Libraries
 =========
@@ -894,9 +896,9 @@ class Progressbar():
 ```
 
 ```python
-steps = 100
-bar = Progressbar(steps)
-for i in range(steps):
+STEPS = 100
+bar = Progressbar(STEPS)
+for i in range(STEPS):
     <code>
     bar.tick()
 ```
@@ -905,9 +907,9 @@ for i in range(steps):
 ```python
 # pip3 install progress
 from progress.bar import Bar
-steps = 100
-bar = Bar('Processing', max=steps)
-for i in range(steps):
+STEPS = 100
+bar = Bar('Processing', max=STEPS)
+for i in range(STEPS):
     <code>
     bar.next()
 bar.finish()
