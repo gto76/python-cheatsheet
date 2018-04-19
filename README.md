@@ -167,7 +167,7 @@ str.replace(text, old, new)
 <str>.strip()
 <str>.join(<list>)
 <str>.startswith(<str>)
-<str>.isnumeric()   # True if str contains only numeric characters.
+<str>.isnumeric()  # True if str contains only numeric characters.
 ```
 
 ### Print
