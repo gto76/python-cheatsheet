@@ -736,7 +736,7 @@ def eval_(node):
 -5.0
 ```
 
-<br><br><br><br>
+<br><br>
 <hr>
 
 Libraries
