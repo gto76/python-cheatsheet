@@ -27,6 +27,7 @@ List
 sum_of_elements  = sum(<list>)
 sorted_by_second = sorted(<list>, key=lambda el: el[1])
 flattened_list   = [item for sublist in <list> for item in sublist]
+elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
 list_of_chars    = list(<str>)
 ```
 
@@ -279,6 +280,13 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
+**Splat operator can also be used in function declaration:**
+```python
+>>> def add(*a):
+...     return sum(a)
+>>> add(1, 2, 3)
+6
+```
 
 Inline
 ------
@@ -379,6 +387,7 @@ class <name>:
         self.a = a
     def __repr__(self):
         return str({'a': self.a})
+	# Use f'{s.__dict__}' for all members.
     def __str__(self):
         return str(self.a)
 ```
