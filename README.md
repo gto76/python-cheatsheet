@@ -25,9 +25,10 @@ List
 
 ```python
 sum_of_elements  = sum(<list>)
-sorted_by_second = sorted(<list>, key=lambda el: el[1])
-flattened_list   = [item for sublist in <list> for item in sublist]
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
+sorted_by_second = sorted(<list>, key=lambda el: el[1])
+sorted_by_both   = sorted(<list>, key=lambda el: (el[0], el[1]))
+flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
 ```
 
@@ -280,12 +281,19 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-**Splat operator can also be used in function declaration:**
+**Splat operator can also be used in function declarations:**
 ```python
 >>> def add(*a):
 ...     return sum(a)
 >>> add(1, 2, 3)
 6
+```
+
+**Or anywhere else:**
+```python
+>>> a = (1, 2, 3)
+>>> [*a]
+[1, 2, 3]
 ```
 
 Inline
@@ -403,10 +411,11 @@ class <enum_name>(enum.Enum):
 ```
 
 ```python
-<enum_name>.<name>  # == <enum>
-<enum_name>(value)  # == <enum>
-<enum>.name         # == <name>
-<enum>.value        # == <value>
+<enum_name>.<name>    # == <enum>
+<enum_name>['<name>'] # == <enum>
+<enum_name>(value)    # == <enum>
+<enum>.name           # == <name>
+<enum>.value          # == <value>
 ```
 
 ```python
