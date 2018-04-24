@@ -27,7 +27,7 @@ List
 sum_of_elements  = sum(<list>)
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
 sorted_by_second = sorted(<list>, key=lambda el: el[1])
-sorted_by_both   = sorted(<list>, key=lambda el: (el[0], el[1]))
+sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
 flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
 ```
@@ -289,11 +289,17 @@ func(1, 2, x=3, y=4, z=5)
 6
 ```
 
-**Or anywhere else:**
+**And in some other places:**
 ```python
 >>> a = (1, 2, 3)
 >>> [*a]
 [1, 2, 3]
+```
+
+```python
+>>> head, *body, tail = [1, 2, 3, 4]
+>>> body
+[2, 3]
 ```
 
 Inline
@@ -344,6 +350,17 @@ any(el[1] for el in <collection>)
 >>> [a if a else 2 for a in [0,1,0,3]]
 [2, 1, 2, 3]
 ```
+
+### Namedtuple, Enum, Class
+```python
+from collections import namedtuple
+from enum import Enum
+
+Point = namedtuple('Point', list('xy'))
+Direction = Enum('Direction', list('nesw'))
+Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
+```
+
 
 Closure
 -------
@@ -895,6 +912,12 @@ Progress Bar
 import sys
 
 class Bar():
+    @staticmethod
+    def range(*args):
+        bar = Bar(len(list(range(*args))))
+        for i in range(*args):
+            yield i 
+            bar.tick()
     def __init__(s, steps, width=40):
         s.st, s.wi, s.fl, s.i = steps, width, 0, 0
         s.th = s.fl * s.st / s.wi
@@ -915,11 +938,8 @@ class Bar():
 
 ```python
 from time import sleep
-STEPS = 100
-bar = Bar(STEPS)
-for i in range(STEPS):
+for i in Bar.range(100):
     sleep(0.02)
-    bar.tick()
 ```
 
 #### Progress:
