@@ -167,7 +167,7 @@ str.replace(text, old, new)
 <str>.split(sep=None, maxsplit=-1)
 <str>.strip()
 <str>.join(<list>)
-<str>.startswith(<str>)
+<str>.startswith(<str>)  # Pass tuple of strings for multiple options.
 <str>.isnumeric()  # True if str contains only numeric characters.
 ```
 
@@ -175,6 +175,8 @@ str.replace(text, old, new)
 ```python
 print(<el> [, <el>, end='', sep='', file=<file>])
 ```
+**For stderr use 'file=sys.stderr'**
+
 
 ### Regex
 ```python
@@ -221,9 +223,10 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 '187'
 ```
 
+#### Binary, at least 10 spaces wide, filled with zeros.
 ```python
->>> f'{123:020b}'
-'00000000000001111011'
+>>> f'{123:010b}'
+'0001111011'
 ```
 
 #### Integer presentation types:
@@ -376,7 +379,7 @@ multiply_by_3 = multiply_closure(3)
 #### Or:
 ```python
 from functools import partial
-partial(<function>, <argument>)
+partial(<function>, <arg1> [, <arg2>, ...])
 ```
 
 Decorator
