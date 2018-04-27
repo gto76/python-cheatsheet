@@ -352,7 +352,7 @@ any(el[1] for el in <collection>)
 ```
 
 ```python
->>> [a if a else 2 for a in [0,1,0,3]]
+>>> [a if a else 2 for a in [0, 1, 0, 3]]
 [2, 1, 2, 3]
 ```
 
