@@ -225,7 +225,7 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 '187'
 ```
 
-#### Binary, at least 10 spaces wide, filled with zeros.
+#### Binary, at least 10 spaces wide, filled with zeros:
 ```python
 >>> f'{123:010b}'
 '0001111011'
