@@ -286,7 +286,7 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-**Splat operator can also be used in function declarations:**
+#### Splat operator can also be used in function declarations:
 ```python
 >>> def add(*a):
 ...     return sum(a)
@@ -294,7 +294,7 @@ func(1, 2, x=3, y=4, z=5)
 6
 ```
 
-**And in some other places:**
+#### And in some other places:
 ```python
 >>> a = (1, 2, 3)
 >>> [*a]
