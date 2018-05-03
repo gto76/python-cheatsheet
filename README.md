@@ -163,7 +163,7 @@ isinstance(<el>, numbers.Number)  # Integral, Real, Rational, Complex
 String
 ------
 ```python
-str.replace(text, old, new)
+<str>.replace(old_str, new_str)
 <str>.split(sep=None, maxsplit=-1)
 <str>.strip()
 <str>.join(<list>)
@@ -417,7 +417,7 @@ class <name>:
         self.a = a
     def __repr__(self):
         return str({'a': self.a})
-	# Use f'{s.__dict__}' for all members.
+        # Use f'{s.__dict__}' for all members.
     def __str__(self):
         return str(self.a)
 ```
