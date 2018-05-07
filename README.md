@@ -165,7 +165,7 @@ String
 ```python
 <str>.replace(old_str, new_str)
 <str>.split(sep=None, maxsplit=-1)
-<str>.strip()
+<str>.strip([chars])
 <str>.join(<list>)
 <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
 <str>.isnumeric()  # True if str contains only numeric characters.
@@ -180,7 +180,7 @@ print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for e
 ### Regex
 ```python
 import re
-re.sub(<regex>, new, text, count=0)
+re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
 re.search(<regex>, text)  # Searches for first occurrence of pattern.
 re.match(<regex>, text)   # Searches only at the beginning of the string.
 re.findall(<regex>, text)
@@ -192,6 +192,8 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
 
 **Use '\\\\1' or r'\1' for backreference.**  
+
+**Use ? to make operators non-greedy.**   
 
 
 #### Special Sequences:
@@ -768,7 +770,6 @@ def eval_(node):
 ```
 
 <br><br>
-<hr>
 
 Libraries
 =========
