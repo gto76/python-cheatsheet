@@ -913,7 +913,7 @@ wf.close()
 
 Progress Bar
 ------------
-#### Basic:
+### Basic:
 ```python
 import sys
 
@@ -958,7 +958,7 @@ for el in Bar.foreach([1, 2, 3, 4]):
     sleep(0.02)
 ```
 
-#### Progress:
+### Progress:
 ```python
 # $ pip3 install progress
 from progress.bar import Bar
