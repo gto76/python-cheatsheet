@@ -924,6 +924,12 @@ class Bar():
         for i in range(*args):
             yield i 
             bar.tick()
+    @staticmethod
+    def foreach(elements):
+        bar = Bar(len(elements))
+        for el in elements:
+            yield el
+            bar.tick()
     def __init__(s, steps, width=40):
         s.st, s.wi, s.fl, s.i = steps, width, 0, 0
         s.th = s.fl * s.st / s.wi
@@ -944,7 +950,11 @@ class Bar():
 
 ```python
 from time import sleep
+# Range:
 for i in Bar.range(100):
+    sleep(0.02)
+# Foreach:
+for el in Bar.foreach([1, 2, 3, 4]):
     sleep(0.02)
 ```
 
@@ -961,6 +971,37 @@ for i in range(STEPS):
 bar.finish()
 ```
 
+Basic Script Template
+---------------------
+```python
+#!/usr/bin/env python3
+#!/usr/bin/python
+#
+# Usage: .py 
+# 
+
+from collections import defaultdict, namedtuple
+from enum import Enum
+import re
+import sys
+
+
+def main():
+    pass
+    
+
+###
+##  UTIL
+#
+
+def read_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return file.readlines()
+
+
+if __name__ == '__main__':
+    main()
+```
 
 
 
