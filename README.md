@@ -234,11 +234,11 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 ```
 
 #### Integer presentation types:
-* 'b' - Binary
-* 'c' - Character
-* 'o' - Octal
-* 'x' - Hex
-* 'X' - HEX
+* `b` - Binary
+* `c` - Character
+* `o` - Octal
+* `x` - Hex
+* `X` - HEX
 
 
 ### Text Wrap
