@@ -954,7 +954,7 @@ from time import sleep
 for i in Bar.range(100):
     sleep(0.02)
 # Foreach:
-for el in Bar.foreach([1, 2, 3, 4]):
+for el in Bar.foreach(['a', 'b', 'c']):
     sleep(0.02)
 ```
 
@@ -980,8 +980,6 @@ Basic Script Template
 # Usage: .py 
 # 
 
-from collections import defaultdict, namedtuple
-from enum import Enum
 import re
 import sys
 
