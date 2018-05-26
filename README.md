@@ -52,6 +52,7 @@ Dictionary
 
 ```python
 collections.defaultdict(<type>)  # Creates a dictionary with default values.
+collections.OrderedDict()        # Creates ordered dictionary.
 dict(<list>)                     # Initiates a dict from list of key/value pairs.
 dict(zip(keys, values))          # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
@@ -528,7 +529,13 @@ import json
 ### Serialization
 ```python
 <str> = json.dumps(<object>, ensure_ascii=True, indent=None)
-<object> = json.loads(<str>)
+<dict> = json.loads(<str>)
+```
+
+#### To preserve order:
+```python
+from collections import OrderedDict
+<dict> = json.loads(<str>, object_pairs_hook=OrderedDict)
 ```
 
 ### Read File
