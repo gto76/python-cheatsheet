@@ -20,7 +20,7 @@ List
 <list>.sort()
 <list>.reverse()
 <list> = sorted(<list>)
-<list> = reversed(<list>)
+<iter> = reversed(<list>)
 ```
 
 ```python
@@ -463,7 +463,8 @@ System
 ### Arguments
 ```python
 import sys
-sys.argv
+script_name = sys.argv[0]
+arguments = sys.argv[1:]
 ```
 
 ### Read File
@@ -744,6 +745,16 @@ class BlaBla:
 
 Eval
 ----
+### Basic
+```python
+>>> import ast
+>>> ast.literal_eval('1 + 1')
+2
+>>> ast.literal_eval('[1, 2, 3]')
+[1, 2, 3]
+```
+
+### Detailed
 ```python
 import ast
 import operator as op
@@ -788,7 +799,7 @@ Plot
 from matplotlib import pyplot
 pyplot.plot(<data> [, <data>])
 pyplot.show()
-pyplot.savefig(filename)
+pyplot.savefig(filename, transparent=True)
 ```
 
 Web
@@ -981,8 +992,10 @@ bar.finish()
 Basic Script Template
 ---------------------
 ```python
+# Linux:
 #!/usr/bin/env python3
-#!/usr/bin/python
+# Mac:
+#!/usr/local/bin/python3
 #
 # Usage: .py 
 # 
