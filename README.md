@@ -579,11 +579,11 @@ Exceptions
 ```python
 while True:
     try:
-        x = int(input("Please enter a number: "))
+        x = int(input('Please enter a number: '))
     except ValueError:
-        print("Oops!  That was no valid number.  Try again...")
+        print('Oops!  That was no valid number.  Try again...')
     else:
-        print("Thank you.")
+        print('Thank you.')
         break
 ```
 
@@ -623,13 +623,13 @@ from itertools import *
 
 ### Combinations
 ```python
->>> combinations("abc", 2)
+>>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
 ```
 
 ### Permutations
 ```python
->>> permutations("abc", 2)
+>>> permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c'), ('c', 'a'), ('c', 'b')]
 ```
 
@@ -641,7 +641,7 @@ from itertools import *
 
 ### Compress
 ```python
->>> compress("abc", [True, 0, 23])
+>>> compress('abc', [True, 0, 23])
 ['a', 'c']
 ```
 
@@ -654,17 +654,17 @@ from itertools import *
 
 ### Cycle
 ```python
->>> a = cycle("abc")
+>>> a = cycle('abc')
 >>> [next(a) for _ in range(10)]
 ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a']
 ```
 
 ### Groupby
 ```python
->>> a = [{"id": 1, "name": "bob"}, 
-         {"id": 2, "name": "bob"}, 
-         {"id": 3, "name": "peter"}]
->>> {k: list(v) for k, v in groupby(a, key=lambda x: x["name"])}
+>>> a = [{'id': 1, 'name': 'bob'}, 
+         {'id': 2, 'name': 'bob'}, 
+         {'id': 3, 'name': 'peter'}]
+>>> {k: list(v) for k, v in groupby(a, key=lambda x: x['name'])}
 {'bob': [{'id': 1, 'name': 'bob'}, 
          {'id': 2, 'name': 'bob'}], 
  'peter': [{'id': 3, 'name': 'peter'}]}
@@ -860,7 +860,7 @@ def main():
 
 def draw(screen):
     screen.clear()
-    screen.addstr(0, 0, "Press ESC to quit.")
+    screen.addstr(0, 0, 'Press ESC to quit.')
     while screen.getch() != 27:
         pass
 
@@ -905,7 +905,8 @@ with pycallgraph.PyCallGraph(output=graph):
 #### Utility code for unique PNG filenames:
 ```python
 def get_filename():
-    return "{}-{}.png".format("profile", get_current_datetime_string())
+    time_str = get_current_datetime_string()
+    return f'profile-{time_str}.png'
 
 def get_current_datetime_string():
     now = datetime.datetime.now()
@@ -920,7 +921,7 @@ Audio
 #### Saves list of floats of size 0 to 1 to a WAV file:
 ```python
 import wave, struct
-frames = [struct.pack("%dh"%(1), int((a-0.5)*60000)) for a in <list>]
+frames = [struct.pack('%dh'%(1), int((a-0.5)*60000)) for a in <list>]
 wf = wave.open(filename, 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(4)
