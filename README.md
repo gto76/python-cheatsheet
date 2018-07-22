@@ -164,12 +164,12 @@ isinstance(<el>, numbers.Number)  # Integral, Real, Rational, Complex
 String
 ------
 ```python
-<str>.replace(old_str, new_str)
-<str>.split(sep=None, maxsplit=-1)
-<str>.strip([chars])
-<str>.join(<list>)
-<str>.startswith(<str>)  # Pass tuple of strings for multiple options.
-<str>.isnumeric()  # True if str contains only numeric characters.
+<str>  = <str>.replace(old_str, new_str)
+<list> = <str>.split(sep=None, maxsplit=-1)
+<str>  = <str>.strip([chars])
+<str>  = <str>.join(<list>)
+<bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
+<bool> = <str>.isnumeric()  # True if str contains only numeric characters.
 ```
 
 ### Print
@@ -248,21 +248,48 @@ import textwrap
 textwrap.wrap(text, width)
 ```
 
+Numbers
+-------
 
-Random
-------
+### Basic functions
+```python
+round(<num>[, ndigits])
+abs(<num>)
+math.pow(x, y)   # == x**y
+```
+
+### Constants
+```python
+from math import e, pi
+```
+
+### Trigonometry
+```python
+from math import cos, acos, sin, asin, tan, atan, degrees, radians
+```
+
+### Logarithm
+```python
+from math import log, log10, log2
+log(x[, base])  # Base e, if not specified.
+log10(x)        # Base 10
+log2(x)         # Base 2
+```
+
+### Infinity, nan
+```python
+float('inf')
+float('nan')
+from math import inf, nan, isfinite, isinf, isnan
+```
+
+### Random
 ```python
 import random
 random.random()
 random.randint(from_inclusive, to_inclusive)
 random.shuffle(<list>)
 random.choice(<list>)
-```
-
-Infinity
---------
-```python
-float('inf')
 ```
 
 Datetime
@@ -362,10 +389,11 @@ any(el[1] for el in <collection>)
 ### Namedtuple, Enum, Class
 ```python
 from collections import namedtuple
-from enum import Enum
-
 Point = namedtuple('Point', list('xy'))
+
+from enum import Enum
 Direction = Enum('Direction', list('nesw'))
+
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
 ```
 
@@ -436,11 +464,11 @@ class <enum_name>(enum.Enum):
 ```
 
 ```python
-<enum_name>.<name>    # == <enum>
-<enum_name>['<name>'] # == <enum>
-<enum_name>(value)    # == <enum>
-<enum>.name           # == <name>
-<enum>.value          # == <value>
+<enum>  = <enum_name>.<name>
+<enum>  = <enum_name>['<name>']
+<enum>  = <enum_name>(value)
+<name>  = <enum>.name
+<value> = <enum>.value
 ```
 
 ```python
@@ -587,6 +615,11 @@ while True:
         break
 ```
 
+#### Raise exception
+```python
+raise IOError("input/output error")
+```
+
 Threading
 ---------
 ```python
@@ -647,8 +680,8 @@ from itertools import *
 
 ### Count
 ```python
->>> a = count(5, 2)
->>> next(a), next(a)
+>>> i = count(5, 2)
+>>> next(i), next(i)
 (5, 7)
 ```
 
@@ -689,7 +722,14 @@ Introspection and Metaprograming
 * **Traverse the parent classes**
 * **Change values in the class**
 
+### Variables
+```python
+<list> = dir()      # In scope variables.
+<dict> = globals()  # Global variables.
+<dict> = locals()   # Local variables.
+```
 
+### Attributes
 ```python
 >>> class Z:
 ...     def __init__(self):
@@ -698,7 +738,6 @@ Introspection and Metaprograming
 >>> z = Z()
 ```
 
-### Getattr, Hasattr, Setattr
 ```python
 >>> getattr(z, 'a')  # Same as Z.__getattribute__(z, 'a')
 'abcde'
@@ -735,7 +774,7 @@ class MyMetaClass(type):
         return type.__new__(klass, name, parents, attrs)
 ```
 
-### Metaclass Attr
+### Metaclass Attribute
 **When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:**
 ```python
 class BlaBla:
@@ -800,6 +839,14 @@ from matplotlib import pyplot
 pyplot.plot(<data> [, <data>])
 pyplot.show()
 pyplot.savefig(filename, transparent=True)
+```
+
+UrlLib
+------
+### Translate special characters 
+```python
+import urllib.parse
+<str> = urllib.parse.quote_plus(<str>)
 ```
 
 Web
