@@ -451,15 +451,19 @@ class <name>:
         # Use f'{s.__dict__}' for all members.
     def __str__(self):
         return str(self.a)
+
+    @classmethod
+    def get_class_name(cls):
+        return cls.__name__
 ```
 
 ### Enum
 ```python
-import enum
-class <enum_name>(enum.Enum):
-    <name1> = <value1>  
-    <name2> = <value2>
-    <name3> = enum.auto()  # Can be used for automatic indexing.
+from enum import Enum, auto
+class <enum_name>(Enum):
+    <name_1> = <value1>  
+    <name_2> = <value2>, <value2_b>
+    <name_3> = auto()   # Can be used for automatic indexing.
     ...
 ```
 
@@ -936,7 +940,7 @@ duration = time() - start_time
 #### Times execution of the passed code:
 ```python
 from timeit import timeit
-timeit('"-".join(str(n) for n in range(100))', number=1000000)
+timeit('"-".join(str(n) for n in range(100))', number=1000000, , globals=globals())
 ```
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
