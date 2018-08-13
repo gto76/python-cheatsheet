@@ -1018,6 +1018,7 @@ class Bar():
         sys.stdout.flush()
 ```
 
+#### Usage:
 ```python
 from time import sleep
 # Range:
