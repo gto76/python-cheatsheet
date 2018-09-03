@@ -298,8 +298,8 @@ Datetime
 import datetime
 now = datetime.datetime.now()
 now.month                      # 3
-now.strftime('%Y%m%d')         # 20180315
-now.strftime('%Y%m%d%H%M%S')   # 20180315002834
+now.strftime('%Y%m%d')         # '20180315'
+now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
 ```
 
 Arguments
@@ -465,6 +465,14 @@ class <enum_name>(Enum):
     <name_2> = <value2>, <value2_b>
     <name_3> = auto()   # Can be used for automatic indexing.
     ...
+
+   @classmethod
+   def get_names(cls):
+      return [a.name for a in cls.__members__.values()]
+
+   @classmethod
+   def get_values(cls):
+      return [a.value for a in cls.__members__.values()]
 ```
 
 ```python
@@ -477,6 +485,7 @@ class <enum_name>(Enum):
 
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
+Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 list(<enum_name>)                 # == [<enum1>, <enum2>, ...]
 random.choice(list(<enum_name>))  # == random <enum>
 ```
@@ -1053,6 +1062,8 @@ Basic Script Template
 # Usage: .py 
 # 
 
+from collections import namedtuple
+from enum import Enum
 import re
 import sys
 
