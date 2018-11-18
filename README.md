@@ -192,11 +192,8 @@ re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches
 ```
 
 * **'Search' and 'match' functions return a 'Match' object. Use '.group()' method on it to get the whole match, or '.group(1)' to get the part in first bracket.**  
-
 * **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
-
 * **Use '\\\\1' or r'\1' for backreference.**  
-
 * **Use ? to make operators non-greedy.**   
 
 
