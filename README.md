@@ -844,11 +844,11 @@ def eval_(node):
 
 Coroutine
 ---------
-**• Similar to Generator, but Generator pulls data through the pipe with iteration, while Coroutine pushes data into the pipeline with send().**  
+* **• Similar to Generator, but Generator pulls data through the pipe with iteration, while Coroutine pushes data into the pipeline with send().**  
 
-**• Coroutines provide more powerful data routing possibilities than iterators.**  
+* **• Coroutines provide more powerful data routing possibilities than iterators.**  
 
-**• If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**  
+* **• If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**  
 
 ### Helper Decorator
 **• All coroutines must be "primed" by first calling .next()**  
