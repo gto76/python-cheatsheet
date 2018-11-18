@@ -893,18 +893,6 @@ reader(adder(printer()))
 Libraries
 =========
 
-Terminal Table
---------------
-```python
-# $ pip3 install tabulate
-import csv
-from tabulate import tabulate
-with open(<filename>, newline='') as csv_file:
-    reader = csv.reader(csv_file, delimiter=';')
-    headers = [a.title() for a in next(reader)]
-    print(tabulate(reader, headers))
-```
-
 Plot
 ----
 ```python
@@ -913,6 +901,18 @@ from matplotlib import pyplot
 pyplot.plot(<data> [, <data>])
 pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
+```
+
+Table
+-----
+```python
+# $ pip3 install tabulate
+import csv
+from tabulate import tabulate
+with open(<filename>, newline='') as csv_file:
+    reader = csv.reader(csv_file, delimiter=';')
+    headers = [a.title() for a in next(reader)]
+    print(tabulate(reader, headers))
 ```
 
 UrlLib
