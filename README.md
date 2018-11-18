@@ -601,7 +601,7 @@ SQLite
 ------
 ```python
 import sqlite3
-db = sqlite3.connect(filename)
+db = sqlite3.connect(<filename>)
 ```
 
 ### Read
@@ -893,6 +893,18 @@ reader(adder(printer()))
 Libraries
 =========
 
+Terminal Table
+--------------
+```python
+# $ pip3 install tabulate
+import csv
+from tabulate import tabulate
+with open(<filename>, newline='') as csv_file:
+    reader = csv.reader(csv_file, delimiter=';')
+    headers = [a.title() for a in next(reader)]
+    print(tabulate(reader, headers))
+```
+
 Plot
 ----
 ```python
@@ -900,7 +912,7 @@ Plot
 from matplotlib import pyplot
 pyplot.plot(<data> [, <data>])
 pyplot.show()
-pyplot.savefig(filename, transparent=True)
+pyplot.savefig(<filename>, transparent=True)
 ```
 
 UrlLib
@@ -1031,7 +1043,7 @@ Audio
 ```python
 import wave, struct
 frames = [struct.pack('%dh'%(1), int((a-0.5)*60000)) for a in <list>]
-wf = wave.open(filename, 'wb')
+wf = wave.open(<filename>, 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(4)
 wf.setframerate(44100)
