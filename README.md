@@ -111,6 +111,8 @@ Point(x=1, y=2)
 1
 >>> getattr(a, 'y')
 2
+>>> Point._fields
+('x', 'y')
 ```
 
 Iterator
@@ -169,6 +171,7 @@ String
 <str>  = <str>.strip([chars])
 <str>  = <str>.join(<list>)
 <bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
+<bool> = <str>.endswith(<str>)  # Pass tuple of strings for multiple options.
 <bool> = <str>.isnumeric()  # True if str contains only numeric characters.
 ```
 
@@ -837,6 +840,47 @@ def eval_(node):
 64
 >>> eval_expr('1 + 2*3**(4^5) / (6 + -7)')
 -5.0
+```
+
+Coroutine
+---------
+**• Similar to Generator, but Generator pulls data through the pipe with iteration, while Coroutine pushes data into the pipeline with send().**
+**• Coroutines provide more powerful data routing possibilities than iterators.
+**• If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**
+
+### Helper Decorator
+**• All coroutines must be "primed" by first calling .next()** 
+**• Remembering to call .next() is easy to forget.**
+**• Solved by wrapping coroutines with a decorator:**
+```python
+def coroutine(func):
+    def start(*args, **kwargs):
+        cr = func(*args, **kwargs)
+        next(cr)
+        return cr
+    return start
+```
+
+### Pipeline Example
+```python
+def reader(target):
+    for i in range(10):
+        target.send(i)
+    target.close()
+
+@coroutine
+def adder(target):
+    while True:
+        item = (yield)
+        target.send(item + 100)
+
+@coroutine
+def printer():
+    while True:
+        item = (yield)
+        print(item)
+
+reader(adder(printer()))
 ```
 
 <br><br>
