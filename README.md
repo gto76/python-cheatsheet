@@ -344,7 +344,7 @@ Inline
 ### Lambda
 ```python
 lambda: <return_value>
-lambda <argument1>, <argument2>: <return_value>
+lambda <argument_1>, <argument_2>: <return_value>
 ```
 
 ### Comprehension
@@ -414,7 +414,7 @@ multiply_by_3 = multiply_closure(3)
 #### Or:
 ```python
 from functools import partial
-partial(<function>, <arg1> [, <arg2>, ...])
+partial(<function>, <arg_1> [, <arg_2>, ...])
 ```
 
 Decorator
@@ -633,6 +633,56 @@ while True:
 #### Raise exception
 ```python
 raise IOError("input/output error")
+```
+
+Bytes
+-----
+**Bytes objects are immutable sequences of single bytes.**
+```python
+<Bytes> = b'<str>'
+<Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
+<Bytes> = bytes.fromhex(<hex>)
+<int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
+<hex> = <Bytes>.hex()
+<Bytes> = b''.join(<list_of_bytes>)
+```
+
+### Read Bytes from file:
+```python
+def read_bytes(filename):
+    with open(filename, 'rb') as file:
+        return file.read()
+```
+
+Struct
+------
+**Conversions between Python values and C structs represented as Python bytes objects.**
+```python
+<Bytes> = struct.pack(<format>, <value_1> [, <value_2>, ...])
+<tuple> = struct.unpack(<format>, <Bytes>)
+```
+
+### Format
+**Use capital leters for unsigned type.** 
+* `x` - Pad byte
+* `c` - char
+* `h` - short
+* `i` - int
+* `l` - long
+* `l` - long
+* `q` - long long
+* `f` - float
+* `d` - double
+
+### Example
+```python
+>>> from struct import *
+>>> pack('hhl', 1, 2, 3)
+b'\x00\x01\x00\x02\x00\x00\x00\x03'
+>>> unpack('hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
+(1, 2, 3)
+>>> calcsize('hhl')
+8
 ```
 
 Threading
@@ -1035,10 +1085,10 @@ def get_datetime_string(a_datetime):
 
 Audio
 -----
-#### Saves list of floats of size 0 to 1 to a WAV file:
+#### Saves list of floats with values between 0 and 1 to a WAV file:
 ```python
 import wave, struct
-frames = [struct.pack('%dh'%(1), int((a-0.5)*60000)) for a in <list>]
+frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
 wf = wave.open(<filename>, 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(4)
