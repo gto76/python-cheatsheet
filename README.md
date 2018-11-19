@@ -642,6 +642,7 @@ Bytes
 ### Encode
 ```python
 <Bytes> = b'<str>'
+<Bytes> = <str>.encode(encoding='utf-8')
 <Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
 <Bytes> = bytes.fromhex(<hex>)
 ```
