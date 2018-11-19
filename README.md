@@ -653,10 +653,6 @@ Bytes
 <hex> = <Bytes>.hex()
 ```
 
-```python
-<Bytes> = b''.join(<list_of_Bytes>)
-```
-
 ### Read Bytes from file
 ```python
 def read_bytes(filename):
@@ -669,6 +665,10 @@ def read_bytes(filename):
 def write_bytes(filename, bytes):
     with open(filename, 'wb') as file:
         file.write(bytes)
+```
+
+```python
+<Bytes> = b''.join(<list_of_Bytes>)
 ```
 
 Struct
