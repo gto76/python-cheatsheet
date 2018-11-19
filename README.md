@@ -654,14 +654,21 @@ Bytes
 ```
 
 ```python
-<Bytes> = b''.join(<list_of_bytes>)
+<Bytes> = b''.join(<list_of_Bytes>)
 ```
 
-### Read Bytes from file:
+### Read Bytes from file
 ```python
 def read_bytes(filename):
     with open(filename, 'rb') as file:
         return file.read()
+```
+
+### Write Bytes to File
+```python
+def write_bytes(filename, bytes):
+    with open(filename, 'wb') as file:
+        file.write(bytes)
 ```
 
 Struct
