@@ -637,13 +637,20 @@ raise IOError("input/output error")
 
 Bytes
 -----
-**Bytes objects are immutable sequences of single bytes.**
+**Bytes objects are immutable sequences of single bytes:**
 ```python
+# str
 <Bytes> = b'<str>'
+<str> = <Bytes>.decode('utf-8') 
+
+# int
 <Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
-<Bytes> = bytes.fromhex(<hex>)
 <int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
+
+# hex
+<Bytes> = bytes.fromhex(<hex>)
 <hex> = <Bytes>.hex()
+
 <Bytes> = b''.join(<list_of_bytes>)
 ```
 
@@ -656,27 +663,15 @@ def read_bytes(filename):
 
 Struct
 ------
-**Conversions between Python values and C structs represented as Python bytes objects.**
+**This module performs conversions between Python values and C structs represented as Python bytes objects:**
 ```python
-<Bytes> = struct.pack(<format>, <value_1> [, <value_2>, ...])
-<tuple> = struct.unpack(<format>, <Bytes>)
+<Bytes> = struct.pack('<format>', <value_1> [, <value_2>, ...])
+<tuple> = struct.unpack('<format>', <Bytes>)
 ```
-
-### Format
-**Use capital leters for unsigned type.** 
-* `x` - Pad byte
-* `c` - char
-* `h` - short
-* `i` - int
-* `l` - long
-* `l` - long
-* `q` - long long
-* `f` - float
-* `d` - double
 
 ### Example
 ```python
->>> from struct import *
+>>> from struct import pack, unpack, calcsize
 >>> pack('hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
 >>> unpack('hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
@@ -684,6 +679,18 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 >>> calcsize('hhl')
 8
 ```
+
+### Format
+**Use capital leters for unsigned type.** 
+* `x` - pad byte
+* `c` - char
+* `h` - short
+* `i` - int
+* `l` - long
+* `q` - long long
+* `f` - float
+* `d` - double
+
 
 Threading
 ---------
