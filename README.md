@@ -637,20 +637,27 @@ raise IOError("input/output error")
 
 Bytes
 -----
-**Bytes objects are immutable sequences of single bytes:**
+**Bytes objects are immutable sequences of single bytes.**
+
+#### Str:
 ```python
-# str
 <Bytes> = b'<str>'
 <str> = <Bytes>.decode('utf-8') 
+```
 
-# int
+#### Int:
+```python
 <Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
 <int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
+```
 
-# hex
+#### Hex:
+```python
 <Bytes> = bytes.fromhex(<hex>)
 <hex> = <Bytes>.hex()
+```
 
+```python
 <Bytes> = b''.join(<list_of_bytes>)
 ```
 
