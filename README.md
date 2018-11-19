@@ -140,6 +140,8 @@ for line in iter(partial(input, 'Please enter value'), ''):
 
 Generator
 ---------
+**Convenient way to implement the iterator protocol.**
+
 ```python
 def step(start, step):
     while True:
@@ -171,8 +173,8 @@ String
 <str>  = <str>.strip([chars])
 <str>  = <str>.join(<list>)
 <bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<str>)  # Pass tuple of strings for multiple options.
-<bool> = <str>.isnumeric()  # True if str contains only numeric characters.
+<bool> = <str>.endswith(<str>)    # Pass tuple of strings for multiple options.
+<bool> = <str>.isnumeric()        # True if str contains only numeric characters.
 ```
 
 ### Print
@@ -185,8 +187,8 @@ print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for e
 ```python
 import re
 re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-re.search(<regex>, text)  # Searches for first occurrence of pattern.
-re.match(<regex>, text)   # Searches only at the beginning of the string.
+re.search(<regex>, text)             # Searches for first occurrence of pattern.
+re.match(<regex>, text)              # Searches only at the beginning of the string.
 re.findall(<regex>, text)
 re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 ```
@@ -255,7 +257,7 @@ Numbers
 ```python
 round(<num>[, ndigits])
 abs(<num>)
-math.pow(x, y)   # == x**y
+math.pow(x, y)  # == x**y
 ```
 
 ### Constants
