@@ -639,21 +639,17 @@ Bytes
 -----
 **Bytes objects are immutable sequences of single bytes.**
 
-#### Str:
+### Encode
 ```python
 <Bytes> = b'<str>'
-<str> = <Bytes>.decode('utf-8') 
-```
-
-#### Int:
-```python
 <Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
-<int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
+<Bytes> = bytes.fromhex(<hex>)
 ```
 
-#### Hex:
+### Decode
 ```python
-<Bytes> = bytes.fromhex(<hex>)
+<str> = <Bytes>.decode('utf-8') 
+<int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
 <hex> = <Bytes>.hex()
 ```
 
