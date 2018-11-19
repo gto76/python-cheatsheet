@@ -900,6 +900,7 @@ pyplot.savefig(<filename>, transparent=True)
 
 Table
 -----
+#### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
 import csv
