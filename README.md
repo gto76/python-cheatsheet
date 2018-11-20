@@ -703,6 +703,12 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * `f` - float
 * `d` - double
 
+Hashlib
+-------
+```python
+>>> hashlib.md5(b'<str>').hexdigest()
+'33d0eba106da4d3ebca17fcd3f4c3d77'
+```
 
 Threading
 ---------
