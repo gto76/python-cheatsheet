@@ -51,7 +51,7 @@ Dictionary
 ```
 
 ```python
-collections.defaultdict(<type>)  # Creates a dictionary with default values.
+collections.defaultdict(<type>)  # Creates a dictionary with default values of type.
 collections.OrderedDict()        # Creates ordered dictionary.
 dict(<list>)                     # Initiates a dict from list of key/value pairs.
 dict(zip(keys, values))          # Initiates a dict from two lists.
@@ -169,7 +169,7 @@ String
 ------
 ```python
 <str>  = <str>.replace(old_str, new_str)
-<list> = <str>.split(sep=None, maxsplit=-1)
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on whitespaces.
 <str>  = <str>.strip([chars])
 <str>  = <str>.join(<list>)
 <bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
@@ -487,6 +487,7 @@ class <enum_name>(Enum):
 
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
+Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 list(<enum_name>)                 # == [<enum1>, <enum2>, ...]
 random.choice(list(<enum_name>))  # == random <enum>
@@ -643,14 +644,14 @@ Bytes
 ```python
 <Bytes> = b'<str>'
 <Bytes> = <str>.encode(encoding='utf-8')
-<Bytes> = <int>.to_bytes(<length>, byteorder='big|small', signed=False)
+<Bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
 <Bytes> = bytes.fromhex(<hex>)
 ```
 
 ### Decode
 ```python
 <str> = <Bytes>.decode('utf-8') 
-<int> = int.from_bytes(<Bytes>, byteorder='big|small', signed=False)
+<int> = int.from_bytes(<Bytes>, byteorder='big|little', signed=False)
 <hex> = <Bytes>.hex()
 ```
 
