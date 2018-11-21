@@ -198,6 +198,10 @@ import re
 <Match_iter> = re.finditer(<regex>, text)      # Searches for all occurences of pattern.
 ```
 
+* **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
+* **Use '\\\\1' or r'\1' for backreference.**  
+* **Use ? to make operators non-greedy.**   
+
 #### Match object:
 ```python
 <str> = <Match>.group()   # Whole match.
@@ -205,11 +209,6 @@ import re
 <int> = <Match>.start()   # Start index of a match.
 <int> = <Match>.end()     # Exclusive end index of a match.
 ```
- 
-* **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
-* **Use '\\\\1' or r'\1' for backreference.**  
-* **Use ? to make operators non-greedy.**   
-
 
 #### Special sequences:
 ```python
