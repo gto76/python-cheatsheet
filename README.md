@@ -190,12 +190,12 @@ print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for e
 ### Regex
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0) # Substitutes all occurrences.
+<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
 <list>  = re.findall(<regex>, text)
-<list>  = re.split(<regex>, text, maxsplit=0) # Use brackets in regex to keep the matches.
-<Match> = re.search(<regex>, text)         # Searches for first occurrence of pattern.
-<Match> = re.match(<regex>, text)          # Searches only at the beginning of the string.
-<Match_iter> = re.finditer(<regex>, text)  # Searches for all occurences of pattern.
+<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
+<Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
+<Match> = re.match(<regex>, text)              # Searches only at the beginning of the string.
+<Match_iter> = re.finditer(<regex>, text)      # Searches for all occurences of pattern.
 ```
 
 * **Use '.group()' method on Match object it to get the whole match, or '.group(1)' to get the part in first bracket.**  
