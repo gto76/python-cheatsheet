@@ -44,6 +44,8 @@ index = <list>.index(<el>)  # Returns first index of item.
 Dictionary
 ----------
 ```python
+<dict>.keys()
+<dict>.values()
 <dict>.items()
 <dict>.get(key, default)
 <dict>.setdefault(key, default)
@@ -162,6 +164,7 @@ type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```python
 import numbers
 isinstance(<el>, numbers.Number)  # Integral, Real, Rational, Complex
+callable(<el>)                    # Is element a function
 ```
 
 
@@ -175,6 +178,7 @@ String
 <bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<str>)    # Pass tuple of strings for multiple options.
 <bool> = <str>.isnumeric()        # True if str contains only numeric characters.
+<int>  = <str>.index(<sub_str>)   # Returns first index of substring.
 ```
 
 ### Print
@@ -186,14 +190,21 @@ print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for e
 ### Regex
 ```python
 import re
-re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-re.search(<regex>, text)             # Searches for first occurrence of pattern.
-re.match(<regex>, text)              # Searches only at the beginning of the string.
-re.findall(<regex>, text)
-re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 ```
 
-* **'Search' and 'match' functions return a 'Match' object. Use '.group()' method on it to get the whole match, or '.group(1)' to get the part in first bracket.**  
+```python
+<str>  = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
+<list> = re.findall(<regex>, text)
+<list> = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
+```
+
+#### Functions that return Match object. Use '.group()' method on it to get the whole match, or '.group(1)' to get the part in first bracket:
+```python
+<Match> = re.search(<regex>, text)         # Searches for first occurrence of pattern.
+<Match> = re.match(<regex>, text)          # Searches only at the beginning of the string.
+<Match_iter> = re.finditer(<regex>, text)  # Searches for all occurences of pattern.
+```
+
 * **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
 * **Use '\\\\1' or r'\1' for backreference.**  
 * **Use ? to make operators non-greedy.**   
@@ -391,10 +402,11 @@ any(el[1] for el in <collection>)
 ### Namedtuple, Enum, Class
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', list('xy'))
+Point = namedtuple('Point', 'x y')
 
 from enum import Enum
-Direction = Enum('Direction', list('nesw'))
+Direction = Enum('Direction', 'n e s w')
+Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
 ```
@@ -486,7 +498,7 @@ class <enum_name>(Enum):
 ```
 
 ```python
-Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
+Cutlery = Enum('Cutlery', 'knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 list(<enum_name>)                 # == [<enum1>, <enum2>, ...]
