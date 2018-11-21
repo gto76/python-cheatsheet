@@ -198,13 +198,20 @@ import re
 <Match_iter> = re.finditer(<regex>, text)      # Searches for all occurences of pattern.
 ```
 
-* **Use '.group()' method on Match object it to get the whole match, or '.group(1)' to get the part in first bracket.**  
+#### Match Object
+```python
+<str> = <Match>.group()   # Whole match.
+<str> = <Match>.group(1)  # Part in first bracket.
+<int> = <Match>.start()   # Start index of a match.
+<int> = <Match>.end()     # Exclusive end index of a match.
+```
+ 
 * **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
 * **Use '\\\\1' or r'\1' for backreference.**  
 * **Use ? to make operators non-greedy.**   
 
 
-#### Special Sequences:
+#### Special sequences:
 ```python
 # Use capital letter for negation.
 '\d' == '[0-9]'          # Digit
@@ -258,7 +265,7 @@ textwrap.wrap(text, width)
 Numbers
 -------
 
-### Basic functions
+### Basic Functions
 ```python
 round(<num>[, ndigits])
 abs(<num>)
@@ -661,7 +668,7 @@ Bytes
 <hex> = <Bytes>.hex()
 ```
 
-### Read Bytes from file
+### Read Bytes from File
 ```python
 def read_bytes(filename):
     with open(filename, 'rb') as file:
