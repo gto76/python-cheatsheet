@@ -198,7 +198,7 @@ import re
 <Match_iter> = re.finditer(<regex>, text)      # Searches for all occurences of pattern.
 ```
 
-#### Match Object
+#### Match Object:
 ```python
 <str> = <Match>.group()   # Whole match.
 <str> = <Match>.group(1)  # Part in first bracket.
