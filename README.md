@@ -750,7 +750,7 @@ Itertools
 from itertools import *
 ```
 
-### Math
+### Combinatoric Iterators
 
 ```python
 >>> combinations('abc', 2)
@@ -766,36 +766,33 @@ from itertools import *
 [('a', 1), ('a', 2), ('b', 1), ('b', 2)]
 ```
 
-### Util
+### Infinite iterators
 
-#### Chain
-```python
->>> chain([1, 2], range(3, 5))
-[1, 2, 3, 4]
-```
-
-#### Compress
-```python
->>> compress('abc', [True, 0, 23])
-['a', 'c']
-```
-
-#### Count
 ```python
 >>> i = count(5, 2)
->>> next(i), next(i)
-(5, 7)
-```
+>>> next(i), next(i), next(i)
+(5, 7, 9)
 
-#### Cycle
-```python
 >>> a = cycle('abc')
 >>> [next(a) for _ in range(10)]
 ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a']
+
+>>> repeat(10, 3)
+[10, 10, 10]
 ```
 
-#### Groupby
+### Iterators
+
 ```python
+>>> chain([1, 2], range(3, 5))
+[1, 2, 3, 4]
+
+>>> compress('abc', [True, 0, 1])
+['a', 'c']
+
+islice([1, 2, 3], 1, None)  # islice(<seq>, from_inclusive, to_exclusive) 
+[2, 3]
+
 >>> a = [{'id': 1, 'name': 'bob'}, 
          {'id': 2, 'name': 'bob'}, 
          {'id': 3, 'name': 'peter'}]
@@ -803,12 +800,6 @@ from itertools import *
 {'bob': [{'id': 1, 'name': 'bob'}, 
          {'id': 2, 'name': 'bob'}], 
  'peter': [{'id': 3, 'name': 'peter'}]}
-```
-
-#### Islice
-```python
-islice([1, 2, 3], 1, None)
-[2, 3]
 ```
 
 ### Ifilter, imap and izip
