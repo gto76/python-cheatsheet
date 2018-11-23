@@ -772,7 +772,6 @@ from itertools import *
 ```python
 >>> chain([1, 2], range(3, 5))
 [1, 2, 3, 4]
-```
 
 #### Compress
 ```python
@@ -780,7 +779,7 @@ from itertools import *
 ['a', 'c']
 ```
 
-### Count
+#### Count
 ```python
 >>> i = count(5, 2)
 >>> next(i), next(i)
