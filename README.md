@@ -752,25 +752,25 @@ from itertools import *
 
 ### Math
 
-#### Combinations:
+#### Combinations
 ```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
 ```
 
-#### Combinations with Replacement:
+#### Combinations with Replacement
 ```python
 >>> ombinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'b'), ('b', 'c'), ('c', 'c')]
 ```
 
-#### Permutations:
+#### Permutations
 ```python
 >>> permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c'), ('c', 'a'), ('c', 'b')]
 ```
 
-#### Product:
+#### Product
 ```python
 >>> product('ab', [1, 2])
 [('a', 1), ('a', 2), ('b', 1), ('b', 2)]
@@ -778,33 +778,33 @@ from itertools import *
 
 ### Util
 
-#### Chain:
+#### Chain
 ```python
 >>> chain([1, 2], range(3, 5))
 [1, 2, 3, 4]
 ```
 
-#### Compress:
+#### Compress
 ```python
 >>> compress('abc', [True, 0, 23])
 ['a', 'c']
 ```
 
-### Count:
+### Count
 ```python
 >>> i = count(5, 2)
 >>> next(i), next(i)
 (5, 7)
 ```
 
-#### Cycle:
+#### Cycle
 ```python
 >>> a = cycle('abc')
 >>> [next(a) for _ in range(10)]
 ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a']
 ```
 
-#### Groupby:
+#### Groupby
 ```python
 >>> a = [{'id': 1, 'name': 'bob'}, 
          {'id': 2, 'name': 'bob'}, 
@@ -815,7 +815,7 @@ from itertools import *
  'peter': [{'id': 3, 'name': 'peter'}]}
 ```
 
-#### Islice:
+#### Islice
 ```python
 islice([1, 2, 3], 1, None)
 [2, 3]
