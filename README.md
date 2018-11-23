@@ -752,26 +752,17 @@ from itertools import *
 
 ### Math
 
-#### Combinations
 ```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
-```
 
-#### Combinations with Replacement
-```python
 >>> ombinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'b'), ('b', 'c'), ('c', 'c')]
-```
 
-#### Permutations
-```python
 >>> permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c'), ('c', 'a'), ('c', 'b')]
 ```
 
-#### Product
-```python
 >>> product('ab', [1, 2])
 [('a', 1), ('a', 2), ('b', 1), ('b', 2)]
 ```
