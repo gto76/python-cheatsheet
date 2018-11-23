@@ -772,6 +772,7 @@ from itertools import *
 ```python
 >>> chain([1, 2], range(3, 5))
 [1, 2, 3, 4]
+```
 
 #### Compress
 ```python
