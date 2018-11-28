@@ -462,10 +462,10 @@ Class
 class <name>:
     def __init__(self, a):
         self.a = a
-    def __repr__(self):
-        return str({'a': self.a})  # Or: return f'{self.__dict__}'
     def __str__(self):
         return str(self.a)
+    def __repr__(self):
+        return str({'a': self.a})  # Or: return f'{self.__dict__}'
 
     @classmethod
     def get_class_name(cls):
