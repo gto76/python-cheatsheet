@@ -742,6 +742,7 @@ import threading
 ```python
 thread = threading.Thread(target=<function>, args=(<first_arg>, ))
 thread.start()
+...
 thread.join()
 ```
 
@@ -749,6 +750,7 @@ thread.join()
 ```python
 lock = threading.Rlock()
 lock.acquire()
+...
 lock.release()
 ```
 
@@ -803,10 +805,10 @@ from itertools import *
 >>> islice([1, 2, 3], 1, None)  # islice(<seq>, from_inclusive, to_exclusive) 
 [2, 3]
 
->>> a = [{'id': 1, 'name': 'bob'}, 
-         {'id': 2, 'name': 'bob'}, 
-         {'id': 3, 'name': 'peter'}]
->>> {k: list(v) for k, v in groupby(a, key=lambda x: x['name'])}
+>>> people = [{'id': 1, 'name': 'bob'}, 
+              {'id': 2, 'name': 'bob'}, 
+              {'id': 3, 'name': 'peter'}]
+>>> {k: list(v) for k, v in groupby(people, key=lambda x: x['name'])}
 {'bob': [{'id': 1, 'name': 'bob'}, 
          {'id': 2, 'name': 'bob'}], 
  'peter': [{'id': 3, 'name': 'peter'}]}
