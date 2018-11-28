@@ -30,6 +30,7 @@ sorted_by_second = sorted(<list>, key=lambda el: el[1])
 sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
 flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
+product_of_els   = functools.reduce(lambda out, x: out * x, <list>)
 ```
 
 ```python
@@ -100,7 +101,8 @@ range(from_inclusive, to_exclusive, -step_size)
 Enumerate
 ---------
 ```python
-for i, <el> in enumerate(<collection> [, i_start])
+for i, <el> in enumerate(<collection> [, i_start]):
+    ...
 ```
 
 Named Tuple
@@ -408,9 +410,9 @@ from enum import Enum
 Direction = Enum('Direction', 'n e s w')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
+# Warrning: Objects will share the objects that are initialized in the dict!
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
 ```
-
 
 Closure
 -------
@@ -498,11 +500,15 @@ class <enum_name>(Enum):
 ```
 
 ```python
-Cutlery = Enum('Cutlery', 'knife', 'fork', 'spoon'])
+Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
-list(<enum_name>)                 # == [<enum1>, <enum2>, ...]
-random.choice(list(<enum_name>))  # == random <enum>
+# Functions can not be values, so they must be enclosed in tuple:
+LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
+                           'OR' : (lambda l, r: l or r, ),
+list(<enum_name>)                  # == [<enum1>, <enum2>, ...]
+list(a.name for a in <enum_name>)  # == ['enum1', 'enum2', ...]
+random.choice(list(<enum_name>))   # == random <enum>
 ```
 
 ### Copy
@@ -803,7 +809,7 @@ from itertools import *
 ```
 
 ### Ifilter, imap and izip
-#### Filter, map and zip functions that return generators instead of iterators.
+#### Filter, map and zip functions that return generators instead of iterators. Droped in Pyhon 3, because filter, map and zip functions started returning generators.
 
 
 Introspection and Metaprograming
