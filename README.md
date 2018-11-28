@@ -477,8 +477,8 @@ class <name>:
 ```python
 from enum import Enum, auto
 class <enum_name>(Enum):
-    <name_1> = <value1>  
-    <name_2> = <value2>, <value2_b>
+    <name_1> = <value_1>  
+    <name_2> = <value_2>, <value_2b>
     <name_3> = auto()   # Can be used for automatic indexing.
     ...
 
