@@ -530,7 +530,7 @@ System
 ```python
 import sys
 script_name = sys.argv[0]
-arguments = sys.argv[1:]
+arguments   = sys.argv[1:]
 ```
 
 ### Read File
@@ -595,7 +595,7 @@ import json
 
 ### Serialization
 ```python
-<str> = json.dumps(<object>, ensure_ascii=True, indent=None)
+<str>  = json.dumps(<object>, ensure_ascii=True, indent=None)
 <dict> = json.loads(<str>)
 ```
 
@@ -697,7 +697,7 @@ def write_bytes(filename, bytes):
 
 Struct
 ------
-**This module performs conversions between Python values and C structs represented as Python bytes objects:**
+**This module performs conversions between Python values and C structs represented as Python Bytes objects:**
 ```python
 <Bytes> = struct.pack('<format>', <value_1> [, <value_2>, ...])
 <tuple> = struct.unpack('<format>', <Bytes>)
@@ -766,7 +766,7 @@ from itertools import *
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
 
->>> ombinations_with_replacement('abc', 2)
+>>> combinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'b'), ('b', 'c'), ('c', 'c')]
 
 >>> permutations('abc', 2)
@@ -812,9 +812,6 @@ from itertools import *
  'peter': [{'id': 3, 'name': 'peter'}]}
 ```
 
-### Ifilter, imap and izip
-#### Filter, map and zip functions that return generators instead of iterators. Dropped in Pyhon 3, because filter, map and zip functions started returning generators.
-
 
 Introspection and Metaprograming
 --------------------------------
@@ -854,7 +851,7 @@ False
 ### Parameters
 ```python
 >>> from inspect import signature
->>> sig = signature(bla)
+>>> sig = signature(<function>)
 >>> len(sig.parameters)
 3
 ```
@@ -862,7 +859,7 @@ False
 ### Type
 **Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):**
 ```python
-type(class_name, parents<tuple>, attributes<dict>)
+type(<class_name>, <parents_tuple>, <attributes_dict>)
 ```
 
 ```python
