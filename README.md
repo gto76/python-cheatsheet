@@ -550,16 +550,16 @@ def write_to_file(filename, text):
 ### Path
 ```python
 import os
-os.path.exists(<path>)
-os.path.isfile(<path>)
-os.path.isdir(<path>)
-os.listdir(<path>)
+<bool> = os.path.exists(<path>)
+<bool> = os.path.isfile(<path>)
+<bool> = os.path.isdir(<path>)
+<list> = os.listdir(<path>)
 ```
 
 ### Execute Command
 ```python
 import os
-os.popen(<command>).read()
+<str> = os.popen(<command>).read()
 ```
 
 #### Or:
