@@ -30,7 +30,7 @@ sorted_by_second = sorted(<list>, key=lambda el: el[1])
 sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
 flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
-product_of_els   = functools.reduce(lambda out, x: out * x, <list>)
+product          = functools.reduce(lambda out, x: out * x, <list>)
 ```
 
 ```python
@@ -500,15 +500,18 @@ class <enum_name>(Enum):
 ```
 
 ```python
+list(<enum_name>)                  # == [<enum1>, <enum2>, ...]
+list(a.name for a in <enum_name>)  # == ['enum1', 'enum2', ...]
+random.choice(list(<enum_name>))   # == random <enum>
+```
+
+```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 # Functions can not be values, so they must be enclosed in tuple:
 LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
-                           'OR' : (lambda l, r: l or r, ),
-list(<enum_name>)                  # == [<enum1>, <enum2>, ...]
-list(a.name for a in <enum_name>)  # == ['enum1', 'enum2', ...]
-random.choice(list(<enum_name>))   # == random <enum>
+                           'OR' : (lambda l, r: l or r, )}
 ```
 
 ### Copy
@@ -809,7 +812,7 @@ from itertools import *
 ```
 
 ### Ifilter, imap and izip
-#### Filter, map and zip functions that return generators instead of iterators. Droped in Pyhon 3, because filter, map and zip functions started returning generators.
+#### Filter, map and zip functions that return generators instead of iterators. Dropped in Pyhon 3, because filter, map and zip functions started returning generators.
 
 
 Introspection and Metaprograming
