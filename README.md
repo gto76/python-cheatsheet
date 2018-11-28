@@ -464,7 +464,7 @@ class <name>:
         self.a = a
     def __repr__(self):
         return str({'a': self.a})
-        # Use f'{s.__dict__}' for all members.
+        # Use f'{self.__dict__}' for all members.
     def __str__(self):
         return str(self.a)
 
