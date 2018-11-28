@@ -1049,16 +1049,16 @@ def send_page(sport):
 ```python
 @post('/p/<sport>')
 def p_handler(sport):
-    team = request.forms.get('team')
+    team = bottle.request.forms.get('team')
     team = urllib.parse.unquote(team).lower()
 
-    db = sqlite3.connect(conf.DB_PATH)
-    p_h, p_a = get_p(db, sport, team)
+    db = sqlite3.connect(<db_path>)
+    home_odds, away_odds = get_p(db, sport, team)
     db.close()
 
     response.headers['Content-Type'] = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
-    return json.dumps([p_h, p_a])
+    return json.dumps([home_odds, away_odds])
 ```
 
 
@@ -1085,7 +1085,7 @@ def get_border(screen):
 
 #### Gets char from int:
 ```python
-<ch> = chr(<int>)
+<ch>  = chr(<int>)
 <int> = ord(<ch>)
 ```
 
