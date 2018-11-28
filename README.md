@@ -463,8 +463,8 @@ class <name>:
     def __init__(self, a):
         self.a = a
     def __repr__(self):
+        # To return all members use: return f'{self.__dict__}'
         return str({'a': self.a})
-        # Use f'{self.__dict__}' for all members.
     def __str__(self):
         return str(self.a)
 
