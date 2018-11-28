@@ -1095,7 +1095,7 @@ Profile
 ```python
 from time import time
 start_time = time()
-<code>
+...
 duration = time() - start_time
 ```
 
