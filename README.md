@@ -519,8 +519,8 @@ LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
 ### Copy
 ```python
 import copy
-copy.copy(<object>)
-copy.deepcopy(<object>)
+<object> = copy.copy(<object>)
+<object> = copy.deepcopy(<object>)
 ```
 
 
