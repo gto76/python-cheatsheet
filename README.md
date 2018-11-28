@@ -510,6 +510,9 @@ random.choice(list(<enum_name>))   # == random <enum>
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
+```
+
+```python
 # Functions can not be values, so they must be enclosed in tuple:
 LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
                            'OR' : (lambda l, r: l or r, )}
