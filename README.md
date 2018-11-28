@@ -477,9 +477,9 @@ class <name>:
 ```python
 from enum import Enum, auto
 class <enum_name>(Enum):
-    <name_1> = <value_1>  
-    <name_2> = <value_2>, <value_2b>
-    <name_3> = auto()   # Can be used for automatic indexing.
+    <member_name_1> = <value_1>  
+    <member_name_2> = <value_2>, <value_2b>
+    <member_name_3> = auto()   # Can be used for automatic indexing.
     ...
 
    @classmethod
@@ -492,17 +492,17 @@ class <enum_name>(Enum):
 ```
 
 ```python
-<enum>  = <enum_name>.<name>
-<enum>  = <enum_name>['<name>']
-<enum>  = <enum_name>(value)
-<name>  = <enum>.name
-<value> = <enum>.value
+<member>  = <enum>.<member_name>
+<member>  = <enum>['<member_name>']
+<member>  = <enum>(<value>)
+<name>    = <member>.name
+<value>   = <member>.value
 ```
 
 ```python
-list(<enum_name>)                  # == [<enum1>, <enum2>, ...]
-list(a.name for a in <enum_name>)  # == ['enum1', 'enum2', ...]
-random.choice(list(<enum_name>))   # == random <enum>
+list(<enum>)                  # == [<member_1>, <member_2>, ...]
+list(a.name for a in <enum>)  # == ['<member_name_1>', '<member_name_2>', ...]
+random.choice(list(<enum>))   # == random <member>
 ```
 
 #### Inline:
