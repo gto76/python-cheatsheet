@@ -30,7 +30,7 @@ sorted_by_second = sorted(<list>, key=lambda el: el[1])
 sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
 flattened_list   = [item for sublist in <list> for item in sublist]
 list_of_chars    = list(<str>)
-product          = functools.reduce(lambda out, x: out * x, <list>)
+product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
 ```
 
 ```python
