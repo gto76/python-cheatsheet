@@ -505,6 +505,7 @@ list(a.name for a in <enum_name>)  # == ['enum1', 'enum2', ...]
 random.choice(list(<enum_name>))   # == random <enum>
 ```
 
+#### Inline:
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
