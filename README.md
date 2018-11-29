@@ -338,8 +338,11 @@ func(1, 2, x=3, y=4, z=5)
 
 #### Splat operator can also be used in function declarations:
 ```python
->>> def add(*a):
-...     return sum(a)
+def add(*a):
+    return sum(a)
+```
+
+```python
 >>> add(1, 2, 3)
 6
 ```
