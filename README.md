@@ -86,7 +86,7 @@ Set
 ### Frozenset
 #### Is hashable and can be used as a key in dictionary:
 ```python
-<frozenset> = frozenset()
+<frozenset> = frozenset(<collection>)
 ```
 
 Range
