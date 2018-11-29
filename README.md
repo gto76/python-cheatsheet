@@ -299,8 +299,7 @@ from math import inf, nan, isfinite, isinf, isnan
 
 #### Or:
 ```python
-float('inf')
-float('nan')
+float('inf'), float('nan')
 ```
 
 ### Random
