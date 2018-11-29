@@ -396,7 +396,7 @@ functools.reduce(lambda sum, x: sum+x, range(10))  # 45
 
 ### Any, All
 ```python
-any(el[1] for el in <collection>)
+<bool> = any(el[1] for el in <collection>)
 ```
 
 ### If - Else
