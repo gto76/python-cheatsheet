@@ -306,10 +306,10 @@ float('nan')
 ### Random
 ```python
 import random
-random.random()
-random.randint(from_inclusive, to_inclusive)
+<float> = random.random()
+<int>   = random.randint(from_inclusive, to_inclusive)
+<el>    = random.choice(<list>)
 random.shuffle(<list>)
-random.choice(<list>)
 ```
 
 Datetime
