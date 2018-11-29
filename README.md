@@ -76,11 +76,11 @@ Set
 <set> = set()
 <set>.add(<el>)
 <set>.update(<set>)
-<set>.union(<set>)
-<set>.intersection(<set>)
-<set>.difference(<set>)
-<set>.issubset(<set>)
-<set>.issuperset(<set>)
+<set>  = <set>.union(<set>)
+<set>  = <set>.intersection(<set>)
+<set>  = <set>.difference(<set>)
+<bool> = <set>.issubset(<set>)
+<bool> = <set>.issuperset(<set>)
 ```
 
 ### Frozenset
