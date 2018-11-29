@@ -48,7 +48,7 @@ Dictionary
 <view>  = <dict>.keys()
 <view>  = <dict>.values()
 <view>  = <dict>.items()
-<value> = <dict>.get(key, default)         # Returns default if key doesn't exist.
+<value> = <dict>.get(key, default)         # Returns default if key does not exist.
 <value> = <dict>.setdefault(key, default)  # Same, but also adds item to dict.
 <dict>.update(<dict>)
 ```
