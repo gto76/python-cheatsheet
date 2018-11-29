@@ -45,11 +45,11 @@ index = <list>.index(<el>)  # Returns first index of item.
 Dictionary
 ----------
 ```python
-<dict>.keys()
-<dict>.values()
-<dict>.items()
-<dict>.get(key, default)
-<dict>.setdefault(key, default)
+<view>  = <dict>.keys()
+<view>  = <dict>.values()
+<view>  = <dict>.items()
+<value> = <dict>.get(key, default)         # Returns default if key doesn't exist.
+<value> = <dict>.setdefault(key, default)  # Same, but also adds item to dict.
 <dict>.update(<dict>)
 ```
 
