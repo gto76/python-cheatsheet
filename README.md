@@ -326,7 +326,7 @@ Arguments
 ---------
 **"*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call:**
 ```python
-args = (1, 2)
+args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
 func(*args, **kwargs)  
 ```
