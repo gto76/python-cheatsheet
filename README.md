@@ -153,8 +153,9 @@ def step(start, step):
         start += step
 ```
 ```python
-stepper = step(10, 2)
-next(stepper)  # 10 (, 12, 14, ...)
+>>> stepper = step(10, 2)
+>>> next(stepper), next(stepper), next(stepper)
+(10, 12, 14)
 ```
 
 
