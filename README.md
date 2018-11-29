@@ -271,7 +271,7 @@ Numbers
 ```python
 round(<num>[, ndigits])
 abs(<num>)
-math.pow(x, y)  # == x**y
+math.pow(x, y)  # Or: x**y
 ```
 
 ### Constants
@@ -294,9 +294,13 @@ log2(x)         # Base 2
 
 ### Infinity, nan
 ```python
+from math import inf, nan, isfinite, isinf, isnan
+```
+
+#### Or:
+```python
 float('inf')
 float('nan')
-from math import inf, nan, isfinite, isinf, isnan
 ```
 
 ### Random
