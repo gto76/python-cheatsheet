@@ -188,7 +188,7 @@ String
 
 ### Print
 ```python
-print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for err.
+print(<el_1> [, end='', sep='', file=<file>, <el_2>, ...])  # Use 'file=sys.stderr' for err.
 ```
 
 ### Regex
