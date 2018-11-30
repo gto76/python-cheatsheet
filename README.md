@@ -735,7 +735,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 Hashlib
 -------
 ```python
->>> hashlib.md5(b'<str>').hexdigest()
+>>> hashlib.md5(<str>.encode()).hexdigest()
 '33d0eba106da4d3ebca17fcd3f4c3d77'
 ```
 
