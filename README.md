@@ -289,8 +289,8 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ```python
 from math import log, log10, log2
 log(x [, base])  # Base e, if not specified.
-log10(x)        # Base 10.
-log2(x)         # Base 2.
+log10(x)         # Base 10.
+log2(x)          # Base 2.
 ```
 
 ### Infinity, nan
