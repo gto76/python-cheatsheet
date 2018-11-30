@@ -188,7 +188,7 @@ String
 
 ### Print
 ```python
-print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for err.
+print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for err.
 ```
 
 ### Regex
@@ -224,7 +224,7 @@ import re
 
 ### Format
 ```python
-'{}'.format(<el> [, <el>, ...])
+'{}'.format(<el_1> [, <el_2>, ...])
 ```
 
 ```python
@@ -270,7 +270,7 @@ Numbers
 
 ### Basic Functions
 ```python
-round(<num>[, ndigits])
+round(<num> [, ndigits])
 abs(<num>)
 math.pow(x, y)  # Or: x**y
 ```
@@ -288,7 +288,7 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ### Logarithm
 ```python
 from math import log, log10, log2
-log(x[, base])  # Base e, if not specified.
+log(x [, base])  # Base e, if not specified.
 log10(x)        # Base 10.
 log2(x)         # Base 2.
 ```
@@ -997,7 +997,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data> [, <data>])
+pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
 ```
