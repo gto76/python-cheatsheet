@@ -182,13 +182,14 @@ String
 <bool> = <str>.endswith(<str>)    # Pass tuple of strings for multiple options.
 <bool> = <str>.isnumeric()        # True if str contains only numeric characters.
 <int>  = <str>.index(<sub_str>)   # Returns first index of substring.
+<ch>   = chr(<int>)               # Converts int to unicode char.
+<int>  = ord(<ch>)                # Converts unicode char to int.
 ```
 
 ### Print
 ```python
 print(<el> [, <el>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for err.
 ```
-
 
 ### Regex
 ```python
@@ -1088,12 +1089,6 @@ def get_border(screen):
     Coords = collections.namedtuple('Coords', ['x', 'y'])
     height, width = screen.getmaxyx()
     return Coords(width - 1, height - 1)
-```
-
-#### Gets char from int:
-```python
-<ch>  = chr(<int>)
-<int> = ord(<ch>)
 ```
 
 Profile
