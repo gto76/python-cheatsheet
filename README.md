@@ -182,8 +182,8 @@ String
 <bool> = <str>.endswith(<str>)    # Pass tuple of strings for multiple options.
 <bool> = <str>.isnumeric()        # True if str contains only numeric characters.
 <int>  = <str>.index(<sub_str>)   # Returns first index of substring.
-<ch>   = chr(<int>)               # Converts int to unicode char.
-<int>  = ord(<ch>)                # Converts unicode char to int.
+<str>  = chr(<int>)               # Converts int to unicode char.
+<int>  = ord(<str>)               # Converts unicode char to int.
 ```
 
 ### Print
