@@ -188,6 +188,16 @@ String
 <int>  = ord(<str>)               # Converts unicode char to int.
 ```
 
+### Ord
+```python
+>>> ord('0'), ord('9')
+(48, 57)
+>>> ord('A'), ord('Z')
+(65, 90)
+>>> ord('a'), ord('z')
+(97, 122)
+```
+
 ### Print
 ```python
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for err.
