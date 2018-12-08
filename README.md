@@ -190,6 +190,11 @@ String
 
 ### Ord
 ```python
+<str>  = chr(<int>)               # Converts int to unicode char.
+<int>  = ord(<str>)               # Converts unicode char to int.
+```
+
+```python
 >>> ord('0'), ord('9')
 (48, 57)
 >>> ord('A'), ord('Z')
