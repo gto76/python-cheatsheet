@@ -68,6 +68,8 @@ dict(zip(keys, values))          # Initiates a dict from two lists.
 >>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
 >>> Counter(z)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
+>>> <counter>.most_common()[0][0]
+'blue'
 ```
 
 Set
@@ -320,6 +322,10 @@ now = datetime.datetime.now()
 now.month                      # 3
 now.strftime('%Y%m%d')         # '20180315'
 now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
+```
+
+```python
+<datetime> = datetime.strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
 ```
 
 Arguments
