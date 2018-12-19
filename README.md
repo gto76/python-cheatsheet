@@ -885,9 +885,9 @@ Introspection and Metaprograming
 
 ### Variables
 ```python
-<list> = dir()      # In scope variables.
-<dict> = globals()  # Global variables.
+<list> = dir()      # In-scope variables.
 <dict> = locals()   # Local variables.
+<dict> = globals()  # Global variables.
 ```
 
 ### Attributes
@@ -910,11 +910,11 @@ False
 ```
 
 ### Parameters
+#### Getting the number of parameters of a function:
 ```python
->>> from inspect import signature
->>> sig = signature(<function>)
->>> len(sig.parameters)
-3
+from inspect import signature
+sig = signature(<function>)
+no_of_params = len(sig.parameters)
 ```
 
 ### Type
@@ -1104,7 +1104,7 @@ img.save('out.png')
 ```
 
 ### Modes
-* `1` - 1-bit pixels, black and white, stored with one pixel per byte
+* `'1'` - 1-bit pixels, black and white, stored with one pixel per byte
 * `L` - 8-bit pixels, greyscale
 * `RGB` - 3x8-bit pixels, true color
 * `RGBA` - 4x8-bit pixels, true color with transparency mask
