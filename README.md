@@ -1103,7 +1103,6 @@ def p_handler(sport):
     return json.dumps([home_odds, away_odds])
 ```
 
-
 Curses
 ------
 ```python
@@ -1123,6 +1122,39 @@ def get_border(screen):
     Coords = collections.namedtuple('Coords', ['x', 'y'])
     height, width = screen.getmaxyx()
     return Coords(width - 1, height - 1)
+```
+
+Image
+-----
+#### Creates png image of greyscale gradient:
+```python
+# $ pip3 install pillow
+from PIL import Image
+width, height = 100, 100
+img = Image.new('L', (width, height), 'white')
+img.putdata([255*a/(width*height) for a in range(width*height)])
+img.save('out.png')
+```
+
+### Modes
+* `1` - 1-bit pixels, black and white, stored with one pixel per byte
+* `L` - 8-bit pixels, greyscale
+* `RGB` - 3x8-bit pixels, true color
+* `RGBA` - 4x8-bit pixels, true color with transparency mask
+* `HSV` - 3x8-bit pixels, Hue, Saturation, Value color space
+
+Audio
+-----
+#### Saves list of floats with values between 0 and 1 to a WAV file:
+```python
+import wave, struct
+frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
+wf = wave.open(<filename>, 'wb')
+wf.setnchannels(1)
+wf.setsampwidth(4)
+wf.setframerate(44100)
+wf.writeframes(b''.join(frames))
+wf.close()
 ```
 
 Profile
@@ -1163,39 +1195,6 @@ def get_current_datetime_string():
 
 def get_datetime_string(a_datetime):
     return a_datetime.strftime('%Y%m%d%H%M%S')
-```
-
-Image
------
-#### Creates png image of greyscale gradient:
-```python
-# $ pip3 install pillow
-from PIL import Image
-width, height = 100, 100
-img = Image.new('L', (width, height), 'white')
-img.putdata([255*a/(width*height) for a in range(width*height)])
-img.save('out.png')
-```
-
-### Modes
-* `1` - 1-bit pixels, black and white, stored with one pixel per byte
-* `L` - 8-bit pixels, greyscale
-* `RGB` - 3x8-bit pixels, true color
-* `RGBA` - 4x8-bit pixels, true color with transparency mask
-* `HSV` - 3x8-bit pixels, Hue, Saturation, Value color space
-
-Audio
------
-#### Saves list of floats with values between 0 and 1 to a WAV file:
-```python
-import wave, struct
-frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
-wf = wave.open(<filename>, 'wb')
-wf.setnchannels(1)
-wf.setsampwidth(4)
-wf.setframerate(44100)
-wf.writeframes(b''.join(frames))
-wf.close()
 ```
 
 Progress Bar
