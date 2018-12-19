@@ -3,6 +3,7 @@ Comprehensive Python Cheatsheet
 
 ![Monty Python](web/image_888.jpeg)
 
+
 Main
 ----
 ```python
@@ -72,6 +73,7 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 'blue'
 ```
 
+
 Set
 ---
 ```python
@@ -96,6 +98,7 @@ Set
 <frozenset> = frozenset(<collection>)
 ```
 
+
 Range
 -----
 ```python
@@ -105,12 +108,14 @@ range(from_inclusive, to_exclusive, step_size)
 range(from_inclusive, to_exclusive, -step_size)
 ```
 
+
 Enumerate
 ---------
 ```python
 for i, <el> in enumerate(<collection> [, i_start]):
     ...
 ```
+
 
 Named Tuple
 -----------
@@ -125,6 +130,7 @@ Point(x=1, y=2)
 >>> Point._fields
 ('x', 'y')
 ```
+
 
 Iterator
 --------
@@ -285,9 +291,9 @@ import textwrap
 textwrap.wrap(text, width)
 ```
 
+
 Numbers
 -------
-
 ### Basic Functions
 ```python
 round(<num> [, ndigits])
@@ -332,6 +338,7 @@ import random
 random.shuffle(<list>)
 ```
 
+
 Datetime
 --------
 ```python
@@ -345,6 +352,7 @@ now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
 ```python
 <datetime> = datetime.strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
 ```
+
 
 Arguments
 ---------
@@ -383,6 +391,7 @@ def add(*a):
 >>> body
 [2, 3]
 ```
+
 
 Inline
 ------
@@ -446,6 +455,7 @@ Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
 ```
 
+
 Closure
 -------
 ```python
@@ -462,6 +472,7 @@ multiply_by_3 = multiply_closure(3)
 from functools import partial
 partial(<function>, <arg_1> [, <arg_2>, ...])
 ```
+
 
 Decorator
 ---------
@@ -504,14 +515,23 @@ class <name>:
         return cls.__name__
 ```
 
-#### Constructor overloading:
+### Constructor Overloading
 ```python
 class <name>:
     def __init__(self, a=None):
         self.a = a
 ```
 
-### Enum
+### Copy
+```python
+import copy
+<object> = copy.copy(<object>)
+<object> = copy.deepcopy(<object>)
+```
+
+
+Enum
+----
 ```python
 from enum import Enum, auto
 class <enum_name>(Enum):
@@ -543,7 +563,7 @@ list(a.name for a in <enum>)  # == ['<member_name_1>', '<member_name_2>', ...]
 random.choice(list(<enum>))   # == random <member>
 ```
 
-#### Inline:
+### Inline
 ```python
 Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
 Cutlery = Enum('Cutlery', 'knife fork spoon')
@@ -558,17 +578,9 @@ LogicOp = Enum('LogicOp', {'AND': (auto(), lambda l, r: l and r),
                            'OR' : (auto(), lambda l, r: l or r)}
 ```
 
-### Copy
-```python
-import copy
-<object> = copy.copy(<object>)
-<object> = copy.deepcopy(<object>)
-```
-
 
 System
 ------
-
 ### Arguments
 ```python
 import sys
@@ -615,7 +627,6 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 0
 ```
 
-
 ### Input
 ```python
 filename = input('Enter a file name: ')
@@ -629,6 +640,7 @@ while True:
     except EOFError:
         break
 ```
+
 
 JSON
 ----
@@ -662,6 +674,7 @@ def write_to_json_file(filename, an_object):
         json.dump(an_object, file, ensure_ascii=False, indent=2)
 ```
 
+
 SQLite
 ------
 ```python
@@ -683,6 +696,7 @@ db.execute(<query>)
 db.commit()
 ```
 
+
 Exceptions
 ----------
 ```python
@@ -700,6 +714,7 @@ while True:
 ```python
 raise IOError("input/output error")
 ```
+
 
 Bytes
 -----
@@ -738,6 +753,7 @@ def write_bytes(filename, bytes):
 <Bytes> = b''.join(<list_of_Bytes>)
 ```
 
+
 Struct
 ------
 **This module performs conversions between Python values and C structs represented as Python Bytes objects:**
@@ -768,12 +784,14 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * `f` - float
 * `d` - double
 
+
 Hashlib
 -------
 ```python
 >>> hashlib.md5(<str>.encode()).hexdigest()
 '33d0eba106da4d3ebca17fcd3f4c3d77'
 ```
+
 
 Threading
 ---------
@@ -797,6 +815,7 @@ lock.acquire()
 lock.release()
 ```
 
+
 Itertools
 ---------
 **Every function returns a generator and can accept any collection. If you want to print an output of generator, as in examples, you need to pass it to the list() function.**
@@ -806,7 +825,6 @@ from itertools import *
 ```
 
 ### Combinatoric iterators
-
 ```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
@@ -822,7 +840,6 @@ from itertools import *
 ```
 
 ### Infinite iterators
-
 ```python
 >>> i = count(5, 2)
 >>> next(i), next(i), next(i)
@@ -837,7 +854,6 @@ from itertools import *
 ```
 
 ### Iterators
-
 ```python
 >>> chain([1, 2], range(3, 5))
 [1, 2, 3, 4]
@@ -912,7 +928,6 @@ type(<class_name>, <parents_tuple>, <attributes_dict>)
 >>> z = Z()
 ```
 
-
 ### MetaClass
 #### Class that creates class:
 ```python
@@ -980,6 +995,7 @@ def eval_(node):
 -5.0
 ```
 
+
 Coroutine
 ---------
 * **Similar to Generator, but Generator pulls data through the pipe with iteration, while Coroutine pushes data into the pipeline with send().**  
@@ -1037,6 +1053,7 @@ pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
 ```
 
+
 Table
 -----
 #### Prints CSV file as ASCII table:
@@ -1049,6 +1066,7 @@ with open(<filename>, newline='') as csv_file:
     headers = [a.title() for a in next(reader)]
     print(tabulate(reader, headers))
 ```
+
 
 Curses
 ------
@@ -1072,6 +1090,7 @@ def get_border(screen):
     return P(width - 1, height - 1)
 ```
 
+
 Image
 -----
 #### Creates PNG image of greyscale gradient:
@@ -1091,6 +1110,7 @@ img.save('out.png')
 * `RGBA` - 4x8-bit pixels, true color with transparency mask
 * `HSV` - 3x8-bit pixels, Hue, Saturation, Value color space
 
+
 Audio
 -----
 #### Saves list of floats with values between 0 and 1 to a WAV file:
@@ -1105,6 +1125,7 @@ wf.writeframes(b''.join(frames))
 wf.close()
 ```
 
+
 UrlLib
 ------
 ### Translate special characters 
@@ -1112,6 +1133,7 @@ UrlLib
 import urllib.parse
 <str> = urllib.parse.quote_plus(<str>)
 ```
+
 
 Web
 ---
@@ -1159,6 +1181,7 @@ def p_handler(sport):
     return json.dumps([home_odds, away_odds])
 ```
 
+
 Profile
 -------
 #### Basic:
@@ -1198,6 +1221,7 @@ def get_current_datetime_string():
 def get_datetime_string(a_datetime):
     return a_datetime.strftime('%Y%m%d%H%M%S')
 ```
+
 
 Progress Bar
 ------------
@@ -1260,6 +1284,7 @@ for i in range(STEPS):
 bar.finish()
 ```
 
+
 Basic Script Template
 ---------------------
 ```python
@@ -1293,6 +1318,3 @@ def read_file(filename):
 if __name__ == '__main__':
     main()
 ```
-
-
-
