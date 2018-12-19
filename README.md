@@ -1165,6 +1165,25 @@ def get_datetime_string(a_datetime):
     return a_datetime.strftime('%Y%m%d%H%M%S')
 ```
 
+Image
+-----
+#### Creates png image of greyscale gradient:
+```python
+# $ pip3 install pillow
+from PIL import Image
+width, height = 100, 100
+img = Image.new('L', (width, height), 'white')
+img.putdata([255*a/(width*height) for a in range(width*height)])
+img.save('out.png')
+```
+
+### Modes
+* `1` - 1-bit pixels, black and white, stored with one pixel per byte
+* `L` - 8-bit pixels, greyscale
+* `RGB` - 3x8-bit pixels, true color
+* `RGBA` - 4x8-bit pixels, true color with transparency mask
+* `HSV` - 3x8-bit pixels, Hue, Saturation, Value color space
+
 Audio
 -----
 #### Saves list of floats with values between 0 and 1 to a WAV file:
