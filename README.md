@@ -1049,60 +1049,6 @@ with open(<filename>, newline='') as csv_file:
     print(tabulate(reader, headers))
 ```
 
-UrlLib
-------
-### Translate special characters 
-```python
-import urllib.parse
-<str> = urllib.parse.quote_plus(<str>)
-```
-
-Web
----
-```python
-# $ pip3 install bottle
-import bottle
-import urllib
-```
-
-### Run
-```python
-bottle.run(host='localhost', port=8080)
-bottle.run(host='0.0.0.0', port=80, server='cherrypy')
-```
-
-### Static request
-```python
-@route('/img/<image>')
-def send_image(image):
-    return static_file(image, 'images/', mimetype='image/png')
-```
-
-### Dynamic request
-```python
-@route('/<sport>')
-def send_page(sport):
-    sport = urllib.parse.unquote(sport).lower()
-    page = read_file(sport)
-    return template(page)
-```
-
-### REST request
-```python
-@post('/p/<sport>')
-def p_handler(sport):
-    team = bottle.request.forms.get('team')
-    team = urllib.parse.unquote(team).lower()
-
-    db = sqlite3.connect(<db_path>)
-    home_odds, away_odds = get_p(db, sport, team)
-    db.close()
-
-    response.headers['Content-Type'] = 'application/json'
-    response.headers['Cache-Control'] = 'no-cache'
-    return json.dumps([home_odds, away_odds])
-```
-
 Curses
 ------
 ```python
@@ -1155,6 +1101,60 @@ wf.setsampwidth(4)
 wf.setframerate(44100)
 wf.writeframes(b''.join(frames))
 wf.close()
+```
+
+UrlLib
+------
+### Translate special characters 
+```python
+import urllib.parse
+<str> = urllib.parse.quote_plus(<str>)
+```
+
+Web
+---
+```python
+# $ pip3 install bottle
+import bottle
+import urllib
+```
+
+### Run
+```python
+bottle.run(host='localhost', port=8080)
+bottle.run(host='0.0.0.0', port=80, server='cherrypy')
+```
+
+### Static request
+```python
+@route('/img/<image>')
+def send_image(image):
+    return static_file(image, 'images/', mimetype='image/png')
+```
+
+### Dynamic request
+```python
+@route('/<sport>')
+def send_page(sport):
+    sport = urllib.parse.unquote(sport).lower()
+    page = read_file(sport)
+    return template(page)
+```
+
+### REST request
+```python
+@post('/p/<sport>')
+def p_handler(sport):
+    team = bottle.request.forms.get('team')
+    team = urllib.parse.unquote(team).lower()
+
+    db = sqlite3.connect(<db_path>)
+    home_odds, away_odds = get_p(db, sport, team)
+    db.close()
+
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Cache-Control'] = 'no-cache'
+    return json.dumps([home_odds, away_odds])
 ```
 
 Profile
