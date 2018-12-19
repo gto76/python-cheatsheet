@@ -775,14 +775,14 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 ### Format
 **Use capital leters for unsigned type.** 
-* `'x'` - Pad byte
-* `'c'` - Char
-* `'h'` - Short
-* `'i'` - Int
-* `'l'` - Long
-* `'q'` - Long long
-* `'f'` - Float
-* `'d'` - Double
+* `'x'` - pad byte
+* `'c'` - char
+* `'h'` - short
+* `'i'` - int
+* `'l'` - long
+* `'q'` - long long
+* `'f'` - float
+* `'d'` - double
 
 
 Hashlib
