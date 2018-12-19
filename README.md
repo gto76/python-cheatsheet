@@ -1073,7 +1073,7 @@ def get_border(screen):
 
 Image
 -----
-#### Creates png image of greyscale gradient:
+#### Creates PNG image of greyscale gradient:
 ```python
 # $ pip3 install pillow
 from PIL import Image
