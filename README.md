@@ -506,7 +506,7 @@ class <name>:
 
 #### Constructor overloading:
 ```python
-class C:
+class <name>:
     def __init__(self, a=None):
         self.a = a
 ```
@@ -552,6 +552,7 @@ Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 # Functions can not be values, so they must be enclosed in tuple:
 LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
                            'OR' : (lambda l, r: l or r, )}
+
 # But 'list(<enum>)' will only work if there is another value in the tuple:
 LogicOp = Enum('LogicOp', {'AND': (auto(), lambda l, r: l and r),
                            'OR' : (auto(), lambda l, r: l or r)}
