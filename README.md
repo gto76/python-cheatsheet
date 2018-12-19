@@ -1065,9 +1065,10 @@ def draw(screen):
         pass
 
 def get_border(screen):
-    Coords = collections.namedtuple('Coords', ['x', 'y'])
+    from collections import namedtuple
+    P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
-    return Coords(width - 1, height - 1)
+    return P(width - 1, height - 1)
 ```
 
 Image
