@@ -278,11 +278,11 @@ import re
 ```
 
 #### Integer presentation types:
-* `b` - Binary
-* `c` - Character
-* `o` - Octal
-* `x` - Hex
-* `X` - HEX
+* `'b'` - Binary
+* `'c'` - Character
+* `'o'` - Octal
+* `'x'` - Hex
+* `'X'` - HEX
 
 
 ### Text Wrap
@@ -1104,11 +1104,11 @@ img.save('out.png')
 ```
 
 ### Modes
-* `'1'` - 1-bit pixels, black and white, stored with one pixel per byte
-* `L` - 8-bit pixels, greyscale
-* `RGB` - 3x8-bit pixels, true color
-* `RGBA` - 4x8-bit pixels, true color with transparency mask
-* `HSV` - 3x8-bit pixels, Hue, Saturation, Value color space
+* `'1'` - 1-bit pixels, black and white, stored with one pixel per byte.
+* `'L'` - 8-bit pixels, greyscale.
+* `'RGB'` - 3x8-bit pixels, true color.
+* `'RGBA'` - 4x8-bit pixels, true color with transparency mask.
+* `'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.
 
 
 Audio
