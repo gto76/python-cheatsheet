@@ -55,10 +55,11 @@ Dictionary
 ```
 
 ```python
-collections.defaultdict(<type>)  # Creates a dictionary with default values of type.
-collections.OrderedDict()        # Creates ordered dictionary.
-dict(<list>)                     # Initiates a dict from list of key/value pairs.
-dict(zip(keys, values))          # Initiates a dict from two lists.
+collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
+collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
+collections.OrderedDict()           # Creates ordered dictionary.
+dict(<list>)                        # Initiates a dict from list of key/value pairs.
+dict(zip(keys, values))             # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
 
@@ -641,6 +642,12 @@ while True:
         break
 ```
 
+### Recursion Limit
+```python
+>>> sys.getrecursionlimit()
+1000
+>>> sys.setrecursionlimit(10000)
+```
 
 JSON
 ----
