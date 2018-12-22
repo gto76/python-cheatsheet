@@ -58,11 +58,13 @@ Dictionary
 collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
 collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
 collections.OrderedDict()           # Creates ordered dictionary.
-dict(<list>)                        # Initiates a dict from list of key/value pairs.
+```
+
+```python
+dict(<list>)                        # Initiates a dict from list of key-value pairs.
 dict(zip(keys, values))             # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
-
 
 ### Counter
 ```python
