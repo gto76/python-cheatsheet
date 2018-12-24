@@ -16,8 +16,8 @@ List
 ----
 ```python
 <list>[from_inclusive : to_exclusive : step_size]
-<list>.append(<el>)    # Same as <list> += [<el>]
-<list>.extend(<list>)  # Same as <list> += <list>
+<list>.append(<el>)    # Or: <list> += [<el>]
+<list>.extend(<list>)  # Or: <list> += <list>
 ```
 
 ```python
@@ -90,10 +90,10 @@ Set
 ```
 
 ```python
-<set>  = <set>.union(<set>)                 # Or <set> | <set>
-<set>  = <set>.intersection(<set>)          # Or <set> & <set>
-<set>  = <set>.difference(<set>)            # Or <set> - <set>
-<set>  = <set>.symmetric_difference(<set>)  # Or <set> ^ <set>
+<set>  = <set>.union(<set>)                 # Or: <set> | <set>
+<set>  = <set>.intersection(<set>)          # Or: <set> & <set>
+<set>  = <set>.difference(<set>)            # Or: <set> - <set>
+<set>  = <set>.symmetric_difference(<set>)  # Or: <set> ^ <set>
 <bool> = <set>.issubset(<set>)
 <bool> = <set>.issuperset(<set>)
 ```
@@ -304,7 +304,7 @@ Numbers
 ```python
 round(<num> [, ndigits])
 abs(<num>)
-math.pow(x, y)  # Or x ** y
+math.pow(x, y)  # Or: x ** y
 ```
 
 ### Constants
