@@ -90,10 +90,10 @@ Set
 ```
 
 ```python
-<set>  = <set>.union(<set>)                 # Same as <set> | <set>
-<set>  = <set>.intersection(<set>)          # Same as <set> & <set>
-<set>  = <set>.difference(<set>)            # Same as <set> - <set>
-<set>  = <set>.symmetric_difference(<set>)  # Same as <set> ^ <set>
+<set>  = <set>.union(<set>)                 # Or: <set> | <set>
+<set>  = <set>.intersection(<set>)          # Or: <set> & <set>
+<set>  = <set>.difference(<set>)            # Or: <set> - <set>
+<set>  = <set>.symmetric_difference(<set>)  # Or: <set> ^ <set>
 <bool> = <set>.issubset(<set>)
 <bool> = <set>.issuperset(<set>)
 ```
