@@ -72,8 +72,8 @@ dict(zip(keys, values))             # Initiates a dict from two lists.
 ### Counter
 ```python
 >>> from collections import Counter
->>> z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
->>> Counter(z)
+>>> colors = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
+>>> Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
 >>> <counter>.most_common()[0][0]
 'blue'
