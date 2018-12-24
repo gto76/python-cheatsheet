@@ -16,8 +16,11 @@ List
 ----
 ```python
 <list>[from_inclusive : to_exclusive : step_size]
-<list>.append(<el>)        # Or: <list> += [<el>]
-<list>.extend(<list>)      # Or: <list> += <list>
+<list>.append(<el>)    # Or: <list> += [<el>]
+<list>.extend(<list>)  # Or: <list> += <list>
+```
+
+```python
 <list>.sort()
 <list>.reverse()
 <list> = sorted(<list>)
