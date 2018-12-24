@@ -16,8 +16,11 @@ List
 ----
 ```python
 <list>[from_inclusive : to_exclusive : step_size]
-<list>.append(<el>)
-<list>.extend(<list>)
+<list>.append(<el>)    # Same as <list> += [<el>]
+<list>.extend(<list>)  # Same as <list> += <list>
+```
+
+```python
 <list>.sort()
 <list>.reverse()
 <list> = sorted(<list>)
@@ -87,10 +90,10 @@ Set
 ```
 
 ```python
-<set>  = <set>.union(<set>)
-<set>  = <set>.intersection(<set>)
-<set>  = <set>.difference(<set>)
-<set>  = <set>.symmetric_difference(<set>)
+<set>  = <set>.union(<set>)                 # Same as <set> | <set>
+<set>  = <set>.intersection(<set>)          # Same as <set> & <set>
+<set>  = <set>.difference(<set>)            # Same as <set> - <set>
+<set>  = <set>.symmetric_difference(<set>)  # Same as <set> ^ <set>
 <bool> = <set>.issubset(<set>)
 <bool> = <set>.issuperset(<set>)
 ```
@@ -561,9 +564,9 @@ class <enum_name>(Enum):
 ```
 
 ```python
-list(<enum>)                  # == [<member_1>, <member_2>, ...]
-list(a.name for a in <enum>)  # == ['<member_name_1>', '<member_name_2>', ...]
-random.choice(list(<enum>))   # == random <member>
+list(<enum>)                 # == [<member_1>, <member_2>, ...]
+[a.name for a in <enum>]     # == ['<member_name_1>', '<member_name_2>', ...]
+random.choice(list(<enum>))  # == random <member>
 ```
 
 ### Inline
@@ -1207,7 +1210,7 @@ duration = time() - start_time
 #### Times execution of the passed code:
 ```python
 from timeit import timeit
-timeit('"-".join(str(n) for n in range(100))', number=1000000, , globals=globals())
+timeit('"-".join(str(n) for n in range(100))', number=1000000, globals=globals())
 ```
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
