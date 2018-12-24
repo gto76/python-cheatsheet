@@ -38,7 +38,7 @@ product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
 ```
 
 ```python
-index = <list>.index(<el>)  # Returns first index of item. 
+<int> = <list>.index(<el>)  # Returns first index of item. 
 <list>.insert(index, <el>)  # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])  # Removes and returns item at index or from the end.
 <list>.remove(<el>)         # Removes first occurrence of item.
