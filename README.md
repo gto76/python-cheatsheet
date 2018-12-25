@@ -836,12 +836,12 @@ Hashlib
 Threading
 ---------
 ```python
-import threading
+from threading import Thread, RLock
 ```
 
 ### Thread
 ```python
-thread = threading.Thread(target=<function>, args=(<first_arg>, ))
+thread = Thread(target=<function>, args=(<first_arg>, ))
 thread.start()
 ...
 thread.join()
@@ -849,7 +849,7 @@ thread.join()
 
 ### Lock
 ```python
-lock = threading.Rlock()
+lock = Rlock()
 lock.acquire()
 ...
 lock.release()
@@ -998,43 +998,48 @@ Eval
 ----
 ### Basic
 ```python
->>> import ast
->>> ast.literal_eval('1 + 1')
+>>> from ast import literal_eval
+>>> literal_eval('1 + 1')
 2
->>> ast.literal_eval('[1, 2, 3]')
+>>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
 ```
 
 ### Detailed
 ```python
 import ast
+from ast import Num, BinOp, UnaryOp
 import operator as op
 
 # Supported operators
-operators = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul,
-             ast.Div: op.truediv, ast.Pow: op.pow, ast.BitXor: op.xor,
-             ast.USub: op.neg}
+operators = {ast.Add:    op.add, 
+             ast.Sub:    op.sub, 
+             ast.Mult:   op.mul,
+             ast.Div:    op.truediv, 
+             ast.Pow:    op.pow, 
+             ast.BitXor: op.xor,
+             ast.USub:   op.neg}
 
-def eval_expr(expr):
-    return eval_(ast.parse(expr, mode='eval').body)
+def evaluate(expr):
+    return eval_node(ast.parse(expr, mode='eval').body)
 
-def eval_(node):
-    if isinstance(node, ast.Num):  # <number>
+def eval_node(node):
+    if isinstance(node, Num):  # <number>
         return node.n
-    elif isinstance(node, ast.BinOp):  # <left> <operator> <right>
-        return operators[type(node.op)](eval_(node.left), eval_(node.right))
-    elif isinstance(node, ast.UnaryOp):  # <operator> <operand> e.g., -1
-        return operators[type(node.op)](eval_(node.operand))
+    elif isinstance(node, BinOp):  # <left> <operator> <right>
+        return operators[type(node.op)](eval_node(node.left), eval_node(node.right))
+    elif isinstance(node, UnaryOp):  # <operator> <operand> e.g., -1
+        return operators[type(node.op)](eval_node(node.operand))
     else:
         raise TypeError(node)
 ```
 
 ```python
->>> eval_expr('2^6')
+>>> evaluate('2^6')
 4
->>> eval_expr('2**6')
+>>> evaluate('2**6')
 64
->>> eval_expr('1 + 2*3**(4^5) / (6 + -7)')
+>>> evaluate('1 + 2*3**(4^5) / (6 + -7)')
 -5.0
 ```
 
@@ -1115,10 +1120,10 @@ Curses
 ------
 ```python
 # $ pip3 install curses
-import curses
+from curses import wrapper
 
 def main():
-    curses.wrapper(draw)
+    wrapper(draw)
 
 def draw(screen):
     screen.clear()
@@ -1197,7 +1202,7 @@ Web
 ```python
 # $ pip3 install bottle
 import bottle
-import urllib
+from urllib.parse import unquote
 ```
 
 ### Run
@@ -1217,7 +1222,7 @@ def send_image(image):
 ```python
 @route('/<sport>')
 def send_page(sport):
-    sport = urllib.parse.unquote(sport).lower()
+    sport = unquote(sport).lower()
     page = read_file(sport)
     return template(page)
 ```
@@ -1227,7 +1232,7 @@ def send_page(sport):
 @post('/p/<sport>')
 def p_handler(sport):
     team = bottle.request.forms.get('team')
-    team = urllib.parse.unquote(team).lower()
+    team = unquote(team).lower()
 
     db = sqlite3.connect(<db_path>)
     home_odds, away_odds = get_p(db, sport, team)
