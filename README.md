@@ -236,7 +236,9 @@ String
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
 ```
 
-### Regex
+
+Regex
+-----
 ```python
 import re
 <str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
@@ -251,7 +253,7 @@ import re
 * **Use '\\\\1' or r'\1' for backreference.**  
 * **Use ? to make operators non-greedy.**   
 
-#### Match object:
+### Match Object
 ```python
 <str> = <Match>.group()   # Whole match.
 <str> = <Match>.group(1)  # Part in first bracket.
@@ -259,7 +261,7 @@ import re
 <int> = <Match>.end()     # Exclusive end index of a match.
 ```
 
-#### Special sequences:
+### Special Sequences
 ```python
 # Use capital letter for negation.
 '\d' == '[0-9]'          # Digit
@@ -267,7 +269,9 @@ import re
 '\w' == '[a-zA-Z0-9_]'   # Alphanumeric
 ```
 
-### Format
+
+Format
+------
 ```python
 # Both return '<el_1>, <el_2>':
 <str> = '{}, {}'.format(<el_1>, <el_2>)
