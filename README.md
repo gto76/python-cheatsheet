@@ -430,14 +430,14 @@ lambda <argument_1>, <argument_2>: <return_value>
 
 ### Comprehension
 ```python
-[i+1 for i in range(10)]         # [1, 2, ..., 10]
-[i for i in range(10) if i > 5]  # [6, 7, ..., 9]
-{i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
-(x+5 for x in range(0, 10))      # (5, 6, ..., 14) -> Iterator
+<list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
+<list> = [i for i in range(10) if i > 5]  # [6, 7, ..., 9]
+<dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
+<iter> = (x+5 for x in range(0, 10))      # (5, 6, ..., 14)
 ```
 
 ```python
-[i+j for i in range(10) for j in range(10)]
+out = [i+j for i in range(10) for j in range(10)]
 ```
 
 #### Is the same as:
