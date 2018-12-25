@@ -910,9 +910,9 @@ from itertools import *
 >>> people = [{'id': 1, 'name': 'bob'}, 
               {'id': 2, 'name': 'bob'}, 
               {'id': 3, 'name': 'peter'}]
->>> {k: list(v) for k, v in groupby(people, key=lambda x: x['name'])}
-{'bob': [{'id': 1, 'name': 'bob'}, 
-         {'id': 2, 'name': 'bob'}], 
+>>> {name: list(ppp) for name, ppp in groupby(people, key=lambda p: p['name'])}
+{'bob':   [{'id': 1, 'name': 'bob'}, 
+           {'id': 2, 'name': 'bob'}], 
  'peter': [{'id': 3, 'name': 'peter'}]}
 ```
 
