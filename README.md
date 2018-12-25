@@ -489,18 +489,17 @@ creature = Creature()
 Closure
 -------
 ```python
-def multiply_closure(a):
+def get_multiplier(a):
     def out(b):
         return a * b
     return out
 ```
 
 ```python
->>> multiply_by_3 = multiply_closure(3)
+>>> multiply_by_3 = get_multiplier(3)
 >>> multiply_by_3(10)
 30
 ```
-
 
 #### Or:
 ```python
