@@ -261,13 +261,10 @@ import re
 ### Format
 ```python
 <str> = '{}, {}'.format(<el_1>, <el_2>)
-```
-#### Or:
-```python
-<str> = f'{<el_1>} {<el_2}'
+<str> = f'{<el_1>}, {<el_2}'
 ```
 
-#### General:
+#### General options:
 ```python
 {<el>:<10}   # '<el>      '
 {<el>:>10}   # '      <el>'
@@ -276,13 +273,13 @@ import re
 {<el>:^0}    # '<el>'
 ```
 
-#### Specific for strings:
+#### Options specific to strings:
 ```python
 {'abcde':.3}      # 'abc'
 {'abcde':>10.3}'  # '       abc'
 ```
 
-#### Specific for numbers:
+#### Options specific to numbers:
 ```python
 {1.23456:.3f}     # '1.235'
 {1.23456:>10.3f}  # '     1.235'
