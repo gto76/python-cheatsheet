@@ -592,9 +592,9 @@ class <enum_name>(Enum):
 ```
 
 ```python
-list(<enum>)                 # == [<member_1>, <member_2>, ...]
-[a.name for a in <enum>]     # == ['<member_name_1>', '<member_name_2>', ...]
-random.choice(list(<enum>))  # == random <member>
+list_of_members = list(<enum>)
+member_names    = [a.name for a in <enum>]
+random_member   = random.choice(list(<enum>))
 ```
 
 ### Inline
