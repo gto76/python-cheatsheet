@@ -197,20 +197,23 @@ is_function = callable(<el>)
 String
 ------
 ```python
-<str>  = <str>.strip()                       # Strips all whitespace characters.
-<str>  = <str>.strip('<chars>')              # Strips all passed characters.
-<list> = <str>.split()                       # Splits on any whitespace character.
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
+<str>  = <str>.strip()           # Strips all whitespace characters.
+<str>  = <str>.strip('<chars>')  # Strips all passed characters.
 ```
 
 ```python
-<str>  = <str>.join(<list>)
+<list> = <str>.split()                       # Splits on any whitespace character.
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
+<str>  = <str>.join(<list>)                  # Joins elements using <str> as separator.
+```
+
+```python
 <str>  = <str>.replace(old_str, new_str)
-<bool> = <str>.startswith(<sub_str>)  # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<sub_str>)    # Pass tuple of strings for multiple options.
-<int>  = <str>.index(<sub_str>)       # Returns first index of a substring.
-<bool> = <str>.isnumeric()            # True if str contains only numeric characters.
-<list> = textwrap.wrap(<str>, width)  # Nicely breakes string into lines.
+<bool> = <str>.startswith(<sub_str>)      # Pass tuple of strings for multiple options.
+<bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
+<int>  = <str>.index(<sub_str>)           # Returns first index of a substring.
+<bool> = <str>.isnumeric()                # True if str contains only numeric characters.
+<list> = textwrap.wrap(<str>, width)      # Nicely breakes string into lines.
 ```
 
 ### Char
