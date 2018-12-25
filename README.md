@@ -1007,7 +1007,7 @@ Eval
 
 ### Detailed
 ```python
-from ast import Num, BinOp, UnaryOp, parse, Add, Sub, Mult, Div, Pow, BitXor, \
+from ast import parse, Num, BinOp, UnaryOp, Add, Sub, Mult, Div, Pow, BitXor, \
                 USub
 import operator as op
 
