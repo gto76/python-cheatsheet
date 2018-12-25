@@ -198,7 +198,7 @@ String
 ------
 ```python
 <str>  = <str>.replace(old_str, new_str)
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on whitespaces.
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on whitespaces by default.
 <str>  = <str>.strip('<chars>')
 <str>  = <str>.join(<list>)
 <bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
