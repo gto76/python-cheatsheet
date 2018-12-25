@@ -270,7 +270,7 @@ import re
 ### Format
 ```python
 <str> = '{}, {}'.format(<el_1>, <el_2>)
-<str> = f'{<el_1>}, {<el_2}'
+<str> = f'{<el_1>}, {<el_2>}'
 ```
 
 #### General options:
