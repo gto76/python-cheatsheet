@@ -201,10 +201,11 @@ String
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on whitespaces by default.
 <str>  = <str>.strip('<chars>')
 <str>  = <str>.join(<list>)
-<bool> = <str>.startswith(<str>)  # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<str>)    # Pass tuple of strings for multiple options.
-<bool> = <str>.isnumeric()        # True if str contains only numeric characters.
-<int>  = <str>.index(<sub_str>)   # Returns first index of substring.
+<bool> = <str>.startswith(<str>)     # Pass tuple of strings for multiple options.
+<bool> = <str>.endswith(<str>)       # Pass tuple of strings for multiple options.
+<bool> = <str>.isnumeric()           # True if str contains only numeric characters.
+<int>  = <str>.index(<sub_str>)      # Returns first index of substring.
+<list> = textwrap.wrap(text, width)  # Nicely breakes text into lines.
 ```
 
 ### Char
@@ -306,12 +307,6 @@ import re
 * `'b'` - Binary
 * `'x'` - Hex
 * `'X'` - HEX
-
-### Text Wrap
-```python
-import textwrap
-<list> = textwrap.wrap(text, width)
-```
 
 
 Numbers
