@@ -450,8 +450,8 @@ for i in range(10):
 
 ### Map, Filter, Reduce
 ```python
-map(lambda x: x+1, range(10))     # [1, 2, ..., 10]
-filter(lambda x: x>5, range(10))  # [6, 7, ..., 9]
+map(lambda x: x + 1, range(10))     # [1, 2, ..., 10]
+filter(lambda x: x > 5, range(10))  # [6, 7, ..., 9]
 functools.reduce(lambda sum, x: sum+x, range(10))  # 45
 ```
 
