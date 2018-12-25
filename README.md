@@ -1172,7 +1172,7 @@ wf.close()
 Url
 ---
 ```python
->>> from urllib.parse import quote, quote_plus, unquote, unquote_plus
+from urllib.parse import quote, quote_plus, unquote, unquote_plus
 ```
 
 ### Encode
