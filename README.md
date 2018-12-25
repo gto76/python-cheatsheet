@@ -204,7 +204,7 @@ String
 ```python
 <list> = <str>.split()                       # Splits on any whitespace character.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
-<str>  = <str>.join(<list>)                  # Joins elements using <str> as separator.
+<str>  = <str>.join(<list>)                  # Joins elements using string as separator.
 ```
 
 ```python
