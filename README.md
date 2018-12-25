@@ -280,10 +280,10 @@ Format
 ```python
 >>> Person = namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
->>> f'{person.height}'
-'187'
->>> '{p.height}'.format(p=person)
-'187'
+>>> f'{person.height:10}'
+'       187'
+>>> '{p.height:10}'.format(p=person)
+'       187'
 ```
 
 ### General Options
