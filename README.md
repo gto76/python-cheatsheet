@@ -282,8 +282,8 @@ import re
 ```
 
 #### Float presentation types:
+* `'f'` - Fixed point: `.<precision>f`
 * `'e'` - Exponent
-* `'f'` - Fixed point: .<precision>f
 
 #### Integer presentation types:
 * `'b'` - Binary
