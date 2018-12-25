@@ -508,12 +508,6 @@ from functools import partial
 partial(<function>, <arg_1> [, <arg_2>, ...])
 ```
 
-```python
->>> multiply_by_3 = partial(lambda a, b: a*b, 3)
->>> multiply_by_3(10)
-30
-```
-
 
 Decorator
 ---------
