@@ -269,6 +269,7 @@ import re
 
 ### Format
 ```python
+# Both return '<el_1>, <el_2>':
 <str> = '{}, {}'.format(<el_1>, <el_2>)
 <str> = f'{<el_1>}, {<el_2>}'
 ```
