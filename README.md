@@ -513,7 +513,7 @@ Decorator
 ```python
 @closure_name
 def function_that_gets_passed_to_closure():
-    pass
+    ...
 ```
 
 #### Debugger example:
