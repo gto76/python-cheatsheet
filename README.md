@@ -291,8 +291,8 @@ Format
 {<el>:<10}   # '<el>      '
 {<el>:>10}   # '      <el>'
 {<el>:^10}   # '   <el>   '
-{<el>:-^10}  # '---<el>---'
-{<el>:^0}    # '<el>'
+{<el>:->10}  # '------<el>'
+{<el>:>0}    # '<el>'
 ```
 
 ### Options Specific to Strings
