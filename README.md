@@ -466,8 +466,8 @@ functools.reduce(lambda sum, x: sum+x, range(10))  # 45
 ```
 
 ```python
->>> [a if a else 2 for a in [0, 1, 0, 3]]
-[2, 1, 2, 3]
+>>> [a if a else 'zero' for a in (0, 1, 0, 3)]
+['zero', 1, 'zero', 3]
 ```
 
 ### Namedtuple, Enum, Class
@@ -481,6 +481,7 @@ Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
 # Warrning: Objects will share the objects that are initialized in the dict!
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
+creature = Creature()
 ```
 
 
