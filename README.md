@@ -297,17 +297,17 @@ Format
 
 ### Options Specific to Strings
 ```python
-{'abcde':.3}      # 'abc'
-{'abcde':>10.3}   # '       abc'
+{'abcde':.3}    # 'abc'
+{'abcde':10.3}  # 'abc       '
 ```
 
 ### Options specific to Numbers
 ```python
-{1.23456:.3f}     # '1.235'
-{1.23456:>10.3f}  # '     1.235'
-{123456:>10,}     # '   123,456'
-{123456:>10_}     # '   123_456'
-{3:08b}           # '00000011' -> Binary with leading zeros.
+{1.23456:.3f}    # '1.235'
+{1.23456:10.3f}  # '     1.235'
+{123456:10,}     # '   123,456'
+{123456:10_}     # '   123_456'
+{3:08b}          # '00000011' -> Binary with leading zeros.
 ````
 
 #### Float presentation types:
