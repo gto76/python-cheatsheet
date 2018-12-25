@@ -436,6 +436,7 @@ lambda <argument_1>, <argument_2>: <return_value>
 <iter> = (x+5 for x in range(10))         # (5, 6, ..., 14)
 ```
 
+### Double Comprehension
 ```python
 out = [i+j for i in range(10) for j in range(10)]
 ```
