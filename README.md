@@ -262,8 +262,8 @@ import re
 ```
 
 ### Special Sequences
+**Use capital letter for negation.**
 ```python
-# Use capital letter for negation.
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
 '\w' == '[a-zA-Z0-9_]'   # Alphanumeric
@@ -278,7 +278,7 @@ Format
 <str> = f'{<el_1>}, {<el_2>}'
 ```
 
-#### General options:
+### General Options
 ```python
 {<el>:<10}   # '<el>      '
 {<el>:>10}   # '      <el>'
@@ -287,13 +287,13 @@ Format
 {<el>:^0}    # '<el>'
 ```
 
-#### Options specific to strings:
+### Options Specific to Strings:
 ```python
 {'abcde':.3}      # 'abc'
 {'abcde':>10.3}   # '       abc'
 ```
 
-#### Options specific to numbers:
+### Options specific to Numbers:
 ```python
 {1.23456:.3f}     # '1.235'
 {1.23456:>10.3f}  # '     1.235'
@@ -301,15 +301,6 @@ Format
 {123456:>10_}     # '   123_456'
 {3:08b}           # '00000011' -> Binary with leading zeros.
 ````
-
-#### Example:
-```python
->>> person = {'name': 'Jean-Luc', 'height': 187.1}
->>> '{p[height]:.0f}'.format(p=person)
-'187'
->>> f"{person['height']:.0f}"
-'187'
-```
 
 #### Float presentation types:
 * `'f'` - Fixed point: `.<precision>f`
@@ -320,6 +311,15 @@ Format
 * `'b'` - Binary
 * `'x'` - Hex
 * `'X'` - HEX
+
+### Example
+```python
+>>> person = {'name': 'Jean-Luc', 'height': 187.1}
+>>> '{p[height]:.0f}'.format(p=person)
+'187'
+>>> f"{person['height']:.0f}"
+'187'
+```
 
 
 Numbers
