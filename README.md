@@ -1317,7 +1317,7 @@ from time import sleep
 for i in Bar.range(100):
     sleep(0.02)
 # Foreach:
-for el in Bar.foreach(['a', 'b', 'c']):
+for el in Bar.foreach([1, 2, 3]):
     sleep(0.02)
 ```
 
