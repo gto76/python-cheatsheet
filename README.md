@@ -185,12 +185,12 @@ def step(start, step):
 Type
 ----
 ```python
-type(<el>)  # <class 'int'> / <class 'str'> / ...
+<type> = type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```
 ```python
-import numbers
-isinstance(<el>, numbers.Number)  # Integral, Real, Rational, Complex
-callable(<el>)                    # Is element a function
+from numbers import Number, Integral, Real, Rational, Complex
+is_number   = isinstance(<el>, Number)
+is_function = callable(<el>)
 ```
 
 
