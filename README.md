@@ -260,19 +260,38 @@ import re
 
 ### Format
 ```python
-'{}'.format(<el_1> [, <el_2>, ...])
+<str> = '{}, {}'.format(<el_1>, <el_2>)
 ```
-
+#### Or:
 ```python
-{:min_width}   # '<el>    '
-{:>min_width}  # '    <el>'
-{:^min_width}  # '  <el>  '
-{:_<min_width} # '<el>____'
-{:.max_width}  # '<e>'
-{:max_width.min_width}        # '    <e>'
-{:max_width.no_of_decimalsf}  # '   3.14'
+<str> = f'{<el_1>} {<el_2}'
 ```
 
+#### General:
+```python
+{<el>:<10}   # '<el>      '
+{<el>:>10}   # '      <el>'
+{<el>:^10}   # '   <el>   '
+{<el>:-^10}  # '---<el>---'
+{<el>:^0}    # '<el>'
+```
+
+#### Specific for strings:
+```python
+{'abcde':.3}      # 'abc'
+{'abcde':>10.3}'  # '       abc'
+```
+
+#### Specific for numbers:
+```python
+{1.23456:.3f}     # '1.235'
+{1.23456:>10.3f}  # '     1.235'
+{123456:>10,}     # '   123,456'
+{123456:>10_}     # '   123_456'
+{3:08b}           # '00000011' -> Binary with leading zeros.
+````
+
+#### Example:
 ```python
 >>> person = {'name': 'Jean-Luc', 'height': 187.1}
 >>> '{p[height]:.0f}'.format(p=person)
@@ -290,12 +309,6 @@ import re
 * `'b'` - Binary
 * `'x'` - Hex
 * `'X'` - HEX
-
-#### Binary, at least 10 spaces wide, filled with zeros:
-```python
->>> f'{123:010b}'
-'0001111011'
-```
 
 ### Text Wrap
 ```python
