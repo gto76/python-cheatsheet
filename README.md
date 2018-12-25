@@ -278,10 +278,11 @@ Format
 ```
 
 ```python
->>> person = {'name': 'Jean-Luc', 'height': 187}
->>> f"{person['height']}"
+>>> Person = namedtuple('Person', 'name height')
+>>> person = Person('Jean-Luc', 187)
+>>> f'{person.height}'
 '187'
->>> '{p[height]}'.format(p=person)
+>>> '{p.height}'.format(p=person)
 '187'
 ```
 
