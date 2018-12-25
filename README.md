@@ -251,8 +251,8 @@ import re
 ```
 
 #### Special sequences:
+**Use capital letter for negation.**  
 ```python
-# Use capital letter for negation.
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
 '\w' == '[a-zA-Z0-9_]'   # Alphanumeric
