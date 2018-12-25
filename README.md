@@ -197,8 +197,10 @@ is_function = callable(<el>)
 String
 ------
 ```python
-<str>  = <str>.strip('<chars>')
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on any whitespace char by default.
+<str>  = <str>.strip()                       # Strips all whitespace characters.
+<str>  = <str>.strip('<chars>')              # Strips all passed characters.
+<list> = <str>.split()                       # Splits on any whitespace character.
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
 <str>  = <str>.join(<list>)
 <str>  = <str>.replace(old_str, new_str)
 ```
