@@ -361,11 +361,11 @@ float('inf'), float('nan')
 
 ### Random
 ```python
-import random
-<float> = random.random()
-<int>   = random.randint(from_inclusive, to_inclusive)
-<el>    = random.choice(<list>)
-random.shuffle(<list>)
+from random import random, randint, choice, shuffle
+<float> = random()
+<int>   = randint(from_inclusive, to_inclusive)
+<el>    = choice(<list>)
+shuffle(<list>)
 ```
 
 
