@@ -570,7 +570,7 @@ Enum
 from enum import Enum, auto
 class <enum_name>(Enum):
     <member_name_1> = <value_1>  
-    <member_name_2> = <value_2>, <value_2b>
+    <member_name_2> = <value_2a>, <value_2b>
     <member_name_3> = auto()  # Can be used for automatic indexing.
     ...
 
