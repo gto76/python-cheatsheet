@@ -1268,15 +1268,9 @@ with pycallgraph.PyCallGraph(output=graph):
 #### Utility code for unique PNG filenames:
 ```python
 def get_filename():
-    time_str = get_current_datetime_string()
+    from datetime import datetime
+    time_str = datetime.now().strftime('%Y%m%d%H%M%S')
     return f'profile-{time_str}.png'
-
-def get_current_datetime_string():
-    now = datetime.datetime.now()
-    return get_datetime_string(now)
-
-def get_datetime_string(a_datetime):
-    return a_datetime.strftime('%Y%m%d%H%M%S')
 ```
 
 
