@@ -197,15 +197,18 @@ is_function = callable(<el>)
 String
 ------
 ```python
-<str>  = <str>.replace(old_str, new_str)
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on whitespaces by default.
 <str>  = <str>.strip('<chars>')
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on any whitespace char by default.
 <str>  = <str>.join(<list>)
-<bool> = <str>.startswith(<str>)     # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<str>)       # Pass tuple of strings for multiple options.
-<bool> = <str>.isnumeric()           # True if str contains only numeric characters.
-<int>  = <str>.index(<sub_str>)      # Returns first index of substring.
-<list> = textwrap.wrap(text, width)  # Nicely breakes text into lines.
+<str>  = <str>.replace(old_str, new_str)
+```
+
+```python
+<bool> = <str>.startswith(<sub_str>)  # Pass tuple of strings for multiple options.
+<bool> = <str>.endswith(<sub_str>)    # Pass tuple of strings for multiple options.
+<int>  = <str>.index(<sub_str>)       # Returns first index of a substring.
+<bool> = <str>.isnumeric()            # True if str contains only numeric characters.
+<list> = textwrap.wrap(<str>, width)  # Nicely breakes string into lines.
 ```
 
 ### Char
