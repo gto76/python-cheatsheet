@@ -1173,8 +1173,15 @@ UrlLib
 ------
 ### Translate special characters 
 ```python
-from urllib.parse import quote_plus
-<str> = quote_plus(<str>)
+>>> from urllib.parse import quote, quote_plus, unquote, unquote_plus
+>>> quote("Can't be in URL!")
+'Can%27t%20be%20in%20URL%21'
+>>> quote_plus("Can't be in URL!")
+'Can%27t+be+in+URL%21
+>>> unquote('Can%27t+be+in+URL%21')
+"Can't+be+in+URL!"'
+>>> unquote_plus('Can%27t+be+in+URL%21')
+"Can't be in URL!"
 ```
 
 
