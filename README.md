@@ -286,9 +286,8 @@ import re
 * `'e'` - Exponent
 
 #### Integer presentation types:
-* `'b'` - Binary
 * `'c'` - Character
-* `'o'` - Octal
+* `'b'` - Binary
 * `'x'` - Hex
 * `'X'` - HEX
 
