@@ -406,7 +406,7 @@ def add(*a):
 6
 ```
 
-#### And in some other places:
+#### And in few other places:
 ```python
 >>> a = (1, 2, 3)
 >>> [*a]
