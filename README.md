@@ -522,10 +522,10 @@ from functools import wraps
 
 def debug(func):
     @wraps(func)  # Needed for metadata copying (func name, ...).
-    def wrapper(*args, **kwargs):
+    def out(*args, **kwargs):
         print(func.__name__)
         return func(*args, **kwargs)
-    return wrapper
+    return out
 
 @debug
 def add(x, y):
