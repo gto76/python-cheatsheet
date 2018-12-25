@@ -1265,7 +1265,6 @@ with pycallgraph.PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
 
-#### Utility code for unique PNG filenames:
 ```python
 def get_filename():
     from datetime import datetime
