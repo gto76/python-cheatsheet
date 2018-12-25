@@ -273,9 +273,16 @@ import re
 Format
 ------
 ```python
-# Both return '<el_1>, <el_2>':
 <str> = '{}, {}'.format(<el_1>, <el_2>)
 <str> = f'{<el_1>}, {<el_2>}'
+```
+
+```python
+>>> person = {'name': 'Jean-Luc', 'height': 187.1}
+>>> '{p[height]:.0f}'.format(p=person)
+'187'
+>>> f"{person['height']:.0f}"
+'187'
 ```
 
 ### General Options
@@ -311,15 +318,6 @@ Format
 * `'b'` - Binary
 * `'x'` - Hex
 * `'X'` - HEX
-
-### Example
-```python
->>> person = {'name': 'Jean-Luc', 'height': 187.1}
->>> '{p[height]:.0f}'.format(p=person)
-'187'
->>> f"{person['height']:.0f}"
-'187'
-```
 
 
 Numbers
