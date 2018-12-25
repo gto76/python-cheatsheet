@@ -558,9 +558,9 @@ class <name>:
 
 ### Copy
 ```python
-import copy
-<object> = copy.copy(<object>)
-<object> = copy.deepcopy(<object>)
+from copy import copy, deepcopy
+<object> = copy(<object>)
+<object> = deepcopy(<object>)
 ```
 
 
