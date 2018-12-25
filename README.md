@@ -294,13 +294,13 @@ Format
 {<el>:^0}    # '<el>'
 ```
 
-### Options Specific to Strings:
+### Options Specific to Strings
 ```python
 {'abcde':.3}      # 'abc'
 {'abcde':>10.3}   # '       abc'
 ```
 
-### Options specific to Numbers:
+### Options specific to Numbers
 ```python
 {1.23456:.3f}     # '1.235'
 {1.23456:>10.3f}  # '     1.235'
