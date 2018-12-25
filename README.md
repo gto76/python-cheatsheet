@@ -1173,8 +1173,8 @@ UrlLib
 ------
 ### Translate special characters 
 ```python
-import urllib.parse
-<str> = urllib.parse.quote_plus(<str>)
+from urllib.parse import quote_plus
+<str> = quote_plus(<str>)
 ```
 
 
