@@ -1007,17 +1007,17 @@ Eval
 
 ### Detailed
 ```python
-import ast
-from ast import Num, BinOp, UnaryOp, parse
+from ast import Num, BinOp, UnaryOp, parse, Add, Sub, Mult, Div, Pow, BitXor, \
+                USub
 import operator as op
 
-operators = {ast.Add:    op.add, 
-             ast.Sub:    op.sub, 
-             ast.Mult:   op.mul,
-             ast.Div:    op.truediv, 
-             ast.Pow:    op.pow, 
-             ast.BitXor: op.xor,
-             ast.USub:   op.neg}
+operators = {Add:    op.add, 
+             Sub:    op.sub, 
+             Mult:   op.mul,
+             Div:    op.truediv, 
+             Pow:    op.pow, 
+             BitXor: op.xor,
+             USub:   op.neg}
 
 def evaluate(expression):
     root = parse(expression, mode='eval')
@@ -1034,7 +1034,7 @@ def eval_node(node):
         left, right = eval_node(node.left), eval_node(node.right)
         return operator(left, right)
     elif type_ == UnaryOp:
-	operand = eval_node(node.operand)
+        operand = eval_node(node.operand)
         return operator(operand)
 ```
 
