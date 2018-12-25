@@ -1008,10 +1008,9 @@ Eval
 ### Detailed
 ```python
 import ast
-from ast import Num, BinOp, UnaryOp
+from ast import Num, BinOp, UnaryOp, parse
 import operator as op
 
-# Supported operators
 operators = {ast.Add:    op.add, 
              ast.Sub:    op.sub, 
              ast.Mult:   op.mul,
@@ -1020,18 +1019,23 @@ operators = {ast.Add:    op.add,
              ast.BitXor: op.xor,
              ast.USub:   op.neg}
 
-def evaluate(expr):
-    return eval_node(ast.parse(expr, mode='eval').body)
+def evaluate(expression):
+    root = parse(expression, mode='eval')
+    return eval_node(root.body)
 
 def eval_node(node):
-    if isinstance(node, Num):  # <number>
+    type_ = type(node)
+    if type_ == Num:
         return node.n
-    elif isinstance(node, BinOp):  # <left> <operator> <right>
-        return operators[type(node.op)](eval_node(node.left), eval_node(node.right))
-    elif isinstance(node, UnaryOp):  # <operator> <operand> e.g., -1
-        return operators[type(node.op)](eval_node(node.operand))
-    else:
+    if type_ not in [BinOp, UnaryOp]:
         raise TypeError(node)
+    operator = operators[type(node.op)]
+    if type_ == BinOp:
+        left, right = eval_node(node.left), eval_node(node.right)
+        return operator(left, right)
+    elif type_ == UnaryOp:
+	operand = eval_node(node.operand)
+        return operator(operand)
 ```
 
 ```python
