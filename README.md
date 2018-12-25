@@ -1305,7 +1305,8 @@ class Bar():
             s.p('-')
         if s.i == s.st:
             s.p('\n')
-    def p(s, t):
+    @staticmethod
+    def p(t):
         sys.stdout.write(t)
         sys.stdout.flush()
 ```
