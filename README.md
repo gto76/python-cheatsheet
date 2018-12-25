@@ -281,11 +281,9 @@ import re
 '187'
 ```
 
-#### Binary, at least 10 spaces wide, filled with zeros:
-```python
->>> f'{123:010b}'
-'0001111011'
-```
+#### Float presentation types:
+* `'e'` - Exponent
+* `'f'` - Fixed point: .<precision>f
 
 #### Integer presentation types:
 * `'b'` - Binary
@@ -294,11 +292,16 @@ import re
 * `'x'` - Hex
 * `'X'` - HEX
 
+#### Binary, at least 10 spaces wide, filled with zeros:
+```python
+>>> f'{123:010b}'
+'0001111011'
+```
 
 ### Text Wrap
 ```python
 import textwrap
-textwrap.wrap(text, width)
+<list> = textwrap.wrap(text, width)
 ```
 
 
