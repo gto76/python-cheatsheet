@@ -308,6 +308,7 @@ Format
 {123456:10,}     # '   123,456'
 {123456:10_}     # '   123_456'
 {3:08b}          # '00000011' -> Binary with leading zeros.
+{3:0<8b}         # '11000000' -> Binary with trailing zeros.
 ````
 
 #### Float presentation types:
