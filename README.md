@@ -286,7 +286,7 @@ import re
 #### Options specific to strings:
 ```python
 {'abcde':.3}      # 'abc'
-{'abcde':>10.3}'  # '       abc'
+{'abcde':>10.3}   # '       abc'
 ```
 
 #### Options specific to numbers:
