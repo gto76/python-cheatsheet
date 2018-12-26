@@ -250,7 +250,7 @@ import re
 <list>  = re.findall(<regex>, text)
 <list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
-<Match> = re.match(<regex>, text)              # Searches only at the beginning of the string.
+<Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <Match_iter> = re.finditer(<regex>, text)      # Searches for all occurrences of pattern.
 ```
 
