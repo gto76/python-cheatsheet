@@ -801,7 +801,7 @@ def write_bytes(filename, bytes):
 
 Struct
 ------
-**This module performs conversions between Python values and C structs represented as Python Bytes objects:**
+**This module performs conversions between Python values and C struct represented as Python Bytes object.**
 ```python
 <Bytes> = struct.pack('<format>', <value_1> [, <value_2>, ...])
 <tuple> = struct.unpack('<format>', <Bytes>)
