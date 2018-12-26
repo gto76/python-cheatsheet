@@ -124,6 +124,7 @@ from_inclusive = <range>.start
 to_exclusive   = <range>.stop
 ```
 
+
 Enumerate
 ---------
 ```python
@@ -180,6 +181,7 @@ def step(start, step):
         yield start
         start += step
 ```
+
 ```python
 >>> stepper = step(10, 2)
 >>> next(stepper), next(stepper), next(stepper)
@@ -192,6 +194,7 @@ Type
 ```python
 <type> = type(<el>)  # <class 'int'> / <class 'str'> / ...
 ```
+
 ```python
 from numbers import Number, Integral, Real, Rational, Complex
 is_number   = isinstance(<el>, Number)
