@@ -1233,7 +1233,7 @@ def send_page(sport):
 
 ### REST request
 ```python
-@post('/p/<sport>')
+@post('/odds/<sport>')
 def odds_handler(sport):
     team = bottle.request.forms.get('team')
     team = unquote(team).lower()
