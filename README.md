@@ -4,7 +4,7 @@ Comprehensive Python Cheatsheet
 ![Monty Python](web/image_888.jpeg)
 
 <br>
-  [Fork me on GitHub](https://github.com/gto76/python-cheatsheet)
+[Fork me on GitHub](https://github.com/gto76/python-cheatsheet)
 
 Main
 ----
