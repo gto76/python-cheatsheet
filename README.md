@@ -1004,6 +1004,24 @@ class BlaBla:
 ```
 
 
+Operator
+--------
+```python
+from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
+                     eq, ne, lt, le, gt, ge, \
+                     not_, and_, or_, xor, \
+                     itemgetter
+```
+
+```python
+product_of_elems = functools.reduce(mul, <list>)
+sorted_by_second = sorted(<list>, key=itemgetter(1))
+sorted_by_both   = sorted(<list>, key=itemgetter(0, 1))
+LogicOp =          Enum('LogicOp', {'AND': (and_, ),
+                                    'OR' : (or_, )})
+```
+
+
 Eval
 ----
 ### Basic
