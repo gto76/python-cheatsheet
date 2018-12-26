@@ -217,7 +217,7 @@ String
 <bool> = <str>.startswith(<sub_str>)      # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
 <int>  = <str>.index(<sub_str>)           # Returns first index of a substring.
-<bool> = <str>.isnumeric()                # True if string contains only numeric characters.
+<bool> = <str>.isnumeric()                # True if str contains only numeric characters.
 <list> = textwrap.wrap(<str>, width)      # Nicely breaks string into lines.
 ```
 
