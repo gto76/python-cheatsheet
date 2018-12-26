@@ -763,7 +763,7 @@ while True:
 raise IOError("input/output error")
 ```
 
-#### Finaly:
+#### Finally:
 ```python
 >>> try:
 ...     raise KeyboardInterrupt
