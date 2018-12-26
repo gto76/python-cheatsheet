@@ -1,7 +1,7 @@
 Comprehensive Python Cheatsheet
 ===============================
 <sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md)
-or [fork me on GitHub](https://github.com/gto76/python-cheatsheet).
+or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
