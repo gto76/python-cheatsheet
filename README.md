@@ -5,7 +5,7 @@ Comprehensive Python Cheatsheet
 
 <br>
 
-([Fork me on GitHub](https://github.com/gto76/python-cheatsheet))
+<sup>[Fork me on GitHub](https://github.com/gto76/python-cheatsheet)</sup>
 
 Main
 ----
