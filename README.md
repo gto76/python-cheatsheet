@@ -1350,19 +1350,6 @@ for i in tqdm([1, 2, 3]):
     sleep(0.2)
 ```
 
-### Progress
-```python
-# $ pip3 install progress
-from progress.bar import Bar
-from time import sleep
-STEPS = 100
-bar = Bar('Processing', max=STEPS)
-for i in range(STEPS):
-    sleep(0.02)
-    bar.next()
-bar.finish()
-```
-
 
 Basic Script Template
 ---------------------
