@@ -760,7 +760,7 @@ while True:
 
 #### Raising exception:
 ```python
-raise IOError("input/output error")
+raise IOError('input/output error')
 ```
 
 #### Finally:
