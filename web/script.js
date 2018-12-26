@@ -4,7 +4,6 @@ $(document).ready(function() {
 
 function parseMd() {
   var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md'
-  var RAWGIT = "https://rawgit.com/gto76/python-cheatsheet/master/README.md"
   jQuery.get(GITHUB, function(text) {
     var converter = new showdown.Converter()
     html = converter.makeHtml(text)
