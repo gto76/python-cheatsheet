@@ -309,7 +309,7 @@ Format
 {123456:10_}     # '   123_456'
 {3:08b}          # '00000011' -> Binary with leading zeros.
 {3:0<8b}         # '11000000' -> Binary with trailing zeros.
-````
+```
 
 #### Float presentation types:
 * `'f'` - Fixed point: `.<precision>f`
@@ -1007,8 +1007,8 @@ Eval
 
 ### Detailed
 ```python
-from ast import parse, Num, BinOp, UnaryOp, Add, Sub, Mult, Div, Pow, BitXor, \
-                USub
+from ast import parse, Num, BinOp, UnaryOp, \
+                Add, Sub, Mult, Div, Pow, BitXor, USub
 import operator as op
 
 operators = {Add:    op.add, 
