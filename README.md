@@ -1234,12 +1234,12 @@ def send_page(sport):
 ### REST request
 ```python
 @post('/p/<sport>')
-def p_handler(sport):
+def odds_handler(sport):
     team = bottle.request.forms.get('team')
     team = unquote(team).lower()
 
     db = sqlite3.connect(<db_path>)
-    home_odds, away_odds = get_p(db, sport, team)
+    home_odds, away_odds = get_odds(db, sport, team)
     db.close()
 
     response.headers['Content-Type'] = 'application/json'
