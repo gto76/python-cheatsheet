@@ -218,7 +218,7 @@ String
 <bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
 <int>  = <str>.index(<sub_str>)           # Returns first index of a substring.
 <bool> = <str>.isnumeric()                # True if string contains only numeric characters.
-<list> = textwrap.wrap(<str>, width)      # Nicely breakes string into lines.
+<list> = textwrap.wrap(<str>, width)      # Nicely breaks string into lines.
 ```
 
 ### Char
@@ -251,7 +251,7 @@ import re
 <list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the string.
-<Match_iter> = re.finditer(<regex>, text)      # Searches for all occurences of pattern.
+<Match_iter> = re.finditer(<regex>, text)      # Searches for all occurrences of pattern.
 ```
 
 * **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
@@ -485,7 +485,7 @@ from enum import Enum
 Direction = Enum('Direction', 'n e s w')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
-# Warrning: Objects will share the objects that are initialized in the dict!
+# Warning: Objects will share the objects that are initialized in the dictionary!
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
 creature = Creature()
 ```
