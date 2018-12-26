@@ -6,6 +6,7 @@ or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 
 ![Monty Python](web/image_888.jpeg)
 
+
 Main
 ----
 ```python
