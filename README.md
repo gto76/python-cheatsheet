@@ -1295,7 +1295,7 @@ def get_filename():
 
 Progress Bar
 ------------
-### Basic:
+### Basic
 ```python
 import sys
 
@@ -1333,15 +1333,24 @@ class Bar():
 #### Usage:
 ```python
 from time import sleep
-# Range:
 for i in Bar.range(100):
     sleep(0.02)
-# Foreach:
 for el in Bar.foreach([1, 2, 3]):
-    sleep(0.02)
+    sleep(0.2)
 ```
 
-### Progress:
+### Tqdm
+```python
+# $ pip3 install tqdm
+from tqdm import tqdm
+from time import sleep
+for i in tqdm(range(100)):
+    sleep(0.02)
+for i in tqdm([1, 2, 3]):
+    sleep(0.2)
+```
+
+### Progress
 ```python
 # $ pip3 install progress
 from progress.bar import Bar
