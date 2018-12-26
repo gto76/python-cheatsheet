@@ -745,6 +745,16 @@ db.commit()
 ```
 
 
+Pickle
+------
+```python
+import pickle
+favorite_color = {'lion': 'yellow', 'kitty': 'red'}
+pickle.dump(favorite_color, open('data.p', 'wb'))
+favorite_color = pickle.load(open('data.p', 'rb'))
+```
+
+
 Exceptions
 ----------
 ```python
