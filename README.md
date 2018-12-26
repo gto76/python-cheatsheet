@@ -1295,6 +1295,17 @@ def get_filename():
 
 Progress Bar
 ------------
+### Tqdm
+```python
+# $ pip3 install tqdm
+from tqdm import tqdm
+from time import sleep
+for i in tqdm(range(100)):
+    sleep(0.02)
+for i in tqdm([1, 2, 3]):
+    sleep(0.2)
+```
+
 ### Basic
 ```python
 import sys
@@ -1336,17 +1347,6 @@ from time import sleep
 for i in Bar.range(100):
     sleep(0.02)
 for el in Bar.foreach([1, 2, 3]):
-    sleep(0.2)
-```
-
-### Tqdm
-```python
-# $ pip3 install tqdm
-from tqdm import tqdm
-from time import sleep
-for i in tqdm(range(100)):
-    sleep(0.02)
-for i in tqdm([1, 2, 3]):
     sleep(0.2)
 ```
 
