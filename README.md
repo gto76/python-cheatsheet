@@ -902,28 +902,28 @@ Itertools
 **Every function returns an iterator and can accept any collection and/or iterator. If you want to print the iterator, you need to pass it to the list() function.**
 
 ```python
-from itertools import *
+import itertools
 ```
 
 ### Combinatoric iterators
 ```python
->>> combinations('abc', 2)
+>>> list(itertools.combinations('abcd', 2))
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
 
->>> combinations_with_replacement('abc', 2)
+>>> itertools.combinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), 
  ('b', 'b'), ('b', 'c'), ('c', 'c')]
 
->>> permutations('abc', 2)
+>>> itertools.permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), 
  ('b', 'a'), ('b', 'c'), 
  ('c', 'a'), ('c', 'b')]
 
->>> product('ab', [1, 2])
+>>> itertools.product('ab', [1, 2])
 [('a', 1), ('a', 2), 
  ('b', 1), ('b', 2)]
 
->>> product([0, 1], repeat=3)
+>>> itertools.product([0, 1], repeat=3)
 [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), 
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
