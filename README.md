@@ -1412,7 +1412,6 @@ for el in Bar.foreach([1, 2, 3]):
 Basic Script Template
 ---------------------
 ```python
-# Linux or macOS
 #!/usr/bin/env python3
 #
 # Usage: .py 
