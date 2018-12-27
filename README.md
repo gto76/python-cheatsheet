@@ -313,8 +313,8 @@ Format
 
 ### String Options
 ```python
-{'abcde':.3}    # 'abc'
-{'abcde':10.3}  # 'abc       '
+{'abcde':.3}     # 'abc'
+{'abcde':10.3}   # 'abc       '
 ```
 
 ### Number Options
