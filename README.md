@@ -18,60 +18,60 @@ if __name__ == '__main__':
 List
 ----
 ```python
-<list> = <list>[from_inclusive : to_exclusive : step_size]
-<list>.append(<el>)
-<list>.extend(<list>)
-<list> += [<el>]
-<list> += <list>
+list = list[from_inclusive : to_exclusive : step_size]
+list.append(el)
+list.extend(list)
+list += [el]
+list += list
 ```
 
 ```python
-<list>.sort()
-<list>.reverse()
-<list> = sorted(<list>)
-<iter> = reversed(<list>)
+list.sort()
+list.reverse()
+list = sorted(list)
+iter = reversed(list)
 ```
 
 ```python
-sum_of_elements  = sum(<list>)
+sum_of_elements  = sum(list)
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
-sorted_by_second = sorted(<list>, key=lambda el: el[1])
-sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
-flattened_list   = list(itertools.chain.from_iterable(<list>))
-list_of_chars    = list(<str>)
-product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
+sorted_by_second = sorted(list, key=lambda el: el[1])
+sorted_by_both   = sorted(list, key=lambda el: (el[1], el[0]))
+flattened_list   = list(itertools.chain.from_iterable(list))
+list_of_chars    = list(str)
+product_of_elems = functools.reduce(lambda out, x: out * x, list)
 ```
 
 ```python
-index = <list>.index(<el>)  # Returns first index of item. 
-<list>.insert(index, <el>)  # Inserts item at index and moves the rest to the right.
-<el> = <list>.pop([index])  # Removes and returns item at index or from the end.
-<list>.remove(<el>)         # Removes first occurrence of item.
-<list>.clear()              # Removes all items.   
+index = list.index(el)  # Returns first index of item. 
+list.insert(index, el)  # Inserts item at index and moves the rest to the right.
+el = list.pop([index])  # Removes and returns item at index or from the end.
+list.remove(el)         # Removes first occurrence of item.
+list.clear()              # Removes all items.   
 ```
 
 
 Dictionary
 ----------
 ```python
-<view>  = <dict>.keys()
-<view>  = <dict>.values()
-<view>  = <dict>.items()
-<value> = <dict>.get(key, default)         # Returns default if key does not exist.
-<value> = <dict>.setdefault(key, default)  # Same, but also adds default to dict.
-<dict>.update(<dict>)
+view  = dict.keys()
+view  = dict.values()
+view  = dict.items()
+value = dict.get(key, default)         # Returns default if key does not exist.
+value = dict.setdefault(key, default)  # Same, but also adds default to dict.
+dict.update(dict)
 ```
 
 ```python
-collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
+collections.defaultdict(type)     # Creates a dictionary with default value of type.
 collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
 collections.OrderedDict()           # Creates ordered dictionary.
 ```
 
 ```python
-dict(<list>)                        # Initiates a dict from list of key-value pairs.
+dict(list)                        # Initiates a dict from list of key-value pairs.
 dict(zip(keys, values))             # Initiates a dict from two lists.
-{k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
+{k: v for k, v in dict.items() if k in list}  # Filters a dict by keys.
 ```
 
 ### Counter
@@ -80,7 +80,7 @@ dict(zip(keys, values))             # Initiates a dict from two lists.
 >>> colors = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
 >>> Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> <counter>.most_common()[0][0]
+>>> counter.most_common()[0][0]
 'blue'
 ```
 
@@ -88,25 +88,25 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 Set
 ---
 ```python
-<set> = set()
-<set>.add(<el>)
-<set>.update(<set>)
-<set>.clear()
+set = set()
+set.add(el)
+set.update(set)
+set.clear()
 ```
 
 ```python
-<set>  = <set>.union(<set>)                 # Or: <set> | <set>
-<set>  = <set>.intersection(<set>)          # Or: <set> & <set>
-<set>  = <set>.difference(<set>)            # Or: <set> - <set>
-<set>  = <set>.symmetric_difference(<set>)  # Or: <set> ^ <set>
-<bool> = <set>.issubset(<set>)
-<bool> = <set>.issuperset(<set>)
+set  = set.union(set)                 # Or: set | set
+set  = set.intersection(set)          # Or: set & set
+set  = set.difference(set)            # Or: set - set
+set  = set.symmetric_difference(set)  # Or: set ^ set
+bool = set.issubset(set)
+bool = set.issuperset(set)
 ```
 
 ### Frozenset
 #### Is hashable and can be used as a key in dictionary.
 ```python
-<frozenset> = frozenset(<collection>)
+frozenset = frozenset(collection)
 ```
 
 
@@ -120,15 +120,15 @@ range(from_inclusive, to_exclusive, -step_size)
 ```
 
 ```python
-from_inclusive = <range>.start
-to_exclusive   = <range>.stop
+from_inclusive = range.start
+to_exclusive   = range.stop
 ```
 
 
 Enumerate
 ---------
 ```python
-for i, <el> in enumerate(<collection> [, i_start]):
+for i, el in enumerate(collection [, i_start]):
     ...
 ```
 
@@ -152,8 +152,8 @@ Iterator
 --------
 #### Skips first element:
 ```python
-next(<iter>)
-for element in <iter>:
+next(iter)
+for element in iter:
     ...
 ```
 
@@ -192,42 +192,42 @@ def step(start, step):
 Type
 ----
 ```python
-<type> = type(<el>)  # <class 'int'> / <class 'str'> / ...
+type = type(el)  # <class 'int'> / <class 'str'> / ...
 ```
 
 ```python
 from numbers import Number, Integral, Real, Rational, Complex
-is_number   = isinstance(<el>, Number)
-is_function = callable(<el>)
+is_number   = isinstance(el, Number)
+is_function = callable(el)
 ```
 
 
 String
 ------
 ```python
-<str>  = <str>.strip()           # Strips all whitespace characters.
-<str>  = <str>.strip('<chars>')  # Strips all passed characters.
+str  = str.strip()           # Strips all whitespace characters.
+str  = str.strip('chars')  # Strips all passed characters.
 ```
 
 ```python
-<list> = <str>.split()                       # Splits on any whitespace character.
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
-<str>  = <str>.join(<list>)                  # Joins elements using string as separator.
+list = str.split()                       # Splits on any whitespace character.
+list = str.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
+str  = str.join(list)                  # Joins elements using string as separator.
 ```
 
 ```python
-<str>  = <str>.replace(old_str, new_str)
-<bool> = <str>.startswith(<sub_str>)      # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
-<int>  = <str>.index(<sub_str>)           # Returns first index of a substring.
-<bool> = <str>.isnumeric()                # True if str contains only numeric characters.
-<list> = textwrap.wrap(<str>, width)      # Nicely breaks string into lines.
+str  = str.replace(old_str, new_str)
+bool = str.startswith(sub_str)      # Pass tuple of strings for multiple options.
+bool = str.endswith(sub_str)        # Pass tuple of strings for multiple options.
+int  = str.index(sub_str)           # Returns first index of a substring.
+bool = str.isnumeric()                # True if str contains only numeric characters.
+list = textwrap.wrap(str, width)      # Nicely breaks string into lines.
 ```
 
 ### Char
 ```python
-<str> = chr(<int>)  # Converts int to unicode char.
-<int> = ord(<str>)  # Converts unicode char to int.
+str = chr(int)  # Converts int to unicode char.
+int = ord(str)  # Converts unicode char to int.
 ```
 
 ```python
@@ -241,7 +241,7 @@ String
 
 ### Print
 ```python
-print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
+print(el_1 [, el_2, end='', sep='', file=file])  # Use 'file=sys.stderr' for errors.
 ```
 
 ```python
@@ -257,12 +257,12 @@ Regex
 -----
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-<list>  = re.findall(<regex>, text)
-<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
-<Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
-<Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<Match_iter> = re.finditer(<regex>, text)      # Searches for all occurrences of pattern.
+str   = re.sub(regex, new, text, count=0)  # Substitutes all occurrences.
+list  = re.findall(regex, text)
+list  = re.split(regex, text, maxsplit=0)  # Use brackets in regex to keep the matches.
+Match = re.search(regex, text)             # Searches for first occurrence of pattern.
+Match = re.match(regex, text)              # Searches only at the beginning of the text.
+Match_iter = re.finditer(regex, text)      # Searches for all occurrences of pattern.
 ```
 
 * **Parameter 'flags=re.IGNORECASE' can be used with all functions. Parameter 'flags=re.DOTALL' makes dot also accept newline.**  
@@ -271,10 +271,10 @@ import re
 
 ### Match Object
 ```python
-<str> = <Match>.group()   # Whole match.
-<str> = <Match>.group(1)  # Part in first bracket.
-<int> = <Match>.start()   # Start index of a match.
-<int> = <Match>.end()     # Exclusive end index of a match.
+str = Match.group()   # Whole match.
+str = Match.group(1)  # Part in first bracket.
+int = Match.start()   # Start index of a match.
+int = Match.end()     # Exclusive end index of a match.
 ```
 
 ### Special Sequences
@@ -289,8 +289,8 @@ import re
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'
-<str> = '{}, {}'.format(<el_1>, <el_2>)
+str = f'{el_1}, {el_2}'
+str = '{}, {}'.format(el_1, el_2)
 ```
 
 ```python
@@ -304,11 +304,11 @@ Format
 
 ### General Options
 ```python
-{<el>:<10}   # '<el>      '
-{<el>:>10}   # '      <el>'
-{<el>:^10}   # '   <el>   '
-{<el>:->10}  # '------<el>'
-{<el>:>0}    # '<el>'
+{el:<10}   # 'el      '
+{el:>10}   # '      el'
+{el:^10}   # '   el   '
+{el:->10}  # '------el'
+{el:>0}    # 'el'
 ```
 
 ### Options Specific to Strings
@@ -328,7 +328,7 @@ Format
 ```
 
 #### Float presentation types:
-* `'f'` - Fixed point: `.<precision>f`
+* `'f'` - Fixed point: `.precisionf`
 * `'e'` - Exponent
 
 #### Integer presentation types:
@@ -342,8 +342,8 @@ Numbers
 -------
 ### Basic Functions
 ```python
-round(<num> [, ndigits])
-abs(<num>)
+round(num [, ndigits])
+abs(num)
 math.pow(x, y)  # Or: x ** y
 ```
 
@@ -378,10 +378,10 @@ float('inf'), float('nan')
 ### Random
 ```python
 from random import random, randint, choice, shuffle
-<float> = random()
-<int>   = randint(from_inclusive, to_inclusive)
-<el>    = choice(<list>)
-shuffle(<list>)
+float = random()
+int   = randint(from_inclusive, to_inclusive)
+el    = choice(list)
+shuffle(list)
 ```
 
 
@@ -393,7 +393,7 @@ now = datetime.now()
 now.month                      # 3
 now.strftime('%Y%m%d')         # '20180315'
 now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
-<datetime> = strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
+datetime = strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
 ```
 
 
@@ -440,16 +440,16 @@ Inline
 ------
 ### Lambda
 ```python
-lambda: <return_value>
-lambda <argument_1>, <argument_2>: <return_value>
+lambda: return_value
+lambda argument_1, argument_2: return_value
 ```
 
 ### Comprehension
 ```python
-<list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
-<set>  = {i for i in range(10) if i > 5}  # {6, 7, ..., 9}
-<dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
-<iter> = (x+5 for x in range(10))         # (5, 6, ..., 14)
+list = [i+1 for i in range(10)]         # [1, 2, ..., 10]
+set  = {i for i in range(10) if i > 5}  # {6, 7, ..., 9}
+dict = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
+iter = (x+5 for x in range(10))         # (5, 6, ..., 14)
 ```
 
 ```python
@@ -467,19 +467,19 @@ for i in range(10):
 ### Map, Filter, Reduce
 ```python
 from functools import reduce
-<iter>     = map(lambda x: x + 1, range(10))          # (1, 2, ..., 10)
-<iter>     = filter(lambda x: x > 5, range(10))       # (6, 7, ..., 9)
-<any_type> = reduce(lambda sum, x: sum+x, range(10))  # 45
+iter     = map(lambda x: x + 1, range(10))          # (1, 2, ..., 10)
+iter     = filter(lambda x: x > 5, range(10))       # (6, 7, ..., 9)
+any_type = reduce(lambda sum, x: sum+x, range(10))  # 45
 ```
 
 ### Any, All
 ```python
-<bool> = any(el[1] for el in <collection>)
+bool = any(el[1] for el in collection)
 ```
 
 ### If - Else
 ```python
-<expression_if_true> if <condition> else <expression_if_false>
+expression_if_true if condition else expression_if_false
 ```
 
 ```python
@@ -520,7 +520,7 @@ def get_multiplier(a):
 #### Or:
 ```python
 from functools import partial
-partial(<function>, <arg_1> [, <arg_2>, ...])
+partial(function, arg_1 [, arg_2, ...])
 ```
 
 
@@ -552,7 +552,7 @@ def add(x, y):
 Class
 -----
 ```python
-class <name>:
+class name:
     def __init__(self, a):
         self.a = a
     def __str__(self):
@@ -567,7 +567,7 @@ class <name>:
 
 ### Constructor Overloading
 ```python
-class <name>:
+class name:
     def __init__(self, a=None):
         self.a = a
 ```
@@ -575,8 +575,8 @@ class <name>:
 ### Copy
 ```python
 from copy import copy, deepcopy
-<object> = copy(<object>)
-<object> = deepcopy(<object>)
+object = copy(object)
+object = deepcopy(object)
 ```
 
 
@@ -584,10 +584,10 @@ Enum
 ----
 ```python
 from enum import Enum, auto
-class <enum_name>(Enum):
-    <member_name_1> = <value_1>  
-    <member_name_2> = <value_2_a>, <value_2_b>
-    <member_name_3> = auto()  # Can be used for automatic indexing.
+class enum_name(Enum):
+    member_name_1 = value_1  
+    member_name_2 = value_2_a, value_2_b
+    member_name_3 = auto()  # Can be used for automatic indexing.
     ...
 
    @classmethod
@@ -600,17 +600,17 @@ class <enum_name>(Enum):
 ```
 
 ```python
-<member>  = <enum>.<member_name>
-<member>  = <enum>['<member_name>']
-<member>  = <enum>(<value>)
-<name>    = <member>.name
-<value>   = <member>.value
+member  = enum.member_name
+member  = enum['member_name']
+member  = enum(value)
+name    = member.name
+value   = member.value
 ```
 
 ```python
-list_of_members = list(<enum>)
-member_names    = [a.name for a in <enum>]
-random_member   = random.choice(list(<enum>))
+list_of_members = list(enum)
+member_names    = [a.name for a in enum]
+random_member   = random.choice(list(enum))
 ```
 
 ### Inline
@@ -623,7 +623,7 @@ Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 LogicOp = Enum('LogicOp', {'AND': (lambda l, r: l and r, ),
                            'OR' : (lambda l, r: l or r, )})
 
-# But 'list(<enum>)' will only work if there is another value in the tuple:
+# But 'list(enum)' will only work if there is another value in the tuple:
 LogicOp = Enum('LogicOp', {'AND': (auto(), lambda l, r: l and r),
                            'OR' : (auto(), lambda l, r: l or r)})
 ```
@@ -655,16 +655,16 @@ def write_to_file(filename, text):
 ### Path
 ```python
 import os
-<bool> = os.path.exists(<path>)
-<bool> = os.path.isfile(<path>)
-<bool> = os.path.isdir(<path>)
-<list> = os.listdir(<path>)
+bool = os.path.exists(path)
+bool = os.path.isfile(path)
+bool = os.path.isdir(path)
+list = os.listdir(path)
 ```
 
 ### Execute Command
 ```python
 import os
-<str> = os.popen(<command>).read()
+str = os.popen(command).read()
 ```
 
 #### Or:
@@ -706,14 +706,14 @@ import json
 
 ### Serialization
 ```python
-<str>  = json.dumps(<object>, ensure_ascii=True, indent=None)
-<dict> = json.loads(<str>)
+str  = json.dumps(object, ensure_ascii=True, indent=None)
+dict = json.loads(str)
 ```
 
 #### To preserve order:
 ```python
 from collections import OrderedDict
-<dict> = json.loads(<str>, object_pairs_hook=OrderedDict)
+dict = json.loads(str, object_pairs_hook=OrderedDict)
 ```
 
 ### Read File
@@ -735,12 +735,12 @@ SQLite
 ------
 ```python
 import sqlite3
-db = sqlite3.connect(<filename>)
+db = sqlite3.connect(filename)
 ```
 
 ### Read
 ```python
-cursor = db.execute(<query>)
+cursor = db.execute(query)
 if cursor:
     cursor.fetchall()  # Or cursor.fetchone()
 db.close()
@@ -748,7 +748,7 @@ db.close()
 
 ### Write
 ```python
-db.execute(<query>)
+db.execute(query)
 db.commit()
 ```
 
@@ -790,7 +790,7 @@ raise ValueError('A very specific message!')
 ... 
 Goodbye, world!
 Traceback (most recent call last):
-  File "<stdin>", line 2, in <module>
+  File "stdin", line 2, in module
 KeyboardInterrupt
 ```
 
@@ -801,17 +801,17 @@ Bytes
 
 ### Encode
 ```python
-<Bytes> = b'<str>'
-<Bytes> = <str>.encode(encoding='utf-8')
-<Bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
-<Bytes> = bytes.fromhex(<hex>)
+Bytes = b'str'
+Bytes = str.encode(encoding='utf-8')
+Bytes = int.to_bytes(length, byteorder='big|little', signed=False)
+Bytes = bytes.fromhex(hex)
 ```
 
 ### Decode
 ```python
-<str> = <Bytes>.decode('utf-8') 
-<int> = int.from_bytes(<Bytes>, byteorder='big|little', signed=False)
-<hex> = <Bytes>.hex()
+str = Bytes.decode('utf-8') 
+int = int.from_bytes(Bytes, byteorder='big|little', signed=False)
+hex = Bytes.hex()
 ```
 
 ### Read Bytes from File
@@ -829,7 +829,7 @@ def write_bytes(filename, bytes):
 ```
 
 ```python
-<Bytes> = b''.join(<list_of_Bytes>)
+Bytes = b''.join(list_of_Bytes)
 ```
 
 
@@ -837,8 +837,8 @@ Struct
 ------
 **This module performs conversions between Python values and C struct represented as Python Bytes object.**
 ```python
-<Bytes> = struct.pack('<format>', <value_1> [, <value_2>, ...])
-<tuple> = struct.unpack('<format>', <Bytes>)
+Bytes = struct.pack('format', value_1 [, value_2, ...])
+tuple = struct.unpack('format', Bytes)
 ```
 
 ### Example
@@ -867,7 +867,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 Hashlib
 -------
 ```python
->>> hashlib.md5(<str>.encode()).hexdigest()
+>>> hashlib.md5(str.encode()).hexdigest()
 '33d0eba106da4d3ebca17fcd3f4c3d77'
 ```
 
@@ -880,7 +880,7 @@ from threading import Thread, RLock
 
 ### Thread
 ```python
-thread = Thread(target=<function>, args=(<first_arg>, ))
+thread = Thread(target=function, args=(first_arg, ))
 thread.start()
 ...
 thread.join()
@@ -948,7 +948,7 @@ from itertools import *
 >>> compress('abc', [True, 0, 1])
 ['a', 'c']
 
->>> islice([1, 2, 3], 1, None)  # islice(<seq>, from_inclusive, to_exclusive) 
+>>> islice([1, 2, 3], 1, None)  # islice(seq, from_inclusive, to_exclusive) 
 [2, 3]
 
 >>> people = [{'id': 1, 'name': 'bob'}, 
@@ -972,9 +972,9 @@ Introspection and Metaprograming
 
 ### Variables
 ```python
-<list> = dir()      # In-scope variables.
-<dict> = locals()   # Local variables.
-<dict> = globals()  # Global variables.
+list = dir()      # In-scope variables.
+dict = locals()   # Local variables.
+dict = globals()  # Global variables.
 ```
 
 ### Attributes
@@ -1003,14 +1003,14 @@ False
 #### Getting the number of parameters of a function:
 ```python
 from inspect import signature
-sig = signature(<function>)
+sig = signature(function)
 no_of_params = len(sig.parameters)
 ```
 
 ### Type
 **Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):**
 ```python
-type(<class_name>, <parents_tuple>, <attributes_dict>)
+type(class_name, parents_tuple, attributes_dict)
 ```
 
 ```python
@@ -1054,9 +1054,9 @@ from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
 from enum import Enum
 from functools import reduce
 
-product_of_elems = reduce(mul, <list>)
-sorted_by_second = sorted(<list>, key=itemgetter(1))
-sorted_by_both   = sorted(<list>, key=itemgetter(0, 1))
+product_of_elems = reduce(mul, list)
+sorted_by_second = sorted(list, key=itemgetter(1))
+sorted_by_both   = sorted(list, key=itemgetter(0, 1))
 LogicOp          = Enum('LogicOp', {'AND': (and_, ),
                                     'OR' : (or_, )})
 ```
@@ -1158,7 +1158,7 @@ def printer():
 reader(adder(printer()))
 ```
 
-<br><br>
+brbr
 
 Libraries
 =========
@@ -1168,9 +1168,9 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])
+pyplot.plot(data_1 [, data_2, ...])
 pyplot.show()
-pyplot.savefig(<filename>, transparent=True)
+pyplot.savefig(filename, transparent=True)
 ```
 
 
@@ -1181,7 +1181,7 @@ Table
 # $ pip3 install tabulate
 import csv
 from tabulate import tabulate
-with open(<filename>, newline='') as csv_file:
+with open(filename, newline='') as csv_file:
     reader = csv.reader(csv_file, delimiter=';')
     headers = [a.title() for a in next(reader)]
     print(tabulate(reader, headers))
@@ -1236,8 +1236,8 @@ Audio
 #### Saves list of floats with values between 0 and 1 to a WAV file:
 ```python
 import wave, struct
-frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
-wf = wave.open(<filename>, 'wb')
+frames = [struct.pack('h', int((a-0.5)*60000)) for a in list]
+wf = wave.open(filename, 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(4)
 wf.setframerate(44100)
@@ -1285,14 +1285,14 @@ bottle.run(host='0.0.0.0', port=80, server='cherrypy')
 
 ### Static request
 ```python
-@route('/img/<image>')
+@route('/img/image')
 def send_image(image):
     return static_file(image, 'images/', mimetype='image/png')
 ```
 
 ### Dynamic request
 ```python
-@route('/<sport>')
+@route('/sport')
 def send_page(sport):
     sport = unquote(sport).lower()
     page = read_file(sport)
@@ -1301,12 +1301,12 @@ def send_page(sport):
 
 ### REST request
 ```python
-@post('/odds/<sport>')
+@post('/odds/sport')
 def odds_handler(sport):
     team = bottle.request.forms.get('team')
     team = unquote(team).lower()
 
-    db = sqlite3.connect(<db_path>)
+    db = sqlite3.connect(db_path)
     home_odds, away_odds = get_odds(db, sport, team)
     db.close()
 
@@ -1340,7 +1340,7 @@ import pycallgraph
 graph = pycallgraph.output.GraphvizOutput()
 graph.output_file = get_filename()
 with pycallgraph.PyCallGraph(output=graph):
-    <code_to_be_profiled>
+    code_to_be_profiled
 ```
 
 ```python
