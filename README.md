@@ -981,8 +981,8 @@ Introspection and Metaprograming
 ```python
 >>> class Z:
 ...     def __init__(self):
-...             self.a = 'abcde'
-...             self.b = 12345
+...         self.a = 'abcde'
+...         self.b = 12345
 >>> z = Z()
 ```
 
@@ -1414,7 +1414,7 @@ Basic Script Template
 ```python
 #!/usr/bin/env python3
 #
-# Usage: .py 
+# Usage: .py
 # 
 
 from collections import namedtuple
@@ -1425,7 +1425,7 @@ import sys
 
 def main():
     pass
-    
+
 
 ###
 ##  UTIL
