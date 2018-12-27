@@ -990,7 +990,7 @@ Introspection and Metaprograming
 >>> vars(z)
 {'a': 'abcde', 'b': 12345}
 
->>> getattr(z, 'a')  # Same as Z.__getattribute__(z, 'a')
+>>> getattr(z, 'a')
 'abcde'
 
 >>> hasattr(z, 'c')
