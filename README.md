@@ -23,6 +23,7 @@ List
 <list>.extend(<list>)
 <list> += [<el>]
 <list> += <list>
+<bool> = <el> in <list>
 ```
 
 ```python
@@ -59,6 +60,7 @@ Dictionary
 <view>  = <dict>.items()
 <value> = <dict>.get(key, default)         # Returns default if key does not exist.
 <value> = <dict>.setdefault(key, default)  # Same, but also adds default to dict.
+<bool>  = key in <dict>
 <dict>.update(<dict>)
 ```
 
@@ -92,6 +94,7 @@ Set
 <set>.add(<el>)
 <set>.update(<set>)
 <set>.clear()
+<bool> = <el> in <set>
 ```
 
 ```python
