@@ -244,6 +244,16 @@ String
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
 ```
 
+#### Pprint:
+```python
+>>> from pprint import pprint
+>>> pprint(locals())
+{'__doc__': None,
+ '__name__': '__main__',
+ '__package__': None, ...
+}
+```
+
 
 Regex
 -----
@@ -979,6 +989,9 @@ Introspection and Metaprograming
 ```
 
 ```python
+>>> vars(z)
+{'a': 'abcde', 'b': 12345}
+
 >>> getattr(z, 'a')  # Same as Z.__getattribute__(z, 'a')
 'abcde'
 
