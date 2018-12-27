@@ -94,7 +94,6 @@ Set
 <set>.add(<el>)
 <set>.update(<set>)
 <set>.clear()
-<bool> = <el> in <set>
 ```
 
 ```python
