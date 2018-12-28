@@ -1093,8 +1093,8 @@ Eval
 
 ### Detailed
 ```python
-from ast import Add, Sub, Mult, Div, Pow, BitXor, USub, \
-                parse, Num, BinOp, UnaryOp
+from ast import parse, Num, BinOp, UnaryOp, \
+                Add, Sub, Mult, Div, Pow, BitXor, USub
 import operator as op
 
 operators = {Add:    op.add, 
