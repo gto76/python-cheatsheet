@@ -267,8 +267,8 @@ import re
 
 * **Use `'\\\\1'` or `r'\1'` for backreference.**  
 * **Use `?` to make operators non-greedy.** 
-* **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
-* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**    
+* **Parameter `flags=re.IGNORECASE` can be used with all functions.**
+* **Parameter `flags=re.DOTALL` makes dot also accept newline.**    
 
 ### Match Object
 ```python
