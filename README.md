@@ -39,7 +39,7 @@ sorted_by_second = sorted(<list>, key=lambda el: el[1])
 sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
 flattened_list   = list(itertools.chain.from_iterable(<list>))
 list_of_chars    = list(<str>)
-product_of_elems = functools.reduce(lambda agr, x: agr * x, <list>)
+product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
 no_duplicates    = list(dict.fromkeys(<list>))
 ```
 
@@ -481,7 +481,7 @@ for i in range(10):
 from functools import reduce
 <iter>     = map(lambda x: x + 1, range(10))            # (1, 2, ..., 10)
 <iter>     = filter(lambda x: x > 5, range(10))         # (6, 7, ..., 9)
-<any_type> = reduce(lambda agr, x: agr + x, range(10))  # 45
+<any_type> = reduce(lambda out, x: out + x, range(10))  # 45
 ```
 
 ### Any, All
