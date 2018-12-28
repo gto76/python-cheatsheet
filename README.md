@@ -680,6 +680,12 @@ import os
 <list> = os.listdir(<path>)
 ```
 
+```python
+>>> from glob import glob
+>>> glob('*.gif')
+['1.gif', 'card.gif']
+```
+
 ### Execute Command
 ```python
 import os
