@@ -1385,11 +1385,12 @@ def profiler(func):
     def out(*args, **kwargs):
         profile = Profile()
         result = profile.runcall(func, *args, **kwargs)
-        with open(f'profile_{func.__name__}.txt', 'w') as stream:
+        filename = f'profile_{func.__name__}.txt'
+        with open(filename, 'w') as stream:
             stats = Stats(profile, stream=stream)
             stats.strip_dirs().sort_stats('tottime')
             stats.print_stats(20)
-        print(f"Profile saved as 'profile_{func.__name__}.txt'")
+        print(f"Profile saved as '{filename}'")
         return result
     return out
 ```
