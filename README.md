@@ -1115,10 +1115,10 @@ def eval_node(node):
         return node.n
     if node_type not in [BinOp, UnaryOp]:
         raise TypeError(node)
-    op_type = type(node.op)
-    if op_type not in legal_operators:
+    operator_type = type(node.op)
+    if operator_type not in legal_operators:
         raise TypeError(f'Illegal operator {node.op}')
-    operator = legal_operators[op_type]
+    operator = legal_operators[operator_type]
     if node_type == BinOp:
         left, right = eval_node(node.left), eval_node(node.right)
         return operator(left, right)
