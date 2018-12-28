@@ -33,13 +33,15 @@ List
 ```
 
 ```python
-sum_of_elements  = sum(<list>)
-elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
-sorted_by_second = sorted(<list>, key=lambda el: el[1])
-sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
-flattened_list   = list(itertools.chain.from_iterable(<list>))
-list_of_chars    = list(<str>)
-product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
+sum_of_elements       = sum(<list>)
+elementwise_sum       = [sum(pair) for pair in zip(list_a, list_b)]
+sorted_by_second      = sorted(<list>, key=lambda el: el[1])
+sorted_by_both        = sorted(<list>, key=lambda el: (el[1], el[0]))
+flattened_list        = list(itertools.chain.from_iterable(<list>))
+list_of_chars         = list(<str>)
+product_of_elems      = functools.reduce(lambda out, x: out * x, <list>)
+no_duplicates         = list(set(<list>))                               # Does not preserve order
+no_duplicates_ordered = list(dict.fromkeys(<list>))                     # Preserves order
 ```
 
 ```python
@@ -99,8 +101,8 @@ Set
 <set>  = <set>.intersection(<set>)          # Or: <set> & <set>
 <set>  = <set>.difference(<set>)            # Or: <set> - <set>
 <set>  = <set>.symmetric_difference(<set>)  # Or: <set> ^ <set>
-<bool> = <set>.issubset(<set>)
-<bool> = <set>.issuperset(<set>)
+<bool> = <set>.issubset(<set>)              # Or: <set> < <set>
+<bool> = <set>.issuperset(<set>)            # Or: <set> > <set>
 ```
 
 ### Frozenset
@@ -1339,6 +1341,64 @@ duration = time() - start_time
 from timeit import timeit
 timeit('"-".join(str(n) for n in range(100))', 
        number=10000, globals=globals())
+
+```
+
+#### Decorator for timing function execution:
+```python
+from timeit import default_timer
+from datetime import timedelta
+
+def stopwatch(func):
+    """Print runtime of decorated function."""
+    def wrap(*args, **kw):
+        start = default_timer()
+        result = func(*args, **kw)
+        delta = timedelta(seconds=(default_timer() - start))
+        print(f"Function {func.__name__} finished in {delta}")
+        return result
+    return wrap
+```
+
+#### Decorator for profiling functions:
+```python
+import cProfile
+
+def profiler(func):
+    """Decorator.
+    Create a run call profile of the decorated function."""
+    def wrap(*args, **kwargs):
+        profile = cProfile.Profile()
+        result = profile.runcall(func, *args, **kwargs)
+        with open(f"profile_{func.__name__}.txt", "w") as stream:
+            stats = pstats.Stats(profile, stream=stream)
+            stats.strip_dirs().sort_stats("tottime")
+            stats.print_stats(20)
+        print(f"Profile saved as 'profile_{func.__name__}.txt'")
+        return result
+    return wrap
+```
+
+#### Decorator for function tracing:
+```python
+def tracer(func):
+    """Print a trace of the input and output of a function in one line."""
+    def traced_func(*args, **kwargs):
+        result = func(*args, **kwargs)
+        if len(args) is not 0:
+            argslist = ", ".join(f"{x}" for x in args)
+            if len(kwargs) is not 0:
+                argslist = argslist + ", " if len(kwargs) is not 0 else ""
+        else:
+            argslist = ""
+        if len(kwargs) is not 0:
+            kwargslist = ", ".join([f"{k}={v}" for k, v in kwargs.items()])
+        else:
+            kwargslist = ""
+        print(
+            f"{func.__name__}({argslist}{kwargslist}) = {result}")
+        return result
+    return traced_func
 ```
 
 #### Generates a PNG image of call graph and highlights the bottlenecks:
