@@ -69,9 +69,9 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 
 ```python
 <dict>.update(<dict>)
-<dict> = dict(<list>)                             # Initiates a dict from list of key-value pairs.
-<dict> = dict(zip(keys, values))                  # Initiates a dict from two lists.
-{k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
+<dict> = dict(<list>)                           # Initiates a dict from list of key-value pairs.
+<dict> = dict(zip(keys, values))                # Initiates a dict from two lists.
+{k: v for k, v in <dict>.items() if k in keys}  # Filters a dict by keys.
 ```
 
 ### Counter
