@@ -1339,7 +1339,23 @@ duration = time() - start_time
 from timeit import timeit
 timeit('"-".join(str(n) for n in range(100))', 
        number=10000, globals=globals())
+```
 
+#### Generates a PNG image of call graph and highlights the bottlenecks:
+```python
+# $ pip3 install pycallgraph
+import pycallgraph
+graph = pycallgraph.output.GraphvizOutput()
+graph.output_file = get_filename()
+with pycallgraph.PyCallGraph(output=graph):
+    <code_to_be_profiled>
+```
+
+```python
+def get_filename():
+    from datetime import datetime
+    time_str = datetime.now().strftime('%Y%m%d%H%M%S')
+    return f'profile-{time_str}.png'
 ```
 
 #### Decorator for timing function execution:
@@ -1397,23 +1413,6 @@ def tracer(func):
             f"{func.__name__}({argslist}{kwargslist}) = {result}")
         return result
     return traced_func
-```
-
-#### Generates a PNG image of call graph and highlights the bottlenecks:
-```python
-# $ pip3 install pycallgraph
-import pycallgraph
-graph = pycallgraph.output.GraphvizOutput()
-graph.output_file = get_filename()
-with pycallgraph.PyCallGraph(output=graph):
-    <code_to_be_profiled>
-```
-
-```python
-def get_filename():
-    from datetime import datetime
-    time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-    return f'profile-{time_str}.png'
 ```
 
 
