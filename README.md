@@ -1094,7 +1094,7 @@ Eval
 ### Detailed
 ```python
 import ast
-from ast import parse, Num, BinOp, UnaryOp
+from ast import Num, BinOp, UnaryOp, parse
 import operator as op
 
 operators = {ast.Add:    op.add, 
