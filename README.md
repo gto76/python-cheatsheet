@@ -1094,7 +1094,7 @@ Eval
 ### Detailed
 ```python
 import ast
-from ast import Num, BinOp, UnaryOp, parse
+from ast import Num, BinOp, UnaryOp
 import operator as op
 
 operators = {ast.Add:    op.add, 
@@ -1106,7 +1106,7 @@ operators = {ast.Add:    op.add,
              ast.USub:   op.neg}
 
 def evaluate(expression):
-    root = parse(expression, mode='eval')
+    root = ast.parse(expression, mode='eval')
     return eval_node(root.body)
 
 def eval_node(node):
