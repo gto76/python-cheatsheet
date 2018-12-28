@@ -58,19 +58,19 @@ Dictionary
 <view>  = <dict>.keys()
 <view>  = <dict>.values()
 <view>  = <dict>.items()
-<value> = <dict>.get(key, default)         # Returns default if key does not exist.
-<value> = <dict>.setdefault(key, default)  # Same, but also adds default to dict.
 <dict>.update(<dict>)
 ```
 
 ```python
-collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
-collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
+value   = <dict>.get(key, default)            # Returns default if key does not exist.
+value   = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
+<dict>  = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
+<dict>  = collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
 ```
 
 ```python
-dict(<list>)                        # Initiates a dict from list of key-value pairs.
-dict(zip(keys, values))             # Initiates a dict from two lists.
+dict(<list>)                                      # Initiates a dict from list of key-value pairs.
+dict(zip(keys, values))                           # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
 
