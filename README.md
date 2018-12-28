@@ -71,6 +71,7 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 <dict>.update(<dict>)
 <dict> = dict(<list>)                           # Initiates a dict from list of key-value pairs.
 <dict> = dict(zip(keys, values))                # Initiates a dict from two lists.
+<dict> = dict.fromkeys(keys [, value])          # Initiates a dict from list of keys.
 {k: v for k, v in <dict>.items() if k in keys}  # Filters a dict by keys.
 ```
 
