@@ -55,17 +55,17 @@ index = <list>.index(<el>)  # Returns first index of item.
 Dictionary
 ----------
 ```python
-<view>  = <dict>.keys()
-<view>  = <dict>.values()
-<view>  = <dict>.items()
 <dict>.update(<dict>)
+<view> = <dict>.keys()
+<view> = <dict>.values()
+<view> = <dict>.items()
 ```
 
 ```python
-value   = <dict>.get(key, default)            # Returns default if key does not exist.
-value   = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
-<dict>  = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
-<dict>  = collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
+value  = <dict>.get(key, default)            # Returns default if key does not exist.
+value  = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
+<dict> = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
+<dict> = collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
 ```
 
 ```python
