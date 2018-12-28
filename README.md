@@ -1097,13 +1097,13 @@ import ast
 from ast import Num, BinOp, UnaryOp
 import operator as op
 
-operators = {ast.Add:    op.add, 
-             ast.Sub:    op.sub, 
-             ast.Mult:   op.mul,
-             ast.Div:    op.truediv, 
-             ast.Pow:    op.pow, 
-             ast.BitXor: op.xor,
-             ast.USub:   op.neg}
+legal_operators = {ast.Add:    op.add, 
+                   ast.Sub:    op.sub, 
+                   ast.Mult:   op.mul,
+                   ast.Div:    op.truediv, 
+                   ast.Pow:    op.pow, 
+                   ast.BitXor: op.xor,
+                   ast.USub:   op.neg}
 
 def evaluate(expression):
     root = ast.parse(expression, mode='eval')
@@ -1115,7 +1115,7 @@ def eval_node(node):
         return node.n
     if type_ not in [BinOp, UnaryOp]:
         raise TypeError(node)
-    operator = operators[type(node.op)]
+    operator = legal_operators[type(node.op)]
     if type_ == BinOp:
         left, right = eval_node(node.left), eval_node(node.right)
         return operator(left, right)
