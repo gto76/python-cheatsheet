@@ -1397,7 +1397,7 @@ def profiler(func):
 #### Decorator for function tracing:
 ```python
 def tracer(func):
-    """Prints input and output of a decorated function."""
+    """Prints arguments and output of a decorated function."""
     def out(*args, **kwargs):
         result = func(*args, **kwargs)
         arg_list = [str(x) for x in args]
