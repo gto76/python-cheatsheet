@@ -55,7 +55,6 @@ index = <list>.index(<el>)  # Returns first index of item.
 Dictionary
 ----------
 ```python
-<dict>.update(<dict>)
 <view> = <dict>.keys()
 <view> = <dict>.values()
 <view> = <dict>.items()
@@ -69,8 +68,9 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 ```
 
 ```python
-dict(<list>)                                      # Initiates a dict from list of key-value pairs.
-dict(zip(keys, values))                           # Initiates a dict from two lists.
+<dict>.update(<dict>)
+<dict> = dict(<list>)                             # Initiates a dict from list of key-value pairs.
+<dict> = dict(zip(keys, values))                  # Initiates a dict from two lists.
 {k: v for k, v in <dict>.items() if k in <list>}  # Filters a dict by keys.
 ```
 
