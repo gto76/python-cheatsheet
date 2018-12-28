@@ -1338,7 +1338,7 @@ duration = time() - start_time
 #### Times execution of the passed code:
 ```python
 from timeit import timeit
-timeit('"-".join(str(n) for n in range(100))', 
+timeit('"-".join(str(a) for a in range(100))', 
        number=10000, globals=globals())
 ```
 
