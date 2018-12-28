@@ -136,7 +136,7 @@ for i, <el> in enumerate(<collection> [, i_start]):
 Named Tuple
 -----------
 ```python
->>> Point = collections.namedtuple('Point', ['x', 'y'])
+>>> Point = collections.namedtuple('Point', 'x y')
 >>> a = Point(1, y=2)
 Point(x=1, y=2)
 >>> a.x
