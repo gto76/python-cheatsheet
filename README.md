@@ -205,8 +205,8 @@ is_function = callable(<el>)
 String
 ------
 ```python
-<str>  = <str>.strip()           # Strips all whitespace characters.
-<str>  = <str>.strip('<chars>')  # Strips all passed characters.
+<str> = <str>.strip()           # Strips all whitespace characters.
+<str> = <str>.strip('<chars>')  # Strips all passed characters.
 ```
 
 ```python
