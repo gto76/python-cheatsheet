@@ -1093,17 +1093,17 @@ Eval
 
 ### Detailed
 ```python
-from ast import parse, Num, BinOp, UnaryOp, \
-                Add, Sub, Mult, Div, Pow, BitXor, USub
+import ast
+from ast import parse, Num, BinOp, UnaryOp
 import operator as op
 
-operators = {Add:    op.add, 
-             Sub:    op.sub, 
-             Mult:   op.mul,
-             Div:    op.truediv, 
-             Pow:    op.pow, 
-             BitXor: op.xor,
-             USub:   op.neg}
+operators = {ast.Add:    op.add, 
+             ast.Sub:    op.sub, 
+             ast.Mult:   op.mul,
+             ast.Div:    op.truediv, 
+             ast.Pow:    op.pow, 
+             ast.BitXor: op.xor,
+             ast.USub:   op.neg}
 
 def evaluate(expression):
     root = parse(expression, mode='eval')
