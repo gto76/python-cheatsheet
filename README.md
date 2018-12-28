@@ -532,7 +532,14 @@ def get_multiplier(a):
 #### Or:
 ```python
 from functools import partial
-partial(<function>, <arg_1> [, <arg_2>, ...])
+<function> = partial(<function>, <arg_1> [, <arg_2>, ...])
+```
+
+```python
+>>> from operator import mul
+>>> multiply_by_3 = partial(mul, 3)
+>>> multiply_by_3(10)
+30
 ```
 
 
