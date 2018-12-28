@@ -1091,7 +1091,7 @@ Eval
 [1, 2, 3]
 ```
 
-### Detailed
+### Using Abstract Syntax Trees
 ```python
 import ast
 from ast import Num, BinOp, UnaryOp
