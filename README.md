@@ -33,15 +33,14 @@ List
 ```
 
 ```python
-sum_of_elements       = sum(<list>)
-elementwise_sum       = [sum(pair) for pair in zip(list_a, list_b)]
-sorted_by_second      = sorted(<list>, key=lambda el: el[1])
-sorted_by_both        = sorted(<list>, key=lambda el: (el[1], el[0]))
-flattened_list        = list(itertools.chain.from_iterable(<list>))
-list_of_chars         = list(<str>)
-product_of_elems      = functools.reduce(lambda out, x: out * x, <list>)
-no_duplicates         = list(set(<list>))                               # Does not preserve order
-no_duplicates_ordered = list(dict.fromkeys(<list>))                     # Preserves order
+sum_of_elements  = sum(<list>)
+elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
+sorted_by_second = sorted(<list>, key=lambda el: el[1])
+sorted_by_both   = sorted(<list>, key=lambda el: (el[1], el[0]))
+flattened_list   = list(itertools.chain.from_iterable(<list>))
+list_of_chars    = list(<str>)
+product_of_elems = functools.reduce(lambda out, x: out * x, <list>)
+no_duplicates    = list(dict.fromkeys(<list>))
 ```
 
 ```python
@@ -67,7 +66,6 @@ Dictionary
 ```python
 collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
 collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
-collections.OrderedDict()           # Creates ordered dictionary.
 ```
 
 ```python
