@@ -1359,61 +1359,53 @@ def get_filename():
     return f'profile-{time_str}.png'
 ```
 
-#### Decorator for timing function execution:
+#### Decorator for timing functions:
 ```python
 from timeit import default_timer
 from datetime import timedelta
 
 def stopwatch(func):
-    """Print runtime of decorated function."""
-    def wrap(*args, **kw):
+    """Prints runtime of decorated function."""
+    def out(*args, **kwargs):
         start = default_timer()
-        result = func(*args, **kw)
+        result = func(*args, **kwargs)
         delta = timedelta(seconds=(default_timer() - start))
-        print(f"Function {func.__name__} finished in {delta}")
+        print(f'Function {func.__name__} finished in {delta}')
         return result
-    return wrap
+    return out
 ```
 
 #### Decorator for profiling functions:
 ```python
-import cProfile
+from cProfile import Profile
+from pstats import Stats
 
 def profiler(func):
-    """Decorator.
-    Create a run call profile of the decorated function."""
-    def wrap(*args, **kwargs):
-        profile = cProfile.Profile()
+    """Saves run call profile of the decorated function to file."""
+    def out(*args, **kwargs):
+        profile = Profile()
         result = profile.runcall(func, *args, **kwargs)
-        with open(f"profile_{func.__name__}.txt", "w") as stream:
-            stats = pstats.Stats(profile, stream=stream)
-            stats.strip_dirs().sort_stats("tottime")
+        with open(f'profile_{func.__name__}.txt', 'w') as stream:
+            stats = Stats(profile, stream=stream)
+            stats.strip_dirs().sort_stats('tottime')
             stats.print_stats(20)
         print(f"Profile saved as 'profile_{func.__name__}.txt'")
         return result
-    return wrap
+    return out
 ```
 
 #### Decorator for function tracing:
 ```python
 def tracer(func):
-    """Print a trace of the input and output of a function in one line."""
-    def traced_func(*args, **kwargs):
+    """Prints input and output of a decorated function."""
+    def out(*args, **kwargs):
         result = func(*args, **kwargs)
-        if len(args) is not 0:
-            argslist = ", ".join(f"{x}" for x in args)
-            if len(kwargs) is not 0:
-                argslist = argslist + ", " if len(kwargs) is not 0 else ""
-        else:
-            argslist = ""
-        if len(kwargs) is not 0:
-            kwargslist = ", ".join([f"{k}={v}" for k, v in kwargs.items()])
-        else:
-            kwargslist = ""
-        print(
-            f"{func.__name__}({argslist}{kwargslist}) = {result}")
+        arg_list = [str(x) for x in args]
+        arg_list += [f'{k}={v}' for k, v in kwargs.items()]
+        arg_str = ', '.join(arg_list)
+        print(f'{func.__name__}({arg_str}) = {result}')
         return result
-    return traced_func
+    return out
 ```
 
 
