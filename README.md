@@ -1401,7 +1401,7 @@ def tracer(func):
     """Prints arguments and output of a decorated function."""
     def out(*args, **kwargs):
         result = func(*args, **kwargs)
-        arg_list = [str(x) for x in args]
+        arg_list = [repr(x) for x in args]
         arg_list += [f'{k}={v}' for k, v in kwargs.items()]
         arg_str = ', '.join(arg_list)
         print(f'{func.__name__}({arg_str}) = {result}')
