@@ -682,7 +682,7 @@ import os
 
 ```python
 >>> from glob import glob
->>> glob('*.gif')
+>>> glob('../*.gif')
 ['1.gif', 'card.gif']
 ```
 
