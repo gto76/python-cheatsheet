@@ -536,8 +536,7 @@ from functools import partial
 ```
 
 ```python
->>> from operator import mul
->>> multiply_by_3 = partial(mul, 3)
+>>> multiply_by_3 = partial(operator.mul, 3)
 >>> multiply_by_3(10)
 30
 ```
