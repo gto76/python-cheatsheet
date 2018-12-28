@@ -1110,16 +1110,19 @@ def evaluate(expression):
     return eval_node(root.body)
 
 def eval_node(node):
-    type_ = type(node)
-    if type_ == Num:
+    node_type = type(node)
+    if node_type == Num:
         return node.n
-    if type_ not in [BinOp, UnaryOp]:
+    if node_type not in [BinOp, UnaryOp]:
         raise TypeError(node)
-    operator = legal_operators[type(node.op)]
-    if type_ == BinOp:
+    op_type = type(node.op)
+    if op_type not in legal_operators:
+        raise TypeError(f'Illegal operator {node.op}')
+    operator = legal_operators[op_type]
+    if node_type == BinOp:
         left, right = eval_node(node.left), eval_node(node.right)
         return operator(left, right)
-    elif type_ == UnaryOp:
+    elif node_type == UnaryOp:
         operand = eval_node(node.operand)
         return operator(operand)
 ```
