@@ -1141,11 +1141,11 @@ Coroutine
 
 ```python
 def coroutine(func):
-    def start(*args, **kwargs):
+    def out(*args, **kwargs):
         cr = func(*args, **kwargs)
         next(cr)
         return cr
-    return start
+    return out
 ```
 
 ### Pipeline Example
