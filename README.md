@@ -351,9 +351,9 @@ Numbers
 -------
 ### Basic Functions
 ```python
-round(<num> [, ndigits])
+pow(x, y)   # Or: x ** y
 abs(<num>)
-math.pow(x, y)  # Or: x ** y
+round(<num> [, ndigits])
 ```
 
 ### Constants
