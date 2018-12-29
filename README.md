@@ -678,11 +678,11 @@ def write_to_file(filename, text):
 
 ### Path
 ```python
-import os
-<bool> = os.path.exists(<path>)
-<bool> = os.path.isfile(<path>)
-<bool> = os.path.isdir(<path>)
-<list> = os.listdir(<path>)
+from os import path, listdir
+<bool> = path.exists(<path>)
+<bool> = path.isfile(<path>)
+<bool> = path.isdir(<path>)
+<list> = listdir(<path>)
 ```
 
 ```python
