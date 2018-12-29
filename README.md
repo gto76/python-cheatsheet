@@ -934,7 +934,7 @@ Itertools
 from itertools import *
 ```
 
-### Combinatoric iterators
+### Combinatoric Iterators
 ```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
@@ -958,7 +958,7 @@ from itertools import *
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
-### Infinite iterators
+### Infinite Iterators
 ```python
 >>> i = count(5, 2)
 >>> next(i), next(i), next(i)
@@ -1382,7 +1382,7 @@ def odds_handler(sport):
 
 Profile
 -------
-#### Basic:
+### Basic
 ```python
 from time import time
 start_time = time()
@@ -1390,7 +1390,7 @@ start_time = time()
 duration = time() - start_time
 ```
 
-#### Times execution of the passed code:
+### Timing a Snippet
 ```python
 from timeit import timeit
 timeit('"-".join(str(a) for a in range(100))', 
