@@ -349,6 +349,7 @@ Format
 
 #### Float presentation types:
 * `'f'` - Fixed point: `.<precision>f`
+* `'%'` - Percent:     `.<precision>%'
 * `'e'` - Exponent
 
 #### Integer presentation types:
