@@ -868,15 +868,15 @@ Struct
 ------
 **This module performs conversions between Python values and C struct represented as Python Bytes object.**
 ```python
-<Bytes> = struct.pack('<format>', <value_1> [, <value_2>, ...])
-<tuple> = struct.unpack('<format>', <Bytes>)
+from struct import pack, unpack, calcsize
+```
+
+```python
+<Bytes> = pack('<format>', <value_1> [, <value_2>, ...])
+<tuple> = unpack('<format>', <Bytes>)
 ```
 
 ### Example
-```python
->>> from struct import pack, unpack, calcsize
-```
-
 ```python
 >>> pack('hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
