@@ -388,7 +388,7 @@ log2(x)          # Base 2.
 
 ### Infinity, nan
 ```python
-from math import inf, nan, isfinite, isinf, isnan
+from math import inf, nan, isinf, isnan
 ```
 
 #### Or:
