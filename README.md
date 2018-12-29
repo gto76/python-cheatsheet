@@ -787,10 +787,11 @@ db.commit()
 Pickle
 ------
 ```python
-import pickle
-favorite_color = {'lion': 'yellow', 'kitty': 'red'}
-pickle.dump(favorite_color, open('data.p', 'wb'))
-favorite_color = pickle.load(open('data.p', 'rb'))
+>>> import pickle
+>>> favorite_color = {'lion': 'yellow', 'kitty': 'red'}
+>>> pickle.dump(favorite_color, open('data.p', 'wb'))
+>>> pickle.load(open('data.p', 'rb'))
+{'lion': 'yellow', 'kitty': 'red'}
 ```
 
 
