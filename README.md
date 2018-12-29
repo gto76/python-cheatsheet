@@ -869,9 +869,6 @@ Struct
 **This module performs conversions between Python values and C struct represented as Python Bytes object.**
 ```python
 from struct import pack, unpack, calcsize
-```
-
-```python
 <Bytes> = pack('<format>', <value_1> [, <value_2>, ...])
 <tuple> = unpack('<format>', <Bytes>)
 ```
