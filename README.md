@@ -316,7 +316,7 @@ Format
 ```
 
 ### String Options
-**"!r" uses object's `repr()` method, instead of `__format__()`, to get a string:** 
+**"!r" uses object's `repr()` method, instead of `format()`, to get a string:** 
 ```python
 {'abcde'!r}      # "'abcde'"
 ```
