@@ -138,13 +138,15 @@ Named Tuple
 -----------
 ```python
 >>> Point = collections.namedtuple('Point', 'x y')
->>> a = Point(1, y=2)
+>>> p = Point(1, y=2)
 Point(x=1, y=2)
->>> a.x
+>>> p[0]
 1
->>> getattr(a, 'y')
+>>> p.x
+1
+>>> getattr(p, 'y')
 2
->>> Point._fields
+>>> Point._fields  # Or: p._fields
 ('x', 'y')
 ```
 
