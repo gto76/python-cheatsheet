@@ -880,14 +880,8 @@ Struct
 ```python
 >>> pack('hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
-```
-
-```python
 >>> unpack('hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
 (1, 2, 3)
-```
-
-```python
 >>> calcsize('hhl')
 8
 ```
