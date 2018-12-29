@@ -315,6 +315,10 @@ Format
 
 ### String Options
 ```python
+{'abcde'!r}      # "'abcde'"
+```
+
+```python
 {'abcde':.3}     # 'abc'
 {'abcde':10.3}   # 'abc       '
 ```
