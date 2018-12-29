@@ -394,6 +394,9 @@ float('inf'), float('nan')
 ### Random
 ```python
 from random import random, randint, choice, shuffle
+```
+
+```python
 <float> = random()
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
