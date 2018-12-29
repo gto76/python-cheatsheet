@@ -1466,7 +1466,6 @@ def tracer(func):
 
 Progress Bar
 ------------
-### Tqdm
 ```python
 # $ pip3 install tqdm
 from tqdm import tqdm
@@ -1474,50 +1473,6 @@ from time import sleep
 for i in tqdm(range(100)):
     sleep(0.02)
 for i in tqdm([1, 2, 3]):
-    sleep(0.2)
-```
-
-### Basic
-```python
-import sys
-
-class Bar():
-    @staticmethod
-    def range(*args):
-        bar = Bar(len(list(range(*args))))
-        for i in range(*args):
-            yield i 
-            bar.tick()
-    @staticmethod
-    def foreach(elements):
-        bar = Bar(len(elements))
-        for el in elements:
-            yield el
-            bar.tick()
-    def __init__(s, steps, width=40):
-        s.st, s.wi, s.fl, s.i = steps, width, 0, 0
-        s.th = s.fl * s.st / s.wi
-        s.p(f"[{' ' * s.wi}]")
-        s.p('\b' * (s.wi + 1))
-    def tick(s):
-        s.i += 1
-        while s.i > s.th:
-            s.fl += 1
-            s.th = s.fl * s.st / s.wi
-            s.p('-')
-        if s.i == s.st:
-            s.p('\n')
-    def p(s, t):
-        sys.stdout.write(t)
-        sys.stdout.flush()
-```
-
-#### Usage:
-```python
-from time import sleep
-for i in Bar.range(100):
-    sleep(0.02)
-for el in Bar.foreach([1, 2, 3]):
     sleep(0.2)
 ```
 
