@@ -809,12 +809,12 @@ while True:
         break
 ```
 
-#### Raising exception:
+### Raising Exceptions
 ```python
 raise ValueError('A very specific message!')
 ```
 
-#### Finally:
+### Finally
 ```python
 >>> try:
 ...     raise KeyboardInterrupt
