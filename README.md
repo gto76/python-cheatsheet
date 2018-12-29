@@ -1088,8 +1088,8 @@ Eval
 ### Basic
 ```python
 >>> from ast import literal_eval
->>> literal_eval('1 + 1')
-2
+>>> literal_eval('1 + 2')
+3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
 ```
