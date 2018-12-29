@@ -604,7 +604,7 @@ class <name>:
 class Person:
     def __init__(self, name, age):
         self.name = name
-        self.age = age
+        self.age  = age
 
 class Employee(Person):
     def __init__(self, name, age, staff_num):
