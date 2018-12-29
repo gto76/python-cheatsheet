@@ -315,7 +315,7 @@ Format
 
 ### String Options
 ```python
-{'abcde'!r}      # "'abcde'"
+{'abcde'!r}      # "'abcde'" -> Uses objects repr() function. 
 ```
 
 ```python
