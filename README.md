@@ -934,7 +934,7 @@ Itertools
 from itertools import *
 ```
 
-### Combinatoric Iterators
+### Combinatoric iterators
 ```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
@@ -958,7 +958,7 @@ from itertools import *
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
-### Infinite Iterators
+### Infinite iterators
 ```python
 >>> i = count(5, 2)
 >>> next(i), next(i), next(i)
