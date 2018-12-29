@@ -1415,13 +1415,13 @@ def get_filename():
     return f'profile-{time_str}.png'
 ```
 
-#### Decorator for timing functions:
+### Timing Decorators
+#### Prints runtime of decorated function:
 ```python
 from timeit import default_timer
 from datetime import timedelta
 
 def stopwatch(func):
-    """Prints runtime of decorated function."""
     def out(*args, **kwargs):
         start = default_timer()
         result = func(*args, **kwargs)
@@ -1431,13 +1431,12 @@ def stopwatch(func):
     return out
 ```
 
-#### Decorator for profiling functions:
+#### Saves run call profile of the decorated function to file:
 ```python
 from cProfile import Profile
 from pstats import Stats
 
 def profiler(func):
-    """Saves run call profile of the decorated function to file."""
     def out(*args, **kwargs):
         profile = Profile()
         result = profile.runcall(func, *args, **kwargs)
@@ -1451,10 +1450,9 @@ def profiler(func):
     return out
 ```
 
-#### Decorator for function tracing:
+#### Prints arguments and output of a decorated function:
 ```python
 def tracer(func):
-    """Prints arguments and output of a decorated function."""
     def out(*args, **kwargs):
         result = func(*args, **kwargs)
         arg_list = [repr(x) for x in args]
