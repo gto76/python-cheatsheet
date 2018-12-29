@@ -1347,14 +1347,14 @@ bottle.run(host='localhost', port=8080)
 bottle.run(host='0.0.0.0', port=80, server='cherrypy')
 ```
 
-### Static request
+### Static Request
 ```python
 @route('/img/<image>')
 def send_image(image):
     return static_file(image, 'images/', mimetype='image/png')
 ```
 
-### Dynamic request
+### Dynamic Request
 ```python
 @route('/<sport>')
 def send_page(sport):
@@ -1363,7 +1363,7 @@ def send_page(sport):
     return template(page)
 ```
 
-### REST request
+### REST Request
 ```python
 @post('/odds/<sport>')
 def odds_handler(sport):
