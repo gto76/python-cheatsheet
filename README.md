@@ -1077,8 +1077,7 @@ from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
 ```
 
 ```python
-from functools import reduce
-product_of_elems = reduce(mul, <list>)
+product_of_elems = functools.reduce(mul, <list>)
 sorted_by_second = sorted(<list>, key=itemgetter(1))
 sorted_by_both   = sorted(<list>, key=itemgetter(0, 1))
 ```
