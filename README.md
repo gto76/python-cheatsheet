@@ -935,7 +935,8 @@ from itertools import *
 
 >>> combinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), 
- ('b', 'b'), ('b', 'c'), ('c', 'c')]
+ ('b', 'b'), ('b', 'c'), 
+ ('c', 'c')]
 
 >>> permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), 
