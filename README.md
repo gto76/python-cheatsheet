@@ -620,10 +620,6 @@ class <enum_name>(Enum):
    @classmethod
    def get_names(cls):
       return [a.name for a in cls.__members__.values()]
-
-   @classmethod
-   def get_values(cls):
-      return [a.value for a in cls.__members__.values()]
 ```
 
 ```python
@@ -637,6 +633,7 @@ class <enum_name>(Enum):
 ```python
 list_of_members = list(<enum>)
 member_names    = [a.name for a in <enum>]
+member_values   = [a.value for a in <enum>]
 random_member   = random.choice(list(<enum>))
 ```
 
