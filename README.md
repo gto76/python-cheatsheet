@@ -373,6 +373,7 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ### Logarithm
 ```python
 from math import log, log10, log2
+
 log(x [, base])  # Base e, if not specified.
 log10(x)         # Base 10.
 log2(x)          # Base 2.
@@ -1077,14 +1078,10 @@ from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
 ```
 
 ```python
-from enum import Enum
 from functools import reduce
-
 product_of_elems = reduce(mul, <list>)
 sorted_by_second = sorted(<list>, key=itemgetter(1))
 sorted_by_both   = sorted(<list>, key=itemgetter(0, 1))
-LogicOp          = Enum('LogicOp', {'AND': (and_, ),
-                                    'OR' : (or_, )})
 ```
 
 
