@@ -1204,6 +1204,19 @@ pyplot.savefig(<filename>, transparent=True)
 ```
 
 
+Progress Bar
+------------
+```python
+# $ pip3 install tqdm
+from tqdm import tqdm
+from time import sleep
+for i in tqdm(range(100)):
+    sleep(0.02)
+for i in tqdm([1, 2, 3]):
+    sleep(0.2)
+```
+
+
 Table
 -----
 #### Prints CSV file as ASCII table:
@@ -1461,19 +1474,6 @@ def tracer(func):
         print(f'{func.__name__}({arg_str}) = {result!r}')
         return result
     return out
-```
-
-
-Progress Bar
-------------
-```python
-# $ pip3 install tqdm
-from tqdm import tqdm
-from time import sleep
-for i in tqdm(range(100)):
-    sleep(0.02)
-for i in tqdm([1, 2, 3]):
-    sleep(0.2)
 ```
 
 
