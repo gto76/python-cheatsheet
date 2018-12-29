@@ -314,8 +314,9 @@ Format
 ```
 
 ### String Options
+**'!r' uses objects repr() function, instead of __format__() to get a string.** 
 ```python
-{'abcde'!r}      # "'abcde'" -> Uses objects repr() function. 
+{'abcde'!r}      # "'abcde'"
 ```
 
 ```python
