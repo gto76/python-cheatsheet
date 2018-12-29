@@ -772,7 +772,8 @@ db = sqlite3.connect(<filename>)
 ```python
 cursor = db.execute(<query>)
 if cursor:
-    <list> = cursor.fetchall()  # Or cursor.fetchone()
+    <tuple> = cursor.fetchone()  # First row.
+    <list>  = cursor.fetchall()  # Remaining rows.
 db.close()
 ```
 
