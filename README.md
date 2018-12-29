@@ -767,7 +767,7 @@ db = sqlite3.connect(<filename>)
 ```python
 cursor = db.execute(<query>)
 if cursor:
-    cursor.fetchall()  # Or cursor.fetchone()
+    <list> = cursor.fetchall()  # Or cursor.fetchone()
 db.close()
 ```
 
