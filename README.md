@@ -809,7 +809,7 @@ while True:
         break
 ```
 
-### Raising Exceptions
+#### Raising exception:
 ```python
 raise ValueError('A very specific message!')
 ```
