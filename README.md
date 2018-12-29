@@ -1326,9 +1326,9 @@ def scrape(url):
 >>> document = scrape('https://en.wikipedia.org/wiki/Python_(programming_language)')
 >>> table    = document.find('table', class_='infobox vevent')
 >>> rows     = table.find_all('tr')
->>> rows[11].find('a')['href']
+>>> website  = rows[11].find('a')['href']
 'https://www.python.org/'
->>> rows[6].find('div').text.split()[0]
+>>> latest_v = rows[6].find('div').text.split()[0]
 '3.7.2'
 ```
 
