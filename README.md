@@ -1072,7 +1072,7 @@ Operator
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
                      eq, ne, lt, le, gt, ge, \
-                     not_, and_, or_, xor, \
+                     not_, and_, or_, \
                      itemgetter
 ```
 
