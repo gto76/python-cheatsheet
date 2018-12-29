@@ -373,7 +373,9 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ### Logarithm
 ```python
 from math import log, log10, log2
+```
 
+```python
 log(x [, base])  # Base e, if not specified.
 log10(x)         # Base 10.
 log2(x)          # Base 2.
