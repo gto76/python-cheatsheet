@@ -167,7 +167,7 @@ for line in iter(input, ''):
 #### Same, but prints a message every time:
 ```python
 from functools import partial
-for line in iter(partial(input, 'Please enter value'), ''):
+for line in iter(partial(input, 'Please enter value: '), ''):
     ...
 ```
 
