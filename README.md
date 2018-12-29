@@ -373,9 +373,6 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ### Logarithm
 ```python
 from math import log, log10, log2
-```
-
-```python
 log(x [, base])  # Base e, if not specified.
 log10(x)         # Base 10.
 log2(x)          # Base 2.
@@ -394,9 +391,6 @@ float('inf'), float('nan')
 ### Random
 ```python
 from random import random, randint, choice, shuffle
-```
-
-```python
 <float> = random()
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
