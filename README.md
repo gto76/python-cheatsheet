@@ -875,10 +875,13 @@ Struct
 ### Example
 ```python
 >>> from struct import pack, unpack, calcsize
+
 >>> pack('hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
+
 >>> unpack('hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
 (1, 2, 3)
+
 >>> calcsize('hhl')
 8
 ```
