@@ -1276,7 +1276,7 @@ img.save('out.png')
 
 Audio
 -----
-#### Saves list of floats with values between 0 and 1 to a WAV file:
+#### Saves a list of floats with values between 0 and 1 to a WAV file:
 ```python
 import wave, struct
 frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
