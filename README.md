@@ -1029,7 +1029,7 @@ False
 #### Getting the number of parameters of a function:
 ```python
 from inspect import signature
-sig = signature(<function>)
+sig          = signature(<function>)
 no_of_params = len(sig.parameters)
 ```
 
