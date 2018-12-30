@@ -1211,7 +1211,6 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
@@ -1237,11 +1236,11 @@ Table
 #### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
-import csv
+from csv import reader
 from tabulate import tabulate
 
 with open(<filename>, newline='') as csv_file:
-    reader = csv.reader(csv_file, delimiter=';')
+    reader = reader(csv_file, delimiter=';')
     headers = [a.title() for a in next(reader)]
     print(tabulate(reader, headers))
 ```
