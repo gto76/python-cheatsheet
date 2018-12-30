@@ -1436,7 +1436,7 @@ with PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
 
-### Timing Decorators
+### Profiling Decorators
 #### Prints runtime of decorated function:
 ```python
 from timeit import default_timer
