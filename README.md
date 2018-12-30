@@ -1423,14 +1423,16 @@ timeit('"-".join(str(a) for a in range(100))',
        number=10000, globals=globals())
 ```
 
-### PyCallGraph
+### Call Graph
 #### Generates a PNG image of call graph and highlights the bottlenecks.
 ```python
 # $ pip3 install pycallgraph
-import pycallgraph
-graph = pycallgraph.output.GraphvizOutput()
-graph.output_file = get_filename()
-with pycallgraph.PyCallGraph(output=graph):
+from pycallgraph import output, PyCallGraph
+from datetime import datetime
+graph = output.GraphvizOutput()
+time_str = datetime.now().strftime('%Y%m%d%H%M%S')
+graph.output_file = f'profile-{time_str}.png'
+with PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
 
