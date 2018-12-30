@@ -1425,7 +1425,7 @@ with PyCallGraph(output=graph):
 from timeit import default_timer
 from datetime import timedelta
 
-def stopwatch(func):
+def time_me(func):
     def out(*args, **kwargs):
         start = default_timer()
         result = func(*args, **kwargs)
@@ -1440,7 +1440,7 @@ def stopwatch(func):
 from cProfile import Profile
 from pstats import Stats
 
-def profiler(func):
+def profile_me(func):
     def out(*args, **kwargs):
         profile = Profile()
         result = profile.runcall(func, *args, **kwargs)
@@ -1456,7 +1456,7 @@ def profiler(func):
 
 #### Prints arguments and output of a decorated function:
 ```python
-def tracer(func):
+def trace_me(func):
     def out(*args, **kwargs):
         result = func(*args, **kwargs)
         arg_list = [repr(x) for x in args]
