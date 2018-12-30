@@ -1328,28 +1328,11 @@ from urllib.parse import quote, quote_plus, unquote, unquote_plus
 Scraping
 --------
 ```python
-# $ pip3 install beautifulsoup4
-from http.cookiejar import CookieJar
-from urllib.error import HTTPError, URLError
-from urllib.request import build_opener, HTTPCookieProcessor
-from bs4 import BeautifulSoup
-
-def scrape(url):
-    """Returns tree of HTML elements located at URL."""
-    jar = CookieJar()
-    opener = build_opener(HTTPCookieProcessor(jar))
-    opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-    try:
-        html = opener.open(url)
-    except ValueError as error:
-        return print(f'Malformed URL: {url}.\n{error}')
-    except (HTTPError, URLError) as error:
-        return print(f"Can't find URL: {url}.\n{error}")
-    return BeautifulSoup(html, 'html.parser')
-```
-
-```python
->>> document = scrape('https://en.wikipedia.org/wiki/Python_(programming_language)')
+# $ pip3 install requests beautifulsoup4
+>>> import requests
+>>> from bs4 import BeautifulSoup
+>>> page     = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+>>> document = BeautifulSoup(page.text, 'html.parser')
 >>> table    = document.find('table', class_='infobox vevent')
 >>> rows     = table.find_all('tr')
 >>> website  = rows[11].find('a')['href']
