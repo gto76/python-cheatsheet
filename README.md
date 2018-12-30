@@ -1211,6 +1211,9 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
+```
+
+```python
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
@@ -1223,7 +1226,9 @@ Progress Bar
 # $ pip3 install tqdm
 from tqdm import tqdm
 from time import sleep
+```
 
+```python
 for i in tqdm(range(100)):
     sleep(0.02)
 for i in tqdm([1, 2, 3]):
@@ -1238,7 +1243,9 @@ Table
 # $ pip3 install tabulate
 from csv import reader
 from tabulate import tabulate
+```
 
+```python
 with open(<filename>, newline='') as csv_file:
     reader = reader(csv_file, delimiter=';')
     headers = [a.title() for a in next(reader)]
