@@ -1420,7 +1420,7 @@ with PyCallGraph(output=graph):
 ```
 
 ### Profiling Decorators
-#### Prints runtime of decorated function:
+#### Prints runtime of a decorated function:
 ```python
 from timeit import default_timer
 from datetime import timedelta
@@ -1435,7 +1435,7 @@ def time_me(func):
     return out
 ```
 
-#### Saves run call profile of the decorated function to file:
+#### Saves run call profile of a decorated function to file:
 ```python
 from cProfile import Profile
 from pstats import Stats
