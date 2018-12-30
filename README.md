@@ -1407,7 +1407,7 @@ timeit('"-".join(str(a) for a in range(100))',
 ```
 
 ### Call Graph
-#### Generates a PNG image of call graph with highlighted bottlenecks.
+#### Generates a PNG image of call graph with highlighted bottlenecks:
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
