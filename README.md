@@ -1232,14 +1232,11 @@ for i in tqdm([1, 2, 3]):
 
 Table
 -----
+#### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
 from csv import reader
 from tabulate import tabulate
-```
-
-#### Prints CSV file as ASCII table:
-```python
 with open(<filename>, newline='') as csv_file:
     reader = reader(csv_file, delimiter=';')
     headers = [a.title() for a in next(reader)]
@@ -1276,7 +1273,6 @@ Image
 ```python
 # $ pip3 install pillow
 from PIL import Image
-
 width, height = 100, 100
 img = Image.new('L', (width, height), 'white')
 img.putdata([255*a/(width*height) for a in range(width*height)])
@@ -1296,7 +1292,6 @@ Audio
 #### Saves a list of floats with values between 0 and 1 to a WAV file:
 ```python
 import wave, struct
-
 frames = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
 wf = wave.open(<filename>, 'wb')
 wf.setnchannels(1)
@@ -1434,7 +1429,6 @@ timeit('"-".join(str(a) for a in range(100))',
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
 from datetime import datetime
-
 graph = output.GraphvizOutput()
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 graph.output_file = f'profile-{time_str}.png'
