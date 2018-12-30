@@ -1436,13 +1436,6 @@ with PyCallGraph(output=graph):
     <code_to_be_profiled>
 ```
 
-```python
-def get_filename():
-    from datetime import datetime
-    time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-    return f'profile-{time_str}.png'
-```
-
 ### Timing Decorators
 #### Prints runtime of decorated function:
 ```python
