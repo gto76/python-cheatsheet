@@ -1211,9 +1211,6 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-```
-
-```python
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
@@ -1226,9 +1223,6 @@ Progress Bar
 # $ pip3 install tqdm
 from tqdm import tqdm
 from time import sleep
-```
-
-```python
 for i in tqdm(range(100)):
     sleep(0.02)
 for i in tqdm([1, 2, 3]):
@@ -1238,13 +1232,13 @@ for i in tqdm([1, 2, 3]):
 
 Table
 -----
-#### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
 from csv import reader
 from tabulate import tabulate
 ```
 
+#### Prints CSV file as ASCII table:
 ```python
 with open(<filename>, newline='') as csv_file:
     reader = reader(csv_file, delimiter=';')
@@ -1435,7 +1429,7 @@ timeit('"-".join(str(a) for a in range(100))',
 ```
 
 ### Call Graph
-#### Generates a PNG image of call graph with highlighted the bottlenecks.
+#### Generates a PNG image of call graph with highlighted bottlenecks.
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
