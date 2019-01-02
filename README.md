@@ -1413,8 +1413,8 @@ timeit('"-".join(str(a) for a in range(100))',
 # $ pip3 install line_profiler
 @profile
 def main():
-    a = [(i%3 + 1) * 3 for i in range(10000)]
-    b = [i ** (i/10000) for i in range(10000)] 
+    a = [*range(10000)]
+    b = {*range(10000)}
 main()
 ```
 
@@ -1424,8 +1424,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
      1                                           @profile
      2                                           def main():
-     3         1       6196.0   6196.0     53.2      a = [(i%3 + 1) * 3 for i in range(10000)]
-     4         1       5455.0   5455.0     46.8      b = [i ** (i/10000) for i in range(10000)]
+     3         1       1128.0   1128.0     27.4      a = [*range(10000)]
+     4         1       2994.0   2994.0     72.6      b = {*range(10000)}
 ```
 
 ### Call Graph
