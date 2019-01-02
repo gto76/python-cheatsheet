@@ -1332,7 +1332,8 @@ Scraping
 # $ pip3 install requests beautifulsoup4
 >>> import requests
 >>> from bs4 import BeautifulSoup
->>> page     = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+>>> url      = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+>>> page     = requests.get(url)
 >>> document = BeautifulSoup(page.text, 'html.parser')
 >>> table    = document.find('table', class_='infobox vevent')
 >>> rows     = table.find_all('tr')
