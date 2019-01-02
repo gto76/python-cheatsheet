@@ -1097,9 +1097,12 @@ from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
 ```
 
 ```python
-product_of_elems = functools.reduce(mul, <list>)
-sorted_by_second = sorted(<list>, key=itemgetter(1))
-sorted_by_both   = sorted(<list>, key=itemgetter(0, 1))
+import operator as op
+product_of_elems = functools.reduce(op.mul, <list>)
+sorted_by_second = sorted(<list>, key=op.itemgetter(1))
+sorted_by_both   = sorted(<list>, key=op.itemgetter(0, 1))
+LogicOp          = Enum('LogicOp', {'AND': (op.and_, ),
+                                    'OR' : (op.or_, )})
 ```
 
 
