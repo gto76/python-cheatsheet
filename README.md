@@ -1100,7 +1100,7 @@ from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
 import operator as op
 product_of_elems = functools.reduce(op.mul, <list>)
 sorted_by_second = sorted(<list>, key=op.itemgetter(1))
-sorted_by_both   = sorted(<list>, key=op.itemgetter(0, 1))
+sorted_by_both   = sorted(<list>, key=op.itemgetter(1, 0))
 LogicOp          = Enum('LogicOp', {'AND': (op.and_, ),
                                     'OR' : (op.or_, )})
 ```
