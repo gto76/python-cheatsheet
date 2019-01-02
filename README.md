@@ -1421,10 +1421,10 @@ main()
 $ kernprof -lv test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
-     2                                           @profile
-     3                                           def main():
-     4         1       2901.0   2901.0     45.2      a = [(i%3 + 1) * 3 for i in range(10000)]
-     5         1       3518.0   3518.0     54.8      b = [i ** (i/10000) for i in range(10000)]
+     1                                           @profile
+     2                                           def main():
+     3         1       6196.0   6196.0     53.2      a = [(i%3 + 1) * 3 for i in range(10000)]
+     4         1       5455.0   5455.0     46.8      b = [i ** (i/10000) for i in range(10000)]
 ```
 
 ### Call Graph
