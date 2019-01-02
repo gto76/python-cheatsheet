@@ -1063,13 +1063,14 @@ type(<class_name>, <parents_tuple>, <attributes_dict>)
 >>> z = Z()
 ```
 
-### MetaClass
-#### Class that creates class:
+### Meta Class
+#### Class that creates class.
 ```python
 def my_meta_class(name, parents, attrs):
     ...
     return type(name, parents, attrs)
 ```
+
 #### Or:
 ```python
 class MyMetaClass(type):
@@ -1404,6 +1405,26 @@ duration = time() - start_time
 from timeit import timeit
 timeit('"-".join(str(a) for a in range(100))', 
        number=10000, globals=globals())
+```
+
+### Line Profiler
+```python
+# $ pip3 install line_profiler
+@profile
+def main():
+    a = [(i%3 + 1) * 3 for i in range(10000)]
+    b = [i ** (i/10000) for i in range(10000)] 
+main()
+```
+
+```bash
+$ kernprof -lv test.py
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     2                                           @profile
+     3                                           def main():
+     4         1       2901.0   2901.0     45.2      a = [(i%3 + 1) * 3 for i in range(10000)]
+     5         1       3518.0   3518.0     54.8      b = [i ** (i/10000) for i in range(10000)]
 ```
 
 ### Call Graph
