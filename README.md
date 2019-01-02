@@ -1428,7 +1428,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call Graph
-#### Generates a PNG image of call graph with highlighted bottlenecks:
+#### Generates a PNG image of call graph with highlighted bottlenecks.
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
@@ -1438,54 +1438,6 @@ time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 graph.output_file = f'profile-{time_str}.png'
 with PyCallGraph(output=graph):
     <code_to_be_profiled>
-```
-
-### Profiling Decorators
-#### Prints runtime of a decorated function:
-```python
-from timeit import default_timer
-from datetime import timedelta
-
-def time_me(func):
-    def out(*args, **kwargs):
-        start = default_timer()
-        result = func(*args, **kwargs)
-        delta = timedelta(seconds=(default_timer() - start))
-        print(f'Function {func.__name__} finished in {delta}')
-        return result
-    return out
-```
-
-#### Saves run call profile of a decorated function to file:
-```python
-from cProfile import Profile
-from pstats import Stats
-
-def profile_me(func):
-    def out(*args, **kwargs):
-        profile = Profile()
-        result = profile.runcall(func, *args, **kwargs)
-        filename = f'profile_{func.__name__}.txt'
-        with open(filename, 'w') as stream:
-            stats = Stats(profile, stream=stream)
-            stats.strip_dirs().sort_stats('tottime')
-            stats.print_stats(20)
-        print(f"Profile saved as '{filename}'")
-        return result
-    return out
-```
-
-#### Prints arguments and output of a decorated function:
-```python
-def trace_me(func):
-    def out(*args, **kwargs):
-        result = func(*args, **kwargs)
-        arg_list = [repr(x) for x in args]
-        arg_list += [f'{k}={v!r}' for k, v in kwargs.items()]
-        arg_str = ', '.join(arg_list)
-        print(f'{func.__name__}({arg_str}) = {result!r}')
-        return result
-    return out
 ```
 
 
