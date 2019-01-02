@@ -1,7 +1,7 @@
 Comprehensive Python Cheatsheet
 ===============================
 <sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md)
-or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
+or <a class="github-button" href="https://github.com/gto76/python-cheatsheet" data-show-count="true" aria-label="Star gto76/python-cheatsheet on GitHub">Star</a>
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
