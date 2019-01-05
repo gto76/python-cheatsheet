@@ -61,7 +61,6 @@ Dictionary
 ```
 
 ```python
-del <dict>[key]                              # Remove an existing key.
 value  = <dict>.get(key, default)            # Returns default if key does not exist.
 value  = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
 <dict> = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
@@ -69,6 +68,7 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 ```
 
 ```python
+del <dict>[key]
 <dict>.update(<dict>)
 <dict> = dict(<list>)                           # Initiates a dict from list of key-value pairs.
 <dict> = dict(zip(keys, values))                # Initiates a dict from two lists.
