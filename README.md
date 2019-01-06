@@ -61,7 +61,6 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key)                     # Returns None if key does not exist.
 value  = <dict>.get(key, default)            # Returns default if key does not exist.
 value  = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
 <dict> = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
