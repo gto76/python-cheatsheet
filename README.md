@@ -75,7 +75,7 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 ```
 
 ```python
-del <dict>[key]                                 # Removes item from dictionary.
+value = <dict>.pop(key [, default])
 {k: v for k, v in <dict>.items() if k in keys}  # Filters dictionary by keys.
 ```
 
