@@ -1449,6 +1449,73 @@ with PyCallGraph(output=graph):
 ```
 
 
+NumPy
+-----
+**Array manipulation mini language. Can run up to 100 times faster than equivalent Python code.**
+```python
+<array> = np.array(<list>)
+<array> = np.ones(<shape>)
+<array> = np.arange(from_inclusive, to_exclusive, step)
+<array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
+```
+
+```python
+value   = <array>.min([axis])  # 0: columns, 1: rows
+index   = <array>.argmin([axis])
+```
+
+```python
+<view>  = <array>.reshape(<shape>)
+<view>  = np.broadcast_to(<array>, <shape>)
+<array> = <array>[filter_expression]
+```
+
+### Broadcasting
+**Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions:**
+```python
+left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
+right = [ 0.1 ,  0.6 ,  0.8 ]   # Shape: (3)
+```
+1. If array shapes differ, left-pad the smaller shape with ones.
+```python
+left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
+right = [[0.1 ,  0.6 ,  0.8]])  # Shape: (1, 3) <- !
+```
+2. If any dimensions differ in size, expand the ones that have size 1, by duplicating their elements.
+```python
+left  = [[0.1, 0.1, 0.1], [0.6, 0.6, 0.6], [0.8, 0.8, 0.8]]  # Shape: (3, 3) <- !
+right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- !
+```
+3. If neither non-matching dimension has size 1, rise an error.
+
+### Example
+**For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1])`.**
+```python
+>>> points = np.array([0.1, 0.6, 0.8])
+array([ 0.1,  0.6,  0.8])
+>>> wrapped_points = points.reshape(3, 1)
+array([[ 0.1],
+       [ 0.6],
+       [ 0.8]])
+>>> distances = wrapped_points - points
+array([[ 0. , -0.5, -0.7],
+       [ 0.5,  0. , -0.2],
+       [ 0.7,  0.2,  0. ]])
+>>> distances = np.abs(distances)
+array([[ 0. ,  0.5,  0.7],
+       [ 0.5,  0. ,  0.2],
+       [ 0.7,  0.2,  0. ]])
+>>> i = np.arange(3)
+array([0, 1, 2])
+>>> distances[i, i] = np.inf
+array([[ inf,  0.5,  0.7],
+       [ 0.5,  inf,  0.2],
+       [ 0.7,  0.2,  inf]])
+>>> distances.argmin(1)
+array([1, 2, 1])
+```
+
+
 Basic Script Template
 ---------------------
 ```python
