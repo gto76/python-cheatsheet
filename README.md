@@ -68,7 +68,7 @@ value  = <dict>.setdefault(key, default)     # Same, but also adds default to di
 ```
 
 ```python
-<dict>.update(<dict>)
+<dict>.update(<dict>)                        # Or: dict_a = {**dict_a, **dict_b}.
 <dict> = dict(<list>)                        # Initiates a dict from list of key-value pairs.
 <dict> = dict(zip(keys, values))             # Initiates a dict from two lists.
 <dict> = dict.fromkeys(keys [, value])       # Initiates a dict from list of keys.
@@ -1209,7 +1209,7 @@ def printer():
         item = (yield)
         print(item)
 
-reader(adder(printer()))
+reader(adder(printer()))  # 100, 101, ..., 109
 ```
 
 <br><br>
@@ -1223,8 +1223,8 @@ Plot
 # $ pip3 install matplotlib
 from matplotlib import pyplot
 pyplot.plot(<data_1> [, <data_2>, ...])
-pyplot.show()
 pyplot.savefig(<filename>, transparent=True)
+pyplot.show()
 ```
 
 
