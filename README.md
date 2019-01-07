@@ -1071,7 +1071,7 @@ type(<class_name>, <parents_tuple>, <attributes_dict>)
 #### Class that creates class.
 ```python
 def my_meta_class(name, parents, attrs):
-    ...
+    attrs['a'] = 1
     return type(name, parents, attrs)
 ```
 
@@ -1079,15 +1079,16 @@ def my_meta_class(name, parents, attrs):
 ```python
 class MyMetaClass(type):
     def __new__(klass, name, parents, attrs):
-        ...
+        attrs['a'] = 1
         return type.__new__(klass, name, parents, attrs)
 ```
 
 ### Metaclass Attribute
-**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined, and eventually comes to type:**
+**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type.**
 ```python
-class BlaBla:
-    __metaclass__ = Bla
+class MyClass(metaclass=MyMetaClass):
+    def __init__(self):
+        self.b = 2
 ```
 
 
@@ -1105,8 +1106,8 @@ import operator as op
 product_of_elems = functools.reduce(op.mul, <list>)
 sorted_by_second = sorted(<list>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<list>, key=op.itemgetter(1, 0))
-LogicOp          = Enum('LogicOp', {'AND': (op.and_, ),
-                                    'OR' : (op.or_, )})
+LogicOp          = enum.Enum('LogicOp', {'AND': op.and_,
+                                         'OR' : op.or_})
 ```
 
 
@@ -1119,6 +1120,8 @@ Eval
 3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
+>>> ast.literal_eval('abs(-1)')
+ValueError: malformed node or string
 ```
 
 ### Using Abstract Syntax Trees
@@ -1158,11 +1161,11 @@ def eval_node(node):
 ```
 
 ```python
->>> evaluate('2^6')
+>>> evaluate('2 ^ 6')
 4
->>> evaluate('2**6')
+>>> evaluate('2 ** 6')
 64
->>> evaluate('1 + 2*3**(4^5) / (6 + -7)')
+>>> evaluate('1 + 2 * 3 ** (4 ^ 5) / (6 + -7)')
 -5.0
 ```
 
