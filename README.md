@@ -523,7 +523,7 @@ Direction = Enum('Direction', 'n e s w')
 Cutlery   = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
 # Warning: Objects will share the objects that are initialized in the dictionary!
-Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
+Creature = type('Creature', (), {'p': Point(0, 0), 'd': Direction.n})
 creature = Creature()
 ```
 
@@ -633,7 +633,6 @@ class <enum_name>(Enum):
     <member_name_1> = <value_1>  
     <member_name_2> = <value_2_a>, <value_2_b>
     <member_name_3> = auto()  # Can be used for automatic indexing.
-    ...
 
     @classmethod
     def get_member_names(cls):
