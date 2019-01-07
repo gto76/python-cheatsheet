@@ -96,7 +96,8 @@ Set
 <set> = set()
 <set>.add(<el>)
 <set>.update(<set>)
-<set>.clear()
+<set> |= {<el>}
+<set> |= <set>
 ```
 
 ```python
