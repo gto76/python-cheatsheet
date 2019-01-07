@@ -1457,8 +1457,8 @@ NumPy
 **Array manipulation mini language. Can run up to 100 times faster than equivalent Python code.**
 ```python
 <array> = np.array(<list>)
-<array> = np.ones(<shape>)
 <array> = np.arange(from_inclusive, to_exclusive, step)
+<array> = np.ones(<shape>)
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
@@ -1482,9 +1482,9 @@ right = [ 0.1 ,  0.6 ,  0.8 ]   # Shape: (3)
 1. If array shapes differ, left-pad the smaller shape with ones.
 ```python
 left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
-right = [[0.1 ,  0.6 ,  0.8]])  # Shape: (1, 3) <- !
+right = [[0.1 ,  0.6 ,  0.8]]   # Shape: (1, 3) <- !
 ```
-2. If any dimensions differ in size, expand the ones that have size 1, by duplicating their elements.
+2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements.
 ```python
 left  = [[0.1, 0.1, 0.1], [0.6, 0.6, 0.6], [0.8, 0.8, 0.8]]  # Shape: (3, 3) <- !
 right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- !
@@ -1492,7 +1492,7 @@ right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- 
 3. If neither non-matching dimension has size 1, rise an error.
 
 ### Example
-**For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1])`.**
+**For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1]`.**
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
 array([ 0.1,  0.6,  0.8])
