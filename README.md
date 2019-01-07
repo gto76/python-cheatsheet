@@ -474,7 +474,7 @@ lambda <argument_1>, <argument_2>: <return_value>
 <list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
 <set>  = {i for i in range(10) if i > 5}  # {6, 7, ..., 9}
 <dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
-<iter> = (x+5 for x in range(10))         # (5, 6, ..., 14)
+<iter> = (i+5 for i in range(10))         # (5, 6, ..., 14)
 ```
 
 ```python
@@ -519,7 +519,7 @@ Point = namedtuple('Point', 'x y')
 
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
-Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
+Cutlery   = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
 # Warning: Objects will share the objects that are initialized in the dictionary!
 Creature = type('Creature', (), {'position': Point(0, 0), 'direction': Direction.n})
@@ -634,9 +634,9 @@ class <enum_name>(Enum):
     <member_name_3> = auto()  # Can be used for automatic indexing.
     ...
 
-   @classmethod
-   def get_names(cls):
-      return [a.name for a in cls.__members__.values()]
+    @classmethod
+    def get_member_names(cls):
+        return [a.name for a in cls.__members__.values()]
 ```
 
 ```python
@@ -1460,7 +1460,7 @@ NumPy
 ```
 
 ```python
-value   = <array>.min([axis])  # 0: columns, 1: rows
+value   = <array>.min([axis])
 index   = <array>.argmin([axis])
 ```
 
