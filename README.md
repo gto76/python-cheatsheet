@@ -1000,13 +1000,14 @@ from itertools import *
 >>> islice([1, 2, 3], 1, None)  # islice(<seq>, from_inclusive, to_exclusive) 
 [2, 3]
 
->>> people = [{'id': 1, 'name': 'bob'}, 
-              {'id': 2, 'name': 'bob'}, 
-              {'id': 3, 'name': 'peter'}]
->>> {name: list(ppp) for name, ppp in groupby(people, key=lambda p: p['name'])}
-{'bob':   [{'id': 1, 'name': 'bob'}, 
-           {'id': 2, 'name': 'bob'}], 
- 'peter': [{'id': 3, 'name': 'peter'}]}
+>>> people = [{'id': 1, 'name': 'Bob'}, 
+              {'id': 2, 'name': 'Bob'}, 
+              {'id': 3, 'name': 'Peter'}]
+>>> groups = groupby(people, key=lambda a: a['name'])
+>>> {name: list(group) for name, group in groups}
+{'Bob':   [{'id': 1, 'name': 'Bob'}, 
+           {'id': 2, 'name': 'Bob'}], 
+ 'Peter': [{'id': 3, 'name': 'Peter'}]}
 ```
 
 
