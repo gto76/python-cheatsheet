@@ -20,15 +20,15 @@ List
 ```python
 <list> = <list>[from_inclusive : to_exclusive : step_size]
 <list>.append(<el>)
-<list>.extend(<list>)
+<list>.extend(<collection>)
 <list> += [<el>]
-<list> += <list>
+<list> += <collection>
 ```
 
 ```python
 <list>.sort()
 <list>.reverse()
-<list> = sorted(<list>)
+<list> = sorted(<collection>)
 <iter> = reversed(<list>)
 ```
 
@@ -95,7 +95,7 @@ Set
 ```python
 <set> = set()
 <set>.add(<el>)
-<set>.update(<set>)
+<set>.update(<collection>)
 <set> |= {<el>}
 <set> |= <set>
 ```
@@ -1416,7 +1416,7 @@ duration = time() - start_time
 ```python
 from timeit import timeit
 timeit('"-".join(str(a) for a in range(100))', 
-       number=10000, globals=globals())
+       number=10000, globals=globals(), setup='pass')
 ```
 
 ### Line Profiler
@@ -1456,6 +1456,11 @@ with PyCallGraph(output=graph):
 NumPy
 -----
 **Array manipulation mini language. Can run up to 100 times faster than equivalent Python code.**
+```python
+# $ pip3 install numpy
+import numpy as np
+```
+
 ```python
 <array> = np.array(<list>)
 <array> = np.arange(from_inclusive, to_exclusive, step)
