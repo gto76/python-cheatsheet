@@ -101,12 +101,12 @@ Set
 ```
 
 ```python
-<set>  = <set>.union(<coll>)                 # Or: <set> | <set>
-<set>  = <set>.intersection(<coll>)          # Or: <set> & <set>
-<set>  = <set>.difference(<coll>)            # Or: <set> - <set>
-<set>  = <set>.symmetric_difference(<coll>)  # Or: <set> ^ <set>
-<bool> = <set>.issubset(<coll>)              # Or: <set> < <set>
-<bool> = <set>.issuperset(<coll>)            # Or: <set> > <set>
+<set>  = <set>.union(<collection>)                 # Or: <set> | <set>
+<set>  = <set>.intersection(<collection>)          # Or: <set> & <set>
+<set>  = <set>.difference(<collection>)            # Or: <set> - <set>
+<set>  = <set>.symmetric_difference(<collection>)  # Or: <set> ^ <set>
+<bool> = <set>.issubset(<collection>)              # Or: <set> < <set>
+<bool> = <set>.issuperset(<collection>)            # Or: <set> > <set>
 ```
 
 ### Frozenset
