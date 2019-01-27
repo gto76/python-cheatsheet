@@ -1511,7 +1511,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call Graph
-**Generates a PNG image of call graph with highlighted bottlenecks.**
+#### Generates a PNG image of call graph with highlighted bottlenecks:
 
 ```python
 # $ pip3 install pycallgraph
@@ -1553,28 +1553,28 @@ index = <array>.argmin([axis])
 ```
 
 ### Broadcasting
-**Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions:**
+**Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 ```python
 left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
 right = [ 0.1 ,  0.6 ,  0.8 ]   # Shape: (3)
 ```
 
-**1. If array shapes differ, left-pad the smaller shape with ones.**
+#### 1. If array shapes differ, left-pad the smaller shape with ones:
 ```python
 left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
 right = [[0.1 ,  0.6 ,  0.8]]   # Shape: (1, 3) <- !
 ```
 
-**2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements.**
+#### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
 ```python
 left  = [[0.1, 0.1, 0.1], [0.6, 0.6, 0.6], [0.8, 0.8, 0.8]]  # Shape: (3, 3) <- !
 right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- !
 ```
 
-**3. If neither non-matching dimension has size 1, rise an error.**
+#### 3. If neither non-matching dimension has size 1, rise an error.
 
 ### Example
-**For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1]`.**
+#### For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1]`
 
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
