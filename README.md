@@ -500,9 +500,9 @@ for i in range(10):
 ### Map, Filter, Reduce
 ```python
 from functools import reduce
-<iter>     = map(lambda x: x + 1, range(10))            # (1, 2, ..., 10)
-<iter>     = filter(lambda x: x > 5, range(10))         # (6, 7, ..., 9)
-<any_type> = reduce(lambda out, x: out + x, range(10))  # 45
+<iter> = map(lambda x: x + 1, range(10))            # (1, 2, ..., 10)
+<iter> = filter(lambda x: x > 5, range(10))         # (6, 7, ..., 9)
+<int>  = reduce(lambda out, x: out + x, range(10))  # 45
 ```
 
 ### Any, All
