@@ -874,7 +874,7 @@ Bytes
 ```python
 <bytes> = b'<str>'
 <bytes> = <str>.encode(encoding='utf-8')
-<bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
+<bytes> = <int>.to_bytes(length, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex(<hex>)
 ```
 
@@ -1260,9 +1260,9 @@ answer = args.x ** args.y
 if args.quiet:
     print(answer)
 elif args.verbose:
-    print('{args.x} to the power {args.y} equals {answer}')
+    print(f'{args.x} to the power {args.y} equals {answer}')
 else:
-    print('{args.x}^{args.y} == {answer}')
+    print(f'{args.x}^{args.y} == {answer}')
 ```
 
 #### Usage:
