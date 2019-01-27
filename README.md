@@ -380,7 +380,7 @@ Numbers
 -------
 ### Basic Functions
 ```python
-<num>  = pow(<num>, <num>)   # Or: <num> ** <num>
+<num>  = pow(<num>, <num>)  # Or: <num> ** <num>
 <real> = abs(<num>)
 <real> = round(<real> [, ndigits])
 ```
