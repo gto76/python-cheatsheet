@@ -528,15 +528,15 @@ from functools import reduce
 ### Namedtuple, Enum, Class
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')
+Point     = namedtuple('Point', 'x y')
 
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
 Cutlery   = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 
 # Warning: Objects will share the objects that are initialized in the dictionary!
-Creature = type('Creature', (), {'p': Point(0, 0), 'd': Direction.n})
-creature = Creature()
+Creature  = type('Creature', (), {'p': Point(0, 0), 'd': Direction.n})
+creature  = Creature()
 ```
 
 
