@@ -255,7 +255,9 @@ String
 (97, 122)
 ```
 
-### Print
+
+Print
+-----
 ```python
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
 ```
