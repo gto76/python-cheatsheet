@@ -869,6 +869,7 @@ Bytes
 **Bytes object is immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
+<bytes> = b'<str>'
 <int>   = <bytes>[<index>]
 <bytes> = <bytes>[<slice>]
 <bytes> = b''.join(<coll_of_bytes>)
@@ -876,7 +877,6 @@ Bytes
 
 ### Encode
 ```python
-<bytes> = b'<str>'
 <bytes> = <str>.encode(encoding='utf-8')
 <bytes> = <int>.to_bytes(length, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex(<hex>)
