@@ -606,7 +606,7 @@ class <name>:
         self.a = a
     def __repr__(self):
         class_name = type(self).__name__
-        return f'{class_name}({self.a:!r})'
+        return f'{class_name}({self.a!r})'
     def __str__(self):
         return str(self.a)
 
