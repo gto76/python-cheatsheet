@@ -1053,7 +1053,7 @@ Introspection and Metaprograming
 ### Variables
 ```python
 <list> = dir()      # Names of in-scope variables.
-<dict> = locals()   # Dict of local variables, same as vars().
+<dict> = locals()   # Dict of local variables. Also vars().
 <dict> = globals()  # Dict of global variables.
 ```
 
