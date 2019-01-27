@@ -110,7 +110,7 @@ Set
 ```
 
 ### Frozenset
-#### Is hashable and can be used as a key in dictionary.
+**Is hashable and can be used as a key in dictionary.**
 ```python
 <frozenset> = frozenset(<collection>)
 ```
@@ -333,7 +333,7 @@ Format
 ```
 
 ### String Options
-**"!r" uses object's repr() method, instead of format(), to get a string:** 
+**"!r" calls object's repr() method, instead of format(), to get a string.** 
 ```python
 {'abcde'!r:<10}  # "'abcde'   "
 ```
@@ -679,7 +679,7 @@ Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 ```
 
-**Functions can not be values, unless they are wrapped.**
+#### Functions can not be values, so they must be wrapped:
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'and': partial(lambda l, r: l and r),
@@ -925,7 +925,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 ```
 
 ### Format
-**For standard sizes start format string with:**
+#### For standard sizes start format string with:
 * `'='` - native byte order
 * `'<'` - little-endian
 * `'>'` - big-endian
@@ -1088,7 +1088,8 @@ param_names  = list(sig.parameters.keys())
 ```
 
 ### Type
-**Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!):**
+**Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!).**
+
 ```python
 type(<class_name>, <parents_tuple>, <attributes_dict>)
 ```
@@ -1099,7 +1100,8 @@ type(<class_name>, <parents_tuple>, <attributes_dict>)
 ```
 
 ### Meta Class
-#### Class that creates class.
+**Class that creates class.**
+
 ```python
 def my_meta_class(name, parents, attrs):
     attrs['a'] = 'abcde'
@@ -1116,6 +1118,7 @@ class MyMetaClass(type):
 
 ### Metaclass Attribute
 **When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type.**
+
 ```python
 class MyClass(metaclass=MyMetaClass):
     def __init__(self):
@@ -1508,7 +1511,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call Graph
-#### Generates a PNG image of call graph with highlighted bottlenecks.
+**Generates a PNG image of call graph with highlighted bottlenecks.**
+
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
@@ -1554,20 +1558,24 @@ index = <array>.argmin([axis])
 left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
 right = [ 0.1 ,  0.6 ,  0.8 ]   # Shape: (3)
 ```
+
 **1. If array shapes differ, left-pad the smaller shape with ones.**
 ```python
 left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
 right = [[0.1 ,  0.6 ,  0.8]]   # Shape: (1, 3) <- !
 ```
+
 **2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements.**
 ```python
 left  = [[0.1, 0.1, 0.1], [0.6, 0.6, 0.6], [0.8, 0.8, 0.8]]  # Shape: (3, 3) <- !
 right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- !
 ```
+
 **3. If neither non-matching dimension has size 1, rise an error.**
 
 ### Example
 **For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1]`.**
+
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
 [ 0.1,  0.6,  0.8]
