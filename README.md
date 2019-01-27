@@ -83,9 +83,9 @@ value = <dict>.pop(key)                         # Removes item from dictionary.
 ```python
 >>> from collections import Counter
 >>> colors = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
->>> Counter(colors)
+>>> counter = Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> <counter>.most_common()[0][0]
+>>> counter.most_common()[0][0]
 'blue'
 ```
 
@@ -134,7 +134,7 @@ to_exclusive   = <range>.stop
 Enumerate
 ---------
 ```python
-for i, <el> in enumerate(<collection> [, i_start]):
+for i, element in enumerate(<collection> [, i_start]):
     ...
 ```
 
