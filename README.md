@@ -218,21 +218,6 @@ from numbers import Number, Integral, Real, Rational, Complex
 ```
 
 
-Print
------
-```python
-print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
-```
-
-```python
->>> from pprint import pprint
->>> pprint(locals())
-{'__doc__': None,
- '__name__': '__main__',
- '__package__': None, ...}
-```
-
-
 String
 ------
 ```python
@@ -302,6 +287,21 @@ import re
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
 '\w' == '[a-zA-Z0-9_]'   # Alphanumeric
+```
+
+
+Print
+-----
+```python
+print(<el_1> [, <el_2>, end='', sep='', file=<file>])  # Use 'file=sys.stderr' for errors.
+```
+
+```python
+>>> from pprint import pprint
+>>> pprint(locals())
+{'__doc__': None,
+ '__name__': '__main__',
+ '__package__': None, ...}
 ```
 
 
