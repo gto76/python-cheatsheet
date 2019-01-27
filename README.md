@@ -906,7 +906,7 @@ def write_bytes(filename, bytes_obj):
 
 Struct
 ------
-**This module performs conversions between Python values and C struct represented as Python bytes object. By default machine’s native sizes and byte order are used.**
+**This module performs conversions between Python values and C struct represented as Python bytes object. Machine’s native type sizes and byte order are used by default.**
 
 ```python
 from struct import pack, unpack, calcsize
