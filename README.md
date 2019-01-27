@@ -101,12 +101,12 @@ Set
 ```
 
 ```python
-<set>  = <set>.union(<collection>)                 # Or: <set> | <set>
-<set>  = <set>.intersection(<collection>)          # Or: <set> & <set>
-<set>  = <set>.difference(<collection>)            # Or: <set> - <set>
-<set>  = <set>.symmetric_difference(<collection>)  # Or: <set> ^ <set>
-<bool> = <set>.issubset(<collection>)              # Or: <set> < <set>
-<bool> = <set>.issuperset(<collection>)            # Or: <set> > <set>
+<set>  = <set>.union(<coll.>)                 # Or: <set> | <set>
+<set>  = <set>.intersection(<coll.>)          # Or: <set> & <set>
+<set>  = <set>.difference(<coll.>)            # Or: <set> - <set>
+<set>  = <set>.symmetric_difference(<coll.>)  # Or: <set> ^ <set>
+<bool> = <set>.issubset(<coll.>)              # Or: <set> <= <set>
+<bool> = <set>.issuperset(<coll.>)            # Or: <set> >= <set>
 ```
 
 ### Frozenset
@@ -158,6 +158,11 @@ Point(x=1, y=2)
 
 Iterator
 --------
+```python
+<iter> = iter(<collection>)
+<iter> = iter(<function>, to_exclusive)
+```
+
 #### Skips first element:
 ```python
 next(<iter>)
@@ -184,10 +189,10 @@ Generator
 **Convenient way to implement the iterator protocol.**
 
 ```python
-def step(start, step):
+def step(start, step_size):
     while True:
         yield start
-        start += step
+        start += step_size
 ```
 
 ```python
@@ -205,8 +210,11 @@ Type
 
 ```python
 from numbers import Number, Integral, Real, Rational, Complex
-is_number   = isinstance(<el>, Number)
-is_function = callable(<el>)
+<bool> = isinstance(<el>, Number)
+```
+
+```python
+<bool> = callable(<el>)
 ```
 
 
@@ -219,7 +227,7 @@ String
 
 ```python
 <list> = <str>.split()                       # Splits on any whitespace character.
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' at most 'maxsplit' times.
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
 <str>  = <str>.join(<list>)                  # Joins elements using string as separator.
 ```
 
@@ -265,12 +273,12 @@ Regex
 -----
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-<list>  = re.findall(<regex>, text)
-<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
-<Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
-<Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<Match_iter> = re.finditer(<regex>, text)      # Searches for all occurrences of pattern.
+<str>     = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
+<list>    = re.findall(<regex>, text)            # Returns all occurrences.
+<list>    = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
+<Match>   = re.search(<regex>, text)             # Searches for first occurrence of pattern.
+<Match>   = re.match(<regex>, text)              # Searches only at the beginning of the text.
+<Matches> = re.finditer(<regex>, text)           # Searches for all occurrences of pattern.
 ```
 
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
@@ -323,7 +331,7 @@ Format
 ### String Options
 **"!r" uses object's repr() method, instead of format(), to get a string:** 
 ```python
-{'abcde'!r}      # "'abcde'"
+{'abcde'!r:<10}  # "'abcde'   "
 ```
 
 ```python
@@ -338,11 +346,11 @@ Format
 ```
 
 ```python
-{123456:10,}     # '   123,456'
-{123456:10_}     # '   123_456'
-{123456:+10}     # '   +123456'
+{ 123456:10,}    # '   123,456'
+{ 123456:10_}    # '   123_456'
+{ 123456:+10}    # '   +123456'
 {-123456:=10}    # '-   123456'
-{123456: }       # ' 123456'
+{ 123456: }      # ' 123456'
 {-123456: }      # '-123456'
 ```
 
@@ -368,9 +376,9 @@ Numbers
 -------
 ### Basic Functions
 ```python
-pow(x, y)   # Or: x ** y
-abs(<num>)
-round(<num> [, ndigits])
+<num>  = pow(<num>, <num>)   # Or: <num> ** <num>
+<real> = abs(<num>)
+<real> = round(<real> [, ndigits])
 ```
 
 ### Constants
@@ -386,9 +394,7 @@ from math import cos, acos, sin, asin, tan, atan, degrees, radians
 ### Logarithm
 ```python
 from math import log, log10, log2
-log(x [, base])  # Base e, if not specified.
-log10(x)         # Base 10.
-log2(x)          # Base 2.
+<float> = log(<real> [, base])  # Base e, if not specified.
 ```
 
 ### Infinity, nan
@@ -426,6 +432,7 @@ now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
 Arguments
 ---------
 **"*" is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.**
+
 ```python
 args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -473,7 +480,7 @@ lambda <argument_1>, <argument_2>: <return_value>
 ### Comprehension
 ```python
 <list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
-<set>  = {i for i in range(10) if i > 5}  # {6, 7, ..., 9}
+<set>  = {i for i in range(10) if i > 5}  # {6, 7, 8, 9}
 <dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
 <iter> = (i+5 for i in range(10))         # (5, 6, ..., 14)
 ```
@@ -500,7 +507,8 @@ from functools import reduce
 
 ### Any, All
 ```python
-<bool> = any(el[1] for el in <collection>)
+<bool> = any(<collection>)                  # False if empty.
+<bool> = all(el[1] for el in <collection>)  # True if empty.
 ```
 
 ### If - Else
@@ -587,10 +595,11 @@ Class
 class <name>:
     def __init__(self, a):
         self.a = a
+    def __repr__(self):
+        class_name = type(self).__name__
+        return f'{class_name}({self.a:!r})'
     def __str__(self):
         return str(self.a)
-    def __repr__(self):
-        return str({'a': self.a})  # Or: return f'{self.__dict__}'
 
     @classmethod
     def get_class_name(cls):
@@ -640,11 +649,11 @@ class <enum_name>(Enum):
 ```
 
 ```python
-<member>  = <enum>.<member_name>
-<member>  = <enum>['<member_name>']
-<member>  = <enum>(<value>)
-<name>    = <member>.name
-<value>   = <member>.value
+<member> = <enum>.<member_name>
+<member> = <enum>['<member_name>']
+<member> = <enum>(<value>)
+name     = <member>.name
+value    = <member>.value
 ```
 
 ```python
@@ -725,6 +734,8 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 ```
 
 ### Input
+**Reads a line from user input or pipe if present. The trailing newline gets stripped.**
+
 ```python
 filename = input('Enter a file name: ')
 ```
@@ -740,9 +751,10 @@ while True:
 
 ### Recursion Limit
 ```python
+>>> import sys
 >>> sys.getrecursionlimit()
 1000
->>> sys.setrecursionlimit(10000)
+>>> sys.setrecursionlimit(5000)
 ```
 
 JSON
@@ -783,6 +795,8 @@ SQLite
 ```python
 import sqlite3
 db = sqlite3.connect(<filename>)
+...
+db.close()
 ```
 
 ### Read
@@ -791,7 +805,6 @@ cursor = db.execute(<query>)
 if cursor:
     <tuple> = cursor.fetchone()  # First row.
     <list>  = cursor.fetchall()  # Remaining rows.
-db.close()
 ```
 
 ### Write
@@ -845,21 +858,27 @@ KeyboardInterrupt
 
 Bytes
 -----
-**Bytes objects are immutable sequences of single bytes.**
+**Bytes object is immutable sequence of single bytes. Mutable version is called bytearray. **
+
+```python
+<int>   = <bytes>[<index>]
+<bytes> = <bytes>[<slice>]
+<bytes> = b''.join(<coll_of_bytes>)
+```
 
 ### Encode
 ```python
-<Bytes> = b'<str>'
-<Bytes> = <str>.encode(encoding='utf-8')
-<Bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
-<Bytes> = bytes.fromhex(<hex>)
+<bytes> = b'<str>'
+<bytes> = <str>.encode(encoding='utf-8')
+<bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
+<bytes> = bytes.fromhex(<hex>)
 ```
 
 ### Decode
 ```python
-<str> = <Bytes>.decode('utf-8') 
-<int> = int.from_bytes(<Bytes>, byteorder='big|little', signed=False)
-<hex> = <Bytes>.hex()
+<str> = <bytes>.decode('utf-8') 
+<int> = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
+<hex> = <bytes>.hex()
 ```
 
 ### Read Bytes from File
@@ -871,50 +890,53 @@ def read_bytes(filename):
 
 ### Write Bytes to File
 ```python
-def write_bytes(filename, bytes):
+def write_bytes(filename, bytes_obj):
     with open(filename, 'wb') as file:
-        file.write(bytes)
-```
-
-```python
-<Bytes> = b''.join(<list_of_Bytes>)
+        file.write(bytes_obj)
 ```
 
 
 Struct
 ------
-**This module performs conversions between Python values and C struct represented as Python Bytes object.**
+**This module performs conversions between Python values and C struct represented as Python bytes object. By default machine’s native sizes and byte order are used.**
+
 ```python
-from struct import pack, unpack
-<Bytes> = pack('<format>', <value_1> [, <value_2>, ...])
-<tuple> = unpack('<format>', <Bytes>)
+from struct import pack, unpack, calcsize
+<bytes> = pack('<format>', <value_1> [, <value_2>, ...])
+<tuple> = unpack('<format>', <bytes>)
 ```
 
 ### Example
 ```python
->>> pack('hhl', 1, 2, 3)
+>>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
->>> unpack('hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
+>>> unpack('>hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
 (1, 2, 3)
->>> calcsize('hhl')
+>>> calcsize('>hhl')
 8
 ```
 
 ### Format
-**Use capital leters for unsigned type.** 
+**For standard sizes start format string with:**
+* `'='` - native byte order
+* `'<'` - little-endian
+* `'>'` - big-endian
+
+**Use capital leter for unsigned type. Standard size in brackets.** 
 * `'x'` - pad byte
-* `'c'` - char
-* `'h'` - short
-* `'i'` - int
-* `'l'` - long
-* `'q'` - long long
-* `'f'` - float
-* `'d'` - double
+* `'c'` - char (1)
+* `'h'` - short (2)
+* `'i'` - int (4)
+* `'l'` - long (4)
+* `'q'` - long long (8)
+* `'f'` - float (4)
+* `'d'` - double (8)
 
 
 Hashlib
 -------
 ```python
+>>> import hashlib
 >>> hashlib.md5(<str>.encode()).hexdigest()
 '33d0eba106da4d3ebca17fcd3f4c3d77'
 ```
@@ -936,7 +958,7 @@ thread.join()
 
 ### Lock
 ```python
-lock = Rlock()
+lock = RLock()
 lock.acquire()
 ...
 lock.release()
@@ -945,7 +967,7 @@ lock.release()
 
 Itertools
 ---------
-**Every function returns an iterator and can accept any collection and/or iterator. If you want to print the iterator, you need to pass it to the list() function.**
+**Every function returns an iterator and can accept any collection and/or iterator. If you want to print the iterator, you need to pass it to the list() function!**
 
 ```python
 from itertools import *
@@ -1022,9 +1044,9 @@ Introspection and Metaprograming
 
 ### Variables
 ```python
-<list> = dir()      # In-scope variables.
-<dict> = locals()   # Local variables.
-<dict> = globals()  # Global variables.
+<list> = dir()      # Names of in-scope variables.
+<dict> = locals()   # Dict of local variables, same as vars().
+<dict> = globals()  # Dict of global variables.
 ```
 
 ### Attributes
@@ -1050,11 +1072,11 @@ False
 ```
 
 ### Parameters
-#### Getting the number of parameters of a function:
 ```python
 from inspect import signature
 sig          = signature(<function>)
 no_of_params = len(sig.parameters)
+param_names  = list(sig.parameters.keys())
 ```
 
 ### Type
@@ -1072,7 +1094,7 @@ type(<class_name>, <parents_tuple>, <attributes_dict>)
 #### Class that creates class.
 ```python
 def my_meta_class(name, parents, attrs):
-    attrs['a'] = 1
+    attrs['a'] = 'abcde'
     return type(name, parents, attrs)
 ```
 
@@ -1080,7 +1102,7 @@ def my_meta_class(name, parents, attrs):
 ```python
 class MyMetaClass(type):
     def __new__(klass, name, parents, attrs):
-        attrs['a'] = 1
+        attrs['a'] = 'abcde'
         return type.__new__(klass, name, parents, attrs)
 ```
 
@@ -1089,7 +1111,7 @@ class MyMetaClass(type):
 ```python
 class MyClass(metaclass=MyMetaClass):
     def __init__(self):
-        self.b = 2
+        self.b = 12345
 ```
 
 
@@ -1121,7 +1143,7 @@ Eval
 3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
->>> ast.literal_eval('abs(-1)')
+>>> ast.literal_eval('abs(1)')
 ValueError: malformed node or string
 ```
 
@@ -1218,6 +1240,45 @@ reader(adder(printer()))  # 100, 101, ..., 109
 Libraries
 =========
 
+Argparse
+--------
+```python
+import argparse
+parser = argparse.ArgumentParser(description='calculate X to the power of Y')
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-v', '--verbose', action='store_true')
+group.add_argument('-q', '--quiet', action='store_true')
+parser.add_argument('x', type=int, help='the base')
+parser.add_argument('y', type=int, help='the exponent')
+args = parser.parse_args()
+answer = args.x ** args.y
+
+if args.quiet:
+    print(answer)
+elif args.verbose:
+    print('{args.x} to the power {args.y} equals {answer}')
+else:
+    print('{args.x}^{args.y} == {answer}')
+```
+
+#### Usage:
+```bash
+$ python3 prog.py --help
+usage: test2.py [-h] [-v | -q] x y
+
+calculate X to the power of Y
+
+positional arguments:
+  x              the base
+  y              the exponent
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose
+  -q, --quiet
+```
+
+
 Plot
 ----
 ```python
@@ -1235,10 +1296,10 @@ Progress Bar
 # $ pip3 install tqdm
 from tqdm import tqdm
 from time import sleep
-for i in tqdm(range(100)):
-    sleep(0.02)
 for i in tqdm([1, 2, 3]):
     sleep(0.2)
+for i in tqdm(range(100)):
+    sleep(0.02)
 ```
 
 
@@ -1348,7 +1409,7 @@ Scraping
 >>> document = BeautifulSoup(page.text, 'html.parser')
 >>> table    = document.find('table', class_='infobox vevent')
 >>> rows     = table.find_all('tr')
->>> website  = rows[11].find('a')['href']
+>>> link     = rows[11].find('a')['href']
 'https://www.python.org/'
 >>> latest_v = rows[6].find('div').text.split()[0]
 '3.7.2'
@@ -1396,7 +1457,7 @@ def odds_handler(sport):
     home_odds, away_odds = get_odds(db, sport, team)
     db.close()
 
-    response.headers['Content-Type'] = 'application/json'
+    response.headers['Content-Type']  = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
     return json.dumps([home_odds, away_odds])
 ```
@@ -1456,6 +1517,7 @@ with PyCallGraph(output=graph):
 NumPy
 -----
 **Array manipulation mini language. Can run up to 100 times faster than equivalent Python code.**
+
 ```python
 # $ pip3 install numpy
 import numpy as np
@@ -1463,7 +1525,7 @@ import numpy as np
 
 ```python
 <array> = np.array(<list>)
-<array> = np.arange(from_inclusive, to_exclusive, step)
+<array> = np.arange(from_inclusive, to_exclusive, step_size)
 <array> = np.ones(<shape>)
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
@@ -1501,27 +1563,27 @@ right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- 
 **For each point returns index of its nearest point: `[0.1, 0.6, 0.8] => [1, 2, 1]`.**
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
-array([ 0.1,  0.6,  0.8])
+[ 0.1,  0.6,  0.8]
 >>> wrapped_points = points.reshape(3, 1)
-array([[ 0.1],
-       [ 0.6],
-       [ 0.8]])
+[[ 0.1],
+ [ 0.6],
+ [ 0.8]]
 >>> distances = wrapped_points - points
-array([[ 0. , -0.5, -0.7],
-       [ 0.5,  0. , -0.2],
-       [ 0.7,  0.2,  0. ]])
+[[ 0. , -0.5, -0.7],
+ [ 0.5,  0. , -0.2],
+ [ 0.7,  0.2,  0. ]]
 >>> distances = np.abs(distances)
-array([[ 0. ,  0.5,  0.7],
-       [ 0.5,  0. ,  0.2],
-       [ 0.7,  0.2,  0. ]])
+[[ 0. ,  0.5,  0.7],
+ [ 0.5,  0. ,  0.2],
+ [ 0.7,  0.2,  0. ]]
 >>> i = np.arange(3)
-array([0, 1, 2])
+[0, 1, 2]
 >>> distances[i, i] = np.inf
-array([[ inf,  0.5,  0.7],
-       [ 0.5,  inf,  0.2],
-       [ 0.7,  0.2,  inf]])
+[[ inf,  0.5,  0.7],
+ [ 0.5,  inf,  0.2],
+ [ 0.7,  0.2,  inf]]
 >>> distances.argmin(1)
-array([1, 2, 1])
+[1, 2, 1]
 ```
 
 
