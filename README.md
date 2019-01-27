@@ -1266,7 +1266,7 @@ else:
 ```
 
 #### Usage:
-```bash
+```
 $ python3 prog.py --help
 usage: test2.py [-h] [-v | -q] x y
 
