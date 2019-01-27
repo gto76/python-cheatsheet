@@ -679,11 +679,11 @@ Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 ```
 
+**Functions can not be values, unless they are wrapped.**
 ```python
-# Functions can not be values, unless they are wrapped:
 from functools import partial
-LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
-                           'OR' : partial(lambda l, r: l or r)})
+LogicOp = Enum('LogicOp', {'and': partial(lambda l, r: l and r),
+                           'or' : partial(lambda l, r: l or r)})
 ```
 
 
@@ -1137,8 +1137,7 @@ import operator as op
 product_of_elems = functools.reduce(op.mul, <list>)
 sorted_by_second = sorted(<list>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<list>, key=op.itemgetter(1, 0))
-LogicOp          = enum.Enum('LogicOp', {'AND': op.and_,
-                                         'OR' : op.or_})
+LogicOp          = enum.Enum('LogicOp', {'and': op.and_, 'or' : op.or_})
 ```
 
 
