@@ -529,6 +529,7 @@ from functools import reduce
 ```python
 from collections import namedtuple
 Point     = namedtuple('Point', 'x y')
+point     = Point(0, 0)
 
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
