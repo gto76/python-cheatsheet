@@ -862,7 +862,7 @@ KeyboardInterrupt
 
 Bytes
 -----
-**Bytes object is immutable sequence of single bytes. Mutable version is called bytearray. **
+**Bytes object is immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
 <int>   = <bytes>[<index>]
