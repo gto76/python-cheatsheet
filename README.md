@@ -134,7 +134,7 @@ to_exclusive   = <range>.stop
 Enumerate
 ---------
 ```python
-for i, element in enumerate(<collection> [, i_start]):
+for i, el in enumerate(<collection> [, i_start]):
     ...
 ```
 
