@@ -530,11 +530,15 @@ from functools import reduce
 from collections import namedtuple
 Point     = namedtuple('Point', 'x y')
 point     = Point(0, 0)
+```
 
+```python
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
 Cutlery   = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
+```
 
+```python
 # Warning: Objects will share the objects that are initialized in the dictionary!
 Creature  = type('Creature', (), {'p': Point(0, 0), 'd': Direction.n})
 creature  = Creature()
