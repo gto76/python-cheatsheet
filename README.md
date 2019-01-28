@@ -577,7 +577,7 @@ from functools import partial
 30
 ```
 
-### Nonlocal
+### Nonlocal Variables
 **If variable is assigned to anywhere in the scope, it is regarded as local variable, unless it is declared as global or nonlocal.**
 
 ```python
