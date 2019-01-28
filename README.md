@@ -649,7 +649,7 @@ class MyComparable:
 ```
 
 ### Hashable
-**Hashable object needs both hash() and eq() methods and it's hash value should not change. Objects that compare equal must have the same hash value, meaning default hash() that returns `id(self)` will not do. That is why Python automatically makes classes unhashable if you only implement eq().**
+**Hashable object needs both hash() and eq() methods and it's hash value should never change. Objects that compare equal must have the same hash value, meaning default hash() that returns `id(self)` will not do. That is why Python automatically makes classes unhashable if you only implement eq().**
 
 ```python
 class MyHashable:
