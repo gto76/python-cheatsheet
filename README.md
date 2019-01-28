@@ -971,6 +971,9 @@ Deque
 
 ```python
 from collections import deque
+```
+
+```python
 <deque> = deque(<collection>, maxlen=None)
 <deque>.appendleft(<el>)
 <deque>.extendleft(<collection>)  # Collection gets reversed.
