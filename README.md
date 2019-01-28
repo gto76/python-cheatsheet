@@ -704,6 +704,15 @@ class MySequence:
             yield el
 ```
 
+### Callable
+```python
+class MyCallable:
+    def __init__(self, a):
+        self.a = a
+    def __call__(self):
+        return a
+```
+
 ### Copy
 ```python
 from copy import copy, deepcopy
