@@ -971,10 +971,10 @@ Deque
 
 ```python
 from collections import deque
+<deque> = deque(<collection>, maxlen=None)
 ```
 
 ```python
-<deque> = deque(<collection>, maxlen=None)
 <deque>.appendleft(<el>)
 <deque>.extendleft(<collection>)  # Collection gets reversed.
 <el> = <deque>.popleft()
