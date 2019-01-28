@@ -1027,7 +1027,8 @@ from itertools import *
 >>> compress('abc', [True, 0, 1])
 ['a', 'c']
 
->>> islice([1, 2, 3], 1, None)  # islice(<seq>, from_inclusive, to_exclusive) 
+>>> # islice(<seq>, from_inclusive, to_exclusive) 
+>>> islice([1, 2, 3], 1, None)
 [2, 3]
 
 >>> people = [{'id': 1, 'name': 'Bob'}, 
