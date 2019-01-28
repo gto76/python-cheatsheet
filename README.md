@@ -582,7 +582,7 @@ from functools import partial
 
 ```python
 def get_counter():
-    a = 1
+    a = 0
     def out():
         nonlocal a
         a += 1
@@ -722,11 +722,12 @@ class MySequence:
 
 ### Callable
 ```python
-class MyCallable:
-    def __init__(self, a):
-        self.a = a
+class Counter:
+    def __init__(self):
+        self.a = 0
     def __call__(self):
-        return a
+        self.a += 1
+        return self.a
 ```
 
 ### Copy
