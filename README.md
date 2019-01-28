@@ -292,7 +292,7 @@ import re
 
 Print
 -----
-**Use `file=sys.stderr` for errors.**
+####Use `file=sys.stderr` for errors.
 
 ```python
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])
