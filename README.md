@@ -1535,16 +1535,16 @@ def odds_handler(sport):
     home_odds, away_odds = 2.44, 3.29
     response.headers['Content-Type']  = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
-    return json.dumps([home_odds, away_odds])
+    return json.dumps([team, home_odds, away_odds])
 ```
 
 #### Test:
 ```python
 # $ pip3 install requests
 >>> import requests
->>> r = requests.post('http://localhost:8080/odds/soccer', data={'team': 'arsenal'})
+>>> r = requests.post('http://localhost:8080/odds/soccer', data={'team': 'arsenal f.c.'})
 >>> r.json()
-[2.44, 3.29]
+['arsenal f.c.', 2.44, 3.29]
 ```
 
 
