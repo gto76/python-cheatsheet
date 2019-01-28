@@ -742,7 +742,7 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 ```
 
 ### Input
-**Reads a line from user input or pipe if present. The trailing newline gets stripped.**
+#### Reads a line from user input or pipe if present. The trailing newline gets stripped:
 
 ```python
 filename = input('Enter a file name: ')
