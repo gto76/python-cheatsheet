@@ -333,7 +333,7 @@ Format
 ```
 
 ### String Options
-**"!r" calls object's repr() method, instead of format(), to get a string.** 
+**`'!r'` calls object's repr() method, instead of format(), to get a string.** 
 ```python
 {'abcde'!r:<10}  # "'abcde'   "
 ```
