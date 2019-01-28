@@ -1684,7 +1684,7 @@ import numpy as np
 
 ```python
 <el_or_array> = <array>[:,0]                # First column.
-<el_or_array> = <array>.sum([<axix>])       # Axis is an index of dimension that gets collapsed.
+<el_or_array> = <array>.sum([<axis>])       # Axis is an index of dimension that gets collapsed.
 <el_or_array> = <array>.argmin([<axis>])    # Returns index/es of smallest elements.
 <el_or_array> = <array>[filter_expression]
 ```
