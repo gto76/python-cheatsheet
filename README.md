@@ -998,7 +998,7 @@ from array import array
 
 Deque
 -----
-**Short for “double-ended queue” and pronounced “deck”. They are thread-safe lists with efficient appends and pops from either side.**
+**Short for “double-ended queue” and pronounced “deck”. It is a thread-safe list with efficient appends and pops from either side.**
 
 ```python
 from collections import deque
