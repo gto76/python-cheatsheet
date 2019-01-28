@@ -1677,15 +1677,15 @@ import numpy as np
 ```
 
 ```python
-first_column  = <array>[:, 0]  # Or: <array>[..., 0]
-value         = <array>.min([axis])
-index         = <array>.argmin([axis])
-```
-
-```python
 <array>.shape = <shape>
 <view>        = <array>.reshape(<shape>)
 <view>        = np.broadcast_to(<array>, <shape>)
+```
+
+```python
+<el_or_array> = <array>[:,0]                # First column.
+<el_or_array> = <array>.sum([<axix>])       # Axis is an index of dimension that gets collapsed.
+<el_or_array> = <array>.argmin([<axis>])    # Returns index/es of smallest elements.
 <el_or_array> = <array>[filter_expression]
 ```
 
