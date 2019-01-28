@@ -101,17 +101,17 @@ Set
 ```
 
 ```python
-<set>.remove(<el>)   # Throws error.
-<set>.discard(<el>)  # Doesn't throw error.
-```
-
-```python
 <set>  = <set>.union(<coll.>)                 # Or: <set> | <set>
 <set>  = <set>.intersection(<coll.>)          # Or: <set> & <set>
 <set>  = <set>.difference(<coll.>)            # Or: <set> - <set>
 <set>  = <set>.symmetric_difference(<coll.>)  # Or: <set> ^ <set>
 <bool> = <set>.issubset(<coll.>)              # Or: <set> <= <set>
 <bool> = <set>.issuperset(<coll.>)            # Or: <set> >= <set>
+```
+
+```python
+<set>.remove(<el>)   # Throws error.
+<set>.discard(<el>)  # Doesn't throw error.
 ```
 
 ### Frozenset
