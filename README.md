@@ -636,13 +636,30 @@ class Employee(Person):
 ```
 
 ### Comparable
+**If eq() method is not overriden, it returns `id(self) == id(other)`, which is the same as `self is other`, meaning all objects compare not equal by default.**
+
 ```python
 class MyComparable:
     def __init__(self, a):
         self.a = a
     def __eq__(self, other):
-        # If not defined it returns id(self) == id(other).
-        if isinstance(other, MyComparable):
+        if isinstance(other, type(self)):
+            return self.a == other.a
+        return False 
+```
+
+### Hashable
+**Hashable object needs both hash() and eq() methods and it's hash value should not change. Objects that compare equal must have the same hash value, meaning default hash() that returns `id(self)` will not do. That is why Python automatically makes classes unhashable if you only implement eq().**
+
+```python
+class MyHashable:
+    def __init__(self, a):
+        self.__a = a
+    @property
+    def a(self):
+        return self.__a
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
             return self.a == other.a
         return False 
     def __hash__(self):
