@@ -1027,7 +1027,7 @@ from itertools import *
 >>> compress('abc', [True, 0, 1])
 ['a', 'c']
 
->>> # islice(<seq>, from_inclusive, to_exclusive) 
+>>> # islice(<collection>, from_inclusive, to_exclusive) 
 >>> islice([1, 2, 3], 1, None)
 [2, 3]
 
