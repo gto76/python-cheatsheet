@@ -624,6 +624,8 @@ def add(x, y):
 ### LRU Cache
 **Decorator that caches function's return values. All arguments must be hashable.**
 ```python
+from functools import lru_cache
+
 @lru_cache(maxsize=None)
 def fib(n):
     if n < 2:
