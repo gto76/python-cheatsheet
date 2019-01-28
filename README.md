@@ -1503,14 +1503,14 @@ Web
 ---
 ```python
 # $ pip3 install bottle
-import bottle
-from urllib.parse import unquote
+from bottle import run, route, post, template, request, response
+import json
 ```
 
 ### Run
 ```python
-bottle.run(host='localhost', port=8080)
-bottle.run(host='0.0.0.0', port=80, server='cherrypy')
+run(host='localhost', port=8080)
+run(host='0.0.0.0', port=80, server='cherrypy')
 ```
 
 ### Static Request
@@ -1524,25 +1524,27 @@ def send_image(image):
 ```python
 @route('/<sport>')
 def send_page(sport):
-    sport = unquote(sport).lower()
-    page = read_file(sport)
-    return template(page)
+    return template('<h1>{{title}}</h1>', title=sport)
 ```
 
 ### REST Request
 ```python
 @post('/odds/<sport>')
 def odds_handler(sport):
-    team = bottle.request.forms.get('team')
-    team = unquote(team).lower()
-
-    db = sqlite3.connect(<db_path>)
-    home_odds, away_odds = get_odds(db, sport, team)
-    db.close()
-
+    team = request.forms.get('team')
+    home_odds, away_odds = 2.44, 3.29
     response.headers['Content-Type']  = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
     return json.dumps([home_odds, away_odds])
+```
+
+#### Test:
+```python
+# $ pip3 install requests
+>>> import requests
+>>> r = requests.post('http://localhost:8080/odds/soccer', data={'team': 'arsenal'})
+>>> r.json()
+[2.44, 3.29]
 ```
 
 
