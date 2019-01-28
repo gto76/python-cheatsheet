@@ -955,6 +955,30 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * `'d'` - double (8)
 
 
+Array
+-----
+**List that can only hold elements of predefined type. Available types are listed above.**
+
+```python
+from array import array
+<array> = array(<typecode> [, <collection>])
+```
+
+
+Deque
+-----
+**Short for “double-ended queue” and pronounced “deck”. They are thread-safe lists with efficient appends and pops from either side.**
+
+```python
+from collections import deque
+<deque> = deque(<collection>, maxlen=None)
+<deque>.appendleft(<el>)
+<deque>.extendleft(<collection>)  # Collection gets reversed.
+<el> = <deque>.popleft()
+<deque>.rotate(n=1)               # Rotates elements to the right.
+```
+
+
 Hashlib
 -------
 ```python
