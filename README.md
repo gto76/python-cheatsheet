@@ -1182,14 +1182,15 @@ Introspection and Metaprograming
 
 ### Attributes
 ```python
->>> class Z:
-...     def __init__(self):
-...         self.a = 'abcde'
-...         self.b = 12345
->>> z = Z()
+class Z:
+    def __init__(self):
+        self.a = 'abcde'
+        self.b = 12345
 ```
 
 ```python
+>>> z = Z()
+
 >>> vars(z)
 {'a': 'abcde', 'b': 12345}
 
