@@ -982,15 +982,6 @@ from collections import deque
 ```
 
 
-Hashlib
--------
-```python
->>> import hashlib
->>> hashlib.md5(<str>.encode()).hexdigest()
-'33d0eba106da4d3ebca17fcd3f4c3d77'
-```
-
-
 Threading
 ---------
 ```python
@@ -1011,6 +1002,15 @@ lock = RLock()
 lock.acquire()
 ...
 lock.release()
+```
+
+
+Hashlib
+-------
+```python
+>>> import hashlib
+>>> hashlib.md5(<str>.encode()).hexdigest()
+'33d0eba106da4d3ebca17fcd3f4c3d77'
 ```
 
 
@@ -1520,9 +1520,17 @@ Profile
 ### Basic
 ```python
 from time import time
-start_time = time()
+start_time = time()  # Seconds since Epoch.
 ...
 duration = time() - start_time
+```
+
+### High Performance
+```python
+from time import perf_counter as pc
+start_time = pc()    # Seconds since restart.
+...
+duration = pc() - start_time
 ```
 
 ### Timing a Snippet
