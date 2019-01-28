@@ -101,6 +101,11 @@ Set
 ```
 
 ```python
+<set>.remove(<el>)   # Throws error.
+<set>.discard(<el>)  # Doesn't throw error.
+```
+
+```python
 <set>  = <set>.union(<coll.>)                 # Or: <set> | <set>
 <set>  = <set>.intersection(<coll.>)          # Or: <set> & <set>
 <set>  = <set>.difference(<coll.>)            # Or: <set> - <set>
