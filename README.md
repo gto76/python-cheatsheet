@@ -622,7 +622,7 @@ def add(x, y):
 ```
 
 ### LRU Cache
-**Decorator that caches functions return values.**
+**Decorator that caches function's return values.**
 ```python
 @lru_cache(maxsize=None)
 def fib(n):
