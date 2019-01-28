@@ -1272,7 +1272,7 @@ else:
     print(f'{args.x}^{args.y} == {answer}')
 ```
 
-#### Usage:
+### Usage
 ```text
 $ python3 prog.py --help
 usage: test2.py [-h] [-v | -q] x y
