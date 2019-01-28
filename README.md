@@ -652,14 +652,14 @@ class MyComparable:
 ### Sequence
 ```python
 class MySequence:
-    def __init__(self, seq):
-        self.seq = seq
+    def __init__(self, a):
+        self.a = a
     def __len__(self):
-        return len(self.seq)
+        return len(self.a)
     def __getitem__(self, i):
-        return self.seq[i]
+        return self.a[i]
     def __iter__(self):
-        for el in self.seq:
+        for el in self.a:
             yield el
 ```
 
