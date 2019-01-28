@@ -1712,7 +1712,7 @@ right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- 
 
 
 ### Example
-#### For each point returns index of its nearest point (`[0.1, 0.6, 0.8] => [1, 2, 1]`):
+#### For each point returns index of its nearest point (`'[0.1, 0.6, 0.8] => [1, 2, 1]'`):
 
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
