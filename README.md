@@ -635,9 +635,23 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
+### Comparable
+```python
+class MyComparable:
+    def __init__(self, a):
+        self.a = a
+    def __eq__(self, other):
+        # If not defined it returns id(self) == id(other).
+        if isinstance(other, MyComparable):
+            return self.a == other.a
+        return False 
+    def __hash__(self):
+        return hash(self.a)
+```
+
 ### Sequence
 ```python
-class <name>:
+class MySequence:
     def __init__(self, seq):
         self.seq = seq
     def __len__(self):
