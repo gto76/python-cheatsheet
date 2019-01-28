@@ -640,7 +640,7 @@ def fib(n):
 CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
 ```
 
-### Parametrized Example
+### Parametrized Debugger
 ```python
 def debug(print_result=False):
     def decorator(func):
