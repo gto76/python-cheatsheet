@@ -582,7 +582,7 @@ from functools import partial
 
 ```python
 def get_counter():
-    a = 0
+    a = 1
     def out():
         nonlocal a
         a += 1
@@ -593,7 +593,7 @@ def get_counter():
 ```python
 >>> counter = get_counter()
 >>> counter(), counter(), counter()
-(0, 1, 2)
+(1, 2, 3)
 ```
 
 
