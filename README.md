@@ -1234,9 +1234,9 @@ def my_meta_class(name, parents, attrs):
 #### Or:
 ```python
 class MyMetaClass(type):
-    def __new__(klass, name, parents, attrs):
+    def __new__(cls, name, parents, attrs):
         attrs['a'] = 'abcde'
-        return type.__new__(klass, name, parents, attrs)
+        return type.__new__(cls, name, parents, attrs)
 ```
 
 ### Metaclass Attribute
