@@ -577,6 +577,25 @@ from functools import partial
 30
 ```
 
+### Nonlocal
+**If variable is assigned to anywhere in the scope, it is regarded as local variable, unless it is declared as global or nonlocal.**
+
+```python
+def get_counter():
+    a = 0
+    def out():
+        nonlocal a
+        a += 1
+        return a
+    return out
+```
+
+```python
+>>> counter = get_counter()
+>>> counter(), counter(), counter()
+(0, 1, 2)
+```
+
 
 Decorator
 ---------
