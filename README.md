@@ -1501,6 +1501,7 @@ def main():
 main()
 ```
 
+#### Usage:
 ```text
 $ kernprof -lv test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
