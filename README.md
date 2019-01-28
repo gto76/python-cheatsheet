@@ -605,12 +605,12 @@ def function_that_gets_passed_to_closure():
     ...
 ```
 
-#### Debugger example:
+### Debugger Example
 ```python
 from functools import wraps
 
 def debug(func):
-    @wraps(func)  # Needed for metadata copying (func name, ...).
+    @wraps(func)  # Copies func's metadata like name and doc to out.  
     def out(*args, **kwargs):
         print(func.__name__)
         return func(*args, **kwargs)
@@ -637,6 +637,24 @@ def fib(n):
 >>> fib.cache_info()
 CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
 ```
+
+### Parametrized Decorator
+```python
+def debug(print_result=False):
+    def inner_decorator(func):
+        @wraps(func)
+        def out(*args, **kwargs):
+            result = func(*args, **kwargs)
+            print(func.__name__, result if print_result else '')
+            return result
+        return out
+    return inner_decorator
+
+@debug(print_result=True)
+def add(x, y):
+    return x + y
+```
+
 
 Class
 -----
