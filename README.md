@@ -636,7 +636,7 @@ class Employee(Person):
 ```
 
 ### Comparable
-**If eq() method is not overriden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`, meaning all objects compare not equal by default.**
+**If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`, meaning all objects compare not equal by default.**
 
 ```python
 class MyComparable:
