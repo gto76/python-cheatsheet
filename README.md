@@ -635,6 +635,20 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
+### Sequence
+```python
+class <name>:
+    def __init__(self, seq):
+        self.seq = seq
+    def __len__(self):
+        return len(self.seq)
+    def __getitem__(self, i):
+        return self.seq[i]
+    def __iter__(self):
+        for el in self.seq:
+            yield el
+```
+
 ### Copy
 ```python
 from copy import copy, deepcopy
@@ -1321,7 +1335,7 @@ Table
 # $ pip3 install tabulate
 from csv import reader
 from tabulate import tabulate
-with open(<filename>, newline='') as csv_file:
+with open(<filename>, encoding='utf-8', newline='') as csv_file:
     reader = reader(csv_file, delimiter=';')
     headers = [a.title() for a in next(reader)]
     print(tabulate(reader, headers))
@@ -1544,14 +1558,16 @@ import numpy as np
 ```
 
 ```python
-value = <array>.min([axis])
-index = <array>.argmin([axis])
+first_column  = <array>[:, 0]  # Or: <array>[..., 0]
+value         = <array>.min([axis])
+index         = <array>.argmin([axis])
 ```
 
 ```python
-<view>  = <array>.reshape(<shape>)
-<view>  = np.broadcast_to(<array>, <shape>)
-<array> = <array>[filter_expression]
+<array>.shape = <shape>
+<view>        = <array>.reshape(<shape>)
+<view>        = np.broadcast_to(<array>, <shape>)
+<el_or_array> = <array>[filter_expression]
 ```
 
 ### Broadcasting
