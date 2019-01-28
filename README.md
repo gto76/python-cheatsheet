@@ -683,7 +683,7 @@ Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'and': partial(lambda l, r: l and r),
-                           'or' : partial(lambda l, r: l or r)})
+                           'or' : partial(lambda l, r: l or r )})
 ```
 
 
