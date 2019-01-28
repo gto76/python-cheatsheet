@@ -1403,7 +1403,7 @@ from urllib.parse import quote, quote_plus, unquote, unquote_plus
 ### Decode
 ```text
 >>> unquote('Can%27t+be+in+URL%21')
-"Can't+be+in+URL!"'
+"Can't+be+in+URL!"
 >>> unquote_plus('Can%27t+be+in+URL%21')
 "Can't be in URL!"
 ```
