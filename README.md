@@ -1210,7 +1210,7 @@ Operator
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
                      eq, ne, lt, le, gt, ge, \
                      not_, and_, or_, \
-                     itemgetter
+                     itemgetter, attrgetter, methodcaller
 ```
 
 ```python
@@ -1219,6 +1219,7 @@ product_of_elems = functools.reduce(op.mul, <list>)
 sorted_by_second = sorted(<list>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<list>, key=op.itemgetter(1, 0))
 LogicOp          = enum.Enum('LogicOp', {'and': op.and_, 'or' : op.or_})
+last_el          = op.methodcaller('pop')(<list>)
 ```
 
 
