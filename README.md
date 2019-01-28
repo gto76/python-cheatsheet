@@ -599,9 +599,11 @@ def get_counter():
 
 Decorator
 ---------
+**A decorator takes a function, adds some functionality and returns it.**
+
 ```python
-@closure_name
-def function_that_gets_passed_to_closure():
+@decorator_name
+def function_that_gets_passed_to_decorator():
     ...
 ```
 
@@ -638,17 +640,17 @@ def fib(n):
 CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
 ```
 
-### Parametrized Decorator
+### Parametrized Example
 ```python
 def debug(print_result=False):
-    def inner_decorator(func):
+    def decorator(func):
         @wraps(func)
         def out(*args, **kwargs):
             result = func(*args, **kwargs)
             print(func.__name__, result if print_result else '')
             return result
         return out
-    return inner_decorator
+    return decorator
 
 @debug(print_result=True)
 def add(x, y):
