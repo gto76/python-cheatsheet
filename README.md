@@ -654,7 +654,7 @@ class MyComparable:
 ```python
 class MyHashable:
     def __init__(self, a):
-        self.__a = a
+        self.__a = copy.deepcopy(a)
     @property
     def a(self):
         return self.__a
