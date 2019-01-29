@@ -1400,8 +1400,8 @@ Libraries
 Argparse
 --------
 ```python
-import argparse
-parser = argparse.ArgumentParser(description='calculate X to the power of Y')
+from argparse import ArgumentParser
+parser = ArgumentParser(description='calculate X to the power of Y')
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-v', '--verbose', action='store_true')
 group.add_argument('-q', '--quiet', action='store_true')
