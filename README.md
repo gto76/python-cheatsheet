@@ -263,6 +263,11 @@ String
 
 Regex
 -----
+* **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
+* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
+* **Use `r'\1'` or `'\\\\1'` for backreference.**  
+* **Use `'?'` to make operators non-greedy.**   
+
 ```python
 import re
 <str>     = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
@@ -272,11 +277,6 @@ import re
 <Match>   = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <Matches> = re.finditer(<regex>, text)           # Searches for all occurrences of pattern.
 ```
-
-* **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
-* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
-* **Use `r'\1'` or `'\\\\1'` for backreference.**  
-* **Use `'?'` to make operators non-greedy.**   
 
 ### Match Object
 ```python
