@@ -1616,7 +1616,7 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url = 'http://localhost:8080/odds/soccer'
+>>> url = 'http://localhost:8080/odds/football'
 >>> r = requests.post(url, data={'team': 'arsenal f.c.'})
 >>> r.json()
 ['arsenal f.c.', 2.44, 3.29]
