@@ -637,10 +637,10 @@ def fib(n):
 ```
 
 ```python
->>> [fib(n) for n in range(8)]
-[0, 1, 1, 2, 3, 5, 8, 13]
+>>> [fib(n) for n in range(10)]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 >>> fib.cache_info()
-CacheInfo(hits=12, misses=8, maxsize=None, currsize=8)
+CacheInfo(hits=16, misses=10, maxsize=None, currsize=10)
 ```
 
 ### Parametrized Decorator
