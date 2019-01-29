@@ -1516,7 +1516,7 @@ Image
 from PIL import Image
 width, height = 100, 100
 img = Image.new('L', (width, height), 'white')
-img.putdata([255*a/(width*height) for a in range(width*height)])
+img.putdata([255 * a/(width*height) for a in range(width*height)])
 img.save('out.png')
 ```
 
