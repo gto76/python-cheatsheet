@@ -1693,6 +1693,7 @@ NumPy
 import numpy as np
 ```
 
+**Shape is a tuple of ints, representing sizes of array's dimensions.**
 ```python
 <array> = np.array(<list>)
 <array> = np.arange(from_inclusive, to_exclusive, step_size)
@@ -1713,12 +1714,12 @@ import numpy as np
 
 ### Indexing
 #### Basic indexing
-```python
+```bash
 <el>      = <2d_array>[0, 0]
 ```
 
 #### Basic slicing
-```python
+```bash
 <1d_view> = <2d_array>[0]         # First row.
 <1d_view> = <2d_array>[:, 0]      # First column. Also [..., 0].
 <3d_view> = <2d_array>[None,:,:]  # Expanded by dimension of size 1.
@@ -1726,13 +1727,13 @@ import numpy as np
 
 #### Integer array indexing
 **If row and column indexes differ in shape, they are combined with broadcasting.**
-```python
+```bash
 <1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
 <2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
 ```
 
 #### Boolean array indexing
-```python
+```bash
 <2d_bool_array> = <2d_array> > 0
 <1d_array>      = <2d_array>[<2d_bool_array>]
 ```
