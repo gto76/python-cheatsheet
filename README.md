@@ -1534,12 +1534,12 @@ Audio
 ```python
 import wave, struct
 samples = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
-wav = wave.open(<filename>, 'wb')
-wav.setnchannels(1)
-wav.setsampwidth(4)
-wav.setframerate(44100)
-wav.writeframes(b''.join(samples))
-wav.close()
+wf = wave.open(<filename>, 'wb')
+wf.setnchannels(1)
+wf.setsampwidth(4)
+wf.setframerate(44100)
+wf.writeframes(b''.join(samples))
+wf.close()
 ```
 
 
