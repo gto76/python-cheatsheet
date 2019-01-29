@@ -776,7 +776,7 @@ from enum import Enum, auto
 class <enum_name>(Enum):
     <member_name_1> = <value_1>  
     <member_name_2> = <value_2_a>, <value_2_b>
-    <member_name_3> = auto()  # Can be used for automatic indexing.
+    <member_name_3> = auto()
 
     @classmethod
     def get_member_names(cls):
