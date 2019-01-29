@@ -1713,26 +1713,26 @@ import numpy as np
 ```
 
 ### Indexing
-#### Basic indexing
+#### Basic indexing:
 ```bash
 <el>      = <2d_array>[0, 0]
 ```
 
-#### Basic slicing
+#### Basic slicing:
 ```bash
 <1d_view> = <2d_array>[0]         # First row.
 <1d_view> = <2d_array>[:, 0]      # First column. Also [..., 0].
 <3d_view> = <2d_array>[None,:,:]  # Expanded by dimension of size 1.
 ```
 
-#### Integer array indexing
+#### Integer array indexing:
 **If row and column indexes differ in shape, they are combined with broadcasting.**
 ```bash
 <1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
 <2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
 ```
 
-#### Boolean array indexing
+#### Boolean array indexing:
 ```bash
 <2d_bool_array> = <2d_array> > 0
 <1d_array>      = <2d_array>[<2d_bool_array>]
