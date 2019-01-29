@@ -329,7 +329,7 @@ Format
 ```
 
 ### General Options
-```bash
+```perl
 {<el>:<10}       # '<el>      '
 {<el>:>10}       # '      <el>'
 {<el>:^10}       # '   <el>   '
