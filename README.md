@@ -805,13 +805,13 @@ Cutlery = Enum('Cutlery', 'knife fork spoon')
 Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
 ```
 
-#### Functions can not be values, so they must be wrapped:
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
 
+* **Functions can not be values, so they must be wrapped.**
 
 System
 ------
