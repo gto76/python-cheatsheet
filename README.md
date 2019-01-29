@@ -1705,11 +1705,35 @@ import numpy as np
 ```
 
 ```python
-<el_or_array> = <array>[:,0]                # First column.
-<el_or_array> = <array>.sum([<axis>])       # Axis is an index of dimension that gets collapsed.
-<el_or_array> = <array>.argmin([<axis>])    # Returns index/es of smallest elements.
-<el_or_array> = <array>[filter_expression]
+<el_or_array> = <array>.sum([<axis>])     # Axis is an index of dimension that gets collapsed.
+<el_or_array> = <array>.argmin([<axis>])  # Returns index/es of smallest element/s.
 ```
+
+### Indexing
+#### Basic indexing
+```python
+<el>      = <2d_array>[0, 0]
+```
+
+#### Basic slicing
+```python
+<1d_view> = <2d_array>[0]         # First row.
+<1d_view> = <2d_array>[:, 0]      # First column. Also [..., 0].
+<3d_view> = <2d_array>[None,:,:]  # Expanded by dimension of size 1.
+```
+
+#### Integer array indexing
+**If row and column indexes differ in shape, they are combined with broadcasting.**
+```python
+<1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
+<2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
+```
+
+#### Boolean array indexing
+```python
+<2d_bool_array> = <2d_array> > 0
+<1d_array>      = <2d_array>[<2d_bool_array>]
+``
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
