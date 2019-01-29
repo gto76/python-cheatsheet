@@ -1733,14 +1733,14 @@ import numpy as np
 ### Indexing
 #### Basic indexing:
 ```bash
-<el>      = <2d_array>[0, 0]
+<el>       = <2d_array>[0, 0]
 ```
 
 #### Basic slicing:
 ```bash
-<1d_view> = <2d_array>[0]           # First row.
-<1d_view> = <2d_array>[:, 0]        # First column. Also [..., 0].
-<3d_view> = <2d_array>[None, :, :]  # Expanded by dimension of size 1.
+<1d_view>  = <2d_array>[0]           # First row.
+<1d_view>  = <2d_array>[:, 0]        # First column. Also [..., 0].
+<3d_view>  = <2d_array>[None, :, :]  # Expanded by dimension of size 1.
 ```
 
 #### Integer array indexing:
@@ -1753,8 +1753,8 @@ import numpy as np
 
 #### Boolean array indexing:
 ```bash
-<2d_bool_array> = <2d_array> > 0
-<1d_array>      = <2d_array>[<2d_bool_array>]
+<2d_bools> = <2d_array> > 0
+<1d_array> = <2d_array>[<2d_bools>]
 ```
 
 ### Broadcasting
