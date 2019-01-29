@@ -329,32 +329,32 @@ Format
 ```
 
 ### General Options
-```python
-'{<el>:<10}'       # '<el>      '
-'{<el>:>10}'       # '      <el>'
-'{<el>:^10}'       # '   <el>   '
-'{<el>:->10}'      # '------<el>'
-'{<el>:>0}'        # '<el>'
+```bash
+{<el>:<10}       # '<el>      '
+{<el>:>10}       # '      <el>'
+{<el>:^10}       # '   <el>   '
+{<el>:->10}      # '------<el>'
+{<el>:>0}        # '<el>'
 ```
 
 ### String Options
 **`'!r'` calls object's repr() method, instead of format(), to get a string.** 
-```python
+```bash
 {'abcde'!r:<10}  # "'abcde'   "
 ```
 
-```python
+```bash
 {'abcde':.3}     # 'abc'
 {'abcde':10.3}   # 'abc       '
 ```
 
 ### Number Options
-```python
+```bash
 {1.23456:.3f}    # '1.235'
 {1.23456:10.3f}  # '     1.235'
 ```
 
-```python
+```bash
 { 123456:10,}    # '   123,456'
 { 123456:10_}    # '   123_456'
 { 123456:+10}    # '   +123456'
@@ -363,7 +363,7 @@ Format
 {-123456: }      # '-123456'
 ```
 
-```python
+```bash
 {65:c}           # 'A'
 {3:08b}          # '00000011' -> Binary with leading zeros.
 {3:0<8b}         # '11000000' -> Binary with trailing zeros.
