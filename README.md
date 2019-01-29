@@ -1716,18 +1716,19 @@ import numpy as np
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
-#### Shape is a tuple of dimension sizes.
 ```python
 <array>.shape = <shape>
 <view>  = <array>.reshape(<shape>)
 <view>  = np.broadcast_to(<array>, <shape>)
 ```
 
-#### Axis is an index of dimension, that gets collapsed.
 ```python
 <array> = <array>.sum(<axis>)
 <array> = <array>.argmin(<axis>)
 ```
+
+* **Shape is a tuple of dimension sizes.**
+* **Axis is an index of dimension, that gets collapsed.**
 
 ### Indexing
 #### Basic indexing:
