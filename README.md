@@ -1744,12 +1744,12 @@ import numpy as np
 ```
 
 #### Integer array indexing:
-**If row and column indexes differ in shape, they are combined with broadcasting.**
-
 ```bash
 <1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
 <2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
 ```
+
+* **If row and column indexes differ in shape, they are combined with broadcasting.**
 
 #### Boolean array indexing:
 ```bash
