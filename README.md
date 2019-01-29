@@ -1735,7 +1735,7 @@ import numpy as np
 ```python
 <2d_bool_array> = <2d_array> > 0
 <1d_array>      = <2d_array>[<2d_bool_array>]
-``
+```
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
