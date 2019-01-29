@@ -608,7 +608,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**Decorator that prints function's name every time it gets called. Wraps is a helper decorator that copies metadata of function func() to function out(). Without it `'add.__name__'` would return `'out'`.**
+**Decorator that prints function's name every time it gets called. Wraps is a helper decorator that copies metadata of function add() to function out(). Without it `'add.__name__'` would return `'out'`.**
 
 ```python
 from functools import wraps
