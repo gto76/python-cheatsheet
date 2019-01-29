@@ -608,7 +608,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**"Wraps" decorator copies metadata of function func() to function out(). Without it `add.__name__` would return `'out'`.**
+**Prints functions name every time it gets called. Wraps is a helper decorator that copies metadata of function func() to function out(). Without it `'add.__name__'` would return `'out'`.**
 
 ```python
 from functools import wraps
@@ -1730,6 +1730,7 @@ import numpy as np
 
 #### Integer array indexing:
 **If row and column indexes differ in shape, they are combined with broadcasting.**
+
 ```bash
 <1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
 <2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
@@ -1743,6 +1744,7 @@ import numpy as np
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
+
 ```python
 left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
 right = [ 0.1 ,  0.6 ,  0.8 ]  # Shape: (3)
