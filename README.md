@@ -1325,9 +1325,7 @@ ValueError: malformed node or string
 import ast
 from ast import Num, BinOp, UnaryOp
 import operator as op
-```
 
-```python
 legal_operators = {ast.Add:    op.add, 
                    ast.Sub:    op.sub, 
                    ast.Mult:   op.mul,
@@ -1718,15 +1716,17 @@ import numpy as np
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
+#### Shape is a tuple of dimension sizes:
 ```python
-<array>.shape = <shape>                   # Shape is a tuple of dimension sizes.
-<view>        = <array>.reshape(<shape>)
-<view>        = np.broadcast_to(<array>, <shape>)
+<array>.shape = <shape>
+<view>  = <array>.reshape(<shape>)
+<view>  = np.broadcast_to(<array>, <shape>)
 ```
 
+#### Axis is an index of dimension that gets collapsed:
 ```python
-<el_or_array> = <array>.sum([<axis>])     # Axis is an index of dimension that gets collapsed.
-<el_or_array> = <array>.argmin([<axis>])  # Returns index/es of smallest element/s.
+<array> = <array>.sum(<axis>)
+<array> = <array>.argmin(<axis>)
 ```
 
 ### Indexing
