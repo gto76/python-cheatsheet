@@ -812,11 +812,6 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
 
-```python
->>> LogicOp.AND.value(True, False)
-False
-```
-
 
 System
 ------
