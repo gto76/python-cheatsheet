@@ -1436,17 +1436,6 @@ optional arguments:
 ```
 
 
-Plot
-----
-```python
-# $ pip3 install matplotlib
-from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])
-pyplot.savefig(<filename>, transparent=True)
-pyplot.show()
-```
-
-
 Progress Bar
 ------------
 ```python
@@ -1494,6 +1483,17 @@ def get_border(screen):
     P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
     return P(width - 1, height - 1)
+```
+
+
+Plot
+----
+```python
+# $ pip3 install matplotlib
+from matplotlib import pyplot
+pyplot.plot(<data_1> [, <data_2>, ...])
+pyplot.savefig(<filename>, transparent=True)
+pyplot.show()
 ```
 
 
