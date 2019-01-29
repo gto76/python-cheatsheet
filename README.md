@@ -1720,9 +1720,9 @@ import numpy as np
 
 #### Basic slicing:
 ```bash
-<1d_view> = <2d_array>[0]         # First row.
-<1d_view> = <2d_array>[:, 0]      # First column. Also [..., 0].
-<3d_view> = <2d_array>[None,:,:]  # Expanded by dimension of size 1.
+<1d_view> = <2d_array>[0]           # First row.
+<1d_view> = <2d_array>[:, 0]        # First column. Also [..., 0].
+<3d_view> = <2d_array>[None, :, :]  # Expanded by dimension of size 1.
 ```
 
 #### Integer array indexing:
