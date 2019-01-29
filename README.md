@@ -642,6 +642,8 @@ CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
 
 ### Parametrized Decorator
 ```python
+from functools import wraps
+
 def debug(print_result=False):
     def decorator(func):
         @wraps(func)
