@@ -338,10 +338,10 @@ Format
 ```
 
 ### String Options
+**`'!r'` calls object's repr() method, instead of format(), to get a string.**
 ```python
 {'abcde'!r:<10}  # "'abcde'   "
 ```
-* **`'!r'` calls object's repr() method, instead of format(), to get a string.** 
 
 ```python
 {'abcde':.3}     # 'abc'
@@ -703,7 +703,8 @@ class Employee(Person):
 ```
 
 ### Comparable
-**If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`, meaning all objects compare not equal by default.**
+* **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`,**
+* **meaning all objects compare not equal by default.**
 
 ```python
 class MyComparable:
