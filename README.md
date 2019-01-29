@@ -608,11 +608,13 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
+**"Wraps" decorator copies metadata of function func() to function out(). Without it `add.__name__` would return `'out'`.**
+
 ```python
 from functools import wraps
 
 def debug(func):
-    @wraps(func)  # Copies func's metadata like name and doc to out.  
+    @wraps(func)
     def out(*args, **kwargs):
         print(func.__name__)
         return func(*args, **kwargs)
@@ -625,6 +627,7 @@ def add(x, y):
 
 ### LRU Cache
 **Decorator that caches function's return values. All arguments must be hashable.**
+
 ```python
 from functools import lru_cache
 
@@ -634,10 +637,10 @@ def fib(n):
 ```
 
 ```python
->>> [fib(n) for n in range(16)]
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610]
+>>> [fib(n) for n in range(8)]
+[0, 1, 1, 2, 3, 5, 8, 13]
 >>> fib.cache_info()
-CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
+CacheInfo(hits=12, misses=8, maxsize=None, currsize=8)
 ```
 
 ### Parametrized Decorator
