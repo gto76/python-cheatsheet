@@ -1723,7 +1723,7 @@ import numpy as np
 <view>  = np.broadcast_to(<array>, <shape>)
 ```
 
-#### Axis is an index of dimension that gets collapsed.
+#### Axis is an index of dimension, that gets collapsed.
 ```python
 <array> = <array>.sum(<axis>)
 <array> = <array>.argmin(<axis>)
