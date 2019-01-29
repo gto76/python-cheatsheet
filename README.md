@@ -1714,12 +1714,12 @@ import numpy as np
 ```python
 <array> = np.array(<list>)
 <array> = np.arange(from_inclusive, to_exclusive, step_size)
-<array> = np.ones(<shape>)  # Shape is a tuple of dimension sizes.
+<array> = np.ones(<shape>)
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
 ```python
-<array>.shape = <shape>
+<array>.shape = <shape>                   # Shape is a tuple of dimension sizes.
 <view>        = <array>.reshape(<shape>)
 <view>        = np.broadcast_to(<array>, <shape>)
 ```
