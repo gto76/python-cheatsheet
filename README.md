@@ -329,7 +329,7 @@ Format
 ```
 
 ### General Options
-```python
+```bash
 {<el>:<10}       # '<el>      '
 {<el>:>10}       # '      <el>'
 {<el>:^10}       # '   <el>   '
@@ -1740,14 +1740,14 @@ import numpy as np
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 ```python
-left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
-right = [ 0.1 ,  0.6 ,  0.8 ]   # Shape: (3)
+left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
+right = [ 0.1 ,  0.6 ,  0.8 ]  # Shape: (3)
 ```
 
 #### 1. If array shapes differ, left-pad the smaller shape with ones:
 ```python
-left  = [[0.1], [0.6], [0.8]]   # Shape: (3, 1)
-right = [[0.1 ,  0.6 ,  0.8]]   # Shape: (1, 3) <- !
+left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
+right = [[0.1 ,  0.6 ,  0.8]]  # Shape: (1, 3) <- !
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
