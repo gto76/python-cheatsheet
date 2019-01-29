@@ -1724,7 +1724,7 @@ import numpy as np
 
 ```python
 <array> = <array>.sum(<axis>)
-<array> = <array>.argmin(<axis>)
+indexes = <array>.argmin(<axis>)
 ```
 
 * **Shape is a tuple of dimension sizes.**
