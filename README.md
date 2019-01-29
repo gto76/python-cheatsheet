@@ -1325,7 +1325,9 @@ ValueError: malformed node or string
 import ast
 from ast import Num, BinOp, UnaryOp
 import operator as op
+```
 
+```python
 legal_operators = {ast.Add:    op.add, 
                    ast.Sub:    op.sub, 
                    ast.Mult:   op.mul,
@@ -1712,7 +1714,7 @@ import numpy as np
 ```python
 <array> = np.array(<list>)
 <array> = np.arange(from_inclusive, to_exclusive, step_size)
-<array> = np.ones(<shape>)                # Shape is a tuple of dimension sizes.
+<array> = np.ones(<shape>)  # Shape is a tuple of dimension sizes.
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
