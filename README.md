@@ -1134,7 +1134,8 @@ Hashlib
 
 Itertools
 ---------
-**Every function returns an iterator and can accept any collection and/or iterator. If you want to print the iterator, you need to pass it to the list() function!**
+* **Every function returns an iterator and can accept any collection and/or iterator.**
+* **If you want to print the iterator, you need to pass it to the list() function!**
 
 ```python
 from itertools import *
@@ -1708,11 +1709,10 @@ NumPy
 import numpy as np
 ```
 
-**Shape is a tuple of ints, representing sizes of array's dimensions.**
 ```python
 <array> = np.array(<list>)
 <array> = np.arange(from_inclusive, to_exclusive, step_size)
-<array> = np.ones(<shape>)
+<array> = np.ones(<shape>)                # Shape is a tuple of dimension sizes.
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
 
