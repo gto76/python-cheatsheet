@@ -338,10 +338,10 @@ Format
 ```
 
 ### String Options
-**`'!r'` calls object's repr() method, instead of format(), to get a string.** 
 ```python
 {'abcde'!r:<10}  # "'abcde'   "
 ```
+* **`'!r'` calls object's repr() method, instead of format(), to get a string.** 
 
 ```python
 {'abcde':.3}     # 'abc'
@@ -608,7 +608,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**Decorator that prints function's name every time it gets called. Wraps is a helper decorator that copies metadata of function add() to function out(). Without it `'add.__name__'` would return `'out'`.**
+**Decorator that prints function's name every time it gets called.**
 
 ```python
 from functools import wraps
@@ -624,6 +624,8 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
+* **Wraps is a helper decorator that copies metadata of function add() to function out().**
+* **Without it `'add.__name__'` would return `'out'`.**
 
 ### LRU Cache
 **Decorator that caches function's return values. All arguments must be hashable.**
@@ -714,7 +716,9 @@ class MyComparable:
 ```
 
 ### Hashable
-**Hashable object needs both hash() and eq() methods and it's hash value should never change. Objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do. That is why Python automatically makes classes unhashable if you only implement eq().**
+* **Hashable object needs both hash() and eq() methods and it's hash value should never change.**
+* **Objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do.**
+* **That is why Python automatically makes classes unhashable if you only implement eq().**
 
 ```python
 class MyHashable:
