@@ -807,9 +807,9 @@ script_name = sys.argv[0]
 arguments   = sys.argv[1:]
 ```
 
-### Print
+### Print Function
 ```python
-print(<el_1> [, <el_2>, end='', sep='', file=<file>])
+print(<el_1>, <el_2>, ..., sep=' ', end='\n', file=sys.stdout)
 ```
 
 * **Use `'file=sys.stderr'` for errors.**
