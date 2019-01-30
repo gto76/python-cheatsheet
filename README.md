@@ -885,7 +885,7 @@ while True:
 * `'x'`  - write or fail if the file already exists
 * `'a'`  - append
 * `'w+'` - read and write (truncate)
-* `'r+'` - read and write from begining
+* `'r+'` - read and write from beginning
 * `'a+'` - read and write from end
 * `'b'`  - binary mode
 * `'t'`  - text mode (default)
@@ -1086,7 +1086,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * `'<'` - little-endian
 * `'>'` - big-endian
 
-#### Use capital leter for unsigned type. Standard size in brackets:
+#### Use capital letter for unsigned type. Standard size in brackets:
 * `'x'` - pad byte
 * `'c'` - char (1)
 * `'h'` - short (2)
