@@ -798,6 +798,37 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
 ```
 
 
+Exceptions
+----------
+```python
+while True:
+    try:
+        x = int(input('Please enter a number: '))
+    except ValueError:
+        print('Oops!  That was no valid number.  Try again...')
+    else:
+        print('Thank you.')
+        break
+```
+
+#### Raising exception:
+```python
+raise ValueError('A very specific message!')
+```
+
+### Finally
+```python
+>>> try:
+...     raise KeyboardInterrupt
+... finally:
+...     print('Goodbye, world!')
+Goodbye, world!
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+KeyboardInterrupt
+```
+
+
 System
 ------
 ### Command Line Arguments
@@ -985,37 +1016,6 @@ if cursor:
 ```python
 db.execute(<query>)
 db.commit()
-```
-
-
-Exceptions
-----------
-```python
-while True:
-    try:
-        x = int(input('Please enter a number: '))
-    except ValueError:
-        print('Oops!  That was no valid number.  Try again...')
-    else:
-        print('Thank you.')
-        break
-```
-
-#### Raising exception:
-```python
-raise ValueError('A very specific message!')
-```
-
-### Finally
-```python
->>> try:
-...     raise KeyboardInterrupt
-... finally:
-...     print('Goodbye, world!')
-Goodbye, world!
-Traceback (most recent call last):
-  File "<stdin>", line 2, in <module>
-KeyboardInterrupt
 ```
 
 
