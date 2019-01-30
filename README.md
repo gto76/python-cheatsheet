@@ -1752,7 +1752,7 @@ indexes = <array>.argmin(<axis>)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is an index of dimension, that gets collapsed.**
+* **Axis is an index of dimension that gets collapsed.**
 
 ### Indexing
 ```bash
