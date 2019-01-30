@@ -902,7 +902,7 @@ import json
 #### To preserve order:
 ```python
 from collections import OrderedDict
-<dict> = json.loads(<str>, object_pairs_hook=OrderedDict)
+<object> = json.loads(<str>, object_pairs_hook=OrderedDict)
 ```
 
 ### Read File
