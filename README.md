@@ -952,10 +952,11 @@ Pickle
 ------
 ```python
 >>> import pickle
->>> favorite_color = {'lion': 'yellow', 'kitty': 'red'}
->>> pickle.dump(favorite_color, open('data.p', 'wb'))
->>> pickle.load(open('data.p', 'rb'))
-{'lion': 'yellow', 'kitty': 'red'}
+>>> P = collections.namedtuple('P', 'x y')
+>>> points = [P(0, 0), P(1, 1), P(2, 2)]
+>>> pickle.dump(points, open('points.p', 'wb'))
+>>> pickle.load(open('points.p', 'rb'))
+[P(x=0, y=0), P(x=1, y=1), P(x=2, y=2)]
 ```
 
 
