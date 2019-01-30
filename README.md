@@ -895,10 +895,6 @@ JSON
 ----
 ```python
 import json
-```
-
-### Serialization
-```python
 <str>  = json.dumps(<object>, ensure_ascii=True, indent=None)
 <dict> = json.loads(<str>)
 ```
@@ -952,10 +948,6 @@ Pickle
 ------
 ```python
 import pickle
-```
-
-### Serialization
-```python
 <bytes>  = pickle.dumps(<object>)
 <object> = pickle.loads(<bytes>)
 ```
