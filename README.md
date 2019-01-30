@@ -846,13 +846,15 @@ while True:
 ```
 
 #### Modes:
-* `'r'` - open for reading (default)
-* `'w'` - open for writing, erasing the file first
-* `'x'` - open for exclusive creation, failing if the file already exists
-* `'a'` - open for writing, appending to the end of the file if it exists
-* `'b'` - binary mode
-* `'t'` - text mode (default)
-* `'+'` - open a disk file for updating (reading and writing)
+* `'r'`  - read (default)
+* `'w'`  - write (truncate)
+* `'x'`  - write or fail if the file already exists
+* `'a'`  - append
+* `'w+'` - read and write (truncate)
+* `'r+'` - read and write from begining
+* `'a+'` - read and write from end
+* `'b'`  - binary mode
+* `'t'`  - text mode (default)
 
 #### Read Text from File:
 ```python
