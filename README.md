@@ -370,14 +370,14 @@ Format
 ```
 
 #### Float presentation types:
-* `'f'` - Fixed point: `.<precision>f`
-* `'%'` - Percent: `.<precision>%`
-* `'e'` - Exponent
+* `'f'` - fixed point: `.<precision>f`
+* `'%'` - percent: `.<precision>%`
+* `'e'` - exponent
 
 #### Integer presentation types:
-* `'c'` - Character
-* `'b'` - Binary
-* `'x'` - Hex
+* `'c'` - character
+* `'b'` - binary
+* `'x'` - hex
 * `'X'` - HEX
 
 
@@ -822,14 +822,46 @@ script_name = sys.argv[0]
 arguments   = sys.argv[1:]
 ```
 
-### Read File
+### Input
+**Reads a line from user input or pipe if present. The trailing newline gets stripped.**
+
+```python
+filename = input('Enter a file name: ')
+```
+
+#### Prints lines until EOF:
+```python
+while True:
+    try:
+        print(input())
+    except EOFError:
+        break
+```
+
+### Open
+**Opens file and returns a corresponding file object.**
+
+```python
+<file> = open(<path>, mode='r', encoding=None)
+```
+
+#### Modes:
+* `'r'` - open for reading (default)
+* `'w'` - open for writing, erasing the file first
+* `'x'` - open for exclusive creation, failing if the file already exists
+* `'a'` - open for writing, appending to the end of the file if it exists
+* `'b'` - binary mode
+* `'t'` - text mode (default)
+* `'+'` - open a disk file for updating (reading and writing)
+
+#### Read Text File:
 ```python
 def read_file(filename):
     with open(filename, encoding='utf-8') as file:
         return file.readlines()
 ```
 
-### Write to File
+#### Write to Text File:
 ```python
 def write_to_file(filename, text):
     with open(filename, 'w', encoding='utf-8') as file:
@@ -865,22 +897,6 @@ import os
 b'.\n..\nfile1.txt\nfile2.txt\n'
 >>> a.returncode
 0
-```
-
-### Input
-**Reads a line from user input or pipe if present. The trailing newline gets stripped.**
-
-```python
-filename = input('Enter a file name: ')
-```
-
-#### Prints lines until EOF:
-```python
-while True:
-    try:
-        print(input())
-    except EOFError:
-        break
 ```
 
 ### Recursion Limit
