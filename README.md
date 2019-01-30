@@ -370,9 +370,9 @@ Format
 ```
 
 #### Float presentation types:
-* `'f'` - fixed point: `.<precision>f`
-* `'%'` - percent: `.<precision>%`
-* `'e'` - exponent
+* `'f'` - Fixed point: `.<precision>f`
+* `'%'` - Percent: `.<precision>%`
+* `'e'` - Exponent
 
 #### Integer presentation types:
 * `'c'` - character
