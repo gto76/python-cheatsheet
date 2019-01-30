@@ -854,14 +854,14 @@ while True:
 * `'t'` - text mode (default)
 * `'+'` - open a disk file for updating (reading and writing)
 
-#### Read Text File:
+#### Read Text from File:
 ```python
 def read_file(filename):
     with open(filename, encoding='utf-8') as file:
         return file.readlines()
 ```
 
-#### Write to Text File:
+#### Write Text to File:
 ```python
 def write_to_file(filename, text):
     with open(filename, 'w', encoding='utf-8') as file:
