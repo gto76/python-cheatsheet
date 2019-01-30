@@ -815,14 +815,14 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
 
 System
 ------
-### Arguments
+### Command Line Arguments
 ```python
 import sys
 script_name = sys.argv[0]
 arguments   = sys.argv[1:]
 ```
 
-### Input
+### Input Function
 **Reads a line from user input or pipe if present. The trailing newline gets stripped.**
 
 ```python
@@ -838,7 +838,7 @@ while True:
         break
 ```
 
-### Open
+### Open Function
 **Opens file and returns a corresponding file object.**
 
 ```python
@@ -883,7 +883,7 @@ from os import path, listdir
 ['1.gif', 'card.gif']
 ```
 
-### Execute Command
+### Command Execution
 ```python
 import os
 <str> = os.popen(<command>).read()
