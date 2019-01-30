@@ -265,7 +265,6 @@ Regex
 -----
 ```python
 import re
-
 <str>     = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
 <list>    = re.findall(<regex>, text)            # Returns all occurrences.
 <list>    = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
