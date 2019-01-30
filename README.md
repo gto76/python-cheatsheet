@@ -295,23 +295,6 @@ import re
 ```
 
 
-Print
------
-**Use `'file=sys.stderr'` for errors.**
-
-```python
-print(<el_1> [, <el_2>, end='', sep='', file=<file>])
-```
-
-```python
->>> from pprint import pprint
->>> pprint(locals())
-{'__doc__': None,
- '__name__': '__main__',
- '__package__': None, ...}
-```
-
-
 Format
 ------
 ```python
@@ -822,6 +805,21 @@ System
 import sys
 script_name = sys.argv[0]
 arguments   = sys.argv[1:]
+```
+
+### Print
+**Use `'file=sys.stderr'` for errors.**
+
+```python
+print(<el_1> [, <el_2>, end='', sep='', file=<file>])
+```
+
+```python
+>>> from pprint import pprint
+>>> pprint(locals())
+{'__doc__': None,
+ '__name__': '__main__',
+ '__package__': None, ...}
 ```
 
 ### Input Function
