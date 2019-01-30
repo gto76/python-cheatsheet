@@ -540,7 +540,7 @@ point     = Point(0, 0)
 ```python
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
-Cutlery   = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
+Cutlery   = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 
 ```python
@@ -800,9 +800,9 @@ random_member   = random.choice(list(<enum>))
 
 ### Inline
 ```python
-Cutlery = Enum('Cutlery', ['knife', 'fork', 'spoon'])
-Cutlery = Enum('Cutlery', 'knife fork spoon')
-Cutlery = Enum('Cutlery', {'knife': 1, 'fork': 2, 'spoon': 3})
+Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
+Cutlery = Enum('Cutlery', 'fork knife spoon')
+Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 
 #### Functions can not be values, so they must be wrapped:
