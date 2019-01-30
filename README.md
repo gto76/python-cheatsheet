@@ -818,10 +818,10 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 #### Pretty print:
 ```python
 >>> from pprint import pprint
->>> pprint(locals())
-{'__doc__': None,
- '__name__': '__main__',
- '__package__': None, ...}
+>>> pprint(dir())
+['__annotations__',
+ '__builtins__',
+ '__doc__', ...]
 ```
 
 ### Input Function
