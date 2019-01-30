@@ -808,12 +808,13 @@ arguments   = sys.argv[1:]
 ```
 
 ### Print
-**Use `'file=sys.stderr'` for errors.**
-
 ```python
 print(<el_1> [, <el_2>, end='', sep='', file=<file>])
 ```
 
+* **Use `'file=sys.stderr'` for errors.**
+
+#### Pretty print:
 ```python
 >>> from pprint import pprint
 >>> pprint(locals())
