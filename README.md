@@ -737,6 +737,8 @@ class MyHashable:
 ```
 
 ### Sequence
+* **Methods do not depend on each other, so they can be skipped if not needed.**
+* **Any object with defined getitem() is considered iterable, even if it lacks iter().**
 ```python
 class MySequence:
     def __init__(self, a):
