@@ -846,15 +846,15 @@ while True:
 ```
 
 #### Modes:
-* `'r' ` - Read (default)
-* `'w' ` - Write (truncate)
-* `'x' ` - Write or fail if the file already exists
-* `'a' ` - Append
-* `'w+'` - Read and write (truncate)
-* `'r+'` - Read and write from begining
-* `'a+'` - Read and write from end
-* `'b' ` - Binary mode
-* `'t' ` - Text mode (default)
+* `'r'`  - read (default)
+* `'w'`  - write (truncate)
+* `'x'`  - write or fail if the file already exists
+* `'a'`  - append
+* `'w+'` - read and write (truncate)
+* `'r+'` - read and write from begining
+* `'a+'` - read and write from end
+* `'b'`  - binary mode
+* `'t'`  - text mode (default)
 
 #### Read Text from File:
 ```python
