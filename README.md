@@ -813,7 +813,6 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 
 * **Use `'file=sys.stderr'` for errors.**
-* **Use `'flush=Ture'` to forcibly flush the stream.**
 
 #### Pretty print:
 ```python
