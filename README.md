@@ -951,12 +951,27 @@ db.commit()
 Pickle
 ------
 ```python
->>> import pickle
->>> P = collections.namedtuple('P', 'x y')
->>> points = [P(0, 0), P(1, 1), P(2, 2)]
->>> pickle.dump(points, open('points.p', 'wb'))
->>> pickle.load(open('points.p', 'rb'))
-[P(x=0, y=0), P(x=1, y=1), P(x=2, y=2)]
+import pickle
+```
+
+### Serialization
+```python
+<bytes>  = pickle.dumps(<object>)
+<object> = pickle.loads(<bytes>)
+```
+
+### Read Object from File
+```python
+def read_pickle_file(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+```
+
+### Write Object to File
+```python
+def write_to_pickle_file(filename, an_object):
+    with open(filename, 'wb') as file:
+        pickle.dump(an_object, file)
 ```
 
 
