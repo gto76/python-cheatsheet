@@ -824,13 +824,13 @@ print(<el_1>, <el_2>, ..., sep=' ', end='\n', file=sys.stdout)
 ```
 
 ### Input Function
-* **Reads a line from user input or pipe if present.**
-* **The trailing newline gets stripped.**
-* **The prompt string is printed to standard output before reading input.**
-
 ```python
 <str> = input(prompt=None)
 ```
+
+* **Reads a line from user input or pipe if present.**
+* **The trailing newline gets stripped.**
+* **The prompt string is printed to standard output before reading input.**
 
 #### Prints lines until EOF:
 ```python
