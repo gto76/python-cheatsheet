@@ -825,7 +825,9 @@ arguments   = sys.argv[1:]
 ```
 
 ### Input Function
-**Reads a line from user input or pipe if present. The trailing newline gets stripped.**
+* **Reads a line from user input or pipe if present.**
+* **The trailing newline gets stripped.**
+* **The prompt string is printed to standard output before reading input.**
 
 ```python
 <str> = input(prompt=None)
