@@ -895,8 +895,8 @@ JSON
 ----
 ```python
 import json
-<str>  = json.dumps(<object>, ensure_ascii=True, indent=None)
-<dict> = json.loads(<str>)
+<str>    = json.dumps(<object>, ensure_ascii=True, indent=None)
+<object> = json.loads(<str>)
 ```
 
 #### To preserve order:
@@ -917,6 +917,29 @@ def read_json_file(filename):
 def write_to_json_file(filename, an_object):
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(an_object, file, ensure_ascii=False, indent=2)
+```
+
+
+Pickle
+------
+```python
+import pickle
+<bytes>  = pickle.dumps(<object>)
+<object> = pickle.loads(<bytes>)
+```
+
+### Read Object from File
+```python
+def read_pickle_file(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+```
+
+### Write Object to File
+```python
+def write_to_pickle_file(filename, an_object):
+    with open(filename, 'wb') as file:
+        pickle.dump(an_object, file)
 ```
 
 
@@ -941,29 +964,6 @@ if cursor:
 ```python
 db.execute(<query>)
 db.commit()
-```
-
-
-Pickle
-------
-```python
-import pickle
-<bytes>  = pickle.dumps(<object>)
-<object> = pickle.loads(<bytes>)
-```
-
-### Read Object from File
-```python
-def read_pickle_file(filename):
-    with open(filename, 'rb') as file:
-        return pickle.load(file)
-```
-
-### Write Object to File
-```python
-def write_to_pickle_file(filename, an_object):
-    with open(filename, 'wb') as file:
-        pickle.dump(an_object, file)
 ```
 
 
