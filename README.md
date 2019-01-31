@@ -1437,6 +1437,30 @@ reader(adder(printer()))  # 100, 101, ..., 109
 Libraries
 =========
 
+Progress Bar
+------------
+```python
+# $ pip3 install tqdm
+from tqdm import tqdm
+from time import sleep
+for i in tqdm([1, 2, 3]):
+    sleep(0.2)
+for i in tqdm(range(100)):
+    sleep(0.02)
+```
+
+
+Plot
+----
+```python
+# $ pip3 install matplotlib
+from matplotlib import pyplot
+pyplot.plot(<data_1> [, <data_2>, ...])
+pyplot.savefig(<filename>, transparent=True)
+pyplot.show()
+```
+
+
 Argparse
 --------
 ```python
@@ -1476,19 +1500,6 @@ optional arguments:
 ```
 
 
-Progress Bar
-------------
-```python
-# $ pip3 install tqdm
-from tqdm import tqdm
-from time import sleep
-for i in tqdm([1, 2, 3]):
-    sleep(0.2)
-for i in tqdm(range(100)):
-    sleep(0.02)
-```
-
-
 Table
 -----
 #### Prints CSV file as ASCII table:
@@ -1523,17 +1534,6 @@ def get_border(screen):
     P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
     return P(width - 1, height - 1)
-```
-
-
-Plot
-----
-```python
-# $ pip3 install matplotlib
-from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])
-pyplot.savefig(<filename>, transparent=True)
-pyplot.show()
 ```
 
 
