@@ -1482,23 +1482,6 @@ else:
     print(f'{args.x}^{args.y} == {answer}')
 ```
 
-### Usage
-```text
-$ python3 prog.py --help
-usage: test2.py [-h] [-v | -q] x y
-
-calculate X to the power of Y
-
-positional arguments:
-  x              the base
-  y              the exponent
-
-optional arguments:
-  -h, --help     show this help message and exit
-  -v, --verbose
-  -q, --quiet
-```
-
 
 Table
 -----
