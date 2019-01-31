@@ -1465,13 +1465,14 @@ Argparse
 --------
 ```python
 from argparse import ArgumentParser
-parser = ArgumentParser(description='calculate X to the power of Y')
-group = parser.add_mutually_exclusive_group()
+desc   = 'calculate X to the power of Y'
+parser = ArgumentParser(description=desc)
+group  = parser.add_mutually_exclusive_group()
 group.add_argument('-v', '--verbose', action='store_true')
 group.add_argument('-q', '--quiet', action='store_true')
 parser.add_argument('x', type=int, help='the base')
 parser.add_argument('y', type=int, help='the exponent')
-args = parser.parse_args()
+args   = parser.parse_args()
 answer = args.x ** args.y
 
 if args.quiet:
@@ -1490,8 +1491,8 @@ Table
 # $ pip3 install tabulate
 from csv import reader
 from tabulate import tabulate
-with open(<filename>, encoding='utf-8', newline='') as csv_file:
-    reader = reader(csv_file, delimiter=';')
+with open(<filename>, encoding='utf-8', newline='') as file:
+    reader  = reader(file, delimiter=';')
     headers = [a.title() for a in next(reader)]
     print(tabulate(reader, headers))
 ```
@@ -1527,8 +1528,10 @@ Image
 # $ pip3 install pillow
 from PIL import Image
 width, height = 100, 100
-img = Image.new('L', (width, height), 'white')
-img.putdata([255 * a/(width*height) for a in range(width*height)])
+img    = Image.new('L', (width, height), 'white')
+size   = width * height
+pixels = [255 * a/size for a in range(size)]
+img.putdata(pixels)
 img.save('out.png')
 ```
 
@@ -1639,9 +1642,10 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url = 'http://localhost:8080/odds/football'
->>> r = requests.post(url, data={'team': 'arsenal f.c.'})
->>> r.json()
+>>> url      = 'http://localhost:8080/odds/football'
+>>> data     = {'team': 'arsenal f.c.'}
+>>> response = requests.post(url, data=data)
+>>> response.json()
 ['arsenal f.c.', 2.44, 3.29]
 ```
 
@@ -1698,11 +1702,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
-from datetime import datetime
-graph = output.GraphvizOutput()
+from datetime    import datetime
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-graph.output_file = f'profile-{time_str}.png'
-with PyCallGraph(output=graph):
+filename = f'profile-{time_str}.png'
+drawer   = output.GraphvizOutput(output_file=filename)
+with PyCallGraph(output=drawer):
     <code_to_be_profiled>
 ```
 
