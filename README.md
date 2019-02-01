@@ -888,25 +888,25 @@ while True:
 ```
 
 #### Modes:
-* `'r'`  - read (default)
-* `'w'`  - write (truncate)
-* `'x'`  - write or fail if file already exists
-* `'a'`  - append
-* `'w+'` - read and write (truncate)
-* `'r+'` - read and write from beginning
-* `'a+'` - read and write from end
-* `'b'`  - binary mode
-* `'t'`  - text mode (default)
+* `'r'`  - Read (default).
+* `'w'`  - Write (truncate).
+* `'x'`  - Write or fail if file already exists.
+* `'a'`  - Append.
+* `'w+'` - Read and write (truncate).
+* `'r+'` - Read and write from beginning.
+* `'a+'` - Read and write from the end.
+* `'b'`  - Binary mode.
+* `'t'`  - Text mode (default).
 
 #### Newline - input:
-* `None` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'`.
+* `'None'` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'`.
 * `''` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`.
 * `'\n'` - Input is broken on `'\n'`.
 * `'\r'` - Input is broken on `'\r'`.
 * `'\r\n'` - Input is broken on `'\r\n'`.
 
 #### Newline - output:
-* `None` - Any `'\n'` is translated to system default line separator.
+* `'None'` - Any `'\n'` is translated to system default line separator.
 * `''` - No translation.
 * `'\n'` - No translation.
 * `'\r'` - Any `'\n'` is translated to `'\r'`.
