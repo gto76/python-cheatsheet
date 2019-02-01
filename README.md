@@ -1644,7 +1644,7 @@ def send_page(sport):
 def odds_handler(sport):
     team = request.forms.get('team')
     home_odds, away_odds = 2.44, 3.29
-    response.headers['Content-Type']  ='application/json'
+    response.headers['Content-Type'] = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
     return json.dumps([team, home_odds, away_odds])
 ```
@@ -1653,7 +1653,7 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url  = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -1713,7 +1713,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```python
 # $ pip3 install pycallgraph
 from pycallgraph import output, PyCallGraph
-from datetime    import datetime
+from datetime import datetime
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 filename = f'profile-{time_str}.png'
 drawer = output.GraphvizOutput(output_file=filename)
