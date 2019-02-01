@@ -1598,15 +1598,15 @@ Scraping
 # $ pip3 install requests beautifulsoup4
 >>> import requests
 >>> from bs4 import BeautifulSoup
->>> url      = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
->>> page     = requests.get(url)
->>> document = BeautifulSoup(page.text, 'html.parser')
->>> table    = document.find('table', class_='infobox vevent')
->>> rows     = table.find_all('tr')
->>> link     = rows[11].find('a')['href']
-'https://www.python.org/'
->>> latest_v = rows[6].find('div').text.split()[0]
-'3.7.2'
+>>> url   = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+>>> page  = requests.get(url)
+>>> doc   = BeautifulSoup(page.text, 'html.parser')
+>>> table = doc.find('table', class_='infobox vevent')
+>>> rows  = table.find_all('tr')
+>>> link  = rows[11].find('a')['href']
+>>> ver   = rows[6].find('div').text.split()[0]
+>>> link, ver
+('https://www.python.org/', '3.7.2')
 ```
 
 
