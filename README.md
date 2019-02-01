@@ -1513,7 +1513,7 @@ Table
 # $ pip3 install tabulate
 import csv
 from tabulate import tabulate
-with open(<filename>, encoding='utf-8', newline='') as file:
+with open(<filename>, encoding='utf-8') as file:
     lines   = csv.reader(file, delimiter=';')
     headers = [header.title() for header in next(lines)]
     table   = tabulate(lines, headers)
