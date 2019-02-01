@@ -1501,7 +1501,7 @@ import csv
 from tabulate import tabulate
 with open(<filename>, encoding='utf-8', newline='') as file:
     lines   = csv.reader(file, delimiter=';')
-    headers = [a.title() for a in next(lines)]
+    headers = [header.title() for header in next(lines)]
     table   = tabulate(lines, headers)
     print(table)
 ```
@@ -1644,7 +1644,7 @@ def send_page(sport):
 def odds_handler(sport):
     team = request.forms.get('team')
     home_odds, away_odds = 2.44, 3.29
-    response.headers['Content-Type']  = 'application/json'
+    response.headers['Content-Type']  ='application/json'
     response.headers['Cache-Control'] = 'no-cache'
     return json.dumps([team, home_odds, away_odds])
 ```
@@ -1653,8 +1653,8 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url      = 'http://localhost:8080/odds/football'
->>> data     = {'team': 'arsenal f.c.'}
+>>> url  = 'http://localhost:8080/odds/football'
+>>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
 ['arsenal f.c.', 2.44, 3.29]
@@ -1716,7 +1716,7 @@ from pycallgraph import output, PyCallGraph
 from datetime    import datetime
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 filename = f'profile-{time_str}.png'
-drawer   = output.GraphvizOutput(output_file=filename)
+drawer = output.GraphvizOutput(output_file=filename)
 with PyCallGraph(output=drawer):
     <code_to_be_profiled>
 ```
