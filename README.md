@@ -884,7 +884,7 @@ while True:
 **Opens file and returns a corresponding file object.**
 
 ```python
-<file> = open(<path>, mode='r', encoding=None, newline=None)
+<file> = open(<path>, mode='r', encoding=None)
 ```
 
 #### Modes:
@@ -897,20 +897,6 @@ while True:
 * **`'a+'` - Read and write from the end.**
 * **`'b'`  - Binary mode.**
 * **`'t'`  - Text mode (default).**
-
-#### Newline - input:
-* **`'None'` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'` (default).**
-* **`''` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`.**
-* **`'\n'` - Input is broken on `'\n'`.**
-* **`'\r'` - Input is broken on `'\r'`.**
-* **`'\r\n'` - Input is broken on `'\r\n'`.**
-
-#### Newline - output:
-* **`'None'` - Any `'\n'` is translated to system default line separator (default).**
-* **`''` - No translation.**
-* **`'\n'` - No translation.**
-* **`'\r'` - Any `'\n'` is translated to `'\r'`.**
-* **`'\r\n'` - Any `'\n'` is translated to `'\r\n'`.**
 
 #### Read Text from File:
 ```python
