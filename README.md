@@ -888,15 +888,15 @@ while True:
 ```
 
 #### Modes:
-* `'r'`  - Read (default).
-* `'w'`  - Write (truncate).
-* `'x'`  - Write or fail if file already exists.
-* `'a'`  - Append.
-* `'w+'` - Read and write (truncate).
-* `'r+'` - Read and write from beginning.
-* `'a+'` - Read and write from the end.
-* `'b'`  - Binary mode.
-* `'t'`  - Text mode (default).
+* **`'r'`  - Read (default).**
+* **`'w'`  - Write (truncate).**
+* **`'x'`  - Write or fail if the file already exists.**
+* **`'a'`  - Append.**
+* **`'w+'` - Read and write (truncate).**
+* **`'r+'` - Read and write from the beginning.**
+* **`'a+'` - Read and write from the end.**
+* **`'b'`  - Binary mode.**
+* **`'t'`  - Text mode (default).**
 
 #### Newline - input:
 * `'None'` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'`.
