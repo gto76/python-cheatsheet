@@ -890,7 +890,7 @@ while True:
 #### Modes:
 * `'r'`  - read (default)
 * `'w'`  - write (truncate)
-* `'x'`  - write or fail if the file already exists
+* `'x'`  - write or fail if file already exists
 * `'a'`  - append
 * `'w+'` - read and write (truncate)
 * `'r+'` - read and write from beginning
@@ -899,18 +899,18 @@ while True:
 * `'t'`  - text mode (default)
 
 #### Newline - input:
-* `None` - Input is broken on '\n', '\r' and '\r\n'. '\r' and '\r\n' are translated to '\n'.
-* `''` - Input is broken on '\n', '\r' and '\r\n'.
-* `'\n'` - Input is broken on '\n'.
-* `'\r'` - Input is broken on '\r'.
-* `'\r\n'` - Input is broken on '\r\n'.
+* `None` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'`.
+* `''` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`.
+* `'\n'` - Input is broken on `'\n'`.
+* `'\r'` - Input is broken on `'\r'`.
+* `'\r\n'` - Input is broken on `'\r\n'`.
 
 #### Newline - output:
-* `None` - Any '\n' is translated to system default line separator.
+* `None` - Any `'\n'` is translated to system default line separator.
 * `''` - No translation.
 * `'\n'` - No translation.
-* `'\r'` - Any '\n' is translated to '\r'.
-* `'\r\n'` - Any '\n' is translated to '\r\n'
+* `'\r'` - Any `'\n'` is translated to `'\r'`.
+* `'\r\n'` - Any `'\n'` is translated to `'\r\n'`.
 
 #### Read Text from File:
 ```python
