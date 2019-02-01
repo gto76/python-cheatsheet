@@ -270,7 +270,7 @@ import re
 <list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<iter>  = re.finditer(<regex>, text)           # Returns iterator of all matches.
+<iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
@@ -280,10 +280,11 @@ import re
 
 ### Match Object
 ```python
-<str> = <Match>.group()   # Whole match.
-<str> = <Match>.group(1)  # Part in first bracket.
-<int> = <Match>.start()   # Start index of a match.
-<int> = <Match>.end()     # Exclusive end index of a match.
+<str>   = <Match>.group()   # Whole match.
+<str>   = <Match>.group(1)  # Part in first bracket.
+<tuple> = <Match>.groups()  # All bracketed parts.
+<int>   = <Match>.start()   # Start index of a match.
+<int>   = <Match>.end()     # Exclusive end index of a match.
 ```
 
 ### Special Sequences
@@ -1469,7 +1470,7 @@ desc   = 'calculate X to the power of Y'
 parser = ArgumentParser(description=desc)
 group  = parser.add_mutually_exclusive_group()
 group.add_argument('-v', '--verbose', action='store_true')
-group.add_argument('-q', '--quiet', action='store_true')
+group.add_argument('-q', '--quiet',   action='store_true')
 parser.add_argument('x', type=int, help='the base')
 parser.add_argument('y', type=int, help='the exponent')
 args   = parser.parse_args()
@@ -1489,12 +1490,13 @@ Table
 #### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
-from csv import reader
+import csv
 from tabulate import tabulate
 with open(<filename>, encoding='utf-8', newline='') as file:
-    reader  = reader(file, delimiter=';')
-    headers = [a.title() for a in next(reader)]
-    print(tabulate(reader, headers))
+    lines   = csv.reader(file, delimiter=';')
+    headers = [a.title() for a in next(lines)]
+    table   = tabulate(lines, headers)
+    print(table)
 ```
 
 
@@ -1527,10 +1529,12 @@ Image
 ```python
 # $ pip3 install pillow
 from PIL import Image
-width, height = 100, 100
-img    = Image.new('L', (width, height), 'white')
+width  = 100
+height = 100
 size   = width * height
-pixels = [255 * a/size for a in range(size)]
+pixels = [255 * i/size for i in range(size)]
+
+img = Image.new('L', (width, height), 'white')
 img.putdata(pixels)
 img.save('out.png')
 ```
@@ -1545,13 +1549,13 @@ img.save('out.png')
 
 Audio
 -----
-#### Saves a list of floats with values between 0 and 1 to a WAV file:
+#### Saves a list of floats with values between -1 and 1 to a WAV file:
 ```python
 import wave, struct
-samples = [struct.pack('h', int((a-0.5)*60000)) for a in <list>]
-wf = wave.open(<filename>, 'wb')
+samples = [struct.pack('<h', int(a * 30000)) for a in <list>]
+wf = wave.open('test.wav', 'wb')
 wf.setnchannels(1)
-wf.setsampwidth(4)
+wf.setsampwidth(2)
 wf.setframerate(44100)
 wf.writeframes(b''.join(samples))
 wf.close()
