@@ -354,15 +354,15 @@ Format
 ```
 
 #### Float presentation types:
-* `'f'` - Fixed point: `.<precision>f`
-* `'%'` - Percent: `.<precision>%`
-* `'e'` - Exponent
+* **`'f'` - Fixed point: `.<precision>f`**
+* **`'%'` - Percent: `.<precision>%`**
+* **`'e'` - Exponent**
 
 #### Integer presentation types:
-* `'c'` - character
-* `'b'` - binary
-* `'x'` - hex
-* `'X'` - HEX
+* **`'c'` - character**
+* **`'b'` - binary**
+* **`'x'` - hex**
+* **`'X'` - HEX**
 
 
 Numbers
@@ -899,18 +899,18 @@ while True:
 * **`'t'`  - Text mode (default).**
 
 #### Newline - input:
-* `'None'` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'`.
-* `''` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`.
-* `'\n'` - Input is broken on `'\n'`.
-* `'\r'` - Input is broken on `'\r'`.
-* `'\r\n'` - Input is broken on `'\r\n'`.
+* **`'None'` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`. `'\r'` and `'\r\n'` are translated to `'\n'` (default).**
+* **`''` - Input is broken on `'\n'`, `'\r'` and `'\r\n'`.**
+* **`'\n'` - Input is broken on `'\n'`.**
+* **`'\r'` - Input is broken on `'\r'`.**
+* **`'\r\n'` - Input is broken on `'\r\n'`.**
 
 #### Newline - output:
-* `'None'` - Any `'\n'` is translated to system default line separator.
-* `''` - No translation.
-* `'\n'` - No translation.
-* `'\r'` - Any `'\n'` is translated to `'\r'`.
-* `'\r\n'` - Any `'\n'` is translated to `'\r\n'`.
+* **`'None'` - Any `'\n'` is translated to system default line separator (default).**
+* **`''` - No translation.**
+* **`'\n'` - No translation.**
+* **`'\r'` - Any `'\n'` is translated to `'\r'`.**
+* **`'\r\n'` - Any `'\n'` is translated to `'\r\n'`.**
 
 #### Read Text from File:
 ```python
@@ -1104,19 +1104,19 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 ### Format
 #### For standard sizes start format string with:
-* `'='` - native byte order
-* `'<'` - little-endian
-* `'>'` - big-endian
+* **`'='` - native byte order**
+* **`'<'` - little-endian**
+* **`'>'` - big-endian**
 
 #### Use capital letter for unsigned type. Standard size in brackets:
-* `'x'` - pad byte
-* `'c'` - char (1)
-* `'h'` - short (2)
-* `'i'` - int (4)
-* `'l'` - long (4)
-* `'q'` - long long (8)
-* `'f'` - float (4)
-* `'d'` - double (8)
+* **`'x'` - pad byte**
+* **`'c'` - char (1)**
+* **`'h'` - short (2)**
+* **`'i'` - int (4)**
+* **`'l'` - long (4)**
+* **`'q'` - long long (8)**
+* **`'f'` - float (4)**
+* **`'d'` - double (8)**
 
 
 Array
@@ -1561,11 +1561,11 @@ img.save('test.png')
 ```
 
 ### Modes
-* `'1'` - 1-bit pixels, black and white, stored with one pixel per byte.
-* `'L'` - 8-bit pixels, greyscale.
-* `'RGB'` - 3x8-bit pixels, true color.
-* `'RGBA'` - 4x8-bit pixels, true color with transparency mask.
-* `'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.
+* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
+* **`'L'` - 8-bit pixels, greyscale.**
+* **`'RGB'` - 3x8-bit pixels, true color.**
+* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
+* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
 
 
 Audio
