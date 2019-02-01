@@ -619,7 +619,7 @@ def add(x, y):
 * **Without it `'add.__name__'` would return `'out'`.**
 
 ### LRU Cache
-**Decorator that caches function's return values. All arguments must be hashable.**
+**Decorator that caches function's return values. All function's arguments must be hashable.**
 
 ```python
 from functools import lru_cache
