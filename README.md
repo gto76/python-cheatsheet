@@ -1560,7 +1560,7 @@ Audio
 ```python
 import wave, struct
 samples = [struct.pack('<h', int(a * 30000)) for a in <list>]
-wf = wave.open('test.wav', 'wb')
+wf = wave.open('out.wav', 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(2)
 wf.setframerate(44100)
