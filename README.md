@@ -1571,14 +1571,12 @@ wf.close()
 ### Plays Popcorn
 ```python
 # pip3 install simpleaudio
-import simpleaudio as sa
+import simpleaudio, math, struct
 from itertools import chain, repeat
-from math import pi, sin
-import struct
 F = 44100
 S1 = '59J,57j,,59J,54j,,50J,54j,,47J,,,'
 S2 = '59J,61j,,62J,61j,,62j,,59j,,61J,59j,,61j,,57j,,59J,57j,,59j,,55j,,59J,,,'
-sin_f     = lambda frame_no, hz: sin(frame_no * 2 * pi * hz / F)
+sin_f     = lambda frame_no, hz: math.sin(frame_no * 2 * math.pi * hz / F)
 get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_pause = lambda seconds: repeat(0, int(seconds * F))
 get_hz    = lambda note: round(16.352 * 2 ** (int(note[:2])/12))
@@ -1587,7 +1585,7 @@ get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
 notes_seq = f'{S1}{S1}{S2}'
 samples_f = chain.from_iterable(get_note(n) for n in notes_seq.split(','))
 samples_b = b''.join(struct.pack('<h', int(a * 30000)) for a in samples_f)
-sa.play_buffer(samples_b, 1, 2, F)
+simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
 
 
