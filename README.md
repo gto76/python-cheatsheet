@@ -1573,7 +1573,7 @@ wf.close()
 # pip3 install simpleaudio
 import simpleaudio, math, struct
 from itertools import chain, repeat
-F = 44100
+F  = 44100
 S1 = '59♪,57,,59♪,54,,50♪,54,,47♪,,,'
 S2 = '59♪,61,,62♪,61,,62,,59,,61♪,59,,61,,57,,59♪,57,,59,,55,,59♪,,,'
 get_pause = lambda seconds: repeat(0, int(seconds * F))
