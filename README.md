@@ -1574,13 +1574,13 @@ wf.close()
 import simpleaudio, math, struct
 from itertools import chain, repeat
 F = 44100
-S1 = '59J,57j,,59J,54j,,50J,54j,,47J,,,'
-S2 = '59J,61j,,62J,61j,,62j,,59j,,61J,59j,,61j,,57j,,59J,57j,,59j,,55j,,59J,,,'
+S1 = '59♪,57,,59♪,54,,50♪,54,,47♪,,,'
+S2 = '59♪,61,,62♪,61,,62,,59,,61♪,59,,61,,57,,59♪,57,,59,,55,,59♪,,,'
 sin_f     = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_pause = lambda seconds: repeat(0, int(seconds * F))
 get_hz    = lambda note: round(16.352 * 2 ** (int(note[:2])/12))
-parse_n   = lambda note: (get_hz(note), 0.25 if note[2] == 'J' else 0.125)
+parse_n   = lambda note: (get_hz(note), 0.25 if len(note) > 2 else 0.125)
 get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
 samples_f = chain.from_iterable(get_note(n) for n in f'{S1}{S1}{S2}'.split(','))
 samples_b = b''.join(struct.pack('<h', int(a * 30000)) for a in samples_f)
