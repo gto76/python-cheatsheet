@@ -1576,7 +1576,7 @@ from itertools import chain, repeat
 F = 44100
 S1 = '59J,57j,,59J,54j,,50J,54j,,47J,,,'
 S2 = '59J,61j,,62J,61j,,62j,,59j,,61J,59j,,61j,,57j,,59J,57j,,59j,,55j,,59J,,,'
-sin_f     = lambda frame_no, hz: math.sin(frame_no * 2 * math.pi * hz / F)
+sin_f     = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_pause = lambda seconds: repeat(0, int(seconds * F))
 get_hz    = lambda note: round(16.352 * 2 ** (int(note[:2])/12))
