@@ -1584,7 +1584,7 @@ get_pause = lambda seconds: repeat(0, int(seconds * F))
 get_hz    = lambda note: round(16.352 * 2 ** (int(note[:2])/12))
 parse_n   = lambda note: (get_hz(note), 0.25 if note[2] == 'J' else 0.125)
 get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
-notes_seq = f'{S1}{S1}{S2}{S1}{S1}{S2}'
+notes_seq = f'{S1}{S1}{S2}'
 samples_f = chain.from_iterable(get_note(n) for n in notes_seq.split(','))
 samples_b = b''.join(struct.pack('<h', int(a * 30000)) for a in samples_f)
 sa.play_buffer(samples_b, 1, 2, F)
