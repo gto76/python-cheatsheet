@@ -183,7 +183,9 @@ for line in iter(partial(input, 'Please enter value: '), ''):
 
 ### Next
 **Returns next item. If there are no more items it raises exception or returns default if specified.**
+```python
 <el> = next(<iter> [, default])
+```
 
 #### Skips first item:
 ```python
