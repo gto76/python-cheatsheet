@@ -42,7 +42,7 @@ Table of contents
 * [Threading](#threading)
 * [Hashlib](#hashlib)
 * [Itertools](#itertools)
-* [Introspection and Metaprograming](*introspection-and-metaprograming)
+* [Introspection and Metaprograming](#introspection-and-metaprograming)
 * [Operator](#operator)
 * [Eval](#eval)
 * [Coroutine](#coroutine)
