@@ -170,7 +170,7 @@ Iterator
 
 #### Skips first element:
 ```python
-next(<iter>)
+next(<iter>, None)  # default of `None` avoids exception for empty <iter>
 for element in <iter>:
     ...
 ```
