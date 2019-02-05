@@ -227,7 +227,7 @@ String
 ------
 ```python
 <str>  = <str>.strip()           # Strips all whitespace characters.
-<str>  = <str>.strip('<chars>')  # Strips all passed characters.
+<str>  = <str>.strip('<chars>')  # Strips all passed characters from start and end.
 ```
 
 ```python
