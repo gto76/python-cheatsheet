@@ -7,6 +7,62 @@ or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 ![Monty Python](web/image_888.jpeg)
 
 
+Table of contents
+-----------------
+* [Main](#main)
+* [List](#list)
+* [Dictionary](#dictionary)
+* [Set](#set)
+* [Range](#range)
+* [Enumerate](#enumerate)
+* [Named Tuple](#named-tuple)
+* [Iterator](#iterator)
+* [Generator](#generator)
+* [Type](#type)
+* [String](#string)
+* [Regex](#regex)
+* [Format](#format)
+* [Numbers](#numbers)
+* [Datetime](#datetime)
+* [Arguments](#arguments)
+* [Inline](#inline)
+* [Closure](#closure)
+* [Decorator](#decorator)
+* [Class](#class)
+* [Enum](#enum)
+* [Exceptions](#exceptions)
+* [System](#system)
+* [JSON](#json)
+* [Pickle](#pickle)
+* [SQLite](#sqlite)
+* [Bytes](#bytes)
+* [Struct](#struct)
+* [Array](#array)
+* [Deque](#deque)
+* [Threading](#threading)
+* [Hashlib](#hashlib)
+* [Itertools](#itertools)
+* [Introspection and Metaprograming](*introspection-and-metaprograming)
+* [Operator](#operator)
+* [Eval](#eval)
+* [Coroutine](#coroutine)
+
+**Libraries**
+* [Progress Bar](#progress-bar)
+* [Plot](#plot)
+* [Argparse](#argparse)
+* [Table](#table)
+* [Curses](#curses)
+* [Image](#image)
+* [Audio](#audio)
+* [Url](#url)
+* [Scraping](#scraping)
+* [Web](#web)
+* [Profile](#profile)
+* [NumPy](#numpy)
+* [Basic Script Template](#basic-script-template)
+
+
 Main
 ----
 ```python
