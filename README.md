@@ -226,8 +226,8 @@ from numbers import Number, Integral, Real, Rational, Complex
 String
 ------
 ```python
-<str>  = <str>.strip()           # Strips all whitespace characters from start and end.
-<str>  = <str>.strip('<chars>')  # Strips all passed characters from start and end.
+<str>  = <str>.strip()           # Strips all whitespace characters from both ends.
+<str>  = <str>.strip('<chars>')  # Strips all passed characters from both ends.
 ```
 
 ```python
