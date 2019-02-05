@@ -168,13 +168,6 @@ Iterator
 <iter> = iter(<function>, to_exclusive)
 ```
 
-#### Skips first element:
-```python
-next(<iter>, None)  # default of `None` avoids exception for empty <iter>
-for element in <iter>:
-    ...
-```
-
 #### Reads input until it reaches an empty line:
 ```python
 for line in iter(input, ''):
@@ -185,6 +178,17 @@ for line in iter(input, ''):
 ```python
 from functools import partial
 for line in iter(partial(input, 'Please enter value: '), ''):
+    ...
+```
+
+### Next
+**Returns next item. If there are no more items it raises exception or returns default if specified.**
+<el> = next(<iter> [, default])
+
+#### Skips first item:
+```python
+next(<iter>, None)
+for element in <iter>:
     ...
 ```
 
