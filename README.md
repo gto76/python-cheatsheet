@@ -276,7 +276,17 @@ import re
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
 * **Use `r'\1'` or `'\\\\1'` for backreference.**  
-* **Use `'?'` to make operators non-greedy.**   
+* **Use `'?'` to make operators non-greedy.**
+* **Call `help(re)` in the Python console to get a comprehensive usage guide (`import re` first).**
+
+### Precompiled Patterns
+**Create a reusable pattern object and call its methods to apply the above functions to it.**
+
+```python
+pattern = re.compile(<regex>, FLAGS)
+return (pattern.sub('NEW TEXT', doc) for doc in documents)
+```
+
 
 ### Match Object
 ```python
@@ -290,9 +300,9 @@ import re
 ### Special Sequences
 **Use capital letter for negation.**
 ```python
-'\d' == '[0-9]'          # Digit
-'\s' == '[ \t\n\r\f\v]'  # Whitespace
-'\w' == '[a-zA-Z0-9_]'   # Alphanumeric
+'\d' == '[0-9]'          # Digit (includes all other Unicode digits by default)
+'\s' == '[ \t\n\r\f\v]'  # Whitespace (includes other Unicode whitespace by default)
+'\w' == '[a-zA-Z0-9_]'   # Alphanumeric (includes non-ascii Unicode letters by default)
 ```
 
 
