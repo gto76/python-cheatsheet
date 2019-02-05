@@ -191,7 +191,7 @@ for line in iter(partial(input, 'Please enter value: '), ''):
 
 Generator
 ---------
-**Convenient way to implement the iterator protocol.**
+**Use `yield` instead of `return` to implement lazy iterators.**
 
 ```python
 def step(start, step_size):
