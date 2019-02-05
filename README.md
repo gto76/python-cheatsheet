@@ -189,7 +189,7 @@ for line in iter(partial(input, 'Please enter value: '), ''):
 
 #### Skips first item:
 ```python
-next(<iter>, None)
+next(<iter>)
 for element in <iter>:
     ...
 ```
