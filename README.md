@@ -15,15 +15,6 @@ if __name__ == '__main__':
 ```
 
 
-Help
-----
-```python
->>> help(<package>)
->>> help(<function>)
->>> help(<object>)
-```
-
-
 List
 ----
 ```python
