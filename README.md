@@ -40,7 +40,7 @@ sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flattened_list   = list(itertools.chain.from_iterable(<list>))
 list_of_chars    = list(<str>)
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
-no_duplicates    = list(dict.fromkeys(<list>))
+no_duplicates    = list(set(<list>))
 ```
 
 ```python
