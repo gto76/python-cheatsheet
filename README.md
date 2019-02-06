@@ -7,6 +7,15 @@ or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 ![Monty Python](web/image_888.jpeg)
 
 
+Help
+----
+```python
+>>> help(<package>)
+>>> help(<function>)
+>>> help(<object>)
+```
+
+
 Main
 ----
 ```python
