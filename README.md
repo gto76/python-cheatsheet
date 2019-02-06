@@ -7,20 +7,20 @@ or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 ![Monty Python](web/image_888.jpeg)
 
 
+Main
+----
+```python
+if __name__ == '__main__':
+    main()
+```
+
+
 Help
 ----
 ```python
 >>> help(<package>)
 >>> help(<function>)
 >>> help(<object>)
-```
-
-
-Main
-----
-```python
-if __name__ == '__main__':
-    main()
 ```
 
 
