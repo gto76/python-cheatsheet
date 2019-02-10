@@ -970,21 +970,21 @@ pwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.iterdir()          # Returns all files in a dir.
-<iter> = <Path>.glob('<pattern>')  # Returns all matches. 
-<Path> = <Path>.resolve()          # Makes path absolute. 
-<bool> = <Path>.exists()
-<bool> = <Path>.is_dir()
-<file> = <Path>.open()
+<iter>  = <Path>.iterdir()          # Returns all files in a dir.
+<iter>  = <Path>.glob('<pattern>')  # Returns all matches. 
+<Path>  = <Path>.resolve()          # Makes path absolute. 
+<bool>  = <Path>.exists()
+<bool>  = <Path>.is_dir()
+<file>  = <Path>.open()
 ```
 
 ```python
-<str>   = str(<Path>)              # Returns path as string.
-<str>   = <Path>.name              # Final component.
-<str>   = <Path>.stem              # Final component without extension.
-<str>   = <Path>.suffix            # Final component's extension.
-<Path>  = <Path>.parent            # Path without final component.
-<tuple> = <Path>.parts             # All components as strings.
+<str>   = str(<Path>)               # Returns path as string.
+<str>   = <Path>.name               # Final component.
+<str>   = <Path>.stem               # Final component without extension.
+<str>   = <Path>.suffix             # Final component's extension.
+<Path>  = <Path>.parent             # Path without final component.
+<tuple> = <Path>.parts              # All components as strings.
 ```
 
 
