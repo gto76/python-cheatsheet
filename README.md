@@ -674,6 +674,10 @@ class <name>:
     def __str__(self):
         return str(self.a)
 
+    @staticmethod
+    def do_things_without_using_class_state():
+        pass
+
     @classmethod
     def get_class_name(cls):
         return cls.__name__
