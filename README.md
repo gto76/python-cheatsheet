@@ -55,9 +55,9 @@ index = <list>.index(<el>)  # Returns first index of item.
 Dictionary
 ----------
 ```python
-<view> = <dict>.keys()
-<view> = <dict>.values()
-<view> = <dict>.items()
+<iter(key)> = <dict>.keys()
+<iter(value)> = <dict>.values()
+<iter(key,value)> = <dict>.items()
 ```
 
 ```python
