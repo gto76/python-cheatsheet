@@ -1905,7 +1905,7 @@ import sys
 
 
 def main():
-    pass
+    return 0
 
 
 ###
@@ -1918,6 +1918,6 @@ def read_file(filename):
 
 
 if __name__ == '__main__':
-    main()
+    exit(main())
 
 ```
