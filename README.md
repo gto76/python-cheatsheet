@@ -918,21 +918,6 @@ def write_to_file(filename, text):
         file.write(text)
 ```
 
-### Path
-```python
-from os import path, listdir
-<bool> = path.exists(<path>)
-<bool> = path.isfile(<path>)
-<bool> = path.isdir(<path>)
-<list> = listdir(<path>)
-```
-
-```python
->>> from glob import glob
->>> glob('../*.gif')
-['1.gif', 'card.gif']
-```
-
 ### Command Execution
 ```python
 import os
@@ -956,6 +941,52 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 1000
 >>> sys.setrecursionlimit(5000)
 ```
+
+### Path
+```python
+from os import path, listdir
+<bool> = path.exists(<path>)
+<bool> = path.isfile(<path>)
+<bool> = path.isdir(<path>)
+<list> = listdir(<path>)
+```
+
+```python
+>>> from glob import glob
+>>> glob('../*.gif')
+['1.gif', 'card.gif']
+```
+
+
+Pathlib
+-------
+**This module offers classes representing filesystem paths with semantics appropriate for different operating systems.**
+
+```python
+from pathlib import Path
+pwd    = Path()
+<Path> = Path('<path>' [, '<path>', <Path>, ...])
+<Path> = <Path> / '<dir>' / '<file>'
+```
+
+```python
+<iter> = <Path>.iterdir()          # Returns all files in a dir.
+<iter> = <Path>.glob('<pattern>')  # Returns all matches. 
+<Path> = <Path>.resolve()          # Makes path absolute. 
+<bool> = <Path>.exists()
+<bool> = <Path>.is_dir()
+<file> = <Path>.open()
+```
+
+```python
+<str>   = str(<Path>)              # Returns path as string.
+<str>   = <Path>.name              # Final component.
+<str>   = <Path>.stem              # Final component without extension.
+<str>   = <Path>.suffix            # Final component's extension.
+<Path>  = <Path>.parent            # Path without final component.
+<tuple> = <Path>.parts             # All components as strings.
+```
+
 
 JSON
 ----
@@ -1118,6 +1149,16 @@ Array
 ```python
 from array import array
 <array> = array(<typecode> [, <collection>])
+```
+
+
+Memory View
+-----------
+**Used for accessing the internal data of an object that supports the buffer protocol.**
+
+```python
+<memoryview> = memoryview(<bytes> / <bytearray> / <array>) 
+<memoryview>.release()
 ```
 
 
