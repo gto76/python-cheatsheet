@@ -1,11 +1,8 @@
 
 /* Copyright 2013 Michael Bostock. All rights reserved. Do not copy. */
 
-@import url(//fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
+@import url(https://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
 
-html {
-  min-width: 1040px;
-}
 
 .ocks-org body {
   background: #fcfcfa;
@@ -56,9 +53,7 @@ h1, h2 {
 h2 a[name],
 h2 a[id] {
   color: #ccc;
-  right: 100%;
   padding: 0 .3em;
-  position: absolute;
 }
 
 header,
@@ -143,7 +138,7 @@ textarea {
 body > pre {
   border-left: solid 2px #ccc;
   padding-left: 18px;
-  margin: 2em 0 2em -20px;
+  margin: 2em 0 2em 0;
 }
 
 .html .value,
@@ -218,4 +213,19 @@ blockquote q {
 blockquote q:before,
 blockquote q:after {
   content: "";
+}
+
+@media only screen
+and (max-device-width : 1024px){
+  .ocks-org body {
+    margin: 1rem;
+  }
+
+  h1{
+    font-size: 3rem;
+  }
+  p, h1, img{
+    max-width: calc(100vw - 2em);
+    min-width: calc(100vw - 2em);
+  }
 }

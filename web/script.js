@@ -26,9 +26,10 @@ function removeOrigToc() {
 
 function insertLinks() {
   $('h2').each(function() {
-    aId = $(this).attr('id');
-    $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>');
-  });
+    aId = $(this).attr('id')
+    text = $(this).text()
+    $(this).html('<a href="#'+aId+'" name="'+aId+'">#</a>'+text)
+  })
 }
 
 function addToc() {
