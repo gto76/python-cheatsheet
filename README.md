@@ -1405,7 +1405,7 @@ import ast
 from ast import Num, BinOp, UnaryOp
 import operator as op
 
-legal_operators = {ast.Add:    op.add, 
+LEGAL_OPERATORS = {ast.Add:    op.add, 
                    ast.Sub:    op.sub, 
                    ast.Mult:   op.mul,
                    ast.Div:    op.truediv, 
@@ -1424,9 +1424,9 @@ def eval_node(node):
     if node_type not in [BinOp, UnaryOp]:
         raise TypeError(node)
     operator_type = type(node.op)
-    if operator_type not in legal_operators:
+    if operator_type not in LEGAL_OPERATORS:
         raise TypeError(f'Illegal operator {node.op}')
-    operator = legal_operators[operator_type]
+    operator = LEGAL_OPERATORS[operator_type]
     if node_type == BinOp:
         left, right = eval_node(node.left), eval_node(node.right)
         return operator(left, right)
