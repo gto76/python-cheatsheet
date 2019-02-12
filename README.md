@@ -419,12 +419,12 @@ shuffle(<list>)
 Datetime
 --------
 ```python
-from datetime import datetime, strptime
+from datetime import datetime
 now = datetime.now()
 now.month                     # 3
 now.strftime('%Y%m%d')        # '20180315'
 now.strftime('%Y%m%d%H%M%S')  # '20180315002834'
-<datetime> = strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
+<datetime> = datetime.strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
 ```
 
 
