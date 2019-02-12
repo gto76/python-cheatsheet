@@ -25,11 +25,18 @@ function removeOrigToc() {
 }
 
 function insertLinks() {
-  $('h2').each(function() {
-    aId = $(this).attr('id')
-    text = $(this).text()
-    $(this).html('<a href="#'+aId+'" name="'+aId+'">#</a>'+text)
-  })
+  $("h2").each(function() {
+    aId = $(this).attr("id");
+    text = $(this).text();
+    $(this).html('<a href="#' + aId + '" name="' + aId + '">#</a>' + text);
+  });
+}
+function addImgParentClass() {
+  $("img").each(function() {
+    $(this)
+      .parent()
+      .addClass("img_parent");
+  });
 }
 
 function addToc() {

@@ -214,6 +214,12 @@ blockquote q:before,
 blockquote q:after {
   content: "";
 }
+h3,h4,p, ul{
+  padding-left: 2rem;
+}
+.img_parent{
+  padding: 0;
+}
 
 @media only screen
 and (max-device-width : 1024px){
@@ -224,7 +230,7 @@ and (max-device-width : 1024px){
   h1{
     font-size: 3rem;
   }
-  p, h1, img{
+  .img_parent, h1, img{
     max-width: calc(100vw - 2em);
     min-width: calc(100vw - 2em);
   }
