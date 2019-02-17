@@ -543,7 +543,7 @@ creature  = Creature()
 Closure
 -------
 **We have a closure in Python when:**
-* **Nested function references a value of its enclosing function and then** 
+* **A nested function references a value of its enclosing function and then** 
 * **the enclosing function returns the nested function.**
 
 ```python
