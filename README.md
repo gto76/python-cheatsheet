@@ -575,7 +575,7 @@ from functools import partial
 ```
 
 ### Nonlocal
-**If variable is assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as global or nonlocal.**
+**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as global or nonlocal.**
 
 ```python
 def get_counter():
