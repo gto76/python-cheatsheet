@@ -964,31 +964,31 @@ Pathlib
 
 ```python
 from pathlib import Path
-pwd     = Path()
-<Path>  = Path('<path>' [, '<path>', <Path>, ...])
-<Path>  = <Path> / '<dir>' / '<file>'
+pwd    = Path()
+<Path> = Path('<path>' [, '<path>', <Path>, ...])
+<Path> = <Path> / '<dir>' / '<file>'
 ```
 
 ```python
-<bool>  = <Path>.exists()
-<bool>  = <Path>.is_file()
-<bool>  = <Path>.is_dir()
-<iter>  = <Path>.iterdir()
+<bool> = <Path>.exists()
+<bool> = <Path>.is_file()
+<bool> = <Path>.is_dir()
+<iter> = <Path>.iterdir()
 ```
 
 ```python
-<iter>  = <Path>.glob('<pattern>')  # Returns all matches. 
-<Path>  = <Path>.resolve()          # Makes path absolute.
-<file>  = <Path>.open()             # Opens file.
+<iter> = <Path>.glob('<pattern>')  # Returns all matches. 
+<Path> = <Path>.resolve()          # Makes path absolute.
+<file> = <Path>.open()             # Opens file.
 ```
 
 ```python
-<str>   = str(<Path>)               # Returns path as string.
-<str>   = <Path>.name               # Final component.
-<str>   = <Path>.stem               # Final component without extension.
-<str>   = <Path>.suffix             # Final component's extension.
-<Path>  = <Path>.parent             # Path without final component.
-<tuple> = <Path>.parts              # All components as strings.
+<str>  = str(<Path>)               # Returns path as string.
+<str>  = <Path>.name               # Final component.
+<str>  = <Path>.stem               # Final component without extension.
+<str>  = <Path>.suffix             # Final component's extension.
+<Path> = <Path>.parent             # Path without final component.
+<tup.> = <Path>.parts              # All components as strings.
 ```
 
 
