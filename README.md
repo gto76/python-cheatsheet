@@ -19,6 +19,9 @@ List
 ----
 ```python
 <list> = <list>[from_inclusive : to_exclusive : step_size]
+```
+
+```python
 <list>.append(<el>)
 <list>.extend(<collection>)
 <list> += [<el>]
