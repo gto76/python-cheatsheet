@@ -978,9 +978,9 @@ pwd    = Path()
 ```
 
 ```python
-<Path> = <Path>.resolve()          # Makes path absolute.
 <str>  = str(<Path>)               # Returns path as string.
 <tup.> = <Path>.parts              # Returns all components as strings.
+<Path> = <Path>.resolve()          # Makes path absolute.
 ```
 
 ```python
