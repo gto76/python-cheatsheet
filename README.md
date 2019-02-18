@@ -974,10 +974,7 @@ pwd    = Path()
 <bool> = <Path>.is_file()
 <bool> = <Path>.is_dir()
 <iter> = <Path>.iterdir()
-```
-
-```python
-<iter> = <Path>.glob('<pattern>')  # Returns all matches.
+<iter> = <Path>.glob('<pattern>')
 ```
 
 ```python
