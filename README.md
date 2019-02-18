@@ -1903,7 +1903,8 @@ Basic Script Template
 
 from collections import namedtuple
 from enum import Enum
-import re, sys
+import re
+import sys
 
 
 def main():
