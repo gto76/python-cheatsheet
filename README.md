@@ -635,13 +635,6 @@ def fib(n):
     return n if n < 2 else fib(n-1) + fib(n-2)
 ```
 
-```python
->>> [fib(n) for n in range(10)]
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
->>> fib.cache_info()
-CacheInfo(hits=16, misses=10, maxsize=None, currsize=10)
-```
-
 ### Parametrized Decorator
 ```python
 from functools import wraps
