@@ -908,7 +908,7 @@ while True:
 <file>.seek(0)                 # Move to start of the file.
 <file>.seek(offset)            # Move 'offset' chars/bytes from the start.
 <file>.seek(offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
-````
+```
 
 #### Read Text from File:
 ```python
