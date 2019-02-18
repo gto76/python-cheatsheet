@@ -978,8 +978,8 @@ pwd    = Path()
 
 ```python
 <iter> = <Path>.glob('<pattern>')  # Returns all matches. 
-<Path> = <Path>.resolve()          # Makes path absolute.
 <file> = <Path>.open()             # Opens file.
+<Path> = <Path>.resolve()          # Makes path absolute.
 ```
 
 ```python
