@@ -894,8 +894,8 @@ while True:
 * **`'w+'` - Read and write (truncate).**
 * **`'r+'` - Read and write from the beginning.**
 * **`'a+'` - Read and write from the end.**
-* **`'b'`  - Binary mode.**
 * **`'t'`  - Text mode (default).**
+* **`'b'`  - Binary mode.**
 
 #### Read Text from File:
 ```python
