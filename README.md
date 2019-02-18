@@ -889,7 +889,7 @@ while True:
 **Opens file and returns a corresponding file object.**
 
 ```python
-<file> = open(<path>, mode='r', encoding=None)
+<file> = open('<path>', mode='r', encoding=None)
 ```
 
 #### Modes:
@@ -951,10 +951,10 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 ### Path
 ```python
 from os import path, listdir
-<bool> = path.exists(<path>)
-<bool> = path.isfile(<path>)
-<bool> = path.isdir(<path>)
-<list> = listdir(<path>)
+<bool> = path.exists('<path>')
+<bool> = path.isfile('<path>')
+<bool> = path.isdir('<path>')
+<list> = listdir('<path>')
 ```
 
 ```python
