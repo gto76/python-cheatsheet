@@ -978,16 +978,16 @@ pwd    = Path()
 ```
 
 ```python
-<str>  = str(<Path>)               # Returns path as string.
-<tup.> = <Path>.parts              # Returns all components as strings.
-<Path> = <Path>.resolve()          # Makes path absolute.
+<str>  = str(<Path>)       # Returns path as string.
+<tup.> = <Path>.parts      # Returns all components as strings.
+<Path> = <Path>.resolve()  # Makes path absolute.
 ```
 
 ```python
-<str>  = <Path>.name               # Final component.
-<str>  = <Path>.stem               # Final component without extension.
-<str>  = <Path>.suffix             # Final component's extension.
-<Path> = <Path>.parent             # Path without final component.
+<str>  = <Path>.name       # Final component.
+<str>  = <Path>.stem       # Final component without extension.
+<str>  = <Path>.suffix     # Final component's extension.
+<Path> = <Path>.parent     # Path without final component.
 ```
 
 
