@@ -986,7 +986,7 @@ pwd    = Path()
 ```python
 <str>  = str(<Path>)               # Returns path as string.
 <tup.> = <Path>.parts              # Returns all components as strings.
-<Path> = <Path>.resolve()          # Returns absolute path.
+<Path> = <Path>.resolve()          # Returns absolute path without symlinks.
 ```
 
 ```python
