@@ -1087,7 +1087,7 @@ Bytes
 
 ### Decode
 ```python
-<str>   = <bytes>.decode('utf-8') 
+<str>   = <bytes>.decode(encoding='utf-8') 
 <int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
 <hex>   = <bytes>.hex()
 ```
