@@ -1777,7 +1777,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call Graph
-#### Generates a PNG image of call graph with highlighted bottlenecks:
+#### Generates a PNG image of a call graph with highlighted bottlenecks:
 
 ```python
 # $ pip3 install pycallgraph
