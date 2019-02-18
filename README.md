@@ -977,18 +977,20 @@ pwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.glob('<pattern>')  # Returns all matches. 
-<file> = <Path>.open()             # Opens file.
-<Path> = <Path>.resolve()          # Makes path absolute.
+<iter> = <Path>.glob('<pattern>')  # Returns all matches.
 ```
 
 ```python
+<Path> = <Path>.resolve()          # Makes path absolute.
 <str>  = str(<Path>)               # Returns path as string.
+<tup.> = <Path>.parts              # Returns all components as strings.
+```
+
+```python
 <str>  = <Path>.name               # Final component.
 <str>  = <Path>.stem               # Final component without extension.
 <str>  = <Path>.suffix             # Final component's extension.
 <Path> = <Path>.parent             # Path without final component.
-<tup.> = <Path>.parts              # All components as strings.
 ```
 
 
