@@ -97,6 +97,9 @@ Set
 ---
 ```python
 <set> = set()
+```
+
+```python
 <set>.add(<el>)
 <set>.update(<collection>)
 <set> |= {<el>}
