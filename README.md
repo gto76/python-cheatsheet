@@ -964,18 +964,22 @@ Pathlib
 
 ```python
 from pathlib import Path
-pwd    = Path()
-<Path> = Path('<path>' [, '<path>', <Path>, ...])
-<Path> = <Path> / '<dir>' / '<file>'
+pwd     = Path()
+<Path>  = Path('<path>' [, '<path>', <Path>, ...])
+<Path>  = <Path> / '<dir>' / '<file>'
 ```
 
 ```python
-<iter>  = <Path>.iterdir()          # Returns all files in a dir.
-<iter>  = <Path>.glob('<pattern>')  # Returns all matches. 
-<Path>  = <Path>.resolve()          # Makes path absolute. 
 <bool>  = <Path>.exists()
+<bool>  = <Path>.is_file()
 <bool>  = <Path>.is_dir()
-<file>  = <Path>.open()
+<iter>  = <Path>.iterdir()
+```
+
+```python
+<iter>  = <Path>.glob('<pattern>')  # Returns all matches. 
+<Path>  = <Path>.resolve()          # Makes path absolute.
+<file>  = <Path>.open()             # Opens file.
 ```
 
 ```python
