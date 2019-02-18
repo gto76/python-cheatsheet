@@ -566,7 +566,7 @@ def get_multiplier(a):
 ```
 
 * **If multiple nested functions within enclosing function reference the same value, that value gets shared.**
-* **To dynamically access function's first free variable use: `'<function>.__closure__[0].cell_contents'`.**
+* **To dynamically access function's first free variable use `'<function>.__closure__[0].cell_contents'`.**
 
 #### Or:
 ```python
