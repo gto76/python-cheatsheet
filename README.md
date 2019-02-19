@@ -755,7 +755,7 @@ class Counter:
         self.i = 0
     def __call__(self):
         self.i += 1
-        return self.a
+        return self.i
 ```
 
 ```python
