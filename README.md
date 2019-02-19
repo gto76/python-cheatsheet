@@ -758,6 +758,12 @@ class Counter:
         return self.a
 ```
 
+```python
+>>> c = Counter()
+>>> c(), c(), c()
+(1, 2, 3)
+```
+
 ### Withable
 ```python
 class FileReader():
