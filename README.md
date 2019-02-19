@@ -752,9 +752,9 @@ class MySequence:
 ```python
 class Counter:
     def __init__(self):
-        self.a = 0
+        self.i = 0
     def __call__(self):
-        self.a += 1
+        self.i += 1
         return self.a
 ```
 
