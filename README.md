@@ -758,6 +758,28 @@ class Counter:
         return self.a
 ```
 
+### Withable
+```python
+class FileReader():
+    def __init__(self, filename):
+        self.filename = filename
+    def __enter__(self):
+        self.file = open(self.filename)
+        return self.file.read()
+    def __exit__(self, *args):
+        self.file.close()
+        print(f'FileReader closed {self.filename!r}')
+```
+
+```python
+>>> with open('test.txt', 'w') as file:
+...     file.write('Hello World!')
+>>> with FileReader('test.txt') as text:
+...     print(text)
+Hello World!
+FileReader closed 'test.txt'
+```
+
 ### Copy
 ```python
 from copy import copy, deepcopy
