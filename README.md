@@ -768,7 +768,6 @@ class FileReader():
         return self.file.read()
     def __exit__(self, *args):
         self.file.close()
-        print(f'FileReader closed {self.filename!r}')
 ```
 
 ```python
@@ -777,7 +776,6 @@ class FileReader():
 >>> with FileReader('test.txt') as text:
 ...     print(text)
 Hello World!
-FileReader closed 'test.txt'
 ```
 
 ### Copy
