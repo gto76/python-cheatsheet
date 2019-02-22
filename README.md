@@ -41,16 +41,15 @@ elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
 sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flattened_list   = list(itertools.chain.from_iterable(<list>))
-list_of_chars    = list(<str>)
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
-no_duplicates    = list(dict.fromkeys(<list>))
+list_of_chars    = list(<str>)
 ```
 
 ```python
 index = <list>.index(<el>)  # Returns first index of item. 
 <list>.insert(index, <el>)  # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])  # Removes and returns item at index or from the end.
-<list>.remove(<el>)         # Removes first occurrence of item.
+<list>.remove(<el>)         # Removes first occurrence of item or raises ValueError.
 <list>.clear()              # Removes all items.   
 ```
 
@@ -64,17 +63,17 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key, default)            # Returns default if key does not exist.
-value  = <dict>.setdefault(key, default)     # Same, but also adds default to dict.
-<dict> = collections.defaultdict(<type>)     # Creates a dictionary with default value of type.
-<dict> = collections.defaultdict(lambda: 1)  # Creates a dictionary with default value 1.
+value  = <dict>.get(key, default=None)         # Returns default if key does not exist.
+value  = <dict>.setdefault(key, default=None)  # Same, but also adds default to dict.
+<dict> = collections.defaultdict(<type>)       # Creates a dictionary with default value of type.
+<dict> = collections.defaultdict(lambda: 1)    # Creates a dictionary with default value 1.
 ```
 
 ```python
-<dict>.update(<dict>)                        # Or: dict_a = {**dict_a, **dict_b}.
-<dict> = dict(<list>)                        # Initiates a dict from list of key-value pairs.
-<dict> = dict(zip(keys, values))             # Initiates a dict from two lists.
-<dict> = dict.fromkeys(keys [, value])       # Initiates a dict from list of keys.
+<dict>.update(<dict>)                          # Or: dict_a = {**dict_a, **dict_b}.
+<dict> = dict(<list>)                          # Initiates a dict from list of key-value pairs.
+<dict> = dict(zip(keys, values))               # Initiates a dict from two lists.
+<dict> = dict.fromkeys(keys [, value])         # Initiates a dict from list of keys.
 ```
 
 ```python
@@ -88,8 +87,8 @@ value = <dict>.pop(key)                         # Removes item from dictionary.
 >>> colors = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
 >>> counter = Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> counter.most_common()[0][0]
-'blue'
+>>> counter.most_common()[0]
+('blue', 3)
 ```
 
 
@@ -121,7 +120,7 @@ Set
 ```
 
 ### Frozenset
-#### Is hashable and can be used as a key in dictionary.
+#### Is hashable so it can be used as a key in dictionary.
 ```python
 <frozenset> = frozenset(<collection>)
 ```
@@ -130,10 +129,10 @@ Set
 Range
 -----
 ```python
-range(to_exclusive)
-range(from_inclusive, to_exclusive)
-range(from_inclusive, to_exclusive, step_size)
-range(from_inclusive, to_exclusive, -step_size)
+<range> = range(to_exclusive)
+<range> = range(from_inclusive, to_exclusive)
+<range> = range(from_inclusive, to_exclusive, step_size)
+<range> = range(from_inclusive, to_exclusive, -step_size)
 ```
 
 ```python
@@ -153,7 +152,8 @@ for i, el in enumerate(<collection> [, i_start]):
 Named Tuple
 -----------
 ```python
->>> Point = collections.namedtuple('Point', 'x y')
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', 'x y')
 >>> p = Point(1, y=2)
 Point(x=1, y=2)
 >>> p[0]
@@ -188,7 +188,7 @@ for line in iter(partial(input, 'Please enter value: '), ''):
 ```
 
 ### Next
-**Returns next item. If there are no more items it raises exception or returns default if specified.**
+**Returns next item. If there are no more items it raises StopIteration exception or returns default if specified.**
 ```python
 <el> = next(<iter> [, default])
 ```
@@ -252,7 +252,7 @@ String
 <str>  = <str>.replace(old_str, new_str)
 <bool> = <str>.startswith(<sub_str>)      # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
-<int>  = <str>.index(<sub_str>)           # Returns first index of a substring.
+<int>  = <str>.index(<sub_str>)           # Returns start index of first match.
 <bool> = <str>.isnumeric()                # True if str contains only numeric characters.
 <list> = textwrap.wrap(<str>, width)      # Nicely breaks string into lines.
 ```
@@ -288,7 +288,7 @@ import re
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
 * **Use `r'\1'` or `'\\\\1'` for backreference.**  
-* **Use `'?'` to make operators non-greedy.**   
+* **Use `'?'` to make operator non-greedy.**   
 
 ### Match Object
 ```python
@@ -300,7 +300,7 @@ import re
 ```
 
 ### Special Sequences
-**Use capital letter for negation.**
+**Expressions below hold true only for strings that contain only ASCII characters. Use capital letter for negation.**
 ```python
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
@@ -318,10 +318,10 @@ Format
 ```python
 >>> Person = namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
->>> f'{person.height:10}'
-'       187'
->>> '{p.height:10}'.format(p=person)
-'       187'
+>>> f'{person.height}'
+'187'
+>>> '{p.height}'.format(p=person)
+'187'
 ```
 
 ### General Options
@@ -581,7 +581,7 @@ from functools import partial
 ```
 
 ### Nonlocal
-**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as global or nonlocal.**
+**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as 'global' or 'nonlocal'.**
 
 ```python
 def get_counter():
@@ -668,7 +668,7 @@ class <name>:
     def __init__(self, a):
         self.a = a
     def __repr__(self):
-        class_name = type(self).__name__
+        class_name = self.__class__.__name__
         return f'{class_name}({self.a!r})'
     def __str__(self):
         return str(self.a)
@@ -870,13 +870,6 @@ KeyboardInterrupt
 
 System
 ------
-### Command Line Arguments
-```python
-import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
-```
-
 ### Print Function
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
@@ -974,7 +967,9 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 >>> sys.setrecursionlimit(5000)
 ```
 
-### Path
+
+Path
+----
 ```python
 from os import path, listdir
 <bool> = path.exists('<path>')
@@ -989,9 +984,7 @@ from os import path, listdir
 ['1.gif', 'card.gif']
 ```
 
-
-Pathlib
--------
+### Pathlib
 **This module offers classes representing filesystem paths with semantics appropriate for different operating systems.**
 
 ```python
@@ -1023,6 +1016,36 @@ pwd    = Path()
 ```
 
 
+Command Line Arguments
+----------------------
+```python
+import sys
+script_name = sys.argv[0]
+arguments   = sys.argv[1:]
+```
+
+### Argparse
+```python
+from argparse import ArgumentParser
+desc   = 'calculate X to the power of Y'
+parser = ArgumentParser(description=desc)
+group  = parser.add_mutually_exclusive_group()
+group.add_argument('-v', '--verbose', action='store_true')
+group.add_argument('-q', '--quiet',   action='store_true')
+parser.add_argument('x', type=int, help='the base')
+parser.add_argument('y', type=int, help='the exponent')
+args   = parser.parse_args()
+answer = args.x ** args.y
+
+if args.quiet:
+    print(answer)
+elif args.verbose:
+    print(f'{args.x} to the power {args.y} equals {answer}')
+else:
+    print(f'{args.x}^{args.y} == {answer}')
+```
+
+
 JSON
 ----
 ```python
@@ -1037,14 +1060,14 @@ from collections import OrderedDict
 <object> = json.loads(<str>, object_pairs_hook=OrderedDict)
 ```
 
-### Read File
+### Read Object from JSON File
 ```python
 def read_json_file(filename):
     with open(filename, encoding='utf-8') as file:
         return json.load(file)
 ```
 
-### Write to File
+### Write Object to JSON File
 ```python
 def write_to_json_file(filename, an_object):
     with open(filename, 'w', encoding='utf-8') as file:
@@ -1079,7 +1102,7 @@ SQLite
 ------
 ```python
 import sqlite3
-db = sqlite3.connect(<filename>)
+db = sqlite3.connect('<path>')
 ...
 db.close()
 ```
@@ -1114,7 +1137,7 @@ Bytes
 ```python
 <bytes> = <str>.encode(encoding='utf-8')
 <bytes> = <int>.to_bytes(length, byteorder='big|little', signed=False)
-<bytes> = bytes.fromhex(<hex>)
+<bytes> = bytes.fromhex('<hex>')
 ```
 
 ### Decode
@@ -1166,7 +1189,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - little-endian**
 * **`'>'` - big-endian**
 
-#### Use capital letter for unsigned type. Standard size in brackets:
+#### Use capital letter for unsigned type. Standard sizes are in brackets:
 * **`'x'` - pad byte**
 * **`'c'` - char (1)**
 * **`'h'` - short (2)**
@@ -1183,7 +1206,7 @@ Array
 
 ```python
 from array import array
-<array> = array(<typecode> [, <collection>])
+<array> = array('<typecode>' [, <collection>])
 ```
 
 
@@ -1208,8 +1231,8 @@ from collections import deque
 
 ```python
 <deque>.appendleft(<el>)
-<deque>.extendleft(<collection>)  # Collection gets reversed.
 <el> = <deque>.popleft()
+<deque>.extendleft(<collection>)  # Collection gets reversed.
 <deque>.rotate(n=1)               # Rotates elements to the right.
 ```
 
@@ -1304,7 +1327,10 @@ from itertools import *
 >>> # islice(<collection>, from_inclusive, to_exclusive) 
 >>> islice([1, 2, 3], 1, None)
 [2, 3]
+```
 
+### Group by
+```python
 >>> people = [{'id': 1, 'name': 'Bob'}, 
               {'id': 2, 'name': 'Bob'}, 
               {'id': 3, 'name': 'Peter'}]
@@ -1367,7 +1393,7 @@ param_names  = list(sig.parameters.keys())
 **Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!).**
 
 ```python
-type(<class_name>, <parents_tuple>, <attributes_dict>)
+<class> = type(<class_name>, <parents_tuple>, <attributes_dict>)
 ```
 
 ```python
@@ -1482,7 +1508,7 @@ def eval_node(node):
 
 Coroutine
 ---------
-* **Similar to Generator, but Generator pulls data through the pipe with iteration, while Coroutine pushes data into the pipeline with send().**  
+* **Similar to generator, but generator pulls data through the pipe with iteration, while coroutine pushes data into the pipeline with send().**  
 * **Coroutines provide more powerful data routing possibilities than iterators.**  
 * **If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**  
 
@@ -1548,29 +1574,6 @@ from matplotlib import pyplot
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.savefig(<filename>, transparent=True)
 pyplot.show()
-```
-
-
-Argparse
---------
-```python
-from argparse import ArgumentParser
-desc   = 'calculate X to the power of Y'
-parser = ArgumentParser(description=desc)
-group  = parser.add_mutually_exclusive_group()
-group.add_argument('-v', '--verbose', action='store_true')
-group.add_argument('-q', '--quiet',   action='store_true')
-parser.add_argument('x', type=int, help='the base')
-parser.add_argument('y', type=int, help='the exponent')
-args   = parser.parse_args()
-answer = args.x ** args.y
-
-if args.quiet:
-    print(answer)
-elif args.verbose:
-    print(f'{args.x} to the power {args.y} equals {answer}')
-else:
-    print(f'{args.x}^{args.y} == {answer}')
 ```
 
 
@@ -1641,12 +1644,14 @@ Audio
 #### Saves a list of floats with values between -1 and 1 to a WAV file:
 ```python
 import wave, struct
-samples = [struct.pack('<h', int(a * 30000)) for a in <list>]
+samples_f = [struct.pack('<h', int(a * 30000)) for a in <list>]
+samples_b = b''.join(samples_f)
+
 wf = wave.open('test.wav', 'wb')
 wf.setnchannels(1)
 wf.setsampwidth(2)
 wf.setframerate(44100)
-wf.writeframes(b''.join(samples))
+wf.writeframes(samples_b)
 wf.close()
 ```
 
