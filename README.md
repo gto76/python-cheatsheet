@@ -970,6 +970,7 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 
 Path
 ----
+### Basic
 ```python
 from os import path, listdir
 <bool> = path.exists('<path>')
@@ -1018,6 +1019,7 @@ pwd    = Path()
 
 Command Line Arguments
 ----------------------
+### Basic
 ```python
 import sys
 script_name = sys.argv[0]
