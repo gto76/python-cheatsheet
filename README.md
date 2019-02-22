@@ -1111,7 +1111,7 @@ db.close()
 
 ### Read
 ```python
-cursor = db.execute(<query>)
+cursor = db.execute('<query>')
 if cursor:
     <tuple> = cursor.fetchone()  # First row.
     <list>  = cursor.fetchall()  # Remaining rows.
@@ -1119,7 +1119,7 @@ if cursor:
 
 ### Write
 ```python
-db.execute(<query>)
+db.execute('<query>')
 db.commit()
 ```
 
