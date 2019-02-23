@@ -590,7 +590,7 @@ def get_multiplier(a):
 * **If multiple nested functions within enclosing function reference the same value, that value gets shared.**
 * **To dynamically access function's first free variable use `'<function>.__closure__[0].cell_contents'`.**
 
-#### Or:
+### Partial
 ```python
 from functools import partial
 <function> = partial(<function>, <argument_1> [, <argument_2>, ...])
@@ -1072,7 +1072,7 @@ import json
 <object> = json.loads(<str>)
 ```
 
-#### To preserve order:
+#### To preserve order use:
 ```python
 from collections import OrderedDict
 <object> = json.loads(<str>, object_pairs_hook=OrderedDict)
