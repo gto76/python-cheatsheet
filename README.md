@@ -40,7 +40,7 @@ sum_of_elements  = sum(<collection>)
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
 sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
-flattened_list   = list(itertools.chain.from_iterable(<list>))
+flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
 list_of_chars    = list(<str>)
 ```
@@ -968,6 +968,31 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 ```
 
 
+Command Line Arguments
+----------------------
+### Basic
+```python
+import sys
+script_name = sys.argv[0]
+arguments   = sys.argv[1:]
+```
+
+### Argparse
+```python
+from argparse import ArgumentParser, FileType
+<parser> = ArgumentParser(description=<str>)
+<parser>.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
+<parser>.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
+<parser>.add_argument('<name>', type=<type>, nargs=1)                    # First argument
+<parser>.add_argument('<name>', type=<type>, nargs='+')                  # Ramaining arguments
+<args>   = <parser>.parse_args()
+value    = <args>.<name>
+```
+
+* **Use `'help=<str>'` for argument description.**
+* **Use `'type=FileType(<mode>)'` for files.**
+
+
 Path
 ----
 ### Basic
@@ -990,7 +1015,7 @@ from os import path, listdir
 
 ```python
 from pathlib import Path
-pwd    = Path()
+cwd    = Path()
 <Path> = Path('<path>' [, '<path>', <Path>, ...])
 <Path> = <Path> / '<dir>' / '<file>'
 ```
@@ -1014,37 +1039,6 @@ pwd    = Path()
 <str>  = <Path>.stem               # Final component without extension.
 <str>  = <Path>.suffix             # Final component's extension.
 <Path> = <Path>.parent             # Path without final component.
-```
-
-
-Command Line Arguments
-----------------------
-### Basic
-```python
-import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
-```
-
-### Argparse
-```python
-from argparse import ArgumentParser
-desc   = 'calculate X to the power of Y'
-parser = ArgumentParser(description=desc)
-group  = parser.add_mutually_exclusive_group()
-group.add_argument('-v', '--verbose', action='store_true')
-group.add_argument('-q', '--quiet',   action='store_true')
-parser.add_argument('x', type=int, help='the base')
-parser.add_argument('y', type=int, help='the exponent')
-args   = parser.parse_args()
-answer = args.x ** args.y
-
-if args.quiet:
-    print(answer)
-elif args.verbose:
-    print(f'{args.x} to the power {args.y} equals {answer}')
-else:
-    print(f'{args.x}^{args.y} == {answer}')
 ```
 
 
@@ -1646,8 +1640,8 @@ Audio
 #### Saves a list of floats with values between -1 and 1 to a WAV file:
 ```python
 import wave, struct
-samples_f = [struct.pack('<h', int(a * 30000)) for a in <list>]
-samples_b = b''.join(samples_f)
+samples_l = [struct.pack('<h', int(a * 30000)) for a in <list>]
+samples_b = b''.join(samples_l)
 
 wf = wave.open('test.wav', 'wb')
 wf.setnchannels(1)
@@ -1674,29 +1668,6 @@ get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
 samples_f = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
 samples_b = b''.join(struct.pack('<h', int(a * 30000)) for a in samples_f)
 simpleaudio.play_buffer(samples_b, 1, 2, F)
-```
-
-
-Url
----
-```python
-from urllib.parse import quote, quote_plus, unquote, unquote_plus
-```
-
-### Encode
-```python
->>> quote("Can't be in URL!")
-'Can%27t%20be%20in%20URL%21'
->>> quote_plus("Can't be in URL!")
-'Can%27t+be+in+URL%21'
-```
-
-### Decode
-```python
->>> unquote('Can%27t+be+in+URL%21')
-"Can't+be+in+URL!"
->>> unquote_plus('Can%27t+be+in+URL%21')
-"Can't be in URL!"
 ```
 
 
