@@ -434,9 +434,10 @@ now.strftime('%Y%m%d%H%M%S')  # '20180315002834'
 ```
 
 
-Arguments
----------
-**`'*'` is the splat operator, that takes a list as input, and expands it into actual positional arguments in the function call.**
+Splat Operator
+--------------
+### Inside Function Call
+**`'*'` is the splat operator, that takes a collection as input, and expands it into actual positional arguments in the function call.**
 
 ```python
 args   = (1, 2)
@@ -449,7 +450,8 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-#### Splat operator can also be used in function declarations:
+### Inside Function Declaration
+#### Example:
 ```python
 def add(*a):
     return sum(a)
@@ -460,7 +462,27 @@ def add(*a):
 6
 ```
 
-#### And in few other places:
+#### Legal uses:
+```python
+def f(*args): pass                  # f(1, 2, 3)
+def f(x, *args): pass               # f(1, 2, 3)
+def f(*args, z): pass               # f(1, 2, z=3)
+def f(x, *args, z): pass            # f(1, 2, z=3)
+```
+
+```python
+def f(**kwargs): pass               # f(x=1, y=2, z=3)
+def f(x, **kwargs): pass            # f(x=1, y=2, z=3) or f(1, y=2, z=3)
+```
+
+```python
+def f(*args, **kwargs): pass        # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3) or f(1, 2, 3)
+def f(x, *args, **kwargs): pass     # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3) or f(1, 2, 3)
+def f(*args, y, **kwargs): pass     # f(x=1, y=2, z=3) or f(1, y=2, z=3)
+def f(x, *args, z, **kwargs): pass  # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3)
+```
+
+### Other Uses
 ```python
 >>> a = (1, 2, 3)
 >>> [*a]
