@@ -1446,7 +1446,7 @@ class MyClass(metaclass=MyMetaClass):
 ```
 
 
-Operator [⬈](https://docs.python.org/3/library/operator.html)
+Operator
 --------
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
@@ -1467,7 +1467,7 @@ last_el          = op.methodcaller('pop')(<list>)
 
 Eval 
 ----
-### Basic [⬈](https://docs.python.org/3/library/ast.html?highlight=literal_eval#ast.literal_eval)
+### Basic
 ```python
 >>> from ast import literal_eval
 >>> literal_eval('1 + 2')
@@ -1478,7 +1478,7 @@ Eval
 ValueError: malformed node or string
 ```
 
-### Using Abstract Syntax Trees [⬈](https://docs.python.org/3/library/ast.html#ast.parse)
+### Using Abstract Syntax Trees
 ```python
 import ast
 from ast import Num, BinOp, UnaryOp
