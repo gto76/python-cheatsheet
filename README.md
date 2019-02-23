@@ -1467,7 +1467,8 @@ last_el          = op.methodcaller('pop')(<list>)
 
 Eval
 ----
-### Basic
+### Basic <a href="https://docs.python.org/3/library/ast.html?highlight=literal_eval#ast.literal_eval"><img src="web/external_link.png" alt="External link" style="width:10px;height:10px;border:0;"></a>
+
 ```python
 >>> from ast import literal_eval
 >>> literal_eval('1 + 2')
