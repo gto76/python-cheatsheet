@@ -377,8 +377,8 @@ Format
 * **`'X'` - HEX**
 
 
-Math
-----
+Numbers
+-------
 ### Basic Functions
 ```python
 <num>  = pow(<num>, <num>)  # Or: <num> ** <num>
@@ -412,9 +412,7 @@ from math import inf, nan, isinf, isnan
 float('inf'), float('nan')
 ```
 
-
-Random
-------
+### Random
 ```python
 from random import random, randint, choice, shuffle
 <float> = random()
