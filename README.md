@@ -450,6 +450,7 @@ def f(<default_args>)                          # def f(x=0, y=0)
 def f(<nondefault_args>, <default_args>)       # def f(x, y=0)
 ```
 
+
 Splat Operator
 --------------
 ### Inside Function Call
