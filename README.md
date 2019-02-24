@@ -676,7 +676,7 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def fib(n):
-    return n if n < 2 else fib(n-1) + fib(n-2)
+    return n if n < 2 else fib(n-2) + fib(n-1)
 ```
 
 ### Parametrized Decorator
@@ -927,8 +927,8 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 Input
 -----
 * **Reads a line from user input or pipe if present.**
-* **The trailing newline gets stripped.**
-* **The prompt string is printed to standard output before reading input.**
+* **Trailing newline gets stripped.**
+* **Prompt string is printed to the standard output before reading input.**
 
 ```python
 <str> = input(prompt=None)
@@ -958,14 +958,14 @@ Open
 * **`'x'`  - Write or fail if the file already exists.**
 * **`'a'`  - Append.**
 * **`'w+'` - Read and write (truncate).**
-* **`'r+'` - Read and write from the beginning.**
+* **`'r+'` - Read and write from the start.**
 * **`'a+'` - Read and write from the end.**
 * **`'t'`  - Text mode (default).**
 * **`'b'`  - Binary mode.**
 
 ### Seek
 ```python
-<file>.seek(0)                 # Move to start of the file.
+<file>.seek(0)                 # Move to the start of the file.
 <file>.seek(offset)            # Move 'offset' chars/bytes from the start.
 <file>.seek(offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
 ```
@@ -1274,6 +1274,9 @@ from collections import deque
 ```python
 <deque>.appendleft(<el>)
 <el> = <deque>.popleft()
+```
+
+```python
 <deque>.extendleft(<collection>)  # Collection gets reversed.
 <deque>.rotate(n=1)               # Rotates elements to the right.
 ```
