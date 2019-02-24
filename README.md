@@ -1018,13 +1018,13 @@ arguments   = sys.argv[1:]
 ### Argparse
 ```python
 from argparse import ArgumentParser, FileType
-<parser> = ArgumentParser(description=<str>)
-<parser>.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
-<parser>.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
-<parser>.add_argument('<name>', type=<type>, nargs=1)                    # First argument
-<parser>.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments
-<args>   = <parser>.parse_args()
-value    = <args>.<name>
+p = ArgumentParser(description=<str>)
+p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
+p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
+p.add_argument('<name>', type=<type>, nargs=1)                    # Argument
+p.add_argument('<name>', type=<type>, nargs='+')                  # Arguments
+args  = p.parse_args()
+value = args.<name>
 ```
 
 * **Use `'help=<str>'` for argument description.**
