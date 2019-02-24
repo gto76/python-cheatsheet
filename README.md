@@ -888,7 +888,7 @@ while True:
         break
 ```
 
-#### Raising exception:
+### Raising Exception
 ```python
 raise ValueError('A very specific message!')
 ```
@@ -906,16 +906,15 @@ KeyboardInterrupt
 ```
 
 
-System
-------
-### Print Function
+Print
+-----
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 
 * **Use `'file=sys.stderr'` for errors.**
 
-#### Pretty print:
+### Pretty Print
 ```python
 >>> from pprint import pprint
 >>> pprint(dir())
@@ -924,7 +923,9 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
  '__doc__', ...]
 ```
 
-### Input Function
+
+Input
+-----
 * **Reads a line from user input or pipe if present.**
 * **The trailing newline gets stripped.**
 * **The prompt string is printed to standard output before reading input.**
@@ -942,14 +943,16 @@ while True:
         break
 ```
 
-### Open Function
+
+Open
+----
 **Opens file and returns a corresponding file object.**
 
 ```python
 <file> = open('<path>', mode='r', encoding=None)
 ```
 
-#### Modes:
+### Modes
 * **`'r'`  - Read (default).**
 * **`'w'`  - Write (truncate).**
 * **`'x'`  - Write or fail if the file already exists.**
@@ -960,80 +963,30 @@ while True:
 * **`'t'`  - Text mode (default).**
 * **`'b'`  - Binary mode.**
 
-#### Seek:
+### Seek
 ```python
 <file>.seek(0)                 # Move to start of the file.
 <file>.seek(offset)            # Move 'offset' chars/bytes from the start.
 <file>.seek(offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
 ```
 
-#### Read Text from File:
+### Read Text from File
 ```python
 def read_file(filename):
     with open(filename, encoding='utf-8') as file:
         return file.readlines()
 ```
 
-#### Write Text to File:
+### Write Text to File
 ```python
 def write_to_file(filename, text):
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(text)
 ```
 
-### Command Execution
-```python
-import os
-<str> = os.popen(<command>).read()
-```
-
-#### Or:
-```python
->>> import subprocess
->>> a = subprocess.run(['ls', '-a'], stdout=subprocess.PIPE)
->>> a.stdout
-b'.\n..\nfile1.txt\nfile2.txt\n'
->>> a.returncode
-0
-```
-
-### Recursion Limit
-```python
->>> import sys
->>> sys.getrecursionlimit()
-1000
->>> sys.setrecursionlimit(5000)
-```
-
-
-Command Line Arguments
-----------------------
-### Basic
-```python
-import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
-```
-
-### Argparse
-```python
-from argparse import ArgumentParser, FileType
-p = ArgumentParser(description=<str>)
-p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
-p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
-p.add_argument('<name>', type=<type>, nargs=1)                    # Argument
-p.add_argument('<name>', type=<type>, nargs='+')                  # Arguments
-args  = p.parse_args()
-value = args.<name>
-```
-
-* **Use `'help=<str>'` for argument description.**
-* **Use `'type=FileType(<mode>)'` for files.**
-
 
 Path
 ----
-### Basic
 ```python
 from os import path, listdir
 <bool> = path.exists('<path>')
@@ -1048,7 +1001,9 @@ from os import path, listdir
 ['1.gif', 'card.gif']
 ```
 
-### Pathlib
+
+Pathlib
+-------
 **This module offers classes representing filesystem paths with semantics appropriate for different operating systems.**
 
 ```python
@@ -1077,6 +1032,59 @@ cwd    = Path()
 <str>  = <Path>.stem               # Final component without extension.
 <str>  = <Path>.suffix             # Final component's extension.
 <Path> = <Path>.parent             # Path without final component.
+```
+
+
+Command Line Arguments
+----------------------
+### Basic
+```python
+import sys
+script_name = sys.argv[0]
+arguments   = sys.argv[1:]
+```
+
+### Argparse
+```python
+from argparse import ArgumentParser, FileType
+p = ArgumentParser(description=<str>)
+p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
+p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
+p.add_argument('<name>', type=<type>, nargs=1)                    # Argument
+p.add_argument('<name>', type=<type>, nargs='+')                  # Arguments
+args  = p.parse_args()
+value = args.<name>
+```
+
+* **Use `'help=<str>'` for argument description.**
+* **Use `'type=FileType(<mode>)'` for files.**
+
+
+Command Execution
+-----------------
+```python
+import os
+<str> = os.popen(<command>).read()
+```
+
+#### Or:
+```python
+>>> import subprocess
+>>> a = subprocess.run(['ls', '-a'], stdout=subprocess.PIPE)
+>>> a.stdout
+b'.\n..\nfile1.txt\nfile2.txt\n'
+>>> a.returncode
+0
+```
+
+
+Recursion Limit
+---------------
+```python
+>>> import sys
+>>> sys.getrecursionlimit()
+1000
+>>> sys.setrecursionlimit(5000)
 ```
 
 
