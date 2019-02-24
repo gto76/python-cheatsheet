@@ -71,9 +71,9 @@ value  = <dict>.setdefault(key, default=None)  # Same, but also adds default to 
 
 ```python
 <dict>.update(<dict>)                          # Or: dict_a = {**dict_a, **dict_b}.
-<dict> = dict(<list>)                          # Initiates a dict from list of key-value pairs.
-<dict> = dict(zip(keys, values))               # Initiates a dict from two lists.
-<dict> = dict.fromkeys(keys [, value])         # Initiates a dict from list of keys.
+<dict> = dict(<collection>)                    # Initiates a dict from coll. of key-value pairs.
+<dict> = dict(zip(keys, values))               # Initiates a dict from two collections.
+<dict> = dict.fromkeys(keys [, value])         # Initiates a dict from collection of keys.
 ```
 
 ```python
