@@ -454,6 +454,7 @@ def f(<nondefault_args>, <default_args>)       # def f(x, y=0)
 Splat Operator
 --------------
 ### Inside Function Call
+**Splat expands collection into positional arguments, while splatty-splat expands dictionary into keyword arguments.**
 ```python
 args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -466,7 +467,7 @@ func(1, 2, x=3, y=4, z=5)
 ```
 
 ### Inside Function Definition
-**It combines zero or more positional arguments into tuple.**
+**Splat combines zero or more positional arguments into tuple, while splatty-splat combines zero or more keyword arguments into dictionary.**
 ```python
 def add(*a):
     return sum(a)
