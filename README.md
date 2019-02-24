@@ -450,9 +450,9 @@ def f(<default_args>)                          # def f(x=0, y=0)
 def f(<nondefault_args>, <default_args>)       # def f(x, y=0)
 ```
 
-### Splat operator
-**`'*'` is the splat operator, that takes a collection as input, and expands it into actual positional arguments in the function call.**
-
+Splat Operator
+--------------
+### Inside Function Call
 ```python
 args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -464,7 +464,8 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-#### Splat example:
+### Inside Function Definition
+**It combines zero or more positional arguments into tuple.**
 ```python
 def add(*a):
     return sum(a)
@@ -475,7 +476,7 @@ def add(*a):
 6
 ```
 
-### Legal Argument Definitions and Calls
+#### Legal argument combinations and calls:
 ```python
 def f(*args)                  # f(1, 2, 3)
 def f(x, *args)               # f(1, 2, 3)
