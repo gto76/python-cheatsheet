@@ -434,9 +434,23 @@ now.strftime('%Y%m%d%H%M%S')  # '20180315002834'
 ```
 
 
-Splat Operator
---------------
+Arguments
+---------
 ### Inside Function Call
+```python
+<function>(<positional_args>)                  # f(0, 0)
+<function>(<keyword_args>)                     # f(x=0, y=0)
+<function>(<positional_args>, <keyword_args>)  # f(0, y=0)
+```
+
+### Inside Function Definition
+```python
+def f(<nondefault_args>)                       # def f(x, y)
+def f(<default_args>)                          # def f(x=0, y=0)
+def f(<nondefault_args>, <default_args>)       # def f(x, y=0)
+```
+
+### Splat operator
 **`'*'` is the splat operator, that takes a collection as input, and expands it into actual positional arguments in the function call.**
 
 ```python
@@ -450,8 +464,7 @@ func(*args, **kwargs)
 func(1, 2, x=3, y=4, z=5)
 ```
 
-### Inside Function Declaration
-#### Example:
+#### Splat example:
 ```python
 def add(*a):
     return sum(a)
@@ -462,24 +475,24 @@ def add(*a):
 6
 ```
 
-#### Legal uses:
+### Legal Argument Definitions and Calls
 ```python
-def f(*args): pass                  # f(1, 2, 3)
-def f(x, *args): pass               # f(1, 2, 3)
-def f(*args, z): pass               # f(1, 2, z=3)
-def f(x, *args, z): pass            # f(1, 2, z=3)
+def f(*args)                  # f(1, 2, 3)
+def f(x, *args)               # f(1, 2, 3)
+def f(*args, z)               # f(1, 2, z=3)
+def f(x, *args, z)            # f(1, 2, z=3)
 ```
 
 ```python
-def f(**kwargs): pass               # f(x=1, y=2, z=3)
-def f(x, **kwargs): pass            # f(x=1, y=2, z=3) or f(1, y=2, z=3)
+def f(**kwargs)               # f(x=1, y=2, z=3)
+def f(x, **kwargs)            # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 ```
 
 ```python
-def f(*args, **kwargs): pass        # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3) or f(1, 2, 3)
-def f(x, *args, **kwargs): pass     # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3) or f(1, 2, 3)
-def f(*args, y, **kwargs): pass     # f(x=1, y=2, z=3) or f(1, y=2, z=3)
-def f(x, *args, z, **kwargs): pass  # f(x=1, y=2, z=3) or f(1, y=2, z=3) or f(1, 2, z=3)
+def f(*args, **kwargs)        # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(x, *args, **kwargs)     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(*args, y, **kwargs)     # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(x, *args, z, **kwargs)  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
 ```
 
 ### Other Uses
@@ -1006,7 +1019,7 @@ from argparse import ArgumentParser, FileType
 <parser>.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
 <parser>.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
 <parser>.add_argument('<name>', type=<type>, nargs=1)                    # First argument
-<parser>.add_argument('<name>', type=<type>, nargs='+')                  # Ramaining arguments
+<parser>.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments
 <args>   = <parser>.parse_args()
 value    = <args>.<name>
 ```
