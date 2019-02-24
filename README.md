@@ -84,7 +84,7 @@ value = <dict>.pop(key)                         # Removes item from dictionary.
 ### Counter
 ```python
 >>> from collections import Counter
->>> colors = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
+>>> colors = ['red', 'blue', 'yellow', 'blue', 'red', 'blue']
 >>> counter = Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
 >>> counter.most_common()[0]
@@ -120,7 +120,7 @@ Set
 ```
 
 ### Frozenset
-#### Is hashable so it can be used as a key in dictionary.
+#### Is hashable, meaning it can be used as a key in dictionary.
 ```python
 <frozenset> = frozenset(<collection>)
 ```
