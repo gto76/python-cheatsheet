@@ -377,8 +377,8 @@ Format
 * **`'X'` - HEX**
 
 
-Numbers
--------
+Math
+----
 ### Basic Functions
 ```python
 <num>  = pow(<num>, <num>)  # Or: <num> ** <num>
@@ -412,7 +412,9 @@ from math import inf, nan, isinf, isnan
 float('inf'), float('nan')
 ```
 
-### Random
+
+Random
+------
 ```python
 from random import random, randint, choice, shuffle
 <float> = random()
@@ -478,7 +480,7 @@ def add(*a):
 6
 ```
 
-#### Legal argument combinations and calls:
+#### Legal argument combinations with calls:
 ```python
 def f(*args)                  # f(1, 2, 3)
 def f(x, *args)               # f(1, 2, 3)
@@ -1424,7 +1426,7 @@ param_names  = list(sig.parameters.keys())
 ```
 
 ### Type
-**Type is the root class. If only passed the object it returns it's type. Otherwise it creates a new class (and not the instance!).**
+**Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class (and not an instance!).**
 
 ```python
 <class> = type(<class_name>, <parents_tuple>, <attributes_dict>)
