@@ -300,7 +300,7 @@ import re
 ```
 
 ### Special Sequences
-**Expressions below hold true only for strings that contain only ASCII characters. Use capital letter for negation.**
+**Expressions below hold true for strings that contain only ASCII characters. Use capital letter for negation.**
 ```python
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
@@ -516,8 +516,8 @@ Inline
 ------
 ### Lambda
 ```python
-lambda: <return_value>
-lambda <argument_1>, <argument_2>: <return_value>
+<function> = lambda: <return_value>
+<function> = lambda <argument_1>, <argument_2>: <return_value>
 ```
 
 ### Comprehension
@@ -609,7 +609,7 @@ def get_multiplier(a):
 ### Partial
 ```python
 from functools import partial
-<function> = partial(<function>, <argument_1> [, <argument_2>, ...])
+<function> = partial(<function> [, <argument_1>, <argument_2>, ...])
 ```
 
 ```python
@@ -619,7 +619,7 @@ from functools import partial
 ```
 
 ### Nonlocal
-**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as 'global' or 'nonlocal'.**
+**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or 'nonlocal'.**
 
 ```python
 def get_counter():
