@@ -1692,10 +1692,20 @@ height = 100
 size   = width * height
 pixels = [255 * i/size for i in range(size)]
 
-img_hsv = Image.new('HSV', (width, height), 'white')
+img_hsv = Image.new('HSV', (width, height))
 img_hsv.putdata([(int(a), 255, 255) for a in pixels])
 img_rgb = img_hsv.convert(mode='RGB')
 img_rgb.save('test.png')
+```
+
+#### Adds noise to image:
+```python
+from random import randint
+add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
+img       = Image.open('test.png').convert(mode='HSV')
+pixels    = [(add_noise(h), s, v) for h, s, v in img.getdata()]
+img.putdata(pixels)
+img.convert(mode='RGB').save('test.png')
 ```
 
 ### Modes
