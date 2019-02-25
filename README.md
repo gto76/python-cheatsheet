@@ -1683,10 +1683,13 @@ def get_border(screen):
 
 Image
 -----
-#### Creates PNG image of rainbow gradient:
 ```python
 # $ pip3 install pillow
 from PIL import Image
+```
+
+#### Creates PNG image of rainbow gradient:
+```python
 width  = 100
 height = 100
 size   = width * height
