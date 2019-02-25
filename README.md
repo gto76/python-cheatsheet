@@ -1006,11 +1006,7 @@ from os import path, listdir
 ['1.gif', 'card.gif']
 ```
 
-
-Pathlib
--------
-**This module offers classes representing filesystem paths with semantics appropriate for different operating systems.**
-
+### Pathlib
 ```python
 from pathlib import Path
 cwd    = Path()
@@ -1042,7 +1038,6 @@ cwd    = Path()
 
 Command Line Arguments
 ----------------------
-### Basic
 ```python
 import sys
 script_name = sys.argv[0]
@@ -1072,7 +1067,7 @@ import os
 <str> = os.popen(<command>).read()
 ```
 
-#### Or:
+### Subprocess
 ```python
 >>> import subprocess
 >>> a = subprocess.run(['ls', '-a'], stdout=subprocess.PIPE)
