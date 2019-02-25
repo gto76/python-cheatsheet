@@ -949,6 +949,30 @@ while True:
 ```
 
 
+Command Line Arguments
+----------------------
+```python
+import sys
+script_name = sys.argv[0]
+arguments   = sys.argv[1:]
+```
+
+### Argparse
+```python
+from argparse import ArgumentParser, FileType
+p = ArgumentParser(description=<str>)
+p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
+p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
+p.add_argument('<name>', type=<type>, nargs=1)                    # Argument
+p.add_argument('<name>', type=<type>, nargs='+')                  # Arguments
+args  = p.parse_args()
+value = args.<name>
+```
+
+* **Use `'help=<str>'` for argument description.**
+* **Use `'type=FileType(<mode>)'` for files.**
+
+
 Open
 ----
 **Opens file and returns a corresponding file object.**
@@ -1034,30 +1058,6 @@ cwd    = Path()
 <str>  = <Path>.suffix             # Final component's extension.
 <Path> = <Path>.parent             # Path without final component.
 ```
-
-
-Command Line Arguments
-----------------------
-```python
-import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
-```
-
-### Argparse
-```python
-from argparse import ArgumentParser, FileType
-p = ArgumentParser(description=<str>)
-p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
-p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
-p.add_argument('<name>', type=<type>, nargs=1)                    # Argument
-p.add_argument('<name>', type=<type>, nargs='+')                  # Arguments
-args  = p.parse_args()
-value = args.<name>
-```
-
-* **Use `'help=<str>'` for argument description.**
-* **Use `'type=FileType(<mode>)'` for files.**
 
 
 Command Execution
