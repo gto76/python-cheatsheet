@@ -1385,15 +1385,15 @@ from itertools import *
 
 ### Iterators
 ```python
->>> chain([1, 2], range(3, 5))
+>>> chain([1, 2], [3, 4])
 [1, 2, 3, 4]
 
 >>> compress([1, 2, 3, 4], [True, False, 1, 0])
 [1, 3]
 
 >>> # islice(<collection>, from_inclusive, to_exclusive) 
->>> islice([1, 2, 3], 1, None)
-[2, 3]
+>>> islice([1, 2, 3, 4], 2, None)
+[3, 4]
 ```
 
 ### Group by
