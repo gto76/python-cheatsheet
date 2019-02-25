@@ -1624,6 +1624,9 @@ Progress Bar
 ```python
 # $ pip3 install tqdm
 from tqdm import tqdm
+```
+
+```python
 from time import sleep
 for i in tqdm([1, 2, 3]):
     sleep(0.2)
@@ -1637,6 +1640,9 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
+```
+
+```python
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.savefig(<filename>, transparent=True)
 pyplot.show()
@@ -1645,10 +1651,13 @@ pyplot.show()
 
 Table
 -----
-#### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
 from tabulate import tabulate
+```
+
+#### Prints CSV file as ASCII table:
+```python
 import csv
 with open(<filename>, encoding='utf-8') as file:
     lines   = csv.reader(file, delimiter=';')
@@ -1663,7 +1672,9 @@ Curses
 ```python
 # $ pip3 install curses
 from curses import wrapper
+```
 
+```python
 def main():
     wrapper(draw)
 
@@ -1695,19 +1706,17 @@ height = 100
 size   = width * height
 pixels = [255 * i/size for i in range(size)]
 
-img_hsv = Image.new('HSV', (width, height))
-img_hsv.putdata([(int(a), 255, 255) for a in pixels])
-img_rgb = img_hsv.convert(mode='RGB')
-img_rgb.save('test.png')
+img = Image.new('HSV', (width, height))
+img.putdata([(int(a), 255, 255) for a in pixels])
+img.convert(mode='RGB').save('test.png')
 ```
 
-#### Adds noise to image:
+#### Adds noise to an image:
 ```python
 from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
-img       = Image.open('test.png').convert(mode='HSV')
-pixels    = [(add_noise(h), s, v) for h, s, v in img.getdata()]
-img.putdata(pixels)
+img = Image.open('test.png').convert(mode='HSV')
+img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert(mode='RGB').save('test.png')
 ```
 
