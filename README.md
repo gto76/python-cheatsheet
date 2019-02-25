@@ -1166,7 +1166,7 @@ db.commit()
 
 Bytes
 -----
-**Bytes object is immutable sequence of single bytes. Mutable version is called bytearray.**
+**Bytes object is immutable sequence of single bytes. Mutable version is called 'bytearray'.**
 
 ```python
 <bytes> = b'<str>'
@@ -1178,7 +1178,7 @@ Bytes
 ### Encode
 ```python
 <bytes> = <str>.encode(encoding='utf-8')
-<bytes> = <int>.to_bytes(length, byteorder='big|little', signed=False)
+<bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex('<hex>')
 ```
 
@@ -1244,7 +1244,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold elements of predefined type. Available types are listed above.**
+**List that can hold only elements of predefined type. Available types are listed above.**
 
 ```python
 from array import array
@@ -1264,7 +1264,7 @@ Memory View
 
 Deque
 -----
-**A thread-safe list with efficient appends and pops from either side. Pronounced “deck”.**
+**Thread-safe list with efficient appends and pops from either side. Pronounced “deck”.**
 
 ```python
 from collections import deque
@@ -1349,8 +1349,8 @@ from itertools import *
 
 ### Infinite iterators
 ```python
->>> i = count(5, 2)
->>> next(i), next(i), next(i)
+>>> a = count(5, 2)
+>>> next(a), next(a), next(a)
 (5, 7, 9)
 
 >>> a = cycle('abc')
@@ -1662,7 +1662,7 @@ def get_border(screen):
 
 Image
 -----
-#### Creates PNG image of greyscale gradient:
+#### Creates PNG image of rainbow gradient:
 ```python
 # $ pip3 install pillow
 from PIL import Image
@@ -1671,9 +1671,10 @@ height = 100
 size   = width * height
 pixels = [255 * i/size for i in range(size)]
 
-img = Image.new('L', (width, height), 'white')
-img.putdata(pixels)
-img.save('test.png')
+img_hsv = Image.new('HSV', (width, height), 'white')
+img_hsv.putdata([(int(a), 255, 255) for a in pixels])
+img_rgb = img_hsv.convert(mode='RGB')
+img_rgb.save('test.png')
 ```
 
 ### Modes
