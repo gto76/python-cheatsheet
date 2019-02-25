@@ -1286,7 +1286,7 @@ Memory View
 
 Deque
 -----
-**Thread-safe list with efficient appends and pops from either side. Pronounced “deck”.**
+**Thread-safe list with efficient appends and pops from either side. Pronounced "deck".**
 
 ```python
 from collections import deque
