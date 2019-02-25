@@ -1624,9 +1624,6 @@ Progress Bar
 ```python
 # $ pip3 install tqdm
 from tqdm import tqdm
-```
-
-```python
 from time import sleep
 for i in tqdm([1, 2, 3]):
     sleep(0.2)
@@ -1640,9 +1637,6 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-```
-
-```python
 pyplot.plot(<data_1> [, <data_2>, ...])
 pyplot.savefig(<filename>, transparent=True)
 pyplot.show()
@@ -1651,13 +1645,10 @@ pyplot.show()
 
 Table
 -----
+#### Prints CSV file as ASCII table:
 ```python
 # $ pip3 install tabulate
 from tabulate import tabulate
-```
-
-#### Prints CSV file as ASCII table:
-```python
 import csv
 with open(<filename>, encoding='utf-8') as file:
     lines   = csv.reader(file, delimiter=';')
@@ -1672,9 +1663,7 @@ Curses
 ```python
 # $ pip3 install curses
 from curses import wrapper
-```
 
-```python
 def main():
     wrapper(draw)
 
