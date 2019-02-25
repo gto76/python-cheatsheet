@@ -412,6 +412,11 @@ from math import inf, nan, isinf, isnan
 float('inf'), float('nan')
 ```
 
+### Statistics
+```python
+from statistics import mean, median, variance, pvariance, pstdev
+```
+
 ### Random
 ```python
 from random import random, randint, choice, shuffle
@@ -1088,6 +1093,28 @@ Recursion Limit
 ```
 
 
+CSV
+---
+```python
+import csv
+```
+
+### Read Rows from CSV File
+```python
+def read_csv_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return csv.reader(file, delimiter=';')
+```
+
+### Write Rows to CSV File
+```python
+def write_to_csv_file(filename, rows):
+    with open(filename, 'w', encoding='utf-8') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerows(rows)
+```
+
+
 JSON
 ----
 ```python
@@ -1366,8 +1393,8 @@ from itertools import *
 >>> chain([1, 2], range(3, 5))
 [1, 2, 3, 4]
 
->>> compress('abc', [True, 0, 1])
-['a', 'c']
+>>> compress([1, 2, 3, 4], [True, False, 1, 0])
+[1, 3]
 
 >>> # islice(<collection>, from_inclusive, to_exclusive) 
 >>> islice([1, 2, 3], 1, None)
@@ -1468,8 +1495,7 @@ class MyMetaClass(type):
 
 ```python
 class MyClass(metaclass=MyMetaClass):
-    def __init__(self):
-        self.b = 12345
+    b = 12345
 ```
 
 
