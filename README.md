@@ -1990,8 +1990,7 @@ write_to_wav_file('test.wav', frames_i)
 ```python
 from random import randint
 add_noise = lambda value: max(-32768, min(32768, value + randint(-500, 500)))
-frames_i  = read_wav_file('test.wav')
-frames_i  = (add_noise(a) for a in frames_i)
+frames_i  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_i)
 ```
 
