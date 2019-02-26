@@ -1390,12 +1390,12 @@ from itertools import *
 >>> chain([1, 2], [3, 4])
 [1, 2, 3, 4]
 
->>> compress([1, 2, 3, 4], [True, False, 1, 0])
-[1, 3]
-
 >>> # islice(<collection>, from_inclusive, to_exclusive) 
 >>> islice([1, 2, 3, 4], 2, None)
 [3, 4]
+
+>>> compress([1, 2, 3, 4], [True, False, 1, 0])
+[1, 3]
 ```
 
 ### Group by
