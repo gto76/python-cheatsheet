@@ -1195,6 +1195,7 @@ Bytes
 <int>   = <bytes>[<index>]
 <bytes> = <bytes>[<slice>]
 <bytes> = b''.join(<coll_of_bytes>)
+<ints>  = list(<bytes>)
 ```
 
 ### Encode
@@ -1232,9 +1233,10 @@ Struct
 * **Machine’s native type sizes and byte order are used by default.**
 
 ```python
-from struct import pack, unpack, calcsize
+from struct import pack, unpack, iter_unpack, calcsize
 <bytes> = pack('<format>', <value_1> [, <value_2>, ...])
 <tuple> = unpack('<format>', <bytes>)
+<iter>  = iter_unpack('<format>', <bytes>)
 ```
 
 ### Example
@@ -1700,7 +1702,7 @@ img.putdata([(int(a), 255, 255) for a in pixels])
 img.convert(mode='RGB').save('test.png')
 ```
 
-#### Adds noise to an image:
+#### Adds noise to PNG image:
 ```python
 from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
@@ -1719,21 +1721,50 @@ img.convert(mode='RGB').save('test.png')
 
 Audio
 -----
-#### Saves a list of floats with values between -1 and 1 to a WAV file:
 ```python
-import wave, struct
-samples_l = [struct.pack('<h', int(a * 30000)) for a in <list>]
-samples_b = b''.join(samples_l)
-
-wf = wave.open('test.wav', 'wb')
-wf.setnchannels(1)
-wf.setsampwidth(2)
-wf.setframerate(44100)
-wf.writeframes(samples_b)
-wf.close()
+import wave
+from struct import pack, iter_unpack
 ```
 
-### Plays Popcorn
+### Read Frames from WAV File
+```python
+def read_wav_file(filename):
+    with wave.open(filename, 'rb') as wf:
+        frames = wf.readframes(wf.getnframes())
+        return [a[0] for a in iter_unpack('<h', frames)]
+```
+
+### Write Frames to WAV File
+```python
+def write_to_wav_file(filename, frames_int):
+    frames_short = (pack('<h', a) for a in frames_int)
+    with wave.open(filename, 'wb') as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(44100)
+        wf.writeframes(b''.join(frames_short))
+```
+
+### Examples
+#### Saves a sine wave to a WAV file:
+```python
+from math import pi, sin
+sin_f    = lambda i: sin(i * 2 * pi * 440 / 44100)
+frames_f = (sin_f(a) for a in range(100000))
+frames_i = (int(a * 30000) for a in frames_f)
+write_to_wav_file('test.wav', frames_i)
+```
+
+#### Adds noise to a WAV file:
+```python
+from random import randint
+add_noise = lambda value: max(-32768, min(32768, value + randint(-500, 500)))
+frames_i  = read_wav_file('test.wav')
+frames_i  = (add_noise(a) for a in frames_i)
+write_to_wav_file('test.wav', frames_i)
+```
+
+#### Plays Popcorn:
 ```python
 # pip3 install simpleaudio
 import simpleaudio, math, struct
@@ -1747,9 +1778,9 @@ get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz    = lambda n: 8.176 * 2 ** (int(n) / 12)
 parse_n   = lambda note: (get_hz(note[:2]), 0.25 if len(note) > 2 else 0.125)
 get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
-samples_f = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
-samples_b = b''.join(struct.pack('<h', int(a * 30000)) for a in samples_f)
-simpleaudio.play_buffer(samples_b, 1, 2, F)
+frames_i  = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
+frames_b  = b''.join(struct.pack('<h', int(a * 30000)) for a in frames_i)
+simpleaudio.play_buffer(frames_b, 1, 2, F)
 ```
 
 
