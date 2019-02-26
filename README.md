@@ -1683,107 +1683,6 @@ def get_border(screen):
 ```
 
 
-Image
------
-```python
-# $ pip3 install pillow
-from PIL import Image
-```
-
-#### Creates PNG image of rainbow gradient:
-```python
-width  = 100
-height = 100
-size   = width * height
-pixels = [255 * i/size for i in range(size)]
-
-img = Image.new('HSV', (width, height))
-img.putdata([(int(a), 255, 255) for a in pixels])
-img.convert(mode='RGB').save('test.png')
-```
-
-#### Adds noise to PNG image:
-```python
-from random import randint
-add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
-img = Image.open('test.png').convert(mode='HSV')
-img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
-img.convert(mode='RGB').save('test.png')
-```
-
-### Modes
-* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
-* **`'L'` - 8-bit pixels, greyscale.**
-* **`'RGB'` - 3x8-bit pixels, true color.**
-* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
-* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
-
-
-Audio
------
-```python
-import wave
-from struct import pack, iter_unpack
-```
-
-### Read Frames from WAV File
-```python
-def read_wav_file(filename):
-    with wave.open(filename, 'rb') as wf:
-        frames = wf.readframes(wf.getnframes())
-        return [a[0] for a in iter_unpack('<h', frames)]
-```
-
-### Write Frames to WAV File
-```python
-def write_to_wav_file(filename, frames_int):
-    frames_short = (pack('<h', a) for a in frames_int)
-    with wave.open(filename, 'wb') as wf:
-        wf.setnchannels(1)
-        wf.setsampwidth(2)
-        wf.setframerate(44100)
-        wf.writeframes(b''.join(frames_short))
-```
-
-### Examples
-#### Saves a sine wave to a WAV file:
-```python
-from math import pi, sin
-sin_f    = lambda i: sin(i * 2 * pi * 440 / 44100)
-frames_f = (sin_f(a) for a in range(100000))
-frames_i = (int(a * 30000) for a in frames_f)
-write_to_wav_file('test.wav', frames_i)
-```
-
-#### Adds noise to a WAV file:
-```python
-from random import randint
-add_noise = lambda value: max(-32768, min(32768, value + randint(-500, 500)))
-frames_i  = read_wav_file('test.wav')
-frames_i  = (add_noise(a) for a in frames_i)
-write_to_wav_file('test.wav', frames_i)
-```
-
-#### Plays Popcorn:
-```python
-# pip3 install simpleaudio
-import simpleaudio, math, struct
-from itertools import chain, repeat
-F  = 44100
-P1 = '71♪,69,,71♪,66,,62♪,66,,59♪,,,'
-P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
-get_pause = lambda seconds: repeat(0, int(seconds * F))
-sin_f     = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
-get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz    = lambda n: 8.176 * 2 ** (int(n) / 12)
-parse_n   = lambda note: (get_hz(note[:2]), 0.25 if len(note) > 2 else 0.125)
-get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
-frames_i  = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
-frames_b  = b''.join(struct.pack('<h', int(a * 30000)) for a in frames_i)
-simpleaudio.play_buffer(frames_b, 1, 2, F)
-```
-
-
 Scraping
 --------
 ```python
@@ -2013,6 +1912,107 @@ right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- 
  [ 0.7,  0.2,  inf]]
 >>> distances.argmin(1)
 [1, 2, 1]
+```
+
+
+Image
+-----
+```python
+# $ pip3 install pillow
+from PIL import Image
+```
+
+#### Creates PNG image of rainbow gradient:
+```python
+width  = 100
+height = 100
+size   = width * height
+pixels = [255 * i/size for i in range(size)]
+
+img = Image.new('HSV', (width, height))
+img.putdata([(int(a), 255, 255) for a in pixels])
+img.convert(mode='RGB').save('test.png')
+```
+
+#### Adds noise to a PNG image:
+```python
+from random import randint
+add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
+img = Image.open('test.png').convert(mode='HSV')
+img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
+img.convert(mode='RGB').save('test.png')
+```
+
+### Modes
+* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
+* **`'L'` - 8-bit pixels, greyscale.**
+* **`'RGB'` - 3x8-bit pixels, true color.**
+* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
+* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
+
+
+Audio
+-----
+```python
+import wave
+from struct import pack, iter_unpack
+```
+
+### Read Frames from WAV File
+```python
+def read_wav_file(filename):
+    with wave.open(filename, 'rb') as wf:
+        frames = wf.readframes(wf.getnframes())
+        return [a[0] for a in iter_unpack('<h', frames)]
+```
+
+### Write Frames to WAV File
+```python
+def write_to_wav_file(filename, frames_int):
+    frames_short = (pack('<h', a) for a in frames_int)
+    with wave.open(filename, 'wb') as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(44100)
+        wf.writeframes(b''.join(frames_short))
+```
+
+### Examples
+#### Saves a sine wave to a WAV file:
+```python
+from math import pi, sin
+sin_f    = lambda i: sin(i * 2 * pi * 440 / 44100)
+frames_f = (sin_f(a) for a in range(100000))
+frames_i = (int(a * 30000) for a in frames_f)
+write_to_wav_file('test.wav', frames_i)
+```
+
+#### Adds noise to a WAV file:
+```python
+from random import randint
+add_noise = lambda value: max(-32768, min(32768, value + randint(-500, 500)))
+frames_i  = read_wav_file('test.wav')
+frames_i  = (add_noise(a) for a in frames_i)
+write_to_wav_file('test.wav', frames_i)
+```
+
+#### Plays Popcorn:
+```python
+# pip3 install simpleaudio
+import simpleaudio, math, struct
+from itertools import chain, repeat
+F  = 44100
+P1 = '71♪,69,,71♪,66,,62♪,66,,59♪,,,'
+P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
+get_pause = lambda seconds: repeat(0, int(seconds * F))
+sin_f     = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
+get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
+get_hz    = lambda n: 8.176 * 2 ** (int(n) / 12)
+parse_n   = lambda note: (get_hz(note[:2]), 0.25 if len(note) > 2 else 0.125)
+get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
+frames_i  = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
+frames_b  = b''.join(struct.pack('<h', int(a * 30000)) for a in frames_i)
+simpleaudio.play_buffer(frames_b, 1, 2, F)
 ```
 
 
