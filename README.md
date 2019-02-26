@@ -1968,17 +1968,17 @@ def read_wav_file(filename):
 
 ### Write Frames to WAV File
 ```python
-def write_to_wav_file(filename, frames_int):
+def write_to_wav_file(filename, frames_int, mono=True):
     frames_short = (pack('<h', a) for a in frames_int)
     with wave.open(filename, 'wb') as wf:
-        wf.setnchannels(1)
+        wf.setnchannels(1 if mono else 2)
         wf.setsampwidth(2)
         wf.setframerate(44100)
         wf.writeframes(b''.join(frames_short))
 ```
 
 ### Examples
-#### Saves a sine wave to a WAV file:
+#### Saves a sine wave to a mono WAV file:
 ```python
 from math import pi, sin
 frames_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
@@ -1986,10 +1986,10 @@ frames_i = (int(a * 30000) for a in frames_f)
 write_to_wav_file('test.wav', frames_i)
 ```
 
-#### Adds noise to a WAV file:
+#### Adds noise to a mono WAV file:
 ```python
 from random import randint
-add_noise = lambda value: max(-32768, min(32768, value + randint(-500, 500)))
+add_noise = lambda value: max(-32768, min(32767, value + randint(-500, 500)))
 frames_i  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_i)
 ```
