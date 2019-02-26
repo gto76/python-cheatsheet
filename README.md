@@ -1982,7 +1982,7 @@ def write_to_wav_file(filename, frames_int):
 ```python
 from math import pi, sin
 sin_f    = lambda i: sin(i * 2 * pi * 440 / 44100)
-frames_f = (sin_f(a) for a in range(100000))
+frames_f = (sin_f(i) for i in range(100000))
 frames_i = (int(a * 30000) for a in frames_f)
 write_to_wav_file('test.wav', frames_i)
 ```
