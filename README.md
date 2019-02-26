@@ -485,8 +485,8 @@ def add(*a):
 
 #### Legal argument combinations with calls:
 ```python
-def f(*args)                  # f(1, 2, 3)
-def f(x, *args)               # f(1, 2, 3)
+def f(*args):                 # f(1, 2, 3)
+def f(x, *args):              # f(1, 2, 3)
 def f(*args, z)               # f(1, 2, z=3)
 def f(x, *args, z)            # f(1, 2, z=3)
 ```
