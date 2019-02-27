@@ -63,17 +63,17 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key, default=None)         # Returns default if key does not exist.
-value  = <dict>.setdefault(key, default=None)  # Same, but also adds default to dict.
-<dict> = collections.defaultdict(<type>)       # Creates a dictionary with default value of type.
-<dict> = collections.defaultdict(lambda: 1)    # Creates a dictionary with default value 1.
+value  = <dict>.get(key, default=None)          # Returns default if key does not exist.
+value  = <dict>.setdefault(key, default=None)   # Same, but also adds default to dict.
+<dict> = collections.defaultdict(<type>)        # Creates a dictionary with default value of type.
+<dict> = collections.defaultdict(lambda: 1)     # Creates a dictionary with default value 1.
 ```
 
 ```python
-<dict>.update(<dict>)                          # Or: dict_a = {**dict_a, **dict_b}.
-<dict> = dict(<collection>)                    # Initiates a dict from coll. of key-value pairs.
-<dict> = dict(zip(keys, values))               # Initiates a dict from two collections.
-<dict> = dict.fromkeys(keys [, value])         # Initiates a dict from collection of keys.
+<dict>.update(<dict>)                           # Or: dict_a = {**dict_a, **dict_b}.
+<dict> = dict(<collection>)                     # Initiates a dict from coll. of key-value pairs.
+<dict> = dict(zip(keys, values))                # Initiates a dict from two collections.
+<dict> = dict.fromkeys(keys [, value])          # Initiates a dict from collection of keys.
 ```
 
 ```python
