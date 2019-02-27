@@ -206,16 +206,43 @@ Generator
 **Convenient way to implement the iterator protocol.**
 
 ```python
-def step(start, step_size):
+def count(start, step):
     while True:
         yield start
-        start += step_size
+        start += step
 ```
 
 ```python
->>> stepper = step(10, 2)
->>> next(stepper), next(stepper), next(stepper)
+>>> counter = count(10, 2)
+>>> next(counter), next(counter), next(counter)
 (10, 12, 14)
+```
+
+
+Itertools
+---------
+* **Every function returns an iterator and can accept any collection and/or iterator.**
+* **If you want to print the iterator, you need to pass it to the list() function!**
+
+```python
+from itertools import islice, count, repeat, cycle, chain
+```
+
+```python
+<iter> = islice(<collection>, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
+```
+
+```python
+<iter> = count(start=0, step=1)                     # Counter.
+<iter> = repeat(<el> [, times])                     # Returns element endlesly or times times.
+<iter> = cycle(<collection>)                        # Repeats the sequence indefinately.
+```
+
+```python
+<iter> = chain(<collection>, <collection> [, ...])  # Empties sequences in order.
+<iter> = chain.from_iterable(<collection>)          # Empties sequences inside a sequence in order.
 ```
 
 
@@ -424,6 +451,39 @@ from random import random, randint, choice, shuffle
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
 shuffle(<list>)
+```
+
+
+Combinatorics
+-------------
+* **Every function returns an iterator.**
+* **If you want to print the iterator, you need to pass it to the list() function!**
+
+```python
+from itertools import combinations, combinations_with_replacement, permutations, product
+```
+
+```python
+>>> combinations('abc', 2)
+[('a', 'b'), ('a', 'c'), ('b', 'c')]
+
+>>> combinations_with_replacement('abc', 2)
+[('a', 'a'), ('a', 'b'), ('a', 'c'), 
+ ('b', 'b'), ('b', 'c'), 
+ ('c', 'c')]
+
+>>> permutations('abc', 2)
+[('a', 'b'), ('a', 'c'), 
+ ('b', 'a'), ('b', 'c'), 
+ ('c', 'a'), ('c', 'b')]
+
+>>> product('ab', '12')
+[('a', '1'), ('a', '2'),
+ ('b', '1'), ('b', '2')]
+
+>>> product([0, 1], repeat=3)
+[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), 
+ (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
 
@@ -1335,79 +1395,6 @@ Hashlib
 >>> import hashlib
 >>> hashlib.md5(<str>.encode()).hexdigest()
 '33d0eba106da4d3ebca17fcd3f4c3d77'
-```
-
-
-Itertools
----------
-* **Every function returns an iterator and can accept any collection and/or iterator.**
-* **If you want to print the iterator, you need to pass it to the list() function!**
-
-```python
-from itertools import *
-```
-
-### Combinatoric iterators
-```python
->>> combinations('abc', 2)
-[('a', 'b'), ('a', 'c'), ('b', 'c')]
-
->>> combinations_with_replacement('abc', 2)
-[('a', 'a'), ('a', 'b'), ('a', 'c'), 
- ('b', 'b'), ('b', 'c'), 
- ('c', 'c')]
-
->>> permutations('abc', 2)
-[('a', 'b'), ('a', 'c'), 
- ('b', 'a'), ('b', 'c'), 
- ('c', 'a'), ('c', 'b')]
-
->>> product('ab', '12')
-[('a', '1'), ('a', '2'),
- ('b', '1'), ('b', '2')]
-
->>> product([0, 1], repeat=3)
-[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), 
- (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
-```
-
-### Infinite iterators
-```python
->>> a = count(5, 2)
->>> next(a), next(a), next(a)
-(5, 7, 9)
-
->>> a = cycle('abc')
->>> [next(a) for _ in range(10)]
-['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a']
-
->>> repeat(10, 3)
-[10, 10, 10]
-```
-
-### Iterators
-```python
->>> chain([1, 2], [3, 4])
-[1, 2, 3, 4]
-
->>> # islice(<collection>, from_inclusive, to_exclusive) 
->>> islice([1, 2, 3, 4], 2, None)
-[3, 4]
-
->>> compress([1, 2, 3, 4], [True, False, 1, 0])
-[1, 3]
-```
-
-### Group by
-```python
->>> people = [{'id': 1, 'name': 'Bob'}, 
-              {'id': 2, 'name': 'Bob'}, 
-              {'id': 3, 'name': 'Peter'}]
->>> groups = groupby(people, key=lambda a: a['name'])
->>> {name: list(group) for name, group in groups}
-{'Bob':   [{'id': 1, 'name': 'Bob'}, 
-           {'id': 2, 'name': 'Bob'}], 
- 'Peter': [{'id': 3, 'name': 'Peter'}]}
 ```
 
 
