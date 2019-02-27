@@ -318,7 +318,7 @@ Format
 ```
 
 ```python
->>> Person = namedtuple('Person', 'name height')
+>>> Person = collections.namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
 >>> f'{person.height}'
 '187'
