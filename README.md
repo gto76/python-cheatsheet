@@ -199,27 +199,6 @@ from itertools import islice, count, repeat, cycle, chain
 <iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
 ```
 
-### Examples
-#### Reads input until it reaches an empty line:
-```python
-for line in iter(input, ''):
-    ...
-```
-
-#### Same, but prints a message every time:
-```python
-from functools import partial
-for line in iter(partial(input, 'Please enter value: '), ''):
-    ...
-```
-
-#### Skips first item:
-```python
-next(<iter>)
-for element in <iter>:
-    ...
-```
-
 
 Generator
 ---------
