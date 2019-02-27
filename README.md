@@ -1229,8 +1229,8 @@ Bytes
 <bytes> = b'<str>'
 <int>   = <bytes>[<index>]
 <bytes> = <bytes>[<slice>]
-<bytes> = b''.join(<coll_of_bytes>)
 <ints>  = list(<bytes>)
+<bytes> = b''.join(<coll_of_bytes>)
 ```
 
 ### Encode
