@@ -1269,9 +1269,9 @@ Struct
 
 ```python
 from struct import pack, unpack, iter_unpack, calcsize
-<bytes> = pack('<format>', <value_1> [, <value_2>, ...])
-<tuple> = unpack('<format>', <bytes>)
-<iter>  = iter_unpack('<format>', <bytes>)
+<bytes>  = pack('<format>', <value_1> [, <value_2>, ...])
+<tuple>  = unpack('<format>', <bytes>)
+<tuples> = iter_unpack('<format>', <bytes>)
 ```
 
 ### Example
