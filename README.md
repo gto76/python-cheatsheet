@@ -1391,25 +1391,10 @@ Introspection and Metaprograming
 
 ### Attributes
 ```python
-class Z:
-    def __init__(self):
-        self.a = 'abcde'
-        self.b = 12345
-```
-
-```python
->>> z = Z()
-
->>> vars(z)
-{'a': 'abcde', 'b': 12345}
-
->>> getattr(z, 'a')
-'abcde'
-
->>> hasattr(z, 'c')
-False
-
->>> setattr(z, 'c', 10)
+<dict> = vars(<object>)
+<bool> = hasattr(<object>, '<attr_name>')
+value  = getattr(<object>, '<attr_name>')
+setattr(<object>, '<attr_name>', value)
 ```
 
 ### Parameters
