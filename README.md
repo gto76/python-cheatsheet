@@ -1373,15 +1373,8 @@ Hashlib
 ```
 
 
-Introspection and Metaprograming
---------------------------------
-**Inspecting code at runtime and code that generates code. You can:**
-* **Look at the attributes**
-* **Set new attributes**
-* **Create functions dynamically**
-* **Traverse the parent classes**
-* **Change values in the class**
-
+Introspection
+-------------
 ### Variables
 ```python
 <list> = dir()      # Names of in-scope variables.
@@ -1405,6 +1398,9 @@ no_of_params = len(sig.parameters)
 param_names  = list(sig.parameters.keys())
 ```
 
+
+Metaprograming
+--------------
 ### Type
 **Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class (and not an instance!).**
 
