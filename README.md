@@ -649,7 +649,7 @@ def get_multiplier(a):
 ### Partial
 ```python
 from functools import partial
-<function> = partial(<function> [, <argument_1>, <argument_2>, ...])
+<function> = partial(<function> [, <arg_1>, <arg_2>, ...])
 ```
 
 ```python
