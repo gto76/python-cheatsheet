@@ -186,7 +186,7 @@ from itertools import islice, count, repeat, cycle, chain
 ```
 
 ```python
-<iter> = count(start=0, step=1)             # Returns incremented integer endlessly.
+<iter> = count(start=0, step=1)             # Returns incremented value endlessly.
 <iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
 <iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
 ```
