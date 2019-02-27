@@ -120,7 +120,7 @@ Set
 ```
 
 ### Frozenset
-#### Is hashable, meaning it can be used as a key in dictionary or element in set.
+#### Is hashable, meaning it can be used as a key in dictionary or as an element in set.
 ```python
 <frozenset> = frozenset(<collection>)
 ```
