@@ -435,7 +435,7 @@ Combinatorics
 * **If you want to print the iterator, you need to pass it to the list() function!**
 
 ```python
-from itertools import combinations, combinations_with_replacement, permutations, product
+from itertools import product, combinations, combinations_with_replacement, permutations
 ```
 
 ```python
