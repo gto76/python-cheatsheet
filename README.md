@@ -236,8 +236,8 @@ from itertools import islice, count, repeat, cycle, chain
 
 ```python
 <iter> = count(start=0, step=1)             # Counter.
-<iter> = repeat(<el> [, times])             # Returns element endlesly or times times.
-<iter> = cycle(<collection>)                # Repeats the sequence indefinately.
+<iter> = repeat(<el> [, times])             # Returns element endlessly or times times.
+<iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
 ```
 
 ```python
