@@ -1375,6 +1375,8 @@ Hashlib
 
 Introspection
 -------------
+**Inspecting code at runtime.**
+
 ### Variables
 ```python
 <list> = dir()      # Names of in-scope variables.
