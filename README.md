@@ -183,12 +183,6 @@ from itertools import islice, count, repeat, cycle, chain
 ```
 
 ```python
-<iter> = islice(<collection>, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
-```
-
-```python
 <iter> = count(start=0, step=1)             # Returns incremented integer endlessly.
 <iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
 <iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
@@ -197,6 +191,12 @@ from itertools import islice, count, repeat, cycle, chain
 ```python
 <iter> = chain(<collection>, <collection>)  # Empties collections in order.
 <iter> = chain.from_iterable(<collection>)  # Empties collections inside a collection in order.
+```
+
+```python
+<iter> = islice(<collection>, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
 ```
 
 ### Examples
