@@ -152,7 +152,7 @@ for i, el in enumerate(<collection> [, i_start]):
 Named Tuple
 -----------
 * **Tuple is an immutable and hashable list.**
-* **Named tuple is a subclass of tuple with named elements.**
+* **Named tuple is its subclass with named elements.**
 
 ```python
 >>> from collections import namedtuple
