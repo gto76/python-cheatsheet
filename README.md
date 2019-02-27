@@ -1442,6 +1442,11 @@ class MyClass(metaclass=MyMetaClass):
     b = 12345
 ```
 
+```python
+>>> MyClass.a, MyClass.b
+('abcde', 12345)
+```
+
 
 Operator
 --------
