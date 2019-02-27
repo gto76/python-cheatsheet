@@ -1401,6 +1401,8 @@ param_names  = list(sig.parameters.keys())
 
 Metaprograming
 --------------
+**Code that generates code.**
+
 ### Type
 **Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class (and not an instance!).**
 
