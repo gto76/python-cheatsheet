@@ -235,14 +235,14 @@ from itertools import islice, count, repeat, cycle, chain
 ```
 
 ```python
-<iter> = count(start=0, step=1)                     # Counter.
-<iter> = repeat(<el> [, times])                     # Returns element endlesly or times times.
-<iter> = cycle(<collection>)                        # Repeats the sequence indefinately.
+<iter> = count(start=0, step=1)             # Counter.
+<iter> = repeat(<el> [, times])             # Returns element endlesly or times times.
+<iter> = cycle(<collection>)                # Repeats the sequence indefinately.
 ```
 
 ```python
-<iter> = chain(<collection>, <collection> [, ...])  # Empties sequences in order.
-<iter> = chain.from_iterable(<collection>)          # Empties sequences inside a sequence in order.
+<iter> = chain(<collection>, <collection>)  # Empties sequences in order.
+<iter> = chain.from_iterable(<collection>)  # Empties sequences inside a sequence in order.
 ```
 
 
