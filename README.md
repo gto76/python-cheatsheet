@@ -169,11 +169,37 @@ Point(x=1, y=2)
 
 Iterator
 --------
+* **If you want to print the iterator, you need to pass it to the list() function.**
+* **In this cheatsheet `'<collection>'` can also mean an iterator.**
+
 ```python
-<iter> = iter(<collection>)
-<iter> = iter(<function>, to_exclusive)
+from itertools import islice, count, repeat, cycle, chain
 ```
 
+```python
+<iter> = iter(<collection>)
+<iter> = iter(<function>, to_exclusive)     # Sequence of return values until 'to_exclusive'.
+<el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
+```
+
+```python
+<iter> = islice(<collection>, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive)
+<iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
+```
+
+```python
+<iter> = count(start=0, step=1)             # Returns incremented integer endlessly.
+<iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
+<iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
+```
+
+```python
+<iter> = chain(<collection>, <collection>)  # Empties collections in order.
+<iter> = chain.from_iterable(<collection>)  # Empties collections inside a collection in order.
+```
+
+### Examples
 #### Reads input until it reaches an empty line:
 ```python
 for line in iter(input, ''):
@@ -185,12 +211,6 @@ for line in iter(input, ''):
 from functools import partial
 for line in iter(partial(input, 'Please enter value: '), ''):
     ...
-```
-
-### Next
-**Returns next item. If there are no more items it raises StopIteration exception or returns default if specified.**
-```python
-<el> = next(<iter> [, default])
 ```
 
 #### Skips first item:
@@ -216,33 +236,6 @@ def count(start, step):
 >>> counter = count(10, 2)
 >>> next(counter), next(counter), next(counter)
 (10, 12, 14)
-```
-
-
-Itertools
----------
-* **Every function returns an iterator and can accept any collection and/or iterator.**
-* **If you want to print the iterator, you need to pass it to the list() function!**
-
-```python
-from itertools import islice, count, repeat, cycle, chain
-```
-
-```python
-<iter> = islice(<collection>, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive, step_size)
-```
-
-```python
-<iter> = count(start=0, step=1)             # Counter.
-<iter> = repeat(<el> [, times])             # Returns element endlessly or times times.
-<iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
-```
-
-```python
-<iter> = chain(<collection>, <collection>)  # Empties sequences in order.
-<iter> = chain.from_iterable(<collection>)  # Empties sequences inside a sequence in order.
 ```
 
 
