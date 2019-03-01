@@ -240,8 +240,8 @@ from numbers import Number, Integral, Real, Rational, Complex
 String
 ------
 ```python
-<str>  = <str>.strip()           # Strips all whitespace characters from both ends.
-<str>  = <str>.strip('<chars>')  # Strips all passed characters from both ends.
+<str>  = <str>.strip()                       # Strips all whitespace characters from both ends.
+<str>  = <str>.strip('<chars>')              # Strips all passed characters from both ends.
 ```
 
 ```python
@@ -251,12 +251,15 @@ String
 ```
 
 ```python
-<str>  = <str>.replace(old_str, new_str)
-<bool> = <str>.startswith(<sub_str>)      # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<sub_str>)        # Pass tuple of strings for multiple options.
-<int>  = <str>.index(<sub_str>)           # Returns start index of first match.
-<bool> = <str>.isnumeric()                # True if str contains only numeric characters.
-<list> = textwrap.wrap(<str>, width)      # Nicely breaks string into lines.
+<str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
+<bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
+<bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
+<int>  = <str>.index(<sub_str>)              # Returns start index of first match.
+```
+
+```python
+<bool> = <str>.isnumeric()                   # True if str contains only numeric characters.
+<list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
 
 ### Char
