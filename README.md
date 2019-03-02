@@ -131,8 +131,7 @@ Range
 ```python
 <range> = range(to_exclusive)
 <range> = range(from_inclusive, to_exclusive)
-<range> = range(from_inclusive, to_exclusive, step_size)
-<range> = range(from_inclusive, to_exclusive, -step_size)
+<range> = range(from_inclusive, to_exclusive, ±step_size)
 ```
 
 ```python
@@ -172,11 +171,10 @@ Point(x=1, y=2)
 
 Iterator
 --------
-* **If you want to print the iterator, you need to pass it to the list() function.**
-* **In this cheatsheet `'<collection>'` can also mean an iterator.**
+**In this cheatsheet `'<collection>'` can also mean an iterator.**
 
 ```python
-from itertools import islice, count, repeat, cycle, chain
+from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
@@ -228,7 +226,7 @@ Type
 ```
 
 ```python
-from numbers import Number, Integral, Real, Rational, Complex
+from numbers import Integral, Rational, Real, Complex, Number
 <bool> = isinstance(<el>, Number)
 ```
 
@@ -388,7 +386,8 @@ Numbers
 ```python
 <num>  = pow(<num>, <num>)  # Or: <num> ** <num>
 <real> = abs(<num>)
-<real> = round(<real> [, ndigits])
+<int>  = round(<real>)
+<real> = round(<real>, ±ndigits)
 ```
 
 ### Constants
