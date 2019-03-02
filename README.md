@@ -390,30 +390,12 @@ Numbers
 <real> = round(<real>, ±ndigits)
 ```
 
-### Constants
+### Math
 ```python
 from math import e, pi
-```
-
-### Trigonometry
-```python
 from math import cos, acos, sin, asin, tan, atan, degrees, radians
-```
-
-### Logarithm
-```python
 from math import log, log10, log2
-<float> = log(<real> [, base])  # Base e, if not specified.
-```
-
-### Infinity, nan
-```python
 from math import inf, nan, isinf, isnan
-```
-
-#### Or:
-```python
-float('inf'), float('nan')
 ```
 
 ### Statistics
@@ -444,19 +426,27 @@ from itertools import product, combinations, combinations_with_replacement, perm
 >>> product([0, 1], repeat=3)
 [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), 
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
+```
 
+```python
 >>> product('ab', '12')
 [('a', '1'), ('a', '2'),
  ('b', '1'), ('b', '2')]
+```
 
+```python
 >>> combinations('abc', 2)
 [('a', 'b'), ('a', 'c'), ('b', 'c')]
+```
 
+```python
 >>> combinations_with_replacement('abc', 2)
 [('a', 'a'), ('a', 'b'), ('a', 'c'), 
  ('b', 'b'), ('b', 'c'), 
  ('c', 'c')]
+```
 
+```python
 >>> permutations('abc', 2)
 [('a', 'b'), ('a', 'c'), 
  ('b', 'a'), ('b', 'c'), 
@@ -469,9 +459,9 @@ Datetime
 ```python
 from datetime import datetime
 now = datetime.now()
-now.month                     # 3
-now.strftime('%Y%m%d')        # '20180315'
-now.strftime('%Y%m%d%H%M%S')  # '20180315002834'
+now.month                      # 3
+now.strftime('%Y%m%d')         # '20180315'
+now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
 <datetime> = datetime.strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
 ```
 
@@ -520,7 +510,7 @@ def add(*a):
 6
 ```
 
-#### Legal argument combinations with calls:
+#### Legal argument combinations:
 ```python
 def f(*args):                  # f(1, 2, 3)
 def f(x, *args):               # f(1, 2, 3)
@@ -542,15 +532,14 @@ def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 
 ### Other Uses
 ```python
->>> a = (1, 2, 3)
->>> [*a]
-[1, 2, 3]
+<list>  = [*<collection> [, ...]]
+<set>   = {*<collection> [, ...]}
+<tuple> = (*<collection>, [...])
+<dict>  = {**<dict> [, ...]}
 ```
 
 ```python
->>> head, *body, tail = [1, 2, 3, 4]
->>> body
-[2, 3]
+head, *body, tail = <collection>
 ```
 
 
@@ -566,8 +555,8 @@ Inline
 ```python
 <list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
 <set>  = {i for i in range(10) if i > 5}  # {6, 7, 8, 9}
-<dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
 <iter> = (i+5 for i in range(10))         # (5, 6, ..., 14)
+<dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
 ```
 
 ```python
@@ -665,11 +654,11 @@ from functools import partial
 
 ```python
 def get_counter():
-    a = 0
+    i = 0
     def out():
-        nonlocal a
-        a += 1
-        return a
+        nonlocal i
+        i += 1
+        return i
     return out
 ```
 
@@ -720,6 +709,8 @@ from functools import lru_cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
+
+* **Recursion depth is limited to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
 
 ### Parametrized Decorator
 ```python
@@ -839,8 +830,8 @@ class Counter:
 ```
 
 ```python
->>> c = Counter()
->>> c(), c(), c()
+>>> counter = Counter()
+>>> counter(), counter(), counter()
 (1, 2, 3)
 ```
 
@@ -1112,16 +1103,6 @@ import os
 b'.\n..\nfile1.txt\nfile2.txt\n'
 >>> a.returncode
 0
-```
-
-
-Recursion Limit
----------------
-```python
->>> import sys
->>> sys.getrecursionlimit()
-1000
->>> sys.setrecursionlimit(5000)
 ```
 
 
@@ -1633,7 +1614,7 @@ def get_border(screen):
     from collections import namedtuple
     P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
-    return P(width - 1, height - 1)
+    return P(width-1, height-1)
 ```
 
 
