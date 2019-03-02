@@ -312,8 +312,8 @@ import re
 
 Format
 ------
-```python
-<str> = f'{<el_1>}, {<el_2>}'
+```python 
+<str> = f'{<el_1>}, {<el_2>}' ## f-string is a new feature for Python3.6+ 
 <str> = '{}, {}'.format(<el_1>, <el_2>)
 ```
 
