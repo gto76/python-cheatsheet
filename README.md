@@ -1347,15 +1347,6 @@ lock.release()
 ```
 
 
-Hashlib
--------
-```python
->>> import hashlib
->>> hashlib.md5(<str>.encode()).hexdigest()
-'33d0eba106da4d3ebca17fcd3f4c3d77'
-```
-
-
 Introspection
 -------------
 **Inspecting code at runtime.**
@@ -1389,7 +1380,7 @@ Metaprograming
 **Code that generates code.**
 
 ### Type
-**Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class (and not an instance!).**
+**Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class.**
 
 ```python
 <class> = type(<class_name>, <parents_tuple>, <attributes_dict>)
@@ -1434,17 +1425,17 @@ class MyClass(metaclass=MyMetaClass):
 Operator
 --------
 ```python
-from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs, \
-                     eq, ne, lt, le, gt, ge, \
-                     not_, and_, or_, \
-                     itemgetter, attrgetter, methodcaller
+from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
+from operator import eq, ne, lt, le, gt, ge
+from operator import not_, and_, or_
+from operator import itemgetter, attrgetter, methodcaller
 ```
 
 ```python
 import operator as op
-product_of_elems = functools.reduce(op.mul, <list>)
-sorted_by_second = sorted(<list>, key=op.itemgetter(1))
-sorted_by_both   = sorted(<list>, key=op.itemgetter(1, 0))
+product_of_elems = functools.reduce(op.mul, <collection>)
+sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
+sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
@@ -1459,7 +1450,7 @@ Eval
 3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
->>> ast.literal_eval('abs(1)')
+>>> literal_eval('abs(1)')
 ValueError: malformed node or string
 ```
 
@@ -1469,13 +1460,13 @@ import ast
 from ast import Num, BinOp, UnaryOp
 import operator as op
 
-LEGAL_OPERATORS = {ast.Add:    op.add, 
-                   ast.Sub:    op.sub, 
-                   ast.Mult:   op.mul,
-                   ast.Div:    op.truediv, 
-                   ast.Pow:    op.pow, 
-                   ast.BitXor: op.xor,
-                   ast.USub:   op.neg}
+LEGAL_OPERATORS = {ast.Add:    op.add,      # <el> + <el>
+                   ast.Sub:    op.sub,      # <el> - <el>
+                   ast.Mult:   op.mul,      # <el> * <el>
+                   ast.Div:    op.truediv,  # <el> / <el>
+                   ast.Pow:    op.pow,      # <el> ** <el>
+                   ast.BitXor: op.xor,      # <el> ^ <el>
+                   ast.USub:   op.neg}      # - <el>
 
 def evaluate(expression):
     root = ast.parse(expression, mode='eval')
@@ -1679,7 +1670,7 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url = 'http://localhost:8080/odds/football'
+>>> url  = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -1771,12 +1762,12 @@ import numpy as np
 ```
 
 ```python
-<array> = <array>.sum(<axis>)
-indexes = <array>.argmin(<axis>)
+<array> = <array>.sum(axis=None)
+indexes = <array>.argmin(axis=None)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is an index of dimension that gets collapsed.**
+* **Axis is an index of dimension that gets collapsed. Leftmost dimension has index 0.**
 
 ### Indexing
 ```bash
@@ -1806,7 +1797,7 @@ left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
 right = [ 0.1 ,  0.6 ,  0.8 ]  # Shape: (3)
 ```
 
-#### 1. If array shapes differ, left-pad the smaller shape with ones:
+#### 1. If array shapes differ in length, left-pad the smaller shape with ones:
 ```python
 left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
 right = [[0.1 ,  0.6 ,  0.8]]  # Shape: (1, 3) <- !
@@ -1931,7 +1922,7 @@ write_to_wav_file('test.wav', frames_i)
 
 #### Plays Popcorn:
 ```python
-# pip3 install simpleaudio
+# $ pip3 install simpleaudio
 import simpleaudio, math, struct
 from itertools import chain, repeat
 F  = 44100
@@ -1940,8 +1931,8 @@ P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
 get_pause = lambda seconds: repeat(0, int(seconds * F))
 sin_f     = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave  = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz    = lambda n: 8.176 * 2 ** (int(n) / 12)
-parse_n   = lambda note: (get_hz(note[:2]), 0.25 if len(note) > 2 else 0.125)
+get_hz    = lambda key: 8.176 * 2 ** (int(key) / 12)
+parse_n   = lambda note: (get_hz(note[:2]), 0.25 if '♪' in note else 0.125)
 get_note  = lambda note: get_wave(*parse_n(note)) if note else get_pause(0.125)
 frames_i  = chain.from_iterable(get_note(n) for n in f'{P1}{P1}{P2}'.split(','))
 frames_b  = b''.join(struct.pack('<h', int(a * 30000)) for a in frames_i)
