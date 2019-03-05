@@ -1136,12 +1136,6 @@ import json
 <object> = json.loads(<str>)
 ```
 
-#### To preserve order use:
-```python
-from collections import OrderedDict
-<object> = json.loads(<str>, object_pairs_hook=OrderedDict)
-```
-
 ### Read Object from JSON File
 ```python
 def read_json_file(filename):
@@ -1762,8 +1756,8 @@ import numpy as np
 ```
 
 ```python
-<array> = <array>.sum(axis=None)
-indexes = <array>.argmin(axis=None)
+<array> = <array>.sum(axis)
+indexes = <array>.argmin(axis)
 ```
 
 * **Shape is a tuple of dimension sizes.**
