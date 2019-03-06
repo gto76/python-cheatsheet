@@ -151,7 +151,7 @@ for i, el in enumerate(<collection> [, i_start]):
 Named Tuple
 -----------
 * **Tuple is an immutable and hashable list.**
-* **Named tuple is its subclass with named elements.**
+* **Named tuple is it's subclass with named elements.**
 
 ```python
 >>> from collections import namedtuple
@@ -1744,7 +1744,7 @@ import numpy as np
 
 ```python
 <array> = np.array(<list>)
-<array> = np.arange(from_inclusive, to_exclusive, step_size)
+<array> = np.arange(from_inclusive, to_exclusive, ±step_size)
 <array> = np.ones(<shape>)
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
 ```
