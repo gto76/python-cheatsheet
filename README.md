@@ -151,7 +151,7 @@ for i, el in enumerate(<collection> [, i_start]):
 Named Tuple
 -----------
 * **Tuple is an immutable and hashable list.**
-* **Named tuple is it's subclass with named elements.**
+* **Named tuple is its subclass with named elements.**
 
 ```python
 >>> from collections import namedtuple
@@ -290,7 +290,7 @@ import re
 
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
-* **Use `r'\1'` or `'\\\\1'` for backreference.**  
+* **Use `r'\1'` or `'\\1'` for backreference.**  
 * **Use `'?'` to make operator non-greedy.**   
 
 ### Match Object
@@ -303,7 +303,7 @@ import re
 ```
 
 ### Special Sequences
-**Expressions below hold true for strings that contain only ASCII characters. Use capital letter for negation.**
+**Expressions below hold true for strings that contain only ASCII characters. Use capital letters for negation.**
 ```python
 '\d' == '[0-9]'          # Digit
 '\s' == '[ \t\n\r\f\v]'  # Whitespace
@@ -486,7 +486,7 @@ def f(<nondefault_args>, <default_args>):      # def f(x, y=0)
 Splat Operator
 --------------
 ### Inside Function Call
-**Splat expands collection into positional arguments, while splatty-splat expands dictionary into keyword arguments.**
+**Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.**
 ```python
 args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
@@ -499,7 +499,7 @@ func(1, 2, x=3, y=4, z=5)
 ```
 
 ### Inside Function Definition
-**Splat combines zero or more positional arguments into tuple, while splatty-splat combines zero or more keyword arguments into dictionary.**
+**Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.**
 ```python
 def add(*a):
     return sum(a)
@@ -784,7 +784,7 @@ class MyComparable:
 ```
 
 ### Hashable
-* **Hashable object needs both hash() and eq() methods and it's hash value should never change.**
+* **Hashable object needs both hash() and eq() methods and its hash value should never change.**
 * **Hashable objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do.**
 * **That is why Python automatically makes classes unhashable if you only implement eq().**
 
@@ -1200,7 +1200,7 @@ db.commit()
 
 Bytes
 -----
-**Bytes object is immutable sequence of single bytes. Mutable version is called 'bytearray'.**
+**Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.**
 
 ```python
 <bytes> = b'<str>'
@@ -1374,7 +1374,7 @@ Metaprograming
 **Code that generates code.**
 
 ### Type
-**Type is the root class. If only passed the object it returns it's type (class). Otherwise it creates a new class.**
+**Type is the root class. If only passed the object it returns its type (class). Otherwise it creates a new class.**
 
 ```python
 <class> = type(<class_name>, <parents_tuple>, <attributes_dict>)
