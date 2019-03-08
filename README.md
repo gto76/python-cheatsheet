@@ -1583,7 +1583,6 @@ with open(<filename>, encoding='utf-8') as file:
 Curses
 ------
 ```python
-# $ pip3 install curses
 from curses import wrapper
 
 def main():
