@@ -457,7 +457,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
 Datetime
 --------
 * **Module Datetime provides Date (`'<D>'`), Time (`'<T>'`) and Datetime (`'<DT>'`) classes.**
-* **Time and Datetime can be 'aware' (`'<a>'`), meaning they have defined timezone, or 'naive' (`'<n>'`), meaning they don't.
+* **Time and Datetime can be 'aware' (`'<a>'`), meaning they have defined timezone, or 'naive' (`'<n>'`), meaning they don't.**
 
 ```python
 $ pip3 install pytz
@@ -473,7 +473,7 @@ import pytz
 <TD>     = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
 ```
 * **`'fold=1'` means second pass in case of time jumping back for one hour.**
-* **Use `'<D/DT>.weekday()'` to get day of the week (Mon == 0).
+* **Use `'<D/DT>.weekday()'` to get day of the week (Mon == 0).**
 
 ### Now
 ```python
