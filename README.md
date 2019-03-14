@@ -456,8 +456,8 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 Datetime
 --------
-* **Module Datetime provides Date (`'<D>'`), Time (`'<T>'`) and Datetime (`'<DT>'`) classes.**
-* **Time and Datetime can be 'aware' (`'<a>'`), meaning they have defined timezone, or 'naive' (`'<n>'`), meaning they don't.**
+* **Module Datetime provides Date (`<D>`), Time (`<T>`) and Datetime (`<DT>`) classes.**
+* **Time and Datetime can be 'aware' (`<a>`), meaning they have defined timezone, or 'naive' (`<n>`), meaning they don't.**
 
 ```python
 $ pip3 install pytz
