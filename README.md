@@ -460,7 +460,7 @@ Datetime
 * **Time and Datetime can be 'aware' (`<a>`), meaning they have defined timezone, or 'naive' (`<n>`), meaning they don't.**
 
 ```python
-$ pip3 install pytz
+# $ pip3 install pytz
 from datetime import date, time, datetime, timedelta
 import pytz
 ```
