@@ -456,13 +456,76 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 Datetime
 --------
+* **Module Datetime provides Date (`'<D>'`), Time (`'<T>'`) and Datetime (`'<DT>'`) classes.**
+* **Time and Datetime can be 'aware' (`'<a>'`), meaning they have defined timezone, or 'naive' (`'<n>'`), meaning they don't.
+
 ```python
-from datetime import datetime
-now = datetime.now()
-now.month                      # 3
-now.strftime('%Y%m%d')         # '20180315'
-now.strftime('%Y%m%d%H%M%S')   # '20180315002834'
-<datetime> = datetime.strptime('2015-05-12 00:39', '%Y-%m-%d %H:%M')
+$ pip3 install pytz
+from datetime import date, time, datetime, timedelta
+import pytz
+```
+
+### Constructors
+```python
+<D>      = date(year, month, day)
+<T>      = time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
+<DT>     = datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
+<TD>     = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+```
+* **`'fold=1'` means second pass in case of time jumping back for one hour.**
+* **Use `'<D/DT>.weekday()'` to get day of the week (Mon == 0).
+
+### Now
+```python
+<D>      = date.today()                     # Current local date.
+<DTn>    = datetime.today()                 # Naive datetime from current local time.
+<DTn>    = datetime.utcnow()                # Naive datetime from current UTC time.
+<DTa>    = datetime.now(<tz>)               # Aware datetime from current <tz> time.
+```
+
+### Encode
+```python 
+<D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
+<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to 'format'.
+<D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
+<D/DTn>  = D/DT.fromtimestamp(<real>)       # Date or datetime from seconds since Epoch in local time.
+<DTn>    = DT.utcfromtimestamp(<real>)      # Naive datetime from seconds since Epoch in UTC time.
+<DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware datetime from seconds since Epoch in <tz> time.
+```
+* **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
+
+### Decode                         
+```python
+<str>    = <D/T/DT>.isoformat()             # 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
+<str>    = <D/T/DT>.strftime('<format>')    # Returns customized string representation.
+<int>    = <D/DT>.toordinal()               # Returns days since Christ ignoring time and timezone.
+<float>  = <DT>.timestamp()                 # Returns seconds since Epoch in local time or <tz> if set.
+```
+
+### Format
+```python
+>>> dt = datetime.strptime('2015-05-14 23:39:00', '%Y-%m-%d %H:%M:%S')
+```
+
+#### Rest of the options:
+* **`'y'` - Year, 2 digits**
+* **`'b'` - Month, abbreviated name**
+* **`'B'` - Month, full name**
+* **`'a'` - Weekday, abbreviated name**
+* **`'A'` - Weekday, full name**
+* **`'I'` - Hours, 2 digits, 12 hours**
+* **`'p'` - AM/PM**
+* **`'f'` - Microseconds, 6 digits**
+* **`'z'` - Timezone offset, ± and 4 digits**
+* **`'Z'` - Timezone name**
+
+### Timezone
+```python
+<tz>        = pytz.timezone('<Continent>/<City>')  # Use 'pytz.utc' for UTC.
+<DTa>       = <DT>.astimezone(<tz>)                # Converts datetime to passed timezone.
+<Ta/DTa>    = <T/DT>.replace(tzinfo=<timezone>)    # Changes timezone without conversion.
+<timedelta> = <T/DT>.utcoffset()                   # Returns timezone's current offset from UTC.
+<timedelta> = <T/DT>.dst()                         # Returns daylight saving time offset.
 ```
 
 
