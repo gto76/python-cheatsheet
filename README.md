@@ -508,8 +508,8 @@ import pytz
 ```python
 <str>    = <D/T/DT>.isoformat()             # ISO string representation.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
-<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and timezone.
-<float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
+<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
+<float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz.
 ```
 
 ### Format
