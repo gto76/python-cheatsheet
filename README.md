@@ -457,7 +457,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
 Datetime
 --------
 * **Module 'datetime' provides 'date' `<D>`, 'time' `<T>`, 'datetime' `<DT>` and 'timedelta' `<TD>` classes, all of which are immutable and hashable.**
-* **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.
+* **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
 * **If object is naive it is presumed to be in system's timezone.**
 
 ```python
