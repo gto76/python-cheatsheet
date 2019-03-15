@@ -512,17 +512,15 @@ import pytz
 <float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
 ```
 
-### Format
-#### ISO:
+### ISO
 * **Date: `'YYYY-MM-DD'`.**
 * **Time: `'HH:MM:SS.ffffff[+<offset>]'`.**
 * **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`.**
 
-#### Strptime, strftime:
+### Format
 ```python
 >>> dt = datetime.strptime('2015-05-14 23:39:00', '%Y-%m-%d %H:%M:%S')
 ```
-
 * **`'y'` - Year, 2 digits**
 * **`'b'` - Month, abbreviated name**
 * **`'B'` - Month, full name**
