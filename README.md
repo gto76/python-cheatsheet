@@ -496,8 +496,8 @@ import pytz
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # Object from days since Christ.
-<D/DTn>  = D/DT.fromtimestamp(<real>)       # Object from seconds since Epoch in local time.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since Christ.
+<D/DTn>  = D/DT.fromtimestamp(<real>)       # D/DT from seconds since Epoch in local time.
 <DTn>    = DT.utcfromtimestamp(<real>)      # Naive DT from seconds since Epoch in UTC time.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware DT from seconds since Epoch in tz time.
 ```
