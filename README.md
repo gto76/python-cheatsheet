@@ -472,8 +472,8 @@ import pytz
 <DT> = datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
 <TD> = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
 ```
-* **`'fold=1'` means second pass in case of time jumping back for one hour.**
 * **Use `'<D/DT>.weekday()'` to get day of the week (Mon == 0).**
+* **`'fold=1'` means second pass in case of time jumping back for one hour.**
 
 ### Now
 ```python
@@ -486,7 +486,7 @@ import pytz
 ### Encode
 ```python 
 <D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
-<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to 'format'.
+<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to <format>.
 <D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
 <D/DTn>  = D/DT.fromtimestamp(<real>)       # Date or datetime from seconds since Epoch in local time.
 <DTn>    = DT.utcfromtimestamp(<real>)      # Naive datetime from seconds since Epoch in UTC time.
