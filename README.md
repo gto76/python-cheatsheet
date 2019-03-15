@@ -518,16 +518,16 @@ import pytz
 ```
 
 #### Rest of the codes:
-* **`'y'` - Year, 2 digits**
-* **`'b'` - Month, abbreviated name**
-* **`'B'` - Month, full name**
-* **`'a'` - Weekday, abbreviated name**
-* **`'A'` - Weekday, full name**
-* **`'I'` - Hours, 2 digits, 12 hours**
-* **`'p'` - AM/PM**
-* **`'f'` - Microseconds, 6 digits**
-* **`'z'` - Timezone offset, ± and 4 digits**
-* **`'Z'` - Timezone name**
+* **`'y'` - Year, 2 digits.**
+* **`'b'` - Month, abbreviated name.**
+* **`'B'` - Month, full name.**
+* **`'a'` - Weekday, abbreviated name.**
+* **`'A'` - Weekday, full name.**
+* **`'I'` - Hours, 2 digits, 12 hours.**
+* **`'p'` - AM/PM.**
+* **`'f'` - Microseconds, 6 digits.**
+* **`'z'` - Timezone offset, ± and 4 digits.**
+* **`'Z'` - Timezone name.**
 
 
 Arguments
