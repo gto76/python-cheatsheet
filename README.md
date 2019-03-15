@@ -512,10 +512,14 @@ import pytz
 
 ### Format
 ```python
->>> dt = datetime.strptime('2015-06-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%a %dth %B '%y, %I:%m%p %Z")
-"Sun 14th June '15, 11:06PM UTC+02:00"
+>>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
+>>> dt.strftime("%A %dth %B '%y, %I:%m%p %Z")
+"Thursday 14th May '15, 11:05PM UTC+02:00"
 ```
+
+#### Rest of the codes:
+* **`'b'` - Month, abbreviated name.**
+* **`'a'` - Weekday, abbreviated name.**
 
 
 Arguments
