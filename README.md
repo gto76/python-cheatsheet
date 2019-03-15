@@ -523,7 +523,7 @@ import pytz
 ```python
 <tz>        = pytz.timezone('<Continent>/<City>')  # Use 'pytz.utc' for UTC.
 <DTa>       = <DT>.astimezone(<tz>)                # Converts datetime to passed timezone.
-<Ta/DTa>    = <T/DT>.replace(tzinfo=<timezone>)    # Changes timezone without conversion.
+<Ta/DTa>    = <T/DT>.replace(tzinfo=<tz>)          # Changes timezone without conversion.
 <timedelta> = <T/DT>.utcoffset()                   # Returns timezone's current offset from UTC.
 <timedelta> = <T/DT>.dst()                         # Returns daylight saving time offset.
 ```
