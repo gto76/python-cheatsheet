@@ -507,23 +507,22 @@ import pytz
 ### Decode                         
 ```python
 <str>    = <D/T/DT>.isoformat()             # ISO string representation.
-<str>    = <D/T/DT>.strftime('<format>')    # Customized string representation.
+<str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and timezone.
 <float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
 ```
 
-### ISO Formats
+### Format
+#### ISO:
 * **Date: `'YYYY-MM-DD'`.**
 * **Time: `'HH:MM:SS.ffffff[+<offset>]'`.**
 * **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`.**
 
-
-### Format
+#### Strptime, strftime:
 ```python
 >>> dt = datetime.strptime('2015-05-14 23:39:00', '%Y-%m-%d %H:%M:%S')
 ```
 
-#### Rest of the codes:
 * **`'y'` - Year, 2 digits**
 * **`'b'` - Month, abbreviated name**
 * **`'B'` - Month, full name**
