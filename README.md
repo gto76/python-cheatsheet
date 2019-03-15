@@ -491,8 +491,6 @@ import pytz
 <tz>     = pytz.timezone('<Cont.>/<City>')  # Timezone from 'Continent/City' string.
 <DTa>    = <DT>.astimezone(<tz>)            # Datetime converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
-<TD>     = <T/DT>.utcoffset()               # Timezone's current offset from UTC.
-<TD>     = <T/DT>.dst()                     # Daylight saving time offset.
 ```
 
 ### Encode
