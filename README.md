@@ -456,7 +456,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 Datetime
 --------
-* **Module Datetime provides 'date' `<D>`, 'time' `<T>` and 'datetime' `<DT>` classes.**
+* **Module 'datetime' provides 'date' `<D>`, 'time' `<T>` and 'datetime' `<DT>` classes.**
 * **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
 
 ```python
