@@ -513,16 +513,13 @@ import pytz
 ### Format
 ```python
 >>> dt = datetime.strptime('2015-05-14 23:39:00', '%Y-%m-%d %H:%M:%S')
+>>> dt.strftime("%dth %B '%y %A %I%p")
+"14th May '15 Thursday 11PM"
 ```
 
 #### Rest of the codes:
-* **`'y'` - Year, 2 digits.**
 * **`'b'` - Month, abbreviated name.**
-* **`'B'` - Month, full name.**
 * **`'a'` - Weekday, abbreviated name.**
-* **`'A'` - Weekday, full name.**
-* **`'I'` - Hours, 2 digits, 12 hours.**
-* **`'p'` - AM/PM.**
 * **`'f'` - Microseconds, 6 digits.**
 * **`'z'` - Timezone offset, ± and 4 digits.**
 * **`'Z'` - Timezone name.**
