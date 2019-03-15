@@ -497,8 +497,6 @@ import pytz
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since Christ.
-<D/DTn>  = D/DT.fromtimestamp(<real>)       # D/DT from seconds since Epoch in local time.
-<DTn>    = DT.utcfromtimestamp(<real>)      # Naive DT from seconds since Epoch in UTC time.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware DT from seconds since Epoch in tz time.
 ```
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
