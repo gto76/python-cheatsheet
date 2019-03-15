@@ -470,8 +470,9 @@ import pytz
 ```python
 <D>  = date(year, month, day)
 <T>  = time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
-<DT> = datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
-<TD> = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+<DT> = datetime(year, month, day, hour=0, minute=0, second=0, ...)
+<TD> = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, 
+                 minutes=0, hours=0, weeks=0)
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means second pass in case of time jumping back for one hour.**
