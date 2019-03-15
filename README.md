@@ -495,7 +495,7 @@ import pytz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD' / 'HH:MM:SS.ffffff[+<offset>]'.
+<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # D/T/DT from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
 <D/DTn>  = D/DT.fromtimestamp(<real>)       # D/DT from seconds since Epoch in local time.
@@ -506,19 +506,13 @@ import pytz
 
 ### Decode                         
 ```python
-<str>    = <D/T/DT>.isoformat()             # 'YYYY-MM-DD' / 'HH:MM:SS.ffffff[+<offset>]'.
+<str>    = <D/T/DT>.isoformat()             # ISO string representation.
 <str>    = <D/T/DT>.strftime('<format>')    # Customized string representation.
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and timezone.
 <float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
 ```
 
-### ISO Format
-```python
-date     == 'YYYY-MM-DD'
-time     == 'HH:MM:SS.ffffff[+<offset>]'
-datetime == 'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'
-```
-
+### ISO Formats
 * **Date: `'YYYY-MM-DD'`.**
 * **Time: `'HH:MM:SS.ffffff[+<offset>]'`.**
 * **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`.**
