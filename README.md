@@ -476,10 +476,10 @@ import pytz
 
 ### Now
 ```python
-<D>      = date.today()                     # Current local date.
-<DTn>    = datetime.today()                 # Naive datetime from current local time.
-<DTn>    = datetime.utcnow()                # Naive datetime from current UTC time.
-<DTa>    = datetime.now(<tz>)               # Aware datetime from current <tz> time.
+<D>      = D.today()                        # Current local date.
+<DTn>    = DT.today()                       # Naive datetime from current local time.
+<DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
+<DTa>    = DT.now(<tz>)                     # Aware datetime from current <tz> time.
 ```
 
 ### Encode
