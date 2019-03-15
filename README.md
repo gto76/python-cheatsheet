@@ -479,10 +479,9 @@ import pytz
 
 ### Now
 ```python
-<D>      = D.today()                        # Current local date.
-<DTn>    = DT.today()                       # Naive datetime from current local time.
+<D/DTn>  = D/DT.today()                     # Current local date or naive datetime.
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
-<DTa>    = DT.now(<tz>)                     # Aware datetime from current <tz> time.
+<DTa>    = DT.now(<tz>)                     # Aware datetime from current tz time.
 ```
 
 ### Timezone
