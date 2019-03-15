@@ -461,9 +461,8 @@ Datetime
 * **If object is naive it is presumed to be in system's timezone.**
 
 ```python
-# $ pip3 install pytz
 from datetime import date, time, datetime, timedelta
-import pytz
+from dateutil.tz import UTC, gettz
 ```
 
 ### Constructors
@@ -486,8 +485,8 @@ import pytz
 
 ### Timezone
 ```python
-<tz>     = pytz.utc                         # UTC timezone.
-<tz>     = pytz.timezone('<Cont.>/<City>')  # Timezone from 'Continent/City_Name' str.
+<tz>     = UTC                              # UTC timezone.
+<tz>     = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
 <DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
 ```
