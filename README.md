@@ -499,7 +499,7 @@ import pytz
 <str>    = <D/T/DT>.isoformat()             # 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
 <str>    = <D/T/DT>.strftime('<format>')    # Returns customized string representation.
 <int>    = <D/DT>.toordinal()               # Returns days since Christ ignoring time and timezone.
-<float>  = <DT>.timestamp()                 # Returns seconds since Epoch in local time or <tz> if set.
+<float>  = <DT>.timestamp()                 # Returns seconds since Epoch in local time or tz if set.
 ```
 
 ### Format
