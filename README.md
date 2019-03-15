@@ -494,7 +494,7 @@ import pytz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # D/T/DT from ISO string.
+<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
 <D/DTn>  = D/DT.fromtimestamp(<real>)       # D/DT from seconds since Epoch in local time.
