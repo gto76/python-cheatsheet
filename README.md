@@ -495,22 +495,34 @@ import pytz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
-<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to <format>.
+<D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD' / 'HH:MM:SS.ffffff[+<offset>]'.
+<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
-<D/DTn>  = D/DT.fromtimestamp(<real>)       # Date or datetime from seconds since Epoch in local time.
-<DTn>    = DT.utcfromtimestamp(<real>)      # Naive datetime from seconds since Epoch in UTC time.
-<DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware datetime from seconds since Epoch in <tz> time.
+<D/DTn>  = D/DT.fromtimestamp(<real>)       # D/DT from seconds since Epoch in local time.
+<DTn>    = DT.utcfromtimestamp(<real>)      # Naive DT from seconds since Epoch in UTC time.
+<DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware DT from seconds since Epoch in tz time.
 ```
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode                         
 ```python
-<str>    = <D/T/DT>.isoformat()             # 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
-<str>    = <D/T/DT>.strftime('<format>')    # Returns customized string representation.
-<int>    = <D/DT>.toordinal()               # Returns days since Christ ignoring time and timezone.
-<float>  = <DT>.timestamp()                 # Returns seconds since Epoch in local time or tz if set.
+<str>    = <D/T/DT>.isoformat()             # 'YYYY-MM-DD' / 'HH:MM:SS.ffffff[+<offset>]'.
+<str>    = <D/T/DT>.strftime('<format>')    # Customized string representation.
+<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and timezone.
+<float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
 ```
+
+### ISO Format
+```python
+date     == 'YYYY-MM-DD'
+time     == 'HH:MM:SS.ffffff[+<offset>]'
+datetime == 'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'
+```
+
+* **Date: `'YYYY-MM-DD'`.**
+* **Time: `'HH:MM:SS.ffffff[+<offset>]'`.**
+* **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`.**
+
 
 ### Format
 ```python
