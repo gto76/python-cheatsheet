@@ -507,7 +507,7 @@ import pytz
 >>> dt = datetime.strptime('2015-05-14 23:39:00', '%Y-%m-%d %H:%M:%S')
 ```
 
-#### Rest of the options:
+#### Rest of the codes:
 * **`'y'` - Year, 2 digits**
 * **`'b'` - Month, abbreviated name**
 * **`'B'` - Month, full name**
