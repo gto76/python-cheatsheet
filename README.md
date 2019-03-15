@@ -518,8 +518,8 @@ import pytz
 ```
 
 #### Rest of the codes:
-* **`'b'` - Month, abbreviated name.**
 * **`'a'` - Weekday, abbreviated name.**
+* **`'b'` - Month, abbreviated name.**
 
 
 Arguments
