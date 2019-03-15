@@ -487,7 +487,7 @@ import pytz
 ### Timezone
 ```python
 <tz>     = pytz.utc                         # UTC timezone.
-<tz>     = pytz.timezone('<Cont.>/<City>')  # Timezone from 'Continent/City' string.
+<tz>     = pytz.timezone('<Cont.>/<City>')  # Timezone from 'Continent/City_Name' str.
 <DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
 ```
