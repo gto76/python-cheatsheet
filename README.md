@@ -494,7 +494,7 @@ from dateutil.tz import UTC, gettz
 ### Encode
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
-<DT>     = DT.strptime(<str>, '<format>')   # Datetime from string, according to format.
+<DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
 ```
@@ -512,8 +512,8 @@ from dateutil.tz import UTC, gettz
 ### Format
 ```python
 >>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%A %dth %B '%y, %I:%m%p %Z")
-"Thursday 14th May '15, 11:05PM UTC+02:00"
+>>> dt.strftime("%A %dth %B '%y, %I:%M%p %Z")
+"Thursday 14th May '15, 11:39PM UTC+02:00"
 ```
 
 #### Rest of the codes:
