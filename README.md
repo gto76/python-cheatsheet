@@ -484,7 +484,7 @@ import pytz
 ```
 
 ### Encode
-```python 
+```python
 <D/T/DT> = D/T/DT.fromisoformat(<str>)      # From 'YYYY-MM-DD', 'HH:MM:SS.ffffff[+<offset>]' or both.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string according to <format>.
 <D/DTn>  = D/DT.fromordinal(<int>)          # Date or datetime from days since Christ.
