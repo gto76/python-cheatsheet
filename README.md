@@ -487,7 +487,8 @@ import pytz
 
 ### Timezone
 ```python
-<tz>     = pytz.timezone('<Cont.>/<City>')  # Use 'pytz.utc' for UTC.
+<tz>     = pytz.utc                         # UTC timezone.
+<tz>     = pytz.timezone('<Cont.>/<City>')  # Timezone from 'Continent/City' string.
 <DTa>    = <DT>.astimezone(<tz>)            # Converts datetime to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Changes timezone without conversion.
 <TD>     = <T/DT>.utcoffset()               # Returns timezone's current offset from UTC.
