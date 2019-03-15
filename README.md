@@ -513,9 +513,9 @@ import pytz
 ```
 
 ### ISO
-* **Date: `'YYYY-MM-DD'`.**
-* **Time: `'HH:MM:SS.ffffff[+<offset>]'`.**
-* **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`.**
+* **Date: `'YYYY-MM-DD'`**
+* **Time: `'HH:MM:SS.ffffff[+<offset>]'`**
+* **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`**
 
 ### Format
 ```python
