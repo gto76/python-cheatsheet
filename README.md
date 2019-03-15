@@ -503,6 +503,7 @@ import pytz
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware DT from seconds since Epoch in tz time.
 ```
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
+* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[+<offset>]'` or both separated by `'T'`.
 
 ### Decode                         
 ```python
@@ -511,11 +512,6 @@ import pytz
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and timezone.
 <float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz if set.
 ```
-
-### ISO
-* **Date: `'YYYY-MM-DD'`**
-* **Time: `'HH:MM:SS.ffffff[+<offset>]'`**
-* **Datetime: `'YYYY-MM-DDTHH:MM:SS.ffffff[+<offset>]'`**
 
 ### Format
 ```python
