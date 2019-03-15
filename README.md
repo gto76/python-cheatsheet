@@ -496,7 +496,7 @@ import pytz
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from string, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since Christ.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # Aware DT from seconds since Epoch in tz time.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`.**
