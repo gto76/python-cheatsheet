@@ -456,8 +456,9 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 Datetime
 --------
-* **Module 'datetime' provides 'date' `<D>`, 'time' `<T>`, 'datetime' `<DT>` and 'timedelta' `<TD>` classes.**
-* **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
+* **Module 'datetime' provides 'date' `<D>`, 'time' `<T>`, 'datetime' `<DT>` and 'timedelta' `<TD>` classes, all of which are immutable and hashable.**
+* **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.
+* **If object is naive it is presumed to be in system's timezone.**
 
 ```python
 # $ pip3 install pytz
@@ -481,6 +482,15 @@ import pytz
 <DTn>    = DT.today()                       # Naive datetime from current local time.
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
 <DTa>    = DT.now(<tz>)                     # Aware datetime from current <tz> time.
+```
+
+### Timezone
+```python
+<tz>     = pytz.timezone('<Cont.>/<City>')  # Use 'pytz.utc' for UTC.
+<DTa>    = <DT>.astimezone(<tz>)            # Converts datetime to passed timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Changes timezone without conversion.
+<TD>     = <T/DT>.utcoffset()               # Returns timezone's current offset from UTC.
+<TD>     = <T/DT>.dst()                     # Returns daylight saving time offset.
 ```
 
 ### Encode
@@ -518,15 +528,6 @@ import pytz
 * **`'f'` - Microseconds, 6 digits**
 * **`'z'` - Timezone offset, ± and 4 digits**
 * **`'Z'` - Timezone name**
-
-### Timezone
-```python
-<tz>        = pytz.timezone('<Continent>/<City>')  # Use 'pytz.utc' for UTC.
-<DTa>       = <DT>.astimezone(<tz>)                # Converts datetime to passed timezone.
-<Ta/DTa>    = <T/DT>.replace(tzinfo=<tz>)          # Changes timezone without conversion.
-<timedelta> = <T/DT>.utcoffset()                   # Returns timezone's current offset from UTC.
-<timedelta> = <T/DT>.dst()                         # Returns daylight saving time offset.
-```
 
 
 Arguments
