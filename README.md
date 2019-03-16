@@ -1669,7 +1669,7 @@ logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
 logger.add('error_{time}.log', level='ERROR')  # Adds another file for errors or higher.
 logger.<level>('A logging message')
 ```
-* **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical`'.**
+* **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
 ### Rotation
 **Parameter that sets a condition when a new log file is created.**
