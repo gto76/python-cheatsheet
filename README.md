@@ -46,11 +46,11 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-index = <list>.index(<el>)  # Returns first index of item. 
+index = <list>.index(<el>)  # Returns first index of item.
 <list>.insert(index, <el>)  # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])  # Removes and returns item at index or from the end.
 <list>.remove(<el>)         # Removes first occurrence of item or raises ValueError.
-<list>.clear()              # Removes all items.   
+<list>.clear()              # Removes all items.
 ```
 
 
@@ -289,9 +289,9 @@ import re
 ```
 
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
-* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**  
-* **Use `r'\1'` or `'\\1'` for backreference.**  
-* **Use `'?'` to make operator non-greedy.**   
+* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**
+* **Use `r'\1'` or `'\\1'` for backreference.**
+* **Use `'?'` to make operator non-greedy.**
 
 ### Match Object
 ```python
@@ -424,7 +424,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 ```python
 >>> product([0, 1], repeat=3)
-[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), 
+[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1),
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
@@ -441,15 +441,15 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 ```python
 >>> combinations_with_replacement('abc', 2)
-[('a', 'a'), ('a', 'b'), ('a', 'c'), 
- ('b', 'b'), ('b', 'c'), 
+[('a', 'a'), ('a', 'b'), ('a', 'c'),
+ ('b', 'b'), ('b', 'c'),
  ('c', 'c')]
 ```
 
 ```python
 >>> permutations('abc', 2)
-[('a', 'b'), ('a', 'c'), 
- ('b', 'a'), ('b', 'c'), 
+[('a', 'b'), ('a', 'c'),
+ ('b', 'a'), ('b', 'c'),
  ('c', 'a'), ('c', 'b')]
 ```
 
@@ -505,7 +505,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
-### Decode                         
+### Decode
 ```python
 <str>    = <D/T/DT>.isoformat()             # ISO string representation.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
@@ -549,7 +549,7 @@ Splat Operator
 ```python
 args   = (1, 2)
 kwargs = {'x': 3, 'y': 4, 'z': 5}
-func(*args, **kwargs)  
+func(*args, **kwargs)
 ```
 
 #### Is the same as:
@@ -677,7 +677,7 @@ creature  = Creature()
 Closure
 -------
 **We have a closure in Python when:**
-* **A nested function references a value of its enclosing function and then** 
+* **A nested function references a value of its enclosing function and then**
 * **the enclosing function returns the nested function.**
 
 ```python
@@ -839,7 +839,7 @@ class MyComparable:
     def __eq__(self, other):
         if isinstance(other, type(self)):
             return self.a == other.a
-        return False 
+        return False
 ```
 
 ### Hashable
@@ -857,7 +857,7 @@ class MyHashable:
     def __eq__(self, other):
         if isinstance(other, type(self)):
             return self.a == other.a
-        return False 
+        return False
     def __hash__(self):
         return hash(self.a)
 ```
@@ -928,7 +928,7 @@ Enum
 from enum import Enum, auto
 
 class <enum_name>(Enum):
-    <member_name_1> = <value_1>  
+    <member_name_1> = <value_1>
     <member_name_2> = <value_2_a>, <value_2_b>
     <member_name_3> = auto()
 
@@ -1278,7 +1278,7 @@ Bytes
 
 ### Decode
 ```python
-<str>   = <bytes>.decode(encoding='utf-8') 
+<str>   = <bytes>.decode(encoding='utf-8')
 <int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
 <hex>   = <bytes>.hex()
 ```
@@ -1352,7 +1352,7 @@ Memory View
 **Used for accessing the internal data of an object that supports the buffer protocol.**
 
 ```python
-<memoryview> = memoryview(<bytes> / <bytearray> / <array>) 
+<memoryview> = memoryview(<bytes> / <bytearray> / <array>)
 <memoryview>.release()
 ```
 
@@ -1494,7 +1494,7 @@ last_el          = op.methodcaller('pop')(<list>)
 ```
 
 
-Eval 
+Eval
 ----
 ### Basic
 ```python
@@ -1555,14 +1555,14 @@ def eval_node(node):
 
 Coroutine
 ---------
-* **Similar to generator, but generator pulls data through the pipe with iteration, while coroutine pushes data into the pipeline with send().**  
-* **Coroutines provide more powerful data routing possibilities than iterators.**  
-* **If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**  
+* **Similar to generator, but generator pulls data through the pipe with iteration, while coroutine pushes data into the pipeline with send().**
+* **Coroutines provide more powerful data routing possibilities than iterators.**
+* **If you built a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**
 
 ### Helper Decorator
-* **All coroutines must be "primed" by first calling next().**  
-* **Remembering to call next() is easy to forget.**  
-* **Solved by wrapping coroutines with a decorator:**  
+* **All coroutines must be "primed" by first calling next().**
+* **Remembering to call next() is easy to forget.**
+* **Solved by wrapping coroutines with a decorator:**
 
 ```python
 def coroutine(func):
@@ -1691,7 +1691,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 retention=<int>|<datetime.timedelta>|<str>
 ```
 * **`'<int>'` - Max number of files.**
-* **`'<timedelta>'` - Max age of a file.** 
+* **`'<timedelta>'` - Max age of a file.**
 * **`'<str>'` - Max age as a string: `'1 week, 3 days'`, `'2 months'`, ...**
 
 ### Compression
