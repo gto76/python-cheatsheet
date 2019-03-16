@@ -1461,7 +1461,7 @@ class MyMetaClass(type):
         return type.__new__(cls, name, parents, attrs)
 ```
 * **New() is a class method that gets called before init(). It returns an instance of a class that gets passed to init() as a 'self' argument.**
-* **It receives the same arguments as init(), except for the first one which, is its class.**
+* **It receives the same arguments as init(), except for the first one which is its class.**
 
 ### Metaclass Attribute
 **When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type.**
