@@ -462,7 +462,7 @@ Datetime
 
 ```python
 from datetime import date, time, datetime, timedelta
-from dateutil.tz import UTC, gettz
+from dateutil.tz import UTC, tzlocal, gettz
 ```
 
 ### Constructors
@@ -486,7 +486,11 @@ from dateutil.tz import UTC, gettz
 ### Timezone
 ```python
 <tz>     = UTC                              # UTC timezone.
+<tz>     = tzlocal()                        # Local timezone.
 <tz>     = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
+```
+
+```python
 <DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
 ```
