@@ -1679,7 +1679,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 * **`'<int>'` - Max file size in bytes.**
 * **`'<timedelta>'` - Max age of a file.**
 * **`'<time>'` - Time of day.**
-* **`'<str>'` - Any of above as a string: `'100 MB'`, `'0.5 GB'`, `'1 month 2 weeks'`, `'4 days'`, `'10h'`, `'monthly'`, `'18:00'`, `'sunday'`, `'w0'`, `'monday at 12:00'`, ...**
+* **`'<str>'` - Any of above as a string: `'100 MB'`, `'1 month 2 weeks'`, `'18:00'`, `'w0'`, `'monday at 12:00'`, ...**
 
 ### Retention
 **Sets a condition which old log files are deleted.**
