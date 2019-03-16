@@ -190,7 +190,7 @@ from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
-<iter> = chain(<collection>, <collection>)  # Empties collections in order.
+<iter> = chain(<coll.>, <coll.>, ...)       # Empties collections in order.
 <iter> = chain.from_iterable(<collection>)  # Empties collections inside a collection in order.
 ```
 
