@@ -1677,8 +1677,8 @@ logger.<level>('A logging message')
 rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 ```
 * **`'<int>'` - Max file size in bytes.**
-* **`'<timedelta>`' - Max age of a file.**
-* **`'<time>`' - Time of day.**
+* **`'<timedelta>'` - Max age of a file.**
+* **`'<time>'` - Time of day.**
 * **`'<str>'` - Any of above as string: `'100 MB'`, `'0.5 GB'`, `'1 month 2 weeks'`, `'4 days'`, `'10h'`, `'monthly'`, `'18:00'`, `'sunday'`, `'w0'`, `'monday at 12:00'`, ...**
 
 ### Retention
@@ -1687,7 +1687,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 retention=<int>|<datetime.timedelta>|<str>
 ```
 * **`'<int>'` - Max number of files.**
-* **`'<timedelta>`' - Max age of a file.** 
+* **`'<timedelta>'` - Max age of a file.** 
 * **`'<str>'` - Max age as string: `'1 week, 3 days'`, `'2 months'`, ...**
 
 ### Compression
