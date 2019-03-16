@@ -1657,6 +1657,46 @@ def get_border(screen):
 ```
 
 
+Logging
+-------
+```python
+# $ pip3 install loguru
+from loguru import logger
+```
+
+```python
+logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
+logger.add('error_{time}.log', level='ERROR')  # Adds another file for errors or higher.
+logger.<level>('A logging message')
+```
+* **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical`'.**
+
+### Rotation
+Parameter that sets a condition when a new log file is created.
+```python
+rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
+```
+* **`'<int>'` - Max file size in bytes.**
+* **`'<timedelta>`' - Max age of a file.**
+* **`'<time>`' - Time of day.**
+* **`'<str>'` - Any of above as string: '100 MB', '0.5 GB', '1 month 2 weeks', '4 days', '10h', 'monthly', '18:00', 'sunday', 'w0', 'monday at 12:00', ...**
+
+### Retention
+Sets a condition which old log files are deleted.
+```python
+retention=<int>|<datetime.timedelta>|<str>
+```
+* **`'<int>'` - Max number of files.**
+* **`'<timedelta>`' - Max age of a file.** 
+* **`'<str>'` - Max age as string: '1 week, 3 days', '2 months', ...**
+
+### Compression
+Sets how inactive log files are compressed.
+```python
+compression='gz'|'bz2'|'tar'|'tar.gz'|'tar.bz2'|'zip'
+```
+
+
 Scraping
 --------
 ```python
