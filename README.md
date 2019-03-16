@@ -1672,7 +1672,7 @@ logger.<level>('A logging message')
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical`'.**
 
 ### Rotation
-Parameter that sets a condition when a new log file is created.
+**Parameter that sets a condition when a new log file is created.**
 ```python
 rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 ```
@@ -1682,7 +1682,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 * **`'<str>'` - Any of above as string: '100 MB', '0.5 GB', '1 month 2 weeks', '4 days', '10h', 'monthly', '18:00', 'sunday', 'w0', 'monday at 12:00', ...**
 
 ### Retention
-Sets a condition which old log files are deleted.
+**Sets a condition which old log files are deleted.**
 ```python
 retention=<int>|<datetime.timedelta>|<str>
 ```
@@ -1691,7 +1691,7 @@ retention=<int>|<datetime.timedelta>|<str>
 * **`'<str>'` - Max age as string: '1 week, 3 days', '2 months', ...**
 
 ### Compression
-Sets how inactive log files are compressed.
+**Sets how inactive log files are compressed.**
 ```python
 compression='gz'|'bz2'|'tar'|'tar.gz'|'tar.bz2'|'zip'
 ```
