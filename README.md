@@ -473,12 +473,12 @@ from dateutil.tz import UTC, tzlocal, gettz
 <TD> = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, 
                  minutes=0, hours=0, weeks=0)
 ```
-* **Use `'<D|DT>.weekday()'` to get the day of the week (Mon == 0).**
+* **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means second pass in case of time jumping back for one hour.**
 
 ### Now
 ```python
-<D|DTn>  = D|DT.today()                     # Current local date or naive datetime.
+<D/DTn>  = D/DT.today()                     # Current local date or naive datetime.
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
 <DTa>    = DT.now(<tz>)                     # Aware datetime from current tz time.
 ```
@@ -492,14 +492,14 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ```python
 <DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
-<Ta|DTa> = <T|DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
 ```
 
 ### Encode
 ```python
-<D|T|DT> = D|T|DT.fromisoformat('<iso>')    # Object from ISO string.
+<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
-<D|DTn>  = D|DT.fromordinal(<int>)          # D|DTn from days since Christ.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`.**
@@ -507,9 +507,9 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Decode
 ```python
-<str>    = <D|T|DT>.isoformat()             # ISO string representation.
-<str>    = <D|T|DT>.strftime('<format>')    # Custom string representation.
-<int>    = <D|DT>.toordinal()               # Days since Christ, ignoring time and tz.
+<str>    = <D/T/DT>.isoformat()             # ISO string representation.
+<str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
+<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
 <float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz.
 ```
 
