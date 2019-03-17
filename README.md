@@ -772,6 +772,7 @@ def fib(n):
 * **Recursion depth is limited to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
 
 ### Parametrized Decorator
+**A decorator that accepts arguments and returns a normal decorator that accepts a function.**
 ```python
 from functools import wraps
 
