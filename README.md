@@ -340,9 +340,6 @@ Format
 **`'!r'` calls object's repr() method, instead of format(), to get a string.**
 ```python
 {'abcde'!r:<10}  # "'abcde'   "
-```
-
-```python
 {'abcde':.3}     # 'abc'
 {'abcde':10.3}   # 'abc       '
 ```
