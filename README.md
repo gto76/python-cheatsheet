@@ -366,6 +366,8 @@ Format
 {65:c}           # 'A'
 {3:08b}          # '00000011' -> Binary with leading zeros.
 {3:0<8b}         # '11000000' -> Binary with trailing zeros.
+[I'm an inline-style link](https://www.google.com)
+<strong>'Collections'</strong> : (<a href="#list">list</a>)
 ```
 
 #### Float presentation types:
@@ -1943,7 +1945,7 @@ Image
 from PIL import Image
 ```
 
-#### Creates PNG image of rainbow gradient:
+#### Creates PNG image of a rainbow gradient:
 ```python
 width  = 100
 height = 100
