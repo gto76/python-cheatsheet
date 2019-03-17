@@ -347,12 +347,15 @@ Format
 {'abcde':10.3}   # 'abc       '
 ```
 
-### Number Options
+### Float Options
 ```python
 {1.23456:.3f}    # '1.235'
 {1.23456:10.3f}  # '     1.235'
+{1.23456:10.3e}  # ' 1.235e+00'
+{1.23456:10.3%}  # '  123.456%'
 ```
 
+### Int Options
 ```python
 { 123456:10,}    # '   123,456'
 { 123456:10_}    # '   123_456'
@@ -363,21 +366,10 @@ Format
 ```
 
 ```python
-{65:c}           # 'A'
-{3:08b}          # '00000011' -> Binary with leading zeros.
-{3:0<8b}         # '11000000' -> Binary with trailing zeros.
+{90:c}           # 'Z'
+{90:X}           # '5A'
+{3:08b}          # '00000011'
 ```
-
-#### Float presentation types:
-* **`'f'` - Fixed point: `.<precision>f`**
-* **`'%'` - Percent: `.<precision>%`**
-* **`'e'` - Exponent**
-
-#### Integer presentation types:
-* **`'c'` - character**
-* **`'b'` - binary**
-* **`'x'` - hex**
-* **`'X'` - HEX**
 
 
 Numbers
