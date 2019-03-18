@@ -1053,7 +1053,7 @@ value = args.<name>
 
 Open
 ----
-**Opens file and returns a corresponding file object.**
+**Opens a file and returns a corresponding file object.**
 
 ```python
 <file> = open('<path>', mode='r', encoding=None)
