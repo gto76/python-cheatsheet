@@ -1070,11 +1070,23 @@ Open
 * **`'t'`  - Text mode (default).**
 * **`'b'`  - Binary mode.**
 
-### Seek
+### File
 ```python
-<file>.seek(0)                 # Move to the start of the file.
-<file>.seek(offset)            # Move 'offset' chars/bytes from the start.
-<file>.seek(offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
+<file>.seek(0)                      # Move to the start of the file.
+<file>.seek(offset)                 # Move 'offset' chars/bytes from the start.
+<file>.seek(offset, <anchor>)       # Anchor: 0 start, 1 current pos., 2 end.
+```
+
+```python
+<str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until EOF.
+<str/bytes> = <file>.readline()     # Returns a line.
+<list>      = <file>.readlines()    # Returns a list of lines.
+<str/bytes> = next(<file>)          # Returns a line using buffer. Do not mix.
+```
+
+```python
+write(<str/bytes>)                  # Writes a string or bytes object.
+writelines(<list>)                  # Writes a list of strings or bytes objects.
 ```
 
 ### Read Text from File
