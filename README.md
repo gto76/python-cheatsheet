@@ -1144,7 +1144,7 @@ cwd    = Path()
 ```python
 <str>  = str(<Path>)               # Returns path as a string.
 <tup.> = <Path>.parts              # Returns all components as strings.
-<Path> = <Path>.resolve()          # Returns absolute path without symlinks.
+<Path> = <Path>.resolve()          # Returns absolute Path without symlinks.
 ```
 
 ```python
