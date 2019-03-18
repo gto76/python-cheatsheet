@@ -1135,11 +1135,14 @@ cwd    = Path()
 <bool> = <Path>.is_file()
 <bool> = <Path>.is_dir()
 <iter> = <Path>.iterdir()
+```
+
+```python
 <iter> = <Path>.glob('<pattern>')
 ```
 
 ```python
-<str>  = str(<Path>)               # Returns path as string.
+<str>  = str(<Path>)               # Returns path as a string.
 <tup.> = <Path>.parts              # Returns all components as strings.
 <Path> = <Path>.resolve()          # Returns absolute path without symlinks.
 ```
