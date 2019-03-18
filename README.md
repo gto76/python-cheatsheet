@@ -1085,8 +1085,8 @@ Open
 ```
 
 ```python
-write(<str/bytes>)                  # Writes a string or bytes object.
-writelines(<list>)                  # Writes a list of strings or bytes objects.
+<file>.write(<str/bytes>)           # Writes a string or bytes object.
+<file>.writelines(<list>)           # Writes a list of strings or bytes objects.
 ```
 
 ### Read Text from File
