@@ -1360,7 +1360,7 @@ Memory View
 **Used for accessing the internal data of an object that supports the buffer protocol.**
 
 ```python
-<memoryview> = memoryview(<bytes/bytearray/array>)
+<memoryview> = memoryview(<bytes> / <bytearray> / <array>)
 <memoryview>.release()
 ```
 
