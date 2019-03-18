@@ -1088,7 +1088,7 @@ Open
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<list>)           # Writes a list of strings or bytes objects.
 ```
-* **No method adds or strips trailing newlines.**
+* **Methods do not add or strip trailing newlines.**
 * **Changes are not written until file gets closed.**
 
 ### Read Text from File
