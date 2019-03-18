@@ -1414,7 +1414,7 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()      # Names of in-scope variables.
+<list> = dir()      # Names of variables in current scope.
 <dict> = locals()   # Dict of local variables. Also vars().
 <dict> = globals()  # Dict of global variables.
 ```
