@@ -812,9 +812,7 @@ class Person:
     def __init__(self, name, age):
         self.name = name
         self.age  = age
-```
 
-```python
 class Employee(Person):
     def __init__(self, name, age, staff_num):
         super().__init__(name, age)
