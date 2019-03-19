@@ -1430,9 +1430,9 @@ setattr(<object>, '<attr_name>', value)
 ### Parameters
 ```python
 from inspect import signature
-sig          = signature(<function>)
-no_of_params = len(sig.parameters)
-param_names  = list(sig.parameters.keys())
+<sig>        = signature(<function>)
+no_of_params = len(<sig>.parameters)
+param_names  = list(<sig>.parameters.keys())
 ```
 
 
