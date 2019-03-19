@@ -1601,14 +1601,14 @@ def reader(target):
 @coroutine
 def adder(target):
     while True:
-        item = (yield)
-        target.send(item + 100)
+        value = (yield)
+        target.send(value + 100)
 
 @coroutine
 def printer():
     while True:
-        item = (yield)
-        print(item)
+        value = (yield)
+        print(value)
 
 reader(adder(printer()))  # 100, 101, ..., 109
 ```
