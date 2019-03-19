@@ -120,7 +120,7 @@ Set
 ```
 
 ### Frozenset
-#### Is hashable, meaning it can be used as a key in dictionary or as an element in set.
+#### Is hashable, meaning it can be used as a key in a dictionary or as an element in a set.
 ```python
 <frozenset> = frozenset(<collection>)
 ```
@@ -291,7 +291,7 @@ import re
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**
 * **Use `r'\1'` or `'\\1'` for backreference.**
-* **Use `'?'` to make operator non-greedy.**
+* **Use `'?'` to make an operator non-greedy.**
 
 ### Match Object
 ```python
