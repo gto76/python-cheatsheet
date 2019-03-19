@@ -819,7 +819,7 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
-```pycon
+```python
 >>> Employee.mro()
 [<class 'Employee'>, <class 'Person'>, <class 'object'>]
 ```
