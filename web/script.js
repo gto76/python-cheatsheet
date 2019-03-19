@@ -12,7 +12,7 @@ function parseMd() {
     aDiv.after(nodes);
     insertLinks()
     d3.selectAll("code").each(function() { hljs.highlightBlock(this); });
-    addToc()
+    // addToc()
   });
 }
 
