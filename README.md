@@ -819,6 +819,11 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
+```python
+>>> Employee.mro()
+[<class 'Employee'>, <class 'Person'>, <class 'object'>]
+```
+
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
 * **That means all objects compare not equal by default.**
