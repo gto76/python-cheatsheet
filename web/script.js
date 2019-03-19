@@ -12,6 +12,7 @@ function parseMd() {
     aDiv.after(nodes);
     insertLinks()
     d3.selectAll("code").each(function() { hljs.highlightBlock(this); });
+    addToc()
   });
 }
 
@@ -21,3 +22,11 @@ function insertLinks() {
     $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>')
   })
 }
+
+function addToc() {
+  headerMain = $('#main')
+  nodes = $.parseHTML(TOC)
+  headerMain.before(nodes)
+}
+
+var TOC = '<h2 id="toc">Contents<a href="#toc" name="toc">#</a></h2>'
