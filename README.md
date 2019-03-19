@@ -1094,9 +1094,9 @@ Open
 ```python
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<list>)           # Writes a list of strings or bytes objects.
+<file>.flush()                      # Flushes write buffer.
 ```
 * **Methods do not add or strip trailing newlines.**
-* **Changes are not written until file gets closed.**
 
 ### Read Text from File
 ```python
