@@ -15,7 +15,7 @@ Contents
 4. **System: [Print](#print), [Input](#input), [Command_Line_Arguments](#commandlinearguments), [Open](#open), [Path](#path)ᴺᴱᵂ, [Command_Execution](#commandexecution)**
 5. **Data: [CSV](#csv), [JSON](#json), [Pickle](#pickle), [SQLite](#sqlite), [Bytes](#bytes), [Struct](#struct), [Array](#array), [MemoryView](#memoryview), [Deque](#deque)**
 6. **Advanced: [Threading](#threading), [Introspection](#introspection), [Metaprograming](#metaprograming), [Operator](#operator), [Eval](#eval), [Coroutine](#coroutine)**
-7. **Libraries: [Progress_Bar](#progressbar), [Plot](#plot), [Table](#table), [Curses](#curses), [Logging](#logging)ᴺᴱᵂ, [Scraping](#scraping), [Web](#web), [Profile](#profile), [NumPy](#numpy), [Image](#image), [Audio](#audio), [Basic_Script_Template](#basicscripttemplate)**
+7. **Libraries: [Progress_Bar](#progressbar), [Plot](#plot), [Table](#table), [Curses](#curses), [Logging](#logging)ᴺᴱᵂ, [Scraping](#scraping), [Web](#web), [Profile](#profile), [NumPy](#numpy), [Image](#image), [Audio](#audio)**
 
 
 Main
