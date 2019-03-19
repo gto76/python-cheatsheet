@@ -869,6 +869,8 @@ class MySequence:
         return len(self.a)
     def __getitem__(self, i):
         return self.a[i]
+    def __setitem__(self, i, value):
+        self.a[i] = value
     def __iter__(self):
         for el in self.a:
             yield el
