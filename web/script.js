@@ -12,7 +12,6 @@ function parseMd() {
     aDiv.after(nodes);
     insertLinks()
     d3.selectAll("code").each(function() { hljs.highlightBlock(this); });
-    // removeOrigToc()
     addToc()
   });
 }
@@ -22,13 +21,6 @@ function insertLinks() {
     aId = $(this).attr('id')
     $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>')
   })
-}
-
-function removeOrigToc() {
-  headerContents = $('#contents')
-  contentsList = headerContents.next()
-  headerContents.remove()
-  contentsList.remove()
 }
 
 function addToc() {
