@@ -1688,7 +1688,7 @@ from loguru import logger
 
 ```python
 logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
-logger.add('error_{time}.log', level='ERROR')  # Adds another file for errors or higher.
+logger.add('error_{time}.log', level='ERROR')  # Another file for errors or higher.
 logger.<level>('A logging message')
 ```
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
@@ -1701,7 +1701,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 * **`'<int>'` - Max file size in bytes.**
 * **`'<timedelta>'` - Max age of a file.**
 * **`'<time>'` - Time of day.**
-* **`'<str>'` - Any of above as a string: `'100 MB'`, `'1 month 2 weeks'`, `'18:00'`, `'w0'`, `'monday at 12:00'`, ...**
+* **`'<str>'` - Any of above as a string: `'100 MB'`, `'1 month'`, `'monday at 12:00'`, `'w0'`, , ...**
 
 ### Retention
 **Sets a condition which old log files are deleted.**
