@@ -9,7 +9,7 @@ or [Fork me on GitHub](https://github.com/gto76/python-cheatsheet).
 
 Contents
 --------
-1. **Collections: [List](#list), [Dict](#dictionary), [Set](#set), [Range](#range), [Enumerate](#enumerate), [Namedtuple](#named-tuple), [Iterator](#iterator), [Generator](#generator)**
+1. **Collections:** [List](#list), [Dict](#dictionary), [Set](#set), [Range](#range), [Enumerate](#enumerate), [Namedtuple](#named-tuple), [Iterator](#iterator), [Generator](#generator)
 2. **Types: [Type](#type), [String](#string), [Regex](#regex), [Format](#format), [Numbers](#numbers), [Combinatorics](#combinatorics), [Datetime](#datetime)ᴺᴱᵂ**
 3. **Syntax: [Arguments](#arguments), [Splat](#splat-operator), [Inline](#inline), [Closure](#closure), [Decorator](#decorator), [Class](#class), [Enum](#enum), [Exceptions](#exceptions)**
 4. **System: [Print](#print), [Input](#input), [Command_Line_Arguments](#command-line-arguments), [Open](#open), [Path](#path)ᴺᴱᵂ, [Command_Execution](#command-execution)**
