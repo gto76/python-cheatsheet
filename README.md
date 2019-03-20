@@ -21,10 +21,8 @@ List
 ```
 
 ```python
-<list>.append(<el>)
-<list>.extend(<collection>)
-<list> += [<el>]
-<list> += <collection>
+<list>.append(<el>)          # Or: <list> += [<el>]
+<list>.extend(<collection>)  # Or: <list> += <collection>
 ```
 
 ```python
@@ -45,11 +43,11 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-index = <list>.index(<el>)  # Returns first index of item.
-<list>.insert(index, <el>)  # Inserts item at index and moves the rest to the right.
-<el> = <list>.pop([index])  # Removes and returns item at index or from the end.
-<list>.remove(<el>)         # Removes first occurrence of item or raises ValueError.
-<list>.clear()              # Removes all items.
+index = <list>.index(<el>)   # Returns first index of item.
+<list>.insert(index, <el>)   # Inserts item at index and moves the rest to the right.
+<el> = <list>.pop([index])   # Removes and returns item at index or from the end.
+<list>.remove(<el>)          # Removes first occurrence of item or raises ValueError.
+<list>.clear()               # Removes all items.
 ```
 
 
@@ -98,10 +96,8 @@ Set
 ```
 
 ```python
-<set>.add(<el>)
-<set>.update(<collection>)
-<set> |= {<el>}
-<set> |= <set>
+<set>.add(<el>)                               # Or: <set> |= {<el>}
+<set>.update(<collection>)                    # Or: <set> |= <set>
 ```
 
 ```python
