@@ -1783,8 +1783,8 @@ def odds_handler(sport):
 ```
 
 
-Profiling
----------
+Profile
+-------
 ### Basic
 ```python
 from time import time
