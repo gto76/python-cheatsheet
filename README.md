@@ -818,6 +818,19 @@ class Employee(Person):
 >>> Employee.mro()
 [<class 'Employee'>, <class 'Person'>, <class 'object'>]
 ```
+* **MRO or Method Resolution Order determines the order in which parent classes are traversed when searching for a method.**
+
+### Multiple Inheritance
+```python
+class A: pass
+class B: pass
+class C(A, B): pass
+```
+
+```python
+>>> C.mro()
+[<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
+```
 
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
