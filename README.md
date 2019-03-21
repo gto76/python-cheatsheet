@@ -1179,8 +1179,8 @@ import os
 
 ### Subprocess
 ```python
->>> import subprocess
->>> a = subprocess.run(['ls', '-a'], stdout=subprocess.PIPE)
+>>> import subprocess, shlex
+>>> a = subprocess.run(shlex.split('ls -a'), stdout=subprocess.PIPE)
 >>> a.stdout
 b'.\n..\nfile1.txt\nfile2.txt\n'
 >>> a.returncode
@@ -1420,6 +1420,12 @@ lock = RLock()
 lock.acquire()
 ...
 lock.release()
+```
+or
+```python
+lock = RLock()
+with lock:
+    ...
 ```
 
 
@@ -1700,6 +1706,13 @@ logger.add('error_{time}.log', level='ERROR')  # Another file for errors or high
 logger.<level>('A logging message')
 ```
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
+
+```python
+try:
+    ...
+except Exception as e:
+    logger.exception('An error happened', e)
+```
 
 ### Rotation
 **Parameter that sets a condition when a new log file is created.**
