@@ -110,7 +110,7 @@ Set
 ```
 
 ```python
-<set>.remove(<el>)                            # Removes item or raises KeyError.
+<set>.remove(<el>)                            # Raises KeyError.
 <set>.discard(<el>)                           # Doesn't raise an error.
 ```
 
