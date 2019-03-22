@@ -110,8 +110,8 @@ Set
 ```
 
 ```python
-<set>.remove(<el>)   # Throws error.
-<set>.discard(<el>)  # Doesn't throw error.
+<set>.remove(<el>)   # Raises KeyError.
+<set>.discard(<el>)  # Doesn't raise an error.
 ```
 
 ### Frozenset
