@@ -56,7 +56,7 @@ Dictionary
 ```python
 <view> = <dict>.keys()                          # Coll. of keys that reflects changes.
 <view> = <dict>.values()                        # Coll. of values that reflects changes.
-<view> = <dict>.items()                         # Coll. of key-value pairs.
+<view> = <dict>.items()                         # Coll. of key-value tuples.
 ```
 
 ```python
