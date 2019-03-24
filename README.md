@@ -1668,7 +1668,7 @@ with open(<filename>, encoding='utf-8') as file:
 Curses
 ------
 ```python
-from curses import wrapper
+from curses import wrapper, ascii
 
 def main():
     wrapper(draw)
@@ -1676,7 +1676,7 @@ def main():
 def draw(screen):
     screen.clear()
     screen.addstr(0, 0, 'Press ESC to quit.')
-    while screen.getch() != 27:
+    while screen.getch() != ascii.ESC:
         pass
 
 def get_border(screen):
@@ -1684,6 +1684,9 @@ def get_border(screen):
     P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
     return P(width-1, height-1)
+
+if __name__ == '__main__':
+    main()
 ```
 
 
