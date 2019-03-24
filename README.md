@@ -1681,9 +1681,9 @@ def draw(screen):
 
 def get_border(screen):
     from collections import namedtuple
-    P = namedtuple('P', 'x y')
+    P = namedtuple('P', 'y x')
     height, width = screen.getmaxyx()
-    return P(width-1, height-1)
+    return P(height-1, width-1)
 
 if __name__ == '__main__':
     main()
