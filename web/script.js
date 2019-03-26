@@ -13,7 +13,7 @@ function parseMd() {
     aDiv.after(nodes);
     removeOrigToc();
     insertLinks();
-    addImgParentClass();
+    unindentBanner();
     d3.selectAll("code").each(function() {
       hljs.highlightBlock(this);
     });
@@ -35,10 +35,12 @@ function insertLinks() {
     $(this).html('<a href="#' + aId + '" name="' + aId + '">#</a>' + text);
   });
 }
-function addImgParentClass() {
-  let monty_img = $("img").first();
-  monty_img.parent().addClass("img_parent");
-  monty_img.before("<br>");
+
+function unindentBanner() {
+  let montyImg = $("img").first();
+  montyImg.parent().addClass("banner");
+  let downloadPraragrapth = $("p").first();
+  downloadPraragrapth.addClass("banner");
 }
 
 function addToc() {

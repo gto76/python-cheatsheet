@@ -226,15 +226,19 @@ p,
 ul {
   padding-left: 2rem;
 }
-.img_parent {
+.banner {
   padding: 0;
+}
+
+#toc {
+  margin-top: 0;
 }
 
 @media only screen and (max-device-width: 1024px) {
   h1 {
     font-size: 3rem;
   }
-  .img_parent,
+  .banner,
   h1,
   img {
     max-width: calc(100vw - 2em);
