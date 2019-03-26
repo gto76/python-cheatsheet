@@ -374,7 +374,7 @@ Format
 ```python
 {90:c}           # 'Z'
 {90:X}           # '5A'
-{3:08b}          # '00000011'
+{90:08b}         # '01011010'
 ```
 
 
@@ -501,6 +501,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`.**
+* **Offset is formated as: `'HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
@@ -513,9 +514,10 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Format
 ```python
+>>> from datetime import datetime
 >>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%A %dth %B '%y, %I:%M%p %Z")
-"Thursday 14th May '15, 11:39PM UTC+02:00"
+>>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
+"Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
 
 #### Rest of the codes:
@@ -708,7 +710,7 @@ from functools import partial
 ```
 
 ### Nonlocal
-**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or 'nonlocal'.**
+**If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.**
 
 ```python
 def get_counter():
@@ -828,11 +830,6 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
-```python
->>> Employee.mro()
-[<class 'Employee'>, <class 'Person'>, <class 'object'>]
-```
-
 ### Multiple Inheritance
 ```python
 class A: pass
@@ -845,6 +842,18 @@ class C(A, B): pass
 >>> C.mro()
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
 ```
+
+### Copy
+```python
+from copy import copy, deepcopy
+<object> = copy(<object>)
+<object> = deepcopy(<object>)
+```
+
+
+Duck Types
+----------
+**A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.**
 
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
@@ -914,7 +923,7 @@ class Counter:
 (1, 2, 3)
 ```
 
-### Withable
+### Context Manager
 ```python
 class MyOpen():
     def __init__(self, filename):
@@ -932,13 +941,6 @@ class MyOpen():
 >>> with MyOpen('test.txt') as file:
 ...     print(file.read())
 Hello World!
-```
-
-### Copy
-```python
-from copy import copy, deepcopy
-<object> = copy(<object>)
-<object> = deepcopy(<object>)
 ```
 
 
@@ -1502,7 +1504,7 @@ class MyMetaClass(type):
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute
-**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type.**
+**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
@@ -1659,14 +1661,14 @@ Plot
 # $ pip3 install matplotlib
 from matplotlib import pyplot
 pyplot.plot(<data_1> [, <data_2>, ...])
-pyplot.savefig(<filename>, transparent=True)
+pyplot.savefig(<filename>)
 pyplot.show()
 ```
 
 
 Table
 -----
-#### Prints CSV file as ASCII table:
+#### Prints a CSV file as an ASCII table:
 ```python
 # $ pip3 install tabulate
 from tabulate import tabulate
@@ -1833,9 +1835,10 @@ duration = pc() - start_time
 
 ### Timing a Snippet
 ```python
-from timeit import timeit
-timeit('"-".join(str(a) for a in range(100))', 
-       number=10000, globals=globals(), setup='pass')
+>>> from timeit import timeit
+>>> timeit('"-".join(str(a) for a in range(100))', 
+...        number=10000, globals=globals(), setup='pass')
+0.34986
 ```
 
 ### Line Profiler
@@ -1932,7 +1935,7 @@ left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
 right = [ 0.1 ,  0.6 ,  0.8 ]  # Shape: (3)
 ```
 
-#### 1. If array shapes differ in length, left-pad the smaller shape with ones:
+#### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
 left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
 right = [[0.1 ,  0.6 ,  0.8]]  # Shape: (1, 3) <- !
@@ -1983,7 +1986,7 @@ Image
 from PIL import Image
 ```
 
-#### Creates PNG image of a rainbow gradient:
+#### Creates a PNG image of a rainbow gradient:
 ```python
 width  = 100
 height = 100
