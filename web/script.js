@@ -5,14 +5,15 @@ $(document).ready(function() {
 function parseMd() {
   var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md';
   jQuery.get(GITHUB, function(text) {
-    console.log(text)
-    text = removeMdToc(text);
-    console.log(text)
+    // console.log(text)
+    // text = removeMdToc(text);
+    // console.log(text)
     var converter = new showdown.Converter();
     html = converter.makeHtml(text);
     aDiv = $('#main_container');
     nodes = $.parseHTML(html);
     aDiv.after(nodes);
+    removeOrigToc();
     insertLinks();
     d3.selectAll("code").each(function() { hljs.highlightBlock(this); });
     addToc();
@@ -34,6 +35,13 @@ function removeMdToc(text) {
     }
   }
   return out.join('\n');
+}
+
+function removeOrigToc() {
+  headerContents = $('#contents')
+  contentsList = headerContents.next()
+  headerContents.remove()
+  contentsList.remove()
 }
 
 function insertLinks() {
