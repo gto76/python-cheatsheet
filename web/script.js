@@ -33,7 +33,7 @@ function removeMdToc(text) {
       out.push(line);
     }
   }
-  return out.join();
+  return out.join('\n');
 }
 
 function insertLinks() {
