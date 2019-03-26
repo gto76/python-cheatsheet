@@ -5,7 +5,9 @@ $(document).ready(function() {
 function parseMd() {
   var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md';
   jQuery.get(GITHUB, function(text) {
+    console.log(text)
     text = removeMdToc(text);
+    console.log(text)
     var converter = new showdown.Converter();
     html = converter.makeHtml(text);
     aDiv = $('#main_container');
@@ -38,7 +40,7 @@ function insertLinks() {
   $('h2').each(function() {
     aId = $(this).attr('id');
     $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>');
-  })
+  });
 }
 
 function addToc() {
