@@ -18,10 +18,9 @@ function parseMd() {
 }
 
 function removeMdToc(text) {
-  out = []
+  var out = []
   lines = text.match(/[^\r\n]+/g);
   console.log(lines)
-  return text
   insideContents = false
   for (line of lines) {
     if (line.trim() === 'Contents') {
@@ -33,7 +32,7 @@ function removeMdToc(text) {
       out.push(line)
     }
   }
-  return out
+  return text
 }
 
 function insertLinks() {
