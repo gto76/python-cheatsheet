@@ -5,7 +5,7 @@ $(document).ready(function() {
 function parseMd() {
   var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md'
   jQuery.get(GITHUB, function(text) {
-    // text = removeMdToc(text)
+    text = removeMdToc(text)
     var converter = new showdown.Converter()
     html = converter.makeHtml(text)
     aDiv = $('#main_container')
@@ -20,6 +20,7 @@ function parseMd() {
 function removeMdToc(text) {
   out = []
   console.log(text)
+  return text
   lines = text.match(/[^\r\n]+/g);
   insideContents = false
   for (line of lines) {
