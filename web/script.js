@@ -1,51 +1,50 @@
 $(document).ready(function() {
-  parseMd()
+  parseMd();
 });
 
 function parseMd() {
-  var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md'
+  var GITHUB = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md';
   jQuery.get(GITHUB, function(text) {
-    text = removeMdToc(text)
-    var converter = new showdown.Converter()
-    html = converter.makeHtml(text)
-    aDiv = $('#main_container')
-    nodes = $.parseHTML(html)
+    text = removeMdToc(text);
+    var converter = new showdown.Converter();
+    html = converter.makeHtml(text);
+    aDiv = $('#main_container');
+    nodes = $.parseHTML(html);
     aDiv.after(nodes);
-    insertLinks()
+    insertLinks();
     d3.selectAll("code").each(function() { hljs.highlightBlock(this); });
-    addToc()
+    addToc();
   });
 }
 
 function removeMdToc(text) {
-  var out = []
+  var out = [];
   lines = text.match(/[^\r\n]+/g);
-  console.log(lines)
-  insideContents = false
+  insideContents = false;
   for (line of lines) {
     if (line.trim() === 'Contents') {
-      insideContents = true
+      insideContents = true;
     } else if (line.trim() === 'Main') {
-      insideContents = false
+      insideContents = false;
     }
     if (!insideContents) {
-      out.push(line)
+      out.push(line);
     }
   }
-  return text
+  return out.join();
 }
 
 function insertLinks() {
   $('h2').each(function() {
-    aId = $(this).attr('id')
-    $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>')
+    aId = $(this).attr('id');
+    $(this).append('<a href="#'+aId+'" name="'+aId+'">#</a>');
   })
 }
 
 function addToc() {
-  headerMain = $('#main')
-  nodes = $.parseHTML(TOC)
-  headerMain.before(nodes)
+  headerMain = $('#main');
+  nodes = $.parseHTML(TOC);
+  headerMain.before(nodes);
 }
 
 var TOC = '<br>' +
@@ -60,4 +59,4 @@ var TOC = '<br>' +
 '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>ᴺᴱᵂ, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profile">Profile</a>,\n' +
 '                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>]\n' +
 '}\n' +
-'</code></pre>\n'
+'</code></pre>\n';
