@@ -6,9 +6,6 @@ function parseMd() {
   var GITHUB =
     "https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md";
   jQuery.get(GITHUB, function(text) {
-    console.log(text);
-    text = removeMdToc(text);
-    console.log(text);
     var converter = new showdown.Converter();
     html = converter.makeHtml(text);
     aDiv = $("#main_container");
@@ -24,21 +21,11 @@ function parseMd() {
   });
 }
 
-function removeMdToc(text) {
-  var out = [];
-  lines = text.match(/[^\r\n]+/g);
-  insideContents = false;
-  for (line of lines) {
-    if (line.trim() === "Contents") {
-      insideContents = true;
-    } else if (line.trim() === "Main") {
-      insideContents = false;
-    }
-    if (!insideContents) {
-      out.push(line);
-    }
-  }
-  return out.join("\n");
+function removeOrigToc() {
+  headerContents = $("#contents");
+  contentsList = headerContents.next();
+  headerContents.remove();
+  contentsList.remove();
 }
 
 function insertLinks() {
