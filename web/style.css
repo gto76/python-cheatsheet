@@ -1,8 +1,6 @@
-
 /* Copyright 2013 Michael Bostock. All rights reserved. Do not copy. */
 
 @import url(https://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
-
 
 .ocks-org body {
   background: #fcfcfa;
@@ -11,6 +9,7 @@
   margin: 1em auto 4em auto;
   position: relative;
   width: 960px;
+  padding: 1rem;
 }
 
 .ocks-org header,
@@ -39,21 +38,22 @@ h1 {
   font-size: 64px;
   font-weight: 300;
   letter-spacing: -2px;
-  margin: .3em 0 .1em 0;
+  margin: 0.3em 0 0.1em 0;
 }
 
 h2 {
   margin-top: 2em;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-rendering: optimizeLegibility;
 }
 
 h2 a[name],
 h2 a[id] {
   color: #ccc;
-  padding: 0 .3em;
+  padding-right: 0.3em;
 }
 
 header,
@@ -64,12 +64,12 @@ footer {
 .ocks-org header aside,
 .ocks-org footer aside {
   float: left;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .ocks-org header aside:after,
 .ocks-org footer aside:after {
-  padding-left: .5em;
+  padding-left: 0.5em;
   content: "/";
 }
 
@@ -89,7 +89,8 @@ h1 ~ aside {
   margin-bottom: 2em;
 }
 
-body > p, li > p {
+body > p,
+li > p {
   line-height: 1.5em;
 }
 
@@ -123,7 +124,9 @@ a:not(:hover) {
   text-decoration: none;
 }
 
-pre, code, textarea {
+pre,
+code,
+textarea {
   font-family: "Menlo", monospace;
 }
 
@@ -187,13 +190,15 @@ svg {
   font: 10px sans-serif;
 }
 
-.axis path, .axis line {
+.axis path,
+.axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-sup, sub {
+sup,
+sub {
   line-height: 0;
 }
 
@@ -214,23 +219,23 @@ blockquote q:before,
 blockquote q:after {
   content: "";
 }
-h3,h4,p, ul{
+h3,
+h4,
+p,
+ul {
   padding-left: 2rem;
 }
-.img_parent{
+.img_parent {
   padding: 0;
 }
 
-@media only screen
-and (max-device-width : 1024px){
-  .ocks-org body {
-    margin: 1rem;
-  }
-
-  h1{
+@media only screen and (max-device-width: 1024px) {
+  h1 {
     font-size: 3rem;
   }
-  .img_parent, h1, img{
+  .img_parent,
+  h1,
+  img {
     max-width: calc(100vw - 2em);
     min-width: calc(100vw - 2em);
   }
