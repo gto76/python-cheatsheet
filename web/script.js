@@ -19,9 +19,9 @@ function parseMd() {
 
 function removeMdToc(text) {
   out = []
-  console.log(text)
-  return text
   lines = text.match(/[^\r\n]+/g);
+  console.log(lines)
+  return text
   insideContents = false
   for (line of lines) {
     if (line.trim() === 'Contents') {
