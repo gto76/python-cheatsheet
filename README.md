@@ -9,7 +9,7 @@ Comprehensive Python Cheatsheet
 Main
 ----
 ```python
-if __name__ == '__main__':
+if __name__ == '__main__':     # Runs main() if file wasn't imported.
     main()
 ```
 
@@ -314,7 +314,8 @@ Format
 ```
 
 ```python
->>> Person = collections.namedtuple('Person', 'name height')
+>>> from collections import namedtuple
+>>> Person = namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
 >>> f'{person.height}'
 '187'
@@ -357,6 +358,7 @@ Format
 {-123456: }      # '-123456'
 ```
 
+#### Char, Hex, Binary:
 ```python
 {90:c}           # 'Z'
 {90:X}           # '5A'
