@@ -12,12 +12,12 @@ function parseMd() {
     nodes = $.parseHTML(html);
     aDiv.after(nodes);
     removeOrigToc();
+    addToc();
     insertLinks();
     unindentBanner();
     d3.selectAll("code").each(function() {
       hljs.highlightBlock(this);
     });
-    addToc();
   });
 }
 
