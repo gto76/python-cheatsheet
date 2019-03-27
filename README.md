@@ -887,11 +887,11 @@ class MyHashable:
         return hash(self.a)
 ```
 
-### Sequence
+### Collection
 * **Methods do not depend on each other, so they can be skipped if not needed.**
 * **Any object with defined getitem() is considered iterable, even if it lacks iter().**
 ```python
-class MySequence:
+class MyCollection:
     def __init__(self, a):
         self.a = a
     def __len__(self):
@@ -900,6 +900,8 @@ class MySequence:
         return self.a[i]
     def __setitem__(self, i, value):
         self.a[i] = value
+    def __contains__(self, value):
+        return value in self.a
     def __iter__(self):
         for el in self.a:
             yield el
