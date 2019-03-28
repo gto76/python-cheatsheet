@@ -347,15 +347,15 @@ f'{<el>:>0}'        # '<el>'
 ### String Options
 **`'!r'` calls object's repr() method, instead of format(), to get a string.**
 ```python
-f'{'abcde'!r:<10}'  # "'abcde'   "
-f'{'abcde':.3}'     # 'abc'
-f'{'abcde':10.3}'   # 'abc       '
+f'{"abcde"!r:<10}'  # "'abcde'   "
+f'{"abcde":.3}'     # 'abc'
+f'{"abcde":10.3}'   # 'abc       '
 ```
 
 ### Number Options
 ```python
 f'{ 123456:10,}'    # '   123,456'
-f'{ 123456:10_}'    # '   123_456'
+'{ 123456:10_}'    # '   123_456'
 f'{ 123456:+10}'    # '   +123456'
 f'{-123456:=10}'    # '-   123456'
 f'{ 123456: }'      # ' 123456'
