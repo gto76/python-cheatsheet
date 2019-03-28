@@ -413,7 +413,7 @@ shuffle(<list>)
 Combinatorics
 -------------
 * **Every function returns an iterator.**
-* **If you want to print the iterator, you need to pass it to the list() function!**
+* **If you want to print the iterator, you need to pass it to the list() function first!**
 
 ```python
 from itertools import product, combinations, combinations_with_replacement, permutations
