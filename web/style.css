@@ -138,7 +138,7 @@ textarea {
   font-size: 100%;
 }
 
-body > pre {
+pre {
   border-left: solid 2px #ccc;
   padding-left: 18px;
   margin: 2em 0 2em 0;
@@ -224,8 +224,9 @@ h3,
 h4,
 p,
 ul {
-  padding-left: 2rem;
+  padding-left: 1.2rem;
 }
+
 .banner {
   padding: 0;
 }
@@ -235,9 +236,26 @@ ul {
 }
 
 @media only screen and (max-device-width: 1024px) {
-  h1 {
-    font-size: 3rem;
+  .ocks-org body {
+    font-size: 80%;
+    padding: 0.5rem;
   }
+
+  h3,
+  h4,
+  p,
+  ul {
+    padding-left: .7rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  pre {
+    padding-left: 0.5rem;
+  }
+
   .banner,
   h1,
   img {
