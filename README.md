@@ -287,12 +287,12 @@ Regex
 -----
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-<list>  = re.findall(<regex>, text)            # Returns all occurrences.
-<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
-<Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
-<Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
+<str>   = re.sub('<regex>', new, text, count=0)  # Substitutes all occurrences.
+<list>  = re.findall('<regex>', text)            # Returns all occurrences.
+<list>  = re.split('<regex>', text, maxsplit=0)  # Use brackets in regex to keep the matches.
+<Match> = re.search('<regex>', text)             # Searches for first occurrence of pattern.
+<Match> = re.match('<regex>', text)              # Searches only at the beginning of the text.
+<iter>  = re.finditer('<regex>', text)           # Returns all occurrences as match objects.
 ```
 
 * **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
@@ -312,9 +312,9 @@ import re
 ### Special Sequences
 **Expressions below hold true for strings that contain only ASCII characters. Use capital letters for negation.**
 ```python
-'\d' == '[0-9]'          # Digit
-'\s' == '[ \t\n\r\f\v]'  # Whitespace
-'\w' == '[a-zA-Z0-9_]'   # Alphanumeric
+'\d' == '[0-9]'             # Digit
+'\s' == '[ \t\n\r\f\v]'     # Whitespace
+'\w' == '[a-zA-Z0-9_]'      # Alphanumeric
 ```
 
 
