@@ -1761,6 +1761,14 @@ Scraping
 >>> ver   = rows[6].find('div').text.split()[0]
 >>> link, ver
 ('https://www.python.org/', '3.7.2')
+#Selenium for scraping using XPath
+#$pip install selenium
+>>> from selenium import webdriver
+>>> driver = webdriver.Chrome('Path in your computer where you have installed chromedriver')
+>>> driver.get(url)
+>>> ver_elem = driver.find_element_by_xpath('//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div/text()[1]')
+>>> ver_elem.text
+3.7.3 / 25 March 2019; 5 days ago
 ```
 
 
