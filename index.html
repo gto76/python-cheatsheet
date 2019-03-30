@@ -498,7 +498,7 @@ shuffle(&lt;list&gt;)
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz&gt;)   <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
 </code></pre>
 <ul>
-<li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[±&lt;offset&gt;]'</span></code>, or both separated by <code class="python hljs"><span class="hljs-string">'T'</span></code>. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'HH:MM'</span></code>.</strong></li>
+<li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[&lt;offset&gt;]'</span></code>, or both separated by <code class="python hljs"><span class="hljs-string">'T'</span></code>. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'±HH:MM'</span></code>.</strong></li>
 <li><strong>On Unix systems Epoch is <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
 <h3 id="decode">Decode</h3>

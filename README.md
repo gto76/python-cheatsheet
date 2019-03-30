@@ -497,7 +497,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
 <DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
 ```
-* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`. Offset is formatted as: `'HH:MM'`.**
+* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[<offset>]'`, or both separated by `'T'`. Offset is formatted as: `'±HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
