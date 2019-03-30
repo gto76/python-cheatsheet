@@ -30,6 +30,8 @@ const TOC =
   '}\n' +
   '</code></pre>\n';
 
+const MRO =
+  '<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()\n[&lt;<span class="hljs-class"><span class="hljs-title">class</span> \'<span class="hljs-title">C</span>\'&gt;, &lt;<span class="hljs-title">class</span> \'<span class="hljs-title">A</span>\'&gt;, &lt;<span class="hljs-title">class</span> \'<span class="hljs-title">B</span>\'&gt;, &lt;<span class="hljs-title">class</span> \'<span class="hljs-title">object</span>\'&gt;]</span></code>\n</pre>\n'
 
 function main() {
   const html = getMd();
@@ -60,10 +62,7 @@ function modifyPage() {
   addToc();
   insertLinks();
   unindentBanner();
-  $('code').not('.python').not('.text').not('.bash').addClass('python');
-  $('code').each(function(index) {
-      hljs.highlightBlock(this);
-  }); 
+  highlightCode(); 
 }
 
 function removeOrigToc() {
@@ -71,6 +70,11 @@ function removeOrigToc() {
   const contentsList = headerContents.next();
   headerContents.remove();
   contentsList.remove();
+}
+
+function addToc() {
+  const nodes = $.parseHTML(TOC);
+  $('#main').before(nodes);
 }
 
 function insertLinks() {
@@ -89,10 +93,24 @@ function unindentBanner() {
   downloadPraragrapth.addClass('banner');
 }
 
-function addToc() {
-  const headerMain = $('#main');
-  const nodes = $.parseHTML(TOC);
-  headerMain.before(nodes);
+function highlightCode() {
+  setApache('<D>')
+  setApache('<T>')
+  setApache('<DT>')
+  setApache('<TD>')
+  setApache('<a>')
+  setApache('<n>')
+  $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
+  $('code').each(function(index) {
+      hljs.highlightBlock(this);
+  });
+  $('#copy').prev().remove()
+  const nodes = $.parseHTML(MRO);
+  $('#copy').before(nodes);
+}
+
+function setApache(codeContents) {
+  $(`code:contains(${codeContents})`).addClass('apache');
 }
 
 function readFile(filename) {

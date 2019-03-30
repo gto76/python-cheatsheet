@@ -460,15 +460,15 @@ shuffle(&lt;list&gt;)
 </code></pre>
 <h2 id="datetime"><a href="#datetime" name="datetime">#</a>Datetime</h2>
 <ul>
-<li><strong>Module 'datetime' provides 'date' <code class="python hljs">&lt;D&gt;</code>, 'time' <code class="python hljs">&lt;T&gt;</code>, 'datetime' <code class="python hljs">&lt;DT&gt;</code> and 'timedelta' <code class="python hljs">&lt;TD&gt;</code> classes. All are immutable and hashable.</strong></li>
-<li><strong>Time and datetime can be 'aware' <code class="python hljs">&lt;a&gt;</code>, meaning they have defined timezone, or 'naive' <code class="python hljs">&lt;n&gt;</code>, meaning they don't.</strong></li>
+<li><strong>Module 'datetime' provides 'date' <code class="apache hljs"><span class="hljs-section">&lt;D&gt;</span></code>, 'time' <code class="apache hljs"><span class="hljs-section">&lt;T&gt;</span></code>, 'datetime' <code class="apache hljs"><span class="hljs-section">&lt;DT&gt;</span></code> and 'timedelta' <code class="apache hljs"><span class="hljs-section">&lt;TD&gt;</span></code> classes. All are immutable and hashable.</strong></li>
+<li><strong>Time and datetime can be 'aware' <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code>, meaning they have defined timezone, or 'naive' <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code>, meaning they don't.</strong></li>
 <li><strong>If object is naive it is presumed to be in system's timezone.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, time, datetime, timedelta
 <span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> UTC, tzlocal, gettz
 </code></pre>
 <h3 id="constructors">Constructors</h3>
-<pre><code class="python language-python hljs">&lt;D&gt;  = date(year, month, day)
+<pre><code class="python language-python apache hljs">&lt;D&gt;  = date(year, month, day)
 &lt;T&gt;  = time(hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>, microsecond=<span class="hljs-number">0</span>, tzinfo=<span class="hljs-keyword">None</span>, fold=<span class="hljs-number">0</span>)
 &lt;DT&gt; = datetime(year, month, day, hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>, ...)
 &lt;TD&gt; = timedelta(days=<span class="hljs-number">0</span>, seconds=<span class="hljs-number">0</span>, microseconds=<span class="hljs-number">0</span>, milliseconds=<span class="hljs-number">0</span>,
@@ -488,11 +488,11 @@ shuffle(&lt;list&gt;)
 &lt;tz&gt;     = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
 &lt;tz&gt;     = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tz&gt;)            <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
+<pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tz&gt;)            <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tz&gt;)      <span class="hljs-comment"># Unconverted object with new timezone.</span>
 </code></pre>
 <h3 id="encode">Encode</h3>
-<pre><code class="python language-python hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
+<pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz&gt;)   <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
@@ -502,7 +502,7 @@ shuffle(&lt;list&gt;)
 <li><strong>On Unix systems Epoch is <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
 <h3 id="decode">Decode</h3>
-<pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat()             <span class="hljs-comment"># ISO string representation.</span>
+<pre><code class="python language-python apache hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat()             <span class="hljs-comment"># ISO string representation.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Christ, ignoring time and tz.</span>
 &lt;float&gt;  = &lt;DT&gt;.timestamp()                 <span class="hljs-comment"># Seconds since Epoch in local time or tz.</span>
@@ -749,9 +749,10 @@ creature  = Creature()
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
 </code></pre>
 <p><strong>MRO determines the order in which parent classes are traversed when searching for a method:</strong></p>
+
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
-[&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
-</span></code></pre>
+[&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]</span></code>
+</pre>
 <h3 id="copy">Copy</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
 &lt;object&gt; = copy(&lt;object&gt;)
