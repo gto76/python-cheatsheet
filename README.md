@@ -178,8 +178,6 @@ Point(x=1, y=2)
 
 Iterator
 --------
-**In this cheatsheet `'<collection>'` can also mean an iterator.**
-
 ```python
 from itertools import count, repeat, cycle, chain, islice
 ```
