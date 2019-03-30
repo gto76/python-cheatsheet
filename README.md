@@ -480,7 +480,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Timezone
 ```python
-<tz>     = UTC                              # UTC timezone.
+<tz>     = UTC                              # UTC timezone. London without DST.
 <tz>     = tzlocal()                        # Local timezone.
 <tz>     = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
 ```
