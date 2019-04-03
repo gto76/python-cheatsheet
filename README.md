@@ -226,17 +226,42 @@ def count(start, step):
 
 Type
 ----
+* **Everything is an object.**
+* **Every object has a type.**
+* **Type and class are synonymous.**
+
 ```python
-<type> = type(<el>)  # <class 'int'> / <class 'str'> / ...
+<type>  = type(<el>)                      # Or: <type> = <el>.__class__
+<bool>  = isinstance(<el>, <type>)        # Also true if 'type' is a superclass of el's type.
 ```
 
+```python
+<tuple> = <type>.__bases__                # A tuple of type's parents.
+<list>  = <type>.mro()                    # Returns a list of all type's superclasses.
+<bool>  = issubclass(<sub_type>, <type>)  # Checks if 'sub_type' is a subclass of 'type'.
+```
+
+* **Every class is a subclass and a superclass of itself.**
+
+```python
+>>> type('a'), 'a'.__class__, str
+(<class 'str'>, <class 'str'>, <class 'str'>)
+```
+
+#### Some types do not have builtin names, so they must be imported:
+```python
+from types import FunctionType, MethodType, LambdaType, GeneratorType
+```
+
+### ABC-s
 ```python
 from numbers import Integral, Rational, Real, Complex, Number
 <bool> = isinstance(<el>, Number)
 ```
 
 ```python
-<bool> = callable(<el>)
+from collections.abc import Iterable, Collection, Sequence
+<bool> = isinstance(<el>, Iterable)
 ```
 
 
@@ -1512,6 +1537,32 @@ class MyClass(metaclass=MyMetaClass):
 ```python
 >>> MyClass.a, MyClass.b
 ('abcde', 12345)
+```
+
+#### Type diagram ('abc' is a str, str is a type, ...):
+```text
+┏━━━━━━━━━┯━━━━━━━━━━━━━┓
+┃ classes │ metaclasses ┃
+┠─────────┼─────────────┨
+┃ MyClass → MyMetaClass ┃
+┃         │     ↓       ┃
+┃  object ───→ type ←╮  ┃
+┃         │    ↑ ╰───╯  ┃
+┃   str ───────╯        ┃
+┗━━━━━━━━━┷━━━━━━━━━━━━━┛
+```
+
+#### Inheritance diagram (str inherits from object, ...):
+```text
+┏━━━━━━━━━┯━━━━━━━━━━━━━┓
+┃ classes │ metaclasses ┃
+┠─────────┼─────────────┨
+┃ MyClass │ MyMetaClass ┃
+┃    ↓    │     ↓       ┃
+┃  object ←─── type     ┃
+┃    ↑    │             ┃
+┃   str   │             ┃
+┗━━━━━━━━━┷━━━━━━━━━━━━━┛
 ```
 
 
