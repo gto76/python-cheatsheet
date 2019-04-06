@@ -1768,7 +1768,6 @@ Scraping
 >>> driver.get(url)
 >>> ver_elem = driver.find_element_by_xpath('//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div/text()[1]')
 >>> ver_elem.text
-3.7.3 / 25 March 2019; 5 days ago
 ```
 
 
