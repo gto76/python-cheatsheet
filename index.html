@@ -318,7 +318,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Every class is a subclass and a superclass of itself.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>type(<span class="hljs-string">'a'</span>), <span class="hljs-string">'a'</span>.__class__, str
-(&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
+(&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
 </span></code></pre>
 <h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have builtin names, so they must be imported:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
@@ -770,10 +770,9 @@ creature  = Creature()
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
 </code></pre>
 <p><strong>MRO determines the order in which parent classes are traversed when searching for a method:</strong></p>
-
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
-[&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]</span></code>
-</pre>
+[&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
+</span></code></pre>
 <h3 id="copy">Copy</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
 &lt;object&gt; = copy(&lt;object&gt;)
