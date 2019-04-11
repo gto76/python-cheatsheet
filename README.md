@@ -232,16 +232,8 @@ Type
 
 ```python
 <type>  = type(<el>)                      # Or: <type> = <el>.__class__
-<bool>  = isinstance(<el>, <type>)        # Also true if 'type' is a superclass of el's type.
+<bool>  = isinstance(<el>, <type>)        # Also checks subclasses and ABCs.
 ```
-
-```python
-<tuple> = <type>.__bases__                # A tuple of type's parents.
-<list>  = <type>.mro()                    # Returns a list of all type's superclasses.
-<bool>  = issubclass(<sub_type>, <type>)  # Checks if 'sub_type' is a subclass of 'type'.
-```
-
-* **Every class is a subclass and a superclass of itself.**
 
 ```python
 >>> type('a'), 'a'.__class__, str
@@ -254,6 +246,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### ABC-s
+**Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance().**
 ```python
 from numbers import Integral, Rational, Real, Complex, Number
 <bool> = isinstance(<el>, Number)
