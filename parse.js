@@ -30,6 +30,50 @@ const TOC =
   '}\n' +
   '</code></pre>\n';
 
+const DIAGRAM_1_A = 
+  '+---------+-------------+\n' +
+  '| classes | metaclasses |\n' +
+  '+---------|-------------|\n' +
+  '| MyClass > MyMetaClass |\n' +
+  '|         |     v       |\n' +
+  '|  object ---> type <+  |\n' +
+  '|         |    ^ +---+  |\n' +
+  '|   str -------+        |\n' +
+  '+---------+-------------+\n';
+
+const DIAGRAM_1_B =
+  '┏━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃ classes │ metaclasses ┃\n' +
+  '┠─────────┼─────────────┨\n' +
+  '┃ MyClass → MyMetaClass ┃\n' +
+  '┃         │     ↓       ┃\n' +
+  '┃  object ───→ type ←╮  ┃\n' +
+  '┃         │    ↑ ╰───╯  ┃\n' +
+  '┃   str ───────╯        ┃\n' +
+  '┗━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_2_A =
+  '+---------+-------------+\n' +
+  '| classes | metaclasses |\n' +
+  '+---------|-------------|\n' +
+  '| MyClass | MyMetaClass |\n' +
+  '|    v    |     v       |\n' +
+  '|  object <--- type     |\n' +
+  '|    ^    |             |\n' +
+  '|   str   |             |\n' +
+  '+---------+-------------+\n';
+
+const DIAGRAM_2_B =
+  '┏━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃ classes │ metaclasses ┃\n' +
+  '┠─────────┼─────────────┨\n' +
+  '┃ MyClass │ MyMetaClass ┃\n' +
+  '┃    ↓    │     ↓       ┃\n' +
+  '┃  object ←─── type     ┃\n' +
+  '┃    ↑    │             ┃\n' +
+  '┃   str   │             ┃\n' +
+  '┗━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
 
 function main() {
   const html = getMd();
@@ -50,9 +94,15 @@ function initDom(html) {
 }
 
 function getMd() {
-  const readme = readFile('README.md');
+  var readme = readFile('README.md');
+  readme = switchClassDiagrams(readme);
   const converter = new showdown.Converter();
   return converter.makeHtml(readme);
+}
+
+function switchClassDiagrams(readme) {
+  readme = readme.replace(DIAGRAM_1_A, DIAGRAM_1_B)
+  return readme.replace(DIAGRAM_2_A, DIAGRAM_2_B)
 }
 
 function modifyPage() {

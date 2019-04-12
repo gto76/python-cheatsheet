@@ -1534,28 +1534,28 @@ class MyClass(metaclass=MyMetaClass):
 
 #### Type diagram ('abc' is a str, str is a type, ...):
 ```text
-┏━━━━━━━━━┯━━━━━━━━━━━━━┓
-┃ classes │ metaclasses ┃
-┠─────────┼─────────────┨
-┃ MyClass → MyMetaClass ┃
-┃         │     ↓       ┃
-┃  object ───→ type ←╮  ┃
-┃         │    ↑ ╰───╯  ┃
-┃   str ───────╯        ┃
-┗━━━━━━━━━┷━━━━━━━━━━━━━┛
++---------+-------------+
+| classes | metaclasses |
++---------|-------------|
+| MyClass > MyMetaClass |
+|         |     v       |
+|  object ---> type <+  |
+|         |    ^ +---+  |
+|   str -------+        |
++---------+-------------+
 ```
 
 #### Inheritance diagram (str inherits from object, ...):
 ```text
-┏━━━━━━━━━┯━━━━━━━━━━━━━┓
-┃ classes │ metaclasses ┃
-┠─────────┼─────────────┨
-┃ MyClass │ MyMetaClass ┃
-┃    ↓    │     ↓       ┃
-┃  object ←─── type     ┃
-┃    ↑    │             ┃
-┃   str   │             ┃
-┗━━━━━━━━━┷━━━━━━━━━━━━━┛
++---------+-------------+
+| classes | metaclasses |
++---------|-------------|
+| MyClass | MyMetaClass |
+|    v    |     v       |
+|  object <--- type     |
+|    ^    |             |
+|   str   |             |
++---------+-------------+
 ```
 
 
