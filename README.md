@@ -231,8 +231,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type>  = type(<el>)                      # Or: <type> = <el>.__class__
-<bool>  = isinstance(<el>, <type>)        # Also checks subclasses and ABCs.
+<type> = type(<el>)                # Or: <el>.__class__
+<bool> = isinstance(<el>, <type>)  # Or: issubclass(type(<el>), <type>)
 ```
 
 ```python
@@ -246,7 +246,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### ABC-s
-**Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance().**
+**Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance() and issubclass().**
 
 ```python
 from numbers import Integral, Rational, Real, Complex, Number

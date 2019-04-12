@@ -307,8 +307,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Every object has a type.</strong></li>
 <li><strong>Type and class are synonymous.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;type&gt;  = type(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;type&gt; = &lt;el&gt;.__class__</span>
-&lt;bool&gt;  = isinstance(&lt;el&gt;, &lt;type&gt;)        <span class="hljs-comment"># Also checks subclasses and ABCs.</span>
+<pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;el&gt;)                <span class="hljs-comment"># Or: &lt;el&gt;.__class__</span>
+&lt;bool&gt; = isinstance(&lt;el&gt;, &lt;type&gt;)  <span class="hljs-comment"># Or: issubclass(type(&lt;el&gt;), &lt;type&gt;)</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>type(<span class="hljs-string">'a'</span>), <span class="hljs-string">'a'</span>.__class__, str
 (&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
@@ -317,7 +317,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre>
 <h3 id="abcs">ABC-s</h3>
-<p><strong>Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance().</strong></p>
+<p><strong>Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance() and issubclass().</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
 <span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable, Collection, Sequence
 </code></pre>
