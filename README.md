@@ -408,10 +408,9 @@ Numbers
 
 ### Math
 ```python
-from math import e, pi
+from math import e, pi, inf, nan
 from math import cos, acos, sin, asin, tan, atan, degrees, radians
 from math import log, log10, log2
-from math import inf, nan, isinf, isnan
 ```
 
 ### Statistics
