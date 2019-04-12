@@ -247,14 +247,10 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 
 ### ABC-s
 **Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance().**
-```python
-from numbers import Integral, Rational, Real, Complex, Number
-<bool> = isinstance(<el>, Number)
-```
 
 ```python
+from numbers import Integral, Rational, Real, Complex, Number
 from collections.abc import Iterable, Collection, Sequence
-<bool> = isinstance(<el>, Iterable)
 ```
 
 

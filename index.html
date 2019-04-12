@@ -319,10 +319,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <h3 id="abcs">ABC-s</h3>
 <p><strong>Abstract base classes introduce virtual subclasses, that don’t inherit from a class but are still recognized by isinstance().</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
-&lt;bool&gt; = isinstance(&lt;el&gt;, Number)
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable, Collection, Sequence
-&lt;bool&gt; = isinstance(&lt;el&gt;, Iterable)
+<span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable, Collection, Sequence
 </code></pre>
 <h2 id="string"><a href="#string" name="string">#</a>String</h2>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
