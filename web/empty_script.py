@@ -1,12 +1,13 @@
 # This is an empty Python script.
 # It is here, so it tricks GitHub into thinking that this is a Python project.
 # But because GitHub counts characters, we have to fill it with something.
-
 # How about:
+
 from math import sin, pi
+
 LEN = 40
-wave = ['#' * (1 + round(amp * (1+sin(i/resolution*2*pi)))) 
-            for resolution, amp in zip(range(10, 10+LEN, 2), range(2, 2+LEN, 2)) 
+wave = ['#' * (1 + round(amp * (1+sin(i/resolution*2*pi))))
+            for resolution, amp in zip(range(10, 10+LEN, 2), range(2, 2+LEN, 2))
                 for i in range(resolution)]
 print('\n'.join(wave))
 
@@ -1210,44 +1211,6 @@ print('\n'.join(wave))
 #
 #
 #
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 ##
 ####
 #######
@@ -3457,34 +3420,6 @@ print('\n'.join(wave))
 #####
 ###
 ##
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 #
 ##
 ####
