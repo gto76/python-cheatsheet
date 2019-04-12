@@ -782,7 +782,7 @@ creature  = Creature()
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span><span class="hljs-params">(self, other)</span>:</span>
         <span class="hljs-keyword">if</span> isinstance(other, type(self)):
             <span class="hljs-keyword">return</span> self.a == other.a
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
 </code></pre>
 <h3 id="hashable">Hashable</h3>
 <ul>
@@ -799,7 +799,7 @@ creature  = Creature()
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span><span class="hljs-params">(self, other)</span>:</span>
         <span class="hljs-keyword">if</span> isinstance(other, type(self)):
             <span class="hljs-keyword">return</span> self.a == other.a
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__hash__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> hash(self.a)
 </code></pre>

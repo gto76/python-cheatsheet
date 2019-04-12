@@ -876,7 +876,7 @@ class MyComparable:
     def __eq__(self, other):
         if isinstance(other, type(self)):
             return self.a == other.a
-        return False
+        return NotImplemented
 ```
 
 ### Hashable
@@ -894,7 +894,7 @@ class MyHashable:
     def __eq__(self, other):
         if isinstance(other, type(self)):
             return self.a == other.a
-        return False
+        return NotImplemented
     def __hash__(self):
         return hash(self.a)
 ```
