@@ -1539,7 +1539,7 @@ class MyClass(metaclass=MyMetaClass):
 ```text
 +---------+-------------+
 | classes | metaclasses |
-+---------|-------------|
++---------+-------------|
 | MyClass > MyMetaClass |
 |         |     v       |
 |  object ---> type <+  |
@@ -1552,7 +1552,7 @@ class MyClass(metaclass=MyMetaClass):
 ```text
 +---------+-------------+
 | classes | metaclasses |
-+---------|-------------|
++---------+-------------|
 | MyClass | MyMetaClass |
 |    v    |     v       |
 |  object <--- type     |

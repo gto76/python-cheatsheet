@@ -1,7 +1,7 @@
 const DIAGRAM_1_A = 
   '+---------+-------------+\n' +
   '| classes | metaclasses |\n' +
-  '+---------|-------------|\n' +
+  '+---------+-------------|\n' +
   '| MyClass > MyMetaClass |\n' +
   '|         |     v       |\n' +
   '|  object ---> type <+  |\n' +
@@ -23,7 +23,7 @@ const DIAGRAM_1_B =
 const DIAGRAM_2_A =
   '+---------+-------------+\n' +
   '| classes | metaclasses |\n' +
-  '+---------|-------------|\n' +
+  '+---------+-------------|\n' +
   '| MyClass | MyMetaClass |\n' +
   '|    v    |     v       |\n' +
   '|  object <--- type     |\n' +
