@@ -1456,9 +1456,9 @@ lock.acquire()
 ...
 lock.release()
 ```
-or
+
+#### Or:
 ```python
-lock = RLock()
 with lock:
     ...
 ```
@@ -1767,15 +1767,15 @@ from loguru import logger
 ```python
 logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
 logger.add('error_{time}.log', level='ERROR')  # Another file for errors or higher.
-logger.<level>('A logging message')
+logger.<level>('A logging message.')
 ```
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
 ```python
 try:
     ...
-except Exception as e:
-    logger.exception('An error happened', e)
+except <Exception>:
+    logger.exception('An error happened.')
 ```
 
 ### Rotation

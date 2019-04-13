@@ -1040,8 +1040,8 @@ cwd    = Path()
 &lt;str&gt; = os.popen(&lt;command&gt;).read()
 </code></pre>
 <h3 id="subprocess">Subprocess</h3>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> subprocess
-<span class="hljs-meta">&gt;&gt;&gt; </span>a = subprocess.run([<span class="hljs-string">'ls'</span>, <span class="hljs-string">'-a'</span>], stdout=subprocess.PIPE)
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> subprocess, shlex
+<span class="hljs-meta">&gt;&gt;&gt; </span>a = subprocess.run(shlex.split(<span class="hljs-string">'ls -a'</span>), stdout=subprocess.PIPE)
 <span class="hljs-meta">&gt;&gt;&gt; </span>a.stdout
 <span class="hljs-string">b'.\n..\nfile1.txt\nfile2.txt\n'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>a.returncode
@@ -1207,6 +1207,10 @@ lock.acquire()
 ...
 lock.release()
 </code></pre>
+<h4 id="or">Or:</h4>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> lock:
+    ...
+</code></pre>
 <h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2>
 <p><strong>Inspecting code at runtime.</strong></p>
 <h3 id="variables">Variables</h3>
@@ -1241,7 +1245,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
     attrs[<span class="hljs-string">'a'</span>] = <span class="hljs-string">'abcde'</span>
     <span class="hljs-keyword">return</span> type(name, parents, attrs)
 </code></pre>
-<h4 id="or">Or:</h4>
+<h4 id="or-1">Or:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMetaClass</span><span class="hljs-params">(type)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls, name, parents, attrs)</span>:</span>
         attrs[<span class="hljs-string">'a'</span>] = <span class="hljs-string">'abcde'</span>
@@ -1441,11 +1445,16 @@ pyplot.show()
 </code></pre>
 <pre><code class="python language-python hljs">logger.add(<span class="hljs-string">'debug_{time}.log'</span>, colorize=<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># Connects a log file.</span>
 logger.add(<span class="hljs-string">'error_{time}.log'</span>, level=<span class="hljs-string">'ERROR'</span>)  <span class="hljs-comment"># Another file for errors or higher.</span>
-logger.&lt;level&gt;(<span class="hljs-string">'A logging message'</span>)
+logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 </code></pre>
 <ul>
 <li><strong>Levels: <code class="python hljs"><span class="hljs-string">'debug'</span></code>, <code class="python hljs"><span class="hljs-string">'info'</span></code>, <code class="python hljs"><span class="hljs-string">'success'</span></code>, <code class="python hljs"><span class="hljs-string">'warning'</span></code>, <code class="python hljs"><span class="hljs-string">'error'</span></code>, <code class="python hljs"><span class="hljs-string">'critical'</span></code>.</strong></li>
 </ul>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
+    ...
+<span class="hljs-keyword">except</span> &lt;Exception&gt;:
+    logger.exception(<span class="hljs-string">'An error happened.'</span>)
+</code></pre>
 <h3 id="rotation">Rotation</h3>
 <p><strong>Parameter that sets a condition when a new log file is created.</strong></p>
 <pre><code class="python language-python hljs">rotation=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;datetime.time&gt;|&lt;str&gt;
