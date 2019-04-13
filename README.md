@@ -670,7 +670,7 @@ from functools import reduce
 ['zero', 1, 'zero', 3]
 ```
 
-### Namedtuple, Enum, Class
+### Namedtuple, Enum, Dataclass
 ```python
 from collections import namedtuple
 Point     = namedtuple('Point', 'x y')
@@ -684,9 +684,9 @@ Cutlery   = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 
 ```python
-# Warning: Objects will share the objects that are initialized in the dictionary!
-Creature  = type('Creature', (), {'p': Point(0, 0), 'd': Direction.n})
-creature  = Creature()
+from dataclasses import make_dataclass
+Creature  = make_dataclass('Creature', ['location', 'direction'])
+creature  = Creature(Point(0, 0), Direction.n)
 ```
 
 

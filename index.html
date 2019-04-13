@@ -620,7 +620,7 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)]
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-string">'zero'</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<h3 id="namedtupleenumclass">Namedtuple, Enum, Class</h3>
+<h3 id="namedtupleenumdataclass">Namedtuple, Enum, Dataclass</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 Point     = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
 point     = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
@@ -629,9 +629,9 @@ point     = Point(<span class="hljs-number">0</span>, <span class="hljs-number">
 Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'n e s w'</span>)
 Cutlery   = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-comment"># Warning: Objects will share the objects that are initialized in the dictionary!</span>
-Creature  = type(<span class="hljs-string">'Creature'</span>, (), {<span class="hljs-string">'p'</span>: Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-string">'d'</span>: Direction.n})
-creature  = Creature()
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
+Creature  = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'location'</span>, <span class="hljs-string">'direction'</span>])
+creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), Direction.n)
 </code></pre>
 <h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2>
 <p><strong>We have a closure in Python when:</strong></p>
