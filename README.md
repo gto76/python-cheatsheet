@@ -1808,6 +1808,20 @@ Scraping
 ('https://www.python.org/', '3.7.2')
 ```
 
+### Selenium
+**Library for scraping dynamically generated web content.**
+
+```python
+# $ brew cask install chromedriver
+# $ pip3 install selenium
+>>> from selenium import webdriver
+>>> driver = webdriver.Chrome()
+>>> driver.get(url)
+>>> xpath  = '//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'
+>>> driver.find_element_by_xpath(xpath).text.split()[0]
+'3.7.2'
+```
+
 
 Web
 ---

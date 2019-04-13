@@ -1483,6 +1483,17 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>link, ver
 (<span class="hljs-string">'https://www.python.org/'</span>, <span class="hljs-string">'3.7.2'</span>)
 </code></pre>
+<h3 id="selenium">Selenium</h3>
+<p><strong>Library for scraping dynamically generated web content.</strong></p>
+<pre><code class="python language-python hljs"><span class="hljs-comment"># $ brew cask install chromedriver</span>
+<span class="hljs-comment"># $ pip3 install selenium</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver
+<span class="hljs-meta">&gt;&gt;&gt; </span>driver = webdriver.Chrome()
+<span class="hljs-meta">&gt;&gt;&gt; </span>driver.get(url)
+<span class="hljs-meta">&gt;&gt;&gt; </span>xpath  = <span class="hljs-string">'//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>driver.find_element_by_xpath(xpath).text.split()[<span class="hljs-number">0</span>]
+<span class="hljs-string">'3.7.2'</span>
+</code></pre>
 <h2 id="web"><a href="#web" name="web">#</a>Web</h2>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
 <span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, post, template, request, response
