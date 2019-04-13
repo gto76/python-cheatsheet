@@ -1797,12 +1797,6 @@ retention=<int>|<datetime.timedelta>|<str>
 * **`'<timedelta>'` - Max age of a file.**
 * **`'<str>'` - Max age as a string: `'1 week, 3 days'`, `'2 months'`, ...**
 
-### Compression
-**Sets how inactive log files are compressed.**
-```python
-compression='gz'|'bz2'|'tar'|'tar.gz'|'tar.bz2'|'zip'
-```
-
 
 Scraping
 --------
