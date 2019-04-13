@@ -1541,7 +1541,7 @@ class MyClass(metaclass=MyMetaClass):
 ('abcde', 12345)
 ```
 
-#### Type diagram ('abc' is a str, str is a type, ...):
+#### Type diagram (str is an instance of type, ...):
 ```text
 +---------+-------------+
 | classes | metaclasses |
@@ -1554,7 +1554,7 @@ class MyClass(metaclass=MyMetaClass):
 +---------+-------------+
 ```
 
-#### Inheritance diagram (str inherits from object, ...):
+#### Inheritance diagram (str is a subclass of object, ...):
 ```text
 +---------+-------------+
 | classes | metaclasses |
