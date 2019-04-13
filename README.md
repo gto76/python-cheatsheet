@@ -1771,6 +1771,9 @@ logger.<level>('A logging message.')
 ```
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
+### Exceptions
+**Error description, stack trace and values of variables are appended automatically.**
+
 ```python
 try:
     ...
