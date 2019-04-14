@@ -1,6 +1,6 @@
 const DIAGRAM_1_A = 
   '+---------+-------------+\n' +
-  '| classes | metaclasses |\n' +
+  '| Classes | Metaclasses |\n' +
   '+---------+-------------|\n' +
   '| MyClass > MyMetaClass |\n' +
   '|         |     v       |\n' +
@@ -11,7 +11,7 @@ const DIAGRAM_1_A =
 
 const DIAGRAM_1_B =
   '┏━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
-  '┃ classes │ metaclasses ┃\n' +
+  '┃ Classes │ Metaclasses ┃\n' +
   '┠─────────┼─────────────┨\n' +
   '┃ MyClass → MyMetaClass ┃\n' +
   '┃         │     ↓       ┃\n' +
@@ -22,7 +22,7 @@ const DIAGRAM_1_B =
 
 const DIAGRAM_2_A =
   '+---------+-------------+\n' +
-  '| classes | metaclasses |\n' +
+  '| Classes | Metaclasses |\n' +
   '+---------+-------------|\n' +
   '| MyClass | MyMetaClass |\n' +
   '|    v    |     v       |\n' +
@@ -33,7 +33,7 @@ const DIAGRAM_2_A =
 
 const DIAGRAM_2_B =
   '┏━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
-  '┃ classes │ metaclasses ┃\n' +
+  '┃ Classes │ Metaclasses ┃\n' +
   '┠─────────┼─────────────┨\n' +
   '┃ MyClass │ MyMetaClass ┃\n' +
   '┃    ↓    │     ↓       ┃\n' +
