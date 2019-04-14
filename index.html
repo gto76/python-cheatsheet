@@ -385,6 +385,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>
 &lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)
 </code></pre>
+<h3 id="attributes">Attributes</h3>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Person = namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>person = Person(<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)
@@ -395,9 +396,10 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <h3 id="generaloptions">General Options</h3>
 <pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}       <span class="hljs-comment"># '&lt;el&gt;      '</span>
-{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}       <span class="hljs-comment"># '      &lt;el&gt;'</span>
 {&lt;el&gt;:^<span class="hljs-number">10</span>}       <span class="hljs-comment"># '   &lt;el&gt;   '</span>
-{&lt;el&gt;:.&gt;<span class="hljs-number">10</span>}      <span class="hljs-comment"># '......&lt;el&gt;'</span>
+{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}       <span class="hljs-comment"># '      &lt;el&gt;'</span>
+</code></pre>
+<pre><code class="python language-python hljs">{&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}      <span class="hljs-comment"># '&lt;el&gt;......'</span>
 {&lt;el&gt;:&gt;<span class="hljs-number">0</span>}        <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre>
 <h3 id="stringoptions">String Options</h3>
@@ -1218,7 +1220,7 @@ lock.release()
 &lt;dict&gt; = locals()   <span class="hljs-comment"># Dict of local variables. Also vars().</span>
 &lt;dict&gt; = globals()  <span class="hljs-comment"># Dict of global variables.</span>
 </code></pre>
-<h3 id="attributes">Attributes</h3>
+<h3 id="attributes-1">Attributes</h3>
 <pre><code class="python language-python hljs">&lt;dict&gt; = vars(&lt;object&gt;)
 &lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
 value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)

@@ -344,6 +344,7 @@ Format
 <str> = '{}, {}'.format(<el_1>, <el_2>)
 ```
 
+### Attributes
 ```python
 >>> from collections import namedtuple
 >>> Person = namedtuple('Person', 'name height')
@@ -357,9 +358,12 @@ Format
 ### General Options
 ```python
 {<el>:<10}       # '<el>      '
-{<el>:>10}       # '      <el>'
 {<el>:^10}       # '   <el>   '
-{<el>:.>10}      # '......<el>'
+{<el>:>10}       # '      <el>'
+```
+
+```python
+{<el>:.<10}      # '<el>......'
 {<el>:>0}        # '<el>'
 ```
 
