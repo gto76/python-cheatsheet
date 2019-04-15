@@ -556,9 +556,9 @@ Arguments
 
 ### Inside Function Definition
 ```python
-def f(<nondefault_args>):                      # def f(x, y)
-def f(<default_args>):                         # def f(x=0, y=0)
-def f(<nondefault_args>, <default_args>):      # def f(x, y=0)
+def f(<nondefault_args>): ...                  # def f(x, y)
+def f(<default_args>): ...                     # def f(x=0, y=0)
+def f(<nondefault_args>, <default_args>): ...  # def f(x, y=0)
 ```
 
 
@@ -591,6 +591,13 @@ def add(*a):
 
 #### Legal argument combinations:
 ```python
+def f(x, y, z):                # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(*, x, y, z):             # f(x=1, y=2, z=3)
+def f(x, *, y, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(x, y, *, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
+```
+
+```python
 def f(*args):                  # f(1, 2, 3)
 def f(x, *args):               # f(1, 2, 3)
 def f(*args, z):               # f(1, 2, z=3)
@@ -600,6 +607,7 @@ def f(x, *args, z):            # f(1, 2, z=3)
 ```python
 def f(**kwargs):               # f(x=1, y=2, z=3)
 def f(x, **kwargs):            # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*, x, **kwargs):         # f(x=1, y=2, z=3)
 ```
 
 ```python
