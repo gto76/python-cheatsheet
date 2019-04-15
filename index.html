@@ -283,7 +283,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;iter&gt; = repeat(&lt;el&gt; [, times])             <span class="hljs-comment"># Returns element endlessly or 'times' times.</span>
 &lt;iter&gt; = cycle(&lt;collection&gt;)                <span class="hljs-comment"># Repeats the sequence indefinitely.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = chain(&lt;coll.&gt;, &lt;coll.&gt;, ...)       <span class="hljs-comment"># Empties collections in order.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = chain(&lt;coll.&gt;, &lt;coll.&gt; [, ...])    <span class="hljs-comment"># Empties collections in order.</span>
 &lt;iter&gt; = chain.from_iterable(&lt;collection&gt;)  <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = islice(&lt;collection&gt;, to_exclusive)
