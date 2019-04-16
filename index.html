@@ -777,7 +777,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
 <h3 id="dataclass">Dataclass</h3>
-<p><strong>Decorator that automatically generates init(), repr() and eq() magic methods. Object can also be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and/or immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></p>
+<p><strong>Decorator that automatically generates init(), repr() and eq() magic methods.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
 
 <span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
@@ -787,6 +787,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
     &lt;attr_name_3&gt;: list/dict/set = field(default_factory=list/dict/set)
 </code></pre>
 <ul>
+<li><strong>An object can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> or immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
 <li><strong>Default_factory can be any callable.</strong></li>
 </ul>

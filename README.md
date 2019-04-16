@@ -872,7 +872,7 @@ class C(A, B): pass
 ```
 
 ### Dataclass
-**Decorator that automatically generates init(), repr() and eq() magic methods. Object can also be made sortable with `'order=True'` and/or immutable with `'frozen=True'`.**
+**Decorator that automatically generates init(), repr() and eq() magic methods.**
 ```python
 from dataclasses import dataclass, field
 
@@ -882,6 +882,7 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
+* **An object can be made sortable with `'order=True'` or immutable with `'frozen=True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any callable.**
 
