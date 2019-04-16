@@ -871,6 +871,20 @@ class C(A, B): pass
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
 ```
 
+### Dataclass
+**Decorator that automatically generates init(), repr() and eq() magic methods. Object can also be made sortable with `'order=True'` and/or immutable with `'frozen=True'`.**
+```python
+from dataclasses import dataclass, field
+
+@dataclass(order=False, frozen=False)
+class <class_name>:
+    <attr_name_1>: <type>
+    <attr_name_2>: <type> = <default_value>
+    <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
+```
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
+* **Default_factory can be any callable.**
+
 ### Copy
 ```python
 from copy import copy, deepcopy
@@ -916,6 +930,25 @@ class MyHashable:
         return NotImplemented
     def __hash__(self):
         return hash(self.a)
+```
+
+### Sortable
+* **With 'total_ordering' decorator you only need to provide one of lt(), gt(), le(), ge() magic methods.**
+```python
+from functools import total_ordering
+
+@total_ordering
+class MySortable:
+    def __init__(self, a):
+        self.a = a
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            return self.a == other.a
+        return NotImplemented
+    def __lt__(self, other):
+        if isinstance(other, type(self)):
+            return self.a < other.a
+        return NotImplemented
 ```
 
 ### Collection

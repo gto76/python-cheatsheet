@@ -776,6 +776,20 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
+<h3 id="dataclass">Dataclass</h3>
+<p><strong>Decorator that automatically generates init(), repr() and eq() magic methods. Object can also be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and/or immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></p>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
+
+<span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
+    &lt;attr_name_1&gt;: &lt;type&gt;
+    &lt;attr_name_2&gt;: &lt;type&gt; = &lt;default_value&gt;
+    &lt;attr_name_3&gt;: list/dict/set = field(default_factory=list/dict/set)
+</code></pre>
+<ul>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
+<li><strong>Default_factory can be any callable.</strong></li>
+</ul>
 <h3 id="copy">Copy</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
 &lt;object&gt; = copy(&lt;object&gt;)
@@ -815,6 +829,25 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__hash__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> hash(self.a)
+</code></pre>
+<h3 id="sortable">Sortable</h3>
+<ul>
+<li><strong>With 'total_ordering' decorator you only need to provide one of lt(), gt(), le(), ge() magic methods.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
+
+<span class="hljs-meta">@total_ordering</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySortable</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span><span class="hljs-params">(self, other)</span>:</span>
+        <span class="hljs-keyword">if</span> isinstance(other, type(self)):
+            <span class="hljs-keyword">return</span> self.a == other.a
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span><span class="hljs-params">(self, other)</span>:</span>
+        <span class="hljs-keyword">if</span> isinstance(other, type(self)):
+            <span class="hljs-keyword">return</span> self.a &lt; other.a
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
 </code></pre>
 <h3 id="collection">Collection</h3>
 <ul>
