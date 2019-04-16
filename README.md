@@ -872,7 +872,7 @@ class C(A, B): pass
 ```
 
 ### Dataclass
-**Decorator that automatically generates init(), repr() and eq() magic methods.**
+**Decorator that automatically generates init(), repr() and eq() special methods.**
 ```python
 from dataclasses import dataclass, field
 
@@ -934,7 +934,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() magic methods.**
+* **With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() special methods.**
 ```python
 from functools import total_ordering
 

@@ -777,7 +777,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
 <h3 id="dataclass">Dataclass</h3>
-<p><strong>Decorator that automatically generates init(), repr() and eq() magic methods.</strong></p>
+<p><strong>Decorator that automatically generates init(), repr() and eq() special methods.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
 
 <span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
@@ -833,7 +833,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 </code></pre>
 <h3 id="sortable">Sortable</h3>
 <ul>
-<li><strong>With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() magic methods.</strong></li>
+<li><strong>With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() special methods.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
