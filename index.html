@@ -7,6 +7,7 @@
   <title>Comprehensive Python Cheatsheet</title>
   <link rel="icon" href="web/favicon.png">
   <link rel="stylesheet" href="web/default.min.css">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Comprehensive Python Cheatsheet">
   <meta name="twitter:description" content="Exhaustive, simple, beautiful and concise. A truly pythonic cheat sheet about Python programming language.">
@@ -141,6 +142,49 @@ pre.prettyprint {
   padding: 1em;
   white-space: pre-wrap;
 }
+
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+#return-to-top:hover i {
+    color: #ffffff;
+}
 </style>
 
 <body>
@@ -149,6 +193,7 @@ pre.prettyprint {
     <a href="../" rel="author">Jure Šorn</a>
   </header>
 
+  <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
    <h1 id="comprehensivepythoncheatsheet">Comprehensive Python Cheatsheet</h1>
 <p class="banner"><sup><a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md">Download text file</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a> or <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a>.
 </sup></p>
@@ -1817,7 +1862,7 @@ simpleaudio.play_buffer(frames_b, <span class="hljs-number">1</span>, <span clas
   <br>
   <br>
   <br>
-  <script src="web/jquery-3.4.0.slim.min.js"></script>
+  <script src="web/jquery-3.4.0.min.js"></script>
   <script src="web/script_2.js"></script>
 </body>
 </html>
