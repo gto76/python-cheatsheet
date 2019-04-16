@@ -61,7 +61,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 // ===== Scroll to Top ==== 
 $(window).scroll(function() {
-  if (isMobile && $(this).scrollTop() >= 520) {  // If mobile device and page is scrolled more than 520px.
+  if (isMobile && $(this).scrollTop() >= 480) {  // If mobile device and page is scrolled more than 520px.
     $('#return-to-top').fadeIn(200);    // Fade in the arrow
   } else {
     $('#return-to-top').fadeOut(200);   // Else fade out the arrow
