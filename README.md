@@ -2127,7 +2127,7 @@ frames_i  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_i)
 ```
 
-#### Plays Popcorn:
+### Synthesizer
 ```python
 # $ pip3 install simpleaudio
 import simpleaudio, math, struct
@@ -2156,6 +2156,7 @@ Basic Script Template
 #
 
 from collections import namedtuple
+from dataclasses import make_dataclass
 from enum import Enum
 import re
 import sys

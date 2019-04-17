@@ -1766,7 +1766,7 @@ add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hlj
 frames_i  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)
 </code></pre>
-<h4 id="playspopcorn">Plays Popcorn:</h4>
+<h3 id="synthesizer">Synthesizer</h3>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">import</span> simpleaudio, math, struct
 <span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain, repeat
@@ -1790,6 +1790,7 @@ simpleaudio.play_buffer(frames_b, <span class="hljs-number">1</span>, <span clas
 <span class="hljs-comment">#</span>
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
+<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
 <span class="hljs-keyword">import</span> re
 <span class="hljs-keyword">import</span> sys
