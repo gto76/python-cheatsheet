@@ -79,7 +79,7 @@ value  = <dict>.setdefault(key, default=None)   # Same, but also adds default to
 ```
 
 ```python
-<dict>.update(<dict>)                           # Or: dict_a = {**dict_a, **dict_b}.
+<dict>.update(<dict>)
 <dict> = dict(<collection>)                     # Creates a dict from coll. of key-value pairs.
 <dict> = dict(zip(keys, values))                # Creates a dict from two collections.
 <dict> = dict.fromkeys(keys [, value])          # Creates a dict from collection of keys.
