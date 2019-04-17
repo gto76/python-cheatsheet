@@ -1635,7 +1635,6 @@ last_el          = op.methodcaller('pop')(<list>)
 
 Eval
 ----
-### Basic
 ```python
 >>> from ast import literal_eval
 >>> literal_eval('1 + 2')
@@ -1644,51 +1643,6 @@ Eval
 [1, 2, 3]
 >>> literal_eval('abs(1)')
 ValueError: malformed node or string
-```
-
-### Using Abstract Syntax Trees
-```python
-import ast
-from ast import Num, BinOp, UnaryOp
-import operator as op
-
-LEGAL_OPERATORS = {ast.Add:    op.add,      # <el> + <el>
-                   ast.Sub:    op.sub,      # <el> - <el>
-                   ast.Mult:   op.mul,      # <el> * <el>
-                   ast.Div:    op.truediv,  # <el> / <el>
-                   ast.Pow:    op.pow,      # <el> ** <el>
-                   ast.BitXor: op.xor,      # <el> ^ <el>
-                   ast.USub:   op.neg}      # - <el>
-
-def evaluate(expression):
-    root = ast.parse(expression, mode='eval')
-    return eval_node(root.body)
-
-def eval_node(node):
-    node_type = type(node)
-    if node_type == Num:
-        return node.n
-    if node_type not in [BinOp, UnaryOp]:
-        raise TypeError(node)
-    operator_type = type(node.op)
-    if operator_type not in LEGAL_OPERATORS:
-        raise TypeError(f'Illegal operator {node.op}')
-    operator = LEGAL_OPERATORS[operator_type]
-    if node_type == BinOp:
-        left, right = eval_node(node.left), eval_node(node.right)
-        return operator(left, right)
-    elif node_type == UnaryOp:
-        operand = eval_node(node.operand)
-        return operator(operand)
-```
-
-```python
->>> evaluate('2 ^ 6')
-4
->>> evaluate('2 ** 6')
-64
->>> evaluate('1 + 2 * 3 ** (4 ^ 5) / (6 + -7)')
--5.0
 ```
 
 

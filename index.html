@@ -1387,7 +1387,6 @@ LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span 
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
 <h2 id="eval"><a href="#eval" name="eval">#</a>Eval</h2>
-<h3 id="basic">Basic</h3>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval
 <span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'1 + 2'</span>)
 <span class="hljs-number">3</span>
@@ -1395,47 +1394,6 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'abs(1)'</span>)
 ValueError: malformed node <span class="hljs-keyword">or</span> string
-</code></pre>
-<h3 id="usingabstractsyntaxtrees">Using Abstract Syntax Trees</h3>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> ast
-<span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> Num, BinOp, UnaryOp
-<span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-
-LEGAL_OPERATORS = {ast.Add:    op.add,      <span class="hljs-comment"># &lt;el&gt; + &lt;el&gt;</span>
-                   ast.Sub:    op.sub,      <span class="hljs-comment"># &lt;el&gt; - &lt;el&gt;</span>
-                   ast.Mult:   op.mul,      <span class="hljs-comment"># &lt;el&gt; * &lt;el&gt;</span>
-                   ast.Div:    op.truediv,  <span class="hljs-comment"># &lt;el&gt; / &lt;el&gt;</span>
-                   ast.Pow:    op.pow,      <span class="hljs-comment"># &lt;el&gt; ** &lt;el&gt;</span>
-                   ast.BitXor: op.xor,      <span class="hljs-comment"># &lt;el&gt; ^ &lt;el&gt;</span>
-                   ast.USub:   op.neg}      <span class="hljs-comment"># - &lt;el&gt;</span>
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">evaluate</span><span class="hljs-params">(expression)</span>:</span>
-    root = ast.parse(expression, mode=<span class="hljs-string">'eval'</span>)
-    <span class="hljs-keyword">return</span> eval_node(root.body)
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">eval_node</span><span class="hljs-params">(node)</span>:</span>
-    node_type = type(node)
-    <span class="hljs-keyword">if</span> node_type == Num:
-        <span class="hljs-keyword">return</span> node.n
-    <span class="hljs-keyword">if</span> node_type <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [BinOp, UnaryOp]:
-        <span class="hljs-keyword">raise</span> TypeError(node)
-    operator_type = type(node.op)
-    <span class="hljs-keyword">if</span> operator_type <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> LEGAL_OPERATORS:
-        <span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">f'Illegal operator <span class="hljs-subst">{node.op}</span>'</span>)
-    operator = LEGAL_OPERATORS[operator_type]
-    <span class="hljs-keyword">if</span> node_type == BinOp:
-        left, right = eval_node(node.left), eval_node(node.right)
-        <span class="hljs-keyword">return</span> operator(left, right)
-    <span class="hljs-keyword">elif</span> node_type == UnaryOp:
-        operand = eval_node(node.operand)
-        <span class="hljs-keyword">return</span> operator(operand)
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>evaluate(<span class="hljs-string">'2 ^ 6'</span>)
-<span class="hljs-number">4</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>evaluate(<span class="hljs-string">'2 ** 6'</span>)
-<span class="hljs-number">64</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>evaluate(<span class="hljs-string">'1 + 2 * 3 ** (4 ^ 5) / (6 + -7)'</span>)
-<span class="hljs-number">-5.0</span>
 </code></pre>
 <h2 id="coroutine"><a href="#coroutine" name="coroutine">#</a>Coroutine</h2>
 <ul>
@@ -1626,7 +1584,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 [<span class="hljs-string">'arsenal f.c.'</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>]
 </code></pre>
 <h2 id="profile"><a href="#profile" name="profile">#</a>Profile</h2>
-<h3 id="basic-1">Basic</h3>
+<h3 id="basic">Basic</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
 start_time = time()  <span class="hljs-comment"># Seconds since Epoch.</span>
 ...
