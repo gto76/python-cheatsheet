@@ -680,7 +680,7 @@ point     = Point(<span class="hljs-number">0</span>, <span class="hljs-number">
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
 Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'n e s w'</span>)
-Cutlery   = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
+direction = Direction.n
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 Creature  = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'location'</span>, <span class="hljs-string">'direction'</span>])

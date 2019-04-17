@@ -692,7 +692,7 @@ point     = Point(0, 0)
 ```python
 from enum import Enum
 Direction = Enum('Direction', 'n e s w')
-Cutlery   = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
+direction = Direction.n
 ```
 
 ```python
