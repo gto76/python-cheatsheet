@@ -1777,7 +1777,7 @@ logger.<level>('A logging message.')
 ```python
 try:
     ...
-except <Exception>:
+except <exception>:
     logger.exception('An error happened.')
 ```
 
