@@ -588,9 +588,9 @@ shuffle(&lt;list&gt;)
 &lt;function&gt;(&lt;positional_args&gt;, &lt;keyword_args&gt;)  <span class="hljs-comment"># f(0, y=0)</span>
 </code></pre>
 <h3 id="insidefunctiondefinition">Inside Function Definition</h3>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># def f(x, y)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;default_args&gt;)</span>:</span> ...                     <span class="hljs-comment"># def f(x=0, y=0)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span> ...  <span class="hljs-comment"># def f(x, y=0)</span>
+<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span>                      <span class="hljs-comment"># def f(x, y):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;default_args&gt;)</span>:</span>                         <span class="hljs-comment"># def f(x=0, y=0):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span>      <span class="hljs-comment"># def f(x, y=0):</span>
 </code></pre>
 <h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2>
 <h3 id="insidefunctioncall-1">Inside Function Call</h3>
