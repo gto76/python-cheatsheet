@@ -871,6 +871,25 @@ class C(A, B): pass
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
 ```
 
+### Property
+```python
+class MyClass:
+    @property
+    def a(self):
+        return self._a
+
+    @a.setter
+    def a(self, value):
+        self._a = value
+```
+
+```python
+>>> el = MyClass()
+>>> el.a = 123
+>>> el.a
+123
+```
+
 ### Dataclass
 **Decorator that automatically generates init(), repr() and eq() special methods.**
 ```python
@@ -885,6 +904,7 @@ class <class_name>:
 * **An object can be made sortable with `'order=True'` or immutable with `'frozen=True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any callable.**
+
 
 ### Copy
 ```python
@@ -921,10 +941,10 @@ class MyComparable:
 ```python
 class MyHashable:
     def __init__(self, a):
-        self.__a = copy.deepcopy(a)
+        self._a = copy.deepcopy(a)
     @property
     def a(self):
-        return self.__a
+        return self._a
     def __eq__(self, other):
         if isinstance(other, type(self)):
             return self.a == other.a
