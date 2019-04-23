@@ -798,6 +798,10 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_class_name</span><span class="hljs-params">(cls)</span>:</span>
         <span class="hljs-keyword">return</span> cls.__name__
 </code></pre>
+<ul>
+<li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
+<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
+</ul>
 <h3 id="constructoroverloading">Constructor Overloading</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=None)</span>:</span>

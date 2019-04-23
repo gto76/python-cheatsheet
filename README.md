@@ -837,6 +837,8 @@ class <name>:
     def get_class_name(cls):
         return cls.__name__
 ```
+* **Return value of repr() should be unambiguous and of str() readable.**
+* **If only repr() is defined, it will also be used for str().**
 
 ### Constructor Overloading
 ```python
