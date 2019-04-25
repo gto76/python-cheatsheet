@@ -223,6 +223,16 @@ def count(start, step):
 (10, 12, 14)
 ```
 
+**Generator instance operations**
+
+```python
+>>> gen = <generator>
+next(gen)                               # Advance to next yield
+gen.send(<item>)                        # Send an item
+gen.close()                             # Terminate
+gen.throw(<type>, <value>, <traceback>) # Raise exception
+result = yield from gen                 # Delegate
+```
 
 Type
 ----
