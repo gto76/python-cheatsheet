@@ -59,7 +59,7 @@ index = <list>.index(<el>)     # Returns first index of item.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
 <list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
-<list>.clear()                 # Removes all items.
+<list>.clear()                 # Removes all items. Also works on dict and set.
 ```
 
 
@@ -324,6 +324,9 @@ import re
 <str>   = <Match>.group()   # Whole match.
 <str>   = <Match>.group(1)  # Part in first bracket.
 <tuple> = <Match>.groups()  # All bracketed parts.
+```
+
+```python
 <int>   = <Match>.start()   # Start index of a match.
 <int>   = <Match>.end()     # Exclusive end index of a match.
 ```
