@@ -286,6 +286,11 @@ String
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
 
+```python
+<str>  = bin(<int>)                          # Binary representation starting with '0b'.
+<str>  = hex(<int>)                          # Hexadecimal representation starting with '0x'.
+```
+
 ### Char
 ```python
 <str> = chr(<int>)  # Converts int to unicode char.
