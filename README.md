@@ -1457,7 +1457,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 #### Use capital letter for unsigned type. Standard sizes are in brackets:
 * **`'x'` - pad byte**
-* **`'c'` - char (1)**
+* **`'b'` - char (1)**
 * **`'h'` - short (2)**
 * **`'i'` - int (4)**
 * **`'l'` - long (4)**
