@@ -475,8 +475,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:b}           <span class="hljs-comment"># '1011010'</span>
 </code></pre>
 <h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2>
+<pre><code class="python language-python hljs">&lt;int&gt;     = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
+&lt;float&gt;   = float(&lt;int/str/bool&gt;)
+&lt;complex&gt; = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
+</code></pre>
 <h3 id="basicfunctions">Basic Functions</h3>
-<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)  <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
+<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)           <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
 &lt;real&gt; = abs(&lt;num&gt;)
 &lt;int&gt;  = round(&lt;real&gt;)
 &lt;real&gt; = round(&lt;real&gt;, ±ndigits)
@@ -1281,7 +1285,7 @@ db.commit()
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8)</strong></li>
 </ul>
 <h2 id="array"><a href="#array" name="array">#</a>Array</h2>
-<p><strong>List that can hold only elements of predefined type. Available types are listed above.</strong></p>
+<p><strong>List that can hold only elements of predefined type. Available types and their sizes are listed above.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span> [, &lt;collection&gt;])
 </code></pre>

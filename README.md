@@ -405,9 +405,15 @@ Format
 
 Numbers
 -------
+```python
+<int>     = int(<float/str/bool>)    # Or: math.floor(<float>)
+<float>   = float(<int/str/bool>)
+<complex> = complex(real=0, imag=0)  # Or: <real> + <real>j
+```
+
 ### Basic Functions
 ```python
-<num>  = pow(<num>, <num>)  # Or: <num> ** <num>
+<num>  = pow(<num>, <num>)           # Or: <num> ** <num>
 <real> = abs(<num>)
 <int>  = round(<real>)
 <real> = round(<real>, ±ndigits)
@@ -1468,7 +1474,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can hold only elements of predefined type. Available types are listed above.**
+**List that can hold only elements of predefined type. Available types and their sizes are listed above.**
 
 ```python
 from array import array
