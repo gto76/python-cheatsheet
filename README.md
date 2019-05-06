@@ -324,9 +324,6 @@ import re
 <str>   = <Match>.group()   # Whole match.
 <str>   = <Match>.group(1)  # Part in first bracket.
 <tuple> = <Match>.groups()  # All bracketed parts.
-```
-
-```python
 <int>   = <Match>.start()   # Start index of a match.
 <int>   = <Match>.end()     # Exclusive end index of a match.
 ```
