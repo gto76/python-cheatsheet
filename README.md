@@ -286,11 +286,6 @@ String
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
 
-```python
-<str>  = bin(<int>)                          # Binary representation starting with '0b'.
-<str>  = hex(<int>)                          # Hexadecimal representation starting with '0x'.
-```
-
 ### Char
 ```python
 <str> = chr(<int>)  # Converts int to unicode char.
@@ -443,6 +438,14 @@ from random import random, randint, choice, shuffle
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
 shuffle(<list>)
+```
+
+### Bin, Hex
+```python
+<int>     = 0b<bin>            # Or: 0x<hex>
+<int>     = int('0b<bin>', 0)  # Or: int('0x<hex>', 0)
+<int>     = int('<bin>', 2)    # Or: int('<hex>', 16)
+'0b<bin>' = bin(<int>)         # Or: '0x<bin>' = hex(<int>)
 ```
 
 

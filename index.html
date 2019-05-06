@@ -389,9 +389,6 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># True if str contains only numeric characters.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = bin(&lt;int&gt;)                          <span class="hljs-comment"># Binary representation starting with '0b'.</span>
-&lt;str&gt;  = hex(&lt;int&gt;)                          <span class="hljs-comment"># Hexadecimal representation starting with '0x'.</span>
-</code></pre>
 <h3 id="char">Char</h3>
 <pre><code class="python language-python hljs">&lt;str&gt; = chr(&lt;int&gt;)  <span class="hljs-comment"># Converts int to unicode char.</span>
 &lt;int&gt; = ord(&lt;str&gt;)  <span class="hljs-comment"># Converts unicode char to int.</span>
@@ -502,6 +499,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;int&gt;   = randint(from_inclusive, to_inclusive)
 &lt;el&gt;    = choice(&lt;list&gt;)
 shuffle(&lt;list&gt;)
+</code></pre>
+<h3 id="binhex">Bin, Hex</h3>
+<pre><code class="python language-python hljs">&lt;int&gt;     = <span class="hljs-number">0</span>b&lt;bin&gt;            <span class="hljs-comment"># Or: 0x&lt;hex&gt;</span>
+&lt;int&gt;     = int(<span class="hljs-string">'0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: int('0x&lt;hex&gt;', 0)</span>
+&lt;int&gt;     = int(<span class="hljs-string">'&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)    <span class="hljs-comment"># Or: int('&lt;hex&gt;', 16)</span>
+<span class="hljs-string">'0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)         <span class="hljs-comment"># Or: '0x&lt;bin&gt;' = hex(&lt;int&gt;)</span>
 </code></pre>
 <h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2>
 <ul>
