@@ -237,7 +237,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
-<pre><code class="python language-python hljs">index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns first index of item.</span>
+<pre><code class="python language-python hljs">index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns first index of item or raises ValueError.</span>
 &lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
 &lt;el&gt; = &lt;list&gt;.pop([index])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
 &lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of item or raises ValueError.</span>
@@ -377,18 +377,24 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
 &lt;str&gt;  = &lt;str&gt;.strip(<span class="hljs-string">'&lt;chars&gt;'</span>)              <span class="hljs-comment"># Strips all passed characters from both ends.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on any whitespace character.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
+&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on line breaks. Keeps them if 'keepends'.</span>
 &lt;str&gt;  = &lt;str&gt;.join(&lt;collection&gt;)            <span class="hljs-comment"># Joins elements using string as separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;bool&gt; = &lt;str&gt;.endswith(&lt;sub_str&gt;)           <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
-&lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Returns start index of first match.</span>
+&lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of first match or -1.</span>
+&lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># True if str contains only numeric characters.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
+<ul>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code>.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
+</ul>
 <h3 id="char">Char</h3>
 <pre><code class="python language-python hljs">&lt;str&gt; = chr(&lt;int&gt;)  <span class="hljs-comment"># Converts int to unicode char.</span>
 &lt;int&gt; = ord(&lt;str&gt;)  <span class="hljs-comment"># Converts unicode char to int.</span>

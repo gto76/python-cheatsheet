@@ -55,7 +55,7 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-index = <list>.index(<el>)     # Returns first index of item.
+index = <list>.index(<el>)     # Returns first index of item or raises ValueError.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
 <list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
@@ -269,8 +269,9 @@ String
 ```
 
 ```python
-<list> = <str>.split()                       # Splits on any whitespace character.
+<list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
+<list> = <str>.splitlines(keepends=False)    # Splits on line breaks. Keeps them if 'keepends'.
 <str>  = <str>.join(<collection>)            # Joins elements using string as separator.
 ```
 
@@ -278,13 +279,17 @@ String
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
-<int>  = <str>.index(<sub_str>)              # Returns start index of first match.
+<int>  = <str>.find(<sub_str>)               # Returns start index of first match or -1.
+<int>  = <str>.index(<sub_str>)              # Same but raises ValueError.
 ```
 
 ```python
 <bool> = <str>.isnumeric()                   # True if str contains only numeric characters.
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
+
+* **Also: `'lstrip()'`, `'rstrip()'`.**
+* **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
 
 ### Char
 ```python
