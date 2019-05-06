@@ -504,7 +504,15 @@ shuffle(&lt;list&gt;)
 <pre><code class="python language-python hljs">&lt;int&gt;     = <span class="hljs-number">0</span>b&lt;bin&gt;            <span class="hljs-comment"># Or: 0x&lt;hex&gt;</span>
 &lt;int&gt;     = int(<span class="hljs-string">'0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: int('0x&lt;hex&gt;', 0)</span>
 &lt;int&gt;     = int(<span class="hljs-string">'&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)    <span class="hljs-comment"># Or: int('&lt;hex&gt;', 16)</span>
-<span class="hljs-string">'0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)         <span class="hljs-comment"># Or: '0x&lt;bin&gt;' = hex(&lt;int&gt;)</span>
+<span class="hljs-string">'0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)         <span class="hljs-comment"># Or: '0x&lt;hex&gt;' = hex(&lt;int&gt;)</span>
+</code></pre>
+<h3 id="bitwiseoperators">Bitwise Operators</h3>
+<pre><code class="python language-python hljs">&lt;int&gt;     = &lt;int&gt; &amp; &lt;int&gt;      <span class="hljs-comment"># And</span>
+&lt;int&gt;     = &lt;int&gt; | &lt;int&gt;      <span class="hljs-comment"># Or</span>
+&lt;int&gt;     = &lt;int&gt; ^ &lt;int&gt;      <span class="hljs-comment"># Xor (0 if both bits equal)</span>
+&lt;int&gt;     = &lt;int&gt; &lt;&lt; n_bits    <span class="hljs-comment"># Shift left</span>
+&lt;int&gt;     = &lt;int&gt; &gt;&gt; n_bits    <span class="hljs-comment"># Shift right</span>
+&lt;int&gt;     = ~&lt;int&gt;             <span class="hljs-comment"># Compliment (flips bits)</span>
 </code></pre>
 <h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2>
 <ul>
