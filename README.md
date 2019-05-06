@@ -1423,7 +1423,7 @@ Bytes
 ```python
 <str>   = <bytes>.decode(encoding='utf-8')
 <int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
-<hex>   = <bytes>.hex()
+'<hex>' = <bytes>.hex()
 ```
 
 ### Read Bytes from File
