@@ -412,6 +412,7 @@ Numbers
 <float>   = float(<int/str/bool>)
 <complex> = complex(real=0, imag=0)  # Or: <real> + <real>j
 ```
+* **`'int()'` and `'float()'` raise ValueError on malformed string.**
 
 ### Basic Functions
 ```python
