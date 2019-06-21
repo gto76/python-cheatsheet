@@ -482,6 +482,10 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:b}           <span class="hljs-comment"># '1011010'</span>
 </code></pre>
 <h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2>
+<ul>
+<li><strong>Int, float and complex are the only number types.</strong></li>
+<li><strong>I use <code class="python hljs">&lt;num&gt;</code> to mean any of the above and <code class="python hljs">&lt;real&gt;</code> for either int or float.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;int&gt;     = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
 &lt;float&gt;   = float(&lt;int/str/bool&gt;)
 &lt;complex&gt; = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
@@ -513,7 +517,7 @@ shuffle(&lt;list&gt;)
 &lt;int&gt;     = int(<span class="hljs-string">'&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)    <span class="hljs-comment"># Or: int('&lt;hex&gt;', 16)</span>
 <span class="hljs-string">'0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)         <span class="hljs-comment"># Or: '0x&lt;hex&gt;' = hex(&lt;int&gt;)</span>
 </code></pre>
-<h3 id="bitwiseoperators">Bitwise Operators</h3>
+<h3 id="bitwise">Bitwise</h3>
 <pre><code class="python language-python hljs">&lt;int&gt;     = &lt;int&gt; &amp; &lt;int&gt;      <span class="hljs-comment"># And</span>
 &lt;int&gt;     = &lt;int&gt; | &lt;int&gt;      <span class="hljs-comment"># Or</span>
 &lt;int&gt;     = &lt;int&gt; ^ &lt;int&gt;      <span class="hljs-comment"># Xor (0 if both bits equal)</span>

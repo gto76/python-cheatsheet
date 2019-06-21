@@ -409,6 +409,9 @@ Format
 
 Numbers
 -------
+* **Int, float and complex are the only number types.**
+* **I use `<num>` to mean any of the above and `<real>` for either int or float.**
+
 ```python
 <int>     = int(<float/str/bool>)    # Or: math.floor(<float>)
 <float>   = float(<int/str/bool>)
@@ -452,7 +455,7 @@ shuffle(<list>)
 '0b<bin>' = bin(<int>)         # Or: '0x<hex>' = hex(<int>)
 ```
 
-### Bitwise Operators
+### Bitwise
 ```python
 <int>     = <int> & <int>      # And
 <int>     = <int> | <int>      # Or
