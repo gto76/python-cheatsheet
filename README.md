@@ -178,14 +178,16 @@ Point(x=1, y=2)
 
 Iterator
 --------
+**Iterator is any object with next() special method.**
 ```python
-from itertools import count, repeat, cycle, chain, islice
-```
-
-```python
-<iter> = iter(<collection>)
+<iter> = iter(<collection>)                 # Calling `iter(<iter>)` returns the same object.
 <iter> = iter(<function>, to_exclusive)     # Sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
+```
+
+### Itertools
+```python
+from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
