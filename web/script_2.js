@@ -42,6 +42,44 @@ const DIAGRAM_2_B =
   '┃   str   │             ┃\n' +
   '┗━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_3_A =
+  '+------------------+----------+------------+----------+\n' +
+  '|                  | Sequence | Collection | Iterable |\n' +
+  '+------------------+----------+------------+----------+\n' +
+  '| list, range, str |   yes    |    yes     |   yes    |\n' +
+  '| dict, set        |          |    yes     |   yes    |\n' +
+  '| iter             |          |            |   yes    |\n' +
+  '+------------------+----------+------------+----------+\n';
+
+const DIAGRAM_3_B =
+  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃                  │ Sequence │ Collection │ Iterable ┃\n' +
+  '┠──────────────────┼──────────┼────────────┼──────────┨\n' +
+  '┃ list, range, str │    ✓     │     ✓      │    ✓     ┃\n' +
+  '┃ dict, set        │          │     ✓      │    ✓     ┃\n' +
+  '┃ iter             │          │            │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_4_A =
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '|                    | Integral | Rational | Real | Complex | Number |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '| int                |   yes    |   yes    | yes  |   yes   |  yes   |\n' +
+  '| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |\n' +
+  '| float              |          |          | yes  |   yes   |  yes   |\n' +
+  '| complex            |          |          |      |   yes   |  yes   |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n';
+
+const DIAGRAM_4_B =
+  '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓\n' +
+  '┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃\n' +
+  '┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨\n' +
+  '┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ complex            │          │          │      │    ✓    │   ✓    ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛\n';
+
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -49,6 +87,8 @@ const DIAGRAM_2_B =
 if (!isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_1_B})`).html(DIAGRAM_1_A);
   $(`code:contains(${DIAGRAM_2_B})`).html(DIAGRAM_2_A);
+  $(`code:contains(${DIAGRAM_3_B})`).html(DIAGRAM_3_A);
+  $(`code:contains(${DIAGRAM_4_B})`).html(DIAGRAM_4_A);
   // var htmlString = $('code:contains(ᴺᴱᵂ)').html().replace(/ᴺᴱᵂ/g, '');
   // $('code:contains(ᴺᴱᵂ)').html(htmlString);
 }

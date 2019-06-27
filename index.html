@@ -204,7 +204,7 @@ pre.prettyprint {
 
 <br><h2 id="toc"><a href="#toc" name="toc">#</a>Contents</h2>
 <pre><code class="hljs bash"><strong>ToC</strong> = {
-    <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#namedtuple">Namedtuple</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regex</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exceptions</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#commandexecution">Command_Execution</a>],
@@ -237,7 +237,8 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
-<pre><code class="python language-python hljs">index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns first index of item or raises ValueError.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;el&gt; <span class="hljs-keyword">in</span> &lt;collection&gt;  <span class="hljs-comment"># For dictionary it checks if key exists.</span>
+index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
 &lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
 &lt;el&gt; = &lt;list&gt;.pop([index])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
 &lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of item or raises ValueError.</span>
@@ -285,27 +286,21 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 <pre><code class="python language-python hljs">&lt;set&gt;.remove(&lt;el&gt;)                            <span class="hljs-comment"># Raises KeyError.</span>
 &lt;set&gt;.discard(&lt;el&gt;)                           <span class="hljs-comment"># Doesn't raise an error.</span>
 </code></pre>
-<h3 id="frozenset">Frozenset</h3>
-<h4 id="ishashablemeaningitcanbeusedasakeyinadictionaryorasanelementinaset">Is hashable, meaning it can be used as a key in a dictionary or as an element in a set.</h4>
+<h3 id="frozenset">Frozen Set</h3>
+<ul>
+<li><strong>Is immutable and hashable.</strong></li>
+<li><strong>That means it can be used as a key in a dictionary or as an element in a set.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;frozenset&gt; = frozenset(&lt;collection&gt;)
 </code></pre>
-<h2 id="range"><a href="#range" name="range">#</a>Range</h2>
-<pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive, ±step_size)
+<h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2>
+<p><strong>Tuple is an immutable and hashable list.</strong></p>
+<pre><code class="python language-python hljs">&lt;tuple&gt; = ()
+&lt;tuple&gt; = (&lt;el&gt;, )
+&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt;, ...)
 </code></pre>
-<pre><code class="python language-python hljs">from_inclusive = &lt;range&gt;.start
-to_exclusive   = &lt;range&gt;.stop
-</code></pre>
-<h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;collection&gt; [, i_start]):
-    ...
-</code></pre>
-<h2 id="namedtuple"><a href="#namedtuple" name="namedtuple">#</a>Named Tuple</h2>
-<ul>
-<li><strong>Tuple is an immutable and hashable list.</strong></li>
-<li><strong>Named tuple is its subclass with named elements.</strong></li>
-</ul>
+<h3 id="namedtuple">Named Tuple</h3>
+<p><strong>Tuple's subclass with named elements.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
@@ -318,6 +313,18 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-number">2</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>p._fields  <span class="hljs-comment"># Or: Point._fields</span>
 (<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>)
+</code></pre>
+<h2 id="range"><a href="#range" name="range">#</a>Range</h2>
+<pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)
+&lt;range&gt; = range(from_inclusive, to_exclusive)
+&lt;range&gt; = range(from_inclusive, to_exclusive, ±step_size)
+</code></pre>
+<pre><code class="python language-python hljs">from_inclusive = &lt;range&gt;.start
+to_exclusive   = &lt;range&gt;.stop
+</code></pre>
+<h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;collection&gt; [, i_start]):
+    ...
 </code></pre>
 <h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2>
 <pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                 <span class="hljs-comment"># Calling `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
@@ -366,13 +373,30 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <h3 id="abc">ABC</h3>
 <p><strong>An abstract base class introduces virtual subclasses, that don’t inherit from it but are still recognized by isinstance() and issubclass().</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
-<span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
-<span class="hljs-keyword">True</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
+</code></pre>
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓
+┃                  │ Sequence │ Collection │ Iterable ┃
+┠──────────────────┼──────────┼────────────┼──────────┨
+┃ list, range, str │    ✓     │     ✓      │    ✓     ┃
+┃ dict, set        │          │     ✓      │    ✓     ┃
+┃ iter             │          │            │    ✓     ┃
+┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
+<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
+<span class="hljs-keyword">True</span>
+</code></pre>
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓
+┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃
+┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨
+┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃
+┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃
+┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃
+┃ complex            │          │          │      │    ✓    │   ✓    ┃
+┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛
 </code></pre>
 <h2 id="string"><a href="#string" name="string">#</a>String</h2>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
@@ -481,16 +505,16 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:b}           <span class="hljs-comment"># '1011010'</span>
 </code></pre>
 <h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2>
-<ul>
-<li><strong>Int, float and complex are the only number types.</strong></li>
-<li><strong>I use <code class="python hljs">&lt;num&gt;</code> to mean any of the above and <code class="python hljs">&lt;real&gt;</code> for either int or float.</strong></li>
-</ul>
-<pre><code class="python language-python hljs">&lt;int&gt;     = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
-&lt;float&gt;   = float(&lt;int/str/bool&gt;)
-&lt;complex&gt; = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
+<pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
+&lt;Fraction&gt; = fractions.Fraction(numerator=<span class="hljs-number">0</span>, denominator=<span class="hljs-number">1</span>)
 </code></pre>
+<ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
+</ul>
 <h3 id="basicfunctions">Basic Functions</h3>
-<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)           <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
+<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)            <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
 &lt;real&gt; = abs(&lt;num&gt;)
 &lt;int&gt;  = round(&lt;real&gt;)
 &lt;real&gt; = round(&lt;real&gt;, ±ndigits)
@@ -964,6 +988,25 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
             <span class="hljs-keyword">yield</span> el
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<span class="hljs-meta">&gt;&gt;&gt; </span>a = MyCollection([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(a, Sequence), isinstance(a, Collection), isinstance(a, Iterable)
+(<span class="hljs-keyword">False</span>, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">True</span>)
+</code></pre>
+<h3 id="iterator-1">Iterator</h3>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self.i = <span class="hljs-number">0</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__next__</span><span class="hljs-params">(self)</span>:</span>
+        self.i += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">return</span> self.i
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> self
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter()
+<span class="hljs-meta">&gt;&gt;&gt; </span>next(counter), next(counter), next(counter)
+(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <h3 id="callable">Callable</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
@@ -1572,29 +1615,18 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Max age as a string: <code class="python hljs"><span class="hljs-string">'1 week, 3 days'</span></code>, <code class="python hljs"><span class="hljs-string">'2 months'</span></code>, …</strong></li>
 </ul>
 <h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2>
+<h4 id="scrapesandprintspythonsurlandversionnumberfromwikipedia">Scrapes and prints Python's URL and version number from Wikipedia:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> requests
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
-<span class="hljs-meta">&gt;&gt;&gt; </span>url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>page  = requests.get(url)
-<span class="hljs-meta">&gt;&gt;&gt; </span>doc   = BeautifulSoup(page.text, <span class="hljs-string">'html.parser'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>rows  = table.find_all(<span class="hljs-string">'tr'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">'div'</span>).text.split()[<span class="hljs-number">0</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>link, ver
-(<span class="hljs-string">'https://www.python.org/'</span>, <span class="hljs-string">'3.7.2'</span>)
-</code></pre>
-<h3 id="selenium">Selenium</h3>
-<p><strong>Library for scraping dynamically generated web content.</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-comment"># $ brew cask install chromedriver</span>
-<span class="hljs-comment"># $ pip3 install selenium</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver = webdriver.Chrome()
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver.get(url)
-<span class="hljs-meta">&gt;&gt;&gt; </span>xpath  = <span class="hljs-string">'//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver.find_element_by_xpath(xpath).text.split()[<span class="hljs-number">0</span>]
-<span class="hljs-string">'3.7.2'</span>
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
+page  = requests.get(url)
+doc   = BeautifulSoup(page.text, <span class="hljs-string">'html.parser'</span>)
+table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
+rows  = table.find_all(<span class="hljs-string">'tr'</span>)
+link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
+ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">'div'</span>).text.split()[<span class="hljs-number">0</span>]
+print(link, ver)
 </code></pre>
 <h2 id="web"><a href="#web" name="web">#</a>Web</h2>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
@@ -1677,7 +1709,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
 filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{time_str}</span>.png'</span>
 drawer = output.GraphvizOutput(output_file=filename)
-<span class="hljs-keyword">with</span> PyCallGraph(output=drawer):
+<span class="hljs-keyword">with</span> PyCallGraph(drawer):
     &lt;code_to_be_profiled&gt;
 </code></pre>
 <h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2>

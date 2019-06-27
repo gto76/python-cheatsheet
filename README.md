@@ -8,7 +8,7 @@ Comprehensive Python Cheatsheet
 
 Contents
 --------
-**&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dict`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Namedtuple`](#named-tuple)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
+**&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dict`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
 **&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regex`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exceptions`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#command-execution)**__.__  
@@ -55,7 +55,8 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-index = <list>.index(<el>)     # Returns first index of item or raises ValueError.
+<bool> = <el> in <collection>  # For dictionary it checks if key exists.
+index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
 <list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
@@ -126,10 +127,39 @@ Set
 <set>.discard(<el>)                           # Doesn't raise an error.
 ```
 
-### Frozenset
-#### Is hashable, meaning it can be used as a key in a dictionary or as an element in a set.
+### Frozen Set
+* **Is immutable and hashable.**
+* **That means it can be used as a key in a dictionary or as an element in a set.**
 ```python
 <frozenset> = frozenset(<collection>)
+```
+
+
+Tuple
+-----
+**Tuple is an immutable and hashable list.**
+```python
+<tuple> = ()
+<tuple> = (<el>, )
+<tuple> = (<el_1>, <el_2>, ...)
+```
+
+### Named Tuple
+**Tuple's subclass with named elements.**
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', 'x y')
+>>> p = Point(1, y=2)
+Point(x=1, y=2)
+>>> p[0]
+1
+>>> p.x
+1
+>>> getattr(p, 'y')
+2
+>>> p._fields  # Or: Point._fields
+('x', 'y')
 ```
 
 
@@ -152,27 +182,6 @@ Enumerate
 ```python
 for i, el in enumerate(<collection> [, i_start]):
     ...
-```
-
-
-Named Tuple
------------
-* **Tuple is an immutable and hashable list.**
-* **Named tuple is its subclass with named elements.**
-
-```python
->>> from collections import namedtuple
->>> Point = namedtuple('Point', 'x y')
->>> p = Point(1, y=2)
-Point(x=1, y=2)
->>> p[0]
-1
->>> p.x
-1
->>> getattr(p, 'y')
-2
->>> p._fields  # Or: Point._fields
-('x', 'y')
 ```
 
 
@@ -250,15 +259,36 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 **An abstract base class introduces virtual subclasses, that don’t inherit from it but are still recognized by isinstance() and issubclass().**
 
 ```python
-from numbers import Integral, Rational, Real, Complex, Number
-from collections.abc import Sequence, Collection, Iterable
+>>> from collections.abc import Sequence, Collection, Iterable
+>>> isinstance([1, 2, 3], Iterable)
+True
+```
+
+```text
++------------------+----------+------------+----------+
+|                  | Sequence | Collection | Iterable |
++------------------+----------+------------+----------+
+| list, range, str |   yes    |    yes     |   yes    |
+| dict, set        |          |    yes     |   yes    |
+| iter             |          |            |   yes    |
++------------------+----------+------------+----------+
 ```
 
 ```python
+>>> from numbers import Integral, Rational, Real, Complex, Number
 >>> isinstance(123, Number)
 True
->>> isinstance([1, 2, 3], Iterable)
-True
+```
+
+```text
++--------------------+----------+----------+------+---------+--------+
+|                    | Integral | Rational | Real | Complex | Number |
++--------------------+----------+----------+------+---------+--------+
+| int                |   yes    |   yes    | yes  |   yes   |  yes   |
+| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
+| float              |          |          | yes  |   yes   |  yes   |
+| complex            |          |          |      |   yes   |  yes   |
++--------------------+----------+----------+------+---------+--------+
 ```
 
 
@@ -408,18 +438,17 @@ Format
 
 Numbers
 -------
-* **Int, float and complex are the only number types.**
-* **I use `<num>` to mean any of the above and `<real>` for either int or float.**
-
 ```python
-<int>     = int(<float/str/bool>)    # Or: math.floor(<float>)
-<float>   = float(<int/str/bool>)
-<complex> = complex(real=0, imag=0)  # Or: <real> + <real>j
+<int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
+<float>    = float(<int/str/bool>)
+<complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
+<Fraction> = fractions.Fraction(numerator=0, denominator=1)
 ```
+* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 
 ### Basic Functions
 ```python
-<num>  = pow(<num>, <num>)           # Or: <num> ** <num>
+<num>  = pow(<num>, <num>)            # Or: <num> ** <num>
 <real> = abs(<num>)
 <int>  = round(<real>)
 <real> = round(<real>, ±ndigits)
@@ -1025,6 +1054,31 @@ class MyCollection:
     def __iter__(self):
         for el in self.a:
             yield el
+```
+
+```python
+>>> from collections.abc import Sequence, Collection, Iterable
+>>> a = MyCollection([1, 2, 3])
+>>> isinstance(a, Sequence), isinstance(a, Collection), isinstance(a, Iterable)
+(False, True, True)
+```
+
+### Iterator
+```python
+class Counter:
+    def __init__(self):
+        self.i = 0
+    def __next__(self):
+        self.i += 1
+        return self.i
+    def __iter__(self):
+        return self
+```
+
+```python
+>>> counter = Counter()
+>>> next(counter), next(counter), next(counter)
+(1, 2, 3)
 ```
 
 ### Callable
@@ -1858,33 +1912,19 @@ retention=<int>|<datetime.timedelta>|<str>
 
 Scraping
 --------
+#### Scrapes and prints Python's URL and version number from Wikipedia:
 ```python
 # $ pip3 install requests beautifulsoup4
->>> import requests
->>> from bs4 import BeautifulSoup
->>> url   = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
->>> page  = requests.get(url)
->>> doc   = BeautifulSoup(page.text, 'html.parser')
->>> table = doc.find('table', class_='infobox vevent')
->>> rows  = table.find_all('tr')
->>> link  = rows[11].find('a')['href']
->>> ver   = rows[6].find('div').text.split()[0]
->>> link, ver
-('https://www.python.org/', '3.7.2')
-```
-
-### Selenium
-**Library for scraping dynamically generated web content.**
-
-```python
-# $ brew cask install chromedriver
-# $ pip3 install selenium
->>> from selenium import webdriver
->>> driver = webdriver.Chrome()
->>> driver.get(url)
->>> xpath  = '//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'
->>> driver.find_element_by_xpath(xpath).text.split()[0]
-'3.7.2'
+import requests
+from bs4 import BeautifulSoup
+url   = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+page  = requests.get(url)
+doc   = BeautifulSoup(page.text, 'html.parser')
+table = doc.find('table', class_='infobox vevent')
+rows  = table.find_all('tr')
+link  = rows[11].find('a')['href']
+ver   = rows[6].find('div').text.split()[0]
+print(link, ver)
 ```
 
 
@@ -1996,7 +2036,7 @@ from datetime import datetime
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 filename = f'profile-{time_str}.png'
 drawer = output.GraphvizOutput(output_file=filename)
-with PyCallGraph(output=drawer):
+with PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
 

@@ -19,7 +19,7 @@ const TOC =
   '<br>' +
   '<h2 id="toc">Contents</h2>\n' +
   '<pre><code class="hljs bash"><strong>ToC</strong> = {\n' +
-  '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#namedtuple">Namedtuple</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
+  '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regex</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
   '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exceptions</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#commandexecution">Command_Execution</a>],\n' +
@@ -74,6 +74,44 @@ const DIAGRAM_2_B =
   '┃   str   │             ┃\n' +
   '┗━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_3_A =
+  '+------------------+----------+------------+----------+\n' +
+  '|                  | Sequence | Collection | Iterable |\n' +
+  '+------------------+----------+------------+----------+\n' +
+  '| list, range, str |   yes    |    yes     |   yes    |\n' +
+  '| dict, set        |          |    yes     |   yes    |\n' +
+  '| iter             |          |            |   yes    |\n' +
+  '+------------------+----------+------------+----------+\n';
+
+const DIAGRAM_3_B =
+  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃                  │ Sequence │ Collection │ Iterable ┃\n' +
+  '┠──────────────────┼──────────┼────────────┼──────────┨\n' +
+  '┃ list, range, str │    ✓     │     ✓      │    ✓     ┃\n' +
+  '┃ dict, set        │          │     ✓      │    ✓     ┃\n' +
+  '┃ iter             │          │            │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_4_A =
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '|                    | Integral | Rational | Real | Complex | Number |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '| int                |   yes    |   yes    | yes  |   yes   |  yes   |\n' +
+  '| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |\n' +
+  '| float              |          |          | yes  |   yes   |  yes   |\n' +
+  '| complex            |          |          |      |   yes   |  yes   |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n';
+
+const DIAGRAM_4_B =
+  '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓\n' +
+  '┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃\n' +
+  '┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨\n' +
+  '┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ complex            │          │          │      │    ✓    │   ✓    ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛\n';
+
 
 function main() {
   const html = getMd();
@@ -102,7 +140,10 @@ function getMd() {
 
 function switchClassDiagrams(readme) {
   readme = readme.replace(DIAGRAM_1_A, DIAGRAM_1_B)
-  return readme.replace(DIAGRAM_2_A, DIAGRAM_2_B)
+  readme = readme.replace(DIAGRAM_2_A, DIAGRAM_2_B)
+  readme = readme.replace(DIAGRAM_3_A, DIAGRAM_3_B)
+  readme = readme.replace(DIAGRAM_4_A, DIAGRAM_4_B)
+  return readme
 }
 
 function modifyPage() {
