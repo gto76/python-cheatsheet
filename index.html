@@ -365,13 +365,30 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <h3 id="abc">ABC</h3>
 <p><strong>An abstract base class introduces virtual subclasses, that don’t inherit from it but are still recognized by isinstance() and issubclass().</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
-<span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
-<span class="hljs-keyword">True</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
+</code></pre>
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓
+┃                  │ Sequence │ Collection │ Iterable ┃
+┠──────────────────┼──────────┼────────────┼──────────┨
+┃ list, range, str │    ✓     │     ✓      │    ✓     ┃
+┃ dict, set        │          │     ✓      │    ✓     ┃
+┃ iter             │          │            │    ✓     ┃
+┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
+<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
+<span class="hljs-keyword">True</span>
+</code></pre>
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓
+┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃
+┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨
+┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃
+┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃
+┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃
+┃ complex            │          │          │      │    ✓    │   ✓    ┃
+┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛
 </code></pre>
 <h2 id="string"><a href="#string" name="string">#</a>String</h2>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
@@ -480,15 +497,16 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:b}           <span class="hljs-comment"># '1011010'</span>
 </code></pre>
 <h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2>
-<pre><code class="python language-python hljs">&lt;int&gt;     = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
-&lt;float&gt;   = float(&lt;int/str/bool&gt;)
-&lt;complex&gt; = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
+<pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
+&lt;Fraction&gt; = fractions.Fraction(numerator=<span class="hljs-number">0</span>, denominator=<span class="hljs-number">1</span>)
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
 </ul>
 <h3 id="basicfunctions">Basic Functions</h3>
-<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)           <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
+<pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)            <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
 &lt;real&gt; = abs(&lt;num&gt;)
 &lt;int&gt;  = round(&lt;real&gt;)
 &lt;real&gt; = round(&lt;real&gt;, ±ndigits)

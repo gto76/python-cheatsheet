@@ -249,15 +249,36 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 **An abstract base class introduces virtual subclasses, that don’t inherit from it but are still recognized by isinstance() and issubclass().**
 
 ```python
-from numbers import Integral, Rational, Real, Complex, Number
-from collections.abc import Sequence, Collection, Iterable
+>>> from collections.abc import Sequence, Collection, Iterable
+>>> isinstance([1, 2, 3], Iterable)
+True
+```
+
+```text
++------------------+----------+------------+----------+
+|                  | Sequence | Collection | Iterable |
++------------------+----------+------------+----------+
+| list, range, str |   yes    |    yes     |   yes    |
+| dict, set        |          |    yes     |   yes    |
+| iter             |          |            |   yes    |
++------------------+----------+------------+----------+
 ```
 
 ```python
+>>> from numbers import Integral, Rational, Real, Complex, Number
 >>> isinstance(123, Number)
 True
->>> isinstance([1, 2, 3], Iterable)
-True
+```
+
+```text
++--------------------+----------+----------+------+---------+--------+
+|                    | Integral | Rational | Real | Complex | Number |
++--------------------+----------+----------+------+---------+--------+
+| int                |   yes    |   yes    | yes  |   yes   |  yes   |
+| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
+| float              |          |          | yes  |   yes   |  yes   |
+| complex            |          |          |      |   yes   |  yes   |
++--------------------+----------+----------+------+---------+--------+
 ```
 
 
@@ -408,15 +429,16 @@ Format
 Numbers
 -------
 ```python
-<int>     = int(<float/str/bool>)    # Or: math.floor(<float>)
-<float>   = float(<int/str/bool>)
-<complex> = complex(real=0, imag=0)  # Or: <real> + <real>j
+<int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
+<float>    = float(<int/str/bool>)
+<complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
+<Fraction> = fractions.Fraction(numerator=0, denominator=1)
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 
 ### Basic Functions
 ```python
-<num>  = pow(<num>, <num>)           # Or: <num> ** <num>
+<num>  = pow(<num>, <num>)            # Or: <num> ** <num>
 <real> = abs(<num>)
 <int>  = round(<real>)
 <real> = round(<real>, ±ndigits)

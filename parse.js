@@ -74,6 +74,44 @@ const DIAGRAM_2_B =
   '┃   str   │             ┃\n' +
   '┗━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_3_A =
+  '+------------------+----------+------------+----------+\n' +
+  '|                  | Sequence | Collection | Iterable |\n' +
+  '+------------------+----------+------------+----------+\n' +
+  '| list, range, str |   yes    |    yes     |   yes    |\n' +
+  '| dict, set        |          |    yes     |   yes    |\n' +
+  '| iter             |          |            |   yes    |\n' +
+  '+------------------+----------+------------+----------+\n';
+
+const DIAGRAM_3_B =
+  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃                  │ Sequence │ Collection │ Iterable ┃\n' +
+  '┠──────────────────┼──────────┼────────────┼──────────┨\n' +
+  '┃ list, range, str │    ✓     │     ✓      │    ✓     ┃\n' +
+  '┃ dict, set        │          │     ✓      │    ✓     ┃\n' +
+  '┃ iter             │          │            │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_4_A =
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '|                    | Integral | Rational | Real | Complex | Number |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n' +
+  '| int                |   yes    |   yes    | yes  |   yes   |  yes   |\n' +
+  '| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |\n' +
+  '| float              |          |          | yes  |   yes   |  yes   |\n' +
+  '| complex            |          |          |      |   yes   |  yes   |\n' +
+  '+--------------------+----------+----------+------+---------+--------+\n';
+
+const DIAGRAM_4_B =
+  '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓\n' +
+  '┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃\n' +
+  '┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨\n' +
+  '┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃\n' +
+  '┃ complex            │          │          │      │    ✓    │   ✓    ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛\n';
+
 
 function main() {
   const html = getMd();
@@ -102,7 +140,10 @@ function getMd() {
 
 function switchClassDiagrams(readme) {
   readme = readme.replace(DIAGRAM_1_A, DIAGRAM_1_B)
-  return readme.replace(DIAGRAM_2_A, DIAGRAM_2_B)
+  readme = readme.replace(DIAGRAM_2_A, DIAGRAM_2_B)
+  readme = readme.replace(DIAGRAM_3_A, DIAGRAM_3_B)
+  readme = readme.replace(DIAGRAM_4_A, DIAGRAM_4_B)
+  return readme
 }
 
 function modifyPage() {
