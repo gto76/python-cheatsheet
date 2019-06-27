@@ -1046,6 +1046,13 @@ class MyCollection:
             yield el
 ```
 
+```python
+>>> from collections.abc import Sequence, Collection, Iterable
+>>> a = MyCollection([1, 2, 3])
+>>> isinstance(a, Sequence), isinstance(a, Collection), isinstance(a, Iterable)
+(False, True, True)
+```
+
 ### Iterator
 ```python
 class Counter:
