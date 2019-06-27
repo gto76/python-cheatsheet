@@ -237,7 +237,8 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
-<pre><code class="python language-python hljs">index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns first index of item or raises ValueError.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;el&gt; <span class="hljs-keyword">in</span> &lt;collection&gt;  <span class="hljs-comment"># For dictionary it checks if key exists.</span>
+index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
 &lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
 &lt;el&gt; = &lt;list&gt;.pop([index])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
 &lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of item or raises ValueError.</span>
