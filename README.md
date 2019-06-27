@@ -128,8 +128,8 @@ Set
 ```
 
 ### Frozen Set
-* **Frozen set is immutable and hashable set.**
-* **It can be used as a key in a dictionary or as an element in a set.**
+* **Is immutable and hashable.**
+* **That means it can be used as a key in a dictionary or as an element in a set.**
 ```python
 <frozenset> = frozenset(<collection>)
 ```
@@ -137,7 +137,7 @@ Set
 
 Tuple
 -----
-**Tuple is immutable and hashable list.**
+**Tuple is an immutable and hashable list.**
 ```python
 <tuple> = ()
 <tuple> = (<el>, )
@@ -145,7 +145,7 @@ Tuple
 ```
 
 ### Named Tuple
-**Named tuple is tuple's subclass with named elements.**
+**Tuple's subclass with named elements.**
 
 ```python
 >>> from collections import namedtuple
