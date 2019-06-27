@@ -8,7 +8,7 @@ Comprehensive Python Cheatsheet
 
 Contents
 --------
-**&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dict`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Namedtuple`](#named-tuple)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
+**&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dict`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
 **&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regex`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exceptions`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#command-execution)**__.__  
@@ -127,10 +127,39 @@ Set
 <set>.discard(<el>)                           # Doesn't raise an error.
 ```
 
-### Frozenset
-#### Is hashable, meaning it can be used as a key in a dictionary or as an element in a set.
+### Frozen Set
+* **Frozen set is immutable and hashable set.**
+* **It can be used as a key in a dictionary or as an element in a set.**
 ```python
 <frozenset> = frozenset(<collection>)
+```
+
+
+Tuple
+-----
+**Tuple is immutable and hashable list.**
+```python
+<tuple> = ()
+<tuple> = (<el>, )
+<tuple> = (<el_1>, <el_2>, ...)
+```
+
+### Named Tuple
+**Named tuple is tuple's subclass with named elements.**
+
+```python
+>>> from collections import namedtuple
+>>> Point = namedtuple('Point', 'x y')
+>>> p = Point(1, y=2)
+Point(x=1, y=2)
+>>> p[0]
+1
+>>> p.x
+1
+>>> getattr(p, 'y')
+2
+>>> p._fields  # Or: Point._fields
+('x', 'y')
 ```
 
 
@@ -153,27 +182,6 @@ Enumerate
 ```python
 for i, el in enumerate(<collection> [, i_start]):
     ...
-```
-
-
-Named Tuple
------------
-* **Tuple is an immutable and hashable list.**
-* **Named tuple is its subclass with named elements.**
-
-```python
->>> from collections import namedtuple
->>> Point = namedtuple('Point', 'x y')
->>> p = Point(1, y=2)
-Point(x=1, y=2)
->>> p[0]
-1
->>> p.x
-1
->>> getattr(p, 'y')
-2
->>> p._fields  # Or: Point._fields
-('x', 'y')
 ```
 
 

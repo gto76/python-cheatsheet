@@ -204,7 +204,7 @@ pre.prettyprint {
 
 <br><h2 id="toc"><a href="#toc" name="toc">#</a>Contents</h2>
 <pre><code class="hljs bash"><strong>ToC</strong> = {
-    <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#namedtuple">Namedtuple</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dict</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regex</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exceptions</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#commandexecution">Command_Execution</a>],
@@ -286,27 +286,21 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 <pre><code class="python language-python hljs">&lt;set&gt;.remove(&lt;el&gt;)                            <span class="hljs-comment"># Raises KeyError.</span>
 &lt;set&gt;.discard(&lt;el&gt;)                           <span class="hljs-comment"># Doesn't raise an error.</span>
 </code></pre>
-<h3 id="frozenset">Frozenset</h3>
-<h4 id="ishashablemeaningitcanbeusedasakeyinadictionaryorasanelementinaset">Is hashable, meaning it can be used as a key in a dictionary or as an element in a set.</h4>
+<h3 id="frozenset">Frozen Set</h3>
+<ul>
+<li><strong>Frozen set is immutable and hashable set.</strong></li>
+<li><strong>It can be used as a key in a dictionary or as an element in a set.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;frozenset&gt; = frozenset(&lt;collection&gt;)
 </code></pre>
-<h2 id="range"><a href="#range" name="range">#</a>Range</h2>
-<pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive, ±step_size)
+<h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2>
+<p><strong>Tuple is immutable and hashable list.</strong></p>
+<pre><code class="python language-python hljs">&lt;tuple&gt; = ()
+&lt;tuple&gt; = (&lt;el&gt;, )
+&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt;, ...)
 </code></pre>
-<pre><code class="python language-python hljs">from_inclusive = &lt;range&gt;.start
-to_exclusive   = &lt;range&gt;.stop
-</code></pre>
-<h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;collection&gt; [, i_start]):
-    ...
-</code></pre>
-<h2 id="namedtuple"><a href="#namedtuple" name="namedtuple">#</a>Named Tuple</h2>
-<ul>
-<li><strong>Tuple is an immutable and hashable list.</strong></li>
-<li><strong>Named tuple is its subclass with named elements.</strong></li>
-</ul>
+<h3 id="namedtuple">Named Tuple</h3>
+<p><strong>Named tuple is tuple's subclass with named elements.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
@@ -319,6 +313,18 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-number">2</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>p._fields  <span class="hljs-comment"># Or: Point._fields</span>
 (<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>)
+</code></pre>
+<h2 id="range"><a href="#range" name="range">#</a>Range</h2>
+<pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)
+&lt;range&gt; = range(from_inclusive, to_exclusive)
+&lt;range&gt; = range(from_inclusive, to_exclusive, ±step_size)
+</code></pre>
+<pre><code class="python language-python hljs">from_inclusive = &lt;range&gt;.start
+to_exclusive   = &lt;range&gt;.stop
+</code></pre>
+<h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;collection&gt; [, i_start]):
+    ...
 </code></pre>
 <h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> count, repeat, cycle, chain, islice
