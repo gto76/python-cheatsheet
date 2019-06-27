@@ -1911,33 +1911,19 @@ retention=<int>|<datetime.timedelta>|<str>
 
 Scraping
 --------
+#### Scrapes and prints Python's URL and version number from Wikipedia:
 ```python
 # $ pip3 install requests beautifulsoup4
->>> import requests
->>> from bs4 import BeautifulSoup
->>> url   = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
->>> page  = requests.get(url)
->>> doc   = BeautifulSoup(page.text, 'html.parser')
->>> table = doc.find('table', class_='infobox vevent')
->>> rows  = table.find_all('tr')
->>> link  = rows[11].find('a')['href']
->>> ver   = rows[6].find('div').text.split()[0]
->>> link, ver
-('https://www.python.org/', '3.7.2')
-```
-
-### Selenium
-**Library for scraping dynamically generated web content.**
-
-```python
-# $ brew cask install chromedriver
-# $ pip3 install selenium
->>> from selenium import webdriver
->>> driver = webdriver.Chrome()
->>> driver.get(url)
->>> xpath  = '//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'
->>> driver.find_element_by_xpath(xpath).text.split()[0]
-'3.7.2'
+import requests
+from bs4 import BeautifulSoup
+url   = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+page  = requests.get(url)
+doc   = BeautifulSoup(page.text, 'html.parser')
+table = doc.find('table', class_='infobox vevent')
+rows  = table.find_all('tr')
+link  = rows[11].find('a')['href']
+ver   = rows[6].find('div').text.split()[0]
+print(link, ver)
 ```
 
 
@@ -2049,7 +2035,7 @@ from datetime import datetime
 time_str = datetime.now().strftime('%Y%m%d%H%M%S')
 filename = f'profile-{time_str}.png'
 drawer = output.GraphvizOutput(output_file=filename)
-with PyCallGraph(output=drawer):
+with PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
 

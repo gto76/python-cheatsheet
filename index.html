@@ -1614,29 +1614,18 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Max age as a string: <code class="python hljs"><span class="hljs-string">'1 week, 3 days'</span></code>, <code class="python hljs"><span class="hljs-string">'2 months'</span></code>, …</strong></li>
 </ul>
 <h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2>
+<h4 id="scrapesandprintspythonsurlandversionnumberfromwikipedia">Scrapes and prints Python's URL and version number from Wikipedia:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> requests
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
-<span class="hljs-meta">&gt;&gt;&gt; </span>url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>page  = requests.get(url)
-<span class="hljs-meta">&gt;&gt;&gt; </span>doc   = BeautifulSoup(page.text, <span class="hljs-string">'html.parser'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>rows  = table.find_all(<span class="hljs-string">'tr'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">'div'</span>).text.split()[<span class="hljs-number">0</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>link, ver
-(<span class="hljs-string">'https://www.python.org/'</span>, <span class="hljs-string">'3.7.2'</span>)
-</code></pre>
-<h3 id="selenium">Selenium</h3>
-<p><strong>Library for scraping dynamically generated web content.</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-comment"># $ brew cask install chromedriver</span>
-<span class="hljs-comment"># $ pip3 install selenium</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver = webdriver.Chrome()
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver.get(url)
-<span class="hljs-meta">&gt;&gt;&gt; </span>xpath  = <span class="hljs-string">'//*[@id="mw-content-text"]/div/table[1]/tbody/tr[7]/td/div'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>driver.find_element_by_xpath(xpath).text.split()[<span class="hljs-number">0</span>]
-<span class="hljs-string">'3.7.2'</span>
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
+page  = requests.get(url)
+doc   = BeautifulSoup(page.text, <span class="hljs-string">'html.parser'</span>)
+table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
+rows  = table.find_all(<span class="hljs-string">'tr'</span>)
+link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
+ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">'div'</span>).text.split()[<span class="hljs-number">0</span>]
+print(link, ver)
 </code></pre>
 <h2 id="web"><a href="#web" name="web">#</a>Web</h2>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
@@ -1719,7 +1708,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
 filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{time_str}</span>.png'</span>
 drawer = output.GraphvizOutput(output_file=filename)
-<span class="hljs-keyword">with</span> PyCallGraph(output=drawer):
+<span class="hljs-keyword">with</span> PyCallGraph(drawer):
     &lt;code_to_be_profiled&gt;
 </code></pre>
 <h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2>
