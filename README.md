@@ -179,7 +179,7 @@ Point(x=1, y=2)
 Iterator
 --------
 ```python
-<iter> = iter(<collection>)
+<iter> = iter(<collection>)                 # Calling `iter(<iter>)` returns unmodified iterator.
 <iter> = iter(<function>, to_exclusive)     # Sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
 ```
