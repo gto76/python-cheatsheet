@@ -483,7 +483,7 @@ shuffle(<list>)
 '0b<bin>' = bin(<int>)         # Or: '0x<hex>' = hex(<int>)
 ```
 
-### Bitwise
+### Bitwise Operators
 ```python
 <int>     = <int> & <int>      # And
 <int>     = <int> | <int>      # Or
