@@ -303,7 +303,7 @@ String
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
 <list> = <str>.splitlines(keepends=False)    # Splits on line breaks. Keeps them if 'keepends'.
-<str>  = <str>.join(<collection>)            # Joins elements using string as separator.
+<str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as separator.
 ```
 
 ```python
@@ -1475,23 +1475,24 @@ Bytes
 **Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.**
 
 ```python
-<bytes> = b'<str>'
-<int>   = <bytes>[<index>]
-<bytes> = <bytes>[<slice>]
-<ints>  = list(<bytes>)
-<bytes> = b''.join(<coll_of_bytes>)
+<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00 - \xff.
+<int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
+<bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator. 
 ```
 
 ### Encode
 ```python
-<bytes> = <str>.encode(encoding='utf-8')
+<bytes> = <str>.encode('utf-8')          # Or: bytes(<str>, 'utf-8')
+<bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex('<hex>')
 ```
 
 ### Decode
 ```python
-<str>   = <bytes>.decode(encoding='utf-8')
+<str>   = <bytes>.decode('utf-8')        # Or: str(<bytes>, 'utf-8')
+<list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
 '<hex>' = <bytes>.hex()
 ```

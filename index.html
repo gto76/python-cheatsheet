@@ -405,7 +405,7 @@ to_exclusive   = &lt;range&gt;.stop
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
 &lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on line breaks. Keeps them if 'keepends'.</span>
-&lt;str&gt;  = &lt;str&gt;.join(&lt;collection&gt;)            <span class="hljs-comment"># Joins elements using string as separator.</span>
+&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
@@ -1289,19 +1289,20 @@ db.commit()
 </code></pre>
 <h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2>
 <p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.</strong></p>
-<pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>
-&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]
-&lt;ints&gt;  = list(&lt;bytes&gt;)
-&lt;bytes&gt; = <span class="hljs-string">b''</span>.join(&lt;coll_of_bytes&gt;)
+<pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00 - \xff.</span>
+&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns int in range from 0 to 255.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes object as separator. </span>
 </code></pre>
 <h3 id="encode-1">Encode</h3>
-<pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;str&gt;.encode(encoding=<span class="hljs-string">'utf-8'</span>)
+<pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;str&gt;.encode(<span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: bytes(&lt;str&gt;, 'utf-8')</span>
+&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;int&gt;.to_bytes(&lt;length&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 &lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)
 </code></pre>
 <h3 id="decode-1">Decode</h3>
-<pre><code class="python language-python hljs">&lt;str&gt;   = &lt;bytes&gt;.decode(encoding=<span class="hljs-string">'utf-8'</span>)
+<pre><code class="python language-python hljs">&lt;str&gt;   = &lt;bytes&gt;.decode(<span class="hljs-string">'utf-8'</span>)        <span class="hljs-comment"># Or: str(&lt;bytes&gt;, 'utf-8')</span>
+&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
 &lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()
 </code></pre>
