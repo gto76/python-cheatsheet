@@ -1362,7 +1362,7 @@ db.commit()
 &lt;memoryview&gt;.release()
 </code></pre>
 <h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2>
-<p><strong>Thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p>
+<p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
 </code></pre>
@@ -1371,6 +1371,14 @@ db.commit()
 </code></pre>
 <pre><code class="python language-python hljs">&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Collection gets reversed.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Rotates elements to the right.</span>
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>a = deque([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], maxlen=<span class="hljs-number">3</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>a.append(<span class="hljs-number">4</span>)
+[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>a.appendleft(<span class="hljs-number">5</span>)
+[<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>a.insert(<span class="hljs-number">6</span>, <span class="hljs-number">1</span>)
+IndexError: deque already at its maximum size
 </code></pre>
 <h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock

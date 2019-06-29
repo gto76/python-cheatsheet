@@ -1572,7 +1572,7 @@ Memory View
 
 Deque
 -----
-**Thread-safe list with efficient appends and pops from either side. Pronounced "deck".**
+**A thread-safe list with efficient appends and pops from either side. Pronounced "deck".**
 
 ```python
 from collections import deque
@@ -1587,6 +1587,16 @@ from collections import deque
 ```python
 <deque>.extendleft(<collection>)  # Collection gets reversed.
 <deque>.rotate(n=1)               # Rotates elements to the right.
+```
+
+```python
+>>> a = deque([1, 2, 3], maxlen=3)
+>>> a.append(4)
+[2, 3, 4]
+>>> a.appendleft(5)
+[5, 2, 3]
+>>> a.insert(6, 1)
+IndexError: deque already at its maximum size
 ```
 
 
