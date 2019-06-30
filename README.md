@@ -1261,8 +1261,10 @@ Open
 **Opens a file and returns a corresponding file object.**
 
 ```python
-<file> = open('<path>', mode='r', encoding=None)
+<file> = open('<path>', mode='r', encoding=None, endline=None)
 ```
+* **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `"encoding='utf-8'"` whenever possible.**
+* **`'endline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 
 ### Modes
 * **`'r'`  - Read (default).**

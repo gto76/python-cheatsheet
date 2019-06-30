@@ -1141,8 +1141,12 @@ value = args.&lt;name&gt;
 </ul>
 <h2 id="open"><a href="#open" name="open">#</a>Open</h2>
 <p><strong>Opens a file and returns a corresponding file object.</strong></p>
-<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>)
+<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, endline=<span class="hljs-keyword">None</span>)
 </code></pre>
+<ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">"encoding='utf-8'"</span></code> whenever possible.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'endline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+</ul>
 <h3 id="modes">Modes</h3>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read (default).</strong></li>
