@@ -599,21 +599,24 @@ shuffle(&lt;list&gt;)
 <h3 id="now">Now</h3>
 <pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
-&lt;DTa&gt;    = DT.now(&lt;tz&gt;)                     <span class="hljs-comment"># Aware datetime from current tz time.</span>
+&lt;DTa&gt;    = DT.now(&lt;tzinfo&gt;)                 <span class="hljs-comment"># Aware datetime from current tz time.</span>
 </code></pre>
+<ul>
+<li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
+</ul>
 <h3 id="timezone">Timezone</h3>
-<pre><code class="python language-python hljs">&lt;tz&gt;     = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
-&lt;tz&gt;     = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
-&lt;tz&gt;     = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
+<pre><code class="python language-python hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
+&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
+&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
 </code></pre>
-<pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tz&gt;)            <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
-&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tz&gt;)      <span class="hljs-comment"># Unconverted object with new timezone.</span>
+<pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
+&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with new timezone.</span>
 </code></pre>
 <h3 id="encode">Encode</h3>
 <pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ.</span>
-&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz&gt;)   <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
+&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
 </code></pre>
 <ul>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[±&lt;offset&gt;]'</span></code>, or both separated by <code class="python hljs"><span class="hljs-string">'T'</span></code>. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'HH:MM'</span></code>.</strong></li>
@@ -631,11 +634,15 @@ shuffle(&lt;list&gt;)
 <span class="hljs-meta">&gt;&gt;&gt; </span>dt.strftime(<span class="hljs-string">"%A, %dth of %B '%y, %I:%M%p %Z"</span>)
 <span class="hljs-string">"Thursday, 14th of May '15, 11:39PM UTC+02:00"</span>
 </code></pre>
-<h4 id="restofthecodes">Rest of the codes:</h4>
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code> - Weekday, abbreviated name.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - Month, abbreviated name.</strong></li>
+<li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
+<h3 id="arithmetics">Arithmetics</h3>
+<pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt; ±  &lt;TD&gt;
+&lt;TD&gt;     = &lt;TD&gt;   ±  &lt;TD&gt;
+&lt;TD&gt;     = &lt;TD&gt;   */ &lt;real&gt;
+&lt;float&gt;  = &lt;TD&gt;   /  &lt;TD&gt;
+</code></pre>
 <h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2>
 <h3 id="insidefunctioncall">Inside Function Call</h3>
 <pre><code class="python language-python hljs">&lt;function&gt;(&lt;positional_args&gt;)                  <span class="hljs-comment"># f(0, 0)</span>
@@ -1153,8 +1160,12 @@ value = args.&lt;name&gt;
 </ul>
 <h2 id="open"><a href="#open" name="open">#</a>Open</h2>
 <p><strong>Opens a file and returns a corresponding file object.</strong></p>
-<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>)
+<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, endline=<span class="hljs-keyword">None</span>)
 </code></pre>
+<ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'endline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+</ul>
 <h3 id="modes">Modes</h3>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read (default).</strong></li>
@@ -1170,7 +1181,8 @@ value = args.&lt;name&gt;
 <h3 id="file">File</h3>
 <pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
-&lt;file&gt;.seek(offset, &lt;anchor&gt;)       <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
+&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
+&lt;bin_file&gt;.seek(±offset, &lt;anchor&gt;)  <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line.</span>
@@ -1178,11 +1190,11 @@ value = args.&lt;name&gt;
 &lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
-&lt;file&gt;.writelines(&lt;list&gt;)           <span class="hljs-comment"># Writes a list of strings or bytes objects.</span>
+&lt;file&gt;.writelines(&lt;coll.&gt;)          <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer.</span>
 </code></pre>
 <ul>
-<li><strong>Methods do not add or strip trailing newlines.</strong></li>
+<li><strong>Methods do not add or strip trailing newlines, even writelines().</strong></li>
 </ul>
 <h3 id="readtextfromfile">Read Text from File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_file</span><span class="hljs-params">(filename)</span>:</span>
@@ -1196,27 +1208,28 @@ value = args.&lt;name&gt;
 </code></pre>
 <h2 id="path"><a href="#path" name="path">#</a>Path</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> path, listdir
-&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
+<span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
+</code></pre>
+<pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
-&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
-<span class="hljs-meta">&gt;&gt;&gt; </span>glob(<span class="hljs-string">'../*.gif'</span>)
-[<span class="hljs-string">'1.gif'</span>, <span class="hljs-string">'card.gif'</span>]
+<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># List of filenames located at 'path'. </span>
+&lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)         <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <h3 id="pathlib">Pathlib</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
-cwd    = Path()
+</code></pre>
+<pre><code class="python language-python hljs">cwd    = Path()
 &lt;Path&gt; = Path(<span class="hljs-string">'&lt;path&gt;'</span> [, <span class="hljs-string">'&lt;path&gt;'</span>, &lt;Path&gt;, ...])
 &lt;Path&gt; = &lt;Path&gt; / <span class="hljs-string">'&lt;dir&gt;'</span> / <span class="hljs-string">'&lt;file&gt;'</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Path&gt;.exists()
 &lt;bool&gt; = &lt;Path&gt;.is_file()
 &lt;bool&gt; = &lt;Path&gt;.is_dir()
-&lt;iter&gt; = &lt;Path&gt;.iterdir()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Iterator of filenames located at path.</span>
+&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)               <span class="hljs-comment"># Returns path as a string.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts              <span class="hljs-comment"># Returns all components as strings.</span>
@@ -1458,14 +1471,17 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <li><strong>New() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>), in which case init() is not called.</strong></li>
 </ul>
 <h3 id="metaclassattribute">Metaclass Attribute</h3>
-<p><strong>When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p>
+<p><strong>Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
     b = <span class="hljs-number">12345</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>MyClass.a, MyClass.b
 (<span class="hljs-string">'abcde'</span>, <span class="hljs-number">12345</span>)
 </code></pre>
-<h4 id="typediagramstrisaninstanceoftype">Type diagram (str is an instance of type, …):</h4>
+<h3 id="typediagram">Type Diagram</h3>
+<pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass  <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
+type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
+</code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃
 ┠─────────┼─────────────┨
@@ -1476,7 +1492,10 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 ┃   str ───────╯        ┃
 ┗━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
-<h4 id="inheritancediagramstrisasubclassofobject">Inheritance diagram (str is a subclass of object, …):</h4>
+<h3 id="inheritancediagram">Inheritance Diagram</h3>
+<pre><code class="python language-python hljs">MyClass.__base__     == object    <span class="hljs-comment"># MyClass is a subclass of object.</span>
+MyMetaClass.__base__ == type      <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
+</code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃
 ┠─────────┼─────────────┨

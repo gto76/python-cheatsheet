@@ -561,19 +561,20 @@ from dateutil.tz import UTC, tzlocal, gettz
 ```python
 <D/DTn>  = D/DT.today()                     # Current local date or naive datetime.
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
-<DTa>    = DT.now(<tz>)                     # Aware datetime from current tz time.
+<DTa>    = DT.now(<tzinfo>)                 # Aware datetime from current tz time.
 ```
+* **To extract time use `'<DTn>.time()'` or `'<DTa>.timetz()'`.**
 
 ### Timezone
 ```python
-<tz>     = UTC                              # UTC timezone. London without DST.
-<tz>     = tzlocal()                        # Local timezone.
-<tz>     = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
+<tzinfo> = UTC                              # UTC timezone. London without DST.
+<tzinfo> = tzlocal()                        # Local timezone.
+<tzinfo> = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
 ```
 
 ```python
-<DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
 ```
 
 ### Encode
@@ -581,7 +582,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
-<DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
+<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # DTa from seconds since Epoch in tz time.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`. Offset is formatted as: `'HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -601,10 +602,15 @@ from dateutil.tz import UTC, tzlocal, gettz
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
+* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
-#### Rest of the codes:
-* **`'a'` - Weekday, abbreviated name.**
-* **`'b'` - Month, abbreviated name.**
+### Arithmetics
+```python
+<D/DT>   = <D/DT> ±  <TD>
+<TD>     = <TD>   ±  <TD>
+<TD>     = <TD>   */ <real>
+<float>  = <TD>   /  <TD>
+```
 
 
 Arguments
@@ -1277,8 +1283,10 @@ Open
 **Opens a file and returns a corresponding file object.**
 
 ```python
-<file> = open('<path>', mode='r', encoding=None)
+<file> = open('<path>', mode='r', encoding=None, endline=None)
 ```
+* **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
+* **`'endline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 
 ### Modes
 * **`'r'`  - Read (default).**
@@ -1295,7 +1303,8 @@ Open
 ```python
 <file>.seek(0)                      # Moves to the start of the file.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
-<file>.seek(offset, <anchor>)       # Anchor: 0 start, 1 current pos., 2 end.
+<file>.seek(0, 2)                   # Moves to the end of the file.
+<bin_file>.seek(±offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
 ```
 
 ```python
@@ -1307,10 +1316,10 @@ Open
 
 ```python
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
-<file>.writelines(<list>)           # Writes a list of strings or bytes objects.
+<file>.writelines(<coll.>)          # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer.
 ```
-* **Methods do not add or strip trailing newlines.**
+* **Methods do not add or strip trailing newlines, even writelines().**
 
 ### Read Text from File
 ```python
@@ -1331,21 +1340,26 @@ Path
 ----
 ```python
 from os import path, listdir
-<bool> = path.exists('<path>')
-<bool> = path.isfile('<path>')
-<bool> = path.isdir('<path>')
-<list> = listdir('<path>')
+from glob import glob
 ```
 
 ```python
->>> from glob import glob
->>> glob('../*.gif')
-['1.gif', 'card.gif']
+<bool> = path.exists('<path>')
+<bool> = path.isfile('<path>')
+<bool> = path.isdir('<path>')
+```
+
+```python
+<list> = listdir('<path>')         # List of filenames located at 'path'. 
+<list> = glob('<pattern>')         # Filenames matching the wildcard pattern.
 ```
 
 ### Pathlib
 ```python
 from pathlib import Path
+```
+
+```python
 cwd    = Path()
 <Path> = Path('<path>' [, '<path>', <Path>, ...])
 <Path> = <Path> / '<dir>' / '<file>'
@@ -1355,11 +1369,11 @@ cwd    = Path()
 <bool> = <Path>.exists()
 <bool> = <Path>.is_file()
 <bool> = <Path>.is_dir()
-<iter> = <Path>.iterdir()
 ```
 
 ```python
-<iter> = <Path>.glob('<pattern>')
+<iter> = <Path>.iterdir()          # Iterator of filenames located at path.
+<iter> = <Path>.glob('<pattern>')  # Filenames matching the wildcard pattern.
 ```
 
 ```python
@@ -1711,7 +1725,7 @@ class MyMetaClass(type):
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute
-**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
@@ -1723,7 +1737,12 @@ class MyClass(metaclass=MyMetaClass):
 ('abcde', 12345)
 ```
 
-#### Type diagram (str is an instance of type, ...):
+### Type Diagram
+```python
+type(MyClass)     == MyMetaClass  # MyClass is an instance of MyMetaClass.
+type(MyMetaClass) == type         # MyMetaClass is an instance of type.
+```
+
 ```text
 +---------+-------------+
 | Classes | Metaclasses |
@@ -1736,7 +1755,12 @@ class MyClass(metaclass=MyMetaClass):
 +---------+-------------+
 ```
 
-#### Inheritance diagram (str is a subclass of object, ...):
+### Inheritance Diagram
+```python
+MyClass.__base__     == object    # MyClass is a subclass of object.
+MyMetaClass.__base__ == type      # MyMetaClass is a subclass of type.
+```
+
 ```text
 +---------+-------------+
 | Classes | Metaclasses |
