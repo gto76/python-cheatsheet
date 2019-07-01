@@ -1469,7 +1469,6 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <h3 id="typediagram">Type Diagram</h3>
 <pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass  <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
 type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
-type(type)        == type         <span class="hljs-comment"># Type is an instance of type.</span>
 </code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃
@@ -1482,8 +1481,8 @@ type(type)        == type         <span class="hljs-comment"># Type is an instan
 ┗━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
 <h3 id="inheritancediagram">Inheritance Diagram</h3>
-<pre><code class="python language-python hljs">MyClass.__base__  == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
-object.__base__   == <span class="hljs-keyword">None</span>         <span class="hljs-comment"># Object is a subclass to no one.</span>
+<pre><code class="python language-python hljs">MyClass.__base__     == object    <span class="hljs-comment"># MyClass is a subclass of object.</span>
+MyMetaClass.__base__ == type      <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
 </code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃

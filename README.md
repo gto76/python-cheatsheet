@@ -1725,7 +1725,6 @@ class MyClass(metaclass=MyMetaClass):
 ```python
 type(MyClass)     == MyMetaClass  # MyClass is an instance of MyMetaClass.
 type(MyMetaClass) == type         # MyMetaClass is an instance of type.
-type(type)        == type         # Type is an instance of type.
 ```
 
 ```text
@@ -1742,8 +1741,8 @@ type(type)        == type         # Type is an instance of type.
 
 ### Inheritance Diagram
 ```python
-MyClass.__base__  == object       # MyClass is a subclass of object.
-object.__base__   == None         # Object is a subclass to no one.
+MyClass.__base__     == object    # MyClass is a subclass of object.
+MyMetaClass.__base__ == type      # MyMetaClass is a subclass of type.
 ```
 
 ```text
