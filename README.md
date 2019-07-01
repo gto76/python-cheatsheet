@@ -563,7 +563,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
 <DTa>    = DT.now(<tzinfo>)                 # Aware datetime from current tz time.
 ```
-* **To extract time use `'<DTn>.time()'` or `'<DTa>.timetz()'`.**
+* **To extract time use `'<DTn>.time()'`, `'<DTa>.time()'` or `'<DTa>.timetz()'`.**
 
 ### Timezone
 ```python
@@ -581,8 +581,9 @@ from dateutil.tz import UTC, tzlocal, gettz
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
-<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # DTa from seconds since Epoch in tz time.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ, at midnight.
+<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since Epoch.
+<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`. Offset is formatted as: `'HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -592,7 +593,8 @@ from dateutil.tz import UTC, tzlocal, gettz
 <str>    = <D/T/DT>.isoformat()             # ISO string representation.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
-<float>  = <DT>.timestamp()                 # Seconds since Epoch in local time or tz.
+<float>  = <DTn>.timestamp()                # Seconds since Epoch from DTn in local time.
+<float>  = <DTa>.timestamp()                # Seconds since Epoch from DTa.
 ```
 
 ### Format

@@ -602,7 +602,7 @@ shuffle(&lt;list&gt;)
 &lt;DTa&gt;    = DT.now(&lt;tzinfo&gt;)                 <span class="hljs-comment"># Aware datetime from current tz time.</span>
 </code></pre>
 <ul>
-<li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
+<li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
 </ul>
 <h3 id="timezone">Timezone</h3>
 <pre><code class="python language-python hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
@@ -615,18 +615,20 @@ shuffle(&lt;list&gt;)
 <h3 id="encode">Encode</h3>
 <pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
-&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ.</span>
-&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
+&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ, at midnight.</span>
+&lt;DTn&gt;    = DT.fromtimestamp(&lt;real&gt;)         <span class="hljs-comment"># Local time DTn from seconds since Epoch.</span>
+&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># Aware datetime from seconds since Epoch.</span>
 </code></pre>
 <ul>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[±&lt;offset&gt;]'</span></code>, or both separated by <code class="python hljs"><span class="hljs-string">'T'</span></code>. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'HH:MM'</span></code>.</strong></li>
 <li><strong>On Unix systems Epoch is <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
 <h3 id="decode">Decode</h3>
-<pre><code class="python language-python apache hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat()             <span class="hljs-comment"># ISO string representation.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat()             <span class="hljs-comment"># ISO string representation.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Christ, ignoring time and tz.</span>
-&lt;float&gt;  = &lt;DT&gt;.timestamp()                 <span class="hljs-comment"># Seconds since Epoch in local time or tz.</span>
+&lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since Epoch from DTn in local time.</span>
+&lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since Epoch from DTa.</span>
 </code></pre>
 <h3 id="format-1">Format</h3>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
