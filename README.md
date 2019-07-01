@@ -1263,7 +1263,7 @@ Open
 ```python
 <file> = open('<path>', mode='r', encoding=None, endline=None)
 ```
-* **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `"encoding='utf-8'"` whenever possible.**
+* **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'endline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 
 ### Modes
@@ -1318,21 +1318,26 @@ Path
 ----
 ```python
 from os import path, listdir
-<bool> = path.exists('<path>')
-<bool> = path.isfile('<path>')
-<bool> = path.isdir('<path>')
-<list> = listdir('<path>')
+from glob import glob
 ```
 
 ```python
->>> from glob import glob
->>> glob('../*.gif')
-['1.gif', 'card.gif']
+<bool> = path.exists('<path>')
+<bool> = path.isfile('<path>')
+<bool> = path.isdir('<path>')
+```
+
+```python
+<list> = listdir('<path>')         # List of filenames located at 'path'. 
+<list> = glob('<pattern>')         # Filenames matching the wildcard pattern.
 ```
 
 ### Pathlib
 ```python
 from pathlib import Path
+```
+
+```python
 cwd    = Path()
 <Path> = Path('<path>' [, '<path>', <Path>, ...])
 <Path> = <Path> / '<dir>' / '<file>'
@@ -1342,11 +1347,11 @@ cwd    = Path()
 <bool> = <Path>.exists()
 <bool> = <Path>.is_file()
 <bool> = <Path>.is_dir()
-<iter> = <Path>.iterdir()
 ```
 
 ```python
-<iter> = <Path>.glob('<pattern>')
+<iter> = <Path>.iterdir()          # Iterator with filenames located at path.
+<iter> = <Path>.glob('<pattern>')  # Filenames matching the wildcard pattern.
 ```
 
 ```python

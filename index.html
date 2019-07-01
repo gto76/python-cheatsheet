@@ -1144,7 +1144,7 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, endline=<span class="hljs-keyword">None</span>)
 </code></pre>
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">"encoding='utf-8'"</span></code> whenever possible.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'endline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 </ul>
 <h3 id="modes">Modes</h3>
@@ -1189,27 +1189,28 @@ value = args.&lt;name&gt;
 </code></pre>
 <h2 id="path"><a href="#path" name="path">#</a>Path</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> path, listdir
-&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
+<span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
+</code></pre>
+<pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
-&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
-<span class="hljs-meta">&gt;&gt;&gt; </span>glob(<span class="hljs-string">'../*.gif'</span>)
-[<span class="hljs-string">'1.gif'</span>, <span class="hljs-string">'card.gif'</span>]
+<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># List of filenames located at 'path'. </span>
+&lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)         <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <h3 id="pathlib">Pathlib</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
-cwd    = Path()
+</code></pre>
+<pre><code class="python language-python hljs">cwd    = Path()
 &lt;Path&gt; = Path(<span class="hljs-string">'&lt;path&gt;'</span> [, <span class="hljs-string">'&lt;path&gt;'</span>, &lt;Path&gt;, ...])
 &lt;Path&gt; = &lt;Path&gt; / <span class="hljs-string">'&lt;dir&gt;'</span> / <span class="hljs-string">'&lt;file&gt;'</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Path&gt;.exists()
 &lt;bool&gt; = &lt;Path&gt;.is_file()
 &lt;bool&gt; = &lt;Path&gt;.is_dir()
-&lt;iter&gt; = &lt;Path&gt;.iterdir()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Iterator with filenames located at path.</span>
+&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)               <span class="hljs-comment"># Returns path as a string.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts              <span class="hljs-comment"># Returns all components as strings.</span>
