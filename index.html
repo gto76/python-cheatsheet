@@ -1162,7 +1162,8 @@ value = args.&lt;name&gt;
 <h3 id="file">File</h3>
 <pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
-&lt;file&gt;.seek(offset, &lt;anchor&gt;)       <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
+&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
+&lt;bin_file&gt;.seek(±offset, &lt;anchor&gt;)  <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line.</span>
@@ -1170,11 +1171,11 @@ value = args.&lt;name&gt;
 &lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
-&lt;file&gt;.writelines(&lt;list&gt;)           <span class="hljs-comment"># Writes a list of strings or bytes objects.</span>
+&lt;file&gt;.writelines(&lt;coll.&gt;)          <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer.</span>
 </code></pre>
 <ul>
-<li><strong>Methods do not add or strip trailing newlines.</strong></li>
+<li><strong>Methods do not add or strip trailing newlines, even writelines().</strong></li>
 </ul>
 <h3 id="readtextfromfile">Read Text from File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_file</span><span class="hljs-params">(filename)</span>:</span>
