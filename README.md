@@ -902,6 +902,22 @@ class <name>:
 * **Return value of repr() should be unambiguous and of str() readable.**
 * **If only repr() is defined, it will also be used for str().**
 
+#### Str() is used by:
+```python
+print(<el>)
+f'{<el>}'
+raise Exception(<el>)
+logging.debug(<el>)
+```
+
+#### Repr() is used by:
+```python
+print([<el>])
+f'{<el>!r}'
+>>> <el>
+loguru.logger.exception()
+```
+
 ### Constructor Overloading
 ```python
 class <name>:

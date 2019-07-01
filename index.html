@@ -855,6 +855,18 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
+<h4 id="strisusedby">Str() is used by:</h4>
+<pre><code class="python language-python hljs">print(&lt;el&gt;)
+<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
+<span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
+logging.debug(&lt;el&gt;)
+</code></pre>
+<h4 id="reprisusedby">Repr() is used by:</h4>
+<pre><code class="python language-python hljs">print([&lt;el&gt;])
+<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
+loguru.logger.exception()
+</code></pre>
 <h3 id="constructoroverloading">Constructor Overloading</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=None)</span>:</span>
