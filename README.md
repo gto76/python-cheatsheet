@@ -1709,7 +1709,7 @@ class MyMetaClass(type):
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute
-**When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
@@ -1721,7 +1721,13 @@ class MyClass(metaclass=MyMetaClass):
 ('abcde', 12345)
 ```
 
-#### Type diagram (str is an instance of type, ...):
+### Type Diagram
+```python
+type(MyClass)     == MyMetaClass  # MyClass is an instance of MyMetaClass.
+type(MyMetaClass) == type         # MyMetaClass is an instance of type.
+type(type)        == type         # Type is an instance of type.
+```
+
 ```text
 +---------+-------------+
 | Classes | Metaclasses |
@@ -1734,7 +1740,12 @@ class MyClass(metaclass=MyMetaClass):
 +---------+-------------+
 ```
 
-#### Inheritance diagram (str is a subclass of object, ...):
+### Inheritance Diagram
+```python
+MyClass.__base__  == object       # MyClass is a subclass of object.
+object.__base__   == None         # Object is a subclass to no one.
+```
+
 ```text
 +---------+-------------+
 | Classes | Metaclasses |

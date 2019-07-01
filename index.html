@@ -1459,14 +1459,18 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <li><strong>New() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>), in which case init() is not called.</strong></li>
 </ul>
 <h3 id="metaclassattribute">Metaclass Attribute</h3>
-<p><strong>When class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p>
+<p><strong>Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
     b = <span class="hljs-number">12345</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>MyClass.a, MyClass.b
 (<span class="hljs-string">'abcde'</span>, <span class="hljs-number">12345</span>)
 </code></pre>
-<h4 id="typediagramstrisaninstanceoftype">Type diagram (str is an instance of type, …):</h4>
+<h3 id="typediagram">Type Diagram</h3>
+<pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass  <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
+type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
+type(type)        == type         <span class="hljs-comment"># Type is an instance of type.</span>
+</code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃
 ┠─────────┼─────────────┨
@@ -1477,7 +1481,10 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 ┃   str ───────╯        ┃
 ┗━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
-<h4 id="inheritancediagramstrisasubclassofobject">Inheritance diagram (str is a subclass of object, …):</h4>
+<h3 id="inheritancediagram">Inheritance Diagram</h3>
+<pre><code class="python language-python hljs">MyClass.__base__  == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
+object.__base__   == <span class="hljs-keyword">None</span>         <span class="hljs-comment"># Object is a subclass to no one.</span>
+</code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃ Classes │ Metaclasses ┃
 ┠─────────┼─────────────┨
