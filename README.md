@@ -605,6 +605,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
 * **For abbreviated weekday and month use `'%a'` and `'%b'`.**
+* **When parsing, `'%z'` also accepts `'±HH:MM'`.**
 
 ### Arithmetics
 ```python
