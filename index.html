@@ -599,21 +599,24 @@ shuffle(&lt;list&gt;)
 <h3 id="now">Now</h3>
 <pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
-&lt;DTa&gt;    = DT.now(&lt;tz&gt;)                     <span class="hljs-comment"># Aware datetime from current tz time.</span>
+&lt;DTa&gt;    = DT.now(&lt;tzinfo&gt;)                 <span class="hljs-comment"># Aware datetime from current tz time.</span>
 </code></pre>
+<ul>
+<li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
+</ul>
 <h3 id="timezone">Timezone</h3>
-<pre><code class="python language-python hljs">&lt;tz&gt;     = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
-&lt;tz&gt;     = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
-&lt;tz&gt;     = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
+<pre><code class="python language-python hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
+&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
+&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
 </code></pre>
-<pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tz&gt;)            <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
-&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tz&gt;)      <span class="hljs-comment"># Unconverted object with new timezone.</span>
+<pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
+&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with new timezone.</span>
 </code></pre>
 <h3 id="encode">Encode</h3>
 <pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ.</span>
-&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz&gt;)   <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
+&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># DTa from seconds since Epoch in tz time.</span>
 </code></pre>
 <ul>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[±&lt;offset&gt;]'</span></code>, or both separated by <code class="python hljs"><span class="hljs-string">'T'</span></code>. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'HH:MM'</span></code>.</strong></li>
@@ -631,11 +634,15 @@ shuffle(&lt;list&gt;)
 <span class="hljs-meta">&gt;&gt;&gt; </span>dt.strftime(<span class="hljs-string">"%A, %dth of %B '%y, %I:%M%p %Z"</span>)
 <span class="hljs-string">"Thursday, 14th of May '15, 11:39PM UTC+02:00"</span>
 </code></pre>
-<h4 id="restofthecodes">Rest of the codes:</h4>
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code> - Weekday, abbreviated name.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - Month, abbreviated name.</strong></li>
+<li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
+<h3 id="arithmetics">Arithmetics</h3>
+<pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt; ±  &lt;TD&gt;
+&lt;TD&gt;     = &lt;TD&gt;   ±  &lt;TD&gt;
+&lt;TD&gt;     = &lt;TD&gt;   */ &lt;real&gt;
+&lt;float&gt;  = &lt;TD&gt;   /  &lt;TD&gt;
+</code></pre>
 <h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2>
 <h3 id="insidefunctioncall">Inside Function Call</h3>
 <pre><code class="python language-python hljs">&lt;function&gt;(&lt;positional_args&gt;)                  <span class="hljs-comment"># f(0, 0)</span>
@@ -1209,7 +1216,7 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = &lt;Path&gt;.is_file()
 &lt;bool&gt; = &lt;Path&gt;.is_dir()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Iterator with filenames located at path.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Iterator of filenames located at path.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)               <span class="hljs-comment"># Returns path as a string.</span>

@@ -561,19 +561,20 @@ from dateutil.tz import UTC, tzlocal, gettz
 ```python
 <D/DTn>  = D/DT.today()                     # Current local date or naive datetime.
 <DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
-<DTa>    = DT.now(<tz>)                     # Aware datetime from current tz time.
+<DTa>    = DT.now(<tzinfo>)                 # Aware datetime from current tz time.
 ```
+* **To extract time use `'<DTn>.time()'` or `'<DTa>.timetz()'`.**
 
 ### Timezone
 ```python
-<tz>     = UTC                              # UTC timezone. London without DST.
-<tz>     = tzlocal()                        # Local timezone.
-<tz>     = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
+<tzinfo> = UTC                              # UTC timezone. London without DST.
+<tzinfo> = tzlocal()                        # Local timezone.
+<tzinfo> = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
 ```
 
 ```python
-<DTa>    = <DT>.astimezone(<tz>)            # Datetime, converted to passed timezone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tz>)      # Unconverted object with new timezone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
 ```
 
 ### Encode
@@ -581,7 +582,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ.
-<DTa>    = DT.fromtimestamp(<real>, <tz>)   # DTa from seconds since Epoch in tz time.
+<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # DTa from seconds since Epoch in tz time.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by `'T'`. Offset is formatted as: `'HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -601,10 +602,15 @@ from dateutil.tz import UTC, tzlocal, gettz
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
+* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
-#### Rest of the codes:
-* **`'a'` - Weekday, abbreviated name.**
-* **`'b'` - Month, abbreviated name.**
+### Arithmetics
+```python
+<D/DT>   = <D/DT> ±  <TD>
+<TD>     = <TD>   ±  <TD>
+<TD>     = <TD>   */ <real>
+<float>  = <TD>   /  <TD>
+```
 
 
 Arguments
@@ -1350,7 +1356,7 @@ cwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.iterdir()          # Iterator with filenames located at path.
+<iter> = <Path>.iterdir()          # Iterator of filenames located at path.
 <iter> = <Path>.glob('<pattern>')  # Filenames matching the wildcard pattern.
 ```
 
