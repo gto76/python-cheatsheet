@@ -888,6 +888,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
 <span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
 logging.debug(&lt;el&gt;)
+csv.writer(&lt;file&gt;).writerow([&lt;el&gt;])
 </code></pre>
 <h4 id="reprisusedby">Repr() is used by:</h4>
 <pre><code class="python language-python hljs">print([&lt;el&gt;])
@@ -1181,11 +1182,11 @@ value = args.&lt;name&gt;
 </ul>
 <h2 id="open"><a href="#open" name="open">#</a>Open</h2>
 <p><strong>Opens a file and returns a corresponding file object.</strong></p>
-<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, endline=<span class="hljs-keyword">None</span>)
+<pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'endline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 </ul>
 <h3 id="modes">Modes</h3>
 <ul>
@@ -1278,12 +1279,12 @@ value = args.&lt;name&gt;
 </code></pre>
 <h3 id="readrowsfromcsvfile">Read Rows from CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_csv_file</span><span class="hljs-params">(filename)</span>:</span>
-    <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
         <span class="hljs-keyword">return</span> csv.reader(file, delimiter=<span class="hljs-string">';'</span>)
 </code></pre>
 <h3 id="writerowstocsvfile">Write Rows to CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows)</span>:</span>
-    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
         writer = csv.writer(file, delimiter=<span class="hljs-string">';'</span>)
         writer.writerows(rows)
 </code></pre>

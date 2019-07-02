@@ -935,6 +935,7 @@ print(<el>)
 f'{<el>}'
 raise Exception(<el>)
 logging.debug(<el>)
+csv.writer(<file>).writerow([<el>])
 ```
 
 #### Repr() is used by:
@@ -1304,10 +1305,10 @@ Open
 **Opens a file and returns a corresponding file object.**
 
 ```python
-<file> = open('<path>', mode='r', encoding=None, endline=None)
+<file> = open('<path>', mode='r', encoding=None, newline=None)
 ```
 * **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
-* **`'endline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
+* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 
 ### Modes
 * **`'r'`  - Read (default).**
@@ -1438,14 +1439,14 @@ import csv
 ### Read Rows from CSV File
 ```python
 def read_csv_file(filename):
-    with open(filename, encoding='utf-8') as file:
+    with open(filename, encoding='utf-8', newline='') as file:
         return csv.reader(file, delimiter=';')
 ```
 
 ### Write Rows to CSV File
 ```python
 def write_to_csv_file(filename, rows):
-    with open(filename, 'w', encoding='utf-8') as file:
+    with open(filename, 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerows(rows)
 ```
