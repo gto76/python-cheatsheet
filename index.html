@@ -1187,6 +1187,7 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but lines are still broken on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
 <h3 id="modes">Modes</h3>
 <ul>
