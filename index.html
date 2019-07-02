@@ -1324,7 +1324,7 @@ value = args.&lt;name&gt;
 </code></pre>
 <h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)
+db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)   <span class="hljs-comment"># Also ':memory:'.</span>
 ...
 db.close()
 </code></pre>
@@ -1334,10 +1334,20 @@ db.close()
     &lt;tuple&gt; = cursor.fetchone()  <span class="hljs-comment"># First row.</span>
     &lt;list&gt;  = cursor.fetchall()  <span class="hljs-comment"># Remaining rows.</span>
 </code></pre>
+<ul>
+<li><strong>Returned values can be of type str, int, float or bytes.</strong></li>
+</ul>
 <h3 id="write">Write</h3>
 <pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 db.commit()
 </code></pre>
+<h3 id="placeholders">Placeholders</h3>
+<pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '?' in query with value.</span>
+db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces ':&lt;key&gt;' with value.</span>
+</code></pre>
+<ul>
+<li><strong>Passed values can be of type str, int, float, bytes, bool, datetime.date and datetime.datetme.</strong></li>
+</ul>
 <h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2>
 <p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.</strong></p>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00 - \xff.</span>

@@ -1504,7 +1504,7 @@ SQLite
 ------
 ```python
 import sqlite3
-db = sqlite3.connect('<path>')
+db = sqlite3.connect('<path>')   # Also ':memory:'.
 ...
 db.close()
 ```
@@ -1516,12 +1516,20 @@ if cursor:
     <tuple> = cursor.fetchone()  # First row.
     <list>  = cursor.fetchall()  # Remaining rows.
 ```
+* **Returned values can be of type str, int, float or bytes.**
 
 ### Write
 ```python
 db.execute('<query>')
 db.commit()
 ```
+
+### Placeholders
+```python
+db.execute('<query>', <list/tuple>)       # Replaces '?' in query with value.
+db.execute('<query>', <dict/namedtuple>)  # Replaces ':<key>' with value.
+```
+* **Passed values can be of type str, int, float, bytes, bool, datetime.date and datetime.datetme.**
 
 
 Bytes
