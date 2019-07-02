@@ -883,18 +883,19 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
-<h4 id="strisusedby">Str() is used by:</h4>
+<h4 id="strusecases">Str() use cases:</h4>
 <pre><code class="python language-python hljs">print(&lt;el&gt;)
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
+print(<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>)
 <span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
 logging.debug(&lt;el&gt;)
 csv.writer(&lt;file&gt;).writerow([&lt;el&gt;])
 </code></pre>
-<h4 id="reprisusedby">Repr() is used by:</h4>
+<h4 id="reprusecases">Repr() use cases:</h4>
 <pre><code class="python language-python hljs">print([&lt;el&gt;])
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>
+print(<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
 loguru.logger.exception()
+Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print(Z(&lt;el&gt;))
 </code></pre>
 <h3 id="constructoroverloading">Constructor Overloading</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
@@ -1323,11 +1324,15 @@ value = args.&lt;name&gt;
         pickle.dump(an_object, file)
 </code></pre>
 <h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2>
+<p><strong>Server-less database engine that stores each database into separate file.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
 db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)   <span class="hljs-comment"># Also ':memory:'.</span>
 ...
 db.close()
 </code></pre>
+<ul>
+<li><strong>New database will be created if path doesn't exist.</strong></li>
+</ul>
 <h3 id="read">Read</h3>
 <pre><code class="python language-python hljs">cursor = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 <span class="hljs-keyword">if</span> cursor:
@@ -1335,19 +1340,27 @@ db.close()
     &lt;list&gt;  = cursor.fetchall()  <span class="hljs-comment"># Remaining rows.</span>
 </code></pre>
 <ul>
-<li><strong>Returned values can be of type str, int, float or bytes.</strong></li>
+<li><strong>Returned values can be of type str, int, float, bytes or None.</strong></li>
 </ul>
 <h3 id="write">Write</h3>
 <pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 db.commit()
 </code></pre>
 <h3 id="placeholders">Placeholders</h3>
-<pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '?' in query with value.</span>
-db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces ':&lt;key&gt;' with value.</span>
+<pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)         <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)    <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)  <span class="hljs-comment"># Runs execute() many times.</span>
 </code></pre>
 <ul>
-<li><strong>Passed values can be of type str, int, float, bytes, bool, datetime.date and datetime.datetme.</strong></li>
+<li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
 </ul>
+<h3 id="mysql">MySQL</h3>
+<pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install mysql-connector</span>
+<span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
+db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;)
+cursor = db.cursor()
+cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
+</code></pre>
 <h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2>
 <p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.</strong></p>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00 - \xff.</span>

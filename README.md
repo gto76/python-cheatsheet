@@ -929,21 +929,22 @@ class <name>:
 * **Return value of repr() should be unambiguous and of str() readable.**
 * **If only repr() is defined, it will also be used for str().**
 
-#### Str() is used by:
+#### Str() use cases:
 ```python
 print(<el>)
-f'{<el>}'
+print(f'{<el>}')
 raise Exception(<el>)
 logging.debug(<el>)
 csv.writer(<file>).writerow([<el>])
 ```
 
-#### Repr() is used by:
+#### Repr() use cases:
 ```python
 print([<el>])
-f'{<el>!r}'
+print(f'{<el>!r}')
 >>> <el>
 loguru.logger.exception()
+Z = dataclasses.make_dataclass('Z', ['a']); print(Z(<el>))
 ```
 
 ### Constructor Overloading
@@ -1502,12 +1503,14 @@ def write_to_pickle_file(filename, an_object):
 
 SQLite
 ------
+**Server-less database engine that stores each database into separate file.**
 ```python
 import sqlite3
 db = sqlite3.connect('<path>')   # Also ':memory:'.
 ...
 db.close()
 ```
+* **New database will be created if path doesn't exist.**
 
 ### Read
 ```python
@@ -1516,7 +1519,7 @@ if cursor:
     <tuple> = cursor.fetchone()  # First row.
     <list>  = cursor.fetchall()  # Remaining rows.
 ```
-* **Returned values can be of type str, int, float or bytes.**
+* **Returned values can be of type str, int, float, bytes or None.**
 
 ### Write
 ```python
@@ -1526,10 +1529,20 @@ db.commit()
 
 ### Placeholders
 ```python
-db.execute('<query>', <list/tuple>)       # Replaces '?' in query with value.
-db.execute('<query>', <dict/namedtuple>)  # Replaces ':<key>' with value.
+db.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
+db.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
+db.executemany('<query>', <coll_of_above>)  # Runs execute() many times.
 ```
-* **Passed values can be of type str, int, float, bytes, bool, datetime.date and datetime.datetme.**
+* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
+
+### MySQL
+```python
+# $ pip3 install mysql-connector
+from mysql import connector
+db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
+cursor = db.cursor()
+cursor.execute('<query>')
+```
 
 
 Bytes
