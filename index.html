@@ -1613,7 +1613,7 @@ pyplot.show()
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate
 <span class="hljs-keyword">import</span> csv
-<span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
+<span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
     lines   = csv.reader(file, delimiter=<span class="hljs-string">';'</span>)
     headers = [header.title() <span class="hljs-keyword">for</span> header <span class="hljs-keyword">in</span> next(lines)]
     table   = tabulate(lines, headers)

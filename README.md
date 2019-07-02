@@ -1905,7 +1905,7 @@ Table
 # $ pip3 install tabulate
 from tabulate import tabulate
 import csv
-with open(<filename>, encoding='utf-8') as file:
+with open(<filename>, encoding='utf-8', newline='') as file:
     lines   = csv.reader(file, delimiter=';')
     headers = [header.title() for header in next(lines)]
     table   = tabulate(lines, headers)
