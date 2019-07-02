@@ -441,8 +441,8 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt;  = re.finditer(&lt;regex&gt;, text)           <span class="hljs-comment"># Returns all occurrences as match objects.</span>
 </code></pre>
 <ul>
-<li><strong>Parameter <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
-<li><strong>Parameter <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept newline.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept newline.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'?'</span></code> to make an operator non-greedy.</strong></li>
 </ul>
@@ -454,7 +454,10 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;int&gt;   = &lt;Match&gt;.end()     <span class="hljs-comment"># Exclusive end index of a match.</span>
 </code></pre>
 <h3 id="specialsequences">Special Sequences</h3>
-<p><strong>Expressions below hold true for strings that contain only ASCII characters. Use capital letters for negation.</strong></p>
+<ul>
+<li><strong>By default digits, whitespaces and alphanumerics from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
+<li><strong>Use capital letters for negation.</strong></li>
+</ul>
 <pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>             <span class="hljs-comment"># Digit</span>
 <span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>     <span class="hljs-comment"># Whitespace</span>
 <span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>      <span class="hljs-comment"># Alphanumeric</span>
@@ -1654,7 +1657,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
     logger.exception(<span class="hljs-string">'An error happened.'</span>)
 </code></pre>
 <h3 id="rotation">Rotation</h3>
-<p><strong>Parameter that sets a condition when a new log file is created.</strong></p>
+<p><strong>Argument that sets a condition when a new log file is created.</strong></p>
 <pre><code class="python language-python hljs">rotation=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;datetime.time&gt;|&lt;str&gt;
 </code></pre>
 <ul>

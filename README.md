@@ -350,8 +350,8 @@ import re
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
-* **Parameter `'flags=re.IGNORECASE'` can be used with all functions.**
-* **Parameter `'flags=re.DOTALL'` makes dot also accept newline.**
+* **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
+* **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
 * **Use `r'\1'` or `'\\1'` for backreference.**
 * **Use `'?'` to make an operator non-greedy.**
 
@@ -365,7 +365,8 @@ import re
 ```
 
 ### Special Sequences
-**Expressions below hold true for strings that contain only ASCII characters. Use capital letters for negation.**
+* **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
+* **Use capital letters for negation.**
 ```python
 '\d' == '[0-9]'             # Digit
 '\s' == '[ \t\n\r\f\v]'     # Whitespace
@@ -1960,7 +1961,7 @@ except <exception>:
 ```
 
 ### Rotation
-**Parameter that sets a condition when a new log file is created.**
+**Argument that sets a condition when a new log file is created.**
 ```python
 rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 ```
