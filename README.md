@@ -468,7 +468,7 @@ Numbers
 <num>  = pow(<num>, <num>)            # Or: <num> ** <num>
 <real> = abs(<num>)
 <int>  = round(<real>)
-<real> = round(<real>, ±ndigits)
+<real> = round(<real>, ±ndigits)      # `round(126, -1) == 130`
 ```
 
 ### Math
@@ -1633,9 +1633,6 @@ from collections import deque
 ```python
 <deque>.appendleft(<el>)
 <el> = <deque>.popleft()
-```
-
-```python
 <deque>.extendleft(<collection>)  # Collection gets reversed.
 <deque>.rotate(n=1)               # Rotates elements to the right.
 ```
@@ -1675,6 +1672,7 @@ lock.release()
 
 #### Or:
 ```python
+lock = RLock()
 with lock:
     ...
 ```

@@ -532,7 +532,7 @@ to_exclusive   = &lt;range&gt;.stop
 <pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)            <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
 &lt;real&gt; = abs(&lt;num&gt;)
 &lt;int&gt;  = round(&lt;real&gt;)
-&lt;real&gt; = round(&lt;real&gt;, ±ndigits)
+&lt;real&gt; = round(&lt;real&gt;, ±ndigits)      <span class="hljs-comment"># `round(126, -1) == 130`</span>
 </code></pre>
 <h3 id="math">Math</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan
@@ -1412,8 +1412,7 @@ db.commit()
 </code></pre>
 <pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)
 &lt;el&gt; = &lt;deque&gt;.popleft()
-</code></pre>
-<pre><code class="python language-python hljs">&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Collection gets reversed.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Collection gets reversed.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>a = deque([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], maxlen=<span class="hljs-number">3</span>)
@@ -1440,7 +1439,8 @@ lock.acquire()
 lock.release()
 </code></pre>
 <h4 id="or">Or:</h4>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> lock:
+<pre><code class="python language-python hljs">lock = RLock()
+<span class="hljs-keyword">with</span> lock:
     ...
 </code></pre>
 <h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2>
