@@ -1309,7 +1309,7 @@ Open
 ```
 * **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
-* **`'newline=""'` means no conversions take place, but lines are still broken on either '\n', '\r' or '\r\n'.**
+* **`'newline=""'` means no conversions take place, but lines are still broken by readline() on either '\n', '\r' or '\r\n'.**
 
 ### Modes
 * **`'r'`  - Read (default).**
