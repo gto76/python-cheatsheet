@@ -1443,6 +1443,7 @@ def read_csv_file(filename):
     with open(filename, encoding='utf-8', newline='') as file:
         return csv.reader(file, delimiter=';')
 ```
+* **If `'newline=""'` is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.**
 
 ### Write Rows to CSV File
 ```python

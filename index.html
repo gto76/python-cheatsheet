@@ -1283,6 +1283,9 @@ value = args.&lt;name&gt;
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
         <span class="hljs-keyword">return</span> csv.reader(file, delimiter=<span class="hljs-string">';'</span>)
 </code></pre>
+<ul>
+<li><strong>If <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.</strong></li>
+</ul>
 <h3 id="writerowstocsvfile">Write Rows to CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
