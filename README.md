@@ -357,7 +357,7 @@ import re
 
 ### Match Object
 ```python
-<str>   = <Match>.group()   # Whole match.
+<str>   = <Match>.group()   # Whole match. Also group(0).
 <str>   = <Match>.group(1)  # Part in first bracket.
 <tuple> = <Match>.groups()  # All bracketed parts.
 <int>   = <Match>.start()   # Start index of a match.

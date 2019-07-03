@@ -447,7 +447,7 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'?'</span></code> to make an operator non-greedy.</strong></li>
 </ul>
 <h3 id="matchobject">Match Object</h3>
-<pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()   <span class="hljs-comment"># Whole match.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()   <span class="hljs-comment"># Whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)  <span class="hljs-comment"># Part in first bracket.</span>
 &lt;tuple&gt; = &lt;Match&gt;.groups()  <span class="hljs-comment"># All bracketed parts.</span>
 &lt;int&gt;   = &lt;Match&gt;.start()   <span class="hljs-comment"># Start index of a match.</span>
