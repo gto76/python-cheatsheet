@@ -586,7 +586,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 ### Timezone
 ```python
 <tzinfo> = UTC                              # UTC timezone. London without DST.
-<tzinfo> = tzlocal()                        # Local timezone.
+<tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
 ```
 
@@ -1177,6 +1177,9 @@ class <enum_name>(Enum):
     def get_member_names(cls):
         return [a.name for a in cls.__members__.values()]
 ```
+* **If there are no numeric values before auto(), it returns 1.**
+* **Otherwise it returns an increment of last numeric value.**
+
 
 ```python
 <member> = <enum>.<member_name>

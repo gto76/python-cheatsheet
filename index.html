@@ -624,7 +624,7 @@ shuffle(&lt;list&gt;)
 </ul>
 <h3 id="timezone">Timezone</h3>
 <pre><code class="python language-python hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
-&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone.</span>
+&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone. Also gettz().</span>
 &lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
 </code></pre>
 <pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
@@ -1090,6 +1090,10 @@ Hello World!
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_member_names</span><span class="hljs-params">(cls)</span>:</span>
         <span class="hljs-keyword">return</span> [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> cls.__members__.values()]
 </code></pre>
+<ul>
+<li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
+<li><strong>Otherwise it returns an increment of last numeric value.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;
 &lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]
 &lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)
