@@ -1139,6 +1139,7 @@ KeyboardInterrupt
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> for errors.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> to forcibly flush the stream.</strong></li>
 </ul>
 <h3 id="prettyprint">Pretty Print</h3>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
@@ -1395,11 +1396,11 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 </code></pre>
 <h2 id="struct"><a href="#struct" name="struct">#</a>Struct</h2>
 <ul>
-<li><strong>Module that performs conversions between Python values and a C struct, represented as a Python bytes object.</strong></li>
+<li><strong>Module that performs conversions between a sequence of numbers and a C struct, represented as a Python bytes object.</strong></li>
 <li><strong>Machine’s native type sizes and byte order are used by default.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack, iter_unpack, calcsize
-&lt;bytes&gt;  = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;value_1&gt; [, &lt;value_2&gt;, ...])
+&lt;bytes&gt;  = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;num_1&gt; [, &lt;num_2&gt;, ...])
 &lt;tuple&gt;  = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
 &lt;tuples&gt; = iter_unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
 </code></pre>
@@ -1418,7 +1419,7 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian</strong></li>
 </ul>
-<h4 id="usecapitalletterforunsignedtypestandardsizesareinbrackets">Use capital letter for unsigned type. Standard sizes are in brackets:</h4>
+<h4 id="integertypesusecapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:</h4>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
@@ -1426,11 +1427,14 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 <li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8)</strong></li>
+</ul>
+<h4 id="floatingpointtypes">Floating point types:</h4>
+<ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8)</strong></li>
 </ul>
 <h2 id="array"><a href="#array" name="array">#</a>Array</h2>
-<p><strong>List that can hold only elements of predefined type. Available types and their sizes are listed above.</strong></p>
+<p><strong>List that can only hold numbers of predefined type. Available types and their sizes in bytes are listed above.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span> [, &lt;collection&gt;])
 </code></pre>
@@ -1454,7 +1458,7 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>a.appendleft(<span class="hljs-number">5</span>)
 [<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>a.insert(<span class="hljs-number">6</span>, <span class="hljs-number">1</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>a.insert(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)
 IndexError: deque already at its maximum size
 </code></pre>
 <h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2>

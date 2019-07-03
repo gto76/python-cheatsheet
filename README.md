@@ -1246,6 +1246,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 
 * **Use `'file=sys.stderr'` for errors.**
+* **Use `'flush=True'` to forcibly flush the stream.**
 
 ### Pretty Print
 ```python
@@ -1592,12 +1593,12 @@ def write_bytes(filename, bytes_obj):
 
 Struct
 ------
-* **Module that performs conversions between Python values and a C struct, represented as a Python bytes object.**
+* **Module that performs conversions between a sequence of numbers and a C struct, represented as a Python bytes object.**
 * **Machine’s native type sizes and byte order are used by default.**
 
 ```python
 from struct import pack, unpack, iter_unpack, calcsize
-<bytes>  = pack('<format>', <value_1> [, <value_2>, ...])
+<bytes>  = pack('<format>', <num_1> [, <num_2>, ...])
 <tuple>  = unpack('<format>', <bytes>)
 <tuples> = iter_unpack('<format>', <bytes>)
 ```
@@ -1618,20 +1619,22 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - little-endian**
 * **`'>'` - big-endian**
 
-#### Use capital letter for unsigned type. Standard sizes are in brackets:
+#### Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:
 * **`'x'` - pad byte**
 * **`'b'` - char (1)**
 * **`'h'` - short (2)**
 * **`'i'` - int (4)**
 * **`'l'` - long (4)**
 * **`'q'` - long long (8)**
+
+#### Floating point types:
 * **`'f'` - float (4)**
 * **`'d'` - double (8)**
 
 
 Array
 -----
-**List that can hold only elements of predefined type. Available types and their sizes are listed above.**
+**List that can only hold numbers of predefined type. Available types and their sizes in bytes are listed above.**
 
 ```python
 from array import array
@@ -1671,7 +1674,7 @@ from collections import deque
 [2, 3, 4]
 >>> a.appendleft(5)
 [5, 2, 3]
->>> a.insert(6, 1)
+>>> a.insert(1, 6)
 IndexError: deque already at its maximum size
 ```
 
