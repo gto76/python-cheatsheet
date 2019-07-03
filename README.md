@@ -1536,12 +1536,15 @@ db.executemany('<query>', <coll_of_above>)  # Runs execute() many times.
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
 
 ### MySQL
+**Has a very similar interface, with differences listed below.**
 ```python
 # $ pip3 install mysql-connector
 from mysql import connector
 db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 cursor = db.cursor()
-cursor.execute('<query>')
+cursor.execute('<query>')                     # Connector doesn't have execute method.
+cursor.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
+cursor.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
 
 

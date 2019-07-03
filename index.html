@@ -1355,11 +1355,14 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
 </ul>
 <h3 id="mysql">MySQL</h3>
+<p><strong>Has a very similar interface, with differences listed below.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install mysql-connector</span>
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
 db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;)
 cursor = db.cursor()
-cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
+cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Connector doesn't have execute method.</span>
+cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '%s's in query with values.</span>
+cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces '%(&lt;key&gt;)s's with values.</span>
 </code></pre>
 <h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2>
 <p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.</strong></p>
