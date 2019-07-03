@@ -1745,7 +1745,7 @@ Metaprograming
 **Code that generates code.**
 
 ### Type
-**Type is the root class. If only passed the object it returns its type (class). Otherwise it creates a new class.**
+**Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.**
 
 ```python
 <class> = type(<class_name>, <parents_tuple>, <attributes_dict>)

@@ -1507,7 +1507,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2>
 <p><strong>Code that generates code.</strong></p>
 <h3 id="type-1">Type</h3>
-<p><strong>Type is the root class. If only passed the object it returns its type (class). Otherwise it creates a new class.</strong></p>
+<p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p>
 <pre><code class="python language-python hljs">&lt;<span class="hljs-class"><span class="hljs-keyword">class</span>&gt; = <span class="hljs-title">type</span><span class="hljs-params">(&lt;class_name&gt;, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</span>
 </span></code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Z = type(<span class="hljs-string">'Z'</span>, (), {<span class="hljs-string">'a'</span>: <span class="hljs-string">'abcde'</span>, <span class="hljs-string">'b'</span>: <span class="hljs-number">12345</span>})
