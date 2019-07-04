@@ -55,7 +55,6 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
-<bool> = <el> in <collection>  # For dictionary it checks if key exists.
 index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
@@ -309,7 +308,7 @@ String
 ```
 
 ```python
-<str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
+<bool> = <sub_str> in <str>                  # Checks if string contains a substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of first match or -1.
@@ -317,6 +316,7 @@ String
 ```
 
 ```python
+<str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <bool> = <str>.isnumeric()                   # True if str contains only numeric characters.
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```

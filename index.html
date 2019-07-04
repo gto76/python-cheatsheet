@@ -237,8 +237,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;el&gt; <span class="hljs-keyword">in</span> &lt;collection&gt;  <span class="hljs-comment"># For dictionary it checks if key exists.</span>
-index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
+<pre><code class="python language-python hljs">index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
 &lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
 &lt;el&gt; = &lt;list&gt;.pop([index])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
 &lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of item or raises ValueError.</span>
@@ -411,13 +410,14 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on line breaks. Keeps them if 'keepends'.</span>
 &lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as separator.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains a substring.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;bool&gt; = &lt;str&gt;.endswith(&lt;sub_str&gt;)           <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of first match or -1.</span>
 &lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># True if str contains only numeric characters.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
+&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># True if str contains only numeric characters.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
 <ul>
