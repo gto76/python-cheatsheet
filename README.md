@@ -1204,14 +1204,14 @@ class MyOpen():
 Hello World!
 ```
 
-#### List of context managers:
+#### Context managers:
 ```python
 with open('<path>', ...) as file: ...
 with wave.open('<path>', ...) as wave_file: ...
 with memoryview(<bytes/bytearray/array>) as view: ...
 ```
 
-#### List of reusable context managers:
+#### Reusable context managers:
 ```python
 lock = threading.RLock(); with lock: ...
 con  = sqlite3.connect('<path>'); with con: con.execute('<insert_query>')

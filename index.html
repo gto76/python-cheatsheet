@@ -1122,12 +1122,12 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">... </span>    print(file.read())
 Hello World!
 </code></pre>
-<h4 id="listofcontextmanagers">List of context managers:</h4>
+<h4 id="contextmanagers">Context managers:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> open(<span class="hljs-string">'&lt;path&gt;'</span>, ...) <span class="hljs-keyword">as</span> file: ...
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, ...) <span class="hljs-keyword">as</span> wave_file: ...
 <span class="hljs-keyword">with</span> memoryview(&lt;bytes/bytearray/array&gt;) <span class="hljs-keyword">as</span> view: ...
 </code></pre>
-<h4 id="listofreusablecontextmanagers">List of reusable context managers:</h4>
+<h4 id="reusablecontextmanagers">Reusable context managers:</h4>
 <pre><code class="python language-python hljs">lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span class="hljs-keyword">with</span> con: con.execute(<span class="hljs-string">'&lt;insert_query&gt;'</span>)
 </code></pre>
