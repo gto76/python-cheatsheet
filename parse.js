@@ -142,7 +142,7 @@ const DIAGRAM_5_B =
 
 const DIAGRAM_6_A =
   '+------------+----------+------------+----------+--------------+\n' +
-  '|            | iterable | collection | sequence | abc.Sequence |\n' +
+  '|            | Iterable | Collection | Sequence | abc.Sequence |\n' +
   '+------------+----------+------------+----------+--------------+\n' +
   '| iter()     |   yes    |    yes     |   yes    |     yes      |\n' +
   '| len()      |          |    yes     |   yes    |     yes      |\n' +
@@ -152,7 +152,7 @@ const DIAGRAM_6_A =
 
 const DIAGRAM_6_B =
   '┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
-  '┃            │ iterable │ collection │ sequence │ abc.Sequence ┃\n' +
+  '┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃\n' +
   '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n' +
   '┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
   '┃ len()      │          │     ✓      │    ✓     │      ✓       ┃\n' +

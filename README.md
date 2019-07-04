@@ -1138,10 +1138,10 @@ class MyAbcSequence(collections.abc.Sequence):
         return self.a[i]
 ```
 
-#### Table of provided methods:
+#### Table of the methods that each (duck) type provides:
 ```text
 +------------+----------+------------+----------+--------------+
-|            | iterable | collection | sequence | abc.Sequence |
+|            | Iterable | Collection | Sequence | abc.Sequence |
 +------------+----------+------------+----------+--------------+
 | iter()     |   yes    |    yes     |   yes    |     yes      |
 | len()      |          |    yes     |   yes    |     yes      |
