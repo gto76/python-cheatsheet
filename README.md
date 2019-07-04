@@ -1083,31 +1083,71 @@ class MySortable:
         return NotImplemented
 ```
 
+### Iterable
+* **Only required method for iterable is iter(), that should return an iterator of its contents.**
+```python
+class MyIterable:
+    def __init__(self, a):
+        self.a = a
+    def __iter__(self):
+        for el in self.a:
+            yield el
+```
+
 ### Collection
-* **Methods do not depend on each other, so they can be skipped if not needed.**
-* **Any object with defined getitem() is considered iterable, even if it lacks iter().**
+* **Every collection is also an iterable.**
+* **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
+* **I chose not to use the name iterable because it sounds scarier and more vague than collection.**
 ```python
 class MyCollection:
+    def __init__(self, a):
+        self.a = a
+    def __iter__(self):
+        for el in self.a:
+            yield el
+    def __len__(self):
+        return len(self.a)
+    def __contains__(self, el):
+        return el in self.a
+```
+
+### Sequence
+* **Every sequence is also an iterable.**
+* **That is because iter() is automatically generated if getitem() is defined.**
+```python
+class MySequence:
     def __init__(self, a):
         self.a = a
     def __len__(self):
         return len(self.a)
     def __getitem__(self, i):
         return self.a[i]
-    def __setitem__(self, i, el):
-        self.a[i] = el
-    def __contains__(self, el):
-        return el in self.a
-    def __iter__(self):
-        for el in self.a:
-            yield el
 ```
 
+### Collections.abc.Sequence
+* **A much richer interface than the basic sequence.**
+* **Extending it generates contains(), iter(), reversed(), index(), and count().**
+* **It is not a duck type, so `'issubclass(MySequence, collections.abc.Sequence)'` would return 'False' even if it had all the methods defined.**
 ```python
->>> from collections.abc import Sequence, Collection, Iterable
->>> a = MyCollection([1, 2, 3])
->>> isinstance(a, Sequence), isinstance(a, Collection), isinstance(a, Iterable)
-(False, True, True)
+class MyAbcSequence(collections.abc.Sequence):
+    def __init__(self, a):
+        self.a = a
+    def __len__(self):
+        return len(self.a)
+    def __getitem__(self, i):
+        return self.a[i]
+```
+
+#### Table of provided methods:
+```text
++------------+----------+------------+----------+--------------+
+|            | iterable | collection | sequence | abc.Sequence |
++------------+----------+------------+----------+--------------+
+| iter()     |   yes    |    yes     |   yes    |     yes      |
+| len()      |          |    yes     |   yes    |     yes      |
+| getitem()  |          |            |   yes    |     yes      |
+| contains() |          |    yes     |          |     yes      |
++------------+----------+------------+----------+--------------+
 ```
 
 ### Iterator

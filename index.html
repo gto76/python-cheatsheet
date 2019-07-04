@@ -1015,30 +1015,70 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
             <span class="hljs-keyword">return</span> self.a &lt; other.a
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
 </code></pre>
+<h3 id="iterable">Iterable</h3>
+<ul>
+<li><strong>Only required method for iterable is iter(), that should return an iterator of its contents.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
+</code></pre>
 <h3 id="collection">Collection</h3>
 <ul>
-<li><strong>Methods do not depend on each other, so they can be skipped if not needed.</strong></li>
-<li><strong>Any object with defined getitem() is considered iterable, even if it lacks iter().</strong></li>
+<li><strong>Every collection is also an iterable.</strong></li>
+<li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
+<li><strong>I chose not to use the name iterable because it sounds scarier and more vague than collection.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> len(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
+        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
+</code></pre>
+<h3 id="sequence">Sequence</h3>
+<ul>
+<li><strong>Every sequence is also an iterable.</strong></li>
+<li><strong>That is because iter() is automatically generated if getitem() is defined.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> len(self.a)
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
         <span class="hljs-keyword">return</span> self.a[i]
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__setitem__</span><span class="hljs-params">(self, i, el)</span>:</span>
-        self.a[i] = el
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
-        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
-<span class="hljs-meta">&gt;&gt;&gt; </span>a = MyCollection([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(a, Sequence), isinstance(a, Collection), isinstance(a, Iterable)
-(<span class="hljs-keyword">False</span>, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">True</span>)
+<h3 id="collectionsabcsequence">Collections.abc.Sequence</h3>
+<ul>
+<li><strong>A much richer interface than the basic sequence.</strong></li>
+<li><strong>Extending it generates contains(), iter(), reversed(), index(), and count().</strong></li>
+<li><strong>It is not a duck type, so <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if it had all the methods defined.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> len(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
+        <span class="hljs-keyword">return</span> self.a[i]
+</code></pre>
+<h4 id="tableofprovidedmethods">Table of provided methods:</h4>
+<pre><code class="text language-text">+------------+----------+------------+----------+--------------+
+|            | iterable | collection | sequence | abc.Sequence |
++------------+----------+------------+----------+--------------+
+| iter()     |   yes    |    yes     |   yes    |     yes      |
+| len()      |          |    yes     |   yes    |     yes      |
+| getitem()  |          |            |   yes    |     yes      |
+| contains() |          |    yes     |          |     yes      |
++------------+----------+------------+----------+--------------+
 </code></pre>
 <h3 id="iterator-1">Iterator</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
