@@ -1071,14 +1071,14 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
         <span class="hljs-keyword">return</span> self.a[i]
 </code></pre>
 <h4 id="tableofprovidedmethods">Table of provided methods:</h4>
-<pre><code class="text language-text">+------------+----------+------------+----------+--------------+
-|            | iterable | collection | sequence | abc.Sequence |
-+------------+----------+------------+----------+--------------+
-| iter()     |   yes    |    yes     |   yes    |     yes      |
-| len()      |          |    yes     |   yes    |     yes      |
-| getitem()  |          |            |   yes    |     yes      |
-| contains() |          |    yes     |          |     yes      |
-+------------+----------+------------+----------+--------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃            │ iterable │ collection │ sequence │ abc.Sequence ┃
+┠────────────┼──────────┼────────────┼──────────┼──────────────┨
+┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃
+┃ len()      │          │     ✓      │    ✓     │      ✓       ┃
+┃ getitem()  │          │            │    ✓     │      ✓       ┃
+┃ contains() │          │     ✓      │          │      ✓       ┃
+┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre>
 <h3 id="iterator-1">Iterator</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>

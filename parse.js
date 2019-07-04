@@ -140,6 +140,26 @@ const DIAGRAM_5_B =
   "┃  567.89        │  '5.7e+02'   │    '567.89'   │   '5.68e+02'  │  '56789.00%'  ┃\n" +
   "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
+const DIAGRAM_6_A =
+  '+------------+----------+------------+----------+--------------+\n' +
+  '|            | iterable | collection | sequence | abc.Sequence |\n' +
+  '+------------+----------+------------+----------+--------------+\n' +
+  '| iter()     |   yes    |    yes     |   yes    |     yes      |\n' +
+  '| len()      |          |    yes     |   yes    |     yes      |\n' +
+  '| getitem()  |          |            |   yes    |     yes      |\n' +
+  '| contains() |          |    yes     |          |     yes      |\n' +
+  '+------------+----------+------------+----------+--------------+\n';
+
+const DIAGRAM_6_B =
+  '┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
+  '┃            │ iterable │ collection │ sequence │ abc.Sequence ┃\n' +
+  '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n' +
+  '┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ len()      │          │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ getitem()  │          │            │    ✓     │      ✓       ┃\n' +
+  '┃ contains() │          │     ✓      │          │      ✓       ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
+
 
 function main() {
   const html = getMd();
@@ -172,6 +192,7 @@ function switchClassDiagrams(readme) {
   readme = readme.replace(DIAGRAM_3_A, DIAGRAM_3_B)
   readme = readme.replace(DIAGRAM_4_A, DIAGRAM_4_B)
   readme = readme.replace(DIAGRAM_5_A, DIAGRAM_5_B)
+  readme = readme.replace(DIAGRAM_6_A, DIAGRAM_6_B)
   return readme
 }
 

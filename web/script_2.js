@@ -108,6 +108,26 @@ const DIAGRAM_5_B =
   "┃  567.89        │  '5.7e+02'   │    '567.89'   │   '5.68e+02'  │  '56789.00%'  ┃\n" +
   "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
+const DIAGRAM_6_A =
+  '+------------+----------+------------+----------+--------------+\n' +
+  '|            | iterable | collection | sequence | abc.Sequence |\n' +
+  '+------------+----------+------------+----------+--------------+\n' +
+  '| iter()     |   yes    |    yes     |   yes    |     yes      |\n' +
+  '| len()      |          |    yes     |   yes    |     yes      |\n' +
+  '| getitem()  |          |            |   yes    |     yes      |\n' +
+  '| contains() |          |    yes     |          |     yes      |\n' +
+  '+------------+----------+------------+----------+--------------+\n';
+
+const DIAGRAM_6_B =
+  '┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
+  '┃            │ iterable │ collection │ sequence │ abc.Sequence ┃\n' +
+  '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n' +
+  '┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ len()      │          │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ getitem()  │          │            │    ✓     │      ✓       ┃\n' +
+  '┃ contains() │          │     ✓      │          │      ✓       ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
+
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -118,6 +138,7 @@ if (!isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_3_B})`).html(DIAGRAM_3_A);
   $(`code:contains(${DIAGRAM_4_B})`).html(DIAGRAM_4_A);
   $(`code:contains(${DIAGRAM_5_B})`).html(DIAGRAM_5_A);
+  $(`code:contains(${DIAGRAM_6_B})`).html(DIAGRAM_6_A);
   // var htmlString = $('code:contains(ᴺᴱᵂ)').html().replace(/ᴺᴱᵂ/g, '');
   // $('code:contains(ᴺᴱᵂ)').html(htmlString);
 }
