@@ -827,7 +827,7 @@ from functools import partial
 >>> multiply_by_3(10)
 30
 ```
-* **Partial is useful in cases when a function needs to be passed as an argument, because it enables us to set the arguments beforehand.**
+* **Partial is also useful in cases when a function needs to be passed as an argument, because it enables us to set its arguments beforehand.**
 * **A few examples being `'defaultdict(<function>)'`, `'iter(<function>, to_exclusive)'` and dataclass's `'field(default_factory=<function>)'`.**
 
 ### Nonlocal
