@@ -346,7 +346,11 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt; = islice(&lt;collection&gt;, from_inclusive, to_exclusive, +step_size)
 </code></pre>
 <h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2>
-<p><strong>Convenient way to implement the iterator protocol.</strong></p>
+<ul>
+<li><strong>Convenient way to implement the iterator protocol.</strong></li>
+<li><strong>Any function that contains a yield statement returns a generator object.</strong></li>
+<li><strong>Generators and iterators are interchangeable.</strong></li>
+</ul>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count</span><span class="hljs-params">(start, step)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         <span class="hljs-keyword">yield</span> start

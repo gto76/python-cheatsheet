@@ -218,7 +218,9 @@ from itertools import count, repeat, cycle, chain, islice
 
 Generator
 ---------
-**Convenient way to implement the iterator protocol.**
+* **Convenient way to implement the iterator protocol.**
+* **Any function that contains a yield statement returns a generator object.**
+* **Generators and iterators are interchangeable.**
 
 ```python
 def count(start, step):
