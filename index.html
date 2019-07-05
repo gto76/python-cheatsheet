@@ -489,7 +489,7 @@ to_exclusive   = &lt;range&gt;.stop
 {&lt;el&gt;:&gt;<span class="hljs-number">0</span>}        <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre>
 <h3 id="strings">Strings</h3>
-<p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's repr() method, instead of format(), to get a string.</strong></p>
+<p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's repr() method, instead of str(), to get a string.</strong></p>
 <pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:&lt;<span class="hljs-number">10</span>}  <span class="hljs-comment"># "'abcde'   "</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}     <span class="hljs-comment"># 'abc'</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}   <span class="hljs-comment"># 'abc       '</span>
