@@ -353,6 +353,7 @@ import re
 ```
 
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
+* **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
 * **Use `r'\1'` or `'\\1'` for backreference.**
 * **Use `'?'` to make an operator non-greedy.**
@@ -931,7 +932,7 @@ class <name>:
         return cls.__name__
 ```
 * **Return value of repr() should be unambiguous and of str() readable.**
-* **If only repr() is defined, it will also be used for str().**
+* **If only repr() is defined, it will be also used for str().**
 
 #### Str() use cases:
 ```python

@@ -446,6 +446,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre>
 <ul>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept newline.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'?'</span></code> to make an operator non-greedy.</strong></li>
@@ -889,7 +890,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 </code></pre>
 <ul>
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
-<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
+<li><strong>If only repr() is defined, it will be also used for str().</strong></li>
 </ul>
 <h4 id="strusecases">Str() use cases:</h4>
 <pre><code class="python language-python hljs">print(&lt;el&gt;)
