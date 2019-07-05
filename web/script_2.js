@@ -138,7 +138,7 @@ if (!isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_3_B})`).html(DIAGRAM_3_A);
   $(`code:contains(${DIAGRAM_4_B})`).html(DIAGRAM_4_A);
   $(`code:contains(${DIAGRAM_5_B})`).html(DIAGRAM_5_A);
-  $(`code:contains(${DIAGRAM_6_B})`).html(DIAGRAM_6_A);
+  // $(`code:contains(${DIAGRAM_6_B})`).html(DIAGRAM_6_A);
   // var htmlString = $('code:contains(ᴺᴱᵂ)').html().replace(/ᴺᴱᵂ/g, '');
   // $('code:contains(ᴺᴱᵂ)').html(htmlString);
 }
