@@ -1409,8 +1409,8 @@ Open
 
 ```python
 <str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until EOF.
-<str/bytes> = <file>.readline()     # Returns a line.
-<list>      = <file>.readlines()    # Returns a list of lines.
+<str/bytes> = <file>.readline()     # Returns a line or empty string on EOF.
+<list>      = <file>.readlines()    # Returns a list of lines or empty list.
 <str/bytes> = next(<file>)          # Returns a line using buffer. Do not mix.
 ```
 
