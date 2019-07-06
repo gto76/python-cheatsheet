@@ -1996,8 +1996,10 @@ Plot
 # $ pip3 install matplotlib
 from matplotlib import pyplot
 pyplot.plot(<data_1> [, <data_2>, ...])
+pyplot.hist(<data>)
 pyplot.savefig(<filename>)
 pyplot.show()
+pyplot.clf()  # Clears figure.
 ```
 
 
