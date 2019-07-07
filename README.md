@@ -1242,7 +1242,7 @@ class MyAbcSequence(collections.abc.Sequence):
         return self.a[i]
 ```
 
-#### Table of the required and available methods:
+#### Table of required and available special methods:
 ```text
 +------------+----------+------------+----------+--------------+
 |            | Iterable | Collection | Sequence | abc.Sequence |
