@@ -1172,7 +1172,7 @@ Iterable Duck Types
 -------------------
 
 ### Iterable
-* **Only required method is iter(). It should return an iterator of its contents.**
+* **Only required method is iter(). It should return an iterator of object's items.**
 * **Contains() automatically works on any object that has iter() defined.**
 ```python
 class MyIterable:
