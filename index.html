@@ -1087,8 +1087,8 @@ con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span c
 <h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2>
 <h3 id="iterable">Iterable</h3>
 <ul>
-<li><strong>Only required method for iterable is iter(), that should return an iterator of its contents.</strong></li>
-<li><strong>Contains() is automatically generated whenever iter() is present.</strong></li>
+<li><strong>Only required method for iterable is iter(). It should return an iterator of its contents.</strong></li>
+<li><strong>Contains() automatically works on any object that has iter() defined.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -1105,56 +1105,67 @@ con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span c
 </code></pre>
 <h3 id="collection">Collection</h3>
 <ul>
-<li><strong>Every collection is also an iterable.</strong></li>
+<li><strong>Only required methods are iter() and len().</strong></li>
 <li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
 <li><strong>I chose not to use the name iterable because it sounds scarier and more vague than collection.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
         <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> len(self.a)
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
 </code></pre>
 <h3 id="sequence">Sequence</h3>
 <ul>
-<li><strong>Every sequence is also a collection.</strong></li>
-<li><strong>Iter() and reversed() are automatically generated whenever getitem() is present.</strong></li>
+<li><strong>Only required methods are len() and getitem().</strong></li>
+<li><strong>Iter(), contains() and reversed() automatically work on any object that has getitem() defined.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
-        <span class="hljs-keyword">return</span> self.a[i]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
+        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> len(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
+        <span class="hljs-keyword">return</span> self.a[i]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__reversed__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> reversed(self.a)
 </code></pre>
 <h3 id="collectionsabcsequence">Collections.abc.Sequence</h3>
 <ul>
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
-<li><strong>Extending it generates contains(), iter(), reversed(), index(), and count().</strong></li>
+<li><strong>Extending it generates iter(), contains(), reversed(), index(), and count().</strong></li>
 <li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That's why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if it had all the methods defined.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
-        <span class="hljs-keyword">return</span> self.a[i]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> len(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
+        <span class="hljs-keyword">return</span> self.a[i]
 </code></pre>
-<h4 id="tableofthemethodsthateachducktypeprovides">Table of the methods that each (duck) type provides:</h4>
+<h4 id="tableoftherequiredandavailablemethods">Table of the required and available methods:</h4>
 <pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓
 ┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃
 ┠────────────┼──────────┼────────────┼──────────┼──────────────┨
-┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃
-┃ len()      │          │     ✓      │    ✓     │      ✓       ┃
-┃ getitem()  │          │     +      │    ✓     │      ✓       ┃
-┃ contains() │          │     ✓      │          │      ✓       ┃
+┃ iter()     │    !     │     !      │    ✓     │      ✓       ┃
+┃ contains() │    ✓     │     ✓      │    ✓     │      ✓       ┃
+┃ len()      │          │     !      │    !     │      !       ┃
+┃ getitem()  │          │            │    !     │      !       ┃
+┃ reversed() │          │            │    ✓     │      ✓       ┃
+┃ reverse()  │          │            │          │      ✓       ┃
+┃ index()    │          │            │          │      ✓       ┃
+┃ count()    │          │            │          │      ✓       ┃
 ┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre>
 <h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2>

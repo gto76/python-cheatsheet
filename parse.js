@@ -172,20 +172,28 @@ const DIAGRAM_7_A =
   '+------------+----------+------------+----------+--------------+\n' +
   '|            | Iterable | Collection | Sequence | abc.Sequence |\n' +
   '+------------+----------+------------+----------+--------------+\n' +
-  '| iter()     |   yes    |    yes     |   yes    |     yes      |\n' +
-  '| len()      |          |    yes     |   yes    |     yes      |\n' +
-  '| getitem()  |          |            |   yes    |     yes      |\n' +
-  '| contains() |          |    yes     |          |     yes      |\n' +
+  '| iter()     |   REQ    |    REQ     |   yes    |     yes      |\n' +
+  '| contains() |   yes    |    yes     |   yes    |     yes      |\n' +
+  '| len()      |          |    REQ     |   REQ    |     REQ      |\n' +
+  '| getitem()  |          |            |   REQ    |     REQ      |\n' +
+  '| reversed() |          |            |   yes    |     yes      |\n' +
+  '| reverse()  |          |            |          |     yes      |\n' +
+  '| index()    |          |            |          |     yes      |\n' +
+  '| count()    |          |            |          |     yes      |\n' +
   '+------------+----------+------------+----------+--------------+\n';
 
 const DIAGRAM_7_B =
   '┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
   '┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃\n' +
   '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n' +
-  '┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
-  '┃ len()      │          │     ✓      │    ✓     │      ✓       ┃\n' +
-  '┃ getitem()  │          │     +      │    ✓     │      ✓       ┃\n' +
-  '┃ contains() │          │     ✓      │          │      ✓       ┃\n' +
+  '┃ iter()     │    !     │     !      │    ✓     │      ✓       ┃\n' +
+  '┃ contains() │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ len()      │          │     !      │    !     │      !       ┃\n' +
+  '┃ getitem()  │          │            │    !     │      !       ┃\n' +
+  '┃ reversed() │          │            │    ✓     │      ✓       ┃\n' +
+  '┃ reverse()  │          │            │          │      ✓       ┃\n' +
+  '┃ index()    │          │            │          │      ✓       ┃\n' +
+  '┃ count()    │          │            │          │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
 
