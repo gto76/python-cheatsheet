@@ -1082,7 +1082,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() special methods.**
+* **With 'total_ordering' decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
 ```python
 from functools import total_ordering
 
@@ -1098,73 +1098,6 @@ class MySortable:
         if isinstance(other, type(self)):
             return self.a < other.a
         return NotImplemented
-```
-
-### Iterable
-* **Only required method for iterable is iter(), that should return an iterator of its contents.**
-```python
-class MyIterable:
-    def __init__(self, a):
-        self.a = a
-    def __iter__(self):
-        for el in self.a:
-            yield el
-```
-
-### Collection
-* **Every collection is also an iterable.**
-* **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name iterable because it sounds scarier and more vague than collection.**
-```python
-class MyCollection:
-    def __init__(self, a):
-        self.a = a
-    def __iter__(self):
-        for el in self.a:
-            yield el
-    def __len__(self):
-        return len(self.a)
-    def __contains__(self, el):
-        return el in self.a
-```
-
-### Sequence
-* **Every sequence is also an iterable.**
-* **That is because iter() is automatically generated if getitem() is defined.**
-```python
-class MySequence:
-    def __init__(self, a):
-        self.a = a
-    def __len__(self):
-        return len(self.a)
-    def __getitem__(self, i):
-        return self.a[i]
-```
-
-### Collections.abc.Sequence
-* **A much richer interface than the basic sequence.**
-* **Extending it generates contains(), iter(), reversed(), index(), and count().**
-* **It is not a duck type, so `'issubclass(MySequence, collections.abc.Sequence)'` would return 'False' even if it had all the methods defined.**
-```python
-class MyAbcSequence(collections.abc.Sequence):
-    def __init__(self, a):
-        self.a = a
-    def __len__(self):
-        return len(self.a)
-    def __getitem__(self, i):
-        return self.a[i]
-```
-
-#### Table of the methods that each (duck) type provides:
-```text
-+------------+----------+------------+----------+--------------+
-|            | Iterable | Collection | Sequence | abc.Sequence |
-+------------+----------+------------+----------+--------------+
-| iter()     |   yes    |    yes     |   yes    |     yes      |
-| len()      |          |    yes     |   yes    |     yes      |
-| getitem()  |          |            |   yes    |     yes      |
-| contains() |          |    yes     |          |     yes      |
-+------------+----------+------------+----------+--------------+
 ```
 
 ### Iterator
@@ -1232,6 +1165,86 @@ with memoryview(<bytes/bytearray/array>) as view: ...
 ```python
 lock = threading.RLock(); with lock: ...
 con  = sqlite3.connect('<path>'); with con: con.execute('<insert_query>')
+```
+
+
+Iterable Duck Types
+-------------------
+
+### Iterable
+* **Only required method for iterable is iter(), that should return an iterator of its contents.**
+* **Contains() is automatically generated whenever iter() is present.**
+```python
+class MyIterable:
+    def __init__(self, a):
+        self.a = a
+    def __iter__(self):
+        for el in self.a:
+            yield el
+```
+
+```python
+>>> a = MyIterable([1, 2, 3])
+>>> iter(a)
+<generator object MyIterable.__iter__ at 0x1026c18b8>
+>>> 1 in a
+True
+```
+
+### Collection
+* **Every collection is also an iterable.**
+* **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
+* **I chose not to use the name iterable because it sounds scarier and more vague than collection.**
+```python
+class MyCollection:
+    def __init__(self, a):
+        self.a = a
+    def __contains__(self, el):
+        return el in self.a
+    def __len__(self):
+        return len(self.a)
+    def __iter__(self):
+        for el in self.a:
+            yield el
+```
+
+### Sequence
+* **Every sequence is also a collection.**
+* **Iter() and reversed() are automatically generated whenever getitem() is present.**
+```python
+class MySequence:
+    def __init__(self, a):
+        self.a = a
+    def __getitem__(self, i):
+        return self.a[i]
+    def __len__(self):
+        return len(self.a)
+```
+
+### Collections.abc.Sequence
+* **It's a richer interface than the basic sequence.**
+* **Extending it generates contains(), iter(), reversed(), index(), and count().**
+* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That's why `'issubclass(MySequence, collections.abc.Sequence)'` would return 'False' even if it had all the methods defined.**
+```python
+class MyAbcSequence(collections.abc.Sequence):
+    def __init__(self, a):
+        self.a = a
+    def __getitem__(self, i):
+        return self.a[i]
+    def __len__(self):
+        return len(self.a)
+```
+
+#### Table of the methods that each (duck) type provides:
+```text
++------------+----------+------------+----------+--------------+
+|            | Iterable | Collection | Sequence | abc.Sequence |
++------------+----------+------------+----------+--------------+
+| iter()     |   yes    |    yes     |   yes    |     yes      |
+| len()      |          |    yes     |   yes    |     yes      |
+| getitem()  |          |            |   yes    |     yes      |
+| contains() |          |    yes     |          |     yes      |
++------------+----------+------------+----------+--------------+
 ```
 
 

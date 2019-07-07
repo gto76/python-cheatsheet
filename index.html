@@ -1016,7 +1016,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 </code></pre>
 <h3 id="sortable">Sortable</h3>
 <ul>
-<li><strong>With 'total_ordering' decorator you only need to provide one of lt(), gt(), le() or ge() special methods.</strong></li>
+<li><strong>With 'total_ordering' decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
@@ -1032,71 +1032,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
         <span class="hljs-keyword">if</span> isinstance(other, type(self)):
             <span class="hljs-keyword">return</span> self.a &lt; other.a
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">NotImplemented</span>
-</code></pre>
-<h3 id="iterable">Iterable</h3>
-<ul>
-<li><strong>Only required method for iterable is iter(), that should return an iterator of its contents.</strong></li>
-</ul>
-<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
-</code></pre>
-<h3 id="collection">Collection</h3>
-<ul>
-<li><strong>Every collection is also an iterable.</strong></li>
-<li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
-<li><strong>I chose not to use the name iterable because it sounds scarier and more vague than collection.</strong></li>
-</ul>
-<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> len(self.a)
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
-        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
-</code></pre>
-<h3 id="sequence">Sequence</h3>
-<ul>
-<li><strong>Every sequence is also an iterable.</strong></li>
-<li><strong>That is because iter() is automatically generated if getitem() is defined.</strong></li>
-</ul>
-<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> len(self.a)
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
-        <span class="hljs-keyword">return</span> self.a[i]
-</code></pre>
-<h3 id="collectionsabcsequence">Collections.abc.Sequence</h3>
-<ul>
-<li><strong>A much richer interface than the basic sequence.</strong></li>
-<li><strong>Extending it generates contains(), iter(), reversed(), index(), and count().</strong></li>
-<li><strong>It is not a duck type, so <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if it had all the methods defined.</strong></li>
-</ul>
-<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self.a = a
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> len(self.a)
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
-        <span class="hljs-keyword">return</span> self.a[i]
-</code></pre>
-<h4 id="tableofthemethodsthateachducktypeprovides">Table of the methods that each (duck) type provides:</h4>
-<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓
-┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃
-┠────────────┼──────────┼────────────┼──────────┼──────────────┨
-┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃
-┃ len()      │          │     ✓      │    ✓     │      ✓       ┃
-┃ getitem()  │          │            │    ✓     │      ✓       ┃
-┃ contains() │          │     ✓      │          │      ✓       ┃
-┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre>
 <h3 id="iterator-1">Iterator</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
@@ -1148,6 +1083,79 @@ Hello World!
 <h4 id="reusablecontextmanagers">Reusable context managers:</h4>
 <pre><code class="python language-python hljs">lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span class="hljs-keyword">with</span> con: con.execute(<span class="hljs-string">'&lt;insert_query&gt;'</span>)
+</code></pre>
+<h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2>
+<h3 id="iterable">Iterable</h3>
+<ul>
+<li><strong>Only required method for iterable is iter(), that should return an iterator of its contents.</strong></li>
+<li><strong>Contains() is automatically generated whenever iter() is present.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>a = MyIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<span class="hljs-meta">&gt;&gt;&gt; </span>iter(a)
+&lt;generator object MyIterable.__iter__ at <span class="hljs-number">0x1026c18b8</span>&gt;
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span> <span class="hljs-keyword">in</span> a
+<span class="hljs-keyword">True</span>
+</code></pre>
+<h3 id="collection">Collection</h3>
+<ul>
+<li><strong>Every collection is also an iterable.</strong></li>
+<li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
+<li><strong>I chose not to use the name iterable because it sounds scarier and more vague than collection.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
+        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> len(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
+            <span class="hljs-keyword">yield</span> el
+</code></pre>
+<h3 id="sequence">Sequence</h3>
+<ul>
+<li><strong>Every sequence is also a collection.</strong></li>
+<li><strong>Iter() and reversed() are automatically generated whenever getitem() is present.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
+        <span class="hljs-keyword">return</span> self.a[i]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> len(self.a)
+</code></pre>
+<h3 id="collectionsabcsequence">Collections.abc.Sequence</h3>
+<ul>
+<li><strong>It's a richer interface than the basic sequence.</strong></li>
+<li><strong>Extending it generates contains(), iter(), reversed(), index(), and count().</strong></li>
+<li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That's why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if it had all the methods defined.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
+        self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
+        <span class="hljs-keyword">return</span> self.a[i]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> len(self.a)
+</code></pre>
+<h4 id="tableofthemethodsthateachducktypeprovides">Table of the methods that each (duck) type provides:</h4>
+<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃
+┠────────────┼──────────┼────────────┼──────────┼──────────────┨
+┃ iter()     │    ✓     │     ✓      │    ✓     │      ✓       ┃
+┃ len()      │          │     ✓      │    ✓     │      ✓       ┃
+┃ getitem()  │          │     +      │    ✓     │      ✓       ┃
+┃ contains() │          │     ✓      │          │      ✓       ┃
+┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre>
 <h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum, auto
