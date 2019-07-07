@@ -1194,7 +1194,7 @@ True
 ### Collection
 * **Only required methods are iter() and len().**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name iterable because it sounds scarier and more vague than collection.**
+* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'.**
 ```python
 class MyCollection:
     def __init__(self, a):
