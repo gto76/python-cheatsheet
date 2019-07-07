@@ -21,7 +21,7 @@ Contents
 Main
 ----
 ```python
-if __name__ == '__main__':     # Runs main() if file was not imported.
+if __name__ == '__main__':     # Runs main() if file wasn't imported.
     main()
 ```
 
