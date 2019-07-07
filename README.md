@@ -1154,17 +1154,13 @@ class MyOpen():
 Hello World!
 ```
 
-#### Context managers:
+#### List of existing context managers:
 ```python
 with open('<path>', ...) as file: ...
 with wave.open('<path>', ...) as wave_file: ...
 with memoryview(<bytes/bytearray/array>) as view: ...
-```
-
-#### Reusable context managers:
-```python
+db = sqlite3.connect('<path>'); with db: db.execute('<insert_query>')
 lock = threading.RLock(); with lock: ...
-con  = sqlite3.connect('<path>'); with con: con.execute('<insert_query>')
 ```
 
 
@@ -1232,6 +1228,7 @@ class MySequence:
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index(), and count().**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return 'False' even if it had all the methods defined.**
+
 ```python
 class MyAbcSequence(collections.abc.Sequence):
     def __init__(self, a):
@@ -1257,6 +1254,8 @@ class MyAbcSequence(collections.abc.Sequence):
 | count()    |          |            |          |     yes      |
 +------------+----------+------------+----------+--------------+
 ```
+
+* **Other useful ABCs that automatically generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
 
 
 Enum

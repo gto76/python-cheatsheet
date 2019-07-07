@@ -1075,14 +1075,12 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">... </span>    print(file.read())
 Hello World!
 </code></pre>
-<h4 id="contextmanagers">Context managers:</h4>
+<h4 id="listofexistingcontextmanagers">List of existing context managers:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> open(<span class="hljs-string">'&lt;path&gt;'</span>, ...) <span class="hljs-keyword">as</span> file: ...
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, ...) <span class="hljs-keyword">as</span> wave_file: ...
 <span class="hljs-keyword">with</span> memoryview(&lt;bytes/bytearray/array&gt;) <span class="hljs-keyword">as</span> view: ...
-</code></pre>
-<h4 id="reusablecontextmanagers">Reusable context managers:</h4>
-<pre><code class="python language-python hljs">lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
-con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span class="hljs-keyword">with</span> con: con.execute(<span class="hljs-string">'&lt;insert_query&gt;'</span>)
+db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span class="hljs-keyword">with</span> db: db.execute(<span class="hljs-string">'&lt;insert_query&gt;'</span>)
+lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 </code></pre>
 <h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2>
 <h3 id="iterable">Iterable</h3>
@@ -1168,6 +1166,9 @@ con  = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span c
 ┃ count()    │          │            │          │      ✓       ┃
 ┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre>
+<ul>
+<li><strong>Other useful ABCs that automatically generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.</strong></li>
+</ul>
 <h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum, auto
 
