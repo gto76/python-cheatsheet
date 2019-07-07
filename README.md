@@ -2018,8 +2018,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])
-pyplot.hist(<data>)
+pyplot.plot(<data_1> [, <data_2>, ...])  # Or: hist, pie, ...
 pyplot.savefig(<filename>)
 pyplot.show()
 pyplot.clf()  # Clears figure.
