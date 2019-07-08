@@ -217,7 +217,7 @@ function initDom(html) {
 
 function getMd() {
   var readme = readFile('README.md');
-  readme = switchClassDiagrams(readme);
+  // readme = switchClassDiagrams(readme);
   const converter = new showdown.Converter();
   return converter.makeHtml(readme);
 }

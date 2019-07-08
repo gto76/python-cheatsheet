@@ -380,26 +380,26 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┓
-┃                  │ Sequence │ Collection │ Iterable ┃
-┠──────────────────┼──────────┼────────────┼──────────┨
-┃ list, range, str │    ✓     │     ✓      │    ✓     ┃
-┃ dict, set        │          │     ✓      │    ✓     ┃
-┃ iter             │          │            │    ✓     ┃
-┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┛
+<pre><code class="text language-text">+------------------+----------+------------+----------+
+|                  | Sequence | Collection | Iterable |
++------------------+----------+------------+----------+
+| list, range, str |   yes    |    yes     |   yes    |
+| dict, set        |          |    yes     |   yes    |
+| iter             |          |            |   yes    |
++------------------+----------+------------+----------+
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
 <span class="hljs-keyword">True</span>
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┓
-┃                    │ Integral │ Rational │ Real │ Complex │ Number ┃
-┠────────────────────┼──────────┼──────────┼──────┼─────────┼────────┨
-┃ int                │    ✓     │    ✓     │  ✓   │    ✓    │   ✓    ┃
-┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃
-┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃
-┃ complex            │          │          │      │    ✓    │   ✓    ┃
-┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛
+<pre><code class="text language-text">+--------------------+----------+----------+------+---------+--------+
+|                    | Integral | Rational | Real | Complex | Number |
++--------------------+----------+----------+------+---------+--------+
+| int                |   yes    |   yes    | yes  |   yes   |  yes   |
+| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
+| float              |          |          | yes  |   yes   |  yes   |
+| complex            |          |          |      |   yes   |  yes   |
++--------------------+----------+----------+------+---------+--------+
 </code></pre>
 <h2 id="string"><a href="#string" name="string">#</a>String</h2>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
@@ -509,31 +509,31 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}  <span class="hljs-comment"># '  123.456%'</span>
 </code></pre>
 <h4 id="comparisonoffloatpresentationtypes">Comparison of float presentation types:</h4>
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
-┃                │    {&lt;float&gt;}   │  {&lt;float&gt;:f}  │   {&lt;float&gt;:e}  │   {&lt;float&gt;:%}   ┃
-┠────────────────┼────────────────┼───────────────┼────────────────┼─────────────────┨
-┃    0.000056789 │   '5.6789e-05' │    '0.000057' │ '5.678900e-05' │     '0.005679%' ┃
-┃    0.00056789  │   '0.00056789' │    '0.000568' │ '5.678900e-04' │     '0.056789%' ┃
-┃    0.0056789   │   '0.0056789'  │    '0.005679' │ '5.678900e-03' │     '0.567890%' ┃
-┃    0.056789    │   '0.056789'   │    '0.056789' │ '5.678900e-02' │     '5.678900%' ┃
-┃    0.56789     │   '0.56789'    │    '0.567890' │ '5.678900e-01' │    '56.789000%' ┃
-┃    5.6789      │   '5.6789'     │    '5.678900' │ '5.678900e+00' │   '567.890000%' ┃
-┃   56.789       │  '56.789'      │   '56.789000' │ '5.678900e+01' │  '5678.900000%' ┃
-┃  567.89        │ '567.89'       │  '567.890000' │ '5.678900e+02' │ '56789.000000%' ┃
-┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
+<pre><code class="text language-text">+----------------+----------------+---------------+----------------+-----------------+
+|                |    {&lt;float&gt;}   |  {&lt;float&gt;:f}  |   {&lt;float&gt;:e}  |   {&lt;float&gt;:%}   |
++----------------+----------------+---------------+----------------+-----------------+
+|    0.000056789 |   '5.6789e-05' |    '0.000057' | '5.678900e-05' |     '0.005679%' |
+|    0.00056789  |   '0.00056789' |    '0.000568' | '5.678900e-04' |     '0.056789%' |
+|    0.0056789   |   '0.0056789'  |    '0.005679' | '5.678900e-03' |     '0.567890%' |
+|    0.056789    |   '0.056789'   |    '0.056789' | '5.678900e-02' |     '5.678900%' |
+|    0.56789     |   '0.56789'    |    '0.567890' | '5.678900e-01' |    '56.789000%' |
+|    5.6789      |   '5.6789'     |    '5.678900' | '5.678900e+00' |   '567.890000%' |
+|   56.789       |  '56.789'      |   '56.789000' | '5.678900e+01' |  '5678.900000%' |
+|  567.89        | '567.89'       |  '567.890000' | '5.678900e+02' | '56789.000000%' |
++----------------+----------------+---------------+----------------+-----------------+
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
-┃                │  {&lt;float&gt;:.2}  │ {&lt;float&gt;:.2f} │  {&lt;float&gt;:.2e} │  {&lt;float&gt;:.2%}  ┃
-┠────────────────┼────────────────┼───────────────┼────────────────┼─────────────────┨
-┃    0.000056789 │   '5.7e-05'    │      '0.00'   │   '5.68e-05'   │       '0.01%'   ┃
-┃    0.00056789  │   '0.00057'    │      '0.00'   │   '5.68e-04'   │       '0.06%'   ┃
-┃    0.0056789   │   '0.0057'     │      '0.01'   │   '5.68e-03'   │       '0.57%'   ┃
-┃    0.056789    │   '0.057'      │      '0.06'   │   '5.68e-02'   │       '5.68%'   ┃
-┃    0.56789     │   '0.57'       │      '0.57'   │   '5.68e-01'   │      '56.79%'   ┃
-┃    5.6789      │   '5.7'        │      '5.68'   │   '5.68e+00'   │     '567.89%'   ┃
-┃   56.789       │   '5.7e+01'    │     '56.79'   │   '5.68e+01'   │    '5678.90%'   ┃
-┃  567.89        │   '5.7e+02'    │    '567.89'   │   '5.68e+02'   │   '56789.00%'   ┃
-┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
+<pre><code class="text language-text">+----------------+----------------+---------------+----------------+-----------------+
+|                |  {&lt;float&gt;:.2}  | {&lt;float&gt;:.2f} |  {&lt;float&gt;:.2e} |  {&lt;float&gt;:.2%}  |
++----------------+----------------+---------------+----------------+-----------------+
+|    0.000056789 |   '5.7e-05'    |      '0.00'   |   '5.68e-05'   |       '0.01%'   |
+|    0.00056789  |   '0.00057'    |      '0.00'   |   '5.68e-04'   |       '0.06%'   |
+|    0.0056789   |   '0.0057'     |      '0.01'   |   '5.68e-03'   |       '0.57%'   |
+|    0.056789    |   '0.057'      |      '0.06'   |   '5.68e-02'   |       '5.68%'   |
+|    0.56789     |   '0.57'       |      '0.57'   |   '5.68e-01'   |      '56.79%'   |
+|    5.6789      |   '5.7'        |      '5.68'   |   '5.68e+00'   |     '567.89%'   |
+|   56.789       |   '5.7e+01'    |     '56.79'   |   '5.68e+01'   |    '5678.90%'   |
+|  567.89        |   '5.7e+02'    |    '567.89'   |   '5.68e+02'   |   '56789.00%'   |
++----------------+----------------+---------------+----------------+-----------------+
 </code></pre>
 <h3 id="ints">Ints</h3>
 <pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}           <span class="hljs-comment"># 'Z'</span>
@@ -1153,18 +1153,18 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
         <span class="hljs-keyword">return</span> self.a[i]
 </code></pre>
 <h4 id="tableofrequiredandavailablespecialmethods">Table of required and available special methods:</h4>
-<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓
-┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃
-┠────────────┼──────────┼────────────┼──────────┼──────────────┨
-┃ iter()     │    !     │     !      │    ✓     │      ✓       ┃
-┃ contains() │    ✓     │     ✓      │    ✓     │      ✓       ┃
-┃ len()      │          │     !      │    !     │      !       ┃
-┃ getitem()  │          │            │    !     │      !       ┃
-┃ reversed() │          │            │    ✓     │      ✓       ┃
-┃ reverse()  │          │            │          │      ✓       ┃
-┃ index()    │          │            │          │      ✓       ┃
-┃ count()    │          │            │          │      ✓       ┃
-┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛
+<pre><code class="text language-text">+------------+----------+------------+----------+--------------+
+|            | Iterable | Collection | Sequence | abc.Sequence |
++------------+----------+------------+----------+--------------+
+| iter()     |   REQ    |    REQ     |   yes    |     yes      |
+| contains() |   yes    |    yes     |   yes    |     yes      |
+| len()      |          |    REQ     |   REQ    |     REQ      |
+| getitem()  |          |            |   REQ    |     REQ      |
+| reversed() |          |            |   yes    |     yes      |
+| reverse()  |          |            |          |     yes      |
+| index()    |          |            |          |     yes      |
+| count()    |          |            |          |     yes      |
++------------+----------+------------+----------+--------------+
 </code></pre>
 <ul>
 <li><strong>Other useful ABCs that automatically generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.</strong></li>
@@ -1633,29 +1633,29 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass  <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
 type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
-┃ Classes │ Metaclasses ┃
-┠─────────┼─────────────┨
-┃ MyClass → MyMetaClass ┃
-┃         │     ↓       ┃
-┃  object ───→ type ←╮  ┃
-┃         │    ↑ ╰───╯  ┃
-┃   str ───────╯        ┃
-┗━━━━━━━━━┷━━━━━━━━━━━━━┛
+<pre><code class="text language-text">+---------+-------------+
+| Classes | Metaclasses |
++---------+-------------|
+| MyClass &gt; MyMetaClass |
+|         |     v       |
+|  object ---&gt; type &lt;+  |
+|         |    ^ +---+  |
+|   str -------+        |
++---------+-------------+
 </code></pre>
 <h3 id="inheritancediagram">Inheritance Diagram</h3>
 <pre><code class="python language-python hljs">MyClass.__base__     == object    <span class="hljs-comment"># MyClass is a subclass of object.</span>
 MyMetaClass.__base__ == type      <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━┯━━━━━━━━━━━━━┓
-┃ Classes │ Metaclasses ┃
-┠─────────┼─────────────┨
-┃ MyClass │ MyMetaClass ┃
-┃    ↓    │     ↓       ┃
-┃  object ←─── type     ┃
-┃    ↑    │             ┃
-┃   str   │             ┃
-┗━━━━━━━━━┷━━━━━━━━━━━━━┛
+<pre><code class="text language-text">+---------+-------------+
+| Classes | Metaclasses |
++---------+-------------|
+| MyClass | MyMetaClass |
+|    v    |     v       |
+|  object &lt;--- type     |
+|    ^    |             |
+|   str   |             |
++---------+-------------+
 </code></pre>
 <h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs

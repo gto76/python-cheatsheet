@@ -82,7 +82,7 @@ const DIAGRAM_4_B =
 
 const DIAGRAM_5_A =
   "+----------------+----------------+---------------+----------------+-----------------+\n" +
-  "|                |    {&lt;float&gt;}   |  {&lt;float&gt;:f}  |   {&lt;float&gt;:e}  |   {&lt;float&gt;:%}   |\n" +
+  "|                |    {<float>}   |  {<float>:f}  |   {<float>:e}  |   {<float>:%}   |\n" +
   "+----------------+----------------+---------------+----------------+-----------------+\n" +
   "|    0.000056789 |   '5.6789e-05' |    '0.000057' | '5.678900e-05' |     '0.005679%' |\n" +
   "|    0.00056789  |   '0.00056789' |    '0.000568' | '5.678900e-04' |     '0.056789%' |\n" +
@@ -96,7 +96,7 @@ const DIAGRAM_5_A =
 
 const DIAGRAM_5_B =
   "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃                │    {<float>}   │  {<float>:f}  │   {<float>:e}  │   {<float>:%}   ┃\n" +
+  "┃                │    {&lt;float&gt;}   │  {&lt;float&gt;:f}  │   {&lt;float&gt;:e}  │   {&lt;float&gt;:%}   ┃\n" +
   "┠────────────────┼────────────────┼───────────────┼────────────────┼─────────────────┨\n" +
   "┃    0.000056789 │   '5.6789e-05' │    '0.000057' │ '5.678900e-05' │     '0.005679%' ┃\n" +
   "┃    0.00056789  │   '0.00056789' │    '0.000568' │ '5.678900e-04' │     '0.056789%' ┃\n" +
@@ -110,7 +110,7 @@ const DIAGRAM_5_B =
 
 const DIAGRAM_6_A =
   "+----------------+----------------+---------------+----------------+-----------------+\n" +
-  "|                |  {&lt;float&gt;:.2}  | {&lt;float&gt;:.2f} |  {&lt;float&gt;:.2e} |  {&lt;float&gt;:.2%}  |\n" +
+  "|                |  {<float>:.2}  | {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%}  |\n" +
   "+----------------+----------------+---------------+----------------+-----------------+\n" +
   "|    0.000056789 |   '5.7e-05'    |      '0.00'   |   '5.68e-05'   |       '0.01%'   |\n" +
   "|    0.00056789  |   '0.00057'    |      '0.00'   |   '5.68e-04'   |       '0.06%'   |\n" +
@@ -124,7 +124,7 @@ const DIAGRAM_6_A =
 
 const DIAGRAM_6_B =
   "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃                │  {<float>:.2}  │ {<float>:.2f} │  {<float>:.2e} │  {<float>:.2%}  ┃\n" +
+  "┃                │  {&lt;float&gt;:.2}  │ {&lt;float&gt;:.2f} │  {&lt;float&gt;:.2e} │  {&lt;float&gt;:.2%}  ┃\n" +
   "┠────────────────┼────────────────┼───────────────┼────────────────┼─────────────────┨\n" +
   "┃    0.000056789 │   '5.7e-05'    │      '0.00'   │   '5.68e-05'   │       '0.01%'   ┃\n" +
   "┃    0.00056789  │   '0.00057'    │      '0.00'   │   '5.68e-04'   │       '0.06%'   ┃\n" +
@@ -139,36 +139,34 @@ const DIAGRAM_6_B =
 const DIAGRAM_7_A =
   '+------------+----------+------------+----------+--------------+\n' +
   '|            | Iterable | Collection | Sequence | abc.Sequence |\n' +
-  '+------------+----------+------------+----------+--------------+\n' +
-  '| iter()     |   REQ    |    REQ     |   yes    |     yes      |\n' +
-  '| contains() |   yes    |    yes     |   yes    |     yes      |\n' +
-  '| len()      |          |    REQ     |   REQ    |     REQ      |\n' +
-  '| getitem()  |          |            |   REQ    |     REQ      |\n' +
-  '| reversed() |          |            |   yes    |     yes      |\n' +
-  '| reverse()  |          |            |          |     yes      |\n' +
-  '| index()    |          |            |          |     yes      |\n' +
-  '| count()    |          |            |          |     yes      |\n' +
   '+------------+----------+------------+----------+--------------+\n';
 
 const DIAGRAM_7_B =
   '┏━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
   '┃            │ Iterable │ Collection │ Sequence │ abc.Sequence ┃\n' +
-  '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n';
+  '┠────────────┼──────────┼────────────┼──────────┼──────────────┨\n' +
+  '┃ iter()     │    !     │     !      │    ✓     │      ✓       ┃\n' +
+  '┃ contains() │    ✓     │     ✓      │    ✓     │      ✓       ┃\n' +
+  '┃ len()      │          │     !      │    !     │      !       ┃\n' +
+  '┃ getitem()  │          │            │    !     │      !       ┃\n' +
+  '┃ reversed() │          │            │    ✓     │      ✓       ┃\n' +
+  '┃ reverse()  │          │            │          │      ✓       ┃\n' +
+  '┃ index()    │          │            │          │      ✓       ┃\n' +
+  '┃ count()    │          │            │          │      ✓       ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
 
-if (!isFontAvailable('Menlo')) {
-  $(`code:contains(${DIAGRAM_1_B})`).html(DIAGRAM_1_A);
-  $(`code:contains(${DIAGRAM_2_B})`).html(DIAGRAM_2_A);
-  $(`code:contains(${DIAGRAM_3_B})`).html(DIAGRAM_3_A);
-  $(`code:contains(${DIAGRAM_4_B})`).html(DIAGRAM_4_A);
-  $(`code:contains(${DIAGRAM_5_B})`).html(DIAGRAM_5_A);
-  $(`code:contains(${DIAGRAM_6_B})`).html(DIAGRAM_6_A);
-  $(`code:contains(${DIAGRAM_7_B})`).html(DIAGRAM_7_A);
-  // var htmlString = $('code:contains(ᴺᴱᵂ)').html().replace(/ᴺᴱᵂ/g, '');
-  // $('code:contains(ᴺᴱᵂ)').html(htmlString);
+if (isFontAvailable('Menlo')) {
+  $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
+  $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
+  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
+  $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
+  $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
+  $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
+  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
 }
 
 var isMobile = false;
