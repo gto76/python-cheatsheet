@@ -1210,28 +1210,52 @@ Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-st
 LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">and</span> r),
                            <span class="hljs-string">'OR'</span> : partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre>
+<ul>
+<li><strong>Another solution in this particular case, is to use <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> functions from module <a href="#operator">operator</a> as values.</strong></li>
+</ul>
 <h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-    <span class="hljs-keyword">try</span>:
-        x = int(input(<span class="hljs-string">'Please enter a number: '</span>))
-    <span class="hljs-keyword">except</span> ValueError:
-        print(<span class="hljs-string">'Oops!  That was no valid number.  Try again...'</span>)
-    <span class="hljs-keyword">else</span>:
-        print(<span class="hljs-string">'Thank you.'</span>)
-        <span class="hljs-keyword">break</span>
+<h3 id="basicexample">Basic Example</h3>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
+    &lt;code&gt;
+<span class="hljs-keyword">except</span> &lt;exception&gt;:
+    &lt;code&gt;
 </code></pre>
-<h3 id="raisingexception">Raising Exception</h3>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'A very specific message!'</span>)
+<h3 id="complexexample">Complex Example</h3>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
+    &lt;code_1&gt;
+<span class="hljs-keyword">except</span> &lt;exception_a&gt;:
+    &lt;code_2_a&gt;
+<span class="hljs-keyword">except</span> &lt;exception_b&gt;:
+    &lt;code_2_b&gt;
+<span class="hljs-keyword">else</span>:
+    &lt;code_2_c&gt;
+<span class="hljs-keyword">finally</span>:
+    &lt;code_3&gt;
 </code></pre>
-<h3 id="finally">Finally</h3>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">try</span>:
-<span class="hljs-meta">... </span>    <span class="hljs-keyword">raise</span> KeyboardInterrupt
-<span class="hljs-meta">... </span><span class="hljs-keyword">finally</span>:
-<span class="hljs-meta">... </span>    print(<span class="hljs-string">'Goodbye, world!'</span>)
-Goodbye, world!
-Traceback (most recent call last):
-  File <span class="hljs-string">"&lt;stdin&gt;"</span>, line <span class="hljs-number">2</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
-KeyboardInterrupt
+<h3 id="catchingexceptions">Catching Exceptions</h3>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
+<span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;:
+<span class="hljs-keyword">except</span> (&lt;exception_1&gt;, &lt;exception_2&gt;, ...):
+<span class="hljs-keyword">except</span> (&lt;exception_1&gt;, &lt;exception_2&gt;, ...) <span class="hljs-keyword">as</span> &lt;name&gt;:
+</code></pre>
+<ul>
+<li><strong>Also catches subclasses of the exception.</strong></li>
+</ul>
+<h3 id="raisingexceptions">Raising Exceptions</h3>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
+<span class="hljs-keyword">raise</span> &lt;exception&gt;()
+<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt;)
+<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el_1&gt;, &lt;el_2&gt;, ...)
+</code></pre>
+<h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
+<span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
+<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
+</code></pre>
+<h4 id="reraisingcaughtexception">Re-raising caught exception:</h4>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
+    &lt;code&gt;
+    <span class="hljs-keyword">raise</span>
 </code></pre>
 <h3 id="commonbuiltinexceptions">Common Built-in Exceptions</h3>
 <pre><code class="python language-python hljs">BaseException
@@ -1255,9 +1279,13 @@ KeyboardInterrupt
       +-- ValueError              <span class="hljs-comment"># When an argument is of right type but inappropriate value.</span>
            +-- UnicodeError       <span class="hljs-comment"># Raised when encoding/decoding strings from/to bytes fails. </span>
 </code></pre>
-<ul>
-<li><strong>Appropriate built-in exceptions for user to rise are: 'ValueError', 'TypeError' and 'RuntimeError'.</strong></li>
-</ul>
+<h3 id="userdefinedexceptions">User-defined Exceptions</h3>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInputError</span><span class="hljs-params">(MyError)</span>:</span>
+    <span class="hljs-keyword">pass</span>
+</code></pre>
 <h2 id="print"><a href="#print" name="print">#</a>Print</h2>
 <pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
 </code></pre>

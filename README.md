@@ -1306,36 +1306,63 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
+* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [operator](#operator) as values.**
 
 
 Exceptions
 ----------
+
+### Basic Example
 ```python
-while True:
-    try:
-        x = int(input('Please enter a number: '))
-    except ValueError:
-        print('Oops!  That was no valid number.  Try again...')
-    else:
-        print('Thank you.')
-        break
+try:
+    <code>
+except <exception>:
+    <code>
 ```
 
-### Raising Exception
+### Complex Example
 ```python
-raise ValueError('A very specific message!')
+try:
+    <code_1>
+except <exception_a>:
+    <code_2_a>
+except <exception_b>:
+    <code_2_b>
+else:
+    <code_2_c>
+finally:
+    <code_3>
 ```
 
-### Finally
+### Catching Exceptions
 ```python
->>> try:
-...     raise KeyboardInterrupt
-... finally:
-...     print('Goodbye, world!')
-Goodbye, world!
-Traceback (most recent call last):
-  File "<stdin>", line 2, in <module>
-KeyboardInterrupt
+except <exception>:
+except <exception> as <name>:
+except (<exception_1>, <exception_2>, ...):
+except (<exception_1>, <exception_2>, ...) as <name>:
+```
+* **Also catches subclasses of the exception.**
+
+### Raising Exceptions
+```python
+raise <exception>
+raise <exception>()
+raise <exception>(<el>)
+raise <exception>(<el_1>, <el_2>, ...)
+```
+
+#### Useful built-in exceptions:
+```python
+raise ValueError('Argument is of right type but inappropriate value!')
+raise TypeError('Argument is of wrong type!')
+raise RuntimeError('None of above!')
+```
+
+#### Re-raising caught exception:
+```python
+except <exception>:
+    <code>
+    raise
 ```
 
 ### Common Built-in Exceptions
@@ -1361,7 +1388,15 @@ BaseException
       +-- ValueError              # When an argument is of right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
 ```
-* **Appropriate built-in exceptions for user to rise are: 'ValueError', 'TypeError' and 'RuntimeError'.**
+
+### User-defined Exceptions
+```python
+class MyError(Exception):
+    pass
+
+class MyInputError(MyError):
+    pass
+```
 
 
 Print
