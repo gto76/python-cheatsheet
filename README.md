@@ -1206,7 +1206,8 @@ class MyCollection:
 
 ### Sequence
 * **Only required methods are len() and getitem().**
-* **Iter(), contains() and reversed() automatically work on any object that has getitem() defined.**
+* **Iter() and contains() automatically work on any object that has getitem() defined.**
+* **Reversed() automatically works on any object that has getitem() and len() defined.**
 ```python
 class MySequence:
     def __init__(self, a):
