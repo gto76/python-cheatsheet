@@ -1429,7 +1429,7 @@ value = args.<name>
 
 Open
 ----
-**Opens a file and returns a corresponding file object.**
+**Opens a file and returns a corresponding file object or raises 'FileNotFoundError'.**
 
 ```python
 <file> = open('<path>', mode='r', encoding=None, newline=None)
