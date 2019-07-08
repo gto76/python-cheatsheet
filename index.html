@@ -1307,7 +1307,7 @@ value = args.&lt;name&gt;
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files.</strong></li>
 </ul>
 <h2 id="open"><a href="#open" name="open">#</a>Open</h2>
-<p><strong>Opens a file and returns a corresponding file object or raises 'FileNotFoundError'.</strong></p>
+<p><strong>Opens a file and returns a corresponding file object.</strong></p>
 <pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre>
 <ul>
@@ -1326,6 +1326,11 @@ value = args.&lt;name&gt;
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'t'</span></code>  - Text mode (default).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode.</strong></li>
+</ul>
+<h3 id="exceptions-1">Exceptions</h3>
+<ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong>  </li>
+<li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be risen when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 </ul>
 <h3 id="file">File</h3>
 <pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
@@ -1809,7 +1814,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <ul>
 <li><strong>Levels: <code class="python hljs"><span class="hljs-string">'debug'</span></code>, <code class="python hljs"><span class="hljs-string">'info'</span></code>, <code class="python hljs"><span class="hljs-string">'success'</span></code>, <code class="python hljs"><span class="hljs-string">'warning'</span></code>, <code class="python hljs"><span class="hljs-string">'error'</span></code>, <code class="python hljs"><span class="hljs-string">'critical'</span></code>.</strong></li>
 </ul>
-<h3 id="exceptions-1">Exceptions</h3>
+<h3 id="exceptions-2">Exceptions</h3>
 <p><strong>Error description, stack trace and values of variables are appended automatically.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     ...

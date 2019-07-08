@@ -1429,7 +1429,7 @@ value = args.<name>
 
 Open
 ----
-**Opens a file and returns a corresponding file object or raises 'FileNotFoundError'.**
+**Opens a file and returns a corresponding file object.**
 
 ```python
 <file> = open('<path>', mode='r', encoding=None, newline=None)
@@ -1448,6 +1448,10 @@ Open
 * **`'a+'` - Read and write from the end.**
 * **`'t'`  - Text mode (default).**
 * **`'b'`  - Binary mode.**
+
+### Exceptions
+* **`'FileNotFoundError'` can be risen when reading with `'r'` or `'r+'`.**  
+* **`'FileExistsError'` can be risen when writing with `'x'`.**
 
 ### File
 ```python
