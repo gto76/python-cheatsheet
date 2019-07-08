@@ -1250,7 +1250,6 @@ class MyAbcSequence(collections.abc.Sequence):
 | len()      |          |    REQ     |   REQ    |     REQ      |
 | getitem()  |          |            |   REQ    |     REQ      |
 | reversed() |          |            |   yes    |     yes      |
-| reverse()  |          |            |          |     yes      |
 | index()    |          |            |          |     yes      |
 | count()    |          |            |          |     yes      |
 +------------+----------+------------+----------+--------------+
