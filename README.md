@@ -1361,7 +1361,7 @@ BaseException
       +-- ValueError              # When an argument is of right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
 ```
-* *Appropriate built-in exceptions for user to rise are: 'ValueError', 'TypeError' and 'RuntimeError'..**
+* **Appropriate built-in exceptions for user to rise are: 'ValueError', 'TypeError' and 'RuntimeError'..**
 
 
 Print
