@@ -1101,6 +1101,8 @@ class MySortable:
 ```
 
 ### Iterator
+* **Next() should return next item or raise 'StopIteration'.**
+* **Iter() should return 'self'.**
 ```python
 class Counter:
     def __init__(self):
@@ -1205,7 +1207,7 @@ class MyCollection:
 ```
 
 ### Sequence
-* **Only required methods are len() and getitem().**
+* **Only required methods are len() and getitem(), that should return an item at index or raise 'IndexError'.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has getitem() and len() defined.**
 ```python
