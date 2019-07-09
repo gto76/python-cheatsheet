@@ -2030,7 +2030,7 @@ Operator
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 from operator import eq, ne, lt, le, gt, ge
-from operator import not_, and_, or_
+from operator import and_, or_, not_
 from operator import itemgetter, attrgetter, methodcaller
 ```
 
