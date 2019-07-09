@@ -1258,26 +1258,26 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">raise</span>
 </code></pre>
 <h3 id="commonbuiltinexceptions">Common Built-in Exceptions</h3>
-<pre><code class="python language-python hljs">BaseException
- ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function.</span>
- ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key.</span>
- └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
-      ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
-      ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors.</span>
-      │    └── ZeroDivisionError  <span class="hljs-comment"># Raised when dividing by zero.</span>
-      ├── AttributeError          <span class="hljs-comment"># Raised when an attribute is missing.</span>
-      ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits end-of-file condition.</span>
-      ├── LookupError             <span class="hljs-comment"># Raised when a look-up on sequence or dict fails.</span>
-      │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
-      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key is not found.</span>
-      ├── NameError               <span class="hljs-comment"># Raised when a variable name is not found.</span>
-      ├── OSError                 <span class="hljs-comment"># Failures such as “file not found” or “disk full”.</span>
-      │    └── FileNotFoundError  <span class="hljs-comment"># When a file or directory is requested but doesn't exist.</span>
-      ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall in other categories.</span>
-      │    └── RecursionError     <span class="hljs-comment"># Raised when the the maximum recursion depth is exceeded.</span>
-      ├── TypeError               <span class="hljs-comment"># Raised when an argument is of wrong type.</span>
-      └── ValueError              <span class="hljs-comment"># When an argument is of right type but inappropriate value.</span>
-           └── UnicodeError       <span class="hljs-comment"># Raised when encoding/decoding strings from/to bytes fails.</span>
+<pre><code class="text language-text">BaseException
+ +-- SystemExit                   # Raised by the sys.exit() function.
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
+ +-- Exception                    # User-defined exceptions should be derived from this class.
+      +-- StopIteration           # Raised by next() when run on an empty iterator.
+      +-- ArithmeticError         # Base class for arithmetic errors.
+      |    +-- ZeroDivisionError  # Raised when dividing by zero.
+      +-- AttributeError          # Raised when an attribute is missing.
+      +-- EOFError                # Raised by input() when it hits end-of-file condition.
+      +-- LookupError             # Raised when a look-up on sequence or dict fails.
+      |    +-- IndexError         # Raised when a sequence index is out of range.
+      |    +-- KeyError           # Raised when a dictionary key is not found.
+      +-- NameError               # Raised when a variable name is not found.
+      +-- OSError                 # Failures such as “file not found” or “disk full”.
+      |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
+      +-- RuntimeError            # Raised by errors that don't fall in other categories.
+      |    +-- RecursionError     # Raised when the the maximum recursion depth is exceeded.
+      +-- TypeError               # Raised when an argument is of wrong type.
+      +-- ValueError              # When an argument is of right type but inappropriate value.
+           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
 </code></pre>
 <h3 id="userdefinedexceptions">User-defined Exceptions</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>

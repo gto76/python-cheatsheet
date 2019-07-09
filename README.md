@@ -1366,27 +1366,27 @@ except <exception>:
 ```
 
 ### Common Built-in Exceptions
-```python
+```text
 BaseException
- ├── SystemExit                   # Raised by the sys.exit() function.
- ├── KeyboardInterrupt            # Raised when the user hits the interrupt key.
- └── Exception                    # User-defined exceptions should be derived from this class.
-      ├── StopIteration           # Raised by next() when run on an empty iterator.
-      ├── ArithmeticError         # Base class for arithmetic errors.
-      │    └── ZeroDivisionError  # Raised when dividing by zero.
-      ├── AttributeError          # Raised when an attribute is missing.
-      ├── EOFError                # Raised by input() when it hits end-of-file condition.
-      ├── LookupError             # Raised when a look-up on sequence or dict fails.
-      │    ├── IndexError         # Raised when a sequence index is out of range.
-      │    └── KeyError           # Raised when a dictionary key is not found.
-      ├── NameError               # Raised when a variable name is not found.
-      ├── OSError                 # Failures such as “file not found” or “disk full”.
-      │    └── FileNotFoundError  # When a file or directory is requested but doesn't exist.
-      ├── RuntimeError            # Raised by errors that don't fall in other categories.
-      │    └── RecursionError     # Raised when the the maximum recursion depth is exceeded.
-      ├── TypeError               # Raised when an argument is of wrong type.
-      └── ValueError              # When an argument is of right type but inappropriate value.
-           └── UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+ +-- SystemExit                   # Raised by the sys.exit() function.
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
+ +-- Exception                    # User-defined exceptions should be derived from this class.
+      +-- StopIteration           # Raised by next() when run on an empty iterator.
+      +-- ArithmeticError         # Base class for arithmetic errors.
+      |    +-- ZeroDivisionError  # Raised when dividing by zero.
+      +-- AttributeError          # Raised when an attribute is missing.
+      +-- EOFError                # Raised by input() when it hits end-of-file condition.
+      +-- LookupError             # Raised when a look-up on sequence or dict fails.
+      |    +-- IndexError         # Raised when a sequence index is out of range.
+      |    +-- KeyError           # Raised when a dictionary key is not found.
+      +-- NameError               # Raised when a variable name is not found.
+      +-- OSError                 # Failures such as “file not found” or “disk full”.
+      |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
+      +-- RuntimeError            # Raised by errors that don't fall in other categories.
+      |    +-- RecursionError     # Raised when the the maximum recursion depth is exceeded.
+      +-- TypeError               # Raised when an argument is of wrong type.
+      +-- ValueError              # When an argument is of right type but inappropriate value.
+           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
 ```
 
 ### User-defined Exceptions
