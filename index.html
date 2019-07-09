@@ -1431,15 +1431,15 @@ value = args.&lt;name&gt;
 <li><strong>All exceptions are either 'OSError' or its subclasses.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
-os.chdir(&lt;path&gt;)       <span class="hljs-comment"># Changes the current working directory.</span>
-&lt;str&gt; = os.getcwd()    <span class="hljs-comment"># Returns current working directory.</span>
+os.chdir(&lt;path&gt;)               <span class="hljs-comment"># Changes the current working directory.</span>
+&lt;str&gt; = os.getcwd()            <span class="hljs-comment"># Returns current working directory.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)      <span class="hljs-comment"># Deletes the file.</span>
-os.rmdir(&lt;path&gt;)       <span class="hljs-comment"># Deletes empty directory.</span>
-shutil.rmtree(&lt;path&gt;)  <span class="hljs-comment"># Deletes an entire directory tree.</span>
+<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)              <span class="hljs-comment"># Deletes the file.</span>
+os.rmdir(&lt;path&gt;)               <span class="hljs-comment"># Deletes empty directory.</span>
+shutil.rmtree(&lt;path&gt;)          <span class="hljs-comment"># Deletes an entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)    <span class="hljs-comment"># Renames the file or directory.</span>
-os.replace(<span class="hljs-keyword">from</span>, to)   <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)            <span class="hljs-comment"># Renames the file or directory.</span>
+os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)   <span class="hljs-comment"># Creates a directory.</span>
 &lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)  <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>

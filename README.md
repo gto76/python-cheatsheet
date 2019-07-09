@@ -1589,19 +1589,19 @@ Command Execution
 
 ```python
 import os
-os.chdir(<path>)       # Changes the current working directory.
-<str> = os.getcwd()    # Returns current working directory.
+os.chdir(<path>)               # Changes the current working directory.
+<str> = os.getcwd()            # Returns current working directory.
 ```
 
 ```python
-os.remove(<path>)      # Deletes the file.
-os.rmdir(<path>)       # Deletes empty directory.
-shutil.rmtree(<path>)  # Deletes an entire directory tree.
+os.remove(<path>)              # Deletes the file.
+os.rmdir(<path>)               # Deletes empty directory.
+shutil.rmtree(<path>)          # Deletes an entire directory tree.
 ```
 
 ```python
-os.rename(from, to)    # Renames the file or directory.
-os.replace(from, to)   # Same, but overwrites 'to' if it exists.
+os.rename(from, to)            # Renames the file or directory.
+os.replace(from, to)           # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
