@@ -479,7 +479,7 @@ Numbers
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 ```
-* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
+* **`'int(<str>)'` and `'float(<str>)'` raise 'ValueError' on malformed strings.**
 
 ### Basic Functions
 ```python
@@ -1583,12 +1583,48 @@ cwd    = Path()
 
 Command Execution
 -----------------
+### Files and Directories Commands
+* **Paths can be either strings or Path objects.**
+* **All exceptions are either 'OSError' or its subclasses.**
+
 ```python
 import os
-<str> = os.popen(<command>).read()
+os.chdir(<path>)       # Changes the current working directory.
+<str> = os.getcwd()    # Returns current working directory.
 ```
 
-### Subprocess
+```python
+os.remove(<path>)      # Deletes the file.
+os.rmdir(<path>)       # Deletes empty directory.
+shutil.rmtree(<path>)  # Deletes an entire directory tree.
+```
+
+```python
+os.rename(from, to)    # Renames the file or directory.
+os.replace(from, to)   # Same, but overwrites 'to' if it exists.
+```
+
+```python
+os.mkdir(<path>, mode=0o777)   # Creates a directory.
+<iter> = os.scandir(path='.')  # Returns os.DirEntry objects located at path.
+```
+
+#### DirEntry:
+```pyton
+<str>  = <DirEntry>.name
+<str>  = <DirEntry>.path
+<bool> = <DirEntry>.is_file()
+<bool> = <DirEntry>.is_dir()
+<bool> = <DirEntry>.is_symlink() 
+```
+
+### Shell Commands
+```python
+import os
+<str> = os.popen('<shell_command>').read()
+```
+
+#### Using subprocess:
 ```python
 >>> import subprocess, shlex
 >>> a = subprocess.run(shlex.split('ls -a'), stdout=subprocess.PIPE)

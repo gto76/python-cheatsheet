@@ -547,7 +547,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;Fraction&gt; = fractions.Fraction(numerator=<span class="hljs-number">0</span>, denominator=<span class="hljs-number">1</span>)
 </code></pre>
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise 'ValueError' on malformed strings.</strong></li>
 </ul>
 <h3 id="basicfunctions">Basic Functions</h3>
 <pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)            <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
@@ -1425,10 +1425,37 @@ value = args.&lt;name&gt;
 &lt;Path&gt; = &lt;Path&gt;.parent             <span class="hljs-comment"># Path without final component.</span>
 </code></pre>
 <h2 id="commandexecution"><a href="#commandexecution" name="commandexecution">#</a>Command Execution</h2>
+<h3 id="filesanddirectoriescommands">Files and Directories Commands</h3>
+<ul>
+<li><strong>Paths can be either strings or Path objects.</strong></li>
+<li><strong>All exceptions are either 'OSError' or its subclasses.</strong></li>
+</ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
-&lt;str&gt; = os.popen(&lt;command&gt;).read()
+os.chdir(&lt;path&gt;)       <span class="hljs-comment"># Changes the current working directory.</span>
+&lt;str&gt; = os.getcwd()    <span class="hljs-comment"># Returns current working directory.</span>
 </code></pre>
-<h3 id="subprocess">Subprocess</h3>
+<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)      <span class="hljs-comment"># Deletes the file.</span>
+os.rmdir(&lt;path&gt;)       <span class="hljs-comment"># Deletes empty directory.</span>
+shutil.rmtree(&lt;path&gt;)  <span class="hljs-comment"># Deletes an entire directory tree.</span>
+</code></pre>
+<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)    <span class="hljs-comment"># Renames the file or directory.</span>
+os.replace(<span class="hljs-keyword">from</span>, to)   <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+</code></pre>
+<pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)   <span class="hljs-comment"># Creates a directory.</span>
+&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)  <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
+</code></pre>
+<h4 id="direntry">DirEntry:</h4>
+<pre><code class="pyton language-pyton python">&lt;str&gt;  = &lt;DirEntry&gt;.name
+&lt;str&gt;  = &lt;DirEntry&gt;.path
+&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
+&lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
+&lt;bool&gt; = &lt;DirEntry&gt;.is_symlink() 
+</code></pre>
+<h3 id="shellcommands">Shell Commands</h3>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
+&lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
+</code></pre>
+<h4 id="usingsubprocess">Using subprocess:</h4>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> subprocess, shlex
 <span class="hljs-meta">&gt;&gt;&gt; </span>a = subprocess.run(shlex.split(<span class="hljs-string">'ls -a'</span>), stdout=subprocess.PIPE)
 <span class="hljs-meta">&gt;&gt;&gt; </span>a.stdout
