@@ -117,6 +117,31 @@ const DIAGRAM_7_B =
   '┃ count()    │          │            │          │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_8_A =
+  'BaseException\n' +
+  ' +-- SystemExit';
+
+const DIAGRAM_8_B =
+  "BaseException\n" +
+  " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function.</span>\n" +
+  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key.</span>\n" +
+  " └── Exception                    <span class='hljs-comment'># User-defined exceptions should be derived from this class.</span>\n" +
+  "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
+  "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors.</span>\n" +
+  "      │    └── ZeroDivisionError  <span class='hljs-comment'># Raised when dividing by zero.</span>\n" +
+  "      ├── AttributeError          <span class='hljs-comment'># Raised when an attribute is missing.</span>\n" +
+  "      ├── EOFError                <span class='hljs-comment'># Raised by input() when it hits end-of-file condition.</span>\n" +
+  "      ├── LookupError             <span class='hljs-comment'># Raised when a look-up on sequence or dict fails.</span>\n" +
+  "      │    ├── IndexError         <span class='hljs-comment'># Raised when a sequence index is out of range.</span>\n" +
+  "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key is not found.</span>\n" +
+  "      ├── NameError               <span class='hljs-comment'># Raised when a variable name is not found.</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Failures such as “file not found” or “disk full”.</span>\n" +
+  "      │    └── FileNotFoundError  <span class='hljs-comment'># When a file or directory is requested but doesn't exist.</span>\n" +
+  "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall in other categories.</span>\n" +
+  "      │    └── RecursionError     <span class='hljs-comment'># Raised when the the maximum recursion depth is exceeded.</span>\n" +
+  "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
+  "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
+  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings from/to bytes fails.</span>\n";
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -129,6 +154,7 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
+  $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
 }
 
 var isMobile = false;
