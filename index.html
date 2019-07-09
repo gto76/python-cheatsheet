@@ -745,10 +745,10 @@ func(*args, **kwargs)
 &lt;function&gt; = <span class="hljs-keyword">lambda</span> &lt;argument_1&gt;, &lt;argument_2&gt;: &lt;return_value&gt;
 </code></pre>
 <h3 id="comprehension">Comprehension</h3>
-<pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]         <span class="hljs-comment"># [1, 2, ..., 10]</span>
-&lt;set&gt;  = {i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>}  <span class="hljs-comment"># {6, 7, 8, 9}</span>
-&lt;iter&gt; = (i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># (5, 6, ..., 14)</span>
-&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}      <span class="hljs-comment"># {0: 0, 1: 2, ..., 9: 18}</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># [1, 2, ..., 10]</span>
+&lt;set&gt;  = {i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>}            <span class="hljs-comment"># {6, 7, 8, 9}</span>
+&lt;iter&gt; = (i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))                   <span class="hljs-comment"># (5, 6, ..., 14)</span>
+&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># {0: 0, 1: 2, ..., 9: 18}</span>
 </code></pre>
 <pre><code class="python language-python hljs">out = [i+j <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
 </code></pre>
@@ -765,8 +765,8 @@ func(*args, **kwargs)
 &lt;int&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># 45</span>
 </code></pre>
 <h3 id="anyall">Any, All</h3>
-<pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                  <span class="hljs-comment"># False if empty.</span>
-&lt;bool&gt; = all(el[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> &lt;collection&gt;)  <span class="hljs-comment"># True if empty.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># False if empty.</span>
+&lt;bool&gt; = all(el[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> &lt;collection&gt;)          <span class="hljs-comment"># True if empty.</span>
 </code></pre>
 <h3 id="ifelse">If - Else</h3>
 <pre><code class="python language-python hljs">&lt;expression_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;expression_if_false&gt;
@@ -1431,23 +1431,24 @@ value = args.&lt;name&gt;
 <li><strong>All exceptions are either 'OSError' or its subclasses.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
-os.chdir(&lt;path&gt;)               <span class="hljs-comment"># Changes the current working directory.</span>
-&lt;str&gt; = os.getcwd()            <span class="hljs-comment"># Returns current working directory.</span>
+os.chdir(&lt;path&gt;)                  <span class="hljs-comment"># Changes the current working directory.</span>
+&lt;str&gt; = os.getcwd()               <span class="hljs-comment"># Returns current working directory.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)              <span class="hljs-comment"># Deletes the file.</span>
-os.rmdir(&lt;path&gt;)               <span class="hljs-comment"># Deletes empty directory.</span>
-shutil.rmtree(&lt;path&gt;)          <span class="hljs-comment"># Deletes an entire directory tree.</span>
+<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                 <span class="hljs-comment"># Deletes the file.</span>
+os.rmdir(&lt;path&gt;)                  <span class="hljs-comment"># Deletes empty directory.</span>
+shutil.rmtree(&lt;path&gt;)             <span class="hljs-comment"># Deletes an entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)            <span class="hljs-comment"># Renames the file or directory.</span>
-os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)               <span class="hljs-comment"># Renames the file or directory.</span>
+os.replace(<span class="hljs-keyword">from</span>, to)              <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)   <span class="hljs-comment"># Creates a directory.</span>
-&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)  <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
+<pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)      <span class="hljs-comment"># Creates a directory.</span>
+&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)     <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
 <h4 id="direntry">DirEntry:</h4>
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.name       <span class="hljs-comment"># Final component of the path.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.path       <span class="hljs-comment"># Path with final component.</span>
-&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.name          <span class="hljs-comment"># Final component of the path.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path          <span class="hljs-comment"># Path with final component.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
 &lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
 &lt;bool&gt; = &lt;DirEntry&gt;.is_symlink()
 &lt;Path&gt; = Path(&lt;DirEntry&gt;)
@@ -1667,8 +1668,8 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 </code></pre>
 <pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)
 &lt;el&gt; = &lt;deque&gt;.popleft()
-&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Collection gets reversed.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Rotates elements to the right.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)            <span class="hljs-comment"># Collection gets reversed.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                         <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>a = deque([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], maxlen=<span class="hljs-number">3</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>a.append(<span class="hljs-number">4</span>)
@@ -1854,10 +1855,10 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 <h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2>
 <pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-pyplot.plot(&lt;data_1&gt; [, &lt;data_2&gt;, ...])  <span class="hljs-comment"># Or: hist, pie, ...</span>
+pyplot.plot(&lt;data_1&gt; [, &lt;data_2&gt;, ...])  <span class="hljs-comment"># Or: hist(&lt;data&gt;).</span>
 pyplot.savefig(&lt;filename&gt;)
 pyplot.show()
-pyplot.clf()  <span class="hljs-comment"># Clears figure.</span>
+pyplot.clf()                             <span class="hljs-comment"># Clears figure.</span>
 </code></pre>
 <h2 id="table"><a href="#table" name="table">#</a>Table</h2>
 <h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4>
@@ -1982,13 +1983,13 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <h2 id="profile"><a href="#profile" name="profile">#</a>Profile</h2>
 <h3 id="basic">Basic</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
-start_time = time()  <span class="hljs-comment"># Seconds since Epoch.</span>
+start_time = time()                  <span class="hljs-comment"># Seconds since Epoch.</span>
 ...
 duration = time() - start_time
 </code></pre>
 <h3 id="highperformance">High Performance</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> perf_counter <span class="hljs-keyword">as</span> pc
-start_time = pc()    <span class="hljs-comment"># Seconds since restart.</span>
+start_time = pc()                    <span class="hljs-comment"># Seconds since restart.</span>
 ...
 duration = pc() - start_time
 </code></pre>

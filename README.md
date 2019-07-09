@@ -746,10 +746,10 @@ Inline
 
 ### Comprehension
 ```python
-<list> = [i+1 for i in range(10)]         # [1, 2, ..., 10]
-<set>  = {i for i in range(10) if i > 5}  # {6, 7, 8, 9}
-<iter> = (i+5 for i in range(10))         # (5, 6, ..., 14)
-<dict> = {i: i*2 for i in range(10)}      # {0: 0, 1: 2, ..., 9: 18}
+<list> = [i+1 for i in range(10)]                   # [1, 2, ..., 10]
+<set>  = {i for i in range(10) if i > 5}            # {6, 7, 8, 9}
+<iter> = (i+5 for i in range(10))                   # (5, 6, ..., 14)
+<dict> = {i: i*2 for i in range(10)}                # {0: 0, 1: 2, ..., 9: 18}
 ```
 
 ```python
@@ -774,8 +774,8 @@ from functools import reduce
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                  # False if empty.
-<bool> = all(el[1] for el in <collection>)  # True if empty.
+<bool> = any(<collection>)                          # False if empty.
+<bool> = all(el[1] for el in <collection>)          # True if empty.
 ```
 
 ### If - Else
@@ -1589,30 +1589,33 @@ Command Execution
 
 ```python
 import os
-os.chdir(<path>)               # Changes the current working directory.
-<str> = os.getcwd()            # Returns current working directory.
+os.chdir(<path>)                  # Changes the current working directory.
+<str> = os.getcwd()               # Returns current working directory.
 ```
 
 ```python
-os.remove(<path>)              # Deletes the file.
-os.rmdir(<path>)               # Deletes empty directory.
-shutil.rmtree(<path>)          # Deletes an entire directory tree.
+os.remove(<path>)                 # Deletes the file.
+os.rmdir(<path>)                  # Deletes empty directory.
+shutil.rmtree(<path>)             # Deletes an entire directory tree.
 ```
 
 ```python
-os.rename(from, to)            # Renames the file or directory.
-os.replace(from, to)           # Same, but overwrites 'to' if it exists.
+os.rename(from, to)               # Renames the file or directory.
+os.replace(from, to)              # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
-os.mkdir(<path>, mode=0o777)   # Creates a directory.
-<iter> = os.scandir(path='.')  # Returns os.DirEntry objects located at path.
+os.mkdir(<path>, mode=0o777)      # Creates a directory.
+<iter> = os.scandir(path='.')     # Returns os.DirEntry objects located at path.
 ```
 
 #### DirEntry:
 ```python
-<str>  = <DirEntry>.name       # Final component of the path.
-<str>  = <DirEntry>.path       # Path with final component.
+<str>  = <DirEntry>.name          # Final component of the path.
+<str>  = <DirEntry>.path          # Path with final component.
+```
+
+```python
 <bool> = <DirEntry>.is_file()
 <bool> = <DirEntry>.is_dir()
 <bool> = <DirEntry>.is_symlink()
@@ -1900,8 +1903,8 @@ from collections import deque
 ```python
 <deque>.appendleft(<el>)
 <el> = <deque>.popleft()
-<deque>.extendleft(<collection>)  # Collection gets reversed.
-<deque>.rotate(n=1)               # Rotates elements to the right.
+<deque>.extendleft(<collection>)            # Collection gets reversed.
+<deque>.rotate(n=1)                         # Rotates elements to the right.
 ```
 
 ```python
@@ -2156,10 +2159,10 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])  # Or: hist, pie, ...
+pyplot.plot(<data_1> [, <data_2>, ...])  # Or: hist(<data>).
 pyplot.savefig(<filename>)
 pyplot.show()
-pyplot.clf()  # Clears figure.
+pyplot.clf()                             # Clears figure.
 ```
 
 
@@ -2321,7 +2324,7 @@ Profile
 ### Basic
 ```python
 from time import time
-start_time = time()  # Seconds since Epoch.
+start_time = time()                  # Seconds since Epoch.
 ...
 duration = time() - start_time
 ```
@@ -2329,7 +2332,7 @@ duration = time() - start_time
 ### High Performance
 ```python
 from time import perf_counter as pc
-start_time = pc()    # Seconds since restart.
+start_time = pc()                    # Seconds since restart.
 ...
 duration = pc() - start_time
 ```
