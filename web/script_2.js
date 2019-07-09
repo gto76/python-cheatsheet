@@ -144,22 +144,22 @@ const DIAGRAM_8_B =
   "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings from/to bytes fails.</span>\n";
 
 const DIAGRAM_9_A =
-  '+------------------+---------+-----------+--------------+\n' +
-  '|                  |  excel  | excel_tab | unix_dialect |\n' +
-  '+------------------+---------+-----------+--------------+\n';
+  '+------------------+-----------+-----------+--------------+\n' +
+  '|                  |   excel   | excel_tab | unix_dialect |\n' +
+  '+------------------+-----------+-----------+--------------+\n';
 
 const DIAGRAM_9_B =
-  "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
-  "┃                  │  excel  │ excel_tab │ unix_dialect ┃\n" +
-  "┠──────────────────┼─────────┼───────────┼──────────────┨\n" +
-  "┃ delimiter        │     ',' │     '\\t'  │       ','    ┃\n" +
-  "┃ quotechar        │     '\"' │      '\"'  │       '\"'    ┃\n" +
-  "┃ doublequote      │    True │     True  │      True    ┃\n" +
-  "┃ skipinitialspace │   False │    False  │     False    ┃\n" +
-  "┃ lineterminator   │  '\\r\\n' │   '\\r\\n'  │      '\\n'    ┃\n" +
-  "┃ quoting          │       0 │        0  │         1    ┃\n" +
-  "┃ escapechar       │    None │     None  │      None    ┃\n" +
-  "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
+  "┃                  │   excel   │ excel_tab │ unix_dialect ┃\n" +
+  "┠──────────────────┼───────────┼───────────┼──────────────┨\n" +
+  "┃ delimiter        │      ','  │     '\t'  │       ','    ┃\n" +
+  "┃ quotechar        │      '\"'  │      '\"'  │       '\"'    ┃\n" +
+  "┃ doublequote      │     True  │     True  │      True    ┃\n" +
+  "┃ skipinitialspace │    False  │    False  │     False    ┃\n" +
+  "┃ lineterminator   │   '\\r\\n'  │   '\\r\\n'  │      '\\n'    ┃\n" +
+  "┃ quoting          │        0  │        0  │         1    ┃\n" +
+  "┃ escapechar       │     None  │     None  │      None    ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 
 // isFontAvailable:

@@ -1665,17 +1665,17 @@ import csv
 
 ### Dialects
 ```text
-+------------------+---------+-----------+--------------+
-|                  |  excel  | excel_tab | unix_dialect |
-+------------------+---------+-----------+--------------+
-| delimiter        |     ',' |     '\t'  |       ','    |
-| quotechar        |     '"' |      '"'  |       '"'    |
-| doublequote      |    True |     True  |      True    |
-| skipinitialspace |   False |    False  |     False    |
-| lineterminator   |  '\r\n' |   '\r\n'  |      '\n'    |
-| quoting          |       0 |        0  |         1    |
-| escapechar       |    None |     None  |      None    |
-+------------------+---------+-----------+--------------+
++------------------+-----------+-----------+--------------+
+|                  |   excel   | excel_tab | unix_dialect |
++------------------+-----------+-----------+--------------+
+| delimiter        |      ','  |     '\t'  |       ','    |
+| quotechar        |      '"'  |      '"'  |       '"'    |
+| doublequote      |     True  |     True  |      True    |
+| skipinitialspace |    False  |    False  |     False    |
+| lineterminator   |   '\r\n'  |   '\r\n'  |      '\n'    |
+| quoting          |        0  |        0  |         1    |
+| escapechar       |     None  |     None  |      None    |
++------------------+-----------+-----------+--------------+
 ```
 
 ### Read Rows from CSV File

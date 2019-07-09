@@ -1486,17 +1486,17 @@ os.replace(<span class="hljs-keyword">from</span>, to)              <span class=
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechar if doublequote is false.</strong></li>
 </ul>
 <h3 id="dialects">Dialects</h3>
-<pre><code class="text language-text">+------------------+---------+-----------+--------------+
-|                  |  excel  | excel_tab | unix_dialect |
-+------------------+---------+-----------+--------------+
-| delimiter        |     ',' |     '\t'  |       ','    |
-| quotechar        |     '"' |      '"'  |       '"'    |
-| doublequote      |    True |     True  |      True    |
-| skipinitialspace |   False |    False  |     False    |
-| lineterminator   |  '\r\n' |   '\r\n'  |      '\n'    |
-| quoting          |       0 |        0  |         1    |
-| escapechar       |    None |     None  |      None    |
-+------------------+---------+-----------+--------------+
+<pre><code class="text language-text">+------------------+-----------+-----------+--------------+
+|                  |   excel   | excel_tab | unix_dialect |
++------------------+-----------+-----------+--------------+
+| delimiter        |      ','  |     '\t'  |       ','    |
+| quotechar        |      '"'  |      '"'  |       '"'    |
+| doublequote      |     True  |     True  |      True    |
+| skipinitialspace |    False  |    False  |     False    |
+| lineterminator   |   '\r\n'  |   '\r\n'  |      '\n'    |
+| quoting          |        0  |        0  |         1    |
+| escapechar       |     None  |     None  |      None    |
++------------------+-----------+-----------+--------------+
 </code></pre>
 <h3 id="readrowsfromcsvfile">Read Rows from CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_csv_file</span><span class="hljs-params">(filename)</span>:</span>
