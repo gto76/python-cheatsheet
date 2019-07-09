@@ -1445,11 +1445,12 @@ os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hl
 &lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)  <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
 <h4 id="direntry">DirEntry:</h4>
-<pre><code class="pyton language-pyton python">&lt;str&gt;  = &lt;DirEntry&gt;.name
-&lt;str&gt;  = &lt;DirEntry&gt;.path
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.name       <span class="hljs-comment"># Final component of the path.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path       <span class="hljs-comment"># Path with final component.</span>
 &lt;bool&gt; = &lt;DirEntry&gt;.is_file()
 &lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
-&lt;bool&gt; = &lt;DirEntry&gt;.is_symlink() 
+&lt;bool&gt; = &lt;DirEntry&gt;.is_symlink()
+&lt;Path&gt; = Path(&lt;DirEntry&gt;)
 </code></pre>
 <h3 id="shellcommands">Shell Commands</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
