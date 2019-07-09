@@ -1306,7 +1306,7 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [Operator](#operator) as values.**
+* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [Operator](#operator).**
 
 
 Exceptions
