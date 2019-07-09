@@ -1101,7 +1101,7 @@ class MySortable:
 ```
 
 ### Iterator
-* **Next() should return next item or raise 'StopIteration'.**
+* **Next() should return the next item or raise 'StopIteration'.**
 * **Iter() should return 'self'.**
 ```python
 class Counter:
