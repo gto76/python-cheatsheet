@@ -1466,11 +1466,41 @@ os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hl
 </code></pre>
 <h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
+&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>, ...)
+&lt;list&gt;   = next(&lt;reader&gt;)  <span class="hljs-comment"># Returns a row as list of strings.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>, ...)
+&lt;writer&gt;.writerow(&lt;collection&gt;)
+&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string used to separate fields.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields that contain special characters.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields get doubled or escaped.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Whether whitespace after delimiter gets stripped.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How does writer terminate lines.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - Controls the amount of quoting: 0 - as necessary, 1 - all.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechar if doublequote is false.</strong></li>
+</ul>
+<h3 id="dialects">Dialects</h3>
+<pre><code class="python language-python hljs">+------------------+--------+-----------+--------------+
+|                  | excel  | excel_tab | unix_dialect |
++------------------+--------+-----------+--------------+
+| delimiter        | <span class="hljs-string">','</span>    |   <span class="hljs-string">'\t'</span>    |     <span class="hljs-string">','</span>      |
+| quotechar        | <span class="hljs-string">'"'</span>    |   <span class="hljs-string">'"'</span>     |     <span class="hljs-string">'"'</span>      |
+| doublequote      | <span class="hljs-keyword">True</span>   |   <span class="hljs-keyword">True</span>    |     <span class="hljs-keyword">True</span>     |
+| skipinitialspace | <span class="hljs-keyword">False</span>  |   <span class="hljs-keyword">False</span>   |     <span class="hljs-keyword">False</span>    |
+| lineterminator   | <span class="hljs-string">'\r\n'</span> |   <span class="hljs-string">'\r\n'</span>  |     <span class="hljs-string">'\n'</span>     |
+| quoting          | <span class="hljs-number">0</span>      |   <span class="hljs-number">0</span>       |     <span class="hljs-number">1</span>        |
+| escapechar       | <span class="hljs-keyword">None</span>   |   <span class="hljs-keyword">None</span>    |     <span class="hljs-keyword">None</span>     |
++------------------+--------+-----------+--------------+
 </code></pre>
 <h3 id="readrowsfromcsvfile">Read Rows from CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_csv_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-        <span class="hljs-keyword">return</span> csv.reader(file, delimiter=<span class="hljs-string">';'</span>)
+        <span class="hljs-keyword">return</span> csv.reader(file)
 </code></pre>
 <ul>
 <li><strong>If <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.</strong></li>
@@ -1478,7 +1508,7 @@ os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hl
 <h3 id="writerowstocsvfile">Write Rows to CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-        writer = csv.writer(file, delimiter=<span class="hljs-string">';'</span>)
+        writer = csv.writer(file)
         writer.writerows(rows)
 </code></pre>
 <h2 id="json"><a href="#json" name="json">#</a>JSON</h2>
@@ -1681,7 +1711,7 @@ lock.release()
 value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
 setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)
 </code></pre>
-<h3 id="parameters">Parameters</h3>
+<h3 id="parameters-1">Parameters</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
 &lt;sig&gt;        = signature(&lt;function&gt;)
 no_of_params = len(&lt;sig&gt;.parameters)
@@ -1835,7 +1865,7 @@ pyplot.clf()  <span class="hljs-comment"># Clears figure.</span>
 <span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate
 <span class="hljs-keyword">import</span> csv
 <span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-    lines   = csv.reader(file, delimiter=<span class="hljs-string">';'</span>)
+    lines   = csv.reader(file)
     headers = [header.title() <span class="hljs-keyword">for</span> header <span class="hljs-keyword">in</span> next(lines)]
     table   = tabulate(lines, headers)
     print(table)

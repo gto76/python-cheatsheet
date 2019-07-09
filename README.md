@@ -1640,13 +1640,46 @@ CSV
 ---
 ```python
 import csv
+<reader> = csv.reader(<file>, dialect='excel', delimiter=',', ...)
+<list>   = next(<reader>)  # Returns a row as list of strings.
+```
+
+```python
+<writer> = csv.writer(<file>, dialect='excel', delimiter=',', ...)
+<writer>.writerow(<collection>)
+<writer>.writerows(<coll_of_coll>)
+```
+
+### Parameters
+* **`'dialect'` - Master parameter that sets the default values.**
+* **`'delimiter'` - A one-character string used to separate fields.**
+* **`'quotechar'` - Character for quoting fields that contain special characters.**
+* **`'doublequote'` - Whether quotechars inside fields get doubled or escaped.**
+* **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped.**
+* **`'lineterminator'` - How does writer terminate lines.**
+* **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
+* **`'escapechar'` - Character for escaping quotechar if doublequote is false.**
+
+### Dialects
+```python
++------------------+--------+-----------+--------------+
+|                  | excel  | excel_tab | unix_dialect |
++------------------+--------+-----------+--------------+
+| delimiter        | ','    |   '\t'    |     ','      |
+| quotechar        | '"'    |   '"'     |     '"'      |
+| doublequote      | True   |   True    |     True     |
+| skipinitialspace | False  |   False   |     False    |
+| lineterminator   | '\r\n' |   '\r\n'  |     '\n'     |
+| quoting          | 0      |   0       |     1        |
+| escapechar       | None   |   None    |     None     |
++------------------+--------+-----------+--------------+
 ```
 
 ### Read Rows from CSV File
 ```python
 def read_csv_file(filename):
     with open(filename, encoding='utf-8', newline='') as file:
-        return csv.reader(file, delimiter=';')
+        return csv.reader(file)
 ```
 * **If `'newline=""'` is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.**
 
@@ -1654,7 +1687,7 @@ def read_csv_file(filename):
 ```python
 def write_to_csv_file(filename, rows):
     with open(filename, 'w', encoding='utf-8', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
+        writer = csv.writer(file)
         writer.writerows(rows)
 ```
 
@@ -2138,7 +2171,7 @@ Table
 from tabulate import tabulate
 import csv
 with open(<filename>, encoding='utf-8', newline='') as file:
-    lines   = csv.reader(file, delimiter=';')
+    lines   = csv.reader(file)
     headers = [header.title() for header in next(lines)]
     table   = tabulate(lines, headers)
     print(table)
