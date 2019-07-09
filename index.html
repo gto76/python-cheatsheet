@@ -1359,6 +1359,8 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong>  </li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be risen when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be risen by any.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
 </ul>
 <h3 id="file">File</h3>
 <pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
