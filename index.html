@@ -1544,7 +1544,7 @@ os.replace(<span class="hljs-keyword">from</span>, to)           <span class="hl
 <h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2>
 <p><strong>Server-less database engine that stores each database into separate file.</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)   <span class="hljs-comment"># Also ':memory:'.</span>
+db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)                <span class="hljs-comment"># Also ':memory:'.</span>
 ...
 db.close()
 </code></pre>
@@ -1554,8 +1554,8 @@ db.close()
 <h3 id="read">Read</h3>
 <pre><code class="python language-python hljs">cursor = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 <span class="hljs-keyword">if</span> cursor:
-    &lt;tuple&gt; = cursor.fetchone()  <span class="hljs-comment"># First row.</span>
-    &lt;list&gt;  = cursor.fetchall()  <span class="hljs-comment"># Remaining rows.</span>
+    &lt;tuple&gt; = cursor.fetchone()               <span class="hljs-comment"># First row.</span>
+    &lt;list&gt;  = cursor.fetchall()               <span class="hljs-comment"># Remaining rows.</span>
 </code></pre>
 <ul>
 <li><strong>Returned values can be of type str, int, float, bytes or None.</strong></li>
@@ -1565,9 +1565,9 @@ db.close()
 db.commit()
 </code></pre>
 <h3 id="placeholders">Placeholders</h3>
-<pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)         <span class="hljs-comment"># Replaces '?'s in query with values.</span>
-db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)    <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
-db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)  <span class="hljs-comment"># Runs execute() many times.</span>
+<pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)           <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)      <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)    <span class="hljs-comment"># Runs execute() many times.</span>
 </code></pre>
 <ul>
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>

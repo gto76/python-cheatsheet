@@ -1743,7 +1743,7 @@ SQLite
 **Server-less database engine that stores each database into separate file.**
 ```python
 import sqlite3
-db = sqlite3.connect('<path>')   # Also ':memory:'.
+db = sqlite3.connect('<path>')                # Also ':memory:'.
 ...
 db.close()
 ```
@@ -1753,8 +1753,8 @@ db.close()
 ```python
 cursor = db.execute('<query>')
 if cursor:
-    <tuple> = cursor.fetchone()  # First row.
-    <list>  = cursor.fetchall()  # Remaining rows.
+    <tuple> = cursor.fetchone()               # First row.
+    <list>  = cursor.fetchall()               # Remaining rows.
 ```
 * **Returned values can be of type str, int, float, bytes or None.**
 
@@ -1766,9 +1766,9 @@ db.commit()
 
 ### Placeholders
 ```python
-db.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
-db.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
-db.executemany('<query>', <coll_of_above>)  # Runs execute() many times.
+db.execute('<query>', <list/tuple>)           # Replaces '?'s in query with values.
+db.execute('<query>', <dict/namedtuple>)      # Replaces ':<key>'s with values.
+db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
 
