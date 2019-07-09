@@ -1211,7 +1211,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
                            <span class="hljs-string">'OR'</span> : partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre>
 <ul>
-<li><strong>Another solution in this particular case, is to use <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> functions from module <a href="#operator">operator</a> as values.</strong></li>
+<li><strong>Another solution in this particular case, is to use <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> functions from module <a href="#operator">Operator</a> as values.</strong></li>
 </ul>
 <h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2>
 <h3 id="basicexample">Basic Example</h3>
@@ -1755,9 +1755,9 @@ MyMetaClass.__base__ == type      <span class="hljs-comment"># MyMetaClass is a 
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> itemgetter, attrgetter, methodcaller
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
+product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>

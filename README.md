@@ -1306,7 +1306,7 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [operator](#operator) as values.**
+* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [Operator](#operator) as values.**
 
 
 Exceptions
@@ -2036,9 +2036,9 @@ from operator import itemgetter, attrgetter, methodcaller
 
 ```python
 import operator as op
-product_of_elems = functools.reduce(op.mul, <collection>)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
+product_of_elems = functools.reduce(op.mul, <collection>)
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
