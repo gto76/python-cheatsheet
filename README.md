@@ -1664,7 +1664,7 @@ import csv
 * **`'escapechar'` - Character for escaping quotechar if doublequote is false.**
 
 ### Dialects
-```python
+```text
 +------------------+--------+-----------+--------------+
 |                  | excel  | excel_tab | unix_dialect |
 +------------------+--------+-----------+--------------+
