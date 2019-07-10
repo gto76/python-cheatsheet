@@ -1258,7 +1258,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">raise</span>
 </code></pre>
 <h3 id="commonbuiltinexceptions">Common Built-in Exceptions</h3>
-<pre><code class="text language-text">BaseException                     # Not meant to be extended by user-defined exceptions.
+<pre><code class="text language-text">BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
  +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
  +-- Exception                    # User-defined exceptions should be derived from this class.
