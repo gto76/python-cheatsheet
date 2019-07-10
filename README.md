@@ -1367,7 +1367,7 @@ except <exception>:
 
 ### Common Built-in Exceptions
 ```text
-BaseException
+BaseException                     # Not meant to be extended by user-defined exceptions.
  +-- SystemExit                   # Raised by the sys.exit() function.
  +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
  +-- Exception                    # User-defined exceptions should be derived from this class.
