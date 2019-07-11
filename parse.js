@@ -30,7 +30,7 @@ const TOC =
   '}\n' +
   '</code></pre>\n';
 
-const DIAGRAM_1_A = 
+const DIAGRAM_1_A =
   '+---------+-------------+\n' +
   '| Classes | Metaclasses |\n' +
   '+---------+-------------|\n' +
@@ -236,7 +236,7 @@ function modifyPage() {
   addToc();
   insertLinks();
   unindentBanner();
-  highlightCode(); 
+  highlightCode();
 }
 
 function removeOrigToc() {
@@ -272,6 +272,14 @@ function highlightCode() {
   $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
   $('code').each(function(index) {
       hljs.highlightBlock(this);
+      if (this.result && this.result.language === "python") {
+        // now wrap e.g. &lt;type&gt; with <span class="hljs-type">
+        const plainHTML = $(this).html();
+        const typingRegex = /&lt;[a-z1-9._\/]*&gt;/ig;
+        const replacementString = '<span class="hljs-type">$&</span>';
+        const typedHTML = plainHTML.replace(typingRegex, replacementString);
+        $(this).html(typedHTML);
+      }
   });
   fixClasses()
 }
@@ -288,7 +296,7 @@ function fixClasses() {
 }
 
 function readFile(filename) {
-  try {  
+  try {
     return fs.readFileSync(filename, 'utf8');
   } catch(e) {
     console.error('Error:', e.stack);
@@ -296,7 +304,7 @@ function readFile(filename) {
 }
 
 function writeToFile(filename, text) {
-  try {  
+  try {
     return fs.writeFileSync(filename, text, 'utf8');
   } catch(e) {
     console.error('Error:', e.stack);
