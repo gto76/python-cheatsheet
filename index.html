@@ -974,6 +974,13 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
 <li><strong>Default_factory can be any callable.</strong></li>
 </ul>
+<h3 id="slots">Slots</h3>
+<p><strong>Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.</strong></p>
+<pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
+    __slots__ = [<span class="hljs-string">'a'</span>]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self.a = <span class="hljs-number">1</span>
+</code></pre>
 <h3 id="copy">Copy</h3>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
 &lt;object&gt; = copy(&lt;object&gt;)

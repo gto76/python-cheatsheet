@@ -1033,6 +1033,15 @@ class <class_name>:
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any callable.**
 
+### Slots
+**Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.**
+
+```
+class MyClassWithSlots:
+    __slots__ = ['a']
+    def __init__(self):
+        self.a = 1
+```
 
 ### Copy
 ```python
