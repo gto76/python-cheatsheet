@@ -1036,7 +1036,7 @@ class <class_name>:
 ### Slots
 **Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.**
 
-```
+```python
 class MyClassWithSlots:
     __slots__ = ['a']
     def __init__(self):
