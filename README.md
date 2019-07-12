@@ -725,14 +725,14 @@ def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 
 ### Other Uses
 ```python
-head, *body, tail = <collection>
-```
-
-```python
 <list>  = [*<collection> [, ...]]
 <set>   = {*<collection> [, ...]}
 <tuple> = (*<collection>, [...])
 <dict>  = {**<dict> [, ...]}
+```
+
+```python
+head, *body, tail = <collection>
 ```
 
 
