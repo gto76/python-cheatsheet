@@ -1652,12 +1652,12 @@ CSV
 ---
 ```python
 import csv
-<reader> = csv.reader(<file>, dialect='excel', delimiter=',', ...)
+<reader> = csv.reader(<file>, dialect='excel', delimiter=',')
 <list>   = next(<reader>)  # Returns a row as list of strings.
 ```
 
 ```python
-<writer> = csv.writer(<file>, dialect='excel', delimiter=',', ...)
+<writer> = csv.writer(<file>, dialect='excel', delimiter=',')
 <writer>.writerow(<collection>)
 <writer>.writerows(<coll_of_coll>)
 ```

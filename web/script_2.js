@@ -152,7 +152,7 @@ const DIAGRAM_9_B =
   "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
   "┃                  │   excel   │ excel_tab │ unix_dialect ┃\n" +
   "┠──────────────────┼───────────┼───────────┼──────────────┨\n" +
-  "┃ delimiter        │      ','  │     '\t'  │       ','    ┃\n" +
+  "┃ delimiter        │      ','  │     '\\t'  │       ','    ┃\n" +
   "┃ quotechar        │      '\"'  │      '\"'  │       '\"'    ┃\n" +
   "┃ doublequote      │     True  │     True  │      True    ┃\n" +
   "┃ skipinitialspace │    False  │    False  │     False    ┃\n" +
