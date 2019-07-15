@@ -1622,7 +1622,7 @@ os.mkdir(<path>, mode=0o777)      # Creates a directory.
 ```python
 <str>  = <DirEntry>.name          # Final component of the path.
 <str>  = <DirEntry>.path          # Path with final component.
-<Path> = Path(<DirEntry>)         # Path as Path object.
+<Path> = Path(<DirEntry>)         # Path object.
 ```
 
 ```python
