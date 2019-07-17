@@ -1481,6 +1481,9 @@ os.replace(<span class="hljs-keyword">from</span>, to)              <span class=
 &lt;writer&gt;.writerow(&lt;collection&gt;)  <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
 &lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
 </code></pre>
+<ul>
+<li><strong>File must be open with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
+</ul>
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values.</strong></li>
@@ -1510,9 +1513,6 @@ os.replace(<span class="hljs-keyword">from</span>, to)              <span class=
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
         <span class="hljs-keyword">return</span> csv.reader(file)
 </code></pre>
-<ul>
-<li><strong>If <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.</strong></li>
-</ul>
 <h3 id="writerowstocsvfile">Write Rows to CSV File</h3>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:

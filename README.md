@@ -1661,6 +1661,7 @@ import csv
 <writer>.writerow(<collection>)  # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)
 ```
+* **File must be open with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**
@@ -1693,7 +1694,6 @@ def read_csv_file(filename):
     with open(filename, encoding='utf-8', newline='') as file:
         return csv.reader(file)
 ```
-* **If `'newline=""'` is not specified, then newlines embedded inside quoted fields will not be interpreted correctly.**
 
 ### Write Rows to CSV File
 ```python
