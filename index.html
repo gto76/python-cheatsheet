@@ -1284,7 +1284,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
       |    +-- RecursionError     # Raised when the the maximum recursion depth is exceeded.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
+           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 </code></pre>
 <h3 id="userdefinedexceptions">User-defined Exceptions</h3>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>
@@ -1364,7 +1364,7 @@ value = args.&lt;name&gt;
 </ul>
 <h3 id="exceptions-1">Exceptions</h3>
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong>  </li>
+<li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be risen when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be risen by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
@@ -1405,7 +1405,7 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># List of filenames located at 'path'. </span>
+<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># List of filenames located at 'path'.</span>
 &lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)         <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <h3 id="pathlib">Pathlib</h3>
@@ -1595,7 +1595,7 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 <pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00 - \xff.</span>
 &lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns int in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes object as separator. </span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes object as separator.</span>
 </code></pre>
 <h3 id="encode-1">Encode</h3>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;str&gt;.encode(<span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: bytes(&lt;str&gt;, 'utf-8')</span>

@@ -1395,7 +1395,7 @@ BaseException
       |    +-- RecursionError     # Raised when the the maximum recursion depth is exceeded.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails. 
+           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 ```
 
 ### User-defined Exceptions
@@ -1494,7 +1494,7 @@ Open
 * **`'b'`  - Binary mode.**
 
 ### Exceptions
-* **`'FileNotFoundError'` can be risen when reading with `'r'` or `'r+'`.**  
+* **`'FileNotFoundError'` can be risen when reading with `'r'` or `'r+'`.**
 * **`'FileExistsError'` can be risen when writing with `'x'`.**
 * **`'IsADirectoryError'` and `'PermissionError'` can be risen by any.**
 * **`'OSError'` is the parent class of all listed exceptions.**
@@ -1550,7 +1550,7 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir('<path>')         # List of filenames located at 'path'. 
+<list> = listdir('<path>')         # List of filenames located at 'path'.
 <list> = glob('<pattern>')         # Filenames matching the wildcard pattern.
 ```
 
@@ -1805,7 +1805,7 @@ Bytes
 <bytes> = b'<str>'                       # Only accepts ASCII characters and \x00 - \xff.
 <int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
 <bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator. 
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator.
 ```
 
 ### Encode
