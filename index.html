@@ -1475,10 +1475,10 @@ os.replace(<span class="hljs-keyword">from</span>, to)              <span class=
 <h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
 &lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
-&lt;list&gt;   = next(&lt;reader&gt;)  <span class="hljs-comment"># Returns a row as list of strings.</span>
+&lt;list&gt;   = next(&lt;reader&gt;)        <span class="hljs-comment"># Returns a row as list of strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
-&lt;writer&gt;.writerow(&lt;collection&gt;)
+&lt;writer&gt;.writerow(&lt;collection&gt;)  <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
 &lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
 </code></pre>
 <h3 id="parameters">Parameters</h3>
