@@ -1661,7 +1661,7 @@ import csv
 <writer>.writerow(<collection>)  # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)
 ```
-* **File must be open with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
+* **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**
