@@ -1152,7 +1152,7 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 <ul>
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index(), and count().</strong></li>
-<li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if it had all the methods defined.</strong></li>
+<li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if 'MySequence' had all the methods defined.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
