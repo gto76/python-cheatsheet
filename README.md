@@ -1591,7 +1591,7 @@ cwd    = Path()
 
 Command Execution
 -----------------
-### Files and Directories Commands
+### Files and Directories
 * **Paths can be either strings or Path objects.**
 * **All exceptions are either 'OSError' or its subclasses.**
 

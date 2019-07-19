@@ -194,6 +194,10 @@ const DIAGRAM_7_B =
   '┃ count()    │          │            │          │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
+const OS_RENAME = 
+  'os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>\n' +
+  'os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
+
 
 function main() {
   const html = getMd();
@@ -273,7 +277,8 @@ function highlightCode() {
   $('code').each(function(index) {
       hljs.highlightBlock(this);
   });
-  fixClasses()
+  fixClasses();
+  fixFroms();
 }
 
 function setApaches(elements) {
@@ -285,6 +290,10 @@ function setApaches(elements) {
 function fixClasses() {
   // Changes class="hljs-keyword" to class="hljs-title" of 'class' keyword.
   $('.hljs-class').filter(':contains(class \')').find(':first-child').removeClass('hljs-keyword').addClass('hljs-title')
+}
+
+function fixFroms() {
+  $(`code:contains(os.rename)`).html(OS_RENAME);
 }
 
 function readFile(filename) {

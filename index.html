@@ -1431,7 +1431,7 @@ value = args.&lt;name&gt;
 &lt;Path&gt; = &lt;Path&gt;.parent             <span class="hljs-comment"># Path without final component.</span>
 </code></pre>
 <h2 id="commandexecution"><a href="#commandexecution" name="commandexecution">#</a>Command Execution</h2>
-<h3 id="filesanddirectoriescommands">Files and Directories Commands</h3>
+<h3 id="filesanddirectories">Files and Directories</h3>
 <ul>
 <li><strong>Paths can be either strings or Path objects.</strong></li>
 <li><strong>All exceptions are either 'OSError' or its subclasses.</strong></li>
@@ -1444,8 +1444,8 @@ os.chdir(&lt;path&gt;)                   <span class="hljs-comment"># Changes th
 os.rmdir(&lt;path&gt;)                   <span class="hljs-comment"># Deletes empty directory.</span>
 shutil.rmtree(&lt;path&gt;)              <span class="hljs-comment"># Deletes the entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(<span class="hljs-keyword">from</span>, to)                <span class="hljs-comment"># Renames the file or directory.</span>
-os.replace(<span class="hljs-keyword">from</span>, to)               <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+<pre><code class="python language-python hljs">os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>
+os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)       <span class="hljs-comment"># Creates a directory.</span>
 &lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)      <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
