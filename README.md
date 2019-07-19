@@ -1597,31 +1597,31 @@ Command Execution
 
 ```python
 import os
-os.chdir(<path>)                  # Changes the current working directory.
-<str> = os.getcwd()               # Returns current working directory.
+<str> = os.getcwd()                # Returns the current working directory.
+os.chdir(<path>)                   # Changes the current working directory.
 ```
 
 ```python
-os.remove(<path>)                 # Deletes the file.
-os.rmdir(<path>)                  # Deletes empty directory.
-shutil.rmtree(<path>)             # Deletes an entire directory tree.
+os.remove(<path>)                  # Deletes the file.
+os.rmdir(<path>)                   # Deletes empty directory.
+shutil.rmtree(<path>)              # Deletes the entire directory tree.
 ```
 
 ```python
-os.rename(from, to)               # Renames the file or directory.
-os.replace(from, to)              # Same, but overwrites 'to' if it exists.
+os.rename(from, to)                # Renames the file or directory.
+os.replace(from, to)               # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
-os.mkdir(<path>, mode=0o777)      # Creates a directory.
-<iter> = os.scandir(path='.')     # Returns os.DirEntry objects located at path.
+os.mkdir(<path>, mode=0o777)       # Creates a directory.
+<iter> = os.scandir(path='.')      # Returns os.DirEntry objects located at path.
 ```
 
 #### DirEntry:
 ```python
-<str>  = <DirEntry>.name          # Final component of the path.
-<str>  = <DirEntry>.path          # Path with final component.
-<Path> = Path(<DirEntry>)         # Path object.
+<str>  = <DirEntry>.name           # Final component of the path.
+<str>  = <DirEntry>.path           # Path with final component.
+<Path> = Path(<DirEntry>)          # Path object.
 ```
 
 ```python
