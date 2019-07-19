@@ -1207,8 +1207,7 @@ class MyCollection:
     def __init__(self, a):
         self.a = a
     def __iter__(self):
-        for el in self.a:
-            yield el
+        return iter(self.a)
     def __contains__(self, el):
         return el in self.a
     def __len__(self):
@@ -1224,8 +1223,7 @@ class MySequence:
     def __init__(self, a):
         self.a = a
     def __iter__(self):
-        for el in self.a:
-            yield el
+        return iter(self.a)
     def __contains__(self, el):
         return el in self.a
     def __len__(self):
