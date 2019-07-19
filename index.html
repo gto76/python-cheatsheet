@@ -1130,7 +1130,8 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 </code></pre>
 <h3 id="sequence">Sequence</h3>
 <ul>
-<li><strong>Only required methods are len() and getitem(), that should return an item at index or raise 'IndexError'.</strong></li>
+<li><strong>Only required methods are len() and getitem().</strong></li>
+<li><strong>Getitem() should return an item at index or raise 'IndexError'.</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
 <li><strong>Reversed() automatically works on any object that has getitem() and len() defined.</strong></li>
 </ul>
