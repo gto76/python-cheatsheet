@@ -1619,15 +1619,14 @@ os.mkdir(<path>, mode=0o777)       # Creates a directory.
 
 #### DirEntry:
 ```python
-<str>  = <DirEntry>.name           # Final component of the path.
-<str>  = <DirEntry>.path           # Path with final component.
-<Path> = Path(<DirEntry>)          # Path object.
+<bool> = <DirEntry>.is_file()
+<bool> = <DirEntry>.is_dir()
 ```
 
 ```python
-<bool> = <DirEntry>.is_file()
-<bool> = <DirEntry>.is_dir()
-<bool> = <DirEntry>.is_symlink()
+<str>  = <DirEntry>.name           # Final component of the path.
+<str>  = <DirEntry>.path           # Path with final component.
+<Path> = Path(<DirEntry>)          # Path object.
 ```
 
 ### Shell Commands

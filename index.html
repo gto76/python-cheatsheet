@@ -1459,14 +1459,13 @@ os.replace(from, to)               <span class="hljs-comment"># Same, but overwr
 <pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)       <span class="hljs-comment"># Creates a directory.</span>
 &lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)      <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
-<div><h4 id="direntry">DirEntry:</h4><pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.name           <span class="hljs-comment"># Final component of the path.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.path           <span class="hljs-comment"># Path with final component.</span>
-&lt;Path&gt; = Path(&lt;DirEntry&gt;)          <span class="hljs-comment"># Path object.</span>
+<div><h4 id="direntry">DirEntry:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
+&lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
-&lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
-&lt;bool&gt; = &lt;DirEntry&gt;.is_symlink()
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.name           <span class="hljs-comment"># Final component of the path.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path           <span class="hljs-comment"># Path with final component.</span>
+&lt;Path&gt; = Path(&lt;DirEntry&gt;)          <span class="hljs-comment"># Path object.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
