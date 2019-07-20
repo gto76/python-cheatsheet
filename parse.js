@@ -279,6 +279,7 @@ function highlightCode() {
   });
   fixClasses();
   fixFroms();
+  preventPageBreaks();
 }
 
 function setApaches(elements) {
@@ -294,6 +295,19 @@ function fixClasses() {
 
 function fixFroms() {
   $(`code:contains(os.rename)`).html(OS_RENAME);
+}
+
+function preventPageBreaks() {
+  $(':header').each(function(index) {
+    var el = $(this)
+    var untilPre = el.nextUntil('pre')
+    var untilH2 = el.nextUntil('h2')
+    if (untilPre.length < untilH2.length) {
+      untilPre.add(el).next().add(el).wrapAll("<div></div>");
+    } else {
+      untilH2.add(el).wrapAll("<div></div>");
+    }
+  });
 }
 
 function readFile(filename) {
