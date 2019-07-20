@@ -1764,7 +1764,7 @@ db.close()
 ```python
 cursor = db.execute('<query>')
 if cursor:
-    <tuple> = cursor.fetchone()               # First row.
+    <tuple> = cursor.fetchone()               # First row. Also next(cursor).
     <list>  = cursor.fetchall()               # Remaining rows.
 ```
 * **Returned values can be of type str, int, float, bytes or None.**
