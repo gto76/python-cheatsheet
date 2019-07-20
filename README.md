@@ -1760,14 +1760,6 @@ db.close()
 ```
 * **New database will be created if path doesn't exist.**
 
-### Create
-```python
->>> db.execute('create table t (a, b, c)')
->>> db.execute('insert into t values (1, 2, 3)')
->>> db.execute('select * from t').fetchall()
-[(1, 2, 3)]
-```
-
 ### Read
 ```python
 cursor = db.execute('<query>')
@@ -1783,6 +1775,12 @@ db.execute('<query>')
 db.commit()
 ```
 
+#### Or:
+```python
+with db:
+    db.execute('<query>')
+```
+
 ### Placeholders
 ```python
 db.execute('<query>', <list/tuple>)           # Replaces '?'s in query with values.
@@ -1790,6 +1788,16 @@ db.execute('<query>', <dict/namedtuple>)      # Replaces ':<key>'s with values.
 db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
+
+### Example
+```python
+>>> db = sqlite3.connect('test.db')
+>>> db.execute('create table t (a, b, c)')
+>>> db.execute('insert into t values (1, 2, 3)')
+>>> db.execute('select * from t').fetchall()
+[(1, 2, 3)]
+```
+* **In this example values are not actually saved because `'db.commit()'` was omitted.** 
 
 ### MySQL
 **Has a very similar interface, with differences listed below.**

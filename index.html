@@ -1567,12 +1567,6 @@ db.close()
 <ul>
 <li><strong>New database will be created if path doesn't exist.</strong></li>
 </ul>
-<div><h3 id="create">Create</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table t (a, b, c)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'insert into t values (1, 2, 3)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'select * from t'</span>).fetchall()
-[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
-</code></pre></div>
-
 <div><h3 id="read">Read</h3><pre><code class="python language-python hljs">cursor = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 <span class="hljs-keyword">if</span> cursor:
     &lt;tuple&gt; = cursor.fetchone()               <span class="hljs-comment"># First row.</span>
@@ -1586,6 +1580,10 @@ db.close()
 db.commit()
 </code></pre></div>
 
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> db:
+    db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
+</code></pre></div>
+
 <div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)           <span class="hljs-comment"># Replaces '?'s in query with values.</span>
 db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)      <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
 db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)    <span class="hljs-comment"># Runs execute() many times.</span>
@@ -1593,6 +1591,16 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 
 <ul>
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
+</ul>
+<div><h3 id="example">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table t (a, b, c)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'insert into t values (1, 2, 3)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'select * from t'</span>).fetchall()
+[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
+</code></pre></div>
+
+<ul>
+<li><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'db.commit()'</span></code> was omitted.</strong> </li>
 </ul>
 <div><h3 id="mysql">MySQL</h3><p><strong>Has a very similar interface, with differences listed below.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install mysql-connector</span>
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
@@ -1643,7 +1651,7 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 </code></pre></div>
 
 
-<div><h3 id="example">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<div><h3 id="example-1">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>unpack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>)
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
@@ -1715,7 +1723,7 @@ lock.acquire()
 lock.release()
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
+<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
 <span class="hljs-keyword">with</span> lock:
     ...
 </code></pre></div>
@@ -1754,7 +1762,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 </code></pre></div>
 
 
-<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMetaClass</span><span class="hljs-params">(type)</span>:</span>
+<div><h4 id="or-2">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMetaClass</span><span class="hljs-params">(type)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls, name, parents, attrs)</span>:</span>
         attrs[<span class="hljs-string">'a'</span>] = <span class="hljs-string">'abcde'</span>
         <span class="hljs-keyword">return</span> type.__new__(cls, name, parents, attrs)
@@ -2097,7 +2105,7 @@ right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6<
 right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
 </code></pre></div>
 
-<div><h4 id="3ifneithernonmatchingdimensionhassize1riseanerror">3. If neither non-matching dimension has size 1, rise an error.</h4><div><h3 id="example-1">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
+<div><h4 id="3ifneithernonmatchingdimensionhassize1riseanerror">3. If neither non-matching dimension has size 1, rise an error.</h4><div><h3 id="example-2">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
 [ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
 [[ <span class="hljs-number">0.1</span>],
