@@ -1932,6 +1932,7 @@ from collections import deque
 <deque>.rotate(n=1)                         # Rotates elements to the right.
 ```
 
+### Example
 ```python
 >>> a = deque([1, 2, 3], maxlen=3)
 >>> a.append(4)
