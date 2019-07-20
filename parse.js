@@ -302,7 +302,7 @@ function preventPageBreaks() {
     var el = $(this)
     var untilPre = el.nextUntil('pre')
     var untilH2 = el.nextUntil('h2')
-    if (untilPre.length < untilH2.length) {
+    if ((untilPre.length < untilH2.length) || el.prop('tagName') === 'H1') {
       untilPre.add(el).next().add(el).wrapAll("<div></div>");
     } else {
       untilH2.add(el).wrapAll("<div></div>");
