@@ -1788,6 +1788,7 @@ db.execute('<query>', <dict/namedtuple>)      # Replaces ':<key>'s with values.
 db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
+* **Bools will be stored and returned as ints and dates as ISO formatted strings.**
 
 ### Example
 ```python
@@ -1806,7 +1807,7 @@ db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
 from mysql import connector
 db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 cursor = db.cursor()
-cursor.execute('<query>')                     # Connector doesn't have execute method.
+cursor.execute('<query>')                     # Only cursor has execute method.
 cursor.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 cursor.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
