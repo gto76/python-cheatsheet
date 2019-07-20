@@ -1760,6 +1760,14 @@ db.close()
 ```
 * **New database will be created if path doesn't exist.**
 
+### Create
+```python
+>>> db.execute('create table t (a, b, c)')
+>>> db.execute('insert into t values (1, 2, 3)')
+>>> db.execute('select * from t').fetchall()
+[(1, 2, 3)]
+```
+
 ### Read
 ```python
 cursor = db.execute('<query>')
