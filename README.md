@@ -1549,7 +1549,7 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir('<path>')         # List of filenames located at 'path'.
+<list> = listdir('<path>')         # List of filenames located at path.
 <list> = glob('<pattern>')         # Filenames matching the wildcard pattern.
 ```
 
@@ -1572,20 +1572,20 @@ cwd    = Path()
 
 ```python
 <iter> = <Path>.iterdir()          # Returns dir contents as Path objects.
-<iter> = <Path>.glob('<pattern>')  # Paths matching the wildcard pattern.
+<iter> = <Path>.glob('<pattern>')  # Returns Paths matching the wildcard pattern.
 ```
 
 ```python
-<str>  = str(<Path>)               # Returns path as a string.
-<tup.> = <Path>.parts              # Returns all components as strings.
-<Path> = <Path>.resolve()          # Returns absolute Path without symlinks.
-```
-
-```python
+<str>  = str(<Path>)               # Path as a string.
 <str>  = <Path>.name               # Final component.
 <str>  = <Path>.stem               # Final component without extension.
 <str>  = <Path>.suffix             # Final component's extension.
-<Path> = <Path>.parent             # Path without final component.
+<tup.> = <Path>.parts              # All components as strings.
+```
+
+```python
+<Path> = <Path>.resolve()          # Returns absolute path without symlinks.
+<Path> = <Path>.parent             # Returns path without final component.
 ```
 
 
@@ -1598,7 +1598,7 @@ Command Execution
 ```python
 import os
 <str> = os.getcwd()                # Returns the current working directory.
-os.chdir(<path>)                   # Changes the current working directory.
+os.chdir(<path>)                   # Changes current working directory.
 ```
 
 ```python
@@ -1624,8 +1624,8 @@ os.mkdir(<path>, mode=0o777)       # Creates a directory.
 ```
 
 ```python
-<str>  = <DirEntry>.name           # Final component of the path.
-<str>  = <DirEntry>.path           # Path with final component.
+<str>  = <DirEntry>.path           # Path as a string.
+<str>  = <DirEntry>.name           # Final component.
 <Path> = Path(<DirEntry>)          # Path object.
 ```
 
