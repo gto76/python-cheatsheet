@@ -1878,8 +1878,6 @@ from struct import pack, unpack, iter_unpack, calcsize
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
 >>> unpack('>hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
 (1, 2, 3)
->>> calcsize('>hhl')
-8
 ```
 
 ### Format
