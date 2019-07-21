@@ -198,6 +198,15 @@ const OS_RENAME =
   'os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>\n' +
   'os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
+const EVAL =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">\'1 + 2\'</span>)\n' +
+  '<span class="hljs-number">3</span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">\'[1, 2, 3]\'</span>)\n' +
+  '[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">\'abs(1)\'</span>)\n' +
+  'ValueError: malformed node or string\n';
+
 
 function main() {
   const html = getMd();
@@ -278,7 +287,7 @@ function highlightCode() {
       hljs.highlightBlock(this);
   });
   fixClasses();
-  fixFroms();
+  fixHighlights();
   preventPageBreaks();
   insertPageBreak();
 }
@@ -294,8 +303,9 @@ function fixClasses() {
   $('.hljs-class').filter(':contains(class \')').find(':first-child').removeClass('hljs-keyword').addClass('hljs-title')
 }
 
-function fixFroms() {
+function fixHighlights() {
   $(`code:contains(os.rename)`).html(OS_RENAME);
+  $(`code:contains(ValueError: malformed node)`).html(EVAL);
 }
 
 function preventPageBreaks() {
