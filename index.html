@@ -189,6 +189,9 @@ pre.prettyprint {
 }
 
 @media print {
+  .pagebreak { 
+    page-break-before: always; 
+  } 
   div {
     page-break-inside: avoid;
   }
@@ -1878,7 +1881,7 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 </code></pre></div>
 
 <p><br><br></p>
-<div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
+<div class="pagebreak"></div><div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]):

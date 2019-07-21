@@ -280,6 +280,7 @@ function highlightCode() {
   fixClasses();
   fixFroms();
   preventPageBreaks();
+  insertPageBreak();
 }
 
 function setApaches(elements) {
@@ -308,6 +309,10 @@ function preventPageBreaks() {
       untilH2.add(el).wrapAll("<div></div>");
     }
   });
+}
+
+function insertPageBreak() {
+  $('<div class="pagebreak"></div>').insertBefore($('#libraries').parent())
 }
 
 function readFile(filename) {
