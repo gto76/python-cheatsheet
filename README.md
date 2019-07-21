@@ -479,7 +479,7 @@ Numbers
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 ```
-* **`'int(<str>)'` and `'float(<str>)'` raise 'ValueError' on malformed strings.**
+* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 
 ### Basic Functions
 ```python
