@@ -1651,12 +1651,12 @@ CSV
 ```python
 import csv
 <reader> = csv.reader(<file>, dialect='excel', delimiter=',')
-<list>   = next(<reader>)        # Returns a row as list of strings.
+<list>   = next(<reader>)          # Returns next row as list of strings.
 ```
 
 ```python
 <writer> = csv.writer(<file>, dialect='excel', delimiter=',')
-<writer>.writerow(<collection>)  # Encodes objects using `str(<el>)`.
+<writer>.writerow(<collection>)    # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)
 ```
 * **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
@@ -1669,7 +1669,7 @@ import csv
 * **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped.**
 * **`'lineterminator'` - How does writer terminate lines.**
 * **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
-* **`'escapechar'` - Character for escaping quotechar if doublequote is false.**
+* **`'escapechar'` - Character for escaping 'quotechar' if 'doublequote' is false.**
 
 ### Dialects
 ```text

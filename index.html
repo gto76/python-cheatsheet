@@ -1481,11 +1481,11 @@ os.replace(from, to)               <span class="hljs-comment"># Same, but overwr
 
 <div><h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
 &lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
-&lt;list&gt;   = next(&lt;reader&gt;)        <span class="hljs-comment"># Returns a row as list of strings.</span>
+&lt;list&gt;   = next(&lt;reader&gt;)          <span class="hljs-comment"># Returns next row as list of strings.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
-&lt;writer&gt;.writerow(&lt;collection&gt;)  <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
+&lt;writer&gt;.writerow(&lt;collection&gt;)    <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
 &lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
 </code></pre>
 <ul>
@@ -1499,7 +1499,7 @@ os.replace(from, to)               <span class="hljs-comment"># Same, but overwr
 <li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Whether whitespace after delimiter gets stripped.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How does writer terminate lines.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - Controls the amount of quoting: 0 - as necessary, 1 - all.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechar if doublequote is false.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping 'quotechar' if 'doublequote' is false.</strong></li>
 </ul><div><h3 id="dialects">Dialects</h3><pre><code class="text language-text">+------------------+-----------+-----------+--------------+
 |                  |   excel   | excel_tab | unix_dialect |
 +------------------+-----------+-----------+--------------+
