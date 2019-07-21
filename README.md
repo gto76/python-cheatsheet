@@ -1571,8 +1571,8 @@ cwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.iterdir()          # Iterator of filenames located at path.
-<iter> = <Path>.glob('<pattern>')  # Filenames matching the wildcard pattern.
+<iter> = <Path>.iterdir()          # Returns dir contents as Path objects.
+<iter> = <Path>.glob('<pattern>')  # Paths matching the wildcard pattern.
 ```
 
 ```python

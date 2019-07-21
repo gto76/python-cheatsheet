@@ -1427,8 +1427,8 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = &lt;Path&gt;.is_file()
 &lt;bool&gt; = &lt;Path&gt;.is_dir()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Iterator of filenames located at path.</span>
-&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Returns dir contents as Path objects.</span>
+&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)               <span class="hljs-comment"># Returns path as a string.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts              <span class="hljs-comment"># Returns all components as strings.</span>
