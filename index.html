@@ -1356,7 +1356,7 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but lines are still broken by readline() on either '\n', '\r' or '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read (default).</strong></li>
@@ -1385,7 +1385,7 @@ value = args.&lt;name&gt;
 
 <pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line or empty string on EOF.</span>
-&lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns a list of lines or empty list.</span>
+&lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns a list of remaining lines.</span>
 &lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>

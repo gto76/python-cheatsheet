@@ -1479,7 +1479,7 @@ Open
 ```
 * **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
-* **`'newline=""'` means no conversions take place, but lines are still broken by readline() on either '\n', '\r' or '\r\n'.**
+* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.**
 
 ### Modes
 * **`'r'`  - Read (default).**
@@ -1509,7 +1509,7 @@ Open
 ```python
 <str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until EOF.
 <str/bytes> = <file>.readline()     # Returns a line or empty string on EOF.
-<list>      = <file>.readlines()    # Returns a list of lines or empty list.
+<list>      = <file>.readlines()    # Returns a list of remaining lines.
 <str/bytes> = next(<file>)          # Returns a line using buffer. Do not mix.
 ```
 
