@@ -1973,8 +1973,8 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
 url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
-page  = requests.get(url)
-doc   = BeautifulSoup(page.text, <span class="hljs-string">'html.parser'</span>)
+resp  = requests.get(url)
+doc   = BeautifulSoup(resp.text, <span class="hljs-string">'html.parser'</span>)
 table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
 rows  = table.find_all(<span class="hljs-string">'tr'</span>)
 link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
@@ -1982,6 +1982,12 @@ ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">
 print(link, ver)
 </code></pre></div></div>
 
+
+<div><h4 id="downloadspythonslogo">Downloads Python's logo:</h4><pre><code class="python language-python hljs">url_img = rows[<span class="hljs-number">0</span>].find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
+image   = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{url_img}</span>'</span>).content
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+    file.write(image)
+</code></pre></div>
 
 <div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
 <span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, post, template, request, response
