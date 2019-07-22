@@ -1586,6 +1586,7 @@ cwd    = Path()
 ```python
 <Path> = <Path>.resolve()          # Returns absolute path without symlinks.
 <Path> = <Path>.parent             # Returns path without final component.
+<file> = open(<Path>)              # Opens a file and returns file object.
 ```
 
 
@@ -1626,7 +1627,11 @@ os.mkdir(<path>, mode=0o777)       # Creates a directory.
 ```python
 <str>  = <DirEntry>.path           # Path as a string.
 <str>  = <DirEntry>.name           # Final component.
+```
+
+```python
 <Path> = Path(<DirEntry>)          # Path object.
+<file> = open(<DirEntry>)          # File object.
 ```
 
 ### Shell Commands

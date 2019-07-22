@@ -1441,6 +1441,7 @@ value = args.&lt;name&gt;
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.resolve()          <span class="hljs-comment"># Returns absolute path without symlinks.</span>
 &lt;Path&gt; = &lt;Path&gt;.parent             <span class="hljs-comment"># Returns path without final component.</span>
+&lt;file&gt; = open(&lt;Path&gt;)              <span class="hljs-comment"># Opens a file and returns file object.</span>
 </code></pre>
 <div><h2 id="commandexecution"><a href="#commandexecution" name="commandexecution">#</a>Command Execution</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings or Path objects.</strong></li>
@@ -1468,7 +1469,9 @@ os.replace(from, to)               <span class="hljs-comment"># Same, but overwr
 
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.path           <span class="hljs-comment"># Path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name           <span class="hljs-comment"># Final component.</span>
-&lt;Path&gt; = Path(&lt;DirEntry&gt;)          <span class="hljs-comment"># Path object.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;DirEntry&gt;)          <span class="hljs-comment"># Path object.</span>
+&lt;file&gt; = open(&lt;DirEntry&gt;)          <span class="hljs-comment"># File object.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
