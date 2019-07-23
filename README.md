@@ -1594,23 +1594,24 @@ Command Execution
 -----------------
 ### Files and Directories
 * **Paths can be either strings, Paths, or DirEntry objects.**
-* **All exceptions are either 'OSError' or its subclasses.**
+* **All exceptions are either OSError or its subclasses.**
 
 ```python
-import os
+import os, shutil
 <str> = os.getcwd()                # Returns the current working directory.
 os.chdir(<path>)                   # Changes current working directory.
+```
+
+```python
+shutil.copy(from, to)              # Copies the file.
+os.rename(from, to)                # Renames the file or directory.
+os.replace(from, to)               # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
 os.remove(<path>)                  # Deletes the file.
 os.rmdir(<path>)                   # Deletes empty directory.
 shutil.rmtree(<path>)              # Deletes the entire directory tree.
-```
-
-```python
-os.rename(from, to)                # Renames the file or directory.
-os.replace(from, to)               # Same, but overwrites 'to' if it exists.
 ```
 
 ```python

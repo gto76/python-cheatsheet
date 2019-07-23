@@ -195,6 +195,7 @@ const DIAGRAM_7_B =
   '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
 const OS_RENAME = 
+  'shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>\n' +
   'os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>\n' +
   'os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
