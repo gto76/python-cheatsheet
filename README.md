@@ -1593,7 +1593,7 @@ cwd    = Path()
 Command Execution
 -----------------
 ### Files and Directories
-* **Paths can be either strings, Paths, or DirEntry objects.**
+* **Path can be either string, Path, or DirEntry object.**
 * **All exceptions are either 'OSError' or its subclasses.**
 
 ```python
