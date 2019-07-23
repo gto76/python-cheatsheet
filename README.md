@@ -1170,7 +1170,8 @@ Hello World!
 with open('<path>') as file: ...
 with wave.open('<path>') as wave_file: ...
 with memoryview(<bytes/bytearray/array>) as view: ...
-db = sqlite3.connect('<path>'); with db: db.execute('<insert_query>')
+with concurrent.futures.ThreadPoolExecutor() as executor: ...
+db = sqlite3.connect('<path>'); with db: ...
 lock = threading.RLock(); with lock: ...
 ```
 
@@ -1980,6 +1981,13 @@ lock.release()
 lock = RLock()
 with lock:
     ...
+```
+
+### Thread Pool
+```python
+from concurrent.futures import ThreadPoolExecutor
+with ThreadPoolExecutor(max_workers=None) as executor:
+    results = executor.map(lambda x: x + 1, range(3))   # (1, 2, 3)
 ```
 
 
