@@ -473,20 +473,28 @@ Format
 
 Numbers
 -------
+### Built-in Types
 ```python
 <int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
 <float>    = float(<int/str/bool>)
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
-<Fraction> = fractions.Fraction(numerator=0, denominator=1)
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 
+### Special Types
+```python
+<Fraction> = fractions.Fraction(numerator=0, denominator=1)
+<Decimal>  = decimal.Decimal(<int/float/str>)
+```
+* **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 == 3.3000000000000003'`.**
+* **Their precision can be adjusted with `'decimal.getcontext().prec = <int>'`.**
+
 ### Basic Functions
 ```python
-<num>  = pow(<num>, <num>)            # Or: <num> ** <num>
-<real> = abs(<num>)
-<int>  = round(<real>)
-<real> = round(<real>, ±ndigits)      # `round(126, -1) == 130`
+<num> = pow(<num>, <num>)             # Or: <num> ** <num>
+<num> = abs(<num>)
+<int> = round(<num>)
+<num> = round(<num>, ±ndigits)        # `round(126, -1) == 130`
 ```
 
 ### Math

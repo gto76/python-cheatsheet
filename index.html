@@ -552,19 +552,27 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-number">90</span>:b}           <span class="hljs-comment"># '1011010'</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><div><h3 id="builtintypes">Built-in Types</h3><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
 &lt;float&gt;    = float(&lt;int/str/bool&gt;)
 &lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: &lt;real&gt; + &lt;real&gt;j</span>
-&lt;Fraction&gt; = fractions.Fraction(numerator=<span class="hljs-number">0</span>, denominator=<span class="hljs-number">1</span>)
-</code></pre></div>
+</code></pre></div></div>
+
 
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
 </ul>
-<div><h3 id="basicfunctions">Basic Functions</h3><pre><code class="python language-python hljs">&lt;num&gt;  = pow(&lt;num&gt;, &lt;num&gt;)            <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
-&lt;real&gt; = abs(&lt;num&gt;)
-&lt;int&gt;  = round(&lt;real&gt;)
-&lt;real&gt; = round(&lt;real&gt;, ±ndigits)      <span class="hljs-comment"># `round(126, -1) == 130`</span>
+<div><h3 id="specialtypes">Special Types</h3><pre><code class="python language-python hljs">&lt;Fraction&gt; = fractions.Fraction(numerator=<span class="hljs-number">0</span>, denominator=<span class="hljs-number">1</span>)
+&lt;Decimal&gt;  = decimal.Decimal(&lt;int/float/str&gt;)
+</code></pre></div>
+
+<ul>
+<li><strong>Decimal numbers can be represented exactly, unlike floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 == 3.3000000000000003'</span></code>.</strong></li>
+<li><strong>Their precision can be adjusted with <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
+</ul>
+<div><h3 id="basicfunctions">Basic Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)             <span class="hljs-comment"># Or: &lt;num&gt; ** &lt;num&gt;</span>
+&lt;num&gt; = abs(&lt;num&gt;)
+&lt;int&gt; = round(&lt;num&gt;)
+&lt;num&gt; = round(&lt;num&gt;, ±ndigits)        <span class="hljs-comment"># `round(126, -1) == 130`</span>
 </code></pre></div>
 
 <div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan
