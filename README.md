@@ -482,7 +482,7 @@ Numbers
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 
-### Special Types
+### Importable Types
 ```python
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<int/float/str>)
