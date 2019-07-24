@@ -487,7 +487,7 @@ Numbers
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<int/float/str>)
 ```
-* **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 == 3.3000000000000003'`.**
+* **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
 * **Their precision can be adjusted with `'decimal.getcontext().prec = <int>'`.**
 
 ### Basic Functions
