@@ -289,6 +289,7 @@ True
 | fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
 | float              |          |          | yes  |   yes   |  yes   |
 | complex            |          |          |      |   yes   |  yes   |
+| decimal.Decimal    |          |          |      |         |  yes   |
 +--------------------+----------+----------+------+---------+--------+
 ```
 

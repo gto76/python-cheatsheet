@@ -59,6 +59,7 @@ const DIAGRAM_4_B =
   '┃ fractions.Fraction │          │    ✓     │  ✓   │    ✓    │   ✓    ┃\n' +
   '┃ float              │          │          │  ✓   │    ✓    │   ✓    ┃\n' +
   '┃ complex            │          │          │      │    ✓    │   ✓    ┃\n' +
+  '┃ decimal.Decimal    │          │          │      │         │   ✓    ┃\n' +
   '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┛\n';
 
 const DIAGRAM_5_A =
