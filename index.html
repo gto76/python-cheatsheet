@@ -404,15 +404,15 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
 <span class="hljs-keyword">True</span>
 </code></pre>
-<pre><code class="text language-text">+--------------------+----------+----------+------+---------+--------+
-|                    | Integral | Rational | Real | Complex | Number |
-+--------------------+----------+----------+------+---------+--------+
-| int                |   yes    |   yes    | yes  |   yes   |  yes   |
-| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
-| float              |          |          | yes  |   yes   |  yes   |
-| complex            |          |          |      |   yes   |  yes   |
-| decimal.Decimal    |          |          |      |         |  yes   |
-+--------------------+----------+----------+------+---------+--------+
+<pre><code class="text language-text">+--------------------+----------+----------+--------+---------+--------+
+|                    | Integral | Rational |  Real  | Complex | Number |
++--------------------+----------+----------+--------+---------+--------+
+| int                |   yes    |   yes    |  yes   |   yes   |  yes   |
+| fractions.Fraction |          |   yes    |  yes   |   yes   |  yes   |
+| float              |          |          |  yes   |   yes   |  yes   |
+| complex            |          |          |        |   yes   |  yes   |
+| decimal.Decimal    |          |          |        |         |  yes   |
++--------------------+----------+----------+--------+---------+--------+
 </code></pre>
 <div><h2 id="string"><a href="#string" name="string">#</a>String</h2><pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
 &lt;str&gt;  = &lt;str&gt;.strip(<span class="hljs-string">'&lt;chars&gt;'</span>)              <span class="hljs-comment"># Strips all passed characters from both ends.</span>

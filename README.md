@@ -282,15 +282,15 @@ True
 ```
 
 ```text
-+--------------------+----------+----------+------+---------+--------+
-|                    | Integral | Rational | Real | Complex | Number |
-+--------------------+----------+----------+------+---------+--------+
-| int                |   yes    |   yes    | yes  |   yes   |  yes   |
-| fractions.Fraction |          |   yes    | yes  |   yes   |  yes   |
-| float              |          |          | yes  |   yes   |  yes   |
-| complex            |          |          |      |   yes   |  yes   |
-| decimal.Decimal    |          |          |      |         |  yes   |
-+--------------------+----------+----------+------+---------+--------+
++--------------------+----------+----------+--------+---------+--------+
+|                    | Integral | Rational |  Real  | Complex | Number |
++--------------------+----------+----------+--------+---------+--------+
+| int                |   yes    |   yes    |  yes   |   yes   |  yes   |
+| fractions.Fraction |          |   yes    |  yes   |   yes   |  yes   |
+| float              |          |          |  yes   |   yes   |  yes   |
+| complex            |          |          |        |   yes   |  yes   |
+| decimal.Decimal    |          |          |        |         |  yes   |
++--------------------+----------+----------+--------+---------+--------+
 ```
 
 
