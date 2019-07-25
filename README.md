@@ -1992,7 +1992,8 @@ with lock:
 ```python
 from concurrent.futures import ThreadPoolExecutor
 with ThreadPoolExecutor(max_workers=None) as executor:
-    results = executor.map(lambda x: x + 1, range(3))   # (1, 2, 3)
+    results = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
+    results = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
 ```
 
 
