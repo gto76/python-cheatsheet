@@ -474,19 +474,15 @@ Format
 
 Numbers
 -------
-### Built-in Types
+### Types
 ```python
 <int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
 <float>    = float(<int/str/bool>)
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
-```
-* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
-
-### Importable Types
-```python
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<int/float/str>)
 ```
+* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
 * **Their precision can be adjusted with `'decimal.getcontext().prec = <int>'`.**
 
