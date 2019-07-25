@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exceptions`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#command-execution)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`CSV`](#csv)**__,__ **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`MemoryView`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Operator`](#operator)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutine)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Eval`](#eval)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Coroutine`](#coroutine)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profile)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__.__
 
@@ -1996,6 +1996,38 @@ with ThreadPoolExecutor(max_workers=None) as executor:
 ```
 
 
+Operator
+--------
+```python
+from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
+from operator import eq, ne, lt, le, gt, ge
+from operator import and_, or_, not_
+from operator import itemgetter, attrgetter, methodcaller
+```
+
+```python
+import operator as op
+sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
+sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
+product_of_elems = functools.reduce(op.mul, <collection>)
+LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
+last_el          = op.methodcaller('pop')(<list>)
+```
+
+
+Eval
+----
+```python
+>>> from ast import literal_eval
+>>> literal_eval('1 + 2')
+3
+>>> literal_eval('[1, 2, 3]')
+[1, 2, 3]
+>>> literal_eval('abs(1)')
+ValueError: malformed node or string
+```
+
+
 Introspection
 -------------
 **Inspecting code at runtime.**
@@ -2107,38 +2139,6 @@ MyMetaClass.__base__ == type      # MyMetaClass is a subclass of type.
 |    ^    |             |
 |   str   |             |
 +---------+-------------+
-```
-
-
-Operator
---------
-```python
-from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
-from operator import eq, ne, lt, le, gt, ge
-from operator import and_, or_, not_
-from operator import itemgetter, attrgetter, methodcaller
-```
-
-```python
-import operator as op
-sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
-sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
-product_of_elems = functools.reduce(op.mul, <collection>)
-LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
-last_el          = op.methodcaller('pop')(<list>)
-```
-
-
-Eval
-----
-```python
->>> from ast import literal_eval
->>> literal_eval('1 + 2')
-3
->>> literal_eval('[1, 2, 3]')
-[1, 2, 3]
->>> literal_eval('abs(1)')
-ValueError: malformed node or string
 ```
 
 
@@ -2300,7 +2300,7 @@ retention=<int>|<datetime.timedelta>|<str>
 
 Scraping
 --------
-#### Scrapes Python's URL, version number and logo from Wikipedia page:
+#### Scrapes Python's logo, URL and version number from Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
 import requests
