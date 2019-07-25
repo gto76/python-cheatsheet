@@ -59,7 +59,7 @@ index = <list>.index(<el>)     # Returns index of first occurrence or raises Val
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
 <list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
-<list>.clear()                 # Removes all items. Also works on dict and set.
+<list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
 
 
