@@ -2300,7 +2300,7 @@ retention=<int>|<datetime.timedelta>|<str>
 
 Scraping
 --------
-#### Scrapes and prints Python's URL and version number from Wikipedia:
+#### Scrapes Python's URL, version number and logo from Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
 import requests
@@ -2312,15 +2312,11 @@ table = doc.find('table', class_='infobox vevent')
 rows  = table.find_all('tr')
 link  = rows[11].find('a')['href']
 ver   = rows[6].find('div').text.split()[0]
-print(link, ver)
-```
-
-#### Downloads Python's logo:
-```python
-url_img = rows[0].find('img')['src']
-image   = requests.get(f'https:{url_img}').content
+url_i = rows[0].find('img')['src']
+image = requests.get(f'https:{url_i}').content
 with open('test.png', 'wb') as file:
     file.write(image)
+print(link, ver)
 ```
 
 

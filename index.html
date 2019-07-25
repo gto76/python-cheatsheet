@@ -1981,7 +1981,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;timedelta&gt;'</span></code> - Max age of a file.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Max age as a string: <code class="python hljs"><span class="hljs-string">'1 week, 3 days'</span></code>, <code class="python hljs"><span class="hljs-string">'2 months'</span></code>, …</strong></li>
 </ul>
-<div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapesandprintspythonsurlandversionnumberfromwikipedia">Scrapes and prints Python's URL and version number from Wikipedia:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
+<div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlversionnumberandlogofromwikipediapage">Scrapes Python's URL, version number and logo from Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
 url   = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
@@ -1991,15 +1991,13 @@ table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="h
 rows  = table.find_all(<span class="hljs-string">'tr'</span>)
 link  = rows[<span class="hljs-number">11</span>].find(<span class="hljs-string">'a'</span>)[<span class="hljs-string">'href'</span>]
 ver   = rows[<span class="hljs-number">6</span>].find(<span class="hljs-string">'div'</span>).text.split()[<span class="hljs-number">0</span>]
+url_i = rows[<span class="hljs-number">0</span>].find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
+image = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{url_i}</span>'</span>).content
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+    file.write(image)
 print(link, ver)
 </code></pre></div></div>
 
-
-<div><h4 id="downloadspythonslogo">Downloads Python's logo:</h4><pre><code class="python language-python hljs">url_img = rows[<span class="hljs-number">0</span>].find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
-image   = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{url_img}</span>'</span>).content
-<span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-    file.write(image)
-</code></pre></div>
 
 <div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
 <span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, post, template, request, response
