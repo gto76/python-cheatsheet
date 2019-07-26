@@ -462,7 +462,7 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept newline.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'?'</span></code> to make an operator non-greedy.</strong></li>
+<li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after an operator to make it non-greedy.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()   <span class="hljs-comment"># Whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)  <span class="hljs-comment"># Part in first bracket.</span>
@@ -588,8 +588,8 @@ shuffle(&lt;list&gt;)
 </code></pre></div>
 
 <div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt;     = <span class="hljs-number">0</span>b&lt;bin&gt;            <span class="hljs-comment"># Or: 0x&lt;hex&gt;</span>
-&lt;int&gt;     = int(<span class="hljs-string">'0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: int('0x&lt;hex&gt;', 0)</span>
 &lt;int&gt;     = int(<span class="hljs-string">'&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)    <span class="hljs-comment"># Or: int('&lt;hex&gt;', 16)</span>
+&lt;int&gt;     = int(<span class="hljs-string">'0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># Or: int('0x&lt;hex&gt;', 0)</span>
 <span class="hljs-string">'0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)         <span class="hljs-comment"># Or: '0x&lt;hex&gt;' = hex(&lt;int&gt;)</span>
 </code></pre></div>
 
@@ -690,8 +690,8 @@ shuffle(&lt;list&gt;)
 </code></pre></div>
 
 <ul>
-<li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 <li><strong>When parsing, <code class="python hljs"><span class="hljs-string">'%z'</span></code> also accepts <code class="python hljs"><span class="hljs-string">'±HH:MM'</span></code>.</strong></li>
+<li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt; ±  &lt;TD&gt;
 &lt;TD&gt;     = &lt;TD&gt;   ±  &lt;TD&gt;

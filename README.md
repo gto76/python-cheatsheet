@@ -357,7 +357,7 @@ import re
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
 * **Use `r'\1'` or `'\\1'` for backreference.**
-* **Use `'?'` to make an operator non-greedy.**
+* **Add `'?'` after an operator to make it non-greedy.**
 
 ### Match Object
 ```python
@@ -518,8 +518,8 @@ shuffle(<list>)
 ### Bin, Hex
 ```python
 <int>     = 0b<bin>            # Or: 0x<hex>
-<int>     = int('0b<bin>', 0)  # Or: int('0x<hex>', 0)
 <int>     = int('<bin>', 2)    # Or: int('<hex>', 16)
+<int>     = int('0b<bin>', 0)  # Or: int('0x<hex>', 0)
 '0b<bin>' = bin(<int>)         # Or: '0x<hex>' = hex(<int>)
 ```
 
@@ -644,8 +644,8 @@ from dateutil.tz import UTC, tzlocal, gettz
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
-* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 * **When parsing, `'%z'` also accepts `'±HH:MM'`.**
+* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
 ```python
