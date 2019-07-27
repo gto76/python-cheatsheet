@@ -208,6 +208,12 @@ const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">\'abs(1)\'</span>)\n' +
   'ValueError: malformed node or string\n';
 
+const LRU_CACHE = 
+  '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache\n' +
+  '\n' +
+  '<span class="hljs-meta">@lru_cache(maxsize=None)</span>\n' +
+  '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
+  '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
 
 function main() {
   const html = getMd();
@@ -307,6 +313,7 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
+  $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
 }
 
 function preventPageBreaks() {

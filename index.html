@@ -357,8 +357,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt; = islice(&lt;collection&gt;, from_inclusive, to_exclusive, +step_size)
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
-<li><strong>Convenient way to implement the iterator protocol.</strong></li>
-<li><strong>Any function that contains a yield statement returns a generator object.</strong></li>
+<li><strong>Any function that contains a yield statement returns a generator.</strong></li>
 <li><strong>Generators and iterators are interchangeable.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count</span><span class="hljs-params">(start, step)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
@@ -879,7 +878,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 
 <span class="hljs-meta">@lru_cache(maxsize=None)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>
-    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n<span class="hljs-number">-2</span>) + fib(n<span class="hljs-number">-1</span>)
+    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)
 </code></pre></div>
 
 
