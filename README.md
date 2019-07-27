@@ -957,7 +957,7 @@ class <name>:
 print(<el>)
 print(f'{<el>}')
 raise Exception(<el>)
-logging.debug(<el>)
+loguru.logger.debug(<el>)
 csv.writer(<file>).writerow([<el>])
 ```
 
