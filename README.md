@@ -2145,14 +2145,14 @@ ValueError: malformed node or string
 
 Coroutine
 ---------
-* **Similar to generator, but generator pulls data through the pipe with iteration, while coroutine pushes data into the pipeline with send().**
+* **Any function that contains a `'(yield)'` expression returns a coroutine.**
+* **Coroutines are similar to iterators, but data needs to be pulled out of an iterator by calling `'next(<iter>)'`, while we push data into the coroutine by calling `'<coroutine>.send(<el>)'`.**
 * **Coroutines provide more powerful data routing possibilities than iterators.**
-* **If you build a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.**
 
 ### Helper Decorator
-* **All coroutines must be "primed" by first calling next().**
+* **All coroutines must first be "primed" by calling `'next(<coroutine>)'`.**
 * **Remembering to call next() is easy to forget.**
-* **Solved by wrapping coroutines with a decorator:**
+* **Solved by wrapping functions that return a coroutine with a decorator:**
 
 ```python
 def coroutine(func):

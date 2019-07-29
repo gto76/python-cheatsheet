@@ -1858,13 +1858,13 @@ ValueError: malformed node or string
 </code></pre></div>
 
 <div><h2 id="coroutine"><a href="#coroutine" name="coroutine">#</a>Coroutine</h2><ul>
-<li><strong>Similar to generator, but generator pulls data through the pipe with iteration, while coroutine pushes data into the pipeline with send().</strong></li>
+<li><strong>Any function that contains a <code class="python hljs"><span class="hljs-string">'(yield)'</span></code> expression returns a coroutine.</strong></li>
+<li><strong>Coroutines are similar to iterators, but data needs to be pulled out of an iterator by calling <code class="python hljs"><span class="hljs-string">'next(&lt;iter&gt;)'</span></code>, while we push data into the coroutine by calling <code class="python hljs"><span class="hljs-string">'&lt;coroutine&gt;.send(&lt;el&gt;)'</span></code>.</strong></li>
 <li><strong>Coroutines provide more powerful data routing possibilities than iterators.</strong></li>
-<li><strong>If you build a collection of simple data processing components, you can glue them together into complex arrangements of pipes, branches, merging, etc.</strong></li>
 </ul><div><h3 id="helperdecorator">Helper Decorator</h3><ul>
-<li><strong>All coroutines must be "primed" by first calling next().</strong></li>
+<li><strong>All coroutines must first be "primed" by calling <code class="python hljs"><span class="hljs-string">'next(&lt;coroutine&gt;)'</span></code>.</strong></li>
 <li><strong>Remembering to call next() is easy to forget.</strong></li>
-<li><strong>Solved by wrapping coroutines with a decorator:</strong></li>
+<li><strong>Solved by wrapping functions that return a coroutine with a decorator:</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">coroutine</span><span class="hljs-params">(func)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(*args, **kwargs)</span>:</span>
         cr = func(*args, **kwargs)
