@@ -773,7 +773,7 @@ for i in range(10):
 from functools import reduce
 <iter> = map(lambda x: x + 1, range(10))            # (1, 2, ..., 10)
 <iter> = filter(lambda x: x > 5, range(10))         # (6, 7, 8, 9)
-<int>  = reduce(lambda out, x: out + x, range(10))  # 45
+<obj>  = reduce(lambda out, x: out + x, range(10))  # 45
 ```
 
 ### Any, All
