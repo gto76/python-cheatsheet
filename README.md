@@ -1035,7 +1035,7 @@ class <class_name>:
 ```
 * **An object can be made sortable with `'order=True'` or immutable with `'frozen=True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
-* **Default_factory can be any callable.**
+* **Default_factory can be any [callable](#callable).**
 
 ### Slots
 **Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.**
@@ -1134,6 +1134,8 @@ class Counter:
 ```
 
 ### Callable
+* **All functions and classes have a call() method, hence are callable.**
+* **When this cheatsheet uses `'<function>'` in an argument, it actually means `'<callable>'`.**
 ```python
 class Counter:
     def __init__(self):
@@ -1994,7 +1996,7 @@ with ThreadPoolExecutor(max_workers=None) as executor:
     results = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
     results = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
 ```
-* **CPython interpreter can only run a single thread at the time. That is why this map() won't be faster than the standard map() unless passed function contains an I/O operation.**
+* **CPython interpreter can only run a single thread at the time. That is why this map() won't be faster than the standard map(), unless passed function contains an I/O operation.**
 
 
 Operator
