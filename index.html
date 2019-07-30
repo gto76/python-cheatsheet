@@ -1539,7 +1539,7 @@ shutil.rmtree(&lt;path&gt;)              <span class="hljs-comment"># Deletes th
 
 <div><h3 id="readrowsfromcsvfile">Read Rows from CSV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_csv_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-        <span class="hljs-keyword">return</span> csv.reader(file)
+        <span class="hljs-keyword">return</span> list(csv.reader(file))
 </code></pre></div>
 
 <div><h3 id="writerowstocsvfile">Write Rows to CSV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows)</span>:</span>

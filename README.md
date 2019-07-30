@@ -1709,7 +1709,7 @@ from csv import reader, writer
 ```python
 def read_csv_file(filename):
     with open(filename, encoding='utf-8', newline='') as file:
-        return csv.reader(file)
+        return list(csv.reader(file))
 ```
 
 ### Write Rows to CSV File
