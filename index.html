@@ -1913,7 +1913,7 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-pyplot.plot(&lt;data_1&gt; [, &lt;data_2&gt;, ...])  <span class="hljs-comment"># Or: hist(&lt;data&gt;).</span>
+pyplot.plot(&lt;data_1&gt; [, &lt;data_2&gt;, ...])  <span class="hljs-comment"># Or: pyplot.hist(&lt;data&gt;)</span>
 pyplot.savefig(&lt;filename&gt;)
 pyplot.show()
 pyplot.clf()                             <span class="hljs-comment"># Clears figure.</span>
@@ -1923,9 +1923,9 @@ pyplot.clf()                             <span class="hljs-comment"># Clears fig
 <span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate
 <span class="hljs-keyword">import</span> csv
 <span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-    lines   = csv.reader(file)
-    headers = [header.title() <span class="hljs-keyword">for</span> header <span class="hljs-keyword">in</span> next(lines)]
-    table   = tabulate(lines, headers)
+    rows   = csv.reader(file)
+    header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
+    table  = tabulate(rows, header)
     print(table)
 </code></pre></div></div>
 
@@ -1962,7 +1962,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <ul>
 <li><strong>Levels: <code class="python hljs"><span class="hljs-string">'debug'</span></code>, <code class="python hljs"><span class="hljs-string">'info'</span></code>, <code class="python hljs"><span class="hljs-string">'success'</span></code>, <code class="python hljs"><span class="hljs-string">'warning'</span></code>, <code class="python hljs"><span class="hljs-string">'error'</span></code>, <code class="python hljs"><span class="hljs-string">'critical'</span></code>.</strong></li>
 </ul>
-<div><h3 id="exceptions-2">Exceptions</h3><p><strong>Error description, stack trace and values of variables are appended automatically.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
+<div><h3 id="exceptions-2">Exceptions</h3><p><strong>Exception description, stack trace and values of variables are appended automatically.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     ...
 <span class="hljs-keyword">except</span> &lt;exception&gt;:
     logger.exception(<span class="hljs-string">'An error happened.'</span>)
@@ -2044,7 +2044,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 </code></pre></div>
 
 <div><h2 id="profile"><a href="#profile" name="profile">#</a>Profile</h2><div><h3 id="basic">Basic</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
-start_time = time()                  <span class="hljs-comment"># Seconds since Epoch.</span>
+start_time = time()                  <span class="hljs-comment"># Seconds since the Epoch.</span>
 ...
 duration = time() - start_time
 </code></pre></div></div>

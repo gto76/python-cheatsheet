@@ -2210,7 +2210,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])  # Or: hist(<data>).
+pyplot.plot(<data_1> [, <data_2>, ...])  # Or: pyplot.hist(<data>)
 pyplot.savefig(<filename>)
 pyplot.show()
 pyplot.clf()                             # Clears figure.
@@ -2225,9 +2225,9 @@ Table
 from tabulate import tabulate
 import csv
 with open(<filename>, encoding='utf-8', newline='') as file:
-    lines   = csv.reader(file)
-    headers = [header.title() for header in next(lines)]
-    table   = tabulate(lines, headers)
+    rows   = csv.reader(file)
+    header = [a.title() for a in next(rows)]
+    table  = tabulate(rows, header)
     print(table)
 ```
 
@@ -2272,7 +2272,7 @@ logger.<level>('A logging message.')
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
 ### Exceptions
-**Error description, stack trace and values of variables are appended automatically.**
+**Exception description, stack trace and values of variables are appended automatically.**
 
 ```python
 try:
@@ -2379,7 +2379,7 @@ Profile
 ### Basic
 ```python
 from time import time
-start_time = time()                  # Seconds since Epoch.
+start_time = time()                  # Seconds since the Epoch.
 ...
 duration = time() - start_time
 ```
