@@ -1879,7 +1879,7 @@ Struct
 * **Machine’s native type sizes and byte order are used by default.**
 
 ```python
-from struct import pack, unpack, iter_unpack, calcsize
+from struct import pack, unpack, iter_unpack
 <bytes>  = pack('<format>', <num_1> [, <num_2>, ...])
 <tuple>  = unpack('<format>', <bytes>)
 <tuples> = iter_unpack('<format>', <bytes>)
