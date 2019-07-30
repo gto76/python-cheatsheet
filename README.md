@@ -1846,7 +1846,7 @@ Bytes
 ```python
 <bytes> = <str>.encode('utf-8')          # Or: bytes(<str>, 'utf-8')
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
-<bytes> = <int>.to_bytes(<length>, byteorder='big|little', signed=False)
+<bytes> = <int>.to_bytes(n_bytes, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex('<hex>')
 ```
 

@@ -1643,7 +1643,7 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 
 <div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;str&gt;.encode(<span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: bytes(&lt;str&gt;, 'utf-8')</span>
 &lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(&lt;length&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 &lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)
 </code></pre></div>
 
