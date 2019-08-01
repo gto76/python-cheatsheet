@@ -1729,8 +1729,12 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 IndexError: deque already at its maximum size
 </code></pre></div>
 
-<div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock
+<div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
+<li><strong>CPython interpreter can only run a single thread at the time.</strong></li>
+<li><strong>That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock
 </code></pre></div>
+
 
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">thread = Thread(target=&lt;function&gt;, args=(&lt;first_arg&gt;, ))
 thread.start()
@@ -1751,13 +1755,14 @@ lock.release()
 
 <div><h3 id="threadpool">Thread Pool</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
 <span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:
-    results = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
-    results = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
+    &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
+    &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
+    &lt;Future&gt; = executor.submit(&lt;function&gt;, &lt;arg_1&gt;, ...)
 </code></pre></div>
 
-<ul>
-<li><strong>CPython interpreter can only run a single thread at the time. That is why this map() won't be faster than the standard map(), unless passed function contains an I/O operation.</strong></li>
-</ul>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()    <span class="hljs-comment"># Checks if thread has finished executing.</span>
+&lt;obj&gt;  = &lt;Future&gt;.result()  <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
+</code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> and_, or_, not_

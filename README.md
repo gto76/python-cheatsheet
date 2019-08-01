@@ -1962,6 +1962,8 @@ IndexError: deque already at its maximum size
 
 Threading
 ---------
+* **CPython interpreter can only run a single thread at the time.**
+* **That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.**
 ```python
 from threading import Thread, RLock
 ```
@@ -1993,10 +1995,15 @@ with lock:
 ```python
 from concurrent.futures import ThreadPoolExecutor
 with ThreadPoolExecutor(max_workers=None) as executor:
-    results = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
-    results = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
+    <iter>   = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
+    <iter>   = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
+    <Future> = executor.submit(<function>, <arg_1>, ...)
 ```
-* **CPython interpreter can only run a single thread at the time. That is why this map() won't be faster than the standard map(), unless passed function contains an I/O operation.**
+
+```python
+<bool> = <Future>.done()    # Checks if thread has finished executing.
+<obj>  = <Future>.result()  # Waits for thread to finish and returns result.
+```
 
 
 Operator
