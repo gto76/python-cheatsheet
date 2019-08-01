@@ -1353,8 +1353,8 @@ finally:
 ```python
 except <exception>:
 except <exception> as <name>:
-except (<exception_1>, <exception_2>, ...):
-except (<exception_1>, <exception_2>, ...) as <name>:
+except (<exception>, ...):
+except (<exception>, ...) as <name>:
 ```
 * **Also catches subclasses of the exception.**
 
@@ -1363,7 +1363,7 @@ except (<exception_1>, <exception_2>, ...) as <name>:
 raise <exception>
 raise <exception>()
 raise <exception>(<el>)
-raise <exception>(<el_1>, <el_2>, ...)
+raise <exception>(<el>, ...)
 ```
 
 #### Useful built-in exceptions:
