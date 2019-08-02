@@ -96,8 +96,8 @@ value = <dict>.pop(key)                         # Removes item from dictionary.
 >>> colors = ['red', 'blue', 'yellow', 'blue', 'red', 'blue']
 >>> counter = Counter(colors)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> counter.most_common()[0]
-('blue', 3)
+>>> counter.most_common(1)
+[('blue', 3)]
 ```
 
 
