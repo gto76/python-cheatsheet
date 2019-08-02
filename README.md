@@ -1948,17 +1948,6 @@ from collections import deque
 <deque>.rotate(n=1)                         # Rotates elements to the right.
 ```
 
-### Example
-```python
->>> a = deque([1, 2, 3], maxlen=3)
->>> a.append(4)
-[2, 3, 4]
->>> a.appendleft(5)
-[5, 2, 3]
->>> a.insert(1, 6)
-IndexError: deque already at its maximum size
-```
-
 
 Threading
 ---------
@@ -2001,8 +1990,22 @@ with ThreadPoolExecutor(max_workers=None) as executor:
 ```
 
 ```python
-<bool> = <Future>.done()    # Checks if thread has finished executing.
-<obj>  = <Future>.result()  # Waits for thread to finish and returns result.
+<bool> = <Future>.done()     # Checks if thread has finished executing.
+<obj>  = <Future>.result()   # Waits for thread to finish and returns result.
+```
+
+### Queue
+* **A thread-safe FIFO queue. For LIFO queue use 'queue.LifoQueue'.**
+```python
+from queue import Queue
+<Queue> = Queue(maxsize=0)
+```
+
+```python
+<Queue>.put(<el>)            # Blocks until queue has a free spot.
+<Queue>.put_nowait(<el>)     # Raises queue.Full exception if full.
+<el> = <Queue>.get()         # Blocks until queue contains an item.
+<el> = <Queue>.get_nowait()  # Raises _queue.Empty exception if empty.
 ```
 
 
