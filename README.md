@@ -1135,7 +1135,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
-* **When this cheatsheet uses `'<function>'` as an argument, it actually means `'<callable>'`.**
+* **When this cheatsheet uses `'<function>'` for an argument, it actually means `'<callable>'`.**
 ```python
 class Counter:
     def __init__(self):
