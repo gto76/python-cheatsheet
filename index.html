@@ -2052,16 +2052,16 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 </code></pre></div>
 
 <div><h2 id="profile"><a href="#profile" name="profile">#</a>Profile</h2><div><h3 id="basic">Basic</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
-start_time = time()                  <span class="hljs-comment"># Seconds since the Epoch.</span>
+start_time = time()                     <span class="hljs-comment"># Seconds since the Epoch.</span>
 ...
 duration = time() - start_time
 </code></pre></div></div>
 
 
-<div><h3 id="highperformance">High Performance</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> perf_counter <span class="hljs-keyword">as</span> pc
-start_time = pc()                    <span class="hljs-comment"># Seconds since restart.</span>
+<div><h3 id="highperformance">High Performance</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> perf_counter
+start_time = perf_counter()             <span class="hljs-comment"># Seconds since restart.</span>
 ...
-duration = pc() - start_time
+duration = perf_counter() - start_time
 </code></pre></div>
 
 <div><h3 id="timingasnippet">Timing a Snippet</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> timeit <span class="hljs-keyword">import</span> timeit

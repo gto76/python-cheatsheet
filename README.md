@@ -2389,17 +2389,17 @@ Profile
 ### Basic
 ```python
 from time import time
-start_time = time()                  # Seconds since the Epoch.
+start_time = time()                     # Seconds since the Epoch.
 ...
 duration = time() - start_time
 ```
 
 ### High Performance
 ```python
-from time import perf_counter as pc
-start_time = pc()                    # Seconds since restart.
+from time import perf_counter
+start_time = perf_counter()             # Seconds since restart.
 ...
-duration = pc() - start_time
+duration = perf_counter() - start_time
 ```
 
 ### Timing a Snippet
