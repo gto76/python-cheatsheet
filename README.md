@@ -55,6 +55,7 @@ list_of_chars    = list(<str>)
 ```
 
 ```python
+<int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
 index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
