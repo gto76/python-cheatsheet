@@ -123,7 +123,8 @@ Set
 ```
 
 ```python
-<set>.remove(<el>)                            # Raises KeyError.
+<el> = <set>.pop()                            # Raises KeyError if empty.
+<set>.remove(<el>)                            # Raises KeyError if missing.
 <set>.discard(<el>)                           # Doesn't raise an error.
 ```
 
