@@ -2004,9 +2004,9 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)            # Blocks until queue has a free spot.
+<Queue>.put(<el>)            # Blocks until queue stops being full.
 <Queue>.put_nowait(<el>)     # Raises queue.Full exception if full.
-<el> = <Queue>.get()         # Blocks until queue contains an item.
+<el> = <Queue>.get()         # Blocks until queue stops being empty.
 <el> = <Queue>.get_nowait()  # Raises _queue.Empty exception if empty.
 ```
 

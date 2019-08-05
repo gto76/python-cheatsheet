@@ -1763,9 +1763,9 @@ lock.release()
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)            <span class="hljs-comment"># Blocks until queue has a free spot.</span>
+<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)            <span class="hljs-comment"># Blocks until queue stops being full.</span>
 &lt;Queue&gt;.put_nowait(&lt;el&gt;)     <span class="hljs-comment"># Raises queue.Full exception if full.</span>
-&lt;el&gt; = &lt;Queue&gt;.get()         <span class="hljs-comment"># Blocks until queue contains an item.</span>
+&lt;el&gt; = &lt;Queue&gt;.get()         <span class="hljs-comment"># Blocks until queue stops being empty.</span>
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()  <span class="hljs-comment"># Raises _queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
