@@ -650,10 +650,10 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Arithmetics
 ```python
+<TD>     = <D/DT> -  <D/DT>
 <D/DT>   = <D/DT> ±  <TD>
 <TD>     = <TD>   ±  <TD>
 <TD>     = <TD>   */ <real>
-<float>  = <TD>   /  <TD>
 ```
 
 
