@@ -1596,7 +1596,7 @@ cwd    = Path()
 ```python
 <Path> = <Path>.resolve()          # Returns absolute path without symlinks.
 <Path> = <Path>.parent             # Returns path without final component.
-<file> = open(<Path>)              # Opens a file and returns file object.
+<file> = open(<Path>)              # Opens the file and returns a file object.
 ```
 
 
