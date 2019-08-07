@@ -1457,7 +1457,7 @@ value = args.&lt;name&gt;
 </code></pre>
 <div><h2 id="commandexecution"><a href="#commandexecution" name="commandexecution">#</a>Command Execution</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
-<li><strong>All functions can raise either OSError or its subclasses.</strong></li>
+<li><strong>Functions report OS related errors by raising either OSError or one of its subclasses.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
 &lt;str&gt; = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
 os.chdir(&lt;path&gt;)                   <span class="hljs-comment"># Changes current working directory.</span>
