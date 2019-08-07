@@ -1671,7 +1671,7 @@ from csv import reader, writer
 ### Read
 ```python
 <reader> = reader(<file>, dialect='excel', delimiter=',')
-<list>   = next(<reader>)           # Returns next row as list of strings.
+<list>   = next(<reader>)           # Returns next row as a list of strings.
 ```
 * **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
