@@ -1605,7 +1605,7 @@ Command Execution
 -----------------
 ### Files and Directories
 * **Paths can be either strings, Paths, or DirEntry objects.**
-* **Functions report OS related errors by raising either OSError or one of its subclasses.**
+* **Functions report [OS related errors](#exceptions-1) by raising either OSError or one of its subclasses.**
 
 ```python
 import os, shutil
