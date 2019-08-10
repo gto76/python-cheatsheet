@@ -87,7 +87,7 @@ value  = <dict>.setdefault(key, default=None)   # Same, but also adds default to
 ```
 
 ```python
-value = <dict>.pop(key)                         # Removes item from dictionary.
+value = <dict>.pop(key)                         # Removes item or raises KeyError.
 {k: v for k, v in <dict>.items() if k in keys}  # Filters dictionary by keys.
 ```
 
@@ -354,6 +354,7 @@ import re
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
+* **Search() and match() return None if there are no matches.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
@@ -610,7 +611,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 ```python
 <tzinfo> = UTC                              # UTC timezone. London without DST.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
-<tzinfo> = gettz('<Cont.>/<City>')          # Timezone from 'Continent/City_Name' str.
+<tzinfo> = gettz('<Cont.>/<City>')          # 'Continent/City_Name' timezone or None.
 ```
 
 ```python
@@ -620,7 +621,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string.
+<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ, at midnight.
 <DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since Epoch.
@@ -1296,9 +1297,9 @@ class <enum_name>(Enum):
 
 
 ```python
-<member> = <enum>.<member_name>
-<member> = <enum>['<member_name>']
-<member> = <enum>(<value>)
+<member> = <enum>.<member_name>                # Returns a member.
+<member> = <enum>['<member_name>']             # Returns a member or raises KeyError.
+<member> = <enum>(<value>)                     # Returns a member or raises ValueError.
 name     = <member>.name
 value    = <member>.value
 ```

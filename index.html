@@ -271,7 +271,7 @@ value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</s
 &lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates a dict from two collections.</span>
 &lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Creates a dict from collection of keys.</span>
 </code></pre>
-<pre><code class="python language-python hljs">value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item from dictionary.</span>
+<pre><code class="python language-python hljs">value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError.</span>
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Filters dictionary by keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
@@ -459,6 +459,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
+<li><strong>Search() and match() return None if there are no matches.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept newline.</strong></li>
@@ -660,14 +661,14 @@ shuffle(&lt;list&gt;)
 </ul>
 <div><h3 id="timezone">Timezone</h3><pre><code class="python language-python hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
 &lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone. Also gettz().</span>
-&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># Timezone from 'Continent/City_Name' str.</span>
+&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
 </code></pre></div>
 
 <pre><code class="python language-python apache hljs">&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with new timezone.</span>
 </code></pre>
-<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string.</span>
-&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
+<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
+&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format. </span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ, at midnight.</span>
 &lt;DTn&gt;    = DT.fromtimestamp(&lt;real&gt;)         <span class="hljs-comment"># Local time DTn from seconds since Epoch.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># Aware datetime from seconds since Epoch.</span>
@@ -1218,9 +1219,9 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 <li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
 <li><strong>Otherwise it returns an increment of last numeric value.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                <span class="hljs-comment"># Returns a member.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]             <span class="hljs-comment"># Returns a member or raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                     <span class="hljs-comment"># Returns a member or raises ValueError.</span>
 name     = &lt;member&gt;.name
 value    = &lt;member&gt;.value
 </code></pre>
