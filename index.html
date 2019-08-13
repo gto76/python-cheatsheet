@@ -1723,8 +1723,8 @@ cursor.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedt
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)
-&lt;el&gt; = &lt;deque&gt;.popleft()
+<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                    <span class="hljs-comment"># Opposite element is dropped if full.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                    <span class="hljs-comment"># Raises IndexError if empty.</span>
 &lt;deque&gt;.extendleft(&lt;collection&gt;)            <span class="hljs-comment"># Collection gets reversed.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                         <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>

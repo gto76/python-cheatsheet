@@ -1950,8 +1950,8 @@ from collections import deque
 ```
 
 ```python
-<deque>.appendleft(<el>)
-<el> = <deque>.popleft()
+<deque>.appendleft(<el>)                    # Opposite element is dropped if full.
+<el> = <deque>.popleft()                    # Raises IndexError if empty.
 <deque>.extendleft(<collection>)            # Collection gets reversed.
 <deque>.rotate(n=1)                         # Rotates elements to the right.
 ```
