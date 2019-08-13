@@ -1408,7 +1408,7 @@ BaseException
 ```
 
 #### Collections and their exceptions:
-```python
+```text
 +-----------+------------+----------+----------+
 |           |    list    |   dict   |   set    |
 +-----------+------------+----------+----------+
