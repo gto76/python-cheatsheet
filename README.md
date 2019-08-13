@@ -1407,7 +1407,7 @@ BaseException
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 ```
 
-#### Collections and their execeptions:
+#### Collections and their exceptions:
 ```python
 +-----------+------------+----------+----------+
 |           |    list    |   dict   |   set    |
@@ -1480,7 +1480,8 @@ args  = p.parse_args()
 value = args.<name>
 ```
 
-* **Use `'help=<str>'` for argument description.**
+* **Use `'help=<str>'` to set argument description.**
+* **Use `'default=<el>'` to set the default value.**
 * **Use `'type=FileType(<mode>)'` for files.**
 
 

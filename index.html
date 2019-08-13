@@ -1309,7 +1309,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 </code></pre></div>
 
-<div><h4 id="collectionsandtheirexeceptions">Collections and their execeptions:</h4><pre><code class="python language-python hljs">+-----------+------------+----------+----------+
+<div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="python language-python hljs">+-----------+------------+----------+----------+
 |           |    list    |   dict   |   set    |
 +-----------+------------+----------+----------+
 | getitem() | IndexError | KeyError |          |
@@ -1365,7 +1365,8 @@ value = args.&lt;name&gt;
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> for argument description.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set the default value.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens a file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
