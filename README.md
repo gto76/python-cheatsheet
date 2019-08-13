@@ -1780,7 +1780,7 @@ SQLite
 **Server-less database engine that stores each database into separate file.**
 ```python
 import sqlite3
-db = sqlite3.connect('<path>')                # Also ':memory:'.
+db = sqlite3.connect('<path>')                  # Also ':memory:'.
 ...
 db.close()
 ```
@@ -1788,10 +1788,9 @@ db.close()
 
 ### Read
 ```python
-cursor = db.execute('<query>')
-if cursor:
-    <tuple> = cursor.fetchone()               # First row. Also next(cursor).
-    <list>  = cursor.fetchall()               # Remaining rows.
+<cursor> = db.execute('<query>')                # Raises sqlite3.OperationalError.
+<tuple>  = <cursor>.fetchone()                  # First row. Also next(<cursor>).
+<list>   = <cursor>.fetchall()                  # Remaining rows.
 ```
 * **Returned values can be of type str, int, float, bytes or None.**
 
@@ -1809,9 +1808,9 @@ with db:
 
 ### Placeholders
 ```python
-db.execute('<query>', <list/tuple>)           # Replaces '?'s in query with values.
-db.execute('<query>', <dict/namedtuple>)      # Replaces ':<key>'s with values.
-db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
+db.execute('<query>', <list/tuple>)             # Replaces '?'s in query with values.
+db.execute('<query>', <dict/namedtuple>)        # Replaces ':<key>'s with values.
+db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
 * **Bools will be stored and returned as ints and dates as ISO formatted strings.**
@@ -1832,10 +1831,10 @@ db.executemany('<query>', <coll_of_above>)    # Runs execute() many times.
 # $ pip3 install mysql-connector
 from mysql import connector
 db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
-cursor = db.cursor()
-cursor.execute('<query>')                     # Only cursor has execute method.
-cursor.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
-cursor.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
+<cursor> = db.cursor()
+<cursor>.execute('<query>')                     # Only cursor has execute method.
+<cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
+<cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
 
 
