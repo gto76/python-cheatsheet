@@ -1407,6 +1407,18 @@ BaseException
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 ```
 
+#### Collections and their execeptions:
+```python
++-----------+------------+----------+----------+
+|           |    list    |   dict   |   set    |
++-----------+------------+----------+----------+
+| getitem() | IndexError | KeyError |          |
+| pop()     | IndexError | KeyError | KeyError |
+| remove()  | ValueError |          | KeyError |
+| index()   | ValueError |          |          |
++-----------+------------+----------+----------+
+```
+
 ### User-defined Exceptions
 ```python
 class MyError(Exception):
@@ -1431,8 +1443,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 >>> from pprint import pprint
 >>> pprint(dir())
 ['__annotations__',
- '__builtins__',
- '__doc__', ...]
+ '__builtins__', ...]
 ```
 
 
@@ -1441,18 +1452,10 @@ Input
 * **Reads a line from user input or pipe if present.**
 * **Trailing newline gets stripped.**
 * **Prompt string is printed to the standard output before reading input.**
+* **Raises EOFError when user hits EOF or input stream gets exhausted.**
 
 ```python
 <str> = input(prompt=None)
-```
-
-#### Prints lines until EOF:
-```python
-while True:
-    try:
-        print(input())
-    except EOFError:
-        break
 ```
 
 

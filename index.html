@@ -1309,6 +1309,16 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 </code></pre></div>
 
+<div><h4 id="collectionsandtheirexeceptions">Collections and their execeptions:</h4><pre><code class="python language-python hljs">+-----------+------------+----------+----------+
+|           |    list    |   dict   |   set    |
++-----------+------------+----------+----------+
+| getitem() | IndexError | KeyError |          |
+| pop()     | IndexError | KeyError | KeyError |
+| remove()  | ValueError |          | KeyError |
+| index()   | ValueError |          |          |
++-----------+------------+----------+----------+
+</code></pre></div>
+
 <div><h3 id="userdefinedexceptions">User-defined Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>
     <span class="hljs-keyword">pass</span>
 
@@ -1326,24 +1336,17 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
 <span class="hljs-meta">&gt;&gt;&gt; </span>pprint(dir())
 [<span class="hljs-string">'__annotations__'</span>,
- <span class="hljs-string">'__builtins__'</span>,
- <span class="hljs-string">'__doc__'</span>, ...]
+ <span class="hljs-string">'__builtins__'</span>, ...]
 </code></pre></div>
 
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><ul>
 <li><strong>Reads a line from user input or pipe if present.</strong></li>
 <li><strong>Trailing newline gets stripped.</strong></li>
 <li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
+<li><strong>Raises EOFError when user hits EOF or input stream gets exhausted.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
-
-<div><h4 id="printslinesuntileof">Prints lines until EOF:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-    <span class="hljs-keyword">try</span>:
-        print(input())
-    <span class="hljs-keyword">except</span> EOFError:
-        <span class="hljs-keyword">break</span>
-</code></pre></div>
 
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 script_name = sys.argv[<span class="hljs-number">0</span>]

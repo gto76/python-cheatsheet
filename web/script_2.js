@@ -162,6 +162,21 @@ const DIAGRAM_9_B =
   "┃ escapechar       │     None  │     None  │      None    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
+const DIAGRAM_10_A = 
+  '+-----------+------------+----------+----------+\n' +
+  '|           |    list    |   dict   |   set    |\n' +
+  '+-----------+------------+----------+----------+\n';
+
+const DIAGRAM_10_B = 
+  '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃           │    list    │   dict   │   set    ┃\n' +
+  '┠───────────┼────────────┼──────────┼──────────┨\n' +
+  '┃ getitem() │ IndexError │ KeyError │          ┃\n' +
+  '┃ pop()     │ IndexError │ KeyError │ KeyError ┃\n' +
+  '┃ remove()  │ ValueError │          │ KeyError ┃\n' +
+  '┃ index()   │ ValueError │          │          ┃\n' +
+  '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -176,6 +191,7 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
+  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
 }
 
 var isMobile = false;
