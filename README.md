@@ -953,7 +953,7 @@ class <name>:
         return cls.__name__
 ```
 * **Return value of repr() should be unambiguous and of str() readable.**
-* **If only repr() is defined, it will be also used for str().**
+* **If only repr() is defined, it will also be used for str().**
 
 #### Str() use cases:
 ```python
@@ -1065,7 +1065,7 @@ Duck Types
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
 * **That means all objects compare not equal by default.**
-* **Only left side object has eq() method called, unless it returns 'NotImplemented', in which case the right object is consulted.**
+* **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted.**
 
 ```python
 class MyComparable:
@@ -1117,7 +1117,7 @@ class MySortable:
 ```
 
 ### Iterator
-* **Next() should return next item or raise 'StopIteration'.**
+* **Next() should return next item or raise StopIteration.**
 * **Iter() should return 'self'.**
 ```python
 class Counter:
@@ -1226,7 +1226,7 @@ class MyCollection:
 
 ### Sequence
 * **Only required methods are len() and getitem().**
-* **Getitem() should return an item at index or raise 'IndexError'.**
+* **Getitem() should return an item at index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has getitem() and len() defined.**
 ```python
@@ -1248,7 +1248,7 @@ class MySequence:
 ### Collections.abc.Sequence
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index(), and count().**
-* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return 'False' even if 'MySequence' had all the methods defined.**
+* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return False even if MySequence had all the methods defined.**
 
 ```python
 class MyAbcSequence(collections.abc.Sequence):
@@ -2096,7 +2096,7 @@ class MyMetaClass(type):
         return type.__new__(cls, name, parents, attrs)
 ```
 * **New() is a class method that gets called before init(). If it returns an instance of its class, then that instance gets passed to init() as a 'self' argument.**
-* **It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (**`'MyMetaClass'` **in our case).**
+* **It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (MyMetaClass in our case).**
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute

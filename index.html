@@ -922,7 +922,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 
 <ul>
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
-<li><strong>If only repr() is defined, it will be also used for str().</strong></li>
+<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
 <div><h4 id="strusecases">Str() use cases:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
 print(<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>)
@@ -1008,7 +1008,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
 <li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>.</strong></li>
 <li><strong>That means all objects compare not equal by default.</strong></li>
-<li><strong>Only left side object has eq() method called, unless it returns 'NotImplemented', in which case the right object is consulted.</strong></li>
+<li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1060,7 +1060,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="iterator-1">Iterator</h3><ul>
-<li><strong>Next() should return next item or raise 'StopIteration'.</strong></li>
+<li><strong>Next() should return next item or raise StopIteration.</strong></li>
 <li><strong>Iter() should return 'self'.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1154,7 +1154,7 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 
 <div><h3 id="sequence">Sequence</h3><ul>
 <li><strong>Only required methods are len() and getitem().</strong></li>
-<li><strong>Getitem() should return an item at index or raise 'IndexError'.</strong></li>
+<li><strong>Getitem() should return an item at index or raise IndexError.</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
 <li><strong>Reversed() automatically works on any object that has getitem() and len() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
@@ -1176,7 +1176,7 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 <div><h3 id="collectionsabcsequence">Collections.abc.Sequence</h3><ul>
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index(), and count().</strong></li>
-<li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return 'False' even if 'MySequence' had all the methods defined.</strong></li>
+<li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return False even if MySequence had all the methods defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1828,7 +1828,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 
 <ul>
 <li><strong>New() is a class method that gets called before init(). If it returns an instance of its class, then that instance gets passed to init() as a 'self' argument.</strong></li>
-<li><strong>It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (</strong><code class="python hljs"><span class="hljs-string">'MyMetaClass'</span></code> <strong>in our case).</strong></li>
+<li><strong>It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (MyMetaClass in our case).</strong></li>
 <li><strong>New() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>), in which case init() is not called.</strong></li>
 </ul>
 <div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
