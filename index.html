@@ -1728,7 +1728,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                         <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
-<li><strong>CPython interpreter can only run a single thread at the time.</strong></li>
+<li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
 <li><strong>That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock
 </code></pre></div>
