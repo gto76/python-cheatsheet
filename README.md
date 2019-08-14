@@ -2320,7 +2320,7 @@ retention=<int>|<datetime.timedelta>|<str>
 
 Scraping
 --------
-#### Scrapes Python's logo, URL and version number from Wikipedia page:
+#### Scrapes Python's URL, version number and logo from Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
 import requests
