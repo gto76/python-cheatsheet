@@ -2002,7 +2002,7 @@ with ThreadPoolExecutor(max_workers=None) as executor:
 ```
 
 ### Queue
-* **A thread-safe FIFO queue. For LIFO queue use 'queue.LifoQueue'.**
+**A thread-safe FIFO queue. For LIFO queue use LifoQueue.**
 ```python
 from queue import Queue
 <Queue> = Queue(maxsize=0)
