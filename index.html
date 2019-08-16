@@ -1596,9 +1596,9 @@ db.close()
 <ul>
 <li><strong>New database will be created if path doesn't exist.</strong></li>
 </ul>
-<div><h3 id="read-1">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Raises sqlite3.OperationalError.</span>
-&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># First row. Also next(&lt;cursor&gt;).</span>
-&lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Remaining rows.</span>
+<div><h3 id="read-1">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise sqlite3.OperationalError.</span>
+&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
+&lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows.</span>
 </code></pre></div>
 
 <ul>

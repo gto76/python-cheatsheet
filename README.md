@@ -1788,9 +1788,9 @@ db.close()
 
 ### Read
 ```python
-<cursor> = db.execute('<query>')                # Raises sqlite3.OperationalError.
-<tuple>  = <cursor>.fetchone()                  # First row. Also next(<cursor>).
-<list>   = <cursor>.fetchall()                  # Remaining rows.
+<cursor> = db.execute('<query>')                # Can raise sqlite3.OperationalError.
+<tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
+<list>   = <cursor>.fetchall()                  # Returns remaining rows.
 ```
 * **Returned values can be of type str, int, float, bytes or None.**
 
