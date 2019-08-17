@@ -2567,9 +2567,9 @@ from PIL import Image
 ```python
 WIDTH, HEIGHT = 100, 100
 size = WIDTH * HEIGHT
-pixels = [255 * i/size for i in range(size)]
+hue = [255 * i/size for i in range(size)]
 img = Image.new('HSV', (WIDTH, HEIGHT))
-img.putdata([(int(a), 255, 255) for a in pixels])
+img.putdata([(int(h), 255, 255) for h in hue])
 img.convert(mode='RGB').save('test.png')
 ```
 
