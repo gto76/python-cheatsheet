@@ -2204,7 +2204,22 @@ img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - 3x8-bit pixels, true color.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - 4x8-bit pixels, true color with transparency mask.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
-</ul></div>
+</ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
+<span class="hljs-keyword">import</span> imageio
+height, r = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
+frames = []
+<span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
+    y = sum(range(velocity))
+    frame = Image.new(<span class="hljs-string">'L'</span>, (height, height))
+    draw  = ImageDraw.Draw(frame)
+    draw.ellipse((height/<span class="hljs-number">2</span>-r, y, height/<span class="hljs-number">2</span>+r, y+<span class="hljs-number">2</span>*r), fill=<span class="hljs-string">'white'</span>)
+    frames.append(frame)
+frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
+imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
+</code></pre></div></div></div>
+
+
+
 
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 <span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, iter_unpack

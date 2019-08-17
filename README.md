@@ -2590,6 +2590,24 @@ img.convert(mode='RGB').save('test.png')
 * **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
 * **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
 
+### Animation
+
+#### Creates a GIF of a bouncing ball:
+```python
+from PIL import Image, ImageDraw
+import imageio
+height, r = 126, 10
+frames = []
+for velocity in range(1, 16):
+    y = sum(range(velocity))
+    frame = Image.new('L', (height, height))
+    draw  = ImageDraw.Draw(frame)
+    draw.ellipse((height/2-r, y, height/2+r, y+2*r), fill='white')
+    frames.append(frame)
+frames += reversed(frames[1:-1])
+imageio.mimsave('test.gif', frames, duration=0.03)
+```
+
 
 Audio
 -----
