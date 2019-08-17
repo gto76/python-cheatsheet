@@ -2203,7 +2203,8 @@ img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - 3x8-bit pixels, true color.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - 4x8-bit pixels, true color with transparency mask.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
-</ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
+</ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
 HEIGHT, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []

@@ -2592,6 +2592,7 @@ img.convert(mode='RGB').save('test.png')
 ### Animation
 #### Creates a GIF of a bouncing ball:
 ```python
+# $ pip3 install imageio
 from PIL import Image, ImageDraw
 import imageio
 HEIGHT, R = 126, 10
