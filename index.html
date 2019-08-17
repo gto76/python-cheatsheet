@@ -2181,11 +2181,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 </code></pre></div>
 
-<div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH  = <span class="hljs-number">100</span>
-HEIGHT = <span class="hljs-number">100</span>
-SIZE   = WIDTH * HEIGHT
-pixels = [<span class="hljs-number">255</span> * i/SIZE <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(SIZE)]
-
+<div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
+size = WIDTH * HEIGHT
+pixels = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
 img = Image.new(<span class="hljs-string">'HSV'</span>, (WIDTH, HEIGHT))
 img.putdata([(int(a), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> pixels])
 img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)

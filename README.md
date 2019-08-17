@@ -2565,11 +2565,9 @@ from PIL import Image
 ### Examples
 #### Creates a PNG image of a rainbow gradient:
 ```python
-WIDTH  = 100
-HEIGHT = 100
-SIZE   = WIDTH * HEIGHT
-pixels = [255 * i/SIZE for i in range(SIZE)]
-
+WIDTH, HEIGHT = 100, 100
+size = WIDTH * HEIGHT
+pixels = [255 * i/size for i in range(size)]
 img = Image.new('HSV', (WIDTH, HEIGHT))
 img.putdata([(int(a), 255, 255) for a in pixels])
 img.convert(mode='RGB').save('test.png')
