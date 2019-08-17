@@ -2653,6 +2653,7 @@ write_to_wav_file('test.wav', frames_i)
 ```
 
 ### Synthesizer
+#### Plays song Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
 import simpleaudio, math, struct

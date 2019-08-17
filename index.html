@@ -2254,7 +2254,7 @@ frames_i  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="h
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)
 </code></pre></div>
 
-<div><h3 id="synthesizer">Synthesizer</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
+<div><h3 id="synthesizer">Synthesizer</h3><div><h4 id="playssongpopcornbygershonkingsley">Plays song Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">import</span> simpleaudio, math, struct
 <span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain, repeat
 F  = <span class="hljs-number">44100</span>
@@ -2269,7 +2269,8 @@ get_frames = <span class="hljs-keyword">lambda</span> note: get_wave(*parse_note
 frames_f   = chain.from_iterable(get_frames(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span><span class="hljs-subst">{P1}</span><span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
 frames_b   = <span class="hljs-string">b''</span>.join(struct.pack(<span class="hljs-string">'&lt;h'</span>, int(f * <span class="hljs-number">30000</span>)) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> frames_f)
 simpleaudio.play_buffer(frames_b, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, F)
-</code></pre></div>
+</code></pre></div></div>
+
 
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>
