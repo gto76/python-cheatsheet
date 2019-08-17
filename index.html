@@ -2181,15 +2181,16 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 </code></pre></div>
 
-<div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">width  = <span class="hljs-number">100</span>
-height = <span class="hljs-number">100</span>
-size   = width * height
-pixels = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
+<div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH  = <span class="hljs-number">100</span>
+HEIGHT = <span class="hljs-number">100</span>
+SIZE   = WIDTH * HEIGHT
+pixels = [<span class="hljs-number">255</span> * i/SIZE <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(SIZE)]
 
-img = Image.new(<span class="hljs-string">'HSV'</span>, (width, height))
+img = Image.new(<span class="hljs-string">'HSV'</span>, (WIDTH, HEIGHT))
 img.putdata([(int(a), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> pixels])
 img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
-</code></pre></div>
+</code></pre></div></div>
+
 
 <div><h4 id="addsnoisetoapngimage">Adds noise to a PNG image:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">0</span>, min(<span class="hljs-number">255</span>, value + randint(<span class="hljs-number">-20</span>, <span class="hljs-number">20</span>)))
@@ -2206,13 +2207,13 @@ img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
 </ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
-height, r = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
+HEIGHT, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []
-<span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
-    y = sum(range(velocity))
-    frame = Image.new(<span class="hljs-string">'L'</span>, (height, height))
+<span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">15</span>):
+    y = sum(range(velocity+<span class="hljs-number">1</span>))
+    frame = Image.new(<span class="hljs-string">'L'</span>, (HEIGHT, HEIGHT))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((height/<span class="hljs-number">2</span>-r, y, height/<span class="hljs-number">2</span>+r, y+<span class="hljs-number">2</span>*r), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse((HEIGHT/<span class="hljs-number">2</span>-R, y, HEIGHT/<span class="hljs-number">2</span>+R, y+<span class="hljs-number">2</span>*R), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
@@ -2240,7 +2241,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
         wf.writeframes(<span class="hljs-string">b''</span>.join(frames_short))
 </code></pre></div>
 
-<div><h3 id="examples">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
+<div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
 frames_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100000</span>))
 frames_i = (int(a * <span class="hljs-number">30000</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_f)
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)

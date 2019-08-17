@@ -2562,14 +2562,15 @@ Image
 from PIL import Image
 ```
 
+### Examples
 #### Creates a PNG image of a rainbow gradient:
 ```python
-width  = 100
-height = 100
-size   = width * height
-pixels = [255 * i/size for i in range(size)]
+WIDTH  = 100
+HEIGHT = 100
+SIZE   = WIDTH * HEIGHT
+pixels = [255 * i/SIZE for i in range(SIZE)]
 
-img = Image.new('HSV', (width, height))
+img = Image.new('HSV', (WIDTH, HEIGHT))
 img.putdata([(int(a), 255, 255) for a in pixels])
 img.convert(mode='RGB').save('test.png')
 ```
@@ -2591,18 +2592,17 @@ img.convert(mode='RGB').save('test.png')
 * **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
 
 ### Animation
-
 #### Creates a GIF of a bouncing ball:
 ```python
 from PIL import Image, ImageDraw
 import imageio
-height, r = 126, 10
+HEIGHT, R = 126, 10
 frames = []
-for velocity in range(1, 16):
-    y = sum(range(velocity))
-    frame = Image.new('L', (height, height))
+for velocity in range(15):
+    y = sum(range(velocity+1))
+    frame = Image.new('L', (HEIGHT, HEIGHT))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((height/2-r, y, height/2+r, y+2*r), fill='white')
+    draw.ellipse((HEIGHT/2-R, y, HEIGHT/2+R, y+2*R), fill='white')
     frames.append(frame)
 frames += reversed(frames[1:-1])
 imageio.mimsave('test.gif', frames, duration=0.03)
