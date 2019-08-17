@@ -73,8 +73,8 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key, default=None)          # Returns default if key does not exist.
-value  = <dict>.setdefault(key, default=None)   # Adds default to dict if key doesn't exist.
+value  = <dict>.get(key, default=None)          # Returns default if key is missing.
+value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
 <dict> = collections.defaultdict(<type>)        # Creates a dict with default value of type.
 <dict> = collections.defaultdict(lambda: 1)     # Creates a dict with default value 1.
 ```
