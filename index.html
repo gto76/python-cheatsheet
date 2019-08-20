@@ -2208,13 +2208,13 @@ img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-
 </ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
-HEIGHT, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
+WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []
 <span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">15</span>):
     y = sum(range(velocity+<span class="hljs-number">1</span>))
-    frame = Image.new(<span class="hljs-string">'L'</span>, (HEIGHT, HEIGHT))
+    frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((HEIGHT/<span class="hljs-number">2</span>-R, y, HEIGHT/<span class="hljs-number">2</span>+R, y+<span class="hljs-number">2</span>*R), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+<span class="hljs-number">2</span>*R), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
