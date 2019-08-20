@@ -2227,10 +2227,12 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-pyplot.plot(<data_1> [, <data_2>, ...])  # Or: pyplot.hist(<data>)
-pyplot.savefig(<filename>)
-pyplot.show()
-pyplot.clf()                             # Clears figure.
+pyplot.plot(<y_data>)
+pyplot.plot(<x_data>, <y_data>)
+pyplot.plot(..., label=<str>)    # Use `pyplot.legend()` to add legend.
+pyplot.savefig(<filename>)       # Saves figure.
+pyplot.show()                    # Displays figure.
+pyplot.clf()                     # Clears figure.
 ```
 
 

@@ -1925,10 +1925,12 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-pyplot.plot(&lt;data_1&gt; [, &lt;data_2&gt;, ...])  <span class="hljs-comment"># Or: pyplot.hist(&lt;data&gt;)</span>
-pyplot.savefig(&lt;filename&gt;)
-pyplot.show()
-pyplot.clf()                             <span class="hljs-comment"># Clears figure.</span>
+pyplot.plot(&lt;y_data&gt;)
+pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
+pyplot.plot(..., label=&lt;str&gt;)    <span class="hljs-comment"># Use `pyplot.legend()` to add legend.</span>
+pyplot.savefig(&lt;filename&gt;)       <span class="hljs-comment"># Saves figure.</span>
+pyplot.show()                    <span class="hljs-comment"># Displays figure.</span>
+pyplot.clf()                     <span class="hljs-comment"># Clears figure.</span>
 </code></pre></div>
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
