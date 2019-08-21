@@ -2573,7 +2573,7 @@ from PIL import Image
 ```
 
 ```python
-<tuple/int> = img.getpixel((x, y))              # Returns a pixel.
+<tuple/int> = <Image>.getpixel((x, y))          # Returns a pixel.
 <Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to image.
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
 <Image>.putdata(<list/tuple>)                   # Writes a sequence of pixels.
