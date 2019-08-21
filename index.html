@@ -2234,7 +2234,7 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div>
 
-<div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
+<div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
 WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
@@ -2250,23 +2250,31 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 </code></pre></div></div>
 
 
-<div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
-<span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, iter_unpack
+<div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave, struct
 </code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)
+&lt;bytes&gt;      = &lt;Wave_read&gt;.readframes(nframes)
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Wave_write&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)
+&lt;Wave_write&gt;.writeframes(&lt;bytes&gt;)
+&lt;Wave_write&gt;.setnchannels(&lt;int&gt;)                <span class="hljs-comment"># Number of samples per frame.</span>
+&lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># Sample size in bytes.</span>
+&lt;Wave_write&gt;.setframerate(&lt;int&gt;)                <span class="hljs-comment"># Frames per second.</span>
+</code></pre>
 <div><h3 id="readframesfromwavfile">Read Frames from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
-    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> wf:
-        frames = wf.readframes(wf.getnframes())
-        <span class="hljs-keyword">return</span> [a[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> iter_unpack(<span class="hljs-string">'&lt;h'</span>, frames)]
+    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
+        frames = file.readframes(file.getnframes())
+        <span class="hljs-keyword">return</span> [a[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> struct.iter_unpack(<span class="hljs-string">'&lt;h'</span>, frames)]
 </code></pre></div>
 
 <div><h3 id="writeframestowavfile">Write Frames to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_int, mono=True)</span>:</span>
-    frames_short = (pack(<span class="hljs-string">'&lt;h'</span>, a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_int)
-    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> wf:
-        wf.setnchannels(<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> mono <span class="hljs-keyword">else</span> <span class="hljs-number">2</span>)
-        wf.setsampwidth(<span class="hljs-number">2</span>)
-        wf.setframerate(<span class="hljs-number">44100</span>)
-        wf.writeframes(<span class="hljs-string">b''</span>.join(frames_short))
+    frames_short = (struct.pack(<span class="hljs-string">'&lt;h'</span>, a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_int)
+    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+        file.setnchannels(<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> mono <span class="hljs-keyword">else</span> <span class="hljs-number">2</span>)
+        file.setsampwidth(<span class="hljs-number">2</span>)
+        file.setframerate(<span class="hljs-number">44100</span>)
+        file.writeframes(<span class="hljs-string">b''</span>.join(frames_short))
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
@@ -2282,7 +2290,7 @@ frames_i  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="h
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)
 </code></pre></div>
 
-<div><h3 id="synthesizer">Synthesizer</h3><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
+<div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">import</span> simpleaudio, math, struct
 <span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain, repeat
 F  = <span class="hljs-number">44100</span>

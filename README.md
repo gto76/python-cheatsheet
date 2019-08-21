@@ -2622,7 +2622,8 @@ img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert(mode='RGB').save('test.png')
 ```
 
-### Animation
+Animation
+---------
 #### Creates a GIF of a bouncing ball:
 ```python
 # $ pip3 install imageio
@@ -2644,27 +2645,39 @@ imageio.mimsave('test.gif', frames, duration=0.03)
 Audio
 -----
 ```python
-import wave
-from struct import pack, iter_unpack
+import wave, struct
+```
+
+```python
+<Wave_read>  = wave.open('<path>', 'rb')
+<bytes>      = <Wave_read>.readframes(nframes)
+```
+
+```python
+<Wave_write> = wave.open('<path>', 'wb')
+<Wave_write>.writeframes(<bytes>)
+<Wave_write>.setnchannels(<int>)                # Number of samples per frame.
+<Wave_write>.setsampwidth(<int>)                # Sample size in bytes.
+<Wave_write>.setframerate(<int>)                # Frames per second.
 ```
 
 ### Read Frames from WAV File
 ```python
 def read_wav_file(filename):
-    with wave.open(filename, 'rb') as wf:
-        frames = wf.readframes(wf.getnframes())
-        return [a[0] for a in iter_unpack('<h', frames)]
+    with wave.open(filename, 'rb') as file:
+        frames = file.readframes(file.getnframes())
+        return [a[0] for a in struct.iter_unpack('<h', frames)]
 ```
 
 ### Write Frames to WAV File
 ```python
 def write_to_wav_file(filename, frames_int, mono=True):
-    frames_short = (pack('<h', a) for a in frames_int)
-    with wave.open(filename, 'wb') as wf:
-        wf.setnchannels(1 if mono else 2)
-        wf.setsampwidth(2)
-        wf.setframerate(44100)
-        wf.writeframes(b''.join(frames_short))
+    frames_short = (struct.pack('<h', a) for a in frames_int)
+    with wave.open(filename, 'wb') as file:
+        file.setnchannels(1 if mono else 2)
+        file.setsampwidth(2)
+        file.setframerate(44100)
+        file.writeframes(b''.join(frames_short))
 ```
 
 ### Examples
@@ -2684,7 +2697,8 @@ frames_i  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_i)
 ```
 
-### Synthesizer
+Synthesizer
+-----------
 #### Plays Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
