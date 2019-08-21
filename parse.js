@@ -26,7 +26,7 @@ const TOC =
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#csv">CSV</a>, <a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">MemoryView</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutine">Coroutine</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profile">Profile</a>,\n' +
-  '                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>]\n' +
+  '                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>]\n' +
   '}\n' +
   '</code></pre>\n';
 

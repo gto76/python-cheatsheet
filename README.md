@@ -15,7 +15,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`CSV`](#csv)**__,__ **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`MemoryView`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutine)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profile)**__,__  
-**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__.__
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer `](#synthesizer)**__.__
 
 
 Main
@@ -2573,11 +2573,11 @@ from PIL import Image
 ```
 
 ```python
-<tuple/int> = img.getpixel((x, y))        # Returns a pixel.
-<Image>.putpixel((x, y), <tuple/int>)     # Writes tuple/int to image.
-<ImagingCore> = <Image>.getdata()         # Returns a sequence of tuples/ints.
-<Image>.putdata(<list/tuple>)             # Writes a sequence of tuples/ints.
-<Image>.paste(<Image>, (x, y))            # Writes an image to image.
+<tuple/int> = img.getpixel((x, y))              # Returns a pixel.
+<Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to image.
+<ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
+<Image>.putdata(<list/tuple>)                   # Writes a sequence of pixels.
+<Image>.paste(<Image>, (x, y))                  # Writes an image to image.
 ```
 
 ### Modes
@@ -2586,21 +2586,6 @@ from PIL import Image
 * **`'RGB'` - 3x8-bit pixels, true color.**
 * **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
 * **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
-
-### ImageDraw
-```python
-from PIL import ImageDraw
-<ImageDraw> = ImageDraw.Draw(<Image>)
-<ImageDraw>.point((x, y), fill=None)
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 
-<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg, fill=None, width=0)
-<ImageDraw>.rectangle((x1, y1, x2, y2), fill=None, outline=None, width=0)
-<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]), fill=None, outline=None)
-<ImageDraw>.ellipse((x1, y1, x2, y2), fill=None, outline=None, width=0)
-```
-* **Use `'fill=<color>'` to set the primary color.**
-* **Use `'outline=<color>'` to set the secondary color.**
-* **Colors can be specified as tuple, int, `'#rrggbb'` string or a color name.**
 
 ### Examples
 #### Creates a PNG image of a rainbow gradient:
@@ -2622,11 +2607,27 @@ img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert(mode='RGB').save('test.png')
 ```
 
+### ImageDraw
+```python
+from PIL import ImageDraw
+<ImageDraw> = ImageDraw.Draw(<Image>)
+<ImageDraw>.point((x, y), fill=None)
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 
+<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg, fill=None, width=0)
+<ImageDraw>.rectangle((x1, y1, x2, y2), fill=None, outline=None, width=0)
+<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]), fill=None, outline=None)
+<ImageDraw>.ellipse((x1, y1, x2, y2), fill=None, outline=None, width=0)
+```
+* **Use `'fill=<color>'` to set the primary color.**
+* **Use `'outline=<color>'` to set the secondary color.**
+* **Colors can be specified as tuple, int, `'#rrggbb'` string or a color name.**
+
+
 Animation
 ---------
 #### Creates a GIF of a bouncing ball:
 ```python
-# $ pip3 install imageio
+# $ pip3 install pillow imageio
 from PIL import Image, ImageDraw
 import imageio
 WIDTH, R = 126, 10
