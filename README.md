@@ -2564,6 +2564,44 @@ Image
 from PIL import Image
 ```
 
+```python
+<Image> = Image.new('<mode>', (width, height))
+<Image> = Image.open('<path>')
+<Image> = <Image>.convert(mode='<mode>')
+<Image>.save('<path>')
+<Image>.show()
+```
+
+```python
+<tuple/int> = img.getpixel((x, y))        # Returns a pixel.
+<Image>.putpixel((x, y), <tuple/int>)     # Writes tuple/int to image.
+<ImagingCore> = <Image>.getdata()         # Returns a sequence of tuples/ints.
+<Image>.putdata(<list/tuple>)             # Writes a sequence of tuples/ints.
+<Image>.paste(<Image>, (x, y))            # Writes an image to image.
+```
+
+### Modes
+* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
+* **`'L'` - 8-bit pixels, greyscale.**
+* **`'RGB'` - 3x8-bit pixels, true color.**
+* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
+* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
+
+### ImageDraw
+```python
+from PIL import ImageDraw
+<ImageDraw> = ImageDraw.Draw(<Image>)
+<ImageDraw>.point((x, y), fill=None)
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 
+<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg, fill=None, width=0)
+<ImageDraw>.rectangle((x1, y1, x2, y2), fill=None, outline=None, width=0)
+<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]), fill=None, outline=None)
+<ImageDraw>.ellipse((x1, y1, x2, y2), fill=None, outline=None, width=0)
+```
+* **Use `'fill=<color>'` to set the primary color.**
+* **Use `'outline=<color>'` to set the secondary color.**
+* **Colors can be specified as tuple, int, `'#rrggbb'` string or a color name.**
+
 ### Examples
 #### Creates a PNG image of a rainbow gradient:
 ```python
@@ -2583,13 +2621,6 @@ img = Image.open('test.png').convert(mode='HSV')
 img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert(mode='RGB').save('test.png')
 ```
-
-### Modes
-* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
-* **`'L'` - 8-bit pixels, greyscale.**
-* **`'RGB'` - 3x8-bit pixels, true color.**
-* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
-* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
 
 ### Animation
 #### Creates a GIF of a bouncing ball:

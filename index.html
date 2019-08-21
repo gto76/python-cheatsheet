@@ -2183,6 +2183,41 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 </code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))
+&lt;Image&gt; = Image.open(<span class="hljs-string">'&lt;path&gt;'</span>)
+&lt;Image&gt; = &lt;Image&gt;.convert(mode=<span class="hljs-string">'&lt;mode&gt;'</span>)
+&lt;Image&gt;.save(<span class="hljs-string">'&lt;path&gt;'</span>)
+&lt;Image&gt;.show()
+</code></pre>
+<pre><code class="python language-python hljs">&lt;tuple/int&gt; = img.getpixel((x, y))        <span class="hljs-comment"># Returns a pixel.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;tuple/int&gt;)     <span class="hljs-comment"># Writes tuple/int to image.</span>
+&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()         <span class="hljs-comment"># Returns a sequence of tuples/ints.</span>
+&lt;Image&gt;.putdata(&lt;list/tuple&gt;)             <span class="hljs-comment"># Writes a sequence of tuples/ints.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))            <span class="hljs-comment"># Writes an image to image.</span>
+</code></pre>
+<div><h3 id="modes-1">Modes</h3><ul>
+<li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - 8-bit pixels, greyscale.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - 3x8-bit pixels, true color.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - 4x8-bit pixels, true color with transparency mask.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
+</ul><div><h3 id="imagedraw">ImageDraw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
+&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
+&lt;ImageDraw&gt;.point((x, y), fill=<span class="hljs-keyword">None</span>)
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>, joint=<span class="hljs-keyword">None</span>) 
+&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg, fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>)
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
+</code></pre></div></div>
+
+
+
+<ul>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the secondary color.</strong></li>
+<li><strong>Colors can be specified as tuple, int, <code class="python hljs"><span class="hljs-string">'#rrggbb'</span></code> string or a color name.</strong></li>
+</ul>
 <div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 size = WIDTH * HEIGHT
 hue = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
@@ -2199,13 +2234,7 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div>
 
-<div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - 8-bit pixels, greyscale.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - 3x8-bit pixels, true color.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - 4x8-bit pixels, true color with transparency mask.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
-</ul><div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
+<div><h3 id="animation">Animation</h3><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
 WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
@@ -2218,9 +2247,7 @@ frames = []
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
-</code></pre></div></div></div>
-
-
+</code></pre></div></div>
 
 
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
