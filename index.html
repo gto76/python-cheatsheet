@@ -2285,7 +2285,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 +-----------+-------------+------+-------------+
 </code></pre></div>
 
-<div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
+<div><h3 id="readfloatframesfromwavfile">Read Float Frames from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_int</span><span class="hljs-params">(a_bytes)</span>:</span>
         an_int = int.from_bytes(a_bytes, <span class="hljs-string">'little'</span>, signed=width!=<span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (width == <span class="hljs-number">1</span>)
@@ -2296,7 +2296,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
     <span class="hljs-keyword">return</span> [get_int(a) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> chunks]
 </code></pre></div>
 
-<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_float, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
+<div><h3 id="writefloatframestowavfile">Write Float Frames to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_float, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
         a_float += sampwidth == <span class="hljs-number">1</span>
