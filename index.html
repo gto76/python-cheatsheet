@@ -2185,7 +2185,7 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))
 &lt;Image&gt; = Image.open(<span class="hljs-string">'&lt;path&gt;'</span>)
-&lt;Image&gt; = &lt;Image&gt;.convert(mode=<span class="hljs-string">'&lt;mode&gt;'</span>)
+&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)
 &lt;Image&gt;.save(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;Image&gt;.show()
 </code></pre>
@@ -2206,7 +2206,7 @@ size = WIDTH * HEIGHT
 hue = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
 img = Image.new(<span class="hljs-string">'HSV'</span>, (WIDTH, HEIGHT))
 img.putdata([(int(h), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> hue])
-img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
+img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div></div></div>
 
 
@@ -2214,9 +2214,9 @@ img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-
 
 <div><h4 id="addsnoisetoapngimage">Adds noise to a PNG image:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">0</span>, min(<span class="hljs-number">255</span>, value + randint(<span class="hljs-number">-20</span>, <span class="hljs-number">20</span>)))
-img = Image.open(<span class="hljs-string">'test.png'</span>).convert(mode=<span class="hljs-string">'HSV'</span>)
+img = Image.open(<span class="hljs-string">'test.png'</span>).convert(<span class="hljs-string">'HSV'</span>)
 img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v <span class="hljs-keyword">in</span> img.getdata()])
-img.convert(mode=<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
+img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div>
 
 <div><h3 id="imagedraw">ImageDraw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw

@@ -2567,7 +2567,7 @@ from PIL import Image
 ```python
 <Image> = Image.new('<mode>', (width, height))
 <Image> = Image.open('<path>')
-<Image> = <Image>.convert(mode='<mode>')
+<Image> = <Image>.convert('<mode>')
 <Image>.save('<path>')
 <Image>.show()
 ```
@@ -2595,16 +2595,16 @@ size = WIDTH * HEIGHT
 hue = [255 * i/size for i in range(size)]
 img = Image.new('HSV', (WIDTH, HEIGHT))
 img.putdata([(int(h), 255, 255) for h in hue])
-img.convert(mode='RGB').save('test.png')
+img.convert('RGB').save('test.png')
 ```
 
 #### Adds noise to a PNG image:
 ```python
 from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
-img = Image.open('test.png').convert(mode='HSV')
+img = Image.open('test.png').convert('HSV')
 img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
-img.convert(mode='RGB').save('test.png')
+img.convert('RGB').save('test.png')
 ```
 
 ### ImageDraw
@@ -2665,13 +2665,11 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
 <Wave_write>.writeframes(<bytes>)               
 ```
-
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In stereo signal first sample of a frame belongs to the left channel.**
 * **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
 * **If sample width is one, then the integer should be encoded as unsigned.**
 * **For all other sizes the integer should be encoded as signed with little-endian byte order.**
-
 
 ### Sample Values
 ```text
