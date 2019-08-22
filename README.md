@@ -2227,6 +2227,9 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
+```
+
+```python
 pyplot.plot(<y_data>)
 pyplot.plot(<x_data>, <y_data>)
 pyplot.plot(..., label=<str>)    # Use `pyplot.legend()` to add legend.
@@ -2610,6 +2613,9 @@ img.convert('RGB').save('test.png')
 ### ImageDraw
 ```python
 from PIL import ImageDraw
+```
+
+```python
 <ImageDraw> = ImageDraw.Draw(<Image>)
 <ImageDraw>.point((x, y), fill=None)
 <ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 

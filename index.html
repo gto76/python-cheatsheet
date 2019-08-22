@@ -1925,14 +1925,15 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-pyplot.plot(&lt;y_data&gt;)
+</code></pre></div>
+
+<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt;)
 pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
 pyplot.plot(..., label=&lt;str&gt;)    <span class="hljs-comment"># Use `pyplot.legend()` to add legend.</span>
 pyplot.savefig(&lt;filename&gt;)       <span class="hljs-comment"># Saves figure.</span>
 pyplot.show()                    <span class="hljs-comment"># Displays figure.</span>
 pyplot.clf()                     <span class="hljs-comment"># Clears figure.</span>
-</code></pre></div>
-
+</code></pre>
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate
 <span class="hljs-keyword">import</span> csv
@@ -2220,15 +2221,16 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 </code></pre></div>
 
 <div><h3 id="imagedraw">ImageDraw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
-&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
+</code></pre></div>
+
+<pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
 &lt;ImageDraw&gt;.point((x, y), fill=<span class="hljs-keyword">None</span>)
 &lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>, joint=<span class="hljs-keyword">None</span>) 
 &lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg, fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
 &lt;ImageDraw&gt;.polygon((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>)
 &lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
-</code></pre></div>
-
+</code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the secondary color.</strong></li>
