@@ -2666,11 +2666,11 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.writeframes(<bytes>)               
 ```
 
-* **Bytes object contains a seqence of frames, each consisting of one or more samples.**
-* **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
-* **If sample width is one, then the integer is interpreted as unsigned.**
-* **For all other sample sizes the integer is interpreted as signed with little-endian byte order.**
+* **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In stereo signal first sample of a frame belongs to the left channel.**
+* **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
+* **If sample width is one, then the integer should be encoded as unsigned.**
+* **For all other sizes the integer should be encoded as signed with little-endian byte order.**
 
 
 ### Sample Values
@@ -2724,7 +2724,8 @@ write_to_wav_file('test.wav', frames_f)
 #### Adds noise to a mono WAV file:
 ```python
 from random import random
-frames_f = (a + (random()-0.5) * 0.03 for a in read_wav_file('test.wav'))
+add_noise = lambda value: value + (random()-0.5) * 0.03
+frames_f  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_f)
 ```
 
