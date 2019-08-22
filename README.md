@@ -2652,7 +2652,7 @@ imageio.mimsave('test.gif', frames, duration=0.03)
 Audio
 -----
 ```python
-import wave, struct
+import wave
 ```
 
 ```python
