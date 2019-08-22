@@ -2661,7 +2661,7 @@ framerate    = <Wave_read>.getframerate()       # Number of frames per second.
 nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
 sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
 nframes      = <Wave_read>.getnframes()         # Number of frames.
-<bytes>      = <Wave_read>.readframes(nframes)
+<bytes>      = <Wave_read>.readframes(nframes)  # Returns next 'nframes' frames.
 ```
 
 ```python
@@ -2669,7 +2669,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
 <Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
-<Wave_write>.writeframes(<bytes>)               
+<Wave_write>.writeframes(<bytes>)               # Appends frames to file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In stereo signal first sample of a frame belongs to the left channel.**
