@@ -2651,15 +2651,38 @@ import wave, struct
 
 ```python
 <Wave_read>  = wave.open('<path>', 'rb')
+framerate    = <Wave_read>.getframerate()       # Number of frames per second.
+nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
+sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
+nframes      = <Wave_read>.getnframes()         # Number of frames.
 <bytes>      = <Wave_read>.readframes(nframes)
 ```
 
 ```python
 <Wave_write> = wave.open('<path>', 'wb')
-<Wave_write>.writeframes(<bytes>)
-<Wave_write>.setnchannels(<int>)                # Number of samples per frame.
-<Wave_write>.setsampwidth(<int>)                # Sample size in bytes.
-<Wave_write>.setframerate(<int>)                # Frames per second.
+<Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
+<Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
+<Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
+<Wave_write>.writeframes(<bytes>)               
+```
+
+* **Bytes object contains a seqence of frames, each consisting of one or more samples.**
+* **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
+* **If sample width is one, then the integer is interpreted as unsigned.**
+* **For all other sample sizes the integer is interpreted as signed with little-endian byte order.**
+* **In stereo signal first sample of a frame belongs to the left channel.**
+
+
+### Sample Values
+```text
+┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓
+┃ sampwidth │     min     │ zero │     max     ┃
+┠───────────┼─────────────┼──────┼─────────────┨
+┃     1     │           0 │  128 │         255 ┃
+┃     2     │      -32768 │    0 │       32767 ┃
+┃     3     │    -8388608 │    0 │     8388607 ┃
+┃     4     │ -2147483648 │    0 │  2147483647 ┃
+┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛
 ```
 
 ### Read Float Frames from WAV File
@@ -2701,8 +2724,7 @@ write_to_wav_file('test.wav', frames_f)
 #### Adds noise to a mono WAV file:
 ```python
 from random import random
-add_noise = lambda value: max(-1, min(1, value + (random()-0.5)*0.03))
-frames_f  = (add_noise(a) for a in read_wav_file('test.wav'))
+frames_f = (a + (random()-0.5) * 0.03 for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_f)
 ```
 
