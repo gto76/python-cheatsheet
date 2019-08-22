@@ -2689,7 +2689,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 ┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛
 ```
 
-### Read Float Frames from WAV File
+### Read Float Samples from WAV File
 ```python
 def read_wav_file(filename):
     def get_int(a_bytes):
@@ -2702,7 +2702,7 @@ def read_wav_file(filename):
     return [get_int(a) / pow(2, width * 8 - 1) for a in chunks]
 ```
 
-### Write Float Frames to WAV File
+### Write Float Samples to WAV File
 ```python
 def write_to_wav_file(filename, frames_float, nchannels=1, sampwidth=2, framerate=44100):
     def get_bytes(a_float):
