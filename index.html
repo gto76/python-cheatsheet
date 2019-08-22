@@ -2262,32 +2262,40 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># Sample size in bytes.</span>
 &lt;Wave_write&gt;.setframerate(&lt;int&gt;)                <span class="hljs-comment"># Frames per second.</span>
 </code></pre>
-<div><h3 id="readframesfromwavfile">Read Frames from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
+<div><h3 id="readfloatframesfromwavfile">Read Float Frames from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_int</span><span class="hljs-params">(a_bytes)</span>:</span>
+        an_int = int.from_bytes(a_bytes, <span class="hljs-string">'little'</span>, signed=width!=<span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (width == <span class="hljs-number">1</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
         frames = file.readframes(file.getnframes())
-        <span class="hljs-keyword">return</span> [a[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> struct.iter_unpack(<span class="hljs-string">'&lt;h'</span>, frames)]
+        width  = file.getsampwidth()
+    chunks = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
+    <span class="hljs-keyword">return</span> [get_int(a) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> chunks]
 </code></pre></div>
 
-<div><h3 id="writeframestowavfile">Write Frames to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_int, mono=True)</span>:</span>
-    frames_short = (struct.pack(<span class="hljs-string">'&lt;h'</span>, a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_int)
+<div><h3 id="writefloatframestowavfile">Write Float Frames to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_float, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
+        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
+        a_float += sampwidth == <span class="hljs-number">1</span>
+        a_float *= pow(<span class="hljs-number">2</span>, sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> int(a_float).to_bytes(sampwidth, <span class="hljs-string">'little'</span>, signed=sampwidth!=<span class="hljs-number">1</span>) 
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-        file.setnchannels(<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> mono <span class="hljs-keyword">else</span> <span class="hljs-number">2</span>)
-        file.setsampwidth(<span class="hljs-number">2</span>)
-        file.setframerate(<span class="hljs-number">44100</span>)
-        file.writeframes(<span class="hljs-string">b''</span>.join(frames_short))
+        file.setnchannels(nchannels)
+        file.setsampwidth(sampwidth)
+        file.setframerate(framerate)
+        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_float))
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
 frames_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100000</span>))
-frames_i = (int(a * <span class="hljs-number">30000</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_f)
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 </code></pre></div></div>
 
 
-<div><h4 id="addsnoisetoamonowavfile">Adds noise to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
-add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">-32768</span>, min(<span class="hljs-number">32767</span>, value + randint(<span class="hljs-number">-500</span>, <span class="hljs-number">500</span>)))
-frames_i  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_i)
+<div><h4 id="addsnoisetoamonowavfile">Adds noise to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
+add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span>, value + (random()<span class="hljs-number">-0.5</span>)*<span class="hljs-number">0.03</span>))
+frames_f  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>

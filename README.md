@@ -2662,23 +2662,32 @@ import wave, struct
 <Wave_write>.setframerate(<int>)                # Frames per second.
 ```
 
-### Read Frames from WAV File
+### Read Float Frames from WAV File
 ```python
 def read_wav_file(filename):
+    def get_int(a_bytes):
+        an_int = int.from_bytes(a_bytes, 'little', signed=width!=1)
+        return an_int - 128 * (width == 1)
     with wave.open(filename, 'rb') as file:
         frames = file.readframes(file.getnframes())
-        return [a[0] for a in struct.iter_unpack('<h', frames)]
+        width  = file.getsampwidth()
+    chunks = (frames[i: i + width] for i in range(0, len(frames), width))
+    return [get_int(a) / pow(2, width * 8 - 1) for a in chunks]
 ```
 
-### Write Frames to WAV File
+### Write Float Frames to WAV File
 ```python
-def write_to_wav_file(filename, frames_int, mono=True):
-    frames_short = (struct.pack('<h', a) for a in frames_int)
+def write_to_wav_file(filename, frames_float, nchannels=1, sampwidth=2, framerate=44100):
+    def get_bytes(a_float):
+        a_float = max(-1, min(1 - 2e-16, a_float))
+        a_float += sampwidth == 1
+        a_float *= pow(2, sampwidth * 8 - 1)
+        return int(a_float).to_bytes(sampwidth, 'little', signed=sampwidth!=1) 
     with wave.open(filename, 'wb') as file:
-        file.setnchannels(1 if mono else 2)
-        file.setsampwidth(2)
-        file.setframerate(44100)
-        file.writeframes(b''.join(frames_short))
+        file.setnchannels(nchannels)
+        file.setsampwidth(sampwidth)
+        file.setframerate(framerate)
+        file.writeframes(b''.join(get_bytes(a) for a in frames_float))
 ```
 
 ### Examples
@@ -2686,17 +2695,17 @@ def write_to_wav_file(filename, frames_int, mono=True):
 ```python
 from math import pi, sin
 frames_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
-frames_i = (int(a * 30000) for a in frames_f)
-write_to_wav_file('test.wav', frames_i)
+write_to_wav_file('test.wav', frames_f)
 ```
 
 #### Adds noise to a mono WAV file:
 ```python
-from random import randint
-add_noise = lambda value: max(-32768, min(32767, value + randint(-500, 500)))
-frames_i  = (add_noise(a) for a in read_wav_file('test.wav'))
-write_to_wav_file('test.wav', frames_i)
+from random import random
+add_noise = lambda value: max(-1, min(1, value + (random()-0.5)*0.03))
+frames_f  = (add_noise(a) for a in read_wav_file('test.wav'))
+write_to_wav_file('test.wav', frames_f)
 ```
+
 
 Synthesizer
 -----------
