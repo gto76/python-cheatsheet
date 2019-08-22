@@ -2275,14 +2275,14 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 <li><strong>If sample width is one, then the integer should be encoded as unsigned.</strong></li>
 <li><strong>For all other sizes the integer should be encoded as signed with little-endian byte order.</strong></li>
 </ul>
-<div><h3 id="samplevalues">Sample Values</h3><pre><code class="text language-text">┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓
-┃ sampwidth │     min     │ zero │     max     ┃
-┠───────────┼─────────────┼──────┼─────────────┨
-┃     1     │           0 │  128 │         255 ┃
-┃     2     │      -32768 │    0 │       32767 ┃
-┃     3     │    -8388608 │    0 │     8388607 ┃
-┃     4     │ -2147483648 │    0 │  2147483647 ┃
-┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛
+<div><h3 id="samplevalues">Sample Values</h3><pre><code class="text language-text">+-----------+-------------+------+-------------+
+| sampwidth |     min     | zero |     max     |
++-----------+-------------+------+-------------+
+|     1     |           0 |  128 |         255 |
+|     2     |      -32768 |    0 |       32767 |
+|     3     |    -8388608 |    0 |     8388607 |
+|     4     | -2147483648 |    0 |  2147483647 |
++-----------+-------------+------+-------------+
 </code></pre></div>
 
 <div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>

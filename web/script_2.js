@@ -177,6 +177,21 @@ const DIAGRAM_10_B =
   '┃ index()   │ ValueError │          │          ┃\n' +
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
+const DIAGRAM_11_A =
+  '+-----------+-------------+------+-------------+\n' +
+  '| sampwidth |     min     | zero |     max     |\n' +
+  '+-----------+-------------+------+-------------+\n';
+
+const DIAGRAM_11_B =
+  '┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃ sampwidth │     min     │ zero │     max     ┃\n' +
+  '┠───────────┼─────────────┼──────┼─────────────┨\n' +
+  '┃     1     │           0 │  128 │         255 ┃\n' +
+  '┃     2     │      -32768 │    0 │       32767 ┃\n' +
+  '┃     3     │    -8388608 │    0 │     8388607 ┃\n' +
+  '┃     4     │ -2147483648 │    0 │  2147483647 ┃\n' +
+  '┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛\n';
+
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -192,6 +207,7 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
+  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
 }
 
 var isMobile = false;
