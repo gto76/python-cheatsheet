@@ -253,7 +253,7 @@ Type
 (<class 'str'>, <class 'str'>, <class 'str'>)
 ```
 
-#### Some types do not have builtin names, so they must be imported:
+#### Some types do not have built-in names, so they must be imported:
 ```python
 from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
