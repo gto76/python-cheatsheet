@@ -143,7 +143,7 @@ Tuple
 ```python
 <tuple> = ()
 <tuple> = (<el>, )
-<tuple> = (<el_1>, <el_2>, ...)
+<tuple> = (<el_1>, <el_2> [, ...])
 ```
 
 ### Named Tuple
