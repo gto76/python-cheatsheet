@@ -275,8 +275,9 @@ value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</s
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Filters dictionary by keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
-<span class="hljs-meta">&gt;&gt;&gt; </span>colors = [<span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'yellow'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>colors = [<span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter(colors)
+<span class="hljs-meta">&gt;&gt;&gt; </span>counter[<span class="hljs-string">'yellow'</span>] += <span class="hljs-number">1</span>
 Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'red'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'yellow'</span>: <span class="hljs-number">1</span>})
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter.most_common()[<span class="hljs-number">0</span>]
 (<span class="hljs-string">'blue'</span>, <span class="hljs-number">3</span>)
