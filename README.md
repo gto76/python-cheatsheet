@@ -355,7 +355,7 @@ import re
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
-* **Search() and match() return None if there are no matches.**
+* **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
