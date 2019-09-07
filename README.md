@@ -483,7 +483,7 @@ Numbers
 <float>    = float(<int/str/bool>)
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
-<Decimal>  = decimal.Decimal(<int/float/str>)
+<Decimal>  = decimal.Decimal(<str/int/float>)
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
