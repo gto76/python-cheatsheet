@@ -364,20 +364,20 @@ import re
 
 ### Match Object
 ```python
-<str>   = <Match>.group()   # Whole match. Also group(0).
-<str>   = <Match>.group(1)  # Part in first bracket.
-<tuple> = <Match>.groups()  # All bracketed parts.
-<int>   = <Match>.start()   # Start index of a match.
-<int>   = <Match>.end()     # Exclusive end index of a match.
+<str>   = <Match>.group()                      # Whole match. Also group(0).
+<str>   = <Match>.group(1)                     # Part in first bracket.
+<tuple> = <Match>.groups()                     # All bracketed parts.
+<int>   = <Match>.start()                      # Start index of a match.
+<int>   = <Match>.end()                        # Exclusive end index of a match.
 ```
 
 ### Special Sequences
 * **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
 * **Use capital letters for negation.**
 ```python
-'\d' == '[0-9]'             # Digit
-'\s' == '[ \t\n\r\f\v]'     # Whitespace
-'\w' == '[a-zA-Z0-9_]'      # Alphanumeric
+'\d' == '[0-9]'                                # Digit
+'\s' == '[ \t\n\r\f\v]'                        # Whitespace
+'\w' == '[a-zA-Z0-9_]'                         # Alphanumeric
 ```
 
 
