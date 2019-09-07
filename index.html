@@ -286,19 +286,19 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 <div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = set()
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                               <span class="hljs-comment"># Or: &lt;set&gt; |= {&lt;el&gt;}</span>
-&lt;set&gt;.update(&lt;collection&gt;)                    <span class="hljs-comment"># Or: &lt;set&gt; |= &lt;set&gt;</span>
+<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                                 <span class="hljs-comment"># Or: &lt;set&gt; |= {&lt;el&gt;}</span>
+&lt;set&gt;.update(&lt;collection&gt;)                      <span class="hljs-comment"># Or: &lt;set&gt; |= &lt;set&gt;</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll.&gt;)                 <span class="hljs-comment"># Or: &lt;set&gt; | &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll.&gt;)          <span class="hljs-comment"># Or: &lt;set&gt; &amp; &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.difference(&lt;coll.&gt;)            <span class="hljs-comment"># Or: &lt;set&gt; - &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.symmetric_difference(&lt;coll.&gt;)  <span class="hljs-comment"># Or: &lt;set&gt; ^ &lt;set&gt;</span>
-&lt;bool&gt; = &lt;set&gt;.issubset(&lt;coll.&gt;)              <span class="hljs-comment"># Or: &lt;set&gt; &lt;= &lt;set&gt;</span>
-&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll.&gt;)            <span class="hljs-comment"># Or: &lt;set&gt; &gt;= &lt;set&gt;</span>
+<pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll.&gt;)                   <span class="hljs-comment"># Or: &lt;set&gt; | &lt;set&gt;</span>
+&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll.&gt;)            <span class="hljs-comment"># Or: &lt;set&gt; &amp; &lt;set&gt;</span>
+&lt;set&gt;  = &lt;set&gt;.difference(&lt;coll.&gt;)              <span class="hljs-comment"># Or: &lt;set&gt; - &lt;set&gt;</span>
+&lt;set&gt;  = &lt;set&gt;.symmetric_difference(&lt;coll.&gt;)    <span class="hljs-comment"># Or: &lt;set&gt; ^ &lt;set&gt;</span>
+&lt;bool&gt; = &lt;set&gt;.issubset(&lt;coll.&gt;)                <span class="hljs-comment"># Or: &lt;set&gt; &lt;= &lt;set&gt;</span>
+&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll.&gt;)              <span class="hljs-comment"># Or: &lt;set&gt; &gt;= &lt;set&gt;</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                            <span class="hljs-comment"># Raises KeyError if empty.</span>
-&lt;set&gt;.remove(&lt;el&gt;)                            <span class="hljs-comment"># Raises KeyError if missing.</span>
-&lt;set&gt;.discard(&lt;el&gt;)                           <span class="hljs-comment"># Doesn't raise an error.</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                              <span class="hljs-comment"># Raises KeyError if empty.</span>
+&lt;set&gt;.remove(&lt;el&gt;)                              <span class="hljs-comment"># Raises KeyError if missing.</span>
+&lt;set&gt;.discard(&lt;el&gt;)                             <span class="hljs-comment"># Doesn't raise an error.</span>
 </code></pre>
 <div><h3 id="frozenset">Frozen Set</h3><ul>
 <li><strong>Is immutable and hashable.</strong></li>
