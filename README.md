@@ -900,7 +900,7 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies metadata of function add() to function out().**
+* **Wraps is a helper decorator that copies metadata of function func() to function out().**
 * **Without it `'add.__name__'` would return `'out'`.**
 
 ### LRU Cache
