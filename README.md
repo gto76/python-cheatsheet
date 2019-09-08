@@ -1156,6 +1156,8 @@ class Counter:
 ```
 
 ### Context Manager
+* **Enter() should lock the resources and return an object.**
+* **Exit() should release the resources.**
 ```python
 class MyOpen():
     def __init__(self, filename):

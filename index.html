@@ -1094,7 +1094,10 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter(), counter(), counter()
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
-<div><h3 id="contextmanager">Context Manager</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span><span class="hljs-params">()</span>:</span>
+<div><h3 id="contextmanager">Context Manager</h3><ul>
+<li><strong>Enter() should lock the resources and return an object.</strong></li>
+<li><strong>Exit() should release the resources.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__enter__</span><span class="hljs-params">(self)</span>:</span>
@@ -1103,6 +1106,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, *args)</span>:</span>
         self.file.close()
 </code></pre></div>
+
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.txt'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> file:
 <span class="hljs-meta">... </span>    file.write(<span class="hljs-string">'Hello World!'</span>)
