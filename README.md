@@ -1443,10 +1443,8 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 
 ### Pretty Print
 ```python
->>> from pprint import pprint
->>> pprint(dir())
-['__annotations__',
- '__builtins__', ...]
+from pprint import pprint
+pprint(<collection>, stream=None, width=80)
 ```
 
 
