@@ -1278,7 +1278,7 @@ class MyAbcSequence(collections.abc.Sequence):
 +------------+----------+------------+----------+--------------+
 ```
 
-* **Other useful ABCs that automatically generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping — `'<abc>.__abstractmethods__'`.**
+* **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping. Required methods: `'<abc>.__abstractmethods__'`.**
 
 
 Enum
