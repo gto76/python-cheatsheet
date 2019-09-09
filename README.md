@@ -1444,8 +1444,9 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ### Pretty Print
 ```python
 from pprint import pprint
-pprint(<collection>, stream=None, width=80)
+pprint(<collection>, width=80, depth=None)
 ```
+* **Levels deeper than 'depth' will be replaced by '...'.**
 
 
 Input

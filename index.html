@@ -1339,9 +1339,12 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> to forcibly flush the stream.</strong></li>
 </ul>
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
-pprint(&lt;collection&gt;, stream=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">80</span>)
+pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
+<ul>
+<li><strong>Levels deeper than 'depth' will be replaced by '…'.</strong></li>
+</ul>
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><ul>
 <li><strong>Reads a line from user input or pipe if present.</strong></li>
 <li><strong>Trailing newline gets stripped.</strong></li>
