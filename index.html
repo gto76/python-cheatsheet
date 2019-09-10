@@ -1512,17 +1512,17 @@ shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entir
 <span class="hljs-number">0</span>
 </code></pre></div>
 
-<div><h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> csv <span class="hljs-keyword">import</span> reader, writer
+<div><h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
 </code></pre></div>
 
-<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;reader&gt; = reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
+<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
 &lt;list&gt;   = next(&lt;reader&gt;)           <span class="hljs-comment"># Returns next row as a list of strings.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
 </ul>
-<div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
+<div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
 &lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
 </code></pre></div>

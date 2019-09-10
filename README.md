@@ -1679,19 +1679,19 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 CSV
 ---
 ```python
-from csv import reader, writer
+import csv
 ```
 
 ### Read
 ```python
-<reader> = reader(<file>, dialect='excel', delimiter=',')
+<reader> = csv.reader(<file>, dialect='excel', delimiter=',')
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 ```
 * **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
 ### Write
 ```python
-<writer> = writer(<file>, dialect='excel', delimiter=',')
+<writer> = csv.writer(<file>, dialect='excel', delimiter=',')
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)
 ```
