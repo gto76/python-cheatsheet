@@ -1931,11 +1931,13 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of predefined type. Available types and their sizes in bytes are listed above.**
+**List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.**
 
 ```python
 from array import array
-<array> = array('<typecode>' [, <collection>])
+<array> = array('<typecode>', <collection>)  # Array from collection of numbers.
+<array> = array('<typecode>', <bytes>)       # Array from bytes object.
+<bytes> = <array>.tobytes()
 ```
 
 
