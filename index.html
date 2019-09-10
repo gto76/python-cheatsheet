@@ -1343,7 +1343,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 </code></pre></div>
 
 <ul>
-<li><strong>Levels deeper than 'depth' will be replaced by '…'.</strong></li>
+<li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
 </ul>
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><ul>
 <li><strong>Reads a line from user input or pipe if present.</strong></li>
@@ -1366,7 +1366,7 @@ p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span cla
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># First argument</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Remaining arguments</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'*'</span>)                  <span class="hljs-comment"># Optional arguments</span>
-args  = p.parse_args()
+args  = p.parse_args()                                            <span class="hljs-comment"># Exits on error.</span>
 value = args.&lt;name&gt;
 </code></pre></div>
 

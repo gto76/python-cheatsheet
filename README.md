@@ -1446,7 +1446,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 from pprint import pprint
 pprint(<collection>, width=80, depth=None)
 ```
-* **Levels deeper than 'depth' will be replaced by '...'.**
+* **Levels deeper than 'depth' get replaced by '...'.**
 
 
 Input
@@ -1478,7 +1478,7 @@ p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
 p.add_argument('<name>', type=<type>, nargs=1)                    # First argument
 p.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments
 p.add_argument('<name>', type=<type>, nargs='*')                  # Optional arguments
-args  = p.parse_args()
+args  = p.parse_args()                                            # Exits on error.
 value = args.<name>
 ```
 
