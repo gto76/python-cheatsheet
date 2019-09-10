@@ -1114,7 +1114,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">... </span>    print(file.read())
 Hello World!
 </code></pre>
-<div><h4 id="listofexistingcontextmanagers">List of existing context managers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> open(<span class="hljs-string">'&lt;path&gt;'</span>) <span class="hljs-keyword">as</span> file: ...
+<div><h4 id="listofcoveredcontextmanagers">List of covered context managers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> open(<span class="hljs-string">'&lt;path&gt;'</span>) <span class="hljs-keyword">as</span> file: ...
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'&lt;path&gt;'</span>) <span class="hljs-keyword">as</span> wave_file: ...
 <span class="hljs-keyword">with</span> memoryview(&lt;bytes/bytearray/array&gt;) <span class="hljs-keyword">as</span> view: ...
 <span class="hljs-keyword">with</span> concurrent.futures.ThreadPoolExecutor() <span class="hljs-keyword">as</span> executor: ...
@@ -1470,21 +1470,24 @@ value = args.&lt;name&gt;
 <li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
 <li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
-&lt;str&gt; = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
-os.chdir(&lt;path&gt;)                   <span class="hljs-comment"># Changes current working directory.</span>
 </code></pre></div></div>
 
 
 
-<pre><code class="python language-python hljs">shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>
-os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                   <span class="hljs-comment"># Changes current working directory.</span>
+os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)       <span class="hljs-comment"># Creates a directory.</span>
+</code></pre>
+<pre><code class="python language-python hljs">os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>
 os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                  <span class="hljs-comment"># Deletes the file.</span>
 os.rmdir(&lt;path&gt;)                   <span class="hljs-comment"># Deletes empty directory.</span>
 shutil.rmtree(&lt;path&gt;)              <span class="hljs-comment"># Deletes the entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)       <span class="hljs-comment"># Creates a directory.</span>
+<pre><code class="python language-python hljs">shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>
+shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entire directory tree.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()               <span class="hljs-comment"># Returns the current working directory.</span>
 &lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)      <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
 <div><h4 id="direntry">DirEntry:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()

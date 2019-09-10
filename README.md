@@ -1177,7 +1177,7 @@ class MyOpen():
 Hello World!
 ```
 
-#### List of existing context managers:
+#### List of covered context managers:
 ```python
 with open('<path>') as file: ...
 with wave.open('<path>') as wave_file: ...
@@ -1615,12 +1615,14 @@ Command Execution
 
 ```python
 import os, shutil
-<str> = os.getcwd()                # Returns the current working directory.
-os.chdir(<path>)                   # Changes current working directory.
 ```
 
 ```python
-shutil.copy(from, to)              # Copies the file.
+os.chdir(<path>)                   # Changes current working directory.
+os.mkdir(<path>, mode=0o777)       # Creates a directory.
+```
+
+```python
 os.rename(from, to)                # Renames the file or directory.
 os.replace(from, to)               # Same, but overwrites 'to' if it exists.
 ```
@@ -1632,7 +1634,12 @@ shutil.rmtree(<path>)              # Deletes the entire directory tree.
 ```
 
 ```python
-os.mkdir(<path>, mode=0o777)       # Creates a directory.
+shutil.copy(from, to)              # Copies the file.
+shutil.copytree(from, to)          # Copies the entire directory tree.
+```
+
+```python
+<str>  = os.getcwd()               # Returns the current working directory.
 <iter> = os.scandir(path='.')      # Returns os.DirEntry objects located at path.
 ```
 

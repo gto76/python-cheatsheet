@@ -194,10 +194,13 @@ const DIAGRAM_7_B =
   '┃ count()    │          │            │          │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
-const OS_RENAME = 
-  'shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>\n' +
+const OS_RENAME =
   'os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>\n' +
   'os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
+
+const SHUTIL_COPY = 
+  'shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>\n' +
+  'shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entire directory tree.</span>\n';
 
 const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +
@@ -316,6 +319,7 @@ function fixClasses() {
 
 function fixHighlights() {
   $(`code:contains(os.rename)`).html(OS_RENAME);
+  $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(<class_name>, <parents_tuple>, <attributes_dict>)`).html(TYPE);
