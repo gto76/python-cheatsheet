@@ -1658,13 +1658,13 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;str&gt;.encode(<span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: bytes(&lt;str&gt;, 'utf-8')</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
 &lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 &lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;bytes&gt;.decode(<span class="hljs-string">'utf-8'</span>)        <span class="hljs-comment"># Or: str(&lt;bytes&gt;, 'utf-8')</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
 &lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
 &lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()

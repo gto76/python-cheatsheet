@@ -1861,7 +1861,7 @@ Bytes
 
 ### Encode
 ```python
-<bytes> = <str>.encode('utf-8')          # Or: bytes(<str>, 'utf-8')
+<bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = <int>.to_bytes(n_bytes, byteorder='big|little', signed=False)
 <bytes> = bytes.fromhex('<hex>')
@@ -1869,7 +1869,7 @@ Bytes
 
 ### Decode
 ```python
-<str>   = <bytes>.decode('utf-8')        # Or: str(<bytes>, 'utf-8')
+<str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
 '<hex>' = <bytes>.hex()
