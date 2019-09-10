@@ -1686,6 +1686,7 @@ import csv
 ```python
 <reader> = csv.reader(<file>, dialect='excel', delimiter=',')
 <list>   = next(<reader>)           # Returns next row as a list of strings.
+<list>   = list(<reader>)           # Returns list of remaining rows.
 ```
 * **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
@@ -1693,7 +1694,7 @@ import csv
 ```python
 <writer> = csv.writer(<file>, dialect='excel', delimiter=',')
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
-<writer>.writerows(<coll_of_coll>)
+<writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
 * **File must be opened with `'newline=""'` argument, or an extra '\r' will be added on platforms that use '\r\n' linendings!**
 

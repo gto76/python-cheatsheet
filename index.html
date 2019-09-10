@@ -1517,6 +1517,7 @@ shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entir
 
 <div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
 &lt;list&gt;   = next(&lt;reader&gt;)           <span class="hljs-comment"># Returns next row as a list of strings.</span>
+&lt;list&gt;   = list(&lt;reader&gt;)           <span class="hljs-comment"># Returns list of remaining rows.</span>
 </code></pre></div>
 
 <ul>
@@ -1524,7 +1525,7 @@ shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entir
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
-&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)
+&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)  <span class="hljs-comment"># Appends multiple rows.</span>
 </code></pre></div>
 
 <ul>
