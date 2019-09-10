@@ -1892,7 +1892,7 @@ def write_bytes(filename, bytes_obj):
 
 Struct
 ------
-* **Module that performs conversions between a sequence of numbers and a C struct, represented as a Python bytes object.**
+* **Module that performs conversions between a sequence of numbers and a bytes object.**
 * **Machine’s native type sizes and byte order are used by default.**
 
 ```python
