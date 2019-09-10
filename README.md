@@ -1935,7 +1935,7 @@ Array
 
 ```python
 from array import array
-<array> = array('<typecode>', <collection>)  # Array from collection of numbers.
+<array> = array('<typecode>', <collection>)  # Array from coll. of numbers.
 <array> = array('<typecode>', <bytes>)       # Array from bytes object.
 <bytes> = <array>.tobytes()
 ```
