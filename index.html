@@ -216,7 +216,7 @@ pre.prettyprint {
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#commandexecution">Command_Execution</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#csv">CSV</a>, <a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">MemoryView</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutine">Coroutine</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profile">Profile</a>,
+    <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,
                        <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>]
 }
 </code></pre></div></div>
@@ -2070,14 +2070,14 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 [<span class="hljs-string">'arsenal f.c.'</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>]
 </code></pre></div>
 
-<div><h2 id="profile"><a href="#profile" name="profile">#</a>Profile</h2><div><h3 id="basic">Basic</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
+<div><h2 id="profiling"><a href="#profiling" name="profiling">#</a>Profiling</h2><div><h3 id="stopwatch">Stopwatch</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
 start_time = time()                     <span class="hljs-comment"># Seconds since the Epoch.</span>
 ...
 duration = time() - start_time
 </code></pre></div></div>
 
 
-<div><h3 id="highperformance">High Performance</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> perf_counter
+<div><h4 id="highperformance">High performance:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> perf_counter
 start_time = perf_counter()             <span class="hljs-comment"># Seconds since restart.</span>
 ...
 duration = perf_counter() - start_time
@@ -2089,24 +2089,7 @@ duration = perf_counter() - start_time
 <span class="hljs-number">0.34986</span>
 </code></pre></div>
 
-<div><h3 id="lineprofiler">Line Profiler</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install line_profiler</span>
-<span class="hljs-meta">@profile</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    a = [*range(<span class="hljs-number">10000</span>)]
-    b = {*range(<span class="hljs-number">10000</span>)}
-main()
-</code></pre></div>
-
-<div><h4 id="usage">Usage:</h4><pre><code class="text language-text">$ kernprof -lv test.py
-Line #      Hits         Time  Per Hit   % Time  Line Contents
-==============================================================
-     1                                           @profile
-     2                                           def main():
-     3         1       1128.0   1128.0     27.4      a = [*range(10000)]
-     4         1       2994.0   2994.0     72.6      b = {*range(10000)}
-</code></pre></div>
-
-<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
+<div><h3 id="timingbyfunction">Timing by Function</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
 <span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> output, PyCallGraph
 <span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
 time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
@@ -2117,6 +2100,25 @@ drawer = output.GraphvizOutput(output_file=filename)
 </code></pre></div></div>
 
 
+<div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="text language-text">$ pip3 install line_profiler memory_profiler
+</code></pre></div>
+
+<pre><code class="text language-text">$ kernprof -lv test.py
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           @profile
+     2                                           def main():
+     3         1       1128.0   1128.0     27.4      a = [*range(10000)]
+     4         1       2994.0   2994.0     72.6      b = {*range(10000)}
+</code></pre>
+<pre><code class="text language-text">$ python3 -m memory_profiler test.py
+Line #    Mem usage    Increment   Line Contents
+================================================
+     1   35.387 MiB   35.387 MiB   @profile
+     2                             def main():
+     3   35.734 MiB    0.348 MiB       a = [*range(10000)]
+     4   36.160 MiB    0.426 MiB       b = {*range(10000)}
+</code></pre>
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini language. Can run up to one hundred times faster than equivalent Python code.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 </code></pre></div>

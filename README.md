@@ -14,7 +14,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#command-execution)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`CSV`](#csv)**__,__ **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`MemoryView`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutine)**__.__  
-**&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profile)**__,__  
+**&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__.__
 
 
@@ -2408,9 +2408,9 @@ def odds_handler(sport):
 ```
 
 
-Profile
--------
-### Basic
+Profiling
+---------
+### Stopwatch
 ```python
 from time import time
 start_time = time()                     # Seconds since the Epoch.
@@ -2418,7 +2418,7 @@ start_time = time()                     # Seconds since the Epoch.
 duration = time() - start_time
 ```
 
-### High Performance
+#### High performance:
 ```python
 from time import perf_counter
 start_time = perf_counter()             # Seconds since restart.
@@ -2434,17 +2434,24 @@ duration = perf_counter() - start_time
 0.34986
 ```
 
-### Line Profiler
+### Timing by Function
+#### Generates a PNG image of a call graph with highlighted bottlenecks:
 ```python
-# $ pip3 install line_profiler
-@profile
-def main():
-    a = [*range(10000)]
-    b = {*range(10000)}
-main()
+# $ pip3 install pycallgraph
+from pycallgraph import output, PyCallGraph
+from datetime import datetime
+time_str = datetime.now().strftime('%Y%m%d%H%M%S')
+filename = f'profile-{time_str}.png'
+drawer = output.GraphvizOutput(output_file=filename)
+with PyCallGraph(drawer):
+    <code_to_be_profiled>
 ```
 
-#### Usage:
+### Profiling by Line
+```text
+$ pip3 install line_profiler memory_profiler
+```
+
 ```text
 $ kernprof -lv test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
@@ -2455,18 +2462,14 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1       2994.0   2994.0     72.6      b = {*range(10000)}
 ```
 
-### Call Graph
-#### Generates a PNG image of a call graph with highlighted bottlenecks:
-
-```python
-# $ pip3 install pycallgraph
-from pycallgraph import output, PyCallGraph
-from datetime import datetime
-time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-filename = f'profile-{time_str}.png'
-drawer = output.GraphvizOutput(output_file=filename)
-with PyCallGraph(drawer):
-    <code_to_be_profiled>
+```text
+$ python3 -m memory_profiler test.py
+Line #    Mem usage    Increment   Line Contents
+================================================
+     1   35.387 MiB   35.387 MiB   @profile
+     2                             def main():
+     3   35.734 MiB    0.348 MiB       a = [*range(10000)]
+     4   36.160 MiB    0.426 MiB       b = {*range(10000)}
 ```
 
 
