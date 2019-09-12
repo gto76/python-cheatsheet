@@ -2089,18 +2089,12 @@ duration = perf_counter() - start_time
 <span class="hljs-number">0.34986</span>
 </code></pre></div>
 
-<div><h3 id="timingbyfunction">Timing by Function</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
-<span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> output, PyCallGraph
-<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
-time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
-filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{time_str}</span>.png'</span>
-drawer = output.GraphvizOutput(output_file=filename)
-<span class="hljs-keyword">with</span> PyCallGraph(drawer):
-    &lt;code_to_be_profiled&gt;
-</code></pre></div></div>
-
-
-<div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="text language-text">$ pip3 install line_profiler memory_profiler
+<div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install line_profiler memory_profiler</span>
+<span class="hljs-meta">@profile</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    a = [*range(<span class="hljs-number">10000</span>)]
+    b = {*range(<span class="hljs-number">10000</span>)}
+main()
 </code></pre></div>
 
 <pre><code class="text language-text">$ kernprof -lv test.py
@@ -2119,6 +2113,17 @@ Line #    Mem usage    Increment   Line Contents
      3   35.734 MiB    0.348 MiB       a = [*range(10000)]
      4   36.160 MiB    0.426 MiB       b = {*range(10000)}
 </code></pre>
+<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
+<span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> output, PyCallGraph
+<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
+filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{time_str}</span>.png'</span>
+drawer = output.GraphvizOutput(output_file=filename)
+<span class="hljs-keyword">with</span> PyCallGraph(drawer):
+    &lt;code_to_be_profiled&gt;
+</code></pre></div></div>
+
+
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini language. Can run up to one hundred times faster than equivalent Python code.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 </code></pre></div>

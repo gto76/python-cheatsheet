@@ -2434,22 +2434,14 @@ duration = perf_counter() - start_time
 0.34986
 ```
 
-### Timing by Function
-#### Generates a PNG image of a call graph with highlighted bottlenecks:
-```python
-# $ pip3 install pycallgraph
-from pycallgraph import output, PyCallGraph
-from datetime import datetime
-time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-filename = f'profile-{time_str}.png'
-drawer = output.GraphvizOutput(output_file=filename)
-with PyCallGraph(drawer):
-    <code_to_be_profiled>
-```
-
 ### Profiling by Line
-```text
-$ pip3 install line_profiler memory_profiler
+```python
+# $ pip3 install line_profiler memory_profiler
+@profile
+def main():
+    a = [*range(10000)]
+    b = {*range(10000)}
+main()
 ```
 
 ```text
@@ -2470,6 +2462,19 @@ Line #    Mem usage    Increment   Line Contents
      2                             def main():
      3   35.734 MiB    0.348 MiB       a = [*range(10000)]
      4   36.160 MiB    0.426 MiB       b = {*range(10000)}
+```
+
+### Call Graph
+#### Generates a PNG image of a call graph with highlighted bottlenecks:
+```python
+# $ pip3 install pycallgraph
+from pycallgraph import output, PyCallGraph
+from datetime import datetime
+time_str = datetime.now().strftime('%Y%m%d%H%M%S')
+filename = f'profile-{time_str}.png'
+drawer = output.GraphvizOutput(output_file=filename)
+with PyCallGraph(drawer):
+    <code_to_be_profiled>
 ```
 
 
