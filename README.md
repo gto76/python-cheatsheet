@@ -2446,22 +2446,22 @@ main()
 
 ```text
 $ kernprof -lv test.py
-Line #      Hits         Time  Per Hit   % Time  Line Contents
-==============================================================
-     1                                           @profile
-     2                                           def main():
-     3         1       1128.0   1128.0     27.4      a = [*range(10000)]
-     4         1       2994.0   2994.0     72.6      b = {*range(10000)}
+Line #   Hits     Time  Per Hit   % Time   Line Contents
+========================================================
+     1                                     @profile
+     2                                     def main():
+     3      1   1128.0   1128.0     27.4       a = [*range(10000)]
+     4      1   2994.0   2994.0     72.6       b = {*range(10000)}
 ```
 
 ```text
 $ python3 -m memory_profiler test.py
-Line #    Mem usage    Increment   Line Contents
-================================================
-     1   35.387 MiB   35.387 MiB   @profile
-     2                             def main():
-     3   35.734 MiB    0.348 MiB       a = [*range(10000)]
-     4   36.160 MiB    0.426 MiB       b = {*range(10000)}
+Line #           Mem usage     Increment   Line Contents
+========================================================
+     1          35.387 MiB    35.387 MiB   @profile
+     2                                     def main():
+     3          35.734 MiB     0.348 MiB       a = [*range(10000)]
+     4          36.160 MiB     0.426 MiB       b = {*range(10000)}
 ```
 
 ### Call Graph
