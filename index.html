@@ -1135,10 +1135,10 @@ lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
 
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>a = MyIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>iter(a)
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>z = MyIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<span class="hljs-meta">&gt;&gt;&gt; </span>iter(z)
 &lt;generator object MyIterable.__iter__ at <span class="hljs-number">0x1026c18b8</span>&gt;
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span> <span class="hljs-keyword">in</span> a
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span> <span class="hljs-keyword">in</span> z
 <span class="hljs-keyword">True</span>
 </code></pre>
 <div><h3 id="collection">Collection</h3><ul>

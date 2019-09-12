@@ -1204,10 +1204,10 @@ class MyIterable:
 ```
 
 ```python
->>> a = MyIterable([1, 2, 3])
->>> iter(a)
+>>> z = MyIterable([1, 2, 3])
+>>> iter(z)
 <generator object MyIterable.__iter__ at 0x1026c18b8>
->>> 1 in a
+>>> 1 in z
 True
 ```
 
