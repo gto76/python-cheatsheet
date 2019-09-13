@@ -408,7 +408,7 @@ Format
 
 ```python
 {<el>:.<10}          # '<el>......'
-{<el>:>0}            # '<el>'
+{<el>:<0}            # '<el>'
 ```
 
 ### Strings
