@@ -315,7 +315,7 @@ String
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of first match or -1.
-<int>  = <str>.index(<sub_str>)              # Same but raises ValueError.
+<int>  = <str>.index(<sub_str>)              # Same but raises ValueError if missing.
 ```
 
 ```python
