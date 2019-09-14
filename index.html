@@ -1749,11 +1749,12 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">thread = Thread(target=&lt;function&gt;, args=(&lt;first_arg&gt;, ))
 thread.start()
 ...
-thread.join()
+&lt;bool&gt; = thread.is_alive()   <span class="hljs-comment"># Checks if thread has finished executing.</span>
+thread.join()                <span class="hljs-comment"># Waits for thread to finish.</span>
 </code></pre></div>
 
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">lock = RLock()
-lock.acquire()
+lock.acquire()               <span class="hljs-comment"># Waits for lock to be available.</span>
 ...
 lock.release()
 </code></pre></div>
@@ -1767,7 +1768,7 @@ lock.release()
 <span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
-    &lt;Future&gt; = executor.submit(&lt;function&gt;, &lt;arg_1&gt;, ...)
+    &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()     <span class="hljs-comment"># Checks if thread has finished executing.</span>
