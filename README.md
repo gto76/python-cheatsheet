@@ -1739,52 +1739,6 @@ def write_to_csv_file(filename, rows):
 ```
 
 
-JSON
-----
-```python
-import json
-<str>    = json.dumps(<object>, ensure_ascii=True, indent=None)
-<object> = json.loads(<str>)
-```
-
-### Read Object from JSON File
-```python
-def read_json_file(filename):
-    with open(filename, encoding='utf-8') as file:
-        return json.load(file)
-```
-
-### Write Object to JSON File
-```python
-def write_to_json_file(filename, an_object):
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(an_object, file, ensure_ascii=False, indent=2)
-```
-
-
-Pickle
-------
-```python
-import pickle
-<bytes>  = pickle.dumps(<object>)
-<object> = pickle.loads(<bytes>)
-```
-
-### Read Object from File
-```python
-def read_pickle_file(filename):
-    with open(filename, 'rb') as file:
-        return pickle.load(file)
-```
-
-### Write Object to File
-```python
-def write_to_pickle_file(filename, an_object):
-    with open(filename, 'wb') as file:
-        pickle.dump(an_object, file)
-```
-
-
 SQLite
 ------
 **Server-less database engine that stores each database into separate file.**
@@ -1845,6 +1799,52 @@ db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 <cursor>.execute('<query>')                     # Only cursor has execute method.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
+```
+
+
+JSON
+----
+```python
+import json
+<str>    = json.dumps(<object>, ensure_ascii=True, indent=None)
+<object> = json.loads(<str>)
+```
+
+### Read Object from JSON File
+```python
+def read_json_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return json.load(file)
+```
+
+### Write Object to JSON File
+```python
+def write_to_json_file(filename, an_object):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(an_object, file, ensure_ascii=False, indent=2)
+```
+
+
+Pickle
+------
+```python
+import pickle
+<bytes>  = pickle.dumps(<object>)
+<object> = pickle.loads(<bytes>)
+```
+
+### Read Object from File
+```python
+def read_pickle_file(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+```
+
+### Write Object to File
+```python
+def write_to_pickle_file(filename, an_object):
+    with open(filename, 'wb') as file:
+        pickle.dump(an_object, file)
 ```
 
 
@@ -1946,8 +1946,24 @@ Memory View
 **Used for accessing the internal data of an object that supports the buffer protocol.**
 
 ```python
-<memoryview> = memoryview(<bytes> / <bytearray> / <array>)
-<memoryview>.release()
+<mview> = memoryview(<bytes> / <bytearray> / <array>)
+<mview>.release()                         # Releases the buffer.
+```
+
+```python
+<num>   = <mview>[<index>]                # Returns int in range from 0 to 255.
+<mview> = <mview>[<slice>]                # Returns bytes even if it has only one element.
+<file>.write(<mview>)
+```
+
+```python
+<bytes> = <bytes>.join(<coll_of_mviews>)  # Joins elements using bytes object as separator.
+<bytes> = bytes(<mview>)                  # Or: <mview>.tobytes() 
+'<hex>' = <mview>.hex()
+<list>  = list(<mview>)                   # Returns numbers.
+<str>   = str(<mview>, 'utf-8')           # Or: <bytes>.decode('utf-8')
+<int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
+'<hex>' = <bytes>.hex()
 ```
 
 
