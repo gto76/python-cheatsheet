@@ -1824,7 +1824,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Z = type(<span class="hljs-string">'Z'</span>, (), {<span class="hljs-string">'a'</span>: <span class="hljs-string">'abcde'</span>, <span class="hljs-string">'b'</span>: <span class="hljs-number">12345</span>})
 <span class="hljs-meta">&gt;&gt;&gt; </span>z = Z()
 </code></pre>
-<div><h3 id="metaclass">Meta Class</h3><p><strong>Class that creates class.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_meta_class</span><span class="hljs-params">(name, parents, attrs)</span>:</span>
+<div><h3 id="metaclass">Meta Class</h3><p><strong>Class that creates classes.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_meta_class</span><span class="hljs-params">(name, parents, attrs)</span>:</span>
     attrs[<span class="hljs-string">'a'</span>] = <span class="hljs-string">'abcde'</span>
     <span class="hljs-keyword">return</span> type(name, parents, attrs)
 </code></pre></div>
@@ -1841,7 +1841,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <li><strong>It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (MyMetaClass in our case).</strong></li>
 <li><strong>New() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>), in which case init() is not called.</strong></li>
 </ul>
-<div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
+<div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has metaclass attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
     b = <span class="hljs-number">12345</span>
 </code></pre></div>
 

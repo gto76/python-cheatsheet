@@ -2093,7 +2093,7 @@ Metaprograming
 ```
 
 ### Meta Class
-**Class that creates class.**
+**Class that creates classes.**
 
 ```python
 def my_meta_class(name, parents, attrs):
@@ -2113,7 +2113,7 @@ class MyMetaClass(type):
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute
-**Right before a class is created it checks if it has metaclass defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has metaclass attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
