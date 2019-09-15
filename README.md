@@ -2241,8 +2241,8 @@ from matplotlib import pyplot
 ```
 
 ```python
-pyplot.plot(<y_data>)                  # X values start from 0.
-pyplot.plot(<x_data>, <y_data>)        # Add `label=<str>` for legend.
+pyplot.plot(<y_data> [, label=<str>])
+pyplot.plot(<x_data>, <y_data>)
 ```
 
 ```python

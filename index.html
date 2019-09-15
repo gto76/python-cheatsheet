@@ -1938,8 +1938,8 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
 </code></pre></div>
 
-<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt;)                  <span class="hljs-comment"># X values start from 0.</span>
-pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)        <span class="hljs-comment"># Add `label=&lt;str&gt;` for legend.</span>
+<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
+pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
 </code></pre>
 <pre><code class="python language-python hljs">pyplot.legend()                        <span class="hljs-comment"># Adds a legend.</span>
 pyplot.savefig(&lt;filename&gt;)             <span class="hljs-comment"># Saves figure.</span>
