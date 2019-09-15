@@ -2263,6 +2263,7 @@ print(table)
 
 Curses
 ------
+#### Clears terminal, prints message and waits for ESC key press:
 ```python
 from curses import wrapper, curs_set, ascii
 from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
