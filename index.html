@@ -1970,12 +1970,14 @@ pyplot.clf()                     <span class="hljs-comment"># Clears figure.</sp
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
+<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     wrapper(draw)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen)</span>:</span>
+    curs_set(<span class="hljs-number">0</span>)
     screen.clear()
     screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)
     <span class="hljs-keyword">while</span> screen.getch() != ascii.ESC:
@@ -1983,9 +1985,9 @@ pyplot.clf()                     <span class="hljs-comment"># Clears figure.</sp
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_border</span><span class="hljs-params">(screen)</span>:</span>
     <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-    P = namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'y x'</span>)
+    P = namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
     height, width = screen.getmaxyx()
-    <span class="hljs-keyword">return</span> P(height<span class="hljs-number">-1</span>, width<span class="hljs-number">-1</span>)
+    <span class="hljs-keyword">return</span> P(width<span class="hljs-number">-1</span>, height<span class="hljs-number">-1</span>)
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()

@@ -2286,12 +2286,14 @@ with open(<filename>, encoding='utf-8', newline='') as file:
 Curses
 ------
 ```python
-from curses import wrapper, ascii
+from curses import wrapper, curs_set, ascii
+from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
 
 def main():
     wrapper(draw)
 
 def draw(screen):
+    curs_set(0)
     screen.clear()
     screen.addstr(0, 0, 'Press ESC to quit.')
     while screen.getch() != ascii.ESC:
@@ -2299,9 +2301,9 @@ def draw(screen):
 
 def get_border(screen):
     from collections import namedtuple
-    P = namedtuple('P', 'y x')
+    P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
-    return P(height-1, width-1)
+    return P(width-1, height-1)
 
 if __name__ == '__main__':
     main()
