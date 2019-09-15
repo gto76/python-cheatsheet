@@ -1950,22 +1950,6 @@ Memory View
 <mview>.release()                         # Releases the buffer.
 ```
 
-```python
-<num>   = <mview>[<index>]                # Returns int in range from 0 to 255.
-<mview> = <mview>[<slice>]                # Returns bytes even if it has only one element.
-<file>.write(<mview>)
-```
-
-```python
-<bytes> = <bytes>.join(<coll_of_mviews>)  # Joins elements using bytes object as separator.
-<bytes> = bytes(<mview>)                  # Or: <mview>.tobytes() 
-'<hex>' = <mview>.hex()
-<list>  = list(<mview>)                   # Returns numbers.
-<str>   = str(<mview>, 'utf-8')           # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
-'<hex>' = <bytes>.hex()
-```
-
 
 Deque
 -----
@@ -2257,12 +2241,15 @@ from matplotlib import pyplot
 ```
 
 ```python
-pyplot.plot(<y_data>)
-pyplot.plot(<x_data>, <y_data>)
-pyplot.plot(..., label=<str>)    # Use `pyplot.legend()` to add legend.
-pyplot.savefig(<filename>)       # Saves figure.
-pyplot.show()                    # Displays figure.
-pyplot.clf()                     # Clears figure.
+pyplot.plot(<y_data>)                  # X values start from 0.
+pyplot.plot(<x_data>, <y_data>)        # Add `label=<str>` for legend.
+```
+
+```python
+pyplot.legend()                        # Adds a legend.
+pyplot.savefig(<filename>)             # Saves figure.
+pyplot.show()                          # Displays figure.
+pyplot.clf()                           # Clears figure.
 ```
 
 

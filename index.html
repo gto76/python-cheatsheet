@@ -1729,18 +1729,6 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                <span class="hljs-comment"># Returns int in range from 0 to 255.</span>
-&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;file&gt;.write(&lt;mview&gt;)
-</code></pre>
-<pre><code class="python language-python hljs">&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)  <span class="hljs-comment"># Joins elements using bytes object as separator.</span>
-&lt;bytes&gt; = bytes(&lt;mview&gt;)                  <span class="hljs-comment"># Or: &lt;mview&gt;.tobytes() </span>
-<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()
-&lt;list&gt;  = list(&lt;mview&gt;)                   <span class="hljs-comment"># Returns numbers.</span>
-&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
-&lt;int&gt;   = int.from_bytes(&lt;mview&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
-<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()
-</code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1950,12 +1938,13 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
 </code></pre></div>
 
-<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt;)
-pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
-pyplot.plot(..., label=&lt;str&gt;)    <span class="hljs-comment"># Use `pyplot.legend()` to add legend.</span>
-pyplot.savefig(&lt;filename&gt;)       <span class="hljs-comment"># Saves figure.</span>
-pyplot.show()                    <span class="hljs-comment"># Displays figure.</span>
-pyplot.clf()                     <span class="hljs-comment"># Clears figure.</span>
+<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt;)                  <span class="hljs-comment"># X values start from 0.</span>
+pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)        <span class="hljs-comment"># Add `label=&lt;str&gt;` for legend.</span>
+</code></pre>
+<pre><code class="python language-python hljs">pyplot.legend()                        <span class="hljs-comment"># Adds a legend.</span>
+pyplot.savefig(&lt;filename&gt;)             <span class="hljs-comment"># Saves figure.</span>
+pyplot.show()                          <span class="hljs-comment"># Displays figure.</span>
+pyplot.clf()                           <span class="hljs-comment"># Clears figure.</span>
 </code></pre>
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">import</span> csv, tabulate
