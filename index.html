@@ -1936,16 +1936,14 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-</code></pre></div>
-
-<pre><code class="python language-python hljs">pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
+pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
 pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
-</code></pre>
-<pre><code class="python language-python hljs">pyplot.legend()                        <span class="hljs-comment"># Adds a legend.</span>
+pyplot.legend()                        <span class="hljs-comment"># Adds a legend.</span>
 pyplot.savefig(&lt;filename&gt;)             <span class="hljs-comment"># Saves figure.</span>
 pyplot.show()                          <span class="hljs-comment"># Displays figure.</span>
 pyplot.clf()                           <span class="hljs-comment"># Clears figure.</span>
-</code></pre>
+</code></pre></div>
+
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">import</span> csv, tabulate
 <span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:

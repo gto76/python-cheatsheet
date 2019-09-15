@@ -2238,14 +2238,8 @@ Plot
 ```python
 # $ pip3 install matplotlib
 from matplotlib import pyplot
-```
-
-```python
 pyplot.plot(<y_data> [, label=<str>])
 pyplot.plot(<x_data>, <y_data>)
-```
-
-```python
 pyplot.legend()                        # Adds a legend.
 pyplot.savefig(<filename>)             # Saves figure.
 pyplot.show()                          # Displays figure.
