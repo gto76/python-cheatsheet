@@ -2246,8 +2246,6 @@ from tqdm import tqdm
 from time import sleep
 for el in tqdm([1, 2, 3]):
     sleep(0.2)
-for i in tqdm(range(100)):
-    sleep(0.02)
 ```
 
 
@@ -2293,7 +2291,8 @@ def main():
     wrapper(draw)
 
 def draw(screen):
-    curs_set(0)
+    curs_set(0)           # Makes cursor invisible.
+    screen.nodelay(True)  # Makes getch() non-blocking.
     screen.clear()
     screen.addstr(0, 0, 'Press ESC to quit.')
     while screen.getch() != ascii.ESC:
