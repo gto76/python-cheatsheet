@@ -1958,13 +1958,12 @@ pyplot.show()                    <span class="hljs-comment"># Displays figure.</
 pyplot.clf()                     <span class="hljs-comment"># Clears figure.</span>
 </code></pre>
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
-<span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate
-<span class="hljs-keyword">import</span> csv
+<span class="hljs-keyword">import</span> csv, tabulate
 <span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
     rows   = csv.reader(file)
     header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
-    table  = tabulate(rows, header)
-    print(table)
+    table  = tabulate.tabulate(rows, header)
+print(table)
 </code></pre></div></div>
 
 

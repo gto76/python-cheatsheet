@@ -2271,13 +2271,12 @@ Table
 #### Prints a CSV file as an ASCII table:
 ```python
 # $ pip3 install tabulate
-from tabulate import tabulate
-import csv
+import csv, tabulate
 with open(<filename>, encoding='utf-8', newline='') as file:
     rows   = csv.reader(file)
     header = [a.title() for a in next(rows)]
-    table  = tabulate(rows, header)
-    print(table)
+    table  = tabulate.tabulate(rows, header)
+print(table)
 ```
 
 
