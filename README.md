@@ -1947,7 +1947,7 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes> / <bytearray> / <array>)
-<mview>.release()                         # Releases the buffer.
+<mview>.release()                            # Releases the buffer.
 ```
 
 
