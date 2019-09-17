@@ -1394,16 +1394,16 @@ value = args.&lt;name&gt;
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'t'</span></code>  - Text mode (default).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode.</strong></li>
-</ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
+</ul></div><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be risen when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be risen by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
-</ul><div><h3 id="file">File</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
+</ul></div><div><h3 id="file">File</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
 &lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
 &lt;bin_file&gt;.seek(±offset, &lt;anchor&gt;)  <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
-</code></pre></div></div></div>
+</code></pre></div>
 
 
 
@@ -1724,11 +1724,26 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 </code></pre></div>
 
 
-<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>Used for accessing the internal data of an object that supports the buffer protocol.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes&gt; / &lt;bytearray&gt; / &lt;array&gt;)
-&lt;mview&gt;.release()                            <span class="hljs-comment"># Releases the buffer.</span>
+<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><ul>
+<li><strong>Memory View is a seqence that points to the memory of bytes, bytearray or array objects.</strong></li>
+<li><strong>Each element can reference a single or multiple consecutive bytes.</strong></li>
+<li><strong>Referenced elements can be narrowed down with slicing.</strong></li>
+</ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)
+&lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Can be int or float.</span>
+&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearanged elements.</span>
+&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Cast a memoryview to a new format.</span>
+&lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the buffer.</span>
 </code></pre></div>
 
 
+<pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)
+&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Or: &lt;mview&gt;.tobytes()</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
+&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns numbers. Or: &lt;mview&gt;.tolist()</span>
+&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
+&lt;int&gt;   = int.from_bytes(&lt;mview&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
+<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()
+</code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1925,8 +1940,8 @@ ValueError: malformed node or string
 reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 </code></pre></div>
 
-<p><br><br></p>
-<div class="pagebreak"></div><div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
+<p><br></p>
+<div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
 <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]):
@@ -1946,7 +1961,7 @@ pyplot.clf()                           <span class="hljs-comment"># Clears figur
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">import</span> csv, tabulate
-<span class="hljs-keyword">with</span> open(&lt;filename&gt;, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.csv'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
     rows   = csv.reader(file)
     header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
     table  = tabulate.tabulate(rows, header)

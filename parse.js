@@ -303,7 +303,8 @@ function highlightCode() {
   fixClasses();
   fixHighlights();
   preventPageBreaks();
-  insertPageBreak();
+  fixPageBreaks();
+  // insertPageBreak();
 }
 
 function setApaches(elements) {
@@ -336,6 +337,14 @@ function preventPageBreaks() {
       untilH2.add(el).wrapAll("<div></div>");
     }
   });
+}
+
+function fixPageBreaks() {
+  const fileDiv = $('#file').parent()
+  const modesDiv = $('#file').parent().parent().parent()
+  modesDiv.after(fileDiv)
+  const exceptDiv = $('#exceptions-1').parent()
+  modesDiv.after(exceptDiv)
 }
 
 function insertPageBreak() {

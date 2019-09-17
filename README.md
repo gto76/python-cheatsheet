@@ -1943,11 +1943,26 @@ from array import array
 
 Memory View
 -----------
-**Used for accessing the internal data of an object that supports the buffer protocol.**
+* **Memory View is a seqence that points to the memory of bytes, bytearray or array objects.**
+* **Each element can reference a single or multiple consecutive bytes.**
+* **Referenced elements can be narrowed down with slicing.**
 
 ```python
-<mview> = memoryview(<bytes> / <bytearray> / <array>)
-<mview>.release()                            # Releases the buffer.
+<mview> = memoryview(<bytes/bytearray/array>)
+<num>   = <mview>[<index>]                     # Can be int or float.
+<mview> = <mview>[<slice>]                     # Mview with rearanged elements.
+<mview> = <mview>.cast('<typecode>')           # Cast a memoryview to a new format.
+<mview>.release()                              # Releases the buffer.
+```
+
+```python
+<bin_file>.write(<mview>)
+<bytes> = bytes(<mview>)                       # Or: <mview>.tobytes()
+<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
+<list>  = list(<mview>)                        # Returns numbers. Or: <mview>.tolist()
+<str>   = str(<mview>, 'utf-8')                # Or: <bytes>.decode('utf-8')
+<int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
+'<hex>' = <mview>.hex()
 ```
 
 
@@ -2217,7 +2232,7 @@ def printer():
 reader(adder(printer()))  # 100, 101, ..., 109
 ```
 
-<br><br>
+<br>
 
 Libraries
 =========
@@ -2253,7 +2268,7 @@ Table
 ```python
 # $ pip3 install tabulate
 import csv, tabulate
-with open(<filename>, encoding='utf-8', newline='') as file:
+with open('test.csv', encoding='utf-8', newline='') as file:
     rows   = csv.reader(file)
     header = [a.title() for a in next(rows)]
     table  = tabulate.tabulate(rows, header)
