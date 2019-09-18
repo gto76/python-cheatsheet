@@ -2340,7 +2340,7 @@ rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
 * **`'<str>'` - Any of above as a string: `'100 MB'`, `'1 month'`, `'monday at 12:00'`, ...**
 
 ### Retention
-**Sets a condition which old log files are deleted.**
+**Sets a condition which old log files get deleted.**
 ```python
 retention=<int>|<datetime.timedelta>|<str>
 ```
@@ -2613,7 +2613,7 @@ from PIL import Image
 <tuple/int> = <Image>.getpixel((x, y))          # Returns a pixel.
 <Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to image.
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
-<Image>.putdata(<list/tuple>)                   # Writes a sequence of pixels.
+<Image>.putdata(<list/tuple/ImagingCore>)       # Writes a sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes an image to image.
 ```
 
@@ -2629,9 +2629,9 @@ from PIL import Image
 ```python
 WIDTH, HEIGHT = 100, 100
 size = WIDTH * HEIGHT
-hue = [255 * i/size for i in range(size)]
+hues = [255 * i/size for i in range(size)]
 img = Image.new('HSV', (WIDTH, HEIGHT))
-img.putdata([(int(h), 255, 255) for h in hue])
+img.putdata([(int(h), 255, 255) for h in hues])
 img.convert('RGB').save('test.png')
 ```
 
@@ -2723,7 +2723,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 +-----------+-------------+------+-------------+
 ```
 
-### Read Float Frames from WAV File
+### Read Float Samples from WAV File
 ```python
 def read_wav_file(filename):
     def get_int(a_bytes):
@@ -2732,13 +2732,13 @@ def read_wav_file(filename):
     with wave.open(filename, 'rb') as file:
         frames = file.readframes(file.getnframes())
         width  = file.getsampwidth()
-    chunks = (frames[i: i + width] for i in range(0, len(frames), width))
-    return [get_int(a) / pow(2, width * 8 - 1) for a in chunks]
+    samples = (frames[i: i + width] for i in range(0, len(frames), width))
+    return [get_int(a) / pow(2, width * 8 - 1) for a in samples]
 ```
 
-### Write Float Frames to WAV File
+### Write Float Samples to WAV File
 ```python
-def write_to_wav_file(filename, frames_float, nchannels=1, sampwidth=2, framerate=44100):
+def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framerate=44100):
     def get_bytes(a_float):
         a_float = max(-1, min(1 - 2e-16, a_float))
         a_float += sampwidth == 1
@@ -2748,7 +2748,7 @@ def write_to_wav_file(filename, frames_float, nchannels=1, sampwidth=2, framerat
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
         file.setframerate(framerate)
-        file.writeframes(b''.join(get_bytes(a) for a in frames_float))
+        file.writeframes(b''.join(get_bytes(a) for a in float_samples))
 ```
 
 ### Examples
@@ -2762,7 +2762,7 @@ write_to_wav_file('test.wav', frames_f)
 #### Adds noise to a mono WAV file:
 ```python
 from random import random
-add_noise = lambda value: value + (random()-0.5) * 0.03
+add_noise = lambda value: value + (random() - 0.5) * 0.03
 frames_f  = (add_noise(a) for a in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_f)
 ```

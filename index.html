@@ -2022,7 +2022,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;time&gt;'</span></code> - Time of day.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Any of above as a string: <code class="python hljs"><span class="hljs-string">'100 MB'</span></code>, <code class="python hljs"><span class="hljs-string">'1 month'</span></code>, <code class="python hljs"><span class="hljs-string">'monday at 12:00'</span></code>, …</strong></li>
 </ul>
-<div><h3 id="retention">Retention</h3><p><strong>Sets a condition which old log files are deleted.</strong></p><pre><code class="python language-python hljs">retention=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;str&gt;
+<div><h3 id="retention">Retention</h3><p><strong>Sets a condition which old log files get deleted.</strong></p><pre><code class="python language-python hljs">retention=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;str&gt;
 </code></pre></div>
 
 
@@ -2228,7 +2228,7 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <pre><code class="python language-python hljs">&lt;tuple/int&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
 &lt;Image&gt;.putpixel((x, y), &lt;tuple/int&gt;)           <span class="hljs-comment"># Writes a pixel to image.</span>
 &lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a sequence of pixels.</span>
-&lt;Image&gt;.putdata(&lt;list/tuple&gt;)                   <span class="hljs-comment"># Writes a sequence of pixels.</span>
+&lt;Image&gt;.putdata(&lt;list/tuple/ImagingCore&gt;)       <span class="hljs-comment"># Writes a sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to image.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
@@ -2239,9 +2239,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 size = WIDTH * HEIGHT
-hue = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
+hues = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
 img = Image.new(<span class="hljs-string">'HSV'</span>, (WIDTH, HEIGHT))
-img.putdata([(int(h), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> hue])
+img.putdata([(int(h), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> hues])
 img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div></div></div>
 
@@ -2320,18 +2320,18 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 +-----------+-------------+------+-------------+
 </code></pre></div>
 
-<div><h3 id="readfloatframesfromwavfile">Read Float Frames from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
+<div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_int</span><span class="hljs-params">(a_bytes)</span>:</span>
         an_int = int.from_bytes(a_bytes, <span class="hljs-string">'little'</span>, signed=width!=<span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (width == <span class="hljs-number">1</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
         frames = file.readframes(file.getnframes())
         width  = file.getsampwidth()
-    chunks = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
-    <span class="hljs-keyword">return</span> [get_int(a) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> chunks]
+    samples = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
+    <span class="hljs-keyword">return</span> [get_int(a) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> samples]
 </code></pre></div>
 
-<div><h3 id="writefloatframestowavfile">Write Float Frames to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, frames_float, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
+<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, float_samples, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
         a_float += sampwidth == <span class="hljs-number">1</span>
@@ -2341,7 +2341,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
         file.setframerate(framerate)
-        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> frames_float))
+        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> float_samples))
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
@@ -2351,7 +2351,7 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 
 
 <div><h4 id="addsnoisetoamonowavfile">Adds noise to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
-add_noise = <span class="hljs-keyword">lambda</span> value: value + (random()<span class="hljs-number">-0.5</span>) * <span class="hljs-number">0.03</span>
+add_noise = <span class="hljs-keyword">lambda</span> value: value + (random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">0.03</span>
 frames_f  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 </code></pre></div>
