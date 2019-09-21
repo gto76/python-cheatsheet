@@ -994,6 +994,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
 <li><strong>Default_factory can be any <a href="#callable">callable</a>.</strong></li>
 </ul>
+<div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
+&lt;class&gt; = make_dataclass<span class="hljs-params">(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;list_of_attribute_names&gt;)</span></code></code></pre></div>
+
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1235,7 +1238,7 @@ member_names    = [a.name <span class="hljs-keyword">for</span> a <span class="h
 member_values   = [a.value <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]
 random_member   = random.choice(list(&lt;enum&gt;))
 </code></pre>
-<div><h3 id="inline-1">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
+<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'fork knife spoon'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
@@ -1940,7 +1943,6 @@ ValueError: malformed node or string
 reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 </code></pre></div>
 
-<p><br></p>
 <div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
@@ -1965,7 +1967,7 @@ pyplot.clf()                           <span class="hljs-comment"># Clears figur
     rows   = csv.reader(file)
     header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
     table  = tabulate.tabulate(rows, header)
-print(table)
+    print(table)
 </code></pre></div></div>
 
 
@@ -2382,8 +2384,8 @@ simpleaudio.play_buffer(frames_b, <span class="hljs-number">1</span>, <span clas
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+<span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv
 <span class="hljs-keyword">import</span> re
-<span class="hljs-keyword">import</span> sys
 
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>

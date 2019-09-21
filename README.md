@@ -1041,6 +1041,12 @@ class <class_name>:
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any [callable](#callable).**
 
+#### Inline:
+```python
+from dataclasses import make_dataclass
+<class> = make_dataclass('<class_name>', <list_of_attribute_names>)
+```
+
 ### Slots
 **Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.**
 
@@ -2232,7 +2238,6 @@ def printer():
 reader(adder(printer()))  # 100, 101, ..., 109
 ```
 
-<br>
 
 Libraries
 =========
@@ -2272,7 +2277,7 @@ with open('test.csv', encoding='utf-8', newline='') as file:
     rows   = csv.reader(file)
     header = [a.title() for a in next(rows)]
     table  = tabulate.tabulate(rows, header)
-print(table)
+    print(table)
 ```
 
 
@@ -2801,8 +2806,8 @@ Basic Script Template
 from collections import namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
+from sys import argv
 import re
-import sys
 
 
 def main():

@@ -221,6 +221,10 @@ const LRU_CACHE =
 const TYPE =
   '<code class="python language-python hljs">&lt;class&gt; = type(&lt;class_name&gt;, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code>';
 
+const DATACLASS = 
+  '<code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
+  '&lt;class&gt; = make_dataclass<span class="hljs-params">(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;list_of_attribute_names&gt;)</span></code>';
+
 
 function main() {
   const html = getMd();
@@ -324,6 +328,7 @@ function fixHighlights() {
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(<class_name>, <parents_tuple>, <attributes_dict>)`).html(TYPE);
+  $(`code:contains(<list_of_attribute_names>)`).html(DATACLASS);
 }
 
 function preventPageBreaks() {
