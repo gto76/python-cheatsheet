@@ -213,7 +213,7 @@ pre.prettyprint {
     <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exceptions</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#commandexecution">Command_Execution</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#oscommands">Command_Execution</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">MemoryView</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutine">Coroutine</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,
@@ -1469,7 +1469,7 @@ value = args.&lt;name&gt;
 &lt;Path&gt; = &lt;Path&gt;.parent             <span class="hljs-comment"># Returns path without final component.</span>
 &lt;file&gt; = open(&lt;Path&gt;)              <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
-<div><h2 id="commandexecution"><a href="#commandexecution" name="commandexecution">#</a>Command Execution</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
+<div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
 <li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
@@ -1515,8 +1515,9 @@ shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entir
 <span class="hljs-number">0</span>
 </code></pre></div>
 
-<div><h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
+<div><h2 id="csv"><a href="#csv" name="csv">#</a>CSV</h2><p><strong>Text file format for storing spreadsheets.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> csv
 </code></pre></div>
+
 
 <div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>, delimiter=<span class="hljs-string">','</span>)
 &lt;list&gt;   = next(&lt;reader&gt;)           <span class="hljs-comment"># Returns next row as a list of strings.</span>
@@ -1728,14 +1729,14 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><ul>
-<li><strong>Memory View is a seqence that points to the memory of bytes, bytearray or array objects.</strong></li>
-<li><strong>Each element can reference a single or multiple consecutive bytes.</strong></li>
-<li><strong>Referenced elements can be narrowed down with slicing.</strong></li>
+<li><strong>A seqence object that points to the memory of another object.</strong></li>
+<li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
+<li><strong>Order and number of elements can be changed with slicing.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)
 &lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Can be int or float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearanged elements.</span>
-&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Cast a memoryview to a new format.</span>
-&lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the buffer.</span>
+&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts a memoryview to a new format.</span>
+&lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the object's memory buffer.</span>
 </code></pre></div>
 
 
@@ -1943,6 +1944,7 @@ ValueError: malformed node or string
 reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 </code></pre></div>
 
+<p><br></p>
 <div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep

@@ -11,7 +11,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dictionary`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
 **&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exceptions`](#exceptions)**__.__  
-**&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#command-execution)**__.__  
+**&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#oscommands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`MemoryView`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutine)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
@@ -1613,8 +1613,8 @@ cwd    = Path()
 ```
 
 
-Command Execution
------------------
+OS Commands
+-----------
 ### Files and Directories
 * **Paths can be either strings, Paths, or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
@@ -1684,6 +1684,8 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 
 CSV
 ---
+**Text file format for storing spreadsheets.**
+
 ```python
 import csv
 ```
@@ -1949,16 +1951,16 @@ from array import array
 
 Memory View
 -----------
-* **Memory View is a seqence that points to the memory of bytes, bytearray or array objects.**
-* **Each element can reference a single or multiple consecutive bytes.**
-* **Referenced elements can be narrowed down with slicing.**
+* **A seqence object that points to the memory of another object.**
+* **Each element can reference a single or multiple consecutive bytes, depending on format.**
+* **Order and number of elements can be changed with slicing.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)
 <num>   = <mview>[<index>]                     # Can be int or float.
 <mview> = <mview>[<slice>]                     # Mview with rearanged elements.
-<mview> = <mview>.cast('<typecode>')           # Cast a memoryview to a new format.
-<mview>.release()                              # Releases the buffer.
+<mview> = <mview>.cast('<typecode>')           # Casts a memoryview to a new format.
+<mview>.release()                              # Releases the object's memory buffer.
 ```
 
 ```python
@@ -2237,6 +2239,7 @@ def printer():
 
 reader(adder(printer()))  # 100, 101, ..., 109
 ```
+<br>
 
 
 Libraries
