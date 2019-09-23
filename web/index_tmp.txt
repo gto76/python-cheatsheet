@@ -1,0 +1,136 @@
+
+Index
+-----
+### A
+**abstract base classes, [4](#abc)**  
+**all function, [11](#anyall)**  
+**animation, [39](#animation)**  
+**any function, [11](#anyall)**  
+**arguments, [10](#arguments)**  
+**arrays, [28](#array)**  
+**audio, [39](#audio)-40**  
+
+### B
+**basic script template, [41](#basicscripttemplate)**  
+**binary representation, [8](#binhex)**  
+**bitwise operators, [8](#bitwiseoperators)**  
+**bytes, [27](#bytes)-28**  
+
+### C
+**csv module, [25](#csv), [33](#printsacsvfileasanasciitable)**  
+**callable, [17](#callable)**  
+**chars, [5](#char)**  
+**class, [14](#class)-15**  
+**closure, [12](#closure)**  
+**collection, [18](#collection)**  
+**combinatorics, [8](#combinatorics)**  
+**command line arguments, [22](#commandlinearguments)**  
+**comprehension, [11](#comprehension)**  
+**context manager, [17](#contextmanager)**  
+**copy function, [15](#copy)**  
+**coroutine, [32](#coroutine)**  
+**curses module, [33](#curses)**  
+
+### D
+**dataclass decorator, [15](#dataclass)**  
+**datetime module, [8](#datetime)-9**  
+**decorator, [13](#decorator)**  
+**deques, [29](#deque)**  
+**dictionaries, [2](#dictionary)**  
+**duck types, [16](#ducktypes)-19**  
+
+### E
+**enum module, [19](#enum)-20**  
+**enumerate function, [3](#enumerate)**  
+**eval function, [32](#eval)**  
+**exceptions, [20](#exceptions)-21, [22](#exceptions-1)**  
+
+### F
+**filter function, [11](#mapfilterreduce)**  
+**floats, [4](#abc), [6](#floats), [7](#types)**  
+**format function, [6](#format)-7**  
+
+### G
+**generator, [4](#generator)**  
+
+### H
+**hash function, [16](#hashable)**  
+**hexadecimal representation, [8](#binhex)**  
+
+### I
+**image, [38](#image)**  
+**inline, [11](#inline)-12**  
+**input function, [22](#input)**  
+**introspection, [30](#introspection)**  
+**ints, [4](#abc), [7](#types), [8](#binhex)**  
+**iterable, [18](#iterable)**  
+**iterator, [3](#iterator), [17](#iterator-1)**  
+
+### J
+**json module, [27](#json)**  
+
+### L
+**lambda, [11](#lambda)**  
+**lists, [1](#list)-2**  
+**logging, [34](#logging)**  
+**lru_cache decorator, [13](#lrucache)**  
+
+### M
+**main function, [1](#main), [41](#basicscripttemplate)**  
+**map function, [11](#mapfilterreduce)**  
+**math module, [7](#math)**  
+**memoryviews, [29](#memoryview)**  
+**metaprograming, [31](#metaprograming)**  
+
+### N
+**named tuples, [3](#namedtuple)**  
+**nonlocal keyword, [12](#nonlocal)**  
+**numpy module, [36](#numpy)-37**  
+
+### O
+**open function, [22](#open)-23**  
+**operator module, [30](#operator)**  
+**OS commands, [24](#oscommands)**  
+
+### P
+**parameters, [10](#arguments)**  
+**partial function, [12](#partial)**  
+**paths, [23](#path)-24**  
+**pickle module, [27](#pickle)**  
+**plotting, [33](#plot)**  
+**print function, [21](#print)**  
+**profiling, [35](#profiling)-36**  
+**progress bar, [33](#progressbar)**  
+
+### Q
+**queues, [30](#queue)**  
+
+### R
+**random module, [8](#random)**  
+**ranges, [3](#range)**  
+**recursion, [13](#lrucache)**  
+**reduce function, [11](#mapfilterreduce)**  
+**regular expressions, [5](#regex)-6**  
+**requests library, [34](#scraping), [35](#test)**  
+
+### S
+**SQLite module, [26](#sqlite)**  
+**scraping, [34](#scraping)**  
+**sequence, [18](#sequence)**  
+**sets, [2](#set)**  
+**shell commands, [24](#shellcommands)**  
+**splat operator, [10](#splatoperator)-11**  
+**statistics module, [7](#statistics)**  
+**strings, [5](#string)**  
+**struct module, [28](#struct)**  
+**synthesizer, [40](#synthesizer)**  
+
+### T
+**table, [33](#table)**  
+**threads, [29](#threading)-30**  
+**time module, [35](#stopwatch)**  
+**tuples, [3](#tuple)**  
+**type, [4](#type), [31](#type-1)**  
+
+### W
+**web, [35](#web)**  
