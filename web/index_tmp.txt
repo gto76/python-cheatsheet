@@ -2,25 +2,26 @@
 Index
 -----
 ### A
-**abstract base classes, [4](#abc)**  
+**abstract base classes, [4](#abc), [19](#collectionsabcsequence)**  
 **all function, [11](#anyall)**  
 **animation, [39](#animation)**  
 **any function, [11](#anyall)**  
 **arguments, [10](#arguments)**  
 **arrays, [28](#array)**  
-**audio, [39](#audio)-40**  
+**audio, [39](#audio)-[40](#writefloatsamplestowavfile)**  
 
 ### B
 **basic script template, [41](#basicscripttemplate)**  
 **binary representation, [8](#binhex)**  
 **bitwise operators, [8](#bitwiseoperators)**  
-**bytes, [27](#bytes)-28**  
+**bytes, [27](#bytes)-[28](#readbytesfromfile)**  
 
 ### C
+**cache, [13](#lrucache)**  
 **csv module, [25](#csv), [33](#printsacsvfileasanasciitable)**  
 **callable, [17](#callable)**  
 **chars, [5](#char)**  
-**class, [14](#class)-15**  
+**class, [14](#class)-[15](#property)**  
 **closure, [12](#closure)**  
 **collection, [18](#collection)**  
 **combinatorics, [8](#combinatorics)**  
@@ -37,18 +38,18 @@ Index
 **decorator, [13](#decorator)**  
 **deques, [29](#deque)**  
 **dictionaries, [2](#dictionary)**  
-**duck types, [16](#ducktypes)-19**  
+**duck types, [16](#ducktypes)-[19](#collectionsabcsequence)**  
 
 ### E
-**enum module, [19](#enum)-20**  
+**enum module, [19](#enum)-[20](#inline-2)**  
 **enumerate function, [3](#enumerate)**  
 **eval function, [32](#eval)**  
-**exceptions, [20](#exceptions)-21, [22](#exceptions-1)**  
+**exceptions, [20](#exceptions)-[21](#reraisingcaughtexception), [22](#exceptions-1)**  
 
 ### F
 **filter function, [11](#mapfilterreduce)**  
 **floats, [4](#abc), [6](#floats), [7](#types)**  
-**format function, [6](#format)-7**  
+**format function, [6](#format)-[7](#comparisonoffloatpresentationtypes)**  
 
 ### G
 **generator, [4](#generator)**  
@@ -71,6 +72,7 @@ Index
 
 ### L
 **lambda, [11](#lambda)**  
+**list comprehension, [11](#comprehension)**  
 **lists, [1](#list)-2**  
 **logging, [34](#logging)**  
 **lru_cache decorator, [13](#lrucache)**  
@@ -83,12 +85,12 @@ Index
 **metaprograming, [31](#metaprograming)**  
 
 ### N
-**named tuples, [3](#namedtuple)**  
+**namedtuples, [3](#namedtuple)**  
 **nonlocal keyword, [12](#nonlocal)**  
-**numpy module, [36](#numpy)-37**  
+**numpy module, [36](#numpy)-[37](#indexing)**  
 
 ### O
-**open function, [22](#open)-23**  
+**open function, [22](#open)-[23](#file)**  
 **operator module, [30](#operator)**  
 **OS commands, [24](#oscommands)**  
 
@@ -97,9 +99,10 @@ Index
 **partial function, [12](#partial)**  
 **paths, [23](#path)-24**  
 **pickle module, [27](#pickle)**  
+**PIL library, [38](#image)**  
 **plotting, [33](#plot)**  
 **print function, [21](#print)**  
-**profiling, [35](#profiling)-36**  
+**profiling, [35](#profiling)-[36](#timingasnippet)**  
 **progress bar, [33](#progressbar)**  
 
 ### Q
@@ -110,16 +113,16 @@ Index
 **ranges, [3](#range)**  
 **recursion, [13](#lrucache)**  
 **reduce function, [11](#mapfilterreduce)**  
-**regular expressions, [5](#regex)-6**  
+**regular expressions, [5](#regex)-[6](#specialsequences)**  
 **requests library, [34](#scraping), [35](#test)**  
 
 ### S
 **SQLite module, [26](#sqlite)**  
 **scraping, [34](#scraping)**  
-**sequence, [18](#sequence)**  
+**sequence, [18](#sequence), [19](#collectionsabcsequence)**  
 **sets, [2](#set)**  
 **shell commands, [24](#shellcommands)**  
-**splat operator, [10](#splatoperator)-11**  
+**splat operator, [10](#splatoperator)-[11](#otheruses)**  
 **statistics module, [7](#statistics)**  
 **strings, [5](#string)**  
 **struct module, [28](#struct)**  
@@ -127,7 +130,7 @@ Index
 
 ### T
 **table, [33](#table)**  
-**threads, [29](#threading)-30**  
+**threads, [29](#threading)-[30](#threadpool)**  
 **time module, [35](#stopwatch)**  
 **tuples, [3](#tuple)**  
 **type, [4](#type), [31](#type-1)**  
