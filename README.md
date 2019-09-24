@@ -1943,22 +1943,22 @@ Array
 
 ```python
 from array import array
-<array> = array('<typecode>', <collection>)  # Array from coll. of numbers.
-<array> = array('<typecode>', <bytes>)       # Array from bytes object.
+<array> = array('<typecode>', <collection>)    # Array from coll. of numbers.
+<array> = array('<typecode>', <bytes>)         # Array from bytes object.
 <bytes> = <array>.tobytes()
 ```
 
 
 Memory View
 -----------
-* **A seqence object that points to the memory of another object.**
+* **A sequence object that points to the memory of another object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)
 <num>   = <mview>[<index>]                     # Can be int or float.
-<mview> = <mview>[<slice>]                     # Mview with rearanged elements.
+<mview> = <mview>[<slice>]                     # Mview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Casts a memoryview to a new format.
 <mview>.release()                              # Releases the object's memory buffer.
 ```
@@ -1984,10 +1984,10 @@ from collections import deque
 ```
 
 ```python
-<deque>.appendleft(<el>)                    # Opposite element is dropped if full.
-<el> = <deque>.popleft()                    # Raises IndexError if empty.
-<deque>.extendleft(<collection>)            # Collection gets reversed.
-<deque>.rotate(n=1)                         # Rotates elements to the right.
+<deque>.appendleft(<el>)                       # Opposite element is dropped if full.
+<el> = <deque>.popleft()                       # Raises IndexError if empty.
+<deque>.extendleft(<collection>)               # Collection gets reversed.
+<deque>.rotate(n=1)                            # Rotates elements to the right.
 ```
 
 
@@ -2286,7 +2286,7 @@ with open('test.csv', encoding='utf-8', newline='') as file:
 
 Curses
 ------
-#### Clears terminal, prints message and waits for ESC key press:
+#### Clears the terminal, prints a message and waits for an ESC key press:
 ```python
 from curses import wrapper, curs_set, ascii
 from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT

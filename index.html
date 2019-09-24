@@ -1723,19 +1723,19 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 
 <div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)  <span class="hljs-comment"># Array from coll. of numbers.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Array from bytes object.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from coll. of numbers.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
 &lt;bytes&gt; = &lt;array&gt;.tobytes()
 </code></pre></div>
 
 
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><ul>
-<li><strong>A seqence object that points to the memory of another object.</strong></li>
+<li><strong>A sequence object that points to the memory of another object.</strong></li>
 <li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
 <li><strong>Order and number of elements can be changed with slicing.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)
 &lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Can be int or float.</span>
-&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearanged elements.</span>
+&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts a memoryview to a new format.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the object's memory buffer.</span>
 </code></pre></div>
@@ -1754,10 +1754,10 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                    <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()                    <span class="hljs-comment"># Raises IndexError if empty.</span>
-&lt;deque&gt;.extendleft(&lt;collection&gt;)            <span class="hljs-comment"># Collection gets reversed.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                         <span class="hljs-comment"># Rotates elements to the right.</span>
+<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
@@ -1974,7 +1974,7 @@ pyplot.clf()                           <span class="hljs-comment"># Clears figur
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="clearsterminalprintsmessageandwaitsforesckeypress">Clears terminal, prints message and waits for ESC key press:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="clearstheterminalprintsamessageandwaitsforanesckeypress">Clears the terminal, prints a message and waits for an ESC key press:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
 <span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
