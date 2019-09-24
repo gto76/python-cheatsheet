@@ -1957,18 +1957,21 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)
-<num>   = <mview>[<index>]                     # Can be int or float.
+<num>   = <mview>[<index>]                     # Returns an int or a float.
 <mview> = <mview>[<slice>]                     # Mview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Casts a memoryview to a new format.
 <mview>.release()                              # Releases the object's memory buffer.
 ```
 
 ```python
-<bin_file>.write(<mview>)
-<bytes> = bytes(<mview>)                       # Or: <mview>.tobytes()
+<bin_file>.write(<mview>)                      # Writes mview to a binary file.
+<bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
-<list>  = list(<mview>)                        # Returns numbers. Or: <mview>.tolist()
-<str>   = str(<mview>, 'utf-8')                # Or: <bytes>.decode('utf-8')
+```
+
+```python
+<list>  = list(<mview>)                        # Returns list of ints or floats.
+<str>   = str(<mview>, 'utf-8')
 <int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
 '<hex>' = <mview>.hex()
 ```
