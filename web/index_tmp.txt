@@ -6,14 +6,17 @@ Index
 **all function, [11](#anyall)**  
 **animation, [39](#animation)**  
 **any function, [11](#anyall)**  
+**argparse module, [22](#argparse)**  
 **arguments, [10](#arguments)**  
 **arrays, [28](#array)**  
 **audio, [39](#audio)-[40](#writefloatsamplestowavfile)**  
 
 ### B
 **basic script template, [41](#basicscripttemplate)**  
+**beautifulsoup4 library, [34](#scraping)**  
 **binary representation, [8](#binhex)**  
 **bitwise operators, [8](#bitwiseoperators)**  
+**bottle library, [35](#web)**  
 **bytes, [27](#bytes)-[28](#readbytesfromfile)**  
 
 ### C
@@ -47,9 +50,11 @@ Index
 **exceptions, [20](#exceptions)-[21](#reraisingcaughtexception), [22](#exceptions-1)**  
 
 ### F
+**files, [23](#file)**  
 **filter function, [11](#mapfilterreduce)**  
 **floats, [4](#abc), [6](#floats), [7](#types)**  
 **format function, [6](#format)-[7](#comparisonoffloatpresentationtypes)**  
+**futures, [30](#threadpool)**  
 
 ### G
 **generator, [4](#generator)**  
@@ -74,6 +79,7 @@ Index
 **lambda, [11](#lambda)**  
 **list comprehension, [11](#comprehension)**  
 **lists, [1](#list)-2**  
+**locks, [29](#lock)**  
 **logging, [34](#logging)**  
 **lru_cache decorator, [13](#lrucache)**  
 
@@ -81,8 +87,10 @@ Index
 **main function, [1](#main), [41](#basicscripttemplate)**  
 **map function, [11](#mapfilterreduce)**  
 **math module, [7](#math)**  
+**matplotlib library, [33](#plot)**  
 **memoryviews, [29](#memoryview)**  
 **metaprograming, [31](#metaprograming)**  
+**mysql library, [26](#mysql)**  
 
 ### N
 **namedtuples, [3](#namedtuple)**  
@@ -117,11 +125,12 @@ Index
 **requests library, [34](#scraping), [35](#test)**  
 
 ### S
-**SQLite module, [26](#sqlite)**  
+**sqlite3 module, [26](#sqlite)**  
 **scraping, [34](#scraping)**  
 **sequence, [18](#sequence), [19](#collectionsabcsequence)**  
 **sets, [2](#set)**  
 **shell commands, [24](#shellcommands)**  
+**sleep function, [33](#progressbar)**  
 **splat operator, [10](#splatoperator)-[11](#otheruses)**  
 **statistics module, [7](#statistics)**  
 **strings, [5](#string)**  
@@ -130,8 +139,9 @@ Index
 
 ### T
 **table, [33](#table)**  
-**threads, [29](#threading)-[30](#threadpool)**  
-**time module, [35](#stopwatch)**  
+**threading module, [29](#threading)-[30](#threadpool)**  
+**time module, [33](#progressbar), [35](#stopwatch)**  
+**tqdm library, [33](#progressbar)**  
 **tuples, [3](#tuple)**  
 **type, [4](#type), [31](#type-1)**  
 

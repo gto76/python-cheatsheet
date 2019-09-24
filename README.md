@@ -1283,8 +1283,8 @@ class MyAbcSequence(collections.abc.Sequence):
 | count()    |          |            |          |     yes      |
 +------------+----------+------------+----------+--------------+
 ```
-
-* **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping. Required methods: `'<abc>.__abstractmethods__'`.**
+* **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
+* **Names of their required methods are stored in `'<abc>.__abstractmethods__'`.**
 
 
 Enum
@@ -2136,7 +2136,7 @@ class MyMetaClass(type):
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute
-**Right before a class is created it checks if it has metaclass attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has a 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
