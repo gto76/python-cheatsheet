@@ -1964,10 +1964,10 @@ Memory View
 <bin_file>.write(<mview>)                      # Writes mview to a binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
+<list>  = list(<mview>)                        # Returns list of ints or floats.
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')
 <int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
 '<hex>' = <mview>.hex()
