@@ -2211,7 +2211,7 @@ Coroutine
 ### Helper Decorator
 * **All coroutines must first be "primed" by calling `'next(<coroutine>)'`.**
 * **Remembering to call next() is easy to forget.**
-* **Solved by wrapping functions that return a coroutine with a decorator:**
+* **Solved by wrapping coroutine functions with a following decorator:**
 
 ```python
 def coroutine(func):
