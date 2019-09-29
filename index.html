@@ -1082,7 +1082,12 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">&gt;&gt;&gt; </span>next(counter), next(counter), next(counter)
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
-<div><h3 id="callable">Callable</h3><ul>
+<div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
+<li><strong>Iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
+<li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
+<li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehension">generator expressions</a>.</strong></li>
+<li><strong>All <a href="#file">file objects</a>, etc.</strong></li>
+</ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method, hence are callable.</strong></li>
 <li><strong>When this cheatsheet uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> for an argument, it actually means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
@@ -1091,7 +1096,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__call__</span><span class="hljs-params">(self)</span>:</span>
         self.i += <span class="hljs-number">1</span>
         <span class="hljs-keyword">return</span> self.i
-</code></pre></div>
+</code></pre></div></div>
+
+
 
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter()
@@ -1118,14 +1125,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">... </span>    print(file.read())
 Hello World!
 </code></pre>
-<div><h4 id="listofcoveredcontextmanagers">List of covered context managers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> open(<span class="hljs-string">'&lt;path&gt;'</span>) <span class="hljs-keyword">as</span> file: ...
-<span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'&lt;path&gt;'</span>) <span class="hljs-keyword">as</span> wave_file: ...
-<span class="hljs-keyword">with</span> memoryview(&lt;bytes/bytearray/array&gt;) <span class="hljs-keyword">as</span> view: ...
-<span class="hljs-keyword">with</span> concurrent.futures.ThreadPoolExecutor() <span class="hljs-keyword">as</span> executor: ...
-db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>); <span class="hljs-keyword">with</span> db: ...
-lock = threading.RLock(); <span class="hljs-keyword">with</span> lock: ...
-</code></pre></div>
-
 <div><h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2><div><h3 id="iterable">Iterable</h3><ul>
 <li><strong>Only required method is iter(). It should return an iterator of object's items.</strong></li>
 <li><strong>Contains() automatically works on any object that has iter() defined.</strong></li>

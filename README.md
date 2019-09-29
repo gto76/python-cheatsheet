@@ -1144,6 +1144,12 @@ class Counter:
 (1, 2, 3)
 ```
 
+#### Python has many different iterator objects:
+* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
+* **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
+* **All [file objects](#file), etc.**
+
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
 * **When this cheatsheet uses `'<function>'` for an argument, it actually means `'<callable>'`.**
@@ -1182,16 +1188,6 @@ class MyOpen():
 >>> with MyOpen('test.txt') as file:
 ...     print(file.read())
 Hello World!
-```
-
-#### List of covered context managers:
-```python
-with open('<path>') as file: ...
-with wave.open('<path>') as wave_file: ...
-with memoryview(<bytes/bytearray/array>) as view: ...
-with concurrent.futures.ThreadPoolExecutor() as executor: ...
-db = sqlite3.connect('<path>'); with db: ...
-lock = threading.RLock(); with lock: ...
 ```
 
 
