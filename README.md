@@ -1855,7 +1855,7 @@ db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 
 Bytes
 -----
-**Bytes object is an immutable sequence of single bytes. Mutable version is called 'bytearray'.**
+**Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
 <bytes> = b'<str>'                       # Only accepts ASCII characters and \x00 - \xff.
