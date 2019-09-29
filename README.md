@@ -1105,7 +1105,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With 'total_ordering' decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
+* **With total_ordering decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
 ```python
 from functools import total_ordering
 
