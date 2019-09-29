@@ -1828,7 +1828,7 @@ db.execute('<query>', <dict/namedtuple>)        # Replaces ':<key>'s with values
 db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
-* **Bools will be stored and returned as ints and dates as ISO formatted strings.**
+* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 
 ### Example
 ```python
