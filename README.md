@@ -203,7 +203,7 @@ from itertools import count, repeat, cycle, chain, islice
 ```python
 <iter> = count(start=0, step=1)             # Returns incremented value endlessly.
 <iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
-<iter> = cycle(<collection>)                # Repeats the sequence indefinitely.
+<iter> = cycle(<collection>)                # Repeats the sequence endlessly.
 ```
 
 ```python
