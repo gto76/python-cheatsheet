@@ -191,7 +191,7 @@ Iterator
 --------
 ```python
 <iter> = iter(<collection>)                 # `iter(<iter>)` returns unmodified iterator.
-<iter> = iter(<function>, to_exclusive)     # Sequence of return values until 'to_exclusive'.
+<iter> = iter(<function>, to_exclusive)     # A Sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
 ```
 
@@ -1124,6 +1124,7 @@ class MySortable:
 ```
 
 ### Iterator
+* **Any object that defines methods next() and iter() is an iterator.**
 * **Next() should return next item or raise StopIteration.**
 * **Iter() should return 'self'.**
 ```python
@@ -2266,7 +2267,7 @@ Plot
 from matplotlib import pyplot
 pyplot.plot(<y_data> [, label=<str>])
 pyplot.plot(<x_data>, <y_data>)
-pyplot.legend()                        # Adds a legend.
+pyplot.legend()                        # Adds legend.
 pyplot.savefig(<filename>)             # Saves figure.
 pyplot.show()                          # Displays figure.
 pyplot.clf()                           # Clears figure.
@@ -2298,8 +2299,8 @@ def main():
     wrapper(draw)
 
 def draw(screen):
-    curs_set(0)           # Makes cursor invisible.
-    screen.nodelay(True)  # Makes getch() non-blocking.
+    curs_set(0)                        # Makes cursor invisible.
+    screen.nodelay(True)               # Makes getch() non-blocking.
     screen.clear()
     screen.addstr(0, 0, 'Press ESC to quit.')
     while screen.getch() != ascii.ESC:

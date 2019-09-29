@@ -341,7 +341,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                 <span class="hljs-comment"># `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
-&lt;iter&gt; = iter(&lt;function&gt;, to_exclusive)     <span class="hljs-comment"># Sequence of return values until 'to_exclusive'.</span>
+&lt;iter&gt; = iter(&lt;function&gt;, to_exclusive)     <span class="hljs-comment"># A Sequence of return values until 'to_exclusive'.</span>
 &lt;el&gt;   = next(&lt;iter&gt; [, default])           <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
 </code></pre></div>
 
@@ -1064,6 +1064,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="iterator-1">Iterator</h3><ul>
+<li><strong>Any object that defines methods next() and iter() is an iterator.</strong></li>
 <li><strong>Next() should return next item or raise StopIteration.</strong></li>
 <li><strong>Iter() should return 'self'.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
@@ -1959,7 +1960,7 @@ reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
 pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
 pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
-pyplot.legend()                        <span class="hljs-comment"># Adds a legend.</span>
+pyplot.legend()                        <span class="hljs-comment"># Adds legend.</span>
 pyplot.savefig(&lt;filename&gt;)             <span class="hljs-comment"># Saves figure.</span>
 pyplot.show()                          <span class="hljs-comment"># Displays figure.</span>
 pyplot.clf()                           <span class="hljs-comment"># Clears figure.</span>
@@ -1982,8 +1983,8 @@ pyplot.clf()                           <span class="hljs-comment"># Clears figur
     wrapper(draw)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen)</span>:</span>
-    curs_set(<span class="hljs-number">0</span>)           <span class="hljs-comment"># Makes cursor invisible.</span>
-    screen.nodelay(<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># Makes getch() non-blocking.</span>
+    curs_set(<span class="hljs-number">0</span>)                        <span class="hljs-comment"># Makes cursor invisible.</span>
+    screen.nodelay(<span class="hljs-keyword">True</span>)               <span class="hljs-comment"># Makes getch() non-blocking.</span>
     screen.clear()
     screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)
     <span class="hljs-keyword">while</span> screen.getch() != ascii.ESC:
