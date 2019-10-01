@@ -373,7 +373,7 @@ import re
 
 ### Special Sequences
 * **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
-* **Use capital letters for negation.**
+* **Use capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Digit
 '\s' == '[ \t\n\r\f\v]'                        # Whitespace
@@ -652,10 +652,10 @@ from dateutil.tz import UTC, tzlocal, gettz
 
 ### Arithmetics
 ```python
-<TD>     = <D/DT> -  <D/DT>
-<D/DT>   = <D/DT> ±  <TD>
-<TD>     = <TD>   ±  <TD>
-<TD>     = <TD>   */ <real>
+<TD>     = <D/DT> - <D/DT>
+<D/DT>   = <D/DT> ± <TD>
+<TD>     = <TD>   ± <TD>
+<TD>     = <TD>   * <real>
 ```
 
 
