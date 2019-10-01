@@ -2621,7 +2621,7 @@ from PIL import Image
 <tuple/int> = <Image>.getpixel((x, y))          # Returns a pixel.
 <Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to image.
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
-<Image>.putdata(<list/tuple/ImagingCore>)       # Writes a sequence of pixels.
+<Image>.putdata(<list/ImagingCore>)             # Writes a sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes an image to image.
 ```
 
