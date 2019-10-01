@@ -2331,10 +2331,10 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         an_int = int.from_bytes(a_bytes, <span class="hljs-string">'little'</span>, signed=width!=<span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (width == <span class="hljs-number">1</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
-        frames = file.readframes(file.getnframes())
         width  = file.getsampwidth()
-    samples = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
-    <span class="hljs-keyword">return</span> [get_int(a) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> samples]
+        frames = file.readframes(file.getnframes())
+    byte_samples = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
+    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> byte_samples]
 </code></pre></div>
 
 <div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, float_samples, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
@@ -2347,7 +2347,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
         file.setframerate(framerate)
-        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> float_samples))
+        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> float_samples))
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
@@ -2358,7 +2358,7 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 
 <div><h4 id="addsnoisetoamonowavfile">Adds noise to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
 add_noise = <span class="hljs-keyword">lambda</span> value: value + (random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">0.03</span>
-frames_f  = (add_noise(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
+frames_f  = (add_noise(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, frames_f)
 </code></pre></div>
 

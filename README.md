@@ -2738,10 +2738,10 @@ def read_wav_file(filename):
         an_int = int.from_bytes(a_bytes, 'little', signed=width!=1)
         return an_int - 128 * (width == 1)
     with wave.open(filename, 'rb') as file:
-        frames = file.readframes(file.getnframes())
         width  = file.getsampwidth()
-    samples = (frames[i: i + width] for i in range(0, len(frames), width))
-    return [get_int(a) / pow(2, width * 8 - 1) for a in samples]
+        frames = file.readframes(file.getnframes())
+    byte_samples = (frames[i: i + width] for i in range(0, len(frames), width))
+    return [get_int(b) / pow(2, width * 8 - 1) for b in byte_samples]
 ```
 
 ### Write Float Samples to WAV File
@@ -2756,7 +2756,7 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
         file.setframerate(framerate)
-        file.writeframes(b''.join(get_bytes(a) for a in float_samples))
+        file.writeframes(b''.join(get_bytes(f) for f in float_samples))
 ```
 
 ### Examples
@@ -2771,7 +2771,7 @@ write_to_wav_file('test.wav', frames_f)
 ```python
 from random import random
 add_noise = lambda value: value + (random() - 0.5) * 0.03
-frames_f  = (add_noise(a) for a in read_wav_file('test.wav'))
+frames_f  = (add_noise(f) for f in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', frames_f)
 ```
 
