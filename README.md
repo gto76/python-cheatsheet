@@ -2763,16 +2763,16 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
 #### Saves a sine wave to a mono WAV file:
 ```python
 from math import pi, sin
-frames_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
-write_to_wav_file('test.wav', frames_f)
+samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
+write_to_wav_file('test.wav', samples_f)
 ```
 
 #### Adds noise to a mono WAV file:
 ```python
 from random import random
 add_noise = lambda value: value + (random() - 0.5) * 0.03
-frames_f  = (add_noise(f) for f in read_wav_file('test.wav'))
-write_to_wav_file('test.wav', frames_f)
+samples_f = (add_noise(f) for f in read_wav_file('test.wav'))
+write_to_wav_file('test.wav', samples_f)
 ```
 
 
@@ -2786,15 +2786,15 @@ from itertools import chain, repeat
 F  = 44100
 P1 = '71♪,69,,71♪,66,,62♪,66,,59♪,,,'
 P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
-get_pause  = lambda seconds: repeat(0, int(seconds * F))
-sin_f      = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
-get_wave   = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz     = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note = lambda note: (get_hz(note[:2]), 0.25 if '♪' in note else 0.125)
-get_frames = lambda note: get_wave(*parse_note(note)) if note else get_pause(0.125)
-frames_f   = chain.from_iterable(get_frames(n) for n in f'{P1}{P1}{P2}'.split(','))
-frames_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in frames_f)
-simpleaudio.play_buffer(frames_b, 1, 2, F)
+get_pause   = lambda seconds: repeat(0, int(seconds * F))
+sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
+get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
+get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
+parse_note  = lambda note: (get_hz(note[:2]), 0.25 if '♪' in note else 0.125)
+get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(0.125)
+samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1}{P1}{P2}'.split(','))
+samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
+simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
 
 
