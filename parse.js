@@ -223,7 +223,9 @@ const TYPE =
 
 const DATACLASS = 
   '<code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
-  '&lt;class&gt; = make_dataclass<span class="hljs-params">(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;list_of_attribute_names&gt;)</span></code>';
+  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_attribute_names&gt;)\n' +
+  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_tuples&gt;)\n' +
+  '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_val&gt;])</code>';
 
 
 function main() {
@@ -328,7 +330,7 @@ function fixHighlights() {
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(<class_name>, <parents_tuple>, <attributes_dict>)`).html(TYPE);
-  $(`code:contains(<list_of_attribute_names>)`).html(DATACLASS);
+  $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
 }
 
 function preventPageBreaks() {

@@ -1037,14 +1037,16 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
-* **Objects can be made sortable with `'order=True'` or immutable and hashable with `'frozen=True'`.**
+* **Objects can be made sortable with `'order=True'` and/or immutable and hashable with `'frozen=True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any [callable](#callable).**
 
 #### Inline:
 ```python
 from dataclasses import make_dataclass
-<class> = make_dataclass('<class_name>', <list_of_attribute_names>)
+<class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
+<class> = make_dataclass('<class_name>', <coll_of_tuples>)
+<tuple> = ('<attr_name>', <type> [, <default_value>])
 ```
 
 ### Slots
