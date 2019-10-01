@@ -103,7 +103,7 @@
 .play circle {
   fill: #fff;
   stroke: #000;
-  stroke-width: 3px;
+  stroke-width: 3.5px;
 }
 
 .play:hover path {
@@ -181,7 +181,7 @@ pre.prettyprint {
 }
 
 #return-to-top:hover {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.39);
 }
 
 #return-to-top:hover i {
@@ -1331,7 +1331,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <div><h3 id="userdefinedexceptions">User-defined Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>
     <span class="hljs-keyword">pass</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInputError</span><span class="hljs-params">(MyError)</span>:</span>
+<span class="hljs-class"><span class="hljs-keyword">Class</span> <span class="hljs-title">MyInputError</span><span class="hljs-params">(MyError)</span>:</span>
     <span class="hljs-keyword">pass</span>
 </code></pre></div>
 
@@ -1634,7 +1634,7 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 
 <ul>
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
-<li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
+<li><strong>Bools will be stored and returned as int and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
 </ul>
 <div><h3 id="example">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table t (a, b, c)'</span>)
