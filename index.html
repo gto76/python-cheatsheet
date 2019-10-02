@@ -1943,11 +1943,12 @@ ValueError: malformed node or string
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printer</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         value = (<span class="hljs-keyword">yield</span>)
-        print(value)
-
-reader(adder(printer()))  <span class="hljs-comment"># 100, 101, ..., 109</span>
+        print(value, end=<span class="hljs-string">' '</span>)
 </code></pre></div>
 
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>reader(adder(printer()))
+<span class="hljs-number">100</span> <span class="hljs-number">101</span> <span class="hljs-number">102</span> <span class="hljs-number">103</span> <span class="hljs-number">104</span> <span class="hljs-number">105</span> <span class="hljs-number">106</span> <span class="hljs-number">107</span> <span class="hljs-number">108</span> <span class="hljs-number">109</span>
+</code></pre>
 <p><br></p>
 <div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

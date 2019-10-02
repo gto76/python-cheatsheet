@@ -2243,9 +2243,12 @@ def adder(target):
 def printer():
     while True:
         value = (yield)
-        print(value)
+        print(value, end=' ')
+```
 
-reader(adder(printer()))  # 100, 101, ..., 109
+```python
+>>> reader(adder(printer()))
+100 101 102 103 104 105 106 107 108 109
 ```
 <br>
 
