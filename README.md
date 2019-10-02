@@ -2274,10 +2274,10 @@ Plot
 from matplotlib import pyplot
 pyplot.plot(<y_data> [, label=<str>])
 pyplot.plot(<x_data>, <y_data>)
-pyplot.legend()                        # Adds legend.
-pyplot.savefig(<filename>)             # Saves figure.
-pyplot.show()                          # Displays figure.
-pyplot.clf()                           # Clears figure.
+pyplot.legend()                                # Adds a legend.
+pyplot.savefig(<filename>)                     # Saves the figure.
+pyplot.show()                                  # Displays the figure.
+pyplot.clf()                                   # Clears the figure.
 ```
 
 
@@ -2306,8 +2306,8 @@ def main():
     wrapper(draw)
 
 def draw(screen):
-    curs_set(0)                        # Makes cursor invisible.
-    screen.nodelay(True)               # Makes getch() non-blocking.
+    curs_set(0)                                # Makes cursor invisible.
+    screen.nodelay(True)                       # Makes getch() non-blocking.
     screen.clear()
     screen.addstr(0, 0, 'Press ESC to quit.')
     while screen.getch() != ascii.ESC:

@@ -1962,10 +1962,10 @@ ValueError: malformed node or string
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
 pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
 pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
-pyplot.legend()                        <span class="hljs-comment"># Adds legend.</span>
-pyplot.savefig(&lt;filename&gt;)             <span class="hljs-comment"># Saves figure.</span>
-pyplot.show()                          <span class="hljs-comment"># Displays figure.</span>
-pyplot.clf()                           <span class="hljs-comment"># Clears figure.</span>
+pyplot.legend()                                <span class="hljs-comment"># Adds a legend.</span>
+pyplot.savefig(&lt;filename&gt;)                     <span class="hljs-comment"># Saves the figure.</span>
+pyplot.show()                                  <span class="hljs-comment"># Displays the figure.</span>
+pyplot.clf()                                   <span class="hljs-comment"># Clears the figure.</span>
 </code></pre></div>
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
@@ -1985,8 +1985,8 @@ pyplot.clf()                           <span class="hljs-comment"># Clears figur
     wrapper(draw)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen)</span>:</span>
-    curs_set(<span class="hljs-number">0</span>)                        <span class="hljs-comment"># Makes cursor invisible.</span>
-    screen.nodelay(<span class="hljs-keyword">True</span>)               <span class="hljs-comment"># Makes getch() non-blocking.</span>
+    curs_set(<span class="hljs-number">0</span>)                                <span class="hljs-comment"># Makes cursor invisible.</span>
+    screen.nodelay(<span class="hljs-keyword">True</span>)                       <span class="hljs-comment"># Makes getch() non-blocking.</span>
     screen.clear()
     screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)
     <span class="hljs-keyword">while</span> screen.getch() != ascii.ESC:
