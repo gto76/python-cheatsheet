@@ -2030,7 +2030,7 @@ with lock:
     ...
 ```
 
-### Thread Pool
+### Thread Pool Executor
 ```python
 from concurrent.futures import ThreadPoolExecutor
 with ThreadPoolExecutor(max_workers=None) as executor:
