@@ -1351,15 +1351,15 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
 </ul>
-<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><ul>
-<li><strong>Reads a line from user input or pipe if present.</strong></li>
-<li><strong>Trailing newline gets stripped.</strong></li>
-<li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
-<li><strong>Raises EOFError when user hits EOF or input stream gets exhausted.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
+<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
 
+<ul>
+<li><strong>Trailing newline gets stripped.</strong></li>
+<li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
+<li><strong>Raises EOFError when user hits EOF or input stream gets exhausted.</strong></li>
+</ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 script_name = sys.argv[<span class="hljs-number">0</span>]
 arguments   = sys.argv[<span class="hljs-number">1</span>:]
@@ -1603,24 +1603,23 @@ shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entir
         writer.writerows(rows)
 </code></pre></div>
 
-<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into separate file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
+<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into separate file.</strong></p><div><h3 id="connect">Connect</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
 db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># Also ':memory:'.</span>
 ...
 db.close()
-</code></pre></div>
+</code></pre></div></div>
+
 
 
 <ul>
 <li><strong>New database will be created if path doesn't exist.</strong></li>
 </ul>
-<div><h3 id="read-1">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise sqlite3.OperationalError.</span>
+<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise sqlite3.OperationalError.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows.</span>
 </code></pre></div>
 
-<ul>
-<li><strong>Returned values can be of type str, int, float, bytes or None.</strong></li>
-</ul>
+
 <div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 db.commit()
 </code></pre></div>
@@ -1629,25 +1628,23 @@ db.commit()
     db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)             <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+<div><h3 id="placeholders">Placeholders</h3><ul>
+<li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
+<li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
+</ul><pre><code class="python language-python hljs">db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)             <span class="hljs-comment"># Replaces '?'s in query with values.</span>
 db.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)        <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
 db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)      <span class="hljs-comment"># Runs execute() many times.</span>
 </code></pre></div>
 
-<ul>
-<li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
-<li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
-</ul>
-<div><h3 id="example">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
+
+<div><h3 id="example">Example</h3><p><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'db.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table t (a, b, c)'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'insert into t values (1, 2, 3)'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'select * from t'</span>).fetchall()
 [(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
 </code></pre></div>
 
-<ul>
-<li><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'db.commit()'</span></code> was omitted.</strong> </li>
-</ul>
+
 <div><h3 id="mysql">MySQL</h3><p><strong>Has a very similar interface, with differences listed below.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install mysql-connector</span>
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
 db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;)

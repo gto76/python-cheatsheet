@@ -1456,14 +1456,13 @@ pprint(<collection>, width=80, depth=None)
 
 Input
 -----
-* **Reads a line from user input or pipe if present.**
-* **Trailing newline gets stripped.**
-* **Prompt string is printed to the standard output before reading input.**
-* **Raises EOFError when user hits EOF or input stream gets exhausted.**
-
+**Reads a line from user input or pipe if present.**
 ```python
 <str> = input(prompt=None)
 ```
+* **Trailing newline gets stripped.**
+* **Prompt string is printed to the standard output before reading input.**
+* **Raises EOFError when user hits EOF or input stream gets exhausted.**
 
 
 Command Line Arguments
@@ -1795,6 +1794,8 @@ def write_to_csv_file(filename, rows):
 SQLite
 ------
 **Server-less database engine that stores each database into separate file.**
+
+### Connect
 ```python
 import sqlite3
 db = sqlite3.connect('<path>')                  # Also ':memory:'.
@@ -1804,12 +1805,12 @@ db.close()
 * **New database will be created if path doesn't exist.**
 
 ### Read
+**Returned values can be of type str, int, float, bytes or None.**
 ```python
 <cursor> = db.execute('<query>')                # Can raise sqlite3.OperationalError.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                  # Returns remaining rows.
 ```
-* **Returned values can be of type str, int, float, bytes or None.**
 
 ### Write
 ```python
@@ -1824,23 +1825,23 @@ with db:
 ```
 
 ### Placeholders
+* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
+* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 ```python
 db.execute('<query>', <list/tuple>)             # Replaces '?'s in query with values.
 db.execute('<query>', <dict/namedtuple>)        # Replaces ':<key>'s with values.
 db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 ```
-* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
-* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 
 ### Example
+**In this example values are not actually saved because `'db.commit()'` is omitted!**
 ```python
 >>> db = sqlite3.connect('test.db')
 >>> db.execute('create table t (a, b, c)')
 >>> db.execute('insert into t values (1, 2, 3)')
 >>> db.execute('select * from t').fetchall()
 [(1, 2, 3)]
-```
-* **In this example values are not actually saved because `'db.commit()'` was omitted.** 
+``` 
 
 ### MySQL
 **Has a very similar interface, with differences listed below.**
