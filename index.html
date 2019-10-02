@@ -1996,7 +1996,7 @@ pyplot.clf()                                   <span class="hljs-comment"># Clea
     <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
     P = namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
     height, width = screen.getmaxyx()
-    <span class="hljs-keyword">return</span> P(width<span class="hljs-number">-1</span>, height<span class="hljs-number">-1</span>)
+    <span class="hljs-keyword">return</span> P(width - <span class="hljs-number">1</span>, height - <span class="hljs-number">1</span>)
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
