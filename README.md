@@ -2011,14 +2011,14 @@ from threading import Thread, RLock
 thread = Thread(target=<function>, args=(<first_arg>, ))
 thread.start()
 ...
-<bool> = thread.is_alive()   # Checks if thread has finished executing.
-thread.join()                # Waits for thread to finish.
+<bool> = thread.is_alive()           # Checks if thread has finished executing.
+thread.join()                        # Waits for thread to finish.
 ```
 
 ### Lock
 ```python
 lock = RLock()
-lock.acquire()               # Waits for lock to be available.
+lock.acquire()                       # Waits for lock to be available.
 ...
 lock.release()
 ```
@@ -2040,8 +2040,8 @@ with ThreadPoolExecutor(max_workers=None) as executor:
 ```
 
 ```python
-<bool> = <Future>.done()     # Checks if thread has finished executing.
-<obj>  = <Future>.result()   # Waits for thread to finish and returns result.
+<bool> = <Future>.done()             # Checks if thread has finished executing.
+<obj>  = <Future>.result()           # Waits for thread to finish and returns result.
 ```
 
 ### Queue
@@ -2052,10 +2052,10 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)            # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)     # Raises queue.Full exception if full.
-<el> = <Queue>.get()         # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()  # Raises _queue.Empty exception if empty.
+<Queue>.put(<el>)                    # Blocks until queue stops being full.
+<Queue>.put_nowait(<el>)             # Raises queue.Full exception if full.
+<el> = <Queue>.get()                 # Blocks until queue stops being empty.
+<el> = <Queue>.get_nowait()          # Raises _queue.Empty exception if empty.
 ```
 
 

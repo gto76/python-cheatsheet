@@ -1771,12 +1771,12 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">thread = Thread(target=&lt;function&gt;, args=(&lt;first_arg&gt;, ))
 thread.start()
 ...
-&lt;bool&gt; = thread.is_alive()   <span class="hljs-comment"># Checks if thread has finished executing.</span>
-thread.join()                <span class="hljs-comment"># Waits for thread to finish.</span>
+&lt;bool&gt; = thread.is_alive()           <span class="hljs-comment"># Checks if thread has finished executing.</span>
+thread.join()                        <span class="hljs-comment"># Waits for thread to finish.</span>
 </code></pre></div>
 
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">lock = RLock()
-lock.acquire()               <span class="hljs-comment"># Waits for lock to be available.</span>
+lock.acquire()                       <span class="hljs-comment"># Waits for lock to be available.</span>
 ...
 lock.release()
 </code></pre></div>
@@ -1793,18 +1793,18 @@ lock.release()
     &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()     <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;obj&gt;  = &lt;Future&gt;.result()   <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()             <span class="hljs-comment"># Checks if thread has finished executing.</span>
+&lt;obj&gt;  = &lt;Future&gt;.result()           <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
 </code></pre>
 <div><h3 id="queue">Queue</h3><p><strong>A thread-safe FIFO queue. For LIFO queue use LifoQueue.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> queue <span class="hljs-keyword">import</span> Queue
 &lt;Queue&gt; = Queue(maxsize=<span class="hljs-number">0</span>)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)            <span class="hljs-comment"># Blocks until queue stops being full.</span>
-&lt;Queue&gt;.put_nowait(&lt;el&gt;)     <span class="hljs-comment"># Raises queue.Full exception if full.</span>
-&lt;el&gt; = &lt;Queue&gt;.get()         <span class="hljs-comment"># Blocks until queue stops being empty.</span>
-&lt;el&gt; = &lt;Queue&gt;.get_nowait()  <span class="hljs-comment"># Raises _queue.Empty exception if empty.</span>
+<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                    <span class="hljs-comment"># Blocks until queue stops being full.</span>
+&lt;Queue&gt;.put_nowait(&lt;el&gt;)             <span class="hljs-comment"># Raises queue.Full exception if full.</span>
+&lt;el&gt; = &lt;Queue&gt;.get()                 <span class="hljs-comment"># Blocks until queue stops being empty.</span>
+&lt;el&gt; = &lt;Queue&gt;.get_nowait()          <span class="hljs-comment"># Raises _queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
