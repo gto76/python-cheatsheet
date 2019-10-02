@@ -1806,11 +1806,12 @@ lock.release()
 &lt;el&gt; = &lt;Queue&gt;.get()                 <span class="hljs-comment"># Blocks until queue stops being empty.</span>
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()          <span class="hljs-comment"># Raises _queue.Empty exception if empty.</span>
 </code></pre>
-<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
+<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> and_, or_, not_
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> itemgetter, attrgetter, methodcaller
 </code></pre></div>
+
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))

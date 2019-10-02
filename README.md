@@ -2061,6 +2061,7 @@ from queue import Queue
 
 Operator
 --------
+**Module of functions that provide the functionality of operators.**
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 from operator import eq, ne, lt, le, gt, ge
