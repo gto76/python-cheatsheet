@@ -1493,13 +1493,13 @@ value = args.<name>
 
 Open
 ----
-**Opens a file and returns a corresponding file object.**
+**Opens the file and returns a corresponding file object.**
 
 ```python
 <file> = open('<path>', mode='r', encoding=None, newline=None)
 ```
 * **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
-* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
+* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.**
 
 ### Modes
@@ -1570,8 +1570,8 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir('<path>')         # List of filenames located at path.
-<list> = glob('<pattern>')         # Filenames matching the wildcard pattern.
+<list> = listdir('<path>')          # List of filenames located at path.
+<list> = glob('<pattern>')          # Filenames matching the wildcard pattern.
 ```
 
 ### Pathlib
@@ -1592,22 +1592,22 @@ cwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.iterdir()          # Returns dir contents as Path objects.
-<iter> = <Path>.glob('<pattern>')  # Returns Paths matching the wildcard pattern.
+<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
+<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
 ```
 
 ```python
-<str>  = str(<Path>)               # Path as a string.
-<str>  = <Path>.name               # Final component.
-<str>  = <Path>.stem               # Final component without extension.
-<str>  = <Path>.suffix             # Final component's extension.
-<tup.> = <Path>.parts              # All components as strings.
+<str>  = str(<Path>)                # Path as a string.
+<str>  = <Path>.name                # Final component.
+<str>  = <Path>.stem                # Final component without extension.
+<str>  = <Path>.suffix              # Final component's extension.
+<tup.> = <Path>.parts               # All components as strings.
 ```
 
 ```python
-<Path> = <Path>.resolve()          # Returns absolute path without symlinks.
-<Path> = <Path>.parent             # Returns path without final component.
-<file> = open(<Path>)              # Opens the file and returns a file object.
+<Path> = <Path>.resolve()           # Returns absolute path without symlinks.
+<Path> = <Path>.parent              # Returns path without final component.
+<file> = open(<Path>)               # Opens the file and returns a file object.
 ```
 
 
@@ -1622,29 +1622,29 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                   # Changes current working directory.
-os.mkdir(<path>, mode=0o777)       # Creates a directory.
+os.chdir(<path>)                    # Changes current working directory.
+os.mkdir(<path>, mode=0o777)        # Creates a directory.
 ```
 
 ```python
-os.rename(from, to)                # Renames the file or directory.
-os.replace(from, to)               # Same, but overwrites 'to' if it exists.
+os.rename(from, to)                 # Renames the file or directory.
+os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
-os.remove(<path>)                  # Deletes the file.
-os.rmdir(<path>)                   # Deletes empty directory.
-shutil.rmtree(<path>)              # Deletes the entire directory tree.
+os.remove(<path>)                   # Deletes the file.
+os.rmdir(<path>)                    # Deletes empty directory.
+shutil.rmtree(<path>)               # Deletes the entire directory tree.
 ```
 
 ```python
-shutil.copy(from, to)              # Copies the file.
-shutil.copytree(from, to)          # Copies the entire directory tree.
+shutil.copy(from, to)               # Copies the file.
+shutil.copytree(from, to)           # Copies the entire directory tree.
 ```
 
 ```python
-<str>  = os.getcwd()               # Returns the current working directory.
-<iter> = os.scandir(path='.')      # Returns os.DirEntry objects located at path.
+<str>  = os.getcwd()                # Returns the current working directory.
+<iter> = os.scandir(path='.')       # Returns os.DirEntry objects located at path.
 ```
 
 #### DirEntry:
@@ -1654,13 +1654,13 @@ shutil.copytree(from, to)          # Copies the entire directory tree.
 ```
 
 ```python
-<str>  = <DirEntry>.path           # Path as a string.
-<str>  = <DirEntry>.name           # Final component.
+<str>  = <DirEntry>.path            # Path as a string.
+<str>  = <DirEntry>.name            # Final component.
 ```
 
 ```python
-<Path> = Path(<DirEntry>)          # Path object.
-<file> = open(<DirEntry>)          # File object.
+<Path> = Path(<DirEntry>)           # Path object.
+<file> = open(<DirEntry>)           # File object.
 ```
 
 ### Shell Commands

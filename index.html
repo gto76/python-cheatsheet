@@ -1381,13 +1381,13 @@ value = args.&lt;name&gt;
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set the default value.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files.</strong></li>
 </ul>
-<div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens a file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
+<div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
 
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default line separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
@@ -1445,8 +1445,8 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># List of filenames located at path.</span>
-&lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)         <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)          <span class="hljs-comment"># List of filenames located at path.</span>
+&lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)          <span class="hljs-comment"># Filenames matching the wildcard pattern.</span>
 </code></pre>
 <div><h3 id="pathlib">Pathlib</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
@@ -1459,18 +1459,18 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = &lt;Path&gt;.is_file()
 &lt;bool&gt; = &lt;Path&gt;.is_dir()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()          <span class="hljs-comment"># Returns dir contents as Path objects.</span>
-&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)  <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns dir contents as Path objects.</span>
+&lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)               <span class="hljs-comment"># Path as a string.</span>
-&lt;str&gt;  = &lt;Path&gt;.name               <span class="hljs-comment"># Final component.</span>
-&lt;str&gt;  = &lt;Path&gt;.stem               <span class="hljs-comment"># Final component without extension.</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix             <span class="hljs-comment"># Final component's extension.</span>
-&lt;tup.&gt; = &lt;Path&gt;.parts              <span class="hljs-comment"># All components as strings.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Path as a string.</span>
+&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Final component.</span>
+&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Final component without extension.</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Final component's extension.</span>
+&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># All components as strings.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.resolve()          <span class="hljs-comment"># Returns absolute path without symlinks.</span>
-&lt;Path&gt; = &lt;Path&gt;.parent             <span class="hljs-comment"># Returns path without final component.</span>
-&lt;file&gt; = open(&lt;Path&gt;)              <span class="hljs-comment"># Opens the file and returns a file object.</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute path without symlinks.</span>
+&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns path without final component.</span>
+&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
@@ -1480,31 +1480,31 @@ value = args.&lt;name&gt;
 
 
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                   <span class="hljs-comment"># Changes current working directory.</span>
-os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)       <span class="hljs-comment"># Creates a directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
+os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(from, to)                <span class="hljs-comment"># Renames the file or directory.</span>
-os.replace(from, to)               <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+<pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames the file or directory.</span>
+os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                  <span class="hljs-comment"># Deletes the file.</span>
-os.rmdir(&lt;path&gt;)                   <span class="hljs-comment"># Deletes empty directory.</span>
-shutil.rmtree(&lt;path&gt;)              <span class="hljs-comment"># Deletes the entire directory tree.</span>
+<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file.</span>
+os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes empty directory.</span>
+shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">shutil.copy(from, to)              <span class="hljs-comment"># Copies the file.</span>
-shutil.copytree(from, to)          <span class="hljs-comment"># Copies the entire directory tree.</span>
+<pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
+shutil.copytree(from, to)           <span class="hljs-comment"># Copies the entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()               <span class="hljs-comment"># Returns the current working directory.</span>
-&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)      <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
+&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
 <div><h4 id="direntry">DirEntry:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
 &lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.path           <span class="hljs-comment"># Path as a string.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.name           <span class="hljs-comment"># Final component.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Path as a string.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Final component.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;DirEntry&gt;)          <span class="hljs-comment"># Path object.</span>
-&lt;file&gt; = open(&lt;DirEntry&gt;)          <span class="hljs-comment"># File object.</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;DirEntry&gt;)           <span class="hljs-comment"># Path object.</span>
+&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># File object.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
