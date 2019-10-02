@@ -1518,10 +1518,11 @@ shutil.copytree(from, to)           <span class="hljs-comment"># Copies the enti
 <span class="hljs-number">0</span>
 </code></pre></div>
 
-<div><h2 id="json"><a href="#json" name="json">#</a>JSON</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> json
+<div><h2 id="json"><a href="#json" name="json">#</a>JSON</h2><p><strong>Text file format for storing collections of strings and numbers.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> json
 &lt;str&gt;    = json.dumps(&lt;object&gt;, ensure_ascii=<span class="hljs-keyword">True</span>, indent=<span class="hljs-keyword">None</span>)
 &lt;object&gt; = json.loads(&lt;str&gt;)
 </code></pre></div>
+
 
 <div><h3 id="readobjectfromjsonfile">Read Object from JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_json_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
@@ -1533,10 +1534,11 @@ shutil.copytree(from, to)           <span class="hljs-comment"># Copies the enti
         json.dump(an_object, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
 </code></pre></div>
 
-<div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
+<div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
 &lt;bytes&gt;  = pickle.dumps(&lt;object&gt;)
 &lt;object&gt; = pickle.loads(&lt;bytes&gt;)
 </code></pre></div>
+
 
 <div><h3 id="readobjectfromfile">Read Object from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_pickle_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:

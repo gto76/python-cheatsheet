@@ -1682,6 +1682,8 @@ b'.\n..\nfile1.txt\nfile2.txt\n'
 
 JSON
 ----
+**Text file format for storing collections of strings and numbers.**
+
 ```python
 import json
 <str>    = json.dumps(<object>, ensure_ascii=True, indent=None)
@@ -1705,6 +1707,8 @@ def write_to_json_file(filename, an_object):
 
 Pickle
 ------
+**Binary file format for storing objects.**
+
 ```python
 import pickle
 <bytes>  = pickle.dumps(<object>)
