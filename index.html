@@ -1777,6 +1777,7 @@ thread.join()                        <span class="hljs-comment"># Waits for thre
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code> or the program will not be able to exit while the thread is alive.</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">lock = RLock()
 lock.acquire()                       <span class="hljs-comment"># Waits for lock to be available.</span>
