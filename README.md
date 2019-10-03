@@ -2410,7 +2410,7 @@ run(host='0.0.0.0', port=80, server='cherrypy')
 ```python
 @route('/img/<image>')
 def send_image(image):
-    return static_file(image, 'images/', mimetype='image/png')
+    return static_file(image, 'img_dir/', mimetype='image/png')
 ```
 
 ### Dynamic Request
@@ -2636,6 +2636,12 @@ from PIL import Image
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
 <Image>.putdata(<list/ImagingCore>)             # Writes a sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes an image to image.
+```
+
+```bash
+<2d_array> = np.array(<Image>)                  # NumPy array from greyscale image.
+<3d_array> = np.array(<Image>)                  # NumPy array from color image.
+<Image>    = Image.fromarray(<array>)           # Image from NumPy array.
 ```
 
 ### Modes
