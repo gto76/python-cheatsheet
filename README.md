@@ -2015,7 +2015,7 @@ thread.start()
 thread.join()                        # Waits for thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
-* **Use `'daemon=True'` or the program will not be able to exit while the thread is alive.**
+* **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
 
 ### Lock
 ```python
