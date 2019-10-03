@@ -1775,6 +1775,9 @@ thread.start()
 thread.join()                        <span class="hljs-comment"># Waits for thread to finish.</span>
 </code></pre></div>
 
+<ul>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
+</ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">lock = RLock()
 lock.acquire()                       <span class="hljs-comment"># Waits for lock to be available.</span>
 ...
@@ -2059,7 +2062,7 @@ print(link, ver)
 
 
 <div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
-<span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, post, template, request, response
+<span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, static_file, template, post, request, response
 <span class="hljs-keyword">import</span> json
 </code></pre></div>
 

@@ -2014,6 +2014,7 @@ thread.start()
 <bool> = thread.is_alive()           # Checks if thread has finished executing.
 thread.join()                        # Waits for thread to finish.
 ```
+* **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 
 ### Lock
 ```python
@@ -2394,7 +2395,7 @@ Web
 ---
 ```python
 # $ pip3 install bottle
-from bottle import run, route, post, template, request, response
+from bottle import run, route, static_file, template, post, request, response
 import json
 ```
 
