@@ -401,40 +401,40 @@ Format
 
 ### General Options
 ```python
-{<el>:<10}                    # '<el>      '
-{<el>:^10}                    # '   <el>   '
-{<el>:>10}                    # '      <el>'
+{<el>:<10}                                     # '<el>      '
+{<el>:^10}                                     # '   <el>   '
+{<el>:>10}                                     # '      <el>'
 ```
 
 ```python
-{<el>:.<10}                   # '<el>......'
-{<el>:<0}                     # '<el>'
+{<el>:.<10}                                    # '<el>......'
+{<el>:<0}                                      # '<el>'
 ```
 
 ### Strings
 **`'!r'` calls object's repr() method, instead of str(), to get a string.**
 ```python
-{'abcde'!r:<10}               # "'abcde'   "
-{'abcde':.3}                  # 'abc'
-{'abcde':10.3}                # 'abc       '
+{'abcde'!r:<10}                                # "'abcde'   "
+{'abcde':.3}                                   # 'abc'
+{'abcde':10.3}                                 # 'abc       '
 ```
 
 ### Numbers
 ```python
-{ 123456:10,}                 # '   123,456'
-{ 123456:10_}                 # '   123_456'
-{ 123456:+10}                 # '   +123456'
-{-123456:=10}                 # '-   123456'
-{ 123456: }                   # ' 123456'
-{-123456: }                   # '-123456'
+{ 123456:10,}                                  # '   123,456'
+{ 123456:10_}                                  # '   123_456'
+{ 123456:+10}                                  # '   +123456'
+{-123456:=10}                                  # '-   123456'
+{ 123456: }                                    # ' 123456'
+{-123456: }                                    # '-123456'
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                # '      1.23'
-{1.23456:10.3f}               # '     1.235'
-{1.23456:10.3e}               # ' 1.235e+00'
-{1.23456:10.3%}               # '  123.456%'
+{1.23456:10.3}                                 # '      1.23'
+{1.23456:10.3f}                                # '     1.235'
+{1.23456:10.3e}                                # ' 1.235e+00'
+{1.23456:10.3%}                                # '  123.456%'
 ```
 
 #### Comparison of float presentation types:
@@ -469,9 +469,9 @@ Format
 
 ### Ints
 ```python
-{90:c}                        # 'Z'
-{90:X}                        # '5A'
-{90:b}                        # '1011010'
+{90:c}                                # 'Z'
+{90:X}                                # '5A'
+{90:b}                                # '1011010'
 ```
 
 
@@ -1499,7 +1499,7 @@ Open
 <file> = open('<path>', mode='r', encoding=None, newline=None)
 ```
 * **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
-* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default line separator.**
+* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.**
 
 ### Modes
@@ -1800,13 +1800,13 @@ SQLite
 **Server-less database engine that stores each database into separate file.**
 
 ### Connect
+**Opens a connection to the database file. Creates a new file if path doesn't exist.**
 ```python
 import sqlite3
 db = sqlite3.connect('<path>')                  # Also ':memory:'.
 ...
 db.close()
 ```
-* **New database will be created if path doesn't exist.**
 
 ### Read
 **Returned values can be of type str, int, float, bytes or None.**
@@ -1963,12 +1963,12 @@ Memory View
 <mview> = memoryview(<bytes/bytearray/array>)
 <num>   = <mview>[<index>]                     # Returns an int or a float.
 <mview> = <mview>[<slice>]                     # Mview with rearranged elements.
-<mview> = <mview>.cast('<typecode>')           # Casts a memoryview to a new format.
+<mview> = <mview>.cast('<typecode>')           # Casts memoryview to the new format.
 <mview>.release()                              # Releases the object's memory buffer.
 ```
 
 ```python
-<bin_file>.write(<mview>)                      # Writes mview to a binary file.
+<bin_file>.write(<mview>)                      # Appends mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <list>  = list(<mview>)                        # Returns list of ints or floats.

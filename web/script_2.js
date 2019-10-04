@@ -118,6 +118,19 @@ const DIAGRAM_7_B =
   '┃ count()    │              │              │              │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_7_C =
+  '┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
+  '┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃\n' +
+  '┠────────────┼────────────┼────────────┼────────────┼──────────────┨\n' +
+  '┃ iter()     │     !      │     !      │     ✓      │      ✓       ┃\n' +
+  '┃ contains() │     ✓      │     ✓      │     ✓      │      ✓       ┃\n' +
+  '┃ len()      │            │     !      │     !      │      !       ┃\n' +
+  '┃ getitem()  │            │            │     !      │      !       ┃\n' +
+  '┃ reversed() │            │            │     ✓      │      ✓       ┃\n' +
+  '┃ index()    │            │            │            │      ✓       ┃\n' +
+  '┃ count()    │            │            │            │      ✓       ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
+
 const DIAGRAM_8_A =
   'BaseException\n' +
   ' +-- SystemExit';
@@ -203,7 +216,7 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
   $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
-  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
+  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_C);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);

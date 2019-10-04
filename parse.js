@@ -309,8 +309,9 @@ function highlightCode() {
   fixClasses();
   fixHighlights();
   preventPageBreaks();
-  fixPageBreaks();
-  // insertPageBreak();
+  fixPageBreaksFile();
+  fixPageBreaksStruct();
+  insertPageBreaks();
 }
 
 function setApaches(elements) {
@@ -346,16 +347,31 @@ function preventPageBreaks() {
   });
 }
 
-function fixPageBreaks() {
-  const fileDiv = $('#file').parent()
+function fixPageBreaksFile() {
   const modesDiv = $('#file').parent().parent().parent()
-  modesDiv.after(fileDiv)
-  const exceptDiv = $('#exceptions-1').parent()
-  modesDiv.after(exceptDiv)
+  move(modesDiv, 'file')
+  move(modesDiv, 'exceptions-1')
 }
 
-function insertPageBreak() {
-  $('<div class="pagebreak"></div>').insertBefore($('#libraries').parent())
+function fixPageBreaksStruct() {
+  const formatDiv = $('#floatingpointtypes').parent().parent().parent().parent()
+  move(formatDiv, 'floatingpointtypes')
+  move(formatDiv, 'integertypesusecapitalletterforunsignedtypestandardsizesareinbrackets')
+  move(formatDiv, 'forstandardsizesstartformatstringwith')
+}
+
+function move(anchor_el, el_id) {
+  const el = $('#'+el_id).parent()
+  anchor_el.after(el)
+}
+
+function insertPageBreaks() {
+  // insertPageBreakBefore('#libraries')
+  insertPageBreakBefore('#print')
+}
+
+function insertPageBreakBefore(an_id) {
+  $('<div class="pagebreak"></div>').insertBefore($(an_id).parent())
 }
 
 function readFile(filename) {

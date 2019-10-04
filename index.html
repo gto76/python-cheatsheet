@@ -496,32 +496,32 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-string">'187'</span>
 </code></pre></div>
 
-<div><h3 id="generaloptions">General Options</h3><pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}                    <span class="hljs-comment"># '&lt;el&gt;      '</span>
-{&lt;el&gt;:^<span class="hljs-number">10</span>}                    <span class="hljs-comment"># '   &lt;el&gt;   '</span>
-{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}                    <span class="hljs-comment"># '      &lt;el&gt;'</span>
+<div><h3 id="generaloptions">General Options</h3><pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}                                     <span class="hljs-comment"># '&lt;el&gt;      '</span>
+{&lt;el&gt;:^<span class="hljs-number">10</span>}                                     <span class="hljs-comment"># '   &lt;el&gt;   '</span>
+{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}                                     <span class="hljs-comment"># '      &lt;el&gt;'</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">{&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}                   <span class="hljs-comment"># '&lt;el&gt;......'</span>
-{&lt;el&gt;:&lt;<span class="hljs-number">0</span>}                     <span class="hljs-comment"># '&lt;el&gt;'</span>
+<pre><code class="python language-python hljs">{&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}                                    <span class="hljs-comment"># '&lt;el&gt;......'</span>
+{&lt;el&gt;:&lt;<span class="hljs-number">0</span>}                                      <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre>
-<div><h3 id="strings">Strings</h3><p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's repr() method, instead of str(), to get a string.</strong></p><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:&lt;<span class="hljs-number">10</span>}               <span class="hljs-comment"># "'abcde'   "</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                  <span class="hljs-comment"># 'abc'</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                <span class="hljs-comment"># 'abc       '</span>
+<div><h3 id="strings">Strings</h3><p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's repr() method, instead of str(), to get a string.</strong></p><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:&lt;<span class="hljs-number">10</span>}                                <span class="hljs-comment"># "'abcde'   "</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                                   <span class="hljs-comment"># 'abc'</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                                 <span class="hljs-comment"># 'abc       '</span>
 </code></pre></div>
 
 
-<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                 <span class="hljs-comment"># '   123,456'</span>
-{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                 <span class="hljs-comment"># '   123_456'</span>
-{ <span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                 <span class="hljs-comment"># '   +123456'</span>
-{<span class="hljs-number">-123456</span>:=<span class="hljs-number">10</span>}                 <span class="hljs-comment"># '-   123456'</span>
-{ <span class="hljs-number">123456</span>: }                   <span class="hljs-comment"># ' 123456'</span>
-{<span class="hljs-number">-123456</span>: }                   <span class="hljs-comment"># '-123456'</span>
+<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                                  <span class="hljs-comment"># '   123,456'</span>
+{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                                  <span class="hljs-comment"># '   123_456'</span>
+{ <span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                                  <span class="hljs-comment"># '   +123456'</span>
+{<span class="hljs-number">-123456</span>:=<span class="hljs-number">10</span>}                                  <span class="hljs-comment"># '-   123456'</span>
+{ <span class="hljs-number">123456</span>: }                                    <span class="hljs-comment"># ' 123456'</span>
+{<span class="hljs-number">-123456</span>: }                                    <span class="hljs-comment"># '-123456'</span>
 </code></pre></div>
 
-<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                <span class="hljs-comment"># '      1.23'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}               <span class="hljs-comment"># '     1.235'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}               <span class="hljs-comment"># ' 1.235e+00'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}               <span class="hljs-comment"># '  123.456%'</span>
+<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                                 <span class="hljs-comment"># '      1.23'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}                                <span class="hljs-comment"># '     1.235'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}                                <span class="hljs-comment"># ' 1.235e+00'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                                <span class="hljs-comment"># '  123.456%'</span>
 </code></pre></div>
 
 <div><h4 id="comparisonoffloatpresentationtypes">Comparison of float presentation types:</h4><pre><code class="text language-text">+----------------+----------------+---------------+----------------+-----------------+
@@ -551,9 +551,9 @@ to_exclusive   = &lt;range&gt;.stop
 |  567.89        |   '5.7e+02'    |    '567.89'   |   '5.68e+02'   |   '56789.00%'   |
 +----------------+----------------+---------------+----------------+-----------------+
 </code></pre>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                        <span class="hljs-comment"># 'Z'</span>
-{<span class="hljs-number">90</span>:X}                        <span class="hljs-comment"># '5A'</span>
-{<span class="hljs-number">90</span>:b}                        <span class="hljs-comment"># '1011010'</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                <span class="hljs-comment"># 'Z'</span>
+{<span class="hljs-number">90</span>:X}                                <span class="hljs-comment"># '5A'</span>
+{<span class="hljs-number">90</span>:b}                                <span class="hljs-comment"># '1011010'</span>
 </code></pre></div>
 
 <div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><div><h3 id="types">Types</h3><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)    <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
@@ -1337,7 +1337,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">pass</span>
 </code></pre></div>
 
-<div><h2 id="print"><a href="#print" name="print">#</a>Print</h2><pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
+<div class="pagebreak"></div><div><h2 id="print"><a href="#print" name="print">#</a>Print</h2><pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
 </code></pre></div>
 
 <ul>
@@ -1387,7 +1387,7 @@ value = args.&lt;name&gt;
 
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default line separator.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
@@ -1605,7 +1605,7 @@ shutil.copytree(from, to)           <span class="hljs-comment"># Copies the enti
         writer.writerows(rows)
 </code></pre></div>
 
-<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into separate file.</strong></p><div><h3 id="connect">Connect</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
+<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into separate file.</strong></p><div><h3 id="connect">Connect</h3><p><strong>Opens a connection to the database file. Creates a new file if path doesn't exist.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
 db = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># Also ':memory:'.</span>
 ...
 db.close()
@@ -1613,9 +1613,7 @@ db.close()
 
 
 
-<ul>
-<li><strong>New database will be created if path doesn't exist.</strong></li>
-</ul>
+
 <div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise sqlite3.OperationalError.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows.</span>
@@ -1702,21 +1700,21 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h3 id="format-2">Format</h3><div><h4 id="forstandardsizesstartformatstringwith">For standard sizes start format string with:</h4><ul>
+<div><h3 id="format-2">Format</h3></div><div><h4 id="forstandardsizesstartformatstringwith">For standard sizes start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian</strong></li>
-</ul><div><h4 id="integertypesusecapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
+</ul></div><div><h4 id="integertypesusecapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8)</strong></li>
-</ul><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
+</ul></div><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8)</strong></li>
-</ul></div></div></div></div>
+</ul></div>
 
 
 
@@ -1737,12 +1735,12 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 </ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)
 &lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
-&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts a memoryview to a new format.</span>
+&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts memoryview to the new format.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the object's memory buffer.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Writes mview to a binary file.</span>
+<pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Appends mview to the binary file.</span>
 &lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
