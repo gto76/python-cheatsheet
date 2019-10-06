@@ -1918,7 +1918,7 @@ ValueError: malformed node or string
 </ul><div><h3 id="helperdecorator">Helper Decorator</h3><ul>
 <li><strong>All coroutines must first be "primed" by calling <code class="python hljs"><span class="hljs-string">'next(&lt;coroutine&gt;)'</span></code>.</strong></li>
 <li><strong>Remembering to call next() is easy to forget.</strong></li>
-<li><strong>Solved by wrapping coroutine functions with a following decorator:</strong></li>
+<li><strong>Solved by wrapping coroutine functions with the following decorator:</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">coroutine</span><span class="hljs-params">(func)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(*args, **kwargs)</span>:</span>
         cr = func(*args, **kwargs)
