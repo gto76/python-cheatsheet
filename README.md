@@ -191,7 +191,7 @@ Iterator
 --------
 ```python
 <iter> = iter(<collection>)                 # `iter(<iter>)` returns unmodified iterator.
-<iter> = iter(<function>, to_exclusive)     # A Sequence of return values until 'to_exclusive'.
+<iter> = iter(<function>, to_exclusive)     # A sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
 ```
 
