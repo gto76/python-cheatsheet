@@ -80,7 +80,6 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 ```
 
 ```python
-<dict>.update(<dict>)
 <dict> = dict(<collection>)                     # Creates a dict from coll. of key-value pairs.
 <dict> = dict(zip(keys, values))                # Creates a dict from two collections.
 <dict> = dict.fromkeys(keys [, value])          # Creates a dict from collection of keys.
@@ -88,7 +87,9 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 
 ```python
 value = <dict>.pop(key)                         # Removes item or raises KeyError.
-{k: v for k, v in <dict>.items() if k in keys}  # Filters dictionary by keys.
+<dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
+[k for k, v in <dict>.items() if v == value]    # Returns list of keys that point to value.
+{k: v for k, v in <dict>.items() if k in keys}  # Returns dictionary filtered by keys.
 ```
 
 ### Counter
