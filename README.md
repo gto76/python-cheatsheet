@@ -88,7 +88,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 ```python
 value = <dict>.pop(key)                         # Removes item or raises KeyError.
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
-[k for k, v in <dict>.items() if v == value]    # Returns list of keys that point to value.
+[k for k, v in <dict>.items() if v == value]    # Returns list of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns dictionary filtered by keys.
 ```
 
@@ -194,7 +194,9 @@ Iterator
 <iter> = iter(<collection>)                 # `iter(<iter>)` returns unmodified iterator.
 <iter> = iter(<function>, to_exclusive)     # A sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
+<list> = list(<iter>)                       # Returns a list of iterator's remaining elements.
 ```
+
 
 ### Itertools
 ```python
@@ -214,8 +216,7 @@ from itertools import count, repeat, cycle, chain, islice
 
 ```python
 <iter> = islice(<collection>, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive, +step_size)
+<iter> = islice(<collection>, from_inclusive, to_exclusive [, +step_size])
 ```
 
 
