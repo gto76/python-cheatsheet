@@ -432,8 +432,11 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of first match or -1.</span>
 &lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError if missing.</span>
 </code></pre>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># True if str contains only [0-9], [٠-٩], …</span>
+&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Also true if str contains '¹²³…'.</span>
+&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Also true if str contains '¼½¾…'.</span>
+</code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
-&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># True if str contains only numeric characters.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
 <ul>

@@ -321,8 +321,13 @@ String
 ```
 
 ```python
+<bool> = <str>.isdecimal()                   # True if str contains only [0-9], [٠-٩], …
+<bool> = <str>.isdigit()                     # Also true if str contains '¹²³…'.
+<bool> = <str>.isnumeric()                   # Also true if str contains '¼½¾…'.
+```
+
+```python
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
-<bool> = <str>.isnumeric()                   # True if str contains only numeric characters.
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
 
