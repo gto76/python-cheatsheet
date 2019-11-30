@@ -436,11 +436,14 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
+<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts int to unicode char.</span>
+&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts unicode char to int.</span>
+</code></pre>
 <ul>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code>.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
 </ul>
-<div><h3 id="properties">Properties</h3><pre><code class="text language-text">+---------------+----------+----------+----------+----------+----------+----------+
+<div><h3 id="propertymethods">Property Methods</h3><pre><code class="text language-text">+---------------+----------+----------+----------+----------+----------+----------+
 |               | [\t\n\r] | [ !#$%…] | [A-Za-z] |  [¼½¾…]  |  [¹²³…]  |  [0-9]   |
 +---------------+----------+----------+----------+----------+----------+----------+
 | isprintable() |          |   yes    |   yes    |   yes    |   yes    |   yes    |
@@ -449,10 +452,6 @@ to_exclusive   = &lt;range&gt;.stop
 | isdigit()     |          |          |          |          |   yes    |   yes    |
 | isdecimal()   |          |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+----------+
-</code></pre></div>
-
-<div><h3 id="char">Char</h3><pre><code class="python language-python hljs">&lt;str&gt; = chr(&lt;int&gt;)                           <span class="hljs-comment"># Converts int to unicode char.</span>
-&lt;int&gt; = ord(&lt;str&gt;)                           <span class="hljs-comment"># Converts unicode char to int.</span>
 </code></pre></div>
 
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re

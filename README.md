@@ -325,10 +325,15 @@ String
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
+
+```python
+<str>  = chr(<int>)                          # Converts int to unicode char.
+<int>  = ord(<str>)                          # Converts unicode char to int.
+```
 * **Also: `'lstrip()'`, `'rstrip()'`.**
 * **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
 
-### Properties
+### Property Methods
 ```text
 +---------------+----------+----------+----------+----------+----------+----------+
 |               | [\t\n\r] | [ !#$%…] | [A-Za-z] |  [¼½¾…]  |  [¹²³…]  |  [0-9]   |
@@ -339,12 +344,6 @@ String
 | isdigit()     |          |          |          |          |   yes    |   yes    |
 | isdecimal()   |          |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+----------+
-```
-
-### Char
-```python
-<str> = chr(<int>)                           # Converts int to unicode char.
-<int> = ord(<str>)                           # Converts unicode char to int.
 ```
 
 
