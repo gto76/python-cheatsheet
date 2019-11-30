@@ -205,6 +205,19 @@ const DIAGRAM_11_B =
   '┃     4     │ -2147483648 │    0 │  2147483647 ┃\n' +
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛\n';
 
+const DIAGRAM_12_A =
+  '+---------------+----------+----------+----------+----------+----------+----------+\n';
+
+const DIAGRAM_12_B =
+  '┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃               │ [\\t\\n\\r] │ [ !#$%…] │ [A-Za-z] │  [¼½¾…]  │  [¹²³…]  │  [0-9]   ┃\n' +
+  '┠───────────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
+  '┃ isprintable() │          │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isalnum()     │          │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isnumeric()   │          │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isdigit()     │          │          │          │          │    ✓     │    ✓     ┃\n' +
+  '┃ isdecimal()   │          │          │          │          │          │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -221,6 +234,7 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
+  $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B);
 }
 
 var isMobile = false;

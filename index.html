@@ -432,28 +432,29 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of first match or -1.</span>
 &lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError if missing.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># True if str contains only [0-9], [٠-٩], …</span>
-&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Also true if str contains '¹²³…'.</span>
-&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Also true if str contains '¼½¾…'.</span>
-</code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
+&lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 &lt;list&gt; = textwrap.wrap(&lt;str&gt;, width)         <span class="hljs-comment"># Nicely breaks string into lines.</span>
 </code></pre>
 <ul>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code>.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
 </ul>
+<div><h3 id="properties">Properties</h3><pre><code class="text language-text">+---------------+----------+----------+----------+----------+----------+----------+
+|               | [\t\n\r] | [ !#$%…] | [A-Za-z] |  [¼½¾…]  |  [¹²³…]  |  [0-9]   |
++---------------+----------+----------+----------+----------+----------+----------+
+| isprintable() |          |   yes    |   yes    |   yes    |   yes    |   yes    |
+| isalnum()     |          |          |   yes    |   yes    |   yes    |   yes    |
+| isnumeric()   |          |          |          |   yes    |   yes    |   yes    |
+| isdigit()     |          |          |          |          |   yes    |   yes    |
+| isdecimal()   |          |          |          |          |          |   yes    |
++---------------+----------+----------+----------+----------+----------+----------+
+</code></pre></div>
+
 <div><h3 id="char">Char</h3><pre><code class="python language-python hljs">&lt;str&gt; = chr(&lt;int&gt;)                           <span class="hljs-comment"># Converts int to unicode char.</span>
 &lt;int&gt; = ord(&lt;str&gt;)                           <span class="hljs-comment"># Converts unicode char to int.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>ord(<span class="hljs-string">'0'</span>), ord(<span class="hljs-string">'9'</span>)
-(<span class="hljs-number">48</span>, <span class="hljs-number">57</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>ord(<span class="hljs-string">'A'</span>), ord(<span class="hljs-string">'Z'</span>)
-(<span class="hljs-number">65</span>, <span class="hljs-number">90</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>ord(<span class="hljs-string">'a'</span>), ord(<span class="hljs-string">'z'</span>)
-(<span class="hljs-number">97</span>, <span class="hljs-number">122</span>)
-</code></pre>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
 &lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences.</span>
 &lt;list&gt;  = re.findall(&lt;regex&gt;, text)            <span class="hljs-comment"># Returns all occurrences.</span>

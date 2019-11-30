@@ -321,32 +321,30 @@ String
 ```
 
 ```python
-<bool> = <str>.isdecimal()                   # True if str contains only [0-9], [٠-٩], …
-<bool> = <str>.isdigit()                     # Also true if str contains '¹²³…'.
-<bool> = <str>.isnumeric()                   # Also true if str contains '¼½¾…'.
-```
-
-```python
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
+<str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 <list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
-
 * **Also: `'lstrip()'`, `'rstrip()'`.**
 * **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
+
+### Properties
+```text
++---------------+----------+----------+----------+----------+----------+----------+
+|               | [\t\n\r] | [ !#$%…] | [A-Za-z] |  [¼½¾…]  |  [¹²³…]  |  [0-9]   |
++---------------+----------+----------+----------+----------+----------+----------+
+| isprintable() |          |   yes    |   yes    |   yes    |   yes    |   yes    |
+| isalnum()     |          |          |   yes    |   yes    |   yes    |   yes    |
+| isnumeric()   |          |          |          |   yes    |   yes    |   yes    |
+| isdigit()     |          |          |          |          |   yes    |   yes    |
+| isdecimal()   |          |          |          |          |          |   yes    |
++---------------+----------+----------+----------+----------+----------+----------+
+```
 
 ### Char
 ```python
 <str> = chr(<int>)                           # Converts int to unicode char.
 <int> = ord(<str>)                           # Converts unicode char to int.
-```
-
-```python
->>> ord('0'), ord('9')
-(48, 57)
->>> ord('A'), ord('Z')
-(65, 90)
->>> ord('a'), ord('z')
-(97, 122)
 ```
 
 
