@@ -792,12 +792,12 @@ from functools import reduce
 
 ### If - Else
 ```python
-<expression_if_true> if <condition> else <expression_if_false>
+<obj> = <expression_if_true> if <condition> else <expression_if_false>
 ```
 
 ```python
->>> [a if a else 'zero' for a in (0, 1, 0, 3)]
-['zero', 1, 'zero', 3]
+>>> [a if a else 'zero' for a in (0, 1, 2, 3)]
+['zero', 1, 2, 3]
 ```
 
 ### Namedtuple, Enum, Dataclass
