@@ -1012,7 +1012,7 @@ class C(A, B): pass
 ```
 
 ### Property
-**Pythonic way to implement getters and setters.**
+**Pythonic way of implementing getters and setters.**
 ```python
 class MyClass:
     @property
