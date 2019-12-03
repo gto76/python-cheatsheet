@@ -1384,13 +1384,6 @@ raise <exception>(<el>)
 raise <exception>(<el>, ...)
 ```
 
-#### Useful built-in exceptions:
-```python
-raise ValueError('Argument is of right type but inappropriate value!')
-raise TypeError('Argument is of wrong type!')
-raise RuntimeError('None of above!')
-```
-
 #### Re-raising caught exception:
 ```python
 except <exception>:
@@ -1398,11 +1391,18 @@ except <exception>:
     raise
 ```
 
+#### Useful built-in exceptions:
+```python
+raise ValueError('Argument is of right type but inappropriate value!')
+raise TypeError('Argument is of wrong type!')
+raise RuntimeError('None of above!')
+```
+
 ### Common Built-in Exceptions
 ```text
 BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
- +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
  +-- Exception                    # User-defined exceptions should be derived from this class.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- ArithmeticError         # Base class for arithmetic errors.

@@ -1297,19 +1297,19 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt;, ...)
 </code></pre></div>
 
-<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
-<span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
-<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
-</code></pre></div>
-
 <div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
     &lt;code&gt;
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
 
+<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
+<span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
+<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
+</code></pre></div>
+
 <div><h3 id="commonbuiltinexceptions">Common Built-in Exceptions</h3><pre><code class="text language-text">BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
- +-- KeyboardInterrupt            # Raised when the user hits the interrupt key.
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
  +-- Exception                    # User-defined exceptions should be derived from this class.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- ArithmeticError         # Base class for arithmetic errors.

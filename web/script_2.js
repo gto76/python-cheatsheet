@@ -125,7 +125,7 @@ const DIAGRAM_8_A =
 const DIAGRAM_8_B =
   "BaseException\n" +
   " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function.</span>\n" +
-  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key.</span>\n" +
+  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key (ctrl-c).</span>\n" +
   " └── Exception                    <span class='hljs-comment'># User-defined exceptions should be derived from this class.</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
   "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors.</span>\n" +
