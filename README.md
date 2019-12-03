@@ -904,7 +904,7 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies the metadata of a passed function (func) to the function it is wrapping (out).**
+* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out).**
 * **Without it `'add.__name__'` would return `'out'`.**
 
 ### LRU Cache
@@ -918,7 +918,7 @@ def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
 
-* **Recursion depth is limited to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
+* **In CPython recursion depth is limited to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
