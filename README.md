@@ -1273,7 +1273,7 @@ class MyAbcSequence(collections.abc.Sequence):
         return self.a[i]
 ```
 
-#### Table of required and available special methods:
+#### Table of required and automatically available special methods:
 ```text
 +------------+------------+------------+------------+--------------+
 |            |  Iterable  | Collection |  Sequence  | abc.Sequence |
@@ -1300,19 +1300,14 @@ class <enum_name>(Enum):
     <member_name_1> = <value_1>
     <member_name_2> = <value_2_a>, <value_2_b>
     <member_name_3> = auto()
-
-    @classmethod
-    def get_member_names(cls):
-        return [a.name for a in cls.__members__.values()]
 ```
 * **If there are no numeric values before auto(), it returns 1.**
-* **Otherwise it returns an increment of last numeric value.**
-
+* **Otherwise it returns an increment of the last numeric value.**
 
 ```python
-<member> = <enum>.<member_name>                # Returns a member.
-<member> = <enum>['<member_name>']             # Returns a member or raises KeyError.
-<member> = <enum>(<value>)                     # Returns a member or raises ValueError.
+<member> = <enum>.<member_name>                 # Returns a member.
+<member> = <enum>['<member_name>']              # Returns a member or raises KeyError.
+<member> = <enum>(<value>)                      # Returns a member or raises ValueError.
 name     = <member>.name
 value    = <member>.value
 ```
@@ -1322,6 +1317,13 @@ list_of_members = list(<enum>)
 member_names    = [a.name for a in <enum>]
 member_values   = [a.value for a in <enum>]
 random_member   = random.choice(list(<enum>))
+```
+
+```python
+def get_next_member(member):
+    members = list(member.__class__)
+    index   = (members.index(member) + 1) % len(members)
+    return members[index]
 ```
 
 ### Inline

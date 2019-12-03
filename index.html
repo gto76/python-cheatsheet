@@ -1205,7 +1205,7 @@ Hello World!
 </code></pre></div>
 
 
-<div><h4 id="tableofrequiredandavailablespecialmethods">Table of required and available special methods:</h4><pre><code class="text language-text">+------------+------------+------------+------------+--------------+
+<div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">+------------+------------+------------+------------+--------------+
 |            |  Iterable  | Collection |  Sequence  | abc.Sequence |
 +------------+------------+------------+------------+--------------+
 | iter()     |    REQ     |    REQ     |    yes     |     yes      |
@@ -1228,19 +1228,15 @@ Hello World!
     &lt;member_name_1&gt; = &lt;value_1&gt;
     &lt;member_name_2&gt; = &lt;value_2_a&gt;, &lt;value_2_b&gt;
     &lt;member_name_3&gt; = auto()
-
-<span class="hljs-meta">    @classmethod</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_member_names</span><span class="hljs-params">(cls)</span>:</span>
-        <span class="hljs-keyword">return</span> [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> cls.__members__.values()]
 </code></pre></div>
 
 <ul>
 <li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
-<li><strong>Otherwise it returns an increment of last numeric value.</strong></li>
+<li><strong>Otherwise it returns an increment of the last numeric value.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                <span class="hljs-comment"># Returns a member.</span>
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]             <span class="hljs-comment"># Returns a member or raises KeyError.</span>
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                     <span class="hljs-comment"># Returns a member or raises ValueError.</span>
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                 <span class="hljs-comment"># Returns a member.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]              <span class="hljs-comment"># Returns a member or raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                      <span class="hljs-comment"># Returns a member or raises ValueError.</span>
 name     = &lt;member&gt;.name
 value    = &lt;member&gt;.value
 </code></pre>
@@ -1248,6 +1244,11 @@ value    = &lt;member&gt;.value
 member_names    = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]
 member_values   = [a.value <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]
 random_member   = random.choice(list(&lt;enum&gt;))
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_next_member</span><span class="hljs-params">(member)</span>:</span>
+    members = list(member.__class__)
+    index   = (members.index(member) + <span class="hljs-number">1</span>) % len(members)
+    <span class="hljs-keyword">return</span> members[index]
 </code></pre>
 <div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'fork knife spoon'</span>)
