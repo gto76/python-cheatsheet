@@ -1505,7 +1505,7 @@ Open
 ```python
 <file> = open('<path>', mode='r', encoding=None, newline=None)
 ```
-* **`'encoding=None'` means default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
+* **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.**
 
@@ -1543,7 +1543,7 @@ Open
 
 ```python
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
-<file>.writelines(<coll.>)          # Writes a coll. of strings or bytes objects.
+<file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer.
 ```
 * **Methods do not add or strip trailing newlines, even writelines().**
@@ -1566,8 +1566,12 @@ def write_to_file(filename, text):
 Path
 ----
 ```python
-from os import path, listdir
+from os import getcwd, path, listdir
 from glob import glob
+```
+
+```python
+<str>  = getcwd()                   # Returns the current working directory.
 ```
 
 ```python
@@ -1634,6 +1638,11 @@ os.mkdir(<path>, mode=0o777)        # Creates a directory.
 ```
 
 ```python
+shutil.copy(from, to)               # Copies the file.
+shutil.copytree(from, to)           # Copies the entire directory tree.
+```
+
+```python
 os.rename(from, to)                 # Renames the file or directory.
 os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```
@@ -1645,12 +1654,6 @@ shutil.rmtree(<path>)               # Deletes the entire directory tree.
 ```
 
 ```python
-shutil.copy(from, to)               # Copies the file.
-shutil.copytree(from, to)           # Copies the entire directory tree.
-```
-
-```python
-<str>  = os.getcwd()                # Returns the current working directory.
 <iter> = os.scandir(path='.')       # Returns os.DirEntry objects located at path.
 ```
 

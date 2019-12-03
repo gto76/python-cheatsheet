@@ -1395,7 +1395,7 @@ value = args.&lt;name&gt;
 
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
@@ -1430,7 +1430,7 @@ value = args.&lt;name&gt;
 &lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
-&lt;file&gt;.writelines(&lt;coll.&gt;)          <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
+&lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer.</span>
 </code></pre>
 <ul>
@@ -1446,10 +1446,12 @@ value = args.&lt;name&gt;
         file.write(text)
 </code></pre></div>
 
-<div><h2 id="path"><a href="#path" name="path">#</a>Path</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> path, listdir
+<div><h2 id="path"><a href="#path" name="path">#</a>Path</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns the current working directory.</span>
+</code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
@@ -1492,6 +1494,9 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory.</span>
 </code></pre>
+<pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
+shutil.copytree(from, to)           <span class="hljs-comment"># Copies the entire directory tree.</span>
+</code></pre>
 <pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames the file or directory.</span>
 os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
@@ -1499,11 +1504,7 @@ os.replace(from, to)                <span class="hljs-comment"># Same, but overw
 os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes empty directory.</span>
 shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the entire directory tree.</span>
 </code></pre>
-<pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
-shutil.copytree(from, to)           <span class="hljs-comment"># Copies the entire directory tree.</span>
-</code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
-&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns os.DirEntry objects located at path.</span>
 </code></pre>
 <div><h4 id="direntry">DirEntry:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;DirEntry&gt;.is_file()
 &lt;bool&gt; = &lt;DirEntry&gt;.is_dir()
