@@ -1746,12 +1746,12 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 &lt;real&gt;  = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts memoryview to the new format.</span>
-&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Appends mview to the binary file.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the object's memory buffer.</span>
 </code></pre></div>
 
 
-<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
+<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Appends mview to the binary file.</span>
+&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)
