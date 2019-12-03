@@ -1713,7 +1713,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h3 id="format-2">Format</h3></div><div><h4 id="forstandardsizesstartformatstringwith">For standard sizes start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
 </ul></div><div><h4 id="integertypesusecapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
@@ -1734,7 +1734,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from coll. of numbers.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
-&lt;bytes&gt; = &lt;array&gt;.tobytes()
+&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Or: &lt;array&gt;.tobytes()</span>
 </code></pre></div>
 
 
@@ -1742,23 +1742,23 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <li><strong>A sequence object that points to the memory of another object.</strong></li>
 <li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
 <li><strong>Order and number of elements can be changed with slicing.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)
-&lt;num&gt;   = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
+</ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
+&lt;real&gt;  = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts memoryview to the new format.</span>
+&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Appends mview to the binary file.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases the object's memory buffer.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Appends mview to the binary file.</span>
-&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
+<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
-</code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)
+&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)
 &lt;int&gt;   = int.from_bytes(&lt;mview&gt;, byteorder=<span class="hljs-string">'big|little'</span>, signed=<span class="hljs-keyword">False</span>)
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()
-</code></pre>
+</code></pre></div>
+
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
 </code></pre></div>

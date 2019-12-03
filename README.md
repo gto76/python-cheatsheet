@@ -1936,7 +1936,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 #### For standard sizes start format string with:
 * **`'='` - native byte order**
 * **`'<'` - little-endian**
-* **`'>'` - big-endian**
+* **`'>'` - big-endian (also `'!'`)**
 
 #### Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:
 * **`'x'` - pad byte**
@@ -1959,7 +1959,7 @@ Array
 from array import array
 <array> = array('<typecode>', <collection>)    # Array from coll. of numbers.
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
-<bytes> = <array>.tobytes()
+<bytes> = bytes(<array>)                       # Or: <array>.tobytes()
 ```
 
 
@@ -1970,21 +1970,19 @@ Memory View
 * **Order and number of elements can be changed with slicing.**
 
 ```python
-<mview> = memoryview(<bytes/bytearray/array>)
-<num>   = <mview>[<index>]                     # Returns an int or a float.
+<mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
+<real>  = <mview>[<index>]                     # Returns an int or a float.
 <mview> = <mview>[<slice>]                     # Mview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Casts memoryview to the new format.
+<bin_file>.write(<mview>)                      # Appends mview to the binary file.
 <mview>.release()                              # Releases the object's memory buffer.
 ```
 
+### Decode
 ```python
-<bin_file>.write(<mview>)                      # Appends mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
-```
-
-```python
 <str>   = str(<mview>, 'utf-8')
 <int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
 '<hex>' = <mview>.hex()
