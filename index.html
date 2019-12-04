@@ -1799,15 +1799,16 @@ lock.release()
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
-<span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:
+<span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:         <span class="hljs-comment"># None == `n_cores * 5`.</span>
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
     &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()             <span class="hljs-comment"># Checks if thread has finished executing.</span>
+<div><h4 id="future">Future</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()             <span class="hljs-comment"># Checks if thread has finished executing.</span>
 &lt;obj&gt;  = &lt;Future&gt;.result()           <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
-</code></pre>
+</code></pre></div>
+
 <div><h3 id="queue">Queue</h3><p><strong>A thread-safe FIFO queue. For LIFO queue use LifoQueue.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> queue <span class="hljs-keyword">import</span> Queue
 &lt;Queue&gt; = Queue(maxsize=<span class="hljs-number">0</span>)
 </code></pre></div>
