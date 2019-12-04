@@ -55,7 +55,7 @@ const LRU_CACHE =
   '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
 
 const TYPE =
-  '<code class="python language-python hljs">&lt;class&gt; = type(&lt;class_name&gt;, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code>';
+  '<code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code>';
 
 const DATACLASS = 
   '<code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
@@ -154,7 +154,7 @@ function fixHighlights() {
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
-  $(`code:contains(<class_name>, <parents_tuple>, <attributes_dict>)`).html(TYPE);
+  $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
 }
 
