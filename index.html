@@ -644,7 +644,7 @@ shuffle(&lt;list&gt;)
 <li><strong>Time and datetime can be 'aware' <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code>, meaning they have defined timezone, or 'naive' <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code>, meaning they don't.</strong></li>
 <li><strong>If object is naive it is presumed to be in the system's timezone.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, time, datetime, timedelta
-<span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> UTC, tzlocal, gettz
+<span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> UTC, tzlocal, gettz, resolve_imaginary
 </code></pre></div>
 
 
@@ -658,6 +658,7 @@ shuffle(&lt;list&gt;)
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week (Mon == 0).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means second pass in case of time jumping back for one hour.</strong></li>
+<li><strong><code class="apache hljs"><code class="python language-python hljs"><span class="hljs-string">'&lt;DT&gt; = resolve_imaginary(&lt;DT&gt;)'</span></code></code> fixes DTs that fall into missing hour.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
@@ -701,10 +702,9 @@ shuffle(&lt;list&gt;)
 
 <ul>
 <li><strong>When parsing, <code class="python hljs"><span class="hljs-string">'%z'</span></code> also accepts <code class="python hljs"><span class="hljs-string">'±HH:MM'</span></code>.</strong></li>
-<li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
-<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;TD&gt;     = &lt;D/DT&gt; - &lt;D/DT&gt;
-&lt;D/DT&gt;   = &lt;D/DT&gt; ± &lt;TD&gt;
+<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;TD&gt;     = &lt;D/DT&gt; - &lt;D/DT&gt;                  <span class="hljs-comment"># Returns the difference between wall times.</span>
+&lt;D/DT&gt;   = &lt;D/DT&gt; ± &lt;TD&gt;                    <span class="hljs-comment"># Result can be an imaginary time.</span>
 &lt;TD&gt;     = &lt;TD&gt;   ± &lt;TD&gt;
 &lt;TD&gt;     = &lt;TD&gt;   * &lt;real&gt;
 </code></pre></div>

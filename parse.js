@@ -63,6 +63,9 @@ const DATACLASS =
   '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_tuples&gt;)\n' +
   '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code>';
 
+const DATETIME = 
+  '<code class="python language-python hljs"><span class="hljs-string">\'&lt;DT&gt; = resolve_imaginary(&lt;DT&gt;)\'</span></code>';
+
 
 function main() {
   const html = getMd();
@@ -156,6 +159,7 @@ function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
+  $(`code:contains((<DT>))`).html(DATETIME)
 }
 
 function preventPageBreaks() {

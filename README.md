@@ -590,7 +590,7 @@ Datetime
 
 ```python
 from datetime import date, time, datetime, timedelta
-from dateutil.tz import UTC, tzlocal, gettz
+from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 ```
 
 ### Constructors
@@ -603,6 +603,7 @@ from dateutil.tz import UTC, tzlocal, gettz
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means second pass in case of time jumping back for one hour.**
+* **`'<DT> = resolve_imaginary(<DT>)'` fixes DTs that fall into missing hour.**
 
 ### Now
 ```python
@@ -652,12 +653,11 @@ from dateutil.tz import UTC, tzlocal, gettz
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
 * **When parsing, `'%z'` also accepts `'±HH:MM'`.**
-* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
 ```python
-<TD>     = <D/DT> - <D/DT>
-<D/DT>   = <D/DT> ± <TD>
+<TD>     = <D/DT> - <D/DT>                  # Returns the difference between wall times.
+<D/DT>   = <D/DT> ± <TD>                    # Result can be an imaginary time.
 <TD>     = <TD>   ± <TD>
 <TD>     = <TD>   * <real>
 ```
