@@ -2049,7 +2049,7 @@ with ThreadPoolExecutor(max_workers=None) as executor:         # None == `n_core
     <Future> = executor.submit(<function> [, <arg_1>, ...])
 ```
 
-#### Future
+#### Future:
 ```python
 <bool> = <Future>.done()             # Checks if thread has finished executing.
 <obj>  = <Future>.result()           # Waits for thread to finish and returns result.
