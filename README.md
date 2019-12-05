@@ -1526,7 +1526,7 @@ Open
 * **`'IsADirectoryError'` and `'PermissionError'` can be risen by any.**
 * **`'OSError'` is the parent class of all listed exceptions.**
 
-### File
+### File Object
 ```python
 <file>.seek(0)                      # Moves to the start of the file.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
@@ -2151,7 +2151,7 @@ class MyMetaClass(type):
         return type.__new__(cls, name, parents, attrs)
 ```
 * **New() is a class method that gets called before init(). If it returns an instance of its class, then that instance gets passed to init() as a 'self' argument.**
-* **It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (MyMetaClass in our case).**
+* **It receives the same arguments as init(), except for the first one that specifies the desired class of the returned instance (MyMetaClass in our case).**
 * **New() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**), in which case init() is not called.**
 
 ### Metaclass Attribute

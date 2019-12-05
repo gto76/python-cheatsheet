@@ -1409,16 +1409,16 @@ value = args.&lt;name&gt;
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'t'</span></code>  - Text mode (default).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode.</strong></li>
-</ul></div><div><h3 id="exceptions-1">Exceptions</h3><ul>
+</ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be risen when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be risen when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be risen by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
-</ul></div><div><h3 id="file">File</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
+</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
 &lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
 &lt;bin_file&gt;.seek(±offset, &lt;anchor&gt;)  <span class="hljs-comment"># Anchor: 0 start, 1 current pos., 2 end.</span>
-</code></pre></div>
+</code></pre></div></div></div>
 
 
 
@@ -1874,7 +1874,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 
 <ul>
 <li><strong>New() is a class method that gets called before init(). If it returns an instance of its class, then that instance gets passed to init() as a 'self' argument.</strong></li>
-<li><strong>It receives the same arguments as init(), except for the first one that specifies the desired class of returned instance (MyMetaClass in our case).</strong></li>
+<li><strong>It receives the same arguments as init(), except for the first one that specifies the desired class of the returned instance (MyMetaClass in our case).</strong></li>
 <li><strong>New() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>), in which case init() is not called.</strong></li>
 </ul>
 <div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has a 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
