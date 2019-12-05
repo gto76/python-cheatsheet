@@ -656,10 +656,9 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 
 ### Arithmetics
 ```python
-<TD>     = <D/DT> - <D/DT>                  # Returns the difference between wall times.
-<D/DT>   = <D/DT> ± <TD>                    # Result can be an imaginary time.
-<TD>     = <TD>   ± <TD>
-<TD>     = <TD>   * <real>
+<D/DT>   = <D/DT> ± <TD>                    # Result can fall into missing hour.
+<TD>     = <D/DT> - <D/DT>                  # Returns the difference, ignoring time jumps.
+<TD>     = <DT_UTC> - <DT_UTC>              # Convert DTs to UTC to get the actual delta.
 ```
 
 
