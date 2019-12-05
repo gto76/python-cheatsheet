@@ -2680,7 +2680,7 @@ img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert('RGB').save('test.png')
 ```
 
-### ImageDraw
+### Drawing
 ```python
 from PIL import ImageDraw
 ```
