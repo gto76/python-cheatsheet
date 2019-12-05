@@ -653,6 +653,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
 * **When parsing, `'%z'` also accepts `'±HH:MM'`.**
+* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
 ```python
