@@ -86,9 +86,9 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 ```
 
 ```python
-value = <dict>.pop(key)                         # Removes item or raises KeyError.
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
-[k for k, v in <dict>.items() if v == value]    # Returns list of keys that point to the value.
+value = <dict>.pop(key)                         # Removes item or raises KeyError.
+{k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns dictionary filtered by keys.
 ```
 
