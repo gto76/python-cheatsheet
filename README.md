@@ -483,7 +483,7 @@ Numbers
 ### Types
 ```python
 <int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
-<float>    = float(<int/str/bool>)
+<float>    = float(<int/str/bool>)    # Or: <real>±e<int>
 <complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<str/int/float>)
@@ -495,9 +495,8 @@ Numbers
 ### Basic Functions
 ```python
 <num> = pow(<num>, <num>)             # Or: <num> ** <num>
-<num> = abs(<num>)
-<int> = round(<num>)
-<num> = round(<num>, ±ndigits)        # `round(126, -1) == 130`
+<num> = abs(<num>)                    # <float> = abs(<complex>)
+<num> = round(<num> [, ±ndigits])     # `round(126, -1) == 130`
 ```
 
 ### Math
