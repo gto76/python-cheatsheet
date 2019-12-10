@@ -323,7 +323,6 @@ String
 ```python
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
-<list> = textwrap.wrap(<str>, width)         # Nicely breaks string into lines.
 ```
 
 ```python
