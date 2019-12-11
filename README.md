@@ -1152,7 +1152,7 @@ class Counter:
 * **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
-* **All [file objects](#file), etc.**
+* **File objects returned by the [open()](#open) function, etc.**
 
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
