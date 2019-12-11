@@ -601,7 +601,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means second pass in case of time jumping back for one hour.**
-* **`'<DT> = resolve_imaginary(<DT>)'` fixes DTs that fall into missing hour.**
+* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into missing hour.**
 
 ### Now
 ```python
@@ -915,8 +915,7 @@ from functools import lru_cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
-
-* **In CPython recursion depth is limited to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
+* **CPython interpreter limits recursion depth to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
