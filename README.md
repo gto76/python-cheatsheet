@@ -2040,7 +2040,7 @@ with lock:
 ### Thread Pool Executor
 ```python
 from concurrent.futures import ThreadPoolExecutor
-with ThreadPoolExecutor(max_workers=None) as executor:         # None == `n_cores * 5`.
+with ThreadPoolExecutor(max_workers=None) as executor:
     <iter>   = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
     <iter>   = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
     <Future> = executor.submit(<function> [, <arg_1>, ...])
