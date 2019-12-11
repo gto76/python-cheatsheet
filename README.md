@@ -2409,8 +2409,8 @@ import json
 
 ### Run
 ```python
-run(host='localhost', port=8080)                 # Runs locally.
-run(host='0.0.0.0', port=80, server='cherrypy')  # Runs globally.
+run(host='localhost', port=8080)        # Runs locally.
+run(host='0.0.0.0', port=80)            # Runs globally.
 ```
 
 ### Static Request
