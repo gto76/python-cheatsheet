@@ -351,10 +351,10 @@ Regex
 -----
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences.
-<list>  = re.findall(<regex>, text)            # Returns all occurrences.
+<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences of the pattern.
+<list>  = re.findall(<regex>, text)            # Returns all occurrences of the pattern.
 <list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
-<Match> = re.search(<regex>, text)             # Searches for first occurrence of pattern.
+<Match> = re.search(<regex>, text)             # Searches for first occurrence of the pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
