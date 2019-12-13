@@ -457,8 +457,8 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'isspace()'</span></code> checks for <code class="python hljs"><span class="hljs-string">'[ \t\n\r…]'</span></code>.</strong></li>
 </ul>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
-&lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences of the pattern.</span>
-&lt;list&gt;  = re.findall(&lt;regex&gt;, text)            <span class="hljs-comment"># Returns all occurrences of the pattern.</span>
+&lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
+&lt;list&gt;  = re.findall(&lt;regex&gt;, text)            <span class="hljs-comment"># Returns all occurrences as strings.</span>
 &lt;list&gt;  = re.split(&lt;regex&gt;, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Use brackets in regex to keep the matches.</span>
 &lt;Match&gt; = re.search(&lt;regex&gt;, text)             <span class="hljs-comment"># Searches for first occurrence of the pattern.</span>
 &lt;Match&gt; = re.match(&lt;regex&gt;, text)              <span class="hljs-comment"># Searches only at the beginning of the text.</span>
