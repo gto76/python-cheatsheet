@@ -657,7 +657,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 ### Arithmetics
 ```python
 <D/DT>   = <D/DT> ± <TD>                    # Result can fall into missing hour.
-<TD>     = <D/DT> - <D/DT>                  # Returns the difference, ignoring time jumps.
+<TD>     = <D/DT> - <D/DT>                  # Ignores time jumps if they share non tzlocal tz.
 <TD>     = <DT_UTC> - <DT_UTC>              # Convert DTs to UTC to get the actual delta.
 ```
 
