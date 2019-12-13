@@ -485,7 +485,7 @@ Numbers
 ```python
 <int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
 <float>    = float(<int/str/bool>)    # Or: <real>e±<int>
-<complex>  = complex(real=0, imag=0)  # Or: <real> + <real>j
+<complex>  = complex(real=0, imag=0)  # Or: <real> ± <real>j
 <Fraction> = fractions.Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<str/int/float>)
 ```
