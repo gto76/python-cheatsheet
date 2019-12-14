@@ -2320,12 +2320,14 @@ framerate    = &lt;Wave_read&gt;.getframerate()       <span class="hljs-comment"
 nchannels    = &lt;Wave_read&gt;.getnchannels()       <span class="hljs-comment"># Number of samples per frame.</span>
 sampwidth    = &lt;Wave_read&gt;.getsampwidth()       <span class="hljs-comment"># Sample size in bytes.</span>
 nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"># Number of frames.</span>
+&lt;params&gt;     = &lt;Wave_read&gt;.getparams()          <span class="hljs-comment"># Immutable collection of above.</span>
 &lt;bytes&gt;      = &lt;Wave_read&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next 'nframes' frames.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Wave_write&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)
 &lt;Wave_write&gt;.setframerate(&lt;int&gt;)                <span class="hljs-comment"># 44100 for CD, 48000 for video.</span>
 &lt;Wave_write&gt;.setnchannels(&lt;int&gt;)                <span class="hljs-comment"># 1 for mono, 2 for stereo.</span>
 &lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># 2 for CD quality sound.</span>
+&lt;Wave_write&gt;.setparams(&lt;params&gt;)                <span class="hljs-comment"># Sets all parameters.</span>
 &lt;Wave_write&gt;.writeframes(&lt;bytes&gt;)               <span class="hljs-comment"># Appends frames to file.</span>
 </code></pre>
 <ul>
@@ -2379,6 +2381,21 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 add_noise = <span class="hljs-keyword">lambda</span> value: value + (random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">0.03</span>
 samples_f = (add_noise(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
+</code></pre></div>
+
+<div><h4 id="playsawavfile">Plays a WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
+<span class="hljs-keyword">import</span> wave, simpleaudio
+<span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
+    p = file.getparams()
+    frames = file.readframes(p.nframes)
+    simpleaudio.play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+</code></pre></div>
+
+<div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
+<span class="hljs-keyword">import</span> pyttsx3
+engine = pyttsx3.init()
+engine.say(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>)
+engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>

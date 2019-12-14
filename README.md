@@ -2730,6 +2730,7 @@ framerate    = <Wave_read>.getframerate()       # Number of frames per second.
 nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
 sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
 nframes      = <Wave_read>.getnframes()         # Number of frames.
+<params>     = <Wave_read>.getparams()          # Immutable collection of above.
 <bytes>      = <Wave_read>.readframes(nframes)  # Returns next 'nframes' frames.
 ```
 
@@ -2738,6 +2739,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
 <Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
+<Wave_write>.setparams(<params>)                # Sets all parameters.
 <Wave_write>.writeframes(<bytes>)               # Appends frames to file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
@@ -2800,6 +2802,25 @@ from random import random
 add_noise = lambda value: value + (random() - 0.5) * 0.03
 samples_f = (add_noise(f) for f in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', samples_f)
+```
+
+#### Plays a WAV file:
+```python
+# $ pip3 install simpleaudio
+import wave, simpleaudio
+with wave.open('test.wav', 'rb') as file:
+    p = file.getparams()
+    frames = file.readframes(p.nframes)
+    simpleaudio.play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+```
+
+### Text to Speech
+```python
+# $ pip3 install pyttsx3
+import pyttsx3
+engine = pyttsx3.init()
+engine.say('Sally sells seashells by the seashore.')
+engine.runAndWait()
 ```
 
 
