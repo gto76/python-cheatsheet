@@ -274,7 +274,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
 }
 
-var TOC_SCREEN_WIDTH_CUTOFF = 400
+var TOC_SCREEN_WIDTH_CUTOFF = 667
 
 if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
     $(`code:contains(ToC)`).html(TOC_MOBILE);
