@@ -237,10 +237,19 @@ ul {
   margin-top: 0;
 }
 
-@media only screen and (max-device-width: 1024px) {
+@media only screen and (max-device-width: 1023px) {
   .ocks-org body {
     font-size: 70%;
     padding: 0.5rem;
+  }
+
+  body > p,
+  div > p {
+    width: 90vw !important;
+  }
+
+  li {
+    width: 82vw;
   }
 
   h3,
@@ -248,6 +257,7 @@ ul {
   p,
   ul {
     padding-left: .7rem;
+    width: 90vw;
   }
 
   h1 {
