@@ -262,7 +262,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
 }
 
-if (isMobile && window.screen.width < 768) {
+if (isMobile && window.screen.width < 667) {
   $(`code:contains(ToC)`).html(TOC_MOBILE);
 }
 
