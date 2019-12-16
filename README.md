@@ -69,7 +69,7 @@ Dictionary
 ```python
 <view> = <dict>.keys()                          # Coll. of keys that reflects changes.
 <view> = <dict>.values()                        # Coll. of values that reflects changes.
-<view> = <dict>.items()                         # Coll. of key-value tuples.
+<view> = <dict>.items()                         # Coll. of key-value tuples that reflects chgs.
 ```
 
 ```python
@@ -246,8 +246,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type> = type(<el>)                # Or: <el>.__class__
-<bool> = isinstance(<el>, <type>)  # Or: issubclass(type(<el>), <type>)
+<type> = type(<el>)                          # Or: <el>.__class__
+<bool> = isinstance(<el>, <type>)            # Or: issubclass(type(<el>), <type>)
 ```
 
 ```python
@@ -368,11 +368,11 @@ import re
 
 ### Match Object
 ```python
-<str>   = <Match>.group()                      # Whole match. Also group(0).
-<str>   = <Match>.group(1)                     # Part in first bracket.
-<tuple> = <Match>.groups()                     # All bracketed parts.
-<int>   = <Match>.start()                      # Start index of a match.
-<int>   = <Match>.end()                        # Exclusive end index of a match.
+<str>   = <Match>.group()                      # Returns whole match. Also group(0).
+<str>   = <Match>.group(1)                     # Returns part in first bracket.
+<tuple> = <Match>.groups()                     # Returns all bracketed parts.
+<int>   = <Match>.start()                      # Returns start index of a match.
+<int>   = <Match>.end()                        # Returns exclusive end index of a match.
 ```
 
 ### Special Sequences
@@ -474,8 +474,8 @@ Format
 ### Ints
 ```python
 {90:c}                                # 'Z'
-{90:X}                                # '5A'
 {90:b}                                # '1011010'
+{90:X}                                # '5A'
 ```
 
 
