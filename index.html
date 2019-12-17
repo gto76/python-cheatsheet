@@ -483,9 +483,9 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
 <li><strong>By default digits, whitespaces and alphanumerics from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
 <li><strong>Use capital letter for negation.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Digit</span>
-<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Whitespace</span>
-<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Alphanumeric</span>
+</ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches any digit.</span>
+<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Matches any whitespace.</span>
+<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches any alphanumeric.</span>
 </code></pre></div>
 
 
@@ -1232,11 +1232,11 @@ Hello World!
 <li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
 <li><strong>Otherwise it returns an increment of the last numeric value.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                 <span class="hljs-comment"># Returns a member.</span>
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]              <span class="hljs-comment"># Returns a member or raises KeyError.</span>
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                      <span class="hljs-comment"># Returns a member or raises ValueError.</span>
-name     = &lt;member&gt;.name
-value    = &lt;member&gt;.value
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                <span class="hljs-comment"># Returns a member.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]             <span class="hljs-comment"># Returns a member or raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                     <span class="hljs-comment"># Returns a member or raises ValueError.</span>
+&lt;str&gt;    = &lt;member&gt;.name                       <span class="hljs-comment"># Returns member's name.</span>
+&lt;obj&gt;    = &lt;member&gt;.value                      <span class="hljs-comment"># Returns member's value.</span>
 </code></pre>
 <pre><code class="python language-python hljs">list_of_members = list(&lt;enum&gt;)
 member_names    = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]
@@ -1831,9 +1831,9 @@ product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()      <span class="hljs-comment"># Names of variables in current scope.</span>
-&lt;dict&gt; = locals()   <span class="hljs-comment"># Dict of local variables. Also vars().</span>
-&lt;dict&gt; = globals()  <span class="hljs-comment"># Dict of global variables.</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of variables in current scope.</span>
+&lt;dict&gt; = locals()                    <span class="hljs-comment"># Returns dict of local variables. Also vars().</span>
+&lt;dict&gt; = globals()                   <span class="hljs-comment"># Returns dict of global variables.</span>
 </code></pre></div></div>
 
 
@@ -1884,8 +1884,8 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>MyClass.a, MyClass.b
 (<span class="hljs-string">'abcde'</span>, <span class="hljs-number">12345</span>)
 </code></pre>
-<div><h3 id="typediagram">Type Diagram</h3><pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass  <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
-type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
+<div><h3 id="typediagram">Type Diagram</h3><pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass     <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
+type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
 </code></pre></div>
 
 <pre><code class="text language-text">+-------------+-------------+
@@ -1898,8 +1898,8 @@ type(MyMetaClass) == type         <span class="hljs-comment"># MyMetaClass is an
 |     str ---------+        |
 +-------------+-------------+
 </code></pre>
-<div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object    <span class="hljs-comment"># MyClass is a subclass of object.</span>
-MyMetaClass.__base__ == type      <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
+<div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
+MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
 </code></pre></div>
 
 <pre><code class="text language-text">+-------------+-------------+
@@ -2197,13 +2197,13 @@ indexes = &lt;array&gt;.argmin(axis)
 <ul>
 <li><strong>If row and column indexes differ in shape, they are combined with broadcasting.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 1)</span>
-right = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]  <span class="hljs-comment"># Shape: (3)</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]        <span class="hljs-comment"># Shape: (3, 1)</span>
+right = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]        <span class="hljs-comment"># Shape: (3)</span>
 </code></pre></div>
 
 
-<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 1)</span>
-right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (1, 3) &lt;- !</span>
+<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]        <span class="hljs-comment"># Shape: (3, 1)</span>
+right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span>]]        <span class="hljs-comment"># Shape: (1, 3) &lt;- !</span>
 </code></pre></div>
 
 <div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>

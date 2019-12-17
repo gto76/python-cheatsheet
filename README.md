@@ -379,9 +379,9 @@ import re
 * **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
 * **Use capital letter for negation.**
 ```python
-'\d' == '[0-9]'                                # Digit
-'\s' == '[ \t\n\r\f\v]'                        # Whitespace
-'\w' == '[a-zA-Z0-9_]'                         # Alphanumeric
+'\d' == '[0-9]'                                # Matches any digit.
+'\s' == '[ \t\n\r\f\v]'                        # Matches any whitespace.
+'\w' == '[a-zA-Z0-9_]'                         # Matches any alphanumeric.
 ```
 
 
@@ -1303,11 +1303,11 @@ class <enum_name>(Enum):
 * **Otherwise it returns an increment of the last numeric value.**
 
 ```python
-<member> = <enum>.<member_name>                 # Returns a member.
-<member> = <enum>['<member_name>']              # Returns a member or raises KeyError.
-<member> = <enum>(<value>)                      # Returns a member or raises ValueError.
-name     = <member>.name
-value    = <member>.value
+<member> = <enum>.<member_name>                # Returns a member.
+<member> = <enum>['<member_name>']             # Returns a member or raises KeyError.
+<member> = <enum>(<value>)                     # Returns a member or raises ValueError.
+<str>    = <member>.name                       # Returns member's name.
+<obj>    = <member>.value                      # Returns member's value.
 ```
 
 ```python
@@ -2094,9 +2094,9 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()      # Names of variables in current scope.
-<dict> = locals()   # Dict of local variables. Also vars().
-<dict> = globals()  # Dict of global variables.
+<list> = dir()                       # Returns names of variables in current scope.
+<dict> = locals()                    # Returns dict of local variables. Also vars().
+<dict> = globals()                   # Returns dict of global variables.
 ```
 
 ### Attributes
@@ -2168,8 +2168,8 @@ class MyClass(metaclass=MyMetaClass):
 
 ### Type Diagram
 ```python
-type(MyClass)     == MyMetaClass  # MyClass is an instance of MyMetaClass.
-type(MyMetaClass) == type         # MyMetaClass is an instance of type.
+type(MyClass)     == MyMetaClass     # MyClass is an instance of MyMetaClass.
+type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 ```
 
 ```text
@@ -2186,8 +2186,8 @@ type(MyMetaClass) == type         # MyMetaClass is an instance of type.
 
 ### Inheritance Diagram
 ```python
-MyClass.__base__     == object    # MyClass is a subclass of object.
-MyMetaClass.__base__ == type      # MyMetaClass is a subclass of type.
+MyClass.__base__     == object       # MyClass is a subclass of object.
+MyMetaClass.__base__ == type         # MyMetaClass is a subclass of type.
 ```
 
 ```text
@@ -2575,14 +2575,14 @@ indexes = <array>.argmin(axis)
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 
 ```python
-left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
-right = [ 0.1 ,  0.6 ,  0.8 ]  # Shape: (3)
+left  = [[0.1], [0.6], [0.8]]        # Shape: (3, 1)
+right = [ 0.1 ,  0.6 ,  0.8 ]        # Shape: (3)
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = [[0.1], [0.6], [0.8]]  # Shape: (3, 1)
-right = [[0.1 ,  0.6 ,  0.8]]  # Shape: (1, 3) <- !
+left  = [[0.1], [0.6], [0.8]]        # Shape: (3, 1)
+right = [[0.1 ,  0.6 ,  0.8]]        # Shape: (1, 3) <- !
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
