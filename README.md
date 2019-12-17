@@ -617,9 +617,6 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <tzinfo> = UTC                              # UTC timezone. London without DST.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Cont.>/<City>')          # 'Continent/City_Name' timezone or None.
-```
-
-```python
 <DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
 ```
