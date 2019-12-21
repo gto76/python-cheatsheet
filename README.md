@@ -1576,8 +1576,8 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir('<path>')          # List of filenames located at path.
-<list> = glob('<pattern>')          # Filenames matching the wildcard pattern.
+<list> = listdir('<path>')          # Returns filenames located at path.
+<list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
 ```
 
 ### Pathlib
@@ -1586,9 +1586,14 @@ from pathlib import Path
 ```
 
 ```python
-cwd    = Path()
 <Path> = Path('<path>' [, '<path>', <Path>, ...])
 <Path> = <Path> / '<dir>' / '<file>'
+```
+
+```python
+<Path> = Path()                     # Or: Path('.')
+<Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
+<Path> = <Path>.parent              # Returns path without final component.
 ```
 
 ```python
@@ -1598,22 +1603,40 @@ cwd    = Path()
 ```
 
 ```python
-<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
-<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
+<iter> = <Path>.iterdir()           # Returns dir contents as relative (not true) Path objects.
+<iter> = <Path>.glob('<pattern>')   # Returns relative Paths matching the wildcard pattern.
 ```
 
 ```python
-<str>  = str(<Path>)                # Path as a string.
-<str>  = <Path>.name                # Final component.
-<str>  = <Path>.stem                # Final component without extension.
-<str>  = <Path>.suffix              # Final component's extension.
-<tup.> = <Path>.parts               # All components as strings.
+<str>  = str(<Path>)                # Returns Path as a string.
+<str>  = <Path>.name                # Returns final component.
+<str>  = <Path>.stem                # Returns final component without extension.
+<str>  = <Path>.suffix              # Returns final component's extension.
+<tup.> = <Path>.parts               # Returns all components as strings.
 ```
 
 ```python
-<Path> = <Path>.resolve()           # Returns absolute path without symlinks.
-<Path> = <Path>.parent              # Returns path without final component.
 <file> = open(<Path>)               # Opens the file and returns a file object.
+```
+
+### DirEntry
+```python
+<iter> = os.scandir(path='.')       # Returns DirEntry objects located at path.
+```
+
+```python
+<bool> = <DirEntry>.is_file()
+<bool> = <DirEntry>.is_dir()
+```
+
+```python
+<str>  = <DirEntry>.path            # Returns relative path as a string.
+<str>  = <DirEntry>.name            # Returns final component.
+```
+
+```python
+<Path> = Path(<DirEntry>)           # Returns relative Path object.
+<file> = open(<DirEntry>)           # Opens the file and returns a file object.
 ```
 
 
@@ -1634,7 +1657,7 @@ os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 
 ```python
 shutil.copy(from, to)               # Copies the file.
-shutil.copytree(from, to)           # Copies the entire directory tree.
+shutil.copytree(from, to)           # Copies the directory.
 ```
 
 ```python
@@ -1645,27 +1668,7 @@ os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```python
 os.remove(<path>)                   # Deletes the file.
 os.rmdir(<path>)                    # Deletes empty directory.
-shutil.rmtree(<path>)               # Deletes the entire directory tree.
-```
-
-```python
-<iter> = os.scandir(path='.')       # Returns os.DirEntry objects located at path.
-```
-
-#### DirEntry:
-```python
-<bool> = <DirEntry>.is_file()
-<bool> = <DirEntry>.is_dir()
-```
-
-```python
-<str>  = <DirEntry>.path            # Path as a string.
-<str>  = <DirEntry>.name            # Final component.
-```
-
-```python
-<Path> = Path(<DirEntry>)           # Path object.
-<file> = open(<DirEntry>)           # File object.
+shutil.rmtree(<path>)               # Deletes non-empty directory.
 ```
 
 ### Shell Commands

@@ -36,7 +36,7 @@ const OS_RENAME =
 
 const SHUTIL_COPY = 
   'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>\n' +
-  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the entire directory tree.</span>\n';
+  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory.</span>\n';
 
 const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +
