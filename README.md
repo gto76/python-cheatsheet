@@ -1567,6 +1567,8 @@ from glob import glob
 
 ```python
 <str>  = getcwd()                   # Returns the current working directory.
+<str>  = path.join('<path>', ...)   # Joins two or more pathname components.
+<str>  = path.abspath('<path>')     # Return an absolute path.
 ```
 
 ```python
@@ -1578,6 +1580,12 @@ from glob import glob
 ```python
 <list> = listdir('<path>')          # Returns filenames located at path.
 <list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
+```
+
+```python
+<str>  = path.basename('<path>')    # Returns final component.
+<str>  = path.dirname('<path>')     # Returns path without final component.
+<str>  = path.splitext('<path>')[1] # Returns final component's extension.
 ```
 
 ### Pathlib
@@ -1592,8 +1600,9 @@ from pathlib import Path
 
 ```python
 <Path> = Path()                     # Or: Path('.')
+<Path> = Path.cwd()                 # Returns absolute cwd. Or: Path().resolve()
 <Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
-<Path> = <Path>.parent              # Returns path without final component.
+<Path> = <Path>.parent              # Returns Path without final component.
 ```
 
 ```python
@@ -1620,6 +1629,7 @@ from pathlib import Path
 ```
 
 ### DirEntry
+**Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type or file attribute information.**
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at path.
 ```
