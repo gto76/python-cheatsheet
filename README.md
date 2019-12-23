@@ -1567,18 +1567,18 @@ from glob import glob
 
 ```python
 <str>  = getcwd()                   # Returns the current working directory.
-<str>  = path.join('<path>', ...)   # Joins two or more pathname components.
-<str>  = path.abspath('<path>')     # Return an absolute path.
+<str>  = path.join(<path>, ...)     # Joins two or more pathname components.
+<str>  = path.abspath(<path>)       # Return an absolute path.
 ```
 
 ```python
-<str>  = path.basename('<path>')    # Returns final component.
-<str>  = path.dirname('<path>')     # Returns path without final component.
-<tup.> = path.splitext('<path>')    # Splits on last period of final component.
+<str>  = path.basename(<path>)      # Returns final component.
+<str>  = path.dirname(<path>)       # Returns path without final component.
+<tup.> = path.splitext(<path>)      # Splits on last period of final component.
 ```
 
 ```python
-<list> = listdir('<path>')          # Returns filenames located at path.
+<list> = listdir(<path>)            # Returns filenames located at path.
 <list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
 ```
 
@@ -1594,24 +1594,12 @@ from pathlib import Path
 
 ```python
 <Path> = Path()                     # Or: Path('.')
-<Path> = Path.cwd()                 # Returns absolute cwd. Or: Path().resolve()
-<Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
+<Path> = Path.cwd()                 # Returns the absolute cwd.
+<Path> = <Path>.resolve()           # Returns the absolute Path without symlinks.
 <Path> = <Path>.parent              # Returns Path without final component.
 ```
 
 ```python
-<bool> = <Path>.exists()            # Or: path.exists('<path>')
-<bool> = <Path>.is_file()           # Or: path.isfile('<path>')
-<bool> = <Path>.is_dir()            # Or: path.isdir('<path>')
-```
-
-```python
-<iter> = <Path>.iterdir()           # Returns dir contents as relative (not true) Path objects.
-<iter> = <Path>.glob('<pattern>')   # Returns relative Paths matching the wildcard pattern.
-```
-
-```python
-<str>  = str(<Path>)                # Returns Path as a string.
 <str>  = <Path>.name                # Returns final component.
 <str>  = <Path>.stem                # Returns final component without extension.
 <str>  = <Path>.suffix              # Returns final component's extension.
@@ -1619,6 +1607,18 @@ from pathlib import Path
 ```
 
 ```python
+<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
+<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
+```
+
+```python
+<bool> = <Path>.exists()            # Or: path.exists(<path>)
+<bool> = <Path>.is_file()           # Or: path.isfile(<path>)
+<bool> = <Path>.is_dir()            # Or: path.isdir(<path>)
+```
+
+```python
+<str>  = str(<Path>)                # Returns Path as a string.
 <file> = open(<Path>)               # Opens the file and returns a file object.
 ```
 
