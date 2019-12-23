@@ -1464,12 +1464,12 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
 &lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># One of the paths must be a Path object.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Or: Path('.')</span>
-&lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns the absolute cwd.</span>
-&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns the absolute Path without symlinks.</span>
-&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without final component.</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative cwd. Also Path('.').</span>
+&lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute cwd. Also Path().resolve().</span>
+&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute Path without symlinks.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component.</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without final component.</span>
+&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as string.</span>
 &lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns final component without extension.</span>
 &lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns final component's extension.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all components as strings.</span>

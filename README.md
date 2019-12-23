@@ -1593,14 +1593,14 @@ from pathlib import Path
 ```
 
 ```python
-<Path> = Path()                     # Or: Path('.')
-<Path> = Path.cwd()                 # Returns the absolute cwd.
-<Path> = <Path>.resolve()           # Returns the absolute Path without symlinks.
-<Path> = <Path>.parent              # Returns Path without final component.
+<Path> = Path()                     # Returns relative cwd. Also Path('.').
+<Path> = Path.cwd()                 # Returns absolute cwd. Also Path().resolve().
+<Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
 ```
 
 ```python
-<str>  = <Path>.name                # Returns final component.
+<Path> = <Path>.parent              # Returns Path without final component.
+<str>  = <Path>.name                # Returns final component as string.
 <str>  = <Path>.stem                # Returns final component without extension.
 <str>  = <Path>.suffix              # Returns final component's extension.
 <tup.> = <Path>.parts               # Returns all components as strings.
