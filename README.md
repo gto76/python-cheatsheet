@@ -1572,9 +1572,9 @@ from glob import glob
 ```
 
 ```python
-<bool> = path.exists('<path>')
-<bool> = path.isfile('<path>')
-<bool> = path.isdir('<path>')
+<str>  = path.basename('<path>')    # Returns final component.
+<str>  = path.dirname('<path>')     # Returns path without final component.
+<tup.> = path.splitext('<path>')    # Splits on last period of final component.
 ```
 
 ```python
@@ -1582,20 +1582,14 @@ from glob import glob
 <list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
 ```
 
-```python
-<str>  = path.basename('<path>')    # Returns final component.
-<str>  = path.dirname('<path>')     # Returns path without final component.
-<str>  = path.splitext('<path>')[1] # Returns final component's extension.
-```
-
-### Pathlib
+### Path Object
 ```python
 from pathlib import Path
 ```
 
 ```python
-<Path> = Path('<path>' [, '<path>', <Path>, ...])
-<Path> = <Path> / '<dir>' / '<file>'
+<Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
+<Path> = <path> / <path> [/ ...]    # One of the paths must be a Path object.
 ```
 
 ```python
@@ -1606,9 +1600,9 @@ from pathlib import Path
 ```
 
 ```python
-<bool> = <Path>.exists()
-<bool> = <Path>.is_file()
-<bool> = <Path>.is_dir()
+<bool> = <Path>.exists()            # Or: path.exists('<path>')
+<bool> = <Path>.is_file()           # Or: path.isfile('<path>')
+<bool> = <Path>.is_dir()            # Or: path.isdir('<path>')
 ```
 
 ```python
@@ -1629,7 +1623,7 @@ from pathlib import Path
 ```
 
 ### DirEntry
-**Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type or file attribute information.**
+**Using scandir() instead of listdir() or iterdir() can significantly increase the performance of code that also needs file type or file attribute information.**
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at path.
 ```

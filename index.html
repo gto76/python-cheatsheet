@@ -1451,31 +1451,27 @@ value = args.&lt;name&gt;
 &lt;str&gt;  = path.join(<span class="hljs-string">'&lt;path&gt;'</span>, ...)   <span class="hljs-comment"># Joins two or more pathname components.</span>
 &lt;str&gt;  = path.abspath(<span class="hljs-string">'&lt;path&gt;'</span>)     <span class="hljs-comment"># Return an absolute path.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(<span class="hljs-string">'&lt;path&gt;'</span>)
-&lt;bool&gt; = path.isfile(<span class="hljs-string">'&lt;path&gt;'</span>)
-&lt;bool&gt; = path.isdir(<span class="hljs-string">'&lt;path&gt;'</span>)
+<pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(<span class="hljs-string">'&lt;path&gt;'</span>)    <span class="hljs-comment"># Returns final component.</span>
+&lt;str&gt;  = path.dirname(<span class="hljs-string">'&lt;path&gt;'</span>)     <span class="hljs-comment"># Returns path without final component.</span>
+&lt;tup.&gt; = path.splitext(<span class="hljs-string">'&lt;path&gt;'</span>)    <span class="hljs-comment"># Splits on last period of final component.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt; = listdir(<span class="hljs-string">'&lt;path&gt;'</span>)          <span class="hljs-comment"># Returns filenames located at path.</span>
 &lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)          <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(<span class="hljs-string">'&lt;path&gt;'</span>)    <span class="hljs-comment"># Returns final component.</span>
-&lt;str&gt;  = path.dirname(<span class="hljs-string">'&lt;path&gt;'</span>)     <span class="hljs-comment"># Returns path without final component.</span>
-&lt;str&gt;  = path.splitext(<span class="hljs-string">'&lt;path&gt;'</span>)[<span class="hljs-number">1</span>] <span class="hljs-comment"># Returns final component's extension.</span>
-</code></pre>
-<div><h3 id="pathlib">Pathlib</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Path&gt; = Path(<span class="hljs-string">'&lt;path&gt;'</span> [, <span class="hljs-string">'&lt;path&gt;'</span>, &lt;Path&gt;, ...])
-&lt;Path&gt; = &lt;Path&gt; / <span class="hljs-string">'&lt;dir&gt;'</span> / <span class="hljs-string">'&lt;file&gt;'</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
+&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># One of the paths must be a Path object.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Or: Path('.')</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute cwd. Or: Path().resolve()</span>
 &lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute Path without symlinks.</span>
 &lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without final component.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Path&gt;.exists()
-&lt;bool&gt; = &lt;Path&gt;.is_file()
-&lt;bool&gt; = &lt;Path&gt;.is_dir()
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Path&gt;.exists()            <span class="hljs-comment"># Or: path.exists('&lt;path&gt;')</span>
+&lt;bool&gt; = &lt;Path&gt;.is_file()           <span class="hljs-comment"># Or: path.isfile('&lt;path&gt;')</span>
+&lt;bool&gt; = &lt;Path&gt;.is_dir()            <span class="hljs-comment"># Or: path.isdir('&lt;path&gt;')</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns dir contents as relative (not true) Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns relative Paths matching the wildcard pattern.</span>
@@ -1488,7 +1484,7 @@ value = args.&lt;name&gt;
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
-<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type or file attribute information.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
+<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() or iterdir() can significantly increase the performance of code that also needs file type or file attribute information.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
 </code></pre></div>
 
 
