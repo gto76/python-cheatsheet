@@ -1561,7 +1561,7 @@ def write_to_file(filename, text):
 Path
 ----
 ```python
-from os import getcwd, path, listdir
+from os import getcwd, path, listdir, scandir
 from glob import glob
 ```
 
@@ -1578,8 +1578,27 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir(<path>)            # Returns filenames located at path.
+<list> = listdir(path='.')          # Returns filenames located at path.
 <list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
+```
+
+```python
+<bool> = path.exists(<path>)        # Or: <Path>.exists()
+<bool> = path.isfile(<path>)        # Or: <DirEntry/Path>.is_file()
+<bool> = path.isdir(<path>)         # Or: <DirEntry/Path>.is_dir()
+```
+
+### DirEntry
+**Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.**
+
+```python
+<iter> = scandir(path='.')          # Returns DirEntry objects located at path.
+```
+
+```python
+<str>  = <DirEntry>.path            # Returns path as a string.
+<str>  = <DirEntry>.name            # Returns final component as a string.
+<file> = open(<DirEntry>)           # Opens the file and returns a file object.
 ```
 
 ### Path Object
@@ -1600,21 +1619,10 @@ from pathlib import Path
 
 ```python
 <Path> = <Path>.parent              # Returns Path without final component.
-<str>  = <Path>.name                # Returns final component as string.
+<str>  = <Path>.name                # Returns final component as a string.
 <str>  = <Path>.stem                # Returns final component without extension.
 <str>  = <Path>.suffix              # Returns final component's extension.
 <tup.> = <Path>.parts               # Returns all components as strings.
-```
-
-```python
-<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
-<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
-```
-
-```python
-<bool> = <Path>.exists()            # Or: path.exists(<path>)
-<bool> = <Path>.is_file()           # Or: path.isfile(<path>)
-<bool> = <Path>.is_dir()            # Or: path.isdir(<path>)
 ```
 
 ```python
@@ -1622,25 +1630,9 @@ from pathlib import Path
 <file> = open(<Path>)               # Opens the file and returns a file object.
 ```
 
-### DirEntry
-**Using scandir() instead of listdir() or iterdir() can significantly increase the performance of code that also needs file type or file attribute information.**
 ```python
-<iter> = os.scandir(path='.')       # Returns DirEntry objects located at path.
-```
-
-```python
-<bool> = <DirEntry>.is_file()
-<bool> = <DirEntry>.is_dir()
-```
-
-```python
-<str>  = <DirEntry>.path            # Returns relative path as a string.
-<str>  = <DirEntry>.name            # Returns final component.
-```
-
-```python
-<Path> = Path(<DirEntry>)           # Returns relative Path object.
-<file> = open(<DirEntry>)           # Opens the file and returns a file object.
+<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
+<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
 ```
 
 
