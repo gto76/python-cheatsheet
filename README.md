@@ -1626,13 +1626,13 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = str(<Path>)                # Returns Path as a string.
-<file> = open(<Path>)               # Opens the file and returns a file object.
+<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
+<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
 ```
 
 ```python
-<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
-<iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
+<str>  = str(<Path>)                # Returns path as a string.
+<file> = open(<Path>)               # Opens the file and returns a file object.
 ```
 
 
