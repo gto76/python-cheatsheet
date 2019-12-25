@@ -15,6 +15,9 @@ const showdown  = require('showdown');
 const hljs = require('highlightjs');
 
 
+const PDF_BUTTON =
+  '<a href="https://transactions.sendowl.com/products/78175486/4422834F/view" rel="nofollow"><img src="web/button.png" /></a>\n';
+
 const TOC =
   '<br>' +
   '<h2 id="toc">Contents</h2>\n' +
@@ -92,11 +95,17 @@ function getMd() {
 }
 
 function modifyPage() {
+  addPdfButton()
   removeOrigToc();
   addToc();
   insertLinks();
   unindentBanner();
   highlightCode(); 
+}
+
+function addPdfButton() {
+  const nodes = $.parseHTML(PDF_BUTTON);
+  $('img').first().parent().before(nodes);
 }
 
 function removeOrigToc() {
