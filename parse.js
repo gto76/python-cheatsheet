@@ -16,7 +16,7 @@ const hljs = require('highlightjs');
 
 
 const PDF_BUTTON =
-  '<a href="https://transactions.sendowl.com/products/78175486/4422834F/view" rel="nofollow"><img src="web/button.png" /></a>\n';
+  '<a href="https://transactions.sendowl.com/products/78175486/4422834F/view" rel="nofollow"><img src="web/button.png" style="max-width: none; min-width: 0;"/></a>\n';
 
 const TOC =
   '<br>' +
