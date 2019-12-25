@@ -95,7 +95,7 @@ function getMd() {
 }
 
 function modifyPage() {
-  addPdfButton()
+  // addPdfButton()
   removeOrigToc();
   addToc();
   insertLinks();
