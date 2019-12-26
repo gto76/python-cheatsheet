@@ -1830,9 +1830,9 @@ product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of variables in current scope.</span>
-&lt;dict&gt; = locals()                    <span class="hljs-comment"># Returns dict of local variables. Also vars().</span>
-&lt;dict&gt; = globals()                   <span class="hljs-comment"># Returns dict of global variables.</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                                <span class="hljs-comment"># Returns names of variables in current scope.</span>
+&lt;dict&gt; = locals()                             <span class="hljs-comment"># Returns dict of local variables. Also vars().</span>
+&lt;dict&gt; = globals()                            <span class="hljs-comment"># Returns dict of global variables.</span>
 </code></pre></div></div>
 
 

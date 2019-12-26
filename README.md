@@ -2090,9 +2090,9 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()                       # Returns names of variables in current scope.
-<dict> = locals()                    # Returns dict of local variables. Also vars().
-<dict> = globals()                   # Returns dict of global variables.
+<list> = dir()                                # Returns names of variables in current scope.
+<dict> = locals()                             # Returns dict of local variables. Also vars().
+<dict> = globals()                            # Returns dict of global variables.
 ```
 
 ### Attributes
