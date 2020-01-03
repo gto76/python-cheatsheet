@@ -1978,7 +1978,7 @@ Memory View
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
-<str>   = str(<mview>, 'utf-8')
+<str>   = str(<mview>, 'utf-8')                # Treats mview as a seqence of bytes.
 <int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
 '<hex>' = <mview>.hex()
 ```
