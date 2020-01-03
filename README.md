@@ -629,7 +629,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since Epoch.
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since Epoch.
 ```
-* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by a space or a `'T'`. Offset is formatted as: `'HH:MM'`.**
+* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
 * **On Unix systems Epoch is `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
@@ -653,8 +653,9 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 
 ### Arithmetics
 ```python
-<D/DT>   = <D/DT> ± <TD>                    # Result can fall into missing hour.
-<TD>     = <D/DT> - <D/DT>                  # Ignores time jumps if they share non tzlocal tz.
+<D/DT>   = <D/DT>   ± <TD>                  # Returned datetime can fall into missing hour.
+<TD>     = <D/DTn>  - <D/DTn>               # Returns the difference, ignoring time jumps.
+<TD>     = <DTa>    - <DTa>                 # Ignores time jumps if they share tzinfo object.
 <TD>     = <DT_UTC> - <DT_UTC>              # Convert DTs to UTC to get the actual delta.
 ```
 
@@ -1879,7 +1880,7 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, byteorder='big|little', signed=False)
+<bytes> = <int>.to_bytes(n_bytes, byteorder='big/little', signed=False)
 <bytes> = bytes.fromhex('<hex>')
 ```
 
@@ -1887,7 +1888,7 @@ Bytes
 ```python
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, byteorder='big|little', signed=False)
+<int>   = int.from_bytes(<bytes>, byteorder='big/little', signed=False)
 '<hex>' = <bytes>.hex()
 ```
 
@@ -1978,7 +1979,7 @@ Memory View
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')
-<int>   = int.from_bytes(<mview>, byteorder='big|little', signed=False)
+<int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
 '<hex>' = <mview>.hex()
 ```
 
