@@ -344,7 +344,7 @@ String
 | isdecimal()   |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
-* **Also: `'isspace()'` checks for `'[ \t\n\r…]'`.**
+* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v…]'`.**
 
 
 Regex
@@ -380,7 +380,7 @@ import re
 * **Use capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches any digit.
-'\s' == '[ \t\n\r\f\v]'                        # Matches any whitespace.
+'\s' == '[ \t\n\r\f\v…]'                       # Matches any whitespace.
 '\w' == '[a-zA-Z0-9_]'                         # Matches any alphanumeric.
 ```
 
