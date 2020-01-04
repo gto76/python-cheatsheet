@@ -2387,11 +2387,11 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div>
 
 <div><h4 id="playsawavfile">Plays a WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> simpleaudio
+<span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
     p = file.getparams()
     frames = file.readframes(p.nframes)
-    simpleaudio.play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
 </code></pre></div>
 
 <div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>

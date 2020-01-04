@@ -2807,11 +2807,11 @@ write_to_wav_file('test.wav', samples_f)
 #### Plays a WAV file:
 ```python
 # $ pip3 install simpleaudio
-import simpleaudio
+from simpleaudio import play_buffer
 with wave.open('test.wav', 'rb') as file:
     p = file.getparams()
     frames = file.readframes(p.nframes)
-    simpleaudio.play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
 ```
 
 ### Text to Speech
