@@ -443,7 +443,7 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
 </ul>
 <div><h3 id="propertymethods">Property Methods</h3><pre><code class="text language-text">+---------------+----------+----------+----------+----------+----------+
-|               | [ !#$%…] | [a-zA-Z] |  [¼½¾…]  |  [²³¹…]  |  [0-9]   |
+|               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
 +---------------+----------+----------+----------+----------+----------+
 | isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
 | isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
@@ -484,8 +484,8 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>By default digits, whitespaces and alphanumerics from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
 <li><strong>Use capital letter for negation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches any digit.</span>
-<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v…]'</span>                       <span class="hljs-comment"># Matches any whitespace.</span>
 <span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches any alphanumeric.</span>
+<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Matches any whitespace.</span>
 </code></pre></div>
 
 

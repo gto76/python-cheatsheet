@@ -335,7 +335,7 @@ String
 ### Property Methods
 ```text
 +---------------+----------+----------+----------+----------+----------+
-|               | [ !#$%…] | [a-zA-Z] |  [¼½¾…]  |  [²³¹…]  |  [0-9]   |
+|               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
 +---------------+----------+----------+----------+----------+----------+
 | isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
 | isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
@@ -380,8 +380,8 @@ import re
 * **Use capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches any digit.
-'\s' == '[ \t\n\r\f\v…]'                       # Matches any whitespace.
 '\w' == '[a-zA-Z0-9_]'                         # Matches any alphanumeric.
+'\s' == '[ \t\n\r\f\v]'                        # Matches any whitespace.
 ```
 
 
