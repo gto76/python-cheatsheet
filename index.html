@@ -1116,13 +1116,15 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <div><h3 id="contextmanager">Context Manager</h3><ul>
 <li><strong>Enter() should lock the resources and return an object.</strong></li>
 <li><strong>Exit() should release the resources.</strong></li>
+<li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
+<li><strong>If it wishes to suppress the exception it must return a true value.</strong> </li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__enter__</span><span class="hljs-params">(self)</span>:</span>
         self.file = open(self.filename)
         <span class="hljs-keyword">return</span> self.file
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, *args)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, exc_type, exc_value, traceback)</span>:</span>
         self.file.close()
 </code></pre></div>
 

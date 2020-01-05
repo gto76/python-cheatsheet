@@ -1174,6 +1174,8 @@ class Counter:
 ### Context Manager
 * **Enter() should lock the resources and return an object.**
 * **Exit() should release the resources.**
+* **Any exception that happens inside the with block is passed to the exit() method.**
+* **If it wishes to suppress the exception it must return a true value.** 
 ```python
 class MyOpen():
     def __init__(self, filename):
@@ -1181,7 +1183,7 @@ class MyOpen():
     def __enter__(self):
         self.file = open(self.filename)
         return self.file
-    def __exit__(self, *args):
+    def __exit__(self, exc_type, exc_value, traceback):
         self.file.close()
 ```
 
