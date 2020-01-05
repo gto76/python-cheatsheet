@@ -1127,7 +1127,7 @@ class MySortable:
 ```
 
 ### Iterator
-* **Any object that defines methods next() and iter() is an iterator.**
+* **Any object that has methods next() and iter() is an iterator.**
 * **Next() should return next item or raise StopIteration.**
 * **Iter() should return 'self'.**
 ```python
