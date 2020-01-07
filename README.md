@@ -1260,7 +1260,6 @@ class MySequence:
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index(), and count().**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return False even if MySequence had all the methods defined.**
-
 ```python
 class MyAbcSequence(collections.abc.Sequence):
     def __init__(self, a):
@@ -1378,8 +1377,7 @@ except (<exception>, ...) as <name>:
 ```python
 raise <exception>
 raise <exception>()
-raise <exception>(<el>)
-raise <exception>(<el>, ...)
+raise <exception>(<el_1> [, ...])
 ```
 
 #### Re-raising caught exception:
@@ -1407,9 +1405,9 @@ BaseException
       |    +-- ZeroDivisionError  # Raised when dividing by zero.
       +-- AttributeError          # Raised when an attribute is missing.
       +-- EOFError                # Raised by input() when it hits end-of-file condition.
-      +-- LookupError             # Raised when a look-up on a sequence or dict fails.
+      +-- LookupError             # Raised when a look-up on a collection fails.
       |    +-- IndexError         # Raised when a sequence index is out of range.
-      |    +-- KeyError           # Raised when a dictionary key is not found.
+      |    +-- KeyError           # Raised when a dictionary key or set element is not found.
       +-- NameError               # Raised when a variable name is not found.
       +-- OSError                 # Failures such as “file not found” or “disk full”.
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
@@ -1467,7 +1465,7 @@ Input
 ```
 * **Trailing newline gets stripped.**
 * **Prompt string is printed to the standard output before reading input.**
-* **Raises EOFError when user hits EOF or input stream gets exhausted.**
+* **Raises EOFError when user hits EOF (ctrl-d) or input stream gets exhausted.**
 
 
 Command Line Arguments

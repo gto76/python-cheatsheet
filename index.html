@@ -1293,8 +1293,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
 <span class="hljs-keyword">raise</span> &lt;exception&gt;()
-<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt;)
-<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt;, ...)
+<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el_1&gt; [, ...])
 </code></pre></div>
 
 <div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
@@ -1316,9 +1315,9 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
       |    +-- ZeroDivisionError  # Raised when dividing by zero.
       +-- AttributeError          # Raised when an attribute is missing.
       +-- EOFError                # Raised by input() when it hits end-of-file condition.
-      +-- LookupError             # Raised when a look-up on a sequence or dict fails.
+      +-- LookupError             # Raised when a look-up on a collection fails.
       |    +-- IndexError         # Raised when a sequence index is out of range.
-      |    +-- KeyError           # Raised when a dictionary key is not found.
+      |    +-- KeyError           # Raised when a dictionary key or set element is not found.
       +-- NameError               # Raised when a variable name is not found.
       +-- OSError                 # Failures such as “file not found” or “disk full”.
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
@@ -1367,7 +1366,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Trailing newline gets stripped.</strong></li>
 <li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
-<li><strong>Raises EOFError when user hits EOF or input stream gets exhausted.</strong></li>
+<li><strong>Raises EOFError when user hits EOF (ctrl-d) or input stream gets exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 script_name = sys.argv[<span class="hljs-number">0</span>]
