@@ -1532,7 +1532,7 @@ Open
 
 ```python
 <str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until EOF.
-<str/bytes> = <file>.readline()     # Returns a line or empty string on EOF.
+<str/bytes> = <file>.readline()     # Returns a line or empty string/bytes on EOF.
 <list>      = <file>.readlines()    # Returns a list of remaining lines.
 <str/bytes> = next(<file>)          # Returns a line using buffer. Do not mix.
 ```
