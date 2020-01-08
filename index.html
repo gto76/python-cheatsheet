@@ -1234,11 +1234,11 @@ Hello World!
 <li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
 <li><strong>Otherwise it returns an increment of the last numeric value.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                <span class="hljs-comment"># Returns a member.</span>
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]             <span class="hljs-comment"># Returns a member or raises KeyError.</span>
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                     <span class="hljs-comment"># Returns a member or raises ValueError.</span>
-&lt;str&gt;    = &lt;member&gt;.name                       <span class="hljs-comment"># Returns member's name.</span>
-&lt;obj&gt;    = &lt;member&gt;.value                      <span class="hljs-comment"># Returns member's value.</span>
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;                 <span class="hljs-comment"># Returns a member.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]              <span class="hljs-comment"># Returns a member or raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                      <span class="hljs-comment"># Returns a member or raises ValueError.</span>
+&lt;str&gt;    = &lt;member&gt;.name                        <span class="hljs-comment"># Returns member's name.</span>
+&lt;obj&gt;    = &lt;member&gt;.value                       <span class="hljs-comment"># Returns member's value.</span>
 </code></pre>
 <pre><code class="python language-python hljs">list_of_members = list(&lt;enum&gt;)
 member_names    = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]
@@ -1761,14 +1761,13 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
-</code></pre></div>
-
-
-<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
+&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
 &lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
 &lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
-</code></pre>
+</code></pre></div>
+
+
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
 <li><strong>That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.</strong></li>
@@ -1833,19 +1832,22 @@ product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of variables in current scope.</span>
-&lt;dict&gt; = locals()                    <span class="hljs-comment"># Returns dict of local variables. Also vars().</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of local variables (including functions).</span>
+&lt;dict&gt; = vars()                      <span class="hljs-comment"># Returns dict of local variables. Also locals().</span>
 &lt;dict&gt; = globals()                   <span class="hljs-comment"># Returns dict of global variables.</span>
 </code></pre></div></div>
 
 
 
-<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;dict&gt; = vars(&lt;object&gt;)
-&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
-value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
-setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)
+<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)               <span class="hljs-comment"># Returns names of object's attributes (incl. methods).</span>
+&lt;dict&gt; = vars(&lt;object&gt;)              <span class="hljs-comment"># Returns dict of object's fields. Also &lt;object&gt;.__dict__.</span>
 </code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
+value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
+setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)
+delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
+</code></pre>
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
 &lt;sig&gt;        = signature(&lt;function&gt;)
 no_of_params = len(&lt;sig&gt;.parameters)
@@ -2257,9 +2259,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to image.</span>
 </code></pre>
-<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># NumPy array from greyscale image.</span>
-&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># NumPy array from color image.</span>
-&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Image from NumPy array.</span>
+<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Generates NumPy array from greyscale image.</span>
+&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Generates NumPy array from color image.</span>
+&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Generates image from NumPy array.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>

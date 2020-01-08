@@ -1302,11 +1302,11 @@ class <enum_name>(Enum):
 * **Otherwise it returns an increment of the last numeric value.**
 
 ```python
-<member> = <enum>.<member_name>                # Returns a member.
-<member> = <enum>['<member_name>']             # Returns a member or raises KeyError.
-<member> = <enum>(<value>)                     # Returns a member or raises ValueError.
-<str>    = <member>.name                       # Returns member's name.
-<obj>    = <member>.value                      # Returns member's value.
+<member> = <enum>.<member_name>                 # Returns a member.
+<member> = <enum>['<member_name>']              # Returns a member or raises KeyError.
+<member> = <enum>(<value>)                      # Returns a member or raises ValueError.
+<str>    = <member>.name                        # Returns member's name.
+<obj>    = <member>.value                       # Returns member's value.
 ```
 
 ```python
@@ -1992,9 +1992,6 @@ Deque
 ```python
 from collections import deque
 <deque> = deque(<collection>, maxlen=None)
-```
-
-```python
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
 <el> = <deque>.popleft()                       # Raises IndexError if empty.
 <deque>.extendleft(<collection>)               # Collection gets reversed.
@@ -2092,18 +2089,24 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()                       # Returns names of variables in current scope.
-<dict> = locals()                    # Returns dict of local variables. Also vars().
+<list> = dir()                       # Returns names of local variables (including functions).
+<dict> = vars()                      # Returns dict of local variables. Also locals().
 <dict> = globals()                   # Returns dict of global variables.
 ```
 
 ### Attributes
 ```python
-<dict> = vars(<object>)
+<list> = dir(<object>)               # Returns names of object's attributes (incl. methods).
+<dict> = vars(<object>)              # Returns dict of object's fields. Also <object>.__dict__.
+```
+
+```python
 <bool> = hasattr(<object>, '<attr_name>')
 value  = getattr(<object>, '<attr_name>')
 setattr(<object>, '<attr_name>', value)
+delattr(<object>, '<attr_name>')
 ```
+
 
 ### Parameters
 ```python
@@ -2648,9 +2651,9 @@ from PIL import Image
 ```
 
 ```bash
-<2d_array> = np.array(<Image>)                  # NumPy array from greyscale image.
-<3d_array> = np.array(<Image>)                  # NumPy array from color image.
-<Image>    = Image.fromarray(<array>)           # Image from NumPy array.
+<2d_array> = np.array(<Image>)                  # Generates NumPy array from greyscale image.
+<3d_array> = np.array(<Image>)                  # Generates NumPy array from color image.
+<Image>    = Image.fromarray(<array>)           # Generates image from NumPy array.
 ```
 
 ### Modes
