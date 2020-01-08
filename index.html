@@ -1445,7 +1445,7 @@ value = args.&lt;name&gt;
         file.write(text)
 </code></pre></div>
 
-<div><h2 id="path"><a href="#path" name="path">#</a>Path</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir, scandir
+<div><h2 id="path"><a href="#path" name="path">#</a>Path</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
@@ -1464,11 +1464,12 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = path.isfile(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_file()</span>
 &lt;bool&gt; = path.isdir(&lt;path&gt;)         <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_dir()</span>
 </code></pre>
-<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
+<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> scandir
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns path as a string.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>

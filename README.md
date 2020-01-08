@@ -1562,7 +1562,7 @@ def write_to_file(filename, text):
 Path
 ----
 ```python
-from os import getcwd, path, listdir, scandir
+from os import getcwd, path, listdir
 from glob import glob
 ```
 
@@ -1593,10 +1593,11 @@ from glob import glob
 **Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.**
 
 ```python
-<iter> = scandir(path='.')          # Returns DirEntry objects located at path.
+from os import scandir
 ```
 
 ```python
+<iter> = scandir(path='.')          # Returns DirEntry objects located at path.
 <str>  = <DirEntry>.path            # Returns path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns a file object.
