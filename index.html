@@ -1195,7 +1195,9 @@ Hello World!
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index(), and count().</strong></li>
 <li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, collections.abc.Sequence)'</span></code> would return False even if MySequence had all the methods defined.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(collections.abc.Sequence)</span>:</span>
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAbcSequence</span><span class="hljs-params">(abc.Sequence)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span>
@@ -1293,7 +1295,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
 <span class="hljs-keyword">raise</span> &lt;exception&gt;()
-<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el_1&gt; [, ...])
+<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt; [, ...])
 </code></pre></div>
 
 <div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:

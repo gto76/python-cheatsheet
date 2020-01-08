@@ -1261,7 +1261,9 @@ class MySequence:
 * **Extending it generates iter(), contains(), reversed(), index(), and count().**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return False even if MySequence had all the methods defined.**
 ```python
-class MyAbcSequence(collections.abc.Sequence):
+from collections import abc
+
+class MyAbcSequence(abc.Sequence):
     def __init__(self, a):
         self.a = a
     def __len__(self):
@@ -1377,7 +1379,7 @@ except (<exception>, ...) as <name>:
 ```python
 raise <exception>
 raise <exception>()
-raise <exception>(<el_1> [, ...])
+raise <exception>(<el> [, ...])
 ```
 
 #### Re-raising caught exception:
