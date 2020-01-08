@@ -1761,13 +1761,14 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;, maxlen=<span class="hljs-keyword">None</span>)
-&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
-&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre></div>
 
 
+<pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
+</code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
 <li><strong>That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.</strong></li>
@@ -2259,9 +2260,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to image.</span>
 </code></pre>
-<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Generates NumPy array from greyscale image.</span>
-&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Generates NumPy array from color image.</span>
-&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Generates image from NumPy array.</span>
+<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Converts greyscale image to NumPy array.</span>
+&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Converts color image to NumPy array.</span>
+&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Converts NumPy array to Image.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>

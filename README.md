@@ -1992,6 +1992,9 @@ Deque
 ```python
 from collections import deque
 <deque> = deque(<collection>, maxlen=None)
+```
+
+```python
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
 <el> = <deque>.popleft()                       # Raises IndexError if empty.
 <deque>.extendleft(<collection>)               # Collection gets reversed.
@@ -2651,9 +2654,9 @@ from PIL import Image
 ```
 
 ```bash
-<2d_array> = np.array(<Image>)                  # Generates NumPy array from greyscale image.
-<3d_array> = np.array(<Image>)                  # Generates NumPy array from color image.
-<Image>    = Image.fromarray(<array>)           # Generates image from NumPy array.
+<2d_array> = np.array(<Image>)                  # Converts greyscale image to NumPy array.
+<3d_array> = np.array(<Image>)                  # Converts color image to NumPy array.
+<Image>    = Image.fromarray(<array>)           # Converts NumPy array to Image.
 ```
 
 ### Modes
