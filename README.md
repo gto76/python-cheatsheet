@@ -2734,7 +2734,7 @@ import wave
 ```
 
 ```python
-<Wave_read>  = wave.open('<path>', 'rb')        # Can raise OSError.
+<Wave_read>  = wave.open('<path>', 'rb')        # Opens file or raises OSError.
 framerate    = <Wave_read>.getframerate()       # Number of frames per second.
 nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
 sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
