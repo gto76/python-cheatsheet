@@ -2325,7 +2325,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)
+<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)        <span class="hljs-comment"># Can raise OSError.</span>
 framerate    = &lt;Wave_read&gt;.getframerate()       <span class="hljs-comment"># Number of frames per second.</span>
 nchannels    = &lt;Wave_read&gt;.getnchannels()       <span class="hljs-comment"># Number of samples per frame.</span>
 sampwidth    = &lt;Wave_read&gt;.getsampwidth()       <span class="hljs-comment"># Sample size in bytes.</span>
@@ -2333,7 +2333,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 &lt;params&gt;     = &lt;Wave_read&gt;.getparams()          <span class="hljs-comment"># Immutable collection of above.</span>
 &lt;bytes&gt;      = &lt;Wave_read&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next 'nframes' frames.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Wave_write&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)
+<pre><code class="python language-python hljs">&lt;Wave_write&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)        <span class="hljs-comment"># Truncates existing file.</span>
 &lt;Wave_write&gt;.setframerate(&lt;int&gt;)                <span class="hljs-comment"># 44100 for CD, 48000 for video.</span>
 &lt;Wave_write&gt;.setnchannels(&lt;int&gt;)                <span class="hljs-comment"># 1 for mono, 2 for stereo.</span>
 &lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># 2 for CD quality sound.</span>

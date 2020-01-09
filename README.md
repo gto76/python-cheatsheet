@@ -2734,7 +2734,7 @@ import wave
 ```
 
 ```python
-<Wave_read>  = wave.open('<path>', 'rb')
+<Wave_read>  = wave.open('<path>', 'rb')        # Can raise OSError.
 framerate    = <Wave_read>.getframerate()       # Number of frames per second.
 nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
 sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
@@ -2744,7 +2744,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 ```
 
 ```python
-<Wave_write> = wave.open('<path>', 'wb')
+<Wave_write> = wave.open('<path>', 'wb')        # Truncates existing file.
 <Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
 <Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
