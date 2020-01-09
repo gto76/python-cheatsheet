@@ -246,8 +246,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type> = type(<el>)                            # Or: <el>.__class__
-<bool> = isinstance(<el>, <type>)              # Or: issubclass(type(<el>), <type>)
+<type> = type(<el>)                          # Or: <el>.__class__
+<bool> = isinstance(<el>, <type>)            # Or: issubclass(type(<el>), <type>)
 ```
 
 ```python
@@ -353,7 +353,7 @@ Regex
 import re
 <str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences with 'new'.
 <list>  = re.findall(<regex>, text)            # Returns all occurrences as strings.
-<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to keep the matches.
+<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to include the matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of the pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
