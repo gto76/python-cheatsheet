@@ -246,8 +246,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type> = type(<el>)                          # Or: <el>.__class__
-<bool> = isinstance(<el>, <type>)            # Or: issubclass(type(<el>), <type>)
+<type> = type(<el>)                            # Or: <el>.__class__
+<bool> = isinstance(<el>, <type>)              # Or: issubclass(type(<el>), <type>)
 ```
 
 ```python
