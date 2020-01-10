@@ -584,7 +584,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
 Datetime
 --------
 * **Module 'datetime' provides 'date' `<D>`, 'time' `<T>`, 'datetime' `<DT>` and 'timedelta' `<TD>` classes. All are immutable and hashable.**
-* **Time and datetime can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
+* **Time and datetime objects can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
 * **If object is naive, it is presumed to be in the system's timezone.**
 
 ```python
@@ -1259,7 +1259,7 @@ class MySequence:
 ### Collections.abc.Sequence
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index(), and count().**
-* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, collections.abc.Sequence)'` would return False even if MySequence had all the methods defined.**
+* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined.**
 ```python
 from collections import abc
 
@@ -2111,7 +2111,6 @@ value  = getattr(<object>, '<attr_name>')
 setattr(<object>, '<attr_name>', value)
 delattr(<object>, '<attr_name>')
 ```
-
 
 ### Parameters
 ```python
