@@ -1522,12 +1522,17 @@ shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes n
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
 </code></pre></div>
 
-<div><h4 id="usingsubprocess">Using subprocess:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> subprocess, shlex
-<span class="hljs-meta">&gt;&gt;&gt; </span>a = subprocess.run(shlex.split(<span class="hljs-string">'ls -a'</span>), stdout=subprocess.PIPE)
-<span class="hljs-meta">&gt;&gt;&gt; </span>a.stdout
-<span class="hljs-string">b'.\n..\nfile1.txt\nfile2.txt\n'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>a.returncode
-<span class="hljs-number">0</span>
+<div><h4 id="sends11tocalculatorandcapturesitsoutput">Sends '1 + 1' to calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> subprocess <span class="hljs-keyword">import</span> run
+<span class="hljs-meta">&gt;&gt;&gt; </span>run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, encoding=<span class="hljs-string">'utf-8'</span>)
+CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
+</code></pre></div>
+
+<div><h4 id="sendstestintocalculatorrunninginstandardmodeandsavesitsoutputtotestout">Sends 'test.in' to calculator running in standard mode and saves its output to 'test.out':</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> shlex <span class="hljs-keyword">import</span> split
+<span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>run(split(<span class="hljs-string">'bc -s'</span>), stdin=open(<span class="hljs-string">'test.in'</span>), stdout=open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>))
+CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-string">'-s'</span>], returncode=<span class="hljs-number">0</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'cat test.out'</span>).read()
+<span class="hljs-string">'2\n'</span>
 </code></pre></div>
 
 <div><h2 id="json"><a href="#json" name="json">#</a>JSON</h2><p><strong>Text file format for storing collections of strings and numbers.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> json

@@ -1677,14 +1677,21 @@ import os
 <str> = os.popen('<shell_command>').read()
 ```
 
-#### Using subprocess:
+#### Sends '1 + 1' to calculator and captures its output:
 ```python
->>> import subprocess, shlex
->>> a = subprocess.run(shlex.split('ls -a'), stdout=subprocess.PIPE)
->>> a.stdout
-b'.\n..\nfile1.txt\nfile2.txt\n'
->>> a.returncode
-0
+>>> from subprocess import run
+>>> run('bc', input='1 + 1\n', capture_output=True, encoding='utf-8')
+CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
+```
+
+#### Sends 'test.in' to calculator running in standard mode and saves its output to 'test.out':
+```python
+>>> from shlex import split
+>>> os.popen('echo 1 + 1 > test.in')
+>>> run(split('bc -s'), stdin=open('test.in'), stdout=open('test.out', 'w'))
+CompletedProcess(args=['bc', '-s'], returncode=0)
+>>> os.popen('cat test.out').read()
+'2\n'
 ```
 
 
