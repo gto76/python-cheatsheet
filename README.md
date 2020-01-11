@@ -1690,7 +1690,7 @@ CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 >>> os.popen('echo 1 + 1 > test.in')
 >>> run(split('bc -s'), stdin=open('test.in'), stdout=open('test.out', 'w'))
 CompletedProcess(args=['bc', '-s'], returncode=0)
->>> os.popen('cat test.out').read()
+>>> open('test.out').read()
 '2\n'
 ```
 

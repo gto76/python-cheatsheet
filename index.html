@@ -1531,7 +1531,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 <span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>run(split(<span class="hljs-string">'bc -s'</span>), stdin=open(<span class="hljs-string">'test.in'</span>), stdout=open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>))
 CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-string">'-s'</span>], returncode=<span class="hljs-number">0</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'cat test.out'</span>).read()
+<span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">'test.out'</span>).read()
 <span class="hljs-string">'2\n'</span>
 </code></pre></div>
 
