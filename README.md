@@ -1988,7 +1988,7 @@ Memory View
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
-<str>   = str(<mview>, 'utf-8')                # Treats mview as a seqence of bytes.
+<str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
 <int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
 '<hex>' = <mview>.hex()
 ```
@@ -2005,8 +2005,8 @@ from collections import deque
 
 ```python
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
-<el> = <deque>.popleft()                       # Raises IndexError if empty.
 <deque>.extendleft(<collection>)               # Collection gets reversed.
+<el> = <deque>.popleft()                       # Raises IndexError if empty.
 <deque>.rotate(n=1)                            # Rotates elements to the right.
 ```
 
@@ -2014,7 +2014,7 @@ from collections import deque
 Threading
 ---------
 * **CPython interpreter can only run a single thread at a time.**
-* **That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.**
+* **That is why using multiple threads won't result in a faster execution, unless one of the threads contains an I/O operation.**
 ```python
 from threading import Thread, RLock
 ```
@@ -2071,7 +2071,7 @@ from queue import Queue
 <Queue>.put(<el>)                    # Blocks until queue stops being full.
 <Queue>.put_nowait(<el>)             # Raises queue.Full exception if full.
 <el> = <Queue>.get()                 # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()          # Raises _queue.Empty exception if empty.
+<el> = <Queue>.get_nowait()          # Raises queue.Empty exception if empty.
 ```
 
 
@@ -2125,6 +2125,7 @@ from inspect import signature
 <sig>        = signature(<function>)
 no_of_params = len(<sig>.parameters)
 param_names  = list(<sig>.parameters.keys())
+param_kinds  = [a.kind for a in <sig>.parameters.values()]
 ```
 
 

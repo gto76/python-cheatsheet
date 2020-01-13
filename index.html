@@ -1761,7 +1761,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 &lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
-&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a seqence of bytes.</span>
+&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
 &lt;int&gt;   = int.from_bytes(&lt;mview&gt;, byteorder=<span class="hljs-string">'big/little'</span>, signed=<span class="hljs-keyword">False</span>)
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()
 </code></pre></div>
@@ -1772,13 +1772,13 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 
 <pre><code class="python language-python hljs">&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
 &lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
-<li><strong>That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in the thread.</strong></li>
+<li><strong>That is why using multiple threads won't result in a faster execution, unless one of the threads contains an I/O operation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock
 </code></pre></div>
 
@@ -1824,7 +1824,7 @@ lock.release()
 <pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                    <span class="hljs-comment"># Blocks until queue stops being full.</span>
 &lt;Queue&gt;.put_nowait(&lt;el&gt;)             <span class="hljs-comment"># Raises queue.Full exception if full.</span>
 &lt;el&gt; = &lt;Queue&gt;.get()                 <span class="hljs-comment"># Blocks until queue stops being empty.</span>
-&lt;el&gt; = &lt;Queue&gt;.get_nowait()          <span class="hljs-comment"># Raises _queue.Empty exception if empty.</span>
+&lt;el&gt; = &lt;Queue&gt;.get_nowait()          <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
@@ -1860,6 +1860,7 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
 &lt;sig&gt;        = signature(&lt;function&gt;)
 no_of_params = len(&lt;sig&gt;.parameters)
 param_names  = list(&lt;sig&gt;.parameters.keys())
+param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;sig&gt;.parameters.values()]
 </code></pre></div>
 
 <div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs"><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></code></pre></div></div>
