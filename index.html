@@ -2331,7 +2331,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)        <span class="hljs-comment"># Opens file or raises OSError.</span>
+<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)        <span class="hljs-comment"># Opens the wav file.</span>
 framerate    = &lt;Wave_read&gt;.getframerate()       <span class="hljs-comment"># Number of frames per second.</span>
 nchannels    = &lt;Wave_read&gt;.getnchannels()       <span class="hljs-comment"># Number of samples per frame.</span>
 sampwidth    = &lt;Wave_read&gt;.getsampwidth()       <span class="hljs-comment"># Sample size in bytes.</span>
