@@ -2656,10 +2656,10 @@ from PIL import Image
 
 ```python
 <tuple/int> = <Image>.getpixel((x, y))          # Returns a pixel.
-<Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to image.
+<Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to the image.
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
 <Image>.putdata(<list/ImagingCore>)             # Writes a sequence of pixels.
-<Image>.paste(<Image>, (x, y))                  # Writes an image to image.
+<Image>.paste(<Image>, (x, y))                  # Writes an image to the image.
 ```
 
 ```bash
