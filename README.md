@@ -2014,7 +2014,7 @@ from collections import deque
 Threading
 ---------
 * **CPython interpreter can only run a single thread at a time.**
-* **That is why using multiple threads won't result in a faster execution, unless one of the threads contains an I/O operation.**
+* **That is why using multiple threads won't result in a faster execution, unless there is an I/O operation in at least one of them.**
 ```python
 from threading import Thread, RLock
 ```
