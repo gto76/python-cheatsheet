@@ -89,7 +89,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
 value = <dict>.pop(key)                         # Removes item or raises KeyError.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
-{k: v for k, v in <dict>.items() if k in keys}  # Returns dictionary filtered by keys.
+{k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
 ```
 
 ### Counter
