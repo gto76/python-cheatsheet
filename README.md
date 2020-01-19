@@ -418,9 +418,9 @@ Format
 ### Strings
 **`'!r'` calls object's [repr()](#class) method, instead of [str()](#class), to get a string.**
 ```python
-{'abcde'!r:<10}                                # "'abcde'   "
-{'abcde':.3}                                   # 'abc'
+{'abcde'!r:10}                                 # "'abcde'   "
 {'abcde':10.3}                                 # 'abc       '
+{'abcde':.3}                                   # 'abc'
 ```
 
 ### Numbers
