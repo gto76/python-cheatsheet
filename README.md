@@ -273,9 +273,9 @@ True
 +------------------+------------+------------+------------+
 |                  |  Sequence  | Collection |  Iterable  |
 +------------------+------------+------------+------------+
-| list, range, str |    Yes     |    Yes     |    Yes     |
-| dict, set        |            |    Yes     |    Yes     |
-| iter             |            |            |    Yes     |
+| list, range, str |    yes     |    yes     |    yes     |
+| dict, set        |            |    yes     |    yes     |
+| iter             |            |            |    yes     |
 +------------------+------------+------------+------------+
 ```
 
