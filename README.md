@@ -289,11 +289,11 @@ True
 +--------------------+----------+----------+----------+----------+----------+
 |                    | Integral | Rational |   Real   | Complex  |  Number  |
 +--------------------+----------+----------+----------+----------+----------+
-| int                |   Yes    |   Yes    |   Yes    |   Yes    |   Yes    |
-| fractions.Fraction |          |   Yes    |   Yes    |   Yes    |   Yes    |
-| float              |          |          |   Yes    |   Yes    |   Yes    |
-| complex            |          |          |          |   Yes    |   Yes    |
-| decimal.Decimal    |          |          |          |          |   Yes    |
+| int                |   yes    |   yes    |   yes    |   yes    |   yes    |
+| fractions.Fraction |          |   yes    |   yes    |   yes    |   yes    |
+| float              |          |          |   yes    |   yes    |   yes    |
+| complex            |          |          |          |   yes    |   yes    |
+| decimal.Decimal    |          |          |          |          |   yes    |
 +--------------------+----------+----------+----------+----------+----------+
 ```
 
@@ -337,11 +337,11 @@ String
 +---------------+----------+----------+----------+----------+----------+
 |               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
 +---------------+----------+----------+----------+----------+----------+
-| isprintable() |   Yes    |   Yes    |   Yes    |   Yes    |   Yes    |
-| isalnum()     |          |   Yes    |   Yes    |   Yes    |   Yes    |
-| isnumeric()   |          |          |   Yes    |   Yes    |   Yes    |
-| isdigit()     |          |          |          |   Yes    |   Yes    |
-| isdecimal()   |          |          |          |          |   Yes    |
+| isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
+| isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
+| isnumeric()   |          |          |   yes    |   yes    |   yes    |
+| isdigit()     |          |          |          |   yes    |   yes    |
+| isdecimal()   |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
 * **Also: `'isspace()'` checks for `'[ \t\n\r\f\v…]'`.**
