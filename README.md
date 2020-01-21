@@ -273,9 +273,9 @@ True
 +------------------+------------+------------+------------+
 |                  |  Sequence  | Collection |  Iterable  |
 +------------------+------------+------------+------------+
-| list, range, str |    yes     |    yes     |    yes     |
-| dict, set        |            |    yes     |    yes     |
-| iter             |            |            |    yes     |
+| list, range, str |    Yes     |    Yes     |    Yes     |
+| dict, set        |            |    Yes     |    Yes     |
+| iter             |            |            |    Yes     |
 +------------------+------------+------------+------------+
 ```
 
@@ -289,11 +289,11 @@ True
 +--------------------+----------+----------+----------+----------+----------+
 |                    | Integral | Rational |   Real   | Complex  |  Number  |
 +--------------------+----------+----------+----------+----------+----------+
-| int                |   yes    |   yes    |   yes    |   yes    |   yes    |
-| fractions.Fraction |          |   yes    |   yes    |   yes    |   yes    |
-| float              |          |          |   yes    |   yes    |   yes    |
-| complex            |          |          |          |   yes    |   yes    |
-| decimal.Decimal    |          |          |          |          |   yes    |
+| int                |   Yes    |   Yes    |   Yes    |   Yes    |   Yes    |
+| fractions.Fraction |          |   Yes    |   Yes    |   Yes    |   Yes    |
+| float              |          |          |   Yes    |   Yes    |   Yes    |
+| complex            |          |          |          |   Yes    |   Yes    |
+| decimal.Decimal    |          |          |          |          |   Yes    |
 +--------------------+----------+----------+----------+----------+----------+
 ```
 
@@ -337,11 +337,11 @@ String
 +---------------+----------+----------+----------+----------+----------+
 |               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
 +---------------+----------+----------+----------+----------+----------+
-| isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
-| isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
-| isnumeric()   |          |          |   yes    |   yes    |   yes    |
-| isdigit()     |          |          |          |   yes    |   yes    |
-| isdecimal()   |          |          |          |          |   yes    |
+| isprintable() |   Yes    |   Yes    |   Yes    |   Yes    |   Yes    |
+| isalnum()     |          |   Yes    |   Yes    |   Yes    |   Yes    |
+| isnumeric()   |          |          |   Yes    |   Yes    |   Yes    |
+| isdigit()     |          |          |          |   Yes    |   Yes    |
+| isdecimal()   |          |          |          |          |   Yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
 * **Also: `'isspace()'` checks for `'[ \t\n\r\f\v…]'`.**
@@ -1274,13 +1274,13 @@ class MyAbcSequence(abc.Sequence):
 +------------+------------+------------+------------+--------------+
 |            |  Iterable  | Collection |  Sequence  | abc.Sequence |
 +------------+------------+------------+------------+--------------+
-| iter()     |    REQ     |    REQ     |    yes     |     yes      |
-| contains() |    yes     |    yes     |    yes     |     yes      |
+| iter()     |    REQ     |    REQ     |    Yes     |     Yes      |
+| contains() |    Yes     |    Yes     |    Yes     |     Yes      |
 | len()      |            |    REQ     |    REQ     |     REQ      |
 | getitem()  |            |            |    REQ     |     REQ      |
-| reversed() |            |            |    yes     |     yes      |
-| index()    |            |            |            |     yes      |
-| count()    |            |            |            |     yes      |
+| reversed() |            |            |    Yes     |     Yes      |
+| index()    |            |            |            |     Yes      |
+| count()    |            |            |            |     Yes      |
 +------------+------------+------------+------------+--------------+
 ```
 * **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
