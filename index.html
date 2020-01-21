@@ -530,8 +530,8 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                                <span class="hljs-comment"># '  123.456%'</span>
 </code></pre></div>
 
-<div><h4 id="comparisonoffloatpresentationtypes">Comparison of float presentation types:</h4><pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |    {&lt;float&gt;}    |   {&lt;float&gt;:f}   |   {&lt;float&gt;:e}   |   {&lt;float&gt;:%}   |
+<div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
+|               |     {&lt;real&gt;}    |    {&lt;real&gt;:f}   |    {&lt;real&gt;:e}   |    {&lt;real&gt;:%}   |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.6789e-05' |     '0.000057'  |  '5.678900e-05' |     '0.005679%' |
 |   0.00056789  |    '0.00056789' |     '0.000568'  |  '5.678900e-04' |     '0.056789%' |
@@ -545,7 +545,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |   {&lt;float&gt;:.2}  |  {&lt;float&gt;:.2f}  |  {&lt;float&gt;:.2e}  |  {&lt;float&gt;:.2%}  |
+|               |   {&lt;float&gt;:.2}  |   {&lt;real&gt;:.2f}  |   {&lt;real&gt;:.2e}  |   {&lt;real&gt;:.2%}  |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.7e-05'    |       '0.00'    |    '5.68e-05'   |       '0.01%'   |
 |   0.00056789  |    '0.00057'    |       '0.00'    |    '5.68e-04'   |       '0.06%'   |
