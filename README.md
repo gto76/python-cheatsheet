@@ -526,7 +526,7 @@ shuffle(<list>)
 <int>     = 0b<bin>                   # Or: 0x<hex>
 <int>     = int('<bin>', 2)           # Or: int('<hex>', 16)
 <int>     = int('0b<bin>', 0)         # Or: int('0x<hex>', 0)
-'0b<bin>' = bin(<int>)                # Or: '0x<hex>' = hex(<int>)
+'0b<bin>' = bin(<int>)                # Or: hex(<int>)
 ```
 
 ### Bitwise Operators
@@ -630,7 +630,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
-* **On Unix systems Epoch is: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
+* **Epoch on Unix systems is: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
 ```python
