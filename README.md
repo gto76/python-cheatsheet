@@ -634,7 +634,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds'.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
-<float>  = <DTn>.timestamp()                # Seconds since Epoch from DTn in local time.
+<float>  = <DTn>.timestamp()                # Seconds since Epoch from DTn in local tz.
 <float>  = <DTa>.timestamp()                # Seconds since Epoch from DTa.
 ```
 
