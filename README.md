@@ -2738,7 +2738,7 @@ import wave
 ```
 
 ```python
-<Wave_read>  = wave.open('<path>', 'rb')        # Opens the wav file.
+<Wave_read>  = wave.open('<path>', 'rb')        # Opens the WAV file.
 framerate    = <Wave_read>.getframerate()       # Number of frames per second.
 nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
 sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
