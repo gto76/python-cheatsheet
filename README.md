@@ -2748,7 +2748,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 ```
 
 ```python
-<Wave_write> = wave.open('<path>', 'wb')        # Truncates file if it exists.
+<Wave_write> = wave.open('<path>', 'wb')        # Truncates existing file.
 <Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
 <Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
