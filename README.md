@@ -2881,8 +2881,8 @@ Basic Script Template
 from collections import namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-from sys import argv
 import re
+import sys
 
 
 def main():
