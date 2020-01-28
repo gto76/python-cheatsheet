@@ -1388,8 +1388,8 @@ except <exception>:
 
 #### Useful built-in exceptions:
 ```python
-raise ValueError('Argument is of right type but inappropriate value!')
 raise TypeError('Argument is of wrong type!')
+raise ValueError('Argument is of right type but inappropriate value!')
 raise RuntimeError('None of above!')
 ```
 
@@ -1439,13 +1439,24 @@ class MyInputError(MyError):
 ```
 
 
+Exit
+----
+**Exits the interpreter by raising SystemExit exception.**
+```python
+import sys
+sys.exit()                        # Exits with exit code 0 (success).
+sys.exit(<int>)                   # Exits with passed exit code.
+sys.exit(<obj>)                   # Prints the object and exits with 1 (failure).
+```
+
+
 Print
 -----
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 
-* **Use `'file=sys.stderr'` for errors.**
+* **Use `'file=sys.stderr'` for messages about errors.**
 * **Use `'flush=True'` to forcibly flush the stream.**
 
 ### Pretty Print

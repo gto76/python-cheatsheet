@@ -1302,8 +1302,8 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
 
-<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
-<span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
+<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
+<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
 <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
 </code></pre></div>
 
@@ -1346,11 +1346,18 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">pass</span>
 </code></pre></div>
 
+<div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
+sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
+sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with passed exit code.</span>
+sys.exit(&lt;obj&gt;)                   <span class="hljs-comment"># Prints the object and exits with 1 (failure).</span>
+</code></pre></div>
+
+
 <div class="pagebreak"></div><div><h2 id="print"><a href="#print" name="print">#</a>Print</h2><pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> for errors.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> for messages about errors.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> to forcibly flush the stream.</strong></li>
 </ul>
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
