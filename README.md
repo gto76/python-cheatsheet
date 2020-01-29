@@ -1324,8 +1324,8 @@ def get_next_member(member):
 
 ### Inline
 ```python
-Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
 Cutlery = Enum('Cutlery', 'fork knife spoon')
+Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
 Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 

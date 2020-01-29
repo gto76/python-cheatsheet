@@ -1251,8 +1251,8 @@ random_member   = random.choice(list(&lt;enum&gt;))
     index   = (members.index(member) + <span class="hljs-number">1</span>) % len(members)
     <span class="hljs-keyword">return</span> members[index]
 </code></pre>
-<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
-Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'fork knife spoon'</span>)
+<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'fork knife spoon'</span>)
+Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
 
