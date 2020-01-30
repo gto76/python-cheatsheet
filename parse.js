@@ -4,7 +4,7 @@
 // It is written in JS because this code used to be executed on the client side.
 // To install dependencies run:
 // $ npm install -g jsdom jquery showdown highlightjs
-// If running on mac and modules cant be found after instalation add:
+// If running on Mac and modules can't be found after installation add:
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
 
