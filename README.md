@@ -2767,10 +2767,10 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.writeframes(<bytes>)               # Appends frames to file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
-* **In stereo signal first sample of a frame belongs to the left channel.**
+* **In a stereo signal, the first sample of a frame belongs to the left channel.**
 * **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
 * **If sample width is one, then the integer should be encoded unsigned.**
-* **For all other sizes the integer should be encoded signed with little-endian byte order.**
+* **For all other sizes, the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
 ```text

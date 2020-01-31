@@ -2354,10 +2354,10 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 </code></pre>
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
-<li><strong>In stereo signal first sample of a frame belongs to the left channel.</strong></li>
+<li><strong>In a stereo signal, the first sample of a frame belongs to the left channel.</strong></li>
 <li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.</strong></li>
 <li><strong>If sample width is one, then the integer should be encoded unsigned.</strong></li>
-<li><strong>For all other sizes the integer should be encoded signed with little-endian byte order.</strong></li>
+<li><strong>For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="text language-text">+-----------+-------------+------+-------------+
 | sampwidth |     min     | zero |     max     |
