@@ -2547,7 +2547,7 @@ with PyCallGraph(drawer):
 
 NumPy
 -----
-**Array manipulation mini language. Can run up to one hundred times faster than the equivalent Python code.**
+**Array manipulation mini-language. Can run up to one hundred times faster than the equivalent Python code.**
 
 ```python
 # $ pip3 install numpy
