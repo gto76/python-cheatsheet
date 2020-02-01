@@ -1113,7 +1113,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h3 id="contextmanager">Context Manager</h3><ul>
-<li><strong>Enter() should lock the resources and return an object.</strong></li>
+<li><strong>Enter() should lock the resources and (optionally) return an object.</strong></li>
 <li><strong>Exit() should release the resources.</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>If it wishes to suppress the exception it must return a true value.</strong> </li>

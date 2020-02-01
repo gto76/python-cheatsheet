@@ -1169,7 +1169,7 @@ class Counter:
 ```
 
 ### Context Manager
-* **Enter() should lock the resources and return an object.**
+* **Enter() should lock the resources and (optionally) return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **If it wishes to suppress the exception it must return a true value.** 
