@@ -1877,7 +1877,7 @@ param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Z = type(<span class="hljs-string">'Z'</span>, (), {<span class="hljs-string">'a'</span>: <span class="hljs-string">'abcde'</span>, <span class="hljs-string">'b'</span>: <span class="hljs-number">12345</span>})
 <span class="hljs-meta">&gt;&gt;&gt; </span>z = Z()
 </code></pre>
-<div><h3 id="metaclass">Meta Class</h3><p><strong>Class that creates classes.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_meta_class</span><span class="hljs-params">(name, parents, attrs)</span>:</span>
+<div><h3 id="metaclass">Meta Class</h3><p><strong>A class that creates classes.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_meta_class</span><span class="hljs-params">(name, parents, attrs)</span>:</span>
     attrs[<span class="hljs-string">'a'</span>] = <span class="hljs-string">'abcde'</span>
     <span class="hljs-keyword">return</span> type(name, parents, attrs)
 </code></pre></div>

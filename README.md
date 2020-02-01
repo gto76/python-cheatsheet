@@ -2154,7 +2154,7 @@ Metaprograming
 ```
 
 ### Meta Class
-**Class that creates classes.**
+**A class that creates classes.**
 
 ```python
 def my_meta_class(name, parents, attrs):
