@@ -1820,7 +1820,7 @@ def write_to_csv_file(filename, rows):
 
 SQLite
 ------
-**Server-less database engine that stores each database into separate file.**
+**Server-less database engine that stores each database into a separate file.**
 
 ### Connect
 **Opens a connection to the database file. Creates a new file if path doesn't exist.**
