@@ -326,8 +326,8 @@ String
 ```
 
 ```python
-<str>  = chr(<int>)                          # Converts int to unicode char.
-<int>  = ord(<str>)                          # Converts unicode char to int.
+<str>  = chr(<int>)                          # Converts int to Unicode char.
+<int>  = ord(<str>)                          # Converts Unicode char to int.
 ```
 * **Also: `'lstrip()'`, `'rstrip()'`.**
 * **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
