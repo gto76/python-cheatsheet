@@ -1527,9 +1527,9 @@ Open
 * **`'b'`  - Binary mode.**
 
 ### Exceptions
-* **`'FileNotFoundError'` can be risen when reading with `'r'` or `'r+'`.**
-* **`'FileExistsError'` can be risen when writing with `'x'`.**
-* **`'IsADirectoryError'` and `'PermissionError'` can be risen by any.**
+* **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
+* **`'FileExistsError'` can be raised when writing with `'x'`.**
+* **`'IsADirectoryError'` and `'PermissionError'` can be raised by any.**
 * **`'OSError'` is the parent class of all listed exceptions.**
 
 ### File Object
