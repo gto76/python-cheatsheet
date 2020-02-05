@@ -362,7 +362,8 @@ import re
 * **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
-* **Argument `'flags=re.DOTALL'` makes dot also accept newline.**
+* **Argument `'flags=re.DOTALL'` makes dot also match the newline.**
+* **Only character that is considered a line separator is `'\n'`.**
 * **Use `r'\1'` or `'\\1'` for backreference.**
 * **Add `'?'` after an operator to make it non-greedy.**
 
@@ -1579,7 +1580,7 @@ from glob import glob
 ```python
 <str>  = getcwd()                   # Returns the current working directory.
 <str>  = path.join(<path>, ...)     # Joins two or more pathname components.
-<str>  = path.abspath(<path>)       # Return an absolute path.
+<str>  = path.abspath(<path>)       # Returns an absolute path.
 ```
 
 ```python
