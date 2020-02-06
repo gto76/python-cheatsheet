@@ -1512,7 +1512,7 @@ value = args.&lt;name&gt;
 
 
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
@@ -1522,8 +1522,8 @@ shutil.copytree(from, to)           <span class="hljs-comment"># Copies the dire
 os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file.</span>
-os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes empty directory.</span>
-shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes non-empty directory.</span>
+os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory.</span>
+shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the non-empty directory.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()

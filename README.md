@@ -1660,7 +1660,7 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                    # Changes current working directory.
+os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 
@@ -1676,8 +1676,8 @@ os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 
 ```python
 os.remove(<path>)                   # Deletes the file.
-os.rmdir(<path>)                    # Deletes empty directory.
-shutil.rmtree(<path>)               # Deletes non-empty directory.
+os.rmdir(<path>)                    # Deletes the empty directory.
+shutil.rmtree(<path>)               # Deletes the non-empty directory.
 ```
 
 ### Shell Commands
