@@ -599,8 +599,8 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
                  minutes=0, hours=0, weeks=0)
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
-* **`'fold=1'` means second pass in case of time jumping back for one hour.**
-* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into missing hour.**
+* **`'fold=1'` means the second pass in case of time jumping back for one hour.**
+* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
 
 ### Now
 ```python
