@@ -378,7 +378,7 @@ import re
 
 ### Special Sequences
 * **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
-* **Use capital letter for negation.**
+* **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches any digit.
 '\w' == '[a-zA-Z0-9_]'                         # Matches any alphanumeric.
@@ -1686,14 +1686,14 @@ import os
 <str> = os.popen('<shell_command>').read()
 ```
 
-#### Sends '1 + 1' to calculator and captures its output:
+#### Sends '1 + 1' to a calculator and captures its output:
 ```python
 >>> from subprocess import run
 >>> run('bc', input='1 + 1\n', capture_output=True, encoding='utf-8')
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends 'test.in' to calculator running in standard mode and saves its output to 'test.out':
+#### Sends 'test.in' to a calculator running in standard mode and saves its output to 'test.out':
 ```python
 >>> from shlex import split
 >>> os.popen('echo 1 + 1 > test.in')
@@ -1952,7 +1952,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
 
-#### Integer types. Use capital letter for unsigned type. Standard sizes are in brackets:
+#### Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:
 * **`'x'` - pad byte**
 * **`'b'` - char (1)**
 * **`'h'` - short (2)**
@@ -2575,7 +2575,7 @@ indexes = <array>.argmin(axis)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is the index of a dimension that gets collapsed. Leftmost dimension has index 0.**
+* **Axis is the index of a dimension that gets collapsed. The leftmost dimension has index 0.**
 
 ### Indexing
 ```bash
