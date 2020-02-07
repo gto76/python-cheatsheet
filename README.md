@@ -368,11 +368,11 @@ import re
 
 ### Match Object
 ```python
-<str>   = <Match>.group()                      # Returns whole match. Also group(0).
-<str>   = <Match>.group(1)                     # Returns part in first bracket.
+<str>   = <Match>.group()                      # Returns the whole match. Also group(0).
+<str>   = <Match>.group(1)                     # Returns part in the first bracket.
 <tuple> = <Match>.groups()                     # Returns all bracketed parts.
-<int>   = <Match>.start()                      # Returns start index of a match.
-<int>   = <Match>.end()                        # Returns exclusive end index of a match.
+<int>   = <Match>.start()                      # Returns start index of the match.
+<int>   = <Match>.end()                        # Returns exclusive end index of the match.
 ```
 
 ### Special Sequences

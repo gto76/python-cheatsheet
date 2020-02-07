@@ -473,11 +473,11 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference.</strong></li>
 <li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after an operator to make it non-greedy.</strong></li>
 </ul>
-<div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                      <span class="hljs-comment"># Returns whole match. Also group(0).</span>
-&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns part in first bracket.</span>
+<div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                      <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
+&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns part in the first bracket.</span>
 &lt;tuple&gt; = &lt;Match&gt;.groups()                     <span class="hljs-comment"># Returns all bracketed parts.</span>
-&lt;int&gt;   = &lt;Match&gt;.start()                      <span class="hljs-comment"># Returns start index of a match.</span>
-&lt;int&gt;   = &lt;Match&gt;.end()                        <span class="hljs-comment"># Returns exclusive end index of a match.</span>
+&lt;int&gt;   = &lt;Match&gt;.start()                      <span class="hljs-comment"># Returns start index of the match.</span>
+&lt;int&gt;   = &lt;Match&gt;.end()                        <span class="hljs-comment"># Returns exclusive end index of the match.</span>
 </code></pre></div>
 
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
