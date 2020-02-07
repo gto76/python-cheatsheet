@@ -1685,14 +1685,14 @@ import os
 <str> = os.popen('<shell_command>').read()
 ```
 
-#### Sends '1 + 1' to a calculator and captures its output:
+#### Sends '1 + 1' to the calculator and captures its output:
 ```python
 >>> from subprocess import run
 >>> run('bc', input='1 + 1\n', capture_output=True, encoding='utf-8')
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends 'test.in' to a calculator running in standard mode and saves its output to 'test.out':
+#### Sends 'test.in' to the calculator running in standard mode and saves its output to 'test.out':
 ```python
 >>> from shlex import split
 >>> os.popen('echo 1 + 1 > test.in')
