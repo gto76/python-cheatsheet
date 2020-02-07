@@ -1577,15 +1577,15 @@ from glob import glob
 ```
 
 ```python
-<str>  = getcwd()                   # Returns the current working directory.
+<str>  = getcwd()                   # Returns current working directory.
 <str>  = path.join(<path>, ...)     # Joins two or more pathname components.
-<str>  = path.abspath(<path>)       # Returns an absolute path.
+<str>  = path.abspath(<path>)       # Returns absolute path.
 ```
 
 ```python
-<str>  = path.basename(<path>)      # Returns final component.
-<str>  = path.dirname(<path>)       # Returns path without final component.
-<tup.> = path.splitext(<path>)      # Splits on last period of final component.
+<str>  = path.basename(<path>)      # Returns final component of the path.
+<str>  = path.dirname(<path>)       # Returns path without the final component.
+<tup.> = path.splitext(<path>)      # Splits on last period of the final component.
 ```
 
 ```python
@@ -1610,7 +1610,7 @@ from os import scandir
 <iter> = scandir(path='.')          # Returns DirEntry objects located at path.
 <str>  = <DirEntry>.path            # Returns path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
-<file> = open(<DirEntry>)           # Opens the file and returns a file object.
+<file> = open(<DirEntry>)           # Opens the file and returns file object.
 ```
 
 ### Path Object
@@ -1644,7 +1644,7 @@ from pathlib import Path
 
 ```python
 <str>  = str(<Path>)                # Returns path as a string.
-<file> = open(<Path>)               # Opens the file and returns a file object.
+<file> = open(<Path>)               # Opens the file and returns file object.
 ```
 
 
@@ -1659,7 +1659,7 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                    # Changes the current working directory.
+os.chdir(<path>)                    # Changes current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 

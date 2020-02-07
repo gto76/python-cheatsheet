@@ -1457,13 +1457,13 @@ value = args.&lt;name&gt;
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns the current working directory.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns current working directory.</span>
 &lt;str&gt;  = path.join(&lt;path&gt;, ...)     <span class="hljs-comment"># Joins two or more pathname components.</span>
-&lt;str&gt;  = path.abspath(&lt;path&gt;)       <span class="hljs-comment"># Returns an absolute path.</span>
+&lt;str&gt;  = path.abspath(&lt;path&gt;)       <span class="hljs-comment"># Returns absolute path.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(&lt;path&gt;)      <span class="hljs-comment"># Returns final component.</span>
-&lt;str&gt;  = path.dirname(&lt;path&gt;)       <span class="hljs-comment"># Returns path without final component.</span>
-&lt;tup.&gt; = path.splitext(&lt;path&gt;)      <span class="hljs-comment"># Splits on last period of final component.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(&lt;path&gt;)      <span class="hljs-comment"># Returns final component of the path.</span>
+&lt;str&gt;  = path.dirname(&lt;path&gt;)       <span class="hljs-comment"># Returns path without the final component.</span>
+&lt;tup.&gt; = path.splitext(&lt;path&gt;)      <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt; = listdir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns filenames located at path.</span>
 &lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)          <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
@@ -1479,7 +1479,7 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
+&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns file object.</span>
 </code></pre>
 <div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
@@ -1501,7 +1501,7 @@ value = args.&lt;name&gt;
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as a string.</span>
-&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns a file object.</span>
+&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns file object.</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
@@ -1511,7 +1511,7 @@ value = args.&lt;name&gt;
 
 
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
