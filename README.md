@@ -2672,9 +2672,9 @@ from PIL import Image
 ```
 
 ```bash
-<2d_array> = np.array(<Image>)                  # Converts greyscale image to NumPy array.
-<3d_array> = np.array(<Image>)                  # Converts color image to NumPy array.
-<Image>    = Image.fromarray(<array>)           # Converts NumPy array to Image.
+<2d_array> = np.array(<Image>)                  # Creates NumPy array from greyscale image.
+<3d_array> = np.array(<Image>)                  # Creates NumPy array from color image.
+<Image>    = Image.fromarray(<array>)           # Creates image from NumPy array of floats.
 ```
 
 ### Modes

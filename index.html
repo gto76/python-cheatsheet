@@ -2275,9 +2275,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to the image.</span>
 </code></pre>
-<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Converts greyscale image to NumPy array.</span>
-&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Converts color image to NumPy array.</span>
-&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Converts NumPy array to Image.</span>
+<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Creates NumPy array from greyscale image.</span>
+&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Creates NumPy array from color image.</span>
+&lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Creates image from NumPy array of floats.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
