@@ -2243,7 +2243,7 @@ Coroutines
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
 * **Coroutine definition starts with `'async'` and its call with `'await'`.**
 * **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
-* **Fucntions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
+* **Functions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 
