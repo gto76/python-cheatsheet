@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exceptions`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`Command_Execution`](#oscommands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`MemoryView`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutine)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutine`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__.__
 
@@ -1209,10 +1209,15 @@ class MyIterable:
 ```
 
 ```python
->>> z = MyIterable([1, 2, 3])
->>> iter(z)
-<generator object MyIterable.__iter__>
->>> 1 in z
+>>> obj = MyIterable([1, 2, 3])
+>>> itr = iter(obj)
+>>> [next(itr), next(itr), next(itr)]
+[1, 2, 3]
+>>> [el for el in iter(obj)]
+[1, 2, 3]
+>>> [el for el in obj]
+[1, 2, 3]
+>>> 1 in obj
 True
 ```
 
@@ -2095,10 +2100,10 @@ from operator import itemgetter, attrgetter, methodcaller
 
 ```python
 import operator as op
-elementwise_sum  = map(op.add, list_a, list_b)
-product_of_elems = functools.reduce(op.mul, <collection>)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
+product_of_elems = functools.reduce(op.mul, <collection>)
+elementwise_sum  = map(op.add, list_a, list_b)
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
@@ -2238,49 +2243,64 @@ ValueError: malformed node or string
 ```
 
 
-Coroutine
----------
-* **Any function that contains a `'(yield)'` expression returns a coroutine.**
-* **Coroutines are similar to iterators, but data needs to be pulled out of an iterator by calling `'next(<iter>)'`, while we push data into the coroutine by calling `'<coroutine>.send(<el>)'`.**
-* **Coroutines provide more powerful data routing possibilities than iterators.**
+Coroutines
+----------
+* **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
+* **Coroutine definition starts with `'async'` and its call with `'await'`.**
+* **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
+* **Fucntions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
 
-### Helper Decorator
-* **All coroutines must first be "primed" by calling `'next(<coroutine>)'`.**
-* **Remembering to call next() is easy to forget.**
-* **Solved by wrapping coroutine functions with the following decorator:**
+#### Starts a terminal game where you control an asterisk that must avoid numbers:
 
 ```python
-def coroutine(func):
-    def out(*args, **kwargs):
-        cr = func(*args, **kwargs)
-        next(cr)
-        return cr
-    return out
-```
+import asyncio, collections, curses, enum, random
 
-### Pipeline Example
-```python
-def reader(target):
-    for i in range(10):
-        target.send(i)
-    target.close()
+P = collections.namedtuple('P', 'x y')         # Position
+D = enum.Enum('D', 'n e s w')                  # Direction
 
-@coroutine
-def adder(target):
+def main(screen):
+    curses.curs_set(0)                         # Makes cursor invisible.
+    screen.nodelay(True)                       # Makes getch() non-blocking.
+    asyncio.run(main_coroutine(screen))        # Starts running asyncio code.
+
+async def main_coroutine(screen):
+    state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
+    moves = asyncio.Queue()
+    coros = (*(random_controller(id_, moves) for id_ in range(10)),
+             human_controller(screen, moves),
+             model(moves, state, *screen.getmaxyx()),
+             view(state, screen))
+    await asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
+
+async def random_controller(id_, moves):
     while True:
-        value = (yield)
-        target.send(value + 100)
+        moves.put_nowait((id_, random.choice(list(D))))
+        await asyncio.sleep(random.random() / 2)
 
-@coroutine
-def printer():
+async def human_controller(screen, moves):
+    while (ch := screen.getch()) != 27:
+        key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
+        if ch in key_mappings:
+            moves.put_nowait(('*', key_mappings[ch]))
+        await asyncio.sleep(0.01)  
+
+async def model(moves, state, height, width):
+    while state['*'] not in {p for id_, p in state.items() if id_ != '*'}:
+        id_, d = await moves.get()
+        p      = state[id_]
+        deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
+        new_p  = P(*[sum(a) for a in zip(p, deltas[d])])
+        if 0 <= new_p.x < width-1 and 0 <= new_p.y < height:
+            state[id_] = new_p
+
+async def view(state, screen):
     while True:
-        value = (yield)
-        print(value, end=' ')
-```
+        screen.clear()
+        for id_, p in state.items():
+            screen.addstr(p.y, p.x, str(id_))
+        await asyncio.sleep(0.01)  
 
-```python
->>> reader(adder(printer()))
-100 101 102 103 104 105 106 107 108 109
+curses.wrapper(main)
 ```
 <br>
 
@@ -2329,7 +2349,7 @@ with open('test.csv', encoding='utf-8', newline='') as file:
 
 Curses
 ------
-#### Clears the terminal, prints a message and waits for an ESC key press:
+#### Clears the terminal, prints a message and waits for the ESC key press:
 ```python
 from curses import wrapper, curs_set, ascii
 from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT

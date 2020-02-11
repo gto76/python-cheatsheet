@@ -1147,10 +1147,15 @@ Hello World!
 
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>z = MyIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>iter(z)
-&lt;generator object MyIterable.__iter__&gt;
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span> <span class="hljs-keyword">in</span> z
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>obj = MyIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<span class="hljs-meta">&gt;&gt;&gt; </span>itr = iter(obj)
+<span class="hljs-meta">&gt;&gt;&gt; </span>[next(itr), next(itr), next(itr)]
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>[el <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> iter(obj)]
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>[el <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> obj]
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span> <span class="hljs-keyword">in</span> obj
 <span class="hljs-keyword">True</span>
 </code></pre>
 <div><h3 id="collection">Collection</h3><ul>
@@ -1727,14 +1732,14 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
-</ul><div><h4 id="integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
+</ul></div><div><h4 id="integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8)</strong></li>
-</ul></div></div><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
+</ul></div><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8)</strong></li>
 </ul></div>
@@ -1840,10 +1845,10 @@ lock.release()
 
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-elementwise_sum  = map(op.add, list_a, list_b)
-product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
+product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
+elementwise_sum  = map(op.add, list_a, list_b)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
@@ -1941,46 +1946,63 @@ MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is
 ValueError: malformed node or string
 </code></pre></div>
 
-<div><h2 id="coroutine"><a href="#coroutine" name="coroutine">#</a>Coroutine</h2><ul>
-<li><strong>Any function that contains a <code class="python hljs"><span class="hljs-string">'(yield)'</span></code> expression returns a coroutine.</strong></li>
-<li><strong>Coroutines are similar to iterators, but data needs to be pulled out of an iterator by calling <code class="python hljs"><span class="hljs-string">'next(&lt;iter&gt;)'</span></code>, while we push data into the coroutine by calling <code class="python hljs"><span class="hljs-string">'&lt;coroutine&gt;.send(&lt;el&gt;)'</span></code>.</strong></li>
-<li><strong>Coroutines provide more powerful data routing possibilities than iterators.</strong></li>
-</ul><div><h3 id="helperdecorator">Helper Decorator</h3><ul>
-<li><strong>All coroutines must first be "primed" by calling <code class="python hljs"><span class="hljs-string">'next(&lt;coroutine&gt;)'</span></code>.</strong></li>
-<li><strong>Remembering to call next() is easy to forget.</strong></li>
-<li><strong>Solved by wrapping coroutine functions with the following decorator:</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">coroutine</span><span class="hljs-params">(func)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(*args, **kwargs)</span>:</span>
-        cr = func(*args, **kwargs)
-        next(cr)
-        <span class="hljs-keyword">return</span> cr
-    <span class="hljs-keyword">return</span> out
+<div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
+<li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>
+<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> is the main entry point for asynchronous programs.</strong></li>
+<li><strong>Fucntions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.</strong></li>
+</ul><div><h4 id="startsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Starts a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, enum, random
+
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)         <span class="hljs-comment"># Position</span>
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                  <span class="hljs-comment"># Direction</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
+    curses.curs_set(<span class="hljs-number">0</span>)                         <span class="hljs-comment"># Makes cursor invisible.</span>
+    screen.nodelay(<span class="hljs-keyword">True</span>)                       <span class="hljs-comment"># Makes getch() non-blocking.</span>
+    asyncio.run(main_coroutine(screen))        <span class="hljs-comment"># Starts running asyncio code.</span>
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
+    state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(<span class="hljs-number">30</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}
+    moves = asyncio.Queue()
+    coros = (*(random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)),
+             human_controller(screen, moves),
+             model(moves, state, *screen.getmaxyx()),
+             view(state, screen))
+    <span class="hljs-keyword">await</span> asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        moves.put_nowait((id_, random.choice(list(D))))
+        <span class="hljs-keyword">await</span> asyncio.sleep(random.random() / <span class="hljs-number">2</span>)
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
+    <span class="hljs-keyword">while</span> (ch := screen.getch()) != <span class="hljs-number">27</span>:
+        key_mappings = {<span class="hljs-number">259</span>: D.n, <span class="hljs-number">261</span>: D.e, <span class="hljs-number">258</span>: D.s, <span class="hljs-number">260</span>: D.w}
+        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:
+            moves.put_nowait((<span class="hljs-string">'*'</span>, key_mappings[ch]))
+        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.01</span>)  
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state, height, width)</span>:</span>
+    <span class="hljs-keyword">while</span> state[<span class="hljs-string">'*'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> {p <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items() <span class="hljs-keyword">if</span> id_ != <span class="hljs-string">'*'</span>}:
+        id_, d = <span class="hljs-keyword">await</span> moves.get()
+        p      = state[id_]
+        deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
+        new_p  = P(*[sum(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> zip(p, deltas[d])])
+        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= new_p.x &lt; width<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_p.y &lt; height:
+            state[id_] = new_p
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, screen)</span>:</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        screen.clear()
+        <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():
+            screen.addstr(p.y, p.x, str(id_))
+        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.01</span>)  
+
+curses.wrapper(main)
 </code></pre></div></div>
 
 
 
-
-<div><h3 id="pipelineexample">Pipeline Example</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reader</span><span class="hljs-params">(target)</span>:</span>
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
-        target.send(i)
-    target.close()
-
-<span class="hljs-meta">@coroutine</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">adder</span><span class="hljs-params">(target)</span>:</span>
-    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-        value = (<span class="hljs-keyword">yield</span>)
-        target.send(value + <span class="hljs-number">100</span>)
-
-<span class="hljs-meta">@coroutine</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printer</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-        value = (<span class="hljs-keyword">yield</span>)
-        print(value, end=<span class="hljs-string">' '</span>)
-</code></pre></div>
-
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>reader(adder(printer()))
-<span class="hljs-number">100</span> <span class="hljs-number">101</span> <span class="hljs-number">102</span> <span class="hljs-number">103</span> <span class="hljs-number">104</span> <span class="hljs-number">105</span> <span class="hljs-number">106</span> <span class="hljs-number">107</span> <span class="hljs-number">108</span> <span class="hljs-number">109</span>
-</code></pre>
 <p><br></p>
 <div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
@@ -2010,7 +2032,7 @@ pyplot.clf()                                   <span class="hljs-comment"># Clea
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="clearstheterminalprintsamessageandwaitsforanesckeypress">Clears the terminal, prints a message and waits for an ESC key press:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="clearstheterminalprintsamessageandwaitsfortheesckeypress">Clears the terminal, prints a message and waits for the ESC key press:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
 <span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
