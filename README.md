@@ -1210,11 +1210,6 @@ class MyIterable:
 
 ```python
 >>> obj = MyIterable([1, 2, 3])
->>> itr = iter(obj)
->>> [next(itr), next(itr), next(itr)]
-[1, 2, 3]
->>> [el for el in iter(obj)]
-[1, 2, 3]
 >>> [el for el in obj]
 [1, 2, 3]
 >>> 1 in obj
