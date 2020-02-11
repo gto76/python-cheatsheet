@@ -2245,7 +2245,7 @@ Coroutines
 * **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
 * **Fucntions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
 
-#### Starts a terminal game where you control an asterisk that must avoid numbers:
+#### Runs a terminal game where you control an asterisk that must avoid numbers:
 
 ```python
 import asyncio, collections, curses, enum, random
