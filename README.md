@@ -2100,10 +2100,10 @@ from operator import itemgetter, attrgetter, methodcaller
 
 ```python
 import operator as op
-sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
-sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 elementwise_sum  = map(op.add, list_a, list_b)
+sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
+sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
