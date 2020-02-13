@@ -1396,7 +1396,7 @@ line      = linecache.getline(filename, line_num)
 error_msg = traceback.format_exc()
 ```
 
-### Common Built-in Exceptions
+### Built-in Exceptions
 ```text
 BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
@@ -1420,13 +1420,6 @@ BaseException
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
 ```
 
-#### Useful built-in exceptions:
-```python
-raise TypeError('Argument is of wrong type!')
-raise ValueError('Argument is of right type but inappropriate value!')
-raise RuntimeError('None of above!')
-```
-
 #### Collections and their exceptions:
 ```text
 +-----------+------------+------------+------------+
@@ -1437,6 +1430,13 @@ raise RuntimeError('None of above!')
 | remove()  | ValueError |            |  KeyError  |
 | index()   | ValueError |            |            |
 +-----------+------------+------------+------------+
+```
+
+#### Useful built-in exceptions:
+```python
+raise TypeError('Argument is of wrong type!')
+raise ValueError('Argument is of right type but inappropriate value!')
+raise RuntimeError('None of above!')
 ```
 
 ### User-defined Exceptions
