@@ -1386,7 +1386,7 @@ except <exception> as <name>:
     raise
 ```
 
-### Attributes
+### Exception Object
 ```python
 arguments = <name>.args
 line_num  = <name>.__traceback__.tb_lineno
