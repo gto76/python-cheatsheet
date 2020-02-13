@@ -1329,7 +1329,7 @@ Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
 Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 
-#### User-defined functions can not be values, so they must be wrapped:
+#### User-defined functions cannot be values, so they must be wrapped:
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),

@@ -1256,7 +1256,7 @@ Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-st
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
 
-<div><h4 id="userdefinedfunctionscannotbevaluessotheymustbewrapped">User-defined functions can not be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
+<div><h4 id="userdefinedfunctionscannotbevaluessotheymustbewrapped">User-defined functions cannot be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
 LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">and</span> r),
                            <span class="hljs-string">'OR'</span> : partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre></div>
