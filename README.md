@@ -1180,7 +1180,7 @@ class MyOpen():
     def __enter__(self):
         self.file = open(self.filename)
         return self.file
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(self, exc_type, exception, traceback):
         self.file.close()
 ```
 
@@ -1329,13 +1329,13 @@ Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
 Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```
 
-#### Functions can not be values, so they must be wrapped:
+#### User-defined functions can not be values, so they must be wrapped:
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case, is to use `'and_'` and `'or_'` functions from module [operator](#operator).**
+* **Another solution in this particular case is to use built-in functions `'and_'` and `'or_'` from the module [operator](#operator).**
 
 
 Exceptions
@@ -1381,16 +1381,19 @@ raise <exception>(<el> [, ...])
 
 #### Re-raising caught exception:
 ```python
-except <exception>:
-    <code>
+except <exception> as <name>:
+    ...
     raise
 ```
 
-#### Useful built-in exceptions:
+### Attributes
 ```python
-raise TypeError('Argument is of wrong type!')
-raise ValueError('Argument is of right type but inappropriate value!')
-raise RuntimeError('None of above!')
+arguments = <name>.args
+line_num  = <name>.__traceback__.tb_lineno
+func_name = <name>.__traceback__.tb_frame.f_code.co_name
+filename  = <name>.__traceback__.tb_frame.f_code.co_filename
+line      = linecache.getline(filename, line_num)
+error_msg = traceback.format_exc()
 ```
 
 ### Common Built-in Exceptions
@@ -1415,6 +1418,13 @@ BaseException
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+```
+
+#### Useful built-in exceptions:
+```python
+raise TypeError('Argument is of wrong type!')
+raise ValueError('Argument is of right type but inappropriate value!')
+raise RuntimeError('None of above!')
 ```
 
 #### Collections and their exceptions:

@@ -1123,7 +1123,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__enter__</span><span class="hljs-params">(self)</span>:</span>
         self.file = open(self.filename)
         <span class="hljs-keyword">return</span> self.file
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, exc_type, exc_value, traceback)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, exc_type, exception, traceback)</span>:</span>
         self.file.close()
 </code></pre></div>
 
@@ -1256,13 +1256,13 @@ Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-st
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
 
-<div><h4 id="functionscannotbevaluessotheymustbewrapped">Functions can not be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
+<div><h4 id="userdefinedfunctionscannotbevaluessotheymustbewrapped">User-defined functions can not be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
 LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">and</span> r),
                            <span class="hljs-string">'OR'</span> : partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre></div>
 
 <ul>
-<li><strong>Another solution in this particular case, is to use <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> functions from module <a href="#operator">operator</a>.</strong></li>
+<li><strong>Another solution in this particular case is to use built-in functions <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> from the module <a href="#operator">operator</a>.</strong></li>
 </ul>
 <div><h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2><div><h3 id="basicexample">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     &lt;code&gt;
@@ -1297,14 +1297,17 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt; [, ...])
 </code></pre></div>
 
-<div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
-    &lt;code&gt;
+<div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;:
+    ...
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
 
-<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
-<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
-<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
+<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">arguments = &lt;name&gt;.args
+line_num  = &lt;name&gt;.__traceback__.tb_lineno
+func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
+filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
+line      = linecache.getline(filename, line_num)
+error_msg = traceback.format_exc()
 </code></pre></div>
 
 <div><h3 id="commonbuiltinexceptions">Common Built-in Exceptions</h3><pre><code class="text language-text">BaseException
@@ -1327,6 +1330,11 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+</code></pre></div>
+
+<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
+<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument is of right type but inappropriate value!'</span>)
+<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
 </code></pre></div>
 
 <div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">+-----------+------------+------------+------------+
@@ -1854,7 +1862,7 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 
 
 
-<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)               <span class="hljs-comment"># Returns names of object's attributes (incl. methods).</span>
+<div><h3 id="attributes-2">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)               <span class="hljs-comment"># Returns names of object's attributes (incl. methods).</span>
 &lt;dict&gt; = vars(&lt;object&gt;)              <span class="hljs-comment"># Returns dict of object's fields. Also &lt;object&gt;.__dict__.</span>
 </code></pre></div>
 
