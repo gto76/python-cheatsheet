@@ -1302,12 +1302,12 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
 
-<div><h3 id="exceptionobject">Exception Object</h3><pre><code class="python language-python hljs">arguments = &lt;name&gt;.args
-line_num  = &lt;name&gt;.__traceback__.tb_lineno
-func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
-filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
-line      = linecache.getline(filename, line_num)
-error_msg = traceback.format_exc()
+<div><h3 id="exceptionobject">Exception Object</h3><pre><code class="python language-python hljs">arguments   = &lt;name&gt;.args
+line_number = &lt;name&gt;.__traceback__.tb_lineno
+func_name   = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
+filename    = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
+line        = linecache.getline(filename, line_num)
+error_msg   = traceback.format_exc()
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
