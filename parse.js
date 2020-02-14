@@ -34,7 +34,7 @@ const TOC =
   '</code></pre>\n';
 
 const OS_RENAME =
-  'os.rename(from, to)                 <span class="hljs-comment"># Renames the file or directory.</span>\n' +
+  'os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory.</span>\n' +
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
 const SHUTIL_COPY = 

@@ -1679,7 +1679,7 @@ shutil.copytree(from, to)           # Copies the directory.
 ```
 
 ```python
-os.rename(from, to)                 # Renames the file or directory.
+os.rename(from, to)                 # Renames or moves the file or directory.
 os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```
 
