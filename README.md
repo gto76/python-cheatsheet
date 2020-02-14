@@ -1255,7 +1255,7 @@ class MySequence:
 
 ### Collections.abc.Sequence
 * **It's a richer interface than the basic sequence.**
-* **Extending it generates iter(), contains(), reversed(), index(), and count().**
+* **Extending it generates iter(), contains(), reversed(), index() and count().**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined.**
 ```python
 from collections import abc
