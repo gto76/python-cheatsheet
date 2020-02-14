@@ -1152,7 +1152,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
-* **When this cheatsheet uses `'<function>'` for an argument, it actually means `'<callable>'`.**
+* **When this cheatsheet uses `'<function>'` as an argument, it actually means `'<callable>'`.**
 ```python
 class Counter:
     def __init__(self):
@@ -1465,14 +1465,13 @@ Print
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
-
 * **Use `'file=sys.stderr'` for messages about errors.**
 * **Use `'flush=True'` to forcibly flush the stream.**
 
 ### Pretty Print
 ```python
 from pprint import pprint
-pprint(<collection>, width=80, depth=None)
+pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
 * **Levels deeper than 'depth' get replaced by '...'.**
 
@@ -1480,6 +1479,7 @@ pprint(<collection>, width=80, depth=None)
 Input
 -----
 **Reads a line from user input or pipe if present.**
+
 ```python
 <str> = input(prompt=None)
 ```
