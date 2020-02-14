@@ -1793,7 +1793,7 @@ import csv
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields get doubled or escaped.**
 * **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped.**
-* **`'lineterminator'` - How does writer terminate rows.**
+* **`'lineterminator'` - Specifies how writer terminates rows.**
 * **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
 * **`'escapechar'` - Character for escaping 'quotechar' if 'doublequote' is False.**
 
