@@ -1702,7 +1702,7 @@ import os
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends 'test.in' to the calculator running in standard mode and saves its output to 'test.out':
+#### Sends test.in to the calculator running in standard mode and saves its output to test.out:
 ```python
 >>> from shlex import split
 >>> os.popen('echo 1 + 1 > test.in')
@@ -1785,7 +1785,7 @@ import csv
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
-* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added on platforms that use '\r\n' linendings!**
+* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' linendings!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**

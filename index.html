@@ -1541,7 +1541,7 @@ shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes t
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
 </code></pre></div>
 
-<div><h4 id="sendstestintothecalculatorrunninginstandardmodeandsavesitsoutputtotestout">Sends 'test.in' to the calculator running in standard mode and saves its output to 'test.out':</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> shlex <span class="hljs-keyword">import</span> split
+<div><h4 id="sendstestintothecalculatorrunninginstandardmodeandsavesitsoutputtotestout">Sends test.in to the calculator running in standard mode and saves its output to test.out:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> shlex <span class="hljs-keyword">import</span> split
 <span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>run(split(<span class="hljs-string">'bc -s'</span>), stdin=open(<span class="hljs-string">'test.in'</span>), stdout=open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>))
 CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-string">'-s'</span>], returncode=<span class="hljs-number">0</span>)
@@ -1599,7 +1599,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or an extra '\r' will be added on platforms that use '\r\n' linendings!</strong></li>
+<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' linendings!</strong></li>
 </ul>
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values.</strong></li>
