@@ -2034,7 +2034,7 @@ Threading
 * **CPython interpreter can only run a single thread at a time.**
 * **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
-from threading import Thread, RLock
+from threading import Thread, RLock, Semaphore, Event, Barrier
 ```
 
 ### Thread
@@ -2061,6 +2061,13 @@ lock.release()
 lock = RLock()
 with lock:
     ...
+```
+
+### Semaphore, Event, Barrier
+```
+<Semaphore> = Semaphore(value=1)     # Lock that can be acquired 'value' times.
+<Event>     = Event()                # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(n_times)       # Method wait() blocks until it's called n_times.
 ```
 
 ### Thread Pool Executor

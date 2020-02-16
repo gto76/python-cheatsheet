@@ -1793,7 +1793,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
 <li><strong>That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock, Semaphore, Event, Barrier
 </code></pre></div>
 
 
@@ -1817,6 +1817,11 @@ lock.release()
 <div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
 <span class="hljs-keyword">with</span> lock:
     ...
+</code></pre></div>
+
+<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)     <span class="hljs-comment"># Lock that can be acquired 'value' times.</span>
+&lt;Event&gt;     = Event()                <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
+&lt;Barrier&gt;   = Barrier(n_times)       <span class="hljs-comment"># Method wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
