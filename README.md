@@ -53,6 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
 list_of_chars    = list(<str>)
 ```
+* **Check out module [operator](#operator) for alternative versions of examples.**
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
@@ -2112,10 +2113,10 @@ from operator import itemgetter, attrgetter, methodcaller
 
 ```python
 import operator as op
-product_of_elems = functools.reduce(op.mul, <collection>)
 elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
+product_of_elems = functools.reduce(op.mul, <collection>)
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
@@ -2127,7 +2128,7 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()                       # Returns names of local variables (including functions).
+<list> = dir()                       # Returns names of local variables (incl. functions).
 <dict> = vars()                      # Returns dict of local variables. Also locals().
 <dict> = globals()                   # Returns dict of global variables.
 ```
@@ -2135,7 +2136,7 @@ Introspection
 ### Attributes
 ```python
 <list> = dir(<object>)               # Returns names of object's attributes (incl. methods).
-<dict> = vars(<object>)              # Returns dict of object's fields. Also <object>.__dict__.
+<dict> = vars(<object>)              # Returns dict of object's fields. Also <obj>.__dict__.
 ```
 
 ```python

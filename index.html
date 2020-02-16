@@ -249,6 +249,9 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
+<ul>
+<li><strong>Check out module <a href="#operator">operator</a> for alternative versions of examples.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)     <span class="hljs-comment"># Returns number of occurrences. Also works on strings.</span>
 index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
 &lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
@@ -1853,14 +1856,14 @@ lock.release()
 
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
+product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of local variables (including functions).</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of local variables (incl. functions).</span>
 &lt;dict&gt; = vars()                      <span class="hljs-comment"># Returns dict of local variables. Also locals().</span>
 &lt;dict&gt; = globals()                   <span class="hljs-comment"># Returns dict of global variables.</span>
 </code></pre></div></div>
@@ -1868,7 +1871,7 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 
 
 <div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)               <span class="hljs-comment"># Returns names of object's attributes (incl. methods).</span>
-&lt;dict&gt; = vars(&lt;object&gt;)              <span class="hljs-comment"># Returns dict of object's fields. Also &lt;object&gt;.__dict__.</span>
+&lt;dict&gt; = vars(&lt;object&gt;)              <span class="hljs-comment"># Returns dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
