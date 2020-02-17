@@ -1294,6 +1294,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 
 <ul>
 <li><strong>Also catches subclasses of the exception.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the the error message.</strong></li>
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
 <span class="hljs-keyword">raise</span> &lt;exception&gt;()
@@ -1306,11 +1307,11 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </code></pre></div>
 
 <div><h3 id="exceptionobject">Exception Object</h3><pre><code class="python language-python hljs">arguments   = &lt;name&gt;.args
-line_number = &lt;name&gt;.__traceback__.tb_lineno
-func_name   = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
+exc_type    = &lt;name&gt;.__class__
 filename    = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
-line        = linecache.getline(filename, line_num)
-error_msg   = traceback.format_exc()
+func_name   = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
+line        = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
+error_msg   = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__)
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException

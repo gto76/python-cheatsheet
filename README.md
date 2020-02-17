@@ -1372,6 +1372,7 @@ except (<exception>, ...):
 except (<exception>, ...) as <name>:
 ```
 * **Also catches subclasses of the exception.**
+* **Use `'traceback.print_exc()'` to print the the error message.**
 
 ### Raising Exceptions
 ```python
@@ -1390,11 +1391,11 @@ except <exception> as <name>:
 ### Exception Object
 ```python
 arguments   = <name>.args
-line_number = <name>.__traceback__.tb_lineno
-func_name   = <name>.__traceback__.tb_frame.f_code.co_name
+exc_type    = <name>.__class__
 filename    = <name>.__traceback__.tb_frame.f_code.co_filename
-line        = linecache.getline(filename, line_num)
-error_msg   = traceback.format_exc()
+func_name   = <name>.__traceback__.tb_frame.f_code.co_name
+line        = linecache.getline(filename, <name>.__traceback__.tb_lineno)
+error_msg   = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
 ```
 
 ### Built-in Exceptions
