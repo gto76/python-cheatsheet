@@ -1146,7 +1146,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Objects returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
 * **File objects returned by the [open()](#open) function, etc.**
@@ -1404,7 +1404,6 @@ BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
  +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
  +-- Exception                    # User-defined exceptions should be derived from this class.
-      +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- ArithmeticError         # Base class for arithmetic errors.
       |    +-- ZeroDivisionError  # Raised when dividing by zero.
       +-- AttributeError          # Raised when an attribute is missing.
@@ -1417,6 +1416,7 @@ BaseException
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
       +-- RuntimeError            # Raised by errors that don't fall in other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
+      +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
