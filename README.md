@@ -2263,7 +2263,7 @@ Coroutines
 * **Coroutine definition starts with `'async'` and its call with `'await'`.**
 * **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
 * **Functions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
-* **Asyncio module also provides it's own Queue, Event, Lock and Semaphore classes.**
+* **Asyncio module also provides it's own [Queue](#queue), [Event](#semaphoreeventbarrier), [Lock](#lock) and [Semaphore](#semaphoreeventbarrier) classes.**
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 
