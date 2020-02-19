@@ -1372,7 +1372,7 @@ except (<exception>, ...):
 except (<exception>, ...) as <name>:
 ```
 * **Also catches subclasses of the exception.**
-* **Use `'traceback.print_exc()'` to print the the error message.**
+* **Use `'traceback.print_exc()'` to print the error message.**
 
 ### Raising Exceptions
 ```python
