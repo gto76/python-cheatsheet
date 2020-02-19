@@ -309,7 +309,7 @@ String
 ```python
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
-<list> = <str>.splitlines(keepends=False)    # Splits on line breaks. Keeps them if 'keepends'.
+<list> = <str>.splitlines(keepends=False)    # Splits on \n,\r,\r\n. Keeps them if 'keepends'.
 <str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as separator.
 ```
 
@@ -1676,19 +1676,19 @@ os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 
 ```python
-shutil.copy(from, to)               # Copies the file.
-shutil.copytree(from, to)           # Copies the directory.
+shutil.copy(from, to)               # Copies the file. 'to' can be a directory.
+shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
 ```
 
 ```python
-os.rename(from, to)                 # Renames or moves the file or directory.
+os.rename(from, to)                 # Renames/moves the file or directory.
 os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
 os.remove(<path>)                   # Deletes the file.
 os.rmdir(<path>)                    # Deletes the empty directory.
-shutil.rmtree(<path>)               # Deletes the non-empty directory.
+shutil.rmtree(<path>)               # Deletes the directory.
 ```
 
 ### Shell Commands

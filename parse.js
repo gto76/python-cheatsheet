@@ -34,12 +34,12 @@ const TOC =
   '</code></pre>\n';
 
 const OS_RENAME =
-  'os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory.</span>\n' +
+  'os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
 const SHUTIL_COPY = 
-  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>\n' +
-  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory.</span>\n';
+  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can be a directory.</span>\n' +
+  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
 
 const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +

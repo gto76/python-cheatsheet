@@ -426,7 +426,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
-&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on line breaks. Keeps them if 'keepends'.</span>
+&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on \n,\r,\r\n. Keeps them if 'keepends'.</span>
 &lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains a substring.</span>
@@ -1526,15 +1526,15 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 </code></pre>
-<pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file.</span>
-shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory.</span>
+<pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can be a directory.</span>
+shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory.</span>
+<pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>
 os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file.</span>
 os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory.</span>
-shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the non-empty directory.</span>
+shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
 &lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
