@@ -1390,12 +1390,12 @@ except <exception> as <name>:
 
 ### Exception Object
 ```python
-arguments   = <name>.args
-exc_type    = <name>.__class__
-filename    = <name>.__traceback__.tb_frame.f_code.co_filename
-func_name   = <name>.__traceback__.tb_frame.f_code.co_name
-line        = linecache.getline(filename, <name>.__traceback__.tb_lineno)
-error_msg   = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
+arguments = <name>.args
+exc_type  = <name>.__class__
+filename  = <name>.__traceback__.tb_frame.f_code.co_filename
+func_name = <name>.__traceback__.tb_frame.f_code.co_name
+line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
+error_msg = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
 ```
 
 ### Built-in Exceptions
@@ -2007,6 +2007,7 @@ Memory View
 <bin_file>.write(<mview>)                      # Writes mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
+<array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
 <int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
@@ -2263,7 +2264,7 @@ Coroutines
 * **Coroutine definition starts with `'async'` and its call with `'await'`.**
 * **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
 * **Functions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.**
-* **Asyncio module also provides it's own [Queue](#queue), [Event](#semaphoreeventbarrier), [Lock](#lock) and [Semaphore](#semaphoreeventbarrier) classes.**
+* **Asyncio module also provides its own [Queue](#queue), [Event](#semaphore-event-barrier), [Lock](#lock) and [Semaphore](#semaphore-event-barrier) classes.**
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 

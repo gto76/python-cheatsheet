@@ -1306,12 +1306,12 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
 
-<div><h3 id="exceptionobject">Exception Object</h3><pre><code class="python language-python hljs">arguments   = &lt;name&gt;.args
-exc_type    = &lt;name&gt;.__class__
-filename    = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
-func_name   = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
-line        = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
-error_msg   = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__)
+<div><h3 id="exceptionobject">Exception Object</h3><pre><code class="python language-python hljs">arguments = &lt;name&gt;.args
+exc_type  = &lt;name&gt;.__class__
+filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
+func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
+line      = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
+error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__)
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
@@ -1778,6 +1778,7 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 <div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Writes mview to the binary file.</span>
 &lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
 &lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
 &lt;int&gt;   = int.from_bytes(&lt;mview&gt;, byteorder=<span class="hljs-string">'big/little'</span>, signed=<span class="hljs-keyword">False</span>)
@@ -1963,7 +1964,7 @@ ValueError: malformed node or string
 <li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> is the main entry point for asynchronous programs.</strong></li>
 <li><strong>Functions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.</strong></li>
-<li><strong>Asyncio module also provides it's own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphoreeventbarrier">Semaphore</a> classes.</strong></li>
+<li><strong>Asyncio module also provides its own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphore-event-barrier">Semaphore</a> classes.</strong></li>
 </ul><div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, enum, random
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)         <span class="hljs-comment"># Position</span>
