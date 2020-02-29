@@ -2914,7 +2914,7 @@ Pygame
 
 #### Runs a simple Mario game:
 ```python
-import collections, enum, itertools, pygame, random, math, dataclasses, random
+import collections, dataclasses, enum, itertools, math, pygame, random 
 
 D      = enum.Enum('D', 'n e s w')
 P      = collections.namedtuple('P', 'x y')
@@ -2929,7 +2929,7 @@ FRAMES += [pygame.transform.flip(f, True, False) for f in FRAMES]
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode(2 * [SCR_SIDE*RECT_SIDE])
+    screen = pygame.display.set_mode(2 * [SCR_SIDE * RECT_SIDE])
     mario = Mario(pygame.Rect(16, 16, 16, 16), P(0, 0), False, itertools.cycle(range(3)))
     while not any(event.type == pygame.QUIT for event in pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
@@ -2949,17 +2949,15 @@ def update_speed(mario, pressed):
     mario.spd = P(*[max(-thresh, min(thresh, s)) for thresh, s in zip(MAX_SPEED, speed)])
 
 def update_position(mario):
-    larger_speed = max(abs(s) for s in mario.spd)
-    if larger_speed == 0:
-        return
     delta, old_p = P(0, 0), mario.rect.topleft
+    larger_speed = max(abs(s) for s in mario.spd)
     for _ in range(int(larger_speed)):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect))
         delta = P(*[s/larger_speed + dlt for s, dlt in zip(mario.spd, delta)])
         mario.rect.topleft = [sum(a) for a in zip(old_p, delta)]
 
 def get_boundaries(rect):
-    deltas = {D.n: (0, -1), D.e: (1, 0), D.s: (0, 1), D.w: (-1, 0)}
+    deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
     return {d for d, delta in deltas.items() if rect.move(delta).collidelist(FLOORS) != -1}
 
 def stop_on_collision(spd, bounds):

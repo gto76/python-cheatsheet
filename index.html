@@ -2475,7 +2475,7 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, enum, itertools, pygame, random, math, dataclasses, random
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, itertools, math, pygame, random 
 
 D      = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)
 P      = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
@@ -2490,7 +2490,7 @@ FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <spa
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     pygame.init()
-    screen = pygame.display.set_mode(<span class="hljs-number">2</span> * [SCR_SIDE*RECT_SIDE])
+    screen = pygame.display.set_mode(<span class="hljs-number">2</span> * [SCR_SIDE * RECT_SIDE])
     mario = Mario(pygame.Rect(<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, itertools.cycle(range(<span class="hljs-number">3</span>)))
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> any(event.type == pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
@@ -2510,17 +2510,15 @@ FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <spa
     mario.spd = P(*[max(-thresh, min(thresh, s)) <span class="hljs-keyword">for</span> thresh, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, speed)])
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario)</span>:</span>
-    larger_speed = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
-    <span class="hljs-keyword">if</span> larger_speed == <span class="hljs-number">0</span>:
-        <span class="hljs-keyword">return</span>
     delta, old_p = P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), mario.rect.topleft
+    larger_speed = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(int(larger_speed)):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect))
         delta = P(*[s/larger_speed + dlt <span class="hljs-keyword">for</span> s, dlt <span class="hljs-keyword">in</span> zip(mario.spd, delta)])
         mario.rect.topleft = [sum(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> zip(old_p, delta)]
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect)</span>:</span>
-    deltas = {D.n: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
+    deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">return</span> {d <span class="hljs-keyword">for</span> d, delta <span class="hljs-keyword">in</span> deltas.items() <span class="hljs-keyword">if</span> rect.move(delta).collidelist(FLOORS) != <span class="hljs-number">-1</span>}
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stop_on_collision</span><span class="hljs-params">(spd, bounds)</span>:</span>
