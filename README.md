@@ -1390,12 +1390,12 @@ except <exception> as <name>:
 
 ### Exception Object
 ```python
-arguments   = <name>.args
-exc_type    = <name>.__class__
-filename    = <name>.__traceback__.tb_frame.f_code.co_filename
-func_name   = <name>.__traceback__.tb_frame.f_code.co_name
-line        = linecache.getline(filename, <name>.__traceback__.tb_lineno)
-error_msg   = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
+arguments = <name>.args
+exc_type  = <name>.__class__
+filename  = <name>.__traceback__.tb_frame.f_code.co_filename
+func_name = <name>.__traceback__.tb_frame.f_code.co_name
+line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
+error_msg = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
 ```
 
 ### Built-in Exceptions
