@@ -2906,6 +2906,249 @@ simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
 
 
+Pygame
+------
+
+### Example
+
+#### Runs a simple Mario game:
+```python
+import collections, enum, itertools, pygame, random, math, dataclasses, random
+
+D      = enum.Enum('D', 'n e s w')
+P      = collections.namedtuple('P', 'x y')
+Mario  = dataclasses.make_dataclass('Mario', ['rect', 'spd', 'facing_left', 'running_cycle'])
+RECT_SIDE, SCR_SIDE, MAX_SPEED = 16, 25, P(x=5, y=10)
+COORDS = [p for p in itertools.product(range(SCR_SIDE), repeat=2) if {*p} & {0, SCR_SIDE-1}] +\
+         [(random.randint(1, SCR_SIDE-2), random.randint(2, SCR_SIDE-2)) for _ in range(62)]
+FLOORS = [pygame.Rect(x*RECT_SIDE, y*RECT_SIDE, RECT_SIDE, RECT_SIDE) for x, y in COORDS]
+IMAGE  = pygame.image.load('mario_bros.png')
+FRAMES = [IMAGE.subsurface(pygame.Rect(x*16, 0, 16, 16)) for x in range(7)]
+FRAMES += [pygame.transform.flip(f, True, False) for f in FRAMES]
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode(2 * [SCR_SIDE*RECT_SIDE])
+    mario = Mario(pygame.Rect(16, 16, 16, 16), P(0, 0), False, itertools.cycle(range(3)))
+    while not any(event.type == pygame.QUIT for event in pygame.event.get()):
+        keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
+        pressed = {keys.get(i, None) for i, on in enumerate(pygame.key.get_pressed()) if on}
+        update_speed(mario, pressed)
+        update_position(mario)
+        draw(screen, mario, pressed)
+        pygame.time.wait(28)
+
+def update_speed(mario, pressed):
+    bounds = get_boundaries(mario.rect)
+    x, y = mario.spd
+    x += 2 * ((D.e in pressed) - (D.w in pressed))
+    x = math.copysign(abs(x) - 1, x) if x else 0
+    y += 1 if D.s not in bounds else (-10 if D.n in pressed else 0)
+    speed = stop_on_collision(P(x, y), bounds)
+    mario.spd = P(*[max(-thresh, min(thresh, s)) for thresh, s in zip(MAX_SPEED, speed)])
+
+def update_position(mario):
+    larger_speed = max(abs(s) for s in mario.spd)
+    if larger_speed == 0:
+        return
+    delta, old_p = P(0, 0), mario.rect.topleft
+    for _ in range(int(larger_speed)):
+        mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect))
+        delta = P(*[s/larger_speed + dlt for s, dlt in zip(mario.spd, delta)])
+        mario.rect.topleft = [sum(a) for a in zip(old_p, delta)]
+
+def get_boundaries(rect):
+    deltas = {D.n: (0, -1), D.e: (1, 0), D.s: (0, 1), D.w: (-1, 0)}
+    return {d for d, delta in deltas.items() if rect.move(delta).collidelist(FLOORS) != -1}
+
+def stop_on_collision(spd, bounds):
+    return P(x=0 if (D.w in bounds and spd.x < 0) or (D.e in bounds and spd.x > 0) else spd.x,
+             y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
+
+def draw(screen, mario, pressed):
+    screen.fill((0, 0, 0))
+    mario.facing_left = mario.spd.x < 0 if mario.spd.x else mario.facing_left
+    screen.blit(FRAMES[get_frame_index(mario, pressed) + mario.facing_left*7], mario.rect)
+    for rect in FLOORS:
+        pygame.draw.rect(screen, (255, 100, 0), rect)
+    pygame.display.flip()
+
+def get_frame_index(mario, pressed):
+    if D.s not in get_boundaries(mario.rect):
+        return 4
+    return next(mario.running_cycle) if {D.w, D.e} & pressed else 6
+
+if __name__ == '__main__':
+    main()
+```
+
+
+Django
+------
+
+```bash
+$ pip3 install Django
+$ django-admin startproject mysite
+```
+
+```bash
+$ python3 manage.py startapp polls         # http://localhost:8000/polls/
+$ python3 manage.py migrate
+$ python3 manage.py makemigrations polls
+$ python3 manage.py sqlmigrate polls 0001
+$ python3 manage.py migrate
+$ python3 manage.py shell
+$ python3 manage.py createsuperuser
+$ python3 manage.py runserver              # http://127.0.0.1:8000/admin/
+$ python3 manage.py runserver              # Runs sever internally on port 8000.
+$ python3 manage.py runserver <port>       # Runs sever internally.
+$ python3 manage.py runserver 0:<port>     # Runs server externally.
+```
+
+### Files
+```text
+mysite/
+    mysite/
+        settings.py
+        urls.py
+    polls/
+        admin.py
+        models.py
+        urls.py
+        views.py
+        templates/
+            polls/
+                detail.html
+                index.html
+                results.html
+```
+
+#### mysite/mysite/settings.py
+```python
+INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
+    ...
+```
+
+#### mysite/mysite/urls.py
+```python
+urlpatterns = [
+    url(r'^polls/', include('polls.urls')),
+    url(r'^admin/', admin.site.urls),
+]
+```
+
+#### mysite/polls/admin.py
+```python
+from django.contrib import admin
+from .models import Question
+
+admin.site.register(Question)
+```
+
+#### mysite/polls/models.py
+```python
+from django.db import models
+
+class Question(models.Model):
+    text     = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text     = models.CharField(max_length=200)
+    votes    = models.IntegerField(default=0)
+```
+
+#### mysite/polls/urls.py
+```python
+from django.conf.urls import url
+from . import views
+
+app_name = 'polls'
+urlpatterns = [
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
+    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+]
+```
+
+#### mysite/polls/views.py
+```python
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.views import generic
+from .models import Choice, Question
+
+class IndexView(generic.ListView):
+    template_name       = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+    def get_queryset(self):
+        return Question.objects.order_by('-pub_date')[:5]
+
+class DetailView(generic.DetailView):
+    model         = Question
+    template_name = 'polls/detail.html'
+
+class ResultsView(generic.DetailView):
+    model         = Question
+    template_name = 'polls/results.html'
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        data = {'question': question, 'error_message': "You didn't select a choice."}
+        return render(request, 'polls/detail.html', data)
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+```
+
+#### mysite/polls/templates/polls/index.html
+```html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+```
+
+#### mysite/polls/templates/polls/detail.html
+```html
+<h1>{{ question.text }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" 
+        value="{{ choice.id }}"/>
+    <label for="choice{{ forloop.counter }}">{{ choice.text }}</label><br/>
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
+```
+
+#### mysite/polls/templates/polls/results.html
+```html
+<h1>{{ question.text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+```
+
+
 Basic Script Template
 ---------------------
 ```python

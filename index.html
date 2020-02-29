@@ -2474,6 +2474,216 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, enum, itertools, pygame, random, math, dataclasses, random
+
+D      = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)
+P      = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
+Mario  = dataclasses.make_dataclass(<span class="hljs-string">'Mario'</span>, [<span class="hljs-string">'rect'</span>, <span class="hljs-string">'spd'</span>, <span class="hljs-string">'facing_left'</span>, <span class="hljs-string">'running_cycle'</span>])
+RECT_SIDE, SCR_SIDE, MAX_SPEED = <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, P(x=<span class="hljs-number">5</span>, y=<span class="hljs-number">10</span>)
+COORDS = [p <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> itertools.product(range(SCR_SIDE), repeat=<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> {*p} &amp; {<span class="hljs-number">0</span>, SCR_SIDE<span class="hljs-number">-1</span>}] +\
+         [(random.randint(<span class="hljs-number">1</span>, SCR_SIDE<span class="hljs-number">-2</span>), random.randint(<span class="hljs-number">2</span>, SCR_SIDE<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">62</span>)]
+FLOORS = [pygame.Rect(x*RECT_SIDE, y*RECT_SIDE, RECT_SIDE, RECT_SIDE) <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> COORDS]
+IMAGE  = pygame.image.load(<span class="hljs-string">'mario_bros.png'</span>)
+FRAMES = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">7</span>)]
+FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">False</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> FRAMES]
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    pygame.init()
+    screen = pygame.display.set_mode(<span class="hljs-number">2</span> * [SCR_SIDE*RECT_SIDE])
+    mario = Mario(pygame.Rect(<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, itertools.cycle(range(<span class="hljs-number">3</span>)))
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> any(event.type == pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
+        keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
+        pressed = {keys.get(i, <span class="hljs-keyword">None</span>) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pygame.key.get_pressed()) <span class="hljs-keyword">if</span> on}
+        update_speed(mario, pressed)
+        update_position(mario)
+        draw(screen, mario, pressed)
+        pygame.time.wait(<span class="hljs-number">28</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, pressed)</span>:</span>
+    bounds = get_boundaries(mario.rect)
+    x, y = mario.spd
+    x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
+    x = math.copysign(abs(x) - <span class="hljs-number">1</span>, x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">else</span> (<span class="hljs-number">-10</span> <span class="hljs-keyword">if</span> D.n <span class="hljs-keyword">in</span> pressed <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+    speed = stop_on_collision(P(x, y), bounds)
+    mario.spd = P(*[max(-thresh, min(thresh, s)) <span class="hljs-keyword">for</span> thresh, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, speed)])
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario)</span>:</span>
+    larger_speed = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
+    <span class="hljs-keyword">if</span> larger_speed == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">return</span>
+    delta, old_p = P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), mario.rect.topleft
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(int(larger_speed)):
+        mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect))
+        delta = P(*[s/larger_speed + dlt <span class="hljs-keyword">for</span> s, dlt <span class="hljs-keyword">in</span> zip(mario.spd, delta)])
+        mario.rect.topleft = [sum(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> zip(old_p, delta)]
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect)</span>:</span>
+    deltas = {D.n: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
+    <span class="hljs-keyword">return</span> {d <span class="hljs-keyword">for</span> d, delta <span class="hljs-keyword">in</span> deltas.items() <span class="hljs-keyword">if</span> rect.move(delta).collidelist(FLOORS) != <span class="hljs-number">-1</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stop_on_collision</span><span class="hljs-params">(spd, bounds)</span>:</span>
+    <span class="hljs-keyword">return</span> P(x=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.w <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.e <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.x,
+             y=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.n <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.s <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.y)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen, mario, pressed)</span>:</span>
+    screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+    mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
+    screen.blit(FRAMES[get_frame_index(mario, pressed) + mario.facing_left*<span class="hljs-number">7</span>], mario.rect)
+    <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> FLOORS:
+        pygame.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>), rect)
+    pygame.display.flip()
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_frame_index</span><span class="hljs-params">(mario, pressed)</span>:</span>
+    <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect):
+        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
+    <span class="hljs-keyword">return</span> next(mario.running_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    main()
+</code></pre></div></div></div>
+
+
+
+<div><h2 id="django"><a href="#django" name="django">#</a>Django</h2><pre><code class="bash language-bash hljs">$ pip3 install Django
+$ django-admin startproject mysite
+</code></pre></div>
+
+<pre><code class="bash language-bash hljs">$ python3 manage.py startapp polls         <span class="hljs-comment"># http://localhost:8000/polls/</span>
+$ python3 manage.py migrate
+$ python3 manage.py makemigrations polls
+$ python3 manage.py sqlmigrate polls 0001
+$ python3 manage.py migrate
+$ python3 manage.py shell
+$ python3 manage.py createsuperuser
+$ python3 manage.py runserver              <span class="hljs-comment"># http://127.0.0.1:8000/admin/</span>
+$ python3 manage.py runserver              <span class="hljs-comment"># Runs sever internally on port 8000.</span>
+$ python3 manage.py runserver &lt;port&gt;       <span class="hljs-comment"># Runs sever internally.</span>
+$ python3 manage.py runserver 0:&lt;port&gt;     <span class="hljs-comment"># Runs server externally.</span>
+</code></pre>
+<div><h3 id="files">Files</h3><pre><code class="text language-text">mysite/
+    mysite/
+        settings.py
+        urls.py
+    polls/
+        admin.py
+        models.py
+        urls.py
+        views.py
+        templates/
+            polls/
+                detail.html
+                index.html
+                results.html
+</code></pre></div>
+
+<div><h4 id="mysitemysitesettingspy">mysite/mysite/settings.py</h4><pre><code class="python language-python hljs">INSTALLED_APPS = [
+    <span class="hljs-string">'polls.apps.PollsConfig'</span>,
+    ...
+</code></pre></div>
+
+<div><h4 id="mysitemysiteurlspy">mysite/mysite/urls.py</h4><pre><code class="python language-python hljs">urlpatterns = [
+    url(<span class="hljs-string">r'^polls/'</span>, include(<span class="hljs-string">'polls.urls'</span>)),
+    url(<span class="hljs-string">r'^admin/'</span>, admin.site.urls),
+]
+</code></pre></div>
+
+<div><h4 id="mysitepollsadminpy">mysite/polls/admin.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Question
+
+admin.site.register(Question)
+</code></pre></div>
+
+<div><h4 id="mysitepollsmodelspy">mysite/polls/models.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Question</span><span class="hljs-params">(models.Model)</span>:</span>
+    text     = models.CharField(max_length=<span class="hljs-number">200</span>)
+    pub_date = models.DateTimeField(<span class="hljs-string">'date published'</span>)
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Choice</span><span class="hljs-params">(models.Model)</span>:</span>
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text     = models.CharField(max_length=<span class="hljs-number">200</span>)
+    votes    = models.IntegerField(default=<span class="hljs-number">0</span>)
+</code></pre></div>
+
+<div><h4 id="mysitepollsurlspy">mysite/polls/urls.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
+<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views
+
+app_name = <span class="hljs-string">'polls'</span>
+urlpatterns = [
+    url(<span class="hljs-string">r'^$'</span>, views.IndexView.as_view(), name=<span class="hljs-string">'index'</span>),
+    url(<span class="hljs-string">r'^(?P&lt;pk&gt;[0-9]+)/$'</span>, views.DetailView.as_view(), name=<span class="hljs-string">'detail'</span>),
+    url(<span class="hljs-string">r'^(?P&lt;pk&gt;[0-9]+)/results/$'</span>, views.ResultsView.as_view(), name=<span class="hljs-string">'results'</span>),
+    url(<span class="hljs-string">r'^(?P&lt;question_id&gt;[0-9]+)/vote/$'</span>, views.vote, name=<span class="hljs-string">'vote'</span>),
+]
+</code></pre></div>
+
+<div><h4 id="mysitepollsviewspy">mysite/polls/views.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404, render
+<span class="hljs-keyword">from</span> django.http <span class="hljs-keyword">import</span> HttpResponseRedirect
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> reverse
+<span class="hljs-keyword">from</span> django.views <span class="hljs-keyword">import</span> generic
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Choice, Question
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IndexView</span><span class="hljs-params">(generic.ListView)</span>:</span>
+    template_name       = <span class="hljs-string">'polls/index.html'</span>
+    context_object_name = <span class="hljs-string">'latest_question_list'</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> Question.objects.order_by(<span class="hljs-string">'-pub_date'</span>)[:<span class="hljs-number">5</span>]
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DetailView</span><span class="hljs-params">(generic.DetailView)</span>:</span>
+    model         = Question
+    template_name = <span class="hljs-string">'polls/detail.html'</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultsView</span><span class="hljs-params">(generic.DetailView)</span>:</span>
+    model         = Question
+    template_name = <span class="hljs-string">'polls/results.html'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vote</span><span class="hljs-params">(request, question_id)</span>:</span>
+    question = get_object_or_404(Question, pk=question_id)
+    <span class="hljs-keyword">try</span>:
+        selected_choice = question.choice_set.get(pk=request.POST[<span class="hljs-string">'choice'</span>])
+    <span class="hljs-keyword">except</span> (KeyError, Choice.DoesNotExist):
+        data = {<span class="hljs-string">'question'</span>: question, <span class="hljs-string">'error_message'</span>: <span class="hljs-string">"You didn't select a choice."</span>}
+        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">'polls/detail.html'</span>, data)
+    <span class="hljs-keyword">else</span>:
+        selected_choice.votes += <span class="hljs-number">1</span>
+        selected_choice.save()
+        <span class="hljs-keyword">return</span> HttpResponseRedirect(reverse(<span class="hljs-string">'polls:results'</span>, args=(question.id,)))
+</code></pre></div>
+
+<div><h4 id="mysitepollstemplatespollsindexhtml">mysite/polls/templates/polls/index.html</h4><pre><code class="html language-html python hljs xml">{% if latest_question_list %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+    {% for question in latest_question_list %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"{% url 'polls:detail' question.id %}"</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    {% endfor %}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+{% else %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>No polls are available.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+{% endif %}
+</code></pre></div>
+
+<div><h4 id="mysitepollstemplatespollsdetailhtml">mysite/polls/templates/polls/detail.html</h4><pre><code class="html language-html python hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+{% if error_message %}<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>{{ error_message }}<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>{% endif %}
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"{% url 'polls:vote' question.id %}"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span>&gt;</span>
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"choice"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"choice{{ forloop.counter }}"</span> 
+        <span class="hljs-attr">value</span>=<span class="hljs-string">"{{ choice.id }}"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"choice{{ forloop.counter }}"</span>&gt;</span>{{ choice.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span>
+{% endfor %}
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Vote"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre></div>
+
+<div><h4 id="mysitepollstemplatespollsresultshtml">mysite/polls/templates/polls/results.html</h4><pre><code class="html language-html python hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+{% for choice in question.choice_set.all %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{{ choice.text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+{% endfor %}
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"{% url 'polls:detail' question.id %}"</span>&gt;</span>Vote again?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre></div>
+
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># Usage: .py</span>
