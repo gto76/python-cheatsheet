@@ -2007,6 +2007,7 @@ Memory View
 <bin_file>.write(<mview>)                      # Writes mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
+<array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
 <int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
