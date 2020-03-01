@@ -2914,7 +2914,8 @@ Pygame
 
 #### Runs a simple Mario game:
 ```python
-import collections, dataclasses, enum, itertools, math, pygame, random 
+import collections, dataclasses, enum, io, itertools, math, pygame, random, urllib
+from urllib.request import urlopen
 
 D      = enum.Enum('D', 'n e s w')
 P      = collections.namedtuple('P', 'x y')
@@ -2923,9 +2924,11 @@ RECT_SIDE, SCR_SIDE, MAX_SPEED = 16, 25, P(x=5, y=10)
 COORDS = [p for p in itertools.product(range(SCR_SIDE), repeat=2) if {*p} & {0, SCR_SIDE-1}] +\
          [(random.randint(1, SCR_SIDE-2), random.randint(2, SCR_SIDE-2)) for _ in range(62)]
 FLOORS = [pygame.Rect(x*RECT_SIDE, y*RECT_SIDE, RECT_SIDE, RECT_SIDE) for x, y in COORDS]
-IMAGE  = pygame.image.load('mario_bros.png')
+URL    = 'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/web/mario_bros.png'
+IMAGE  = pygame.image.load(io.BytesIO(urlopen(URL).read()))
 FRAMES = [IMAGE.subsurface(pygame.Rect(x*16, 0, 16, 16)) for x in range(7)]
 FRAMES += [pygame.transform.flip(f, True, False) for f in FRAMES]
+TILES  = [IMAGE.subsurface(pygame.Rect(x*16, 0, 16, 16)) for x in range(9, 14)]
 
 def main():
     pygame.init()
@@ -2965,11 +2968,12 @@ def stop_on_collision(spd, bounds):
              y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
 
 def draw(screen, mario, pressed):
-    screen.fill((0, 0, 0))
+    screen.fill((85, 168, 255))
     mario.facing_left = mario.spd.x < 0 if mario.spd.x else mario.facing_left
     screen.blit(FRAMES[get_frame_index(mario, pressed) + mario.facing_left*7], mario.rect)
     for rect in FLOORS:
-        pygame.draw.rect(screen, (255, 100, 0), rect)
+        tile_index = 1 if {*rect.topleft} & {0, (SCR_SIDE-1)*RECT_SIDE} else 0
+        screen.blit(TILES[tile_index], rect)
     pygame.display.flip()
 
 def get_frame_index(mario, pressed):

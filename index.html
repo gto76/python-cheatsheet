@@ -2475,7 +2475,8 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, itertools, math, pygame, random 
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools, math, pygame, random, urllib
+<span class="hljs-keyword">from</span> urllib.request <span class="hljs-keyword">import</span> urlopen
 
 D      = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)
 P      = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
@@ -2484,9 +2485,11 @@ RECT_SIDE, SCR_SIDE, MAX_SPEED = <span class="hljs-number">16</span>, <span clas
 COORDS = [p <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> itertools.product(range(SCR_SIDE), repeat=<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> {*p} &amp; {<span class="hljs-number">0</span>, SCR_SIDE<span class="hljs-number">-1</span>}] +\
          [(random.randint(<span class="hljs-number">1</span>, SCR_SIDE<span class="hljs-number">-2</span>), random.randint(<span class="hljs-number">2</span>, SCR_SIDE<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">62</span>)]
 FLOORS = [pygame.Rect(x*RECT_SIDE, y*RECT_SIDE, RECT_SIDE, RECT_SIDE) <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> COORDS]
-IMAGE  = pygame.image.load(<span class="hljs-string">'mario_bros.png'</span>)
+URL    = <span class="hljs-string">'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/web/mario_bros.png'</span>
+IMAGE  = pygame.image.load(io.BytesIO(urlopen(URL).read()))
 FRAMES = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">7</span>)]
 FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">False</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> FRAMES]
+TILES  = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">9</span>, <span class="hljs-number">14</span>)]
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     pygame.init()
@@ -2526,11 +2529,12 @@ FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <spa
              y=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.n <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.s <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.y)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen, mario, pressed)</span>:</span>
-    screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+    screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
     mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
     screen.blit(FRAMES[get_frame_index(mario, pressed) + mario.facing_left*<span class="hljs-number">7</span>], mario.rect)
     <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> FLOORS:
-        pygame.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>), rect)
+        tile_index = <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SCR_SIDE<span class="hljs-number">-1</span>)*RECT_SIDE} <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+        screen.blit(TILES[tile_index], rect)
     pygame.display.flip()
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_frame_index</span><span class="hljs-params">(mario, pressed)</span>:</span>
