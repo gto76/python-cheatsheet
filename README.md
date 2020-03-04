@@ -2917,13 +2917,14 @@ Pygame
 import collections, dataclasses, enum, io, math, pygame, urllib.request, itertools as it
 from random import randint
 
-P = collections.namedtuple('P', 'x y')
-D = enum.Enum('D', 'n e s w')
-SIZE, MAX_SPEED = 25, P(5, 10)
+P = collections.namedtuple('P', 'x y')     # Position
+D = enum.Enum('D', 'n e s w')              # Direction
+SIZE, MAX_SPEED = 25, P(5, 10)             # Screen size, Mario speed
 
 def main():
-    def get_rect(x, y):
-        return pygame.Rect(x*16, y*16, 16, 16)
+    def get_screen():
+        pygame.init()
+        return pygame.display.set_mode(2 * [SIZE*16])
     def get_images():
         url = 'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'
         img = pygame.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
@@ -2935,28 +2936,25 @@ def main():
         positions = [p for p in it.product(range(SIZE), repeat=2) if {*p} & {0, SIZE-1}] + \
             [(randint(1, SIZE-2), randint(2, SIZE-2)) for _ in range(SIZE**2 // 10)]
         return [get_rect(*p) for p in positions]
-    def get_screen():
-        pygame.init()
-        return pygame.display.set_mode(2 * [SIZE*16])
-    run(get_images(), get_mario(), get_tiles(), get_screen())
+    def get_rect(x, y):
+        return pygame.Rect(x*16, y*16, 16, 16)
+    run(get_screen(), get_images(), get_mario(), get_tiles())
 
-def run(images, mario, tiles, screen):
+def run(screen, images, mario, tiles):
     while all(event.type != pygame.QUIT for event in pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
         pressed = {keys.get(i, None) for i, on in enumerate(pygame.key.get_pressed()) if on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
-        draw(mario, tiles, screen, pressed, images)
+        draw(screen, images, mario, tiles, pressed)
         pygame.time.wait(28)
 
 def update_speed(mario, tiles, pressed):
-    bounds = get_boundaries(mario.rect, tiles)
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
     x = math.copysign(abs(x) - 1, x) if x else 0
-    y += 1 if D.s not in bounds else (-10 if D.n in pressed else 0)
-    speed = stop_on_collision(P(x, y), bounds)
-    mario.spd = P(*[max(-thresh, min(thresh, s)) for thresh, s in zip(MAX_SPEED, speed)])
+    y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (-10 if D.n in pressed else 0)
+    mario.spd = P(*[max(-thresh, min(thresh, s)) for thresh, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
     old_p, delta = mario.rect.topleft, P(0, 0)
@@ -2974,7 +2972,7 @@ def stop_on_collision(spd, bounds):
     return P(x=0 if (D.w in bounds and spd.x < 0) or (D.e in bounds and spd.x > 0) else spd.x,
              y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
 
-def draw(mario, tiles, screen, pressed, images):
+def draw(screen, images, mario, tiles, pressed):
     def get_frame_index():
         if D.s not in get_boundaries(mario.rect, tiles):
             return 4
