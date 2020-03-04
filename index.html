@@ -2475,36 +2475,43 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplemariogame">Runs a simple Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools, math, pygame, random, urllib
-<span class="hljs-keyword">from</span> urllib.request <span class="hljs-keyword">import</span> urlopen
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplesupermariogame">Runs a simple Super Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
+<span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
-D      = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)
-P      = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
-Mario  = dataclasses.make_dataclass(<span class="hljs-string">'Mario'</span>, [<span class="hljs-string">'rect'</span>, <span class="hljs-string">'spd'</span>, <span class="hljs-string">'facing_left'</span>, <span class="hljs-string">'running_cycle'</span>])
-RECT_SIDE, SCR_SIDE, MAX_SPEED = <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, P(x=<span class="hljs-number">5</span>, y=<span class="hljs-number">10</span>)
-COORDS = [p <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> itertools.product(range(SCR_SIDE), repeat=<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> {*p} &amp; {<span class="hljs-number">0</span>, SCR_SIDE<span class="hljs-number">-1</span>}] +\
-         [(random.randint(<span class="hljs-number">1</span>, SCR_SIDE<span class="hljs-number">-2</span>), random.randint(<span class="hljs-number">2</span>, SCR_SIDE<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">62</span>)]
-FLOORS = [pygame.Rect(x*RECT_SIDE, y*RECT_SIDE, RECT_SIDE, RECT_SIDE) <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> COORDS]
-URL    = <span class="hljs-string">'https://raw.githubusercontent.com/gto76/python-cheatsheet/master/web/mario_bros.png'</span>
-IMAGE  = pygame.image.load(io.BytesIO(urlopen(URL).read()))
-FRAMES = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">7</span>)]
-FRAMES += [pygame.transform.flip(f, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">False</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> FRAMES]
-TILES  = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">9</span>, <span class="hljs-number">14</span>)]
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)
+SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    pygame.init()
-    screen = pygame.display.set_mode(<span class="hljs-number">2</span> * [SCR_SIDE * RECT_SIDE])
-    mario = Mario(pygame.Rect(<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, itertools.cycle(range(<span class="hljs-number">3</span>)))
-    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> any(event.type == pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_rect</span><span class="hljs-params">(x, y)</span>:</span>
+        <span class="hljs-keyword">return</span> pygame.Rect(x*<span class="hljs-number">16</span>, y*<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_images</span><span class="hljs-params">()</span>:</span>
+        url = <span class="hljs-string">'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'</span>
+        img = pygame.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
+        <span class="hljs-keyword">return</span> [img.subsurface(get_rect(x, <span class="hljs-number">0</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(img.get_width() // <span class="hljs-number">16</span>)]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_mario</span><span class="hljs-params">()</span>:</span>
+        Mario = dataclasses.make_dataclass(<span class="hljs-string">'Mario'</span>, <span class="hljs-string">'rect spd facing_left frame_cycle'</span>.split())
+        <span class="hljs-keyword">return</span> Mario(get_rect(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, it.cycle(range(<span class="hljs-number">3</span>)))
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_tiles</span><span class="hljs-params">()</span>:</span>
+        positions = [p <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> it.product(range(SIZE), repeat=<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> {*p} &amp; {<span class="hljs-number">0</span>, SIZE<span class="hljs-number">-1</span>}] + \
+            [(randint(<span class="hljs-number">1</span>, SIZE<span class="hljs-number">-2</span>), randint(<span class="hljs-number">2</span>, SIZE<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(SIZE**<span class="hljs-number">2</span> // <span class="hljs-number">10</span>)]
+        <span class="hljs-keyword">return</span> [get_rect(*p) <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> positions]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
+        pygame.init()
+        <span class="hljs-keyword">return</span> pygame.display.set_mode(<span class="hljs-number">2</span> * [SIZE*<span class="hljs-number">16</span>])
+    run(get_images(), get_mario(), get_tiles(), get_screen())
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(images, mario, tiles, screen)</span>:</span>
+    <span class="hljs-keyword">while</span> all(event.type != pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
         pressed = {keys.get(i, <span class="hljs-keyword">None</span>) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pygame.key.get_pressed()) <span class="hljs-keyword">if</span> on}
-        update_speed(mario, pressed)
-        update_position(mario)
-        draw(screen, mario, pressed)
+        update_speed(mario, tiles, pressed)
+        update_position(mario, tiles)
+        draw(mario, tiles, screen, pressed, images)
         pygame.time.wait(<span class="hljs-number">28</span>)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, pressed)</span>:</span>
-    bounds = get_boundaries(mario.rect)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
+    bounds = get_boundaries(mario.rect, tiles)
     x, y = mario.spd
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
     x = math.copysign(abs(x) - <span class="hljs-number">1</span>, x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
@@ -2512,35 +2519,33 @@ TILES  = [IMAGE.subsurface(pygame.Rect(x*<span class="hljs-number">16</span>, <s
     speed = stop_on_collision(P(x, y), bounds)
     mario.spd = P(*[max(-thresh, min(thresh, s)) <span class="hljs-keyword">for</span> thresh, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, speed)])
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario)</span>:</span>
-    delta, old_p = P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), mario.rect.topleft
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>
+    old_p, delta = mario.rect.topleft, P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
     larger_speed = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(int(larger_speed)):
-        mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect))
-        delta = P(*[s/larger_speed + dlt <span class="hljs-keyword">for</span> s, dlt <span class="hljs-keyword">in</span> zip(mario.spd, delta)])
-        mario.rect.topleft = [sum(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> zip(old_p, delta)]
+        mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
+        delta = P(*[a + s/larger_speed <span class="hljs-keyword">for</span> a, s <span class="hljs-keyword">in</span> zip(delta, mario.spd)])
+        mario.rect.topleft = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(old_p, delta)]
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect)</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>
     deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-    <span class="hljs-keyword">return</span> {d <span class="hljs-keyword">for</span> d, delta <span class="hljs-keyword">in</span> deltas.items() <span class="hljs-keyword">if</span> rect.move(delta).collidelist(FLOORS) != <span class="hljs-number">-1</span>}
+    <span class="hljs-keyword">return</span> {d <span class="hljs-keyword">for</span> d, delta <span class="hljs-keyword">in</span> deltas.items() <span class="hljs-keyword">if</span> rect.move(delta).collidelist(tiles) != <span class="hljs-number">-1</span>}
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stop_on_collision</span><span class="hljs-params">(spd, bounds)</span>:</span>
     <span class="hljs-keyword">return</span> P(x=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.w <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.e <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.x,
              y=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.n <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.s <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.y)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen, mario, pressed)</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(mario, tiles, screen, pressed, images)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_frame_index</span><span class="hljs-params">()</span>:</span>
+        <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles):
+            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
+        <span class="hljs-keyword">return</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
-    mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
-    screen.blit(FRAMES[get_frame_index(mario, pressed) + mario.facing_left*<span class="hljs-number">7</span>], mario.rect)
-    <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> FLOORS:
-        tile_index = <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SCR_SIDE<span class="hljs-number">-1</span>)*RECT_SIDE} <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
-        screen.blit(TILES[tile_index], rect)
+    mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.e, D.w} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
+    screen.blit(images[get_frame_index() + mario.facing_left*<span class="hljs-number">9</span>], mario.rect)
+    <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> tiles:
+        screen.blit(images[<span class="hljs-number">19</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SIZE<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>} <span class="hljs-keyword">else</span> <span class="hljs-number">18</span>], rect)
     pygame.display.flip()
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_frame_index</span><span class="hljs-params">(mario, pressed)</span>:</span>
-    <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect):
-        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-    <span class="hljs-keyword">return</span> next(mario.running_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
