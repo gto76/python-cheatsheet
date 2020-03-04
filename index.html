@@ -1990,7 +1990,8 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
         <span class="hljs-keyword">await</span> asyncio.sleep(random.random() / <span class="hljs-number">2</span>)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
-    <span class="hljs-keyword">while</span> (ch := screen.getch()) != <span class="hljs-number">27</span>:
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        ch = screen.getch()
         key_mappings = {<span class="hljs-number">259</span>: D.n, <span class="hljs-number">261</span>: D.e, <span class="hljs-number">258</span>: D.s, <span class="hljs-number">260</span>: D.w}
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:
             moves.put_nowait((<span class="hljs-string">'*'</span>, key_mappings[ch]))

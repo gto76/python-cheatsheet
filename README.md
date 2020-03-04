@@ -2294,7 +2294,8 @@ async def random_controller(id_, moves):
         await asyncio.sleep(random.random() / 2)
 
 async def human_controller(screen, moves):
-    while (ch := screen.getch()) != 27:
+    while True:
+        ch = screen.getch()
         key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
         if ch in key_mappings:
             moves.put_nowait(('*', key_mappings[ch]))
