@@ -53,7 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
 list_of_chars    = list(<str>)
 ```
-* **Check out module [operator](#operator) for alternative versions of examples.**
+* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.**
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
