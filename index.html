@@ -2476,7 +2476,66 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="example-3">Example</h3><div><h4 id="runsasimplesupermariogame">Runs a simple Super Mario game:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="basicexample-1">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
+<span class="hljs-keyword">import</span> pygame <span class="hljs-keyword">as</span> pg
+pg.init()
+screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
+rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">235</span>, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>)
+<span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
+    keys = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-3</span>), pg.K_RIGHT: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>), pg.K_LEFT: (<span class="hljs-number">-3</span>, <span class="hljs-number">0</span>)}
+    <span class="hljs-keyword">for</span> delta <span class="hljs-keyword">in</span> {keys.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> on}:
+        rect = rect.move(delta) <span class="hljs-keyword">if</span> delta <span class="hljs-keyword">else</span> rect
+    screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+    pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
+    pg.display.flip()
+</code></pre></div></div>
+
+
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
+&lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
+&lt;Surface&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()     <span class="hljs-comment"># Loads an image.</span>
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
+&lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
+&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
+&lt;Surface&gt; = pg.transform.rotate(&lt;Surface&gt;, angle)
+&lt;Surface&gt; = pg.transform.scale(&lt;Surface&gt;, (width, height))
+</code></pre>
+<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt;  = pg.Rect(topleft_x, topleft_y, width, height)  <span class="hljs-comment"># x, y, w/width, h/height</span>
+&lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery/bottom/left/right/top
+&lt;tuple&gt; = &lt;Rect&gt;.topleft/center/topright/bottomright/bottomleft
+&lt;tuple&gt; = &lt;Rect&gt;.midtop/midright/midbottom/midleft
+&lt;bool&gt;  = &lt;Rect&gt;.contains(&lt;Rect&gt;)
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;Rect&gt;  = &lt;Rect&gt;.move(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+&lt;Rect&gt;.move_ip(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+&lt;Rect&gt;  = &lt;Rect&gt;.inflate(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+&lt;Rect&gt;.inflate_ip(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+</code></pre>
+<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+&lt;bool&gt;  = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)
+index   = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first coliding Rect or -1.</span>
+indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colinding Rects.</span>
+(key, value) = &lt;Rect&gt;.collidedict(&lt;dict_of_Rect&gt;)
+[(key, value), ...] = &lt;Rect&gt;.collidedictall(&lt;dict_of_Rect&gt;)
+</code></pre>
+<div><h3 id="draw">Draw</h3><pre><code class="python language-python hljs">pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
+pg.draw.polygon(&lt;Surface&gt;, color, points)
+pg.draw.circle(&lt;Surface&gt;, color, center, radius)
+pg.draw.ellipse(&lt;Surface&gt;, color, &lt;Rect&gt;)
+pg.draw.arc(&lt;Surface&gt;, color, &lt;Rect&gt;, start_angle, stop_angle)
+pg.draw.line(&lt;Surface&gt;, color, start_pos, end_pos, width)
+pg.draw.lines(&lt;Surface&gt;, color, points)
+</code></pre></div>
+
+<div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
@@ -2548,9 +2607,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-numbe
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
-</code></pre></div></div></div>
-
-
+</code></pre></div>
 
 <div><h2 id="django"><a href="#django" name="django">#</a>Django</h2><pre><code class="bash language-bash hljs">$ pip3 install Django
 $ django-admin startproject mysite

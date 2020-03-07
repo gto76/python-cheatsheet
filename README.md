@@ -2911,9 +2911,81 @@ simpleaudio.play_buffer(samples_b, 1, 2, F)
 Pygame
 ------
 
-### Example
+### Basic Example
+```python
+# $ pip3 install pygame
+import pygame as pg
+pg.init()
+screen = pg.display.set_mode((500, 500))
+rect = pg.Rect(235, 235, 30, 30)
+while all(event.type != pg.QUIT for event in pg.event.get()):
+    keys = {pg.K_UP: (0, -3), pg.K_RIGHT: (3, 0), pg.K_DOWN: (0, 3), pg.K_LEFT: (-3, 0)}
+    for delta in {keys.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}:
+        rect = rect.move(delta) if delta else rect
+    screen.fill((0, 0, 0))
+    pg.draw.rect(screen, (255, 255, 255), rect)
+    pg.display.flip()
+```
 
-#### Runs a simple Super Mario game:
+### Surface
+**Object for representing images.**
+```python
+<Surface> = pg.display.set_mode((width, height))  # Retruns the display surface.
+<Surface> = pg.Surface((width, height))           # Creates a new surface.
+<Surface> = pg.image.load('<path>').convert()     # Loads an image.
+```
+
+```python
+<Surface>.set_at((x, y), <color>)                 # Updates pixel.
+<Surface>.fill(<color>)                           # Fills the whole surface.
+<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface.
+<Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
+```
+
+```python
+<Surface> = pg.transform.flip(<Surface>, xbool, ybool)
+<Surface> = pg.transform.rotate(<Surface>, angle)
+<Surface> = pg.transform.scale(<Surface>, (width, height))
+```
+
+### Rect
+**Object for storing rectangular coordinates.**
+```python
+<Rect>  = pg.Rect(topleft_x, topleft_y, width, height)  # x, y, w/width, h/height
+<int>   = <Rect>.x/y/centerx/centery/bottom/left/right/top
+<tuple> = <Rect>.topleft/center/topright/bottomright/bottomleft
+<tuple> = <Rect>.midtop/midright/midbottom/midleft
+<bool>  = <Rect>.contains(<Rect>)
+```
+
+```python
+<Rect>  = <Rect>.move(<tuple>/<int>, <int>)
+<Rect>.move_ip(<tuple>/<int>, <int>)
+<Rect>  = <Rect>.inflate(<tuple>/<int>, <int>)
+<Rect>.inflate_ip(<tuple>/<int>, <int>)
+```
+
+```python
+<bool>  = <Rect>.collidepoint(<tuple>/<int>, <int>)
+<bool>  = <Rect>.colliderect(<Rect>)
+index   = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first coliding Rect or -1.
+indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colinding Rects.
+(key, value) = <Rect>.collidedict(<dict_of_Rect>)
+[(key, value), ...] = <Rect>.collidedictall(<dict_of_Rect>)
+```
+
+### Draw
+```python
+pg.draw.rect(<Surface>, color, <Rect>)
+pg.draw.polygon(<Surface>, color, points)
+pg.draw.circle(<Surface>, color, center, radius)
+pg.draw.ellipse(<Surface>, color, <Rect>)
+pg.draw.arc(<Surface>, color, <Rect>, start_angle, stop_angle)
+pg.draw.line(<Surface>, color, start_pos, end_pos, width)
+pg.draw.lines(<Surface>, color, points)
+```
+
+### Basic Mario Brothers Example
 ```python
 import collections, dataclasses, enum, io, math, pygame, urllib.request, itertools as it
 from random import randint
