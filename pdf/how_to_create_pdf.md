@@ -5,7 +5,7 @@ PDF file can also be purchased here: https://transactions.sendowl.com/products/7
 Setup
 -----
 * Install Adobe Acrobat Pro DC.
-* Copy headers and footers from 'web/Adobe/' folder to '/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/'.
+* Copy headers and footers from 'pdf/Adobe/' folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
 * Change date in header and footer element of 'web/template.html'.
 * Run `./parse.js` and commit changes.
 
@@ -13,14 +13,14 @@ Printing to PDF
 ---------------
 ### Normal PDF
 * Open 'index.html' in text editor and first remove element '<p><br></p>' before the '<h1>Libraries</h1>'.
-* Then replace the footer and last three '<br>' elements with contents of 'web/index_for_pdf.html' file and save.
+* Then replace the footer and last three '<br>' elements with contents of 'pdf/index_for_pdf.html' file and save.
 * Open 'index.html' in Chrome and select 'Print...'.
 * Select destination 'Save as PDF', paper size 'A4', margins and scale 'Default' and no headers and footers and save.
 
 ### PDF optimized for laser color printing
 * Run `./parse.js` again.
 * Open 'index.html' in text editor and first remove element '<p><br></p>' before the '<h1>Libraries</h1>'.
-* Then replace the footer and last three '<br>' elements with contents of 'web/index_for_pdf_print.html' file and save.
+* Then replace the footer and last three '<br>' elements with contents of 'pdf/index_for_pdf_print.html' file and save.
 * Change all links in text to normal text. They can be found with this regex: '<strong>.*a href.*</strong>'.
 * Open 'index.html' in Chrome.
 * Change brightness of elements by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
