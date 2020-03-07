@@ -2481,7 +2481,7 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
 D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction</span>
-SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)             <span class="hljs-comment"># Screen size, Mario speed</span>
+SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)             <span class="hljs-comment"># Screen size, Speed limit</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
@@ -2505,7 +2505,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-numbe
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(screen, images, mario, tiles)</span>:</span>
     <span class="hljs-keyword">while</span> all(event.type != pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
-        pressed = {keys.get(i, <span class="hljs-keyword">None</span>) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pygame.key.get_pressed()) <span class="hljs-keyword">if</span> on}
+        pressed = {keys.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pygame.key.get_pressed()) <span class="hljs-keyword">if</span> on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)

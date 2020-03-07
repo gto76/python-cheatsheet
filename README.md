@@ -2920,7 +2920,7 @@ from random import randint
 
 P = collections.namedtuple('P', 'x y')     # Position
 D = enum.Enum('D', 'n e s w')              # Direction
-SIZE, MAX_SPEED = 25, P(5, 10)             # Screen size, Mario speed
+SIZE, MAX_SPEED = 25, P(5, 10)             # Screen size, Speed limit
 
 def main():
     def get_screen():
@@ -2944,7 +2944,7 @@ def main():
 def run(screen, images, mario, tiles):
     while all(event.type != pygame.QUIT for event in pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
-        pressed = {keys.get(i, None) for i, on in enumerate(pygame.key.get_pressed()) if on}
+        pressed = {keys.get(i) for i, on in enumerate(pygame.key.get_pressed()) if on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
