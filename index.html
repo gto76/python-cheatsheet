@@ -203,7 +203,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>December 15, 2019</aside>
+    <aside>March 7, 2020</aside>
     <a href="../" rel="author">Jure Šorn</a>
   </header>
 
@@ -250,7 +250,7 @@ product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
-<li><strong>Check out module <a href="#operator">operator</a> for alternative versions of examples.</strong></li>
+<li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)     <span class="hljs-comment"># Returns number of occurrences. Also works on strings.</span>
 index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
@@ -1990,7 +1990,8 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
         <span class="hljs-keyword">await</span> asyncio.sleep(random.random() / <span class="hljs-number">2</span>)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
-    <span class="hljs-keyword">while</span> (ch := screen.getch()) != <span class="hljs-number">27</span>:
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        ch = screen.getch()
         key_mappings = {<span class="hljs-number">259</span>: D.n, <span class="hljs-number">261</span>: D.e, <span class="hljs-number">258</span>: D.s, <span class="hljs-number">260</span>: D.w}
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:
             moves.put_nowait((<span class="hljs-string">'*'</span>, key_mappings[ch]))
@@ -2721,7 +2722,7 @@ urlpatterns = [
  
 
   <footer>
-    <aside>December 15, 2019</aside>
+    <aside>March 7, 2020</aside>
     <a href="../" rel="author">Jure Šorn</a>
   </footer>
 

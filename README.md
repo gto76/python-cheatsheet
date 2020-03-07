@@ -53,7 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, x: out * x, <collection>)
 list_of_chars    = list(<str>)
 ```
-* **Check out module [operator](#operator) for alternative versions of examples.**
+* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.**
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
@@ -2294,7 +2294,8 @@ async def random_controller(id_, moves):
         await asyncio.sleep(random.random() / 2)
 
 async def human_controller(screen, moves):
-    while (ch := screen.getch()) != 27:
+    while True:
+        ch = screen.getch()
         key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
         if ch in key_mappings:
             moves.put_nowait(('*', key_mappings[ch]))
