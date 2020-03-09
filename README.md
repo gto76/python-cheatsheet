@@ -96,7 +96,7 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 ### Counter
 ```python
 >>> from collections import Counter
->>> colors = ['blue', 'red', 'blue', 'red', 'blue']
+>>> colors = ['blue', 'blue', 'blue', 'red', 'red']
 >>> counter = Counter(colors)
 >>> counter['yellow'] += 1
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
