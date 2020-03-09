@@ -2494,12 +2494,18 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
 &lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
 &lt;Surface&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()     <span class="hljs-comment"># Loads an image.</span>
+&lt;Surface&gt; = &lt;Surface&gt;.convert()                   <span class="hljs-comment"># Converts to screen format.</span>
+&lt;Surface&gt; = &lt;Surface&gt;.convert_alpha()             <span class="hljs-comment"># Converts to screen format including alphas.</span>
 </code></pre></div>
 
 
+<ul>
+<li><strong>If no arguments are passed the new Surface will have the same pixel format as the display Surface. This is always the fastest format for blitting. It is a good idea to convert all Surfaces before they are blitted many times.</strong></li>
+</ul>
 <pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
-&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface. </span>
+&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws one image onto another.</span>
 &lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
@@ -2510,7 +2516,6 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 &lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery/bottom/left/right/top
 &lt;tuple&gt; = &lt;Rect&gt;.topleft/center/topright/bottomright/bottomleft
 &lt;tuple&gt; = &lt;Rect&gt;.midtop/midright/midbottom/midleft
-&lt;bool&gt;  = &lt;Rect&gt;.contains(&lt;Rect&gt;)
 </code></pre></div>
 
 
@@ -2519,7 +2524,8 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 &lt;Rect&gt;  = &lt;Rect&gt;.inflate(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
 &lt;Rect&gt;.inflate_ip(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.contains(&lt;Rect&gt;)
+&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
 &lt;bool&gt;  = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)
 index   = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first coliding Rect or -1.</span>
 indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colinding Rects.</span>
@@ -2535,6 +2541,22 @@ pg.draw.line(&lt;Surface&gt;, color, start_pos, end_pos, width)
 pg.draw.lines(&lt;Surface&gt;, color, points)
 </code></pre></div>
 
+<div><h3 id="mixer">Mixer</h3><pre><code class="python language-python hljs">pygame.mixer.init              <span class="hljs-comment"># initialize the mixer module</span>
+pygame.mixer.pre_init          <span class="hljs-comment"># preset the mixer init arguments</span>
+pygame.mixer.stop              <span class="hljs-comment"># stop playback of all sound channels</span>
+pygame.mixer.set_num_channels  <span class="hljs-comment"># set the total number of playback channels</span>
+pygame.mixer.set_reserved      <span class="hljs-comment"># reserve channels from being automatically used</span>
+pygame.mixer.find_channel      <span class="hljs-comment"># find an unused channel</span>
+pygame.mixer.Sound             <span class="hljs-comment"># Create a new Sound object from a file or buffer object</span>
+pygame.mixer.Channel           <span class="hljs-comment"># Create a Channel object for controlling playback</span>
+</code></pre></div>
+
+<pre><code class="python language-python hljs">pygame.mixer.music.load(<span class="hljs-string">'test.wav'</span>)
+pygame.mixer.music.play()
+pygame.mixer.music.rewind()
+pygame.mixer.music.stop()
+pygame.mixer.music.set_volume(&lt;float&gt;)
+</code></pre>
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
@@ -2607,145 +2629,6 @@ SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-numbe
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
-</code></pre></div>
-
-<div><h2 id="django"><a href="#django" name="django">#</a>Django</h2><pre><code class="bash language-bash hljs">$ pip3 install Django
-$ django-admin startproject mysite
-</code></pre></div>
-
-<pre><code class="bash language-bash hljs">$ python3 manage.py startapp polls         <span class="hljs-comment"># http://localhost:8000/polls/</span>
-$ python3 manage.py migrate
-$ python3 manage.py makemigrations polls
-$ python3 manage.py sqlmigrate polls 0001
-$ python3 manage.py migrate
-$ python3 manage.py shell
-$ python3 manage.py createsuperuser
-$ python3 manage.py runserver              <span class="hljs-comment"># http://127.0.0.1:8000/admin/</span>
-$ python3 manage.py runserver              <span class="hljs-comment"># Runs sever internally on port 8000.</span>
-$ python3 manage.py runserver &lt;port&gt;       <span class="hljs-comment"># Runs sever internally.</span>
-$ python3 manage.py runserver 0:&lt;port&gt;     <span class="hljs-comment"># Runs server externally.</span>
-</code></pre>
-<div><h3 id="files">Files</h3><pre><code class="text language-text">mysite/
-    mysite/
-        settings.py
-        urls.py
-    polls/
-        admin.py
-        models.py
-        urls.py
-        views.py
-        templates/
-            polls/
-                detail.html
-                index.html
-                results.html
-</code></pre></div>
-
-<div><h4 id="mysitemysitesettingspy">mysite/mysite/settings.py</h4><pre><code class="python language-python hljs">INSTALLED_APPS = [
-    <span class="hljs-string">'polls.apps.PollsConfig'</span>,
-    ...
-</code></pre></div>
-
-<div><h4 id="mysitemysiteurlspy">mysite/mysite/urls.py</h4><pre><code class="python language-python hljs">urlpatterns = [
-    url(<span class="hljs-string">r'^polls/'</span>, include(<span class="hljs-string">'polls.urls'</span>)),
-    url(<span class="hljs-string">r'^admin/'</span>, admin.site.urls),
-]
-</code></pre></div>
-
-<div><h4 id="mysitepollsadminpy">mysite/polls/admin.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Question
-
-admin.site.register(Question)
-</code></pre></div>
-
-<div><h4 id="mysitepollsmodelspy">mysite/polls/models.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Question</span><span class="hljs-params">(models.Model)</span>:</span>
-    text     = models.CharField(max_length=<span class="hljs-number">200</span>)
-    pub_date = models.DateTimeField(<span class="hljs-string">'date published'</span>)
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Choice</span><span class="hljs-params">(models.Model)</span>:</span>
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text     = models.CharField(max_length=<span class="hljs-number">200</span>)
-    votes    = models.IntegerField(default=<span class="hljs-number">0</span>)
-</code></pre></div>
-
-<div><h4 id="mysitepollsurlspy">mysite/polls/urls.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
-<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views
-
-app_name = <span class="hljs-string">'polls'</span>
-urlpatterns = [
-    url(<span class="hljs-string">r'^$'</span>, views.IndexView.as_view(), name=<span class="hljs-string">'index'</span>),
-    url(<span class="hljs-string">r'^(?P&lt;pk&gt;[0-9]+)/$'</span>, views.DetailView.as_view(), name=<span class="hljs-string">'detail'</span>),
-    url(<span class="hljs-string">r'^(?P&lt;pk&gt;[0-9]+)/results/$'</span>, views.ResultsView.as_view(), name=<span class="hljs-string">'results'</span>),
-    url(<span class="hljs-string">r'^(?P&lt;question_id&gt;[0-9]+)/vote/$'</span>, views.vote, name=<span class="hljs-string">'vote'</span>),
-]
-</code></pre></div>
-
-<div><h4 id="mysitepollsviewspy">mysite/polls/views.py</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404, render
-<span class="hljs-keyword">from</span> django.http <span class="hljs-keyword">import</span> HttpResponseRedirect
-<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> reverse
-<span class="hljs-keyword">from</span> django.views <span class="hljs-keyword">import</span> generic
-<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Choice, Question
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IndexView</span><span class="hljs-params">(generic.ListView)</span>:</span>
-    template_name       = <span class="hljs-string">'polls/index.html'</span>
-    context_object_name = <span class="hljs-string">'latest_question_list'</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> Question.objects.order_by(<span class="hljs-string">'-pub_date'</span>)[:<span class="hljs-number">5</span>]
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DetailView</span><span class="hljs-params">(generic.DetailView)</span>:</span>
-    model         = Question
-    template_name = <span class="hljs-string">'polls/detail.html'</span>
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultsView</span><span class="hljs-params">(generic.DetailView)</span>:</span>
-    model         = Question
-    template_name = <span class="hljs-string">'polls/results.html'</span>
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vote</span><span class="hljs-params">(request, question_id)</span>:</span>
-    question = get_object_or_404(Question, pk=question_id)
-    <span class="hljs-keyword">try</span>:
-        selected_choice = question.choice_set.get(pk=request.POST[<span class="hljs-string">'choice'</span>])
-    <span class="hljs-keyword">except</span> (KeyError, Choice.DoesNotExist):
-        data = {<span class="hljs-string">'question'</span>: question, <span class="hljs-string">'error_message'</span>: <span class="hljs-string">"You didn't select a choice."</span>}
-        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">'polls/detail.html'</span>, data)
-    <span class="hljs-keyword">else</span>:
-        selected_choice.votes += <span class="hljs-number">1</span>
-        selected_choice.save()
-        <span class="hljs-keyword">return</span> HttpResponseRedirect(reverse(<span class="hljs-string">'polls:results'</span>, args=(question.id,)))
-</code></pre></div>
-
-<div><h4 id="mysitepollstemplatespollsindexhtml">mysite/polls/templates/polls/index.html</h4><pre><code class="html language-html python hljs xml">{% if latest_question_list %}
-    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
-    {% for question in latest_question_list %}
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"{% url 'polls:detail' question.id %}"</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    {% endfor %}
-    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-{% else %}
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>No polls are available.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-{% endif %}
-</code></pre></div>
-
-<div><h4 id="mysitepollstemplatespollsdetailhtml">mysite/polls/templates/polls/detail.html</h4><pre><code class="html language-html python hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-{% if error_message %}<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>{{ error_message }}<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>{% endif %}
-<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"{% url 'polls:vote' question.id %}"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span>&gt;</span>
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"choice"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"choice{{ forloop.counter }}"</span> 
-        <span class="hljs-attr">value</span>=<span class="hljs-string">"{{ choice.id }}"</span>/&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"choice{{ forloop.counter }}"</span>&gt;</span>{{ choice.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span>
-{% endfor %}
-<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Vote"</span> /&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-</code></pre></div>
-
-<div><h4 id="mysitepollstemplatespollsresultshtml">mysite/polls/templates/polls/results.html</h4><pre><code class="html language-html python hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ question.text }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
-{% for choice in question.choice_set.all %}
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{{ choice.text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-{% endfor %}
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"{% url 'polls:detail' question.id %}"</span>&gt;</span>Vote again?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre></div>
 
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>

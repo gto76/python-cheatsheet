@@ -2933,12 +2933,16 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <Surface> = pg.display.set_mode((width, height))  # Retruns the display surface.
 <Surface> = pg.Surface((width, height))           # Creates a new surface.
 <Surface> = pg.image.load('<path>').convert()     # Loads an image.
+<Surface> = <Surface>.convert()                   # Converts to screen format.
+<Surface> = <Surface>.convert_alpha()             # Converts to screen format including alphas.
 ```
+* **If no arguments are passed the new Surface will have the same pixel format as the display Surface. This is always the fastest format for blitting. It is a good idea to convert all Surfaces before they are blitted many times.**
 
 ```python
 <Surface>.set_at((x, y), <color>)                 # Updates pixel.
 <Surface>.fill(<color>)                           # Fills the whole surface.
-<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface.
+<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface. 
+<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws one image onto another.
 <Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
 ```
 
@@ -2955,7 +2959,6 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <int>   = <Rect>.x/y/centerx/centery/bottom/left/right/top
 <tuple> = <Rect>.topleft/center/topright/bottomright/bottomleft
 <tuple> = <Rect>.midtop/midright/midbottom/midleft
-<bool>  = <Rect>.contains(<Rect>)
 ```
 
 ```python
@@ -2966,6 +2969,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
+<bool>  = <Rect>.contains(<Rect>)
 <bool>  = <Rect>.collidepoint(<tuple>/<int>, <int>)
 <bool>  = <Rect>.colliderect(<Rect>)
 index   = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first coliding Rect or -1.
@@ -2983,6 +2987,26 @@ pg.draw.ellipse(<Surface>, color, <Rect>)
 pg.draw.arc(<Surface>, color, <Rect>, start_angle, stop_angle)
 pg.draw.line(<Surface>, color, start_pos, end_pos, width)
 pg.draw.lines(<Surface>, color, points)
+```
+
+### Mixer
+```python
+pygame.mixer.init              # initialize the mixer module
+pygame.mixer.pre_init          # preset the mixer init arguments
+pygame.mixer.stop              # stop playback of all sound channels
+pygame.mixer.set_num_channels  # set the total number of playback channels
+pygame.mixer.set_reserved      # reserve channels from being automatically used
+pygame.mixer.find_channel      # find an unused channel
+pygame.mixer.Sound             # Create a new Sound object from a file or buffer object
+pygame.mixer.Channel           # Create a Channel object for controlling playback
+```
+
+```python
+pygame.mixer.music.load('test.wav')
+pygame.mixer.music.play()
+pygame.mixer.music.rewind()
+pygame.mixer.music.stop()
+pygame.mixer.music.set_volume(<float>)
 ```
 
 ### Basic Mario Brothers Example
@@ -3059,172 +3083,6 @@ def draw(screen, images, mario, tiles, pressed):
 
 if __name__ == '__main__':
     main()
-```
-
-
-Django
-------
-
-```bash
-$ pip3 install Django
-$ django-admin startproject mysite
-```
-
-```bash
-$ python3 manage.py startapp polls         # http://localhost:8000/polls/
-$ python3 manage.py migrate
-$ python3 manage.py makemigrations polls
-$ python3 manage.py sqlmigrate polls 0001
-$ python3 manage.py migrate
-$ python3 manage.py shell
-$ python3 manage.py createsuperuser
-$ python3 manage.py runserver              # http://127.0.0.1:8000/admin/
-$ python3 manage.py runserver              # Runs sever internally on port 8000.
-$ python3 manage.py runserver <port>       # Runs sever internally.
-$ python3 manage.py runserver 0:<port>     # Runs server externally.
-```
-
-### Files
-```text
-mysite/
-    mysite/
-        settings.py
-        urls.py
-    polls/
-        admin.py
-        models.py
-        urls.py
-        views.py
-        templates/
-            polls/
-                detail.html
-                index.html
-                results.html
-```
-
-#### mysite/mysite/settings.py
-```python
-INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
-    ...
-```
-
-#### mysite/mysite/urls.py
-```python
-urlpatterns = [
-    url(r'^polls/', include('polls.urls')),
-    url(r'^admin/', admin.site.urls),
-]
-```
-
-#### mysite/polls/admin.py
-```python
-from django.contrib import admin
-from .models import Question
-
-admin.site.register(Question)
-```
-
-#### mysite/polls/models.py
-```python
-from django.db import models
-
-class Question(models.Model):
-    text     = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text     = models.CharField(max_length=200)
-    votes    = models.IntegerField(default=0)
-```
-
-#### mysite/polls/urls.py
-```python
-from django.conf.urls import url
-from . import views
-
-app_name = 'polls'
-urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
-    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-]
-```
-
-#### mysite/polls/views.py
-```python
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views import generic
-from .models import Choice, Question
-
-class IndexView(generic.ListView):
-    template_name       = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-    def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
-
-class DetailView(generic.DetailView):
-    model         = Question
-    template_name = 'polls/detail.html'
-
-class ResultsView(generic.DetailView):
-    model         = Question
-    template_name = 'polls/results.html'
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        data = {'question': question, 'error_message': "You didn't select a choice."}
-        return render(request, 'polls/detail.html', data)
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-```
-
-#### mysite/polls/templates/polls/index.html
-```html
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
-```
-
-#### mysite/polls/templates/polls/detail.html
-```html
-<h1>{{ question.text }}</h1>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" 
-        value="{{ choice.id }}"/>
-    <label for="choice{{ forloop.counter }}">{{ choice.text }}</label><br/>
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
-```
-
-#### mysite/polls/templates/polls/results.html
-```html
-<h1>{{ question.text }}</h1>
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 ```
 
 
