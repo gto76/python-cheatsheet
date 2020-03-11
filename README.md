@@ -1788,7 +1788,7 @@ import csv
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
-* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' linendings!**
+* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**
