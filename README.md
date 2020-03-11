@@ -1590,7 +1590,7 @@ from glob import glob
 ```
 
 ```python
-<str>  = getcwd()                   # Returns current working directory.
+<str>  = getcwd()                   # Returns the current working directory.
 <str>  = path.join(<path>, ...)     # Joins two or more pathname components.
 <str>  = path.abspath(<path>)       # Returns absolute path.
 ```
@@ -1664,7 +1664,7 @@ from pathlib import Path
 OS Commands
 -----------
 ### Files and Directories
-* **Paths can be either strings, Paths, or DirEntry objects.**
+* **Paths can be either strings, Paths or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ```python
@@ -1672,7 +1672,7 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                    # Changes current working directory.
+os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 

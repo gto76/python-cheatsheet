@@ -1470,7 +1470,7 @@ value = args.&lt;name&gt;
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns current working directory.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns the current working directory.</span>
 &lt;str&gt;  = path.join(&lt;path&gt;, ...)     <span class="hljs-comment"># Joins two or more pathname components.</span>
 &lt;str&gt;  = path.abspath(&lt;path&gt;)       <span class="hljs-comment"># Returns absolute path.</span>
 </code></pre>
@@ -1517,14 +1517,14 @@ value = args.&lt;name&gt;
 &lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns file object.</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
-<li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
+<li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
 <li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
 </code></pre></div></div>
 
 
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can be a directory.</span>
