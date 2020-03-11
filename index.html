@@ -1144,8 +1144,9 @@ Hello World!
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
+        <span class="hljs-keyword">return</span> iter(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
+        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
 </code></pre></div></div>
 
 
