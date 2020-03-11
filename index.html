@@ -1266,7 +1266,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </code></pre></div>
 
 <ul>
-<li><strong>Another solution in this particular case is to use built-in functions <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> from the module <a href="#operator">operator</a>.</strong></li>
+<li><strong>Another solution in this particular case is to use built-in functions and_() and or_() from the module <a href="#operator">operator</a>.</strong></li>
 </ul>
 <div><h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2><div><h3 id="basicexample">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     &lt;code&gt;
@@ -1334,7 +1334,7 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 </code></pre></div>
 
 <div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">+-----------+------------+------------+------------+

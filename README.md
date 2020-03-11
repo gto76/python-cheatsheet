@@ -1337,7 +1337,7 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case is to use built-in functions `'and_'` and `'or_'` from the module [operator](#operator).**
+* **Another solution in this particular case is to use built-in functions and\_() and or\_() from the module [operator](#operator).**
 
 
 Exceptions
@@ -1420,7 +1420,7 @@ BaseException
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 ```
 
 #### Collections and their exceptions:

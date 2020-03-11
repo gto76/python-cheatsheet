@@ -183,7 +183,7 @@ const DIAGRAM_8_B =
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
   "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
   "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
-  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings from/to bytes fails.</span>\n";
+  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
 
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +
