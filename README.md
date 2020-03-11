@@ -1146,7 +1146,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Objects returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
 * **File objects returned by the [open()](#open) function, etc.**
@@ -1170,7 +1170,7 @@ class Counter:
 ```
 
 ### Context Manager
-* **Enter() should lock the resources and (optionally) return an object.**
+* **Enter() should lock the resources and optionally return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **If it wishes to suppress the exception it must return a true value.** 
