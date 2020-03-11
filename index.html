@@ -2491,27 +2491,6 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
-&lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
-&lt;Surface&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()     <span class="hljs-comment"># Loads an image.</span>
-&lt;Surface&gt; = &lt;Surface&gt;.convert()                   <span class="hljs-comment"># Converts to screen format.</span>
-&lt;Surface&gt; = &lt;Surface&gt;.convert_alpha()             <span class="hljs-comment"># Converts to screen format including alphas.</span>
-</code></pre></div>
-
-
-<ul>
-<li><strong>If no arguments are passed the new Surface will have the same pixel format as the display Surface. This is always the fastest format for blitting. It is a good idea to convert all Surfaces before they are blitted many times.</strong></li>
-</ul>
-<pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
-&lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
-&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface. </span>
-&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws one image onto another.</span>
-&lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
-</code></pre>
-<pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
-&lt;Surface&gt; = pg.transform.rotate(&lt;Surface&gt;, angle)
-&lt;Surface&gt; = pg.transform.scale(&lt;Surface&gt;, (width, height))
-</code></pre>
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt;  = pg.Rect(topleft_x, topleft_y, width, height)  <span class="hljs-comment"># x, y, w/width, h/height</span>
 &lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery/bottom/left/right/top
 &lt;tuple&gt; = &lt;Rect&gt;.topleft/center/topright/bottomright/bottomleft
@@ -2532,7 +2511,22 @@ indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-c
 (key, value) = &lt;Rect&gt;.collidedict(&lt;dict_of_Rect&gt;)
 [(key, value), ...] = &lt;Rect&gt;.collidedictall(&lt;dict_of_Rect&gt;)
 </code></pre>
-<div><h3 id="draw">Draw</h3><pre><code class="python language-python hljs">pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
+&lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
+&lt;Surface&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()     <span class="hljs-comment"># Loads an image.</span>
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
+&lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
+&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
+&lt;Surface&gt; = pg.transform.rotate(&lt;Surface&gt;, angle)
+&lt;Surface&gt; = pg.transform.scale(&lt;Surface&gt;, (width, height))
+</code></pre>
+<div><h4 id="drawing-1">Drawing:</h4><pre><code class="python language-python hljs">pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
 pg.draw.polygon(&lt;Surface&gt;, color, points)
 pg.draw.circle(&lt;Surface&gt;, color, center, radius)
 pg.draw.ellipse(&lt;Surface&gt;, color, &lt;Rect&gt;)
@@ -2541,28 +2535,21 @@ pg.draw.line(&lt;Surface&gt;, color, start_pos, end_pos, width)
 pg.draw.lines(&lt;Surface&gt;, color, points)
 </code></pre></div>
 
-<div><h3 id="mixer">Mixer</h3><pre><code class="python language-python hljs">pygame.mixer.init              <span class="hljs-comment"># initialize the mixer module</span>
-pygame.mixer.pre_init          <span class="hljs-comment"># preset the mixer init arguments</span>
-pygame.mixer.stop              <span class="hljs-comment"># stop playback of all sound channels</span>
-pygame.mixer.set_num_channels  <span class="hljs-comment"># set the total number of playback channels</span>
-pygame.mixer.set_reserved      <span class="hljs-comment"># reserve channels from being automatically used</span>
-pygame.mixer.find_channel      <span class="hljs-comment"># find an unused channel</span>
-pygame.mixer.Sound             <span class="hljs-comment"># Create a new Sound object from a file or buffer object</span>
-pygame.mixer.Channel           <span class="hljs-comment"># Create a Channel object for controlling playback</span>
+<div><h4 id="fonts">Fonts:</h4><pre><code class="python language-python hljs">&lt;Font&gt;    = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
+&lt;Font&gt;    = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
+&lt;Surface&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
-<pre><code class="python language-python hljs">pygame.mixer.music.load(<span class="hljs-string">'test.wav'</span>)
-pygame.mixer.music.play()
-pygame.mixer.music.rewind()
-pygame.mixer.music.stop()
-pygame.mixer.music.set_volume(&lt;float&gt;)
-</code></pre>
+<div><h3 id="sound">Sound</h3><pre><code class="python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)  <span class="hljs-comment"># Loads a sound file.</span>
+&lt;Sound&gt;.play()                      <span class="hljs-comment"># Starts playing sound.</span>
+</code></pre></div>
+
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
 D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction</span>
-SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)             <span class="hljs-comment"># Screen size, Speed limit</span>
+SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)             <span class="hljs-comment"># Screen size, Speed limit</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
@@ -2584,13 +2571,14 @@ SIZE, MAX_SPEED = <span class="hljs-number">25</span>, P(<span class="hljs-numbe
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(screen, images, mario, tiles)</span>:</span>
+    clock = pygame.time.Clock()
     <span class="hljs-keyword">while</span> all(event.type != pygame.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
         pressed = {keys.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pygame.key.get_pressed()) <span class="hljs-keyword">if</span> on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
-        pygame.time.wait(<span class="hljs-number">28</span>)
+        clock.tick(<span class="hljs-number">28</span>)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd

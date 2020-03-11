@@ -2927,31 +2927,6 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
     pg.display.flip()
 ```
 
-### Surface
-**Object for representing images.**
-```python
-<Surface> = pg.display.set_mode((width, height))  # Retruns the display surface.
-<Surface> = pg.Surface((width, height))           # Creates a new surface.
-<Surface> = pg.image.load('<path>').convert()     # Loads an image.
-<Surface> = <Surface>.convert()                   # Converts to screen format.
-<Surface> = <Surface>.convert_alpha()             # Converts to screen format including alphas.
-```
-* **If no arguments are passed the new Surface will have the same pixel format as the display Surface. This is always the fastest format for blitting. It is a good idea to convert all Surfaces before they are blitted many times.**
-
-```python
-<Surface>.set_at((x, y), <color>)                 # Updates pixel.
-<Surface>.fill(<color>)                           # Fills the whole surface.
-<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface. 
-<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws one image onto another.
-<Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
-```
-
-```python
-<Surface> = pg.transform.flip(<Surface>, xbool, ybool)
-<Surface> = pg.transform.rotate(<Surface>, angle)
-<Surface> = pg.transform.scale(<Surface>, (width, height))
-```
-
 ### Rect
 **Object for storing rectangular coordinates.**
 ```python
@@ -2978,7 +2953,28 @@ indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colind
 [(key, value), ...] = <Rect>.collidedictall(<dict_of_Rect>)
 ```
 
-### Draw
+### Surface
+**Object for representing images.**
+```python
+<Surface> = pg.display.set_mode((width, height))  # Retruns the display surface.
+<Surface> = pg.Surface((width, height))           # Creates a new surface.
+<Surface> = pg.image.load('<path>').convert()     # Loads an image.
+```
+
+```python
+<Surface>.set_at((x, y), <color>)                 # Updates pixel.
+<Surface>.fill(<color>)                           # Fills the whole surface.
+<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface.
+<Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
+```
+
+```python
+<Surface> = pg.transform.flip(<Surface>, xbool, ybool)
+<Surface> = pg.transform.rotate(<Surface>, angle)
+<Surface> = pg.transform.scale(<Surface>, (width, height))
+```
+
+#### Drawing:
 ```python
 pg.draw.rect(<Surface>, color, <Rect>)
 pg.draw.polygon(<Surface>, color, points)
@@ -2989,24 +2985,17 @@ pg.draw.line(<Surface>, color, start_pos, end_pos, width)
 pg.draw.lines(<Surface>, color, points)
 ```
 
-### Mixer
+#### Fonts:
 ```python
-pygame.mixer.init              # initialize the mixer module
-pygame.mixer.pre_init          # preset the mixer init arguments
-pygame.mixer.stop              # stop playback of all sound channels
-pygame.mixer.set_num_channels  # set the total number of playback channels
-pygame.mixer.set_reserved      # reserve channels from being automatically used
-pygame.mixer.find_channel      # find an unused channel
-pygame.mixer.Sound             # Create a new Sound object from a file or buffer object
-pygame.mixer.Channel           # Create a Channel object for controlling playback
+<Font>    = pg.font.SysFont(name, size, bold=False, italic=False)
+<Font>    = pg.font.Font('<path>', size)
+<Surface> = <Font>.render(text, antialias, color, background=None)
 ```
 
-```python
-pygame.mixer.music.load('test.wav')
-pygame.mixer.music.play()
-pygame.mixer.music.rewind()
-pygame.mixer.music.stop()
-pygame.mixer.music.set_volume(<float>)
+### Sound
+```
+<Sound> = pg.mixer.Sound('<path>')  # Loads a sound file.
+<Sound>.play()                      # Starts playing sound.
 ```
 
 ### Basic Mario Brothers Example
@@ -3016,7 +3005,7 @@ from random import randint
 
 P = collections.namedtuple('P', 'x y')     # Position
 D = enum.Enum('D', 'n e s w')              # Direction
-SIZE, MAX_SPEED = 25, P(5, 10)             # Screen size, Speed limit
+SIZE, MAX_SPEED = 50, P(5, 10)             # Screen size, Speed limit
 
 def main():
     def get_screen():
@@ -3038,13 +3027,14 @@ def main():
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 def run(screen, images, mario, tiles):
+    clock = pygame.time.Clock()
     while all(event.type != pygame.QUIT for event in pygame.event.get()):
         keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
         pressed = {keys.get(i) for i, on in enumerate(pygame.key.get_pressed()) if on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
-        pygame.time.wait(28)
+        clock.tick(28)
 
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
