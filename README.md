@@ -1093,7 +1093,7 @@ class MyComparable:
 ```python
 class MyHashable:
     def __init__(self, a):
-        self._a = copy.deepcopy(a)
+        self._a = a
     @property
     def a(self):
         return self._a

@@ -1041,7 +1041,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>That is why Python automatically makes classes unhashable if you only implement eq().</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self._a = copy.deepcopy(a)
+        self._a = a
 <span class="hljs-meta">    @property</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> self._a
