@@ -377,7 +377,7 @@ import re
 ```
 
 ### Special Sequences
-* **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
+* **By default digits, alphanumerics and whitespaces from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches any digit.
