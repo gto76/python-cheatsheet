@@ -1983,8 +1983,9 @@ Array
 
 ```python
 from array import array
-<array> = array('<typecode>', <collection>)    # Array from coll. of numbers.
+<array> = array('<typecode>', <collection>)    # Array from collection of numbers.
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
+<array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
 <bytes> = bytes(<array>)                       # Or: <array>.tobytes()
 ```
 
