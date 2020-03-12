@@ -105,12 +105,12 @@ const DIAGRAM_4_B =
  
 const DIAGRAM_5_A = 
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
-  "|               |     {<real>}    |    {<real>:f}   |    {<real>:e}   |    {<real>:%}   |\n" +
+  "|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |\n" +
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
 
 const DIAGRAM_5_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃               │     {&lt;real&gt;}    │    {&lt;real&gt;:f}   │    {&lt;real&gt;:e}   │    {&lt;real&gt;:%}   ┃\n" +
+  "┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃\n" +
   "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
   "┃   0.000056789 │    '5.6789e-05' │     '0.000057'  │  '5.678900e-05' │     '0.005679%' ┃\n" +
   "┃   0.00056789  │    '0.00056789' │     '0.000568'  │  '5.678900e-04' │     '0.056789%' ┃\n" +
@@ -124,12 +124,12 @@ const DIAGRAM_5_B =
 
 const DIAGRAM_6_A =
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
-  "|               |   {<float>:.2}  |   {<real>:.2f}  |   {<real>:.2e}  |   {<real>:.2%}  |\n" +
+  "|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |\n" +
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
 
 const DIAGRAM_6_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃               │   {&lt;float&gt;:.2}  │   {&lt;real&gt;:.2f}  │   {&lt;real&gt;:.2e}  │   {&lt;real&gt;:.2%}  ┃\n" +
+  "┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃\n" +
   "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
   "┃   0.000056789 │    '5.7e-05'    │       '0.00'    │    '5.68e-05'   │       '0.01%'   ┃\n" +
   "┃   0.00056789  │    '0.00057'    │       '0.00'    │    '5.68e-04'   │       '0.06%'   ┃\n" +
@@ -183,7 +183,7 @@ const DIAGRAM_8_B =
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
   "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
   "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
-  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings from/to bytes fails.</span>\n";
+  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
 
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +

@@ -96,7 +96,7 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 ### Counter
 ```python
 >>> from collections import Counter
->>> colors = ['blue', 'red', 'blue', 'red', 'blue']
+>>> colors = ['blue', 'blue', 'blue', 'red', 'red']
 >>> counter = Counter(colors)
 >>> counter['yellow'] += 1
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
@@ -377,7 +377,7 @@ import re
 ```
 
 ### Special Sequences
-* **By default digits, whitespaces and alphanumerics from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
+* **By default digits, alphanumerics and whitespaces from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches any digit.
@@ -442,7 +442,7 @@ Format
 #### Comparison of presentation types:
 ```text
 +---------------+-----------------+-----------------+-----------------+-----------------+
-|               |     {<real>}    |    {<real>:f}   |    {<real>:e}   |    {<real>:%}   |
+|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.6789e-05' |     '0.000057'  |  '5.678900e-05' |     '0.005679%' |
 |   0.00056789  |    '0.00056789' |     '0.000568'  |  '5.678900e-04' |     '0.056789%' |
@@ -456,7 +456,7 @@ Format
 ```
 ```text
 +---------------+-----------------+-----------------+-----------------+-----------------+
-|               |   {<float>:.2}  |   {<real>:.2f}  |   {<real>:.2e}  |   {<real>:.2%}  |
+|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.7e-05'    |       '0.00'    |    '5.68e-05'   |       '0.01%'   |
 |   0.00056789  |    '0.00057'    |       '0.00'    |    '5.68e-04'   |       '0.06%'   |
@@ -541,7 +541,7 @@ shuffle(<list>)
 Combinatorics
 -------------
 * **Every function returns an iterator.**
-* **If you want to print the iterator, you need to pass it to the list() function!**
+* **If you want to print the iterator, you need to pass it to the list() function first!**
 
 ```python
 from itertools import product, combinations, combinations_with_replacement, permutations
@@ -1093,7 +1093,7 @@ class MyComparable:
 ```python
 class MyHashable:
     def __init__(self, a):
-        self._a = copy.deepcopy(a)
+        self._a = a
     @property
     def a(self):
         return self._a
@@ -1146,7 +1146,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Objects returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
 * **File objects returned by the [open()](#open) function, etc.**
@@ -1170,7 +1170,7 @@ class Counter:
 ```
 
 ### Context Manager
-* **Enter() should lock the resources and (optionally) return an object.**
+* **Enter() should lock the resources and optionally return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **If it wishes to suppress the exception it must return a true value.** 
@@ -1205,8 +1205,9 @@ class MyIterable:
     def __init__(self, a):
         self.a = a
     def __iter__(self):
-        for el in self.a:
-            yield el
+        return iter(self.a)
+    def __contains__(self, el):
+        return el in self.a
 ```
 
 ```python
@@ -1336,7 +1337,7 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case is to use built-in functions `'and_'` and `'or_'` from the module [operator](#operator).**
+* **Another solution in this particular case is to use built-in functions and\_() and or\_() from the module [operator](#operator).**
 
 
 Exceptions
@@ -1419,7 +1420,7 @@ BaseException
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 ```
 
 #### Collections and their exceptions:
@@ -1589,7 +1590,7 @@ from glob import glob
 ```
 
 ```python
-<str>  = getcwd()                   # Returns current working directory.
+<str>  = getcwd()                   # Returns the current working directory.
 <str>  = path.join(<path>, ...)     # Joins two or more pathname components.
 <str>  = path.abspath(<path>)       # Returns absolute path.
 ```
@@ -1663,7 +1664,7 @@ from pathlib import Path
 OS Commands
 -----------
 ### Files and Directories
-* **Paths can be either strings, Paths, or DirEntry objects.**
+* **Paths can be either strings, Paths or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ```python
@@ -1671,7 +1672,7 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                    # Changes current working directory.
+os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 
@@ -1787,7 +1788,7 @@ import csv
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
-* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' linendings!**
+* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**
@@ -1846,9 +1847,9 @@ db.close()
 ### Read
 **Returned values can be of type str, int, float, bytes or None.**
 ```python
-<cursor> = db.execute('<query>')                # Can raise sqlite3.OperationalError.
+<cursor> = db.execute('<query>')                # Raises a subclass of sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
-<list>   = <cursor>.fetchall()                  # Returns remaining rows.
+<list>   = <cursor>.fetchall()                  # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
@@ -1889,7 +1890,7 @@ db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 from mysql import connector
 db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 <cursor> = db.cursor()
-<cursor>.execute('<query>')                     # Only cursor has execute method.
+<cursor>.execute('<query>')                     # Raises a subclass of mysql.connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
@@ -1958,7 +1959,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 ```
 
 ### Format
-#### For standard sizes start format string with:
+#### For standard type sizes start format string with:
 * **`'='` - native byte order**
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
@@ -1982,8 +1983,9 @@ Array
 
 ```python
 from array import array
-<array> = array('<typecode>', <collection>)    # Array from coll. of numbers.
+<array> = array('<typecode>', <collection>)    # Array from collection of numbers.
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
+<array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
 <bytes> = bytes(<array>)                       # Or: <array>.tobytes()
 ```
 

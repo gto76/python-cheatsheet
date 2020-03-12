@@ -279,7 +279,7 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Returns a dictionary, filtered by keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
-<span class="hljs-meta">&gt;&gt;&gt; </span>colors = [<span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'blue'</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>colors = [<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'red'</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter(colors)
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter[<span class="hljs-string">'yellow'</span>] += <span class="hljs-number">1</span>
 Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'red'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'yellow'</span>: <span class="hljs-number">1</span>})
@@ -484,7 +484,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
-<li><strong>By default digits, whitespaces and alphanumerics from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
+<li><strong>By default digits, alphanumerics and whitespaces from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
 <li><strong>Use a capital letter for negation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches any digit.</span>
 <span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches any alphanumeric.</span>
@@ -533,7 +533,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |     {&lt;real&gt;}    |    {&lt;real&gt;:f}   |    {&lt;real&gt;:e}   |    {&lt;real&gt;:%}   |
+|               |    {&lt;float&gt;}    |   {&lt;float&gt;:f}   |   {&lt;float&gt;:e}   |   {&lt;float&gt;:%}   |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.6789e-05' |     '0.000057'  |  '5.678900e-05' |     '0.005679%' |
 |   0.00056789  |    '0.00056789' |     '0.000568'  |  '5.678900e-04' |     '0.056789%' |
@@ -547,7 +547,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |   {&lt;float&gt;:.2}  |   {&lt;real&gt;:.2f}  |   {&lt;real&gt;:.2e}  |   {&lt;real&gt;:.2%}  |
+|               |   {&lt;float&gt;:.2}  |  {&lt;float&gt;:.2f}  |  {&lt;float&gt;:.2e}  |  {&lt;float&gt;:.2%}  |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 |   0.000056789 |    '5.7e-05'    |       '0.00'    |    '5.68e-05'   |       '0.01%'   |
 |   0.00056789  |    '0.00057'    |       '0.00'    |    '5.68e-04'   |       '0.06%'   |
@@ -613,7 +613,7 @@ shuffle(&lt;list&gt;)
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><ul>
 <li><strong>Every function returns an iterator.</strong></li>
-<li><strong>If you want to print the iterator, you need to pass it to the list() function!</strong></li>
+<li><strong>If you want to print the iterator, you need to pass it to the list() function first!</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> product, combinations, combinations_with_replacement, permutations
 </code></pre></div>
 
@@ -1041,7 +1041,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>That is why Python automatically makes classes unhashable if you only implement eq().</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
-        self._a = copy.deepcopy(a)
+        self._a = a
 <span class="hljs-meta">    @property</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a</span><span class="hljs-params">(self)</span>:</span>
         <span class="hljs-keyword">return</span> self._a
@@ -1093,7 +1093,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
-<li><strong>Objects returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
+<li><strong>Iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
 <li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
 <li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehension">generator expressions</a>.</strong></li>
 <li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
@@ -1116,7 +1116,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h3 id="contextmanager">Context Manager</h3><ul>
-<li><strong>Enter() should lock the resources and (optionally) return an object.</strong></li>
+<li><strong>Enter() should lock the resources and optionally return an object.</strong></li>
 <li><strong>Exit() should release the resources.</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>If it wishes to suppress the exception it must return a true value.</strong> </li>
@@ -1144,8 +1144,9 @@ Hello World!
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__iter__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> self.a:
-            <span class="hljs-keyword">yield</span> el
+        <span class="hljs-keyword">return</span> iter(self.a)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__contains__</span><span class="hljs-params">(self, el)</span>:</span>
+        <span class="hljs-keyword">return</span> el <span class="hljs-keyword">in</span> self.a
 </code></pre></div></div>
 
 
@@ -1265,7 +1266,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </code></pre></div>
 
 <ul>
-<li><strong>Another solution in this particular case is to use built-in functions <code class="python hljs"><span class="hljs-string">'and_'</span></code> and <code class="python hljs"><span class="hljs-string">'or_'</span></code> from the module <a href="#operator">operator</a>.</strong></li>
+<li><strong>Another solution in this particular case is to use built-in functions and_() and or_() from the module <a href="#operator">operator</a>.</strong></li>
 </ul>
 <div><h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2><div><h3 id="basicexample">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     &lt;code&gt;
@@ -1333,7 +1334,7 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
       +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings from/to bytes fails.
+           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 </code></pre></div>
 
 <div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">+-----------+------------+------------+------------+
@@ -1469,7 +1470,7 @@ value = args.&lt;name&gt;
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns current working directory.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns the current working directory.</span>
 &lt;str&gt;  = path.join(&lt;path&gt;, ...)     <span class="hljs-comment"># Joins two or more pathname components.</span>
 &lt;str&gt;  = path.abspath(&lt;path&gt;)       <span class="hljs-comment"># Returns absolute path.</span>
 </code></pre>
@@ -1516,14 +1517,14 @@ value = args.&lt;name&gt;
 &lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns file object.</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
-<li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
+<li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
 <li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
 </code></pre></div></div>
 
 
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can be a directory.</span>
@@ -1603,7 +1604,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' linendings!</strong></li>
+<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' line endings!</strong></li>
 </ul>
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values.</strong></li>
@@ -1649,9 +1650,9 @@ db.close()
 
 
 
-<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise sqlite3.OperationalError.</span>
+<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Raises a subclass of sqlite3.Error.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
-&lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows.</span>
+&lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
 
@@ -1684,7 +1685,7 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
 db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;)
 &lt;cursor&gt; = db.cursor()
-&lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Only cursor has execute method.</span>
+&lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Raises a subclass of mysql.connector.Error.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '%s's in query with values.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces '%(&lt;key&gt;)s's with values.</span>
 </code></pre></div>
@@ -1735,11 +1736,11 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h3 id="format-2">Format</h3></div><div><h4 id="forstandardsizesstartformatstringwith">For standard sizes start format string with:</h4><ul>
+<div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesstartformatstringwith">For standard type sizes start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
-</ul></div><div><h4 id="integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
+</ul></div></div><div><h4 id="integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2)</strong></li>
@@ -1757,8 +1758,9 @@ db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;,
 
 
 <div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from coll. of numbers.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from collection of numbers.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
 &lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Or: &lt;array&gt;.tobytes()</span>
 </code></pre></div>
 
