@@ -1959,7 +1959,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 ```
 
 ### Format
-#### For standard sizes start format string with:
+#### For standard type sizes start format string with:
 * **`'='` - native byte order**
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
