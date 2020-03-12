@@ -1847,9 +1847,9 @@ db.close()
 ### Read
 **Returned values can be of type str, int, float, bytes or None.**
 ```python
-<cursor> = db.execute('<query>')                # Can raise sqlite3.OperationalError.
+<cursor> = db.execute('<query>')                # Raises a subclass of sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
-<list>   = <cursor>.fetchall()                  # Returns remaining rows.
+<list>   = <cursor>.fetchall()                  # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
@@ -1890,7 +1890,7 @@ db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 from mysql import connector
 db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
 <cursor> = db.cursor()
-<cursor>.execute('<query>')                     # Only cursor has execute method.
+<cursor>.execute('<query>')                     # Raises a subclass of mysql.connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
