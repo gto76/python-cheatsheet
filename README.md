@@ -2932,27 +2932,21 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rect
 **Object for storing rectangular coordinates.**
 ```python
-<Rect>  = pg.Rect(topleft_x, topleft_y, width, height)  # x, y, w/width, h/height
-<int>   = <Rect>.x/y/centerx/centery/bottom/left/right/top
-<tuple> = <Rect>.topleft/center/topright/bottomright/bottomleft
-<tuple> = <Rect>.midtop/midright/midbottom/midleft
+<Rect>  = pg.Rect(topleft_x, topleft_y, width, height)
+<tuple> = <Rect>.topleft/topright/bottomright/bottomleft/center
+<int>   = <Rect>.x/y/centerx/centery
 ```
 
 ```python
-<Rect>  = <Rect>.move(<tuple>/<int>, <int>)
-<Rect>.move_ip(<tuple>/<int>, <int>)
-<Rect>  = <Rect>.inflate(<tuple>/<int>, <int>)
-<Rect>.inflate_ip(<tuple>/<int>, <int>)
+<Rect>  = <Rect>.move(<tuple>)                   # Or: <Rect>.move(<int>, <int>)
+<Rect>.move_ip(<tuple>)                          # Or: <Rect>.move_ip(<int>, <int>)
 ```
 
 ```python
-<bool>  = <Rect>.contains(<Rect>)
-<bool>  = <Rect>.collidepoint(<tuple>/<int>, <int>)
+<bool>  = <Rect>.collidepoint(<tuple>)           # Or: <Rect>.collidepoint(<int>, <int>)
 <bool>  = <Rect>.colliderect(<Rect>)
 index   = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first coliding Rect or -1.
 indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colinding Rects.
-(key, value) = <Rect>.collidedict(<dict_of_Rect>)
-[(key, value), ...] = <Rect>.collidedictall(<dict_of_Rect>)
 ```
 
 ### Surface
@@ -2966,7 +2960,7 @@ indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colind
 ```python
 <Surface>.set_at((x, y), <color>)                 # Updates pixel.
 <Surface>.fill(<color>)                           # Fills the whole surface.
-<Surface>.blit(<Surface>, (x, y)/<Rect>)          # Draws passed surface to the surface.
+<Surface>.blit(<Surface>, (x, y))                 # Draws passed surface to the surface.
 <Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
 ```
 
@@ -2976,7 +2970,6 @@ indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colind
 <Surface> = pg.transform.scale(<Surface>, (width, height))
 ```
 
-#### Drawing:
 ```python
 pg.draw.rect(<Surface>, color, <Rect>)
 pg.draw.polygon(<Surface>, color, points)
@@ -2987,7 +2980,7 @@ pg.draw.line(<Surface>, color, start_pos, end_pos, width)
 pg.draw.lines(<Surface>, color, points)
 ```
 
-#### Fonts:
+### Font
 ```python
 <Font>    = pg.font.SysFont(name, size, bold=False, italic=False)
 <Font>    = pg.font.Font('<path>', size)

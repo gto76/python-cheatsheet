@@ -2493,25 +2493,19 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt;  = pg.Rect(topleft_x, topleft_y, width, height)  <span class="hljs-comment"># x, y, w/width, h/height</span>
-&lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery/bottom/left/right/top
-&lt;tuple&gt; = &lt;Rect&gt;.topleft/center/topright/bottomright/bottomleft
-&lt;tuple&gt; = &lt;Rect&gt;.midtop/midright/midbottom/midleft
+<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt;  = pg.Rect(topleft_x, topleft_y, width, height)
+&lt;tuple&gt; = &lt;Rect&gt;.topleft/topright/bottomright/bottomleft/center
+&lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Rect&gt;  = &lt;Rect&gt;.move(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
-&lt;Rect&gt;.move_ip(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
-&lt;Rect&gt;  = &lt;Rect&gt;.inflate(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
-&lt;Rect&gt;.inflate_ip(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+<pre><code class="python language-python hljs">&lt;Rect&gt;  = &lt;Rect&gt;.move(&lt;tuple&gt;)                   <span class="hljs-comment"># Or: &lt;Rect&gt;.move(&lt;int&gt;, &lt;int&gt;)</span>
+&lt;Rect&gt;.move_ip(&lt;tuple&gt;)                          <span class="hljs-comment"># Or: &lt;Rect&gt;.move_ip(&lt;int&gt;, &lt;int&gt;)</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.contains(&lt;Rect&gt;)
-&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;/&lt;int&gt;, &lt;int&gt;)
+<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;)           <span class="hljs-comment"># Or: &lt;Rect&gt;.collidepoint(&lt;int&gt;, &lt;int&gt;)</span>
 &lt;bool&gt;  = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)
 index   = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first coliding Rect or -1.</span>
 indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colinding Rects.</span>
-(key, value) = &lt;Rect&gt;.collidedict(&lt;dict_of_Rect&gt;)
-[(key, value), ...] = &lt;Rect&gt;.collidedictall(&lt;dict_of_Rect&gt;)
 </code></pre>
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
 &lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
@@ -2521,23 +2515,22 @@ indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-c
 
 <pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
-&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y)/&lt;Rect&gt;)          <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y))                 <span class="hljs-comment"># Draws passed surface to the surface.</span>
 &lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
 &lt;Surface&gt; = pg.transform.rotate(&lt;Surface&gt;, angle)
 &lt;Surface&gt; = pg.transform.scale(&lt;Surface&gt;, (width, height))
 </code></pre>
-<div><h4 id="drawing-1">Drawing:</h4><pre><code class="python language-python hljs">pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
+<pre><code class="python language-python hljs">pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
 pg.draw.polygon(&lt;Surface&gt;, color, points)
 pg.draw.circle(&lt;Surface&gt;, color, center, radius)
 pg.draw.ellipse(&lt;Surface&gt;, color, &lt;Rect&gt;)
 pg.draw.arc(&lt;Surface&gt;, color, &lt;Rect&gt;, start_angle, stop_angle)
 pg.draw.line(&lt;Surface&gt;, color, start_pos, end_pos, width)
 pg.draw.lines(&lt;Surface&gt;, color, points)
-</code></pre></div>
-
-<div><h4 id="fonts">Fonts:</h4><pre><code class="python language-python hljs">&lt;Font&gt;    = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
+</code></pre>
+<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt;    = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
 &lt;Font&gt;    = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
 &lt;Surface&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
 </code></pre></div>
