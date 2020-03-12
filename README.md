@@ -2935,11 +2935,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <Rect>  = pg.Rect(topleft_x, topleft_y, width, height)
 <tuple> = <Rect>.topleft/topright/bottomright/bottomleft/center
 <int>   = <Rect>.x/y/centerx/centery
-```
-
-```python
 <Rect>  = <Rect>.move(<tuple>)                   # Or: <Rect>.move(<int>, <int>)
-<Rect>.move_ip(<tuple>)                          # Or: <Rect>.move_ip(<int>, <int>)
 ```
 
 ```python
@@ -2971,13 +2967,11 @@ indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colind
 ```
 
 ```python
+pg.draw.line(<Surface>, color, start_pos, end_pos, width)
+pg.draw.arc(<Surface>, color, <Rect>, start_angle, stop_angle)
 pg.draw.rect(<Surface>, color, <Rect>)
 pg.draw.polygon(<Surface>, color, points)
-pg.draw.circle(<Surface>, color, center, radius)
 pg.draw.ellipse(<Surface>, color, <Rect>)
-pg.draw.arc(<Surface>, color, <Rect>, start_angle, stop_angle)
-pg.draw.line(<Surface>, color, start_pos, end_pos, width)
-pg.draw.lines(<Surface>, color, points)
 ```
 
 ### Font
