@@ -2346,7 +2346,7 @@ from matplotlib import pyplot
 pyplot.plot(<y_data> [, label=<str>])
 pyplot.plot(<x_data>, <y_data>)
 pyplot.legend()                                # Adds a legend.
-pyplot.savefig(<filename>)                     # Saves the figure.
+pyplot.savefig('<path>')                       # Saves the figure.
 pyplot.show()                                  # Displays the figure.
 pyplot.clf()                                   # Clears the figure.
 ```
