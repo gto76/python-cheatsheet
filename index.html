@@ -2508,13 +2508,13 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Returns the display surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># Creates a new surface.</span>
 &lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()      <span class="hljs-comment"># Loads an image.</span>
+&lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
 &lt;Surf&gt;.blit(&lt;Surface&gt;, (x, y))                  <span class="hljs-comment"># Draws passed surface to the surface.</span>
-&lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns subsurface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
 &lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)

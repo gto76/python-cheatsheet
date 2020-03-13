@@ -2951,13 +2951,13 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
 <Surf> = pg.Surface((width, height))            # Creates a new surface.
 <Surf> = pg.image.load('<path>').convert()      # Loads an image.
+<Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
 ```python
 <Surf>.set_at((x, y), color)                    # Updates pixel.
 <Surf>.fill(color)                              # Fills the whole surface.
 <Surf>.blit(<Surface>, (x, y))                  # Draws passed surface to the surface.
-<Surf> = <Surf>.subsurface(<Rect>)              # Returns subsurface.
 ```
 
 ```python
