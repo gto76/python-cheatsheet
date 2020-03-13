@@ -2482,10 +2482,10 @@ simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span cla
 <span class="hljs-keyword">import</span> pygame <span class="hljs-keyword">as</span> pg
 pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
-rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">235</span>, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>)
+rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
-    keys = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-3</span>), pg.K_RIGHT: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>), pg.K_LEFT: (<span class="hljs-number">-3</span>, <span class="hljs-number">0</span>)}
-    <span class="hljs-keyword">for</span> delta <span class="hljs-keyword">in</span> {keys.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> on}:
+    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-3</span>), pg.K_RIGHT: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>), pg.K_LEFT: (<span class="hljs-number">-3</span>, <span class="hljs-number">0</span>)}
+    <span class="hljs-keyword">for</span> delta <span class="hljs-keyword">in</span> {deltas.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> on}:
         rect = rect.move(delta) <span class="hljs-keyword">if</span> delta <span class="hljs-keyword">else</span> rect
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
@@ -2493,54 +2493,54 @@ rect = pg.Rect(<span class="hljs-number">235</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt;  = pg.Rect(topleft_x, topleft_y, width, height)
-&lt;tuple&gt; = &lt;Rect&gt;.topleft/topright/bottomright/bottomleft/center
-&lt;int&gt;   = &lt;Rect&gt;.x/y/centerx/centery
-&lt;Rect&gt;  = &lt;Rect&gt;.move(&lt;tuple&gt;)                   <span class="hljs-comment"># Or: &lt;Rect&gt;.move(&lt;int&gt;, &lt;int&gt;)</span>
+<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(topleft_x, topleft_y, width, height)
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/topright/bottomright/bottomleft/center
+&lt;Rect&gt; = &lt;Rect&gt;.move(&lt;tuple&gt;)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bool&gt;  = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;)           <span class="hljs-comment"># Or: &lt;Rect&gt;.collidepoint(&lt;int&gt;, &lt;int&gt;)</span>
-&lt;bool&gt;  = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)
-index   = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first coliding Rect or -1.</span>
-indices = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colinding Rects.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;)           <span class="hljs-comment"># Tests if a point is inside a rectangle.</span>
+&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Tests if two rectangles overlap.</span>
+&lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
+&lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colliding Rects.</span>
 </code></pre>
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surface&gt; = pg.display.set_mode((width, height))  <span class="hljs-comment"># Retruns the display surface.</span>
-&lt;Surface&gt; = pg.Surface((width, height))           <span class="hljs-comment"># Creates a new surface.</span>
-&lt;Surface&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()     <span class="hljs-comment"># Loads an image.</span>
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Returns the display surface.</span>
+&lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># Creates a new surface.</span>
+&lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()      <span class="hljs-comment"># Loads an image.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Surface&gt;.set_at((x, y), &lt;color&gt;)                 <span class="hljs-comment"># Updates pixel.</span>
-&lt;Surface&gt;.fill(&lt;color&gt;)                           <span class="hljs-comment"># Fills the whole surface.</span>
-&lt;Surface&gt;.blit(&lt;Surface&gt;, (x, y))                 <span class="hljs-comment"># Draws passed surface to the surface.</span>
-&lt;Surface&gt; = &lt;Surface&gt;.subsurface(&lt;Rect&gt;)          <span class="hljs-comment"># Returns subsurface.</span>
+<pre><code class="python language-python hljs">&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
+&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
+&lt;Surf&gt;.blit(&lt;Surface&gt;, (x, y))                  <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns subsurface.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Surface&gt; = pg.transform.flip(&lt;Surface&gt;, xbool, ybool)
-&lt;Surface&gt; = pg.transform.rotate(&lt;Surface&gt;, angle)
-&lt;Surface&gt; = pg.transform.scale(&lt;Surface&gt;, (width, height))
+<pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
+&lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)
+&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
 </code></pre>
-<pre><code class="python language-python hljs">pg.draw.line(&lt;Surface&gt;, color, start_pos, end_pos, width)
-pg.draw.arc(&lt;Surface&gt;, color, &lt;Rect&gt;, start_angle, stop_angle)
-pg.draw.rect(&lt;Surface&gt;, color, &lt;Rect&gt;)
-pg.draw.polygon(&lt;Surface&gt;, color, points)
-pg.draw.ellipse(&lt;Surface&gt;, color, &lt;Rect&gt;)
+<pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, start_pos, end_pos, width)
+pg.draw.arc(&lt;Surf&gt;, color, &lt;Rect&gt;, start_radians, stop_radians)
+pg.draw.rect(&lt;Surf&gt;, color, &lt;Rect&gt;)
+pg.draw.polygon(&lt;Surf&gt;, color, points)
+pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 </code></pre>
-<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt;    = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
-&lt;Font&gt;    = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
-&lt;Surface&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
+<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
+&lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
+&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
-<div><h3 id="sound">Sound</h3><pre><code class="python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)  <span class="hljs-comment"># Loads a sound file.</span>
-&lt;Sound&gt;.play()                      <span class="hljs-comment"># Starts playing sound.</span>
+<div><h3 id="sound">Sound</h3><pre><code class="python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)              <span class="hljs-comment"># Loads a sound file.</span>
+&lt;Sound&gt;.play()                                  <span class="hljs-comment"># Starts playing the sound.</span>
 </code></pre></div>
 
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
-P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
-D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction</span>
-SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)             <span class="hljs-comment"># Screen size, Speed limit</span>
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position</span>
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                   <span class="hljs-comment"># Direction</span>
+SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)                  <span class="hljs-comment"># Screen size, Speed limit</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>

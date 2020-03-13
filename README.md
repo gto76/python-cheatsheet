@@ -2919,10 +2919,10 @@ Pygame
 import pygame as pg
 pg.init()
 screen = pg.display.set_mode((500, 500))
-rect = pg.Rect(235, 235, 30, 30)
+rect = pg.Rect(240, 240, 20, 20)
 while all(event.type != pg.QUIT for event in pg.event.get()):
-    keys = {pg.K_UP: (0, -3), pg.K_RIGHT: (3, 0), pg.K_DOWN: (0, 3), pg.K_LEFT: (-3, 0)}
-    for delta in {keys.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}:
+    deltas = {pg.K_UP: (0, -3), pg.K_RIGHT: (3, 0), pg.K_DOWN: (0, 3), pg.K_LEFT: (-3, 0)}
+    for delta in {deltas.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}:
         rect = rect.move(delta) if delta else rect
     screen.fill((0, 0, 0))
     pg.draw.rect(screen, (255, 255, 255), rect)
@@ -2932,59 +2932,59 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rect
 **Object for storing rectangular coordinates.**
 ```python
-<Rect>  = pg.Rect(topleft_x, topleft_y, width, height)
-<tuple> = <Rect>.topleft/topright/bottomright/bottomleft/center
-<int>   = <Rect>.x/y/centerx/centery
-<Rect>  = <Rect>.move(<tuple>)                   # Or: <Rect>.move(<int>, <int>)
+<Rect> = pg.Rect(topleft_x, topleft_y, width, height)
+<int>  = <Rect>.x/y/centerx/centery
+<tup.> = <Rect>.topleft/topright/bottomright/bottomleft/center
+<Rect> = <Rect>.move(<tuple>)
 ```
 
 ```python
-<bool>  = <Rect>.collidepoint(<tuple>)           # Or: <Rect>.collidepoint(<int>, <int>)
-<bool>  = <Rect>.colliderect(<Rect>)
-index   = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first coliding Rect or -1.
-indices = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colinding Rects.
+<bool> = <Rect>.collidepoint(<tuple>)           # Tests if a point is inside a rectangle.
+<bool> = <Rect>.colliderect(<Rect>)             # Tests if two rectangles overlap.
+<int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
+<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colliding Rects.
 ```
 
 ### Surface
 **Object for representing images.**
 ```python
-<Surface> = pg.display.set_mode((width, height))  # Retruns the display surface.
-<Surface> = pg.Surface((width, height))           # Creates a new surface.
-<Surface> = pg.image.load('<path>').convert()     # Loads an image.
+<Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
+<Surf> = pg.Surface((width, height))            # Creates a new surface.
+<Surf> = pg.image.load('<path>').convert()      # Loads an image.
 ```
 
 ```python
-<Surface>.set_at((x, y), <color>)                 # Updates pixel.
-<Surface>.fill(<color>)                           # Fills the whole surface.
-<Surface>.blit(<Surface>, (x, y))                 # Draws passed surface to the surface.
-<Surface> = <Surface>.subsurface(<Rect>)          # Returns subsurface.
+<Surf>.set_at((x, y), color)                    # Updates pixel.
+<Surf>.fill(color)                              # Fills the whole surface.
+<Surf>.blit(<Surface>, (x, y))                  # Draws passed surface to the surface.
+<Surf> = <Surf>.subsurface(<Rect>)              # Returns subsurface.
 ```
 
 ```python
-<Surface> = pg.transform.flip(<Surface>, xbool, ybool)
-<Surface> = pg.transform.rotate(<Surface>, angle)
-<Surface> = pg.transform.scale(<Surface>, (width, height))
+<Surf> = pg.transform.flip(<Surf>, xbool, ybool)
+<Surf> = pg.transform.rotate(<Surf>, degrees)
+<Surf> = pg.transform.scale(<Surf>, (width, height))
 ```
 
 ```python
-pg.draw.line(<Surface>, color, start_pos, end_pos, width)
-pg.draw.arc(<Surface>, color, <Rect>, start_angle, stop_angle)
-pg.draw.rect(<Surface>, color, <Rect>)
-pg.draw.polygon(<Surface>, color, points)
-pg.draw.ellipse(<Surface>, color, <Rect>)
+pg.draw.line(<Surf>, color, start_pos, end_pos, width)
+pg.draw.arc(<Surf>, color, <Rect>, start_radians, stop_radians)
+pg.draw.rect(<Surf>, color, <Rect>)
+pg.draw.polygon(<Surf>, color, points)
+pg.draw.ellipse(<Surf>, color, <Rect>)
 ```
 
 ### Font
 ```python
-<Font>    = pg.font.SysFont(name, size, bold=False, italic=False)
-<Font>    = pg.font.Font('<path>', size)
-<Surface> = <Font>.render(text, antialias, color, background=None)
+<Font> = pg.font.SysFont(name, size, bold=False, italic=False)
+<Font> = pg.font.Font('<path>', size)
+<Surf> = <Font>.render(text, antialias, color, background=None)
 ```
 
 ### Sound
 ```
-<Sound> = pg.mixer.Sound('<path>')  # Loads a sound file.
-<Sound>.play()                      # Starts playing sound.
+<Sound> = pg.mixer.Sound('<path>')              # Loads a sound file.
+<Sound>.play()                                  # Starts playing the sound.
 ```
 
 ### Basic Mario Brothers Example
@@ -2992,9 +2992,9 @@ pg.draw.ellipse(<Surface>, color, <Rect>)
 import collections, dataclasses, enum, io, math, pygame, urllib.request, itertools as it
 from random import randint
 
-P = collections.namedtuple('P', 'x y')     # Position
-D = enum.Enum('D', 'n e s w')              # Direction
-SIZE, MAX_SPEED = 50, P(5, 10)             # Screen size, Speed limit
+P = collections.namedtuple('P', 'x y')          # Position
+D = enum.Enum('D', 'n e s w')                   # Direction
+SIZE, MAX_SPEED = 50, P(5, 10)                  # Screen size, Speed limit
 
 def main():
     def get_screen():
