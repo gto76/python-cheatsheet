@@ -2935,11 +2935,11 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <Rect> = pg.Rect(topleft_x, topleft_y, width, height)
 <int>  = <Rect>.x/y/centerx/centery
 <tup.> = <Rect>.topleft/topright/bottomright/bottomleft/center
-<Rect> = <Rect>.move(<tuple>)
+<Rect> = <Rect>.move((x, y))
 ```
 
 ```python
-<bool> = <Rect>.collidepoint(<tuple>)           # Tests if a point is inside a rectangle.
+<bool> = <Rect>.collidepoint((x, y))            # Tests if a point is inside a rectangle.
 <bool> = <Rect>.colliderect(<Rect>)             # Tests if two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colliding Rects.
@@ -2955,8 +2955,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-<Surf>.set_at((x, y), color)                    # Updates pixel.
 <Surf>.fill(color)                              # Fills the whole surface.
+<Surf>.set_at((x, y), color)                    # Updates pixel.
 <Surf>.blit(<Surface>, (x, y))                  # Draws passed surface to the surface.
 ```
 
@@ -2967,7 +2967,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-pg.draw.line(<Surf>, color, start_pos, end_pos, width)
+pg.draw.line(<Surf>, color, (x1, y1), (x2, y2), width)
 pg.draw.arc(<Surf>, color, <Rect>, start_radians, stop_radians)
 pg.draw.rect(<Surf>, color, <Rect>)
 pg.draw.polygon(<Surf>, color, points)
@@ -2976,7 +2976,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 
 ### Font
 ```python
-<Font> = pg.font.SysFont(name, size, bold=False, italic=False)
+<Font> = pg.font.SysFont('<name>', size, bold=False, italic=False)
 <Font> = pg.font.Font('<path>', size)
 <Surf> = <Font>.render(text, antialias, color, background=None)
 ```

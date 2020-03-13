@@ -2496,11 +2496,11 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(topleft_x, topleft_y, width, height)
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/topright/bottomright/bottomleft/center
-&lt;Rect&gt; = &lt;Rect&gt;.move(&lt;tuple&gt;)
+&lt;Rect&gt; = &lt;Rect&gt;.move((x, y))
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint(&lt;tuple&gt;)           <span class="hljs-comment"># Tests if a point is inside a rectangle.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Tests if a point is inside a rectangle.</span>
 &lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Tests if two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colliding Rects.</span>
@@ -2512,21 +2512,21 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
-&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
+<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
+&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surface&gt;, (x, y))                  <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
 &lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)
 &lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
 </code></pre>
-<pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, start_pos, end_pos, width)
+<pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)
 pg.draw.arc(&lt;Surf&gt;, color, &lt;Rect&gt;, start_radians, stop_radians)
 pg.draw.rect(&lt;Surf&gt;, color, &lt;Rect&gt;)
 pg.draw.polygon(&lt;Surf&gt;, color, points)
 pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 </code></pre>
-<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(name, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
+<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
 &lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
 &lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
 </code></pre></div>
