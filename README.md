@@ -2968,7 +2968,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 
 ```python
 pg.draw.line(<Surf>, color, (x1, y1), (x2, y2), width)
-pg.draw.arc(<Surf>, color, <Rect>, start_radians, stop_radians)
+pg.draw.arc(<Surf>, color, <Rect>, from_radians, to_radians)
 pg.draw.rect(<Surf>, color, <Rect>)
 pg.draw.polygon(<Surf>, color, points)
 pg.draw.ellipse(<Surf>, color, <Rect>)
