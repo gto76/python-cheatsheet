@@ -2982,7 +2982,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 ```
 
 ### Sound
-```
+```python
 <Sound> = pg.mixer.Sound('<path>')              # Loads a sound file.
 <Sound>.play()                                  # Starts playing the sound.
 ```
