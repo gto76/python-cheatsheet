@@ -2493,9 +2493,9 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(topleft_x, topleft_y, width, height)
+<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/topright/bottomright/bottomleft/center
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center
 &lt;Rect&gt; = &lt;Rect&gt;.move((x, y))
 </code></pre></div>
 
@@ -2507,7 +2507,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre>
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Returns the display surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># Creates a new surface.</span>
-&lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>).convert()      <span class="hljs-comment"># Loads an image.</span>
+&lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>)                <span class="hljs-comment"># Loads the image.</span>
 &lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
 </code></pre></div>
 

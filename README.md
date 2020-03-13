@@ -2932,9 +2932,9 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rect
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(topleft_x, topleft_y, width, height)
+<Rect> = pg.Rect(x, y, width, height)
 <int>  = <Rect>.x/y/centerx/centery
-<tup.> = <Rect>.topleft/topright/bottomright/bottomleft/center
+<tup.> = <Rect>.topleft/center
 <Rect> = <Rect>.move((x, y))
 ```
 
@@ -2950,7 +2950,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```python
 <Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
 <Surf> = pg.Surface((width, height))            # Creates a new surface.
-<Surf> = pg.image.load('<path>').convert()      # Loads an image.
+<Surf> = pg.image.load('<path>')                # Loads the image.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
