@@ -162,7 +162,7 @@ Point(x=1, y=2)
 1
 >>> getattr(p, 'y')
 2
->>> p._fields
+>>> p._fields  # Or: Point._fields
 ('x', 'y')
 ```
 
