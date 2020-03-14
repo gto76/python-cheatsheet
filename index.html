@@ -246,7 +246,7 @@ elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span c
 sorted_by_second = sorted(&lt;collection&gt;, key=<span class="hljs-keyword">lambda</span> el: el[<span class="hljs-number">1</span>])
 sorted_by_both   = sorted(&lt;collection&gt;, key=<span class="hljs-keyword">lambda</span> el: (el[<span class="hljs-number">1</span>], el[<span class="hljs-number">0</span>]))
 flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
-product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, x: out * x, &lt;collection&gt;)
+product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, el: out * el, &lt;collection&gt;)
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
