@@ -2072,7 +2072,7 @@ with lock:
 ```python
 <Semaphore> = Semaphore(value=1)     # Lock that can be acquired 'value' times.
 <Event>     = Event()                # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)       # Method wait() blocks until it's called n_times.
+<Barrier>   = Barrier(n_times)       # Method wait() blocks until it's called 'n_times'.
 ```
 
 ### Thread Pool Executor
