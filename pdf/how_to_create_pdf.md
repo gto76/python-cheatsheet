@@ -5,7 +5,7 @@ PDF file can also be purchased here: https://transactions.sendowl.com/products/7
 Setup
 -----
 * Install Adobe Acrobat Pro DC.
-* Copy headers and footers from `pdf/Adobe/` folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
+* Copy headers and footers from `pdf/adobe/` folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
 * Change date in header and footer element of `web/template.html`.
 * Run `./parse.js` and commit changes.
 
