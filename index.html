@@ -1650,7 +1650,7 @@ db.close()
 
 
 
-<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Raises a subclass of sqlite3.Error.</span>
+<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = db.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
@@ -1685,7 +1685,7 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
 db = connector.connect(host=&lt;str&gt;, user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;)
 &lt;cursor&gt; = db.cursor()
-&lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Raises a subclass of mysql.connector.Error.</span>
+&lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Can raise a subclass of connector.Error.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '%s's in query with values.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces '%(&lt;key&gt;)s's with values.</span>
 </code></pre></div>
