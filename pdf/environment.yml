@@ -1,0 +1,11 @@
+name: pythonCheatsheet
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.6
+  - wkhtmltopdf
+  - pip
+  - pip:
+    - grip
