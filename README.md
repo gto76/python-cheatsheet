@@ -238,7 +238,24 @@ def count(start, step):
 >>> next(counter), next(counter), next(counter)
 (10, 12, 14)
 ```
+### Recursive generator
+* **Generators can be recursive using the yield from statment.**
 
+```python
+def depth_first(trie, current_word = ''):
+    if trie is None:
+        yield current_word
+    else:
+        for letter, new_trie in trie.items():
+            yield from depth_first(new_trie, current_word + letter)
+```
+
+```python
+>>> trie={'b': {'a': {'b': {'y': None}, 'd': None,'n': {'k': None}}, 'o': {'x': None}}, 
+...       't': {'e': {'a': None,'d': None,'n': None}, 'o': None}}
+>>> [w for w in depth_first(trie)]
+['baby', 'bad', 'bank', 'box', 'tea', 'ted', 'ten', 'to']
+```
 
 Type
 ----
