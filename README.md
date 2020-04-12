@@ -239,7 +239,7 @@ def count(start, step):
 (10, 12, 14)
 ```
 ### Recursive generator
-* **Generators can be recursive using the yield from statment.**
+* **Generators can be recursive using the yield from statement.**
 
 ```python
 def depth_first(trie, current_word = ''):
