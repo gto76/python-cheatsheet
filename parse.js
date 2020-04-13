@@ -195,7 +195,6 @@ function move(anchor_el, el_id) {
 }
 
 function insertPageBreaks() {
-  // insertPageBreakBefore('#libraries')
   insertPageBreakBefore('#print')
 }
 
