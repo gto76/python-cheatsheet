@@ -250,7 +250,7 @@ product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
-<li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.</strong></li>
+<li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)     <span class="hljs-comment"># Returns number of occurrences. Also works on strings.</span>
 index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
@@ -353,7 +353,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h3 id="itertools">Itertools</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> count, repeat, cycle, chain, islice
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;iter&gt; = count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)             <span class="hljs-comment"># Returns incremented value endlessly.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)             <span class="hljs-comment"># Returns updated value endlessly. Accepts floats.</span>
 &lt;iter&gt; = repeat(&lt;el&gt; [, times])             <span class="hljs-comment"># Returns element endlessly or 'times' times.</span>
 &lt;iter&gt; = cycle(&lt;collection&gt;)                <span class="hljs-comment"># Repeats the sequence endlessly.</span>
 </code></pre>
@@ -392,7 +392,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
-<div><h3 id="abc">ABC</h3><p><strong>An abstract base class introduces virtual subclasses that don’t inherit from it, but are still recognized by isinstance() and issubclass().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. This classes get recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre></div>
@@ -670,7 +670,7 @@ shuffle(&lt;list&gt;)
 </ul>
 <div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
 &lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone. Also gettz().</span>
-&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Cont.&gt;/&lt;City&gt;'</span>)          <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
+&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Continent&gt;/&lt;City&gt;'</span>)      <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with new timezone.</span>
 </code></pre></div>
@@ -1055,7 +1055,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="sortable">Sortable</h3><ul>
-<li><strong>With total_ordering decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.</strong></li>
+<li><strong>With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
 <span class="hljs-meta">@total_ordering</span>

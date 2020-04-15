@@ -53,7 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, el: out * el, <collection>)
 list_of_chars    = list(<str>)
 ```
-* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.**
+* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
@@ -205,7 +205,7 @@ from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
-<iter> = count(start=0, step=1)             # Returns incremented value endlessly.
+<iter> = count(start=0, step=1)             # Returns updated value endlessly. Accepts floats.
 <iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
 <iter> = cycle(<collection>)                # Repeats the sequence endlessly.
 ```
@@ -261,8 +261,8 @@ Type
 from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
-### ABC
-**An abstract base class introduces virtual subclasses that don’t inherit from it, but are still recognized by isinstance() and issubclass().**
+### Abstract Base Classes
+**Each abstract base class specifies a set of virtual subclasses. This classes get recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -614,7 +614,7 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 ```python
 <tzinfo> = UTC                              # UTC timezone. London without DST.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
-<tzinfo> = gettz('<Cont.>/<City>')          # 'Continent/City_Name' timezone or None.
+<tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
 <DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
 ```
@@ -1106,7 +1106,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With total_ordering decorator you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
+* **With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
 ```python
 from functools import total_ordering
 
