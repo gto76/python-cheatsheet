@@ -1175,7 +1175,7 @@ class Counter:
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **If it wishes to suppress the exception it must return a true value.** 
 ```python
-class MyOpen():
+class MyOpen:
     def __init__(self, filename):
         self.filename = filename
     def __enter__(self):

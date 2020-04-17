@@ -1120,7 +1120,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Exit() should release the resources.</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>If it wishes to suppress the exception it must return a true value.</strong> </li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span><span class="hljs-params">()</span>:</span>
+</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__enter__</span><span class="hljs-params">(self)</span>:</span>
