@@ -1550,7 +1550,7 @@ Open
 <file>.seek(0)                      # Moves to the start of the file.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
 <file>.seek(0, 2)                   # Moves to the end of the file.
-<bin_file>.seek(±offset, <anchor>)  # Anchor: 0 start, 1 current pos., 2 end.
+<bin_file>.seek(±offset, <anchor>)  # Anchor: 0 start, 1 current position, 2 end.
 ```
 
 ```python
@@ -1677,7 +1677,7 @@ os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
 ```
 
 ```python
-shutil.copy(from, to)               # Copies the file. 'to' can be a directory.
+shutil.copy(from, to)               # Copies the file. 'to' can exist or be a dir.
 shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
 ```
 
@@ -1698,14 +1698,14 @@ import os
 <str> = os.popen('<shell_command>').read()
 ```
 
-#### Sends '1 + 1' to the calculator and captures its output:
+#### Sends '1 + 1' to the basic calculator and captures its output:
 ```python
 >>> from subprocess import run
 >>> run('bc', input='1 + 1\n', capture_output=True, encoding='utf-8')
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends test.in to the calculator running in standard mode and saves its output to test.out:
+#### Sends test.in to the basic calculator running in standard mode and saves its output to test.out:
 ```python
 >>> from shlex import split
 >>> os.popen('echo 1 + 1 > test.in')
@@ -1788,7 +1788,7 @@ import csv
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
-* **File must be opened with `'newline=""'` argument, or an extra '\r' will be added to every '\n' on platforms that use '\r\n' line endings!**
+* **File must be opened with `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**

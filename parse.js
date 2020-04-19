@@ -35,7 +35,7 @@ const OS_RENAME =
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
 const SHUTIL_COPY = 
-  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can be a directory.</span>\n' +
+  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
   'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
 
 const EVAL =
