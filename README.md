@@ -262,7 +262,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. This classes get recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
+**Each abstract base class specifies a set of virtual subclasses. This classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -500,7 +500,7 @@ Numbers
 
 ### Math
 ```python
-from math import e, pi, inf, nan
+from math import e, pi, inf, nan, isinf, isnan
 from math import cos, acos, sin, asin, tan, atan, degrees, radians
 from math import log, log10, log2
 ```
@@ -1255,7 +1255,7 @@ class MySequence:
         return reversed(self.a)
 ```
 
-### Collections.abc.Sequence
+### ABC Sequence
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index() and count().**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined.**
@@ -1415,7 +1415,7 @@ BaseException
       +-- NameError               # Raised when a variable name is not found.
       +-- OSError                 # Failures such as “file not found” or “disk full”.
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
-      +-- RuntimeError            # Raised by errors that don't fall in other categories.
+      +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
@@ -1458,8 +1458,8 @@ Exit
 ```python
 import sys
 sys.exit()                        # Exits with exit code 0 (success).
-sys.exit(<int>)                   # Exits with passed exit code.
-sys.exit(<obj>)                   # Prints the object and exits with 1 (failure).
+sys.exit(<el>)                    # Prints object to stderr and exits with 1.
+sys.exit(<int>)                   # Exits with the passed exit code.
 ```
 
 

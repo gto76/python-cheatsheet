@@ -392,7 +392,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
-<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. This classes get recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. This classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre></div>
@@ -582,7 +582,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;num&gt; = round(&lt;num&gt; [, ±ndigits])     <span class="hljs-comment"># `round(126, -1) == 130`</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan, isinf, isnan
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> cos, acos, sin, asin, tan, atan, degrees, radians
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2
 </code></pre></div>
@@ -1194,7 +1194,7 @@ Hello World!
 </code></pre></div>
 
 
-<div><h3 id="collectionsabcsequence">Collections.abc.Sequence</h3><ul>
+<div><h3 id="abcsequence">ABC Sequence</h3><ul>
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index() and count().</strong></li>
 <li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, abc.Sequence)'</span></code> would return False even if MySequence had all the methods defined.</strong></li>
@@ -1329,7 +1329,7 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
       +-- NameError               # Raised when a variable name is not found.
       +-- OSError                 # Failures such as “file not found” or “disk full”.
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
-      +-- RuntimeError            # Raised by errors that don't fall in other categories.
+      +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of wrong type.
@@ -1361,8 +1361,8 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
 
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
-sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with passed exit code.</span>
-sys.exit(&lt;obj&gt;)                   <span class="hljs-comment"># Prints the object and exits with 1 (failure).</span>
+sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints object to stderr and exits with 1.</span>
+sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with the passed exit code.</span>
 </code></pre></div>
 
 
