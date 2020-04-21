@@ -1119,7 +1119,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Enter() should lock the resources and optionally return an object.</strong></li>
 <li><strong>Exit() should release the resources.</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
-<li><strong>If it wishes to suppress the exception it must return a true value.</strong> </li>
+<li><strong>If it wishes to suppress the exception it must return a true value.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
@@ -1832,10 +1832,10 @@ lock.release()
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
-<span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:
+<span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:         <span class="hljs-comment"># Does not exit until done.</span>
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
     &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
-    &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])
+    &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])    <span class="hljs-comment"># Also visible outside block.</span>
 </code></pre></div>
 
 <div><h4 id="future">Future:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()             <span class="hljs-comment"># Checks if thread has finished executing.</span>

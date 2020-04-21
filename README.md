@@ -1173,7 +1173,7 @@ class Counter:
 * **Enter() should lock the resources and optionally return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
-* **If it wishes to suppress the exception it must return a true value.** 
+* **If it wishes to suppress the exception it must return a true value.**
 ```python
 class MyOpen:
     def __init__(self, filename):
@@ -2078,10 +2078,10 @@ with lock:
 ### Thread Pool Executor
 ```python
 from concurrent.futures import ThreadPoolExecutor
-with ThreadPoolExecutor(max_workers=None) as executor:
+with ThreadPoolExecutor(max_workers=None) as executor:         # Does not exit until done.
     <iter>   = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
     <iter>   = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
-    <Future> = executor.submit(<function> [, <arg_1>, ...])
+    <Future> = executor.submit(<function> [, <arg_1>, ...])    # Also visible outside block.
 ```
 
 #### Future:
