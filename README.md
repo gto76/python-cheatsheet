@@ -1459,7 +1459,7 @@ Exit
 import sys
 sys.exit()                        # Exits with exit code 0 (success).
 sys.exit(<el>)                    # Prints object to stderr and exits with 1.
-sys.exit(<int>)                   # Exits with the passed exit code.
+sys.exit(<int>)                   # Exits with passed exit code.
 ```
 
 
@@ -1476,19 +1476,19 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 from pprint import pprint
 pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
-* **Levels deeper than 'depth' get replaced by '...'.**
+* **Levels deeper than 'depth' get replaced with '...'.**
 
 
 Input
 -----
-**Reads a line from user input or pipe if present.**
+**Reads a line from the user input or pipe if present.**
 
 ```python
 <str> = input(prompt=None)
 ```
 * **Trailing newline gets stripped.**
 * **Prompt string is printed to the standard output before reading input.**
-* **Raises EOFError when user hits EOF (ctrl-d) or input stream gets exhausted.**
+* **Raises EOFError when user hits EOF (ctrl-d/z) or input stream gets exhausted.**
 
 
 Command Line Arguments
@@ -2132,15 +2132,15 @@ Introspection
 
 ### Variables
 ```python
-<list> = dir()                       # Returns names of local variables (incl. functions).
-<dict> = vars()                      # Returns dict of local variables. Also locals().
-<dict> = globals()                   # Returns dict of global variables.
+<list> = dir()                             # Names of local variables (incl. functions).
+<dict> = vars()                            # Dict of local variables. Also locals().
+<dict> = globals()                         # Dict of global variables.
 ```
 
 ### Attributes
 ```python
-<list> = dir(<object>)               # Returns names of object's attributes (incl. methods).
-<dict> = vars(<object>)              # Returns dict of object's fields. Also <obj>.__dict__.
+<list> = dir(<object>)                     # Names of object's attributes (incl. methods).
+<dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
 ```
 
 ```python
@@ -2198,7 +2198,7 @@ class MyMetaClass(type):
 * **The only difference between the examples above is that my\_meta\_class() returns a class of type type, while MyMetaClass() returns a class of type MyMetaClass.**
 
 ### Metaclass Attribute
-**Right before a class is created it checks if it has a 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has the 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
@@ -2223,8 +2223,8 @@ type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 |   MyClass --> MyMetaClass |
 |             |     v       |
 |    object -----> type <+  |
-|             |    ^ +---+  |
-|     str ---------+        |
+|             |     ^ +--+  |
+|     str ----------+       |
 +-------------+-------------+
 ```
 
@@ -2388,7 +2388,7 @@ def get_border(screen):
     from collections import namedtuple
     P = namedtuple('P', 'x y')
     height, width = screen.getmaxyx()
-    return P(width - 1, height - 1)
+    return P(width-1, height-1)
 
 if __name__ == '__main__':
     main()
@@ -2775,7 +2775,7 @@ for velocity in range(15):
     y = sum(range(velocity+1))
     frame = Image.new('L', (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+2*R), fill='white')
+    draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
     frames.append(frame)
 frames += reversed(frames[1:-1])
 imageio.mimsave('test.gif', frames, duration=0.03)
@@ -2804,7 +2804,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 <Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
 <Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
 <Wave_write>.setparams(<params>)                # Sets all parameters.
-<Wave_write>.writeframes(<bytes>)               # Appends frames to file.
+<Wave_write>.writeframes(<bytes>)               # Appends frames to the file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**
@@ -2933,8 +2933,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 **Object for storing rectangular coordinates.**
 ```python
 <Rect> = pg.Rect(x, y, width, height)
-<int>  = <Rect>.x/y/centerx/centery
-<tup.> = <Rect>.topleft/center
+<int>  = <Rect>.x/y/centerx/centery/…
+<tup.> = <Rect>.topleft/center/…
 <Rect> = <Rect>.move((x, y))
 ```
 
@@ -2987,7 +2987,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 <Sound>.play()                                  # Starts playing the sound.
 ```
 
-### Basic Mario Brothers Example
+### Super Mario Bros. Example
 ```python
 import collections, dataclasses, enum, io, math, pygame, urllib.request, itertools as it
 from random import randint
@@ -3028,9 +3028,9 @@ def run(screen, images, mario, tiles):
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
-    x = math.copysign(abs(x) - 1, x) if x else 0
+    x -= x / abs(x) if x else 0
     y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (-10 if D.n in pressed else 0)
-    mario.spd = P(*[max(-thresh, min(thresh, s)) for thresh, s in zip(MAX_SPEED, P(x, y))])
+    mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
     old_p, delta = mario.rect.topleft, P(0, 0)
@@ -3055,7 +3055,7 @@ def draw(screen, images, mario, tiles, pressed):
         return next(mario.frame_cycle) if {D.w, D.e} & pressed else 6
     screen.fill((85, 168, 255))
     mario.facing_left = (D.w in pressed) if {D.e, D.w} & pressed else mario.facing_left
-    screen.blit(images[get_frame_index() + mario.facing_left*9], mario.rect)
+    screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
         screen.blit(images[19 if {*rect.topleft} & {0, (SIZE-1)*16} else 18], rect)
     pygame.display.flip()

@@ -51,8 +51,8 @@ const DIAGRAM_1_B =
   '┃   MyClass ──→ MyMetaClass ┃\n' +
   '┃             │     ↓       ┃\n' +
   '┃    object ─────→ type ←╮  ┃\n' +
-  '┃             │    ↑ ╰───╯  ┃\n' +
-  '┃     str ─────────╯        ┃\n' +
+  '┃             │     ↑ ╰──╯  ┃\n' +
+  '┃     str ──────────╯       ┃\n' +
   '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_2_A =

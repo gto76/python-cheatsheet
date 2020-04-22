@@ -1362,7 +1362,7 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
 sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints object to stderr and exits with 1.</span>
-sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with the passed exit code.</span>
+sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with passed exit code.</span>
 </code></pre></div>
 
 
@@ -1378,16 +1378,16 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 </code></pre></div>
 
 <ul>
-<li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
+<li><strong>Levels deeper than 'depth' get replaced with '…'.</strong></li>
 </ul>
-<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
+<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from the user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
 
 <ul>
 <li><strong>Trailing newline gets stripped.</strong></li>
 <li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
-<li><strong>Raises EOFError when user hits EOF (ctrl-d) or input stream gets exhausted.</strong></li>
+<li><strong>Raises EOFError when user hits EOF (ctrl-d/z) or input stream gets exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 script_name = sys.argv[<span class="hljs-number">0</span>]
@@ -1867,15 +1867,15 @@ product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                       <span class="hljs-comment"># Returns names of local variables (incl. functions).</span>
-&lt;dict&gt; = vars()                      <span class="hljs-comment"># Returns dict of local variables. Also locals().</span>
-&lt;dict&gt; = globals()                   <span class="hljs-comment"># Returns dict of global variables.</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
+&lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables. Also locals().</span>
+&lt;dict&gt; = globals()                         <span class="hljs-comment"># Dict of global variables.</span>
 </code></pre></div></div>
 
 
 
-<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)               <span class="hljs-comment"># Returns names of object's attributes (incl. methods).</span>
-&lt;dict&gt; = vars(&lt;object&gt;)              <span class="hljs-comment"># Returns dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
+<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
+&lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
@@ -1916,7 +1916,7 @@ param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs
 <li><strong>Like in our case, new() can also be called directly, usually from a new() method of a child class (</strong><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls)</span>:</span> <span class="hljs-keyword">return</span> super().__new__(cls)</code><strong>).</strong></li>
 <li><strong>The only difference between the examples above is that my_meta_class() returns a class of type type, while MyMetaClass() returns a class of type MyMetaClass.</strong></li>
 </ul>
-<div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has a 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
+<div><h3 id="metaclassattribute">Metaclass Attribute</h3><p><strong>Right before a class is created it checks if it has the 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span><span class="hljs-params">(metaclass=MyMetaClass)</span>:</span>
     b = <span class="hljs-number">12345</span>
 </code></pre></div>
 
@@ -1934,8 +1934,8 @@ type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is
 |   MyClass --&gt; MyMetaClass |
 |             |     v       |
 |    object -----&gt; type &lt;+  |
-|             |    ^ +---+  |
-|     str ---------+        |
+|             |     ^ +--+  |
+|     str ----------+       |
 +-------------+-------------+
 </code></pre>
 <div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
@@ -2067,7 +2067,7 @@ pyplot.clf()                                   <span class="hljs-comment"># Clea
     <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
     P = namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
     height, width = screen.getmaxyx()
-    <span class="hljs-keyword">return</span> P(width - <span class="hljs-number">1</span>, height - <span class="hljs-number">1</span>)
+    <span class="hljs-keyword">return</span> P(width<span class="hljs-number">-1</span>, height<span class="hljs-number">-1</span>)
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
@@ -2367,7 +2367,7 @@ frames = []
     y = sum(range(velocity+<span class="hljs-number">1</span>))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+<span class="hljs-number">2</span>*R), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
@@ -2390,7 +2390,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 &lt;Wave_write&gt;.setnchannels(&lt;int&gt;)                <span class="hljs-comment"># 1 for mono, 2 for stereo.</span>
 &lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># 2 for CD quality sound.</span>
 &lt;Wave_write&gt;.setparams(&lt;params&gt;)                <span class="hljs-comment"># Sets all parameters.</span>
-&lt;Wave_write&gt;.writeframes(&lt;bytes&gt;)               <span class="hljs-comment"># Appends frames to file.</span>
+&lt;Wave_write&gt;.writeframes(&lt;bytes&gt;)               <span class="hljs-comment"># Appends frames to the file.</span>
 </code></pre>
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
@@ -2494,8 +2494,8 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 
 
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)
-&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…
 &lt;Rect&gt; = &lt;Rect&gt;.move((x, y))
 </code></pre></div>
 
@@ -2535,7 +2535,7 @@ pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 &lt;Sound&gt;.play()                                  <span class="hljs-comment"># Starts playing the sound.</span>
 </code></pre></div>
 
-<div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
+<div><h3 id="supermariobrosexample">Super Mario Bros. Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position</span>
@@ -2574,9 +2574,9 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
-    x = math.copysign(abs(x) - <span class="hljs-number">1</span>, x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+    x -= x / abs(x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
     y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (<span class="hljs-number">-10</span> <span class="hljs-keyword">if</span> D.n <span class="hljs-keyword">in</span> pressed <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
-    mario.spd = P(*[max(-thresh, min(thresh, s)) <span class="hljs-keyword">for</span> thresh, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
+    mario.spd = P(*[max(-limit, min(limit, s)) <span class="hljs-keyword">for</span> limit, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>
     old_p, delta = mario.rect.topleft, P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
@@ -2601,7 +2601,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
         <span class="hljs-keyword">return</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
     mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.e, D.w} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
-    screen.blit(images[get_frame_index() + mario.facing_left*<span class="hljs-number">9</span>], mario.rect)
+    screen.blit(images[get_frame_index() + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
     <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> tiles:
         screen.blit(images[<span class="hljs-number">19</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SIZE<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>} <span class="hljs-keyword">else</span> <span class="hljs-number">18</span>], rect)
     pygame.display.flip()
