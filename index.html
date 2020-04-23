@@ -392,7 +392,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
-<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. This classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre></div>
@@ -1361,7 +1361,7 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
 
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
-sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints object to stderr and exits with 1.</span>
+sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints to stderr and exits with 1.</span>
 sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with passed exit code.</span>
 </code></pre></div>
 
@@ -1378,7 +1378,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 </code></pre></div>
 
 <ul>
-<li><strong>Levels deeper than 'depth' get replaced with '…'.</strong></li>
+<li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
 </ul>
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from the user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>

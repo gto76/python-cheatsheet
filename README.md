@@ -262,7 +262,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. This classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -1458,7 +1458,7 @@ Exit
 ```python
 import sys
 sys.exit()                        # Exits with exit code 0 (success).
-sys.exit(<el>)                    # Prints object to stderr and exits with 1.
+sys.exit(<el>)                    # Prints to stderr and exits with 1.
 sys.exit(<int>)                   # Exits with passed exit code.
 ```
 
@@ -1476,7 +1476,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 from pprint import pprint
 pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
-* **Levels deeper than 'depth' get replaced with '...'.**
+* **Levels deeper than 'depth' get replaced by '...'.**
 
 
 Input
