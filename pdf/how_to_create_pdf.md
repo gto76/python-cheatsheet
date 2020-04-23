@@ -50,6 +50,25 @@ Printing the PDF
 ----------------
 * Open a PDF that was optimized for printing in Chrome and print on A4 on both sides with default margins, scale 98% and no headers and footers.
 
+How To Create PDF (using conda)
+===============================
 
+Note: it was tested on Ubuntu 16.04, this might be compatible with other OS
 
+Setup
+-----
 
+* [Install miniconda](https://docs.conda.io/en/latest/miniconda.html) (or anaconda but it's bigger)
+* Create environment:
+```
+$ cd <git-root>/python-cheatsheet/pdf
+$ conda env create --file environment.yml 
+```
+
+Create PDF
+----------
+* Run shell script:
+```
+$ ./condaCreatePDF.sh
+```
+* Voila!
