@@ -389,7 +389,7 @@ to_exclusive   = &lt;range&gt;.stop
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>type(<span class="hljs-string">'a'</span>), <span class="hljs-string">'a'</span>.__class__, str
 (&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
 </span></code></pre>
-<div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
+<div><h4 id="sometypesdonthavebuiltinnamessotheymustbeimported">Some types don't have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
 <div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
@@ -559,7 +559,7 @@ to_exclusive   = &lt;range&gt;.stop
 | 567.89        |    '5.7e+02'    |     '567.89'    |    '5.68e+02'   |   '56789.00%'   |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 </code></pre>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                <span class="hljs-comment"># 'Z'</span>
+<div><h3 id="integers">Integers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                <span class="hljs-comment"># 'Z'</span>
 {<span class="hljs-number">90</span>:b}                                <span class="hljs-comment"># '1011010'</span>
 {<span class="hljs-number">90</span>:X}                                <span class="hljs-comment"># '5A'</span>
 </code></pre></div>
@@ -846,7 +846,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <li><strong>Partial is also useful in cases when function needs to be passed as an argument, because it enables us to set its arguments beforehand.</strong></li>
 <li><strong>A few examples being: <code class="python hljs"><span class="hljs-string">'defaultdict(&lt;function&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;function&gt;, to_exclusive)'</span></code> and dataclass's <code class="python hljs"><span class="hljs-string">'field(default_factory=&lt;function&gt;)'</span></code>.</strong></li>
 </ul>
-<div><h3 id="nonlocal">Nonlocal</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
+<div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
     i = <span class="hljs-number">0</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">()</span>:</span>
         <span class="hljs-keyword">nonlocal</span> i
@@ -1394,7 +1394,7 @@ script_name = sys.argv[<span class="hljs-number">0</span>]
 arguments   = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
-<div><h3 id="argparse">Argparse</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
+<div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
 p = ArgumentParser(description=&lt;str&gt;)
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag</span>
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option</span>
@@ -1876,13 +1876,12 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 
 <div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
 &lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
-</code></pre></div>
-
-<pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
+&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
 value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
 setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)
 delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
-</code></pre>
+</code></pre></div>
+
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
 &lt;sig&gt;        = signature(&lt;function&gt;)
 no_of_params = len(&lt;sig&gt;.parameters)
@@ -1980,10 +1979,10 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
     state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(<span class="hljs-number">30</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}
     moves = asyncio.Queue()
-    coros = (*(random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)),
+    coros = [*[random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)],
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
-             view(state, screen))
+             view(state, screen)]
     <span class="hljs-keyword">await</span> asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>
@@ -2493,7 +2492,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)
+<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…
 &lt;Rect&gt; = &lt;Rect&gt;.move((x, y))
@@ -2535,7 +2534,7 @@ pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 &lt;Sound&gt;.play()                                  <span class="hljs-comment"># Starts playing the sound.</span>
 </code></pre></div>
 
-<div><h3 id="supermariobrosexample">Super Mario Bros. Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, math, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
+<div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, pygame, urllib.request, itertools <span class="hljs-keyword">as</span> it
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position</span>

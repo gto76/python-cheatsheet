@@ -198,7 +198,6 @@ Iterator
 <list> = list(<iter>)                       # Returns a list of iterator's remaining elements.
 ```
 
-
 ### Itertools
 ```python
 from itertools import count, repeat, cycle, chain, islice
@@ -256,7 +255,7 @@ Type
 (<class 'str'>, <class 'str'>, <class 'str'>)
 ```
 
-#### Some types do not have built-in names, so they must be imported:
+#### Some types don't have built-in names, so they must be imported:
 ```python
 from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
@@ -469,7 +468,7 @@ Format
 +---------------+-----------------+-----------------+-----------------+-----------------+
 ```
 
-### Ints
+### Integers
 ```python
 {90:c}                                # 'Z'
 {90:b}                                # '1011010'
@@ -852,7 +851,7 @@ from functools import partial
 * **Partial is also useful in cases when function needs to be passed as an argument, because it enables us to set its arguments beforehand.**
 * **A few examples being: `'defaultdict(<function>)'`, `'iter(<function>, to_exclusive)'` and dataclass's `'field(default_factory=<function>)'`.**
 
-### Nonlocal
+### Non-Local
 **If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.**
 
 ```python
@@ -1499,7 +1498,7 @@ script_name = sys.argv[0]
 arguments   = sys.argv[1:]
 ```
 
-### Argparse
+### Argument Parser
 ```python
 from argparse import ArgumentParser, FileType
 p = ArgumentParser(description=<str>)
@@ -2141,9 +2140,6 @@ Introspection
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (incl. methods).
 <dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
-```
-
-```python
 <bool> = hasattr(<object>, '<attr_name>')
 value  = getattr(<object>, '<attr_name>')
 setattr(<object>, '<attr_name>', value)
@@ -2284,10 +2280,10 @@ def main(screen):
 async def main_coroutine(screen):
     state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
     moves = asyncio.Queue()
-    coros = (*(random_controller(id_, moves) for id_ in range(10)),
+    coros = [*[random_controller(id_, moves) for id_ in range(10)],
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
-             view(state, screen))
+             view(state, screen)]
     await asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 async def random_controller(id_, moves):
@@ -2929,7 +2925,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
     pg.display.flip()
 ```
 
-### Rect
+### Rectangle
 **Object for storing rectangular coordinates.**
 ```python
 <Rect> = pg.Rect(x, y, width, height)
@@ -2987,9 +2983,9 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 <Sound>.play()                                  # Starts playing the sound.
 ```
 
-### Super Mario Bros. Example
+### Basic Mario Brothers Example
 ```python
-import collections, dataclasses, enum, io, math, pygame, urllib.request, itertools as it
+import collections, dataclasses, enum, io, pygame, urllib.request, itertools as it
 from random import randint
 
 P = collections.namedtuple('P', 'x y')          # Position
