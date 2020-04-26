@@ -389,7 +389,7 @@ to_exclusive   = &lt;range&gt;.stop
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>type(<span class="hljs-string">'a'</span>), <span class="hljs-string">'a'</span>.__class__, str
 (&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
 </span></code></pre>
-<div><h4 id="sometypesdonthavebuiltinnamessotheymustbeimported">Some types don't have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
+<div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
 <div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
@@ -1380,7 +1380,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
 </ul>
-<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from the user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
+<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
 
