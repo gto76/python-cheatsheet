@@ -2140,6 +2140,9 @@ Introspection
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (incl. methods).
 <dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
+```
+
+```python
 <bool> = hasattr(<object>, '<attr_name>')
 value  = getattr(<object>, '<attr_name>')
 setattr(<object>, '<attr_name>', value)
