@@ -468,7 +468,7 @@ Format
 +---------------+-----------------+-----------------+-----------------+-----------------+
 ```
 
-### Integers
+### Ints
 ```python
 {90:c}                                # 'Z'
 {90:b}                                # '1011010'
@@ -2222,8 +2222,8 @@ type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 |   MyClass --> MyMetaClass |
 |             |     v       |
 |    object -----> type <+  |
-|             |     ^ +--+  |
-|     str ----------+       |
+|             |    ^  +--+  |
+|     str ---------+        |
 +-------------+-------------+
 ```
 
@@ -2283,10 +2283,10 @@ def main(screen):
 async def main_coroutine(screen):
     state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
     moves = asyncio.Queue()
-    coros = [*[random_controller(id_, moves) for id_ in range(10)],
+    coros = (*(random_controller(id_, moves) for id_ in range(10)),
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
-             view(state, screen)]
+             view(state, screen))
     await asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 async def random_controller(id_, moves):

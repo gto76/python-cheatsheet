@@ -559,7 +559,7 @@ to_exclusive   = &lt;range&gt;.stop
 | 567.89        |    '5.7e+02'    |     '567.89'    |    '5.68e+02'   |   '56789.00%'   |
 +---------------+-----------------+-----------------+-----------------+-----------------+
 </code></pre>
-<div><h3 id="integers">Integers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                <span class="hljs-comment"># 'Z'</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                <span class="hljs-comment"># 'Z'</span>
 {<span class="hljs-number">90</span>:b}                                <span class="hljs-comment"># '1011010'</span>
 {<span class="hljs-number">90</span>:X}                                <span class="hljs-comment"># '5A'</span>
 </code></pre></div>
@@ -1934,8 +1934,8 @@ type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is
 |   MyClass --&gt; MyMetaClass |
 |             |     v       |
 |    object -----&gt; type &lt;+  |
-|             |     ^ +--+  |
-|     str ----------+       |
+|             |    ^  +--+  |
+|     str ---------+        |
 +-------------+-------------+
 </code></pre>
 <div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
@@ -1980,10 +1980,10 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
     state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(<span class="hljs-number">30</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}
     moves = asyncio.Queue()
-    coros = [*[random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)],
+    coros = (*(random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)),
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
-             view(state, screen)]
+             view(state, screen))
     <span class="hljs-keyword">await</span> asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>
