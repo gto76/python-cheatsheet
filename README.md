@@ -2222,8 +2222,8 @@ type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 |   MyClass --> MyMetaClass |
 |             |     v       |
 |    object -----> type <+  |
-|             |    ^  +--+  |
-|     str ---------+        |
+|             |     ^ +--+  |
+|     str ----------+       |
 +-------------+-------------+
 ```
 
