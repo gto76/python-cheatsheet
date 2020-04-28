@@ -3056,7 +3056,7 @@ def draw(screen, images, mario, tiles, pressed):
     mario.facing_left = (D.w in pressed) if {D.e, D.w} & pressed else mario.facing_left
     screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
-        screen.blit(images[19 if {*rect.topleft} & {0, (SIZE-1)*16} else 18], rect)
+        screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
     pygame.display.flip()
 
 if __name__ == '__main__':
