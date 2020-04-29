@@ -1877,8 +1877,9 @@ db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 
 ```python
 >>> db = sqlite3.connect('test.db')
->>> db.execute('create table person (id integer primary key, name, height)')
->>> db.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187))
+>>> db.execute('create table person (person_id integer primary key, name, height)')
+>>> db.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
+1
 >>> db.execute('select * from person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ``` 
