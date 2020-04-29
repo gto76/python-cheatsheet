@@ -1674,10 +1674,10 @@ db.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_abo
 
 
 <div><h3 id="example">Example</h3><p><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'db.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>db = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table t (a, b, c)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'insert into t values (1, 2, 3)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'select * from t'</span>).fetchall()
-[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'create table person (id integer primary key, name, height)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'insert into person values (null, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>))
+<span class="hljs-meta">&gt;&gt;&gt; </span>db.execute(<span class="hljs-string">'select * from person'</span>).fetchall()
+[(<span class="hljs-number">1</span>, <span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)]
 </code></pre></div>
 
 

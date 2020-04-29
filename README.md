@@ -1874,12 +1874,13 @@ db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 
 ### Example
 **In this example values are not actually saved because `'db.commit()'` is omitted!**
+
 ```python
 >>> db = sqlite3.connect('test.db')
->>> db.execute('create table t (a, b, c)')
->>> db.execute('insert into t values (1, 2, 3)')
->>> db.execute('select * from t').fetchall()
-[(1, 2, 3)]
+>>> db.execute('create table person (id integer primary key, name, height)')
+>>> db.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187))
+>>> db.execute('select * from person').fetchall()
+[(1, 'Jean-Luc', 187)]
 ``` 
 
 ### MySQL
