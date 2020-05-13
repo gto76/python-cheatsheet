@@ -1912,16 +1912,16 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, byteorder='big/little', signed=False)
-<bytes> = bytes.fromhex('<hex>')
+<bytes> = <int>.to_bytes(n_bytes)        # Also: `byteorder='big/little', signed=False`.
+<bytes> = bytes.fromhex('<hex>')         # Hex numbers can be separated by spaces.
 ```
 
 ### Decode
 ```python
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, byteorder='big/little', signed=False)
-'<hex>' = <bytes>.hex()
+<int>   = int.from_bytes(<bytes>)        # Also: `byteorder='big/little', signed=False`.
+'<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal numbers.
 ```
 
 ### Read Bytes from File
@@ -2011,10 +2011,13 @@ Memory View
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
+```
+
+```python
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
-<int>   = int.from_bytes(<mview>, byteorder='big/little', signed=False)
-'<hex>' = <mview>.hex()
+<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`.
+'<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
 ```
 
 
