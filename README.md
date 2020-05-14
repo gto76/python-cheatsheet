@@ -506,7 +506,7 @@ from math import log, log10, log2
 
 ### Statistics
 ```python
-from statistics import mean, median, variance, pvariance, pstdev
+from statistics import mean, median, variance, stdev, pvariance, pstdev
 ```
 
 ### Random
@@ -520,20 +520,20 @@ shuffle(<list>)
 
 ### Bin, Hex
 ```python
-<int>     = 0b<bin>                      # Or: 0x<hex>
-<int>     = int('<bin>', 2)              # Or: int('<hex>', 16)
-<int>     = int('0b<bin>', 0)            # Or: int('0x<hex>', 0)
-'0b<bin>' = bin(<int>)                   # Or: hex(<int>)
+<int>        = 0b<bin>                   # Or: 0x<hex>
+<int>        = int('±<bin>', 2)          # Or: int('±<hex>', 16)
+<int>        = int('±0b<bin>', 0)        # Or: int('±0x<hex>', 0)
+'[-]0b<bin>' = bin(<int>)                # Or: hex(<int>)
 ```
 
 ### Bitwise Operators
 ```python
-<int>     = <int> & <int>                # And
-<int>     = <int> | <int>                # Or
-<int>     = <int> ^ <int>                # Xor (0 if both bits equal)
-<int>     = <int> << n_bits              # Shift left
-<int>     = <int> >> n_bits              # Shift right
-<int>     = ~<int>                       # Compliment (flips bits)
+<int>        = <int> & <int>             # And
+<int>        = <int> | <int>             # Or
+<int>        = <int> ^ <int>             # Xor (0 if both bits equal)
+<int>        = <int> << n_bits           # Shift left
+<int>        = <int> >> n_bits           # Shift right
+<int>        = ~<int>                    # Compliment (flips bits)
 ```
 
 
