@@ -470,9 +470,9 @@ Format
 
 ### Ints
 ```python
-{90:c}                                # 'Z'
-{90:b}                                # '1011010'
-{90:X}                                # '5A'
+{90:c}                                   # 'Z'
+{90:b}                                   # '1011010'
+{90:X}                                   # '5A'
 ```
 
 
@@ -480,11 +480,11 @@ Numbers
 -------
 ### Types
 ```python
-<int>      = int(<float/str/bool>)    # Or: math.floor(<float>)
-<float>    = float(<int/str/bool>)    # Or: <real>e±<int>
-<complex>  = complex(real=0, imag=0)  # Or: <real> ± <real>j
-<Fraction> = fractions.Fraction(numerator=0, denominator=1)
-<Decimal>  = decimal.Decimal(<str/int/float>)
+<int>      = int(<float/str/bool>)       # Or: math.floor(<float>)
+<float>    = float(<int/str/bool>)       # Or: <real>e±<int>
+<complex>  = complex(real=0, imag=0)     # Or: <real> ± <real>j
+<Fraction> = fractions.Fraction(0, 1)    # Or: Fraction(numerator=0, denominator=1)
+<Decimal>  = decimal.Decimal(<str/int>)  # Or: Decimal((sign, digits, exponent))
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
@@ -492,9 +492,9 @@ Numbers
 
 ### Basic Functions
 ```python
-<num> = pow(<num>, <num>)             # Or: <num> ** <num>
-<num> = abs(<num>)                    # <float> = abs(<complex>)
-<num> = round(<num> [, ±ndigits])     # `round(126, -1) == 130`
+<num> = pow(<num>, <num>)                # Or: <num> ** <num>
+<num> = abs(<num>)                       # <float> = abs(<complex>)
+<num> = round(<num> [, ±ndigits])        # `round(126, -1) == 130`
 ```
 
 ### Math
@@ -520,20 +520,20 @@ shuffle(<list>)
 
 ### Bin, Hex
 ```python
-<int>     = 0b<bin>                   # Or: 0x<hex>
-<int>     = int('<bin>', 2)           # Or: int('<hex>', 16)
-<int>     = int('0b<bin>', 0)         # Or: int('0x<hex>', 0)
-'0b<bin>' = bin(<int>)                # Or: hex(<int>)
+<int>     = 0b<bin>                      # Or: 0x<hex>
+<int>     = int('<bin>', 2)              # Or: int('<hex>', 16)
+<int>     = int('0b<bin>', 0)            # Or: int('0x<hex>', 0)
+'0b<bin>' = bin(<int>)                   # Or: hex(<int>)
 ```
 
 ### Bitwise Operators
 ```python
-<int>     = <int> & <int>             # And
-<int>     = <int> | <int>             # Or
-<int>     = <int> ^ <int>             # Xor (0 if both bits equal)
-<int>     = <int> << n_bits           # Shift left
-<int>     = <int> >> n_bits           # Shift right
-<int>     = ~<int>                    # Compliment (flips bits)
+<int>     = <int> & <int>                # And
+<int>     = <int> | <int>                # Or
+<int>     = <int> ^ <int>                # Xor (0 if both bits equal)
+<int>     = <int> << n_bits              # Shift left
+<int>     = <int> >> n_bits              # Shift right
+<int>     = ~<int>                       # Compliment (flips bits)
 ```
 
 
