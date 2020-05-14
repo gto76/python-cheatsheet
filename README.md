@@ -531,8 +531,7 @@ shuffle(<list>)
 <int>        = <int> & <int>             # And
 <int>        = <int> | <int>             # Or
 <int>        = <int> ^ <int>             # Xor (0 if both bits equal)
-<int>        = <int> << n_bits           # Shift left
-<int>        = <int> >> n_bits           # Shift right
+<int>        = <int> << n_bits           # Shift left (>> for right)
 <int>        = ~<int>                    # Compliment (flips bits)
 ```
 
@@ -560,7 +559,8 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 ```python
 >>> combinations('abc', 2)
-[('a', 'b'), ('a', 'c'), ('b', 'c')]
+[('a', 'b'), ('a', 'c'),
+ ('b', 'c')]
 ```
 
 ```python
