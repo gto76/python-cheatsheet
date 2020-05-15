@@ -1912,7 +1912,7 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes)        # Also: `byteorder='big/little', signed=False`.
+<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`
 <bytes> = bytes.fromhex('<hex>')         # Hex numbers can be separated by spaces.
 ```
 
@@ -1920,7 +1920,7 @@ Bytes
 ```python
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>)        # Also: `byteorder='big/little', signed=False`.
+<int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`
 '<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal numbers.
 ```
 
@@ -2016,7 +2016,7 @@ Memory View
 ```python
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
-<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`.
+<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`
 '<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
 ```
 
