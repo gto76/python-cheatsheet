@@ -532,7 +532,7 @@ shuffle(<list>)
 <int>        = <int> | <int>             # Or
 <int>        = <int> ^ <int>             # Xor (0 if both bits equal)
 <int>        = <int> << n_bits           # Shift left (>> for right)
-<int>        = ~<int>                    # Compliment (flips bits)
+<int>        = ~<int>                    # Not (also: -<int> - 1)
 ```
 
 
