@@ -53,7 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, el: out * el, <collection>)
 list_of_chars    = list(<str>)
 ```
-* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
+* **Module [operator](#operator) provides functions itemgetter() and mul() which offer the same functionality as provided by [lambda](#lambda) expressions above.**
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
@@ -242,7 +242,7 @@ def count(start, step):
 Type
 ----
 * **Everything is an object.**
-* **Every object has a type.**
+* **Every object has a specific type.**
 * **Type and class are synonymous.**
 
 ```python
@@ -255,7 +255,7 @@ Type
 (<class 'str'>, <class 'str'>, <class 'str'>)
 ```
 
-#### Some types do not have built-in names, so they must be imported:
+#### Some types do not have built-in names, so they must be imported externally:
 ```python
 from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
