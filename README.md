@@ -2936,10 +2936,10 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rectangle
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(x, y, width, height)
-<int>  = <Rect>.x/y/centerx/centery/…
-<tup.> = <Rect>.topleft/center/…
-<Rect> = <Rect>.move((x, y))
+<Rect> = pg.Rect(x, y, width, height)           # X and y are coordinates of topleft corner.
+<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left.
+<tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft.
+<Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in place.
 ```
 
 ```python

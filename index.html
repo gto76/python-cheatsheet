@@ -2495,10 +2495,10 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)
-&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…
-&lt;Rect&gt; = &lt;Rect&gt;.move((x, y))
+<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># X and y are coordinates of topleft corner.</span>
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left.</span>
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft.</span>
+&lt;Rect&gt; = &lt;Rect&gt;.move((x, y))                    <span class="hljs-comment"># Use move_ip() to move in place.</span>
 </code></pre></div>
 
 
