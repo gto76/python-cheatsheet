@@ -2448,7 +2448,7 @@ Scraping
 #### Scrapes Python's URL, version number and logo from Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
-import requests
+import requests, sys
 from bs4 import BeautifulSoup
 URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
 try:
@@ -2464,7 +2464,7 @@ try:
         file.write(image)
     print(link, ver)
 except requests.exceptions.ConnectionError:
-    print("You've got problems with connection.")
+    print("You've got problems with connection.", file=sys.stderr)
 ```
 
 
