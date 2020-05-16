@@ -2946,7 +2946,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <bool> = <Rect>.collidepoint((x, y))            # Tests if a point is inside a rectangle.
 <bool> = <Rect>.colliderect(<Rect>)             # Tests if two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
-<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colliding Rects.
+<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding Rects.
 ```
 
 ### Surface
@@ -3032,17 +3032,17 @@ def run(screen, images, mario, tiles):
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
-    x -= x / abs(x) if x else 0
+    x -= x // abs(x) if x else 0
     y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (-10 if D.n in pressed else 0)
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
-    old_p, delta = mario.rect.topleft, P(0, 0)
+    new_p = mario.rect.topleft
     larger_speed = max(abs(s) for s in mario.spd)
-    for _ in range(int(larger_speed)):
+    for _ in range(larger_speed):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        delta = P(*[a + s/larger_speed for a, s in zip(delta, mario.spd)])
-        mario.rect.topleft = [sum(pair) for pair in zip(old_p, delta)]
+        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario.spd)])
+        mario.rect.topleft = new_p
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
