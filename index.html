@@ -2602,7 +2602,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
             <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
         <span class="hljs-keyword">return</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
-    mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.e, D.w} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
+    mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
     screen.blit(images[get_frame_index() + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
     <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> tiles:
         screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SIZE<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>} <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], rect)

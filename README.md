@@ -3058,7 +3058,7 @@ def draw(screen, images, mario, tiles, pressed):
             return 4
         return next(mario.frame_cycle) if {D.w, D.e} & pressed else 6
     screen.fill((85, 168, 255))
-    mario.facing_left = (D.w in pressed) if {D.e, D.w} & pressed else mario.facing_left
+    mario.facing_left = (D.w in pressed) if {D.w, D.e} & pressed else mario.facing_left
     screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
         screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
