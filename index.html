@@ -1880,10 +1880,10 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 &lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
-value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
-setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)
-delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)
+<pre><code class="python language-python hljs">&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr raises an error.</span>
+value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Raises AttributeError if attribute is missing.</span>
+setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on user-defined classes.</span>
+delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Equivalent to `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre>
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
 &lt;sig&gt;        = signature(&lt;function&gt;)
@@ -2061,7 +2061,7 @@ pyplot.clf()                                   <span class="hljs-comment"># Clea
     curs_set(<span class="hljs-number">0</span>)                                <span class="hljs-comment"># Makes cursor invisible.</span>
     screen.nodelay(<span class="hljs-keyword">True</span>)                       <span class="hljs-comment"># Makes getch() non-blocking.</span>
     screen.clear()
-    screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)
+    screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)  <span class="hljs-comment"># Coordinates are y, x.</span>
     <span class="hljs-keyword">while</span> screen.getch() != ascii.ESC:
         <span class="hljs-keyword">pass</span>
 

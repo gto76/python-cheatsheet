@@ -2148,10 +2148,10 @@ Introspection
 ```
 
 ```python
-<bool> = hasattr(<object>, '<attr_name>')
-value  = getattr(<object>, '<attr_name>')
-setattr(<object>, '<attr_name>', value)
-delattr(<object>, '<attr_name>')
+<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr raises an error.
+value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
+setattr(<object>, '<attr_name>', value)    # Only works on user-defined classes.
+delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_name>`.
 ```
 
 ### Parameters
@@ -2384,7 +2384,7 @@ def draw(screen):
     curs_set(0)                                # Makes cursor invisible.
     screen.nodelay(True)                       # Makes getch() non-blocking.
     screen.clear()
-    screen.addstr(0, 0, 'Press ESC to quit.')
+    screen.addstr(0, 0, 'Press ESC to quit.')  # Coordinates are y, x.
     while screen.getch() != ascii.ESC:
         pass
 
