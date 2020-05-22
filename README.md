@@ -1775,7 +1775,7 @@ import csv
 
 ### Read
 ```python
-<reader> = csv.reader(<file>, dialect='excel', delimiter=',')
+<reader> = csv.reader(<file>)       # Also: `dialect='excel', delimiter=','`.
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 <list>   = list(<reader>)           # Returns list of remaining rows.
 ```
@@ -1783,7 +1783,7 @@ import csv
 
 ### Write
 ```python
-<writer> = csv.writer(<file>, dialect='excel', delimiter=',')
+<writer> = csv.writer(<file>)       # Also: `dialect='excel', delimiter=','`.
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
@@ -1889,8 +1889,8 @@ db.executemany('<query>', <coll_of_above>)      # Runs execute() many times.
 ```python
 # $ pip3 install mysql-connector
 from mysql import connector
-db = connector.connect(host=<str>, user=<str>, password=<str>, database=<str>)
-<cursor> = db.cursor()
+db = connector.connect(host=<str>, …)           # `user=<str>, password=<str>, database=<str>`.
+<cursor> = db.cursor()                          # Only cursor has execute method.
 <cursor>.execute('<query>')                     # Can raise a subclass of connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
@@ -1912,7 +1912,7 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`
+<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
 <bytes> = bytes.fromhex('<hex>')         # Hex numbers can be separated by spaces.
 ```
 
@@ -1920,7 +1920,7 @@ Bytes
 ```python
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`
+<int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
 '<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal numbers.
 ```
 
@@ -2016,7 +2016,7 @@ Memory View
 ```python
 <list>  = list(<mview>)                        # Returns list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
-<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`
+<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`.
 '<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
 ```
 
