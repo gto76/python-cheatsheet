@@ -2150,7 +2150,7 @@ Introspection
 ```python
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an error.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
-setattr(<object>, '<attr_name>', value)    # Only works on user-defined classes.
+setattr(<object>, '<attr_name>', value)    # Only works on classes with __dict__ attribute.
 delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_name>`.
 ```
 
