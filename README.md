@@ -2047,21 +2047,19 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 
 ### Thread
 ```python
-thread = Thread(target=<function>, args=(<first_arg>, ))
-thread.start()
-...
-<bool> = thread.is_alive()           # Checks if thread has finished executing.
-thread.join()                        # Waits for thread to finish.
+<Thread> = Thread(target=<function>)  # Use `args=<collection>` to set arguments.
+<Thread>.start()                      # Starts the thread.
+<bool> = <Thread>.is_alive()          # Checks if thread has finished executing.
+<Thread>.join()                       # Waits for thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-lock = RLock()
-lock.acquire()                       # Waits for lock to be available.
-...
-lock.release()
+<lock> = RLock()
+<lock>.acquire()                      # Waits for lock to be available.
+<lock>.release()                      # Makes the lock available again.
 ```
 
 #### Or:
@@ -2073,9 +2071,9 @@ with lock:
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)     # Lock that can be acquired 'value' times.
-<Event>     = Event()                # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)       # Method wait() blocks until it's called 'n_times'.
+<Semaphore> = Semaphore(value=1)      # Lock that can be acquired 'value' times.
+<Event>     = Event()                 # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(n_times)        # Method wait() blocks until it's called 'n_times'.
 ```
 
 ### Thread Pool Executor
@@ -2089,8 +2087,8 @@ with ThreadPoolExecutor(max_workers=None) as executor:         # Does not exit u
 
 #### Future:
 ```python
-<bool> = <Future>.done()             # Checks if thread has finished executing.
-<obj>  = <Future>.result()           # Waits for thread to finish and returns result.
+<bool> = <Future>.done()              # Checks if thread has finished executing.
+<obj>  = <Future>.result()            # Waits for thread to finish and returns result.
 ```
 
 ### Queue
@@ -2101,10 +2099,10 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)                    # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)             # Raises queue.Full exception if full.
-<el> = <Queue>.get()                 # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()          # Raises queue.Empty exception if empty.
+<Queue>.put(<el>)                     # Blocks until queue stops being full.
+<Queue>.put_nowait(<el>)              # Raises queue.Full exception if full.
+<el> = <Queue>.get()                  # Blocks until queue stops being empty.
+<el> = <Queue>.get_nowait()           # Raises queue.Empty exception if empty.
 ```
 
 
