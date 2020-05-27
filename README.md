@@ -2142,9 +2142,6 @@ Introspection
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (incl. methods).
 <dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
-```
-
-```python
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an error.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
 setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
