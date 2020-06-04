@@ -2413,7 +2413,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (width == <span class="hljs-number">1</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
         width  = file.getsampwidth()
-        frames = file.readframes(file.getnframes())
+        frames = file.readframes(<span class="hljs-number">-1</span>)
     byte_samples = (frames[i: i + width] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), width))
     <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, width * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> byte_samples]
 </code></pre></div>
@@ -2447,7 +2447,7 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
     p = file.getparams()
-    frames = file.readframes(p.nframes)
+    frames = file.readframes(<span class="hljs-number">-1</span>)
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
 </code></pre></div>
 

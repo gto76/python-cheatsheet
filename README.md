@@ -2830,7 +2830,7 @@ def read_wav_file(filename):
         return an_int - 128 * (width == 1)
     with wave.open(filename, 'rb') as file:
         width  = file.getsampwidth()
-        frames = file.readframes(file.getnframes())
+        frames = file.readframes(-1)
     byte_samples = (frames[i: i + width] for i in range(0, len(frames), width))
     return [get_int(b) / pow(2, width * 8 - 1) for b in byte_samples]
 ```
@@ -2872,7 +2872,7 @@ write_to_wav_file('test.wav', samples_f)
 from simpleaudio import play_buffer
 with wave.open('test.wav', 'rb') as file:
     p = file.getparams()
-    frames = file.readframes(p.nframes)
+    frames = file.readframes(-1)
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
 ```
 
