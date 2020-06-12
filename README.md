@@ -3063,6 +3063,318 @@ if __name__ == '__main__':
 ```
 
 
+Pandas
+------
+
+```python
+# $ pip3 install pandas
+import pandas as pd
+from pandas import Series, DataFrame
+```
+
+### Series
+**Ordered dictionary with a name.**
+
+```python
+>>> Series([1, 2], index=['x', 'y'], name='a')
+x    1
+y    2
+Name: a, dtype: int64
+```
+
+```python
+<Sr> = Series(<list>)                         # Assigns RangeIndex starting at 0.
+<Sr> = Series(<dict>)                         # Takes dictionary's keys for index.
+<Sr> = Series(<dict/Series>, index=<list>)    # Only keeps items with keys specified in index.
+```
+
+```python
+keys = <Sr>.index                             # Returns a sequence of keys as Index object.
+vals = <Sr>.values                            # Returns a sequence of values as numpy array.
+```
+
+```python
+<el> = <Sr>.loc[key]                          # Or: <Sr>.iloc[index]
+<Sr> = <Sr>.loc[keys]                         # Or: <Sr>.iloc[indexes]
+<Sr> = <Sr>.loc[from_key : to_key_inclusive]  # Or: <Sr>.iloc[from_i : to_i_exclusive]
+```
+
+```python
+<el> = <Sr>[key/index]                        # Or: <Sr>.key
+<Sr> = <Sr>[keys/indexes]                     # Or: <Sr>[<key_range/range>]
+<Sr> = <Sr>[<bools>]                          # Or: <Sr>.i/loc[<bools>]
+```
+
+```python
+<Sr> = <Sr> ><== <el/Sr>                      # Returns Series of bools.
+<Sr> = <Sr> +-*/ <el/Sr>                      # Non-matching keys get value NaN.
+```
+
+```python
+<Sr> = pd.concat(<coll_of_Sr>)                # Combines items.
+<Sr> = <Sr>.append(<Sr>)                      # Appends new items.
+<Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present (extends).
+```
+
+### DataFrame
+**Table with labeled rows and columns.**
+
+```python
+>>> DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+   x  y
+a  1  2
+b  3  4
+```
+
+```python
+<DF>     = DataFrame(<list_of_rows>)          # Rows can be either lists, dicts or series.
+<DF>     = DataFrame(<dict_of_columns>)       # Columns can be either lists, dicts or series.
+```
+
+```python
+row_keys = <Sr>.index                         # Also: `col_keys = <Sr>.columns`.
+values   = <Sr>.values                        # Returns values as 2D numpy array.
+```
+
+```python
+<el>     = <DF>.loc[row_key, column_key]      # Or: <DF>.iloc[row_index, column_index]
+<Sr/DF>  = <DF>.loc[row_key/s]                # Or: <DF>.iloc[row_index/es]
+<Sr/DF>  = <DF>.loc[:, column_key/s]          # Or: <DF>.iloc[:, column_index/es]
+<DF>     = <DF>.loc[row_bools, column_bools]  # Or: <DF>.iloc[row_bools, column_bools]
+```
+
+```python
+<Sr/DF>  = <DF>[column_key/s]                 # Or: <DF>.column_key
+<DF>     = <DF>[row_bools]                    # Keeps rows as specified by bools.
+<DF>     = <DF>[<DF_of_bools>]                # Assigns NaN to False values.
+```
+
+```python
+<DF>     = <DF> ><== <el/Sr/DF>               # Returns DataFrame of bools.
+<DF>     = <DF> +-*/ <el/Sr/DF>               # Non-matching keys get value NaN.
+```
+
+```python
+<DF>     = <DF>.set_index(column_key)         # Replaces row keys with values from a column.
+<DF>     = <DF>.reset_index()                 # Moves row keys to their own column.
+<DF>     = <DF>.transpose()                   # Rotates the table.
+<DF>     = <DF>.melt(id_vars=column_key/s)    # Melts on columns.
+```
+
+### Merge, Join, Concat
+```python
+>>> l = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+   x  y 
+a  1  2 
+b  3  4 
+>>> r = DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z'])
+   y  z
+b  4  5
+c  6  7
+```
+```python
+┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
+┃        how/join        │    'outer'    │  'inner'   │   'left'   ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  ┃
+┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  ┃
+┃                        │ 1  3   4   5  │            │ 3   4   5  ┃
+┃                        │ 2  .   6   7  │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z ┃
+┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . ┃
+┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 ┃
+┃                        │ c  .  .  6  7 │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ pd.concat([l, r],      │    x   y   z  │     y      │            ┃
+┃           axis=0,      │ a  1   2   .  │     2      │            ┃
+┃           join=…)      │ b  3   4   .  │     4      │            ┃
+┃                        │ b  .   4   5  │     4      │            ┃
+┃                        │ c  .   6   7  │     6      │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ pd.concat([l, r],      │    x  y  y  z │            │            ┃
+┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            ┃
+┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            ┃
+┃                        │ c  .  .  6  7 │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.combine_first(r)     │    x   y   z  │            │            ┃
+┃                        │ a  1   2   .  │            │            ┃
+┃                        │ b  3   4   5  │            │            ┃
+┃                        │ c  .   6   7  │            │            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
+```
+
+### GroupBy
+```python
+<DF_Gb> = <DF>.groupby(column_key/s)          # Columns that were used for groupin becme row_k.
+<DFs>   = list(<DF_Gb>)                       # Returns list of group_key - DataFrame tuples.
+<DF>    = <DF_Gb>.get_group(group_key)
+<Sr_Gb> = <DF_Gb>[column_key]                 # Or: <DF_Gb>.column_key
+<Srs>   = list(<Sr_Gb>)                       # Returns list of group_key - Series tuples.
+```
+
+### Operations
+```python
+<el/Sr/DF> = <Sr/DF/GB>.sum/max/mean()        # …/idxmax/all()
+<Sr/DF> = <Sr/DF/GB>.diff/cumsum/rank()       # …/pct_change()
+```
+
+```python
+<Sr/DF> = <Sr/DF/GB>.ffill()
+<Sr/DF> = <Sr/DF/GB>.fillna(value)
+<Sr/DF> = <Sr/DF>.interpolate()
+```
+
+```python
+<Sr/DF> = <Sr/DF/GB>.apply(<func>)            # Invokes function on every value/column/group.
+<DF>    = <DF>.applymap(<func>)               # Apply a function to a Dataframe elementwise.
+<Sr/DF> = <Sr/DF/GB>.aggregate(<func>)        # Invokes function on every column > number.
+<Sr/DF> = <Sr/DF/GB>.transform(<func>)
+<Sr/DF> = <Sr/DF>.combine(<Sr/DF>, <func>)
+```
+
+### Rolling
+```python
+<Rl>    = <Sr/DF/GB>.rolling(window_size)     # Also: `min_periods, center=False`.
+<Rl>    = <Rl>[column_key/s]                  # Or: <Rl>.column_key
+<Sr/DF> = <Rl>.sum/max/mean()
+<Sr/DF> = <Rl>.apply(<func>)                  # Invokes function on every window.
+<Sr/DF> = <Rl>.aggregate(<func>)              # Invokes function on every window.
+```
+
+### Encode
+```python
+<DF> = pd.read_json/html('<str/path/url>')
+<DF> = pd.read_csv/pickle/excel('<path/url>')
+<DF> = pd.read_sql('<query>', <connection>)
+<DF> = pd.read_clipboard()
+```
+
+### Decode
+```python
+<dict> = <DF>.to_dict(['d/l/s/sp/r/i'])
+<str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
+<DF>.to_pickle/excel(<path>)
+<DF>.to_sql('<table_name>', <connection>)
+```
+
+
+Plotly
+------
+
+### Top 10 Countries by Percentage of Population With Confirmed COVID-19 Infection
+```text
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
++----------------------------------------------------------------------------------------------
+```
+
+```python
+import pandas as pd
+import plotly.express
+
+covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
+                    usecols=['iso_code', 'date', 'total_deaths', 'population'])
+continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
+                         'list/r/country-and-continent-codes-list-csv.csv',
+                         usecols=['Three_Letter_Country_Code', 'Continent_Name'])
+merged = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
+summed = merged.groupby(['Continent_Name', 'date']).sum().reset_index()
+summed['Total Deaths per Million'] = summed.total_deaths * 1e6 / summed.population
+summed = summed[('2020-03-14' < summed.date) & (summed.date < '2020-05-31')]
+summed = summed.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
+plotly.express.line(summed, x='Date', y='Total Deaths per Million', color='Continent').show()
+```
+
+### Confirmed Cases of COVID-19, Dow Jones Index, Gold, and Bitcoin Price
+```text
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
++----------------------------------------------------------------------------------------------
+```
+
+```python
+import pandas, datetime
+import plotly.graph_objects as go
+
+def main():
+    display_data(mangle_data(*scrape_data()))
+
+def scrape_data():
+    def scrape_yah(id_):
+        BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
+        now  = int(datetime.datetime.now().timestamp())
+        url  = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
+        return pandas.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close 
+    covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
+                        usecols=['date', 'total_cases'])
+    covid = covid.groupby('date').sum()
+    dow_jones, gold, bitcoin = scrape_yah('^DJI'), scrape_yah('GC=F'), scrape_yah('BTC-USD')
+    dow_jones.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
+    return covid, dow_jones, gold, bitcoin
+
+def mangle_data(covid, dow_jones, gold, bitcoin):
+    out = pandas.concat([covid, dow_jones, gold, bitcoin], axis=1)
+    out = out.loc['2020-02-23':].iloc[:-2]
+    out = out.interpolate()
+    out.iloc[:, 1:] = out.rolling(10, 1, center=True).mean().iloc[:, 1:]
+    out.iloc[:, 1:] = out.iloc[:, 1:] / out.iloc[0, 1:] * 100
+    return out
+
+def display_data(out):
+    def get_trace(col_name):
+        return go.Scatter(x=out.index, y=out[col_name], name=col_name, yaxis='y2')
+    traces = [get_trace(col_name) for col_name in out.columns[1:]]
+    traces.append(go.Scatter(x=out.index, y=out.total_cases, name='Total Cases', yaxis='y1'))
+    figure = go.Figure()
+    figure.add_traces(traces)
+    figure.update_layout(
+        yaxis1=dict(title='Total Cases', rangemode='tozero'),
+        yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),
+        legend=dict(x=1.1)
+    ).show()
+
+if __name__ == '__main__':
+    main()
+```
+
+
 Basic Script Template
 ---------------------
 ```python

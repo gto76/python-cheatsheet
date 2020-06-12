@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def convert_table(lines):
     def from_ascii():
         out = []
@@ -25,3 +27,13 @@ def convert_table(lines):
     if lines[0][0] == '+':
         return from_ascii()
     return from_unicode()
+
+if __name__ == '__main__':
+    input_lines = []
+    try:
+        while True:
+            input_lines.append(input())
+    except EOFError:
+        pass
+    print(convert_table(input_lines))
+

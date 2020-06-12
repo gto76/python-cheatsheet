@@ -2608,6 +2608,255 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     main()
 </code></pre></div>
 
+<div><h2 id="pandas"><a href="#pandas" name="pandas">#</a>Pandas</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> Series, DataFrame
+</code></pre></div>
+
+<div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
+x    <span class="hljs-number">1</span>
+y    <span class="hljs-number">2</span>
+Name: a, dtype: int64
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;Sr&gt; = Series(&lt;list&gt;)                         <span class="hljs-comment"># Assigns RangeIndex starting at 0.</span>
+&lt;Sr&gt; = Series(&lt;dict&gt;)                         <span class="hljs-comment"># Takes dictionary's keys for index.</span>
+&lt;Sr&gt; = Series(&lt;dict/Series&gt;, index=&lt;list&gt;)    <span class="hljs-comment"># Only keeps items with keys specified in index.</span>
+</code></pre>
+<pre><code class="python language-python hljs">keys = &lt;Sr&gt;.index                             <span class="hljs-comment"># Returns a sequence of keys as Index object.</span>
+vals = &lt;Sr&gt;.values                            <span class="hljs-comment"># Returns a sequence of values as numpy array.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.loc[key]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[index]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[keys]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[indexes]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[from_key : to_key_inclusive]  <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i : to_i_exclusive]</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                        <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
+&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                     <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;key_range/range&gt;]</span>
+&lt;Sr&gt; = &lt;Sr&gt;[&lt;bools&gt;]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[&lt;bools&gt;]</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                      <span class="hljs-comment"># Returns Series of bools.</span>
+&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                      <span class="hljs-comment"># Non-matching keys get value NaN.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = pd.concat(&lt;coll_of_Sr&gt;)                <span class="hljs-comment"># Combines items.</span>
+&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                      <span class="hljs-comment"># Appends new items.</span>
+&lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present (extends).</span>
+</code></pre>
+<div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+   x  y
+a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
+b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;DF&gt;     = DataFrame(&lt;list_of_rows&gt;)          <span class="hljs-comment"># Rows can be either lists, dicts or series.</span>
+&lt;DF&gt;     = DataFrame(&lt;dict_of_columns&gt;)       <span class="hljs-comment"># Columns can be either lists, dicts or series.</span>
+</code></pre>
+<pre><code class="python language-python hljs">row_keys = &lt;Sr&gt;.index                         <span class="hljs-comment"># Also: `col_keys = &lt;Sr&gt;.columns`.</span>
+values   = &lt;Sr&gt;.values                        <span class="hljs-comment"># Returns values as 2D numpy array.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;el&gt;     = &lt;DF&gt;.loc[row_key, column_key]      <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index, column_index]</span>
+&lt;Sr/DF&gt;  = &lt;DF&gt;.loc[row_key/s]                <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index/es]</span>
+&lt;Sr/DF&gt;  = &lt;DF&gt;.loc[:, column_key/s]          <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[:, column_index/es]</span>
+&lt;DF&gt;     = &lt;DF&gt;.loc[row_bools, column_bools]  <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_bools, column_bools]</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Sr/DF&gt;  = &lt;DF&gt;[column_key/s]                 <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
+&lt;DF&gt;     = &lt;DF&gt;[row_bools]                    <span class="hljs-comment"># Keeps rows as specified by bools.</span>
+&lt;DF&gt;     = &lt;DF&gt;[&lt;DF_of_bools&gt;]                <span class="hljs-comment"># Assigns NaN to False values.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;DF&gt;     = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;               <span class="hljs-comment"># Returns DataFrame of bools.</span>
+&lt;DF&gt;     = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;               <span class="hljs-comment"># Non-matching keys get value NaN.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;DF&gt;     = &lt;DF&gt;.set_index(column_key)         <span class="hljs-comment"># Replaces row keys with values from a column.</span>
+&lt;DF&gt;     = &lt;DF&gt;.reset_index()                 <span class="hljs-comment"># Moves row keys to their own column.</span>
+&lt;DF&gt;     = &lt;DF&gt;.transpose()                   <span class="hljs-comment"># Rotates the table.</span>
+&lt;DF&gt;     = &lt;DF&gt;.melt(id_vars=column_key/s)    <span class="hljs-comment"># Melts on columns.</span>
+</code></pre>
+<div><h3 id="mergejoinconcat">Merge, Join, Concat</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+   x  y 
+a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span> 
+b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span> 
+<span class="hljs-meta">&gt;&gt;&gt; </span>r = DataFrame([[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>]], index=[<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], columns=[<span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>])
+   y  z
+b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
+c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
+</code></pre></div>
+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
+┃        how/join        │    <span class="hljs-string">'outer'</span>    │  <span class="hljs-string">'inner'</span>   │   <span class="hljs-string">'left'</span>   ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  ┃
+┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  ┃
+┃                        │ <span class="hljs-number">1</span>  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  ┃
+┃                        │ <span class="hljs-number">2</span>  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z ┃
+┃           rsuffix=<span class="hljs-string">'r'</span>, │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x yl yr  z │ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . ┃
+┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> ┃
+┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ pd.concat([l, r],      │    x   y   z  │     y      │            ┃
+┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            ┃
+┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ pd.concat([l, r],      │    x  y  y  z │            │            ┃
+┃           axis=<span class="hljs-number">1</span>,      │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x  y  y  z │            ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            ┃
+┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┨
+┃ l.combine_first(r)     │    x   y   z  │            │            ┃
+┃                        │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │            │            ┃
+┃                        │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │            ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
+</code></pre>
+<div><h3 id="groupby">GroupBy</h3><pre><code class="python language-python hljs">&lt;DF_Gb&gt; = &lt;DF&gt;.groupby(column_key/s)          <span class="hljs-comment"># Columns that were used for groupin becme row_k.</span>
+&lt;DFs&gt;   = list(&lt;DF_Gb&gt;)                       <span class="hljs-comment"># Returns list of group_key - DataFrame tuples.</span>
+&lt;DF&gt;    = &lt;DF_Gb&gt;.get_group(group_key)
+&lt;Sr_Gb&gt; = &lt;DF_Gb&gt;[column_key]                 <span class="hljs-comment"># Or: &lt;DF_Gb&gt;.column_key</span>
+&lt;Srs&gt;   = list(&lt;Sr_Gb&gt;)                       <span class="hljs-comment"># Returns list of group_key - Series tuples.</span>
+</code></pre></div>
+
+<div><h3 id="operations">Operations</h3><pre><code class="python language-python hljs">&lt;el/Sr/DF&gt; = &lt;Sr/DF/GB&gt;.sum/max/mean()        <span class="hljs-comment"># …/idxmax/all()</span>
+&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.diff/cumsum/rank()       <span class="hljs-comment"># …/pct_change()</span>
+</code></pre></div>
+
+<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.ffill()
+&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.fillna(value)
+&lt;Sr/DF&gt; = &lt;Sr/DF&gt;.interpolate()
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.apply(&lt;func&gt;)            <span class="hljs-comment"># Invokes function on every value/column/group.</span>
+&lt;DF&gt;    = &lt;DF&gt;.applymap(&lt;func&gt;)               <span class="hljs-comment"># Apply a function to a Dataframe elementwise.</span>
+&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.aggregate(&lt;func&gt;)        <span class="hljs-comment"># Invokes function on every column &gt; number.</span>
+&lt;Sr/DF&gt; = &lt;Sr/DF/GB&gt;.transform(&lt;func&gt;)
+&lt;Sr/DF&gt; = &lt;Sr/DF&gt;.combine(&lt;Sr/DF&gt;, &lt;func&gt;)
+</code></pre>
+<div><h3 id="rolling">Rolling</h3><pre><code class="python language-python hljs">&lt;Rl&gt;    = &lt;Sr/DF/GB&gt;.rolling(window_size)     <span class="hljs-comment"># Also: `min_periods, center=False`.</span>
+&lt;Rl&gt;    = &lt;Rl&gt;[column_key/s]                  <span class="hljs-comment"># Or: &lt;Rl&gt;.column_key</span>
+&lt;Sr/DF&gt; = &lt;Rl&gt;.sum/max/mean()
+&lt;Sr/DF&gt; = &lt;Rl&gt;.apply(&lt;func&gt;)                  <span class="hljs-comment"># Invokes function on every window.</span>
+&lt;Sr/DF&gt; = &lt;Rl&gt;.aggregate(&lt;func&gt;)              <span class="hljs-comment"># Invokes function on every window.</span>
+</code></pre></div>
+
+<div><h3 id="encode-2">Encode</h3><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
+&lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)
+&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;connection&gt;)
+&lt;DF&gt; = pd.read_clipboard()
+</code></pre></div>
+
+<div><h3 id="decode-3">Decode</h3><pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/sp/r/i'</span>])
+&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/markdown/latex([&lt;path&gt;])
+&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)
+&lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)
+</code></pre></div>
+
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="top10countriesbypercentageofpopulationwithconfirmedcovid19infection">Top 10 Countries by Percentage of Population With Confirmed COVID-19 Infection</h3><pre><code class="text language-text">|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
++----------------------------------------------------------------------------------------------
+</code></pre></div></div>
+
+
+<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> plotly.express
+
+covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
+                    usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
+continents = pd.read_csv(<span class="hljs-string">'https://datahub.io/JohnSnowLabs/country-and-continent-codes-'</span> + \
+                         <span class="hljs-string">'list/r/country-and-continent-codes-list-csv.csv'</span>,
+                         usecols=[<span class="hljs-string">'Three_Letter_Country_Code'</span>, <span class="hljs-string">'Continent_Name'</span>])
+merged = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
+summed = merged.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class="hljs-string">'date'</span>]).sum().reset_index()
+summed[<span class="hljs-string">'Total Deaths per Million'</span>] = summed.total_deaths * <span class="hljs-number">1e6</span> / summed.population
+summed = summed[(<span class="hljs-string">'2020-03-14'</span> &lt; summed.date) &amp; (summed.date &lt; <span class="hljs-string">'2020-05-31'</span>)]
+summed = summed.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
+plotly.express.line(summed, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+</code></pre>
+<div><h3 id="confirmedcasesofcovid19dowjonesindexgoldandbitcoinprice">Confirmed Cases of COVID-19, Dow Jones Index, Gold, and Bitcoin Price</h3><pre><code class="text language-text">|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
++----------------------------------------------------------------------------------------------
+</code></pre></div>
+
+<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas, datetime
+<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    display_data(mangle_data(*scrape_data()))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yah</span><span class="hljs-params">(id_)</span>:</span>
+        BASE_URL = <span class="hljs-string">'https://query1.finance.yahoo.com/v7/finance/download/'</span>
+        now  = int(datetime.datetime.now().timestamp())
+        url  = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
+        <span class="hljs-keyword">return</span> pandas.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close 
+    covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
+                        usecols=[<span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
+    covid = covid.groupby(<span class="hljs-string">'date'</span>).sum()
+    dow_jones, gold, bitcoin = scrape_yah(<span class="hljs-string">'^DJI'</span>), scrape_yah(<span class="hljs-string">'GC=F'</span>), scrape_yah(<span class="hljs-string">'BTC-USD'</span>)
+    dow_jones.name, gold.name, bitcoin.name = <span class="hljs-string">'Dow Jones'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Bitcoin'</span>
+    <span class="hljs-keyword">return</span> covid, dow_jones, gold, bitcoin
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mangle_data</span><span class="hljs-params">(covid, dow_jones, gold, bitcoin)</span>:</span>
+    out = pandas.concat([covid, dow_jones, gold, bitcoin], axis=<span class="hljs-number">1</span>)
+    out = out.loc[<span class="hljs-string">'2020-02-23'</span>:].iloc[:<span class="hljs-number">-2</span>]
+    out = out.interpolate()
+    out.iloc[:, <span class="hljs-number">1</span>:] = out.rolling(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean().iloc[:, <span class="hljs-number">1</span>:]
+    out.iloc[:, <span class="hljs-number">1</span>:] = out.iloc[:, <span class="hljs-number">1</span>:] / out.iloc[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] * <span class="hljs-number">100</span>
+    <span class="hljs-keyword">return</span> out
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display_data</span><span class="hljs-params">(out)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_trace</span><span class="hljs-params">(col_name)</span>:</span>
+        <span class="hljs-keyword">return</span> go.Scatter(x=out.index, y=out[col_name], name=col_name, yaxis=<span class="hljs-string">'y2'</span>)
+    traces = [get_trace(col_name) <span class="hljs-keyword">for</span> col_name <span class="hljs-keyword">in</span> out.columns[<span class="hljs-number">1</span>:]]
+    traces.append(go.Scatter(x=out.index, y=out.total_cases, name=<span class="hljs-string">'Total Cases'</span>, yaxis=<span class="hljs-string">'y1'</span>))
+    figure = go.Figure()
+    figure.add_traces(traces)
+    figure.update_layout(
+        yaxis1=dict(title=<span class="hljs-string">'Total Cases'</span>, rangemode=<span class="hljs-string">'tozero'</span>),
+        yaxis2=dict(title=<span class="hljs-string">'%'</span>, rangemode=<span class="hljs-string">'tozero'</span>, overlaying=<span class="hljs-string">'y'</span>, side=<span class="hljs-string">'right'</span>),
+        legend=dict(x=<span class="hljs-number">1.1</span>)
+    ).show()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    main()
+</code></pre>
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># Usage: .py</span>
