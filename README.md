@@ -3089,11 +3089,6 @@ Name: a, dtype: int64
 ```
 
 ```python
-keys = <Sr>.index                             # Returns a sequence of keys as Index object.
-vals = <Sr>.values                            # Returns a sequence of values as numpy array.
-```
-
-```python
 <el> = <Sr>.loc[key]                          # Or: <Sr>.iloc[index]
 <Sr> = <Sr>.loc[keys]                         # Or: <Sr>.iloc[indexes]
 <Sr> = <Sr>.loc[from_key : to_key_inclusive]  # Or: <Sr>.iloc[from_i : to_i_exclusive]
@@ -3102,18 +3097,35 @@ vals = <Sr>.values                            # Returns a sequence of values as 
 ```python
 <el> = <Sr>[key/index]                        # Or: <Sr>.key
 <Sr> = <Sr>[keys/indexes]                     # Or: <Sr>[<key_range/range>]
-<Sr> = <Sr>[<bools>]                          # Or: <Sr>.i/loc[<bools>]
+<Sr> = <Sr>[bools]                            # Or: <Sr>.i/loc[bools]
 ```
 
 ```python
-<Sr> = <Sr> ><== <el/Sr>                      # Returns Series of bools.
+<Sr> = <Sr> ><== <el/Sr>                      # Returns a Series of bools.
 <Sr> = <Sr> +-*/ <el/Sr>                      # Non-matching keys get value NaN.
 ```
 
 ```python
-<Sr> = pd.concat(<coll_of_Sr>)                # Combines items.
-<Sr> = <Sr>.append(<Sr>)                      # Appends new items.
+<Sr> = <Sr>.append(<Sr>)                      # Or: pd.concat(<coll_of_Sr>)
 <Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present (extends).
+```
+
+#### Operations:
+```python
+<el> = <Sr>.sum/max/mean/idxmax/all()
+<Sr> = <Sr>.diff/cumsum/rank/pct_change()     # …/fillna/ffill/interpolate()
+<el> = <Sr>.apply/agg(<agg_func>)
+<Sr> = <Sr>.apply/agg/transform(<trans_func>)
+```
+
+```python
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+|             |    'sum'   |  ['sum']  | {'s': 'sum'} | 'rank' |  ['rank']   | {'r': 'rank'} |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+| sr.apply(…) |            |           |              |        |      rank   |               |
+| sr.agg(…)   |      3     |   sum 3   |     s  3     |  x  1  |   x     1   |    r  x  1    |
+|             |            |           |              |  y  2  |   y     2   |       y  2    |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
 ```
 
 ### DataFrame
@@ -3127,41 +3139,58 @@ b  3  4
 ```
 
 ```python
-<DF>     = DataFrame(<list_of_rows>)          # Rows can be either lists, dicts or series.
-<DF>     = DataFrame(<dict_of_columns>)       # Columns can be either lists, dicts or series.
+<DF>    = DataFrame(<list_of_rows>)           # Rows can be either lists, dicts or series.
+<DF>    = DataFrame(<dict_of_columns>)        # Columns can be either lists, dicts or series.
 ```
 
 ```python
-row_keys = <Sr>.index                         # Also: `col_keys = <Sr>.columns`.
-values   = <Sr>.values                        # Returns values as 2D numpy array.
+<el>    = <DF>.loc[row_key, column_key]       # Or: <DF>.iloc[row_index, column_index]
+<Sr/DF> = <DF>.loc[row_key/s]                 # Or: <DF>.iloc[row_index/es]
+<Sr/DF> = <DF>.loc[:, column_key/s]           # Or: <DF>.iloc[:, column_index/es]
+<DF>    = <DF>.loc[row_bools, column_bools]   # Or: <DF>.iloc[row_bools, column_bools]
 ```
 
 ```python
-<el>     = <DF>.loc[row_key, column_key]      # Or: <DF>.iloc[row_index, column_index]
-<Sr/DF>  = <DF>.loc[row_key/s]                # Or: <DF>.iloc[row_index/es]
-<Sr/DF>  = <DF>.loc[:, column_key/s]          # Or: <DF>.iloc[:, column_index/es]
-<DF>     = <DF>.loc[row_bools, column_bools]  # Or: <DF>.iloc[row_bools, column_bools]
+<Sr/DF> = <DF>[column_key/s]                  # Or: <DF>.column_key
+<DF>    = <DF>[row_bools]                     # Keeps rows as specified by bools.
+<DF>    = <DF>[<DF_of_bools>]                 # Assigns NaN to False values.
 ```
 
 ```python
-<Sr/DF>  = <DF>[column_key/s]                 # Or: <DF>.column_key
-<DF>     = <DF>[row_bools]                    # Keeps rows as specified by bools.
-<DF>     = <DF>[<DF_of_bools>]                # Assigns NaN to False values.
+<DF>    = <DF> ><== <el/Sr/DF>                # Returns DataFrame of bools.
+<DF>    = <DF> +-*/ <el/Sr/DF>                # Non-matching keys get value NaN.
 ```
 
 ```python
-<DF>     = <DF> ><== <el/Sr/DF>               # Returns DataFrame of bools.
-<DF>     = <DF> +-*/ <el/Sr/DF>               # Non-matching keys get value NaN.
+<DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
+<DF>    = <DF>.reset_index()                  # Moves row keys to their own column.
+<DF>    = <DF>.transpose()                    # Rotates the table.
+<DF>    = <DF>.melt(id_vars=column_key/s)     # Melts on columns.
 ```
+
+#### Operations:
+```python
+<Sr>    = <DF>.sum/max/mean/idxmax/all()
+<DF>    = <DF>.diff/cumsum/rank()             # …/pct_change/fillna/ffill/interpolate()
+<Sr>    = <DF>.apply/agg/transform(<agg_func>)
+<DF>    = <DF>.apply/agg/transform(<trans_func>)
+<DF>    = <DF>.applymap(<func>)               # Apply a function to a Dataframe elementwise.
+```
+* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
 
 ```python
-<DF>     = <DF>.set_index(column_key)         # Replaces row keys with values from a column.
-<DF>     = <DF>.reset_index()                 # Moves row keys to their own column.
-<DF>     = <DF>.transpose()                   # Rotates the table.
-<DF>     = <DF>.melt(id_vars=column_key/s)    # Melts on columns.
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+|             |    'sum'   |  ['sum']  | {'x': 'sum'} | 'rank' |  ['rank']   | {'x': 'rank'} |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+| df.apply(…) |            |      x y  |              |    x y |      x    y |        x      |
+| df.agg(…)   |    x  4    |  sum 4 6  |     x  4     | a  1 1 |   rank rank |     a  1      |
+| df.trans(…) |    y  6    |           |              | b  2 2 | a    1    1 |     b  2      |
+|             |            |           |              |        | b    2    2 |               |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
 ```
+* **Transform doesen't work with `['sum']` and `{'x': 'sum'}`.**
 
-### Merge, Join, Concat
+#### Merge, Join, Concat:
 ```python
 >>> l = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
    x  y 
@@ -3172,74 +3201,95 @@ b  3  4
 b  4  5
 c  6  7
 ```
+
 ```python
-┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
-┃        how/join        │    'outer'    │  'inner'   │   'left'   ┃
-┠────────────────────────┼───────────────┼────────────┼────────────┨
-┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  ┃
-┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  ┃
-┃                        │ 1  3   4   5  │            │ 3   4   5  ┃
-┃                        │ 2  .   6   7  │            │            ┃
-┠────────────────────────┼───────────────┼────────────┼────────────┨
-┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z ┃
-┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . ┃
-┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 ┃
-┃                        │ c  .  .  6  7 │            │            ┃
-┠────────────────────────┼───────────────┼────────────┼────────────┨
-┃ pd.concat([l, r],      │    x   y   z  │     y      │            ┃
-┃           axis=0,      │ a  1   2   .  │     2      │            ┃
-┃           join=…)      │ b  3   4   .  │     4      │            ┃
-┃                        │ b  .   4   5  │     4      │            ┃
-┃                        │ c  .   6   7  │     6      │            ┃
-┠────────────────────────┼───────────────┼────────────┼────────────┨
-┃ pd.concat([l, r],      │    x  y  y  z │            │            ┃
-┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            ┃
-┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            ┃
-┃                        │ c  .  .  6  7 │            │            ┃
-┠────────────────────────┼───────────────┼────────────┼────────────┨
-┃ l.combine_first(r)     │    x   y   z  │            │            ┃
-┃                        │ a  1   2   .  │            │            ┃
-┃                        │ b  3   4   5  │            │            ┃
-┃                        │ c  .   6   7  │            │            ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        how/join        │    'outer'    │  'inner'   │   'left'   │       description        ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
+┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃
+┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃
+┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row_keys.┃
+┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃
+┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃
+┃                        │ c  .  .  6  7 │            │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
+┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃
+┃           join=…)      │ b  3   4   .  │     4      │            │ By default works the     ┃
+┃                        │ b  .   4   5  │     4      │            │ same as `l.append(r)`.   ┃
+┃                        │ c  .   6   7  │     6      │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
+┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end.               ┃
+┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ Uses 'outer' by default. ┃
+┃                        │ c  .  .  6  7 │            │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
+┃                        │ a  1   2   .  │            │            │ columns.                 ┃
+┃                        │ b  3   4   5  │            │            │                          ┃
+┃                        │ c  .   6   7  │            │            │                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
 ### GroupBy
-```python
-<DF_Gb> = <DF>.groupby(column_key/s)          # Columns that were used for groupin becme row_k.
-<DFs>   = list(<DF_Gb>)                       # Returns list of group_key - DataFrame tuples.
-<DF>    = <DF_Gb>.get_group(group_key)
-<Sr_Gb> = <DF_Gb>[column_key]                 # Or: <DF_Gb>.column_key
-<Srs>   = list(<Sr_Gb>)                       # Returns list of group_key - Series tuples.
-```
+**Object that groups together rows of a dataframe based on the value of passed column.**
 
-### Operations
 ```python
-<el/Sr/DF> = <Sr/DF/GB>.sum/max/mean()        # …/idxmax/all()
-<Sr/DF> = <Sr/DF/GB>.diff/cumsum/rank()       # …/pct_change()
+>>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
+>>> gb = df.groupby('z')
+      x  y  z
+3: a  1  2  3
+6: b  4  5  6
+   c  7  8  6
 ```
 
 ```python
-<Sr/DF> = <Sr/DF/GB>.ffill()
-<Sr/DF> = <Sr/DF/GB>.fillna(value)
-<Sr/DF> = <Sr/DF>.interpolate()
+<GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
+<DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
+<DF> = <GB>.<operation>()                     # Executes operation on each col of each group.
+```
+* **Result of an operation is a dataframe with index made up of group keys. Use `'<DF>.reset_index()'` to move the index back into it's own column.**
+
+#### Operations:
+```python
+<DF> = <GB>.sum/max/mean/idxmax/all()
+<DF> = <GB>.diff/cumsum/rank()                # …/pct_change/fillna/ffill()
+<DF> = <GB>.apply/agg/transform(<agg_func>)
+<DF> = <GB>.agg/transform(<trans_func>)
 ```
 
 ```python
-<Sr/DF> = <Sr/DF/GB>.apply(<func>)            # Invokes function on every value/column/group.
-<DF>    = <DF>.applymap(<func>)               # Apply a function to a Dataframe elementwise.
-<Sr/DF> = <Sr/DF/GB>.aggregate(<func>)        # Invokes function on every column > number.
-<Sr/DF> = <Sr/DF/GB>.transform(<func>)
-<Sr/DF> = <Sr/DF>.combine(<Sr/DF>, <func>)
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+|             |    'sum'   |  ['sum']  | {'x': 'sum'} | 'rank' |  ['rank']   | {'x': 'rank'} |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+| gb.apply(…) |    x  y  z |           |              |        |             |               |
+|             | z          |           |              |        |             |               |
+|             | 3  1  2  3 |           |              |        |             |               |
+|             | 6 11 13 12 |           |              |        |             |               |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+| gb.agg(…)   |     x  y   |     x   y |        x     |    x y |      x    y |         x     |
+|             |  z         |   sum sum |     z        | a  1 1 |   rank rank |      a  1     |
+|             |  3  1  2   | z         |     3  1     | b  1 1 | a    1    1 |      b  1     |
+|             |  6 11 13   | 3   1   2 |     6 11     | c  2 2 | b    1    1 |      c  2     |
+|             |            | 6  11  13 |              |        | c    2    2 |               |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
+| gb.trans(…) |     x  y   |           |              |    x y |             |               |
+|             |  a  1  2   |           |              | a  1 1 |             |               |
+|             |  b 11 13   |           |              | b  1 1 |             |               |
+|             |  c 11 13   |           |              | c  1 1 |             |               |
++-------------+------------+-----------+--------------+--------+-------------+---------------+
 ```
 
 ### Rolling
 ```python
-<Rl>    = <Sr/DF/GB>.rolling(window_size)     # Also: `min_periods, center=False`.
-<Rl>    = <Rl>[column_key/s]                  # Or: <Rl>.column_key
-<Sr/DF> = <Rl>.sum/max/mean()
-<Sr/DF> = <Rl>.apply(<func>)                  # Invokes function on every window.
-<Sr/DF> = <Rl>.aggregate(<func>)              # Invokes function on every window.
+<Rl_S/D/G> = <Sr/DF/GB>.rolling(window_size)  # Also: `min_periods=None, center=False`.
+<Rl_S/D>   = <Rl_D/G>[column_key/s]           # Or: <Rl>.column_key
+<Sr/DF/DF> = <Rl_S/D/G>.sum/max/mean()
+<Sr/DF/DF> = <Rl_S/D/G>.apply(<func>)         # Invokes function on every window.
+<Sr/DF/DF> = <Rl_S/D/G>.aggregate(<func/str>) # Invokes function on every window.
 ```
 
 ### Encode
@@ -3353,7 +3403,7 @@ def mangle_data(covid, dow_jones, gold, bitcoin):
     out = pandas.concat([covid, dow_jones, gold, bitcoin], axis=1)
     out = out.loc['2020-02-23':].iloc[:-2]
     out = out.interpolate()
-    out.iloc[:, 1:] = out.rolling(10, 1, center=True).mean().iloc[:, 1:]
+    out.iloc[:, 1:] = out.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
     out.iloc[:, 1:] = out.iloc[:, 1:] / out.iloc[0, 1:] * 100
     return out
 
