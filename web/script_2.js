@@ -38,6 +38,14 @@ const TOC_MOBILE =
   '                       <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Pygame</a>]\n' +
   '}\n';
 
+
+var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+if (iOS) {
+  var viewport_meta = document.getElementById('viewport-meta');
+  viewport_meta.setAttribute('content', "initial-scale=0.55");
+}
+
 var isMobile = false;
 // Device detection:
 if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
