@@ -39,7 +39,7 @@ const TOC_MOBILE =
   '}\n';
 
 
-var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var iOS = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 if (iOS) {
   var viewport_meta = document.getElementById('viewport-meta');
