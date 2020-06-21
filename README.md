@@ -3108,6 +3108,7 @@ Name: a, dtype: int64
 ```python
 <Sr> = <Sr>.append(<Sr>)                      # Or: pd.concat(<coll_of_Sr>)
 <Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present (extends).
+combine, update?
 ```
 
 #### Aggregations:
@@ -3131,6 +3132,7 @@ Name: a, dtype: int64
 ```python
 <Sr> = <Sr>.diff/cumsum/rank/pct_change()     # …/fillna/ffill/interpolate()
 <Sr> = <Sr>.apply/agg/transform(<trans_func>)
+map?
 ```
 
 ```python

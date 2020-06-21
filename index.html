@@ -2637,6 +2637,7 @@ Name: a, dtype: int64
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                      <span class="hljs-comment"># Or: pd.concat(&lt;coll_of_Sr&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present (extends).</span>
+combine, update?
 </code></pre>
 <div><h4 id="aggregations">Aggregations:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()
 &lt;el&gt; = &lt;agg_func&gt;(&lt;Sr&gt;)
@@ -2653,6 +2654,7 @@ Name: a, dtype: int64
 </code></pre>
 <div><h4 id="transformations">Transformations:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.diff/cumsum/rank/pct_change()     <span class="hljs-comment"># …/fillna/ffill/interpolate()</span>
 &lt;Sr&gt; = &lt;Sr&gt;.apply/agg/transform(&lt;trans_func&gt;)
+map?
 </code></pre></div>
 
 <pre><code class="python language-python hljs">+-------------+--------+-----------+---------------+
