@@ -129,7 +129,7 @@ a:not(:hover) {
 pre,
 code,
 textarea {
-  font-family: "Menlo Regular", monospace;
+  font-family: "Menlo", "Menlo Regular", monospace;
 }
 
 code {
