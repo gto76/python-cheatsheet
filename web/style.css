@@ -174,20 +174,6 @@ pre {
   color: #e6550d;
 }
 
-.album_cover {
-  width: 179px;
-  height: 179px;
-  border: 0px;
-  margin: 0px;
-}
-
-.single_cover {
-  width: 143px;
-  height: 143px;
-  border: 0px;
-  margin: 0px;
-}
-
 svg {
   font: 10px sans-serif;
 }
