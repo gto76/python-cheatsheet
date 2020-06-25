@@ -2613,7 +2613,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
 <span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> Series, DataFrame
 </code></pre></div>
 
-<div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
+<div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
 x    <span class="hljs-number">1</span>
 y    <span class="hljs-number">2</span>
 Name: a, dtype: int64
@@ -2636,12 +2636,21 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                      <span class="hljs-comment"># Non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                      <span class="hljs-comment"># Or: pd.concat(&lt;coll_of_Sr&gt;)</span>
-&lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present (extends).</span>
-combine, update?
+&lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present.</span>
+&lt;Sr&gt;.update(&lt;Sr&gt;)                             <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
-<div><h4 id="aggregations">Aggregations:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()
-&lt;el&gt; = &lt;agg_func&gt;(&lt;Sr&gt;)
-&lt;el&gt; = &lt;Sr&gt;.apply/agg(&lt;agg_func&gt;)             <span class="hljs-comment"># Apply can only accept strings.</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;Sr&gt;.aggregate(&lt;agg_func&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.diff/cumsum/rank/pct_change()     <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(&lt;trans_func&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;Sr&gt;.apply/agg/transform/map(&lt;map_func&gt;)</span>
+</code></pre>
+<ul>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'ffill()'</span></code> and <code class="python hljs"><span class="hljs-string">'interpolate()'</span></code>.</strong></li>
+<li><strong>The way <code class="python hljs"><span class="hljs-string">'aggregate()'</span></code> and <code class="python hljs"><span class="hljs-string">'transform()'</span></code> find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.</strong></li>
+</ul>
+<div><h4 id="applyaggregatetransform">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
+x    <span class="hljs-number">1</span>
+y    <span class="hljs-number">2</span>
+Name: a, dtype: int64
 </code></pre></div>
 
 <pre><code class="python language-python hljs">+-------------+--------+-----------+---------------+
@@ -2652,11 +2661,6 @@ combine, update?
 |             |        |           |               |
 +-------------+--------+-----------+---------------+
 </code></pre>
-<div><h4 id="transformations">Transformations:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.diff/cumsum/rank/pct_change()     <span class="hljs-comment"># …/fillna/ffill/interpolate()</span>
-&lt;Sr&gt; = &lt;Sr&gt;.apply/agg/transform(&lt;trans_func&gt;)
-map?
-</code></pre></div>
-
 <pre><code class="python language-python hljs">+-------------+--------+-----------+---------------+
 |             | <span class="hljs-string">'rank'</span> | [<span class="hljs-string">'rank'</span>]  | {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} |
 +-------------+--------+-----------+---------------+
@@ -2692,16 +2696,15 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt;.transpose()                    <span class="hljs-comment"># Rotates the table.</span>
 &lt;DF&gt;    = &lt;DF&gt;.melt(id_vars=column_key/s)     <span class="hljs-comment"># Melts on columns.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr&gt;    = &lt;DF&gt;.sum/max/mean/idxmax/all()
-&lt;Sr&gt;    = &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)
-&lt;DF&gt;    = &lt;DF&gt;.diff/cumsum/rank()             <span class="hljs-comment"># …/pct_change/fillna/ffill/interpolate()</span>
-&lt;DF&gt;    = &lt;DF&gt;.apply/agg/transform(&lt;trans_func&gt;)
-&lt;DF&gt;    = &lt;DF&gt;.applymap(&lt;func&gt;)               <span class="hljs-comment"># Apply a function to a Dataframe elementwise.</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.diff/cumsum/rank/pct_change()     <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;trans_func&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(&lt;map_func&gt;)</span>
 </code></pre>
 <ul>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'ffill()'</span></code> and <code class="python hljs"><span class="hljs-string">'interpolate()'</span></code>.</strong></li>
 <li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead.</strong> </li>
 </ul>
-<div><h4 id="applyaggregatetransform">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+<div><h4 id="applyaggregatetransform-1">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
@@ -2783,7 +2786,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <ul>
 <li><strong>Result of an operation is a dataframe with index made up of group keys. Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.reset_index()'</span></code> to move the index back into it's own column.</strong></li>
 </ul>
-<div><h4 id="aggregations-1">Aggregations:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()
+<div><h4 id="aggregations">Aggregations:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()
 &lt;DF&gt; = &lt;GB&gt;.apply/agg/transform(&lt;agg_func&gt;)
 </code></pre></div>
 
@@ -2807,7 +2810,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 |             | c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |             |               |
 +-------------+------------+-------------+---------------+
 </code></pre>
-<div><h4 id="transformations-1">Transformations:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.diff/cumsum/rank()                <span class="hljs-comment"># …/pct_change/fillna/ffill()</span>
+<div><h4 id="transformations">Transformations:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.diff/cumsum/rank()                <span class="hljs-comment"># …/pct_change/fillna/ffill()</span>
 &lt;DF&gt; = &lt;GB&gt;.agg/transform(&lt;trans_func&gt;)
 </code></pre></div>
 

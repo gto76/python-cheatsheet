@@ -3076,7 +3076,7 @@ from pandas import Series, DataFrame
 **Ordered dictionary with a name.**
 
 ```python
->>> sr = Series([1, 2], index=['x', 'y'], name='a')
+>>> Series([1, 2], index=['x', 'y'], name='a')
 x    1
 y    2
 Name: a, dtype: int64
@@ -3107,15 +3107,24 @@ Name: a, dtype: int64
 
 ```python
 <Sr> = <Sr>.append(<Sr>)                      # Or: pd.concat(<coll_of_Sr>)
-<Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present (extends).
-combine, update?
+<Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present.
+<Sr>.update(<Sr>)                             # Updates items that are already present.
 ```
 
-#### Aggregations:
 ```python
-<el> = <Sr>.sum/max/mean/idxmax/all()
-<el> = <agg_func>(<Sr>)
-<el> = <Sr>.apply/agg(<agg_func>)             # Apply can only accept strings.
+<el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.aggregate(<agg_func>)
+<Sr> = <Sr>.diff/cumsum/rank/pct_change()     # Or: <Sr>.agg/transform(<trans_func>)
+<Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.apply/agg/transform/map(<map_func>)
+```
+* **Also: `'ffill()'` and `'interpolate()'`.**
+* **The way `'aggregate()'` and `'transform()'` find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
+
+#### Apply, Aggregate, Transform:
+```python
+>>> sr = Series([1, 2], index=['x', 'y'], name='a')
+x    1
+y    2
+Name: a, dtype: int64
 ```
 
 ```python
@@ -3126,13 +3135,6 @@ combine, update?
 | sr.agg(…)   |    3   |   sum 3   |      s  3     |
 |             |        |           |               |
 +-------------+--------+-----------+---------------+
-```
-
-#### Transformations:
-```python
-<Sr> = <Sr>.diff/cumsum/rank/pct_change()     # …/fillna/ffill/interpolate()
-<Sr> = <Sr>.apply/agg/transform(<trans_func>)
-map?
 ```
 
 ```python
@@ -3186,12 +3188,11 @@ b  3  4
 ```
 
 ```python
-<Sr>    = <DF>.sum/max/mean/idxmax/all()
-<Sr>    = <DF>.apply/agg/transform(<agg_func>)
-<DF>    = <DF>.diff/cumsum/rank()             # …/pct_change/fillna/ffill/interpolate()
-<DF>    = <DF>.apply/agg/transform(<trans_func>)
-<DF>    = <DF>.applymap(<func>)               # Apply a function to a Dataframe elementwise.
+<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
+<DF> = <DF>.diff/cumsum/rank/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
+<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
 ```
+* **Also: `'ffill()'` and `'interpolate()'`.**
 * **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
 
 #### Apply, Aggregate, Transform:
