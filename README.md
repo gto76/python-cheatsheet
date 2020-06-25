@@ -3287,6 +3287,17 @@ b  3  4
 **Object that groups together rows of a dataframe based on the value of passed column.**
 
 ```python
+>>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
+>>> df.groupby('z').get_group(3)
+   x  y
+a  1  2
+>>> df.groupby('z').get_group(6)
+   x  y
+b  4  5
+c  7  8
+```
+
+```python
 <GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
 <DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
 ```
@@ -3299,7 +3310,6 @@ b  3  4
 ```
 
 ```python
->>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
 >>> gb = df.groupby('z')
       x  y  z
 3: a  1  2  3
@@ -3325,12 +3335,12 @@ b  3  4
 ```
 
 ### Rolling
+**Object for rolling window calculations.**
+
 ```python
-<Rl_S/D/G> = <Sr/DF/GB>.rolling(window_size)  # Also: `min_periods=None, center=False`.
-<Rl_S/D>   = <Rl_D/G>[column_key/s]           # Or: <Rl>.column_key
-<Sr/DF/DF> = <Rl_S/D/G>.sum/max/mean()
-<Sr/DF/DF> = <Rl_S/D/G>.apply(<agg_func>)     # Invokes function on every window.
-<Sr/DF/DF> = <Rl_S/D/G>.aggregate(<func/str>) # Invokes function on every window.
+<R_Sr/R_DF/R_GB> = <Sr/DF/GB>.rolling(window_size)  # Also: `min_periods=None, center=False`.
+<R_Sr/R_DF>      = <R_DF/R_GB>[column_key/s]        # Or: <R>.column_key
+<Sr/DF/DF>       = <R_Sr/R_DF/R_GB>.sum/max/mean()  # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
 
