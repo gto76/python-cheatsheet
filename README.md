@@ -3114,7 +3114,7 @@ Name: a, dtype: int64
 #### Apply, Aggregate, Transform:
 ```python
 <el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.aggregate(<agg_func>)
-<Sr> = <Sr>.diff/cumsum/rank/pct_change()     # Or: <Sr>.agg/transform(<trans_func>)
+<Sr> = <Sr>.rank/diff/cumsum/pct_change()     # Or: <Sr>.agg/transform(<trans_func>)
 <Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.apply/agg/transform/map(<map_func>)
 ```
 * **Also: `'ffill()'` and `'interpolate()'`.**
@@ -3234,7 +3234,7 @@ c  6  7
 #### Apply, Aggregate, Transform:
 ```python
 <Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
-<DF> = <DF>.diff/cumsum/rank/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
+<DF> = <DF>.rank/diff/cumsum/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
 <DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
 ```
 * **Also: `'ffill()'` and `'interpolate()'`.**
@@ -3268,7 +3268,7 @@ b  3  4
 +-------------+---------------+---------------+---------------+
 ```
 
-#### Encode:
+#### Encode, Decode:
 ```python
 <DF> = pd.read_json/html('<str/path/url>')
 <DF> = pd.read_csv/pickle/excel('<path/url>')
@@ -3276,7 +3276,6 @@ b  3  4
 <DF> = pd.read_clipboard()
 ```
 
-#### Decode:
 ```python
 <dict> = <DF>.to_dict(['d/l/s/sp/r/i'])
 <str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
@@ -3295,7 +3294,7 @@ b  3  4
 #### Apply, Aggregate, Transform:
 ```python
 <DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.apply/agg(<agg_func>)
-<DF> = <GB>.diff/cumsum/rank/ffill()          # Or: <GB>.aggregate(<trans_func>)  
+<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.aggregate(<trans_func>)  
 <DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(<map_func>)
 ```
 
@@ -3309,37 +3308,20 @@ b  3  4
 ```
 
 ```python
-+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   ['sum']   | {'x': 'sum'}  |
-+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x   y  |      x   y  |         x     |
-|             |  z          |    sum sum  |     z         |
-|             |  3   1   2  |  z          |     3   1     |
-|             |  6  11  13  |  3   1   2  |     6  11     |
-|             |             |  6  11  13  |               |
-+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x   y  |             |               |
-|             |  a   1   2  |             |               |
-|             |  b  11  13  |             |               |
-|             |  c  11  13  |             |               |
-+-------------+-------------+-------------+---------------+
-```
-
-```python
-+-------------+-------------+-------------+---------------+
-|             |   'rank'    |  ['rank']   | {'x': 'rank'} |
-+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x  y   |      x    y |        x      |
-|             |   a  1  1   |   rank rank |     a  1      |
-|             |   b  1  1   | a    1    1 |     b  1      |
-|             |   c  2  2   | b    1    1 |     c  2      |
-|             |             | c    2    2 |               |
-+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x  y   |             |               |
-|             |   a  1  1   |             |               |
-|             |   b  1  1   |             |               |
-|             |   c  1  1   |             |               |
-+-------------+-------------+-------------+---------------+
++-------------+-------------+-------------+-------------+---------------+
+|             |    'sum'    |   'rank'    |  ['rank']   | {'x': 'rank'} |
++-------------+-------------+-------------+-------------+---------------+
+| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
+|             |  z          |   a  1  1   |   rank rank |     a  1      |
+|             |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
+|             |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
+|             |             |             | c    2    2 |               |
++-------------+-------------+-------------+-------------+---------------+
+| gb.trans(…) |      x   y  |      x  y   |             |               |
+|             |  a   1   2  |   a  1  1   |             |               |
+|             |  b  11  13  |   b  1  1   |             |               |
+|             |  c  11  13  |   c  1  1   |             |               |
++-------------+-------------+-------------+-------------+---------------+
 ```
 
 ### Rolling
@@ -3427,7 +3409,7 @@ import pandas, datetime
 import plotly.graph_objects as go
 
 def main():
-    display_data(mangle_data(*scrape_data()))
+    display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
     def scrape_yah(id_):
@@ -3442,7 +3424,7 @@ def scrape_data():
     dow_jones.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
     return covid, dow_jones, gold, bitcoin
 
-def mangle_data(covid, dow_jones, gold, bitcoin):
+def wrangle_data(covid, dow_jones, gold, bitcoin):
     out = pandas.concat([covid, dow_jones, gold, bitcoin], axis=1)
     out = out.loc['2020-02-23':].iloc[:-2]
     out = out.interpolate()
