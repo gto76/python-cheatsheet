@@ -3111,13 +3111,12 @@ Name: a, dtype: int64
 <Sr>.update(<Sr>)                             # Updates items that are already present.
 ```
 
-#### Apply, Aggregate, Transform:
+#### Aggregate, Transform, Map:
 ```python
 <el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.aggregate(<agg_func>)
-<Sr> = <Sr>.rank/diff/cumsum/pct_change()     # Or: <Sr>.agg/transform(<trans_func>)
+<Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(<trans_func>)
 <Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.apply/agg/transform/map(<map_func>)
 ```
-* **Also: `'ffill()'` and `'interpolate()'`.**
 * **The way `'aggregate()'` and `'transform()'` find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
 
 ```python
@@ -3128,23 +3127,22 @@ dtype: int64
 ```
 
 ```python
-+-------------+---------------+---------------+---------------+
-|             |     'sum'     |    ['sum']    |  {'s': 'sum'} |
-+-------------+---------------+---------------+---------------+
-| sr.apply(…) |               |               |               |
-| sr.agg(…)   |       3       |     sum 3     |      s  3     |
-|             |               |               |               |
-+-------------+---------------+---------------+---------------+
+┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │      3      │    sum 3    │      s  3     ┃
+┃ sr.agg(…)   │             │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 ```
 
 ```python
-+-------------+---------------+---------------+---------------+
-|             |    'rank'     |   ['rank']    | {'r': 'rank'} |
-+-------------+---------------+---------------+---------------+
-| sr.apply(…) |               |       rank    |               |
-| sr.agg(…)   |     x  1      |    x     1    |    r  x  1    |
-| sr.trans(…) |     y  2      |    y     2    |       y  2    |
-+-------------+---------------+---------------+---------------+
+┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │             │      rank   │               ┃
+┃ sr.agg(…)   │    x  1     │   x     1   │    r  x  1    ┃
+┃ sr.trans(…) │    y  2     │   y     2   │       y  2    ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 ```
 
 ### DataFrame
@@ -3201,7 +3199,7 @@ c  6  7
 
 ```python
 ┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃        how/join        │    'outer'    │  'inner'   │   'left'   │       description        ┃
+┃        how/join        │    'outer'    │   'inner'  │   'left'   │       description        ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
 ┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃
@@ -3231,13 +3229,12 @@ c  6  7
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
-#### Apply, Aggregate, Transform:
+#### Aggregate, Transform, Map:
 ```python
 <Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
-<DF> = <DF>.rank/diff/cumsum/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
+<DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(<trans_func>)
 <DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
 ```
-* **Also: `'ffill()'` and `'interpolate()'`.**
 * **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
 
 ```python
@@ -3248,24 +3245,24 @@ b  3  4
 ```
 
 ```python
-+-------------+---------------+---------------+---------------+
-|             |     'sum'     |    ['sum']    | {'x': 'sum'}  |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |               |        x y    |               |
-| df.agg(…)   |     x  4      |    sum 4 6    |     x  4      |
-|             |     y  6      |               |               |
-+-------------+---------------+---------------+---------------+
+┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │             │       x y   │               ┃
+┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃
+┃             │    y  6     │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 ```
 
 ```python
-+-------------+---------------+---------------+---------------+
-|             |    'rank'     |   ['rank']    | {'x': 'rank'} |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |       x  y    |       x    y  |        x      |
-| df.agg(…)   |    a  1  1    |    rank rank  |     a  1      |
-| df.trans(…) |    b  2  2    |  a    1    1  |     b  2      |
-|             |               |  b    2    2  |               |
-+-------------+---------------+---------------+---------------+
+┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │      x  y   │      x    y │        x      ┃
+┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃
+┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃
+┃             │             │ b    2    2 │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 ```
 
 #### Encode, Decode:
@@ -3284,7 +3281,7 @@ b  3  4
 ```
 
 ### GroupBy
-**Object that groups together rows of a dataframe based on the value of passed column.**
+**Object that groups together rows of a dataframe based on the value of the passed column.**
 
 ```python
 >>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
@@ -3302,7 +3299,7 @@ c  7  8
 <DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
 ```
 
-#### Apply, Aggregate, Transform:
+#### Aggregate, Transform, Map:
 ```python
 <DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.apply/agg(<agg_func>)
 <DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.aggregate(<trans_func>)  
@@ -3318,20 +3315,20 @@ c  7  8
 ```
 
 ```python
-+-------------+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   'rank'    |  ['rank']   | {'x': 'rank'} |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
-|             |  z          |   a  1  1   |   rank rank |     a  1      |
-|             |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
-|             |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
-|             |             |             | c    2    2 |               |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x   y  |      x  y   |             |               |
-|             |  a   1   2  |   a  1  1   |             |               |
-|             |  b  11  13  |   b  1  1   |             |               |
-|             |  c  11  13  |   c  1  1   |             |               |
-+-------------+-------------+-------------+-------------+---------------+
+┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃
+┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃
+┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃
+┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃
+┃             │             │             │ c    2    2 │               ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃
+┃             │  a   1   2  │   a  1  1   │             │               ┃
+┃             │  b  11  13  │   b  1  1   │             │               ┃
+┃             │  c  11  13  │   c  1  1   │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 ```
 
 ### Rolling

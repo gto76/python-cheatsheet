@@ -2639,13 +2639,12 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present.</span>
 &lt;Sr&gt;.update(&lt;Sr&gt;)                             <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
-<div><h4 id="applyaggregatetransform">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;Sr&gt;.aggregate(&lt;agg_func&gt;)</span>
-&lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/pct_change()     <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(&lt;trans_func&gt;)</span>
+<div><h4 id="aggregatetransformmap">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;Sr&gt;.aggregate(&lt;agg_func&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(&lt;trans_func&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;Sr&gt;.apply/agg/transform/map(&lt;map_func&gt;)</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'ffill()'</span></code> and <code class="python hljs"><span class="hljs-string">'interpolate()'</span></code>.</strong></li>
 <li><strong>The way <code class="python hljs"><span class="hljs-string">'aggregate()'</span></code> and <code class="python hljs"><span class="hljs-string">'transform()'</span></code> find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -2653,21 +2652,20 @@ x    <span class="hljs-number">1</span>
 y    <span class="hljs-number">2</span>
 dtype: int64
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+---------------+---------------+---------------+
-|             |     <span class="hljs-string">'sum'</span>     |    [<span class="hljs-string">'sum'</span>]    |  {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>} |
-+-------------+---------------+---------------+---------------+
-| sr.apply(…) |               |               |               |
-| sr.agg(…)   |       <span class="hljs-number">3</span>       |     sum <span class="hljs-number">3</span>     |      s  <span class="hljs-number">3</span>     |
-|             |               |               |               |
-+-------------+---------------+---------------+---------------+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │      <span class="hljs-number">3</span>      │    sum <span class="hljs-number">3</span>    │      s  <span class="hljs-number">3</span>     ┃
+┃ sr.agg(…)   │             │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+---------------+---------------+---------------+
-|             |    <span class="hljs-string">'rank'</span>     |   [<span class="hljs-string">'rank'</span>]    | {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} |
-+-------------+---------------+---------------+---------------+
-| sr.apply(…) |               |       rank    |               |
-| sr.agg(…)   |     x  <span class="hljs-number">1</span>      |    x     <span class="hljs-number">1</span>    |    r  x  <span class="hljs-number">1</span>    |
-| sr.trans(…) |     y  <span class="hljs-number">2</span>      |    y     <span class="hljs-number">2</span>    |       y  <span class="hljs-number">2</span>    |
-+-------------+---------------+---------------+---------------+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │             │      rank   │               ┃
+┃ sr.agg(…)   │    x  <span class="hljs-number">1</span>     │   x     <span class="hljs-number">1</span>   │    r  x  <span class="hljs-number">1</span>    ┃
+┃ sr.trans(…) │    y  <span class="hljs-number">2</span>     │   y     <span class="hljs-number">2</span>   │       y  <span class="hljs-number">2</span>    ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2707,7 +2705,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃        how/join        │    <span class="hljs-string">'outer'</span>    │  <span class="hljs-string">'inner'</span>   │   <span class="hljs-string">'left'</span>   │       description        ┃
+┃        how/join        │    <span class="hljs-string">'outer'</span>    │   <span class="hljs-string">'inner'</span>  │   <span class="hljs-string">'left'</span>   │       description        ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
 ┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ Also accepts left_on <span class="hljs-keyword">and</span> ┃
@@ -2736,13 +2734,12 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │                          ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h4 id="applyaggregatetransform-1">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>
-&lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/pct_change()     <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;trans_func&gt;)</span>
+<div><h4 id="aggregatetransformmap-1">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;trans_func&gt;)</span>
 &lt;DF&gt; = &lt;DF&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(&lt;map_func&gt;)</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'ffill()'</span></code> and <code class="python hljs"><span class="hljs-string">'interpolate()'</span></code>.</strong></li>
 <li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead.</strong> </li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -2750,22 +2747,22 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+---------------+---------------+---------------+
-|             |     <span class="hljs-string">'sum'</span>     |    [<span class="hljs-string">'sum'</span>]    | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |               |        x y    |               |
-| df.agg(…)   |     x  <span class="hljs-number">4</span>      |    sum <span class="hljs-number">4</span> <span class="hljs-number">6</span>    |     x  <span class="hljs-number">4</span>      |
-|             |     y  <span class="hljs-number">6</span>      |               |               |
-+-------------+---------------+---------------+---------------+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │             │       x y   │               ┃
+┃ df.agg(…)   │    x  <span class="hljs-number">4</span>     │   sum <span class="hljs-number">4</span> <span class="hljs-number">6</span>   │     x  <span class="hljs-number">4</span>      ┃
+┃             │    y  <span class="hljs-number">6</span>     │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+---------------+---------------+---------------+
-|             |    <span class="hljs-string">'rank'</span>     |   [<span class="hljs-string">'rank'</span>]    | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |       x  y    |       x    y  |        x      |
-| df.agg(…)   |    a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>    |    rank rank  |     a  <span class="hljs-number">1</span>      |
-| df.trans(…) |    b  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>    |  a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span>  |     b  <span class="hljs-number">2</span>      |
-|             |               |  b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span>  |               |
-+-------------+---------------+---------------+---------------+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │      x  y   │      x    y │        x      ┃
+┃ df.agg(…)   │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │   rank rank │     a  <span class="hljs-number">1</span>      ┃
+┃ df.trans(…) │   b  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">2</span>      ┃
+┃             │             │ b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h4 id="encodedecode">Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
 &lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)
@@ -2778,7 +2775,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)
 </code></pre>
-<div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], index=list(<span class="hljs-string">'abc'</span>), columns=list(<span class="hljs-string">'xyz'</span>))
+<div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], index=list(<span class="hljs-string">'abc'</span>), columns=list(<span class="hljs-string">'xyz'</span>))
 <span class="hljs-meta">&gt;&gt;&gt; </span>df.groupby(<span class="hljs-string">'z'</span>).get_group(<span class="hljs-number">3</span>)
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
@@ -2792,7 +2789,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 <pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)             <span class="hljs-comment"># DF is split into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.get_group(group_key)              <span class="hljs-comment"># Selects a group by value of grouping column.</span>
 </code></pre>
-<div><h4 id="applyaggregatetransform-2">Apply, Aggregate, Transform:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;GB&gt;.apply/agg(&lt;agg_func&gt;)</span>
+<div><h4 id="aggregatetransformmap-2">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;GB&gt;.apply/agg(&lt;agg_func&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()          <span class="hljs-comment"># Or: &lt;GB&gt;.aggregate(&lt;trans_func&gt;)  </span>
 &lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;GB&gt;.transform(&lt;map_func&gt;)</span>
 </code></pre></div>
@@ -2803,20 +2800,20 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 <span class="hljs-number">6</span>: b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
    c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'sum'</span>    |   <span class="hljs-string">'rank'</span>    |  [<span class="hljs-string">'rank'</span>]   | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
-|             |  z          |   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |   rank rank |     a  <span class="hljs-number">1</span>      |
-|             |  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  |   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   | a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> |     b  <span class="hljs-number">1</span>      |
-|             |  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   | b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> |     c  <span class="hljs-number">2</span>      |
-|             |             |             | c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> |               |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x   y  |      x  y   |             |               |
-|             |  a   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  |   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
-|             |  b  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
-|             |  c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   c  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
-+-------------+-------------+-------------+-------------+---------------+
+<pre><code class="python language-python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    <span class="hljs-string">'sum'</span>    │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃
+┃             │  z          │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │   rank rank │     a  <span class="hljs-number">1</span>      ┃
+┃             │  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">1</span>      ┃
+┃             │  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     c  <span class="hljs-number">2</span>      ┃
+┃             │             │             │ c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │               ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃
+┃             │  a   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
+┃             │  b  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
+┃             │  c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   c  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;R_Sr/R_DF/R_GB&gt; = &lt;Sr/DF/GB&gt;.rolling(window_size)  <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
 &lt;R_Sr/R_DF&gt;      = &lt;R_DF/R_GB&gt;[column_key/s]        <span class="hljs-comment"># Or: &lt;R&gt;.column_key</span>
