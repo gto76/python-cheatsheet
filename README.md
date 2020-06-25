@@ -3111,6 +3111,7 @@ Name: a, dtype: int64
 <Sr>.update(<Sr>)                             # Updates items that are already present.
 ```
 
+#### Apply, Aggregate, Transform:
 ```python
 <el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.aggregate(<agg_func>)
 <Sr> = <Sr>.diff/cumsum/rank/pct_change()     # Or: <Sr>.agg/transform(<trans_func>)
@@ -3119,32 +3120,31 @@ Name: a, dtype: int64
 * **Also: `'ffill()'` and `'interpolate()'`.**
 * **The way `'aggregate()'` and `'transform()'` find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
 
-#### Apply, Aggregate, Transform:
 ```python
->>> sr = Series([1, 2], index=['x', 'y'], name='a')
+>>> sr = Series([1, 2], index=['x', 'y'])
 x    1
 y    2
-Name: a, dtype: int64
+dtype: int64
 ```
 
 ```python
-+-------------+--------+-----------+---------------+
-|             |  'sum' |  ['sum']  |  {'s': 'sum'} |
-+-------------+--------+-----------+---------------+
-| sr.apply(…) |        |           |               |
-| sr.agg(…)   |    3   |   sum 3   |      s  3     |
-|             |        |           |               |
-+-------------+--------+-----------+---------------+
++-------------+---------------+---------------+---------------+
+|             |     'sum'     |    ['sum']    |  {'s': 'sum'} |
++-------------+---------------+---------------+---------------+
+| sr.apply(…) |               |               |               |
+| sr.agg(…)   |       3       |     sum 3     |      s  3     |
+|             |               |               |               |
++-------------+---------------+---------------+---------------+
 ```
 
 ```python
-+-------------+--------+-----------+---------------+
-|             | 'rank' | ['rank']  | {'r': 'rank'} |
-+-------------+--------+-----------+---------------+
-| sr.apply(…) |        |     rank  |               |
-| sr.agg(…)   |  x  1  |  x     1  |    r  x  1    |
-| sr.trans(…) |  y  2  |  y     2  |       y  2    |
-+-------------+--------+-----------+---------------+
++-------------+---------------+---------------+---------------+
+|             |    'rank'     |   ['rank']    | {'r': 'rank'} |
++-------------+---------------+---------------+---------------+
+| sr.apply(…) |               |       rank    |               |
+| sr.agg(…)   |     x  1      |    x     1    |    r  x  1    |
+| sr.trans(…) |     y  2      |    y     2    |       y  2    |
++-------------+---------------+---------------+---------------+
 ```
 
 ### DataFrame
@@ -3186,44 +3186,6 @@ b  3  4
 <DF>    = <DF>.transpose()                    # Rotates the table.
 <DF>    = <DF>.melt(id_vars=column_key/s)     # Melts on columns.
 ```
-
-```python
-<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
-<DF> = <DF>.diff/cumsum/rank/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
-<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
-```
-* **Also: `'ffill()'` and `'interpolate()'`.**
-* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
-
-#### Apply, Aggregate, Transform:
-```python
->>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
-   x  y
-a  1  2
-b  3  4
-```
-
-```python
-+-------------+---------------+---------------+---------------+
-|             |     'sum'     |    ['sum']    | {'x': 'sum'}  |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |               |        x y    |               |
-| df.agg(…)   |     x  4      |    sum 4 6    |     x  4      |
-| df.trans(…) |     y  6      |               |               |
-+-------------+---------------+---------------+---------------+
-```
-
-```python
-+-------------+---------------+---------------+---------------+
-|             |    'rank'     |   ['rank']    | {'x': 'rank'} |
-+-------------+---------------+---------------+---------------+
-| df.apply(…) |       x  y    |       x    y  |        x      |
-| df.agg(…)   |    a  1  1    |    rank rank  |     a  1      |
-| df.trans(…) |    b  2  2    |  a    1    1  |     b  2      |
-|             |               |  b    2    2  |               |
-+-------------+---------------+---------------+---------------+
-```
-* **Transform() doesen't work with `['sum']` and `{'x': 'sum'}`.**
 
 #### Merge, Join, Concat:
 ```python
@@ -3269,8 +3231,73 @@ c  6  7
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
+#### Apply, Aggregate, Transform:
+```python
+<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
+<DF> = <DF>.diff/cumsum/rank/pct_change()     # Or: <DF>.apply/agg/transform(<trans_func>)
+<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
+```
+* **Also: `'ffill()'` and `'interpolate()'`.**
+* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
+
+```python
+>>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+   x  y
+a  1  2
+b  3  4
+```
+
+```python
++-------------+---------------+---------------+---------------+
+|             |     'sum'     |    ['sum']    | {'x': 'sum'}  |
++-------------+---------------+---------------+---------------+
+| df.apply(…) |               |        x y    |               |
+| df.agg(…)   |     x  4      |    sum 4 6    |     x  4      |
+|             |     y  6      |               |               |
++-------------+---------------+---------------+---------------+
+```
+
+```python
++-------------+---------------+---------------+---------------+
+|             |    'rank'     |   ['rank']    | {'x': 'rank'} |
++-------------+---------------+---------------+---------------+
+| df.apply(…) |       x  y    |       x    y  |        x      |
+| df.agg(…)   |    a  1  1    |    rank rank  |     a  1      |
+| df.trans(…) |    b  2  2    |  a    1    1  |     b  2      |
+|             |               |  b    2    2  |               |
++-------------+---------------+---------------+---------------+
+```
+
+#### Encode:
+```python
+<DF> = pd.read_json/html('<str/path/url>')
+<DF> = pd.read_csv/pickle/excel('<path/url>')
+<DF> = pd.read_sql('<query>', <connection>)
+<DF> = pd.read_clipboard()
+```
+
+#### Decode:
+```python
+<dict> = <DF>.to_dict(['d/l/s/sp/r/i'])
+<str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
+<DF>.to_pickle/excel(<path>)
+<DF>.to_sql('<table_name>', <connection>)
+```
+
 ### GroupBy
 **Object that groups together rows of a dataframe based on the value of passed column.**
+
+```python
+<GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
+<DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
+```
+
+#### Apply, Aggregate, Transform:
+```python
+<DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.apply/agg(<agg_func>)
+<DF> = <GB>.diff/cumsum/rank/ffill()          # Or: <GB>.aggregate(<trans_func>)  
+<DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(<map_func>)
+```
 
 ```python
 >>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
@@ -3282,61 +3309,37 @@ c  6  7
 ```
 
 ```python
-<GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
-<DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
-<DF> = <GB>.<operation>()                     # Executes operation on each col of each group.
-```
-* **Result of an operation is a dataframe with index made up of group keys. Use `'<DF>.reset_index()'` to move the index back into it's own column.**
-
-#### Aggregations:
-```python
-<DF> = <GB>.sum/max/mean/idxmax/all()
-<DF> = <GB>.apply/agg/transform(<agg_func>)
-```
-
-```python
-+-------------+------------+-------------+---------------+
-|             |    'sum'   |   ['sum']   | {'x': 'sum'}  |
-+-------------+------------+-------------+---------------+
-| gb.apply(…) |    x  y  z |             |               |
-|             | z          |             |               |
-|             | 3  1  2  3 |             |               |
-|             | 6 11 13 12 |             |               |
-+-------------+------------+-------------+---------------+
-| gb.agg(…)   |     x   y  |      x   y  |         x     |
-|             | z          |    sum sum  |     z         |
-|             | 3   1   2  |  z          |     3   1     |
-|             | 6  11  13  |  3   1   2  |     6  11     |
-|             |            |  6  11  13  |               |
-+-------------+------------+-------------+---------------+
-| gb.trans(…) |     x   y  |             |               |
-|             | a   1   2  |             |               |
-|             | b  11  13  |             |               |
-|             | c  11  13  |             |               |
-+-------------+------------+-------------+---------------+
-```
-
-#### Transformations:
-```python
-<DF> = <GB>.diff/cumsum/rank()                # …/pct_change/fillna/ffill()
-<DF> = <GB>.agg/transform(<trans_func>)
++-------------+-------------+-------------+---------------+
+|             |    'sum'    |   ['sum']   | {'x': 'sum'}  |
++-------------+-------------+-------------+---------------+
+| gb.agg(…)   |      x   y  |      x   y  |         x     |
+|             |  z          |    sum sum  |     z         |
+|             |  3   1   2  |  z          |     3   1     |
+|             |  6  11  13  |  3   1   2  |     6  11     |
+|             |             |  6  11  13  |               |
++-------------+-------------+-------------+---------------+
+| gb.trans(…) |      x   y  |             |               |
+|             |  a   1   2  |             |               |
+|             |  b  11  13  |             |               |
+|             |  c  11  13  |             |               |
++-------------+-------------+-------------+---------------+
 ```
 
 ```python
-+-------------+------------+-------------+---------------+
-|             |   'rank'   |  ['rank']   | {'x': 'rank'} |
-+-------------+------------+-------------+---------------+
-| gb.agg(…)   |     x  y   |      x    y |        x      |
-|             |  a  1  1   |   rank rank |     a  1      |
-|             |  b  1  1   | a    1    1 |     b  1      |
-|             |  c  2  2   | b    1    1 |     c  2      |
-|             |            | c    2    2 |               |
-+-------------+------------+-------------+---------------+
-| gb.trans(…) |     x  y   |             |               |
-|             |  a  1  1   |             |               |
-|             |  b  1  1   |             |               |
-|             |  c  1  1   |             |               |
-+-------------+------------+-------------+---------------+
++-------------+-------------+-------------+---------------+
+|             |   'rank'    |  ['rank']   | {'x': 'rank'} |
++-------------+-------------+-------------+---------------+
+| gb.agg(…)   |      x  y   |      x    y |        x      |
+|             |   a  1  1   |   rank rank |     a  1      |
+|             |   b  1  1   | a    1    1 |     b  1      |
+|             |   c  2  2   | b    1    1 |     c  2      |
+|             |             | c    2    2 |               |
++-------------+-------------+-------------+---------------+
+| gb.trans(…) |      x  y   |             |               |
+|             |   a  1  1   |             |               |
+|             |   b  1  1   |             |               |
+|             |   c  1  1   |             |               |
++-------------+-------------+-------------+---------------+
 ```
 
 ### Rolling
@@ -3346,22 +3349,6 @@ c  6  7
 <Sr/DF/DF> = <Rl_S/D/G>.sum/max/mean()
 <Sr/DF/DF> = <Rl_S/D/G>.apply(<agg_func>)     # Invokes function on every window.
 <Sr/DF/DF> = <Rl_S/D/G>.aggregate(<func/str>) # Invokes function on every window.
-```
-
-### Encode
-```python
-<DF> = pd.read_json/html('<str/path/url>')
-<DF> = pd.read_csv/pickle/excel('<path/url>')
-<DF> = pd.read_sql('<query>', <connection>)
-<DF> = pd.read_clipboard()
-```
-
-### Decode
-```python
-<dict> = <DF>.to_dict(['d/l/s/sp/r/i'])
-<str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
-<DF>.to_pickle/excel(<path>)
-<DF>.to_sql('<table_name>', <connection>)
 ```
 
 
