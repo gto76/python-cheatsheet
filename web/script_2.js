@@ -35,8 +35,7 @@ const TOC_MOBILE =
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>,\n' +
   '                       <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>,\n' +
   '                       <a href="#web">Web</a>, <a href="#profiling">Profile</a>, <a href="#numpy">NumPy</a>,\n' +
-  '                       <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>,\n' +
-  '                       <a href="#pandas">Data</a>]\n' +
+  '                       <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>]\n' +
   '}\n';
 
 
