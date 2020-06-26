@@ -607,7 +607,7 @@ to_exclusive   = &lt;range&gt;.stop
 shuffle(&lt;list&gt;)
 </code></pre></div>
 
-<div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt;        = <span class="hljs-number">0</span>b&lt;bin&gt;                   <span class="hljs-comment"># Or: 0x&lt;hex&gt;</span>
+<div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt;        = ±<span class="hljs-number">0</span>b&lt;bin&gt;                  <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>
 &lt;int&gt;        = int(<span class="hljs-string">'±&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)          <span class="hljs-comment"># Or: int('±&lt;hex&gt;', 16)</span>
 &lt;int&gt;        = int(<span class="hljs-string">'±0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)        <span class="hljs-comment"># Or: int('±0x&lt;hex&gt;', 0)</span>
 <span class="hljs-string">'[-]0b&lt;bin&gt;'</span> = bin(&lt;int&gt;)                <span class="hljs-comment"># Or: hex(&lt;int&gt;)</span>
