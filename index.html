@@ -2718,7 +2718,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃        how/join        │    <span class="hljs-string">'outer'</span>    │   <span class="hljs-string">'inner'</span>  │   <span class="hljs-string">'left'</span>   │       description        ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
-┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ Also accepts left_on <span class="hljs-keyword">and</span> ┃
+┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ Also accepts left_on and ┃
 ┃                        │ <span class="hljs-number">1</span>  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ right_on parameters.     ┃
 ┃                        │ <span class="hljs-number">2</span>  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ Uses <span class="hljs-string">'inner'</span> by default. ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
@@ -2730,7 +2730,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
 ┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ By default works the     ┃
-┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ same <span class="hljs-keyword">as</span> `l.append(r)`.   ┃
+┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ same as `l.append(r)`.   ┃
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │                          ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
@@ -2738,7 +2738,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
 ┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │                          ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
-┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows <span class="hljs-keyword">and</span>    ┃
+┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
 ┃                        │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │            │            │ columns.                 ┃
 ┃                        │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │            │                          ┃
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │                          ┃

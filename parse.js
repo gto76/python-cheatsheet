@@ -408,6 +408,7 @@ function modifyPage() {
   unindentBanner();
   updateDiagrams();
   highlightCode();
+  fixPandasDiagram();
   removePlotImages();
 }
 
@@ -532,6 +533,13 @@ function insertPageBreaks() {
 
 function insertPageBreakBefore(an_id) {
   $('<div class="pagebreak"></div>').insertBefore($(an_id).parent())
+}
+
+function fixPandasDiagram() {
+  const diagram_15 = '┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓';
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(and)").after("and");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(as)").after("as");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword").remove();
 }
 
 function removePlotImages() {
