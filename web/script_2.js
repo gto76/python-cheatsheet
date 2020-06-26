@@ -246,6 +246,101 @@ const DIAGRAM_12_B =
   '┃ isdecimal()   │          │          │          │          │    ✓     ┃\n' +
   '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
+const DIAGRAM_13_A =
+  '| sr.apply(…) |      3      |    sum 3    |      s  3     |'
+const DIAGRAM_13_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…) │      3      │    sum 3    │      s  3     ┃\n" +
+  "┃ sr.agg(…)   │             │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_14_A =
+  '| sr.apply(…) |             |      rank   |               |';
+const DIAGRAM_14_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…) │             │      rank   │               ┃\n" +
+  "┃ sr.agg(…)   │    x  1     │   x     1   │    r  x  1    ┃\n" +
+  "┃ sr.trans(…) │    y  2     │   y     2   │       y  2    ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_15_A =
+  '| df.apply(…) |             |       x y   |               |';
+const DIAGRAM_15_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │             │       x y   │               ┃\n" +
+  "┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃\n" +
+  "┃             │    y  6     │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_16_A =
+  '| df.apply(…) |      x  y   |      x    y |        x      |';
+const DIAGRAM_16_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │      x  y   │      x    y │        x      ┃\n" +
+  "┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
+  "┃             │             │ b    2    2 │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_17_A = 
+  '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |'; 
+const DIAGRAM_17_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃\n" +
+  "┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
+  "┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
+  "┃             │             │             │ c    2    2 │               ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃\n" +
+  "┃             │  a   1   2  │   a  1  1   │             │               ┃\n" +
+  "┃             │  b  11  13  │   b  1  1   │             │               ┃\n" +
+  "┃             │  c  11  13  │   c  1  1   │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_18_A = 
+  '+------------------------+---------------+------------+------------+--------------------------+'; 
+const DIAGRAM_18_B =
+  "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃        how/join        │    'outer'    │   'inner'  │   'left'   │       description        ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃\n" +
+  "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃\n" +
+  "┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃\n" +
+  "┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row_keys.┃\n" +
+  "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
+  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
+  "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
+  "┃           join=…)      │ b  3   4   .  │     4      │            │ By default works the     ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ same as `l.append(r)`.   ┃\n" +
+  "┃                        │ c  .   6   7  │     6      │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
+  "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end.               ┃\n" +
+  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ Uses 'outer' by default. ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +
+  "┃                        │ a  1   2   .  │            │            │ columns.                 ┃\n" +
+  "┃                        │ b  3   4   5  │            │            │                          ┃\n" +
+  "┃                        │ c  .   6   7  │            │            │                          ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+
 
 // isFontAvailable:
 (function(d){function c(c){b.style.fontFamily=c;e.appendChild(b);f=b.clientWidth;e.removeChild(b);return f}var f,e=d.body,b=d.createElement("span");b.innerHTML=Array(100).join("wi");b.style.cssText=["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;");var g=c("monospace"),h=c("serif"),k=c("sans-serif");window.isFontAvailable=function(b){return g!==c(b+",monospace")||k!==c(b+",sans-serif")||h!==c(b+",serif")}})(document);
@@ -263,6 +358,12 @@ if (isFontAvailable('Menlo')) {
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B);
+  $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B);
+  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B);
+  $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B);
+  $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B);
+  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B);
+  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B);
 }
 
 var isMobile = false;
