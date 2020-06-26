@@ -66,6 +66,315 @@ const DATACLASS =
 const DATETIME = 
   '<code class="python language-python hljs"><span class="hljs-string">\'&lt;DT&gt; = resolve_imaginary(&lt;DT&gt;)\'</span></code>';
 
+const DIAGRAM_1_A =
+  '+-------------+-------------+\n' +
+  '|   Classes   | Metaclasses |\n' +
+  '+-------------+-------------|\n' +
+  '|   MyClass --> MyMetaClass |\n';
+
+const DIAGRAM_1_B =
+  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃   Classes   │ Metaclasses ┃\n' +
+  '┠─────────────┼─────────────┨\n' +
+  '┃   MyClass ──→ MyMetaClass ┃\n' +
+  '┃             │     ↓       ┃\n' +
+  '┃    object ─────→ type ←╮  ┃\n' +
+  '┃             │     ↑ ╰──╯  ┃\n' +
+  '┃     str ──────────╯       ┃\n' +
+  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_2_A =
+  '+-------------+-------------+\n' +
+  '|   Classes   | Metaclasses |\n' +
+  '+-------------+-------------|\n' +
+  '|   MyClass   | MyMetaClass |\n';
+
+const DIAGRAM_2_B =
+  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃   Classes   │ Metaclasses ┃\n' +
+  '┠─────────────┼─────────────┨\n' +
+  '┃   MyClass   │ MyMetaClass ┃\n' +
+  '┃      ↓      │     ↓       ┃\n' +
+  '┃    object ←───── type     ┃\n' +
+  '┃      ↑      │             ┃\n' +
+  '┃     str     │             ┃\n' +
+  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_3_A =
+  '+------------------+------------+------------+------------+\n' +
+  '|                  |  Sequence  | Collection |  Iterable  |\n' +
+  '+------------------+------------+------------+------------+\n';
+
+const DIAGRAM_3_B =
+  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+  '┃                  │  Sequence  │ Collection │  Iterable  ┃\n' +
+  '┠──────────────────┼────────────┼────────────┼────────────┨\n' +
+  '┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
+  '┃ dict, set        │            │     ✓      │     ✓      ┃\n' +
+  '┃ iter             │            │            │     ✓      ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_4_A =
+  '+--------------------+----------+----------+----------+----------+----------+\n' +
+  '|                    | Integral | Rational |   Real   | Complex  |  Number  |\n' +
+  '+--------------------+----------+----------+----------+----------+----------+\n';
+
+const DIAGRAM_4_B =
+  '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃\n' +
+  '┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
+  '┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ fractions.Fraction │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ float              │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ complex            │          │          │          │    ✓     │    ✓     ┃\n' +
+  '┃ decimal.Decimal    │          │          │          │          │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_5_A =
+  "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
+  "|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |\n" +
+  "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
+
+const DIAGRAM_5_B =
+  "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
+  "┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃\n" +
+  "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
+  "┃   0.000056789 │    '5.6789e-05' │     '0.000057'  │  '5.678900e-05' │     '0.005679%' ┃\n" +
+  "┃   0.00056789  │    '0.00056789' │     '0.000568'  │  '5.678900e-04' │     '0.056789%' ┃\n" +
+  "┃   0.0056789   │    '0.0056789'  │     '0.005679'  │  '5.678900e-03' │     '0.567890%' ┃\n" +
+  "┃   0.056789    │    '0.056789'   │     '0.056789'  │  '5.678900e-02' │     '5.678900%' ┃\n" +
+  "┃   0.56789     │    '0.56789'    │     '0.567890'  │  '5.678900e-01' │    '56.789000%' ┃\n" +
+  "┃   5.6789      │    '5.6789'     │     '5.678900'  │  '5.678900e+00' │   '567.890000%' ┃\n" +
+  "┃  56.789       │   '56.789'      │    '56.789000'  │  '5.678900e+01' │  '5678.900000%' ┃\n" +
+  "┃ 567.89        │  '567.89'       │   '567.890000'  │  '5.678900e+02' │ '56789.000000%' ┃\n" +
+  "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_6_A =
+  "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
+  "|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |\n" +
+  "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
+
+const DIAGRAM_6_B =
+  "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
+  "┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃\n" +
+  "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
+  "┃   0.000056789 │    '5.7e-05'    │       '0.00'    │    '5.68e-05'   │       '0.01%'   ┃\n" +
+  "┃   0.00056789  │    '0.00057'    │       '0.00'    │    '5.68e-04'   │       '0.06%'   ┃\n" +
+  "┃   0.0056789   │    '0.0057'     │       '0.01'    │    '5.68e-03'   │       '0.57%'   ┃\n" +
+  "┃   0.056789    │    '0.057'      │       '0.06'    │    '5.68e-02'   │       '5.68%'   ┃\n" +
+  "┃   0.56789     │    '0.57'       │       '0.57'    │    '5.68e-01'   │      '56.79%'   ┃\n" +
+  "┃   5.6789      │    '5.7'        │       '5.68'    │    '5.68e+00'   │     '567.89%'   ┃\n" +
+  "┃  56.789       │    '5.7e+01'    │      '56.79'    │    '5.68e+01'   │    '5678.90%'   ┃\n" +
+  "┃ 567.89        │    '5.7e+02'    │     '567.89'    │    '5.68e+02'   │   '56789.00%'   ┃\n" +
+  "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_7_A =
+  '+------------+------------+------------+------------+--------------+\n' +
+  '|            |  Iterable  | Collection |  Sequence  | abc.Sequence |\n' +
+  '+------------+------------+------------+------------+--------------+\n';
+
+const DIAGRAM_7_B =
+  '┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
+  '┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃\n' +
+  '┠────────────┼────────────┼────────────┼────────────┼──────────────┨\n' +
+  '┃ iter()     │     !      │     !      │     ✓      │      ✓       ┃\n' +
+  '┃ contains() │     ✓      │     ✓      │     ✓      │      ✓       ┃\n' +
+  '┃ len()      │            │     !      │     !      │      !       ┃\n' +
+  '┃ getitem()  │            │            │     !      │      !       ┃\n' +
+  '┃ reversed() │            │            │     ✓      │      ✓       ┃\n' +
+  '┃ index()    │            │            │            │      ✓       ┃\n' +
+  '┃ count()    │            │            │            │      ✓       ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_8_A =
+  'BaseException\n' +
+  ' +-- SystemExit';
+
+const DIAGRAM_8_B =
+  "BaseException\n" +
+  " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function.</span>\n" +
+  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key (ctrl-c).</span>\n" +
+  " └── Exception                    <span class='hljs-comment'># User-defined exceptions should be derived from this class.</span>\n" +
+  "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors.</span>\n" +
+  "      │    └── ZeroDivisionError  <span class='hljs-comment'># Raised when dividing by zero.</span>\n" +
+  "      ├── AttributeError          <span class='hljs-comment'># Raised when an attribute is missing.</span>\n" +
+  "      ├── EOFError                <span class='hljs-comment'># Raised by input() when it hits end-of-file condition.</span>\n" +
+  "      ├── LookupError             <span class='hljs-comment'># Raised when a look-up on a collection fails.</span>\n" +
+  "      │    ├── IndexError         <span class='hljs-comment'># Raised when a sequence index is out of range.</span>\n" +
+  "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key or set element is not found.</span>\n" +
+  "      ├── NameError               <span class='hljs-comment'># Raised when a variable name is not found.</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Failures such as “file not found” or “disk full”.</span>\n" +
+  "      │    └── FileNotFoundError  <span class='hljs-comment'># When a file or directory is requested but doesn't exist.</span>\n" +
+  "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall in other categories.</span>\n" +
+  "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
+  "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
+  "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
+  "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
+  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
+
+const DIAGRAM_9_A =
+  '+------------------+--------------+--------------+--------------+\n' +
+  '|                  |     excel    |   excel-tab  |     unix     |\n' +
+  '+------------------+--------------+--------------+--------------+\n';
+
+const DIAGRAM_9_B =
+  "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
+  "┃                  │     excel    │   excel-tab  │     unix     ┃\n" +
+  "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
+  "┃ delimiter        │       ','    │      '\\t'    │       ','    ┃\n" +
+  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
+  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
+  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
+  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │      '\\n'    ┃\n" +
+  "┃ quoting          │         0    │         0    │         1    ┃\n" +
+  "┃ escapechar       │      None    │      None    │      None    ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_10_A =
+  '+-----------+------------+------------+------------+\n' +
+  '|           |    list    |    dict    |    set     |\n' +
+  '+-----------+------------+------------+------------+\n';
+
+const DIAGRAM_10_B =
+  '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+  '┃           │    list    │    dict    │    set     ┃\n' +
+  '┠───────────┼────────────┼────────────┼────────────┨\n' +
+  '┃ getitem() │ IndexError │  KeyError  │            ┃\n' +
+  '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
+  '┃ remove()  │ ValueError │            │  KeyError  ┃\n' +
+  '┃ index()   │ ValueError │            │            ┃\n' +
+  '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_11_A =
+  '+-----------+-------------+------+-------------+\n' +
+  '| sampwidth |     min     | zero |     max     |\n' +
+  '+-----------+-------------+------+-------------+\n';
+
+const DIAGRAM_11_B =
+  '┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃ sampwidth │     min     │ zero │     max     ┃\n' +
+  '┠───────────┼─────────────┼──────┼─────────────┨\n' +
+  '┃     1     │           0 │  128 │         255 ┃\n' +
+  '┃     2     │      -32768 │    0 │       32767 ┃\n' +
+  '┃     3     │    -8388608 │    0 │     8388607 ┃\n' +
+  '┃     4     │ -2147483648 │    0 │  2147483647 ┃\n' +
+  '┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_12_A =
+  '+---------------+----------+----------+----------+----------+----------+\n';
+
+const DIAGRAM_12_B =
+  '┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃               │ [ !#$%…] │ [a-zA-Z] │  [¼½¾]   │  [²³¹]   │  [0-9]   ┃\n' +
+  '┠───────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
+  '┃ isprintable() │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isalnum()     │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isnumeric()   │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isdigit()     │          │          │          │    ✓     │    ✓     ┃\n' +
+  '┃ isdecimal()   │          │          │          │          │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_13_A =
+  '| sr.apply(…) |      3      |    sum 3    |      s  3     |';
+
+const DIAGRAM_13_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…) │      3      │    sum 3    │      s  3     ┃\n" +
+  "┃ sr.agg(…)   │             │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_14_A =
+  '| sr.apply(…) |             |      rank   |               |';
+
+const DIAGRAM_14_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…) │             │      rank   │               ┃\n" +
+  "┃ sr.agg(…)   │    x  1     │   x     1   │    r  x  1    ┃\n" +
+  "┃ sr.trans(…) │    y  2     │   y     2   │       y  2    ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_15_A =
+  '| df.apply(…) |             |       x y   |               |';
+
+const DIAGRAM_15_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │             │       x y   │               ┃\n" +
+  "┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃\n" +
+  "┃             │    y  6     │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_16_A =
+  '| df.apply(…) |      x  y   |      x    y |        x      |';
+
+const DIAGRAM_16_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │      x  y   │      x    y │        x      ┃\n" +
+  "┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
+  "┃             │             │ b    2    2 │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_17_A = 
+  '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |';
+
+const DIAGRAM_17_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃\n" +
+  "┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
+  "┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
+  "┃             │             │             │ c    2    2 │               ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃\n" +
+  "┃             │  a   1   2  │   a  1  1   │             │               ┃\n" +
+  "┃             │  b  11  13  │   b  1  1   │             │               ┃\n" +
+  "┃             │  c  11  13  │   c  1  1   │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_18_A = 
+  '+------------------------+---------------+------------+------------+--------------------------+';
+
+const DIAGRAM_18_B =
+  "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃        how/join        │    'outer'    │   'inner'  │   'left'   │       description        ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃\n" +
+  "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃\n" +
+  "┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃\n" +
+  "┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row_keys.┃\n" +
+  "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
+  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
+  "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
+  "┃           join=…)      │ b  3   4   .  │     4      │            │ By default works the     ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ same as `l.append(r)`.   ┃\n" +
+  "┃                        │ c  .   6   7  │     6      │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
+  "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end.               ┃\n" +
+  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ Uses 'outer' by default. ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
+  "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +
+  "┃                        │ a  1   2   .  │            │            │ columns.                 ┃\n" +
+  "┃                        │ b  3   4   5  │            │            │                          ┃\n" +
+  "┃                        │ c  .   6   7  │            │            │                          ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+
 
 function main() {
   const html = getMd();
@@ -77,19 +386,19 @@ function main() {
   writeToFile('index.html', text);
 }
 
+function getMd() {
+  var readme = readFile('README.md');
+  var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
+  const converter = new showdown.Converter();
+  return converter.makeHtml(readme);
+}
+
 function initDom(html) {
   const { JSDOM } = jsdom;
   const dom = new JSDOM(html);
   const $ = (require('jquery'))(dom.window);
   global.$ = $;
   global.document = dom.window.document;
-}
-
-function getMd() {
-  var readme = readFile('README.md');
-  var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
-  const converter = new showdown.Converter();
-  return converter.makeHtml(readme);
 }
 
 function modifyPage() {
@@ -99,6 +408,7 @@ function modifyPage() {
   unindentBanner();
   highlightCode();
   removePlotImages();
+  updateDiagrams();
 }
 
 function removeOrigToc() {
@@ -206,6 +516,27 @@ function insertPageBreakBefore(an_id) {
 function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
+}
+
+function updateDiagrams() {
+  $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
+  $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
+  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
+  $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
+  $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
+  $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
+  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
+  $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
+  $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
+  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
+  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
+  $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B);
+  $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B);
+  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B);
+  $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B);
+  $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B);
+  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B);
+  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B);
 }
 
 function readFile(filename) {

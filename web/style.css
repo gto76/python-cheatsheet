@@ -129,7 +129,7 @@ a:not(:hover) {
 pre,
 code,
 textarea {
-  font-family: "Menlo", monospace;
+  font-family: "Menlo", "Menlo Regular", monospace;
 }
 
 code {
@@ -172,20 +172,6 @@ pre {
 .javascript .class,
 .javascript .special {
   color: #e6550d;
-}
-
-.album_cover {
-  width: 179px;
-  height: 179px;
-  border: 0px;
-  margin: 0px;
-}
-
-.single_cover {
-  width: 143px;
-  height: 143px;
-  border: 0px;
-  margin: 0px;
 }
 
 svg {

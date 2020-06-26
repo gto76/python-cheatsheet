@@ -14,10 +14,20 @@
   <meta name="twitter:description" content="Exhaustive, simple, beautiful and concise. A truly pythonic cheat sheet about Python programming language.">
   <meta name="twitter:image" content="https://gto76.github.io/python-cheatsheet/web/image_twitter_card_2.jpeg">
   <meta name="google-site-verification" content="w3rvuG0D1kUm_w20qsJecSEZh59Am8jK4eSPVU83e_M" />
+  <meta name="viewport" id="viewport-meta">
 </head>
 
 <style>
 @import url(web/style.css);
+
+@font-face {font-family: "Menlo Regular";
+  src: url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.eot"); /* IE9*/
+  src: url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff2") format("woff2"), /* chrome、firefox */
+  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff") format("woff"), /* chrome、firefox */
+  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.svg#Menlo Regular") format("svg"); /* iOS 4.1- */
+}
 
 .join,
 .link,
@@ -398,27 +408,27 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 
-<pre><code class="text language-text">+------------------+------------+------------+------------+
-|                  |  Sequence  | Collection |  Iterable  |
-+------------------+------------+------------+------------+
-| list, range, str |    yes     |    yes     |    yes     |
-| dict, set        |            |    yes     |    yes     |
-| iter             |            |            |    yes     |
-+------------------+------------+------------+------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
+┃                  │  Sequence  │ Collection │  Iterable  ┃
+┠──────────────────┼────────────┼────────────┼────────────┨
+┃ list, range, str │     ✓      │     ✓      │     ✓      ┃
+┃ dict, set        │            │     ✓      │     ✓      ┃
+┃ iter             │            │            │     ✓      ┃
+┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
 <span class="hljs-keyword">True</span>
 </code></pre>
-<pre><code class="text language-text">+--------------------+----------+----------+----------+----------+----------+
-|                    | Integral | Rational |   Real   | Complex  |  Number  |
-+--------------------+----------+----------+----------+----------+----------+
-| int                |   yes    |   yes    |   yes    |   yes    |   yes    |
-| fractions.Fraction |          |   yes    |   yes    |   yes    |   yes    |
-| float              |          |          |   yes    |   yes    |   yes    |
-| complex            |          |          |          |   yes    |   yes    |
-| decimal.Decimal    |          |          |          |          |   yes    |
-+--------------------+----------+----------+----------+----------+----------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
+┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃
+┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨
+┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃
+┃ fractions.Fraction │          │    ✓     │    ✓     │    ✓     │    ✓     ┃
+┃ float              │          │          │    ✓     │    ✓     │    ✓     ┃
+┃ complex            │          │          │          │    ✓     │    ✓     ┃
+┃ decimal.Decimal    │          │          │          │          │    ✓     ┃
+┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="string"><a href="#string" name="string">#</a>String</h2><pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
 &lt;str&gt;  = &lt;str&gt;.strip(<span class="hljs-string">'&lt;chars&gt;'</span>)              <span class="hljs-comment"># Strips all passed characters from both ends.</span>
@@ -445,15 +455,15 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code>.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
 </ul>
-<div><h3 id="propertymethods">Property Methods</h3><pre><code class="text language-text">+---------------+----------+----------+----------+----------+----------+
-|               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
-+---------------+----------+----------+----------+----------+----------+
-| isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
-| isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
-| isnumeric()   |          |          |   yes    |   yes    |   yes    |
-| isdigit()     |          |          |          |   yes    |   yes    |
-| isdecimal()   |          |          |          |          |   yes    |
-+---------------+----------+----------+----------+----------+----------+
+<div><h3 id="propertymethods">Property Methods</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
+┃               │ [ !#$%…] │ [a-zA-Z] │  [¼½¾]   │  [²³¹]   │  [0-9]   ┃
+┠───────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨
+┃ isprintable() │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃
+┃ isalnum()     │          │    ✓     │    ✓     │    ✓     │    ✓     ┃
+┃ isnumeric()   │          │          │    ✓     │    ✓     │    ✓     ┃
+┃ isdigit()     │          │          │          │    ✓     │    ✓     ┃
+┃ isdecimal()   │          │          │          │          │    ✓     ┃
+┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 </code></pre></div>
 
 <ul>
@@ -532,32 +542,32 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                                <span class="hljs-comment"># '  123.456%'</span>
 </code></pre></div>
 
-<div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |    {&lt;float&gt;}    |   {&lt;float&gt;:f}   |   {&lt;float&gt;:e}   |   {&lt;float&gt;:%}   |
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|   0.000056789 |    '5.6789e-05' |     '0.000057'  |  '5.678900e-05' |     '0.005679%' |
-|   0.00056789  |    '0.00056789' |     '0.000568'  |  '5.678900e-04' |     '0.056789%' |
-|   0.0056789   |    '0.0056789'  |     '0.005679'  |  '5.678900e-03' |     '0.567890%' |
-|   0.056789    |    '0.056789'   |     '0.056789'  |  '5.678900e-02' |     '5.678900%' |
-|   0.56789     |    '0.56789'    |     '0.567890'  |  '5.678900e-01' |    '56.789000%' |
-|   5.6789      |    '5.6789'     |     '5.678900'  |  '5.678900e+00' |   '567.890000%' |
-|  56.789       |   '56.789'      |    '56.789000'  |  '5.678900e+01' |  '5678.900000%' |
-| 567.89        |  '567.89'       |   '567.890000'  |  '5.678900e+02' | '56789.000000%' |
-+---------------+-----------------+-----------------+-----------------+-----------------+
+<div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
+┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃
+┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨
+┃   0.000056789 │    '5.6789e-05' │     '0.000057'  │  '5.678900e-05' │     '0.005679%' ┃
+┃   0.00056789  │    '0.00056789' │     '0.000568'  │  '5.678900e-04' │     '0.056789%' ┃
+┃   0.0056789   │    '0.0056789'  │     '0.005679'  │  '5.678900e-03' │     '0.567890%' ┃
+┃   0.056789    │    '0.056789'   │     '0.056789'  │  '5.678900e-02' │     '5.678900%' ┃
+┃   0.56789     │    '0.56789'    │     '0.567890'  │  '5.678900e-01' │    '56.789000%' ┃
+┃   5.6789      │    '5.6789'     │     '5.678900'  │  '5.678900e+00' │   '567.890000%' ┃
+┃  56.789       │   '56.789'      │    '56.789000'  │  '5.678900e+01' │  '5678.900000%' ┃
+┃ 567.89        │  '567.89'       │   '567.890000'  │  '5.678900e+02' │ '56789.000000%' ┃
+┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
 </code></pre></div>
 
-<pre><code class="text language-text">+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |   {&lt;float&gt;:.2}  |  {&lt;float&gt;:.2f}  |  {&lt;float&gt;:.2e}  |  {&lt;float&gt;:.2%}  |
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|   0.000056789 |    '5.7e-05'    |       '0.00'    |    '5.68e-05'   |       '0.01%'   |
-|   0.00056789  |    '0.00057'    |       '0.00'    |    '5.68e-04'   |       '0.06%'   |
-|   0.0056789   |    '0.0057'     |       '0.01'    |    '5.68e-03'   |       '0.57%'   |
-|   0.056789    |    '0.057'      |       '0.06'    |    '5.68e-02'   |       '5.68%'   |
-|   0.56789     |    '0.57'       |       '0.57'    |    '5.68e-01'   |      '56.79%'   |
-|   5.6789      |    '5.7'        |       '5.68'    |    '5.68e+00'   |     '567.89%'   |
-|  56.789       |    '5.7e+01'    |      '56.79'    |    '5.68e+01'   |    '5678.90%'   |
-| 567.89        |    '5.7e+02'    |     '567.89'    |    '5.68e+02'   |   '56789.00%'   |
-+---------------+-----------------+-----------------+-----------------+-----------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
+┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃
+┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨
+┃   0.000056789 │    '5.7e-05'    │       '0.00'    │    '5.68e-05'   │       '0.01%'   ┃
+┃   0.00056789  │    '0.00057'    │       '0.00'    │    '5.68e-04'   │       '0.06%'   ┃
+┃   0.0056789   │    '0.0057'     │       '0.01'    │    '5.68e-03'   │       '0.57%'   ┃
+┃   0.056789    │    '0.057'      │       '0.06'    │    '5.68e-02'   │       '5.68%'   ┃
+┃   0.56789     │    '0.57'       │       '0.57'    │    '5.68e-01'   │      '56.79%'   ┃
+┃   5.6789      │    '5.7'        │       '5.68'    │    '5.68e+00'   │     '567.89%'   ┃
+┃  56.789       │    '5.7e+01'    │      '56.79'    │    '5.68e+01'   │    '5678.90%'   ┃
+┃ 567.89        │    '5.7e+02'    │     '567.89'    │    '5.68e+02'   │   '56789.00%'   ┃
+┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'</span>
 {<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'</span>
@@ -1210,17 +1220,17 @@ Hello World!
 </code></pre></div>
 
 
-<div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">+------------+------------+------------+------------+--------------+
-|            |  Iterable  | Collection |  Sequence  | abc.Sequence |
-+------------+------------+------------+------------+--------------+
-| iter()     |    REQ     |    REQ     |    Yes     |     Yes      |
-| contains() |    Yes     |    Yes     |    Yes     |     Yes      |
-| len()      |            |    REQ     |    REQ     |     REQ      |
-| getitem()  |            |            |    REQ     |     REQ      |
-| reversed() |            |            |    Yes     |     Yes      |
-| index()    |            |            |            |     Yes      |
-| count()    |            |            |            |     Yes      |
-+------------+------------+------------+------------+--------------+
+<div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃
+┠────────────┼────────────┼────────────┼────────────┼──────────────┨
+┃ iter()     │     !      │     !      │     ✓      │      ✓       ┃
+┃ contains() │     ✓      │     ✓      │     ✓      │      ✓       ┃
+┃ len()      │            │     !      │     !      │      !       ┃
+┃ getitem()  │            │            │     !      │      !       ┃
+┃ reversed() │            │            │     ✓      │      ✓       ┃
+┃ index()    │            │            │            │      ✓       ┃
+┃ count()    │            │            │            │      ✓       ┃
+┗━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre></div>
 
 <ul>
@@ -1316,35 +1326,35 @@ error_msg = traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__tr
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
- +-- SystemExit                   # Raised by the sys.exit() function.
- +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
- +-- Exception                    # User-defined exceptions should be derived from this class.
-      +-- ArithmeticError         # Base class for arithmetic errors.
-      |    +-- ZeroDivisionError  # Raised when dividing by zero.
-      +-- AttributeError          # Raised when an attribute is missing.
-      +-- EOFError                # Raised by input() when it hits end-of-file condition.
-      +-- LookupError             # Raised when a look-up on a collection fails.
-      |    +-- IndexError         # Raised when a sequence index is out of range.
-      |    +-- KeyError           # Raised when a dictionary key or set element is not found.
-      +-- NameError               # Raised when a variable name is not found.
-      +-- OSError                 # Failures such as “file not found” or “disk full”.
-      |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
-      +-- RuntimeError            # Raised by errors that don't fall into other categories.
-      |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
-      +-- StopIteration           # Raised by next() when run on an empty iterator.
-      +-- TypeError               # Raised when an argument is of wrong type.
-      +-- ValueError              # When an argument is of right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
+ ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function.</span>
+ ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key (ctrl-c).</span>
+ └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
+      ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors.</span>
+      │    └── ZeroDivisionError  <span class="hljs-comment"># Raised when dividing by zero.</span>
+      ├── AttributeError          <span class="hljs-comment"># Raised when an attribute is missing.</span>
+      ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits end-of-file condition.</span>
+      ├── LookupError             <span class="hljs-comment"># Raised when a look-up on a collection fails.</span>
+      │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
+      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is not found.</span>
+      ├── NameError               <span class="hljs-comment"># Raised when a variable name is not found.</span>
+      ├── OSError                 <span class="hljs-comment"># Failures such as “file not found” or “disk full”.</span>
+      │    └── FileNotFoundError  <span class="hljs-comment"># When a file or directory is requested but doesn't exist.</span>
+      ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall in other categories.</span>
+      │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
+      ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
+      ├── TypeError               <span class="hljs-comment"># Raised when an argument is of wrong type.</span>
+      └── ValueError              <span class="hljs-comment"># When an argument is of right type but inappropriate value.</span>
+           └── UnicodeError       <span class="hljs-comment"># Raised when encoding/decoding strings to/from bytes fails.</span>
 </code></pre></div>
 
-<div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">+-----------+------------+------------+------------+
-|           |    list    |    dict    |    set     |
-+-----------+------------+------------+------------+
-| getitem() | IndexError |  KeyError  |            |
-| pop()     | IndexError |  KeyError  |  KeyError  |
-| remove()  | ValueError |            |  KeyError  |
-| index()   | ValueError |            |            |
-+-----------+------------+------------+------------+
+<div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
+┃           │    list    │    dict    │    set     ┃
+┠───────────┼────────────┼────────────┼────────────┨
+┃ getitem() │ IndexError │  KeyError  │            ┃
+┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃
+┃ remove()  │ ValueError │            │  KeyError  ┃
+┃ index()   │ ValueError │            │            ┃
+┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
 </code></pre></div>
 
 <div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of wrong type!'</span>)
@@ -1615,17 +1625,17 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - Specifies how writer terminates rows.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - Controls the amount of quoting: 0 - as necessary, 1 - all.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping 'quotechar' if 'doublequote' is False.</strong></li>
-</ul><div><h3 id="dialects">Dialects</h3><pre><code class="text language-text">+------------------+--------------+--------------+--------------+
-|                  |     excel    |   excel-tab  |     unix     |
-+------------------+--------------+--------------+--------------+
-| delimiter        |       ','    |      '\t'    |       ','    |
-| quotechar        |       '"'    |       '"'    |       '"'    |
-| doublequote      |      True    |      True    |      True    |
-| skipinitialspace |     False    |     False    |     False    |
-| lineterminator   |    '\r\n'    |    '\r\n'    |      '\n'    |
-| quoting          |         0    |         0    |         1    |
-| escapechar       |      None    |      None    |      None    |
-+------------------+--------------+--------------+--------------+
+</ul><div><h3 id="dialects">Dialects</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃                  │     excel    │   excel-tab  │     unix     ┃
+┠──────────────────┼──────────────┼──────────────┼──────────────┨
+┃ delimiter        │       ','    │      '\t'    │       ','    ┃
+┃ quotechar        │       '"'    │       '"'    │       '"'    ┃
+┃ doublequote      │      True    │      True    │      True    ┃
+┃ skipinitialspace │     False    │     False    │     False    ┃
+┃ lineterminator   │    '\r\n'    │    '\r\n'    │      '\n'    ┃
+┃ quoting          │         0    │         0    │         1    ┃
+┃ escapechar       │      None    │      None    │      None    ┃
+┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre></div></div>
 
 
@@ -1926,29 +1936,29 @@ param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs
 type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
 </code></pre></div>
 
-<pre><code class="text language-text">+-------------+-------------+
-|   Classes   | Metaclasses |
-+-------------+-------------|
-|   MyClass --&gt; MyMetaClass |
-|             |     v       |
-|    object -----&gt; type &lt;+  |
-|             |     ^ +--+  |
-|     str ----------+       |
-+-------------+-------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓
+┃   Classes   │ Metaclasses ┃
+┠─────────────┼─────────────┨
+┃   MyClass ──→ MyMetaClass ┃
+┃             │     ↓       ┃
+┃    object ─────→ type ←╮  ┃
+┃             │     ↑ ╰──╯  ┃
+┃     str ──────────╯       ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
 MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
 </code></pre></div>
 
-<pre><code class="text language-text">+-------------+-------------+
-|   Classes   | Metaclasses |
-+-------------+-------------|
-|   MyClass   | MyMetaClass |
-|      v      |     v       |
-|    object &lt;----- type     |
-|      ^      |             |
-|     str     |             |
-+-------------+-------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓
+┃   Classes   │ Metaclasses ┃
+┠─────────────┼─────────────┨
+┃   MyClass   │ MyMetaClass ┃
+┃      ↓      │     ↓       ┃
+┃    object ←───── type     ┃
+┃      ↑      │             ┃
+┃     str     │             ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="eval"><a href="#eval" name="eval">#</a>Eval</h2><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval
 <span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'1 + 2'</span>)
@@ -2397,14 +2407,14 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 <li><strong>If sample width is one, then the integer should be encoded unsigned.</strong></li>
 <li><strong>For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
-<div><h3 id="samplevalues">Sample Values</h3><pre><code class="text language-text">+-----------+-------------+------+-------------+
-| sampwidth |     min     | zero |     max     |
-+-----------+-------------+------+-------------+
-|     1     |           0 |  128 |         255 |
-|     2     |      -32768 |    0 |       32767 |
-|     3     |    -8388608 |    0 |     8388607 |
-|     4     | -2147483648 |    0 |  2147483647 |
-+-----------+-------------+------+-------------+
+<div><h3 id="samplevalues">Sample Values</h3><pre><code class="text language-text">┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓
+┃ sampwidth │     min     │ zero │     max     ┃
+┠───────────┼─────────────┼──────┼─────────────┨
+┃     1     │           0 │  128 │         255 ┃
+┃     2     │      -32768 │    0 │       32767 ┃
+┃     3     │    -8388608 │    0 │     8388607 ┃
+┃     4     │ -2147483648 │    0 │  2147483647 ┃
+┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre></div>
 
 <div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
@@ -2652,20 +2662,20 @@ x    <span class="hljs-number">1</span>
 y    <span class="hljs-number">2</span>
 dtype: int64
 </code></pre>
-<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   ['sum']   | {'s': 'sum'}  |
-+-------------+-------------+-------------+---------------+
-| sr.apply(…) |      3      |    sum 3    |      s  3     |
-| sr.agg(…)   |             |             |               |
-+-------------+-------------+-------------+---------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │      3      │    sum 3    │      s  3     ┃
+┃ sr.agg(…)   │             │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
-<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
-|             |    'rank'   |   ['rank']  | {'r': 'rank'} |
-+-------------+-------------+-------------+---------------+
-| sr.apply(…) |             |      rank   |               |
-| sr.agg(…)   |    x  1     |   x     1   |    r  x  1    |
-| sr.trans(…) |    y  2     |   y     2   |       y  2    |
-+-------------+-------------+-------------+---------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ sr.apply(…) │             │      rank   │               ┃
+┃ sr.agg(…)   │    x  1     │   x     1   │    r  x  1    ┃
+┃ sr.trans(…) │    y  2     │   y     2   │       y  2    ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2704,35 +2714,35 @@ b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
 c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
-<pre><code class="text language-text">+------------------------+---------------+------------+------------+--------------------------+
-|        how/join        |    'outer'    |   'inner'  |   'left'   |       description        |
-+------------------------+---------------+------------+------------+--------------------------+
-| l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
-|            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | Also accepts left_on and |
-|                        | 1  3   4   5  |            | 3   4   5  | right_on parameters.     |
-|                        | 2  .   6   7  |            |            | Uses 'inner' by default. |
-+------------------------+---------------+------------+------------+--------------------------+
-| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row_keys.|
-|           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 |                          |
-|                        | c  .  .  6  7 |            |            |                          |
-+------------------------+---------------+------------+------------+--------------------------+
-| pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
-|           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
-|           join=…)      | b  3   4   .  |     4      |            | By default works the     |
-|                        | b  .   4   5  |     4      |            | same as `l.append(r)`.   |
-|                        | c  .   6   7  |     6      |            |                          |
-+------------------------+---------------+------------+------------+--------------------------+
-| pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
-|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end.               |
-|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | Uses 'outer' by default. |
-|                        | c  .  .  6  7 |            |            |                          |
-+------------------------+---------------+------------+------------+--------------------------+
-| l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
-|                        | a  1   2   .  |            |            | columns.                 |
-|                        | b  3   4   5  |            |            |                          |
-|                        | c  .   6   7  |            |            |                          |
-+------------------------+---------------+------------+------------+--------------------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        how/join        │    'outer'    │   'inner'  │   'left'   │       description        ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
+┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃
+┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃
+┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row_keys.┃
+┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃
+┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃
+┃                        │ c  .  .  6  7 │            │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
+┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃
+┃           join=…)      │ b  3   4   .  │     4      │            │ By default works the     ┃
+┃                        │ b  .   4   5  │     4      │            │ same as `l.append(r)`.   ┃
+┃                        │ c  .   6   7  │     6      │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
+┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end.               ┃
+┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ Uses 'outer' by default. ┃
+┃                        │ c  .  .  6  7 │            │            │                          ┃
+┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
+┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
+┃                        │ a  1   2   .  │            │            │ columns.                 ┃
+┃                        │ b  3   4   5  │            │            │                          ┃
+┃                        │ c  .   6   7  │            │            │                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h4 id="aggregatetransformmap-1">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>
 &lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;trans_func&gt;)</span>
@@ -2747,22 +2757,22 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre>
-<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   ['sum']   | {'x': 'sum'}  |
-+-------------+-------------+-------------+---------------+
-| df.apply(…) |             |       x y   |               |
-| df.agg(…)   |    x  4     |   sum 4 6   |     x  4      |
-|             |    y  6     |             |               |
-+-------------+-------------+-------------+---------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │             │       x y   │               ┃
+┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃
+┃             │    y  6     │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
-<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
-|             |    'rank'   |   ['rank']  | {'x': 'rank'} |
-+-------------+-------------+-------------+---------------+
-| df.apply(…) |      x  y   |      x    y |        x      |
-| df.agg(…)   |   a  1  1   |   rank rank |     a  1      |
-| df.trans(…) |   b  2  2   | a    1    1 |     b  2      |
-|             |             | b    2    2 |               |
-+-------------+-------------+-------------+---------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼───────────────┨
+┃ df.apply(…) │      x  y   │      x    y │        x      ┃
+┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃
+┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃
+┃             │             │ b    2    2 │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h4 id="encodedecode">Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
 &lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)
@@ -2800,20 +2810,20 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 <span class="hljs-number">6</span>: b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
    c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
 </code></pre>
-<pre><code class="text language-text">+-------------+-------------+-------------+-------------+---------------+
-|             |    'sum'    |    'rank'   |   ['rank']  | {'x': 'rank'} |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
-|             |  z          |   a  1  1   |   rank rank |     a  1      |
-|             |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
-|             |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
-|             |             |             | c    2    2 |               |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x   y  |      x  y   |             |               |
-|             |  a   1   2  |   a  1  1   |             |               |
-|             |  b  11  13  |   b  1  1   |             |               |
-|             |  c  11  13  |   c  1  1   |             |               |
-+-------------+-------------+-------------+-------------+---------------+
+<pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃
+┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃
+┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃
+┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃
+┃             │             │             │ c    2    2 │               ┃
+┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
+┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃
+┃             │  a   1   2  │   a  1  1   │             │               ┃
+┃             │  b  11  13  │   b  1  1   │             │               ┃
+┃             │  c  11  13  │   c  1  1   │             │               ┃
+┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;R_Sr/R_DF/R_GB&gt; = &lt;Sr/DF/GB&gt;.rolling(window_size)  <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
 &lt;R_Sr/R_DF&gt;      = &lt;R_DF/R_GB&gt;[column_key/s]        <span class="hljs-comment"># Or: &lt;R&gt;.column_key</span>
