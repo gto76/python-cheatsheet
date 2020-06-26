@@ -3348,7 +3348,6 @@ Plotly
 
 ![Covid Deaths](web/covid_deaths.png)
 <div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div>
-</div>
 
 ```python
 import pandas as pd
