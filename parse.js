@@ -97,7 +97,8 @@ function modifyPage() {
   addToc();
   insertLinks();
   unindentBanner();
-  highlightCode(); 
+  highlightCode();
+  removePlotImages();
 }
 
 function removeOrigToc() {
@@ -200,6 +201,11 @@ function insertPageBreaks() {
 
 function insertPageBreakBefore(an_id) {
   $('<div class="pagebreak"></div>').insertBefore($(an_id).parent())
+}
+
+function removePlotImages() {
+  $('img[alt="Covid Deaths"]').remove();
+  $('img[alt="Covid Cases"]').remove();
 }
 
 function readFile(filename) {

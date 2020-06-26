@@ -2652,19 +2652,19 @@ x    <span class="hljs-number">1</span>
 y    <span class="hljs-number">2</span>
 dtype: int64
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'sum'</span>    |   [<span class="hljs-string">'sum'</span>]   | {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  |
+<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
+|             |    'sum'    |   ['sum']   | {'s': 'sum'}  |
 +-------------+-------------+-------------+---------------+
-| sr.apply(…) |      <span class="hljs-number">3</span>      |    sum <span class="hljs-number">3</span>    |      s  <span class="hljs-number">3</span>     |
+| sr.apply(…) |      3      |    sum 3    |      s  3     |
 | sr.agg(…)   |             |             |               |
 +-------------+-------------+-------------+---------------+
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'rank'</span>   |   [<span class="hljs-string">'rank'</span>]  | {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} |
+<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
+|             |    'rank'   |   ['rank']  | {'r': 'rank'} |
 +-------------+-------------+-------------+---------------+
 | sr.apply(…) |             |      rank   |               |
-| sr.agg(…)   |    x  <span class="hljs-number">1</span>     |   x     <span class="hljs-number">1</span>   |    r  x  <span class="hljs-number">1</span>    |
-| sr.trans(…) |    y  <span class="hljs-number">2</span>     |   y     <span class="hljs-number">2</span>   |       y  <span class="hljs-number">2</span>    |
+| sr.agg(…)   |    x  1     |   x     1   |    r  x  1    |
+| sr.trans(…) |    y  2     |   y     2   |       y  2    |
 +-------------+-------------+-------------+---------------+
 </code></pre>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -2704,34 +2704,34 @@ b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
 c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">+------------------------+---------------+------------+------------+--------------------------+
-|        how/join        |    <span class="hljs-string">'outer'</span>    |   <span class="hljs-string">'inner'</span>  |   <span class="hljs-string">'left'</span>   |       description        |
+<pre><code class="text language-text">+------------------------+---------------+------------+------------+--------------------------+
+|        how/join        |    'outer'    |   'inner'  |   'left'   |       description        |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.merge(r, on=<span class="hljs-string">'y'</span>,     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
-|            how=…)      | <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  | <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  | <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  | Also accepts left_on <span class="hljs-keyword">and</span> |
-|                        | <span class="hljs-number">1</span>  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  |            | <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  | right_on parameters.     |
-|                        | <span class="hljs-number">2</span>  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  |            |            | Uses <span class="hljs-string">'inner'</span> by default. |
+| l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
+|            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | Also accepts left_on and |
+|                        | 1  3   4   5  |            | 3   4   5  | right_on parameters.     |
+|                        | 2  .   6   7  |            |            | Uses 'inner' by default. |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.join(r, lsuffix=<span class="hljs-string">'l'</span>, |    x yl yr  z |            | x yl yr  z | Joins/merges on row_keys.|
-|           rsuffix=<span class="hljs-string">'r'</span>, | a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . | x yl yr  z | <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . | Uses <span class="hljs-string">'left'</span> by default.  |
-|           how=…)       | b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> | <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> | <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> |                          |
-|                        | c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> |            |            |                          |
+| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row_keys.|
+|           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
+|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 |                          |
+|                        | c  .  .  6  7 |            |            |                          |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
-|           axis=<span class="hljs-number">0</span>,      | a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  |     <span class="hljs-number">2</span>      |            | Uses <span class="hljs-string">'outer'</span> by default. |
-|           join=…)      | b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  |     <span class="hljs-number">4</span>      |            | By default works the     |
-|                        | b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  |     <span class="hljs-number">4</span>      |            | same <span class="hljs-keyword">as</span> `l.append(r)`.   |
-|                        | c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  |     <span class="hljs-number">6</span>      |            |                          |
+|           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
+|           join=…)      | b  3   4   .  |     4      |            | By default works the     |
+|                        | b  .   4   5  |     4      |            | same as `l.append(r)`.   |
+|                        | c  .   6   7  |     6      |            |                          |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
-|           axis=<span class="hljs-number">1</span>,      | a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . | x  y  y  z |            | right end.               |
-|           join=…)      | b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> | <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> |            | Uses <span class="hljs-string">'outer'</span> by default. |
-|                        | c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> |            |            |                          |
+|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end.               |
+|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | Uses 'outer' by default. |
+|                        | c  .  .  6  7 |            |            |                          |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows <span class="hljs-keyword">and</span>    |
-|                        | a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  |            |            | columns.                 |
-|                        | b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  |            |            |                          |
-|                        | c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  |            |            |                          |
+| l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
+|                        | a  1   2   .  |            |            | columns.                 |
+|                        | b  3   4   5  |            |            |                          |
+|                        | c  .   6   7  |            |            |                          |
 +------------------------+---------------+------------+------------+--------------------------+
 </code></pre>
 <div><h4 id="aggregatetransformmap-1">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>
@@ -2747,21 +2747,21 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'sum'</span>    |   [<span class="hljs-string">'sum'</span>]   | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  |
+<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
+|             |    'sum'    |   ['sum']   | {'x': 'sum'}  |
 +-------------+-------------+-------------+---------------+
 | df.apply(…) |             |       x y   |               |
-| df.agg(…)   |    x  <span class="hljs-number">4</span>     |   sum <span class="hljs-number">4</span> <span class="hljs-number">6</span>   |     x  <span class="hljs-number">4</span>      |
-|             |    y  <span class="hljs-number">6</span>     |             |               |
+| df.agg(…)   |    x  4     |   sum 4 6   |     x  4      |
+|             |    y  6     |             |               |
 +-------------+-------------+-------------+---------------+
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'rank'</span>   |   [<span class="hljs-string">'rank'</span>]  | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} |
+<pre><code class="text language-text">+-------------+-------------+-------------+---------------+
+|             |    'rank'   |   ['rank']  | {'x': 'rank'} |
 +-------------+-------------+-------------+---------------+
 | df.apply(…) |      x  y   |      x    y |        x      |
-| df.agg(…)   |   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |   rank rank |     a  <span class="hljs-number">1</span>      |
-| df.trans(…) |   b  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   | a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> |     b  <span class="hljs-number">2</span>      |
-|             |             | b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> |               |
+| df.agg(…)   |   a  1  1   |   rank rank |     a  1      |
+| df.trans(…) |   b  2  2   | a    1    1 |     b  2      |
+|             |             | b    2    2 |               |
 +-------------+-------------+-------------+---------------+
 </code></pre>
 <div><h4 id="encodedecode">Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
@@ -2800,19 +2800,19 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 <span class="hljs-number">6</span>: b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
    c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
 </code></pre>
-<pre><code class="python language-python hljs">+-------------+-------------+-------------+-------------+---------------+
-|             |    <span class="hljs-string">'sum'</span>    |    <span class="hljs-string">'rank'</span>   |   [<span class="hljs-string">'rank'</span>]  | {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} |
+<pre><code class="text language-text">+-------------+-------------+-------------+-------------+---------------+
+|             |    'sum'    |    'rank'   |   ['rank']  | {'x': 'rank'} |
 +-------------+-------------+-------------+-------------+---------------+
 | gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
-|             |  z          |   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |   rank rank |     a  <span class="hljs-number">1</span>      |
-|             |  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  |   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   | a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> |     b  <span class="hljs-number">1</span>      |
-|             |  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   | b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> |     c  <span class="hljs-number">2</span>      |
-|             |             |             | c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> |               |
+|             |  z          |   a  1  1   |   rank rank |     a  1      |
+|             |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
+|             |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
+|             |             |             | c    2    2 |               |
 +-------------+-------------+-------------+-------------+---------------+
 | gb.trans(…) |      x   y  |      x  y   |             |               |
-|             |  a   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  |   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
-|             |  b  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
-|             |  c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  |   c  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   |             |               |
+|             |  a   1   2  |   a  1  1   |             |               |
+|             |  b  11  13  |   b  1  1   |             |               |
+|             |  c  11  13  |   c  1  1   |             |               |
 +-------------+-------------+-------------+-------------+---------------+
 </code></pre>
 <div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;R_Sr/R_DF/R_GB&gt; = &lt;Sr/DF/GB&gt;.rolling(window_size)  <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
@@ -2821,7 +2821,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 </code></pre></div>
 
 
-<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="coviddeathsbycontinent">Covid Deaths by Continent</h3><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div><p></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="coviddeathsbycontinent">Covid Deaths by Continent</h3><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div><p></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> plotly.express
 
 covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
@@ -2840,7 +2840,8 @@ plotly.express.line(summed, x=<span class="hljs-string">'Date'</span>, y=<span c
 
 
 
-<div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas, datetime
+
+<div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas, datetime
 <span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
@@ -2883,6 +2884,7 @@ plotly.express.line(summed, x=<span class="hljs-string">'Date'</span>, y=<span c
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
 </code></pre></div>
+
 
 
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
