@@ -67,45 +67,11 @@ const DATETIME =
   '<code class="python language-python hljs"><span class="hljs-string">\'&lt;DT&gt; = resolve_imaginary(&lt;DT&gt;)\'</span></code>';
 
 const DIAGRAM_1_A =
-  '+-------------+-------------+\n' +
-  '|   Classes   | Metaclasses |\n' +
-  '+-------------+-------------|\n' +
-  '|   MyClass --> MyMetaClass |\n';
-
-const DIAGRAM_1_B =
-  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
-  '┃   Classes   │ Metaclasses ┃\n' +
-  '┠─────────────┼─────────────┨\n' +
-  '┃   MyClass ──→ MyMetaClass ┃\n' +
-  '┃             │     ↓       ┃\n' +
-  '┃    object ─────→ type ←╮  ┃\n' +
-  '┃             │     ↑ ╰──╯  ┃\n' +
-  '┃     str ──────────╯       ┃\n' +
-  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
-
-const DIAGRAM_2_A =
-  '+-------------+-------------+\n' +
-  '|   Classes   | Metaclasses |\n' +
-  '+-------------+-------------|\n' +
-  '|   MyClass   | MyMetaClass |\n';
-
-const DIAGRAM_2_B =
-  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
-  '┃   Classes   │ Metaclasses ┃\n' +
-  '┠─────────────┼─────────────┨\n' +
-  '┃   MyClass   │ MyMetaClass ┃\n' +
-  '┃      ↓      │     ↓       ┃\n' +
-  '┃    object ←───── type     ┃\n' +
-  '┃      ↑      │             ┃\n' +
-  '┃     str     │             ┃\n' +
-  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
-
-const DIAGRAM_3_A =
   '+------------------+------------+------------+------------+\n' +
   '|                  |  Sequence  | Collection |  Iterable  |\n' +
   '+------------------+------------+------------+------------+\n';
 
-const DIAGRAM_3_B =
+const DIAGRAM_1_B =
   '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
   '┃                  │  Sequence  │ Collection │  Iterable  ┃\n' +
   '┠──────────────────┼────────────┼────────────┼────────────┨\n' +
@@ -114,12 +80,12 @@ const DIAGRAM_3_B =
   '┃ iter             │            │            │     ✓      ┃\n' +
   '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
 
-const DIAGRAM_4_A =
+const DIAGRAM_2_A =
   '+--------------------+----------+----------+----------+----------+----------+\n' +
   '|                    | Integral | Rational |   Real   | Complex  |  Number  |\n' +
   '+--------------------+----------+----------+----------+----------+----------+\n';
 
-const DIAGRAM_4_B =
+const DIAGRAM_2_B =
   '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
   '┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃\n' +
   '┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
@@ -130,12 +96,26 @@ const DIAGRAM_4_B =
   '┃ decimal.Decimal    │          │          │          │          │    ✓     ┃\n' +
   '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
-const DIAGRAM_5_A =
+const DIAGRAM_3_A =
+  '+---------------+----------+----------+----------+----------+----------+\n';
+
+const DIAGRAM_3_B =
+  '┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+  '┃               │ [ !#$%…] │ [a-zA-Z] │  [¼½¾]   │  [²³¹]   │  [0-9]   ┃\n' +
+  '┠───────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
+  '┃ isprintable() │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isalnum()     │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isnumeric()   │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
+  '┃ isdigit()     │          │          │          │    ✓     │    ✓     ┃\n' +
+  '┃ isdecimal()   │          │          │          │          │    ✓     ┃\n' +
+  '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
+
+const DIAGRAM_4_A =
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
   "|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |\n" +
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
 
-const DIAGRAM_5_B =
+const DIAGRAM_4_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
   "┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃\n" +
   "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
@@ -149,12 +129,12 @@ const DIAGRAM_5_B =
   "┃ 567.89        │  '567.89'       │   '567.890000'  │  '5.678900e+02' │ '56789.000000%' ┃\n" +
   "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
 
-const DIAGRAM_6_A =
+const DIAGRAM_5_A =
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
   "|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |\n" +
   "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
 
-const DIAGRAM_6_B =
+const DIAGRAM_5_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
   "┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃\n" +
   "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
@@ -168,12 +148,12 @@ const DIAGRAM_6_B =
   "┃ 567.89        │    '5.7e+02'    │     '567.89'    │    '5.68e+02'   │   '56789.00%'   ┃\n" +
   "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
 
-const DIAGRAM_7_A =
+const DIAGRAM_6_A =
   '+------------+------------+------------+------------+--------------+\n' +
   '|            |  Iterable  | Collection |  Sequence  | abc.Sequence |\n' +
   '+------------+------------+------------+------------+--------------+\n';
 
-const DIAGRAM_7_B =
+const DIAGRAM_6_B =
   '┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
   '┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃\n' +
   '┠────────────┼────────────┼────────────┼────────────┼──────────────┨\n' +
@@ -186,11 +166,11 @@ const DIAGRAM_7_B =
   '┃ count()    │            │            │            │      ✓       ┃\n' +
   '┗━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
 
-const DIAGRAM_8_A =
+const DIAGRAM_7_A =
   'BaseException\n' +
   ' +-- SystemExit';
 
-const DIAGRAM_8_B =
+const DIAGRAM_7_B =
   "BaseException\n" +
   " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function.</span>\n" +
   " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key (ctrl-c).</span>\n" +
@@ -212,6 +192,21 @@ const DIAGRAM_8_B =
   "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
   "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
 
+const DIAGRAM_8_A =
+  '+-----------+------------+------------+------------+\n' +
+  '|           |    list    |    dict    |    set     |\n' +
+  '+-----------+------------+------------+------------+\n';
+
+const DIAGRAM_8_B =
+  '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+  '┃           │    list    │    dict    │    set     ┃\n' +
+  '┠───────────┼────────────┼────────────┼────────────┨\n' +
+  '┃ getitem() │ IndexError │  KeyError  │            ┃\n' +
+  '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
+  '┃ remove()  │ ValueError │            │  KeyError  ┃\n' +
+  '┃ index()   │ ValueError │            │            ┃\n' +
+  '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +
   '|                  |     excel    |   excel-tab  |     unix     |\n' +
@@ -231,26 +226,45 @@ const DIAGRAM_9_B =
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
-  '+-----------+------------+------------+------------+\n' +
-  '|           |    list    |    dict    |    set     |\n' +
-  '+-----------+------------+------------+------------+\n';
+  '+-------------+-------------+\n' +
+  '|   Classes   | Metaclasses |\n' +
+  '+-------------+-------------|\n' +
+  '|   MyClass --> MyMetaClass |\n';
 
 const DIAGRAM_10_B =
-  '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
-  '┃           │    list    │    dict    │    set     ┃\n' +
-  '┠───────────┼────────────┼────────────┼────────────┨\n' +
-  '┃ getitem() │ IndexError │  KeyError  │            ┃\n' +
-  '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
-  '┃ remove()  │ ValueError │            │  KeyError  ┃\n' +
-  '┃ index()   │ ValueError │            │            ┃\n' +
-  '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃   Classes   │ Metaclasses ┃\n' +
+  '┠─────────────┼─────────────┨\n' +
+  '┃   MyClass ──→ MyMetaClass ┃\n' +
+  '┃             │     ↓       ┃\n' +
+  '┃    object ─────→ type ←╮  ┃\n' +
+  '┃             │     ↑ ╰──╯  ┃\n' +
+  '┃     str ──────────╯       ┃\n' +
+  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_11_A =
+  '+-------------+-------------+\n' +
+  '|   Classes   | Metaclasses |\n' +
+  '+-------------+-------------|\n' +
+  '|   MyClass   | MyMetaClass |\n';
+
+const DIAGRAM_11_B =
+  '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
+  '┃   Classes   │ Metaclasses ┃\n' +
+  '┠─────────────┼─────────────┨\n' +
+  '┃   MyClass   │ MyMetaClass ┃\n' +
+  '┃      ↓      │     ↓       ┃\n' +
+  '┃    object ←───── type     ┃\n' +
+  '┃      ↑      │             ┃\n' +
+  '┃     str     │             ┃\n' +
+  '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_12_A =
   '+-----------+-------------+------+-------------+\n' +
   '| sampwidth |     min     | zero |     max     |\n' +
   '+-----------+-------------+------+-------------+\n';
 
-const DIAGRAM_11_B =
+const DIAGRAM_12_B =
   '┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓\n' +
   '┃ sampwidth │     min     │ zero │     max     ┃\n' +
   '┠───────────┼─────────────┼──────┼─────────────┨\n' +
@@ -259,20 +273,6 @@ const DIAGRAM_11_B =
   '┃     3     │    -8388608 │    0 │     8388607 ┃\n' +
   '┃     4     │ -2147483648 │    0 │  2147483647 ┃\n' +
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛\n';
-
-const DIAGRAM_12_A =
-  '+---------------+----------+----------+----------+----------+----------+\n';
-
-const DIAGRAM_12_B =
-  '┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
-  '┃               │ [ !#$%…] │ [a-zA-Z] │  [¼½¾]   │  [²³¹]   │  [0-9]   ┃\n' +
-  '┠───────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
-  '┃ isprintable() │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ isalnum()     │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ isnumeric()   │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ isdigit()     │          │          │          │    ✓     │    ✓     ┃\n' +
-  '┃ isdecimal()   │          │          │          │          │    ✓     ┃\n' +
-  '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
 const DIAGRAM_13_A =
   '| sr.apply(…) |      3      |    sum 3    |      s  3     |';
@@ -297,54 +297,10 @@ const DIAGRAM_14_B =
   "┃ sr.trans(…) │    y  2     │   y     2   │       y  2    ┃\n" +
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
-const DIAGRAM_15_A =
-  '| df.apply(…) |             |       x y   |               |';
-
-const DIAGRAM_15_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…) │             │       x y   │               ┃\n" +
-  "┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃\n" +
-  "┃             │    y  6     │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_16_A =
-  '| df.apply(…) |      x  y   |      x    y |        x      |';
-
-const DIAGRAM_16_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…) │      x  y   │      x    y │        x      ┃\n" +
-  "┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
-  "┃             │             │ b    2    2 │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_17_A = 
-  '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |';
-
-const DIAGRAM_17_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃\n" +
-  "┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
-  "┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
-  "┃             │             │             │ c    2    2 │               ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃\n" +
-  "┃             │  a   1   2  │   a  1  1   │             │               ┃\n" +
-  "┃             │  b  11  13  │   b  1  1   │             │               ┃\n" +
-  "┃             │  c  11  13  │   c  1  1   │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_18_A = 
+const DIAGRAM_15_A = 
   '+------------------------+---------------+------------+------------+--------------------------+';
 
-const DIAGRAM_18_B =
+const DIAGRAM_15_B =
   "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
   "┃        how/join        │    'outer'    │   'inner'  │   'left'   │       description        ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
@@ -374,6 +330,50 @@ const DIAGRAM_18_B =
   "┃                        │ b  3   4   5  │            │            │                          ┃\n" +
   "┃                        │ c  .   6   7  │            │            │                          ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_16_A =
+  '| df.apply(…) |             |       x y   |               |';
+
+const DIAGRAM_16_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │             │       x y   │               ┃\n" +
+  "┃ df.agg(…)   │    x  4     │   sum 4 6   │     x  4      ┃\n" +
+  "┃             │    y  6     │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_17_A =
+  '| df.apply(…) |      x  y   |      x    y |        x      |';
+
+const DIAGRAM_17_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…) │      x  y   │      x    y │        x      ┃\n" +
+  "┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
+  "┃             │             │ b    2    2 │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_18_A = 
+  '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |';
+
+const DIAGRAM_18_B =
+  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃\n" +
+  "┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
+  "┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
+  "┃             │             │             │ c    2    2 │               ┃\n" +
+  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃\n" +
+  "┃             │  a   1   2  │   a  1  1   │             │               ┃\n" +
+  "┃             │  b  11  13  │   b  1  1   │             │               ┃\n" +
+  "┃             │  c  11  13  │   c  1  1   │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 
 function main() {
@@ -406,9 +406,9 @@ function modifyPage() {
   addToc();
   insertLinks();
   unindentBanner();
+  updateDiagrams();
   highlightCode();
   removePlotImages();
-  updateDiagrams();
 }
 
 function removeOrigToc() {
@@ -437,6 +437,27 @@ function unindentBanner() {
   montyImg.parent().addClass('banner');
   const downloadPraragrapth = $('p').first();
   downloadPraragrapth.addClass('banner');
+}
+
+function updateDiagrams() {
+  $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
+  $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
+  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
+  $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
+  $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
+  $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
+  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
+  $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
+  $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
+  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
+  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
+  $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 
 function highlightCode() {
@@ -516,27 +537,6 @@ function insertPageBreakBefore(an_id) {
 function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
-}
-
-function updateDiagrams() {
-  $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
-  $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
-  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
-  $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
-  $(`code:contains(${DIAGRAM_5_A})`).html(DIAGRAM_5_B);
-  $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
-  $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
-  $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
-  $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
-  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
-  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
-  $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B);
-  $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B);
-  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B);
-  $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B);
-  $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B);
-  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B);
-  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B);
 }
 
 function readFile(filename) {
