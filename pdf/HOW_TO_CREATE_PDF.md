@@ -21,7 +21,7 @@ Printing to PDF
 * Run `./parse.js` again.
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the footer and last three `<br>` elements with contents of `pdf/index_for_pdf_print.html` file.
-* Change all links in text to normal text and optionally add a page number after '(p. <num>)'. Links can be found with this regex: `<strong>.*a href.*</strong>`.
+* Change all links in text to normal text and optionally add a page number in brackets like that: '(p. <num>)'. Links can be found with this regex: `<strong>.*a href.*</strong>`.
 * Save and open `index.html` in Chrome.
 * Change brightness of elements by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
 * Change lightness (L) percentage to:
@@ -44,9 +44,7 @@ Adding headers and footers to PDF (the same for both files)
 * Select 'Edit PDF' tab and add headers and footers by clicking 'Header & Footer' button, selecting a preset from 'Saved Settings' dropdown menu and clicking ok. Repeat the process for each preset.
 * If presets get lost, the font and the margins are as follow: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.
 * Set title and author by selecting 'File/Properties...'.
-* Save.
-* Open file in Preview.
-* Select 'Export as PDF...' (This fixes the error message about Menlo font encoding, that would otherwise show every time the file is opened on Windows with Adobe reader).
+* Save in Adobe, Optimized format.
 
 Printing the PDF
 ----------------
