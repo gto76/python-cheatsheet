@@ -5,7 +5,7 @@ PDF file can also be purchased here: https://transactions.sendowl.com/products/7
 Setup
 -----
 * Install Adobe Acrobat Pro DC.
-* Copy headers and footers from `pdf/adobe/` folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
+* Copy headers and footers from `pdf/acrobat/` folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
 * Change date in header and footer element of `web/template.html`.
 * Run `./parse.js` and commit changes.
 
@@ -45,6 +45,8 @@ Adding headers and footers to PDF (the same for both files)
 * If presets get lost, the font and the margins are as follow: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.
 * Set title and author by selecting 'File/Properties...'.
 * Save.
+* Open file in Preview.
+* Select 'Export as PDF...' (This fixes the error message about Menlo font encoding, that would otherwise show every time the file is opened on Windows with Adobe reader).
 
 Printing the PDF
 ----------------
