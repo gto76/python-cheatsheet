@@ -2668,7 +2668,7 @@ y    <span class="hljs-number">2</span>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃             │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  ┃
 ┠─────────────┼─────────────┼─────────────┼───────────────┨
-┃ sr.apply(…) │      <span class="hljs-number">3</span>      │    sum <span class="hljs-number">3</span>    │     s  <span class="hljs-number">3</span>      ┃
+┃ sr.apply(…) │      <span class="hljs-number">3</span>      │    sum  <span class="hljs-number">3</span>   │     s  <span class="hljs-number">3</span>      ┃
 ┃ sr.agg(…)   │             │             │               ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
@@ -2676,12 +2676,12 @@ y    <span class="hljs-number">2</span>
 ┃             │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} ┃
 ┠─────────────┼─────────────┼─────────────┼───────────────┨
 ┃ sr.apply(…) │             │      rank   │               ┃
-┃ sr.agg(…)   │    x  <span class="hljs-number">1</span>     │   x     <span class="hljs-number">1</span>   │    r  x  <span class="hljs-number">1</span>    ┃
-┃ sr.trans(…) │    y  <span class="hljs-number">2</span>     │   y     <span class="hljs-number">2</span>   │       y  <span class="hljs-number">2</span>    ┃
+┃ sr.agg(…)   │     x  <span class="hljs-number">1</span>    │   x     <span class="hljs-number">1</span>   │    r  x  <span class="hljs-number">1</span>    ┃
+┃ sr.trans(…) │     y  <span class="hljs-number">2</span>    │   y     <span class="hljs-number">2</span>   │       y  <span class="hljs-number">2</span>    ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <ul>
-<li><strong>Last result has a hierarchical index. Use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;[&lt;key_1&gt;, &lt;key_2&gt;]'</span></code> to get the value.</strong></li>
+<li><strong>Last result has a hierarchical index. Use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2766,9 +2766,9 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃             │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  ┃
 ┠─────────────┼─────────────┼─────────────┼───────────────┨
-┃ df.apply(…) │             │       x y   │               ┃
-┃ df.agg(…)   │    x  <span class="hljs-number">4</span>     │   sum <span class="hljs-number">4</span> <span class="hljs-number">6</span>   │     x  <span class="hljs-number">4</span>      ┃
-┃             │    y  <span class="hljs-number">6</span>     │             │               ┃
+┃ df.apply(…) │             │       x  y  │               ┃
+┃ df.agg(…)   │     x  <span class="hljs-number">4</span>    │  sum  <span class="hljs-number">4</span>  <span class="hljs-number">6</span>  │     x  <span class="hljs-number">4</span>      ┃
+┃             │     y  <span class="hljs-number">6</span>    │             │               ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
@@ -2780,6 +2780,9 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 ┃             │             │ b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │               ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
+<ul>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;[col_key_1, col_key_2][row_key]'</span></code> to get the fifth result's values.</strong></li>
+</ul>
 <div><h4 id="encodedecode">Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
 &lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)
 &lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;connection&gt;)
