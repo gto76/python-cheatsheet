@@ -3181,8 +3181,8 @@ b  3  4
 ```python
 <DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
 <DF>    = <DF>.reset_index()                  # Moves row keys to their own column.
-<DF>    = <DF>.transpose()                    # Rotates the table.
-<DF>    = <DF>.melt(id_vars=column_key/s)     # Melts on columns.
+<DF>    = <DF>.filter('<regex>', axis=1)      # Only keeps columns whose key matches the regex.
+<DF>    = <DF>.melt(id_vars=column_key/s)     # Convers DF from wide to long format.
 ```
 
 #### Merge, Join, Concat:
@@ -3387,12 +3387,12 @@ def scrape_data():
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                         usecols=['date', 'total_cases'])
     covid = covid.groupby('date').sum()
-    dow, gold, btc = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
-    dow.name, gold.name, btc.name = 'Dow Jones', 'Gold', 'Bitcoin'
-    return covid, dow, gold, btc
+    dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
+    dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
+    return covid, dow, gold, bitcoin
 
-def wrangle_data(covid, dow, gold, btc):
-    df = pandas.concat([covid, dow, gold, btc], axis=1)
+def wrangle_data(covid, dow, gold, bitcoin):
+    df = pandas.concat([covid, dow, gold, bitcoin], axis=1)
     df = df.loc['2020-02-23':].iloc[:-2]
     df = df.interpolate()
     df.iloc[:, 1:] = df.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
