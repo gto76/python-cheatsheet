@@ -2708,7 +2708,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)          <span class="hljs-comment"># Replaces row keys with values from a column.</span>
 &lt;DF&gt;    = &lt;DF&gt;.reset_index()                  <span class="hljs-comment"># Moves row keys to their own column.</span>
 &lt;DF&gt;    = &lt;DF&gt;.filter(<span class="hljs-string">'&lt;regex&gt;'</span>, axis=<span class="hljs-number">1</span>)      <span class="hljs-comment"># Only keeps columns whose key matches the regex.</span>
-&lt;DF&gt;    = &lt;DF&gt;.melt(id_vars=column_key/s)     <span class="hljs-comment"># Convers DF from wide to long format.</span>
+&lt;DF&gt;    = &lt;DF&gt;.melt(id_vars=column_key/s)     <span class="hljs-comment"># Converts DF from wide to long format.</span>
 </code></pre>
 <div><h4 id="mergejoinconcat">Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y 
