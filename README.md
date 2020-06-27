@@ -3143,7 +3143,7 @@ y    2
 | sr.trans(…) |    y  2     |   y     2   |       y  2    |
 +-------------+-------------+-------------+---------------+
 ```
-* **Last result has a hierarchical index. `'<Sr>[<key_1>, <key_2>]'` returns the value.**
+* **Last result has a hierarchical index. Use `'<Sr>[<key_1>, <key_2>]'` to get the value.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
@@ -3387,12 +3387,12 @@ def scrape_data():
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                         usecols=['date', 'total_cases'])
     covid = covid.groupby('date').sum()
-    dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
-    dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
-    return covid, dow, gold, bitcoin
+    dow, gold, btc = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
+    dow.name, gold.name, btc.name = 'Dow Jones', 'Gold', 'Bitcoin'
+    return covid, dow, gold, btc
 
-def wrangle_data(covid, dow, gold, bitcoin):
-    df = pandas.concat([covid, dow, gold, bitcoin], axis=1)
+def wrangle_data(covid, dow, gold, btc):
+    df = pandas.concat([covid, dow, gold, btc], axis=1)
     df = df.loc['2020-02-23':].iloc[:-2]
     df = df.interpolate()
     df.iloc[:, 1:] = df.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
