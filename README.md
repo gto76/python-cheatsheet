@@ -3123,14 +3123,13 @@ Name: a, dtype: int64
 >>> sr = Series([1, 2], index=['x', 'y'])
 x    1
 y    2
-dtype: int64
 ```
 
 ```text
 +-------------+-------------+-------------+---------------+
 |             |    'sum'    |   ['sum']   | {'s': 'sum'}  |
 +-------------+-------------+-------------+---------------+
-| sr.apply(…) |      3      |    sum 3    |      s  3     |
+| sr.apply(…) |      3      |    sum 3    |     s  3      |
 | sr.agg(…)   |             |             |               |
 +-------------+-------------+-------------+---------------+
 ```
@@ -3144,6 +3143,7 @@ dtype: int64
 | sr.trans(…) |    y  2     |   y     2   |       y  2    |
 +-------------+-------------+-------------+---------------+
 ```
+* **Last result has a hierarchical index. `'<Sr>[<key_1>, <key_2>]'` returns the value.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
@@ -3358,12 +3358,12 @@ covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
 continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
                          'list/r/country-and-continent-codes-list-csv.csv',
                          usecols=['Three_Letter_Country_Code', 'Continent_Name'])
-merged = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
-summed = merged.groupby(['Continent_Name', 'date']).sum().reset_index()
-summed['Total Deaths per Million'] = summed.total_deaths * 1e6 / summed.population
-summed = summed[('2020-03-14' < summed.date) & (summed.date < '2020-06-25')]
-summed = summed.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-plotly.express.line(summed, x='Date', y='Total Deaths per Million', color='Continent').show()
+df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
+df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
+df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
+df = df[('2020-03-14' < df.date) & (df.date < '2020-06-25')]
+df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
+plotly.express.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
 ### Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price
@@ -3379,7 +3379,7 @@ def main():
     display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
-    def scrape_yah(id_):
+    def scrape_yahoo(id_):
         BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
         now  = int(datetime.datetime.now().timestamp())
         url  = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
@@ -3387,23 +3387,23 @@ def scrape_data():
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                         usecols=['date', 'total_cases'])
     covid = covid.groupby('date').sum()
-    dow_jones, gold, bitcoin = scrape_yah('^DJI'), scrape_yah('GC=F'), scrape_yah('BTC-USD')
-    dow_jones.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
-    return covid, dow_jones, gold, bitcoin
+    dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
+    dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
+    return covid, dow, gold, bitcoin
 
-def wrangle_data(covid, dow_jones, gold, bitcoin):
-    out = pandas.concat([covid, dow_jones, gold, bitcoin], axis=1)
-    out = out.loc['2020-02-23':].iloc[:-2]
-    out = out.interpolate()
-    out.iloc[:, 1:] = out.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
-    out.iloc[:, 1:] = out.iloc[:, 1:] / out.iloc[0, 1:] * 100
-    return out
+def wrangle_data(covid, dow, gold, bitcoin):
+    df = pandas.concat([covid, dow, gold, bitcoin], axis=1)
+    df = df.loc['2020-02-23':].iloc[:-2]
+    df = df.interpolate()
+    df.iloc[:, 1:] = df.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
+    df.iloc[:, 1:] = df.iloc[:, 1:] / df.iloc[0, 1:] * 100
+    return df
 
-def display_data(out):
+def display_data(df):
     def get_trace(col_name):
-        return go.Scatter(x=out.index, y=out[col_name], name=col_name, yaxis='y2')
-    traces = [get_trace(col_name) for col_name in out.columns[1:]]
-    traces.append(go.Scatter(x=out.index, y=out.total_cases, name='Total Cases', yaxis='y1'))
+        return go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis='y2')
+    traces = [get_trace(col_name) for col_name in df.columns[1:]]
+    traces.append(go.Scatter(x=df.index, y=df.total_cases, name='Total Cases', yaxis='y1'))
     figure = go.Figure()
     figure.add_traces(traces)
     figure.update_layout(
