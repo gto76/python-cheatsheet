@@ -2840,7 +2840,8 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 </code></pre></div>
 
 
-<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="coviddeathsbycontinent">Covid Deaths by Continent</h3><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="coviddeathsbycontinent">Covid Deaths by Continent</h3><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> plotly.express
 
 covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
@@ -2859,7 +2860,8 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 
 
 
-<div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas, datetime
+<div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly</span>
+<span class="hljs-keyword">import</span> pandas, datetime
 <span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>

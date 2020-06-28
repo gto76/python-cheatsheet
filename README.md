@@ -3351,6 +3351,7 @@ Plotly
 <div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:420px; width:100%;"></div>
 
 ```python
+# $ pip3 install pandas plotly
 import pandas as pd
 import plotly.express
 
@@ -3373,6 +3374,7 @@ plotly.express.line(df, x='Date', y='Total Deaths per Million', color='Continent
 <div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div>
 
 ```python
+# $ pip3 install pandas plotly
 import pandas, datetime
 import plotly.graph_objects as go
 
