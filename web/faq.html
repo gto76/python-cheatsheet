@@ -25,7 +25,7 @@
 <details open><summary><strong>What exactly is <code>&lt;collection&gt;</code>?</strong></summary><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Collection is my name for an iterable object. An iterable object in Python is any object that has at least one of iter() and getitem() special methods defined. <code>&lt;object&gt;.__iter__()</code> returns an iterator of object's items and <code>&lt;object&gt;.__getitem__(&lt;index&gt;)</code> returns an item at that index. I chose not to use the name iterable because it sounds scarier and more vague than collection, even though it has a precise definition.<br><br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;iterable&gt;</code> should not be confused with abstract base class collections.abc.Iterable. Expression <code>instanceof(&lt;object&gt;, collections.abc.Iterable)</code> only checks if object has iter() special method. <code>instanceof(&lt;object&gt;, collections.abc.Collection)</code> checks for len(), iter() and contains().
+&nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;iterable&gt;</code> should not be confused with abstract base class <code>collections.abc.Iterable</code>. Expression <code>instanceof(&lt;object&gt;, collections.abc.Iterable)</code> only checks if object has iter() special method. <code>instanceof(&lt;object&gt;, collections.abc.Collection)</code> checks for len(), iter() and contains().
 </details><br>
 
 <details open><summary><strong>What about PEP 8?</strong></summary><br>
