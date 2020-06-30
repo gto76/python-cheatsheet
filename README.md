@@ -166,6 +166,26 @@ Point(x=1, y=2)
 ('x', 'y')
 ```
 
+### Tuple Unpacking
+**Parallel Assignment**
+```python
+>>> latitude, longitude = (33.9425, -118.40805)
+>>> latitude
+33.9425
+>>> longitude
+-118.40805 
+```
+**Grabbing Excess Values**
+```python
+>>> a, b, *rest = [1, 2, 3, 4, 5]           #Assigns first two values to a, b and the remaining values to rest
+>>> a, *body, b = (1, 2, 3, 4, 5)
+>>> a
+1
+>>> body
+[2, 3, 4]
+>>> b
+5
+```
 
 Range
 -----
