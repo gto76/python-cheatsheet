@@ -55,16 +55,17 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 }
 
 var TOC_SCREEN_WIDTH_CUTOFF = 667
+var TOC_EM = '1.8em'
 
 if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
-    $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", "1.8em");
+    $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
 }
 
 function updateToc() {
   if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
-      $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", "1.8em");
+      $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
   } else {
-      $(`code:contains(ToC)`).html(TOC).css("line-height", "1.8em");
+      $(`code:contains(ToC)`).html(TOC).css("line-height", TOC_EM);
   }
 }
 window.addEventListener("orientationchange", updateToc, false);
