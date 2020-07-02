@@ -2544,7 +2544,7 @@ pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 </code></pre>
 <div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
 &lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
-&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color, background=<span class="hljs-keyword">None</span>)
+&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color [, background])
 </code></pre></div>
 
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)              <span class="hljs-comment"># Loads the WAV file.</span>
@@ -2910,6 +2910,31 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 </code></pre></div>
 
 
+
+<div><h2 id="cython"><a href="#cython" name="cython">#</a>Cython</h2><p><strong>Library that compiles Python code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">cdef &lt;type&gt; &lt;var_name&gt; = &lt;el&gt;
+cdef &lt;type&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
+cdef &lt;type/void&gt; &lt;func_name&gt;(&lt;type&gt; &lt;arg_name_1&gt;, ...):
+</code></pre>
+<pre><code class="python language-python hljs">cdef <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
+    cdef public &lt;type&gt; &lt;attr_name&gt;
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>
+        self.&lt;attr_name&gt; = &lt;arg_name&gt;
+</code></pre>
+<pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
+</code></pre>
+<ul>
+<li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
+<li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
+</ul>
+<div><h4 id="runningcythoncode">Running Cython code:</h4><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-keyword">import</span> pyximport; pyximport.install()
+<span class="hljs-keyword">import</span> &lt;pyx_script_name&gt;
+&lt;pyx_script_name&gt;.main()
+</code></pre></div>
 
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>

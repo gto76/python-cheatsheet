@@ -2978,7 +2978,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 ```python
 <Font> = pg.font.SysFont('<name>', size, bold=False, italic=False)
 <Font> = pg.font.Font('<path>', size)
-<Surf> = <Font>.render(text, antialias, color, background=None)
+<Surf> = <Font>.render(text, antialias, color [, background])
 ```
 
 ### Sound
@@ -3422,6 +3422,42 @@ if __name__ == '__main__':
 ```
 
 
+Cython
+------
+**Library that compiles Python code into C.**
+
+```python
+# $ pip3 install cython
+```
+
+```python
+cdef <type> <var_name> = <el>
+cdef <type>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
+cdef <type/void> <func_name>(<type> <arg_name_1>, ...):
+```
+
+```python
+cdef class <class_name>:
+    cdef public <type> <attr_name>
+    def __init__(self, <type> <arg_name>):
+        self.<attr_name> = <arg_name>
+```
+
+```python
+cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
+```
+* **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
+* **Script needs to be saved with a `'pyx'` extension.**
+
+#### Running Cython code:
+```python
+#!/usr/bin/env python3
+import pyximport; pyximport.install()
+import <pyx_script_name>
+<pyx_script_name>.main()
+```
+
+
 Basic Script Template
 ---------------------
 ```python
@@ -3452,5 +3488,4 @@ def read_file(filename):
 
 if __name__ == '__main__':
     main()
-
 ```
