@@ -3428,7 +3428,14 @@ Cython
 
 ```python
 # $ pip3 install cython
+import pyximport; pyximport.install()
+import <cython_script>
+<cython_script>.main()
 ```
+
+### Definitions
+* **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
+* **Script needs to be saved with a `'pyx'` extension.**
 
 ```python
 cdef <type> <var_name> = <el>
@@ -3445,16 +3452,6 @@ cdef class <class_name>:
 
 ```python
 cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
-```
-* **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
-* **Script needs to be saved with a `'pyx'` extension.**
-
-#### Running Cython code:
-```python
-#!/usr/bin/env python3
-import pyximport; pyximport.install()
-import <pyx_script_name>
-<pyx_script_name>.main()
 ```
 
 
