@@ -62,9 +62,9 @@ if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
 
 function updateToc() {
   if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
-      $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", "2em");
+      $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", "1.8em");
   } else {
-      $(`code:contains(ToC)`).html(TOC).css("line-height", "1em");
+      $(`code:contains(ToC)`).html(TOC).css("line-height", "1.8em");
   }
 }
 window.addEventListener("orientationchange", updateToc, false);
