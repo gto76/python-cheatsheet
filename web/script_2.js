@@ -55,7 +55,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 }
 
 var TOC_SCREEN_WIDTH_CUTOFF = 667
-var TOC_EM = '1.8em'
+var TOC_EM = '2em'
 
 if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
     $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
