@@ -750,7 +750,7 @@ Inline
 <function> = lambda <argument_1>, <argument_2>: <return_value>
 ```
 
-### Comprehension
+### Comprehensions
 ```python
 <list> = [i+1 for i in range(10)]                   # [1, 2, ..., 10]
 <set>  = {i for i in range(10) if i > 5}            # {6, 7, 8, 9}
