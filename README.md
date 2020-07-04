@@ -1147,7 +1147,7 @@ class Counter:
 #### Python has many different iterator objects:
 * **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
-* **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehension).**
+* **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
 * **File objects returned by the [open()](#open) function, etc.**
 
 ### Callable
