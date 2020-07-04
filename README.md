@@ -3208,7 +3208,7 @@ c  6  7
 |                        | 1  3   4   5  |            | 3   4   5  | right_on parameters.     |
 |                        | 2  .   6   7  |            |            | Uses 'inner' by default. |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row_keys.|
+| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
 |           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 |                          |
 |                        | c  .  .  6  7 |            |            |                          |

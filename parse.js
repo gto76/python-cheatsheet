@@ -309,7 +309,7 @@ const DIAGRAM_15_B =
   "┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃\n" +
   "┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row_keys.┃\n" +
+  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃\n" +
   "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
   "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃\n" +
   "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
