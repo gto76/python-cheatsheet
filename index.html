@@ -2587,7 +2587,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     x, y = mario.spd
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
     x -= x // abs(x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
-    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (<span class="hljs-number">-10</span> <span class="hljs-keyword">if</span> D.n <span class="hljs-keyword">in</span> pressed <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
     mario.spd = P(*[max(-limit, min(limit, s)) <span class="hljs-keyword">for</span> limit, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>

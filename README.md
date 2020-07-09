@@ -3029,7 +3029,7 @@ def update_speed(mario, tiles, pressed):
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
     x -= x // abs(x) if x else 0
-    y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (-10 if D.n in pressed else 0)
+    y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (D.n in pressed) * -10
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
