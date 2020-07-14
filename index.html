@@ -2930,6 +2930,16 @@ cdef &lt;type/void&gt; &lt;func_name&gt;(&lt;type&gt; &lt;arg_name_1&gt;, ...):
 </code></pre>
 <pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
 </code></pre>
+<div><h2 id="pyinstaller"><a href="#pyinstaller" name="pyinstaller">#</a>PyInstaller</h2><pre><code class="bash language-bash hljs">$ pip3 install pyinstaller
+$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into './dist/script' directory.</span>
+$ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into './dist/script' console app.</span>
+$ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into './dist/script' windowed app.</span>
+$ pyinstaller script.py --add-data <span class="hljs-string">'&lt;path&gt;:.'</span>  <span class="hljs-comment"># Adds file to the root of the executable.</span>
+</code></pre></div>
+
+<ul>
+<li><strong>Paths of files have to be changed to <code class="python hljs"><span class="hljs-string">'os.path.join(sys._MEIPASS, "&lt;path&gt;")'</span></code>.</strong></li>
+</ul>
 <div><h2 id="basicscripttemplate"><a href="#basicscripttemplate" name="basicscripttemplate">#</a>Basic Script Template</h2><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># Usage: .py</span>
