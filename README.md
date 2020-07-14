@@ -3455,8 +3455,10 @@ cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
 ```
 
 
-PyInstaller
------------
+Appendix
+--------
+
+### PyInstaller
 ```bash
 $ pip3 install pyinstaller
 $ pyinstaller script.py                        # Compiles into './dist/script' directory.
@@ -3466,9 +3468,7 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 ```
 * **Paths of files have to be changed to `'os.path.join(sys._MEIPASS, "<path>")'`.**
 
-
-Basic Script Template
----------------------
+### Basic Script Template
 ```python
 #!/usr/bin/env python3
 #
