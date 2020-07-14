@@ -3466,7 +3466,7 @@ $ pyinstaller script.py --onefile              # Compiles into './dist/script' c
 $ pyinstaller script.py --windowed             # Compiles into './dist/script' windowed app.
 $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the executable.
 ```
-* **File paths need to be changed to `'os.path.join(sys._MEIPASS, <path>)'`.**
+* **File paths need to be updated to `'os.path.join(sys._MEIPASS, <path>)'`.**
 
 ### Basic Script Template
 ```python
