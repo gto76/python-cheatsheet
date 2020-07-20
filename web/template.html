@@ -9,15 +9,21 @@
   <link rel="icon" href="web/favicon.png">
   <link rel="stylesheet" href="web/default.min.css">
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Comprehensive Python Cheatsheet">
   <meta name="twitter:description" content="Exhaustive, simple, beautiful and concise. A truly pythonic cheat sheet about Python programming language.">
-  <meta name="twitter:image" content="https://gto76.github.io/python-cheatsheet/web/image_twitter_card_2.jpeg">
+  <meta name="twitter:image" content="https://gto76.github.io/python-cheatsheet/web/image_social_3.png">
   <meta name="google-site-verification" content="w3rvuG0D1kUm_w20qsJecSEZh59Am8jK4eSPVU83e_M" />
+  <meta name="viewport" id="viewport-meta">
 </head>
 
 <style>
 @import url(web/style.css);
+
+@font-face {font-family: "Menlo Regular";
+  src: url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff2") format("woff2"), /* chrome、firefox */
+  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff") format("woff");
+}
 
 .join,
 .link,
@@ -146,60 +152,76 @@ pre.prettyprint {
 }
 
 #return-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.2);
-    width: 50px;
-    height: 50px;
-    display: block;
-    text-decoration: none;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
-    border-radius: 35px;
-    display: none;
-    -webkit-transition: all 0.3s linear;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  display: block;
+  text-decoration: none;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  border-radius: 35px;
+  display: none;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 #return-to-top i {
-    color: #fff;
-    margin: 0;
-    position: relative;
-    left: 16px;
-    top: 13px;
-    font-size: 19px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+  color: #fff;
+  margin: 0;
+  position: relative;
+  left: 16px;
+  top: 13px;
+  font-size: 19px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 #return-to-top:hover {
-    background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 #return-to-top:hover i {
-    color: #f0f0f0;
+   color: #f0f0f0;
+}
+
+@media print {
+  .pagebreak { 
+    page-break-before: always; 
+  } 
+  div {
+    page-break-inside: avoid;
+  }
+  pre {
+    page-break-inside: avoid;
+  }
+}
+
+.modebar{
+  display: none !important;
 }
 </style>
 
 <body>
   <header>
-    <aside>March 14, 2018</aside>
-    <a href="../" rel="author">Jure Šorn</a>
+    <aside>July 2, 2020</aside>
+    <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
   <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
   <div id=main_container></div>
 
   <footer>
-    <aside>March 14, 2018</aside>
+    <aside>July 2, 2020</aside>
     <a href="../" rel="author">Jure Šorn</a>
   </footer>
 
@@ -208,5 +230,9 @@ pre.prettyprint {
   <br>
   <script src="web/jquery-3.4.0.min.js"></script>
   <script src="web/script_2.js"></script>
+  <script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
+  <script src="web/plotly.min.js"></script>
+  <script src="web/covid_deaths.js"></script>
+  <script src="web/covid_cases.js"></script>
 </body>
 </html>
