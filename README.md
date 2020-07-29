@@ -3064,6 +3064,44 @@ if __name__ == '__main__':
     main()
 ```
 
+tty
+-----
+**terminal control functions ; A TTY is essentially a pseudo device(kernel resource), which is used by processes to access a specific terminal. TTYs can be tied to hardware such as a serial port, or can be virtual, eg log the keystrokes made by the user. The shell is a program which is used for controlling and running programs.**
+
+```python
+# $ pip3 install tty
+import sys
+import tty
+import time
+
+# Disable newline buffering on stdin
+tty.setcbreak(sys.stdin.fileno())
+
+seconds = 60
+
+keys = []
+x = sys.stdin.read(1)
+while x:
+    now = time.time()
+    keys.append((now, x))
+
+    # Filter out old keys
+    keys = [(timestamp, key) for timestamp, key in keys if timestamp > now - seconds]
+
+    if keys:
+        # Calculate how many seconds our current list spans
+        timestamps = [timestamp for timestamp, _key in keys]
+        total = max(timestamps) - min(timestamps)
+          
+        # Wait until at-least 1 second passed before showing results
+        if total > 1:
+            keys_per_second = len(keys) / total
+            print(keys_per_second * seconds)
+            
+
+    x = sys.stdin.read(1)
+```
+The above code will hook the keyboard and log all the keystrokes made by the user and calculate users approximate typing speed. The code uses tty.setcbreak(fd) that change the mode of file descriptor fd to cbreak, which disables line buffering and remove character-processing. This package is really helpful in making system monitoring systems.
 
 Pandas
 ------
