@@ -2536,7 +2536,7 @@ duration = perf_counter() - start_time
 ### Timing a Snippet
 ```python
 >>> from timeit import timeit
->>> timeit('"-".join(str(a) for a in range(100))',
+>>> timeit('"-".join(str(i) for i in range(100))',
 ...        number=10000, globals=globals(), setup='pass')
 0.34986
 ```

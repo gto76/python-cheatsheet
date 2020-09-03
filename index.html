@@ -2195,7 +2195,7 @@ duration = perf_counter() - start_time
 </code></pre></div>
 
 <div><h3 id="timingasnippet">Timing a Snippet</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> timeit <span class="hljs-keyword">import</span> timeit
-<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'"-".join(str(a) for a in range(100))'</span>,
+<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'"-".join(str(i) for i in range(100))'</span>,
 <span class="hljs-meta">... </span>       number=<span class="hljs-number">10000</span>, globals=globals(), setup=<span class="hljs-string">'pass'</span>)
 <span class="hljs-number">0.34986</span>
 </code></pre></div>
