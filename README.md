@@ -523,7 +523,7 @@ shuffle(<list>)
 <int> = ±0b<bin>                         # Or: ±0x<hex>
 <int> = int('±<bin>', 2)                 # Or: int('±<hex>', 16)
 <int> = int('±0b<bin>', 0)               # Or: int('±0x<hex>', 0)
-'[-]0b<bin>' = bin(<int>)                # Or: hex(<int>)
+<str> = bin(<int>)                       # Returns '[-]0b<bin>'.
 ```
 
 ### Bitwise Operators
