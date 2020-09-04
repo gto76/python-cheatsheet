@@ -3119,7 +3119,7 @@ Name: a, dtype: int64
 <Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(<trans_func>)
 <Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.apply/agg/transform/map(<map_func>)
 ```
-* **The way `'aggregate()'` and `'transform()'` find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
+* **The way `'aggregate()'` and `'transform()'` find out whether the passed function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
 
 ```python
 >>> sr = Series([1, 2], index=['x', 'y'])

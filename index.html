@@ -2659,7 +2659,7 @@ Name: a, dtype: int64
 </code></pre></div>
 
 <ul>
-<li><strong>The way <code class="python hljs"><span class="hljs-string">'aggregate()'</span></code> and <code class="python hljs"><span class="hljs-string">'transform()'</span></code> find out whether a function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.</strong></li>
+<li><strong>The way <code class="python hljs"><span class="hljs-string">'aggregate()'</span></code> and <code class="python hljs"><span class="hljs-string">'transform()'</span></code> find out whether the passed function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
 x    <span class="hljs-number">1</span>
