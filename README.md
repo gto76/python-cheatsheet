@@ -3201,7 +3201,7 @@ c  6  7
 
 ```text
 +------------------------+---------------+------------+------------+--------------------------+
-|        how/join        |    'outer'    |   'inner'  |   'left'   |       description        |
+|                        |    'outer'    |   'inner'  |   'left'   |       description        |
 +------------------------+---------------+------------+------------+--------------------------+
 | l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
 |            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | Also accepts left_on and |
