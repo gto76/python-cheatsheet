@@ -2866,7 +2866,9 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    display_data(wrangle_data(*scrape_data()))
+    data = scrape_data()
+    df = wrangle_data(*data)
+    display_data(df)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(id_)</span>:</span>
@@ -2884,8 +2886,8 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, dow, gold, bitcoin)</span>:</span>
     df = pd.concat([dow, gold, bitcoin], axis=<span class="hljs-number">1</span>)
     df = df.sort_index().interpolate()
-    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:].iloc[:<span class="hljs-number">-2</span>]
     df = df.rolling(<span class="hljs-number">10</span>, min_periods=<span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean()
+    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:].iloc[:<span class="hljs-number">-2</span>]
     df = df / df.iloc[<span class="hljs-number">0</span>] * <span class="hljs-number">100</span>
     <span class="hljs-keyword">return</span> pd.concat([covid, df], axis=<span class="hljs-number">1</span>, join=<span class="hljs-string">'inner'</span>)
 

@@ -3382,7 +3382,9 @@ import plotly.graph_objects as go
 import datetime
 
 def main():
-    display_data(wrangle_data(*scrape_data()))
+    data = scrape_data()
+    df = wrangle_data(*data)
+    display_data(df)
 
 def scrape_data():
     def scrape_yahoo(id_):
@@ -3400,8 +3402,8 @@ def scrape_data():
 def wrangle_data(covid, dow, gold, bitcoin):
     df = pd.concat([dow, gold, bitcoin], axis=1)
     df = df.sort_index().interpolate()
-    df = df.loc['2020-02-23':].iloc[:-2]
     df = df.rolling(10, min_periods=1, center=True).mean()
+    df = df.loc['2020-02-23':].iloc[:-2]
     df = df / df.iloc[0] * 100
     return pd.concat([covid, df], axis=1, join='inner')
 
