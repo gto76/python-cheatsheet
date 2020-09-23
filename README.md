@@ -3377,8 +3377,9 @@ plotly.express.line(df, x='Date', y='Total Deaths per Million', color='Continent
 
 ```python
 # $ pip3 install pandas plotly
-import pandas, datetime
+import pandas as pd
 import plotly.graph_objects as go
+import datetime
 
 def main():
     display_data(wrangle_data(*scrape_data()))
@@ -3388,8 +3389,8 @@ def scrape_data():
         BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
         now  = int(datetime.datetime.now().timestamp())
         url  = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
-        return pandas.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close 
-    covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
+        return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
+    covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
                         usecols=['date', 'total_cases'])
     covid = covid.groupby('date').sum()
     dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
@@ -3397,12 +3398,12 @@ def scrape_data():
     return covid, dow, gold, bitcoin
 
 def wrangle_data(covid, dow, gold, bitcoin):
-    df = pandas.concat([covid, dow, gold, bitcoin], axis=1)
+    df = pd.concat([dow, gold, bitcoin], axis=1)
+    df = df.sort_index().interpolate()
     df = df.loc['2020-02-23':].iloc[:-2]
-    df = df.interpolate()
-    df.iloc[:, 1:] = df.rolling(10, min_periods=1, center=True).mean().iloc[:, 1:]
-    df.iloc[:, 1:] = df.iloc[:, 1:] / df.iloc[0, 1:] * 100
-    return df
+    df = df.rolling(10, min_periods=1, center=True).mean()
+    df = df / df.iloc[0] * 100
+    return pd.concat([covid, df], axis=1, join='inner')
 
 def display_data(df):
     def get_trace(col_name):
@@ -3478,7 +3479,7 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 from collections import namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-from sys import argv
+from sys import argv, exit
 import re
 
 

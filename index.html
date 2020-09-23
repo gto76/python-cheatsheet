@@ -2861,8 +2861,9 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 
 
 <div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly</span>
-<span class="hljs-keyword">import</span> pandas, datetime
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     display_data(wrangle_data(*scrape_data()))
@@ -2872,8 +2873,8 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
         BASE_URL = <span class="hljs-string">'https://query1.finance.yahoo.com/v7/finance/download/'</span>
         now  = int(datetime.datetime.now().timestamp())
         url  = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
-        <span class="hljs-keyword">return</span> pandas.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close 
-    covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
+        <span class="hljs-keyword">return</span> pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close
+    covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                         usecols=[<span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
     covid = covid.groupby(<span class="hljs-string">'date'</span>).sum()
     dow, gold, bitcoin = [scrape_yahoo(id_) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> (<span class="hljs-string">'^DJI'</span>, <span class="hljs-string">'GC=F'</span>, <span class="hljs-string">'BTC-USD'</span>)]
@@ -2881,12 +2882,12 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
     <span class="hljs-keyword">return</span> covid, dow, gold, bitcoin
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, dow, gold, bitcoin)</span>:</span>
-    df = pandas.concat([covid, dow, gold, bitcoin], axis=<span class="hljs-number">1</span>)
+    df = pd.concat([dow, gold, bitcoin], axis=<span class="hljs-number">1</span>)
+    df = df.sort_index().interpolate()
     df = df.loc[<span class="hljs-string">'2020-02-23'</span>:].iloc[:<span class="hljs-number">-2</span>]
-    df = df.interpolate()
-    df.iloc[:, <span class="hljs-number">1</span>:] = df.rolling(<span class="hljs-number">10</span>, min_periods=<span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean().iloc[:, <span class="hljs-number">1</span>:]
-    df.iloc[:, <span class="hljs-number">1</span>:] = df.iloc[:, <span class="hljs-number">1</span>:] / df.iloc[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] * <span class="hljs-number">100</span>
-    <span class="hljs-keyword">return</span> df
+    df = df.rolling(<span class="hljs-number">10</span>, min_periods=<span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean()
+    df = df / df.iloc[<span class="hljs-number">0</span>] * <span class="hljs-number">100</span>
+    <span class="hljs-keyword">return</span> pd.concat([covid, df], axis=<span class="hljs-number">1</span>, join=<span class="hljs-string">'inner'</span>)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display_data</span><span class="hljs-params">(df)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_trace</span><span class="hljs-params">(col_name)</span>:</span>
@@ -2949,7 +2950,7 @@ $ pyinstaller script.py --add-data <span class="hljs-string">'&lt;path&gt;:.'</s
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-<span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv
+<span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv, exit
 <span class="hljs-keyword">import</span> re
 
 
