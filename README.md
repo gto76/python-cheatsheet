@@ -3201,7 +3201,7 @@ c  6  7
 
 ```text
 +------------------------+---------------+------------+------------+--------------------------+
-|                        |    'outer'    |   'inner'  |   'left'   |       description        |
+|                        |    'outer'    |   'inner'  |   'left'   |       Description        |
 +------------------------+---------------+------------+------------+--------------------------+
 | l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
 |            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | Also accepts left_on and |
@@ -3389,8 +3389,8 @@ def main():
 def scrape_data():
     def scrape_yahoo(id_):
         BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
-        now  = int(datetime.datetime.now().timestamp())
-        url  = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
+        now = int(datetime.datetime.now().timestamp())
+        url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
         return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
                         usecols=['date', 'total_cases'])

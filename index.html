@@ -2721,7 +2721,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                        │    <span class="hljs-string">'outer'</span>    │   <span class="hljs-string">'inner'</span>  │   <span class="hljs-string">'left'</span>   │       description        ┃
+┃                        │    <span class="hljs-string">'outer'</span>    │   <span class="hljs-string">'inner'</span>  │   <span class="hljs-string">'left'</span>   │       Description        ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
 ┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ Also accepts left_on and ┃
@@ -2873,8 +2873,8 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(id_)</span>:</span>
         BASE_URL = <span class="hljs-string">'https://query1.finance.yahoo.com/v7/finance/download/'</span>
-        now  = int(datetime.datetime.now().timestamp())
-        url  = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
+        now = int(datetime.datetime.now().timestamp())
+        url = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
         <span class="hljs-keyword">return</span> pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close
     covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                         usecols=[<span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])

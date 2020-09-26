@@ -302,7 +302,7 @@ const DIAGRAM_15_A =
 
 const DIAGRAM_15_B =
   "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃                        │    'outer'    │   'inner'  │   'left'   │       description        ┃\n" +
+  "┃                        │    'outer'    │   'inner'  │   'left'   │       Description        ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃\n" +
   "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃\n" +
