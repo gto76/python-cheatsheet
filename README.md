@@ -2587,7 +2587,7 @@ with PyCallGraph(drawer):
 
 NumPy
 -----
-**Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code.**
+**Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.**
 
 ```python
 # $ pip3 install numpy
@@ -3404,7 +3404,7 @@ def wrangle_data(covid, dow, gold, bitcoin):
     df = df.sort_index().interpolate()
     df = df.rolling(10, min_periods=1, center=True).mean()
     df = df.loc['2020-02-23':].iloc[:-2]
-    df = df / df.iloc[0] * 100
+    df = (df / df.iloc[0]) * 100
     return pd.concat([covid, df], axis=1, join='inner')
 
 def display_data(df):
