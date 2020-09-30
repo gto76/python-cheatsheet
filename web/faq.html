@@ -3,7 +3,7 @@
 </details><br>
 
 <details open><summary><strong>What is the best way to use it?</strong></summary><br>
-&nbsp;&nbsp;&nbsp;&nbsp;I keep the text file open on separate desktop at all times. It is also in a different text editor than the one I usually use, so it's easier to switch to with <code>Ctrl+↹</code> / <code>⌘↹</code>. Cheatsheet consists of minimal text and short examples so things are easy to find with <code>Ctrl+F</code> / <code>⌘F</code>.<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;I keep the text file open on separate desktop at all times. It is also in a different text editor than the one I usually use, so it's easier to switch to with <code>Ctrl+↹</code> / <code>⌘↹</code>. Cheatsheet consists of minimal text and short examples so things are easy to find with <code>Ctrl+F</code> / <code>⌘F</code>. If you're on the webpage, searching for <code>'#&lt;name&gt;'</code> will only search for the titles.<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;I also keep the Python console open at all times to test little snippets of code, to check out the available functions of a module using code completion and above all, to use <code>help(&lt;module/object/function/type&gt;)</code> command. If something is still unclear, then I search the Python docs by googling <code>'python docs &lt;module/function&gt;'</code>.
 </details><br>
 
@@ -23,9 +23,9 @@
 </details><br>
 
 <details open><summary><strong>What exactly is <code>&lt;collection&gt;</code>?</strong></summary><br>
-&nbsp;&nbsp;&nbsp;&nbsp;Collection is my name for an iterable object. An iterable object in Python is any object that has at least one of iter() and getitem() special methods defined. <code>&lt;object&gt;.__iter__()</code> returns an iterator of object's items and <code>&lt;object&gt;.__getitem__(&lt;index&gt;)</code> returns an item at that index. I chose not to use the name iterable because it sounds scarier and more vague than collection, even though it has a precise definition.<br><br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;iterable&gt;</code> should not be confused with abstract base class <code>collections.abc.Iterable</code>. Expression <code>instanceof(&lt;object&gt;, collections.abc.Iterable)</code> only checks if object has iter() special method. <code>instanceof(&lt;object&gt;, collections.abc.Collection)</code> checks for len(), iter() and contains().
+&nbsp;&nbsp;&nbsp;&nbsp;Collection is my name for an iterable object. An iterable object in Python is any object that has at least one of iter() and getitem() special methods defined. By convention, <code>&lt;object&gt;.__iter__()</code> should return an iterator of object's items and <code>&lt;object&gt;.__getitem__(&lt;index&gt;)</code> an item at that index. I chose not to use the name iterable because it sounds scarier and more vague than collection, even though it has a precise definition.<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;To make matters a bit more confusing, an abstract base class called Iterable doesn't fully follow this definition. An expression <code>instanceof(&lt;object&gt;, collections.abc.Iterable)</code> only checks whether an object has iter() special method, disregarding the getitem().<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Although collection has no definition in Python's <a href="https://docs.python.org/3/glossary.html">glossary</a>, there exists a Collection abstract base class. Expression <code>instanceof(&lt;object&gt;, collections.abc.Collection)</code> returns 'True' for any object that has len(), iter() and contains() special methods defined. <code>&lt;object&gt;.__len__()</code> should return the number of elements and <code>&lt;object&gt;.__contains__(&lt;el&gt;)</code> should check if object contains the passed element.
 </details><br>
 
 <details open><summary><strong>What about PEP 8?</strong></summary><br>
