@@ -1145,7 +1145,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Iterator in python is an object that is used to iterate over iterable objects like lists, tuples, dicts and sets. Iterator object is initialised using the iter() method. ... This method raises a StopIteration to signal the end of the iteration.Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
 * **File objects returned by the [open()](#open) function, etc.**
