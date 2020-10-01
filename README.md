@@ -38,10 +38,10 @@ List
 ```
 
 ```python
-<list>.sort()
-<list>.reverse()
-<list> = sorted(<collection>)
-<iter> = reversed(<list>)
+<list>.sort()                  # modifies the list directly where sort is called upon
+<list>.reverse()               # directly reverses the content
+<list> = sorted(<collection>)  # returns a sorted list 
+<iter> = reversed(<list>)      # accepts a sequence and returns an iterator.
 ```
 
 ```python
@@ -184,7 +184,7 @@ to_exclusive   = <range>.stop
 Enumerate
 ---------
 ```python
-for i, el in enumerate(<collection> [, i_start]):
+for i, el in enumerate(<collection> [, i_start]):       #adds a counter to an iterable and returns it in a form of enumerate object
     ...
 ```
 
