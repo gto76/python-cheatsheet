@@ -498,7 +498,7 @@ Numbers
 <variable_name> = input(<prompt>)        # name = input('Enter your name: ')
 <size> = len(<arg>)                      # arg can be be a string, bytes, tuple, list, dictionary, set or range 
 <max_num> = max(<arg1>, <arg2>, <*args[,key]>) # Returns largest item in iterable or the largest of two or more arguments
-<min_num> = min(<arg1>, <arg2>, <*args[,key]>) # Returns smallest item in iterable or the largest of two or more arguments
+<min_num> = min(<arg1>, <arg2>, <*args[,key]>) # Returns smallest item in iterable or the smallest of two or more arguments
 ```
 
 ### Math
