@@ -2703,16 +2703,16 @@ from PIL import Image
 ```
 
 ```python
-<tuple/int> = <Image>.getpixel((x, y))          # Returns a pixel.
-<Image>.putpixel((x, y), <tuple/int>)           # Writes a pixel to the image.
+<int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
+<Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
 <ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
 <Image>.putdata(<list/ImagingCore>)             # Writes a sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes an image to the image.
 ```
 
 ```bash
-<2d_array> = np.array(<Image>)                  # Creates NumPy array from greyscale image.
-<3d_array> = np.array(<Image>)                  # Creates NumPy array from color image.
+<2d_array> = np.array(<Image_L>)                # Creates NumPy array from greyscale image.
+<3d_array> = np.array(<Image_RGB>)              # Creates NumPy array from color image.
 <Image>    = Image.fromarray(<array>)           # Creates image from NumPy array of floats.
 ```
 

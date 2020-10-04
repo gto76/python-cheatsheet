@@ -2320,14 +2320,14 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 &lt;Image&gt;.save(<span class="hljs-string">'&lt;path&gt;'</span>)
 &lt;Image&gt;.show()
 </code></pre>
-<pre><code class="python language-python hljs">&lt;tuple/int&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
-&lt;Image&gt;.putpixel((x, y), &lt;tuple/int&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
+<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
 &lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a sequence of pixels.</span>
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to the image.</span>
 </code></pre>
-<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Creates NumPy array from greyscale image.</span>
-&lt;3d_array&gt; = np.array(&lt;Image&gt;)                  <span class="hljs-comment"># Creates NumPy array from color image.</span>
+<pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image_L&gt;)                <span class="hljs-comment"># Creates NumPy array from greyscale image.</span>
+&lt;3d_array&gt; = np.array(&lt;Image_RGB&gt;)              <span class="hljs-comment"># Creates NumPy array from color image.</span>
 &lt;Image&gt;    = Image.fromarray(&lt;array&gt;)           <span class="hljs-comment"># Creates image from NumPy array of floats.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
