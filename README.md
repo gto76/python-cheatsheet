@@ -1661,6 +1661,58 @@ from pathlib import Path
 <file> = open(<Path>)               # Opens the file and returns file object.
 ```
 
+### DATA STRUCTURES LIBRARIES IN PYTHON
+
+pip install binarytree  ==> Implementation of binary trees
+pip install llist   ==> Implementation of singly and doubly linkedlist
+from collections import deque ==> Implementation of deque
+
+```
+import llist
+
+double_linkedlist = llist.dllist(['a','b','c','d','e','f'])
+single_linkedlist = llist.sllist(['a','b','c','d','e','f'])
+
+from binarytree import Node
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.right = Node(4)
+print(root)
+
+
+from collections import deque
+
+queue = deque(['name','address','Fighter Squadern'])
+```
+### Implementing sorting of lists with ease
+```
+import sorting
+
+data = [1, 8, 3, 5, 6, 9, 2, 4]
+
+res = sorting.bubble(data)
+print('Bubble Sort      : ', res)
+
+res = sorting.bucket(data)
+print('Bucket Sort      : ', res)
+
+res = sorting.comb(data)
+print('Comb Sort        : ', res)
+
+res = sorting.counting(data)
+print('Counting Sort    : ', res)
+
+res = sorting.maxheap(data)
+print('Max Heap Sort    : ', res)
+
+res = sorting.minheap(data)
+print('Min Heap Sort    : ', res)
+
+res = sorting.merge(data)
+print('Merge Sort       : ', res)
+```
 
 OS Commands
 -----------
