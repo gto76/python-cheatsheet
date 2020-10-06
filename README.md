@@ -2827,14 +2827,14 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 ### Read Float Samples from WAV File
 ```python
 def read_wav_file(filename):
-    def get_int(a_bytes):
-        an_int = int.from_bytes(a_bytes, 'little', signed=width!=1)
+    def get_int(bytes_obj):
+        an_int = int.from_bytes(bytes_obj, 'little', signed=width!=1)
         return an_int - 128 * (width == 1)
     with wave.open(filename, 'rb') as file:
         width  = file.getsampwidth()
         frames = file.readframes(-1)
-    byte_samples = (frames[i: i + width] for i in range(0, len(frames), width))
-    return [get_int(b) / pow(2, width * 8 - 1) for b in byte_samples]
+    bytes_samples = (frames[i: i + width] for i in range(0, len(frames), width))
+    return [get_int(b) / pow(2, width * 8 - 1) for b in bytes_samples]
 ```
 
 ### Write Float Samples to WAV File
