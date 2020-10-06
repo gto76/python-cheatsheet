@@ -527,7 +527,7 @@ function fixPageBreaksFile() {
 function fixPageBreaksStruct() {
   const formatDiv = $('#floatingpointtypes').parent().parent().parent().parent()
   move(formatDiv, 'floatingpointtypes')
-  move(formatDiv, 'integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets')
+  move(formatDiv, 'integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets')
   move(formatDiv, 'forstandardsizesstartformatstringwith')
 }
 

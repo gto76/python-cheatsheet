@@ -1754,16 +1754,16 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
-</ul></div></div><div><h4 id="integertypesuseacapitalletterforunsignedtypestandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:</h4><ul>
+</ul></div></div><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code> - pad byte</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1)</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2)</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (4)</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4)</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1/1)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2/2)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (2/4)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4/4)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8/8)</strong></li>
 </ul></div><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4)</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4/4)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8/8)</strong></li>
 </ul></div>
 
 
@@ -1771,7 +1771,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from collection of numbers.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>

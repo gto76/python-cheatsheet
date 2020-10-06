@@ -1966,22 +1966,22 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
 
-#### Integer types. Use a capital letter for unsigned type. Standard sizes are in brackets:
+#### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
 * **`'x'` - pad byte**
-* **`'b'` - char (1)**
-* **`'h'` - short (2)**
-* **`'i'` - int (4)**
-* **`'l'` - long (4)**
-* **`'q'` - long long (8)**
+* **`'b'` - char (1/1)**
+* **`'h'` - short (2/2)**
+* **`'i'` - int (2/4)**
+* **`'l'` - long (4/4)**
+* **`'q'` - long long (8/8)**
 
 #### Floating point types:
-* **`'f'` - float (4)**
-* **`'d'` - double (8)**
+* **`'f'` - float (4/4)**
+* **`'d'` - double (8/8)**
 
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their sizes in bytes are listed above.**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system.**
 
 ```python
 from array import array
