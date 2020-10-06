@@ -66,6 +66,14 @@ const DATACLASS =
 const DATETIME = 
   '<code class="python language-python hljs"><span class="hljs-string">\'&lt;DT&gt; = resolve_imaginary(&lt;DT&gt;)\'</span></code>';
 
+const PYINSTALLER =
+  '<code class="bash language-bash hljs">$ pip3 install pyinstaller\n' +
+  '$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into \'./dist/script\' directory.</span>\n' +
+  '$ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into \'./dist/script\' console app.</span>\n' +
+  '$ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into \'./dist/script\' windowed app.</span>\n' +
+  '$ pyinstaller script.py --add-data \'&lt;path&gt;:.\'  <span class="hljs-comment"># Adds file to the root of the executable.</span>\n' +
+  '</code>'
+
 const DIAGRAM_1_A =
   '+------------------+------------+------------+------------+\n' +
   '|                  |  Sequence  | Collection |  Iterable  |\n' +
@@ -493,7 +501,8 @@ function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
-  $(`code:contains((<DT>))`).html(DATETIME)
+  $(`code:contains((<DT>))`).html(DATETIME);
+  $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
 }
 
 function preventPageBreaks() {
