@@ -2497,8 +2497,8 @@ screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class=
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
     deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-3</span>), pg.K_RIGHT: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>), pg.K_LEFT: (<span class="hljs-number">-3</span>, <span class="hljs-number">0</span>)}
-    <span class="hljs-keyword">for</span> delta <span class="hljs-keyword">in</span> (deltas.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> on):
-        rect = rect.move(delta) <span class="hljs-keyword">if</span> delta <span class="hljs-keyword">else</span> rect
+    <span class="hljs-keyword">for</span> key_code, is_pressed <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()):
+        rect = rect.move(deltas[key_code]) <span class="hljs-keyword">if</span> key_code <span class="hljs-keyword">in</span> deltas <span class="hljs-keyword">and</span> is_pressed <span class="hljs-keyword">else</span> rect
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
     pg.display.flip()
