@@ -1914,7 +1914,7 @@ Bytes
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
 <bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
-<bytes> = bytes.fromhex('<hex>')         # Hex numbers can be separated by spaces.
+<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by spaces.
 ```
 
 ### Decode
@@ -1922,7 +1922,7 @@ Bytes
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
 <int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
-'<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal numbers.
+'<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal pairs.
 ```
 
 ### Read Bytes from File
