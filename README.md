@@ -215,8 +215,8 @@ from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
-<iter> = islice(<collection>, to_exclusive)
-<iter> = islice(<collection>, from_inclusive, to_exclusive [, +step_size])
+<iter> = islice(<coll>, to_exclusive)       # Only returns first 'to_exclusive' elements.
+<iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive [, +step_size]`.
 ```
 
 
