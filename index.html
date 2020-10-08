@@ -371,7 +371,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt; = chain.from_iterable(&lt;collection&gt;)  <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = islice(&lt;coll&gt;, to_exclusive)       <span class="hljs-comment"># Only returns first 'to_exclusive' elements.</span>
-&lt;iter&gt; = islice(&lt;coll&gt;, from_inclusive, …)  <span class="hljs-comment"># `to_exclusive [, +step_size]`.</span>
+&lt;iter&gt; = islice(&lt;coll&gt;, from_inclusive, …)  <span class="hljs-comment"># `to_exclusive, step_size`.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
