@@ -553,28 +553,27 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 ```python
 >>> product('ab', '12')
-[('a', '1'), ('a', '2'),
- ('b', '1'), ('b', '2')]
+[('a', '1'), ('a', '2'), ('b', '1'), ('b', '2')]
 ```
 
 ```python
->>> combinations('abc', 2)
-[('a', 'b'), ('a', 'c'),
- ('b', 'c')]
+>>> combinations('abc', 2)                        #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'c')]                                      # b .  .  x
 ```
 
 ```python
->>> combinations_with_replacement('abc', 2)
-[('a', 'a'), ('a', 'b'), ('a', 'c'),
- ('b', 'b'), ('b', 'c'),
- ('c', 'c')]
+>>> combinations_with_replacement('abc', 2)       #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
+ ('b', 'b'), ('b', 'c'),                          # b .  x  x
+ ('c', 'c')]                                      # c .  .  x
 ```
 
 ```python
->>> permutations('abc', 2)
-[('a', 'b'), ('a', 'c'),
- ('b', 'a'), ('b', 'c'),
- ('c', 'a'), ('c', 'b')]
+>>> permutations('abc', 2)                        #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'a'), ('b', 'c'),                          # b x  .  x
+ ('c', 'a'), ('c', 'b')]                          # c x  x  .
 ```
 
 

@@ -632,22 +632,21 @@ shuffle(&lt;list&gt;)
  (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)]
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>product(<span class="hljs-string">'ab'</span>, <span class="hljs-string">'12'</span>)
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'1'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'2'</span>),
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'1'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'2'</span>)]
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'1'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'2'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'1'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'2'</span>)]
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>combinations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>combinations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)                        <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                          <span class="hljs-comment"># a .  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>)]                                      <span class="hljs-comment"># b .  .  x</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>combinations_with_replacement(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),
- (<span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>combinations_with_replacement(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)       <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),              <span class="hljs-comment"># a x  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                          <span class="hljs-comment"># b .  x  x</span>
+ (<span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>)]                                      <span class="hljs-comment"># c .  .  x</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>permutations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),
- (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>permutations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>)                        <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                          <span class="hljs-comment"># a .  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                          <span class="hljs-comment"># b x  .  x</span>
+ (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>)]                          <span class="hljs-comment"># c x  x  .</span>
 </code></pre>
 <div><h2 id="datetime"><a href="#datetime" name="datetime">#</a>Datetime</h2><ul>
 <li><strong>Module 'datetime' provides 'date' <code class="apache hljs"><span class="hljs-section">&lt;D&gt;</span></code>, 'time' <code class="apache hljs"><span class="hljs-section">&lt;T&gt;</span></code>, 'datetime' <code class="apache hljs"><span class="hljs-section">&lt;DT&gt;</span></code> and 'timedelta' <code class="apache hljs"><span class="hljs-section">&lt;TD&gt;</span></code> classes. All are immutable and hashable.</strong></li>
