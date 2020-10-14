@@ -546,8 +546,8 @@ from itertools import product, combinations, combinations_with_replacement, perm
 ```
 
 ```python
->>> product([0, 1], repeat=2)
-[(0, 0), (0, 1), (1, 0), (1, 1)]
+>>> product([0, 1], repeat=3)
+[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), ..., (1, 1, 1)]
 ```
 
 ```python
