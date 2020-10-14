@@ -1870,7 +1870,7 @@ with <con>:
 ```python
 <con>.execute('<query>', <list/tuple>)          # Replaces '?'s in query with values.
 <con>.execute('<query>', <dict/namedtuple>)     # Replaces ':<key>'s with values.
-<con>.executemany('<query>', <coll_of_above>)   # Runs execute() many times.
+<con>.executemany('<query>', <coll_of_above>)   # Runs execute() multiple times.
 ```
 
 ### Example
