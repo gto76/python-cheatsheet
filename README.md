@@ -2306,9 +2306,9 @@ async def human_controller(screen, moves):
 async def model(moves, state, height, width):
     while state['*'] not in {p for id_, p in state.items() if id_ != '*'}:
         id_, d = await moves.get()
-        p      = state[id_]
+        p = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
+        new_p = P(p.x + deltas[d].x, p.y + deltas[d].y)
         if 0 <= new_p.x < width-1 and 0 <= new_p.y < height:
             state[id_] = new_p
 

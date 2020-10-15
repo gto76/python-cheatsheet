@@ -2014,9 +2014,9 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state, height, width)</span>:</span>
     <span class="hljs-keyword">while</span> state[<span class="hljs-string">'*'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> {p <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items() <span class="hljs-keyword">if</span> id_ != <span class="hljs-string">'*'</span>}:
         id_, d = <span class="hljs-keyword">await</span> moves.get()
-        p      = state[id_]
+        p = state[id_]
         deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
+        new_p = P(p.x + deltas[d].x, p.y + deltas[d].y)
         <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= new_p.x &lt; width<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_p.y &lt; height:
             state[id_] = new_p
 
