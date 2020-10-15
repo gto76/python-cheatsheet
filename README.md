@@ -1841,7 +1841,7 @@ SQLite
 ```python
 import sqlite3
 <con> = sqlite3.connect('<path>')               # Also ':memory:'.
-<con>.close()
+<con>.close()                                   # Closes the connection.
 ```
 
 ### Read
@@ -2308,7 +2308,7 @@ async def model(moves, state, height, width):
         id_, d = await moves.get()
         p      = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        new_p  = P(*[sum(a) for a in zip(p, deltas[d])])
+        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
         if 0 <= new_p.x < width-1 and 0 <= new_p.y < height:
             state[id_] = new_p
 

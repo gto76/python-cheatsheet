@@ -1657,7 +1657,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into a separate file.</strong></p><div><h3 id="connect">Connect</h3><p><strong>Opens a connection to the database file. Creates a new file if path doesn't exist.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
 &lt;con&gt; = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)               <span class="hljs-comment"># Also ':memory:'.</span>
-&lt;con&gt;.close()
+&lt;con&gt;.close()                                   <span class="hljs-comment"># Closes the connection.</span>
 </code></pre></div></div>
 
 
@@ -2016,7 +2016,7 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
         id_, d = <span class="hljs-keyword">await</span> moves.get()
         p      = state[id_]
         deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-        new_p  = P(*[sum(a) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> zip(p, deltas[d])])
+        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
         <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= new_p.x &lt; width<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_p.y &lt; height:
             state[id_] = new_p
 
