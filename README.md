@@ -1371,8 +1371,8 @@ finally:
 ```python
 except <exception>:
 except <exception> as <name>:
-except (<exception>, ...):
-except (<exception>, ...) as <name>:
+except (<exception>, [...]):
+except (<exception>, [...]) as <name>:
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
