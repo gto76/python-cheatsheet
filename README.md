@@ -15,7 +15,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
-**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__,__ **[`GUI`](#gui)**__.__
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__,__ **[`GUI`](#pysimplegui)**__.__
 
 
 Main
@@ -1196,7 +1196,6 @@ Hello World!
 
 Iterable Duck Types
 -------------------
-
 ### Iterable
 * **Only required method is iter(). It should return an iterator of object's items.**
 * **Contains() automatically works on any object that has iter() defined.**
@@ -1342,7 +1341,6 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
 
 Exceptions
 ----------
-
 ### Basic Example
 ```python
 try:
@@ -2913,7 +2911,6 @@ simpleaudio.play_buffer(samples_b, 1, 2, F)
 
 Pygame
 ------
-
 ### Basic Example
 ```python
 # $ pip3 install pygame
@@ -3068,7 +3065,6 @@ if __name__ == '__main__':
 
 Pandas
 ------
-
 ```python
 # $ pip3 install pandas
 import pandas as pd
@@ -3347,7 +3343,6 @@ c  7  8
 
 Plotly
 ------
-
 ```python
 # $ pip3 install plotly
 from plotly.express import line
@@ -3425,8 +3420,8 @@ if __name__ == '__main__':
 ```
 
 
-GUI
----
+PySimpleGUI
+-----------
 ```python
 # $ pip3 install PySimpleGUI
 import PySimpleGUI as sg
@@ -3439,7 +3434,6 @@ print(f'Hello {values[0]}!')
 
 Appendix
 --------
-
 ### Cython
 **Library that compiles Python code into C.**
 
