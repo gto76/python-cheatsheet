@@ -15,7 +15,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
-**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__,__ **[`Cython`](#cython)**__.__
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__,__ **[`GUI`](#gui)**__.__
 
 
 Main
@@ -409,7 +409,7 @@ Format
 {<el>:^10}                                     # '   <el>   '
 {<el>:>10}                                     # '      <el>'
 {<el>:.<10}                                    # '<el>......'
-{<el>:<0}                                      # '<el>'
+{<el>:0}                                       # '<el>'
 ```
 
 ### Strings
@@ -2508,7 +2508,7 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url  = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -3348,16 +3348,19 @@ c  7  8
 Plotly
 ------
 
-### Covid Deaths by Continent
+```python
+# $ pip3 install plotly
+from plotly.express import line
+<Figure> = line(<DF>, x=<col_name>, y=<col_name>)   # Or: line(x=<list>, y=<list>)
+<Figure>.write_html/json/image('<path>')            # Also: <Figure>.show()
+```
+
+#### Covid deaths by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
-<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:400px; width:100%;"></div>
+<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:360px; width:100%;"></div>
 
 ```python
-# $ pip3 install pandas plotly
-import pandas as pd
-import plotly.express
-
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                     usecols=['iso_code', 'date', 'total_deaths', 'population'])
 continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
@@ -3368,24 +3371,20 @@ df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
 df = df[('2020-03-14' < df.date) & (df.date < '2020-06-25')]
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-plotly.express.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
+line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
-### Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price
+#### Confirmed covid cases, Dow Jones, gold, and Bitcoin price:
 
 ![Covid Cases](web/covid_cases.png)
-<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div>
+<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:333px; width:100%;"></div>
 
 ```python
-# $ pip3 install pandas plotly
-import pandas as pd
 import plotly.graph_objects as go
 import datetime
 
 def main():
-    data = scrape_data()
-    df = wrangle_data(*data)
-    display_data(df)
+    display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
     def scrape_yahoo(id_):
@@ -3426,8 +3425,22 @@ if __name__ == '__main__':
 ```
 
 
-Cython
-------
+GUI
+---
+```python
+# $ pip3 install PySimpleGUI
+import PySimpleGUI as sg
+layout = [[sg.Text("What's your name?")], [sg.Input()], [sg.Button('Ok')]]
+window = sg.Window('Window Title', layout)
+event, values = window.read()
+print(f'Hello {values[0]}! Thanks for trying PySimpleGUI')
+```
+
+
+Appendix
+--------
+
+### Cython
 **Library that compiles Python code into C.**
 
 ```python
@@ -3437,7 +3450,7 @@ import <cython_script>
 <cython_script>.main()
 ```
 
-### Definitions
+#### Definitions:
 * **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
 * **Script needs to be saved with a `'pyx'` extension.**
 
@@ -3457,10 +3470,6 @@ cdef class <class_name>:
 ```python
 cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
 ```
-
-
-Appendix
---------
 
 ### PyInstaller
 ```bash

@@ -227,7 +227,7 @@ pre.prettyprint {
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,
-                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>, <a href="#cython">Cython</a>]
+                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>, <a href="#gui">GUI</a>]
 }
 </code></pre></div></div>
 
@@ -519,7 +519,7 @@ to_exclusive   = &lt;range&gt;.stop
 {&lt;el&gt;:^<span class="hljs-number">10</span>}                                     <span class="hljs-comment"># '   &lt;el&gt;   '</span>
 {&lt;el&gt;:&gt;<span class="hljs-number">10</span>}                                     <span class="hljs-comment"># '      &lt;el&gt;'</span>
 {&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}                                    <span class="hljs-comment"># '&lt;el&gt;......'</span>
-{&lt;el&gt;:&lt;<span class="hljs-number">0</span>}                                      <span class="hljs-comment"># '&lt;el&gt;'</span>
+{&lt;el&gt;:<span class="hljs-number">0</span>}                                       <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre></div>
 
 <div><h3 id="strings">Strings</h3><p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's <a href="#class">repr()</a> method, instead of <a href="#class">str()</a>, to get a string.</strong></p><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                                 <span class="hljs-comment"># "'abcde'   "</span>
@@ -2175,7 +2175,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 
 <div><h4 id="test">Test:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> requests
-<span class="hljs-meta">&gt;&gt;&gt; </span>url  = <span class="hljs-string">'http://localhost:8080/odds/football'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>url = <span class="hljs-string">'http://localhost:8080/odds/football'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
 <span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=data)
 <span class="hljs-meta">&gt;&gt;&gt; </span>response.json()
@@ -2841,11 +2841,13 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 </code></pre></div>
 
 
-<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><div><h3 id="coviddeathsbycontinent">Covid Deaths by Continent</h3><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> plotly.express
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install plotly</span>
+<span class="hljs-keyword">from</span> plotly.express <span class="hljs-keyword">import</span> line
+&lt;Figure&gt; = line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)   <span class="hljs-comment"># Or: line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
+&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)            <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
+</code></pre></div>
 
-covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
+<div><h4 id="coviddeathsbycontinent">Covid deaths by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:360px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://datahub.io/JohnSnowLabs/country-and-continent-codes-'</span> + \
                          <span class="hljs-string">'list/r/country-and-continent-codes-list-csv.csv'</span>,
@@ -2855,21 +2857,16 @@ df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class=
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
 df = df[(<span class="hljs-string">'2020-03-14'</span> &lt; df.date) &amp; (df.date &lt; <span class="hljs-string">'2020-06-25'</span>)]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
-plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
-</code></pre></div></div>
+line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+</code></pre></div>
 
 
 
-
-<div><h3 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price</h3><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<div><h4 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed covid cases, Dow Jones, gold, and Bitcoin price:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:333px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    data = scrape_data()
-    df = wrangle_data(*data)
-    display_data(df)
+    display_data(wrangle_data(*scrape_data()))
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(id_)</span>:</span>
@@ -2911,14 +2908,23 @@ plotly.express.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class
 
 
 
-<div><h2 id="cython"><a href="#cython" name="cython">#</a>Cython</h2><p><strong>Library that compiles Python code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
+<div><h2 id="gui"><a href="#gui" name="gui">#</a>GUI</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
+<span class="hljs-keyword">import</span> PySimpleGUI <span class="hljs-keyword">as</span> sg
+layout = [[sg.Text(<span class="hljs-string">"What's your name?"</span>)], [sg.Input()], [sg.Button(<span class="hljs-string">'Ok'</span>)]]
+window = sg.Window(<span class="hljs-string">'Window Title'</span>, layout)
+event, values = window.read()
+print(<span class="hljs-string">f'Hello <span class="hljs-subst">{values[<span class="hljs-number">0</span>]}</span>! Thanks for trying PySimpleGUI'</span>)
+</code></pre></div>
+
+<div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
 <span class="hljs-keyword">import</span> pyximport; pyximport.install()
 <span class="hljs-keyword">import</span> &lt;cython_script&gt;
 &lt;cython_script&gt;.main()
-</code></pre></div>
+</code></pre></div></div>
 
 
-<div><h3 id="definitions">Definitions</h3><ul>
+
+<div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
 </ul><pre><code class="python language-python hljs">cdef &lt;type&gt; &lt;var_name&gt; = &lt;el&gt;
@@ -2934,13 +2940,12 @@ cdef &lt;type/void&gt; &lt;func_name&gt;(&lt;type&gt; &lt;arg_name_1&gt;, ...):
 </code></pre>
 <pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
 </code></pre>
-<div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs"><code class="bash language-bash hljs">$ pip3 install pyinstaller
+<div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs"><code class="bash language-bash hljs">$ pip3 install pyinstaller
 $ pyinstaller script.py                        <span class="hljs-comment"># Compiles into './dist/script' directory.</span>
 $ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into './dist/script' console app.</span>
 $ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into './dist/script' windowed app.</span>
 $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment"># Adds file to the root of the executable.</span>
-</code></code></pre></div></div>
-
+</code></code></pre></div>
 
 <ul>
 <li><strong>File paths need to be updated to <code class="python hljs"><span class="hljs-string">'os.path.join(sys._MEIPASS, &lt;path&gt;)'</span></code>.</strong></li>
