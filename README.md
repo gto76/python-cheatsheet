@@ -1621,7 +1621,7 @@ from os import scandir
 
 ```python
 <iter> = scandir(path='.')          # Returns DirEntry objects located at path.
-<str>  = <DirEntry>.path            # Returns path as a string.
+<str>  = <DirEntry>.path            # Returns whole path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns file object.
 ```
