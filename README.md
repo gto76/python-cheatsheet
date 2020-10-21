@@ -1374,6 +1374,7 @@ except (<exception>, [...]) as <name>:
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
+* **Use `'print(<name>, file=sys.stderr)'` to print just the cause of the exception.**
 
 ### Raising Exceptions
 ```python
@@ -1396,7 +1397,7 @@ exc_type  = <name>.__class__
 filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
-error_msg = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
+error_msg = ''.join(traceback.format_exception(exc_type, <name>, <name>.__traceback__))
 ```
 
 ### Built-in Exceptions
