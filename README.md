@@ -3345,7 +3345,7 @@ c  7  8
 Plotly
 ------
 ```python
-# $ pip3 install plotly
+# $ pip3 install plotly kaleido
 from plotly.express import line
 <Figure> = line(<DF>, x=<col_name>, y=<col_name>)   # Or: line(x=<list>, y=<list>)
 <Figure>.write_html/json/image('<path>')            # Also: <Figure>.show()
