@@ -1519,6 +1519,7 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative cwd. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute cwd. Also Path().resolve().</span>
 &lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute Path without symlinks.</span>
+&lt;Path&gt; = Path.home()                <span class="hljs-comment"># Returns user's home directory.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without final component.</span>
 &lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
