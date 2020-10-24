@@ -3348,14 +3348,15 @@ Plotly
 ```python
 # $ pip3 install plotly kaleido
 from plotly.express import line
-<Figure> = line(<DF>, x=<col_name>, y=<col_name>)   # Or: line(x=<list>, y=<list>)
-<Figure>.write_html/json/image('<path>')            # Also: <Figure>.show()
+<Figure> = line(<DF>, x=<col_name>, y=<col_name>)        # Or: line(x=<list>, y=<list>)
+<Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Or: paper_bgcolor='rgba(0, 0, 0, 0)'
+<Figure>.write_html/json/image('<path>')                 # Also: <Figure>.show()
 ```
 
 #### Covid deaths by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
-<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:360px; width:100%;"></div>
+<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div>
 
 ```python
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
@@ -3374,9 +3375,10 @@ line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 #### Confirmed covid cases, Dow Jones, gold, and Bitcoin price:
 
 ![Covid Cases](web/covid_cases.png)
-<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:333px; width:100%;"></div>
+<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div>
 
 ```python
+import pandas as pd
 import plotly.graph_objects as go
 import datetime
 
