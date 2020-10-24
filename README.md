@@ -3367,7 +3367,7 @@ continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
 df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-df = df[('2020-03-14' < df.date) & (df.date < '2020-06-25')]
+df = df[('2020-03-14' < df.date) & (df.date < '2020-10-22')]
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
 line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```

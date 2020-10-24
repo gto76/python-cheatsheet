@@ -8,11 +8,12 @@ from datetime import date, time, datetime, timedelta
 import pandas as pd
 from plotly.express import line
 import plotly.graph_objects as go
+import re
 
 
 def main():
-    print('Updating covid deaths...')
-    update_covid_deaths()
+    # print('Updating covid deaths...')
+    # update_covid_deaths()
     print('Updating covid cases...')
     update_confirmed_cases()
 
@@ -88,7 +89,8 @@ def update_confirmed_cases():
 
 def update_file(filename, figure):
     lines = read_file(filename)
-    out = lines[:6] + [f'        {figure.to_json()}\n', '    )\n', '};\n']
+    f_json = figure.to_json(pretty=True).replace('\n', '\n        ')
+    out = lines[:6] + [f'        {f_json}\n', '    )\n', '};\n']
     write_to_file(filename, out)
 
 
