@@ -12,18 +12,18 @@ import re
 
 
 def main():
-    # print('Updating covid deaths...')
-    # update_covid_deaths()
+    print('Updating covid deaths...')
+    update_covid_deaths()
     print('Updating covid cases...')
     update_confirmed_cases()
 
 
 def update_covid_deaths():
     def update_readme(date_treshold):
-        lines = read_file('../README.md')
+        lines = read_file(Path('..') / 'README.md')
         out = [re.sub("df.date < '\d{4}-\d{2}-\d{2}'", f"df.date < '{date_treshold}'", line) 
                    for line in lines]
-        write_to_file('../README.md', out)
+        write_to_file(Path('..') / 'README.md', out)
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                         usecols=['iso_code', 'date', 'total_deaths', 'population'])
     continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
@@ -39,6 +39,7 @@ def update_covid_deaths():
     f.update_layout(margin=dict(t=24, b=0), paper_bgcolor='rgba(0, 0, 0, 0)')
     update_file('covid_deaths.js', f)
     update_readme(date_treshold)
+    write_to_png_file('covid_deaths.png', f, width=960, height=340)
 
 
 def update_confirmed_cases():
@@ -46,6 +47,7 @@ def update_confirmed_cases():
         df = wrangle_data(*scrape_data())
         f = get_figure(df)
         update_file('covid_cases.js', f)
+        write_to_png_file('covid_cases.png', f, width=960, height=315)
 
     def scrape_data():
         def scrape_yahoo(id_):
@@ -99,13 +101,20 @@ def update_file(filename, figure):
 #
 
 def read_file(filename):
-    with open(filename, encoding='utf-8') as file:
+    p = Path(__file__).resolve().parent / filename
+    with open(p, encoding='utf-8') as file:
         return file.readlines()
 
 
 def write_to_file(filename, lines):
-    with open(filename, 'w', encoding='utf-8') as file:
+    p = Path(__file__).resolve().parent / filename
+    with open(p, 'w', encoding='utf-8') as file:
         file.writelines(lines)
+
+
+def write_to_png_file(filename, figure, width, height):
+    p = Path(__file__).resolve().parent / filename
+    figure.write_image(str(p), width=width, height=height)
 
 
 if __name__ == '__main__':
