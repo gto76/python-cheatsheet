@@ -1640,8 +1640,8 @@ from pathlib import Path
 ```python
 <Path> = Path()                     # Returns relative cwd. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute cwd. Also Path().resolve().
-<Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
 <Path> = Path.home()                # Returns user's home directory.
+<Path> = Path(__file__).resolve()   # Returns script's path if cwd wasn't changed.
 ```
 
 ```python
