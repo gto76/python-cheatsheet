@@ -3515,3 +3515,4 @@ Index
 -----
 * **Only available in [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
 * **Ctrl+F / ⌘F is usually sufficient.**
+* **Searching `'#<title>'` on a [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
