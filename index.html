@@ -1013,10 +1013,10 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
 <li><strong>Default_factory can be any <a href="#callable">callable</a>.</strong></li>
 </ul>
-<div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
+<div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
-&lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></code></pre></div>
+&lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre></div>
 
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
@@ -1905,7 +1905,7 @@ param_names  = list(&lt;sig&gt;.parameters.keys())
 param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;sig&gt;.parameters.values()]
 </code></pre></div>
 
-<div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs"><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></code></pre></div></div>
+<div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></pre></div></div>
 
 
 
@@ -2944,12 +2944,12 @@ cdef &lt;type/void&gt; &lt;func_name&gt;(&lt;type&gt; &lt;arg_name_1&gt;, ...):
 </code></pre>
 <pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
 </code></pre>
-<div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs"><code class="bash language-bash hljs">$ pip3 install pyinstaller
+<div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs">$ pip3 install pyinstaller
 $ pyinstaller script.py                        <span class="hljs-comment"># Compiles into './dist/script' directory.</span>
 $ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into './dist/script' console app.</span>
 $ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into './dist/script' windowed app.</span>
 $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment"># Adds file to the root of the executable.</span>
-</code></code></pre></div>
+</code></pre></div>
 
 <ul>
 <li><strong>File paths need to be updated to <code class="python hljs"><span class="hljs-string">'os.path.join(sys._MEIPASS, &lt;path&gt;)'</span></code>.</strong></li>
@@ -2983,8 +2983,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
     main()
 </code></pre></div>
 
-<div><h2 id="index"><a href="#index" name="index">#</a>Index</h2><ul>
-<li><strong>Only available in <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>
+<div><h2 id="index"><a href="#index" name="index">#</a>Index</h2><ul><li><strong>Only available in <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>
 <li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>
 <li><strong>Searching <code class="python hljs"><span class="hljs-string">'#&lt;title&gt;'</span></code> will limit the search to the titles.</strong></li>
 </ul></div>
