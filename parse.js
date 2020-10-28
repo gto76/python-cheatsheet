@@ -320,8 +320,8 @@ const DIAGRAM_15_B =
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃\n" +
   "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
-  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │                          ┃\n" +
-  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If 'r' is a series, it   ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │ is first converted to DF.┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
@@ -549,6 +549,7 @@ function fixPandasDiagram() {
   const diagram_15 = '┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓';
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(and)").after("and");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(as)").after("as");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(is)").after("is");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword").remove();
 }
 

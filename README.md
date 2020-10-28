@@ -3209,8 +3209,8 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 | l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 |                          |
-|                        | c  .  .  6  7 |            |            |                          |
+|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If 'r' is a series, it   |
+|                        | c  .  .  6  7 |            |            | is first converted to DF.|
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
