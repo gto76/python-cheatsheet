@@ -56,8 +56,8 @@ def update_confirmed_cases():
             url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
             return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
         covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
-                            usecols=['date', 'total_cases'])
-        covid = covid.groupby('date').sum()
+                        usecols=['location', 'date', 'total_cases'])
+        covid = covid[covid.location == 'World'].set_index('date').total_cases
         dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
         dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
         return covid, dow, gold, bitcoin

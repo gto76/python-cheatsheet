@@ -3367,7 +3367,7 @@ continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
 df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-df = df[('2020-03-14' < df.date) & (df.date < '2020-10-23')]
+df = df[('2020-03-14' < df.date) & (df.date < '2020-10-26')]
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
 line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
@@ -3392,8 +3392,8 @@ def scrape_data():
         url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
         return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
-                        usecols=['date', 'total_cases'])
-    covid = covid.groupby('date').sum()
+                        usecols=['location', 'date', 'total_cases'])
+    covid = covid[covid.location == 'World'].set_index('date').total_cases
     dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
     dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
     return covid, dow, gold, bitcoin

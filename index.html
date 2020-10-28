@@ -2858,7 +2858,7 @@ continents = pd.read_csv(<span class="hljs-string">'https://datahub.io/JohnSnowL
 df = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
 df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class="hljs-string">'date'</span>]).sum().reset_index()
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
-df = df[(<span class="hljs-string">'2020-03-14'</span> &lt; df.date) &amp; (df.date &lt; <span class="hljs-string">'2020-10-23'</span>)]
+df = df[(<span class="hljs-string">'2020-03-14'</span> &lt; df.date) &amp; (df.date &lt; <span class="hljs-string">'2020-10-26'</span>)]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
 line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
 </code></pre></div>
@@ -2879,8 +2879,8 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
         url = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
         <span class="hljs-keyword">return</span> pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close
     covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
-                        usecols=[<span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
-    covid = covid.groupby(<span class="hljs-string">'date'</span>).sum()
+                        usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
+    covid = covid[covid.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
     dow, gold, bitcoin = [scrape_yahoo(id_) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> (<span class="hljs-string">'^DJI'</span>, <span class="hljs-string">'GC=F'</span>, <span class="hljs-string">'BTC-USD'</span>)]
     dow.name, gold.name, bitcoin.name = <span class="hljs-string">'Dow Jones'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Bitcoin'</span>
     <span class="hljs-keyword">return</span> covid, dow, gold, bitcoin
