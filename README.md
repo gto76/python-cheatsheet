@@ -1523,7 +1523,7 @@ Open
 **Opens the file and returns a corresponding file object.**
 
 ```python
-<file> = open('<path>', mode='r', encoding=None, newline=None)
+<file> = open(<path>, mode='r', encoding=None, newline=None)
 ```
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
@@ -1841,7 +1841,7 @@ SQLite
 **Opens a connection to the database file. Creates a new file if path doesn't exist.**
 ```python
 import sqlite3
-<con> = sqlite3.connect('<path>')               # Also ':memory:'.
+<con> = sqlite3.connect(<path>)                 # Also ':memory:'.
 <con>.close()                                   # Closes the connection.
 ```
 
@@ -2347,7 +2347,7 @@ from matplotlib import pyplot
 pyplot.plot(<y_data> [, label=<str>])
 pyplot.plot(<x_data>, <y_data>)
 pyplot.legend()                                # Adds a legend.
-pyplot.savefig('<path>')                       # Saves the figure.
+pyplot.savefig(<path>)                         # Saves the figure.
 pyplot.show()                                  # Displays the figure.
 pyplot.clf()                                   # Clears the figure.
 ```
@@ -2697,9 +2697,9 @@ from PIL import Image
 
 ```python
 <Image> = Image.new('<mode>', (width, height))
-<Image> = Image.open('<path>')
+<Image> = Image.open(<path>)
 <Image> = <Image>.convert('<mode>')
-<Image>.save('<path>')
+<Image>.save(<path>)
 <Image>.show()
 ```
 
@@ -2961,9 +2961,9 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-<Surf> = pg.transform.flip(<Surf>, xbool, ybool)
-<Surf> = pg.transform.rotate(<Surf>, degrees)
 <Surf> = pg.transform.scale(<Surf>, (width, height))
+<Surf> = pg.transform.rotate(<Surf>, degrees)
+<Surf> = pg.transform.flip(<Surf>, xbool, ybool)
 ```
 
 ```python
@@ -2976,9 +2976,9 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 
 ### Font
 ```python
-<Font> = pg.font.SysFont('<name>', size, bold=False, italic=False)
-<Font> = pg.font.Font('<path>', size)
-<Surf> = <Font>.render(text, antialias, color [, background])
+<Font> = pg.font.SysFont('<name>', size)        # Loads the system font or default if missing.
+<Font> = pg.font.Font('<path>', size)           # Loads the TTF file. Pass None for default.
+<Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
 ```
 
 ### Sound

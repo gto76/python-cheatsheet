@@ -1426,7 +1426,7 @@ value = args.&lt;name&gt;
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set the default value.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files.</strong></li>
 </ul>
-<div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(<span class="hljs-string">'&lt;path&gt;'</span>, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
+<div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
 
@@ -1659,7 +1659,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into a separate file.</strong></p><div><h3 id="connect">Connect</h3><p><strong>Opens a connection to the database file. Creates a new file if path doesn't exist.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-&lt;con&gt; = sqlite3.connect(<span class="hljs-string">'&lt;path&gt;'</span>)               <span class="hljs-comment"># Also ':memory:'.</span>
+&lt;con&gt; = sqlite3.connect(&lt;path&gt;)                 <span class="hljs-comment"># Also ':memory:'.</span>
 &lt;con&gt;.close()                                   <span class="hljs-comment"># Closes the connection.</span>
 </code></pre></div></div>
 
@@ -2049,7 +2049,7 @@ curses.wrapper(main)
 pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
 pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
 pyplot.legend()                                <span class="hljs-comment"># Adds a legend.</span>
-pyplot.savefig(<span class="hljs-string">'&lt;path&gt;'</span>)                       <span class="hljs-comment"># Saves the figure.</span>
+pyplot.savefig(&lt;path&gt;)                         <span class="hljs-comment"># Saves the figure.</span>
 pyplot.show()                                  <span class="hljs-comment"># Displays the figure.</span>
 pyplot.clf()                                   <span class="hljs-comment"># Clears the figure.</span>
 </code></pre></div>
@@ -2318,9 +2318,9 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))
-&lt;Image&gt; = Image.open(<span class="hljs-string">'&lt;path&gt;'</span>)
+&lt;Image&gt; = Image.open(&lt;path&gt;)
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)
-&lt;Image&gt;.save(<span class="hljs-string">'&lt;path&gt;'</span>)
+&lt;Image&gt;.save(&lt;path&gt;)
 &lt;Image&gt;.show()
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
@@ -2531,9 +2531,9 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surface&gt;, (x, y))                  <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
+<pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
 &lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)
-&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
+&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
 </code></pre>
 <pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)
 pg.draw.arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_radians, to_radians)
@@ -2541,9 +2541,9 @@ pg.draw.rect(&lt;Surf&gt;, color, &lt;Rect&gt;)
 pg.draw.polygon(&lt;Surf&gt;, color, points)
 pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
 </code></pre>
-<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size, bold=<span class="hljs-keyword">False</span>, italic=<span class="hljs-keyword">False</span>)
-&lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)
-&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color [, background])
+<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size)        <span class="hljs-comment"># Loads the system font or default if missing.</span>
+&lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)           <span class="hljs-comment"># Loads the TTF file. Pass None for default.</span>
+&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
 </code></pre></div>
 
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)              <span class="hljs-comment"># Loads the WAV file.</span>
