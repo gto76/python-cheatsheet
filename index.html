@@ -2529,7 +2529,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 
 <pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
-&lt;Surf&gt;.blit(&lt;Surface&gt;, (x, y))                  <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
 &lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)

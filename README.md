@@ -2957,7 +2957,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```python
 <Surf>.fill(color)                              # Fills the whole surface.
 <Surf>.set_at((x, y), color)                    # Updates pixel.
-<Surf>.blit(<Surface>, (x, y))                  # Draws passed surface to the surface.
+<Surf>.blit(<Surf>, (x, y))                     # Draws passed surface to the surface.
 ```
 
 ```python
