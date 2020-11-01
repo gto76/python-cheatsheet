@@ -2949,8 +2949,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 **Object for representing images.**
 ```python
 <Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
-<Surf> = pg.Surface((width, height))            # Creates a new surface.
-<Surf> = pg.image.load('<path>')                # Loads the image.
+<Surf> = pg.Surface((width, height) [, ...])    # New RGB surface. Add `pg.SRCALPHA` for RGBA.
+<Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
