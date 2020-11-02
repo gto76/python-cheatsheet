@@ -2334,7 +2334,7 @@ Progress Bar
 # $ pip3 install tqdm
 from tqdm import tqdm
 from time import sleep
-for el in tqdm([1, 2, 3]):
+for el in tqdm(<iter> [, desc=<str>][, total=<int>][, leave=<bool>]):
     sleep(0.2)
 ```
 
