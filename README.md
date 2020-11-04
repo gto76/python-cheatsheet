@@ -3486,10 +3486,10 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 # Usage: .py
 #
 
+from sys import argv, exit
 from collections import namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-from sys import argv, exit
 import re
 
 
