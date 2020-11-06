@@ -30,13 +30,29 @@ const TOC =
   '}\n' +
   '</code></pre>\n';
 
+const LRU_CACHE =
+  '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache\n' +
+  '\n' +
+  '<span class="hljs-meta">@lru_cache(maxsize=None)</span>\n' +
+  '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
+  '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
+
+const DATACLASS =
+  '<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
+  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_attribute_names&gt;)\n' +
+  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_tuples&gt;)\n' +
+  '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_value&gt;])';
+
+const SHUTIL_COPY =
+  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
+  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
+
 const OS_RENAME =
   'os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
-const SHUTIL_COPY = 
-  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
-  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
+const TYPE =
+  '&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)';
 
 const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +
@@ -47,21 +63,12 @@ const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">\'abs(1)\'</span>)\n' +
   'ValueError: malformed node or string\n';
 
-const LRU_CACHE = 
-  '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache\n' +
-  '\n' +
-  '<span class="hljs-meta">@lru_cache(maxsize=None)</span>\n' +
-  '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
-  '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
-
-const TYPE =
-  '&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)';
-
-const DATACLASS = 
-  '<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
-  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_attribute_names&gt;)\n' +
-  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_tuples&gt;)\n' +
-  '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_value&gt;])';
+const PROGRESS_BAR =
+  '<span class="hljs-comment"># $ pip3 install tqdm</span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
+  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">pass</span>\n' +
+  'Processing: 100%|██████████████████| 3/3 [00:00&lt;00:00, 11516.49it/s]\n';
 
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +
@@ -74,13 +81,6 @@ const INDEX =
   '<li><strong>Only available in <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n';
-
-const PROGRESS_BAR =
-  '<span class="hljs-comment"># $ pip3 install tqdm</span>\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
-  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">pass</span>\n' +
-  'Processing: 100%|██████████████████| 3/3 [00:00&lt;00:00, 11516.49it/s]\n';
 
 
 const DIAGRAM_1_A =
@@ -314,7 +314,7 @@ const DIAGRAM_14_B =
   "┃ sr.trans(…) │     y  2    │   y     2   │       y  2    ┃\n" +
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
-const DIAGRAM_15_A = 
+const DIAGRAM_15_A =
   '+------------------------+---------------+------------+------------+--------------------------+';
 
 const DIAGRAM_15_B =
@@ -373,7 +373,7 @@ const DIAGRAM_17_B =
   "┃             │             │ b    2    2 │               ┃\n" +
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
-const DIAGRAM_18_A = 
+const DIAGRAM_18_A =
   '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |';
 
 const DIAGRAM_18_B =
@@ -504,15 +504,15 @@ function fixClasses() {
 }
 
 function fixHighlights() {
-  $(`code:contains(os.rename)`).html(OS_RENAME);
-  $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
-  $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
-  $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
+  $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
+  $(`code:contains(os.rename)`).html(OS_RENAME);
+  $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
+  $(`code:contains(ValueError: malformed node)`).html(EVAL);
+  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
-  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
 }
 
 function preventPageBreaks() {
