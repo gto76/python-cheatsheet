@@ -75,6 +75,14 @@ const INDEX =
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n';
 
+const PROGRESS_BAR =
+  '<span class="hljs-comment"># $ pip3 install tqdm</span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
+  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">pass</span>\n' +
+  'Processing: 100%|██████████████████| 3/3 [00:00&lt;00:00, 11516.49it/s]\n';
+
+
 const DIAGRAM_1_A =
   '+------------------+------------+------------+------------+\n' +
   '|                  |  Sequence  | Collection |  Iterable  |\n' +
@@ -504,6 +512,7 @@ function fixHighlights() {
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
+  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
 }
 
 function preventPageBreaks() {

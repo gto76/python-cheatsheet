@@ -2332,10 +2332,10 @@ Progress Bar
 ------------
 ```python
 # $ pip3 install tqdm
-from tqdm import tqdm
-from time import sleep
-for el in tqdm([1, 2, 3]):
-    sleep(0.2)
+>>> from tqdm import tqdm
+>>> for el in tqdm([1, 2, 3], desc='Processing'):
+...     pass
+Processing: 100%|██████████████████| 3/3 [00:00<00:00, 11516.49it/s]
 ```
 
 
@@ -2989,7 +2989,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 
 ### Basic Mario Brothers Example
 ```python
-import collections, dataclasses, enum, io, pygame, urllib.request, itertools as it
+import collections, dataclasses, enum, io, itertools as it, pygame as pg, urllib.request
 from random import randint
 
 P = collections.namedtuple('P', 'x y')          # Position
@@ -2998,11 +2998,11 @@ SIZE, MAX_SPEED = 50, P(5, 10)                  # Screen size, Speed limit
 
 def main():
     def get_screen():
-        pygame.init()
-        return pygame.display.set_mode(2 * [SIZE*16])
+        pg.init()
+        return pg.display.set_mode(2 * [SIZE*16])
     def get_images():
         url = 'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'
-        img = pygame.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
+        img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
         return [img.subsurface(get_rect(x, 0)) for x in range(img.get_width() // 16)]
     def get_mario():
         Mario = dataclasses.make_dataclass('Mario', 'rect spd facing_left frame_cycle'.split())
@@ -3012,14 +3012,14 @@ def main():
             [(randint(1, SIZE-2), randint(2, SIZE-2)) for _ in range(SIZE**2 // 10)]
         return [get_rect(*p) for p in positions]
     def get_rect(x, y):
-        return pygame.Rect(x*16, y*16, 16, 16)
+        return pg.Rect(x*16, y*16, 16, 16)
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 def run(screen, images, mario, tiles):
-    clock = pygame.time.Clock()
-    while all(event.type != pygame.QUIT for event in pygame.event.get()):
-        keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
-        pressed = {keys.get(i) for i, on in enumerate(pygame.key.get_pressed()) if on}
+    clock = pg.time.Clock()
+    while all(event.type != pg.QUIT for event in pg.event.get()):
+        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
+        pressed = {keys.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
@@ -3058,7 +3058,7 @@ def draw(screen, images, mario, tiles, pressed):
     screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
         screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
-    pygame.display.flip()
+    pg.display.flip()
 
 if __name__ == '__main__':
     main()
