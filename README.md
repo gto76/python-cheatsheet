@@ -3033,12 +3033,12 @@ def update_speed(mario, tiles, pressed):
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
-    new_p = mario.rect.topleft
+    p = mario.rect.topleft
     larger_speed = max(abs(s) for s in mario.spd)
     for _ in range(larger_speed):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario.spd)])
-        mario.rect.topleft = new_p
+        p = P(*[a + s/larger_speed for a, s in zip(p, mario.spd)])
+        mario.rect.topleft = p
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
