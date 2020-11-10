@@ -3350,7 +3350,7 @@ Plotly
 from plotly.express import line
 <Figure> = line(<DF>, x=<col_name>, y=<col_name>)        # Or: line(x=<list>, y=<list>)
 <Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Or: paper_bgcolor='rgba(0, 0, 0, 0)'
-<Figure>.write_html/json/image('<path>')                 # Also: <Figure>.show()
+<Figure>.write_html/json/image('<path>')                 # Or: <Figure>.show()
 ```
 
 #### Covid deaths by continent:
