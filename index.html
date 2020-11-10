@@ -213,7 +213,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>July 2, 2020</aside>
+    <aside>November 10, 2020</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2858,7 +2858,7 @@ continents = pd.read_csv(<span class="hljs-string">'https://datahub.io/JohnSnowL
 df = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
 df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class="hljs-string">'date'</span>]).sum().reset_index()
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
-df = df[(<span class="hljs-string">'2020-03-14'</span> &lt; df.date) &amp; (df.date &lt; <span class="hljs-string">'2020-10-26'</span>)]
+df = df[(<span class="hljs-string">'2020-03-14'</span> &lt; df.date) &amp; (df.date &lt; <span class="hljs-string">'2020-11-08'</span>)]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
 line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
 </code></pre></div>
@@ -2990,7 +2990,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 2, 2020</aside>
+    <aside>November 10, 2020</aside>
     <a href="../" rel="author">Jure Šorn</a>
   </footer>
 
