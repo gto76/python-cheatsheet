@@ -261,7 +261,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass.**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
