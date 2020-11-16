@@ -2650,7 +2650,7 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt;[bools]                            <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[bools]</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                      <span class="hljs-comment"># Returns a Series of bools.</span>
-&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                      <span class="hljs-comment"># Non-matching keys get value NaN.</span>
+&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                      <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                      <span class="hljs-comment"># Or: pd.concat(&lt;coll_of_Sr&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present.</span>
@@ -2706,7 +2706,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                 <span class="hljs-comment"># Assigns NaN to False values.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Returns DataFrame of bools.</span>
-&lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Non-matching keys get value NaN.</span>
+&lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)          <span class="hljs-comment"># Replaces row keys with values from a column.</span>
 &lt;DF&gt;    = &lt;DF&gt;.reset_index()                  <span class="hljs-comment"># Moves row keys to their own column.</span>
@@ -2809,7 +2809,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 
 
 <pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)             <span class="hljs-comment"># DF is split into groups based on passed column.</span>
-&lt;DF&gt; = &lt;GB&gt;.get_group(group_key)              <span class="hljs-comment"># Selects a group by value of grouping column.</span>
+&lt;DF&gt; = &lt;GB&gt;.get_group(group_key/s)            <span class="hljs-comment"># Selects a group by value of grouping column.</span>
 </code></pre>
 <div><h4 id="aggregatetransformmap-2">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;GB&gt;.apply/agg(&lt;agg_func&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()          <span class="hljs-comment"># Or: &lt;GB&gt;.aggregate(&lt;trans_func&gt;)  </span>

@@ -3103,7 +3103,7 @@ Name: a, dtype: int64
 
 ```python
 <Sr> = <Sr> ><== <el/Sr>                      # Returns a Series of bools.
-<Sr> = <Sr> +-*/ <el/Sr>                      # Non-matching keys get value NaN.
+<Sr> = <Sr> +-*/ <el/Sr>                      # Items with non-matching keys get value NaN.
 ```
 
 ```python
@@ -3176,7 +3176,7 @@ b  3  4
 
 ```python
 <DF>    = <DF> ><== <el/Sr/DF>                # Returns DataFrame of bools.
-<DF>    = <DF> +-*/ <el/Sr/DF>                # Non-matching keys get value NaN.
+<DF>    = <DF> +-*/ <el/Sr/DF>                # Items with non-matching keys get value NaN.
 ```
 
 ```python
@@ -3298,7 +3298,7 @@ c  7  8
 
 ```python
 <GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
-<DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
+<DF> = <GB>.get_group(group_key/s)            # Selects a group by value of grouping column.
 ```
 
 #### Aggregate, Transform, Map:
