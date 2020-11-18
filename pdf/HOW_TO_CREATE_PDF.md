@@ -13,14 +13,14 @@ Printing to PDF
 ---------------
 ### Normal PDF
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
-* Then replace the footer and last three `<br>` elements with contents of `pdf/index_for_pdf.html` file and save.
+* Then replace the index and footer with contents of `pdf/index_for_pdf.html` file and save.
 * Open `index.html` in Chrome and select 'Print...'.
 * Select destination 'Save as PDF', paper size 'A4', margins and scale 'Default' and no headers and footers and save.
 
 ### PDF optimized for laser color printing
 * Run `./parse.js` again.
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
-* Then replace the footer and last three `<br>` elements with contents of `pdf/index_for_pdf_print.html` file.
+* Then replace the index and footer with contents of `pdf/index_for_pdf_print.html` file.
 * Change all links in text to normal text and optionally add a page number in brackets like that: '(p. <num>)'. Links can be found with this regex: `<strong>.*a href.*</strong>`.
 * Save and open `index.html` in Chrome.
 * Change brightness of elements by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
