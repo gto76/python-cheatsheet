@@ -66,9 +66,10 @@ const EVAL =
 const PROGRESS_BAR =
   '<span class="hljs-comment"># $ pip3 install tqdm</span>\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
-  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">pass</span>\n' +
-  'Processing: 100%|██████████████████| 3/3 [00:00&lt;00:00, 11516.49it/s]\n';
+  '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
+  'Processing: 100%|███████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
 
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +
@@ -200,7 +201,7 @@ const DIAGRAM_7_B =
   "      │    ├── IndexError         <span class='hljs-comment'># Raised when a sequence index is out of range.</span>\n" +
   "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key or set element is not found.</span>\n" +
   "      ├── NameError               <span class='hljs-comment'># Raised when a variable name is not found.</span>\n" +
-  "      ├── OSError                 <span class='hljs-comment'># Failures such as “file not found” or “disk full”.</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Errors such as “file not found” or “disk full” (see Open).</span>\n" +
   "      │    └── FileNotFoundError  <span class='hljs-comment'># When a file or directory is requested but doesn't exist.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall in other categories.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +

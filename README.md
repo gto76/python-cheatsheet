@@ -1414,7 +1414,8 @@ BaseException
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is not found.
       +-- NameError               # Raised when a variable name is not found.
-      +-- OSError                 # Failures such as “file not found” or “disk full”.
+      +-- OSError                 # Errors such as “file not found” or “disk full” (see Open).
+
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
@@ -2333,9 +2334,10 @@ Progress Bar
 ```python
 # $ pip3 install tqdm
 >>> from tqdm import tqdm
+>>> from time import sleep
 >>> for el in tqdm([1, 2, 3], desc='Processing'):
-...     pass
-Processing: 100%|██████████████████| 3/3 [00:00<00:00, 11516.49it/s]
+...     sleep(1)
+Processing: 100%|██████████████████| 3/3 [00:03<00:00,  1.00s/it]
 ```
 
 
