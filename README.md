@@ -261,7 +261,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass.**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented (Collection, Iterable).**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -2337,7 +2337,7 @@ Progress Bar
 >>> from time import sleep
 >>> for el in tqdm([1, 2, 3], desc='Processing'):
 ...     sleep(1)
-Processing: 100%|██████████████████| 3/3 [00:03<00:00,  1.00s/it]
+Processing: 100%|████████████████████| 3/3 [00:03<00:00, 1.00s/it]
 ```
 
 
