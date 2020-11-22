@@ -69,7 +69,7 @@ const PROGRESS_BAR =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
   '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
-  'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00, 1.00s/it]\n';
+  'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
 
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +

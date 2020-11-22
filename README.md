@@ -2337,7 +2337,7 @@ Progress Bar
 >>> from time import sleep
 >>> for el in tqdm([1, 2, 3], desc='Processing'):
 ...     sleep(1)
-Processing: 100%|████████████████████| 3/3 [00:03<00:00, 1.00s/it]
+Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
 ```
 
 
