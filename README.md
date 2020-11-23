@@ -3273,7 +3273,7 @@ b  3  4
 ```python
 <DF> = pd.read_json/html('<str/path/url>')
 <DF> = pd.read_csv/pickle/excel('<path/url>')
-<DF> = pd.read_sql('<query>', <connection>)
+<DF> = pd.read_sql('<table_name/query>', <connection>)
 <DF> = pd.read_clipboard()
 ```
 
