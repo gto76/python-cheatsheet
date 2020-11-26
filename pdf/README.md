@@ -14,8 +14,10 @@ Printing to PDF
 ### Normal PDF
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the index and footer with contents of `pdf/index_for_pdf.html` file and save.
+* Change brightness of comments by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
+* Change lightness (L) percentage to 77%.
 * Open `index.html` in Chrome and select 'Print...'.
-* Select destination 'Save as PDF', paper size 'A4', margins and scale 'Default' and no headers and footers and save.
+* Select destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 50 pages long).
 
 ### PDF optimized for laser color printing
 * Run `./parse.js` again.
@@ -33,7 +35,7 @@ Printing to PDF
 * 58% for the comments.
 * Individually change brightness of every comment line that starts with: `# $ pip3 install
  ...` and of comments in basic script template to 57%, by adding `color: hsla(0, 0%, 57%, 1);` to their element.style.
-* Select 'Print...' and destination 'Save as PDF', paper size 'A4', margins and scale 'Default' and no headers and footers and save.
+* Select 'Print...' with destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 50 pages long).
 
 Adding headers and footers to PDF (the same for both files)
 -----------------------------------------------------------

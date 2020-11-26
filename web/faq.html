@@ -4,7 +4,7 @@
 
 <details open><summary><strong>What is the best way to use it?</strong></summary><br>
 &nbsp;&nbsp;&nbsp;&nbsp;I keep the text file open on separate desktop at all times. It is also in a different text editor than the one I usually use, so it's easier to switch to with <code>Ctrl+↹</code> / <code>⌘↹</code>. Cheatsheet consists of minimal text and short examples so things are easy to find with <code>Ctrl+F</code> / <code>⌘F</code>. If you're on the webpage, searching for <code>'#&lt;name&gt;'</code> will only search for the titles.<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;I also keep the Python console open at all times to test little snippets of code, to check out the available functions of a module using code completion and above all, to use <code>help(&lt;module/object/function/type&gt;)</code> command. If something is still unclear, then I search the Python docs by googling <code>'python docs &lt;module/function&gt;'</code>.
+&nbsp;&nbsp;&nbsp;&nbsp;I also keep the Python console open at all times to test little snippets of code, to check out the available functions of a module using code completion and above all, to use <code>help(&lt;module/object/function/type/str&gt;)</code> command. If something is still unclear, then I search the Python docs by googling <code>'python docs &lt;module/function&gt;'</code>.
 </details><br>
 
 <details open><summary><strong>What does the '&lt;type&gt;' signify?</strong></summary><br>
@@ -32,12 +32,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;Check out <a href="https://google.github.io/styleguide/pyguide.html">Google Style Guide</a> and use <code>Ctrl+Alt+L</code> / <code>⌥⌘L</code> shortcut in PyCharm to automatically reformat code.
 </details><br>
 
-<details open><summary><strong>Why are import statements, virtual environment, tests, packaging and installation not covered?</strong></summary><br>
+<details open><summary><strong>Why are there no blank lines between method definitions?</strong></summary><br>
+&nbsp;&nbsp;&nbsp;&nbsp;This way classes can be copy-pasted into the Python console, which would otherwise raise IndentationError.
+</details><br>
+
+<details open><summary><strong>Why are import statements, virtual environments and tests not covered?</strong></summary><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Check out <a href="https://docs.python-guide.org/">The Hitchhiker’s Guide to Python</a> for a nice overview of the mentioned topics.
 </details><br>
 
-<details open><summary><strong>Why is Django not covered?</strong></summary><br>
-&nbsp;&nbsp;&nbsp;&nbsp;Maybe it will be in the future. For now, here is a nice <a href="https://github.com/kickstartcoding/cheatsheets/blob/master/build/topical/django.jpg">Django cheatsheet</a>.
+<details open><summary><strong>Why are Flask and Django not covered?</strong></summary><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Maybe they will be in the future. For now, here is a nice <a href="https://github.com/kickstartcoding/cheatsheets/blob/master/build/topical/django.jpg">Django cheatsheet</a>.
 </details><br>
 
 <details open><summary><strong>Why are there no concrete Regex examples?</strong></summary><br>
@@ -49,7 +53,7 @@
 </details><br>
 
 <details open><summary><strong>Why is staticmethod decorator not covered in Class section?</strong></summary><br>
-&nbsp;&nbsp;&nbsp;&nbsp;Because it's of very limited use and is easy to mix up with classmethod.
+&nbsp;&nbsp;&nbsp;&nbsp;Because it is of very limited use and is easy to mix up with classmethod.
 </details><br>
 
 <details open><summary><strong>Why are descriptors not covered?</strong></summary><br>
