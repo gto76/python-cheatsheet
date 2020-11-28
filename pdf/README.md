@@ -17,7 +17,7 @@ Printing to PDF
 * Change brightness of comments by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
 * Change lightness (L) percentage to 77%.
 * Open `index.html` in Chrome and select 'Print...'.
-* Select destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 50 pages long).
+* Select destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 51 pages long with last page empty).
 
 ### PDF optimized for laser color printing
 * Run `./parse.js` again.
@@ -35,7 +35,7 @@ Printing to PDF
 * 58% for the comments.
 * Individually change brightness of every comment line that starts with: `# $ pip3 install
  ...` and of comments in basic script template to 57%, by adding `color: hsla(0, 0%, 57%, 1);` to their element.style.
-* Select 'Print...' with destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 50 pages long).
+* Select 'Print...' with destination 'Save as PDF', paper size 'A4', customised margins of top 10mm, right 9.5mm, bottom 5mm and left 10mm, 'Default' scale and no headers and footers and save (the document should be 51 pages long with last page empty).
 
 Adding headers and footers to PDF (the same for both files)
 -----------------------------------------------------------
@@ -46,7 +46,8 @@ Adding headers and footers to PDF (the same for both files)
 * Select 'Edit PDF' tab and add headers and footers by clicking 'Header & Footer' button, selecting a preset from 'Saved Settings' dropdown menu and clicking ok. Repeat the process for each preset.
 * If presets get lost, the font and the margins are as follow: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.
 * Set title and author by selecting 'File/Properties...'.
-* Save in Adobe, Optimized format.
+* Save the progress by running 'Save as' in 'Adobe PDF format'.
+* Run 'Save as' again, this time in 'Adobe optimized format', so that Menlo font error gets fixed.
 
 Printing the PDF
 ----------------
