@@ -25,7 +25,7 @@ Printing to PDF
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the index and footer with contents of `pdf/index_for_pdf_print.html` file.
 * Disable internet connection and open the file in Chrome with 'Cache killer' extension enabled.
-* Change all links in text to normal text and optionally add a page number in brackets like that: '(p. <num>)'. Links can be found with this regex: `<strong>.*a href.*</strong>`.
+* Change all links in text to normal text and add a page number in brackets like that: '(p. <num>)' by running 'pdf/remove_links.py' (Links can be found with this regex: `<strong>.*a href.*</strong>`).
 * Save and open `index.html` in Chrome.
 * Change brightness of elements by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
 * Change lightness (L) percentage to:
