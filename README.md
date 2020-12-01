@@ -1855,8 +1855,8 @@ import sqlite3
 
 ### Write
 ```python
-<con>.execute('<query>')
-<con>.commit()
+<con>.execute('<query>')                        # Can raise a subclass of sqlite3.Error.
+<con>.commit()                                  # Commits all transactions since last commit.
 ```
 
 #### Or:
