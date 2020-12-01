@@ -2060,7 +2060,7 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 
 ### Lock
 ```python
-<lock> = RLock()
+<lock> = RLock()                      # Lock that can only be released by the owner.
 <lock>.acquire()                      # Waits for lock to be available.
 <lock>.release()                      # Makes the lock available again.
 ```
