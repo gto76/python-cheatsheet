@@ -56,7 +56,3 @@ Adding headers and footers to PDF (the same for both files)
 Printing the PDF
 ----------------
 * Open a PDF that was optimized for printing in Chrome and print on A4 on both sides with default margins, scale 98% and no headers and footers.
-
-
-
-
