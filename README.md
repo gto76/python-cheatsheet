@@ -2618,19 +2618,19 @@ indexes = <array>.argmin(axis)
 * **Axis is the index of a dimension that gets collapsed. The leftmost dimension has index 0.**
 
 ### Indexing
-```python
+```bash
 <el>       = <2d_array>[0, 0]        # First element.
 <1d_view>  = <2d_array>[0]           # First row.
 <1d_view>  = <2d_array>[:, 0]        # First column. Also [..., 0].
 <3d_view>  = <2d_array>[None, :, :]  # Expanded by dimension of size 1.
 ```
 
-```python
+```bash
 <1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
 <2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
 ```
 
-```python
+```bash
 <2d_bools> = <2d_array> > 0
 <1d_array> = <2d_array>[<2d_bools>]
 ```

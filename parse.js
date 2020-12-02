@@ -532,9 +532,9 @@ function fixHighlights() {
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
-  $(`code:contains(<el>       = <2d_array>[0, 0])`).html(NUMPY_1);
-  $(`code:contains(<1d_array> = <2d_array>[<1d_row_indexes>)`).html(NUMPY_2);
-  $(`code:contains(<2d_bools> = <2d_array> > 0)`).html(NUMPY_3);
+  $(`code:contains(<el>       = <2d_array>[0, 0])`).html(NUMPY_1).removeClass().addClass("python language-python hljs");
+  $(`code:contains(<1d_array> = <2d_array>[<1d_row_indexes>)`).html(NUMPY_2).removeClass().addClass("python language-python hljs");
+  $(`code:contains(<2d_bools> = <2d_array> > 0)`).html(NUMPY_3).removeClass().addClass("python language-python hljs");
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
