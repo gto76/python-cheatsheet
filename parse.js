@@ -37,6 +37,11 @@ const LRU_CACHE =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
   '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
 
+const CONSTRUCTOR_OVERLOADING =
+  '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
+  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=<span class="hljs-keyword">None</span>)</span>:</span>\n' +
+  '        self.a = a\n';
+
 const DATACLASS =
   '<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass\n' +
   '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_attribute_names&gt;)\n' +
@@ -70,6 +75,20 @@ const PROGRESS_BAR =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
   '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
   'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
+
+const NUMPY_1 =
+  '&lt;el&gt;       = &lt;2d_array&gt;[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First element.</span>\n' +
+  '&lt;1d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-number">0</span>]           <span class="hljs-comment"># First row.</span>\n' +
+  '&lt;1d_view&gt;  = &lt;2d_array&gt;[:, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First column. Also [..., 0].</span>\n' +
+  '&lt;3d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-keyword">None</span>, :, :]  <span class="hljs-comment"># Expanded by dimension of size 1.</span>\n';
+
+const NUMPY_2 =
+  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;1d_row_indexes&gt;, &lt;1d_column_indexes&gt;]\n' +
+  '&lt;2d_array&gt; = &lt;2d_array&gt;[&lt;2d_row_indexes&gt;, &lt;2d_column_indexes&gt;]\n';
+
+const NUMPY_3 =
+  '&lt;2d_bools&gt; = &lt;2d_array&gt; &gt; <span class="hljs-number">0</span>\n' +
+  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;2d_bools&gt;]\n';
 
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +
@@ -506,12 +525,16 @@ function fixClasses() {
 
 function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
+  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
+  $(`code:contains(<el>       = <2d_array>[0, 0])`).html(NUMPY_1);
+  $(`code:contains(<1d_array> = <2d_array>[<1d_row_indexes>)`).html(NUMPY_2);
+  $(`code:contains(<2d_bools> = <2d_array> > 0)`).html(NUMPY_3);
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
