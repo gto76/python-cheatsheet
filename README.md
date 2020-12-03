@@ -1841,48 +1841,48 @@ SQLite
 **Opens a connection to the database file. Creates a new file if path doesn't exist.**
 ```python
 import sqlite3
-<con> = sqlite3.connect(<path>)                 # Also ':memory:'.
-<con>.close()                                   # Closes the connection.
+<conn> = sqlite3.connect(<path>)                # Also ':memory:'.
+<conn>.close()                                  # Closes the connection.
 ```
 
 ### Read
 **Returned values can be of type str, int, float, bytes or None.**
 ```python
-<cursor> = <con>.execute('<query>')             # Can raise a subclass of sqlite3.Error.
+<cursor> = <conn>.execute('<query>')            # Can raise a subclass of sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                  # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<con>.execute('<query>')                        # Can raise a subclass of sqlite3.Error.
-<con>.commit()                                  # Commits all transactions since last commit.
+<conn>.execute('<query>')                       # Can raise a subclass of sqlite3.Error.
+<conn>.commit()                                 # Commits all transactions since last commit.
 ```
 
 #### Or:
 ```python
-with <con>:
-    <con>.execute('<query>')
+with <conn>:
+    <conn>.execute('<query>')
 ```
 
 ### Placeholders
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
 * **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 ```python
-<con>.execute('<query>', <list/tuple>)          # Replaces '?'s in query with values.
-<con>.execute('<query>', <dict/namedtuple>)     # Replaces ':<key>'s with values.
-<con>.executemany('<query>', <coll_of_above>)   # Runs execute() multiple times.
+<conn>.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
+<conn>.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
+<conn>.executemany('<query>', <coll_of_above>)  # Runs execute() multiple times.
 ```
 
 ### Example
-**In this example values are not actually saved because `'con.commit()'` is omitted!**
+**In this example values are not actually saved because `'conn.commit()'` is omitted!**
 
 ```python
->>> con = sqlite3.connect('test.db')
->>> con.execute('create table person (person_id integer primary key, name, height)')
->>> con.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
+>>> conn = sqlite3.connect('test.db')
+>>> conn.execute('create table person (person_id integer primary key, name, height)')
+>>> conn.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
 1
->>> con.execute('select * from person').fetchall()
+>>> conn.execute('select * from person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ``` 
 
@@ -1891,8 +1891,8 @@ with <con>:
 ```python
 # $ pip3 install mysql-connector
 from mysql import connector
-<con> = connector.connect(host=<str>, …)        # `user=<str>, password=<str>, database=<str>`.
-<cursor> = <con>.cursor()                       # Only cursor has execute method.
+<conn>   = connector.connect(host=<str>, …)     # `user=<str>, password=<str>, database=<str>`.
+<cursor> = <conn>.cursor()                      # Only cursor has execute method.
 <cursor>.execute('<query>')                     # Can raise a subclass of connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.

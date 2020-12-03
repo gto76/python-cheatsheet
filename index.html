@@ -1659,49 +1659,49 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>Server-less database engine that stores each database into a separate file.</strong></p><div><h3 id="connect">Connect</h3><p><strong>Opens a connection to the database file. Creates a new file if path doesn't exist.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-&lt;con&gt; = sqlite3.connect(&lt;path&gt;)                 <span class="hljs-comment"># Also ':memory:'.</span>
-&lt;con&gt;.close()                                   <span class="hljs-comment"># Closes the connection.</span>
+&lt;conn&gt; = sqlite3.connect(&lt;path&gt;)                <span class="hljs-comment"># Also ':memory:'.</span>
+&lt;conn&gt;.close()                                  <span class="hljs-comment"># Closes the connection.</span>
 </code></pre></div></div>
 
 
 
 
-<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;con&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)             <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+<div><h3 id="read-1">Read</h3><p><strong>Returned values can be of type str, int, float, bytes or None.</strong></p><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)            <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
 
-<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;con&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                        <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
-&lt;con&gt;.commit()                                  <span class="hljs-comment"># Commits all transactions since last commit.</span>
+<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                       <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+&lt;conn&gt;.commit()                                 <span class="hljs-comment"># Commits all transactions since last commit.</span>
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;con&gt;:
-    &lt;con&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:
+    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
 </code></pre></div>
 
 <div><h3 id="placeholders">Placeholders</h3><ul>
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.</strong></li>
 <li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;con&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)          <span class="hljs-comment"># Replaces '?'s in query with values.</span>
-&lt;con&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)     <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
-&lt;con&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)   <span class="hljs-comment"># Runs execute() multiple times.</span>
+</ul><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)         <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)    <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
 </code></pre></div>
 
 
-<div><h3 id="example">Example</h3><p><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'con.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>con = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>con.execute(<span class="hljs-string">'create table person (person_id integer primary key, name, height)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>con.execute(<span class="hljs-string">'insert into person values (null, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)).lastrowid
+<div><h3 id="example">Example</h3><p><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'create table person (person_id integer primary key, name, height)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'insert into person values (null, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)).lastrowid
 <span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>con.execute(<span class="hljs-string">'select * from person'</span>).fetchall()
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'select * from person'</span>).fetchall()
 [(<span class="hljs-number">1</span>, <span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)]
 </code></pre></div>
 
 
 <div><h3 id="mysql">MySQL</h3><p><strong>Has a very similar interface, with differences listed below.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install mysql-connector</span>
 <span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector
-&lt;con&gt; = connector.connect(host=&lt;str&gt;, …)        <span class="hljs-comment"># `user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;`.</span>
-&lt;cursor&gt; = &lt;con&gt;.cursor()                       <span class="hljs-comment"># Only cursor has execute method.</span>
+&lt;conn&gt;   = connector.connect(host=&lt;str&gt;, …)     <span class="hljs-comment"># `user=&lt;str&gt;, password=&lt;str&gt;, database=&lt;str&gt;`.</span>
+&lt;cursor&gt; = &lt;conn&gt;.cursor()                      <span class="hljs-comment"># Only cursor has execute method.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                     <span class="hljs-comment"># Can raise a subclass of connector.Error.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)       <span class="hljs-comment"># Replaces '%s's in query with values.</span>
 &lt;cursor&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)  <span class="hljs-comment"># Replaces '%(&lt;key&gt;)s's with values.</span>
