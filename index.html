@@ -1188,7 +1188,7 @@ Hello World!
 <li><strong>Only required methods are len() and getitem().</strong></li>
 <li><strong>Getitem() should return an item at index or raise IndexError.</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
-<li><strong>Reversed() automatically works on any object that has getitem() and len() defined.</strong></li>
+<li><strong>Reversed() automatically works on any object that has len() and getitem() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -2734,8 +2734,8 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃
 ┃           rsuffix=<span class="hljs-string">'r'</span>, │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x yl yr  z │ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ Uses <span class="hljs-string">'left'</span> by default.  ┃
-┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If <span class="hljs-string">'r'</span> is a series, it   ┃
-┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ is first converted to DF.┃
+┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If r is a series, it is  ┃
+┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ first converted to DF.   ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃

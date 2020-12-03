@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 MATCHES = {
-    '<strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong>': '<strong>Module operator (p. 31) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions above.</strong>',
+    '<strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong>': '<strong>Module operator (p. 31) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions (p. 11) above.</strong>',
     '<strong><code class="python hljs"><span class="hljs-string">\'!r\'</span></code> calls object\'s <a href="#class">repr()</a> method, instead of <a href="#class">str()</a>, to get a string.</strong>': '<strong><code class="python hljs"><span class="hljs-string">\'!r\'</span></code> calls object\'s repr() method, instead of str(), to get a string (p. 14).</strong>',
     '<strong>Default_factory can be any <a href="#callable">callable</a>.</strong>': '<strong>Default_factory can be any callable (p. 17).</strong>',
     '<strong>Iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong>': '<strong>Iterators returned by the iter() function, such as list_iterator and set_iterator (p. 3).</strong>',

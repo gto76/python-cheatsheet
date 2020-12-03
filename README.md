@@ -1237,7 +1237,7 @@ class MyCollection:
 * **Only required methods are len() and getitem().**
 * **Getitem() should return an item at index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
-* **Reversed() automatically works on any object that has getitem() and len() defined.**
+* **Reversed() automatically works on any object that has len() and getitem() defined.**
 ```python
 class MySequence:
     def __init__(self, a):
@@ -3210,8 +3210,8 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 | l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If 'r' is a series, it   |
-|                        | c  .  .  6  7 |            |            | is first converted to DF.|
+|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a series, it is  |
+|                        | c  .  .  6  7 |            |            | first converted to DF.   |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
