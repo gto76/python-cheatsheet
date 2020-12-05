@@ -2761,7 +2761,7 @@ from PIL import ImageDraw
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'outline=<color>'` to set the secondary color.**
-* **Color can be specified as a tuple, int, `'#rrggbb'` string or a color name.**
+* **Color can be specified as a int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation
