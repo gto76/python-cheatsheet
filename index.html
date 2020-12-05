@@ -2710,7 +2710,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)          <span class="hljs-comment"># Replaces row keys with values from a column.</span>
-&lt;DF&gt;    = &lt;DF&gt;.reset_index()                  <span class="hljs-comment"># Moves row keys to their own column.</span>
+&lt;DF&gt;    = &lt;DF&gt;.reset_index()                  <span class="hljs-comment"># Moves row keys to column named index.</span>
 &lt;DF&gt;    = &lt;DF&gt;.filter(<span class="hljs-string">'&lt;regex&gt;'</span>, axis=<span class="hljs-number">1</span>)      <span class="hljs-comment"># Only keeps columns whose key matches the regex.</span>
 &lt;DF&gt;    = &lt;DF&gt;.melt(id_vars=column_key/s)     <span class="hljs-comment"># Converts DF from wide to long format.</span>
 </code></pre>
