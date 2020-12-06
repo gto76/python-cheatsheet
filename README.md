@@ -2940,8 +2940,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-<bool> = <Rect>.collidepoint((x, y))            # Tests if a point is inside the rectangle.
-<bool> = <Rect>.colliderect(<Rect>)             # Tests if two rectangles overlap.
+<bool> = <Rect>.collidepoint((x, y))            # Tests if point is inside the rectangle.
+<bool> = <Rect>.colliderect(<Rect>)             # Tests if the two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding Rects.
 ```
@@ -2949,14 +2949,14 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Surface
 **Object for representing images.**
 ```python
-<Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
-<Surf> = pg.Surface((width, height) [, ...])    # New RGB surface. Add `pg.SRCALPHA` for RGBA.
+<Surf> = pg.display.set_mode((width, height))   # Returns display surface.
+<Surf> = pg.Surface((width, height), …)         # New RGB surface. Add `pg.SRCALPHA` for RGBA.
 <Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
 ```python
-<Surf>.fill(color)                              # Fills the whole surface.
+<Surf>.fill(color)                              # Tuple, Color('#rrggbb[aa]') or Color(<name>).
 <Surf>.set_at((x, y), color)                    # Updates pixel.
 <Surf>.blit(<Surf>, (x, y))                     # Draws passed surface to the surface.
 ```
@@ -2964,7 +2964,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```python
 <Surf> = pg.transform.scale(<Surf>, (width, height))
 <Surf> = pg.transform.rotate(<Surf>, degrees)
-<Surf> = pg.transform.flip(<Surf>, xbool, ybool)
+<Surf> = pg.transform.flip(<Surf>, x_bool, y_bool)
 ```
 
 ```python

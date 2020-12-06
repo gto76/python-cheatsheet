@@ -2516,25 +2516,25 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Tests if a point is inside the rectangle.</span>
-&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Tests if two rectangles overlap.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Tests if point is inside the rectangle.</span>
+&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Tests if the two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indexes of all colliding Rects.</span>
 </code></pre>
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Returns the display surface.</span>
-&lt;Surf&gt; = pg.Surface((width, height) [, ...])    <span class="hljs-comment"># New RGB surface. Add `pg.SRCALPHA` for RGBA.</span>
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Returns display surface.</span>
+&lt;Surf&gt; = pg.Surface((width, height), …)         <span class="hljs-comment"># New RGB surface. Add `pg.SRCALPHA` for RGBA.</span>
 &lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>)                <span class="hljs-comment"># Loads the image. Format depends on source.</span>
 &lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Fills the whole surface.</span>
+<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Tuple, Color('#rrggbb[aa]') or Color(&lt;name&gt;).</span>
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
 &lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)
-&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, xbool, ybool)
+&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, x_bool, y_bool)
 </code></pre>
 <pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)
 pg.draw.arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_radians, to_radians)
