@@ -92,6 +92,13 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
 ```
+* **Seting default**
+```python
+from collections import defaultdict
+d = defaultdict(lambda : "Default")
+d["key"] = "value"
+```
+
 
 ### Counter
 ```python
