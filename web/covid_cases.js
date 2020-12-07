@@ -2267,6 +2267,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
               "b": 0,
               "t": 24
             },
+            "plot_bgcolor": "rgba(255, 255 255, 0.9)",
             "paper_bgcolor": "rgba(255, 255 255, 0.9)",
             "template": {
               "data": {
