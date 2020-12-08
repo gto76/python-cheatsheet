@@ -2940,8 +2940,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-<bool> = <Rect>.collidepoint((x, y))            # Tests if point is inside the rectangle.
-<bool> = <Rect>.colliderect(<Rect>)             # Tests if the two rectangles overlap.
+<bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains a point.
+<bool> = <Rect>.colliderect(<Rect>)             # Checks if two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding Rects.
 ```
