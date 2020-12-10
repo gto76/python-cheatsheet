@@ -16,12 +16,13 @@ Printing to PDF
 * Then replace the index and footer with contents of `pdf/index_for_pdf.html` file and save.
 * Disable internet connection and open the file in Chrome with 'Cache killer' extension enabled.
 * Change brightness of comments by right clicking on one of them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows. Change lightness (L) percentage to 77%.
+* Change the brightness of text to 13%.
 * Select 'Print...' with destination 'Save as PDF', paper size 'A4', 'Default' margins (top 10mm, right 9.5mm, bottom 8mm and left 10mm), 'Default' scale and no headers and footers and save (the document should be 51 pages long with last page empty).
 * Check if plots were rendered correctly.
 
 ### PDF optimized for laser color printing
 * Run `./parse.js` again.
-* Change all links in text to normal text and add a page number in brackets like that: '(p. <num>)' by running 'pdf/remove_links.py' (Links can be found with this regex: `<strong>.*a href.*</strong>`).
+* Change all links in text to normal text and add a page number in brackets like that: '(p. <page_num>)' by running './pdf/remove_links.py' (Links can be found with this regex: `<strong>.*a href.*</strong>`).
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the index and footer with contents of `pdf/index_for_pdf_print.html` file.
 * Save.

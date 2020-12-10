@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Usage: node test.js
+// Usage: node parse.js
 // Script that creates index.html out of web/template.html and README.md.
 // It is written in JS because this code used to be executed on the client side.
 // To install dependencies run:
