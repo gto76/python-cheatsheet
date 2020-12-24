@@ -2125,6 +2125,7 @@ elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
+union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
@@ -2252,11 +2253,9 @@ Eval
 ----
 ```python
 >>> from ast import literal_eval
->>> literal_eval('1 + 2')
-3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
->>> literal_eval('abs(1)')
+>>> literal_eval('1 + 2')
 ValueError: malformed node or string
 ```
 

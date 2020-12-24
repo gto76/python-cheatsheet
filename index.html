@@ -1880,6 +1880,7 @@ elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
+union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
 LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span> : op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
@@ -1968,11 +1969,9 @@ MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="eval"><a href="#eval" name="eval">#</a>Eval</h2><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval
-<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'1 + 2'</span>)
-<span class="hljs-number">3</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'[1, 2, 3]'</span>)
 [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'abs(1)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>literal_eval(<span class="hljs-string">'1 + 2'</span>)
 ValueError: malformed node or string
 </code></pre></div>
 
