@@ -31,7 +31,7 @@ const TOC_MOBILE =
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>,\n' +
   '                       <a href="#introspection">Introspection</a>,\n' +
   '                       <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>,\n' +
-  '                       <a href="#coroutine">Coroutine</a>],\n' +
+  '                       <a href="#coroutines">Coroutine</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>,\n' +
   '                       <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>,\n' +
   '                       <a href="#web">Web</a>, <a href="#profiling">Profile</a>, <a href="#numpy">NumPy</a>,\n' +
