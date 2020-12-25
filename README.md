@@ -3487,10 +3487,10 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 #
 
 from sys import argv, exit
-from collections import namedtuple
+from collections import Counter, defaultdict, namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-import re
+import functools, itertools, operator as op, re
 
 
 def main():
