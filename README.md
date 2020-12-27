@@ -2319,7 +2319,8 @@ async def view(state, screen):
             screen.addstr(p.y, p.x, str(id_))
         await asyncio.sleep(0.01)  
 
-curses.wrapper(main)
+if __name__ == '__main__':
+    curses.wrapper(main)
 ```
 <br>
 

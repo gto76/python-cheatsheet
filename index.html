@@ -2042,7 +2042,8 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
             screen.addstr(p.y, p.x, str(id_))
         <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.01</span>)  
 
-curses.wrapper(main)
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    curses.wrapper(main)
 </code></pre></div></div>
 
 
