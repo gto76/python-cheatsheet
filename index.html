@@ -1847,7 +1847,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                      <span class="hljs-comment"># Lock that can only be released by the owner.</span>
 &lt;lock&gt;.acquire()                      <span class="hljs-comment"># Waits for lock to be available.</span>
-&lt;lock&gt;.release()                      <span class="hljs-comment"># Makes the lock available again.</span>
+&lt;lock&gt;.release()                      <span class="hljs-comment"># Makes lock available again.</span>
 </code></pre></div>
 
 <div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
@@ -2520,8 +2520,8 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre></div></div>
 
 
-<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># X and y are coordinates of topleft corner.</span>
-&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left.</span>
+<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Floats get truncated into ints.</span>
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((x, y))                    <span class="hljs-comment"># Use move_ip() to move in place.</span>
 </code></pre></div>

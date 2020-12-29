@@ -2062,7 +2062,7 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 ```python
 <lock> = RLock()                      # Lock that can only be released by the owner.
 <lock>.acquire()                      # Waits for lock to be available.
-<lock>.release()                      # Makes the lock available again.
+<lock>.release()                      # Makes lock available again.
 ```
 
 #### Or:
@@ -2931,8 +2931,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rectangle
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(x, y, width, height)           # X and y are coordinates of topleft corner.
-<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left.
+<Rect> = pg.Rect(x, y, width, height)           # Floats get truncated into ints.
+<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
 <tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft.
 <Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in place.
 ```
