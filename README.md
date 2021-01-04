@@ -623,8 +623,8 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ, at midnight.
-<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since Epoch.
-<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since Epoch.
+<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
+<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
 * **Epoch on Unix systems is: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -634,8 +634,8 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds'.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
-<float>  = <DTn>.timestamp()                # Seconds since Epoch, from DTn in local tz.
-<float>  = <DTa>.timestamp()                # Seconds since Epoch, from DTa.
+<float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
+<float>  = <DTa>.timestamp()                # Seconds since the Epoch, from DTa.
 ```
 
 ### Format
