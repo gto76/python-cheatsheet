@@ -1855,7 +1855,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     ...
 </code></pre></div>
 
-<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)      <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
+<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)      <span class="hljs-comment"># Lock that can be acquired by 'value' threads at once.</span>
 &lt;Event&gt;     = Event()                 <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
 &lt;Barrier&gt;   = Barrier(n_times)        <span class="hljs-comment"># Method wait() blocks until it's called 'n_times'.</span>
 </code></pre></div>
