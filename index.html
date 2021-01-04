@@ -2353,7 +2353,7 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - 3x8-bit pixels, Hue, Saturation, Value color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 size = WIDTH * HEIGHT
-hues = [<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size)]
+hues = (<span class="hljs-number">255</span> * i/size <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size))
 img = Image.new(<span class="hljs-string">'HSV'</span>, (WIDTH, HEIGHT))
 img.putdata([(int(h), <span class="hljs-number">255</span>, <span class="hljs-number">255</span>) <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> hues])
 img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
