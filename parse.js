@@ -229,16 +229,16 @@ const DIAGRAM_7_B =
 
 const DIAGRAM_8_A =
   '+-----------+------------+------------+------------+\n' +
-  '|           |    list    |    dict    |    set     |\n' +
+  '|           |    List    |    Set     |    Dict    |\n' +
   '+-----------+------------+------------+------------+\n';
 
 const DIAGRAM_8_B =
   '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
-  '┃           │    list    │    dict    │    set     ┃\n' +
+  '┃           │    List    │    Set     │    Dict    ┃\n' +
   '┠───────────┼────────────┼────────────┼────────────┨\n' +
-  '┃ getitem() │ IndexError │  KeyError  │            ┃\n' +
   '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
-  '┃ remove()  │ ValueError │            │  KeyError  ┃\n' +
+  '┃ getitem() │ IndexError │            │  KeyError  ┃\n' +
+  '┃ remove()  │ ValueError │  KeyError  │            ┃\n' +
   '┃ index()   │ ValueError │            │            ┃\n' +
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
 

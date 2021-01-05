@@ -1427,11 +1427,11 @@ BaseException
 #### Collections and their exceptions:
 ```text
 +-----------+------------+------------+------------+
-|           |    list    |    dict    |    set     |
+|           |    List    |    Set     |    Dict    |
 +-----------+------------+------------+------------+
-| getitem() | IndexError |  KeyError  |            |
 | pop()     | IndexError |  KeyError  |  KeyError  |
-| remove()  | ValueError |            |  KeyError  |
+| getitem() | IndexError |            |  KeyError  |
+| remove()  | ValueError |  KeyError  |            |
 | index()   | ValueError |            |            |
 +-----------+------------+------------+------------+
 ```
