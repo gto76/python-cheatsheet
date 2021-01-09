@@ -2059,13 +2059,13 @@ Processing: 100%|████████████████████| 3
 
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
-<span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot
-pyplot.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
-pyplot.plot(&lt;x_data&gt;, &lt;y_data&gt;)
-pyplot.legend()                                <span class="hljs-comment"># Adds a legend.</span>
-pyplot.savefig(&lt;path&gt;)                         <span class="hljs-comment"># Saves the figure.</span>
-pyplot.show()                                  <span class="hljs-comment"># Displays the figure.</span>
-pyplot.clf()                                   <span class="hljs-comment"># Clears the figure.</span>
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+plt.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
+plt.plot(&lt;x_data&gt;, &lt;y_data&gt;)
+plt.legend()                                   <span class="hljs-comment"># Adds a legend.</span>
+plt.savefig(&lt;path&gt;)                            <span class="hljs-comment"># Saves the figure.</span>
+plt.show()                                     <span class="hljs-comment"># Displays the figure.</span>
+plt.clf()                                      <span class="hljs-comment"># Clears the figure.</span>
 </code></pre></div>
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
@@ -2228,16 +2228,16 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1   1128.0   1128.0     27.4      a = [*range(10000)]
-     4      1   2994.0   2994.0     72.6      b = {*range(10000)}
+     3      1    955.0    955.0     43.7      a = [*range(10000)]
+     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
 </code></pre>
 <pre><code class="text language-text">$ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
-     1        35.387 MiB     35.387 MiB   @profile
+     1        37.668 MiB     37.668 MiB   @profile
      2                                    def main():
-     3        35.734 MiB      0.348 MiB       a = [*range(10000)]
-     4        36.160 MiB      0.426 MiB       b = {*range(10000)}
+     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
+     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 </code></pre>
 <div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
 <span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> output, PyCallGraph
@@ -2385,7 +2385,7 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the secondary color.</strong></li>
 <li><strong>Color can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
 </ul>
-<div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pillow imageio</span>
+<div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
 WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
@@ -2972,7 +2972,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
 <span class="hljs-comment">#</span>
 
 <span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv, exit
-<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter, defaultdict, namedtuple
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict, namedtuple
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
 <span class="hljs-keyword">import</span> functools, itertools, operator <span class="hljs-keyword">as</span> op, re

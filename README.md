@@ -2344,13 +2344,13 @@ Plot
 ----
 ```python
 # $ pip3 install matplotlib
-from matplotlib import pyplot
-pyplot.plot(<y_data> [, label=<str>])
-pyplot.plot(<x_data>, <y_data>)
-pyplot.legend()                                # Adds a legend.
-pyplot.savefig(<path>)                         # Saves the figure.
-pyplot.show()                                  # Displays the figure.
-pyplot.clf()                                   # Clears the figure.
+import matplotlib.pyplot as plt
+plt.plot(<y_data> [, label=<str>])
+plt.plot(<x_data>, <y_data>)
+plt.legend()                                   # Adds a legend.
+plt.savefig(<path>)                            # Saves the figure.
+plt.show()                                     # Displays the figure.
+plt.clf()                                      # Clears the figure.
 ```
 
 
@@ -2557,18 +2557,18 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1   1128.0   1128.0     27.4      a = [*range(10000)]
-     4      1   2994.0   2994.0     72.6      b = {*range(10000)}
+     3      1    955.0    955.0     43.7      a = [*range(10000)]
+     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
 ```
 
 ```text
 $ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
-     1        35.387 MiB     35.387 MiB   @profile
+     1        37.668 MiB     37.668 MiB   @profile
      2                                    def main():
-     3        35.734 MiB      0.348 MiB       a = [*range(10000)]
-     4        36.160 MiB      0.426 MiB       b = {*range(10000)}
+     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
+     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 ```
 
 ### Call Graph
@@ -2766,7 +2766,7 @@ Animation
 ---------
 #### Creates a GIF of a bouncing ball:
 ```python
-# $ pip3 install pillow imageio
+# $ pip3 install imageio
 from PIL import Image, ImageDraw
 import imageio
 WIDTH, R = 126, 10
@@ -3486,7 +3486,7 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 #
 
 from sys import argv, exit
-from collections import Counter, defaultdict, namedtuple
+from collections import defaultdict, namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
 import functools, itertools, operator as op, re
