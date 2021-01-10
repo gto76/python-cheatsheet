@@ -3209,23 +3209,23 @@ c  6  7
 | l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
 |           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a series, it is  |
-|                        | c  .  .  6  7 |            |            | first converted to DF.   |
+|                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
-|           join=…)      | b  3   4   .  |     4      |            | By default works the     |
-|                        | b  .   4   5  |     4      |            | same as `l.append(r)`.   |
-|                        | c  .   6   7  |     6      |            |                          |
+|           join=…)      | b  3   4   .  |     4      |            | A series is treated as a |
+|                        | b  .   4   5  |     4      |            | column. Use l.append(r)  |
+|                        | c  .   6   7  |     6      |            | to add a row instead.    |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
-|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end.               |
-|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | Uses 'outer' by default. |
-|                        | c  .  .  6  7 |            |            |                          |
+|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
+|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A series is  |
+|                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
-|                        | a  1   2   .  |            |            | columns.                 |
-|                        | b  3   4   5  |            |            |                          |
-|                        | c  .   6   7  |            |            |                          |
+|                        | a  1   2   .  |            |            | columns. Also updates    |
+|                        | b  3   4   5  |            |            | cells that contain NaN.  |
+|                        | c  .   6   7  |            |            | R must be a DataFrame.   |
 +------------------------+---------------+------------+------------+--------------------------+
 ```
 

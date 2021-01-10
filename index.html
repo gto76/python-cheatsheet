@@ -2746,23 +2746,23 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃
 ┃           rsuffix=<span class="hljs-string">'r'</span>, │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x yl yr  z │ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ Uses <span class="hljs-string">'left'</span> by default.  ┃
 ┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If r is a series, it is  ┃
-┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ first converted to DF.   ┃
+┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.     ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
-┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ By default works the     ┃
-┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ same as `l.append(r)`.   ┃
-┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │                          ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ A series is treated as a ┃
+┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. Use l.append(r)  ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │ to add a row instead.    ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
-┃           axis=<span class="hljs-number">1</span>,      │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x  y  y  z │            │ right end.               ┃
-┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
-┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │                          ┃
+┃           axis=<span class="hljs-number">1</span>,      │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x  y  y  z │            │ right end. Uses <span class="hljs-string">'outer'</span>  ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            │ by default. A series is  ┃
+┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.     ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
-┃                        │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │            │            │ columns.                 ┃
-┃                        │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │            │                          ┃
-┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │                          ┃
+┃                        │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │            │            │ columns. Also updates    ┃
+┃                        │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │            │ cells that contain NaN.  ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ R must be a DataFrame.   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h4 id="aggregatetransformmap-1">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(&lt;agg_func&gt;)</span>

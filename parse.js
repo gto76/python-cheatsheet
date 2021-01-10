@@ -347,23 +347,23 @@ const DIAGRAM_15_B =
   "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃\n" +
   "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
   "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a series, it is  ┃\n" +
-  "┃                        │ c  .  .  6  7 │            │            │ first converted to DF.   ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
-  "┃           join=…)      │ b  3   4   .  │     4      │            │ By default works the     ┃\n" +
-  "┃                        │ b  .   4   5  │     4      │            │ same as `l.append(r)`.   ┃\n" +
-  "┃                        │ c  .   6   7  │     6      │            │                          ┃\n" +
+  "┃           join=…)      │ b  3   4   .  │     4      │            │ A series is treated as a ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(r)  ┃\n" +
+  "┃                        │ c  .   6   7  │     6      │            │ to add a row instead.    ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
-  "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end.               ┃\n" +
-  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ Uses 'outer' by default. ┃\n" +
-  "┃                        │ c  .  .  6  7 │            │            │                          ┃\n" +
+  "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'  ┃\n" +
+  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A series is  ┃\n" +
+  "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +
-  "┃                        │ a  1   2   .  │            │            │ columns.                 ┃\n" +
-  "┃                        │ b  3   4   5  │            │            │                          ┃\n" +
-  "┃                        │ c  .   6   7  │            │            │                          ┃\n" +
+  "┃                        │ a  1   2   .  │            │            │ columns. Also updates    ┃\n" +
+  "┃                        │ b  3   4   5  │            │            │ cells that contain NaN.  ┃\n" +
+  "┃                        │ c  .   6   7  │            │            │ R must be a DataFrame.   ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_16_A =
