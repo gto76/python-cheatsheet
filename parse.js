@@ -236,8 +236,8 @@ const DIAGRAM_8_B =
   '┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
   '┃           │    List    │    Set     │    Dict    ┃\n' +
   '┠───────────┼────────────┼────────────┼────────────┨\n' +
-  '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
   '┃ getitem() │ IndexError │            │  KeyError  ┃\n' +
+  '┃ pop()     │ IndexError │  KeyError  │  KeyError  ┃\n' +
   '┃ remove()  │ ValueError │  KeyError  │            ┃\n' +
   '┃ index()   │ ValueError │            │            ┃\n' +
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';

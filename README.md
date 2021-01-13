@@ -1429,8 +1429,8 @@ BaseException
 +-----------+------------+------------+------------+
 |           |    List    |    Set     |    Dict    |
 +-----------+------------+------------+------------+
-| pop()     | IndexError |  KeyError  |  KeyError  |
 | getitem() | IndexError |            |  KeyError  |
+| pop()     | IndexError |  KeyError  |  KeyError  |
 | remove()  | ValueError |  KeyError  |            |
 | index()   | ValueError |            |            |
 +-----------+------------+------------+------------+
