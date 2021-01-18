@@ -362,7 +362,7 @@ const DIAGRAM_15_B =
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +
   "┃                        │ a  1   2   .  │            │            │ columns. Also updates    ┃\n" +
-  "┃                        │ b  3   4   5  │            │            │ cells that contain NaN.  ┃\n" +
+  "┃                        │ b  3   4   5  │            │            │ items that contain NaN.  ┃\n" +
   "┃                        │ c  .   6   7  │            │            │ R must be a DataFrame.   ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 

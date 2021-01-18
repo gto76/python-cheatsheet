@@ -3180,9 +3180,9 @@ b  3  4
 
 ```python
 <DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
-<DF>    = <DF>.reset_index()                  # Moves row keys to column named index.
+<DF>    = <DF>.reset_index()                  # Moves row keys to a column named index.
 <DF>    = <DF>.filter('<regex>', axis=1)      # Only keeps columns whose key matches the regex.
-<DF>    = <DF>.melt(id_vars=column_key/s)     # Converts DF from wide to long format.
+<DF>    = <DF>.melt(id_vars=column_key/s)     # Converts DataFrame from wide to long format.
 ```
 
 #### Merge, Join, Concat:
@@ -3224,7 +3224,7 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 | l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
 |                        | a  1   2   .  |            |            | columns. Also updates    |
-|                        | b  3   4   5  |            |            | cells that contain NaN.  |
+|                        | b  3   4   5  |            |            | items that contain NaN.  |
 |                        | c  .   6   7  |            |            | R must be a DataFrame.   |
 +------------------------+---------------+------------+------------+--------------------------+
 ```
