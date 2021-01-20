@@ -2695,7 +2695,7 @@ from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple>`.
+<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple/str>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
 <Image>.save(<path>)                            # Selects format based on the path extension.

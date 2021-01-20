@@ -2329,7 +2329,7 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also: `color=&lt;int/tuple&gt;`.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also: `color=&lt;int/tuple/str&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
 &lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on the path extension.</span>
