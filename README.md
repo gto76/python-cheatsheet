@@ -144,7 +144,7 @@ Tuple
 **Tuple is an immutable and hashable list.**
 ```python
 <tuple> = ()
-<tuple> = (<el>, )
+<tuple> = (<el>,)
 <tuple> = (<el_1>, <el_2> [, ...])
 ```
 
