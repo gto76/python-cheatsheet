@@ -2528,7 +2528,7 @@ duration = time() - start_time
 #### High performance:
 ```python
 from time import perf_counter
-start_time = perf_counter()             # Seconds since restart.
+start_time = perf_counter()             # Seconds since the restart.
 ...
 duration = perf_counter() - start_time
 ```
