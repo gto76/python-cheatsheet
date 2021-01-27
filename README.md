@@ -3489,7 +3489,7 @@ from sys import argv, exit
 from collections import defaultdict, namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-import functools, itertools, operator as op, re
+import re, operator as op, itertools as it, functools as ft
 
 
 def main():
