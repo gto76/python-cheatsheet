@@ -511,7 +511,7 @@ from statistics import mean, median, variance, stdev, pvariance, pstdev
 
 ### Random
 ```python
-from random import random, randint, choice, shuffle
+from random import random, randint, choice, shuffle, gauss, seed
 <float> = random()
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
