@@ -586,7 +586,7 @@ Datetime
 
 ```python
 from datetime import date, time, datetime, timedelta
-from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
+from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 
 ### Constructors

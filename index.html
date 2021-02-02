@@ -667,7 +667,7 @@ shuffle(&lt;list&gt;)
 <li><strong>Time and datetime objects can be 'aware' <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code>, meaning they have defined timezone, or 'naive' <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code>, meaning they don't.</strong></li>
 <li><strong>If object is naive, it is presumed to be in the system's timezone.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, time, datetime, timedelta
-<span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> UTC, tzlocal, gettz, resolve_imaginary
+<span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 </code></pre></div>
 
 
