@@ -144,8 +144,8 @@ Tuple
 **Tuple is an immutable and hashable list.**
 ```python
 <tuple> = ()
-<tuple> = (<el>,)
-<tuple> = (<el_1>, <el_2> [, ...])
+<tuple> = (<el>,)                           # Or: <el>,
+<tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
 ```
 
 ### Named Tuple
@@ -2370,30 +2370,30 @@ with open('test.csv', encoding='utf-8', newline='') as file:
 
 Curses
 ------
-#### Clears the terminal, prints a message and waits for the ESC key press:
+#### Runs a basic file explorer in the terminal:
 ```python
-from curses import wrapper, curs_set, ascii
-from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
+from curses import wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+from os import listdir, chdir, path
 
-def main():
-    wrapper(draw)
-
-def draw(screen):
-    curs_set(0)                                # Makes cursor invisible.
-    screen.nodelay(True)                       # Makes getch() non-blocking.
-    screen.clear()
-    screen.addstr(0, 0, 'Press ESC to quit.')  # Coordinates are y, x.
-    while screen.getch() != ascii.ESC:
-        pass
-
-def get_border(screen):
-    from collections import namedtuple
-    P = namedtuple('P', 'x y')
-    height, width = screen.getmaxyx()
-    return P(width-1, height-1)
+def main(screen):
+    ch, first, selected, paths = 0, 0, 0, listdir()
+    while ch != ascii.ESC:
+        height, _ = screen.getmaxyx()
+        screen.clear()
+        for y, path_ in enumerate(paths[first : first+height]):
+            screen.addstr(y, 0, path_, A_REVERSE * (selected == first + y))
+        ch = screen.getch()
+        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
+        selected = max(0, min(len(paths)-1, selected))
+        first += (first <= selected - height) - (first > selected)
+        if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, 10, 13]:
+            new_dir = '..' if ch == KEY_LEFT else paths[selected]
+            if path.isdir(new_dir):
+                chdir(new_dir)
+                first, selected, paths = 0, 0, listdir()
 
 if __name__ == '__main__':
-    main()
+    wrapper(main)
 ```
 
 
@@ -3489,7 +3489,7 @@ from sys import argv, exit
 from collections import defaultdict, namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-import re, operator as op, itertools as it, functools as ft
+import functools as ft, itertools as it, operator as op, re
 
 
 def main():

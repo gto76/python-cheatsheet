@@ -335,8 +335,8 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 
 
 <div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()
-&lt;tuple&gt; = (&lt;el&gt;,)
-&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])
+&lt;tuple&gt; = (&lt;el&gt;,)                           <span class="hljs-comment"># Or: &lt;el&gt;,</span>
+&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])          <span class="hljs-comment"># Or: &lt;el_1&gt;, &lt;el_2&gt; [, ...]</span>
 </code></pre></div>
 
 
@@ -2078,28 +2078,28 @@ plt.clf()                                      <span class="hljs-comment"># Clea
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="clearstheterminalprintsamessageandwaitsfortheesckeypress">Clears the terminal, prints a message and waits for the ESC key press:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, curs_set, ascii
-<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> listdir, chdir, path
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    wrapper(draw)
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen)</span>:</span>
-    curs_set(<span class="hljs-number">0</span>)                                <span class="hljs-comment"># Makes cursor invisible.</span>
-    screen.nodelay(<span class="hljs-keyword">True</span>)                       <span class="hljs-comment"># Makes getch() non-blocking.</span>
-    screen.clear()
-    screen.addstr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'Press ESC to quit.'</span>)  <span class="hljs-comment"># Coordinates are y, x.</span>
-    <span class="hljs-keyword">while</span> screen.getch() != ascii.ESC:
-        <span class="hljs-keyword">pass</span>
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_border</span><span class="hljs-params">(screen)</span>:</span>
-    <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-    P = namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)
-    height, width = screen.getmaxyx()
-    <span class="hljs-keyword">return</span> P(width<span class="hljs-number">-1</span>, height<span class="hljs-number">-1</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
+    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
+    <span class="hljs-keyword">while</span> ch != ascii.ESC:
+        height, _ = screen.getmaxyx()
+        screen.clear()
+        <span class="hljs-keyword">for</span> y, path_ <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
+            screen.addstr(y, <span class="hljs-number">0</span>, path_, A_REVERSE * (selected == first + y))
+        ch = screen.getch()
+        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
+        selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
+        first += (first &lt;= selected - height) - (first &gt; selected)
+        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:
+            new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
+            <span class="hljs-keyword">if</span> path.isdir(new_dir):
+                chdir(new_dir)
+                first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
-    main()
+    wrapper(main)
 </code></pre></div></div>
 
 
@@ -2975,7 +2975,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict, namedtuple
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-<span class="hljs-keyword">import</span> re, operator <span class="hljs-keyword">as</span> op, itertools <span class="hljs-keyword">as</span> it, functools <span class="hljs-keyword">as</span> ft
+<span class="hljs-keyword">import</span> functools <span class="hljs-keyword">as</span> ft, itertools <span class="hljs-keyword">as</span> it, operator <span class="hljs-keyword">as</span> op, re
 
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
