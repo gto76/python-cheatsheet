@@ -2292,7 +2292,8 @@ async def main_coroutine(screen):
 
 async def random_controller(id_, moves):
     while True:
-        moves.put_nowait((id_, random.choice(list(D))))
+        move = id_, random.choice(list(D))
+        moves.put_nowait(move)
         await asyncio.sleep(random.random() / 2)
 
 async def human_controller(screen, moves):

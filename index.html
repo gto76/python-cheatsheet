@@ -2015,7 +2015,8 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-        moves.put_nowait((id_, random.choice(list(D))))
+        move = id_, random.choice(list(D))
+        moves.put_nowait(move)
         <span class="hljs-keyword">await</span> asyncio.sleep(random.random() / <span class="hljs-number">2</span>)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
