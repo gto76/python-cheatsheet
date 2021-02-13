@@ -57,6 +57,7 @@ list_of_chars    = list(<str>)
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
+find = <list>.find(<el>)       # Returns index of first occurrence or -1 if not found.
 index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
 <list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
 <el> = <list>.pop([index])     # Removes and returns item at index or from the end.
@@ -321,6 +322,13 @@ String
 ```
 
 ```python
+<str>  = <str>.upper()                       # Returns string in Upper Case.
+<str>  = <str>.lower()                       # Returns string in Lower Case.
+<str>  = <str>.title()                       # Returns string with first letter of every word in Upper Case and rest in Lower Case.
+<str>  = <str>.capitalize()                  # Returns string with very first letter in Upper Case and rest in Lower Case.
+```
+
+```python
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 ```
@@ -330,7 +338,6 @@ String
 <int>  = ord(<str>)                          # Converts Unicode char to int.
 ```
 * **Also: `'lstrip()'`, `'rstrip()'`.**
-* **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
 
 ### Property Methods
 ```text
