@@ -57,10 +57,10 @@ list_of_chars    = list(<str>)
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
-index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
-<list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
-<el> = <list>.pop([index])     # Removes and returns item at index or from the end.
-<list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
+<int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
+<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
+<el> = <list>.pop([<int>])     # Removes and returns item at index or from the end.
+<list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
 
@@ -309,14 +309,14 @@ String
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
 <list> = <str>.splitlines(keepends=False)    # Splits on \n,\r,\r\n. Keeps them if 'keepends'.
-<str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as separator.
+<str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as a separator.
 ```
 
 ```python
 <bool> = <sub_str> in <str>                  # Checks if string contains a substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
-<int>  = <str>.find(<sub_str>)               # Returns start index of first match or -1.
+<int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
 <int>  = <str>.index(<sub_str>)              # Same but raises ValueError if missing.
 ```
 
@@ -512,10 +512,10 @@ from statistics import mean, median, variance, stdev, pvariance, pstdev
 ### Random
 ```python
 from random import random, randint, choice, shuffle, gauss, seed
+
 <float> = random()
 <int>   = randint(from_inclusive, to_inclusive)
 <el>    = choice(<list>)
-shuffle(<list>)
 ```
 
 ### Bin, Hex
@@ -2381,8 +2381,8 @@ def main(screen):
     while ch != ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.clear()
-        for y, path_ in enumerate(paths[first : first+height]):
-            screen.addstr(y, 0, path_, A_REVERSE * (selected == first + y))
+        for y, a_path in enumerate(paths[first : first+height]):
+            screen.addstr(y, 0, a_path, A_REVERSE * (selected == first + y))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))
@@ -2448,18 +2448,19 @@ Scraping
 ```python
 # $ pip3 install requests beautifulsoup4
 import requests, bs4, sys
-URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+
+WIKI_URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
 try:
-    html  = requests.get(URL).text
-    doc   = bs4.BeautifulSoup(html, 'html.parser')
-    table = doc.find('table', class_='infobox vevent')
-    link  = table.find('th', text='Website').next_sibling.a['href']
-    ver   = table.find('th', text='Stable release').next_sibling.strings.__next__()
-    url_i = table.find('img')['src']
-    image = requests.get(f'https:{url_i}').content
+    html       = requests.get(WIKI_URL).text
+    document   = bs4.BeautifulSoup(html, 'html.parser')
+    table      = document.find('table', class_='infobox vevent')
+    python_url = table.find('th', text='Website').next_sibling.a['href']
+    version    = table.find('th', text='Stable release').next_sibling.strings.__next__()
+    logo_url   = table.find('img')['src']
+    logo       = requests.get(f'https:{logo_url}').content
     with open('test.png', 'wb') as file:
-        file.write(image)
-    print(link, ver)
+        file.write(logo)
+    print(python_url, version)
 except requests.exceptions.ConnectionError:
     print("You've got problems with connection.", file=sys.stderr)
 ```
@@ -2614,7 +2615,7 @@ indexes = <array>.argmin(axis)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is the index of a dimension that gets collapsed. The leftmost dimension has index 0.**
+* **Axis is an index of the dimension that gets collapsed. Leftmost dimension has index 0.**
 
 ### Indexing
 ```bash

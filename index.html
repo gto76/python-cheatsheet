@@ -276,10 +276,10 @@ list_of_chars    = list(&lt;str&gt;)
 <li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)     <span class="hljs-comment"># Returns number of occurrences. Also works on strings.</span>
-index = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of first occurrence or raises ValueError.</span>
-&lt;list&gt;.insert(index, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
-&lt;el&gt; = &lt;list&gt;.pop([index])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
-&lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of item or raises ValueError.</span>
+&lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
+&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
+&lt;el&gt; = &lt;list&gt;.pop([&lt;int&gt;])     <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
+&lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of the item or raises ValueError.</span>
 &lt;list&gt;.clear()                 <span class="hljs-comment"># Removes all items. Also works on dictionary and set.</span>
 </code></pre>
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;view&gt; = &lt;dict&gt;.keys()                          <span class="hljs-comment"># Coll. of keys that reflects changes.</span>
@@ -450,12 +450,12 @@ to_exclusive   = &lt;range&gt;.stop
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
 &lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on \n,\r,\r\n. Keeps them if 'keepends'.</span>
-&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as separator.</span>
+&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as a separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains a substring.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;bool&gt; = &lt;str&gt;.endswith(&lt;sub_str&gt;)           <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
-&lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of first match or -1.</span>
+&lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or -1.</span>
 &lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError if missing.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
@@ -614,10 +614,10 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, choice, shuffle, gauss, seed
+
 &lt;float&gt; = random()
 &lt;int&gt;   = randint(from_inclusive, to_inclusive)
 &lt;el&gt;    = choice(&lt;list&gt;)
-shuffle(&lt;list&gt;)
 </code></pre></div>
 
 <div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt; = ±<span class="hljs-number">0</span>b&lt;bin&gt;                         <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>
@@ -2087,8 +2087,8 @@ plt.clf()                                      <span class="hljs-comment"># Clea
     <span class="hljs-keyword">while</span> ch != ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.clear()
-        <span class="hljs-keyword">for</span> y, path_ <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
-            screen.addstr(y, <span class="hljs-number">0</span>, path_, A_REVERSE * (selected == first + y))
+        <span class="hljs-keyword">for</span> y, a_path <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
+            screen.addstr(y, <span class="hljs-number">0</span>, a_path, A_REVERSE * (selected == first + y))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
@@ -2143,18 +2143,19 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 </ul>
 <div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlversionnumberandlogofromitswikipediapage">Scrapes Python's URL, version number and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests, bs4, sys
-URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
+
+WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
 <span class="hljs-keyword">try</span>:
-    html  = requests.get(URL).text
-    doc   = bs4.BeautifulSoup(html, <span class="hljs-string">'html.parser'</span>)
-    table = doc.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
-    link  = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
-    ver   = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
-    url_i = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
-    image = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{url_i}</span>'</span>).content
+    html       = requests.get(WIKI_URL).text
+    document   = bs4.BeautifulSoup(html, <span class="hljs-string">'html.parser'</span>)
+    table      = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
+    python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
+    version    = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
+    logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
+    logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
     <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-        file.write(image)
-    print(link, ver)
+        file.write(logo)
+    print(python_url, version)
 <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:
     print(<span class="hljs-string">"You've got problems with connection."</span>, file=sys.stderr)
 </code></pre></div></div>
@@ -2270,7 +2271,7 @@ indexes = &lt;array&gt;.argmin(axis)
 </code></pre>
 <ul>
 <li><strong>Shape is a tuple of dimension sizes.</strong></li>
-<li><strong>Axis is the index of a dimension that gets collapsed. The leftmost dimension has index 0.</strong></li>
+<li><strong>Axis is an index of the dimension that gets collapsed. Leftmost dimension has index 0.</strong></li>
 </ul>
 <div><h3 id="indexing">Indexing</h3><pre><code class="python language-python hljs">&lt;el&gt;       = &lt;2d_array&gt;[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First element.</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-number">0</span>]           <span class="hljs-comment"># First row.</span>
