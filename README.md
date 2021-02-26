@@ -2050,19 +2050,19 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)  # Use `args=<collection>` to set arguments.
-<Thread>.start()                      # Starts the thread.
-<bool> = <Thread>.is_alive()          # Checks if thread has finished executing.
-<Thread>.join()                       # Waits for thread to finish.
+<Thread> = Thread(target=<function>)          # Use `args=<collection>` to set arguments.
+<Thread>.start()                              # Starts the thread.
+<bool> = <Thread>.is_alive()                  # Checks if thread has finished executing.
+<Thread>.join()                               # Waits for thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-<lock> = RLock()                      # Lock that can only be released by the owner.
-<lock>.acquire()                      # Waits for lock to be available.
-<lock>.release()                      # Makes lock available again.
+<lock> = RLock()                              # Lock that can only be released by the owner.
+<lock>.acquire()                              # Waits for lock to be available.
+<lock>.release()                              # Makes lock available again.
 ```
 
 #### Or:
@@ -2074,24 +2074,27 @@ with lock:
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)      # Lock that can be acquired by 'value' threads at once.
-<Event>     = Event()                 # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)        # Method wait() blocks until it's called 'n_times'.
+<Semaphore> = Semaphore(value=1)              # Lock that can be acquired by 'value' threads.
+<Event>     = Event()                         # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(n_times)                # Method wait() blocks until it's called n_times.
 ```
 
 ### Thread Pool Executor
+**Object that manages thread execution.**
 ```python
 from concurrent.futures import ThreadPoolExecutor
-with ThreadPoolExecutor(max_workers=None) as executor:         # Does not exit until done.
-    <iter>   = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
-    <iter>   = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
-    <Future> = executor.submit(<function> [, <arg_1>, ...])    # Also visible outside block.
 ```
 
-#### Future:
 ```python
-<bool> = <Future>.done()              # Checks if thread has finished executing.
-<obj>  = <Future>.result()            # Waits for thread to finish and returns result.
+<Exec> = ThreadPoolExecutor([max_workers])    # Use max_workers to limit the number of threads.
+<Exec>.shutdown(wait=True)                    # Or: `with ThreadPoolExecutor() as executor: …`
+```
+
+```python
+<iter> = <Exec>.map(<func>, <args_1>, ...)    # A multithreaded and non-lazy map().
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)  # Starts a thread and returns its Future object.
+<bool> = <Futr>.done()                        # Checks if thread has finished executing.
+<obj>  = <Futr>.result()                      # Waits for thread to finish and returns result.
 ```
 
 ### Queue
@@ -2102,10 +2105,10 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)                     # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)              # Raises queue.Full exception if full.
-<el> = <Queue>.get()                  # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()           # Raises queue.Empty exception if empty.
+<Queue>.put(<el>)                             # Blocks until queue stops being full.
+<Queue>.put_nowait(<el>)                      # Raises queue.Full exception if full.
+<el> = <Queue>.get()                          # Blocks until queue stops being empty.
+<el> = <Queue>.get_nowait()                   # Raises queue.Empty exception if empty.
 ```
 
 
@@ -2155,10 +2158,10 @@ delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_n
 ### Parameters
 ```python
 from inspect import signature
-<sig>        = signature(<function>)
-no_of_params = len(<sig>.parameters)
-param_names  = list(<sig>.parameters.keys())
-param_kinds  = [a.kind for a in <sig>.parameters.values()]
+<sig>  = signature(<function>)             # Signature object of the function.
+<dict> = <sig>.parameters                  # Dict of function's parameters.
+<str>  = <param>.name                      # Prameter's name.
+<memb> = <param>.kind                      # Member of ParameterKind enum.
 ```
 
 

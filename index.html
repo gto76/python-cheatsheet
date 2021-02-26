@@ -1835,19 +1835,19 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)  <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set arguments.</span>
-&lt;Thread&gt;.start()                      <span class="hljs-comment"># Starts the thread.</span>
-&lt;bool&gt; = &lt;Thread&gt;.is_alive()          <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;Thread&gt;.join()                       <span class="hljs-comment"># Waits for thread to finish.</span>
+<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)          <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set arguments.</span>
+&lt;Thread&gt;.start()                              <span class="hljs-comment"># Starts the thread.</span>
+&lt;bool&gt; = &lt;Thread&gt;.is_alive()                  <span class="hljs-comment"># Checks if thread has finished executing.</span>
+&lt;Thread&gt;.join()                               <span class="hljs-comment"># Waits for thread to finish.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
 </ul>
-<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                      <span class="hljs-comment"># Lock that can only be released by the owner.</span>
-&lt;lock&gt;.acquire()                      <span class="hljs-comment"># Waits for lock to be available.</span>
-&lt;lock&gt;.release()                      <span class="hljs-comment"># Makes lock available again.</span>
+<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                              <span class="hljs-comment"># Lock that can only be released by the owner.</span>
+&lt;lock&gt;.acquire()                              <span class="hljs-comment"># Waits for lock to be available.</span>
+&lt;lock&gt;.release()                              <span class="hljs-comment"># Makes lock available again.</span>
 </code></pre></div>
 
 <div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
@@ -1855,31 +1855,32 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     ...
 </code></pre></div>
 
-<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)      <span class="hljs-comment"># Lock that can be acquired by 'value' threads at once.</span>
-&lt;Event&gt;     = Event()                 <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(n_times)        <span class="hljs-comment"># Method wait() blocks until it's called 'n_times'.</span>
+<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)              <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
+&lt;Event&gt;     = Event()                         <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
+&lt;Barrier&gt;   = Barrier(n_times)                <span class="hljs-comment"># Method wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
-<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
-<span class="hljs-keyword">with</span> ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>) <span class="hljs-keyword">as</span> executor:         <span class="hljs-comment"># Does not exit until done.</span>
-    &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">3</span>))         <span class="hljs-comment"># (1, 2, 3)</span>
-    &lt;iter&gt;   = executor.map(<span class="hljs-keyword">lambda</span> x, y: x + y, <span class="hljs-string">'abc'</span>, <span class="hljs-string">'123'</span>)  <span class="hljs-comment"># ('a1', 'b2', 'c3')</span>
-    &lt;Future&gt; = executor.submit(&lt;function&gt; [, &lt;arg_1&gt;, ...])    <span class="hljs-comment"># Also visible outside block.</span>
+<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><p><strong>Object that manages thread execution.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
 </code></pre></div>
 
-<div><h4 id="future">Future:</h4><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()              <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;obj&gt;  = &lt;Future&gt;.result()            <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
-</code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor([max_workers])    <span class="hljs-comment"># Use max_workers to limit the number of threads.</span>
+&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                    <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as executor: …`</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)    <span class="hljs-comment"># A multithreaded and non-lazy map().</span>
+&lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)  <span class="hljs-comment"># Starts a thread and returns its Future object.</span>
+&lt;bool&gt; = &lt;Futr&gt;.done()                        <span class="hljs-comment"># Checks if thread has finished executing.</span>
+&lt;obj&gt;  = &lt;Futr&gt;.result()                      <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
+</code></pre>
 <div><h3 id="queue">Queue</h3><p><strong>A thread-safe FIFO queue. For LIFO queue use LifoQueue.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> queue <span class="hljs-keyword">import</span> Queue
 &lt;Queue&gt; = Queue(maxsize=<span class="hljs-number">0</span>)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                     <span class="hljs-comment"># Blocks until queue stops being full.</span>
-&lt;Queue&gt;.put_nowait(&lt;el&gt;)              <span class="hljs-comment"># Raises queue.Full exception if full.</span>
-&lt;el&gt; = &lt;Queue&gt;.get()                  <span class="hljs-comment"># Blocks until queue stops being empty.</span>
-&lt;el&gt; = &lt;Queue&gt;.get_nowait()           <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
+<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                             <span class="hljs-comment"># Blocks until queue stops being full.</span>
+&lt;Queue&gt;.put_nowait(&lt;el&gt;)                      <span class="hljs-comment"># Raises queue.Full exception if full.</span>
+&lt;el&gt; = &lt;Queue&gt;.get()                          <span class="hljs-comment"># Blocks until queue stops being empty.</span>
+&lt;el&gt; = &lt;Queue&gt;.get_nowait()                   <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
@@ -1913,10 +1914,10 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)   
 </code></pre></div>
 
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
-&lt;sig&gt;        = signature(&lt;function&gt;)
-no_of_params = len(&lt;sig&gt;.parameters)
-param_names  = list(&lt;sig&gt;.parameters.keys())
-param_kinds  = [a.kind <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;sig&gt;.parameters.values()]
+&lt;sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Signature object of the function.</span>
+&lt;dict&gt; = &lt;sig&gt;.parameters                  <span class="hljs-comment"># Dict of function's parameters.</span>
+&lt;str&gt;  = &lt;param&gt;.name                      <span class="hljs-comment"># Prameter's name.</span>
+&lt;memb&gt; = &lt;param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
 </code></pre></div>
 
 <div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></pre></div></div>
