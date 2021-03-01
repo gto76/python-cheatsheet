@@ -1914,10 +1914,10 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)   
 </code></pre></div>
 
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
-&lt;sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Signature object of the function.</span>
-&lt;dict&gt; = &lt;sig&gt;.parameters                  <span class="hljs-comment"># Dict of function's parameters.</span>
-&lt;str&gt;  = &lt;param&gt;.name                      <span class="hljs-comment"># Prameter's name.</span>
-&lt;memb&gt; = &lt;param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
+&lt;Sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Signature object of the function.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of function's Parameter objects.</span>
+&lt;str&gt;  = &lt;Param&gt;.name                      <span class="hljs-comment"># Parameter's name.</span>
+&lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
 </code></pre></div>
 
 <div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></pre></div></div>
@@ -2546,15 +2546,15 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Surf&gt; = pg.transform.scale(&lt;Surf&gt;, (width, height))
-&lt;Surf&gt; = pg.transform.rotate(&lt;Surf&gt;, degrees)
-&lt;Surf&gt; = pg.transform.flip(&lt;Surf&gt;, x_bool, y_bool)
+<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pygame.transform <span class="hljs-keyword">as</span> tr
+&lt;Surf&gt; = tr.scale(&lt;Surf&gt;, (width, height))      <span class="hljs-comment"># Returns scaled surface.</span>
+&lt;Surf&gt; = tr.rotate(&lt;Surf&gt;, degrees)             <span class="hljs-comment"># Returns rotated and scaled surface.</span>
+&lt;Surf&gt; = tr.flip(&lt;Surf&gt;, x_bool, y_bool)        <span class="hljs-comment"># Returns flipped surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs">pg.draw.line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)
-pg.draw.arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_radians, to_radians)
-pg.draw.rect(&lt;Surf&gt;, color, &lt;Rect&gt;)
-pg.draw.polygon(&lt;Surf&gt;, color, points)
-pg.draw.ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, arc, rect
+line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
+arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also: ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)</span>
+rect(&lt;Surf&gt;, color, &lt;Rect&gt;)                     <span class="hljs-comment"># Also: polygon(&lt;Surf&gt;, color, points)</span>
 </code></pre>
 <div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size)        <span class="hljs-comment"># Loads the system font or default if missing.</span>
 &lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)           <span class="hljs-comment"># Loads the TTF file. Pass None for default.</span>

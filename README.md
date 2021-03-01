@@ -2158,10 +2158,10 @@ delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_n
 ### Parameters
 ```python
 from inspect import signature
-<sig>  = signature(<function>)             # Signature object of the function.
-<dict> = <sig>.parameters                  # Dict of function's parameters.
-<str>  = <param>.name                      # Prameter's name.
-<memb> = <param>.kind                      # Member of ParameterKind enum.
+<Sig>  = signature(<function>)             # Signature object of the function.
+<dict> = <Sig>.parameters                  # Dict of function's Parameter objects.
+<str>  = <Param>.name                      # Parameter's name.
+<memb> = <Param>.kind                      # Member of ParameterKind enum.
 ```
 
 
@@ -2965,17 +2965,17 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-<Surf> = pg.transform.scale(<Surf>, (width, height))
-<Surf> = pg.transform.rotate(<Surf>, degrees)
-<Surf> = pg.transform.flip(<Surf>, x_bool, y_bool)
+import pygame.transform as tr
+<Surf> = tr.scale(<Surf>, (width, height))      # Returns scaled surface.
+<Surf> = tr.rotate(<Surf>, degrees)             # Returns rotated and scaled surface.
+<Surf> = tr.flip(<Surf>, x_bool, y_bool)        # Returns flipped surface.
 ```
 
 ```python
-pg.draw.line(<Surf>, color, (x1, y1), (x2, y2), width)
-pg.draw.arc(<Surf>, color, <Rect>, from_radians, to_radians)
-pg.draw.rect(<Surf>, color, <Rect>)
-pg.draw.polygon(<Surf>, color, points)
-pg.draw.ellipse(<Surf>, color, <Rect>)
+from pygame.draw import line, arc, rect
+line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
+arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
+rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
 ```
 
 ### Font
