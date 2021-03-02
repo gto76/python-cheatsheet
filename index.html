@@ -615,9 +615,9 @@ to_exclusive   = &lt;range&gt;.stop
 
 <div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, choice, shuffle, gauss, seed
 
-&lt;float&gt; = random()
-&lt;int&gt;   = randint(from_inclusive, to_inclusive)
-&lt;el&gt;    = choice(&lt;list&gt;)
+&lt;float&gt; = random()                       <span class="hljs-comment"># A float inside [0, 1).</span>
+&lt;int&gt;   = randint(from_inc, to_inc)      <span class="hljs-comment"># An int inside [from_inc, to_inc].</span>
+&lt;el&gt;    = choice(&lt;list&gt;)                 <span class="hljs-comment"># Keeps the list intact.</span>
 </code></pre></div>
 
 <div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt; = ±<span class="hljs-number">0</span>b&lt;bin&gt;                         <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>
@@ -694,13 +694,13 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = UTC                              <span class="hljs-comment"># UTC timezone. London without DST.</span>
 &lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone. Also gettz().</span>
 &lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Continent&gt;/&lt;City&gt;'</span>)      <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
-&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to passed timezone.</span>
-&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with new timezone.</span>
+&lt;DTa&gt;    = &lt;DT&gt;.astimezone(&lt;tzinfo&gt;)        <span class="hljs-comment"># Datetime, converted to the passed timezone.</span>
+&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Unconverted object with a new timezone.</span>
 </code></pre></div>
 
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
-&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since Christ, at midnight.</span>
+&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since the Gregorian NYE 1.</span>
 &lt;DTn&gt;    = DT.fromtimestamp(&lt;real&gt;)         <span class="hljs-comment"># Local time DTn from seconds since the Epoch.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
 </code></pre></div>
@@ -711,7 +711,7 @@ to_exclusive   = &lt;range&gt;.stop
 </ul>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also timespec='auto/hours/minutes/seconds'.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
-&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Christ, ignoring time and tz.</span>
+&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Gregorian NYE 1, ignoring time and tz.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTn in local tz.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTa.</span>
 </code></pre></div>
@@ -1835,19 +1835,19 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)          <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set arguments.</span>
-&lt;Thread&gt;.start()                              <span class="hljs-comment"># Starts the thread.</span>
-&lt;bool&gt; = &lt;Thread&gt;.is_alive()                  <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;Thread&gt;.join()                               <span class="hljs-comment"># Waits for thread to finish.</span>
+<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set arguments.</span>
+&lt;Thread&gt;.start()                               <span class="hljs-comment"># Starts the thread.</span>
+&lt;bool&gt; = &lt;Thread&gt;.is_alive()                   <span class="hljs-comment"># Checks if thread has finished executing.</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for thread to finish.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
 </ul>
-<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                              <span class="hljs-comment"># Lock that can only be released by the owner.</span>
-&lt;lock&gt;.acquire()                              <span class="hljs-comment"># Waits for lock to be available.</span>
-&lt;lock&gt;.release()                              <span class="hljs-comment"># Makes lock available again.</span>
+<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                               <span class="hljs-comment"># Lock that can only be released by the owner.</span>
+&lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for lock to be available.</span>
+&lt;lock&gt;.release()                               <span class="hljs-comment"># Makes lock available again.</span>
 </code></pre></div>
 
 <div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
@@ -1855,32 +1855,32 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     ...
 </code></pre></div>
 
-<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)              <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
-&lt;Event&gt;     = Event()                         <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(n_times)                <span class="hljs-comment"># Method wait() blocks until it's called n_times.</span>
+<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
+&lt;Event&gt;     = Event()                          <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
+&lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><p><strong>Object that manages thread execution.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor([max_workers])    <span class="hljs-comment"># Use max_workers to limit the number of threads.</span>
-&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                    <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as executor: …`</span>
+<pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
+&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Cleans-up the resources associated with Exec.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)    <span class="hljs-comment"># A multithreaded and non-lazy map().</span>
-&lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)  <span class="hljs-comment"># Starts a thread and returns its Future object.</span>
-&lt;bool&gt; = &lt;Futr&gt;.done()                        <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;obj&gt;  = &lt;Futr&gt;.result()                      <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># A multithreaded and non-lazy map().</span>
+&lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Starts a thread and returns its Future object.</span>
+&lt;bool&gt; = &lt;Futr&gt;.done()                         <span class="hljs-comment"># Checks if the thread has finished executing.</span>
+&lt;obj&gt;  = &lt;Futr&gt;.result()                       <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
 </code></pre>
 <div><h3 id="queue">Queue</h3><p><strong>A thread-safe FIFO queue. For LIFO queue use LifoQueue.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> queue <span class="hljs-keyword">import</span> Queue
 &lt;Queue&gt; = Queue(maxsize=<span class="hljs-number">0</span>)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                             <span class="hljs-comment"># Blocks until queue stops being full.</span>
-&lt;Queue&gt;.put_nowait(&lt;el&gt;)                      <span class="hljs-comment"># Raises queue.Full exception if full.</span>
-&lt;el&gt; = &lt;Queue&gt;.get()                          <span class="hljs-comment"># Blocks until queue stops being empty.</span>
-&lt;el&gt; = &lt;Queue&gt;.get_nowait()                   <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
+<pre><code class="python language-python hljs">&lt;Queue&gt;.put(&lt;el&gt;)                              <span class="hljs-comment"># Blocks until queue stops being full.</span>
+&lt;Queue&gt;.put_nowait(&lt;el&gt;)                       <span class="hljs-comment"># Raises queue.Full exception if full.</span>
+&lt;el&gt; = &lt;Queue&gt;.get()                           <span class="hljs-comment"># Blocks until queue stops being empty.</span>
+&lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
@@ -1914,7 +1914,7 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)   
 </code></pre></div>
 
 <div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
-&lt;Sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Signature object of the function.</span>
+&lt;Sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Function's Signature object.</span>
 &lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of function's Parameter objects.</span>
 &lt;str&gt;  = &lt;Param&gt;.name                      <span class="hljs-comment"># Parameter's name.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>

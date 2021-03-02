@@ -513,9 +513,9 @@ from statistics import mean, median, variance, stdev, pvariance, pstdev
 ```python
 from random import random, randint, choice, shuffle, gauss, seed
 
-<float> = random()
-<int>   = randint(from_inclusive, to_inclusive)
-<el>    = choice(<list>)
+<float> = random()                       # A float inside [0, 1).
+<int>   = randint(from_inc, to_inc)      # An int inside [from_inc, to_inc].
+<el>    = choice(<list>)                 # Keeps the list intact.
 ```
 
 ### Bin, Hex
@@ -614,15 +614,15 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <tzinfo> = UTC                              # UTC timezone. London without DST.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
-<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to the passed timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with a new timezone.
 ```
 
 ### Encode
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ, at midnight.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since the Gregorian NYE 1.
 <DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
@@ -633,7 +633,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds'.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
-<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
+<int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from DTa.
 ```
@@ -2050,19 +2050,19 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)          # Use `args=<collection>` to set arguments.
-<Thread>.start()                              # Starts the thread.
-<bool> = <Thread>.is_alive()                  # Checks if thread has finished executing.
-<Thread>.join()                               # Waits for thread to finish.
+<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set arguments.
+<Thread>.start()                               # Starts the thread.
+<bool> = <Thread>.is_alive()                   # Checks if thread has finished executing.
+<Thread>.join()                                # Waits for thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-<lock> = RLock()                              # Lock that can only be released by the owner.
-<lock>.acquire()                              # Waits for lock to be available.
-<lock>.release()                              # Makes lock available again.
+<lock> = RLock()                               # Lock that can only be released by the owner.
+<lock>.acquire()                               # Waits for lock to be available.
+<lock>.release()                               # Makes lock available again.
 ```
 
 #### Or:
@@ -2074,9 +2074,9 @@ with lock:
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)              # Lock that can be acquired by 'value' threads.
-<Event>     = Event()                         # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)                # Method wait() blocks until it's called n_times.
+<Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
+<Event>     = Event()                          # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n_times.
 ```
 
 ### Thread Pool Executor
@@ -2086,15 +2086,15 @@ from concurrent.futures import ThreadPoolExecutor
 ```
 
 ```python
-<Exec> = ThreadPoolExecutor([max_workers])    # Use max_workers to limit the number of threads.
-<Exec>.shutdown(wait=True)                    # Or: `with ThreadPoolExecutor() as executor: …`
+<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
+<Exec>.shutdown(wait=True)                     # Cleans-up the resources associated with Exec.
 ```
 
 ```python
-<iter> = <Exec>.map(<func>, <args_1>, ...)    # A multithreaded and non-lazy map().
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)  # Starts a thread and returns its Future object.
-<bool> = <Futr>.done()                        # Checks if thread has finished executing.
-<obj>  = <Futr>.result()                      # Waits for thread to finish and returns result.
+<iter> = <Exec>.map(<func>, <args_1>, ...)     # A multithreaded and non-lazy map().
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
+<bool> = <Futr>.done()                         # Checks if the thread has finished executing.
+<obj>  = <Futr>.result()                       # Waits for thread to finish and returns result.
 ```
 
 ### Queue
@@ -2105,10 +2105,10 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)                             # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)                      # Raises queue.Full exception if full.
-<el> = <Queue>.get()                          # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()                   # Raises queue.Empty exception if empty.
+<Queue>.put(<el>)                              # Blocks until queue stops being full.
+<Queue>.put_nowait(<el>)                       # Raises queue.Full exception if full.
+<el> = <Queue>.get()                           # Blocks until queue stops being empty.
+<el> = <Queue>.get_nowait()                    # Raises queue.Empty exception if empty.
 ```
 
 
@@ -2158,7 +2158,7 @@ delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_n
 ### Parameters
 ```python
 from inspect import signature
-<Sig>  = signature(<function>)             # Signature object of the function.
+<Sig>  = signature(<function>)             # Function's Signature object.
 <dict> = <Sig>.parameters                  # Dict of function's Parameter objects.
 <str>  = <Param>.name                      # Parameter's name.
 <memb> = <Param>.kind                      # Member of ParameterKind enum.
