@@ -1419,8 +1419,8 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <li><strong>Raises EOFError when user hits EOF (ctrl-d/z) or input stream gets exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
-script_name = sys.argv[<span class="hljs-number">0</span>]
-arguments   = sys.argv[<span class="hljs-number">1</span>:]
+scripts_path = sys.argv[<span class="hljs-number">0</span>]
+arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
 <div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
@@ -2213,7 +2213,7 @@ duration = perf_counter() - start_time
 </code></pre></div>
 
 <div><h3 id="timingasnippet">Timing a Snippet</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> timeit <span class="hljs-keyword">import</span> timeit
-<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'"-".join(str(i) for i in range(100))'</span>,
+<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'"".join(str(i) for i in range(100))'</span>,
 <span class="hljs-meta">... </span>       number=<span class="hljs-number">10000</span>, globals=globals(), setup=<span class="hljs-string">'pass'</span>)
 <span class="hljs-number">0.34986</span>
 </code></pre></div>
@@ -2393,8 +2393,8 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 <span class="hljs-keyword">import</span> imageio
 WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []
-<span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">15</span>):
-    y = sum(range(velocity+<span class="hljs-number">1</span>))
+<span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
+    y = sum(range(velocity))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
@@ -2494,13 +2494,13 @@ engine.runAndWait()
 <span class="hljs-keyword">import</span> simpleaudio, math, struct
 <span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain, repeat
 F  = <span class="hljs-number">44100</span>
-P1 = <span class="hljs-string">'71♪,69,,71♪,66,,62♪,66,,59♪,,,'</span>
-P2 = <span class="hljs-string">'71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'</span>
+P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'</span>
+P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'</span>
 get_pause   = <span class="hljs-keyword">lambda</span> seconds: repeat(<span class="hljs-number">0</span>, int(seconds * F))
 sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
 get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
 get_hz      = <span class="hljs-keyword">lambda</span> key: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(key) / <span class="hljs-number">12</span>)
-parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">2</span>]), <span class="hljs-number">0.25</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">0.125</span>)
+parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">2</span>]), <span class="hljs-number">0.125</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">0.25</span>)
 get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(*parse_note(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">0.125</span>)
 samples_f   = chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span><span class="hljs-subst">{P1}</span><span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
 samples_b   = <span class="hljs-string">b''</span>.join(struct.pack(<span class="hljs-string">'&lt;h'</span>, int(f * <span class="hljs-number">30000</span>)) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)

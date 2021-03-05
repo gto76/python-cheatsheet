@@ -1496,8 +1496,8 @@ Command Line Arguments
 ----------------------
 ```python
 import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
+scripts_path = sys.argv[0]
+arguments    = sys.argv[1:]
 ```
 
 ### Argument Parser
@@ -2541,7 +2541,7 @@ duration = perf_counter() - start_time
 ### Timing a Snippet
 ```python
 >>> from timeit import timeit
->>> timeit('"-".join(str(i) for i in range(100))',
+>>> timeit('"".join(str(i) for i in range(100))',
 ...        number=10000, globals=globals(), setup='pass')
 0.34986
 ```
@@ -2776,8 +2776,8 @@ from PIL import Image, ImageDraw
 import imageio
 WIDTH, R = 126, 10
 frames = []
-for velocity in range(15):
-    y = sum(range(velocity+1))
+for velocity in range(1, 16):
+    y = sum(range(velocity))
     frame = Image.new('L', (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
@@ -2901,13 +2901,13 @@ Synthesizer
 import simpleaudio, math, struct
 from itertools import chain, repeat
 F  = 44100
-P1 = '71♪,69,,71♪,66,,62♪,66,,59♪,,,'
-P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
+P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'
+P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'
 get_pause   = lambda seconds: repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note  = lambda note: (get_hz(note[:2]), 0.25 if '♪' in note else 0.125)
+parse_note  = lambda note: (get_hz(note[:2]), 0.125 if '♪' in note else 0.25)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(0.125)
 samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1}{P1}{P2}'.split(','))
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
