@@ -9,13 +9,13 @@ Comprehensive Python Cheatsheet
 Contents
 --------
 **&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dictionary`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
-**&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
+**&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers-1)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Type`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
-**&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`OS_Commands`](#oscommands)**__.__  
+**&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#path)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
-**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__,__ **[`Cython`](#cython)**__.__
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
 
 
 Main
@@ -57,10 +57,10 @@ list_of_chars    = list(<str>)
 
 ```python
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
-index = <list>.index(<el>)     # Returns index of first occurrence or raises ValueError.
-<list>.insert(index, <el>)     # Inserts item at index and moves the rest to the right.
-<el> = <list>.pop([index])     # Removes and returns item at index or from the end.
-<list>.remove(<el>)            # Removes first occurrence of item or raises ValueError.
+<int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
+<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
+<el> = <list>.pop([<int>])     # Removes and returns item at index or from the end.
+<list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
 
@@ -113,7 +113,7 @@ Set
 
 ```python
 <set>.add(<el>)                                 # Or: <set> |= {<el>}
-<set>.update(<collection>)                      # Or: <set> |= <set>
+<set>.update(<collection> [, ...])              # Or: <set> |= <set>
 ```
 
 ```python
@@ -144,8 +144,8 @@ Tuple
 **Tuple is an immutable and hashable list.**
 ```python
 <tuple> = ()
-<tuple> = (<el>, )
-<tuple> = (<el_1>, <el_2> [, ...])
+<tuple> = (<el>,)                           # Or: <el>,
+<tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
 ```
 
 ### Named Tuple
@@ -261,7 +261,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not.**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter() while Collection ABC looks for methods iter(), contains() and len().**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -309,14 +309,14 @@ String
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
 <list> = <str>.splitlines(keepends=False)    # Splits on \n,\r,\r\n. Keeps them if 'keepends'.
-<str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as separator.
+<str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as a separator.
 ```
 
 ```python
 <bool> = <sub_str> in <str>                  # Checks if string contains a substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
-<int>  = <str>.find(<sub_str>)               # Returns start index of first match or -1.
+<int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
 <int>  = <str>.index(<sub_str>)              # Same but raises ValueError if missing.
 ```
 
@@ -409,7 +409,7 @@ Format
 {<el>:^10}                                     # '   <el>   '
 {<el>:>10}                                     # '      <el>'
 {<el>:.<10}                                    # '<el>......'
-{<el>:<0}                                      # '<el>'
+{<el>:0}                                       # '<el>'
 ```
 
 ### Strings
@@ -511,11 +511,11 @@ from statistics import mean, median, variance, stdev, pvariance, pstdev
 
 ### Random
 ```python
-from random import random, randint, choice, shuffle
-<float> = random()
-<int>   = randint(from_inclusive, to_inclusive)
-<el>    = choice(<list>)
-shuffle(<list>)
+from random import random, randint, choice, shuffle, gauss, seed
+
+<float> = random()                       # A float inside [0, 1).
+<int>   = randint(from_inc, to_inc)      # An int inside [from_inc, to_inc].
+<el>    = choice(<list>)                 # Keeps the list intact.
 ```
 
 ### Bin, Hex
@@ -547,34 +547,34 @@ from itertools import product, combinations, combinations_with_replacement, perm
 
 ```python
 >>> product([0, 1], repeat=3)
-[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1),
- (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
+[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), ..., (1, 1, 1)]
 ```
 
 ```python
->>> product('ab', '12')
-[('a', '1'), ('a', '2'),
- ('b', '1'), ('b', '2')]
+>>> product('abc', 'abc')                    #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),         # a x  x  x
+ ('b', 'a'), ('b', 'b'), ('b', 'c'),         # b x  x  x
+ ('c', 'a'), ('c', 'b'), ('c', 'c')]         # c x  x  x
 ```
 
 ```python
->>> combinations('abc', 2)
-[('a', 'b'), ('a', 'c'),
- ('b', 'c')]
+>>> combinations('abc', 2)                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                     # a .  x  x
+ ('b', 'c')]                                 # b .  .  x
 ```
 
 ```python
->>> combinations_with_replacement('abc', 2)
-[('a', 'a'), ('a', 'b'), ('a', 'c'),
- ('b', 'b'), ('b', 'c'),
- ('c', 'c')]
+>>> combinations_with_replacement('abc', 2)  #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),         # a x  x  x
+ ('b', 'b'), ('b', 'c'),                     # b .  x  x
+ ('c', 'c')]                                 # c .  .  x
 ```
 
 ```python
->>> permutations('abc', 2)
-[('a', 'b'), ('a', 'c'),
- ('b', 'a'), ('b', 'c'),
- ('c', 'a'), ('c', 'b')]
+>>> permutations('abc', 2)                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                     # a .  x  x
+ ('b', 'a'), ('b', 'c'),                     # b x  .  x
+ ('c', 'a'), ('c', 'b')]                     # c x  x  .
 ```
 
 
@@ -586,7 +586,7 @@ Datetime
 
 ```python
 from datetime import date, time, datetime, timedelta
-from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
+from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 
 ### Constructors
@@ -614,17 +614,17 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 <tzinfo> = UTC                              # UTC timezone. London without DST.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
-<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to passed timezone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with new timezone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to the passed timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with a new timezone.
 ```
 
 ### Encode
 ```python
 <D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since Christ, at midnight.
-<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since Epoch.
-<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since Epoch.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since the Gregorian NYE 1.
+<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
+<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
 * **Epoch on Unix systems is: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -633,9 +633,9 @@ from dateutil.tz import UTC, tzlocal, gettz, resolve_imaginary
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds'.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
-<int>    = <D/DT>.toordinal()               # Days since Christ, ignoring time and tz.
-<float>  = <DTn>.timestamp()                # Seconds since Epoch, from DTn in local tz.
-<float>  = <DTa>.timestamp()                # Seconds since Epoch, from DTa.
+<int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
+<float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
+<float>  = <DTa>.timestamp()                # Seconds since the Epoch, from DTa.
 ```
 
 ### Format
@@ -1035,7 +1035,8 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
-* **Objects can be made sortable with `'order=True'` and/or immutable and hashable with `'frozen=True'`.**
+* **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
+* **For object to be hashable, all attributes must be hashable and frozen must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
 * **Default_factory can be any [callable](#callable).**
 
@@ -1195,7 +1196,6 @@ Hello World!
 
 Iterable Duck Types
 -------------------
-
 ### Iterable
 * **Only required method is iter(). It should return an iterator of object's items.**
 * **Contains() automatically works on any object that has iter() defined.**
@@ -1237,7 +1237,7 @@ class MyCollection:
 * **Only required methods are len() and getitem().**
 * **Getitem() should return an item at index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
-* **Reversed() automatically works on any object that has getitem() and len() defined.**
+* **Reversed() automatically works on any object that has len() and getitem() defined.**
 ```python
 class MySequence:
     def __init__(self, a):
@@ -1336,12 +1336,11 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR' : partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case is to use built-in functions and\_() and or\_() from the module [operator](#operator).**
+* **Another solution in this particular case is to use functions and\_() and or\_() from the module [operator](#operator).**
 
 
 Exceptions
 ----------
-
 ### Basic Example
 ```python
 try:
@@ -1370,11 +1369,12 @@ finally:
 ```python
 except <exception>:
 except <exception> as <name>:
-except (<exception>, ...):
-except (<exception>, ...) as <name>:
+except (<exception>, [...]):
+except (<exception>, [...]) as <name>:
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
+* **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
 
 ### Raising Exceptions
 ```python
@@ -1397,7 +1397,7 @@ exc_type  = <name>.__class__
 filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
-error_msg = traceback.format_exception(exc_type, <name>, <name>.__traceback__)
+error_msg = ''.join(traceback.format_exception(exc_type, <name>, <name>.__traceback__))
 ```
 
 ### Built-in Exceptions
@@ -1414,7 +1414,7 @@ BaseException
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is not found.
       +-- NameError               # Raised when a variable name is not found.
-      +-- OSError                 # Failures such as “file not found” or “disk full”.
+      +-- OSError                 # Errors such as “file not found” or “disk full” (see Open).
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
@@ -1427,11 +1427,11 @@ BaseException
 #### Collections and their exceptions:
 ```text
 +-----------+------------+------------+------------+
-|           |    list    |    dict    |    set     |
+|           |    List    |    Set     |    Dict    |
 +-----------+------------+------------+------------+
-| getitem() | IndexError |  KeyError  |            |
+| getitem() | IndexError |            |  KeyError  |
 | pop()     | IndexError |  KeyError  |  KeyError  |
-| remove()  | ValueError |            |  KeyError  |
+| remove()  | ValueError |  KeyError  |            |
 | index()   | ValueError |            |            |
 +-----------+------------+------------+------------+
 ```
@@ -1496,8 +1496,8 @@ Command Line Arguments
 ----------------------
 ```python
 import sys
-script_name = sys.argv[0]
-arguments   = sys.argv[1:]
+scripts_path = sys.argv[0]
+arguments    = sys.argv[1:]
 ```
 
 ### Argument Parser
@@ -1523,7 +1523,7 @@ Open
 **Opens the file and returns a corresponding file object.**
 
 ```python
-<file> = open('<path>', mode='r', encoding=None, newline=None)
+<file> = open(<path>, mode='r', encoding=None, newline=None)
 ```
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
@@ -1622,7 +1622,7 @@ from os import scandir
 
 ```python
 <iter> = scandir(path='.')          # Returns DirEntry objects located at path.
-<str>  = <DirEntry>.path            # Returns path as a string.
+<str>  = <DirEntry>.path            # Returns whole path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns file object.
 ```
@@ -1640,7 +1640,8 @@ from pathlib import Path
 ```python
 <Path> = Path()                     # Returns relative cwd. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute cwd. Also Path().resolve().
-<Path> = <Path>.resolve()           # Returns absolute Path without symlinks.
+<Path> = Path.home()                # Returns user's home directory.
+<Path> = Path(__file__).resolve()   # Returns script's path if cwd wasn't changed.
 ```
 
 ```python
@@ -1840,48 +1841,48 @@ SQLite
 **Opens a connection to the database file. Creates a new file if path doesn't exist.**
 ```python
 import sqlite3
-<con> = sqlite3.connect('<path>')               # Also ':memory:'.
-<con>.close()
+<conn> = sqlite3.connect(<path>)                # Also ':memory:'.
+<conn>.close()                                  # Closes the connection.
 ```
 
 ### Read
 **Returned values can be of type str, int, float, bytes or None.**
 ```python
-<cursor> = <con>.execute('<query>')             # Can raise a subclass of sqlite3.Error.
+<cursor> = <conn>.execute('<query>')            # Can raise a subclass of sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                  # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<con>.execute('<query>')
-<con>.commit()
+<conn>.execute('<query>')                       # Can raise a subclass of sqlite3.Error.
+<conn>.commit()                                 # Commits all transactions since last commit.
 ```
 
 #### Or:
 ```python
-with <con>:
-    <con>.execute('<query>')
+with <conn>:
+    <conn>.execute('<query>')
 ```
 
 ### Placeholders
 * **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetme.**
 * **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 ```python
-<con>.execute('<query>', <list/tuple>)          # Replaces '?'s in query with values.
-<con>.execute('<query>', <dict/namedtuple>)     # Replaces ':<key>'s with values.
-<con>.executemany('<query>', <coll_of_above>)   # Runs execute() many times.
+<conn>.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
+<conn>.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
+<conn>.executemany('<query>', <coll_of_above>)  # Runs execute() multiple times.
 ```
 
 ### Example
-**In this example values are not actually saved because `'con.commit()'` is omitted!**
+**In this example values are not actually saved because `'conn.commit()'` is omitted!**
 
 ```python
->>> con = sqlite3.connect('test.db')
->>> con.execute('create table person (person_id integer primary key, name, height)')
->>> con.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
+>>> conn = sqlite3.connect('test.db')
+>>> conn.execute('create table person (person_id integer primary key, name, height)')
+>>> conn.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
 1
->>> con.execute('select * from person').fetchall()
+>>> conn.execute('select * from person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ``` 
 
@@ -1890,8 +1891,8 @@ with <con>:
 ```python
 # $ pip3 install mysql-connector
 from mysql import connector
-<con> = connector.connect(host=<str>, …)        # `user=<str>, password=<str>, database=<str>`.
-<cursor> = <con>.cursor()                       # Only cursor has execute method.
+<conn>   = connector.connect(host=<str>, …)     # `user=<str>, password=<str>, database=<str>`.
+<cursor> = <conn>.cursor()                      # Only cursor has execute method.
 <cursor>.execute('<query>')                     # Can raise a subclass of connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
@@ -2049,19 +2050,19 @@ from threading import Thread, RLock, Semaphore, Event, Barrier
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)  # Use `args=<collection>` to set arguments.
-<Thread>.start()                      # Starts the thread.
-<bool> = <Thread>.is_alive()          # Checks if thread has finished executing.
-<Thread>.join()                       # Waits for thread to finish.
+<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set arguments.
+<Thread>.start()                               # Starts the thread.
+<bool> = <Thread>.is_alive()                   # Checks if thread has finished executing.
+<Thread>.join()                                # Waits for thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-<lock> = RLock()
-<lock>.acquire()                      # Waits for lock to be available.
-<lock>.release()                      # Makes the lock available again.
+<lock> = RLock()                               # Lock that can only be released by the owner.
+<lock>.acquire()                               # Waits for lock to be available.
+<lock>.release()                               # Makes lock available again.
 ```
 
 #### Or:
@@ -2073,24 +2074,27 @@ with lock:
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)      # Lock that can be acquired 'value' times.
-<Event>     = Event()                 # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)        # Method wait() blocks until it's called 'n_times'.
+<Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
+<Event>     = Event()                          # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n_times.
 ```
 
 ### Thread Pool Executor
+**Object that manages thread execution.**
 ```python
 from concurrent.futures import ThreadPoolExecutor
-with ThreadPoolExecutor(max_workers=None) as executor:         # Does not exit until done.
-    <iter>   = executor.map(lambda x: x + 1, range(3))         # (1, 2, 3)
-    <iter>   = executor.map(lambda x, y: x + y, 'abc', '123')  # ('a1', 'b2', 'c3')
-    <Future> = executor.submit(<function> [, <arg_1>, ...])    # Also visible outside block.
 ```
 
-#### Future:
 ```python
-<bool> = <Future>.done()              # Checks if thread has finished executing.
-<obj>  = <Future>.result()            # Waits for thread to finish and returns result.
+<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
+<Exec>.shutdown(wait=True)                     # Cleans-up the resources associated with Exec.
+```
+
+```python
+<iter> = <Exec>.map(<func>, <args_1>, ...)     # A multithreaded and non-lazy map().
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
+<bool> = <Futr>.done()                         # Checks if the thread has finished executing.
+<obj>  = <Futr>.result()                       # Waits for thread to finish and returns result.
 ```
 
 ### Queue
@@ -2101,10 +2105,10 @@ from queue import Queue
 ```
 
 ```python
-<Queue>.put(<el>)                     # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)              # Raises queue.Full exception if full.
-<el> = <Queue>.get()                  # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()           # Raises queue.Empty exception if empty.
+<Queue>.put(<el>)                              # Blocks until queue stops being full.
+<Queue>.put_nowait(<el>)                       # Raises queue.Full exception if full.
+<el> = <Queue>.get()                           # Blocks until queue stops being empty.
+<el> = <Queue>.get_nowait()                    # Raises queue.Empty exception if empty.
 ```
 
 
@@ -2114,7 +2118,7 @@ Operator
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 from operator import eq, ne, lt, le, gt, ge
-from operator import and_, or_, not_
+from operator import and_, or_, xor, not_
 from operator import itemgetter, attrgetter, methodcaller
 ```
 
@@ -2124,6 +2128,7 @@ elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
+union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
@@ -2153,10 +2158,10 @@ delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_n
 ### Parameters
 ```python
 from inspect import signature
-<sig>        = signature(<function>)
-no_of_params = len(<sig>.parameters)
-param_names  = list(<sig>.parameters.keys())
-param_kinds  = [a.kind for a in <sig>.parameters.values()]
+<Sig>  = signature(<function>)             # Function's Signature object.
+<dict> = <Sig>.parameters                  # Dict of function's Parameter objects.
+<str>  = <Param>.name                      # Parameter's name.
+<memb> = <Param>.kind                      # Member of ParameterKind enum.
 ```
 
 
@@ -2251,11 +2256,9 @@ Eval
 ----
 ```python
 >>> from ast import literal_eval
->>> literal_eval('1 + 2')
-3
 >>> literal_eval('[1, 2, 3]')
 [1, 2, 3]
->>> literal_eval('abs(1)')
+>>> literal_eval('1 + 2')
 ValueError: malformed node or string
 ```
 
@@ -2292,7 +2295,8 @@ async def main_coroutine(screen):
 
 async def random_controller(id_, moves):
     while True:
-        moves.put_nowait((id_, random.choice(list(D))))
+        d = random.choice(list(D))
+        moves.put_nowait((id_, d))
         await asyncio.sleep(random.random() / 2)
 
 async def human_controller(screen, moves):
@@ -2308,7 +2312,7 @@ async def model(moves, state, height, width):
         id_, d = await moves.get()
         p      = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        new_p  = P(*[sum(a) for a in zip(p, deltas[d])])
+        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
         if 0 <= new_p.x < width-1 and 0 <= new_p.y < height:
             state[id_] = new_p
 
@@ -2319,7 +2323,8 @@ async def view(state, screen):
             screen.addstr(p.y, p.x, str(id_))
         await asyncio.sleep(0.01)  
 
-curses.wrapper(main)
+if __name__ == '__main__':
+    curses.wrapper(main)
 ```
 <br>
 
@@ -2331,10 +2336,11 @@ Progress Bar
 ------------
 ```python
 # $ pip3 install tqdm
-from tqdm import tqdm
-from time import sleep
-for el in tqdm([1, 2, 3]):
-    sleep(0.2)
+>>> from tqdm import tqdm
+>>> from time import sleep
+>>> for el in tqdm([1, 2, 3], desc='Processing'):
+...     sleep(1)
+Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
 ```
 
 
@@ -2342,13 +2348,13 @@ Plot
 ----
 ```python
 # $ pip3 install matplotlib
-from matplotlib import pyplot
-pyplot.plot(<y_data> [, label=<str>])
-pyplot.plot(<x_data>, <y_data>)
-pyplot.legend()                                # Adds a legend.
-pyplot.savefig('<path>')                       # Saves the figure.
-pyplot.show()                                  # Displays the figure.
-pyplot.clf()                                   # Clears the figure.
+import matplotlib.pyplot as plt
+plt.plot(<y_data> [, label=<str>])
+plt.plot(<x_data>, <y_data>)
+plt.legend()                                   # Adds a legend.
+plt.savefig(<path>)                            # Saves the figure.
+plt.show()                                     # Displays the figure.
+plt.clf()                                      # Clears the figure.
 ```
 
 
@@ -2368,30 +2374,30 @@ with open('test.csv', encoding='utf-8', newline='') as file:
 
 Curses
 ------
-#### Clears the terminal, prints a message and waits for the ESC key press:
+#### Runs a basic file explorer in the terminal:
 ```python
-from curses import wrapper, curs_set, ascii
-from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
+from curses import wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+from os import listdir, chdir, path
 
-def main():
-    wrapper(draw)
-
-def draw(screen):
-    curs_set(0)                                # Makes cursor invisible.
-    screen.nodelay(True)                       # Makes getch() non-blocking.
-    screen.clear()
-    screen.addstr(0, 0, 'Press ESC to quit.')  # Coordinates are y, x.
-    while screen.getch() != ascii.ESC:
-        pass
-
-def get_border(screen):
-    from collections import namedtuple
-    P = namedtuple('P', 'x y')
-    height, width = screen.getmaxyx()
-    return P(width-1, height-1)
+def main(screen):
+    ch, first, selected, paths = 0, 0, 0, listdir()
+    while ch != ascii.ESC:
+        height, _ = screen.getmaxyx()
+        screen.clear()
+        for y, a_path in enumerate(paths[first : first+height]):
+            screen.addstr(y, 0, a_path, A_REVERSE * (selected == first + y))
+        ch = screen.getch()
+        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
+        selected = max(0, min(len(paths)-1, selected))
+        first += (first <= selected - height) - (first > selected)
+        if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, 10, 13]:
+            new_dir = '..' if ch == KEY_LEFT else paths[selected]
+            if path.isdir(new_dir):
+                chdir(new_dir)
+                first, selected, paths = 0, 0, listdir()
 
 if __name__ == '__main__':
-    main()
+    wrapper(main)
 ```
 
 
@@ -2444,21 +2450,20 @@ Scraping
 #### Scrapes Python's URL, version number and logo from its Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
-import requests, sys
-from bs4 import BeautifulSoup
-URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+import requests, bs4, sys
+
+WIKI_URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
 try:
-    html  = requests.get(URL).text
-    doc   = BeautifulSoup(html, 'html.parser')
-    table = doc.find('table', class_='infobox vevent')
-    rows  = table.find_all('tr')
-    link  = rows[11].find('a')['href']
-    ver   = rows[6].find('div').text.split()[0]
-    url_i = rows[0].find('img')['src']
-    image = requests.get(f'https:{url_i}').content
+    html       = requests.get(WIKI_URL).text
+    document   = bs4.BeautifulSoup(html, 'html.parser')
+    table      = document.find('table', class_='infobox vevent')
+    python_url = table.find('th', text='Website').next_sibling.a['href']
+    version    = table.find('th', text='Stable release').next_sibling.strings.__next__()
+    logo_url   = table.find('img')['src']
+    logo       = requests.get(f'https:{logo_url}').content
     with open('test.png', 'wb') as file:
-        file.write(image)
-    print(link, ver)
+        file.write(logo)
+    print(python_url, version)
 except requests.exceptions.ConnectionError:
     print("You've got problems with connection.", file=sys.stderr)
 ```
@@ -2507,7 +2512,7 @@ def odds_handler(sport):
 ```python
 # $ pip3 install requests
 >>> import requests
->>> url  = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -2528,7 +2533,7 @@ duration = time() - start_time
 #### High performance:
 ```python
 from time import perf_counter
-start_time = perf_counter()             # Seconds since restart.
+start_time = perf_counter()             # Seconds since the restart.
 ...
 duration = perf_counter() - start_time
 ```
@@ -2536,7 +2541,7 @@ duration = perf_counter() - start_time
 ### Timing a Snippet
 ```python
 >>> from timeit import timeit
->>> timeit('"-".join(str(i) for i in range(100))',
+>>> timeit('"".join(str(i) for i in range(100))',
 ...        number=10000, globals=globals(), setup='pass')
 0.34986
 ```
@@ -2557,18 +2562,18 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1   1128.0   1128.0     27.4      a = [*range(10000)]
-     4      1   2994.0   2994.0     72.6      b = {*range(10000)}
+     3      1    955.0    955.0     43.7      a = [*range(10000)]
+     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
 ```
 
 ```text
 $ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
-     1        35.387 MiB     35.387 MiB   @profile
+     1        37.668 MiB     37.668 MiB   @profile
      2                                    def main():
-     3        35.734 MiB      0.348 MiB       a = [*range(10000)]
-     4        36.160 MiB      0.426 MiB       b = {*range(10000)}
+     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
+     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 ```
 
 ### Call Graph
@@ -2613,7 +2618,7 @@ indexes = <array>.argmin(axis)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is the index of a dimension that gets collapsed. The leftmost dimension has index 0.**
+* **Axis is an index of the dimension that gets collapsed. Leftmost dimension has index 0.**
 
 ### Indexing
 ```bash
@@ -2695,11 +2700,11 @@ from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))
-<Image> = Image.open('<path>')
-<Image> = <Image>.convert('<mode>')
-<Image>.save('<path>')
-<Image>.show()
+<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple/str>`.
+<Image> = Image.open(<path>)                    # Identifies format based on file contents.
+<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
+<Image>.save(<path>)                            # Selects format based on the path extension.
+<Image>.show()                                  # Opens image in default preview app.
 ```
 
 ```python
@@ -2728,7 +2733,7 @@ from PIL import Image
 ```python
 WIDTH, HEIGHT = 100, 100
 size = WIDTH * HEIGHT
-hues = [255 * i/size for i in range(size)]
+hues = (255 * i/size for i in range(size))
 img = Image.new('HSV', (WIDTH, HEIGHT))
 img.putdata([(int(h), 255, 255) for h in hues])
 img.convert('RGB').save('test.png')
@@ -2759,20 +2764,20 @@ from PIL import ImageDraw
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'outline=<color>'` to set the secondary color.**
-* **Color can be specified as a tuple, int, `'#rrggbb'` string or a color name.**
+* **Color can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation
 ---------
 #### Creates a GIF of a bouncing ball:
 ```python
-# $ pip3 install pillow imageio
+# $ pip3 install imageio
 from PIL import Image, ImageDraw
 import imageio
 WIDTH, R = 126, 10
 frames = []
-for velocity in range(15):
-    y = sum(range(velocity+1))
+for velocity in range(1, 16):
+    y = sum(range(velocity))
     frame = Image.new('L', (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
@@ -2896,13 +2901,13 @@ Synthesizer
 import simpleaudio, math, struct
 from itertools import chain, repeat
 F  = 44100
-P1 = '71♪,69,,71♪,66,,62♪,66,,59♪,,,'
-P2 = '71♪,73,,74♪,73,,74,,71,,73♪,71,,73,,69,,71♪,69,,71,,67,,71♪,,,'
+P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'
+P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'
 get_pause   = lambda seconds: repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note  = lambda note: (get_hz(note[:2]), 0.25 if '♪' in note else 0.125)
+parse_note  = lambda note: (get_hz(note[:2]), 0.125 if '♪' in note else 0.25)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(0.125)
 samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1}{P1}{P2}'.split(','))
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
@@ -2912,7 +2917,6 @@ simpleaudio.play_buffer(samples_b, 1, 2, F)
 
 Pygame
 ------
-
 ### Basic Example
 ```python
 # $ pip3 install pygame
@@ -2932,15 +2936,15 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Rectangle
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(x, y, width, height)           # X and y are coordinates of topleft corner.
-<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left.
+<Rect> = pg.Rect(x, y, width, height)           # Floats get truncated into ints.
+<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
 <tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft.
 <Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in place.
 ```
 
 ```python
-<bool> = <Rect>.collidepoint((x, y))            # Tests if a point is inside the rectangle.
-<bool> = <Rect>.colliderect(<Rect>)             # Tests if two rectangles overlap.
+<bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains a point.
+<bool> = <Rect>.colliderect(<Rect>)             # Checks if two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding Rects.
 ```
@@ -2948,37 +2952,37 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Surface
 **Object for representing images.**
 ```python
-<Surf> = pg.display.set_mode((width, height))   # Returns the display surface.
-<Surf> = pg.Surface((width, height))            # Creates a new surface.
-<Surf> = pg.image.load('<path>')                # Loads the image.
+<Surf> = pg.display.set_mode((width, height))   # Returns display surface.
+<Surf> = pg.Surface((width, height), …)         # New RGB surface. Add `pg.SRCALPHA` for RGBA.
+<Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
 ```python
-<Surf>.fill(color)                              # Fills the whole surface.
+<Surf>.fill(color)                              # Tuple, Color('#rrggbb[aa]') or Color(<name>).
 <Surf>.set_at((x, y), color)                    # Updates pixel.
-<Surf>.blit(<Surface>, (x, y))                  # Draws passed surface to the surface.
+<Surf>.blit(<Surf>, (x, y))                     # Draws passed surface to the surface.
 ```
 
 ```python
-<Surf> = pg.transform.flip(<Surf>, xbool, ybool)
-<Surf> = pg.transform.rotate(<Surf>, degrees)
-<Surf> = pg.transform.scale(<Surf>, (width, height))
+import pygame.transform as tr
+<Surf> = tr.scale(<Surf>, (width, height))      # Returns scaled surface.
+<Surf> = tr.rotate(<Surf>, degrees)             # Returns rotated and scaled surface.
+<Surf> = tr.flip(<Surf>, x_bool, y_bool)        # Returns flipped surface.
 ```
 
 ```python
-pg.draw.line(<Surf>, color, (x1, y1), (x2, y2), width)
-pg.draw.arc(<Surf>, color, <Rect>, from_radians, to_radians)
-pg.draw.rect(<Surf>, color, <Rect>)
-pg.draw.polygon(<Surf>, color, points)
-pg.draw.ellipse(<Surf>, color, <Rect>)
+from pygame.draw import line, arc, rect
+line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
+arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
+rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
 ```
 
 ### Font
 ```python
-<Font> = pg.font.SysFont('<name>', size, bold=False, italic=False)
-<Font> = pg.font.Font('<path>', size)
-<Surf> = <Font>.render(text, antialias, color [, background])
+<Font> = pg.font.SysFont('<name>', size)        # Loads the system font or default if missing.
+<Font> = pg.font.Font('<path>', size)           # Loads the TTF file. Pass None for default.
+<Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
 ```
 
 ### Sound
@@ -2989,7 +2993,7 @@ pg.draw.ellipse(<Surf>, color, <Rect>)
 
 ### Basic Mario Brothers Example
 ```python
-import collections, dataclasses, enum, io, pygame, urllib.request, itertools as it
+import collections, dataclasses, enum, io, itertools as it, pygame as pg, urllib.request
 from random import randint
 
 P = collections.namedtuple('P', 'x y')          # Position
@@ -2998,11 +3002,11 @@ SIZE, MAX_SPEED = 50, P(5, 10)                  # Screen size, Speed limit
 
 def main():
     def get_screen():
-        pygame.init()
-        return pygame.display.set_mode(2 * [SIZE*16])
+        pg.init()
+        return pg.display.set_mode(2 * [SIZE*16])
     def get_images():
         url = 'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'
-        img = pygame.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
+        img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
         return [img.subsurface(get_rect(x, 0)) for x in range(img.get_width() // 16)]
     def get_mario():
         Mario = dataclasses.make_dataclass('Mario', 'rect spd facing_left frame_cycle'.split())
@@ -3012,14 +3016,14 @@ def main():
             [(randint(1, SIZE-2), randint(2, SIZE-2)) for _ in range(SIZE**2 // 10)]
         return [get_rect(*p) for p in positions]
     def get_rect(x, y):
-        return pygame.Rect(x*16, y*16, 16, 16)
+        return pg.Rect(x*16, y*16, 16, 16)
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 def run(screen, images, mario, tiles):
-    clock = pygame.time.Clock()
-    while all(event.type != pygame.QUIT for event in pygame.event.get()):
-        keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e, pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
-        pressed = {keys.get(i) for i, on in enumerate(pygame.key.get_pressed()) if on}
+    clock = pg.time.Clock()
+    while all(event.type != pg.QUIT for event in pg.event.get()):
+        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
+        pressed = {keys.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
@@ -3033,12 +3037,12 @@ def update_speed(mario, tiles, pressed):
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
-    new_p = mario.rect.topleft
+    p = mario.rect.topleft
     larger_speed = max(abs(s) for s in mario.spd)
     for _ in range(larger_speed):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario.spd)])
-        mario.rect.topleft = new_p
+        p = P(*[a + s/larger_speed for a, s in zip(p, mario.spd)])
+        mario.rect.topleft = p
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
@@ -3058,7 +3062,7 @@ def draw(screen, images, mario, tiles, pressed):
     screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
         screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
-    pygame.display.flip()
+    pg.display.flip()
 
 if __name__ == '__main__':
     main()
@@ -3067,7 +3071,6 @@ if __name__ == '__main__':
 
 Pandas
 ------
-
 ```python
 # $ pip3 install pandas
 import pandas as pd
@@ -3104,7 +3107,7 @@ Name: a, dtype: int64
 
 ```python
 <Sr> = <Sr> ><== <el/Sr>                      # Returns a Series of bools.
-<Sr> = <Sr> +-*/ <el/Sr>                      # Non-matching keys get value NaN.
+<Sr> = <Sr> +-*/ <el/Sr>                      # Items with non-matching keys get value NaN.
 ```
 
 ```python
@@ -3177,14 +3180,14 @@ b  3  4
 
 ```python
 <DF>    = <DF> ><== <el/Sr/DF>                # Returns DataFrame of bools.
-<DF>    = <DF> +-*/ <el/Sr/DF>                # Non-matching keys get value NaN.
+<DF>    = <DF> +-*/ <el/Sr/DF>                # Items with non-matching keys get value NaN.
 ```
 
 ```python
 <DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
-<DF>    = <DF>.reset_index()                  # Moves row keys to their own column.
+<DF>    = <DF>.reset_index()                  # Moves row keys to a column named index.
 <DF>    = <DF>.filter('<regex>', axis=1)      # Only keeps columns whose key matches the regex.
-<DF>    = <DF>.melt(id_vars=column_key/s)     # Converts DF from wide to long format.
+<DF>    = <DF>.melt(id_vars=column_key/s)     # Converts DataFrame from wide to long format.
 ```
 
 #### Merge, Join, Concat:
@@ -3210,24 +3213,24 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 | l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 |                          |
-|                        | c  .  .  6  7 |            |            |                          |
+|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a series, it is  |
+|                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
-|           join=…)      | b  3   4   .  |     4      |            | By default works the     |
-|                        | b  .   4   5  |     4      |            | same as `l.append(r)`.   |
-|                        | c  .   6   7  |     6      |            |                          |
+|           join=…)      | b  3   4   .  |     4      |            | A series is treated as a |
+|                        | b  .   4   5  |     4      |            | column. Use l.append(r)  |
+|                        | c  .   6   7  |     6      |            | to add a row instead.    |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
-|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end.               |
-|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | Uses 'outer' by default. |
-|                        | c  .  .  6  7 |            |            |                          |
+|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
+|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A series is  |
+|                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
-|                        | a  1   2   .  |            |            | columns.                 |
-|                        | b  3   4   5  |            |            |                          |
-|                        | c  .   6   7  |            |            |                          |
+|                        | a  1   2   .  |            |            | columns. Also updates    |
+|                        | b  3   4   5  |            |            | items that contain NaN.  |
+|                        | c  .   6   7  |            |            | R must be a DataFrame.   |
 +------------------------+---------------+------------+------------+--------------------------+
 ```
 
@@ -3272,7 +3275,7 @@ b  3  4
 ```python
 <DF> = pd.read_json/html('<str/path/url>')
 <DF> = pd.read_csv/pickle/excel('<path/url>')
-<DF> = pd.read_sql('<query>', <connection>)
+<DF> = pd.read_sql('<table_name/query>', <connection>)
 <DF> = pd.read_clipboard()
 ```
 
@@ -3299,7 +3302,7 @@ c  7  8
 
 ```python
 <GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
-<DF> = <GB>.get_group(group_key)              # Selects a group by value of grouping column.
+<DF> = <GB>.get_group(group_key/s)            # Selects a group by value of grouping column.
 ```
 
 #### Aggregate, Transform, Map:
@@ -3346,17 +3349,20 @@ c  7  8
 
 Plotly
 ------
+```python
+# $ pip3 install plotly kaleido
+from plotly.express import line
+<Figure> = line(<DF>, x=<col_name>, y=<col_name>)        # Or: line(x=<list>, y=<list>)
+<Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Or: paper_bgcolor='rgba(0, 0, 0, 0)'
+<Figure>.write_html/json/image('<path>')                 # Also: <Figure>.show()
+```
 
-### Covid Deaths by Continent
+#### Covid deaths by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
-<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:400px; width:100%;"></div>
+<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div>
 
 ```python
-# $ pip3 install pandas plotly
-import pandas as pd
-import plotly.express
-
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                     usecols=['iso_code', 'date', 'total_deaths', 'population'])
 continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
@@ -3365,26 +3371,23 @@ continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
 df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-df = df[('2020-03-14' < df.date) & (df.date < '2020-06-25')]
+df = df[('2020-03-14' < df.date) & (df.date < '2020-11-25')]
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-plotly.express.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
+line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
-### Confirmed Covid Cases, Dow Jones, Gold, and Bitcoin Price
+#### Confirmed covid cases, Dow Jones, gold, and Bitcoin price:
 
 ![Covid Cases](web/covid_cases.png)
-<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:400px; width:100%;"></div>
+<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div>
 
 ```python
-# $ pip3 install pandas plotly
 import pandas as pd
 import plotly.graph_objects as go
 import datetime
 
 def main():
-    data = scrape_data()
-    df = wrangle_data(*data)
-    display_data(df)
+    display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
     def scrape_yahoo(id_):
@@ -3393,8 +3396,8 @@ def scrape_data():
         url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
         return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
     covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
-                        usecols=['date', 'total_cases'])
-    covid = covid.groupby('date').sum()
+                        usecols=['location', 'date', 'total_cases'])
+    covid = covid[covid.location == 'World'].set_index('date').total_cases
     dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
     dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
     return covid, dow, gold, bitcoin
@@ -3425,8 +3428,21 @@ if __name__ == '__main__':
 ```
 
 
-Cython
-------
+PySimpleGUI
+-----------
+```python
+# $ pip3 install PySimpleGUI
+import PySimpleGUI as sg
+layout = [[sg.Text("What's your name?")], [sg.Input()], [sg.Button('Ok')]]
+window = sg.Window('Window Title', layout)
+event, values = window.read()
+print(f'Hello {values[0]}!' if event == 'Ok' else '')
+```
+
+
+Appendix
+--------
+### Cython
 **Library that compiles Python code into C.**
 
 ```python
@@ -3436,7 +3452,7 @@ import <cython_script>
 <cython_script>.main()
 ```
 
-### Definitions
+#### Definitions:
 * **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
 * **Script needs to be saved with a `'pyx'` extension.**
 
@@ -3457,10 +3473,6 @@ cdef class <class_name>:
 cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
 ```
 
-
-Appendix
---------
-
 ### PyInstaller
 ```bash
 $ pip3 install pyinstaller
@@ -3478,11 +3490,11 @@ $ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the ex
 # Usage: .py
 #
 
-from collections import namedtuple
+from sys import argv, exit
+from collections import defaultdict, namedtuple
 from dataclasses import make_dataclass
 from enum import Enum
-from sys import argv, exit
-import re
+import functools as ft, itertools as it, operator as op, re
 
 
 def main():
@@ -3501,3 +3513,10 @@ def read_file(filename):
 if __name__ == '__main__':
     main()
 ```
+
+
+Index
+-----
+* **Only available in [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
+* **Ctrl+F / ⌘F is usually sufficient.**
+* **Searching `'#<title>'` on a [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
