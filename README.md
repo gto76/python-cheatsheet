@@ -56,10 +56,10 @@ list_of_chars    = list(<str>)
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
+<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
+<el>  = <list>.pop([<int>])    # Returns and removes item at index or from the end.
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
 <int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
-<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
-<el> = <list>.pop([<int>])     # Removes and returns item at index or from the end.
 <list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
@@ -2087,7 +2087,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
-<Exec>.shutdown(wait=True)                     # Cleans-up the resources associated with Exec.
+<Exec>.shutdown(wait=True)                     # Gets called at the end of 'with' block.
 ```
 
 ```python
@@ -2129,7 +2129,7 @@ sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
-LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR' : op.or_})
+LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR': op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
 
@@ -2511,8 +2511,9 @@ def odds_handler(sport):
 #### Test:
 ```python
 # $ pip3 install requests
->>> import requests
->>> url = 'http://localhost:8080/odds/football'
+>>> import threading, requests
+>>> threading.Thread(target=run, daemon=True).start()
+>>> url  = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -2838,7 +2839,7 @@ def read_wav_file(filename):
     with wave.open(filename, 'rb') as file:
         sampwidth = file.getsampwidth()
         frames = file.readframes(-1)
-    bytes_samples = (frames[i: i + sampwidth] for i in range(0, len(frames), sampwidth))
+    bytes_samples = (frames[i : i+sampwidth] for i in range(0, len(frames), sampwidth))
     return [get_int(b) / pow(2, sampwidth * 8 - 1) for b in bytes_samples]
 ```
 
@@ -2907,8 +2908,8 @@ get_pause   = lambda seconds: repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note  = lambda note: (get_hz(note[:2]), 0.125 if '♪' in note else 0.25)
-get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(0.125)
+parse_note  = lambda note: (get_hz(note[:-1]), 1/4 if '♩' in note else 1/8)
+get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
 samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1}{P1}{P2}'.split(','))
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
 simpleaudio.play_buffer(samples_b, 1, 2, F)
@@ -2965,14 +2966,14 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-import pygame.transform as tr
-<Surf> = tr.scale(<Surf>, (width, height))      # Returns scaled surface.
-<Surf> = tr.rotate(<Surf>, degrees)             # Returns rotated and scaled surface.
-<Surf> = tr.flip(<Surf>, x_bool, y_bool)        # Returns flipped surface.
+from pygame.transform import *
+<Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
+<Surf> = rotate(<Surf>, degrees)                # Returns rotated and scaled surface.
+<Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
 ```
 
 ```python
-from pygame.draw import line, arc, rect
+from pygame.draw import *
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
 rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
@@ -3517,6 +3518,6 @@ if __name__ == '__main__':
 
 Index
 -----
-* **Only available in [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
+* **Only available in the [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
 * **Ctrl+F / ⌘F is usually sufficient.**
 * **Searching `'#<title>'` on a [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
