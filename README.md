@@ -500,7 +500,7 @@ Numbers
 ### Math
 ```python
 from math import e, pi, inf, nan, isinf, isnan
-from math import cos, acos, sin, asin, tan, atan, degrees, radians
+from math import cos, sin, tan, acos, asin, atan, degrees, radians
 from math import log, log10, log2
 ```
 
@@ -599,7 +599,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
+* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into missing hour.**
 
 ### Now
 ```python
@@ -1782,7 +1782,7 @@ import csv
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 <list>   = list(<reader>)           # Returns list of remaining rows.
 ```
-* **File must be opened with `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
+* **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
 ### Write
 ```python
@@ -1790,7 +1790,7 @@ import csv
 <writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
-* **File must be opened with `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
+* **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values.**
@@ -1805,15 +1805,15 @@ import csv
 ### Dialects
 ```text
 +------------------+--------------+--------------+--------------+
-|                  |     excel    |   excel-tab  |     unix     |
+|                  |    excel     |   excel-tab  |     unix     |
 +------------------+--------------+--------------+--------------+
-| delimiter        |       ','    |      '\t'    |       ','    |
-| quotechar        |       '"'    |       '"'    |       '"'    |
-| doublequote      |      True    |      True    |      True    |
-| skipinitialspace |     False    |     False    |     False    |
-| lineterminator   |    '\r\n'    |    '\r\n'    |      '\n'    |
-| quoting          |         0    |         0    |         1    |
-| escapechar       |      None    |      None    |      None    |
+| delimiter        |    ','       |    '\t'      |     ','      |
+| quotechar        |    '"'       |    '"'       |     '"'      |
+| doublequote      |    True      |    True      |     True     |
+| skipinitialspace |    False     |    False     |     False    |
+| lineterminator   |    '\r\n'    |    '\r\n'    |     '\n'     |
+| quoting          |    0         |    0         |     1        |
+| escapechar       |    None      |    None      |     None     |
 +------------------+--------------+--------------+--------------+
 ```
 
@@ -1879,10 +1879,10 @@ with <conn>:
 
 ```python
 >>> conn = sqlite3.connect('test.db')
->>> conn.execute('create table person (person_id integer primary key, name, height)')
->>> conn.execute('insert into person values (null, ?, ?)', ('Jean-Luc', 187)).lastrowid
+>>> conn.execute('CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)')
+>>> conn.execute('INSERT INTO person VALUES (NULL, ?, ?)', ('Jean-Luc', 187)).lastrowid
 1
->>> conn.execute('select * from person').fetchall()
+>>> conn.execute('SELECT * FROM person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ``` 
 
@@ -2087,7 +2087,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
-<Exec>.shutdown(wait=True)                     # Gets called at the end of 'with' block.
+<Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
 ```
 
 ```python
@@ -2542,7 +2542,7 @@ duration = perf_counter() - start_time
 ### Timing a Snippet
 ```python
 >>> from timeit import timeit
->>> timeit('"".join(str(i) for i in range(100))',
+>>> timeit("''.join(str(i) for i in range(100))",
 ...        number=10000, globals=globals(), setup='pass')
 0.34986
 ```
@@ -2623,23 +2623,21 @@ indexes = <array>.argmin(axis)
 
 ### Indexing
 ```bash
-<el>       = <2d_array>[0, 0]        # First element.
-<1d_view>  = <2d_array>[0]           # First row.
-<1d_view>  = <2d_array>[:, 0]        # First column. Also [..., 0].
-<3d_view>  = <2d_array>[None, :, :]  # Expanded by dimension of size 1.
+<el>       = <2d_array>[row_index, column_index]
+<1d_view>  = <2d_array>[row_index]
+<1d_view>  = <2d_array>[:, column_index]
 ```
 
 ```bash
-<1d_array> = <2d_array>[<1d_row_indexes>, <1d_column_indexes>]
-<2d_array> = <2d_array>[<2d_row_indexes>, <2d_column_indexes>]
+<1d_array> = <2d_array>[row_indexes, column_indexes]
+<2d_array> = <2d_array>[row_indexes]
+<2d_array> = <2d_array>[:, column_indexes]
 ```
 
 ```bash
-<2d_bools> = <2d_array> > 0
+<2d_bools> = <2d_array> ><== <el>
 <1d_array> = <2d_array>[<2d_bools>]
 ```
-
-* **If row and column indexes differ in shape, they are combined with broadcasting.**
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
@@ -2899,8 +2897,8 @@ Synthesizer
 #### Plays Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
-import simpleaudio, math, struct
-from itertools import chain, repeat
+import math, struct, simpleaudio
+from itertools import repeat, chain
 F  = 44100
 P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'
 P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'

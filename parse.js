@@ -74,20 +74,6 @@ const PROGRESS_BAR =
   '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
   'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
 
-const NUMPY_1 =
-  '&lt;el&gt;       = &lt;2d_array&gt;[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First element.</span>\n' +
-  '&lt;1d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-number">0</span>]           <span class="hljs-comment"># First row.</span>\n' +
-  '&lt;1d_view&gt;  = &lt;2d_array&gt;[:, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First column. Also [..., 0].</span>\n' +
-  '&lt;3d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-keyword">None</span>, :, :]  <span class="hljs-comment"># Expanded by dimension of size 1.</span>\n';
-
-const NUMPY_2 =
-  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;1d_row_indexes&gt;, &lt;1d_column_indexes&gt;]\n' +
-  '&lt;2d_array&gt; = &lt;2d_array&gt;[&lt;2d_row_indexes&gt;, &lt;2d_column_indexes&gt;]\n';
-
-const NUMPY_3 =
-  '&lt;2d_bools&gt; = &lt;2d_array&gt; &gt; <span class="hljs-number">0</span>\n' +
-  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;2d_bools&gt;]\n';
-
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +
   '$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into \'./dist/script\' directory.</span>\n' +
@@ -244,20 +230,20 @@ const DIAGRAM_8_B =
 
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +
-  '|                  |     excel    |   excel-tab  |     unix     |\n' +
+  '|                  |    excel     |   excel-tab  |     unix     |\n' +
   '+------------------+--------------+--------------+--------------+\n';
 
 const DIAGRAM_9_B =
   "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
-  "┃                  │     excel    │   excel-tab  │     unix     ┃\n" +
+  "┃                  │    excel     │   excel-tab  │     unix     ┃\n" +
   "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
-  "┃ delimiter        │       ','    │      '\\t'    │       ','    ┃\n" +
-  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
-  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
-  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
-  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │      '\\n'    ┃\n" +
-  "┃ quoting          │         0    │         0    │         1    ┃\n" +
-  "┃ escapechar       │      None    │      None    │      None    ┃\n" +
+  "┃ delimiter        │    ','       │    '\\t'      │    ','       ┃\n" +
+  "┃ quotechar        │    '\"'       │    '\"'       │    '\"'       ┃\n" +
+  "┃ doublequote      │    True      │    True      │     True     ┃\n" +
+  "┃ skipinitialspace │    False     │    False     │     False    ┃\n" +
+  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │    '\\n'      ┃\n" +
+  "┃ quoting          │    0         │    0         │     1        ┃\n" +
+  "┃ escapechar       │    None      │    None      │     None     ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
@@ -530,9 +516,6 @@ function fixHighlights() {
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
-  $(`code:contains(<el>       = <2d_array>[0, 0])`).html(NUMPY_1).removeClass().addClass("python language-python hljs");
-  $(`code:contains(<1d_array> = <2d_array>[<1d_row_indexes>)`).html(NUMPY_2).removeClass().addClass("python language-python hljs");
-  $(`code:contains(<2d_bools> = <2d_array> > 0)`).html(NUMPY_3).removeClass().addClass("python language-python hljs");
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
 }

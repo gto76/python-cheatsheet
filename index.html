@@ -606,7 +606,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan, isinf, isnan
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> cos, acos, sin, asin, tan, atan, degrees, radians
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> cos, sin, tan, acos, asin, atan, degrees, radians
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2
 </code></pre></div>
 
@@ -681,7 +681,7 @@ to_exclusive   = &lt;range&gt;.stop
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week (Mon == 0).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;DTa&gt; = resolve_imaginary(&lt;DTa&gt;)'</span></code> fixes DTs that fall into the missing hour.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'&lt;DTa&gt; = resolve_imaginary(&lt;DTa&gt;)'</span></code> fixes DTs that fall into missing hour.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
@@ -1626,7 +1626,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
+<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
@@ -1634,7 +1634,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!</strong></li>
+<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!</strong></li>
 </ul>
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values.</strong></li>
@@ -1646,15 +1646,15 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - Controls the amount of quoting: 0 - as necessary, 1 - all.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping 'quotechar' if 'doublequote' is False.</strong></li>
 </ul><div><h3 id="dialects">Dialects</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
-┃                  │     excel    │   excel-tab  │     unix     ┃
+┃                  │    excel     │   excel-tab  │     unix     ┃
 ┠──────────────────┼──────────────┼──────────────┼──────────────┨
-┃ delimiter        │       ','    │      '\t'    │       ','    ┃
-┃ quotechar        │       '"'    │       '"'    │       '"'    ┃
-┃ doublequote      │      True    │      True    │      True    ┃
-┃ skipinitialspace │     False    │     False    │     False    ┃
-┃ lineterminator   │    '\r\n'    │    '\r\n'    │      '\n'    ┃
-┃ quoting          │         0    │         0    │         1    ┃
-┃ escapechar       │      None    │      None    │      None    ┃
+┃ delimiter        │    ','       │    '\t'      │    ','       ┃
+┃ quotechar        │    '"'       │    '"'       │    '"'       ┃
+┃ doublequote      │    True      │    True      │     True     ┃
+┃ skipinitialspace │    False     │    False     │     False    ┃
+┃ lineterminator   │    '\r\n'    │    '\r\n'    │    '\n'      ┃
+┃ quoting          │    0         │    0         │     1        ┃
+┃ escapechar       │    None      │    None      │     None     ┃
 ┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre></div></div>
 
@@ -1703,10 +1703,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <div><h3 id="example">Example</h3><p><strong>In this example values are not actually saved because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'create table person (person_id integer primary key, name, height)'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'insert into person values (null, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)).lastrowid
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'INSERT INTO person VALUES (NULL, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)).lastrowid
 <span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'select * from person'</span>).fetchall()
+<span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'SELECT * FROM person'</span>).fetchall()
 [(<span class="hljs-number">1</span>, <span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)]
 </code></pre></div>
 
@@ -1865,7 +1865,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
-&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Gets called at the end of 'with' block.</span>
+&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># A multithreaded and non-lazy map().</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Starts a thread and returns its Future object.</span>
@@ -2214,7 +2214,7 @@ duration = perf_counter() - start_time
 </code></pre></div>
 
 <div><h3 id="timingasnippet">Timing a Snippet</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> timeit <span class="hljs-keyword">import</span> timeit
-<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'"".join(str(i) for i in range(100))'</span>,
+<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">"''.join(str(i) for i in range(100))"</span>,
 <span class="hljs-meta">... </span>       number=<span class="hljs-number">10000</span>, globals=globals(), setup=<span class="hljs-string">'pass'</span>)
 <span class="hljs-number">0.34986</span>
 </code></pre></div>
@@ -2275,21 +2275,18 @@ indexes = &lt;array&gt;.argmin(axis)
 <li><strong>Shape is a tuple of dimension sizes.</strong></li>
 <li><strong>Axis is an index of the dimension that gets collapsed. Leftmost dimension has index 0.</strong></li>
 </ul>
-<div><h3 id="indexing">Indexing</h3><pre><code class="python language-python hljs">&lt;el&gt;       = &lt;2d_array&gt;[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First element.</span>
-&lt;1d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-number">0</span>]           <span class="hljs-comment"># First row.</span>
-&lt;1d_view&gt;  = &lt;2d_array&gt;[:, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First column. Also [..., 0].</span>
-&lt;3d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-keyword">None</span>, :, :]  <span class="hljs-comment"># Expanded by dimension of size 1.</span>
+<div><h3 id="indexing">Indexing</h3><pre><code class="bash language-bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]
+&lt;1d_view&gt;  = &lt;2d_array&gt;[row_index]
+&lt;1d_view&gt;  = &lt;2d_array&gt;[:, column_index]
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;1d_row_indexes&gt;, &lt;1d_column_indexes&gt;]
-&lt;2d_array&gt; = &lt;2d_array&gt;[&lt;2d_row_indexes&gt;, &lt;2d_column_indexes&gt;]
+<pre><code class="bash language-bash hljs">&lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_indexes]
+&lt;2d_array&gt; = &lt;2d_array&gt;[row_indexes]
+&lt;2d_array&gt; = &lt;2d_array&gt;[:, column_indexes]
 </code></pre>
-<pre><code class="python language-python hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt; <span class="hljs-number">0</span>
+<pre><code class="bash language-bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt;&lt;== &lt;el&gt;
 &lt;1d_array&gt; = &lt;2d_array&gt;[&lt;2d_bools&gt;]
 </code></pre>
-<ul>
-<li><strong>If row and column indexes differ in shape, they are combined with broadcasting.</strong></li>
-</ul>
 <div><h3 id="broadcasting">Broadcasting</h3><p><strong>Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]        <span class="hljs-comment"># Shape: (3, 1)</span>
 right = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]        <span class="hljs-comment"># Shape: (3)</span>
 </code></pre></div>
@@ -2492,8 +2489,8 @@ engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> simpleaudio, math, struct
-<span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain, repeat
+<span class="hljs-keyword">import</span> math, struct, simpleaudio
+<span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> repeat, chain
 F  = <span class="hljs-number">44100</span>
 P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'</span>
 P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'</span>
