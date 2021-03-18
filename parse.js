@@ -239,11 +239,11 @@ const DIAGRAM_9_B =
   "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
   "┃ delimiter        │    ','       │    '\\t'      │    ','       ┃\n" +
   "┃ quotechar        │    '\"'       │    '\"'       │    '\"'       ┃\n" +
-  "┃ doublequote      │    True      │    True      │     True     ┃\n" +
-  "┃ skipinitialspace │    False     │    False     │     False    ┃\n" +
+  "┃ doublequote      │    True      │    True      │    True      ┃\n" +
+  "┃ skipinitialspace │    False     │    False     │    False     ┃\n" +
   "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │    '\\n'      ┃\n" +
-  "┃ quoting          │    0         │    0         │     1        ┃\n" +
-  "┃ escapechar       │    None      │    None      │     None     ┃\n" +
+  "┃ quoting          │    0         │    0         │    1         ┃\n" +
+  "┃ escapechar       │    None      │    None      │    None      ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
