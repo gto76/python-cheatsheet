@@ -2750,13 +2750,13 @@ img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
 img.convert('RGB').save('test.png')
 ```
 
-### Drawing
+### Image Draw
 ```python
 from PIL import ImageDraw
+<ImageDraw> = ImageDraw.Draw(<Image>)
 ```
 
 ```python
-<ImageDraw> = ImageDraw.Draw(<Image>)
 <ImageDraw>.point((x, y), fill=None)
 <ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 
 <ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg, fill=None, width=0)

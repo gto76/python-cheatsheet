@@ -2373,11 +2373,11 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-string">'test.png'</span>)
 </code></pre></div>
 
-<div><h3 id="drawing">Drawing</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
+<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
+&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
-&lt;ImageDraw&gt;.point((x, y), fill=<span class="hljs-keyword">None</span>)
+<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y), fill=<span class="hljs-keyword">None</span>)
 &lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>, joint=<span class="hljs-keyword">None</span>) 
 &lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg, fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
