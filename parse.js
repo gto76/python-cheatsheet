@@ -552,7 +552,8 @@ function move(anchor_el, el_id) {
 }
 
 function insertPageBreaks() {
-  insertPageBreakBefore('#print')
+  insertPageBreakBefore('#decorator')
+  // insertPageBreakBefore('#print')
 }
 
 function insertPageBreakBefore(an_id) {

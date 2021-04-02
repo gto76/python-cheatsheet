@@ -681,7 +681,7 @@ to_exclusive   = &lt;range&gt;.stop
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week (Mon == 0).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;DTa&gt; = resolve_imaginary(&lt;DTa&gt;)'</span></code> fixes DTs that fall into missing hour.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'&lt;DTa&gt; = resolve_imaginary(&lt;DTa&gt;)'</span></code> fixes DTs that fall into the missing hour.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
@@ -781,45 +781,41 @@ func(*args, **kwargs)
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, z, **kwargs)</span>:</span>  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
 </code></pre>
-<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]
-&lt;set&gt;   = {*&lt;collection&gt; [, ...]}
-&lt;tuple&gt; = (*&lt;collection&gt;, [...])
-&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}
+<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt; = [*&lt;collection&gt; [, ...]]
+&lt;set&gt;  = {*&lt;collection&gt; [, ...]}
+&lt;tup.&gt; = (*&lt;collection&gt;, [...])
+&lt;dict&gt; = {**&lt;dict&gt; [, ...]}
 </code></pre></div>
 
 <pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;
 </code></pre>
-<div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;function&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;
-&lt;function&gt; = <span class="hljs-keyword">lambda</span> &lt;argument_1&gt;, &lt;argument_2&gt;: &lt;return_value&gt;
+<div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;
+&lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;
 </code></pre></div></div>
 
 
-<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># [1, 2, ..., 10]</span>
-&lt;set&gt;  = {i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>}            <span class="hljs-comment"># {6, 7, 8, 9}</span>
-&lt;iter&gt; = (i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))                   <span class="hljs-comment"># (5, 6, ..., 14)</span>
-&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># {0: 0, 1: 2, ..., 9: 18}</span>
+<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                         <span class="hljs-comment"># [1, 2, ..., 10]</span>
+&lt;set&gt;  = {i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>}                  <span class="hljs-comment"># {6, 7, 8, 9}</span>
+&lt;iter&gt; = (i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))                         <span class="hljs-comment"># (5, 6, ..., 14)</span>
+&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                      <span class="hljs-comment"># {0: 0, 1: 2, ..., 9: 18}</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">out = [i+j <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]
+[<span class="hljs-string">'aa'</span>, <span class="hljs-string">'ab'</span>, <span class="hljs-string">'ac'</span>, ..., <span class="hljs-string">'cc'</span>]
 </code></pre>
-<div><h4 id="isthesameas-1">Is the same as:</h4><pre><code class="python language-python hljs">out = []
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
-    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
-        out.append(i+j)
+<div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))                  <span class="hljs-comment"># (1, 2, ..., 10)</span>
+&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))               <span class="hljs-comment"># (6, 7, 8, 9)</span>
+&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))        <span class="hljs-comment"># 45</span>
 </code></pre></div>
 
-<div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
-
-&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># (1, 2, ..., 10)</span>
-&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># (6, 7, 8, 9)</span>
-&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># 45</span>
+<ul>
+<li><strong>Reduce must be imported from functools module.</strong></li>
+</ul>
+<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                                <span class="hljs-comment"># False if empty.</span>
+&lt;bool&gt; = all(el[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> &lt;collection&gt;)                <span class="hljs-comment"># True if empty.</span>
 </code></pre></div>
 
-<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># False if empty.</span>
-&lt;bool&gt; = all(el[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> &lt;collection&gt;)          <span class="hljs-comment"># True if empty.</span>
-</code></pre></div>
-
-<div><h3 id="ifelse">If - Else</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;expression_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;expression_if_false&gt;
+<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp_if_false&gt;
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
@@ -835,7 +831,7 @@ Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs
 direction = Direction.n
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-Creature  = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'location'</span>, <span class="hljs-string">'direction'</span>])
+Creature  = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])
 creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), Direction.n)
 </code></pre>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have a closure in Python when:</strong></p><ul>
@@ -884,7 +880,7 @@ creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter(), counter(), counter()
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
-<div><h2 id="decorator"><a href="#decorator" name="decorator">#</a>Decorator</h2><p><strong>A decorator takes a function, adds some functionality and returns it.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">@decorator_name</span>
+<div class="pagebreak"></div><div><h2 id="decorator"><a href="#decorator" name="decorator">#</a>Decorator</h2><p><strong>A decorator takes a function, adds some functionality and returns it.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">@decorator_name</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">function_that_gets_passed_to_decorator</span><span class="hljs-params">()</span>:</span>
     ...
 </code></pre></div>
@@ -1397,7 +1393,7 @@ sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with 
 </code></pre></div>
 
 
-<div class="pagebreak"></div><div><h2 id="print"><a href="#print" name="print">#</a>Print</h2><pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
+<div><h2 id="print"><a href="#print" name="print">#</a>Print</h2><pre><code class="python language-python hljs">print(&lt;el_1&gt;, ..., sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=sys.stdout, flush=<span class="hljs-keyword">False</span>)
 </code></pre></div>
 
 <ul>
@@ -1756,19 +1752,18 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
 <li><strong>Machine’s native type sizes and byte order are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack, iter_unpack
-
-&lt;bytes&gt;  = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;num_1&gt; [, &lt;num_2&gt;, ...])
-&lt;tuple&gt;  = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
-&lt;tuples&gt; = iter_unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
 </code></pre></div>
 
 
-<div><h3 id="example-1">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<pre><code class="python language-python hljs">&lt;bytes&gt;  = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;num_1&gt; [, &lt;num_2&gt;, ...])
+&lt;tuple&gt;  = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
+&lt;tuples&gt; = iter_unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>unpack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>)
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
-</code></pre></div>
-
+</code></pre>
 <div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesstartformatstringwith">For standard type sizes start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order (usually little-endian)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
@@ -1835,6 +1830,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
 <li><strong>That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock, Semaphore, Event, Barrier
+<span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
 </code></pre></div>
 
 
@@ -1863,13 +1859,11 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
-<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><p><strong>Object that manages thread execution.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor
+<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><p><strong>Object that manages thread execution.</strong></p><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
+&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
-&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
-</code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># A multithreaded and non-lazy map().</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Starts a thread and returns its Future object.</span>
 &lt;bool&gt; = &lt;Futr&gt;.done()                         <span class="hljs-comment"># Checks if the thread has finished executing.</span>
@@ -2303,7 +2297,7 @@ right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6<
 right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
 </code></pre></div>
 
-<div><h4 id="3ifneithernonmatchingdimensionhassize1raiseanerror">3. If neither non-matching dimension has size 1, raise an error.</h4><div><h3 id="example-2">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
+<div><h4 id="3ifneithernonmatchingdimensionhassize1raiseanerror">3. If neither non-matching dimension has size 1, raise an error.</h4><div><h3 id="example-1">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
  [ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
 [[ <span class="hljs-number">0.1</span>],

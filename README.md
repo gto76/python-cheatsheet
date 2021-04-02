@@ -599,7 +599,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into missing hour.**
+* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
 
 ### Now
 ```python
@@ -731,10 +731,10 @@ def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 
 ### Other Uses
 ```python
-<list>  = [*<collection> [, ...]]
-<set>   = {*<collection> [, ...]}
-<tuple> = (*<collection>, [...])
-<dict>  = {**<dict> [, ...]}
+<list> = [*<collection> [, ...]]
+<set>  = {*<collection> [, ...]}
+<tup.> = (*<collection>, [...])
+<dict> = {**<dict> [, ...]}
 ```
 
 ```python
@@ -746,48 +746,40 @@ Inline
 ------
 ### Lambda
 ```python
-<function> = lambda: <return_value>
-<function> = lambda <argument_1>, <argument_2>: <return_value>
+<func> = lambda: <return_value>
+<func> = lambda <arg_1>, <arg_2>: <return_value>
 ```
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # [1, 2, ..., 10]
-<set>  = {i for i in range(10) if i > 5}            # {6, 7, 8, 9}
-<iter> = (i+5 for i in range(10))                   # (5, 6, ..., 14)
-<dict> = {i: i*2 for i in range(10)}                # {0: 0, 1: 2, ..., 9: 18}
+<list> = [i+1 for i in range(10)]                         # [1, 2, ..., 10]
+<set>  = {i for i in range(10) if i > 5}                  # {6, 7, 8, 9}
+<iter> = (i+5 for i in range(10))                         # (5, 6, ..., 14)
+<dict> = {i: i*2 for i in range(10)}                      # {0: 0, 1: 2, ..., 9: 18}
 ```
 
 ```python
-out = [i+j for i in range(10) for j in range(10)]
-```
-
-#### Is the same as:
-```python
-out = []
-for i in range(10):
-    for j in range(10):
-        out.append(i+j)
+>>> [l+r for l in 'abc' for r in 'abc']
+['aa', 'ab', 'ac', ..., 'cc']
 ```
 
 ### Map, Filter, Reduce
 ```python
-from functools import reduce
-
-<iter> = map(lambda x: x + 1, range(10))            # (1, 2, ..., 10)
-<iter> = filter(lambda x: x > 5, range(10))         # (6, 7, 8, 9)
-<obj>  = reduce(lambda out, x: out + x, range(10))  # 45
+<iter> = map(lambda x: x + 1, range(10))                  # (1, 2, ..., 10)
+<iter> = filter(lambda x: x > 5, range(10))               # (6, 7, 8, 9)
+<obj>  = reduce(lambda out, x: out + x, range(10))        # 45
 ```
+* **Reduce must be imported from functools module.**
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                          # False if empty.
-<bool> = all(el[1] for el in <collection>)          # True if empty.
+<bool> = any(<collection>)                                # False if empty.
+<bool> = all(el[1] for el in <collection>)                # True if empty.
 ```
 
-### If - Else
+### Conditional Expression
 ```python
-<obj> = <expression_if_true> if <condition> else <expression_if_false>
+<obj> = <exp_if_true> if <condition> else <exp_if_false>
 ```
 
 ```python
@@ -810,7 +802,7 @@ direction = Direction.n
 
 ```python
 from dataclasses import make_dataclass
-Creature  = make_dataclass('Creature', ['location', 'direction'])
+Creature  = make_dataclass('Creature', ['loc', 'dir'])
 creature  = Creature(Point(0, 0), Direction.n)
 ```
 
@@ -1950,13 +1942,14 @@ Struct
 
 ```python
 from struct import pack, unpack, iter_unpack
+```
 
+```python
 <bytes>  = pack('<format>', <num_1> [, <num_2>, ...])
 <tuple>  = unpack('<format>', <bytes>)
 <tuples> = iter_unpack('<format>', <bytes>)
 ```
 
-### Example
 ```python
 >>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
@@ -2049,6 +2042,7 @@ Threading
 * **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
 from threading import Thread, RLock, Semaphore, Event, Barrier
+from concurrent.futures import ThreadPoolExecutor
 ```
 
 ### Thread
@@ -2084,10 +2078,6 @@ with lock:
 
 ### Thread Pool Executor
 **Object that manages thread execution.**
-```python
-from concurrent.futures import ThreadPoolExecutor
-```
-
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
 <Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
