@@ -1554,6 +1554,7 @@ value = args.&lt;name&gt;
 
 <pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
+os.makedirs(&lt;path&gt;, exist_ok=<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># Creates directories recursively. Ignore if directory exists.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
