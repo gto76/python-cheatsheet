@@ -449,7 +449,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
-&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on \n,\r,\r\n. Keeps them if 'keepends'.</span>
+&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on [\n\r\f\v\x1c\x1d\x1e\x85] and '\r\n'.</span>
 &lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as a separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains a substring.</span>
@@ -507,11 +507,12 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
-<li><strong>By default digits, alphanumerics and whitespaces from all alphabets are matched, unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
+<li><strong>By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
+<li><strong>As shown below, it restricts special sequence matches to <code class="python hljs"><span class="hljs-string">'[\x00-\x7f]'</span></code> and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c\x1d\x1e\x1f]'</span></code>.</strong></li>
 <li><strong>Use a capital letter for negation.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches any digit.</span>
-<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches any alphanumeric.</span>
-<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Matches any whitespace.</span>
+</ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches decimal characters.</span>
+<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches alphanumerics and underscore.</span>
+<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Matches whitespaces.</span>
 </code></pre></div>
 
 
@@ -555,33 +556,34 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                                <span class="hljs-comment"># '  123.456%'</span>
 </code></pre></div>
 
-<div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
-┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃
-┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨
-┃   0.000056789 │    '5.6789e-05' │     '0.000057'  │  '5.678900e-05' │     '0.005679%' ┃
-┃   0.00056789  │    '0.00056789' │     '0.000568'  │  '5.678900e-04' │     '0.056789%' ┃
-┃   0.0056789   │    '0.0056789'  │     '0.005679'  │  '5.678900e-03' │     '0.567890%' ┃
-┃   0.056789    │    '0.056789'   │     '0.056789'  │  '5.678900e-02' │     '5.678900%' ┃
-┃   0.56789     │    '0.56789'    │     '0.567890'  │  '5.678900e-01' │    '56.789000%' ┃
-┃   5.6789      │    '5.6789'     │     '5.678900'  │  '5.678900e+00' │   '567.890000%' ┃
-┃  56.789       │   '56.789'      │    '56.789000'  │  '5.678900e+01' │  '5678.900000%' ┃
-┃ 567.89        │  '567.89'       │   '567.890000'  │  '5.678900e+02' │ '56789.000000%' ┃
-┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
+<div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
+┃              │    {&lt;float&gt;}   │   {&lt;float&gt;:f}  │   {&lt;float&gt;:e}  │   {&lt;float&gt;:%}  ┃
+┠──────────────┼────────────────┼────────────────┼────────────────┼────────────────┨
+┃  0.000056789 │   '5.6789e-05' │    '0.000057'  │ '5.678900e-05' │    '0.005679%' ┃
+┃  0.00056789  │   '0.00056789' │    '0.000568'  │ '5.678900e-04' │    '0.056789%' ┃
+┃  0.0056789   │   '0.0056789'  │    '0.005679'  │ '5.678900e-03' │    '0.567890%' ┃
+┃  0.056789    │   '0.056789'   │    '0.056789'  │ '5.678900e-02' │    '5.678900%' ┃
+┃  0.56789     │   '0.56789'    │    '0.567890'  │ '5.678900e-01' │   '56.789000%' ┃
+┃  5.6789      │   '5.6789'     │    '5.678900'  │ '5.678900e+00' │  '567.890000%' ┃
+┃ 56.789       │  '56.789'      │   '56.789000'  │ '5.678900e+01' │ '5678.900000%' ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛
 </code></pre></div>
 
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓
-┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃
-┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨
-┃   0.000056789 │    '5.7e-05'    │       '0.00'    │    '5.68e-05'   │       '0.01%'   ┃
-┃   0.00056789  │    '0.00057'    │       '0.00'    │    '5.68e-04'   │       '0.06%'   ┃
-┃   0.0056789   │    '0.0057'     │       '0.01'    │    '5.68e-03'   │       '0.57%'   ┃
-┃   0.056789    │    '0.057'      │       '0.06'    │    '5.68e-02'   │       '5.68%'   ┃
-┃   0.56789     │    '0.57'       │       '0.57'    │    '5.68e-01'   │      '56.79%'   ┃
-┃   5.6789      │    '5.7'        │       '5.68'    │    '5.68e+00'   │     '567.89%'   ┃
-┃  56.789       │    '5.7e+01'    │      '56.79'    │    '5.68e+01'   │    '5678.90%'   ┃
-┃ 567.89        │    '5.7e+02'    │     '567.89'    │    '5.68e+02'   │   '56789.00%'   ┃
-┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
+┃              │  {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f} │  {&lt;float&gt;:.2e} │  {&lt;float&gt;:.2%} ┃
+┠──────────────┼────────────────┼────────────────┼────────────────┼────────────────┨
+┃  0.000056789 │    '5.7e-05'   │      '0.00'    │   '5.68e-05'   │      '0.01%'   ┃
+┃  0.00056789  │    '0.00057'   │      '0.00'    │   '5.68e-04'   │      '0.06%'   ┃
+┃  0.0056789   │    '0.0057'    │      '0.01'    │   '5.68e-03'   │      '0.57%'   ┃
+┃  0.056789    │    '0.057'     │      '0.06'    │   '5.68e-02'   │      '5.68%'   ┃
+┃  0.56789     │    '0.57'      │      '0.57'    │   '5.68e-01'   │     '56.79%'   ┃
+┃  5.6789      │    '5.7'       │      '5.68'    │   '5.68e+00'   │    '567.89%'   ┃
+┃ 56.789       │    '5.7e+01'   │     '56.79'    │   '5.68e+01'   │   '5678.90%'   ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛
 </code></pre>
+<ul>
+<li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> a <code class="python hljs"><span class="hljs-string">'6'</span></code> and <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
+</ul>
 <div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'</span>
 {<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'</span>
 {<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'</span>
@@ -1115,7 +1117,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
-<li><strong>Iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
+<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
 <li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
 <li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehensions">generator expressions</a>.</strong></li>
 <li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
@@ -2190,7 +2192,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <div><h4 id="test">Test:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> threading, requests
 <span class="hljs-meta">&gt;&gt;&gt; </span>threading.Thread(target=run, daemon=<span class="hljs-keyword">True</span>).start()
-<span class="hljs-meta">&gt;&gt;&gt; </span>url  = <span class="hljs-string">'http://localhost:8080/odds/football'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>url = <span class="hljs-string">'http://localhost:8080/odds/football'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
 <span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=data)
 <span class="hljs-meta">&gt;&gt;&gt; </span>response.json()
@@ -2495,7 +2497,7 @@ get_pause   = <span class="hljs-keyword">lambda</span> seconds: repeat(<span cla
 sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
 get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
 get_hz      = <span class="hljs-keyword">lambda</span> key: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(key) / <span class="hljs-number">12</span>)
-parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">-1</span>]), <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
+parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">2</span>]), <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
 get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(*parse_note(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
 samples_f   = chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span><span class="hljs-subst">{P1}</span><span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
 samples_b   = <span class="hljs-string">b''</span>.join(struct.pack(<span class="hljs-string">'&lt;h'</span>, int(f * <span class="hljs-number">30000</span>)) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
@@ -2541,12 +2543,12 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> *
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, …
 &lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
 &lt;Surf&gt; = rotate(&lt;Surf&gt;, degrees)                <span class="hljs-comment"># Returns rotated and scaled surface.</span>
 &lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> *
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, arc, rect
 line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also: ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;)                     <span class="hljs-comment"># Also: polygon(&lt;Surf&gt;, color, points)</span>
@@ -2604,12 +2606,12 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     mario.spd = P(*[max(-limit, min(limit, s)) <span class="hljs-keyword">for</span> limit, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>
-    p = mario.rect.topleft
-    larger_speed = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
-    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(larger_speed):
+    x, y = mario.rect.topleft
+    n_steps = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        p = P(*[a + s/larger_speed <span class="hljs-keyword">for</span> a, s <span class="hljs-keyword">in</span> zip(p, mario.spd)])
-        mario.rect.topleft = p
+        x, y = x + mario.spd.x/n_steps, y + mario.spd.y/n_steps
+        mario.rect.topleft = x, y
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>
     deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}

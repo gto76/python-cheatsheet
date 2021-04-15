@@ -308,7 +308,7 @@ String
 ```python
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
-<list> = <str>.splitlines(keepends=False)    # Splits on \n,\r,\r\n. Keeps them if 'keepends'.
+<list> = <str>.splitlines(keepends=False)    # Splits on [\n\r\f\v\x1c\x1d\x1e\x85] and '\r\n'.
 <str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as a separator.
 ```
 
@@ -376,12 +376,13 @@ import re
 ```
 
 ### Special Sequences
-* **By default digits, alphanumerics and whitespaces from all alphabets are matched, unless `'flags=re.ASCII'` argument is used.**
+* **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
+* **As shown below, it restricts special sequence matches to `'[\x00-\x7f]'` and prevents `'\s'` from accepting `'[\x1c\x1d\x1e\x1f]'`.**
 * **Use a capital letter for negation.**
 ```python
-'\d' == '[0-9]'                                # Matches any digit.
-'\w' == '[a-zA-Z0-9_]'                         # Matches any alphanumeric.
-'\s' == '[ \t\n\r\f\v]'                        # Matches any whitespace.
+'\d' == '[0-9]'                                # Matches decimal characters.
+'\w' == '[a-zA-Z0-9_]'                         # Matches alphanumerics and underscore.
+'\s' == '[ \t\n\r\f\v]'                        # Matches whitespaces.
 ```
 
 
@@ -440,33 +441,32 @@ Format
 
 #### Comparison of presentation types:
 ```text
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|   0.000056789 |    '5.6789e-05' |     '0.000057'  |  '5.678900e-05' |     '0.005679%' |
-|   0.00056789  |    '0.00056789' |     '0.000568'  |  '5.678900e-04' |     '0.056789%' |
-|   0.0056789   |    '0.0056789'  |     '0.005679'  |  '5.678900e-03' |     '0.567890%' |
-|   0.056789    |    '0.056789'   |     '0.056789'  |  '5.678900e-02' |     '5.678900%' |
-|   0.56789     |    '0.56789'    |     '0.567890'  |  '5.678900e-01' |    '56.789000%' |
-|   5.6789      |    '5.6789'     |     '5.678900'  |  '5.678900e+00' |   '567.890000%' |
-|  56.789       |   '56.789'      |    '56.789000'  |  '5.678900e+01' |  '5678.900000%' |
-| 567.89        |  '567.89'       |   '567.890000'  |  '5.678900e+02' | '56789.000000%' |
-+---------------+-----------------+-----------------+-----------------+-----------------+
++--------------+----------------+----------------+----------------+----------------+
+|              |    {<float>}   |   {<float>:f}  |   {<float>:e}  |   {<float>:%}  |
++--------------+----------------+----------------+----------------+----------------+
+|  0.000056789 |   '5.6789e-05' |    '0.000057'  | '5.678900e-05' |    '0.005679%' |
+|  0.00056789  |   '0.00056789' |    '0.000568'  | '5.678900e-04' |    '0.056789%' |
+|  0.0056789   |   '0.0056789'  |    '0.005679'  | '5.678900e-03' |    '0.567890%' |
+|  0.056789    |   '0.056789'   |    '0.056789'  | '5.678900e-02' |    '5.678900%' |
+|  0.56789     |   '0.56789'    |    '0.567890'  | '5.678900e-01' |   '56.789000%' |
+|  5.6789      |   '5.6789'     |    '5.678900'  | '5.678900e+00' |  '567.890000%' |
+| 56.789       |  '56.789'      |   '56.789000'  | '5.678900e+01' | '5678.900000%' |
++--------------+----------------+----------------+----------------+----------------+
 ```
 ```text
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |
-+---------------+-----------------+-----------------+-----------------+-----------------+
-|   0.000056789 |    '5.7e-05'    |       '0.00'    |    '5.68e-05'   |       '0.01%'   |
-|   0.00056789  |    '0.00057'    |       '0.00'    |    '5.68e-04'   |       '0.06%'   |
-|   0.0056789   |    '0.0057'     |       '0.01'    |    '5.68e-03'   |       '0.57%'   |
-|   0.056789    |    '0.057'      |       '0.06'    |    '5.68e-02'   |       '5.68%'   |
-|   0.56789     |    '0.57'       |       '0.57'    |    '5.68e-01'   |      '56.79%'   |
-|   5.6789      |    '5.7'        |       '5.68'    |    '5.68e+00'   |     '567.89%'   |
-|  56.789       |    '5.7e+01'    |      '56.79'    |    '5.68e+01'   |    '5678.90%'   |
-| 567.89        |    '5.7e+02'    |     '567.89'    |    '5.68e+02'   |   '56789.00%'   |
-+---------------+-----------------+-----------------+-----------------+-----------------+
++--------------+----------------+----------------+----------------+----------------+
+|              |  {<float>:.2}  |  {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%} |
++--------------+----------------+----------------+----------------+----------------+
+|  0.000056789 |    '5.7e-05'   |      '0.00'    |   '5.68e-05'   |      '0.01%'   |
+|  0.00056789  |    '0.00057'   |      '0.00'    |   '5.68e-04'   |      '0.06%'   |
+|  0.0056789   |    '0.0057'    |      '0.01'    |   '5.68e-03'   |      '0.57%'   |
+|  0.056789    |    '0.057'     |      '0.06'    |   '5.68e-02'   |      '5.68%'   |
+|  0.56789     |    '0.57'      |      '0.57'    |   '5.68e-01'   |     '56.79%'   |
+|  5.6789      |    '5.7'       |      '5.68'    |   '5.68e+00'   |    '567.89%'   |
+| 56.789       |    '5.7e+01'   |     '56.79'    |   '5.68e+01'   |   '5678.90%'   |
++--------------+----------------+----------------+----------------+----------------+
 ```
+* **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes `'{6.5:.0f}'` a `'6'` and `'{7.5:.0f}'` an `'8'`.**
 
 ### Ints
 ```python
@@ -1140,7 +1140,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Sequence iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
 * **File objects returned by the [open()](#open) function, etc.**
@@ -2506,7 +2506,7 @@ def odds_handler(sport):
 # $ pip3 install requests
 >>> import threading, requests
 >>> threading.Thread(target=run, daemon=True).start()
->>> url  = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/odds/football'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -2899,7 +2899,7 @@ get_pause   = lambda seconds: repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note  = lambda note: (get_hz(note[:-1]), 1/4 if '♩' in note else 1/8)
+parse_note  = lambda note: (get_hz(note[:2]), 1/4 if '♩' in note else 1/8)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
 samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1}{P1}{P2}'.split(','))
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
@@ -2957,14 +2957,14 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-from pygame.transform import *
+from pygame.transform import scale, …
 <Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
 <Surf> = rotate(<Surf>, degrees)                # Returns rotated and scaled surface.
 <Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
 ```
 
 ```python
-from pygame.draw import *
+from pygame.draw import line, arc, rect
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
 rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
@@ -3029,12 +3029,12 @@ def update_speed(mario, tiles, pressed):
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 
 def update_position(mario, tiles):
-    p = mario.rect.topleft
-    larger_speed = max(abs(s) for s in mario.spd)
-    for _ in range(larger_speed):
+    x, y = mario.rect.topleft
+    n_steps = max(abs(s) for s in mario.spd)
+    for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        p = P(*[a + s/larger_speed for a, s in zip(p, mario.spd)])
-        mario.rect.topleft = p
+        x, y = x + mario.spd.x/n_steps, y + mario.spd.y/n_steps
+        mario.rect.topleft = x, y
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
