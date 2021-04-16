@@ -32,7 +32,7 @@ def update_covid_deaths():
     df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
     df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
     df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-    date_treshold = str(date.today() - timedelta(days=2))
+    date_treshold = str(date.today() - timedelta(days=2))  # '2020-11-25'
     df = df[('2020-03-14' < df.date) & (df.date < date_treshold)]
     df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
     f = line(df, x='Date', y='Total Deaths per Million', color='Continent')
