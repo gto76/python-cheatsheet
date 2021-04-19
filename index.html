@@ -2901,7 +2901,7 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
     df = pd.concat([dow, gold, bitcoin], axis=<span class="hljs-number">1</span>)
     df = df.sort_index().interpolate()
     df = df.rolling(<span class="hljs-number">10</span>, min_periods=<span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean()
-    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:].iloc[:<span class="hljs-number">-2</span>]
+    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:<span class="hljs-string">'2020-11-25'</span>]
     df = (df / df.iloc[<span class="hljs-number">0</span>]) * <span class="hljs-number">100</span>
     <span class="hljs-keyword">return</span> pd.concat([covid, df], axis=<span class="hljs-number">1</span>, join=<span class="hljs-string">'inner'</span>)
 
