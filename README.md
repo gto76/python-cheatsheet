@@ -146,6 +146,7 @@ Tuple
 <tuple> = ()
 <tuple> = (<el>,)                           # Or: <el>,
 <tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
+<tuple>.index(<el>)                         # Get index of an element
 ```
 
 ### Named Tuple
