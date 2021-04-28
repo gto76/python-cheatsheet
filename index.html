@@ -2717,7 +2717,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt;[row_bools]                     <span class="hljs-comment"># Keeps rows as specified by bools.</span>
 &lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                 <span class="hljs-comment"># Assigns NaN to False values.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Returns DataFrame of bools.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
 &lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)          <span class="hljs-comment"># Replaces row keys with values from a column.</span>
@@ -2879,26 +2879,24 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
 
 <div><h4 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed covid cases, Dow Jones, gold, and Bitcoin price:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
-<span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     display_data(wrangle_data(*scrape_data()))
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(id_)</span>:</span>
-        BASE_URL = <span class="hljs-string">'https://query1.finance.yahoo.com/v7/finance/download/'</span>
-        now = int(datetime.datetime.now().timestamp())
-        url = <span class="hljs-string">f'<span class="hljs-subst">{BASE_URL}</span><span class="hljs-subst">{id_}</span>?period1=1579651200&amp;period2=<span class="hljs-subst">{now}</span>&amp;interval=1d&amp;events=history'</span>
-        <span class="hljs-keyword">return</span> pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>]).set_index(<span class="hljs-string">'Date'</span>).Close
-    covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
-                        usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
-    covid = covid[covid.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
-    dow, gold, bitcoin = [scrape_yahoo(id_) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> (<span class="hljs-string">'^DJI'</span>, <span class="hljs-string">'GC=F'</span>, <span class="hljs-string">'BTC-USD'</span>)]
-    dow.name, gold.name, bitcoin.name = <span class="hljs-string">'Dow Jones'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Bitcoin'</span>
-    <span class="hljs-keyword">return</span> covid, dow, gold, bitcoin
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_covid</span><span class="hljs-params">()</span>:</span>
+        url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
+        df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
+        <span class="hljs-keyword">return</span> df[df.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(slug)</span>:</span>
+        url = <span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{slug}</span>'</span> + \
+              <span class="hljs-string">'?period1=1579651200&amp;period2=1608850800&amp;interval=1d&amp;events=history'</span>
+        df = pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>])
+        <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'Date'</span>).Close
+    <span class="hljs-keyword">return</span> scrape_covid(), scrape_yahoo(<span class="hljs-string">'BTC-USD'</span>), scrape_yahoo(<span class="hljs-string">'GC=F'</span>), scrape_yahoo(<span class="hljs-string">'^DJI'</span>)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, dow, gold, bitcoin)</span>:</span>
-    df = pd.concat([dow, gold, bitcoin], axis=<span class="hljs-number">1</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, bitcoin, gold, dow)</span>:</span>
+    df = pd.concat([bitcoin, gold, dow], axis=<span class="hljs-number">1</span>)
     df = df.sort_index().interpolate()
     df = df.rolling(<span class="hljs-number">10</span>, min_periods=<span class="hljs-number">1</span>, center=<span class="hljs-keyword">True</span>).mean()
     df = df.loc[<span class="hljs-string">'2020-02-23'</span>:<span class="hljs-string">'2020-11-25'</span>]
@@ -2906,12 +2904,12 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
     <span class="hljs-keyword">return</span> pd.concat([covid, df], axis=<span class="hljs-number">1</span>, join=<span class="hljs-string">'inner'</span>)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display_data</span><span class="hljs-params">(df)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_trace</span><span class="hljs-params">(col_name)</span>:</span>
-        <span class="hljs-keyword">return</span> go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=<span class="hljs-string">'y2'</span>)
-    traces = [get_trace(col_name) <span class="hljs-keyword">for</span> col_name <span class="hljs-keyword">in</span> df.columns[<span class="hljs-number">1</span>:]]
-    traces.append(go.Scatter(x=df.index, y=df.total_cases, name=<span class="hljs-string">'Total Cases'</span>, yaxis=<span class="hljs-string">'y1'</span>))
+    df.columns = [<span class="hljs-string">'Total Cases'</span>, <span class="hljs-string">'Bitcoin'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Dow Jones'</span>]
     figure = go.Figure()
-    figure.add_traces(traces)
+    <span class="hljs-keyword">for</span> col_name <span class="hljs-keyword">in</span> df:
+        yaxis = <span class="hljs-string">'y1'</span> <span class="hljs-keyword">if</span> col_name == <span class="hljs-string">'Total Cases'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'y2'</span>
+        trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
+        figure.add_trace(trace)
     figure.update_layout(
         yaxis1=dict(title=<span class="hljs-string">'Total Cases'</span>, rangemode=<span class="hljs-string">'tozero'</span>),
         yaxis2=dict(title=<span class="hljs-string">'%'</span>, rangemode=<span class="hljs-string">'tozero'</span>, overlaying=<span class="hljs-string">'y'</span>, side=<span class="hljs-string">'right'</span>),

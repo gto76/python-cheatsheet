@@ -3171,7 +3171,7 @@ b  3  4
 ```
 
 ```python
-<DF>    = <DF> ><== <el/Sr/DF>                # Returns DataFrame of bools.
+<DF>    = <DF> ><== <el/Sr/DF>                # Returns DF of bools. Sr is treated as a row.
 <DF>    = <DF> +-*/ <el/Sr/DF>                # Items with non-matching keys get value NaN.
 ```
 
@@ -3376,26 +3376,24 @@ line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```python
 import pandas as pd
 import plotly.graph_objects as go
-import datetime
 
 def main():
     display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
-    def scrape_yahoo(id_):
-        BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
-        now = int(datetime.datetime.now().timestamp())
-        url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
-        return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
-    covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
-                        usecols=['location', 'date', 'total_cases'])
-    covid = covid[covid.location == 'World'].set_index('date').total_cases
-    dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
-    dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
-    return covid, dow, gold, bitcoin
+    def scrape_covid():
+        url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
+        df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'])
+        return df[df.location == 'World'].set_index('date').total_cases
+    def scrape_yahoo(slug):
+        url = f'https://query1.finance.yahoo.com/v7/finance/download/{slug}' + \
+              '?period1=1579651200&period2=1608850800&interval=1d&events=history'
+        df = pd.read_csv(url, usecols=['Date', 'Close'])
+        return df.set_index('Date').Close
+    return scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
 
-def wrangle_data(covid, dow, gold, bitcoin):
-    df = pd.concat([dow, gold, bitcoin], axis=1)
+def wrangle_data(covid, bitcoin, gold, dow):
+    df = pd.concat([bitcoin, gold, dow], axis=1)
     df = df.sort_index().interpolate()
     df = df.rolling(10, min_periods=1, center=True).mean()
     df = df.loc['2020-02-23':'2020-11-25']
@@ -3403,12 +3401,12 @@ def wrangle_data(covid, dow, gold, bitcoin):
     return pd.concat([covid, df], axis=1, join='inner')
 
 def display_data(df):
-    def get_trace(col_name):
-        return go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis='y2')
-    traces = [get_trace(col_name) for col_name in df.columns[1:]]
-    traces.append(go.Scatter(x=df.index, y=df.total_cases, name='Total Cases', yaxis='y1'))
+    df.columns = ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones']
     figure = go.Figure()
-    figure.add_traces(traces)
+    for col_name in df:
+        yaxis = 'y1' if col_name == 'Total Cases' else 'y2'
+        trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
+        figure.add_trace(trace)
     figure.update_layout(
         yaxis1=dict(title='Total Cases', rangemode='tozero'),
         yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),
