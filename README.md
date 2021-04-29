@@ -500,7 +500,7 @@ Numbers
 ### Math
 ```python
 from math import e, pi, inf, nan, isinf, isnan
-from math import cos, sin, tan, acos, asin, atan, degrees, radians
+from math import sin, cos, tan, asin, acos, atan, degrees, radians
 from math import log, log10, log2
 ```
 
