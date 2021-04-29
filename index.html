@@ -1905,8 +1905,8 @@ last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;l
 
 
 <div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
-&lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of object's fields. Also &lt;obj&gt;.__dict__.</span>
-&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises an error.</span>
+&lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of writable attrs. Also &lt;obj&gt;.__dict__.</span>
+&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises an AttributeError.</span>
 value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Raises AttributeError if attribute is missing.</span>
 setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with __dict__ attribute.</span>
 delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Equivalent to `del &lt;object&gt;.&lt;attr_name&gt;`.</span>

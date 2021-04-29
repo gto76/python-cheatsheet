@@ -2141,8 +2141,8 @@ Introspection
 ### Attributes
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (incl. methods).
-<dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
-<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an error.
+<dict> = vars(<object>)                    # Dict of writable attrs. Also <obj>.__dict__.
+<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
 setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
 delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_name>`.
