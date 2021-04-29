@@ -2917,7 +2917,7 @@ pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
 while all(event.type != pg.QUIT for event in pg.event.get()):
-    deltas = {pg.K_UP: (0, -3), pg.K_RIGHT: (3, 0), pg.K_DOWN: (0, 3), pg.K_LEFT: (-3, 0)}
+    deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
     for key_code, is_pressed in enumerate(pg.key.get_pressed()):
         rect = rect.move(deltas[key_code]) if key_code in deltas and is_pressed else rect
     screen.fill((0, 0, 0))
@@ -2964,7 +2964,7 @@ from pygame.transform import scale, …
 ```
 
 ```python
-from pygame.draw import line, arc, rect
+from pygame.draw import line, …
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
 rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)

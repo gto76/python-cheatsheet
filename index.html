@@ -2511,7 +2511,7 @@ pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
-    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-3</span>), pg.K_RIGHT: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>), pg.K_LEFT: (<span class="hljs-number">-3</span>, <span class="hljs-number">0</span>)}
+    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), pg.K_RIGHT: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), pg.K_LEFT: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> key_code, is_pressed <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()):
         rect = rect.move(deltas[key_code]) <span class="hljs-keyword">if</span> key_code <span class="hljs-keyword">in</span> deltas <span class="hljs-keyword">and</span> is_pressed <span class="hljs-keyword">else</span> rect
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
@@ -2548,7 +2548,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt; = rotate(&lt;Surf&gt;, degrees)                <span class="hljs-comment"># Returns rotated and scaled surface.</span>
 &lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, arc, rect
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, …
 line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also: ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;)                     <span class="hljs-comment"># Also: polygon(&lt;Surf&gt;, color, points)</span>
