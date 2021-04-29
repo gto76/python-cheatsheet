@@ -228,20 +228,20 @@ const DIAGRAM_8_B =
 
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +
-  '|                  |    excel     |   excel-tab  |     unix     |\n' +
+  '|                  |     excel    |   excel-tab  |     unix     |\n' +
   '+------------------+--------------+--------------+--------------+\n';
 
 const DIAGRAM_9_B =
   "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
-  "┃                  │    excel     │   excel-tab  │     unix     ┃\n" +
+  "┃                  │     excel    │   excel-tab  │     unix     ┃\n" +
   "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
-  "┃ delimiter        │    ','       │    '\\t'      │    ','       ┃\n" +
-  "┃ quotechar        │    '\"'       │    '\"'       │    '\"'       ┃\n" +
-  "┃ doublequote      │    True      │    True      │    True      ┃\n" +
-  "┃ skipinitialspace │    False     │    False     │    False     ┃\n" +
-  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │    '\\n'      ┃\n" +
-  "┃ quoting          │    0         │    0         │    1         ┃\n" +
-  "┃ escapechar       │    None      │    None      │    None      ┃\n" +
+  "┃ delimiter        │       ','    │      '\\t'    │       ','    ┃\n" +
+  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
+  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
+  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
+  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │      '\\n'    ┃\n" +
+  "┃ quoting          │         0    │         0    │         1    ┃\n" +
+  "┃ escapechar       │      None    │      None    │      None    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
