@@ -1356,7 +1356,7 @@ else:
 finally:
     <code_3>
 ```
-* **Code inside the `'else'` block will only be executed if `'try'` block had no exception.**
+* **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed.**
 
 ### Catching Exceptions
