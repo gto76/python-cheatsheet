@@ -1898,7 +1898,7 @@ Bytes
 **Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00 - \xff.
+<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
 <int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
 <bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
 <bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator.
