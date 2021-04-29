@@ -531,7 +531,7 @@ from random import random, randint, choice, shuffle, gauss, seed
 <int> = <int> & <int>                    # And
 <int> = <int> | <int>                    # Or
 <int> = <int> ^ <int>                    # Xor (0 if both bits equal)
-<int> = <int> << n_bits                  # Shift left (>> for right)
+<int> = <int> << n_bits                  # Left shift (>> for right)
 <int> = ~<int>                           # Not (also: -<int> - 1)
 ```
 
