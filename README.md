@@ -1670,6 +1670,7 @@ import os, shutil
 ```python
 os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
+os.makedirs(<path>, exist_ok=True)  # Creates directories recursively. Ignore if directory exists.
 ```
 
 ```python
