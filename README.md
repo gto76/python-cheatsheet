@@ -1938,7 +1938,7 @@ def write_bytes(filename, bytes_obj):
 Struct
 ------
 * **Module that performs conversions between a sequence of numbers and a bytes object.**
-* **Machine’s native type sizes and byte order are used by default.**
+* **System’s native type sizes and byte order are used by default.**
 
 ```python
 from struct import pack, unpack, iter_unpack
@@ -1986,6 +1986,7 @@ from array import array
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
 <bytes> = bytes(<array>)                       # Or: <array>.tobytes()
+<file>.write(<array>)                          # Writes array to the binary file.
 ```
 
 
@@ -1994,6 +1995,7 @@ Memory View
 * **A sequence object that points to the memory of another object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
+* **Casting only works between char and other types and always uses native size and b. order.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
@@ -2005,10 +2007,10 @@ Memory View
 
 ### Decode
 ```python
-<bin_file>.write(<mview>)                      # Writes mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
+<file>.write(<mview>)                          # Writes mview to the binary file.
 ```
 
 ```python
@@ -2342,8 +2344,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
-plt.plot(<y_data> [, label=<str>])
-plt.plot(<x_data>, <y_data>)
+plt.plot(<x_data>, <y_data> [, label=<str>])   # Or: plt.plot(<y_data>)
 plt.legend()                                   # Adds a legend.
 plt.savefig(<path>)                            # Saves the figure.
 plt.show()                                     # Displays the figure.
@@ -2370,7 +2371,7 @@ Curses
 #### Runs a basic file explorer in the terminal:
 ```python
 from curses import wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-from os import listdir, chdir, path
+from os import listdir, path, chdir
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, listdir()

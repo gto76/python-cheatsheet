@@ -1752,7 +1752,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h2 id="struct"><a href="#struct" name="struct">#</a>Struct</h2><ul>
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
-<li><strong>Machine’s native type sizes and byte order are used by default.</strong></li>
+<li><strong>System’s native type sizes and byte order are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack, iter_unpack
 </code></pre></div>
 
@@ -1792,6 +1792,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
 &lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Or: &lt;array&gt;.tobytes()</span>
+&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array to the binary file.</span>
 </code></pre></div>
 
 
@@ -1799,6 +1800,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>A sequence object that points to the memory of another object.</strong></li>
 <li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
 <li><strong>Order and number of elements can be changed with slicing.</strong></li>
+<li><strong>Casting only works between char and other types and always uses native size and b. order.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
 &lt;real&gt;  = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
@@ -1807,10 +1809,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bin_file&gt;.write(&lt;mview&gt;)                      <span class="hljs-comment"># Writes mview to the binary file.</span>
-&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
+<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
+&lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes mview to the binary file.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
@@ -2061,8 +2063,7 @@ Processing: 100%|████████████████████| 3
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
-plt.plot(&lt;y_data&gt; [, label=&lt;str&gt;])
-plt.plot(&lt;x_data&gt;, &lt;y_data&gt;)
+plt.plot(&lt;x_data&gt;, &lt;y_data&gt; [, label=&lt;str&gt;])   <span class="hljs-comment"># Or: plt.plot(&lt;y_data&gt;)</span>
 plt.legend()                                   <span class="hljs-comment"># Adds a legend.</span>
 plt.savefig(&lt;path&gt;)                            <span class="hljs-comment"># Saves the figure.</span>
 plt.show()                                     <span class="hljs-comment"># Displays the figure.</span>
@@ -2080,7 +2081,7 @@ plt.clf()                                      <span class="hljs-comment"># Clea
 
 
 <div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> listdir, chdir, path
+<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> listdir, path, chdir
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
