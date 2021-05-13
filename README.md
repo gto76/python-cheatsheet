@@ -773,8 +773,8 @@ Inline
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                                # False if empty.
-<bool> = all(el[1] for el in <collection>)                # True if empty.
+<bool> = any(<collection>)                                # False if collection contains all false values or is empty.
+<bool> = all(el for el in <collection>)                   # True if collectioncontains all true values or is empty.
 ```
 
 ### Conditional Expression
