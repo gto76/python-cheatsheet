@@ -238,7 +238,7 @@ pre.prettyprint {
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,
                        <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>]
 }
@@ -1556,6 +1556,7 @@ value = args.&lt;name&gt;
 
 <pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
+os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all directories in the path.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
@@ -1686,11 +1687,12 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                       <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
-&lt;conn&gt;.commit()                                 <span class="hljs-comment"># Commits all transactions since last commit.</span>
+&lt;conn&gt;.commit()                                 <span class="hljs-comment"># Saves all changes since the last commit.</span>
+&lt;conn&gt;.rollback()                               <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:
-    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                    <span class="hljs-comment"># Exits block with commit() or rollback(),</span>
+    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                   <span class="hljs-comment"># depending on whether an exception occurred.</span>
 </code></pre></div>
 
 <div><h3 id="placeholders">Placeholders</h3><ul>
@@ -1724,7 +1726,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
 &lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns int in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes object as separator.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
@@ -1761,11 +1763,12 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;tuple&gt;  = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
 &lt;tuples&gt; = iter_unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<div><h3 id="example-1">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>unpack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>)
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
-</code></pre>
+</code></pre></div>
+
 <div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesstartformatstringwith">For standard type sizes start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order (usually little-endian)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
@@ -1921,7 +1924,7 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)   
 &lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
 </code></pre></div>
 
-<div><h2 id="metaprograming"><a href="#metaprograming" name="metaprograming">#</a>Metaprograming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></pre></div></div>
+<div><h2 id="metaprogramming"><a href="#metaprogramming" name="metaprogramming">#</a>Metaprogramming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)</code></pre></div></div>
 
 
 
@@ -2300,7 +2303,7 @@ right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6<
 right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>], [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>]]  <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
 </code></pre></div>
 
-<div><h4 id="3ifneithernonmatchingdimensionhassize1raiseanerror">3. If neither non-matching dimension has size 1, raise an error.</h4><div><h3 id="example-1">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
+<div><h4 id="3ifneithernonmatchingdimensionhassize1raiseanerror">3. If neither non-matching dimension has size 1, raise an error.</h4><div><h3 id="example-2">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
  [ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
 [[ <span class="hljs-number">0.1</span>],

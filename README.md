@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Type`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprogramming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
 
@@ -1670,6 +1670,7 @@ import os, shutil
 ```python
 os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
+os.makedirs(<path>, mode=0o777)     # Creates all directories in the path.
 ```
 
 ```python
@@ -1850,13 +1851,14 @@ import sqlite3
 ### Write
 ```python
 <conn>.execute('<query>')                       # Can raise a subclass of sqlite3.Error.
-<conn>.commit()                                 # Commits all transactions since last commit.
+<conn>.commit()                                 # Saves all changes since the last commit.
+<conn>.rollback()                               # Discards all changes since the last commit.
 ```
 
 #### Or:
 ```python
-with <conn>:
-    <conn>.execute('<query>')
+with <conn>:                                    # Exits block with commit() or rollback(),
+    <conn>.execute('<query>')                   # depending on whether an exception occurred.
 ```
 
 ### Placeholders
@@ -1901,7 +1903,7 @@ Bytes
 <bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
 <int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
 <bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
 
 ### Encode
@@ -1950,6 +1952,7 @@ from struct import pack, unpack, iter_unpack
 <tuples> = iter_unpack('<format>', <bytes>)
 ```
 
+### Example
 ```python
 >>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
@@ -2160,8 +2163,8 @@ from inspect import signature
 ```
 
 
-Metaprograming
---------------
+Metaprogramming
+---------------
 **Code that generates code.**
 
 ### Type
