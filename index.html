@@ -2184,7 +2184,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
     <span class="hljs-keyword">return</span> template(<span class="hljs-string">'&lt;h1&gt;{{title}}&lt;/h1&gt;'</span>, title=sport)
 </code></pre></div>
 
-<div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@post('/odds/&lt;sport&gt;')</span>
+<div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">odds_handler</span><span class="hljs-params">(sport)</span>:</span>
     team = request.forms.get(<span class="hljs-string">'team'</span>)
     home_odds, away_odds = <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>
@@ -2196,7 +2196,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <div><h4 id="test">Test:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> threading, requests
 <span class="hljs-meta">&gt;&gt;&gt; </span>threading.Thread(target=run, daemon=<span class="hljs-keyword">True</span>).start()
-<span class="hljs-meta">&gt;&gt;&gt; </span>url = <span class="hljs-string">'http://localhost:8080/odds/football'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>url = <span class="hljs-string">'http://localhost:8080/football/odds'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
 <span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=data)
 <span class="hljs-meta">&gt;&gt;&gt; </span>response.json()
@@ -2246,11 +2246,10 @@ Line #         Mem usage      Increment   Line Contents
      3        38.012 MiB      0.344 MiB       a = [*range(10000)]
      4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 </code></pre>
-<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph</span>
-<span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> output, PyCallGraph
+<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofacallgraphwithhighlightedbottlenecks">Generates a PNG image of a call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2</span>
+<span class="hljs-keyword">from</span> pycallgraph2 <span class="hljs-keyword">import</span> output, PyCallGraph
 <span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
-time_str = datetime.now().strftime(<span class="hljs-string">'%Y%m%d%H%M%S'</span>)
-filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{time_str}</span>.png'</span>
+filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{datetime.now():%Y%m%d%H%M%S}</span>.png'</span>
 drawer = output.GraphvizOutput(output_file=filename)
 <span class="hljs-keyword">with</span> PyCallGraph(drawer):
     &lt;code_to_be_profiled&gt;
@@ -2547,12 +2546,12 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, …
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
 &lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
 &lt;Surf&gt; = rotate(&lt;Surf&gt;, degrees)                <span class="hljs-comment"># Returns rotated and scaled surface.</span>
 &lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, …
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, ...
 line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also: ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;)</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;)                     <span class="hljs-comment"># Also: polygon(&lt;Surf&gt;, color, points)</span>

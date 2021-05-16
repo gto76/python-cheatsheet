@@ -2496,7 +2496,7 @@ def send_page(sport):
 
 ### REST Request
 ```python
-@post('/odds/<sport>')
+@post('/<sport>/odds')
 def odds_handler(sport):
     team = request.forms.get('team')
     home_odds, away_odds = 2.44, 3.29
@@ -2510,7 +2510,7 @@ def odds_handler(sport):
 # $ pip3 install requests
 >>> import threading, requests
 >>> threading.Thread(target=run, daemon=True).start()
->>> url = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/football/odds'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -2577,11 +2577,10 @@ Line #         Mem usage      Increment   Line Contents
 ### Call Graph
 #### Generates a PNG image of a call graph with highlighted bottlenecks:
 ```python
-# $ pip3 install pycallgraph
-from pycallgraph import output, PyCallGraph
+# $ pip3 install pycallgraph2
+from pycallgraph2 import output, PyCallGraph
 from datetime import datetime
-time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-filename = f'profile-{time_str}.png'
+filename = f'profile-{datetime.now():%Y%m%d%H%M%S}.png'
 drawer = output.GraphvizOutput(output_file=filename)
 with PyCallGraph(drawer):
     <code_to_be_profiled>
@@ -2961,14 +2960,14 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-from pygame.transform import scale, …
+from pygame.transform import scale, ...
 <Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
 <Surf> = rotate(<Surf>, degrees)                # Returns rotated and scaled surface.
 <Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
 ```
 
 ```python
-from pygame.draw import line, …
+from pygame.draw import line, ...
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
 rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
