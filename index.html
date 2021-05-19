@@ -508,7 +508,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
 <li><strong>By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
-<li><strong>As shown below, it restricts special sequence matches to <code class="python hljs"><span class="hljs-string">'[\x00-\x7f]'</span></code> and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c\x1d\x1e\x1f]'</span></code>.</strong></li>
+<li><strong>As shown below, it restricts special sequence matches to the first 128 characters and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c\x1d\x1e\x1f]'</span></code>.</strong></li>
 <li><strong>Use a capital letter for negation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches decimal characters.</span>
 <span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches alphanumerics and underscore.</span>
@@ -536,11 +536,14 @@ to_exclusive   = &lt;range&gt;.stop
 {&lt;el&gt;:<span class="hljs-number">0</span>}                                       <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre></div>
 
-<div><h3 id="strings">Strings</h3><p><strong><code class="python hljs"><span class="hljs-string">'!r'</span></code> calls object's <a href="#class">repr()</a> method, instead of <a href="#class">str()</a>, to get a string.</strong></p><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                                 <span class="hljs-comment"># "'abcde'   "</span>
+<ul>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'{&lt;el&gt;:{&lt;str/int/float&gt;}[...]}'</span></code> to set options dynamically.</strong></li>
+<li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
+</ul>
+<div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                                 <span class="hljs-comment"># "'abcde'   "</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                                 <span class="hljs-comment"># 'abc       '</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                                   <span class="hljs-comment"># 'abc'</span>
 </code></pre></div>
-
 
 <div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                                  <span class="hljs-comment"># '   123,456'</span>
 { <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                                  <span class="hljs-comment"># '   123_456'</span>
@@ -1252,13 +1255,13 @@ Hello World!
 <li><strong>Names of their required methods are stored in <code class="python hljs"><span class="hljs-string">'&lt;abc&gt;.__abstractmethods__'</span></code>.</strong></li>
 </ul>
 <div><h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum, auto
+</code></pre></div>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
     &lt;member_name_1&gt; = &lt;value_1&gt;
     &lt;member_name_2&gt; = &lt;value_2_a&gt;, &lt;value_2_b&gt;
     &lt;member_name_3&gt; = auto()
-</code></pre></div>
-
+</code></pre>
 <ul>
 <li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
 <li><strong>Otherwise it returns an increment of the last numeric value.</strong></li>
@@ -1691,7 +1694,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;conn&gt;.rollback()                               <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                    <span class="hljs-comment"># Exits block with commit() or rollback(),</span>
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                    <span class="hljs-comment"># Exits the block with commit() or rollback(),</span>
     &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                   <span class="hljs-comment"># depending on whether an exception occurred.</span>
 </code></pre></div>
 
@@ -1754,7 +1757,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h2 id="struct"><a href="#struct" name="struct">#</a>Struct</h2><ul>
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
-<li><strong>System’s native type sizes and byte order are used by default.</strong></li>
+<li><strong>System’s type sizes and byte order are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack, iter_unpack
 </code></pre></div>
 
@@ -1770,7 +1773,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesstartformatstringwith">For standard type sizes start format string with:</h4><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - native byte order (usually little-endian)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - system's byte order (usually little-endian)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
 </ul></div></div><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
@@ -1803,7 +1806,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>A sequence object that points to the memory of another object.</strong></li>
 <li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
 <li><strong>Order and number of elements can be changed with slicing.</strong></li>
-<li><strong>Casting only works between char and other types and always uses native size and b. order.</strong></li>
+<li><strong>Casting only works between char and other types and uses system's sizes and byte order.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
 &lt;real&gt;  = &lt;mview&gt;[&lt;index&gt;]                     <span class="hljs-comment"># Returns an int or a float.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
@@ -1841,10 +1844,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set arguments.</span>
+<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set the arguments.</span>
 &lt;Thread&gt;.start()                               <span class="hljs-comment"># Starts the thread.</span>
-&lt;bool&gt; = &lt;Thread&gt;.is_alive()                   <span class="hljs-comment"># Checks if thread has finished executing.</span>
-&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for thread to finish.</span>
+&lt;bool&gt; = &lt;Thread&gt;.is_alive()                   <span class="hljs-comment"># Checks if the thread has finished executing.</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for the thread to finish.</span>
 </code></pre></div>
 
 <ul>
@@ -1852,13 +1855,12 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                               <span class="hljs-comment"># Lock that can only be released by the owner.</span>
-&lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for lock to be available.</span>
-&lt;lock&gt;.release()                               <span class="hljs-comment"># Makes lock available again.</span>
+&lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for the lock to be available.</span>
+&lt;lock&gt;.release()                               <span class="hljs-comment"># Makes the lock available again.</span>
 </code></pre></div>
 
-<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs">lock = RLock()
-<span class="hljs-keyword">with</span> lock:
-    ...
+<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;lock&gt;:                                   <span class="hljs-comment"># Enters the block by calling acquire(),</span>
+    ...                                        <span class="hljs-comment"># and exits it with release().</span>
 </code></pre></div>
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>

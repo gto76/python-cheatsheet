@@ -377,7 +377,7 @@ import re
 
 ### Special Sequences
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown below, it restricts special sequence matches to `'[\x00-\x7f]'` and prevents `'\s'` from accepting `'[\x1c\x1d\x1e\x1f]'`.**
+* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c\x1d\x1e\x1f]'`.**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
@@ -412,9 +412,10 @@ Format
 {<el>:.<10}                                    # '<el>......'
 {<el>:0}                                       # '<el>'
 ```
+* **Use `'{<el>:{<str/int/float>}[...]}'` to set options dynamically.**
+* **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
-**`'!r'` calls object's [repr()](#class) method, instead of [str()](#class), to get a string.**
 ```python
 {'abcde'!r:10}                                 # "'abcde'   "
 {'abcde':10.3}                                 # 'abc       '
@@ -1286,7 +1287,9 @@ Enum
 ----
 ```python
 from enum import Enum, auto
+```
 
+```python
 class <enum_name>(Enum):
     <member_name_1> = <value_1>
     <member_name_2> = <value_2_a>, <value_2_b>
@@ -1857,7 +1860,7 @@ import sqlite3
 
 #### Or:
 ```python
-with <conn>:                                    # Exits block with commit() or rollback(),
+with <conn>:                                    # Exits the block with commit() or rollback(),
     <conn>.execute('<query>')                   # depending on whether an exception occurred.
 ```
 
@@ -1940,7 +1943,7 @@ def write_bytes(filename, bytes_obj):
 Struct
 ------
 * **Module that performs conversions between a sequence of numbers and a bytes object.**
-* **System’s native type sizes and byte order are used by default.**
+* **System’s type sizes and byte order are used by default.**
 
 ```python
 from struct import pack, unpack, iter_unpack
@@ -1962,7 +1965,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 ### Format
 #### For standard type sizes start format string with:
-* **`'='` - native byte order (usually little-endian)**
+* **`'='` - system's byte order (usually little-endian)**
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
 
@@ -1998,7 +2001,7 @@ Memory View
 * **A sequence object that points to the memory of another object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
-* **Casting only works between char and other types and always uses native size and b. order.**
+* **Casting only works between char and other types and uses system's sizes and byte order.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
@@ -2052,10 +2055,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set arguments.
+<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
 <Thread>.start()                               # Starts the thread.
-<bool> = <Thread>.is_alive()                   # Checks if thread has finished executing.
-<Thread>.join()                                # Waits for thread to finish.
+<bool> = <Thread>.is_alive()                   # Checks if the thread has finished executing.
+<Thread>.join()                                # Waits for the thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
@@ -2063,15 +2066,14 @@ from concurrent.futures import ThreadPoolExecutor
 ### Lock
 ```python
 <lock> = RLock()                               # Lock that can only be released by the owner.
-<lock>.acquire()                               # Waits for lock to be available.
-<lock>.release()                               # Makes lock available again.
+<lock>.acquire()                               # Waits for the lock to be available.
+<lock>.release()                               # Makes the lock available again.
 ```
 
 #### Or:
 ```python
-lock = RLock()
-with lock:
-    ...
+with <lock>:                                   # Enters the block by calling acquire(),
+    ...                                        # and exits it with release().
 ```
 
 ### Semaphore, Event, Barrier
