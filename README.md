@@ -377,7 +377,7 @@ import re
 
 ### Special Sequences
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c\x1d\x1e\x1f]'`.**
+* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'`.**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
