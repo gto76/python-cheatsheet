@@ -114,6 +114,7 @@ Set
 ```python
 <set>.add(<el>)                                 # Or: <set> |= {<el>}
 <set>.update(<collection> [, ...])              # Or: <set> |= <set>
+<set>.difference_update(<collection> [, ...])   # Or: <set> -= <set>
 ```
 
 ```python
