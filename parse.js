@@ -13,6 +13,9 @@
 // To avoid problems with permissions and path variables, install modules
 // into project's directory using:
 // $ npm install jsdom jquery showdown highlightjs@9.12.0
+// It is also advisable to add a script into .git/hooks directory, that will run 
+// this script before every commit. It should be named 'pre-commit' and it should
+// contain the following line: `./parse.js`.
 
 
 const fs = require('fs');
