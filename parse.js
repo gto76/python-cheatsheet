@@ -1,12 +1,21 @@
 #!/usr/bin/env node
 // Usage: node parse.js
+//
 // Script that creates index.html out of web/template.html and README.md.
 // It is written in JS because this code used to be executed on the client side.
-// To install dependencies run:
-// $ npm install -g jsdom jquery showdown highlightjs
-// If running on Mac and modules can't be found after installation add:
+// To install the Node.js and npm run:
+// $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
+// To install dependencies globally, run:
+// $ npm install -g jsdom jquery showdown highlightjs@9.12.0
+// If running on macOS and modules can't be found after installation add:
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
+// To avoid problems with permissions and path variables, install modules
+// into project's directory using:
+// $ npm install jsdom jquery showdown highlightjs@9.12.0
+// It is also advisable to add a script into .git/hooks directory, that will run 
+// this script before every commit. It should be named 'pre-commit' and it should
+// contain the following line: `./parse.js`.
 
 
 const fs = require('fs');
@@ -18,13 +27,13 @@ const hljs = require('highlightjs');
 const TOC =
   '<br>' +
   '<h2 id="toc">Contents</h2>\n' +
-  '<pre><code class="hljs bash"><strong>ToC</strong> = {\n' +
+  '<pre><code class="hljs bash" style="line-height: 1.3em;"><strong>ToC</strong> = {\n' +
   '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
   '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
-  '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#path">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
+  '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
-  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
+  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,\n' +
   '                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>]\n' +
   '}\n' +
@@ -74,20 +83,6 @@ const PROGRESS_BAR =
   '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
   'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
 
-const NUMPY_1 =
-  '&lt;el&gt;       = &lt;2d_array&gt;[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First element.</span>\n' +
-  '&lt;1d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-number">0</span>]           <span class="hljs-comment"># First row.</span>\n' +
-  '&lt;1d_view&gt;  = &lt;2d_array&gt;[:, <span class="hljs-number">0</span>]        <span class="hljs-comment"># First column. Also [..., 0].</span>\n' +
-  '&lt;3d_view&gt;  = &lt;2d_array&gt;[<span class="hljs-keyword">None</span>, :, :]  <span class="hljs-comment"># Expanded by dimension of size 1.</span>\n';
-
-const NUMPY_2 =
-  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;1d_row_indexes&gt;, &lt;1d_column_indexes&gt;]\n' +
-  '&lt;2d_array&gt; = &lt;2d_array&gt;[&lt;2d_row_indexes&gt;, &lt;2d_column_indexes&gt;]\n';
-
-const NUMPY_3 =
-  '&lt;2d_bools&gt; = &lt;2d_array&gt; &gt; <span class="hljs-number">0</span>\n' +
-  '&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;2d_bools&gt;]\n';
-
 const PYINSTALLER =
   '$ pip3 install pyinstaller\n' +
   '$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into \'./dist/script\' directory.</span>\n' +
@@ -96,7 +91,7 @@ const PYINSTALLER =
   '$ pyinstaller script.py --add-data \'&lt;path&gt;:.\'  <span class="hljs-comment"># Adds file to the root of the executable.</span>\n';
 
 const INDEX =
-  '<li><strong>Only available in <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
+  '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n';
 
@@ -146,42 +141,40 @@ const DIAGRAM_3_B =
   '┗━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
 const DIAGRAM_4_A =
-  "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
-  "|               |    {<float>}    |   {<float>:f}   |   {<float>:e}   |   {<float>:%}   |\n" +
-  "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
+  "+--------------+----------------+----------------+----------------+----------------+\n" +
+  "|              |    {<float>}   |   {<float>:f}  |   {<float>:e}  |   {<float>:%}  |\n" +
+  "+--------------+----------------+----------------+----------------+----------------+\n";
 
 const DIAGRAM_4_B =
-  "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃               │    {&lt;float&gt;}    │   {&lt;float&gt;:f}   │   {&lt;float&gt;:e}   │   {&lt;float&gt;:%}   ┃\n" +
-  "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
-  "┃   0.000056789 │    '5.6789e-05' │     '0.000057'  │  '5.678900e-05' │     '0.005679%' ┃\n" +
-  "┃   0.00056789  │    '0.00056789' │     '0.000568'  │  '5.678900e-04' │     '0.056789%' ┃\n" +
-  "┃   0.0056789   │    '0.0056789'  │     '0.005679'  │  '5.678900e-03' │     '0.567890%' ┃\n" +
-  "┃   0.056789    │    '0.056789'   │     '0.056789'  │  '5.678900e-02' │     '5.678900%' ┃\n" +
-  "┃   0.56789     │    '0.56789'    │     '0.567890'  │  '5.678900e-01' │    '56.789000%' ┃\n" +
-  "┃   5.6789      │    '5.6789'     │     '5.678900'  │  '5.678900e+00' │   '567.890000%' ┃\n" +
-  "┃  56.789       │   '56.789'      │    '56.789000'  │  '5.678900e+01' │  '5678.900000%' ┃\n" +
-  "┃ 567.89        │  '567.89'       │   '567.890000'  │  '5.678900e+02' │ '56789.000000%' ┃\n" +
-  "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n" +
+  "┃              │    {&lt;float&gt;}   │   {&lt;float&gt;:f}  │   {&lt;float&gt;:e}  │   {&lt;float&gt;:%}  ┃\n" +
+  "┠──────────────┼────────────────┼────────────────┼────────────────┼────────────────┨\n" +
+  "┃  0.000056789 │   '5.6789e-05' │    '0.000057'  │ '5.678900e-05' │    '0.005679%' ┃\n" +
+  "┃  0.00056789  │   '0.00056789' │    '0.000568'  │ '5.678900e-04' │    '0.056789%' ┃\n" +
+  "┃  0.0056789   │   '0.0056789'  │    '0.005679'  │ '5.678900e-03' │    '0.567890%' ┃\n" +
+  "┃  0.056789    │   '0.056789'   │    '0.056789'  │ '5.678900e-02' │    '5.678900%' ┃\n" +
+  "┃  0.56789     │   '0.56789'    │    '0.567890'  │ '5.678900e-01' │   '56.789000%' ┃\n" +
+  "┃  5.6789      │   '5.6789'     │    '5.678900'  │ '5.678900e+00' │  '567.890000%' ┃\n" +
+  "┃ 56.789       │  '56.789'      │   '56.789000'  │ '5.678900e+01' │ '5678.900000%' ┃\n" +
+  "┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_5_A =
-  "+---------------+-----------------+-----------------+-----------------+-----------------+\n" +
-  "|               |   {<float>:.2}  |  {<float>:.2f}  |  {<float>:.2e}  |  {<float>:.2%}  |\n" +
-  "+---------------+-----------------+-----------------+-----------------+-----------------+\n";
+  "+--------------+----------------+----------------+----------------+----------------+\n" +
+  "|              |  {<float>:.2}  |  {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%} |\n" +
+  "+--------------+----------------+----------------+----------------+----------------+\n";
 
 const DIAGRAM_5_B =
-  "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┓\n" +
-  "┃               │   {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f}  │  {&lt;float&gt;:.2e}  │  {&lt;float&gt;:.2%}  ┃\n" +
-  "┠───────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┨\n" +
-  "┃   0.000056789 │    '5.7e-05'    │       '0.00'    │    '5.68e-05'   │       '0.01%'   ┃\n" +
-  "┃   0.00056789  │    '0.00057'    │       '0.00'    │    '5.68e-04'   │       '0.06%'   ┃\n" +
-  "┃   0.0056789   │    '0.0057'     │       '0.01'    │    '5.68e-03'   │       '0.57%'   ┃\n" +
-  "┃   0.056789    │    '0.057'      │       '0.06'    │    '5.68e-02'   │       '5.68%'   ┃\n" +
-  "┃   0.56789     │    '0.57'       │       '0.57'    │    '5.68e-01'   │      '56.79%'   ┃\n" +
-  "┃   5.6789      │    '5.7'        │       '5.68'    │    '5.68e+00'   │     '567.89%'   ┃\n" +
-  "┃  56.789       │    '5.7e+01'    │      '56.79'    │    '5.68e+01'   │    '5678.90%'   ┃\n" +
-  "┃ 567.89        │    '5.7e+02'    │     '567.89'    │    '5.68e+02'   │   '56789.00%'   ┃\n" +
-  "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n" +
+  "┃              │  {&lt;float&gt;:.2}  │  {&lt;float&gt;:.2f} │  {&lt;float&gt;:.2e} │  {&lt;float&gt;:.2%} ┃\n" +
+  "┠──────────────┼────────────────┼────────────────┼────────────────┼────────────────┨\n" +
+  "┃  0.000056789 │    '5.7e-05'   │      '0.00'    │   '5.68e-05'   │      '0.01%'   ┃\n" +
+  "┃  0.00056789  │    '0.00057'   │      '0.00'    │   '5.68e-04'   │      '0.06%'   ┃\n" +
+  "┃  0.0056789   │    '0.0057'    │      '0.01'    │   '5.68e-03'   │      '0.57%'   ┃\n" +
+  "┃  0.056789    │    '0.057'     │      '0.06'    │   '5.68e-02'   │      '5.68%'   ┃\n" +
+  "┃  0.56789     │    '0.57'      │      '0.57'    │   '5.68e-01'   │     '56.79%'   ┃\n" +
+  "┃  5.6789      │    '5.7'       │      '5.68'    │   '5.68e+00'   │    '567.89%'   ┃\n" +
+  "┃ 56.789       │    '5.7e+01'   │     '56.79'    │   '5.68e+01'   │   '5678.90%'   ┃\n" +
+  "┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_6_A =
   '+------------+------------+------------+------------+--------------+\n' +
@@ -530,9 +523,6 @@ function fixHighlights() {
   $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
-  $(`code:contains(<el>       = <2d_array>[0, 0])`).html(NUMPY_1).removeClass().addClass("python language-python hljs");
-  $(`code:contains(<1d_array> = <2d_array>[<1d_row_indexes>)`).html(NUMPY_2).removeClass().addClass("python language-python hljs");
-  $(`code:contains(<2d_bools> = <2d_array> > 0)`).html(NUMPY_3).removeClass().addClass("python language-python hljs");
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
@@ -569,7 +559,8 @@ function move(anchor_el, el_id) {
 }
 
 function insertPageBreaks() {
-  insertPageBreakBefore('#print')
+  insertPageBreakBefore('#decorator')
+  // insertPageBreakBefore('#print')
 }
 
 function insertPageBreakBefore(an_id) {

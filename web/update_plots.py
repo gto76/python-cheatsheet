@@ -32,7 +32,7 @@ def update_covid_deaths():
     df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
     df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
     df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-    date_treshold = str(date.today() - timedelta(days=2))
+    date_treshold = str(date.today() - timedelta(days=2))  # '2020-11-25'
     df = df[('2020-03-14' < df.date) & (df.date < date_treshold)]
     df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
     f = line(df, x='Date', y='Total Deaths per Million', color='Continent')
@@ -53,7 +53,8 @@ def update_confirmed_cases():
         def scrape_yahoo(id_):
             BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
             now = int(datetime.now().timestamp())
-            url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
+            url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&' + \
+                'events=history'
             return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
         covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
                         usecols=['location', 'date', 'total_cases'])
