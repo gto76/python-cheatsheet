@@ -2,20 +2,25 @@
 // Usage: node parse.js
 //
 // Script that creates index.html out of web/template.html and README.md.
+//
 // It is written in JS because this code used to be executed on the client side.
 // To install the Node.js and npm run:
 // $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
+//
 // To install dependencies globally, run:
 // $ npm install -g jsdom jquery showdown highlightjs@9.12.0
+//
 // If running on macOS and modules can't be found after installation add:
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
+//
 // To avoid problems with permissions and path variables, install modules
 // into project's directory using:
 // $ npm install jsdom jquery showdown highlightjs@9.12.0
-// It is also advisable to add a script into .git/hooks directory, that will run 
-// this script before every commit. It should be named 'pre-commit' and it should
-// contain the following line: `./parse.js`.
+//
+// It is also advisable to add a Bash script into .git/hooks directory, that will
+// run this script before every commit. It should be named 'pre-commit' and it
+// should contain the following line: `./parse.js`.
 
 
 const fs = require('fs');
@@ -408,7 +413,8 @@ function main() {
   const html = getMd();
   initDom(html);
   modifyPage();
-  const template = readFile('web/template.html');
+  var template = readFile('web/template.html');
+  template = updateDate(template);
   const tokens = template.split('<div id=main_container></div>');
   const text = `${tokens[0]} ${document.body.innerHTML} ${tokens[1]}`;
   writeToFile('index.html', text);
@@ -579,6 +585,18 @@ function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
 }
+
+
+function updateDate(template) {
+  const date = new Date();
+  const date_str = date.toLocaleString('en-us', {month: 'long', day: 'numeric', year: 'numeric'});
+  template = template.replace('May 20, 2021', date_str);
+  template = template.replace('May 20, 2021', date_str);
+  return template;
+}
+
+
+// UTIL
 
 function readFile(filename) {
   try {  
