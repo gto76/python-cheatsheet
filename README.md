@@ -1,6 +1,6 @@
 Comprehensive Python Cheatsheet
 ===============================
-<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/master/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
+<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Closure`](#closure)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Type`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprograming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprogramming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
 
@@ -377,7 +377,7 @@ import re
 
 ### Special Sequences
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown below, it restricts special sequence matches to `'[\x00-\x7f]'` and prevents `'\s'` from accepting `'[\x1c\x1d\x1e\x1f]'`.**
+* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'`.**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
@@ -412,9 +412,10 @@ Format
 {<el>:.<10}                                    # '<el>......'
 {<el>:0}                                       # '<el>'
 ```
+* **Use `'{<el>:{<str/int/float>}[...]}'` to set options dynamically.**
+* **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
-**`'!r'` calls object's [repr()](#class) method, instead of [str()](#class), to get a string.**
 ```python
 {'abcde'!r:10}                                 # "'abcde'   "
 {'abcde':10.3}                                 # 'abc       '
@@ -500,7 +501,7 @@ Numbers
 ### Math
 ```python
 from math import e, pi, inf, nan, isinf, isnan
-from math import cos, sin, tan, acos, asin, atan, degrees, radians
+from math import sin, cos, tan, asin, acos, atan, degrees, radians
 from math import log, log10, log2
 ```
 
@@ -531,7 +532,7 @@ from random import random, randint, choice, shuffle, gauss, seed
 <int> = <int> & <int>                    # And
 <int> = <int> | <int>                    # Or
 <int> = <int> ^ <int>                    # Xor (0 if both bits equal)
-<int> = <int> << n_bits                  # Shift left (>> for right)
+<int> = <int> << n_bits                  # Left shift (>> for right)
 <int> = ~<int>                           # Not (also: -<int> - 1)
 ```
 
@@ -1286,7 +1287,9 @@ Enum
 ----
 ```python
 from enum import Enum, auto
+```
 
+```python
 class <enum_name>(Enum):
     <member_name_1> = <value_1>
     <member_name_2> = <value_2_a>, <value_2_b>
@@ -1356,7 +1359,7 @@ else:
 finally:
     <code_3>
 ```
-* **Code inside the `'else'` block will only be executed if `'try'` block had no exception.**
+* **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed.**
 
 ### Catching Exceptions
@@ -1670,6 +1673,7 @@ import os, shutil
 ```python
 os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
+os.makedirs(<path>, mode=0o777)     # Creates all directories in the path.
 ```
 
 ```python
@@ -1799,15 +1803,15 @@ import csv
 ### Dialects
 ```text
 +------------------+--------------+--------------+--------------+
-|                  |    excel     |   excel-tab  |     unix     |
+|                  |     excel    |   excel-tab  |     unix     |
 +------------------+--------------+--------------+--------------+
-| delimiter        |    ','       |    '\t'      |     ','      |
-| quotechar        |    '"'       |    '"'       |     '"'      |
-| doublequote      |    True      |    True      |     True     |
-| skipinitialspace |    False     |    False     |     False    |
-| lineterminator   |    '\r\n'    |    '\r\n'    |     '\n'     |
-| quoting          |    0         |    0         |     1        |
-| escapechar       |    None      |    None      |     None     |
+| delimiter        |       ','    |      '\t'    |       ','    |
+| quotechar        |       '"'    |       '"'    |       '"'    |
+| doublequote      |      True    |      True    |      True    |
+| skipinitialspace |     False    |     False    |     False    |
+| lineterminator   |    '\r\n'    |    '\r\n'    |      '\n'    |
+| quoting          |         0    |         0    |         1    |
+| escapechar       |      None    |      None    |      None    |
 +------------------+--------------+--------------+--------------+
 ```
 
@@ -1850,13 +1854,14 @@ import sqlite3
 ### Write
 ```python
 <conn>.execute('<query>')                       # Can raise a subclass of sqlite3.Error.
-<conn>.commit()                                 # Commits all transactions since last commit.
+<conn>.commit()                                 # Saves all changes since the last commit.
+<conn>.rollback()                               # Discards all changes since the last commit.
 ```
 
 #### Or:
 ```python
-with <conn>:
-    <conn>.execute('<query>')
+with <conn>:                                    # Exits the block with commit() or rollback(),
+    <conn>.execute('<query>')                   # depending on whether an exception occurred.
 ```
 
 ### Placeholders
@@ -1898,10 +1903,10 @@ Bytes
 **Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00 - \xff.
+<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
 <int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
 <bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes object as separator.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
 
 ### Encode
@@ -1938,7 +1943,7 @@ def write_bytes(filename, bytes_obj):
 Struct
 ------
 * **Module that performs conversions between a sequence of numbers and a bytes object.**
-* **Machine’s native type sizes and byte order are used by default.**
+* **System’s type sizes and byte order are used by default.**
 
 ```python
 from struct import pack, unpack, iter_unpack
@@ -1950,6 +1955,7 @@ from struct import pack, unpack, iter_unpack
 <tuples> = iter_unpack('<format>', <bytes>)
 ```
 
+### Example
 ```python
 >>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
@@ -1959,7 +1965,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 ### Format
 #### For standard type sizes start format string with:
-* **`'='` - native byte order (usually little-endian)**
+* **`'='` - system's byte order (usually little-endian)**
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**
 
@@ -1986,6 +1992,7 @@ from array import array
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
 <bytes> = bytes(<array>)                       # Or: <array>.tobytes()
+<file>.write(<array>)                          # Writes array to the binary file.
 ```
 
 
@@ -1994,6 +2001,7 @@ Memory View
 * **A sequence object that points to the memory of another object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
+* **Casting only works between char and other types and uses system's sizes and byte order.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
@@ -2005,10 +2013,10 @@ Memory View
 
 ### Decode
 ```python
-<bin_file>.write(<mview>)                      # Writes mview to the binary file.
 <bytes> = bytes(<mview>)                       # Creates a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
+<file>.write(<mview>)                          # Writes mview to the binary file.
 ```
 
 ```python
@@ -2047,10 +2055,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set arguments.
+<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
 <Thread>.start()                               # Starts the thread.
-<bool> = <Thread>.is_alive()                   # Checks if thread has finished executing.
-<Thread>.join()                                # Waits for thread to finish.
+<bool> = <Thread>.is_alive()                   # Checks if the thread has finished executing.
+<Thread>.join()                                # Waits for the thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
@@ -2058,15 +2066,14 @@ from concurrent.futures import ThreadPoolExecutor
 ### Lock
 ```python
 <lock> = RLock()                               # Lock that can only be released by the owner.
-<lock>.acquire()                               # Waits for lock to be available.
-<lock>.release()                               # Makes lock available again.
+<lock>.acquire()                               # Waits for the lock to be available.
+<lock>.release()                               # Makes the lock available again.
 ```
 
 #### Or:
 ```python
-lock = RLock()
-with lock:
-    ...
+with <lock>:                                   # Enters the block by calling acquire(),
+    ...                                        # and exits it with release().
 ```
 
 ### Semaphore, Event, Barrier
@@ -2141,8 +2148,8 @@ Introspection
 ### Attributes
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (incl. methods).
-<dict> = vars(<object>)                    # Dict of object's fields. Also <obj>.__dict__.
-<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an error.
+<dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
+<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
 setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
 delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_name>`.
@@ -2158,8 +2165,8 @@ from inspect import signature
 ```
 
 
-Metaprograming
---------------
+Metaprogramming
+---------------
 **Code that generates code.**
 
 ### Type
@@ -2342,8 +2349,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
-plt.plot(<y_data> [, label=<str>])
-plt.plot(<x_data>, <y_data>)
+plt.plot(<x_data>, <y_data> [, label=<str>])   # Or: plt.plot(<y_data>)
 plt.legend()                                   # Adds a legend.
 plt.savefig(<path>)                            # Saves the figure.
 plt.show()                                     # Displays the figure.
@@ -2370,7 +2376,7 @@ Curses
 #### Runs a basic file explorer in the terminal:
 ```python
 from curses import wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-from os import listdir, chdir, path
+from os import listdir, path, chdir
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, listdir()
@@ -2492,7 +2498,7 @@ def send_page(sport):
 
 ### REST Request
 ```python
-@post('/odds/<sport>')
+@post('/<sport>/odds')
 def odds_handler(sport):
     team = request.forms.get('team')
     home_odds, away_odds = 2.44, 3.29
@@ -2506,7 +2512,7 @@ def odds_handler(sport):
 # $ pip3 install requests
 >>> import threading, requests
 >>> threading.Thread(target=run, daemon=True).start()
->>> url = 'http://localhost:8080/odds/football'
+>>> url = 'http://localhost:8080/football/odds'
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
@@ -2573,11 +2579,10 @@ Line #         Mem usage      Increment   Line Contents
 ### Call Graph
 #### Generates a PNG image of a call graph with highlighted bottlenecks:
 ```python
-# $ pip3 install pycallgraph
-from pycallgraph import output, PyCallGraph
+# $ pip3 install pycallgraph2
+from pycallgraph2 import output, PyCallGraph
 from datetime import datetime
-time_str = datetime.now().strftime('%Y%m%d%H%M%S')
-filename = f'profile-{time_str}.png'
+filename = f'profile-{datetime.now():%Y%m%d%H%M%S}.png'
 drawer = output.GraphvizOutput(output_file=filename)
 with PyCallGraph(drawer):
     <code_to_be_profiled>
@@ -2917,7 +2922,7 @@ pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
 while all(event.type != pg.QUIT for event in pg.event.get()):
-    deltas = {pg.K_UP: (0, -3), pg.K_RIGHT: (3, 0), pg.K_DOWN: (0, 3), pg.K_LEFT: (-3, 0)}
+    deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
     for key_code, is_pressed in enumerate(pg.key.get_pressed()):
         rect = rect.move(deltas[key_code]) if key_code in deltas and is_pressed else rect
     screen.fill((0, 0, 0))
@@ -2957,14 +2962,14 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```
 
 ```python
-from pygame.transform import scale, …
+from pygame.transform import scale, ...
 <Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
 <Surf> = rotate(<Surf>, degrees)                # Returns rotated and scaled surface.
 <Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
 ```
 
 ```python
-from pygame.draw import line, arc, rect
+from pygame.draw import line, ...
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
 rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
@@ -3171,7 +3176,7 @@ b  3  4
 ```
 
 ```python
-<DF>    = <DF> ><== <el/Sr/DF>                # Returns DataFrame of bools.
+<DF>    = <DF> ><== <el/Sr/DF>                # Returns DF of bools. Sr is treated as a row.
 <DF>    = <DF> +-*/ <el/Sr/DF>                # Items with non-matching keys get value NaN.
 ```
 
@@ -3376,39 +3381,37 @@ line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```python
 import pandas as pd
 import plotly.graph_objects as go
-import datetime
 
 def main():
     display_data(wrangle_data(*scrape_data()))
 
 def scrape_data():
-    def scrape_yahoo(id_):
-        BASE_URL = 'https://query1.finance.yahoo.com/v7/finance/download/'
-        now = int(datetime.datetime.now().timestamp())
-        url = f'{BASE_URL}{id_}?period1=1579651200&period2={now}&interval=1d&events=history'
-        return pd.read_csv(url, usecols=['Date', 'Close']).set_index('Date').Close
-    covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
-                        usecols=['location', 'date', 'total_cases'])
-    covid = covid[covid.location == 'World'].set_index('date').total_cases
-    dow, gold, bitcoin = [scrape_yahoo(id_) for id_ in ('^DJI', 'GC=F', 'BTC-USD')]
-    dow.name, gold.name, bitcoin.name = 'Dow Jones', 'Gold', 'Bitcoin'
-    return covid, dow, gold, bitcoin
+    def scrape_covid():
+        url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
+        df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'])
+        return df[df.location == 'World'].set_index('date').total_cases
+    def scrape_yahoo(slug):
+        url = f'https://query1.finance.yahoo.com/v7/finance/download/{slug}' + \
+              '?period1=1579651200&period2=1608850800&interval=1d&events=history'
+        df = pd.read_csv(url, usecols=['Date', 'Close'])
+        return df.set_index('Date').Close
+    return scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
 
-def wrangle_data(covid, dow, gold, bitcoin):
-    df = pd.concat([dow, gold, bitcoin], axis=1)
+def wrangle_data(covid, bitcoin, gold, dow):
+    df = pd.concat([bitcoin, gold, dow], axis=1)
     df = df.sort_index().interpolate()
     df = df.rolling(10, min_periods=1, center=True).mean()
-    df = df.loc['2020-02-23':].iloc[:-2]
+    df = df.loc['2020-02-23':'2020-11-25']
     df = (df / df.iloc[0]) * 100
     return pd.concat([covid, df], axis=1, join='inner')
 
 def display_data(df):
-    def get_trace(col_name):
-        return go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis='y2')
-    traces = [get_trace(col_name) for col_name in df.columns[1:]]
-    traces.append(go.Scatter(x=df.index, y=df.total_cases, name='Total Cases', yaxis='y1'))
+    df.columns = ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones']
     figure = go.Figure()
-    figure.add_traces(traces)
+    for col_name in df:
+        yaxis = 'y1' if col_name == 'Total Cases' else 'y2'
+        trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
+        figure.add_trace(trace)
     figure.update_layout(
         yaxis1=dict(title='Total Cases', rangemode='tozero'),
         yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),

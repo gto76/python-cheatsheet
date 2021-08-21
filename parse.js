@@ -1,12 +1,26 @@
 #!/usr/bin/env node
 // Usage: node parse.js
+//
 // Script that creates index.html out of web/template.html and README.md.
+//
 // It is written in JS because this code used to be executed on the client side.
-// To install dependencies run:
-// $ npm install -g jsdom jquery showdown highlightjs
-// If running on Mac and modules can't be found after installation add:
+// To install the Node.js and npm run:
+// $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
+//
+// To install dependencies globally, run:
+// $ npm install -g jsdom jquery showdown highlightjs@9.12.0
+//
+// If running on macOS and modules can't be found after installation add:
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
+//
+// To avoid problems with permissions and path variables, install modules
+// into project's directory using:
+// $ npm install jsdom jquery showdown highlightjs@9.12.0
+//
+// It is also advisable to add a Bash script into .git/hooks directory, that will
+// run this script before every commit. It should be named 'pre-commit' and it
+// should contain the following line: `./parse.js`.
 
 
 const fs = require('fs');
@@ -24,7 +38,7 @@ const TOC =
   '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
-  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprograming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
+  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>,\n' +
   '                       <a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#audio">Audio</a>, <a href="#pygame">Games</a>, <a href="#pandas">Data</a>]\n' +
   '}\n' +
@@ -228,20 +242,20 @@ const DIAGRAM_8_B =
 
 const DIAGRAM_9_A =
   '+------------------+--------------+--------------+--------------+\n' +
-  '|                  |    excel     |   excel-tab  |     unix     |\n' +
+  '|                  |     excel    |   excel-tab  |     unix     |\n' +
   '+------------------+--------------+--------------+--------------+\n';
 
 const DIAGRAM_9_B =
   "┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n" +
-  "┃                  │    excel     │   excel-tab  │     unix     ┃\n" +
+  "┃                  │     excel    │   excel-tab  │     unix     ┃\n" +
   "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
-  "┃ delimiter        │    ','       │    '\\t'      │    ','       ┃\n" +
-  "┃ quotechar        │    '\"'       │    '\"'       │    '\"'       ┃\n" +
-  "┃ doublequote      │    True      │    True      │    True      ┃\n" +
-  "┃ skipinitialspace │    False     │    False     │    False     ┃\n" +
-  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │    '\\n'      ┃\n" +
-  "┃ quoting          │    0         │    0         │    1         ┃\n" +
-  "┃ escapechar       │    None      │    None      │    None      ┃\n" +
+  "┃ delimiter        │       ','    │      '\\t'    │       ','    ┃\n" +
+  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
+  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
+  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
+  "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │      '\\n'    ┃\n" +
+  "┃ quoting          │         0    │         0    │         1    ┃\n" +
+  "┃ escapechar       │      None    │      None    │      None    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
@@ -399,7 +413,8 @@ function main() {
   const html = getMd();
   initDom(html);
   modifyPage();
-  const template = readFile('web/template.html');
+  var template = readFile('web/template.html');
+  template = updateDate(template);
   const tokens = template.split('<div id=main_container></div>');
   const text = `${tokens[0]} ${document.body.innerHTML} ${tokens[1]}`;
   writeToFile('index.html', text);
@@ -570,6 +585,18 @@ function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
 }
+
+
+function updateDate(template) {
+  const date = new Date();
+  const date_str = date.toLocaleString('en-us', {month: 'long', day: 'numeric', year: 'numeric'});
+  template = template.replace('May 20, 2021', date_str);
+  template = template.replace('May 20, 2021', date_str);
+  return template;
+}
+
+
+// UTIL
 
 function readFile(filename) {
   try {  
