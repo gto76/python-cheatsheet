@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>August 11, 2021</aside>
+    <aside>October 1, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -786,10 +786,10 @@ func(*args, **kwargs)
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, z, **kwargs)</span>:</span>  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
 </code></pre>
-<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt; = [*&lt;collection&gt; [, ...]]
-&lt;set&gt;  = {*&lt;collection&gt; [, ...]}
-&lt;tup.&gt; = (*&lt;collection&gt;, [...])
-&lt;dict&gt; = {**&lt;dict&gt; [, ...]}
+<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]
+&lt;set&gt;   = {*&lt;collection&gt; [, ...]}
+&lt;tuple&gt; = (*&lt;collection&gt;, [...])
+&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}
 </code></pre></div>
 
 <pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;
@@ -816,8 +816,8 @@ func(*args, **kwargs)
 <ul>
 <li><strong>Reduce must be imported from functools module.</strong></li>
 </ul>
-<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                                <span class="hljs-comment"># False if empty.</span>
-&lt;bool&gt; = all(el[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> &lt;collection&gt;)                <span class="hljs-comment"># True if empty.</span>
+<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                                <span class="hljs-comment"># Is `bool(el)` True for any element.</span>
+&lt;bool&gt; = all(&lt;collection&gt;)                                <span class="hljs-comment"># Is True for all elements or empty.</span>
 </code></pre></div>
 
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp_if_false&gt;
@@ -826,9 +826,9 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<div><h3 id="namedtupleenumdataclass">Namedtuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-Point     = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
-point     = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+<div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
+Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
+point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
@@ -836,8 +836,8 @@ Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs
 direction = Direction.n
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-Creature  = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])
-creature  = Creature(Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), Direction.n)
+Creature = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])
+creature = Creature(point, direction)
 </code></pre>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have a closure in Python when:</strong></p><ul>
 <li><strong>A nested function references a value of its enclosing function and then</strong></li>
@@ -3005,7 +3005,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>August 11, 2021</aside>
+    <aside>October 1, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

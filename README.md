@@ -732,10 +732,10 @@ def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 
 ### Other Uses
 ```python
-<list> = [*<collection> [, ...]]
-<set>  = {*<collection> [, ...]}
-<tup.> = (*<collection>, [...])
-<dict> = {**<dict> [, ...]}
+<list>  = [*<collection> [, ...]]
+<set>   = {*<collection> [, ...]}
+<tuple> = (*<collection>, [...])
+<dict>  = {**<dict> [, ...]}
 ```
 
 ```python
@@ -774,8 +774,8 @@ Inline
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                                # False if empty.
-<bool> = all(el[1] for el in <collection>)                # True if empty.
+<bool> = any(<collection>)                                # Is `bool(el)` True for any element.
+<bool> = all(<collection>)                                # Is True for all elements or empty.
 ```
 
 ### Conditional Expression
@@ -788,11 +788,11 @@ Inline
 ['zero', 1, 2, 3]
 ```
 
-### Namedtuple, Enum, Dataclass
+### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point     = namedtuple('Point', 'x y')
-point     = Point(0, 0)
+Point = namedtuple('Point', 'x y')
+point = Point(0, 0)
 ```
 
 ```python
@@ -803,8 +803,8 @@ direction = Direction.n
 
 ```python
 from dataclasses import make_dataclass
-Creature  = make_dataclass('Creature', ['loc', 'dir'])
-creature  = Creature(Point(0, 0), Direction.n)
+Creature = make_dataclass('Creature', ['loc', 'dir'])
+creature = Creature(point, direction)
 ```
 
 
