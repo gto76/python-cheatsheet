@@ -62,6 +62,7 @@ list_of_chars    = list(<str>)
 <int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
 <list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
+<list>.max()                   # Returns an item from the list with max value.
 ```
 
 
