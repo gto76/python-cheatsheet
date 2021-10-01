@@ -2046,7 +2046,7 @@ from collections import deque
 
 Threading
 ---------
-* **CPython interpreter can only run a single thread at a time.**
+* **CPython interpreter can only run a single thread at a particular time.**
 * **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
 from threading import Thread, RLock, Semaphore, Event, Barrier
@@ -2114,7 +2114,7 @@ from queue import Queue
 
 Operator
 --------
-**Module of functions that provide the functionality of operators.**
+**Module of functions that provide functionality of operators.**
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 from operator import eq, ne, lt, le, gt, ge
