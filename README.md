@@ -1,6 +1,6 @@
 Comprehensive Python Cheatsheet
 ===============================
-<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
+<sup><a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a> or <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a>.
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
