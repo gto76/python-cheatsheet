@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 1, 2021</aside>
+    <aside>October 2, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2093,8 +2093,8 @@ plt.clf()                                      <span class="hljs-comment"># Clea
     <span class="hljs-keyword">while</span> ch != ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.clear()
-        <span class="hljs-keyword">for</span> y, a_path <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
-            screen.addstr(y, <span class="hljs-number">0</span>, a_path, A_REVERSE * (selected == first + y))
+        <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
+            screen.addstr(y, <span class="hljs-number">0</span>, filename, A_REVERSE * (selected == first + y))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
@@ -3005,7 +3005,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 1, 2021</aside>
+    <aside>October 2, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

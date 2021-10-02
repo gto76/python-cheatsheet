@@ -2383,8 +2383,8 @@ def main(screen):
     while ch != ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.clear()
-        for y, a_path in enumerate(paths[first : first+height]):
-            screen.addstr(y, 0, a_path, A_REVERSE * (selected == first + y))
+        for y, filename in enumerate(paths[first : first+height]):
+            screen.addstr(y, 0, filename, A_REVERSE * (selected == first + y))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))
