@@ -412,18 +412,20 @@ Format
 {<el>:.<10}                                    # '<el>......'
 {<el>:0}                                       # '<el>'
 ```
-* **Use `'{<el>:{<str/int/float>}[...]}'` to set options dynamically.**
+* **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
 ```python
-{'abcde'!r:10}                                 # "'abcde'   "
+{'abcde':10}                                   # 'abcde     '
 {'abcde':10.3}                                 # 'abc       '
 {'abcde':.3}                                   # 'abc'
+{'abcde'!r:10}                                 # "'abcde'   "
 ```
 
 ### Numbers
 ```python
+{ 123456:10}                                   # '    123456'
 { 123456:10,}                                  # '   123,456'
 { 123456:10_}                                  # '   123_456'
 { 123456:+10}                                  # '   +123456'
@@ -2950,7 +2952,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 **Object for representing images.**
 ```python
 <Surf> = pg.display.set_mode((width, height))   # Returns display surface.
-<Surf> = pg.Surface((width, height), …)         # New RGB surface. Add `pg.SRCALPHA` for RGBA.
+<Surf> = pg.Surface((width, height) [, flags])  # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
