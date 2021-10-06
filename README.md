@@ -657,6 +657,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <TD>     = <D/DTn>  - <D/DTn>               # Returns the difference, ignoring time jumps.
 <TD>     = <DTa>    - <DTa>                 # Ignores time jumps if they share tzinfo object.
 <TD>     = <DT_UTC> - <DT_UTC>              # Convert DTs to UTC to get the actual delta.
+<TD>     = <TD>     / <TD>                  # dt.timedelta(days=365.25) / dt.timedelta(weeks=1)
 ```
 
 
