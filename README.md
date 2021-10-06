@@ -491,6 +491,7 @@ Numbers
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
+* **To compare floats, use `math.isclose(f1, f2)` instead of `f1 == f2`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 
 ### Basic Functions
