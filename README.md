@@ -425,12 +425,12 @@ Format
 
 ### Numbers
 ```python
-{ 123456:10}                                   # '    123456'
-{ 123456:10,}                                  # '   123,456'
-{ 123456:10_}                                  # '   123_456'
-{ 123456:+10}                                  # '   +123456'
-{-123456:=10}                                  # '-   123456'
-{ 123456: }                                    # ' 123456'
+{123456:10}                                    # '    123456'
+{123456:10,}                                   # '   123,456'
+{123456:10_}                                   # '   123_456'
+{123456:+10}                                   # '   +123456'
+{123456:=+10}                                  # '+   123456'
+{123456: }                                     # ' 123456'
 {-123456: }                                    # '-123456'
 ```
 
@@ -1031,6 +1031,7 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
+* **For arbitrary type use `'typing.Any'`.**
 * **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be hashable, all attributes must be hashable and frozen must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
@@ -1333,9 +1334,9 @@ Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
 ```python
 from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
-                           'OR' : partial(lambda l, r: l or r)})
+                           'OR':  partial(lambda l, r: l or r)})
 ```
-* **Another solution in this particular case is to use functions and\_() and or\_() from the module [operator](#operator).**
+* **Member names are in all caps because trying to access a member that is named after a reserved keyword raises SyntaxError.**
 
 
 Exceptions
@@ -1362,7 +1363,7 @@ finally:
     <code_3>
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
-* **Code inside the `'finally'` block will always be executed.**
+* **Code inside the `'finally'` block will always be executed (unless a signal is received).**
 
 ### Catching Exceptions
 ```python
@@ -2131,7 +2132,6 @@ sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
-LogicOp          = enum.Enum('LogicOp', {'AND': op.and_, 'OR': op.or_})
 last_el          = op.methodcaller('pop')(<list>)
 ```
 

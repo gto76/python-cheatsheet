@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 4, 2021</aside>
+    <aside>October 7, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -546,12 +546,12 @@ to_exclusive   = &lt;range&gt;.stop
 {<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                                 <span class="hljs-comment"># "'abcde'   "</span>
 </code></pre></div>
 
-<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                                   <span class="hljs-comment"># '    123456'</span>
-{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                                  <span class="hljs-comment"># '   123,456'</span>
-{ <span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                                  <span class="hljs-comment"># '   123_456'</span>
-{ <span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                                  <span class="hljs-comment"># '   +123456'</span>
-{<span class="hljs-number">-123456</span>:=<span class="hljs-number">10</span>}                                  <span class="hljs-comment"># '-   123456'</span>
-{ <span class="hljs-number">123456</span>: }                                    <span class="hljs-comment"># ' 123456'</span>
+<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                                    <span class="hljs-comment"># '    123456'</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                                   <span class="hljs-comment"># '   123,456'</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                                   <span class="hljs-comment"># '   123_456'</span>
+{<span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                                   <span class="hljs-comment"># '   +123456'</span>
+{<span class="hljs-number">123456</span>:=+<span class="hljs-number">10</span>}                                  <span class="hljs-comment"># '+   123456'</span>
+{<span class="hljs-number">123456</span>: }                                     <span class="hljs-comment"># ' 123456'</span>
 {<span class="hljs-number">-123456</span>: }                                    <span class="hljs-comment"># '-123456'</span>
 </code></pre></div>
 
@@ -1025,6 +1025,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <ul>
+<li><strong>For arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 <li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be hashable, all attributes must be hashable and frozen must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
@@ -1291,11 +1292,11 @@ Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-st
 
 <div><h4 id="userdefinedfunctionscannotbevaluessotheymustbewrapped">User-defined functions cannot be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
 LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">and</span> r),
-                           <span class="hljs-string">'OR'</span> : partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
+                           <span class="hljs-string">'OR'</span>:  partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre></div>
 
 <ul>
-<li><strong>Another solution in this particular case is to use functions and_() and or_() from the module <a href="#operator">operator</a>.</strong></li>
+<li><strong>Member names are in all caps because trying to access a member that is named after a reserved keyword raises SyntaxError.</strong></li>
 </ul>
 <div><h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2><div><h3 id="basicexample">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     &lt;code&gt;
@@ -1318,7 +1319,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 
 <ul>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
-<li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed.</strong></li>
+<li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
 <span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;:
@@ -1903,7 +1904,6 @@ sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hlj
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
-LogicOp          = enum.Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-string">'AND'</span>: op.and_, <span class="hljs-string">'OR'</span>: op.or_})
 last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
@@ -3007,7 +3007,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 4, 2021</aside>
+    <aside>October 7, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
