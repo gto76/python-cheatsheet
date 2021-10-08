@@ -1579,7 +1579,7 @@ shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes t
 </code></pre></div>
 
 <div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends '1 + 1' to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> subprocess <span class="hljs-keyword">import</span> run
-<span class="hljs-meta">&gt;&gt;&gt; </span>run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, encoding=<span class="hljs-string">'utf-8'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
 </code></pre></div>
 
