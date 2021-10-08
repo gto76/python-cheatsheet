@@ -1704,7 +1704,7 @@ import os
 #### Sends '1 + 1' to the basic calculator and captures its output:
 ```python
 >>> from subprocess import run
->>> run('bc', input='1 + 1\n', capture_output=True, encoding='utf-8')
+>>> run('bc', input='1 + 1\n', capture_output=True, text=True)
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
