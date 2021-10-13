@@ -1489,7 +1489,7 @@ Input
 ```
 * **Trailing newline gets stripped.**
 * **Prompt string is printed to the standard output before reading input.**
-* **Raises EOFError when user hits EOF (ctrl-d/z) or input stream gets exhausted.**
+* **Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
 
 
 Command Line Arguments
@@ -2952,7 +2952,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 **Object for representing images.**
 ```python
 <Surf> = pg.display.set_mode((width, height))   # Returns display surface.
-<Surf> = pg.Surface((width, height) [, flags])  # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
+<Surf> = pg.Surface((width, height), flags=0)   # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
