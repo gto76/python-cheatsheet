@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 13, 2021</aside>
+    <aside>October 14, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -841,6 +841,15 @@ direction = Direction.n
 Creature = make_dataclass(<span class="hljs-string">'Creature'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])
 creature = Creature(point, direction)
 </code></pre>
+<div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
+<span class="hljs-keyword">import</span> &lt;package&gt;           <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/__init__.py'.</span>
+<span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;  <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/&lt;module&gt;.py'.</span>
+</code></pre></div>
+
+<ul>
+<li><strong>Package is a collection of multiple modules, but it can also define its own objects. Python treats any directory containing a file called <code class="python hljs"><span class="hljs-string">'__init__.py'</span></code> as a package.</strong></li>
+<li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to package's modules unless they are imported in its init script.</strong></li>
+</ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have a closure in Python when:</strong></p><ul>
 <li><strong>A nested function references a value of its enclosing function and then</strong></li>
 <li><strong>the enclosing function returns the nested function.</strong></li>
@@ -3007,7 +3016,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 13, 2021</aside>
+    <aside>October 14, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
