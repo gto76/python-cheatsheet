@@ -817,8 +817,9 @@ import <module>            # Imports a built-in or '<module>.py'.
 import <package>           # Imports a built-in or '<package>/__init__.py'.
 import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 ```
-* **Package is a collection of multiple modules, but it can also define its own objects. Python treats any directory containing a file called `'__init__.py'` as a package.**
-* **Running `'import <package>'` does not automatically provide access to package's modules unless they are imported in its init script.**
+* **Package is a collection of modules, but it can also define its own objects.**
+* **On a filesystem this corresponds to a directory of Python files with an optional init script.**
+* **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
 
 
 Closure

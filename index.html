@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 15, 2021</aside>
+    <aside>October 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -847,8 +847,9 @@ creature = Creature(point, direction)
 </code></pre></div>
 
 <ul>
-<li><strong>Package is a collection of multiple modules, but it can also define its own objects. Python treats any directory containing a file called <code class="python hljs"><span class="hljs-string">'__init__.py'</span></code> as a package.</strong></li>
-<li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to package's modules unless they are imported in its init script.</strong></li>
+<li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
+<li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
+<li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
 </ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have a closure in Python when:</strong></p><ul>
 <li><strong>A nested function references a value of its enclosing function and then</strong></li>
@@ -3016,7 +3017,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 15, 2021</aside>
+    <aside>October 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
