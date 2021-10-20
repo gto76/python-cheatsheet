@@ -257,7 +257,7 @@ Type
 
 #### Some types do not have built-in names, so they must be imported:
 ```python
-from types import FunctionType, MethodType, LambdaType, GeneratorType
+from types import FunctionType, MethodType, LambdaType, GeneratorType, ModuleType
 ```
 
 ### Abstract Base Classes
@@ -1813,7 +1813,7 @@ import csv
 * **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped.**
 * **`'lineterminator'` - Specifies how writer terminates rows.**
 * **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
-* **`'escapechar'` - Character for escaping 'quotechar' if 'doublequote' is False.**
+* **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
 
 ### Dialects
 ```text
@@ -2165,8 +2165,8 @@ Introspection
 <dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
-setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
-delattr(<object>, '<attr_name>')           # Equivalent to `del <object>.<attr_name>`.
+setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict__' attribute.
+delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 ```
 
 ### Parameters
@@ -2187,7 +2187,7 @@ Metaprogramming
 **Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.**
 
 ```python
-<class> = type('<class_name>', <parents_tuple>, <attributes_dict>)
+<class> = type('<class_name>', <tuple_of_parents>, <dict_of_class_attributes>)
 ```
 
 ```python
