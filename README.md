@@ -772,7 +772,7 @@ Inline
 <iter> = filter(lambda x: x > 5, range(10))               # (6, 7, 8, 9)
 <obj>  = reduce(lambda out, x: out + x, range(10))        # 45
 ```
-* **Reduce must be imported from functools module.**
+* **Reduce must be imported from the functools module.**
 
 ### Any, All
 ```python
@@ -1043,11 +1043,10 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
-* **For arbitrary type use `'typing.Any'`.**
 * **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be hashable, all attributes must be hashable and frozen must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances.**
-* **Default_factory can be any [callable](#callable).**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Argument 'default_factory' can be any [callable](#callable).**
+* **For attributes of arbitrary type use `'typing.Any'`.**
 
 #### Inline:
 ```python
@@ -1245,7 +1244,7 @@ class MyCollection:
 
 ### Sequence
 * **Only required methods are len() and getitem().**
-* **Getitem() should return an item at index or raise IndexError.**
+* **Getitem() should return an item at the passed index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has len() and getitem() defined.**
 ```python
@@ -1646,7 +1645,7 @@ from pathlib import Path
 
 ```python
 <Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
-<Path> = <path> / <path> [/ ...]    # One of the paths must be a Path object.
+<Path> = <path> / <path> [/ ...]    # One of the two paths must be a Path object.
 ```
 
 ```python
@@ -2498,22 +2497,22 @@ run(host='0.0.0.0', port=80)            # Runs globally.
 
 ### Static Request
 ```python
-@route('/img/<image>')
-def send_image(image):
-    return static_file(image, 'img_dir/', mimetype='image/png')
+@route('/img/<filename>')
+def send_file(filename):
+    return static_file(filename, root='img_dir/')
 ```
 
 ### Dynamic Request
 ```python
 @route('/<sport>')
-def send_page(sport):
+def send_html(sport):
     return template('<h1>{{title}}</h1>', title=sport)
 ```
 
 ### REST Request
 ```python
 @post('/<sport>/odds')
-def odds_handler(sport):
+def send_json(sport):
     team = request.forms.get('team')
     home_odds, away_odds = 2.44, 3.29
     response.headers['Content-Type'] = 'application/json'
@@ -2766,16 +2765,17 @@ from PIL import ImageDraw
 ```
 
 ```python
-<ImageDraw>.point((x, y), fill=None)
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]), fill=None, width=0, joint=None) 
-<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg, fill=None, width=0)
-<ImageDraw>.rectangle((x1, y1, x2, y2), fill=None, outline=None, width=0)
-<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]), fill=None, outline=None)
-<ImageDraw>.ellipse((x1, y1, x2, y2), fill=None, outline=None, width=0)
+<ImageDraw>.point((x, y))
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))
+<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg)
+<ImageDraw>.rectangle((x1, y1, x2, y2))
+<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]))
+<ImageDraw>.ellipse((x1, y1, x2, y2))
 ```
 * **Use `'fill=<color>'` to set the primary color.**
-* **Use `'outline=<color>'` to set the secondary color.**
-* **Color can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
+* **Use `'width=<int>'` to set the width of lines or contours.**
+* **Use `'outline=<color>'` to set the color of the contours.**
+* **Colors can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation

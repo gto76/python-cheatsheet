@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 21, 2021</aside>
+    <aside>October 22, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -816,7 +816,7 @@ func(*args, **kwargs)
 </code></pre></div>
 
 <ul>
-<li><strong>Reduce must be imported from functools module.</strong></li>
+<li><strong>Reduce must be imported from the functools module.</strong></li>
 </ul>
 <div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                                <span class="hljs-comment"># Is `bool(el)` True for any element.</span>
 &lt;bool&gt; = all(&lt;collection&gt;)                                <span class="hljs-comment"># Is True for all elements or empty.</span>
@@ -1035,11 +1035,10 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <ul>
-<li><strong>For arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 <li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be hashable, all attributes must be hashable and frozen must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances.</strong></li>
-<li><strong>Default_factory can be any <a href="#callable">callable</a>.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Argument 'default_factory' can be any <a href="#callable">callable</a>.</strong></li>
+<li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
@@ -1215,7 +1214,7 @@ Hello World!
 
 <div><h3 id="sequence">Sequence</h3><ul>
 <li><strong>Only required methods are len() and getitem().</strong></li>
-<li><strong>Getitem() should return an item at index or raise IndexError.</strong></li>
+<li><strong>Getitem() should return an item at the passed index or raise IndexError.</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
 <li><strong>Reversed() automatically works on any object that has len() and getitem() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
@@ -1543,7 +1542,7 @@ value = args.&lt;name&gt;
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
-&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># One of the paths must be a Path object.</span>
+&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># One of the two paths must be a Path object.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative cwd. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute cwd. Also Path().resolve().</span>
@@ -2188,18 +2187,18 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
 run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-number">80</span>)            <span class="hljs-comment"># Runs globally.</span>
 </code></pre></div>
 
-<div><h3 id="staticrequest">Static Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@route('/img/&lt;image&gt;')</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_image</span><span class="hljs-params">(image)</span>:</span>
-    <span class="hljs-keyword">return</span> static_file(image, <span class="hljs-string">'img_dir/'</span>, mimetype=<span class="hljs-string">'image/png'</span>)
+<div><h3 id="staticrequest">Static Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@route('/img/&lt;filename&gt;')</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_file</span><span class="hljs-params">(filename)</span>:</span>
+    <span class="hljs-keyword">return</span> static_file(filename, root=<span class="hljs-string">'img_dir/'</span>)
 </code></pre></div>
 
 <div><h3 id="dynamicrequest">Dynamic Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@route('/&lt;sport&gt;')</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_page</span><span class="hljs-params">(sport)</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_html</span><span class="hljs-params">(sport)</span>:</span>
     <span class="hljs-keyword">return</span> template(<span class="hljs-string">'&lt;h1&gt;{{title}}&lt;/h1&gt;'</span>, title=sport)
 </code></pre></div>
 
 <div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@post('/&lt;sport&gt;/odds')</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">odds_handler</span><span class="hljs-params">(sport)</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_json</span><span class="hljs-params">(sport)</span>:</span>
     team = request.forms.get(<span class="hljs-string">'team'</span>)
     home_odds, away_odds = <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>
     response.headers[<span class="hljs-string">'Content-Type'</span>] = <span class="hljs-string">'application/json'</span>
@@ -2390,17 +2389,18 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 &lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y), fill=<span class="hljs-keyword">None</span>)
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>, joint=<span class="hljs-keyword">None</span>) 
-&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg, fill=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2 [, ...]), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>)
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2), fill=<span class="hljs-keyword">None</span>, outline=<span class="hljs-keyword">None</span>, width=<span class="hljs-number">0</span>)
+<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y))
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))
+&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg)
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2 [, ...]))
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the secondary color.</strong></li>
-<li><strong>Color can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
+<li><strong>Colors can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
@@ -3017,7 +3017,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 21, 2021</aside>
+    <aside>October 22, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
