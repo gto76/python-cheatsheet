@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 20, 2021</aside>
+    <aside>October 21, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2440,7 +2440,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
 <li><strong>In a stereo signal, the first sample of a frame belongs to the left channel.</strong></li>
 <li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.</strong></li>
-<li><strong>If sample width is one, then the integer should be encoded unsigned.</strong></li>
+<li><strong>If sample width is one byte, then the integer should be encoded unsigned.</strong></li>
 <li><strong>For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓
@@ -2539,7 +2539,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 
 <div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Floats get truncated into ints.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft.</span>
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft. Same.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((x, y))                    <span class="hljs-comment"># Use move_ip() to move in place.</span>
 </code></pre></div>
 
@@ -2589,7 +2589,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
         pg.init()
-        <span class="hljs-keyword">return</span> pg.display.set_mode(<span class="hljs-number">2</span> * [SIZE*<span class="hljs-number">16</span>])
+        <span class="hljs-keyword">return</span> pg.display.set_mode((SIZE*<span class="hljs-number">16</span>, SIZE*<span class="hljs-number">16</span>))
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_images</span><span class="hljs-params">()</span>:</span>
         url = <span class="hljs-string">'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'</span>
         img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
@@ -2768,7 +2768,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
 ┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ A series is treated as a ┃
-┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. Use l.append(r)  ┃
+┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. Use l.append(sr) ┃
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │ to add a row instead.    ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
@@ -3017,7 +3017,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 20, 2021</aside>
+    <aside>October 21, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

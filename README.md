@@ -2825,7 +2825,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**
 * **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
-* **If sample width is one, then the integer should be encoded unsigned.**
+* **If sample width is one byte, then the integer should be encoded unsigned.**
 * **For all other sizes, the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
@@ -2949,7 +2949,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```python
 <Rect> = pg.Rect(x, y, width, height)           # Floats get truncated into ints.
 <int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
-<tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft.
+<tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft. Same.
 <Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in place.
 ```
 
@@ -3014,7 +3014,7 @@ SIZE, MAX_SPEED = 50, P(5, 10)                  # Screen size, Speed limit
 def main():
     def get_screen():
         pg.init()
-        return pg.display.set_mode(2 * [SIZE*16])
+        return pg.display.set_mode((SIZE*16, SIZE*16))
     def get_images():
         url = 'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'
         img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
@@ -3230,7 +3230,7 @@ c  6  7
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
 |           join=…)      | b  3   4   .  |     4      |            | A series is treated as a |
-|                        | b  .   4   5  |     4      |            | column. Use l.append(r)  |
+|                        | b  .   4   5  |     4      |            | column. Use l.append(sr) |
 |                        | c  .   6   7  |     6      |            | to add a row instead.    |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |

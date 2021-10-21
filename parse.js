@@ -350,7 +350,7 @@ const DIAGRAM_15_B =
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
   "┃           join=…)      │ b  3   4   .  │     4      │            │ A series is treated as a ┃\n" +
-  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(r)  ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(sr) ┃\n" +
   "┃                        │ c  .   6   7  │     6      │            │ to add a row instead.    ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
