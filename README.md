@@ -2590,7 +2590,7 @@ Line #         Mem usage      Increment   Line Contents
 ```
 
 ### Call Graph
-#### Generates a PNG image of a call graph with highlighted bottlenecks:
+#### Generates a PNG image of the call graph with highlighted bottlenecks:
 ```python
 # $ pip3 install pycallgraph2
 from pycallgraph2 import output, PyCallGraph
@@ -2742,8 +2742,8 @@ from PIL import Image
 #### Creates a PNG image of a rainbow gradient:
 ```python
 WIDTH, HEIGHT = 100, 100
-size = WIDTH * HEIGHT
-hues = (255 * i/size for i in range(size))
+n_pixels = WIDTH * HEIGHT
+hues = (255 * i/n_pixels for i in range(n_pixels))
 img = Image.new('HSV', (WIDTH, HEIGHT))
 img.putdata([(int(h), 255, 255) for h in hues])
 img.convert('RGB').save('test.png')
@@ -3064,13 +3064,13 @@ def stop_on_collision(spd, bounds):
              y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
 
 def draw(screen, images, mario, tiles, pressed):
-    def get_frame_index():
+    def get_marios_image_index():
         if D.s not in get_boundaries(mario.rect, tiles):
             return 4
         return next(mario.frame_cycle) if {D.w, D.e} & pressed else 6
     screen.fill((85, 168, 255))
     mario.facing_left = (D.w in pressed) if {D.w, D.e} & pressed else mario.facing_left
-    screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
+    screen.blit(images[get_marios_image_index() + mario.facing_left * 9], mario.rect)
     for rect in tiles:
         screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
     pg.display.flip()
@@ -3387,7 +3387,7 @@ df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
 line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
-#### Confirmed covid cases, Dow Jones, gold, and Bitcoin price:
+#### Confirmed covid cases, Dow Jones, Gold, and Bitcoin price:
 
 ![Covid Cases](web/covid_cases.png)
 <div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div>
