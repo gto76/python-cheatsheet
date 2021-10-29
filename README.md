@@ -308,7 +308,7 @@ String
 ```python
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
-<list> = <str>.splitlines(keepends=False)    # Splits on [\n\r\f\v\x1c\x1d\x1e\x85…] and \r\n.
+<list> = <str>.splitlines(keepends=False)    # On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.
 <str>  = <str>.join(<coll_of_strings>)       # Joins elements using string as a separator.
 ```
 
@@ -329,7 +329,7 @@ String
 <str>  = chr(<int>)                          # Converts int to Unicode char.
 <int>  = ord(<str>)                          # Converts Unicode char to int.
 ```
-* **Also: `'lstrip()'`, `'rstrip()'`.**
+* **Also: `'lstrip()'`, `'rstrip()'` and `'rsplit()'`.**
 * **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
 
 ### Property Methods
@@ -344,7 +344,7 @@ String
 | isdecimal()   |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
-* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v…]'`.**
+* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85…]'`.**
 
 
 Regex
@@ -377,7 +377,7 @@ import re
 
 ### Special Sequences
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'`.**
+* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
 * **Use a capital letter for negation.**
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.

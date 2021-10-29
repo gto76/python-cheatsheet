@@ -449,7 +449,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
-&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># Splits on [\n\r\f\v\x1c\x1d\x1e\x85…] and \r\n.</span>
+&lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.</span>
 &lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as a separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains a substring.</span>
@@ -465,7 +465,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts Unicode char to int.</span>
 </code></pre>
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code>.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'lstrip()'</span></code>, <code class="python hljs"><span class="hljs-string">'rstrip()'</span></code> and <code class="python hljs"><span class="hljs-string">'rsplit()'</span></code>.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'lower()'</span></code>, <code class="python hljs"><span class="hljs-string">'upper()'</span></code>, <code class="python hljs"><span class="hljs-string">'capitalize()'</span></code> and <code class="python hljs"><span class="hljs-string">'title()'</span></code>.</strong></li>
 </ul>
 <div><h3 id="propertymethods">Property Methods</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
@@ -480,7 +480,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'isspace()'</span></code> checks for <code class="python hljs"><span class="hljs-string">'[ \t\n\r\f\v…]'</span></code>.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'isspace()'</span></code> checks for <code class="python hljs"><span class="hljs-string">'[ \t\n\r\f\v\x1c-\x1f\x85…]'</span></code>.</strong></li>
 </ul>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
 &lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
@@ -508,7 +508,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <div><h3 id="specialsequences">Special Sequences</h3><ul>
 <li><strong>By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
-<li><strong>As shown below, it restricts special sequence matches to the first 128 characters and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code>.</strong></li>
+<li><strong>As shown below, it restricts special sequence matches to the first 128 characters and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code> (the so-called separator characters).</strong></li>
 <li><strong>Use a capital letter for negation.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Matches decimal characters.</span>
 <span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Matches alphanumerics and underscore.</span>
