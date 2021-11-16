@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>October 30, 2021</aside>
+    <aside>November 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -253,16 +253,16 @@ pre.prettyprint {
     main()
 </code></pre></div>
 
-<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = &lt;list&gt;[from_inclusive : to_exclusive : ±step_size]
+<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = &lt;list&gt;[&lt;slice&gt;]       <span class="hljs-comment"># Or: &lt;list&gt;[from_inclusive : to_exclusive : ±step]</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;list&gt;.append(&lt;el&gt;)            <span class="hljs-comment"># Or: &lt;list&gt; += [&lt;el&gt;]</span>
 &lt;list&gt;.extend(&lt;collection&gt;)    <span class="hljs-comment"># Or: &lt;list&gt; += &lt;collection&gt;</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;.sort()
-&lt;list&gt;.reverse()
-&lt;list&gt; = sorted(&lt;collection&gt;)
-&lt;iter&gt; = reversed(&lt;list&gt;)
+<pre><code class="python language-python hljs">&lt;list&gt;.sort()                  <span class="hljs-comment"># Sorts in ascending order.</span>
+&lt;list&gt;.reverse()               <span class="hljs-comment"># Reverses the list in-place.</span>
+&lt;list&gt; = sorted(&lt;collection&gt;)  <span class="hljs-comment"># Returns a new sorted list.</span>
+&lt;iter&gt; = reversed(&lt;list&gt;)      <span class="hljs-comment"># Returns reversed iterator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">sum_of_elements  = sum(&lt;collection&gt;)
 elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(list_a, list_b)]
@@ -723,8 +723,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTa.</span>
 </code></pre></div>
 
-<div><h3 id="format-1">Format</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
-<span class="hljs-meta">&gt;&gt;&gt; </span>dt = datetime.strptime(<span class="hljs-string">'2015-05-14 23:39:00.00 +0200'</span>, <span class="hljs-string">'%Y-%m-%d %H:%M:%S.%f %z'</span>)
+<div><h3 id="format-1">Format</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>dt = datetime.strptime(<span class="hljs-string">'2015-05-14 23:39:00.00 +0200'</span>, <span class="hljs-string">'%Y-%m-%d %H:%M:%S.%f %z'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>dt.strftime(<span class="hljs-string">"%A, %dth of %B '%y, %I:%M%p %Z"</span>)
 <span class="hljs-string">"Thursday, 14th of May '15, 11:39PM UTC+02:00"</span>
 </code></pre></div>
@@ -733,10 +732,11 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> only accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code. <code class="python hljs"><span class="hljs-string">'%z'</span></code> also accepts <code class="python hljs"><span class="hljs-string">'±HH:MM'</span></code>.</strong></li>
 <li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
-<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt;   ± &lt;TD&gt;                  <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
-&lt;TD&gt;     = &lt;D/DTn&gt;  - &lt;D/DTn&gt;               <span class="hljs-comment"># Returns the difference, ignoring time jumps.</span>
-&lt;TD&gt;     = &lt;DTa&gt;    - &lt;DTa&gt;                 <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
-&lt;TD&gt;     = &lt;DT_UTC&gt; - &lt;DT_UTC&gt;              <span class="hljs-comment"># Convert DTs to UTC to get the actual delta.</span>
+<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt;  ± &lt;TD&gt;                   <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
+&lt;TD&gt;     = &lt;D/DTn&gt; - &lt;D/DTn&gt;                <span class="hljs-comment"># Returns the difference, ignoring time jumps.</span>
+&lt;TD&gt;     = &lt;DTa&gt;   - &lt;DTa&gt;                  <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
+&lt;TD&gt;     = &lt;TD&gt;    * &lt;real&gt;                 <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;</span>
+&lt;float&gt;  = &lt;TD&gt;    / &lt;TD&gt;                   <span class="hljs-comment"># How many weeks/years there are in TD. Also '//'.</span>
 </code></pre></div>
 
 <div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">&lt;function&gt;(&lt;positional_args&gt;)                  <span class="hljs-comment"># f(0, 0)</span>
@@ -3020,7 +3020,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 30, 2021</aside>
+    <aside>November 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

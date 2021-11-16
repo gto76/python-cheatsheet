@@ -29,7 +29,7 @@ if __name__ == '__main__':     # Runs main() if file wasn't imported.
 List
 ----
 ```python
-<list> = <list>[from_inclusive : to_exclusive : ±step_size]
+<list> = <list>[<slice>]       # Or: <list>[from_inclusive : to_exclusive : ±step]
 ```
 
 ```python
@@ -38,10 +38,10 @@ List
 ```
 
 ```python
-<list>.sort()
-<list>.reverse()
-<list> = sorted(<collection>)
-<iter> = reversed(<list>)
+<list>.sort()                  # Sorts in ascending order.
+<list>.reverse()               # Reverses the list in-place.
+<list> = sorted(<collection>)  # Returns a new sorted list.
+<iter> = reversed(<list>)      # Returns reversed iterator.
 ```
 
 ```python
@@ -643,7 +643,6 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Format
 ```python
->>> from datetime import datetime
 >>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
@@ -653,10 +652,11 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Arithmetics
 ```python
-<D/DT>   = <D/DT>   ± <TD>                  # Returned datetime can fall into missing hour.
-<TD>     = <D/DTn>  - <D/DTn>               # Returns the difference, ignoring time jumps.
-<TD>     = <DTa>    - <DTa>                 # Ignores time jumps if they share tzinfo object.
-<TD>     = <DT_UTC> - <DT_UTC>              # Convert DTs to UTC to get the actual delta.
+<D/DT>   = <D/DT>  ± <TD>                   # Returned datetime can fall into missing hour.
+<TD>     = <D/DTn> - <D/DTn>                # Returns the difference, ignoring time jumps.
+<TD>     = <DTa>   - <DTa>                  # Ignores time jumps if they share tzinfo object.
+<TD>     = <TD>    * <real>                 # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>
+<float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also '//'.
 ```
 
 
