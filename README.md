@@ -1046,7 +1046,7 @@ class <class_name>:
 ```
 * **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be hashable, all attributes must be hashable and frozen must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Argument 'default_factory' can be any [callable](#callable).**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 #### Inline:
@@ -1906,7 +1906,7 @@ with <conn>:                                    # Exits the block with commit() 
 # $ pip3 install mysql-connector
 from mysql import connector
 <conn>   = connector.connect(host=<str>, …)     # `user=<str>, password=<str>, database=<str>`.
-<cursor> = <conn>.cursor()                      # Only cursor has execute method.
+<cursor> = <conn>.cursor()                      # Only cursor has execute() method.
 <cursor>.execute('<query>')                     # Can raise a subclass of connector.Error.
 <cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
@@ -2951,7 +2951,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <Rect> = pg.Rect(x, y, width, height)           # Floats get truncated into ints.
 <int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
 <tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft. Same.
-<Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in place.
+<Rect> = <Rect>.move((x, y))                    # Use move_ip() to move in-place.
 ```
 
 ```python
