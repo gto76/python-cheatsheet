@@ -2147,7 +2147,7 @@ union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 last_element     = op.methodcaller('pop')(<list>)
 ```
 * **Functions and\_() and or\_() correspond to operators '&' and '|'.**
-* **They only work on objects with defined and() and or() special methods, ie. ints and sets.**
+* **They only work on objects with defined and() and or() special methods, i.e. ints and sets.**
 
 
 Introspection
