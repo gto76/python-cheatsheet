@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>November 17, 2021</aside>
+    <aside>November 19, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1916,8 +1916,12 @@ sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hlj
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
-last_el          = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
+last_element     = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
+<ul>
+<li><strong>Functions and_() and or_() correspond to operators '&amp;' and '|'.</strong></li>
+<li><strong>They only work on objects with defined and() and or() special methods, ie. ints and sets.</strong></li>
+</ul>
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
 &lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables. Also locals().</span>
 &lt;dict&gt; = globals()                         <span class="hljs-comment"># Dict of global variables.</span>
@@ -3020,7 +3024,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>November 17, 2021</aside>
+    <aside>November 19, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

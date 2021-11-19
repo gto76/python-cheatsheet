@@ -2144,8 +2144,10 @@ sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
-last_el          = op.methodcaller('pop')(<list>)
+last_element     = op.methodcaller('pop')(<list>)
 ```
+* **Functions and\_() and or\_() correspond to operators '&' and '|'.**
+* **They only work on objects with defined and() and or() special methods, ie. ints and sets.**
 
 
 Introspection
