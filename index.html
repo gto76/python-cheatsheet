@@ -633,9 +633,9 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;str&gt; = bin(&lt;int&gt;)                       <span class="hljs-comment"># Returns '[-]0b&lt;bin&gt;'.</span>
 </code></pre></div>
 
-<div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                    <span class="hljs-comment"># And</span>
-&lt;int&gt; = &lt;int&gt; | &lt;int&gt;                    <span class="hljs-comment"># Or</span>
-&lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                    <span class="hljs-comment"># Xor (0 if both bits equal)</span>
+<div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                    <span class="hljs-comment"># And: `0b1100 &amp; 0b1010 == 0b1000`.</span>
+&lt;int&gt; = &lt;int&gt; | &lt;int&gt;                    <span class="hljs-comment"># Or:  `0b1100 | 0b1010 == 0b1110`.</span>
+&lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                    <span class="hljs-comment"># Xor: `0b1100 ^ 0b1010 == 0b0110`.</span>
 &lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                  <span class="hljs-comment"># Left shift (&gt;&gt; for right)</span>
 &lt;int&gt; = ~&lt;int&gt;                           <span class="hljs-comment"># Not (also: -&lt;int&gt; - 1)</span>
 </code></pre></div>
