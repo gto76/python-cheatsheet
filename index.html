@@ -1022,9 +1022,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>el = MyClass()
-<span class="hljs-meta">&gt;&gt;&gt; </span>el.a = <span class="hljs-number">123</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>el.a
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>obj = MyClass()
+<span class="hljs-meta">&gt;&gt;&gt; </span>obj.a = <span class="hljs-number">123</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>obj.a
 <span class="hljs-number">123</span>
 </code></pre>
 <div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that automatically generates init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field

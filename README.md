@@ -1027,9 +1027,9 @@ class MyClass:
 ```
 
 ```python
->>> el = MyClass()
->>> el.a = 123
->>> el.a
+>>> obj = MyClass()
+>>> obj.a = 123
+>>> obj.a
 123
 ```
 
