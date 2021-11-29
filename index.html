@@ -226,7 +226,7 @@ pre.prettyprint {
 
 <body>
   <header>
-    <aside>November 19, 2021</aside>
+    <aside>November 29, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -273,6 +273,7 @@ product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
+<li><strong>For details about built-in functions sorted(), min() and max() see <a href="#sortable">sortable</a>.</strong></li>
 <li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
@@ -1065,6 +1066,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>.</strong></li>
 <li><strong>That means all objects compare not equal by default.</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted.</strong></li>
+<li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1097,7 +1099,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="sortable">Sortable</h3><ul>
-<li><strong>With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.</strong></li>
+<li><strong>With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.</strong></li>
+<li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
+<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all elements being equal.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
 <span class="hljs-meta">@total_ordering</span>
@@ -1202,7 +1206,7 @@ Hello World!
 <div><h3 id="collection">Collection</h3><ul>
 <li><strong>Only required methods are iter() and len().</strong></li>
 <li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
-<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'.</strong></li>
+<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only iterable objects that are not collections.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1905,7 +1909,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
-<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> and_, or_, xor, not_
+<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> and_, or_, xor, inv
 <span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> itemgetter, attrgetter, methodcaller
 </code></pre></div>
 
@@ -1919,8 +1923,9 @@ union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
 last_element     = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
 </code></pre>
 <ul>
-<li><strong>Functions and_() and or_() correspond to operators '&amp;' and '|'.</strong></li>
-<li><strong>They only work on objects with defined and() and or() special methods, i.e. ints and sets.</strong></li>
+<li><strong>Functions and_(), or_(), xor() and inv() correspond to operators '&amp;', '|', '^' and '~'.</strong></li>
+<li><strong>They only work on objects with and(), or(), xor() and invert() special methods.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'&lt;int&gt; = &lt;int&gt; &amp;|^ &lt;bool&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;bool&gt; = &lt;bool&gt; &amp;|^ &lt;bool&gt;'</span></code>.</strong></li>
 </ul>
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
 &lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables. Also locals().</span>
@@ -3024,7 +3029,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>November 19, 2021</aside>
+    <aside>November 29, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

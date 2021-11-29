@@ -53,6 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, el: out * el, <collection>)
 list_of_chars    = list(<str>)
 ```
+* **For details about built-in functions sorted(), min() and max() see [sortable](#sortable).**
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
@@ -1084,6 +1085,7 @@ Duck Types
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
 * **That means all objects compare not equal by default.**
 * **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted.**
+* **Ne() automatically works on any object that has eq() defined.**
 
 ```python
 class MyComparable:
@@ -1116,7 +1118,10 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods.**
+* **With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
+* **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
+* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all elements being equal.**
+
 ```python
 from functools import total_ordering
 
@@ -1230,7 +1235,7 @@ True
 ### Collection
 * **Only required methods are iter() and len().**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'.**
+* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only iterable objects that are not collections.**
 ```python
 class MyCollection:
     def __init__(self, a):
@@ -2133,7 +2138,7 @@ Operator
 ```python
 from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
 from operator import eq, ne, lt, le, gt, ge
-from operator import and_, or_, xor, not_
+from operator import and_, or_, xor, inv
 from operator import itemgetter, attrgetter, methodcaller
 ```
 
@@ -2146,8 +2151,9 @@ product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 last_element     = op.methodcaller('pop')(<list>)
 ```
-* **Functions and\_() and or\_() correspond to operators '&' and '|'.**
-* **They only work on objects with defined and() and or() special methods, i.e. ints and sets.**
+* **Functions and\_(), or\_(), xor() and inv() correspond to operators '&', '|', '^' and '~'.**
+* **They only work on objects with and(), or(), xor() and invert() special methods.**
+* **Also: `'<int> = <int> &|^ <bool>'` and `'<bool> = <bool> &|^ <bool>'`.**
 
 
 Introspection
