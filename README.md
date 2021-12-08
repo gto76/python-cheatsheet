@@ -17,8 +17,6 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
 
-**[`Back To Contents`](#Contents)**
-
 Main
 ----
 ```python
@@ -26,6 +24,7 @@ if __name__ == '__main__':     # Runs main() if file wasn't imported.
     main()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 List
 ----
@@ -66,6 +65,7 @@ list_of_chars    = list(<str>)
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Dictionary
 ----------
@@ -106,6 +106,7 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 ('blue', 3)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Set
 ---
@@ -140,6 +141,7 @@ Set
 <frozenset> = frozenset(<collection>)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Tuple
 -----
@@ -168,6 +170,7 @@ Point(x=1, y=2)
 ('x', 'y')
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Range
 -----
@@ -182,6 +185,7 @@ from_inclusive = <range>.start
 to_exclusive   = <range>.stop
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Enumerate
 ---------
@@ -190,6 +194,7 @@ for i, el in enumerate(<collection> [, i_start]):
     ...
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Iterator
 --------
@@ -221,6 +226,7 @@ from itertools import count, repeat, cycle, chain, islice
 <iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive, step_size`.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Generator
 ---------
@@ -240,6 +246,7 @@ def count(start, step):
 (10, 12, 14)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Type
 ----
@@ -299,6 +306,7 @@ True
 +--------------------+----------+----------+----------+----------+----------+
 ```
 
+**[`Back To Contents`](#Contents)**
 
 String
 ------
@@ -348,6 +356,7 @@ String
 ```
 * **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85…]'`.**
 
+**[`Back To Contents`](#Contents)**
 
 Regex
 -----
@@ -387,6 +396,7 @@ import re
 '\s' == '[ \t\n\r\f\v]'                        # Matches whitespaces.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Format
 ------
@@ -480,6 +490,7 @@ Format
 {90:X}                                   # '5A'
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Numbers
 -------
@@ -540,6 +551,7 @@ from random import random, randint, choice, shuffle, gauss, seed
 <int> = ~<int>                           # Not (also: -<int> - 1)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Combinatorics
 -------------
@@ -582,6 +594,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
  ('c', 'a'), ('c', 'b')]                     # c x  x  .
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Datetime
 --------
@@ -661,6 +674,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also '//'.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Arguments
 ---------
@@ -678,6 +692,7 @@ def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Splat Operator
 --------------
@@ -746,6 +761,7 @@ def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 head, *body, tail = <collection>
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Inline
 ------
@@ -811,6 +827,7 @@ Creature = make_dataclass('Creature', ['loc', 'dir'])
 creature = Creature(point, direction)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Imports
 -------
@@ -823,6 +840,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
 
+**[`Back To Contents`](#Contents)**
 
 Closure
 -------
@@ -880,6 +898,7 @@ def get_counter():
 (1, 2, 3)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Decorator
 ---------
@@ -944,6 +963,7 @@ def add(x, y):
     return x + y
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Class
 -----
@@ -1077,6 +1097,7 @@ from copy import copy, deepcopy
 <object> = deepcopy(<object>)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Duck Types
 ----------
