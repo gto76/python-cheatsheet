@@ -409,6 +409,29 @@ const DIAGRAM_18_B =
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 
+const DARK_THEME_SCRIPT =
+  '<script>\n' +
+  '  // Changes the image and link to theme if URL ends with "index.html?dark=true". \n' +
+  '  if (window.location.search.search(/[?&]theme=dark/) !== -1) {\n' +
+  '\n' +
+  '    var link_to_theme = document.createElement("a")\n' +
+  '    link_to_theme.href = "index.html"\n' +
+  '    link_to_theme.text = "Switch to light theme"\n' +
+  '    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)\n' +
+  '\n' +
+  '    var img_dark = document.createElement("img");\n' +
+  '    img_dark.src = "web/image_orig_blue6.png";\n' +
+  '    img_dark.alt = "Monthy Python";\n' +
+  '    if (window.location.search.search(/[?&]theme=dark2/) !== -1) {\n' +
+  '      img_dark.style = "width: 910px;";\n' +
+  '    } else {\n' +
+  '      img_dark.style = "width: 960px;";\n' +
+  '    }\n' +
+  '    document.getElementsByClassName("banner")[1].firstChild.replaceWith(img_dark);\n' +
+  '  }\n' +
+  '</script>';
+
+
 function main() {
   const html = getMd();
   initDom(html);
@@ -436,6 +459,7 @@ function initDom(html) {
 }
 
 function modifyPage() {
+  addDarkThemeScript();
   removeOrigToc();
   addToc();
   insertLinks();
@@ -444,6 +468,14 @@ function modifyPage() {
   highlightCode();
   fixPandasDiagram();
   removePlotImages();
+}
+
+function addDarkThemeScript() {
+
+  // const script = $.parseHTML(DARK_THEME_SCRIPT);
+  // $('banner').second().after(script);
+  // console.log(script)
+  $('#main').before(DARK_THEME_SCRIPT);
 }
 
 function removeOrigToc() {

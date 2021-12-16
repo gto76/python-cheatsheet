@@ -7,8 +7,26 @@
   <title>Comprehensive Python Cheatsheet</title>
   <meta name="description" content="Exhaustive, simple, beautiful and concise. A truly Pythonic cheat sheet about Python programming language.">
   <link rel="icon" href="web/favicon.png">
+
   <link rel="stylesheet" href="web/default.min.css">
-  <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+  <link rel="stylesheet" href="web/style.css">
+
+  <script>
+    // Checks if URL ends with "index.html?dark=true"
+    if (window.location.search.search(/[?&]theme=dark2/) !== -1) {
+      document.write("<link rel=\"stylesheet\" href=\"web/default_dark2.min.css\">");
+      document.write("<link rel=\"stylesheet\" href=\"web/style_dark2.css\">");
+    }   
+    else if (window.location.search.search(/[?&]theme=dark1/) !== -1) {
+      document.write("<link rel=\"stylesheet\" href=\"web/default_dark1.min.css\">");
+      document.write("<link rel=\"stylesheet\" href=\"web/style_dark1.css\">");
+    }    
+    else if (window.location.search.search(/[?&]theme=dark/) !== -1) {
+      document.write("<link rel=\"stylesheet\" href=\"web/default_dark.min.css\">");
+      document.write("<link rel=\"stylesheet\" href=\"web/style_dark.css\">");
+    }
+  </script>
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Comprehensive Python Cheatsheet">
@@ -30,209 +48,34 @@
   <meta name="viewport" id="viewport-meta">
 </head>
 
-<style>
-@import url(web/style.css);
-
-@font-face {font-family: "Menlo Regular";
-  src: url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff2") format("woff2"), /* chrome、firefox */
-  url("web\\OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff") format("woff");
-}
-
-.join,
-.link,
-.node rect {
-  fill: none;
-  stroke: #636363;
-  stroke-width: 1.5px;
-}
-
-.link {
-  stroke: #969696;
-}
-
-.node rect {
-  fill: white;
-}
-
-.link path,
-.node rect,
-.node text,
-.join {
-  -webkit-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
-  -moz-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
-  -ms-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
-  -o-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
-  transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
-}
-
-.node .element rect {
-  fill: #bdbdbd;
-  stroke: none;
-}
-
-.node .null rect {
-  fill: none;
-  stroke: none;
-}
-
-.node .null text {
-  fill: #636363;
-}
-
-.node .selection rect {
-  stroke: #e6550d;
-}
-
-.node .data rect {
-  stroke: #3182bd;
-}
-
-.node .datum rect {
-  fill: #d9d9d9;
-  stroke: none;
-}
-
-.node .code text {
-  font-family: monospace;
-}
-
-.node .key rect {
-  fill: #a1d99b;
-  stroke: none;
-}
-
-.link .to-key,
-.join {
-  stroke: #a1d99b;
-}
-
-.join {
-  stroke-dasharray: 2,2;
-}
-
-.link .to-null {
-  stroke-dasharray: .5,3.5;
-  stroke-linecap: round;
-}
-
-.link .from-data {
-  stroke: #3182bd;
-}
-
-.play circle {
-  fill: #fff;
-  stroke: #000;
-  stroke-width: 3px;
-}
-
-.play:hover path {
-  fill: #f00;
-}
-
-.play.mousedown circle {
-  fill: #f00;
-}
-
-.play.mousedown path {
-  fill: #fff;
-}
-
-.play rect {
-  fill: none;
-  pointer-events: all;
-  cursor: pointer;
-}
-
-code span {
-  -webkit-transition: background 250ms linear;
-  -moz-transition: background 250ms linear;
-  -ms-transition: background 250ms linear;
-  -o-transition: background 250ms linear;
-  transition: background 250ms linear;
-}
-
-pre.prettyprint, code.prettyprint {
-  background-color: #222;
-  border-radius: 8px;
-  font-size: 15px;
-}
-
-pre.prettyprint {
-  width: 90%;
-  margin: 0.5em;
-  padding: 1em;
-  white-space: pre-wrap;
-}
-
-#return-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.2);
-  width: 50px;
-  height: 50px;
-  display: block;
-  text-decoration: none;
-  -webkit-border-radius: 35px;
-  -moz-border-radius: 35px;
-  border-radius: 35px;
-  display: none;
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-#return-to-top i {
-  color: #fff;
-  margin: 0;
-  position: relative;
-  left: 16px;
-  top: 13px;
-  font-size: 19px;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-#return-to-top:hover {
-  background: rgba(0, 0, 0, 0.35);
-}
-
-#return-to-top:hover i {
-   color: #f0f0f0;
-}
-
-@media print {
-  .pagebreak { 
-    page-break-before: always; 
-  } 
-  div {
-    page-break-inside: avoid;
-  }
-  pre {
-    page-break-inside: avoid;
-  }
-}
-
-.modebar{
-  display: none !important;
-}
-</style>
-
 <body>
   <header>
-    <aside>November 29, 2021</aside>
+    <aside>December 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
   <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
-   <div><h1 id="comprehensivepythoncheatsheet">Comprehensive Python Cheatsheet</h1><p class="banner"><sup><a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a> or <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a>.
-</sup></p><p class="banner"><img src="web/image_888.jpeg" alt="Monty Python"></p><br><div><h2 id="toc"><a href="#toc" name="toc">#</a>Contents</h2><pre><code class="hljs bash" style="line-height: 1.3em;"><strong>ToC</strong> = {
+   <div><h1 id="comprehensivepythoncheatsheet">Comprehensive Python Cheatsheet</h1><p class="banner"><sup><a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark2">Switch to dark theme</a>.
+</sup></p><p class="banner"><img src="web/image_888.jpeg" alt="Monty Python"></p><script>
+  // Changes the image and link to theme if URL ends with "index.html?dark=true". 
+  if (window.location.search.search(/[?&]theme=dark/) !== -1) {
+
+    var link_to_theme = document.createElement("a")
+    link_to_theme.href = "index.html"
+    link_to_theme.text = "Switch to light theme"
+    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)
+
+    var img_dark = document.createElement("img");
+    img_dark.src = "web/image_orig_blue6.png";
+    img_dark.alt = "Monthy Python";
+    if (window.location.search.search(/[?&]theme=dark2/) !== -1) {
+      img_dark.style = "width: 910px;";
+    } else {
+      img_dark.style = "width: 960px;";
+    }
+    document.getElementsByClassName("banner")[1].firstChild.replaceWith(img_dark);
+  }
+</script><br><div><h2 id="toc"><a href="#toc" name="toc">#</a>Contents</h2><pre><code class="hljs bash" style="line-height: 1.3em;"><strong>ToC</strong> = {
     <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Imports</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],
@@ -1039,7 +882,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <ul>
-<li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
+<li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be hashable, all attributes must be hashable and frozen must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
@@ -2970,15 +2813,15 @@ print(<span class="hljs-string">f'Hello <span class="hljs-subst">{values[<span c
 <div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
-</ul><pre><code class="python language-python hljs">cdef &lt;type&gt; &lt;var_name&gt; = &lt;el&gt;
-cdef &lt;type&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
-cdef &lt;type/void&gt; &lt;func_name&gt;(&lt;type&gt; &lt;arg_name_1&gt;, ...):
+</ul><pre><code class="python language-python hljs">cdef &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
+cdef &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
+cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name_1&gt;, ...):
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">cdef <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
-    cdef public &lt;type&gt; &lt;attr_name&gt;
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>
+    cdef public &lt;ctype&gt; &lt;attr_name&gt;
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype&gt; &lt;arg_name&gt;)</span>:</span>
         self.&lt;attr_name&gt; = &lt;arg_name&gt;
 </code></pre>
 <pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
@@ -3029,7 +2872,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>November 29, 2021</aside>
+    <aside>December 16, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

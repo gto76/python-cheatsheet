@@ -1,6 +1,6 @@
 Comprehensive Python Cheatsheet
 ===============================
-<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
+<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet), [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions) or [Switch to dark theme](index.html?theme=dark2).
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
@@ -1045,7 +1045,7 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
-* **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
+* **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be hashable, all attributes must be hashable and frozen must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
 * **For attributes of arbitrary type use `'typing.Any'`.**
@@ -3475,15 +3475,15 @@ import <cython_script>
 * **Script needs to be saved with a `'pyx'` extension.**
 
 ```python
-cdef <type> <var_name> = <el>
-cdef <type>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
-cdef <type/void> <func_name>(<type> <arg_name_1>, ...):
+cdef <ctype> <var_name> = <el>
+cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
+cdef <ctype/void> <func_name>(<ctype> <arg_name_1>, ...):
 ```
 
 ```python
 cdef class <class_name>:
-    cdef public <type> <attr_name>
-    def __init__(self, <type> <arg_name>):
+    cdef public <ctype> <attr_name>
+    def __init__(self, <ctype> <arg_name>):
         self.<attr_name> = <arg_name>
 ```
 

@@ -3,8 +3,8 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
 
 .ocks-org body {
-  background: #fcfcfa;
-  color: #333;
+  background: hsl(206deg 47% 9%);
+  color: hsl(0deg 0% 72%);
   font-family: "PT Serif", serif;
   margin: 1em auto 4em auto;
   position: relative;
@@ -26,7 +26,7 @@
 .ocks-org h2,
 .ocks-org h3,
 .ocks-org h4 {
-  color: #000;
+  color: hsl(0deg 1% 77%);
 }
 
 .ocks-org header,
@@ -35,7 +35,7 @@
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 67px;
   font-weight: 300;
   letter-spacing: -2px;
   margin: 0.3em 0 0.1em 0;
@@ -52,7 +52,7 @@ h2 {
 
 h2 a[name],
 h2 a[id] {
-  color: #ccc;
+  color: hsl(0deg 0% 75% / 49%);
   padding-right: 0.3em;
 }
 
@@ -134,6 +134,7 @@ textarea {
 
 code {
   line-height: 1em;
+  color: hsl(0deg 0% 96% / 65%);
 }
 
 textarea {
@@ -141,9 +142,13 @@ textarea {
 }
 
 pre {
-  border-left: solid 2px #ccc;
+  border-left: solid 2px hsl(206deg 34% 14%);
   padding-left: 18px;
-  margin: 2em 0 2em 0;
+  margin: 1em 0 1em 0;
+  background: hsl(206deg 34% 14%);
+  border-radius: 6px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .html .value,
@@ -329,6 +334,7 @@ ul {
 
 .node .code text {
   font-family: monospace;
+  color: hsl(0deg 0% 74%)
 }
 
 .node .key rect {
