@@ -3384,8 +3384,8 @@ from plotly.express import line
 ```python
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
                     usecols=['iso_code', 'date', 'total_deaths', 'population'])
-continents = pd.read_csv('https://datahub.io/JohnSnowLabs/country-and-continent-codes-' + \
-                         'list/r/country-and-continent-codes-list-csv.csv',
+continents = pd.read_csv('https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'
+                         '846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv',
                          usecols=['Three_Letter_Country_Code', 'Continent_Name'])
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
 df = df.groupby(['Continent_Name', 'date']).sum().reset_index()

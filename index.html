@@ -2734,8 +2734,8 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 
 <div><h4 id="coviddeathsbycontinent">Covid deaths by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
-continents = pd.read_csv(<span class="hljs-string">'https://datahub.io/JohnSnowLabs/country-and-continent-codes-'</span> + \
-                         <span class="hljs-string">'list/r/country-and-continent-codes-list-csv.csv'</span>,
+continents = pd.read_csv(<span class="hljs-string">'https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'</span>
+                         <span class="hljs-string">'846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv'</span>,
                          usecols=[<span class="hljs-string">'Three_Letter_Country_Code'</span>, <span class="hljs-string">'Continent_Name'</span>])
 df = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
 df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class="hljs-string">'date'</span>]).sum().reset_index()
