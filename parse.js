@@ -409,6 +409,8 @@ const DIAGRAM_18_B =
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 
+const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark2">Switch to dark theme</a>.\n';
+
 const DARK_THEME_SCRIPT =
   '<script>\n' +
   '  // Changes the image and link to theme if URL ends with "index.html?dark=true". \n' +
@@ -459,6 +461,7 @@ function initDom(html) {
 }
 
 function modifyPage() {
+  changeMenu();
   addDarkThemeScript();
   removeOrigToc();
   addToc();
@@ -470,11 +473,11 @@ function modifyPage() {
   removePlotImages();
 }
 
-function addDarkThemeScript() {
+function changeMenu() {
+  $('sup').first().html(MENU)
+}
 
-  // const script = $.parseHTML(DARK_THEME_SCRIPT);
-  // $('banner').second().after(script);
-  // console.log(script)
+function addDarkThemeScript() {
   $('#main').before(DARK_THEME_SCRIPT);
 }
 
@@ -617,7 +620,6 @@ function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
 }
-
 
 function updateDate(template) {
   const date = new Date();
