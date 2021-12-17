@@ -825,7 +825,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 
 Closure
 -------
-**We have a closure in Python when:**
+**We have/get a closure in Python when:**
 * **A nested function references a value of its enclosing function and then**
 * **the enclosing function returns the nested function.**
 
@@ -857,7 +857,7 @@ from functools import partial
 >>> multiply_by_3(10)
 30
 ```
-* **Partial is also useful in cases when function needs to be passed as an argument, because it enables us to set its arguments beforehand.**
+* **Partial is also useful in cases when function needs to be passed as an argument because it enables us to set its arguments beforehand.**
 * **A few examples being: `'defaultdict(<function>)'`, `'iter(<function>, to_exclusive)'` and dataclass's `'field(default_factory=<function>)'`.**
 
 ### Non-Local
@@ -968,8 +968,8 @@ class <name>:
 print(<el>)
 print(f'{<el>}')
 raise Exception(<el>)
-loguru.logger.debug(<el>)
 csv.writer(<file>).writerow([<el>])
+logging.warning(<el>)
 ```
 
 #### Repr() use cases:
@@ -977,7 +977,6 @@ csv.writer(<file>).writerow([<el>])
 print([<el>])
 print(f'{<el>!r}')
 >>> <el>
-loguru.logger.exception()
 Z = dataclasses.make_dataclass('Z', ['a']); print(Z(<el>))
 ```
 
@@ -1120,7 +1119,7 @@ class MyHashable:
 ### Sortable
 * **With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
-* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all elements being equal.**
+* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.**
 
 ```python
 from functools import total_ordering
@@ -3052,7 +3051,7 @@ def run(screen, images, mario, tiles):
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
-    x -= x // abs(x) if x else 0
+    x -= (x > 0) - (x < 0)
     y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (D.n in pressed) * -10
     mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
 

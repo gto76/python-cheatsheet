@@ -50,7 +50,7 @@
 
 <body>
   <header>
-    <aside>December 16, 2021</aside>
+    <aside>December 17, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -694,7 +694,7 @@ creature = Creature(point, direction)
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
 </ul>
-<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have a closure in Python when:</strong></p><ul>
+<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when:</strong></p><ul>
 <li><strong>A nested function references a value of its enclosing function and then</strong></li>
 <li><strong>the enclosing function returns the nested function.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
@@ -723,7 +723,7 @@ creature = Creature(point, direction)
 <span class="hljs-number">30</span>
 </code></pre>
 <ul>
-<li><strong>Partial is also useful in cases when function needs to be passed as an argument, because it enables us to set its arguments beforehand.</strong></li>
+<li><strong>Partial is also useful in cases when function needs to be passed as an argument because it enables us to set its arguments beforehand.</strong></li>
 <li><strong>A few examples being: <code class="python hljs"><span class="hljs-string">'defaultdict(&lt;function&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;function&gt;, to_exclusive)'</span></code> and dataclass's <code class="python hljs"><span class="hljs-string">'field(default_factory=&lt;function&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
@@ -818,14 +818,13 @@ creature = Creature(point, direction)
 <div><h4 id="strusecases">Str() use cases:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
 print(<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>)
 <span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
-loguru.logger.debug(&lt;el&gt;)
 csv.writer(&lt;file&gt;).writerow([&lt;el&gt;])
+logging.warning(&lt;el&gt;)
 </code></pre></div>
 
 <div><h4 id="reprusecases">Repr() use cases:</h4><pre><code class="python language-python hljs">print([&lt;el&gt;])
 print(<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
-loguru.logger.exception()
 Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print(Z(&lt;el&gt;))
 </code></pre></div>
 
@@ -943,7 +942,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <div><h3 id="sortable">Sortable</h3><ul>
 <li><strong>With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.</strong></li>
 <li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
-<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all elements being equal.</strong></li>
+<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
 <span class="hljs-meta">@total_ordering</span>
@@ -2472,7 +2471,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
-    x -= x // abs(x) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+    x -= (x &gt; <span class="hljs-number">0</span>) - (x &lt; <span class="hljs-number">0</span>)
     y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
     mario.spd = P(*[max(-limit, min(limit, s)) <span class="hljs-keyword">for</span> limit, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
 
@@ -2871,7 +2870,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 16, 2021</aside>
+    <aside>December 17, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
