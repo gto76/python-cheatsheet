@@ -3186,7 +3186,8 @@ if (document.getElementById("2a950764-39fc-416d-97fe-0a6226a3095f")) {
               "b": 0,
               "t": 24
             },
-            "paper_bgcolor": "rgba(0, 0, 0, 0)",
+            "paper_bgcolor": "rgba(255, 255, 255, 0.9)",
+            "plot_bgcolor": "rgba(255, 255, 255, 0.9)",
             "template": {
               "data": {
                 "bar": [
