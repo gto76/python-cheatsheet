@@ -36,6 +36,7 @@ def update_covid_deaths():
     f = line(df, x='Date', y='Total Deaths per Million', color='Continent')
     f.update_layout(margin=dict(t=24, b=0), paper_bgcolor='rgba(0, 0, 0, 0)')
     update_file('covid_deaths.js', f)
+    f.layout.paper_bgcolor = 'rgb(255, 255, 255)'
     write_to_png_file('covid_deaths.png', f, width=960, height=340)
 
 
@@ -44,6 +45,7 @@ def update_confirmed_cases():
         df = wrangle_data(*scrape_data())
         f = get_figure(df)
         update_file('covid_cases.js', f)
+        f.layout.paper_bgcolor = 'rgb(255, 255, 255)'
         write_to_png_file('covid_cases.png', f, width=960, height=315)
 
     def scrape_data():
