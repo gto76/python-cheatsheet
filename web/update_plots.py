@@ -58,7 +58,8 @@ def update_confirmed_cases():
                   '?period1=1579651200&period2=9999999999&interval=1d&events=history'
             df = pd.read_csv(url, usecols=['Date', 'Close'])
             return df.set_index('Date').Close
-        out = scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
+        out = [scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), 
+               scrape_yahoo('^DJI')]
         return map(pd.Series.rename, out, ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones'])
 
     def wrangle_data(covid, bitcoin, gold, dow):
@@ -66,9 +67,9 @@ def update_confirmed_cases():
         df = df.sort_index().interpolate()            # Sorts by date and interpolates NaN-s.
         yesterday = str(datetime.date.today() - datetime.timedelta(1))
         df = df.loc['2020-02-23':yesterday]           # Discards rows before '2020-02-23'.
-        df = round((df / df.iloc[0]) * 100, 2)        # Calculates percentages relative to day 1.
+        df = round((df / df.iloc[0]) * 100, 2)        # Calculates percentages relative to day 1
         df = df.join(covid)                           # Adds column with covid cases.
-        return df.sort_values(df.index[-1], axis=1)  # Sorts columns by last day's value.
+        return df.sort_values(df.index[-1], axis=1)   # Sorts columns by last day's value.
 
     def get_figure(df):
         figure = go.Figure()
