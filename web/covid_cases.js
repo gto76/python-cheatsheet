@@ -8,7 +8,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
           "data": [
             {
               "line": {
-                "color": "red"
+                "color": "#EF553B"
               },
               "name": "Total Cases",
               "x": [
@@ -1354,7 +1354,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
             },
             {
               "line": {
-                "color": "blue"
+                "color": "#636efa"
               },
               "name": "Bitcoin",
               "x": [
@@ -2700,7 +2700,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
             },
             {
               "line": {
-                "color": "green"
+                "color": "#00cc96"
               },
               "name": "Dow Jones",
               "x": [
@@ -4046,7 +4046,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
             },
             {
               "line": {
-                "color": "goldenrod"
+                "color": "#FFA15A"
               },
               "name": "Gold",
               "x": [

@@ -74,8 +74,8 @@ def update_confirmed_cases():
         figure = go.Figure()
         for col_name in reversed(df.columns):            
             yaxis = 'y1' if col_name == 'Total Cases' else 'y2'
-            colors = {'Total Cases': 'red', 'Bitcoin': 'blue', 'Gold': 'goldenrod', 
-                      'Dow Jones': 'green'}
+            colors = {'Total Cases': '#EF553B', 'Bitcoin': '#636efa', 'Gold': '#FFA15A', 
+                      'Dow Jones': '#00cc96'}
             trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis,
                                line=dict(color=colors[col_name]))
             figure.add_trace(trace)
