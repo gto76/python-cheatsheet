@@ -598,12 +598,11 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <D>  = date(year, month, day)
 <T>  = time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
 <DT> = datetime(year, month, day, hour=0, minute=0, second=0, ...)
-<TD> = timedelta(days=0, seconds=0, microseconds=0, milliseconds=0,
-                 minutes=0, hours=0, weeks=0)
+<TD> = timedelta(weeks=0, days=0, hours=0, minutes=0, seconds=0, ...)
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
+* **TD converts and normalizes args to ±days, seconds (< 86,400) and microseconds (< 1M).**
 
 ### Now
 ```python
@@ -3390,7 +3389,7 @@ continents = pd.read_csv('https://gist.githubusercontent.com/stevewithington/20a
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
 df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
-df = df[('2020-03-14' < df.date) & (df.date < '2020-11-25')]
+df = df[df.date > '2020-03-14']
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
 line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
@@ -3414,23 +3413,23 @@ def scrape_data():
         return df[df.location == 'World'].set_index('date').total_cases
     def scrape_yahoo(slug):
         url = f'https://query1.finance.yahoo.com/v7/finance/download/{slug}' + \
-              '?period1=1579651200&period2=1608850800&interval=1d&events=history'
+              '?period1=1579651200&period2=9999999999&interval=1d&events=history'
         df = pd.read_csv(url, usecols=['Date', 'Close'])
         return df.set_index('Date').Close
-    return scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
+    out = scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
+    return map(pd.Series.rename, out, ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones'])
 
 def wrangle_data(covid, bitcoin, gold, dow):
-    df = pd.concat([bitcoin, gold, dow], axis=1)
-    df = df.sort_index().interpolate()
-    df = df.rolling(10, min_periods=1, center=True).mean()
-    df = df.loc['2020-02-23':'2020-11-25']
-    df = (df / df.iloc[0]) * 100
-    return pd.concat([covid, df], axis=1, join='inner')
+    df = pd.concat([bitcoin, gold, dow], axis=1)  # Joins columns on dates.
+    df = df.sort_index().interpolate()            # Sorts by date and interpolates NaN-s.
+    df = df.loc['2020-02-23':]                    # Discards rows before '2020-02-23'.
+    df = (df / df.iloc[0]) * 100                  # Calculates percentages relative to day 1.
+    df = df.join(covid)                           # Adds column with covid cases.
+    return df.sort_values(df.index[-1], axis=1)   # Sorts columns by last day's value.
 
 def display_data(df):
-    df.columns = ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones']
     figure = go.Figure()
-    for col_name in df:
+    for col_name in reversed(df.columns):
         yaxis = 'y1' if col_name == 'Total Cases' else 'y2'
         trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
         figure.add_trace(trace)
