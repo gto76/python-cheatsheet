@@ -3436,7 +3436,8 @@ def display_data(df):
     figure.update_layout(
         yaxis1=dict(title='Total Cases', rangemode='tozero'),
         yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),
-        legend=dict(x=1.1)
+        legend=dict(x=1.1),
+        height=450
     ).show()
 
 if __name__ == '__main__':
