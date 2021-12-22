@@ -602,7 +602,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **TD converts and normalizes args to ±days, seconds (< 86,400) and microseconds (< 1M).**
+* **TD converts and normalizes args to ±days, seconds (< 86 400) and microseconds (< 1M).**
 
 ### Now
 ```python
