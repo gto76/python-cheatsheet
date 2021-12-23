@@ -148,23 +148,8 @@ def update_file(filename, figure):
     """
     Updates the file at `filename` with the plotly figure `figure`.
 
-    :param filename: The path to a JSON file containing a Plotly figure.
-    :type filename:
-    str, required.
-        The extension of the file must be .json or .js (for legacy reasons).
-
-        Note that if you are using JupyterLab and want to open
-    your updated 
-        HTML files in an external browser window then you should save your 
-        notebook as an HTML file instead of as a Jupyter notebook.
-    For more 
-        information see this guide on [using Jupyter with Google Colab](http://jupyter-
-    notebook.readthedocs.io/en/stable/examples/Notebook/Running%20Code.html#Running-code).
-
-         If you are not using JupyterLab then it is recommended
-    that you use .html for all types of notebooks so that they can be opened in any web browser, including Chrome, Firefox and Edge on Windows and macOS
-    without any extra configuration needed (see below for more details). This is because some browsers do not support JavaScript which is used by default
-    by Plotly's exporting functions to generate
+    :param filename: The path to a JSON file.
+    :param figure: The Plotly figure.
     """
     lines = read_file(filename)
     f_json = figure.to_json(pretty=True).replace('\n', '\n        ')
