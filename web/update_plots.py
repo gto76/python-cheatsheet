@@ -14,8 +14,7 @@ import re
 def main():
     """
     This function scrapes the data from the web and wrangles it into a pandas DataFrame.
-    It then creates an interactive plotly line graph of covid cases
-    in New York State.
+    It then creates an interactive plotly line graph of covid cases.
     """
     print('Updating covid deaths...')
     update_covid_deaths()
