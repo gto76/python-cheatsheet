@@ -25,6 +25,18 @@ MATCHES = {
 
 
 def main():
+    """
+    Replaces all occurrences of `from_` with `to_` in the file at the given path.
+
+    Args:
+        from_ (str): The string to be replaced.
+        to_ (str): The
+    replacement string.
+
+        index_path (Path): Path object representing the file that is being modified by this function call.  This parameter is not
+    optional, and it has a default value of None because we are required to pass it as an argument but we have no use for it in our code since we don't
+    need access to its attributes or methods while calling this function; therefore, there's no sensible default value for us to provide here.
+    """
     index_path = Path('..', 'index.html')
     lines = read_file(index_path)
     out = ''.join(lines)
