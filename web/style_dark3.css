@@ -1,0 +1,461 @@
+/* Copyright 2013 Michael Bostock. All rights reserved. Do not copy. */
+
+@import url(https://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
+
+.ocks-org body {
+  background: hsl(206deg 47% 9%);
+  color: hsl(249deg 11% 76%);
+  font-family: "PT Serif", serif;
+  margin: 1em auto 4em auto;
+  position: relative;
+  width: 960px;
+  padding: 1rem;
+}
+
+.ocks-org header,
+.ocks-org footer,
+.ocks-org aside,
+.ocks-org h1,
+.ocks-org h2,
+.ocks-org h3,
+.ocks-org h4 {
+  font-family: "PT Sans", sans-serif;
+}
+
+.ocks-org h1,
+.ocks-org h2,
+.ocks-org h3,
+.ocks-org h4 {
+  color: hsl(249deg 11% 75%);
+}
+
+.ocks-org header,
+.ocks-org footer {
+  color: #999999;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: -2px;
+  margin: 0.3em 0 0.1em 0;
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+h1,
+h2 {
+  text-rendering: optimizeLegibility;
+}
+
+h2 a[name],
+h2 a[id] {
+  color: hsl(249deg 3% 31%);
+  padding-right: 0.3em;
+}
+
+header,
+footer {
+  font-size: small;
+}
+
+.ocks-org header aside,
+.ocks-org footer aside {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.ocks-org header aside:after,
+.ocks-org footer aside:after {
+  padding-left: 0.5em;
+  content: "/";
+}
+
+footer {
+  margin-top: 6em;
+}
+
+h1 ~ aside {
+  font-size: small;
+  right: 0;
+  position: absolute;
+  width: 180px;
+}
+
+.attribution {
+  font-size: small;
+  margin-bottom: 2em;
+}
+
+body > p,
+li > p,
+div > p {
+  line-height: 1.5em;
+}
+
+body > p,
+div > p {
+  width: 720px;
+}
+
+body > blockquote {
+  width: 640px;
+}
+
+blockquote q {
+  display: block;
+  font-style: oblique;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  width: 690px;
+  margin-left: 30px;
+}
+
+a {
+  color: hsl(187deg 100% 33%);
+}
+
+a:not(:hover) {
+  text-decoration: none;
+}
+
+pre,
+code,
+textarea {
+  font-family: "Menlo", "Menlo Regular", monospace;
+}
+
+code {
+  line-height: 1em;
+  color: hsl(249deg 11% 78%);
+}
+
+textarea {
+  font-size: 100%;
+}
+
+pre {
+  border-left: solid 2px hsl(0deg 0% 26%);
+  padding-left: 18px;
+  margin: 2em 0 2em 0;
+}
+
+.html .value,
+.javascript .string,
+.javascript .regexp {
+  color: #756bb1;
+}
+
+.html .tag,
+.css .tag,
+.javascript .keyword {
+  color: #3182bd;
+}
+
+.comment {
+  color: #636363;
+}
+
+.html .doctype,
+.javascript .number {
+  color: #31a354;
+}
+
+.html .attribute,
+.css .attribute,
+.javascript .class,
+.javascript .special {
+  color: #e6550d;
+}
+
+svg {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+sup,
+sub {
+  line-height: 0;
+}
+
+q:before {
+  content: "â€œ";
+}
+
+q:after {
+  content: "â€";
+}
+
+blockquote q {
+  line-height: 1.5em;
+  display: inline;
+}
+
+blockquote q:before,
+blockquote q:after {
+  content: "";
+}
+
+h3,
+h4,
+p,
+ul {
+  padding-left: 1.2rem;
+}
+
+.banner {
+  padding: 0;
+}
+
+#toc {
+  margin-top: 0;
+}
+
+@media only screen and (max-device-width: 1023px) {
+  .ocks-org body {
+    font-size: 72%;
+    padding: 0.5rem;
+  }
+
+  body > p,
+  div > p {
+    width: 90vw !important;
+  }
+
+  li {
+    width: 82vw;
+  }
+
+  h3,
+  h4,
+  p,
+  ul {
+    padding-left: .7rem;
+    width: 90vw;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  pre {
+    padding-left: 0.5rem;
+  }
+
+  .banner,
+  h1,
+  img {
+    max-width: calc(100vw - 2em);
+    min-width: calc(100vw - 2em);
+  }
+}
+
+
+
+
+
+/*@import url(web/style.css);*/
+
+@font-face {font-family: "Menlo Regular";
+  src: url("OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff2") format("woff2"), /* chrome、firefox */
+  url("OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff") format("woff");
+}
+
+.join,
+.link,
+.node rect {
+  fill: none;
+  stroke: #636363;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #969696;
+}
+
+.node rect {
+  fill: white;
+}
+
+.link path,
+.node rect,
+.node text,
+.join {
+  -webkit-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
+  -moz-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
+  -ms-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
+  -o-transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
+  transition: stroke-opacity 500ms linear, fill-opacity 500ms linear;
+}
+
+.node .element rect {
+  fill: #bdbdbd;
+  stroke: none;
+}
+
+.node .null rect {
+  fill: none;
+  stroke: none;
+}
+
+.node .null text {
+  fill: #636363;
+}
+
+.node .selection rect {
+  stroke: #e6550d;
+}
+
+.node .data rect {
+  stroke: #3182bd;
+}
+
+.node .datum rect {
+  fill: #d9d9d9;
+  stroke: none;
+}
+
+.node .code text {
+  font-family: monospace;
+  color: hsl(0deg 0% 74%)
+}
+
+.node .key rect {
+  fill: #a1d99b;
+  stroke: none;
+}
+
+.link .to-key,
+.join {
+  stroke: #a1d99b;
+}
+
+.join {
+  stroke-dasharray: 2,2;
+}
+
+.link .to-null {
+  stroke-dasharray: .5,3.5;
+  stroke-linecap: round;
+}
+
+.link .from-data {
+  stroke: #3182bd;
+}
+
+.play circle {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.play:hover path {
+  fill: #f00;
+}
+
+.play.mousedown circle {
+  fill: #f00;
+}
+
+.play.mousedown path {
+  fill: #fff;
+}
+
+.play rect {
+  fill: none;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+code span {
+  -webkit-transition: background 250ms linear;
+  -moz-transition: background 250ms linear;
+  -ms-transition: background 250ms linear;
+  -o-transition: background 250ms linear;
+  transition: background 250ms linear;
+}
+
+pre.prettyprint, code.prettyprint {
+  background-color: #222;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+pre.prettyprint {
+  width: 90%;
+  margin: 0.5em;
+  padding: 1em;
+  white-space: pre-wrap;
+}
+
+#return-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  display: block;
+  text-decoration: none;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  border-radius: 35px;
+  display: none;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#return-to-top i {
+  color: #fff;
+  margin: 0;
+  position: relative;
+  left: 16px;
+  top: 13px;
+  font-size: 19px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+#return-to-top:hover i {
+   color: #f0f0f0;
+}
+
+@media print {
+  .pagebreak { 
+    page-break-before: always; 
+  } 
+  div {
+    page-break-inside: avoid;
+  }
+  pre {
+    page-break-inside: avoid;
+  }
+}
+
+.modebar{
+  display: none !important;
+}

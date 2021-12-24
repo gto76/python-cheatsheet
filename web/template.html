@@ -14,10 +14,14 @@
 
   <script>
     // Checks if URL ends with "index.html?dark=true"
-    if (window.location.search.search(/[?&]theme=dark2/) !== -1) {
+    if (window.location.search.search(/[?&]theme=dark3/) !== -1) {
+      document.write("<link rel=\"stylesheet\" href=\"web/default_dark3.min.css\">");
+      document.write("<link rel=\"stylesheet\" href=\"web/style_dark3.css\">");
+    }
+    else if (window.location.search.search(/[?&]theme=dark2/) !== -1) {
       document.write("<link rel=\"stylesheet\" href=\"web/default_dark2.min.css\">");
       document.write("<link rel=\"stylesheet\" href=\"web/style_dark2.css\">");
-    }   
+    }
     else if (window.location.search.search(/[?&]theme=dark1/) !== -1) {
       document.write("<link rel=\"stylesheet\" href=\"web/default_dark1.min.css\">");
       document.write("<link rel=\"stylesheet\" href=\"web/style_dark1.css\">");

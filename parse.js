@@ -409,11 +409,11 @@ const DIAGRAM_18_B =
   "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 
-const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark2">Switch to dark theme</a>.\n';
+const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.\n';
 
 const DARK_THEME_SCRIPT =
   '<script>\n' +
-  '  // Changes the image and link to theme if URL ends with "index.html?dark=true". \n' +
+  '  // Changes the image and link to theme if URL ends with "index.html?theme=dark". \n' +
   '  if (window.location.search.search(/[?&]theme=dark/) !== -1) {\n' +
   '\n' +
   '    var link_to_theme = document.createElement("a")\n' +
@@ -424,7 +424,8 @@ const DARK_THEME_SCRIPT =
   '    var img_dark = document.createElement("img");\n' +
   '    img_dark.src = "web/image_orig_blue6.png";\n' +
   '    img_dark.alt = "Monthy Python";\n' +
-  '    if (window.location.search.search(/[?&]theme=dark2/) !== -1) {\n' +
+  '    if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||\n' +
+  '        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {\n' +
   '      img_dark.style = "width: 910px;";\n' +
   '    } else {\n' +
   '      img_dark.style = "width: 960px;";\n' +
