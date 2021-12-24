@@ -3204,8 +3204,8 @@ b  3  4
 ```python
 <DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
 <DF>    = <DF>.reset_index()                  # Moves row keys to a column named index.
-<DF>    = <DF>.filter('<regex>', axis=1)      # Only keeps columns whose key matches the regex.
-<DF>    = <DF>.melt(id_vars=column_key/s)     # Converts DataFrame from wide to long format.
+<DF>    = <DF>.sort_index(ascending=True)     # Sorts rows by row keys.
+<DF>    = <DF>.sort_values(column_key/s)      # Sorts rows by the passed column/s.
 ```
 
 #### Merge, Join, Concat:
