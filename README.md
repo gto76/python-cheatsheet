@@ -53,7 +53,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 product_of_elems = functools.reduce(lambda out, el: out * el, <collection>)
 list_of_chars    = list(<str>)
 ```
-* **For details about built-in functions sorted(), min() and max() see [sortable](#sortable).**
+* **For details about sorted(), min() and max() see [sortable](#sortable).**
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
