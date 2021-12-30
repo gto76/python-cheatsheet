@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 25, 2021</aside>
+    <aside>December 30, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -535,7 +535,7 @@ to_exclusive   = &lt;range&gt;.stop
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week (Mon == 0).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
-<li><strong>TD converts and normalizes args to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M).</strong></li>
+<li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M).</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt;  = D/DT.today()                     <span class="hljs-comment"># Current local date or naive datetime.</span>
 &lt;DTn&gt;    = DT.utcnow()                      <span class="hljs-comment"># Naive datetime from current UTC time.</span>
@@ -597,6 +597,10 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span>      <span class="hljs-comment"># def f(x, y=0):</span>
 </code></pre></div>
 
+<ul>
+<li><strong>A function has it's default values evaluated when it's first encountered in the scope.</strong></li>
+<li><strong>Any changes to mutable objects will persist between invocations.</strong></li>
+</ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
 func(*args, **kwargs)
@@ -615,8 +619,7 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-number">6</span>
 </code></pre>
-<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, z)</span>:</span>                <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
+<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *, y, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, *, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
 </code></pre></div>
@@ -624,11 +627,9 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args)</span>:</span>                  <span class="hljs-comment"># f(1, 2, 3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args)</span>:</span>               <span class="hljs-comment"># f(1, 2, 3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, z)</span>:</span>               <span class="hljs-comment"># f(1, 2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, z)</span>:</span>            <span class="hljs-comment"># f(1, 2, z=3)</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span>               <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span>            <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, **kwargs)</span>:</span>         <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span>        <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
@@ -2875,7 +2876,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 25, 2021</aside>
+    <aside>December 30, 2021</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

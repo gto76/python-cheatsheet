@@ -602,7 +602,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **TD converts and normalizes args to ±days, seconds (< 86 400) and microseconds (< 1M).**
+* **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
 
 ### Now
 ```python
@@ -675,6 +675,8 @@ def f(<nondefault_args>):                      # def f(x, y):
 def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
+* **A function has it's default values evaluated when it's first encountered in the scope.**
+* **Any changes to mutable objects will persist between invocations.**
 
 
 Splat Operator
@@ -706,7 +708,6 @@ def add(*a):
 
 #### Legal argument combinations:
 ```python
-def f(x, y, z):                # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
 def f(*, x, y, z):             # f(x=1, y=2, z=3)
 def f(x, *, y, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 def f(x, y, *, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
@@ -716,13 +717,11 @@ def f(x, y, *, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3
 def f(*args):                  # f(1, 2, 3)
 def f(x, *args):               # f(1, 2, 3)
 def f(*args, z):               # f(1, 2, z=3)
-def f(x, *args, z):            # f(1, 2, z=3)
 ```
 
 ```python
 def f(**kwargs):               # f(x=1, y=2, z=3)
 def f(x, **kwargs):            # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(*, x, **kwargs):         # f(x=1, y=2, z=3)
 ```
 
 ```python
