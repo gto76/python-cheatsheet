@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 30, 2021</aside>
+    <aside>January 1, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -598,7 +598,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
-<li><strong>A function has it's default values evaluated when it's first encountered in the scope.</strong></li>
+<li><strong>A function has its default values evaluated when it's first encountered in the scope.</strong></li>
 <li><strong>Any changes to mutable objects will persist between invocations.</strong></li>
 </ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
@@ -886,7 +886,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be hashable, all attributes must be hashable and frozen must be True.</strong></li>
+<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and frozen must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
@@ -894,6 +894,11 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
 &lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre></div>
+
+<div><h4 id="restoftypeannotationscpythoninterpreterignoresthemall">Rest of type annotations (CPython interpreter ignores them all):</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;arg_name&gt;: &lt;type&gt; [= &lt;obj&gt;])</span> -&gt; &lt;type&gt;:</span>
+&lt;var_name&gt;: typing.List/Set/Iterable/Sequence/Optional[&lt;type&gt;]
+&lt;var_name&gt;: typing.Dict/Tuple/Union[&lt;type&gt;, ...]
+</code></pre></div>
 
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
@@ -903,7 +908,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="copy">Copy</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
-
 &lt;object&gt; = copy(&lt;object&gt;)
 &lt;object&gt; = deepcopy(&lt;object&gt;)
 </code></pre></div>
@@ -2876,7 +2880,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 30, 2021</aside>
+    <aside>January 1, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

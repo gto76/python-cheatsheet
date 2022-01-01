@@ -675,7 +675,7 @@ def f(<nondefault_args>):                      # def f(x, y):
 def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
-* **A function has it's default values evaluated when it's first encountered in the scope.**
+* **A function has its default values evaluated when it's first encountered in the scope.**
 * **Any changes to mutable objects will persist between invocations.**
 
 
@@ -1043,7 +1043,7 @@ class <class_name>:
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be hashable, all attributes must be hashable and frozen must be True.**
+* **For object to be [hashable](#hashable), all attributes must be hashable and frozen must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
@@ -1053,6 +1053,13 @@ from dataclasses import make_dataclass
 <class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
 <class> = make_dataclass('<class_name>', <coll_of_tuples>)
 <tuple> = ('<attr_name>', <type> [, <default_value>])
+```
+
+#### Rest of type annotations (CPython interpreter ignores them all):
+```python
+def func(<arg_name>: <type> [= <obj>]) -> <type>:
+<var_name>: typing.List/Set/Iterable/Sequence/Optional[<type>]
+<var_name>: typing.Dict/Tuple/Union[<type>, ...]
 ```
 
 ### Slots
@@ -1068,7 +1075,6 @@ class MyClassWithSlots:
 ### Copy
 ```python
 from copy import copy, deepcopy
-
 <object> = copy(<object>)
 <object> = deepcopy(<object>)
 ```
