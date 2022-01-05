@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 1, 2022</aside>
+    <aside>January 5, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -599,7 +599,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <ul>
 <li><strong>A function has its default values evaluated when it's first encountered in the scope.</strong></li>
-<li><strong>Any changes to mutable objects will persist between invocations.</strong></li>
+<li><strong>Any changes to default values that are mutable will persist between invocations.</strong></li>
 </ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
@@ -630,11 +630,11 @@ func(*args, **kwargs)
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span>               <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span>            <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, **kwargs)</span>:</span>         <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span>        <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, z, **kwargs)</span>:</span>  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
 </code></pre>
 <div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]
 &lt;set&gt;   = {*&lt;collection&gt; [, ...]}
@@ -1737,7 +1737,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
-<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><p><strong>Object that manages thread execution.</strong></p><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
+<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><ul>
+<li><strong>Object that manages thread execution.</strong></li>
+<li><strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be <a href="#pickle">pickable</a>.</strong></li>
+</ul><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
 &lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
 </code></pre></div>
 
@@ -1757,25 +1760,24 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;el&gt; = &lt;Queue&gt;.get()                           <span class="hljs-comment"># Blocks until queue stops being empty.</span>
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
-<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> add, sub, mul, truediv, floordiv, mod, pow, neg, abs
-<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> eq, ne, lt, le, gt, ge
-<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> and_, or_, xor, inv
-<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> itemgetter, attrgetter, methodcaller
+<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
+&lt;el&gt;      = op.add/sub/mul/truediv/floordiv/mod(&lt;el&gt;, &lt;el&gt;)   <span class="hljs-comment"># +, -, *, /, //, %</span>
+&lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)             <span class="hljs-comment"># &amp;, |, ^</span>
+&lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)      <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
+&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;int/str&gt;)  <span class="hljs-comment"># [&lt;int/str&gt;], .&lt;str&gt;, .&lt;str&gt;()</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-elementwise_sum  = map(op.add, list_a, list_b)
+<pre><code class="python language-python hljs">elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
-last_element     = op.methodcaller(<span class="hljs-string">'pop'</span>)(&lt;list&gt;)
+first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span class="hljs-number">0</span>)(&lt;list&gt;)
 </code></pre>
 <ul>
-<li><strong>Functions and_(), or_(), xor() and inv() correspond to operators '&amp;', '|', '^' and '~'.</strong></li>
-<li><strong>They only work on objects with and(), or(), xor() and invert() special methods.</strong></li>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'&lt;int&gt; = &lt;int&gt; &amp;|^ &lt;bool&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;bool&gt; = &lt;bool&gt; &amp;|^ &lt;bool&gt;'</span></code>.</strong></li>
+<li><strong>Binary operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'&lt;bool&gt; = &lt;bool&gt; &amp;|^ &lt;bool&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;int&gt; = &lt;bool&gt; &amp;|^ &lt;int&gt;'</span></code>.</strong></li>
 </ul>
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><p><strong>Inspecting code at runtime.</strong></p><div><h3 id="variables">Variables</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
 &lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables. Also locals().</span>
@@ -2062,10 +2064,9 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_json</span><span class="hljs-params">(sport)</span>:</span>
     team = request.forms.get(<span class="hljs-string">'team'</span>)
-    home_odds, away_odds = <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>
     response.headers[<span class="hljs-string">'Content-Type'</span>] = <span class="hljs-string">'application/json'</span>
     response.headers[<span class="hljs-string">'Cache-Control'</span>] = <span class="hljs-string">'no-cache'</span>
-    <span class="hljs-keyword">return</span> json.dumps([team, home_odds, away_odds])
+    <span class="hljs-keyword">return</span> json.dumps({<span class="hljs-string">'team'</span>: team, <span class="hljs-string">'odds'</span>: [<span class="hljs-number">2.09</span>, <span class="hljs-number">3.74</span>, <span class="hljs-number">3.68</span>]})
 </code></pre></div>
 
 <div><h4 id="test">Test:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests</span>
@@ -2075,7 +2076,7 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <span class="hljs-meta">&gt;&gt;&gt; </span>data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
 <span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=data)
 <span class="hljs-meta">&gt;&gt;&gt; </span>response.json()
-[<span class="hljs-string">'arsenal f.c.'</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">3.29</span>]
+{<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>, <span class="hljs-string">'odds'</span>: [<span class="hljs-number">2.09</span>, <span class="hljs-number">3.74</span>, <span class="hljs-number">3.68</span>]}
 </code></pre></div>
 
 <div><h2 id="profiling"><a href="#profiling" name="profiling">#</a>Profiling</h2><div><h3 id="stopwatch">Stopwatch</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
@@ -2880,7 +2881,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 1, 2022</aside>
+    <aside>January 5, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

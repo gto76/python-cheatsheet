@@ -676,7 +676,7 @@ def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
 * **A function has its default values evaluated when it's first encountered in the scope.**
-* **Any changes to mutable objects will persist between invocations.**
+* **Any changes to default values that are mutable will persist between invocations.**
 
 
 Splat Operator
@@ -722,13 +722,13 @@ def f(*args, z):               # f(1, 2, z=3)
 ```python
 def f(**kwargs):               # f(x=1, y=2, z=3)
 def f(x, **kwargs):            # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*, x, **kwargs):         # f(x=1, y=2, z=3)
 ```
 
 ```python
 def f(*args, **kwargs):        # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
 def f(x, *args, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
 def f(*args, y, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(x, *args, z, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
 ```
 
 ### Other Uses
@@ -2107,7 +2107,9 @@ with <lock>:                                   # Enters the block by calling acq
 ```
 
 ### Thread Pool Executor
-**Object that manages thread execution.**
+* **Object that manages thread execution.**
+* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be [pickable](#pickle).**
+
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
 <Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
@@ -2139,24 +2141,23 @@ Operator
 --------
 **Module of functions that provide the functionality of operators.**
 ```python
-from operator import add, sub, mul, truediv, floordiv, mod, pow, neg, abs
-from operator import eq, ne, lt, le, gt, ge
-from operator import and_, or_, xor, inv
-from operator import itemgetter, attrgetter, methodcaller
+import operator as op
+<el>      = op.add/sub/mul/truediv/floordiv/mod(<el>, <el>)   # +, -, *, /, //, %
+<int/set> = op.and_/or_/xor(<int/set>, <int/set>)             # &, |, ^
+<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)      # ==, !=, <, <=, >, >=
+<func>    = op.itemgetter/attrgetter/methodcaller(<int/str>)  # [<int/str>], .<str>, .<str>()
 ```
 
 ```python
-import operator as op
 elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
-last_element     = op.methodcaller('pop')(<list>)
+first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Functions and\_(), or\_(), xor() and inv() correspond to operators '&', '|', '^' and '~'.**
-* **They only work on objects with and(), or(), xor() and invert() special methods.**
-* **Also: `'<int> = <int> &|^ <bool>'` and `'<bool> = <bool> &|^ <bool>'`.**
+* **Binary operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
+* **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
 Introspection
@@ -2526,10 +2527,9 @@ def send_html(sport):
 @post('/<sport>/odds')
 def send_json(sport):
     team = request.forms.get('team')
-    home_odds, away_odds = 2.44, 3.29
     response.headers['Content-Type'] = 'application/json'
     response.headers['Cache-Control'] = 'no-cache'
-    return json.dumps([team, home_odds, away_odds])
+    return json.dumps({'team': team, 'odds': [2.09, 3.74, 3.68]})
 ```
 
 #### Test:
@@ -2541,7 +2541,7 @@ def send_json(sport):
 >>> data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=data)
 >>> response.json()
-['arsenal f.c.', 2.44, 3.29]
+{'team': 'arsenal f.c.', 'odds': [2.09, 3.74, 3.68]}
 ```
 
 
