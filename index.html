@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 5, 2022</aside>
+    <aside>January 6, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -619,22 +619,22 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-number">6</span>
 </code></pre>
-<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *, y, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, *, z)</span>:</span>             <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
+<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span>          <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *, y, z)</span>:</span>          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, *, z)</span>:</span>          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args)</span>:</span>                  <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args)</span>:</span>               <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, z)</span>:</span>               <span class="hljs-comment"># f(1, 2, z=3)</span>
+<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args)</span>:</span>               <span class="hljs-comment"># f(1, 2, 3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args)</span>:</span>            <span class="hljs-comment"># f(1, 2, 3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, z)</span>:</span>            <span class="hljs-comment"># f(1, 2, z=3)</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span>               <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span>            <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, **kwargs)</span>:</span>         <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
+<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span>            <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span>         <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, **kwargs)</span>:</span>      <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span>        <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
+<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span>     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span>  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span>  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
 </code></pre>
 <div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]
 &lt;set&gt;   = {*&lt;collection&gt; [, ...]}
@@ -885,8 +885,8 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <ul>
-<li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and frozen must be True.</strong></li>
+<li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
+<li><strong>For object to be hashable, all attributes must be <a href="#hashable">hashable</a> and frozen must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
@@ -1956,7 +1956,7 @@ plt.clf()                                      <span class="hljs-comment"># Clea
     rows   = csv.reader(file)
     header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
     table  = tabulate.tabulate(rows, header)
-    print(table)
+print(table)
 </code></pre></div></div>
 
 
@@ -2881,7 +2881,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 5, 2022</aside>
+    <aside>January 6, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

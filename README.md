@@ -708,27 +708,27 @@ def add(*a):
 
 #### Legal argument combinations:
 ```python
-def f(*, x, y, z):             # f(x=1, y=2, z=3)
-def f(x, *, y, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(x, y, *, z):             # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
+def f(*, x, y, z):          # f(x=1, y=2, z=3)
+def f(x, *, y, z):          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(x, y, *, z):          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
 ```
 
 ```python
-def f(*args):                  # f(1, 2, 3)
-def f(x, *args):               # f(1, 2, 3)
-def f(*args, z):               # f(1, 2, z=3)
+def f(*args):               # f(1, 2, 3)
+def f(x, *args):            # f(1, 2, 3)
+def f(*args, z):            # f(1, 2, z=3)
 ```
 
 ```python
-def f(**kwargs):               # f(x=1, y=2, z=3)
-def f(x, **kwargs):            # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(*, x, **kwargs):         # f(x=1, y=2, z=3)
+def f(**kwargs):            # f(x=1, y=2, z=3)
+def f(x, **kwargs):         # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*, x, **kwargs):      # f(x=1, y=2, z=3)
 ```
 
 ```python
-def f(*args, **kwargs):        # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(x, *args, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(*args, y, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*args, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(x, *args, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(*args, y, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 ```
 
 ### Other Uses
@@ -1042,8 +1042,8 @@ class <class_name>:
     <attr_name_2>: <type> = <default_value>
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
-* **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be [hashable](#hashable), all attributes must be hashable and frozen must be True.**
+* **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
+* **For object to be hashable, all attributes must be [hashable](#hashable) and frozen must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
@@ -2393,7 +2393,7 @@ with open('test.csv', encoding='utf-8', newline='') as file:
     rows   = csv.reader(file)
     header = [a.title() for a in next(rows)]
     table  = tabulate.tabulate(rows, header)
-    print(table)
+print(table)
 ```
 
 
