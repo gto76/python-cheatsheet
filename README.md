@@ -2313,13 +2313,13 @@ def main(screen):
 async def main_coroutine(screen):
     state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
     moves = asyncio.Queue()
-    coros = (*(random_controller(id_, moves, state) for id_ in range(10)),
+    coros = (*(number_controller(id_, moves, state) for id_ in range(10)),
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
              view(state, screen))
     await asyncio.wait({asyncio.create_task(coro) for coro in coros}, return_when=asyncio.FIRST_COMPLETED)
 
-async def random_controller(id_, moves, state):
+async def number_controller(id_, moves, state):
     while True:
         char_x, char_y = state['*']
         self_x, self_y = state[id_]
