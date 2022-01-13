@@ -2313,16 +2313,28 @@ def main(screen):
 async def main_coroutine(screen):
     state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
     moves = asyncio.Queue()
-    coros = (*(random_controller(id_, moves) for id_ in range(10)),
+    coros = (*(number_controller(id_, moves, state) for id_ in range(10)),
              human_controller(screen, moves),
              model(moves, state, *screen.getmaxyx()),
              view(state, screen))
-    await asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
+    await asyncio.wait({asyncio.create_task(coro) for coro in coros}, return_when=asyncio.FIRST_COMPLETED)
 
-async def random_controller(id_, moves):
+async def number_controller(id_, moves, state):
     while True:
         d = random.choice(list(D))
-        moves.put_nowait((id_, d))
+        char_x, char_y = state['*']
+        self_x, self_y = state[id_]
+        next_moves = []
+        if char_x < self_x:
+            next_moves.append(D.w)
+        elif char_x > self_x:
+            next_moves.append(D.e)
+        if char_y < self_y:
+            next_moves.append(D.n)
+        elif char_y > self_y:
+            next_moves.append(D.s)
+        for m in next_moves:
+            moves.put_nowait((id_, m))
         await asyncio.sleep(random.random() / 2)
 
 async def human_controller(screen, moves):
@@ -2331,7 +2343,7 @@ async def human_controller(screen, moves):
         key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
         if ch in key_mappings:
             moves.put_nowait(('*', key_mappings[ch]))
-        await asyncio.sleep(0.01)  
+        await asyncio.sleep(0.01)
 
 async def model(moves, state, height, width):
     while state['*'] not in {p for id_, p in state.items() if id_ != '*'}:
@@ -2347,7 +2359,7 @@ async def view(state, screen):
         screen.clear()
         for id_, p in state.items():
             screen.addstr(p.y, p.x, str(id_))
-        await asyncio.sleep(0.01)  
+        await asyncio.sleep(0.01)
 
 if __name__ == '__main__':
     curses.wrapper(main)
