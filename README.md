@@ -2142,10 +2142,10 @@ Operator
 **Module of functions that provide the functionality of operators.**
 ```python
 import operator as op
-<el>      = op.add/sub/mul/truediv/floordiv/mod(<el>, <el>)   # +, -, *, /, //, %
-<int/set> = op.and_/or_/xor(<int/set>, <int/set>)             # &, |, ^
-<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)      # ==, !=, <, <=, >, >=
-<func>    = op.itemgetter/attrgetter/methodcaller(<int/str>)  # [<int/str>], .<str>, .<str>()
+<el>      = op.add/sub/mul/truediv/floordiv/mod(<el>, <el>)  # +, -, *, /, //, %
+<int/set> = op.and_/or_/xor(<int/set>, <int/set>)            # &, |, ^
+<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)     # ==, !=, <, <=, >, >=
+<func>    = op.itemgetter/attrgetter/methodcaller(<el>)      # [index/key], .<str>, .<str>()
 ```
 
 ```python
@@ -2300,10 +2300,11 @@ Coroutines
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 
 ```python
-import asyncio, collections, curses, enum, random
+import asyncio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple('P', 'x y')         # Position
 D = enum.Enum('D', 'n e s w')                  # Direction
+W, H = 15, 7                                   # Width, Height
 
 def main(screen):
     curses.curs_set(0)                         # Makes cursor invisible.
@@ -2311,19 +2312,17 @@ def main(screen):
     asyncio.run(main_coroutine(screen))        # Starts running asyncio code.
 
 async def main_coroutine(screen):
-    state = {'*': P(0, 0), **{id_: P(30, 10) for id_ in range(10)}}
+    state = {'*': P(0, 0), **{id_: P(W//2, H//2) for id_ in range(10)}}
     moves = asyncio.Queue()
     coros = (*(random_controller(id_, moves) for id_ in range(10)),
-             human_controller(screen, moves),
-             model(moves, state, *screen.getmaxyx()),
-             view(state, screen))
+             human_controller(screen, moves), model(moves, state), view(state, screen))
     await asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 async def random_controller(id_, moves):
     while True:
         d = random.choice(list(D))
         moves.put_nowait((id_, d))
-        await asyncio.sleep(random.random() / 2)
+        await asyncio.sleep(random.triangular(0.01, 0.65))
 
 async def human_controller(screen, moves):
     while True:
@@ -2331,23 +2330,24 @@ async def human_controller(screen, moves):
         key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
         if ch in key_mappings:
             moves.put_nowait(('*', key_mappings[ch]))
-        await asyncio.sleep(0.01)  
+        await asyncio.sleep(0.005)
 
-async def model(moves, state, height, width):
+async def model(moves, state):
     while state['*'] not in {p for id_, p in state.items() if id_ != '*'}:
         id_, d = await moves.get()
-        p      = state[id_]
+        x, y   = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
-        if 0 <= new_p.x < width-1 and 0 <= new_p.y < height:
-            state[id_] = new_p
+        state[id_] = P((x + deltas[d].x) % W, (y + deltas[d].y) % H)
 
 async def view(state, screen):
+    offset = P(x=curses.COLS//2 - W//2, y=curses.LINES//2 - H//2)
     while True:
-        screen.clear()
+        screen.erase()
+        curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
         for id_, p in state.items():
-            screen.addstr(p.y, p.x, str(id_))
-        await asyncio.sleep(0.01)  
+            screen.addstr(offset.y + (p.y - state['*'].y + H//2) % H,
+                          offset.x + (p.x - state['*'].x + W//2) % W, str(id_))
+        await asyncio.sleep(0.005)
 
 if __name__ == '__main__':
     curses.wrapper(main)

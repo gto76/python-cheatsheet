@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 6, 2022</aside>
+    <aside>January 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1761,10 +1761,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;el&gt;      = op.add/sub/mul/truediv/floordiv/mod(&lt;el&gt;, &lt;el&gt;)   <span class="hljs-comment"># +, -, *, /, //, %</span>
-&lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)             <span class="hljs-comment"># &amp;, |, ^</span>
-&lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)      <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
-&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;int/str&gt;)  <span class="hljs-comment"># [&lt;int/str&gt;], .&lt;str&gt;, .&lt;str&gt;()</span>
+&lt;el&gt;      = op.add/sub/mul/truediv/floordiv/mod(&lt;el&gt;, &lt;el&gt;)  <span class="hljs-comment"># +, -, *, /, //, %</span>
+&lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)            <span class="hljs-comment"># &amp;, |, ^</span>
+&lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)     <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
+&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;el&gt;)      <span class="hljs-comment"># [index/key], .&lt;str&gt;, .&lt;str&gt;()</span>
 </code></pre></div>
 
 
@@ -1876,10 +1876,11 @@ ValueError: malformed node or string
 <li><strong><code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> is the main entry point for asynchronous programs.</strong></li>
 <li><strong>Functions wait(), gather() and as_completed() can be used when multiple coroutines need to be started at the same time.</strong></li>
 <li><strong>Asyncio module also provides its own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphore-event-barrier">Semaphore</a> classes.</strong></li>
-</ul><div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, enum, random
+</ul><div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)         <span class="hljs-comment"># Position</span>
 D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                  <span class="hljs-comment"># Direction</span>
+W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                                   <span class="hljs-comment"># Width, Height</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     curses.curs_set(<span class="hljs-number">0</span>)                         <span class="hljs-comment"># Makes cursor invisible.</span>
@@ -1887,19 +1888,17 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
     asyncio.run(main_coroutine(screen))        <span class="hljs-comment"># Starts running asyncio code.</span>
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
-    state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(<span class="hljs-number">30</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}
+    state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}
     moves = asyncio.Queue()
     coros = (*(random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)),
-             human_controller(screen, moves),
-             model(moves, state, *screen.getmaxyx()),
-             view(state, screen))
+             human_controller(screen, moves), model(moves, state), view(state, screen))
     <span class="hljs-keyword">await</span> asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         d = random.choice(list(D))
         moves.put_nowait((id_, d))
-        <span class="hljs-keyword">await</span> asyncio.sleep(random.random() / <span class="hljs-number">2</span>)
+        <span class="hljs-keyword">await</span> asyncio.sleep(random.triangular(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.65</span>))
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
@@ -1907,23 +1906,24 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
         key_mappings = {<span class="hljs-number">259</span>: D.n, <span class="hljs-number">261</span>: D.e, <span class="hljs-number">258</span>: D.s, <span class="hljs-number">260</span>: D.w}
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:
             moves.put_nowait((<span class="hljs-string">'*'</span>, key_mappings[ch]))
-        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.01</span>)  
+        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state, height, width)</span>:</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>
     <span class="hljs-keyword">while</span> state[<span class="hljs-string">'*'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> {p <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items() <span class="hljs-keyword">if</span> id_ != <span class="hljs-string">'*'</span>}:
         id_, d = <span class="hljs-keyword">await</span> moves.get()
-        p      = state[id_]
+        x, y   = state[id_]
         deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-        new_p  = P(p.x + deltas[d].x, p.y + deltas[d].y)
-        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= new_p.x &lt; width<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_p.y &lt; height:
-            state[id_] = new_p
+        state[id_] = P((x + deltas[d].x) % W, (y + deltas[d].y) % H)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, screen)</span>:</span>
+    offset = P(x=curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, y=curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>)
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-        screen.clear()
+        screen.erase()
+        curses.textpad.rectangle(screen, offset.y<span class="hljs-number">-1</span>, offset.x<span class="hljs-number">-1</span>, offset.y+H, offset.x+W)
         <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():
-            screen.addstr(p.y, p.x, str(id_))
-        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.01</span>)  
+            screen.addstr(offset.y + (p.y - state[<span class="hljs-string">'*'</span>].y + H//<span class="hljs-number">2</span>) % H,
+                          offset.x + (p.x - state[<span class="hljs-string">'*'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))
+        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     curses.wrapper(main)
@@ -2881,7 +2881,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 6, 2022</aside>
+    <aside>January 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
