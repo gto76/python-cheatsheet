@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 19, 2022</aside>
+    <aside>January 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -472,7 +472,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 &lt;float&gt; = random()                       <span class="hljs-comment"># A float inside [0, 1).</span>
 &lt;int&gt;   = randint(from_inc, to_inc)      <span class="hljs-comment"># An int inside [from_inc, to_inc].</span>
-&lt;el&gt;    = choice(&lt;list&gt;)                 <span class="hljs-comment"># Keeps the list intact.</span>
+&lt;el&gt;    = choice(&lt;sequence&gt;)             <span class="hljs-comment"># Keeps the sequence intact.</span>
 </code></pre></div>
 
 <div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt; = ±<span class="hljs-number">0</span>b&lt;bin&gt;                         <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>
@@ -561,7 +561,7 @@ to_exclusive   = &lt;range&gt;.stop
 
 <ul>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.ffffff[±&lt;offset&gt;]'</span></code>, or both separated by an arbitrary character. Offset is formatted as: <code class="python hljs"><span class="hljs-string">'HH:MM'</span></code>.</strong></li>
-<li><strong>Epoch on Unix systems is: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
+<li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also timespec='auto/hours/minutes/seconds'.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
@@ -2881,7 +2881,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 19, 2022</aside>
+    <aside>January 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

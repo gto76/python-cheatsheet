@@ -519,7 +519,7 @@ from random import random, randint, choice, shuffle, gauss, seed
 
 <float> = random()                       # A float inside [0, 1).
 <int>   = randint(from_inc, to_inc)      # An int inside [from_inc, to_inc].
-<el>    = choice(<list>)                 # Keeps the list intact.
+<el>    = choice(<sequence>)             # Keeps the sequence intact.
 ```
 
 ### Bin, Hex
@@ -630,7 +630,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
-* **Epoch on Unix systems is: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
+* **Python uses the Unix Epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
 ```python
