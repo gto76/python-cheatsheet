@@ -1017,7 +1017,7 @@ class C(A, B): pass
 class Person:
     @property
     def name(self):
-        return ' '.join(a if a == 'van' else a.title() for a in self._name)
+        return ' '.join(a.title() for a in self._name)
 
     @name.setter
     def name(self, value):
@@ -1026,9 +1026,9 @@ class Person:
 
 ```python
 >>> person = Person()
->>> person.name = ' gUiDo  VaN  rOsSuM '
+>>> person.name = ' jEaN-lUc gOdArD '
 >>> person.name
-'Guido van Rossum'
+'Jean-Luc Godard'
 ```
 
 ### Dataclass
