@@ -390,8 +390,8 @@ import re
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'
-<str> = '{}, {}'.format(<el_1>, <el_2>)
+<str> = f'{<el_1>}, {<el_2>}'                  # Or: '%s, %s' % (<el_1>, <el_2>)
+<str> = '{}, {}'.format(<el_1>, <el_2>)        # Or: '{0}, {1}'.format(<el_1>, <el_2>)
 ```
 
 ### Attributes
@@ -1014,21 +1014,21 @@ class C(A, B): pass
 ### Property
 **Pythonic way of implementing getters and setters.**
 ```python
-class MyClass:
+class Person:
     @property
-    def a(self):
-        return self._a
+    def name(self):
+        return ' '.join(a if a == 'van' else a.title() for a in self._name)
 
-    @a.setter
-    def a(self, value):
-        self._a = value
+    @name.setter
+    def name(self, value):
+        self._name = value.lower().split()
 ```
 
 ```python
->>> obj = MyClass()
->>> obj.a = 123
->>> obj.a
-123
+>>> person = Person()
+>>> person.name = ' gUiDo  VaN  rOsSuM '
+>>> person.name
+'Guido van Rossum'
 ```
 
 ### Dataclass
@@ -2624,7 +2624,7 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list>)
+<array> = np.array(<list/list_of_lists>)
 <array> = np.arange(from_inclusive, to_exclusive, ±step_size)
 <array> = np.ones(<shape>)
 <array> = np.random.randint(from_inclusive, to_exclusive, <shape>)

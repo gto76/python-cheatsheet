@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 22, 2022</aside>
+    <aside>January 25, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -364,8 +364,8 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>
-&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>                  <span class="hljs-comment"># Or: '%s, %s' % (&lt;el_1&gt;, &lt;el_2&gt;)</span>
+&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)        <span class="hljs-comment"># Or: '{0}, {1}'.format(&lt;el_1&gt;, &lt;el_2&gt;)</span>
 </code></pre></div>
 
 <div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
@@ -858,21 +858,21 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
-<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
+<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> self._a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(a <span class="hljs-keyword">if</span> a == <span class="hljs-string">'van'</span> <span class="hljs-keyword">else</span> a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> self._name)
 
-<span class="hljs-meta">    @a.setter</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a</span><span class="hljs-params">(self, value)</span>:</span>
-        self._a = value
+<span class="hljs-meta">    @name.setter</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
+        self._name = value.lower().split()
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>obj = MyClass()
-<span class="hljs-meta">&gt;&gt;&gt; </span>obj.a = <span class="hljs-number">123</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>obj.a
-<span class="hljs-number">123</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">' gUiDo  VaN  rOsSuM '</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name
+<span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
 <div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that automatically generates init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
 
@@ -2137,7 +2137,7 @@ drawer = output.GraphvizOutput(output_file=filename)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list&gt;)
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists&gt;)
 &lt;array&gt; = np.arange(from_inclusive, to_exclusive, ±step_size)
 &lt;array&gt; = np.ones(&lt;shape&gt;)
 &lt;array&gt; = np.random.randint(from_inclusive, to_exclusive, &lt;shape&gt;)
@@ -2881,7 +2881,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 22, 2022</aside>
+    <aside>January 25, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
