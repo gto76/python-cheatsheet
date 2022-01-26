@@ -390,8 +390,8 @@ import re
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'                  # Or: '%s, %s' % (<el_1>, <el_2>)
-<str> = '{}, {}'.format(<el_1>, <el_2>)        # Or: '{0}, {1}'.format(<el_1>, <el_2>)
+<str> = f'{<el_1>}, {<el_2>}'
+<str> = '{}, {}'.format(<el_1>, <el_2>)
 ```
 
 ### Attributes
