@@ -1017,18 +1017,18 @@ class C(A, B): pass
 class Person:
     @property
     def name(self):
-        return ' '.join(a.title() for a in self._name)
+        return ' '.join(self._name)
 
     @name.setter
     def name(self, value):
-        self._name = value.lower().split()
+        self._name = value.split()
 ```
 
 ```python
 >>> person = Person()
->>> person.name = ' jEaN-lUc gOdArD '
+>>> person.name = '\t Guido  van Rossum \n'
 >>> person.name
-'Jean-Luc Godard'
+'Guido van Rossum'
 ```
 
 ### Dataclass

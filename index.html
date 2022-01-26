@@ -861,18 +861,18 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> self._name)
+        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(self._name)
 
 <span class="hljs-meta">    @name.setter</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
-        self._name = value.lower().split()
+        self._name = value.split()
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
-<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">' jEaN-lUc gOdArD '</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">'\t Guido  van Rossum \n'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>person.name
-<span class="hljs-string">'Jean-Luc Godard'</span>
+<span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
 <div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that automatically generates init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
 
