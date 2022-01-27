@@ -2340,7 +2340,7 @@ async def model(moves, state):
         state[id_] = P((x + deltas[d].x) % W, (y + deltas[d].y) % H)
 
 async def view(state, screen):
-    offset = P(x=curses.COLS//2 - W//2, y=curses.LINES//2 - H//2)
+    offset = P(curses.COLS//2 - W//2, curses.LINES//2 - H//2)
     while True:
         screen.erase()
         curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
@@ -2856,7 +2856,7 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 ```python
 def read_wav_file(filename):
     def get_int(bytes_obj):
-        an_int = int.from_bytes(bytes_obj, 'little', signed=sampwidth!=1)
+        an_int = int.from_bytes(bytes_obj, 'little', signed=(sampwidth != 1))
         return an_int - 128 * (sampwidth == 1)
     with wave.open(filename, 'rb') as file:
         sampwidth = file.getsampwidth()
@@ -2872,7 +2872,7 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
         a_float = max(-1, min(1 - 2e-16, a_float))
         a_float += sampwidth == 1
         a_float *= pow(2, sampwidth * 8 - 1)
-        return int(a_float).to_bytes(sampwidth, 'little', signed=sampwidth!=1)
+        return int(a_float).to_bytes(sampwidth, 'little', signed=(sampwidth != 1))
     with wave.open(filename, 'wb') as file:
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
@@ -3064,7 +3064,7 @@ def update_position(mario, tiles):
     n_steps = max(abs(s) for s in mario.spd)
     for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + mario.spd.x/n_steps, y + mario.spd.y/n_steps
+        x, y = x + mario.spd.x / n_steps, y + mario.spd.y / n_steps
         mario.rect.topleft = x, y
 
 def get_boundaries(rect, tiles):
