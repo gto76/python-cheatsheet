@@ -1906,7 +1906,7 @@ with <conn>:                                    # Exits the block with commit() 
 1
 >>> conn.execute('SELECT * FROM person').fetchall()
 [(1, 'Jean-Luc', 187)]
-``` 
+```
 
 ### MySQL
 **Has a very similar interface, with differences listed below.**
@@ -2401,14 +2401,14 @@ Curses
 ------
 #### Runs a basic file explorer in the terminal:
 ```python
-from curses import wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+from curses import wrapper, ascii, A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 from os import listdir, path, chdir
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, listdir()
     while ch != ascii.ESC:
         height, _ = screen.getmaxyx()
-        screen.clear()
+        screen.erase()
         for y, filename in enumerate(paths[first : first+height]):
             screen.addstr(y, 0, filename, A_REVERSE * (selected == first + y))
         ch = screen.getch()
@@ -2872,7 +2872,7 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
         a_float = max(-1, min(1 - 2e-16, a_float))
         a_float += sampwidth == 1
         a_float *= pow(2, sampwidth * 8 - 1)
-        return int(a_float).to_bytes(sampwidth, 'little', signed=sampwidth!=1) 
+        return int(a_float).to_bytes(sampwidth, 'little', signed=sampwidth!=1)
     with wave.open(filename, 'wb') as file:
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
@@ -2949,8 +2949,8 @@ screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
 while all(event.type != pg.QUIT for event in pg.event.get()):
     deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
-    for key_code, is_pressed in enumerate(pg.key.get_pressed()):
-        rect = rect.move(deltas[key_code]) if key_code in deltas and is_pressed else rect
+    for ch, is_pressed in enumerate(pg.key.get_pressed()):
+        rect = rect.move(deltas[ch]) if ch in deltas and is_pressed else rect
     screen.fill((0, 0, 0))
     pg.draw.rect(screen, (255, 255, 255), rect)
     pg.display.flip()
@@ -3046,7 +3046,7 @@ def run(screen, images, mario, tiles):
     clock = pg.time.Clock()
     while all(event.type != pg.QUIT for event in pg.event.get()):
         keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed = {keys.get(i) for i, on in enumerate(pg.key.get_pressed()) if on}
+        pressed = {keys.get(ch) for ch, is_prsd in enumerate(pg.key.get_pressed()) if is_prsd}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
@@ -3216,9 +3216,9 @@ b  3  4
 #### Merge, Join, Concat:
 ```python
 >>> l = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
-   x  y 
-a  1  2 
-b  3  4 
+   x  y
+a  1  2
+b  3  4
 >>> r = DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z'])
    y  z
 b  4  5
@@ -3263,7 +3263,7 @@ c  6  7
 <DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(<trans_func>)
 <DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
 ```
-* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.** 
+* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.**
 
 ```python
 >>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
@@ -3331,7 +3331,7 @@ c  7  8
 #### Aggregate, Transform, Map:
 ```python
 <DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.apply/agg(<agg_func>)
-<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.aggregate(<trans_func>)  
+<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.aggregate(<trans_func>)
 <DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(<map_func>)
 ```
 
@@ -3386,7 +3386,7 @@ from plotly.express import line
 <div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div>
 
 ```python
-covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv', 
+covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
                     usecols=['iso_code', 'date', 'total_deaths', 'population'])
 continents = pd.read_csv('https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'
                          '846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv',

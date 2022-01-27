@@ -1960,14 +1960,14 @@ print(table)
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii, A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii, A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 <span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> listdir, path, chdir
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
     <span class="hljs-keyword">while</span> ch != ascii.ESC:
         height, _ = screen.getmaxyx()
-        screen.clear()
+        screen.erase()
         <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
             screen.addstr(y, <span class="hljs-number">0</span>, filename, A_REVERSE * (selected == first + y))
         ch = screen.getch()
@@ -2034,7 +2034,7 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
     version    = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
     logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
     logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">with</span> open(os.path.basename(logo_url), <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.write(logo)
     print(python_url, version)
 <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:
@@ -2101,8 +2101,8 @@ duration = perf_counter() - start_time
 <div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install line_profiler memory_profiler</span>
 <span class="hljs-meta">@profile</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    a = [*range(<span class="hljs-number">10000</span>)]
-    b = {*range(<span class="hljs-number">10000</span>)}
+    l = list(range(<span class="hljs-number">10000</span>))
+    s = set(range(<span class="hljs-number">10000</span>))
 main()
 </code></pre></div>
 
@@ -2111,16 +2111,16 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1    955.0    955.0     43.7      a = [*range(10000)]
-     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
+     3      1    955.0    955.0     43.7      l = list(range(10000))
+     4      1   1231.0   1231.0     56.3      s = set(range(10000))
 </code></pre>
 <pre><code class="text language-text">$ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
      1        37.668 MiB     37.668 MiB   @profile
      2                                    def main():
-     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
-     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
+     3        38.012 MiB      0.344 MiB       l = list(range(10000))
+     4        38.477 MiB      0.465 MiB       s = set(range(10000))
 </code></pre>
 <div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2</span>
 <span class="hljs-keyword">from</span> pycallgraph2 <span class="hljs-keyword">import</span> output, PyCallGraph
@@ -2274,7 +2274,7 @@ frames = []
     y = sum(range(velocity))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse(((WIDTH / <span class="hljs-number">2</span>) - R, y, (WIDTH / <span class="hljs-number">2</span>) + R, y + (R * <span class="hljs-number">2</span>)), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
@@ -2332,7 +2332,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
         a_float += sampwidth == <span class="hljs-number">1</span>
         a_float *= pow(<span class="hljs-number">2</span>, sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)
-        <span class="hljs-keyword">return</span> int(a_float).to_bytes(sampwidth, <span class="hljs-string">'little'</span>, signed=sampwidth!=<span class="hljs-number">1</span>) 
+        <span class="hljs-keyword">return</span> int(a_float).to_bytes(sampwidth, <span class="hljs-string">'little'</span>, signed=sampwidth!=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.setnchannels(nchannels)
         file.setsampwidth(sampwidth)
@@ -2392,8 +2392,8 @@ screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class=
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
     deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), pg.K_RIGHT: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), pg.K_LEFT: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-    <span class="hljs-keyword">for</span> key_code, is_pressed <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()):
-        rect = rect.move(deltas[key_code]) <span class="hljs-keyword">if</span> key_code <span class="hljs-keyword">in</span> deltas <span class="hljs-keyword">and</span> is_pressed <span class="hljs-keyword">else</span> rect
+    <span class="hljs-keyword">for</span> ch, is_pressed <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()):
+        rect = rect.move(deltas[ch]) <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> deltas <span class="hljs-keyword">and</span> is_pressed <span class="hljs-keyword">else</span> rect
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
     pg.display.flip()
@@ -2472,7 +2472,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     clock = pg.time.Clock()
     <span class="hljs-keyword">while</span> all(event.type != pg.QUIT <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get()):
         keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed = {keys.get(i) <span class="hljs-keyword">for</span> i, on <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> on}
+        pressed = {keys.get(ch) <span class="hljs-keyword">for</span> ch, is_prsd <span class="hljs-keyword">in</span> enumerate(pg.key.get_pressed()) <span class="hljs-keyword">if</span> is_prsd}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
@@ -2606,9 +2606,9 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)      <span class="hljs-comment"># Sorts rows by the passed column/s.</span>
 </code></pre>
 <div><h4 id="mergejoinconcat">Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
-   x  y 
-a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span> 
-b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span> 
+   x  y
+a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
+b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>r = DataFrame([[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>]], index=[<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], columns=[<span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>])
    y  z
 b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
@@ -2651,7 +2651,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
 <ul>
-<li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead.</strong> </li>
+<li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2704,7 +2704,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 &lt;DF&gt; = &lt;GB&gt;.get_group(group_key/s)            <span class="hljs-comment"># Selects a group by value of grouping column.</span>
 </code></pre>
 <div><h4 id="aggregatetransformmap-2">Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;GB&gt;.apply/agg(&lt;agg_func&gt;)</span>
-&lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()          <span class="hljs-comment"># Or: &lt;GB&gt;.aggregate(&lt;trans_func&gt;)  </span>
+&lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()          <span class="hljs-comment"># Or: &lt;GB&gt;.aggregate(&lt;trans_func&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;GB&gt;.transform(&lt;map_func&gt;)</span>
 </code></pre></div>
 
@@ -2742,7 +2742,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 &lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
 </code></pre></div>
 
-<div><h4 id="coviddeathsbycontinent">Covid deaths by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>, 
+<div><h4 id="coviddeathsbycontinent">Covid deaths by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'</span>
                          <span class="hljs-string">'846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv'</span>,
