@@ -2034,7 +2034,7 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
     version    = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
     logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
     logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
-    <span class="hljs-keyword">with</span> open(os.path.basename(logo_url), <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.write(logo)
     print(python_url, version)
 <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:
@@ -2101,8 +2101,8 @@ duration = perf_counter() - start_time
 <div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install line_profiler memory_profiler</span>
 <span class="hljs-meta">@profile</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    l = list(range(<span class="hljs-number">10000</span>))
-    s = set(range(<span class="hljs-number">10000</span>))
+    a = [*range(<span class="hljs-number">10000</span>)]
+    b = {*range(<span class="hljs-number">10000</span>)}
 main()
 </code></pre></div>
 
@@ -2111,16 +2111,16 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1    955.0    955.0     43.7      l = list(range(10000))
-     4      1   1231.0   1231.0     56.3      s = set(range(10000))
+     3      1    955.0    955.0     43.7      a = [*range(10000)]
+     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
 </code></pre>
 <pre><code class="text language-text">$ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
      1        37.668 MiB     37.668 MiB   @profile
      2                                    def main():
-     3        38.012 MiB      0.344 MiB       l = list(range(10000))
-     4        38.477 MiB      0.465 MiB       s = set(range(10000))
+     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
+     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 </code></pre>
 <div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2</span>
 <span class="hljs-keyword">from</span> pycallgraph2 <span class="hljs-keyword">import</span> output, PyCallGraph
@@ -2274,7 +2274,7 @@ frames = []
     y = sum(range(velocity))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
     draw  = ImageDraw.Draw(frame)
-    draw.ellipse(((WIDTH / <span class="hljs-number">2</span>) - R, y, (WIDTH / <span class="hljs-number">2</span>) + R, y + (R * <span class="hljs-number">2</span>)), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
