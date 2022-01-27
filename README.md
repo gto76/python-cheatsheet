@@ -643,11 +643,11 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Format
 ```python
->>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
+>>> dt = datetime.strptime('2015-05-14 23:39:00.00 +02:00', '%Y-%m-%d %H:%M:%S.%f %z')
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
-* **`'%Z'` only accepts `'UTC/GMT'` and local timezone's code. `'%z'` also accepts `'±HH:MM'`.**
+* **`'%Z'` only accepts `'UTC/GMT'` and local timezone's code. `'%z'` also accepts `'±HHMM'`.**
 * **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
@@ -964,18 +964,18 @@ class <name>:
 #### Str() use cases:
 ```python
 print(<el>)
-print(f'{<el>}')
-raise Exception(<el>)
-csv.writer(<file>).writerow([<el>])
+f'{<el>}'
 logging.warning(<el>)
+csv.writer(<file>).writerow([<el>])
+raise Exception(<el>)
 ```
 
 #### Repr() use cases:
 ```python
 print([<el>])
-print(f'{<el>!r}')
->>> <el>
+f'{<el>!r}'
 Z = dataclasses.make_dataclass('Z', ['a']); print(Z(<el>))
+>>> <el>
 ```
 
 ### Constructor Overloading
@@ -2327,7 +2327,7 @@ async def random_controller(id_, moves):
 async def human_controller(screen, moves):
     while True:
         ch = screen.getch()
-        key_mappings = {259: D.n, 261: D.e, 258: D.s, 260: D.w}
+        key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
         if ch in key_mappings:
             moves.put_nowait(('*', key_mappings[ch]))
         await asyncio.sleep(0.005)
