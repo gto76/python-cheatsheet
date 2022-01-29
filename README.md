@@ -1043,7 +1043,7 @@ class <class_name>:
     <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
 ```
 * **Objects can be made sortable with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be hashable, all attributes must be [hashable](#hashable) and frozen must be True.**
+* **For object to be hashable, all attributes must be hashable and 'frozen' must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
@@ -2475,7 +2475,7 @@ Scraping
 #### Scrapes Python's URL, version number and logo from its Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
-import requests, bs4, sys
+import requests, bs4, os, sys
 
 WIKI_URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
 try:
@@ -2486,9 +2486,10 @@ try:
     version    = table.find('th', text='Stable release').next_sibling.strings.__next__()
     logo_url   = table.find('img')['src']
     logo       = requests.get(f'https:{logo_url}').content
-    with open('test.png', 'wb') as file:
+    filename   = os.path.basename(logo_url)
+    with open(filename, 'wb') as file:
         file.write(logo)
-    print(python_url, version)
+    print(f'{python_url}, {version}, file://{os.path.abspath(filename)}')
 except requests.exceptions.ConnectionError:
     print("You've got problems with connection.", file=sys.stderr)
 ```

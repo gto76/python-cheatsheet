@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 27, 2022</aside>
+    <aside>January 29, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -886,7 +886,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 <ul>
 <li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be hashable, all attributes must be <a href="#hashable">hashable</a> and frozen must be True.</strong></li>
+<li><strong>For object to be hashable, all attributes must be hashable and 'frozen' must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
@@ -2023,7 +2023,7 @@ logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Max age as a string: <code class="python hljs"><span class="hljs-string">'1 week, 3 days'</span></code>, <code class="python hljs"><span class="hljs-string">'2 months'</span></code>, …</strong></li>
 </ul>
 <div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlversionnumberandlogofromitswikipediapage">Scrapes Python's URL, version number and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
-<span class="hljs-keyword">import</span> requests, bs4, sys
+<span class="hljs-keyword">import</span> requests, bs4, os, sys
 
 WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
 <span class="hljs-keyword">try</span>:
@@ -2034,9 +2034,10 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
     version    = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
     logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
     logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.png'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
+    filename   = os.path.basename(logo_url)
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.write(logo)
-    print(python_url, version)
+    print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, <span class="hljs-subst">{version}</span>, file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
 <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:
     print(<span class="hljs-string">"You've got problems with connection."</span>, file=sys.stderr)
 </code></pre></div></div>
@@ -2881,7 +2882,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 27, 2022</aside>
+    <aside>January 29, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
