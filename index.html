@@ -1230,7 +1230,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── NameError               <span class="hljs-comment"># Raised when a variable name is not found.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as “file not found” or “disk full” (see Open).</span>
       │    └── FileNotFoundError  <span class="hljs-comment"># When a file or directory is requested but doesn't exist.</span>
-      ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall in other categories.</span>
+      ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
       ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
       ├── TypeError               <span class="hljs-comment"># Raised when an argument is of wrong type.</span>
@@ -2652,7 +2652,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
 <ul>
-<li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead. Transform passes DF to a function if it rases an error after receiving a Sr.</strong></li>
+<li><strong>All operations operate on columns by default. Use <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> parameter to process the rows instead. Transform passes DF to a function if it raises an error after receiving a Sr.</strong></li>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y

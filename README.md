@@ -3264,7 +3264,7 @@ c  6  7
 <DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(lambda <Sr>: <Sr>)
 <DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(lambda <el>: <el>)
 ```
-* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead. Transform passes DF to a function if it rases an error after receiving a Sr.**
+* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead. Transform passes DF to a function if it raises an error after receiving a Sr.**
 
 ```python
 >>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
