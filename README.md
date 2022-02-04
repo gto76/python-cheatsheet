@@ -3142,11 +3142,11 @@ Name: a, dtype: int64
 
 #### Aggregate, Transform, Map:
 ```python
-<el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.aggregate(<agg_func>)
-<Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(<trans_func>)
-<Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.apply/agg/transform/map(<map_func>)
+<el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.agg(lambda <Sr>: <el>)
+<Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
+<Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.agg/transform/map(lambda <el>: <el>)
 ```
-* **The way `'aggregate()'` and `'transform()'` find out whether the passed function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series.**
+* **The way `'agg()'` and `'transform()'` find out whether the passed function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series. `'agg()'` only accepts Attribute/Type/ValueError.**
 
 ```python
 >>> sr = Series([1, 2], index=['x', 'y'])
@@ -3155,22 +3155,22 @@ y    2
 ```
 
 ```text
-+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   ['sum']   | {'s': 'sum'}  |
-+-------------+-------------+-------------+---------------+
-| sr.apply(…) |      3      |    sum  3   |     s  3      |
-| sr.agg(…)   |             |             |               |
-+-------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+---------------+
+|                 |    'sum'    |   ['sum']   | {'s': 'sum'}  |
++-----------------+-------------+-------------+---------------+
+| sr.apply(…)     |      3      |    sum  3   |     s  3      |
+| sr.agg(…)       |             |             |               |
++-----------------+-------------+-------------+---------------+
 ```
 
 ```text
-+-------------+-------------+-------------+---------------+
-|             |    'rank'   |   ['rank']  | {'r': 'rank'} |
-+-------------+-------------+-------------+---------------+
-| sr.apply(…) |             |      rank   |               |
-| sr.agg(…)   |     x  1    |   x     1   |    r  x  1    |
-| sr.trans(…) |     y  2    |   y     2   |       y  2    |
-+-------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+---------------+
+|                 |    'rank'   |   ['rank']  | {'r': 'rank'} |
++-----------------+-------------+-------------+---------------+
+| sr.apply(…)     |             |      rank   |               |
+| sr.agg(…)       |     x  1    |   x     1   |    r  x  1    |
+| sr.transform(…) |     y  2    |   y     2   |       y  2    |
++-----------------+-------------+-------------+---------------+
 ```
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
 
@@ -3260,11 +3260,11 @@ c  6  7
 
 #### Aggregate, Transform, Map:
 ```python
-<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg/transform(<agg_func>)
-<DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(<trans_func>)
-<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(<map_func>)
+<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg(lambda <Sr>: <el>)
+<DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(lambda <Sr>: <Sr>)
+<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(lambda <el>: <el>)
 ```
-* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead.**
+* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead. Transform passes DF to a function if it rases an error after receiving a Sr.**
 
 ```python
 >>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
@@ -3274,24 +3274,24 @@ b  3  4
 ```
 
 ```text
-+-------------+-------------+-------------+---------------+
-|             |    'sum'    |   ['sum']   | {'x': 'sum'}  |
-+-------------+-------------+-------------+---------------+
-| df.apply(…) |             |       x  y  |               |
-| df.agg(…)   |     x  4    |  sum  4  6  |     x  4      |
-|             |     y  6    |             |               |
-+-------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+---------------+
+|                 |    'sum'    |   ['sum']   | {'x': 'sum'}  |
++-----------------+-------------+-------------+---------------+
+| df.apply(…)     |             |       x  y  |               |
+| df.agg(…)       |     x  4    |  sum  4  6  |     x  4      |
+|                 |     y  6    |             |               |
++-----------------+-------------+-------------+---------------+
 ```
 
 ```text
-+-------------+-------------+-------------+---------------+
-|             |    'rank'   |   ['rank']  | {'x': 'rank'} |
-+-------------+-------------+-------------+---------------+
-| df.apply(…) |      x  y   |      x    y |        x      |
-| df.agg(…)   |   a  1  1   |   rank rank |     a  1      |
-| df.trans(…) |   b  2  2   | a    1    1 |     b  2      |
-|             |             | b    2    2 |               |
-+-------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+---------------+
+|                 |    'rank'   |   ['rank']  | {'x': 'rank'} |
++-----------------+-------------+-------------+---------------+
+| df.apply(…)     |      x  y   |      x    y |        x      |
+| df.agg(…)       |   a  1  1   |   rank rank |     a  1      |
+| df.transform(…) |   b  2  2   | a    1    1 |     b  2      |
+|                 |             | b    2    2 |               |
++-----------------+-------------+-------------+---------------+
 ```
 * **Use `'<DF>[col_key_1, col_key_2][row_key]'` to get the fifth result's values.**
 
@@ -3315,9 +3315,6 @@ b  3  4
 
 ```python
 >>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
->>> df.groupby('z').get_group(3)
-   x  y
-a  1  2
 >>> df.groupby('z').get_group(6)
    x  y
 b  4  5
@@ -3327,13 +3324,15 @@ c  7  8
 ```python
 <GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
 <DF> = <GB>.get_group(group_key/s)            # Selects a group by value of grouping column.
+<DF> = <GB>.apply(<func>)                     # Maps each group. Func can return DF, Sr or el.
+<GB> = <GB>[column_key]                       # A single column GB. All operations return a Sr.
 ```
 
 #### Aggregate, Transform, Map:
 ```python
-<DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.apply/agg(<agg_func>)
-<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.aggregate(<trans_func>)
-<DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(<map_func>)
+<DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.agg(lambda <Sr>: <el>)
+<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.transform(lambda <Sr>: <Sr>)
+<DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(lambda <Sr>: <Sr>)
 ```
 
 ```python
@@ -3345,20 +3344,20 @@ c  7  8
 ```
 
 ```text
-+-------------+-------------+-------------+-------------+---------------+
-|             |    'sum'    |    'rank'   |   ['rank']  | {'x': 'rank'} |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |
-|             |  z          |   a  1  1   |   rank rank |     a  1      |
-|             |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
-|             |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
-|             |             |             | c    2    2 |               |
-+-------------+-------------+-------------+-------------+---------------+
-| gb.trans(…) |      x   y  |      x  y   |             |               |
-|             |  a   1   2  |   a  1  1   |             |               |
-|             |  b  11  13  |   b  1  1   |             |               |
-|             |  c  11  13  |   c  1  1   |             |               |
-+-------------+-------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+-------------+---------------+
+|                 |    'sum'    |    'rank'   |   ['rank']  | {'x': 'rank'} |
++-----------------+-------------+-------------+-------------+---------------+
+| gb.agg(…)       |      x   y  |      x  y   |      x    y |        x      |
+|                 |  z          |   a  1  1   |   rank rank |     a  1      |
+|                 |  3   1   2  |   b  1  1   | a    1    1 |     b  1      |
+|                 |  6  11  13  |   c  2  2   | b    1    1 |     c  2      |
+|                 |             |             | c    2    2 |               |
++-----------------+-------------+-------------+-------------+---------------+
+| gb.transform(…) |      x   y  |      x  y   |             |               |
+|                 |  a   1   2  |   a  1  1   |             |               |
+|                 |  b  11  13  |   b  1  1   |             |               |
+|                 |  c  11  13  |   c  2  2   |             |               |
++-----------------+-------------+-------------+-------------+---------------+
 ```
 
 ### Rolling
