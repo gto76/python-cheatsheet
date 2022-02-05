@@ -316,12 +316,8 @@ const DIAGRAM_13_B =
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
   "┃ sr.apply(…)     │      3      │    sum  3   │     s  3      ┃\n" +
   "┃ sr.agg(…)       │             │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_14_A =
-  '| sr.apply(…)     |             |      rank   |               |';
-
-const DIAGRAM_14_B =
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
@@ -374,12 +370,8 @@ const DIAGRAM_16_B =
   "┃ df.apply(…)     │             │       x  y  │               ┃\n" +
   "┃ df.agg(…)       │     x  4    │  sum  4  6  │     x  4      ┃\n" +
   "┃                 │     y  6    │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_17_A =
-  '| df.apply(…)     |      x  y   |      x    y |        x      |';
-
-const DIAGRAM_17_B =
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
@@ -524,10 +516,8 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
-  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
-  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 

@@ -3140,7 +3140,7 @@ Name: a, dtype: int64
 <Sr>.update(<Sr>)                             # Updates items that are already present.
 ```
 
-#### Aggregate, Transform, Map:
+#### Series — Aggregate, Transform, Map:
 ```python
 <el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.agg(lambda <Sr>: <el>)
 <Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
@@ -3161,9 +3161,7 @@ y    2
 | sr.apply(…)     |      3      |    sum  3   |     s  3      |
 | sr.agg(…)       |             |             |               |
 +-----------------+-------------+-------------+---------------+
-```
 
-```text
 +-----------------+-------------+-------------+---------------+
 |                 |    'rank'   |   ['rank']  | {'r': 'rank'} |
 +-----------------+-------------+-------------+---------------+
@@ -3214,7 +3212,7 @@ b  3  4
 <DF>    = <DF>.sort_values(column_key/s)      # Sorts rows by the passed column/s.
 ```
 
-#### Merge, Join, Concat:
+#### DataFrame — Merge, Join, Concat:
 ```python
 >>> l = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
    x  y
@@ -3258,13 +3256,13 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 ```
 
-#### Aggregate, Transform, Map:
+#### DataFrame — Aggregate, Transform, Map:
 ```python
 <Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg(lambda <Sr>: <el>)
 <DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(lambda <Sr>: <Sr>)
 <DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(lambda <el>: <el>)
 ```
-* **All operations operate on columns by default. Use `'axis=1'` parameter to process the rows instead. Transform passes DF to a function if it raises an error after receiving a Sr.**
+* **All operations operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 
 ```python
 >>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
@@ -3281,9 +3279,7 @@ b  3  4
 | df.agg(…)       |     x  4    |  sum  4  6  |     x  4      |
 |                 |     y  6    |             |               |
 +-----------------+-------------+-------------+---------------+
-```
 
-```text
 +-----------------+-------------+-------------+---------------+
 |                 |    'rank'   |   ['rank']  | {'x': 'rank'} |
 +-----------------+-------------+-------------+---------------+
@@ -3295,7 +3291,7 @@ b  3  4
 ```
 * **Use `'<DF>[col_key_1, col_key_2][row_key]'` to get the fifth result's values.**
 
-#### Encode, Decode:
+#### DataFrame — Encode, Decode, Plot:
 ```python
 <DF> = pd.read_json/html('<str/path/url>')
 <DF> = pd.read_csv/pickle/excel('<path/url>')
@@ -3308,6 +3304,11 @@ b  3  4
 <str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
 <DF>.to_pickle/excel(<path>)
 <DF>.to_sql('<table_name>', <connection>)
+```
+
+```python
+import matplotlib.pyplot as plt
+<DF>.plot.line/bar/hist/scatter([x=column_key, y=column_key/s]); plt.show()
 ```
 
 ### GroupBy
@@ -3323,12 +3324,11 @@ c  7  8
 
 ```python
 <GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
-<DF> = <GB>.get_group(group_key/s)            # Selects a group by value of grouping column.
 <DF> = <GB>.apply(<func>)                     # Maps each group. Func can return DF, Sr or el.
 <GB> = <GB>[column_key]                       # A single column GB. All operations return a Sr.
 ```
 
-#### Aggregate, Transform, Map:
+#### GroupBy — Aggregate, Transform, Map:
 ```python
 <DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.agg(lambda <Sr>: <el>)
 <DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.transform(lambda <Sr>: <Sr>)
