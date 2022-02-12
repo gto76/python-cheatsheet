@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 6, 2022</aside>
+    <aside>February 13, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -263,7 +263,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType, ModuleType
 </code></pre></div>
 
-<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter() while Collection ABC looks for methods iter(), contains() and len().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Collection ABC looks for methods iter(), contains() and len(), while Iterable ABC only looks for method iter().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre></div>
@@ -304,7 +304,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;bool&gt; = &lt;str&gt;.endswith(&lt;sub_str&gt;)           <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or -1.</span>
-&lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same but raises ValueError if missing.</span>
+&lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same, but raises ValueError if missing.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
@@ -2883,7 +2883,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>February 6, 2022</aside>
+    <aside>February 13, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

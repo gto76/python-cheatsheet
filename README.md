@@ -262,7 +262,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType, ModuleTyp
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter() while Collection ABC looks for methods iter(), contains() and len().**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Collection ABC looks for methods iter(), contains() and len(), while Iterable ABC only looks for method iter().**
 
 ```python
 >>> from collections.abc import Sequence, Collection, Iterable
@@ -318,7 +318,7 @@ String
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
-<int>  = <str>.index(<sub_str>)              # Same but raises ValueError if missing.
+<int>  = <str>.index(<sub_str>)              # Same, but raises ValueError if missing.
 ```
 
 ```python
