@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 13, 2022</aside>
+    <aside>February 17, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -263,32 +263,32 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType, ModuleType
 </code></pre></div>
 
-<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Collection ABC looks for methods iter(), contains() and len(), while Iterable ABC only looks for method iter().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Sequence, Collection, Iterable
+<div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter() while Collection ABC looks for methods iter(), contains() and len().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable, Collection, Sequence
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], Iterable)
 <span class="hljs-keyword">True</span>
 </code></pre></div>
 
 
 <pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
-┃                  │  Sequence  │ Collection │  Iterable  ┃
+┃                  │  Iterable  │ Collection │  Sequence  ┃
 ┠──────────────────┼────────────┼────────────┼────────────┨
 ┃ list, range, str │     ✓      │     ✓      │     ✓      ┃
-┃ dict, set        │            │     ✓      │     ✓      ┃
-┃ iter             │            │            │     ✓      ┃
+┃ dict, set        │     ✓      │     ✓      │            ┃
+┃ iter             │     ✓      │            │            ┃
 ┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Integral, Rational, Real, Complex, Number
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> numbers <span class="hljs-keyword">import</span> Number, Complex, Real, Rational, Integral
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
 <span class="hljs-keyword">True</span>
 </code></pre>
 <pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
-┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃
+┃                    │  Number  │  Complex │   Real   │ Rational │ Integral ┃
 ┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨
 ┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃
-┃ fractions.Fraction │          │    ✓     │    ✓     │    ✓     │    ✓     ┃
-┃ float              │          │          │    ✓     │    ✓     │    ✓     ┃
-┃ complex            │          │          │          │    ✓     │    ✓     ┃
-┃ decimal.Decimal    │          │          │          │          │    ✓     ┃
+┃ fractions.Fraction │    ✓     │    ✓     │    ✓     │    ✓     │          ┃
+┃ float              │    ✓     │    ✓     │    ✓     │          │          ┃
+┃ complex            │    ✓     │    ✓     │          │          │          ┃
+┃ decimal.Decimal    │    ✓     │          │          │          │          ┃
 ┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="string"><a href="#string" name="string">#</a>String</h2><pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
@@ -340,6 +340,7 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
+<li><strong>Argument 'new' can be a function that accepts a match and returns a string.</strong></li>
 <li><strong>Search() and match() return None if they can't find a match.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
@@ -465,7 +466,7 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2
 </code></pre></div>
 
-<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, variance, stdev, pvariance, pstdev
+<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, variance, stdev, quantiles, groupby
 </code></pre></div>
 
 <div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, choice, shuffle, gauss, seed
@@ -2883,7 +2884,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>February 13, 2022</aside>
+    <aside>February 17, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

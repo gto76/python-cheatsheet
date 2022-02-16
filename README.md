@@ -262,39 +262,39 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType, ModuleTyp
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Collection ABC looks for methods iter(), contains() and len(), while Iterable ABC only looks for method iter().**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter() while Collection ABC looks for methods iter(), contains() and len().**
 
 ```python
->>> from collections.abc import Sequence, Collection, Iterable
+>>> from collections.abc import Iterable, Collection, Sequence
 >>> isinstance([1, 2, 3], Iterable)
 True
 ```
 
 ```text
 +------------------+------------+------------+------------+
-|                  |  Sequence  | Collection |  Iterable  |
+|                  |  Iterable  | Collection |  Sequence  |
 +------------------+------------+------------+------------+
 | list, range, str |    yes     |    yes     |    yes     |
-| dict, set        |            |    yes     |    yes     |
-| iter             |            |            |    yes     |
+| dict, set        |    yes     |    yes     |            |
+| iter             |    yes     |            |            |
 +------------------+------------+------------+------------+
 ```
 
 ```python
->>> from numbers import Integral, Rational, Real, Complex, Number
+>>> from numbers import Number, Complex, Real, Rational, Integral
 >>> isinstance(123, Number)
 True
 ```
 
 ```text
 +--------------------+----------+----------+----------+----------+----------+
-|                    | Integral | Rational |   Real   | Complex  |  Number  |
+|                    |  Number  |  Complex |   Real   | Rational | Integral |
 +--------------------+----------+----------+----------+----------+----------+
 | int                |   yes    |   yes    |   yes    |   yes    |   yes    |
-| fractions.Fraction |          |   yes    |   yes    |   yes    |   yes    |
-| float              |          |          |   yes    |   yes    |   yes    |
-| complex            |          |          |          |   yes    |   yes    |
-| decimal.Decimal    |          |          |          |          |   yes    |
+| fractions.Fraction |   yes    |   yes    |   yes    |   yes    |          |
+| float              |   yes    |   yes    |   yes    |          |          |
+| complex            |   yes    |   yes    |          |          |          |
+| decimal.Decimal    |   yes    |          |          |          |          |
 +--------------------+----------+----------+----------+----------+----------+
 ```
 
@@ -360,6 +360,7 @@ import re
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
+* **Argument 'new' can be a function that accepts a match and returns a string.**
 * **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
@@ -510,7 +511,7 @@ from math import log, log10, log2
 
 ### Statistics
 ```python
-from statistics import mean, median, variance, stdev, pvariance, pstdev
+from statistics import mean, median, variance, stdev, quantiles, groupby
 ```
 
 ### Random
