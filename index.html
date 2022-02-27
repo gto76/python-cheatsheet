@@ -1394,7 +1394,7 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns whole path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns file object.</span>
+&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
 <div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
@@ -1417,7 +1417,7 @@ value = args.&lt;name&gt;
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as a string.</span>
-&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns file object.</span>
+&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
