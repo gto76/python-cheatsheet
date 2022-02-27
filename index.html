@@ -1496,7 +1496,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;reader&gt; = csv.reader(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;list&gt;   = next(&lt;reader&gt;)           <span class="hljs-comment"># Returns next row as a list of strings.</span>
-&lt;list&gt;   = list(&lt;reader&gt;)           <span class="hljs-comment"># Returns list of remaining rows.</span>
+&lt;list&gt;   = list(&lt;reader&gt;)           <span class="hljs-comment"># Returns a list of remaining rows.</span>
 </code></pre></div>
 
 <ul>
@@ -1597,7 +1597,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
-&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns int in range from 0 to 255.</span>
+&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
@@ -1691,7 +1691,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes mview to the binary file.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns list of ints or floats.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints or floats.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
 &lt;int&gt;   = int.from_bytes(&lt;mview&gt;, …)           <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Treats mview as a bytes object.</span>

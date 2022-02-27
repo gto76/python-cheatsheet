@@ -1802,7 +1802,7 @@ import csv
 ```python
 <reader> = csv.reader(<file>)       # Also: `dialect='excel', delimiter=','`.
 <list>   = next(<reader>)           # Returns next row as a list of strings.
-<list>   = list(<reader>)           # Returns list of remaining rows.
+<list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
@@ -1928,7 +1928,7 @@ Bytes
 
 ```python
 <bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
-<int>   = <bytes>[<index>]               # Returns int in range from 0 to 255.
+<int>   = <bytes>[<index>]               # Returns an int in range from 0 to 255.
 <bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
 <bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
@@ -2044,7 +2044,7 @@ Memory View
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns list of ints or floats.
+<list>  = list(<mview>)                        # Returns a list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
 <int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`.
 '<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
