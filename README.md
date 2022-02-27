@@ -1655,7 +1655,7 @@ from pathlib import Path
 
 ```python
 <Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
-<Path> = <path> / <path> [/ ...]    # One of the two paths must be a Path object.
+<Path> = <path> / <path> [/ ...]    # First or second path must be a Path object.
 ```
 
 ```python
@@ -1674,7 +1674,7 @@ from pathlib import Path
 ```
 
 ```python
-<iter> = <Path>.iterdir()           # Returns dir contents as Path objects.
+<iter> = <Path>.iterdir()           # Returns directory contents as Path objects.
 <iter> = <Path>.glob('<pattern>')   # Returns Paths matching the wildcard pattern.
 ```
 
