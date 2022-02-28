@@ -7,7 +7,7 @@
 // To install the Node.js and npm run:
 // $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
 //
-// To install dependencies globally, run:
+// Kappa
 // $ npm install -g jsdom jquery showdown highlightjs@9.12.0
 //
 // If running on macOS and modules can't be found after installation add:
