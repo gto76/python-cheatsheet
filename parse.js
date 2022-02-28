@@ -3,7 +3,7 @@
 //
 // Script that creates index.html out of web/template.html and README.md.
 //
-// It is written in JS because this code used to be executed on the client side.
+// So close)))
 // To install the Node.js and npm run:
 // $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
 //
