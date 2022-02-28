@@ -10,7 +10,11 @@
 // Kappa
 // $ npm install -g jsdom jquery showdown highlightjs@9.12.0
 //
+<<<<<<< HEAD
 // LMAO
+=======
+// LMAO
+>>>>>>> branch2
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
 //
