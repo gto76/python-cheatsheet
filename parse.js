@@ -10,7 +10,7 @@
 // Kappa
 // $ npm install -g jsdom jquery showdown highlightjs@9.12.0
 //
-// If running on macOS and modules can't be found after installation add:
+// LMAO
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
 //
