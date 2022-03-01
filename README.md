@@ -1122,7 +1122,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With total_ordering decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
+* **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
 * **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.**
 
@@ -1525,11 +1525,11 @@ arguments    = sys.argv[1:]
 ```python
 from argparse import ArgumentParser, FileType
 p = ArgumentParser(description=<str>)
-p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag
-p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option
-p.add_argument('<name>', type=<type>, nargs=1)                    # First argument
-p.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments
-p.add_argument('<name>', type=<type>, nargs='*')                  # Optional arguments
+p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag.
+p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option.
+p.add_argument('<name>', type=<type>, nargs=1)                    # First argument.
+p.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments.
+p.add_argument('<name>', type=<type>, nargs='*')                  # Optional arguments.
 args  = p.parse_args()                                            # Exits on error.
 value = args.<name>
 ```
@@ -2334,7 +2334,7 @@ async def human_controller(screen, moves):
         await asyncio.sleep(0.005)
 
 async def model(moves, state):
-    while state['*'] not in {p for id_, p in state.items() if id_ != '*'}:
+    while state['*'] not in (state[id_] for id_ in range(10)):
         id_, d = await moves.get()
         x, y   = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
@@ -3292,7 +3292,12 @@ b  3  4
 ```
 * **Use `'<DF>[col_key_1, col_key_2][row_key]'` to get the fifth result's values.**
 
-#### DataFrame — Encode, Decode, Plot:
+#### DataFrame — Plot, Encode, Decode:
+```python
+import matplotlib.pyplot as plt
+<DF>.plot.line/bar/hist/scatter([x=column_key, y=column_key/s]); plt.show()
+```
+
 ```python
 <DF> = pd.read_json/html('<str/path/url>')
 <DF> = pd.read_csv/pickle/excel('<path/url>')
@@ -3305,11 +3310,6 @@ b  3  4
 <str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
 <DF>.to_pickle/excel(<path>)
 <DF>.to_sql('<table_name>', <connection>)
-```
-
-```python
-import matplotlib.pyplot as plt
-<DF>.plot.line/bar/hist/scatter([x=column_key, y=column_key/s]); plt.show()
 ```
 
 ### GroupBy
