@@ -360,7 +360,7 @@ import re
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
 ```
 
-* **Argument 'new' can be a function that accepts a match and returns a string.**
+* **Argument 'new' can be a function that accepts a match object and returns a string.**
 * **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
