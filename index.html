@@ -1057,7 +1057,7 @@ Hello World!
 <div><h3 id="collection">Collection</h3><ul>
 <li><strong>Only required methods are iter() and len().</strong></li>
 <li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
-<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are not collections while being iterable.</strong></li>
+<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only iterable objects that are not collections.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1319,7 +1319,7 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> whenever possible.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on '\n', '\r' and '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read (default).</strong></li>
@@ -1330,7 +1330,7 @@ value = args.&lt;name&gt;
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'t'</span></code>  - Text mode (default).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (must be paired with one of above).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode.</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
