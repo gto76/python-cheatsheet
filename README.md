@@ -1239,7 +1239,7 @@ True
 ### Collection
 * **Only required methods are iter() and len().**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only iterable objects that are not collections.**
+* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
 ```python
 class MyCollection:
     def __init__(self, a):
@@ -1548,7 +1548,7 @@ Open
 ```
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
-* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on either '\n', '\r' or '\r\n'.**
+* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on '\n', '\r' and '\r\n'.**
 
 ### Modes
 * **`'r'`  - Read (default).**
@@ -1585,7 +1585,7 @@ Open
 ```python
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
-<file>.flush()                      # Flushes write buffer.
+<file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
 ```
 * **Methods do not add or strip trailing newlines, even writelines().**
 
