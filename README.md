@@ -1559,7 +1559,7 @@ Open
 * **`'r+'` - Read and write from the start.**
 * **`'a+'` - Read and write from the end.**
 * **`'t'`  - Text mode (default).**
-* **`'b'`  - Binary mode.**
+* **`'b'`  - Binary mode (`'br'`, `'bw'`, `'bx'`, …).**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
