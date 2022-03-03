@@ -2,20 +2,25 @@
 // Usage: node parse.js
 //
 // Script that creates index.html out of web/template.html and README.md.
+//
 // It is written in JS because this code used to be executed on the client side.
 // To install the Node.js and npm run:
 // $ sudo apt install nodejs npm  # On macOS use `brew install ...` instead.
+//
 // To install dependencies globally, run:
 // $ npm install -g jsdom jquery showdown highlightjs@9.12.0
+//
 // If running on macOS and modules can't be found after installation add:
 // export NODE_PATH=/usr/local/lib/node_modules
 // to the ~/.bash_profile or ~/.bashrc file and run '$ bash'.
+//
 // To avoid problems with permissions and path variables, install modules
 // into project's directory using:
 // $ npm install jsdom jquery showdown highlightjs@9.12.0
-// It is also advisable to add a script into .git/hooks directory, that will run 
-// this script before every commit. It should be named 'pre-commit' and it should
-// contain the following line: `./parse.js`.
+//
+// It is also advisable to add a Bash script into .git/hooks directory, that will
+// run this script before every commit. It should be named 'pre-commit' and it
+// should contain the following line: `./parse.js`.
 
 
 const fs = require('fs');
@@ -30,7 +35,7 @@ const TOC =
   '<pre><code class="hljs bash" style="line-height: 1.3em;"><strong>ToC</strong> = {\n' +
   '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
-  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#closure">Closure</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
+  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
@@ -66,7 +71,7 @@ const OS_RENAME =
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
 const TYPE =
-  '&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;parents_tuple&gt;, &lt;attributes_dict&gt;)';
+  '&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;tuple_of_parents&gt;, &lt;dict_of_class_attributes&gt;)';
 
 const EVAL =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval\n' +
@@ -98,32 +103,52 @@ const INDEX =
 
 const DIAGRAM_1_A =
   '+------------------+------------+------------+------------+\n' +
-  '|                  |  Sequence  | Collection |  Iterable  |\n' +
+  '|                  |  Iterable  | Collection |  Sequence  |\n' +
   '+------------------+------------+------------+------------+\n';
 
+// const DIAGRAM_1_B =
+//   '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+//   '┃                  │  Sequence  │ Collection │  Iterable  ┃\n' +
+//   '┠──────────────────┼────────────┼────────────┼────────────┨\n' +
+//   '┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
+//   '┃ dict, set        │            │     ✓      │     ✓      ┃\n' +
+//   '┃ iter             │            │            │     ✓      ┃\n' +
+//   '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+
 const DIAGRAM_1_B =
-  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
-  '┃                  │  Sequence  │ Collection │  Iterable  ┃\n' +
-  '┠──────────────────┼────────────┼────────────┼────────────┨\n' +
-  '┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
-  '┃ dict, set        │            │     ✓      │     ✓      ┃\n' +
-  '┃ iter             │            │            │     ✓      ┃\n' +
-  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+'┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+'┃                  │  Iterable  │ Collection │  Sequence  ┃\n' +
+'┠──────────────────┼────────────┼────────────┼────────────┨\n' +
+'┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
+'┃ dict, set        │     ✓      │     ✓      │            ┃\n' +
+'┃ iter             │     ✓      │            │            ┃\n' +
+'┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_2_A =
   '+--------------------+----------+----------+----------+----------+----------+\n' +
-  '|                    | Integral | Rational |   Real   | Complex  |  Number  |\n' +
+  '|                    |  Number  |  Complex |   Real   | Rational | Integral |\n' +
   '+--------------------+----------+----------+----------+----------+----------+\n';
+
+// const DIAGRAM_2_B =
+//   '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
+//   '┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃\n' +
+//   '┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
+//   '┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+//   '┃ fractions.Fraction │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
+//   '┃ float              │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
+//   '┃ complex            │          │          │          │    ✓     │    ✓     ┃\n' +
+//   '┃ decimal.Decimal    │          │          │          │          │    ✓     ┃\n' +
+//   '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
 const DIAGRAM_2_B =
   '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓\n' +
-  '┃                    │ Integral │ Rational │   Real   │ Complex  │  Number  ┃\n' +
+  '┃                    │  Number  │  Complex │   Real   │ Rational │ Integral ┃\n' +
   '┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨\n' +
   '┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ fractions.Fraction │          │    ✓     │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ float              │          │          │    ✓     │    ✓     │    ✓     ┃\n' +
-  '┃ complex            │          │          │          │    ✓     │    ✓     ┃\n' +
-  '┃ decimal.Decimal    │          │          │          │          │    ✓     ┃\n' +
+  '┃ fractions.Fraction │    ✓     │    ✓     │    ✓     │    ✓     │          ┃\n' +
+  '┃ float              │    ✓     │    ✓     │    ✓     │          │          ┃\n' +
+  '┃ complex            │    ✓     │    ✓     │          │          │          ┃\n' +
+  '┃ decimal.Decimal    │    ✓     │          │          │          │          ┃\n' +
   '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛\n';
 
 const DIAGRAM_3_A =
@@ -213,7 +238,7 @@ const DIAGRAM_7_B =
   "      ├── NameError               <span class='hljs-comment'># Raised when a variable name is not found.</span>\n" +
   "      ├── OSError                 <span class='hljs-comment'># Errors such as “file not found” or “disk full” (see Open).</span>\n" +
   "      │    └── FileNotFoundError  <span class='hljs-comment'># When a file or directory is requested but doesn't exist.</span>\n" +
-  "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall in other categories.</span>\n" +
+  "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall into other categories.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
   "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
@@ -303,27 +328,23 @@ const DIAGRAM_12_B =
   '┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_13_A =
-  '| sr.apply(…) |      3      |    sum  3   |     s  3      |';
+  '| sr.apply(…)     |      3      |    sum  3   |     s  3      |';
 
 const DIAGRAM_13_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ sr.apply(…) │      3      │    sum  3   │     s  3      ┃\n" +
-  "┃ sr.agg(…)   │             │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_14_A =
-  '| sr.apply(…) |             |      rank   |               |';
-
-const DIAGRAM_14_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ sr.apply(…) │             │      rank   │               ┃\n" +
-  "┃ sr.agg(…)   │     x  1    │   x     1   │    r  x  1    ┃\n" +
-  "┃ sr.trans(…) │     y  2    │   y     2   │       y  2    ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…)     │      3      │    sum  3   │     s  3      ┃\n" +
+  "┃ sr.agg(…)       │             │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ sr.apply(…)     │             │      rank   │               ┃\n" +
+  "┃ sr.agg(…)       │     x  1    │   x     1   │    r  x  1    ┃\n" +
+  "┃ sr.transform(…) │     y  2    │   y     2   │       y  2    ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_15_A =
   '+------------------------+---------------+------------+------------+--------------------------+';
@@ -345,7 +366,7 @@ const DIAGRAM_15_B =
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
   "┃           join=…)      │ b  3   4   .  │     4      │            │ A series is treated as a ┃\n" +
-  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(r)  ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(sr) ┃\n" +
   "┃                        │ c  .   6   7  │     6      │            │ to add a row instead.    ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
@@ -360,55 +381,78 @@ const DIAGRAM_15_B =
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_16_A =
-  '| df.apply(…) |             |       x  y  |               |';
+  '| df.apply(…)     |             |       x  y  |               |';
 
 const DIAGRAM_16_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…) │             │       x  y  │               ┃\n" +
-  "┃ df.agg(…)   │     x  4    │  sum  4  6  │     x  4      ┃\n" +
-  "┃             │     y  6    │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
-const DIAGRAM_17_A =
-  '| df.apply(…) |      x  y   |      x    y |        x      |';
-
-const DIAGRAM_17_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…) │      x  y   │      x    y │        x      ┃\n" +
-  "┃ df.agg(…)   │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃ df.trans(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
-  "┃             │             │ b    2    2 │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…)     │             │       x  y  │               ┃\n" +
+  "┃ df.agg(…)       │     x  4    │  sum  4  6  │     x  4      ┃\n" +
+  "┃                 │     y  6    │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ df.apply(…)     │      x  y   │      x    y │        x      ┃\n" +
+  "┃ df.agg(…)       │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃ df.transform(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
+  "┃                 │             │ b    2    2 │               ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_18_A =
-  '| gb.agg(…)   |      x   y  |      x  y   |      x    y |        x      |';
+  '| gb.agg(…)       |      x   y  |      x  y   |      x    y |        x      |';
 
 const DIAGRAM_18_B =
-  "┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃             │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ gb.agg(…)   │      x   y  │      x  y   │      x    y │        x      ┃\n" +
-  "┃             │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃             │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
-  "┃             │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
-  "┃             │             │             │ c    2    2 │               ┃\n" +
-  "┠─────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ gb.trans(…) │      x   y  │      x  y   │             │               ┃\n" +
-  "┃             │  a   1   2  │   a  1  1   │             │               ┃\n" +
-  "┃             │  b  11  13  │   b  1  1   │             │               ┃\n" +
-  "┃             │  c  11  13  │   c  1  1   │             │               ┃\n" +
-  "┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.agg(…)       │      x   y  │      x  y   │      x    y │        x      ┃\n" +
+  "┃                 │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
+  "┃                 │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
+  "┃                 │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
+  "┃                 │             │             │ c    2    2 │               ┃\n" +
+  "┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ gb.transform(…) │      x   y  │      x  y   │             │               ┃\n" +
+  "┃                 │  a   1   2  │   a  1  1   │             │               ┃\n" +
+  "┃                 │  b  11  13  │   b  1  1   │             │               ┃\n" +
+  "┃                 │  c  11  13  │   c  2  2   │             │               ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+
+const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.\n';
+
+const DARK_THEME_SCRIPT =
+  '<script>\n' +
+  '  // Changes the image and link to theme if URL ends with "index.html?theme=dark". \n' +
+  '  if (window.location.search.search(/[?&]theme=dark/) !== -1) {\n' +
+  '\n' +
+  '    var link_to_theme = document.createElement("a")\n' +
+  '    link_to_theme.href = "index.html"\n' +
+  '    link_to_theme.text = "Switch to light theme"\n' +
+  '    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)\n' +
+  '\n' +
+  '    var img_dark = document.createElement("img");\n' +
+  '    img_dark.src = "web/image_orig_blue6.png";\n' +
+  '    img_dark.alt = "Monthy Python";\n' +
+  '    if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||\n' +
+  '        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {\n' +
+  '      img_dark.style = "width: 910px;";\n' +
+  '    } else {\n' +
+  '      img_dark.style = "width: 960px;";\n' +
+  '    }\n' +
+  '    document.getElementsByClassName("banner")[1].firstChild.replaceWith(img_dark);\n' +
+  '  }\n' +
+  '</script>';
 
 
 function main() {
   const html = getMd();
   initDom(html);
   modifyPage();
-  const template = readFile('web/template.html');
+  var template = readFile('web/template.html');
+  template = updateDate(template);
   const tokens = template.split('<div id=main_container></div>');
   const text = `${tokens[0]} ${document.body.innerHTML} ${tokens[1]}`;
   writeToFile('index.html', text);
@@ -430,6 +474,8 @@ function initDom(html) {
 }
 
 function modifyPage() {
+  changeMenu();
+  addDarkThemeScript();
   removeOrigToc();
   addToc();
   insertLinks();
@@ -438,6 +484,14 @@ function modifyPage() {
   highlightCode();
   fixPandasDiagram();
   removePlotImages();
+}
+
+function changeMenu() {
+  $('sup').first().html(MENU)
+}
+
+function addDarkThemeScript() {
+  $('#main').before(DARK_THEME_SCRIPT);
 }
 
 function removeOrigToc() {
@@ -482,10 +536,8 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
-  $(`code:contains(${DIAGRAM_14_A})`).html(DIAGRAM_14_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
-  $(`code:contains(${DIAGRAM_17_A})`).html(DIAGRAM_17_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 
@@ -520,7 +572,7 @@ function fixHighlights() {
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
-  $(`code:contains(\'<class_name>\', <parents_tuple>, <attributes_dict>)`).html(TYPE);
+  $(`code:contains(\'<class_name>\', <tuple_of_parents>, <dict_of_class_attributes>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
@@ -579,6 +631,17 @@ function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
 }
+
+function updateDate(template) {
+  const date = new Date();
+  const date_str = date.toLocaleString('en-us', {month: 'long', day: 'numeric', year: 'numeric'});
+  template = template.replace('May 20, 2021', date_str);
+  template = template.replace('May 20, 2021', date_str);
+  return template;
+}
+
+
+// UTIL
 
 function readFile(filename) {
   try {  

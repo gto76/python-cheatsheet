@@ -3,8 +3,8 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
 
 .ocks-org body {
-  background: #fcfcfa;
-  color: #333;
+  background: hsl(206deg 47% 9%);
+  color: hsl(0deg 0% 72%);
   font-family: "PT Serif", serif;
   margin: 1em auto 4em auto;
   position: relative;
@@ -26,12 +26,12 @@
 .ocks-org h2,
 .ocks-org h3,
 .ocks-org h4 {
-  color: #000;
+  color: hsl(0deg 1% 71%);
 }
 
 .ocks-org header,
 .ocks-org footer {
-  color: #636363;
+  color: #999999;
 }
 
 h1 {
@@ -52,7 +52,7 @@ h2 {
 
 h2 a[name],
 h2 a[id] {
-  color: #ccc;
+  color: #5f5c5c;
   padding-right: 0.3em;
 }
 
@@ -119,7 +119,7 @@ li {
 }
 
 a {
-  color: steelblue;
+  color: hsl(187deg 100% 33%);
 }
 
 a:not(:hover) {
@@ -134,6 +134,7 @@ textarea {
 
 code {
   line-height: 1em;
+  color: hsl(0deg 0% 74%);
 }
 
 textarea {
@@ -141,7 +142,7 @@ textarea {
 }
 
 pre {
-  border-left: solid 2px #ccc;
+  border-left: solid 2px #424242;
   padding-left: 18px;
   margin: 2em 0 2em 0;
 }
@@ -329,6 +330,7 @@ ul {
 
 .node .code text {
   font-family: monospace;
+  color: hsl(0deg 0% 74%)
 }
 
 .node .key rect {

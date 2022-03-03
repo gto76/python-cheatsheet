@@ -2,12 +2,14 @@ How To Create PDF (on macOS)
 ============================
 PDF file can also be purchased here: https://transactions.sendowl.com/products/78175486/4422834F/view
 
+
 Setup
 -----
 * Install Adobe Acrobat Pro DC.
 * Copy headers and footers from `pdf/acrobat/` folder to `/Users/<username>/Library/Preferences/Adobe/Acrobat/DC/HeaderFooter/`.
 * Change date in header and footer element of `web/template.html`.
 * Run `./parse.js` and commit changes.
+
 
 Printing to PDF
 ---------------
@@ -39,6 +41,7 @@ Printing to PDF
 * Select 'Print...' with destination 'Save as PDF', paper size 'A4', 'Default' margins (top 10mm, right 9.5mm, bottom 8mm and left 10mm), 'Default' scale and no headers and footers and save (the document should be 51 pages long with last page empty).
 * Check if plots were rendered correctly.
 
+
 Adding headers and footers to PDF (the same for both files)
 -----------------------------------------------------------
 * Open the PDF file in Adobe Acrobat Pro DC.
@@ -51,6 +54,7 @@ Adding headers and footers to PDF (the same for both files)
 * Set title to 'Comprehensive Python Cheatsheet' and author to 'Jure Šorn' by selecting 'File/Properties...'.
 * Save the progress by running 'Save as' in Format: 'Adobe PDF Files'.
 * Run 'Save as' again, this time in 'Adobe PDF Files, Optimized', so that Menlo font error gets fixed.
+
 
 Printing the PDF
 ----------------
