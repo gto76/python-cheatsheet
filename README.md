@@ -533,11 +533,11 @@ from random import random, randint, choice, shuffle, gauss, seed
 
 ### Bitwise Operators
 ```python
-<int> = <int> & <int>                    # And: `0b1100 & 0b1010 == 0b1000`.
-<int> = <int> | <int>                    # Or:  `0b1100 | 0b1010 == 0b1110`.
-<int> = <int> ^ <int>                    # Xor: `0b1100 ^ 0b1010 == 0b0110`.
-<int> = <int> << n_bits                  # Left shift (>> for right)
-<int> = ~<int>                           # Not (also: -<int> - 1)
+<int> = <int> & <int>                    # And (0b1100 & 0b1010 == 0b1000).
+<int> = <int> | <int>                    # Or  (0b1100 | 0b1010 == 0b1110).
+<int> = <int> ^ <int>                    # Xor (0b1100 ^ 0b1010 == 0b0110).
+<int> = <int> << n_bits                  # Left shift (>> for right).
+<int> = ~<int>                           # Not (also: -<int> - 1).
 ```
 
 
