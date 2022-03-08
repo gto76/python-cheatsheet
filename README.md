@@ -381,6 +381,7 @@ import re
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
 * **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
 * **Use a capital letter for negation.**
+
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
 '\w' == '[a-zA-Z0-9_]'                         # Matches alphanumerics and underscore.
@@ -1548,7 +1549,7 @@ Open
 ```
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
-* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on '\n', '\r' and '\r\n'.**
+* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.**
 
 ### Modes
 * **`'r'`  - Read (default).**
@@ -1898,8 +1899,7 @@ with <conn>:                                    # Exits the block with commit() 
 ```
 
 ### Example
-**In this example values are not actually saved because `'conn.commit()'` is omitted!**
-
+**Values are not actually saved in this example because `'conn.commit()'` is omitted!**
 ```python
 >>> conn = sqlite3.connect('test.db')
 >>> conn.execute('CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)')
@@ -3147,7 +3147,6 @@ Name: a, dtype: int64
 <Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
 <Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.agg/transform/map(lambda <el>: <el>)
 ```
-* **The way `'agg()'` and `'transform()'` find out whether the passed function accepts an element or the whole Series is by passing it a single value at first and if it raises an error, then they pass it the whole Series. `'agg()'` only accepts Attribute/Type/ValueError.**
 
 ```python
 >>> sr = Series([1, 2], index=['x', 'y'])
@@ -3172,6 +3171,12 @@ y    2
 +-----------------+-------------+-------------+---------------+
 ```
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
+
+#### Series — Plot:
+```python
+import matplotlib.pyplot as plt
+<Sr>.plot.line/area/bar/pie/hist(); plt.show()
+```
 
 ### DataFrame
 **Table with labeled rows and columns.**
