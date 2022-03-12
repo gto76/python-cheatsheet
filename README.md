@@ -17,7 +17,6 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
 
-
 Main
 ----
 ```python
@@ -25,6 +24,7 @@ if __name__ == '__main__':     # Runs main() if file wasn't imported.
     main()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 List
 ----
@@ -65,6 +65,7 @@ list_of_chars    = list(<str>)
 <list>.clear()                 # Removes all items. Also works on dictionary and set.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Dictionary
 ----------
@@ -105,6 +106,7 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 ('blue', 3)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Set
 ---
@@ -139,6 +141,7 @@ Set
 <frozenset> = frozenset(<collection>)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Tuple
 -----
@@ -167,6 +170,7 @@ Point(x=1, y=2)
 ('x', 'y')
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Range
 -----
@@ -181,6 +185,7 @@ from_inclusive = <range>.start
 to_exclusive   = <range>.stop
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Enumerate
 ---------
@@ -189,6 +194,7 @@ for i, el in enumerate(<collection> [, i_start]):
     ...
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Iterator
 --------
@@ -220,6 +226,7 @@ from itertools import count, repeat, cycle, chain, islice
 <iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive, step_size`.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Generator
 ---------
@@ -239,6 +246,7 @@ def count(start, step):
 (10, 12, 14)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Type
 ----
@@ -298,6 +306,7 @@ True
 +--------------------+----------+----------+----------+----------+----------+
 ```
 
+**[`Back To Contents`](#Contents)**
 
 String
 ------
@@ -347,6 +356,7 @@ String
 ```
 * **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85…]'`.**
 
+**[`Back To Contents`](#Contents)**
 
 Regex
 -----
@@ -388,6 +398,7 @@ import re
 '\s' == '[ \t\n\r\f\v]'                        # Matches whitespaces.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Format
 ------
@@ -481,6 +492,7 @@ Format
 {90:X}                                   # '5A'
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Numbers
 -------
@@ -541,6 +553,7 @@ from random import random, randint, choice, shuffle, gauss, seed
 <int> = ~<int>                           # Not (also: -<int> - 1).
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Combinatorics
 -------------
@@ -583,6 +596,7 @@ from itertools import product, combinations, combinations_with_replacement, perm
  ('c', 'a'), ('c', 'b')]                     # c x  x  .
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Datetime
 --------
@@ -661,6 +675,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also '//'.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Arguments
 ---------
@@ -680,6 +695,7 @@ def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 * **A function has its default values evaluated when it's first encountered in the scope.**
 * **Any changes to default values that are mutable will persist between invocations.**
 
+**[`Back To Contents`](#Contents)**
 
 Splat Operator
 --------------
@@ -745,6 +761,7 @@ def f(*args, y, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 head, *body, tail = <collection>
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Inline
 ------
@@ -810,6 +827,7 @@ Creature = make_dataclass('Creature', ['loc', 'dir'])
 creature = Creature(point, direction)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Imports
 -------
@@ -822,6 +840,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
 
+**[`Back To Contents`](#Contents)**
 
 Closure
 -------
@@ -879,6 +898,7 @@ def get_counter():
 (1, 2, 3)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Decorator
 ---------
@@ -943,6 +963,7 @@ def add(x, y):
     return x + y
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Class
 -----
@@ -1081,6 +1102,7 @@ from copy import copy, deepcopy
 <object> = deepcopy(<object>)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Duck Types
 ----------
@@ -1213,6 +1235,7 @@ class MyOpen:
 Hello World!
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Iterable Duck Types
 -------------------
@@ -1307,6 +1330,7 @@ class MyAbcSequence(abc.Sequence):
 * **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
 * **Names of their required methods are stored in `'<abc>.__abstractmethods__'`.**
 
+**[`Back To Contents`](#Contents)**
 
 Enum
 ----
@@ -1360,6 +1384,7 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
 ```
 * **Member names are in all caps because trying to access a member that is named after a reserved keyword raises SyntaxError.**
 
+**[`Back To Contents`](#Contents)**
 
 Exceptions
 ----------
@@ -1474,6 +1499,7 @@ class MyInputError(MyError):
     pass
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Exit
 ----
@@ -1485,6 +1511,7 @@ sys.exit(<el>)                    # Prints to stderr and exits with 1.
 sys.exit(<int>)                   # Exits with passed exit code.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Print
 -----
@@ -1501,6 +1528,7 @@ pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
 * **Levels deeper than 'depth' get replaced by '...'.**
 
+**[`Back To Contents`](#Contents)**
 
 Input
 -----
@@ -1513,6 +1541,7 @@ Input
 * **Prompt string is printed to the standard output before reading input.**
 * **Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
 
+**[`Back To Contents`](#Contents)**
 
 Command Line Arguments
 ----------------------
@@ -1539,6 +1568,7 @@ value = args.<name>
 * **Use `'default=<el>'` to set the default value.**
 * **Use `'type=FileType(<mode>)'` for files.**
 
+**[`Back To Contents`](#Contents)**
 
 Open
 ----
@@ -1604,6 +1634,7 @@ def write_to_file(filename, text):
         file.write(text)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Paths
 -----
@@ -1684,6 +1715,7 @@ from pathlib import Path
 <file> = open(<Path>)               # Opens the file and returns a file object.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 OS Commands
 -----------
@@ -1740,6 +1772,7 @@ CompletedProcess(args=['bc', '-s'], returncode=0)
 '2\n'
 ```
 
+**[`Back To Contents`](#Contents)**
 
 JSON
 ----
@@ -1765,6 +1798,7 @@ def write_to_json_file(filename, an_object):
         json.dump(an_object, file, ensure_ascii=False, indent=2)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Pickle
 ------
@@ -1790,6 +1824,7 @@ def write_to_pickle_file(filename, an_object):
         pickle.dump(an_object, file)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 CSV
 ---
@@ -1855,6 +1890,7 @@ def write_to_csv_file(filename, rows):
         writer.writerows(rows)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 SQLite
 ------
@@ -1921,6 +1957,7 @@ from mysql import connector
 <cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Bytes
 -----
@@ -1963,6 +2000,7 @@ def write_bytes(filename, bytes_obj):
         file.write(bytes_obj)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Struct
 ------
@@ -2005,6 +2043,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'f'` - float (4/4)**
 * **`'d'` - double (8/8)**
 
+**[`Back To Contents`](#Contents)**
 
 Array
 -----
@@ -2019,6 +2058,7 @@ from array import array
 <file>.write(<array>)                          # Writes array to the binary file.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Memory View
 -----------
@@ -2050,6 +2090,7 @@ Memory View
 '<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Deque
 -----
@@ -2067,6 +2108,7 @@ from collections import deque
 <deque>.rotate(n=1)                            # Rotates elements to the right.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Threading
 ---------
@@ -2137,6 +2179,7 @@ from queue import Queue
 <el> = <Queue>.get_nowait()                    # Raises queue.Empty exception if empty.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Operator
 --------
@@ -2160,6 +2203,7 @@ first_element    = op.methodcaller('pop', 0)(<list>)
 * **Binary operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
+**[`Back To Contents`](#Contents)**
 
 Introspection
 -------------
@@ -2191,6 +2235,7 @@ from inspect import signature
 <memb> = <Param>.kind                      # Member of ParameterKind enum.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Metaprogramming
 ---------------
@@ -2278,6 +2323,7 @@ MyMetaClass.__base__ == type         # MyMetaClass is a subclass of type.
 +-------------+-------------+
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Eval
 ----
@@ -2289,6 +2335,7 @@ Eval
 ValueError: malformed node or string
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Coroutines
 ----------
@@ -2355,6 +2402,7 @@ if __name__ == '__main__':
 ```
 <br>
 
+**[`Back To Contents`](#Contents)**
 
 Libraries
 =========
@@ -2370,6 +2418,7 @@ Progress Bar
 Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Plot
 ----
@@ -2383,6 +2432,7 @@ plt.show()                                     # Displays the figure.
 plt.clf()                                      # Clears the figure.
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Table
 -----
@@ -2397,6 +2447,7 @@ with open('test.csv', encoding='utf-8', newline='') as file:
 print(table)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Curses
 ------
@@ -2426,6 +2477,7 @@ if __name__ == '__main__':
     wrapper(main)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Logging
 -------
@@ -2470,6 +2522,7 @@ retention=<int>|<datetime.timedelta>|<str>
 * **`'<timedelta>'` - Max age of a file.**
 * **`'<str>'` - Max age as a string: `'1 week, 3 days'`, `'2 months'`, ...**
 
+**[`Back To Contents`](#Contents)**
 
 Scraping
 --------
@@ -2495,6 +2548,7 @@ except requests.exceptions.ConnectionError:
     print("You've got problems with connection.", file=sys.stderr)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Web
 ---
@@ -2546,6 +2600,7 @@ def send_json(sport):
 {'team': 'arsenal f.c.', 'odds': [2.09, 3.74, 3.68]}
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Profiling
 ---------
@@ -2615,6 +2670,7 @@ with PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
 
+**[`Back To Contents`](#Contents)**
 
 NumPy
 -----
@@ -2715,6 +2771,7 @@ right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- 
 [1, 2, 1]
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Image
 -----
@@ -2791,6 +2848,7 @@ from PIL import ImageDraw
 * **Use `'outline=<color>'` to set the color of the contours.**
 * **Colors can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
+**[`Back To Contents`](#Contents)**
 
 Animation
 ---------
@@ -2811,6 +2869,7 @@ frames += reversed(frames[1:-1])
 imageio.mimsave('test.gif', frames, duration=0.03)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Audio
 -----
@@ -2917,6 +2976,7 @@ engine.say('Sally sells seashells by the seashore.')
 engine.runAndWait()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Synthesizer
 -----------
@@ -2939,6 +2999,7 @@ samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
 simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Pygame
 ------
@@ -3093,6 +3154,7 @@ if __name__ == '__main__':
     main()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Pandas
 ------
@@ -3375,6 +3437,7 @@ c  7  8
 <Sr/DF/DF>       = <R_Sr/R_DF/R_GB>.sum/max/mean()  # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Plotly
 ------
@@ -3455,6 +3518,7 @@ if __name__ == '__main__':
     main()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 PySimpleGUI
 -----------
@@ -3467,6 +3531,7 @@ event, values = window.read()
 print(f'Hello {values[0]}!' if event == 'Ok' else '')
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Appendix
 --------
@@ -3542,9 +3607,12 @@ if __name__ == '__main__':
     main()
 ```
 
+**[`Back To Contents`](#Contents)**
 
 Index
 -----
 * **Only available in the [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
 * **Ctrl+F / ⌘F is usually sufficient.**
 * **Searching `'#<title>'` on the [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
+
+**[`Back To Contents`](#Contents)**
