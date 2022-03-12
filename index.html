@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 8, 2022</aside>
+    <aside>March 12, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -228,7 +228,7 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt; = repeat(&lt;el&gt; [, times])             <span class="hljs-comment"># Returns element endlessly or 'times' times.</span>
 &lt;iter&gt; = cycle(&lt;collection&gt;)                <span class="hljs-comment"># Repeats the sequence endlessly.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = chain(&lt;coll_1&gt;, &lt;coll_2&gt; [, ...])  <span class="hljs-comment"># Empties collections in order.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = chain(&lt;coll_1&gt;, &lt;coll_2&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (figuratively).</span>
 &lt;iter&gt; = chain.from_iterable(&lt;collection&gt;)  <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = islice(&lt;coll&gt;, to_exclusive)       <span class="hljs-comment"># Only returns first 'to_exclusive' elements.</span>
@@ -583,7 +583,7 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt;  ± &lt;TD&gt;                   <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;D/DTn&gt; - &lt;D/DTn&gt;                <span class="hljs-comment"># Returns the difference, ignoring time jumps.</span>
 &lt;TD&gt;     = &lt;DTa&gt;   - &lt;DTa&gt;                  <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
-&lt;TD&gt;     = &lt;TD&gt;    * &lt;real&gt;                 <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;</span>
+&lt;TD&gt;     = &lt;TD&gt;    * &lt;real&gt;                 <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
 &lt;float&gt;  = &lt;TD&gt;    / &lt;TD&gt;                   <span class="hljs-comment"># How many weeks/years there are in TD. Also '//'.</span>
 </code></pre></div>
 
@@ -2885,7 +2885,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>March 8, 2022</aside>
+    <aside>March 12, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
