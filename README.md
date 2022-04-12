@@ -365,8 +365,8 @@ import re
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes dot also accept the `'\n'`.**
-* **Use `r'\1'` or `'\\1'` for backreference.**
-* **Add `'?'` after an operator to make it non-greedy.**
+* **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
+* **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
 
 ### Match Object
 ```python
@@ -380,7 +380,7 @@ import re
 ### Special Sequences
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
 * **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
-* **Use a capital letter for negation.**
+* **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
 
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
@@ -458,8 +458,7 @@ Format
 |  5.6789      |   '5.6789'     |    '5.678900'  | '5.678900e+00' |  '567.890000%' |
 | 56.789       |  '56.789'      |   '56.789000'  | '5.678900e+01' | '5678.900000%' |
 +--------------+----------------+----------------+----------------+----------------+
-```
-```text
+
 +--------------+----------------+----------------+----------------+----------------+
 |              |  {<float>:.2}  |  {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%} |
 +--------------+----------------+----------------+----------------+----------------+
@@ -473,6 +472,7 @@ Format
 +--------------+----------------+----------------+----------------+----------------+
 ```
 * **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes `'{6.5:.0f}'` a `'6'` and `'{7.5:.0f}'` an `'8'`.**
+* **This rule only works for numbers that can be represented exactly by a float (`.5`, `.25`, …).**
 
 ### Ints
 ```python
@@ -493,7 +493,7 @@ Numbers
 <Decimal>  = decimal.Decimal(<str/int>)  # Or: Decimal((sign, digits, exponent))
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
-* **Decimal numbers can be represented exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
+* **All decimal numbers are stored exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 
 ### Basic Functions
