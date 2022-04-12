@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 12, 2022</aside>
+    <aside>April 12, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -124,7 +124,7 @@ list_of_chars    = list(&lt;str&gt;)
 <li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
-&lt;el&gt;  = &lt;list&gt;.pop([&lt;int&gt;])    <span class="hljs-comment"># Returns and removes item at index or from the end.</span>
+&lt;el&gt;  = &lt;list&gt;.pop([&lt;int&gt;])    <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
 &lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)     <span class="hljs-comment"># Returns number of occurrences. Also works on strings.</span>
 &lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)     <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
 &lt;list&gt;.remove(&lt;el&gt;)            <span class="hljs-comment"># Removes first occurrence of the item or raises ValueError.</span>
@@ -2550,6 +2550,9 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present.</span>
 &lt;Sr&gt;.update(&lt;Sr&gt;)                             <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
+<pre><code class="python language-python hljs">&lt;Sr&gt;.plot.line/area/bar/pie/hist()            <span class="hljs-comment"># Generates a Matplotlib plot.</span>
+matplotlib.pyplot.show()                      <span class="hljs-comment"># Displays the plot. Also savefig(&lt;path&gt;).</span>
+</code></pre>
 <div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;Sr&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
@@ -2577,10 +2580,6 @@ y    <span class="hljs-number">2</span>
 <ul>
 <li><strong>Last result has a hierarchical index. Use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
-<div><h4 id="seriesplot">Series — Plot:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
-&lt;Sr&gt;.plot.line/area/bar/pie/hist(); plt.show()
-</code></pre></div>
-
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
@@ -2885,7 +2884,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>March 12, 2022</aside>
+    <aside>April 12, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

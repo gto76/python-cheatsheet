@@ -58,7 +58,7 @@ list_of_chars    = list(<str>)
 
 ```python
 <list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
-<el>  = <list>.pop([<int>])    # Returns and removes item at index or from the end.
+<el>  = <list>.pop([<int>])    # Removes and returns item at index or from the end.
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
 <int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
 <list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
@@ -3141,6 +3141,11 @@ Name: a, dtype: int64
 <Sr>.update(<Sr>)                             # Updates items that are already present.
 ```
 
+```python
+<Sr>.plot.line/area/bar/pie/hist()            # Generates a Matplotlib plot.
+matplotlib.pyplot.show()                      # Displays the plot. Also savefig(<path>).
+```
+
 #### Series — Aggregate, Transform, Map:
 ```python
 <el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.agg(lambda <Sr>: <el>)
@@ -3171,12 +3176,6 @@ y    2
 +-----------------+-------------+-------------+---------------+
 ```
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
-
-#### Series — Plot:
-```python
-import matplotlib.pyplot as plt
-<Sr>.plot.line/area/bar/pie/hist(); plt.show()
-```
 
 ### DataFrame
 **Table with labeled rows and columns.**
