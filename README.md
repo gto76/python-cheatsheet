@@ -472,7 +472,7 @@ Format
 +--------------+----------------+----------------+----------------+----------------+
 ```
 * **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes `'{6.5:.0f}'` a `'6'` and `'{7.5:.0f}'` an `'8'`.**
-* **This rule only works for numbers that can be represented exactly by a float (`.5`, `.25`, …).**
+* **This rule only effects numbers that can be represented exactly by a float (`.5`, `.25`, …).**
 
 ### Ints
 ```python
@@ -493,7 +493,7 @@ Numbers
 <Decimal>  = decimal.Decimal(<str/int>)  # Or: Decimal((sign, digits, exponent))
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
-* **All decimal numbers are stored exactly, unlike floats where `'1.1 + 2.2 != 3.3'`.**
+* **Decimal numbers are stored exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 
 ### Basic Functions
@@ -921,6 +921,7 @@ from functools import lru_cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
+* **Default size of the cache is 128 values. Passing `'maxsize=None'` makes it unbounded.**
 * **CPython interpreter limits recursion depth to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
 
 ### Parametrized Decorator
@@ -942,6 +943,7 @@ def debug(print_result=False):
 def add(x, y):
     return x + y
 ```
+* **Using only `'@debug'` to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can however manually check if the argument they received is a function and act accordingly.**
 
 
 Class
@@ -974,9 +976,9 @@ raise Exception(<el>)
 
 #### Repr() use cases:
 ```python
-print([<el>])
+print/str/repr([<el>])
 f'{<el>!r}'
-Z = dataclasses.make_dataclass('Z', ['a']); print(Z(<el>))
+Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<el>))
 >>> <el>
 ```
 

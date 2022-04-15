@@ -51,6 +51,12 @@ const LRU_CACHE =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
   '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
 
+const REPR_USE_CASES =
+  'print/str/repr([&lt;el&gt;])\n' +
+  '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;el&gt;!r}</span>\'</span>\n' +
+  'Z = dataclasses.make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;el&gt;))\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;\n';
+
 const CONSTRUCTOR_OVERLOADING =
   '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=<span class="hljs-keyword">None</span>)</span>:</span>\n' +
@@ -562,6 +568,7 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
+  $(`code:contains(print/str/repr([<el>]))`).html(REPR_USE_CASES);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
