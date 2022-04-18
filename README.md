@@ -1610,7 +1610,7 @@ def write_to_file(filename, text):
 Paths
 -----
 ```python
-from os import getcwd, path, listdir
+from os import getcwd, path, listdir, scandir
 from glob import glob
 ```
 
@@ -1639,10 +1639,6 @@ from glob import glob
 
 ### DirEntry
 **Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.**
-
-```python
-from os import scandir
-```
 
 ```python
 <iter> = scandir(path='.')          # Returns DirEntry objects located at path.
@@ -1689,13 +1685,13 @@ from pathlib import Path
 
 OS Commands
 -----------
+```python
+import os, shutil, subprocess
+```
+
 ### Files and Directories
 * **Paths can be either strings, Paths or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
-
-```python
-import os, shutil
-```
 
 ```python
 os.chdir(<path>)                    # Changes the current working directory.
@@ -1721,14 +1717,14 @@ shutil.rmtree(<path>)               # Deletes the directory.
 
 ### Shell Commands
 ```python
-import os
-<str> = os.popen('<shell_command>').read()
+<pipe> = os.popen('<command>')      # Executes command in sh/cmd and returns its stdout pipe.
+<str>  = <pipe>.read()              # Waits for EOF and returns result. Also readline/s().
+<int>  = <pipe>.close()             # Closes the pipe. Returns None on success, int on error.
 ```
 
 #### Sends '1 + 1' to the basic calculator and captures its output:
 ```python
->>> from subprocess import run
->>> run('bc', input='1 + 1\n', capture_output=True, text=True)
+>>> subprocess.run('bc', input='1 + 1\n', capture_output=True, text=True)
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
@@ -1736,7 +1732,7 @@ CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```python
 >>> from shlex import split
 >>> os.popen('echo 1 + 1 > test.in')
->>> run(split('bc -s'), stdin=open('test.in'), stdout=open('test.out', 'w'))
+>>> subprocess.run(split('bc -s'), stdin=open('test.in'), stdout=open('test.out', 'w'))
 CompletedProcess(args=['bc', '-s'], returncode=0)
 >>> open('test.out').read()
 '2\n'
@@ -2148,7 +2144,7 @@ import operator as op
 <el>      = op.add/sub/mul/truediv/floordiv/mod(<el>, <el>)  # +, -, *, /, //, %
 <int/set> = op.and_/or_/xor(<int/set>, <int/set>)            # &, |, ^
 <bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)     # ==, !=, <, <=, >, >=
-<func>    = op.itemgetter/attrgetter/methodcaller(<el>)      # [index/key], .<str>, .<str>()
+<func>    = op.itemgetter/attrgetter/methodcaller(<obj>)     # [index/key], .name, .name()
 ```
 
 ```python

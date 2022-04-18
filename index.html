@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 15, 2022</aside>
+    <aside>April 18, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1373,7 +1373,7 @@ value = args.&lt;name&gt;
         file.write(text)
 </code></pre></div>
 
-<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir
+<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir, scandir
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 </code></pre></div>
 
@@ -1392,15 +1392,13 @@ value = args.&lt;name&gt;
 &lt;bool&gt; = path.isfile(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_file()</span>
 &lt;bool&gt; = path.isdir(&lt;path&gt;)         <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_dir()</span>
 </code></pre>
-<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> scandir
-</code></pre></div>
-
-
-<pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
+<div><h3 id="direntry">DirEntry</h3><p><strong>Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns whole path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
-</code></pre>
+</code></pre></div>
+
+
 <div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
@@ -1424,18 +1422,18 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as a string.</span>
 &lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre>
-<div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><div><h3 id="filesanddirectories">Files and Directories</h3><ul>
+<div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
+</code></pre></div>
+
+<div><h3 id="filesanddirectories">Files and Directories</h3><ul>
 <li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
 <li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
-</code></pre></div></div>
-
-
-
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
+</ul><pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all directories in the path.</span>
-</code></pre>
+</code></pre></div>
+
+
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
 </code></pre>
@@ -1446,18 +1444,18 @@ os.replace(from, to)                <span class="hljs-comment"># Same, but overw
 os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory.</span>
 shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory.</span>
 </code></pre>
-<div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os
-&lt;str&gt; = os.popen(<span class="hljs-string">'&lt;shell_command&gt;'</span>).read()
+<div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;command&gt;'</span>)      <span class="hljs-comment"># Executes command in sh/cmd and returns its stdout pipe.</span>
+&lt;str&gt;  = &lt;pipe&gt;.read()              <span class="hljs-comment"># Waits for EOF and returns result. Also readline/s().</span>
+&lt;int&gt;  = &lt;pipe&gt;.close()             <span class="hljs-comment"># Closes the pipe. Returns None on success, int on error.</span>
 </code></pre></div>
 
-<div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends '1 + 1' to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> subprocess <span class="hljs-keyword">import</span> run
-<span class="hljs-meta">&gt;&gt;&gt; </span>run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
+<div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends '1 + 1' to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>subprocess.run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
 </code></pre></div>
 
 <div><h4 id="sendstestintothebasiccalculatorrunninginstandardmodeandsavesitsoutputtotestout">Sends test.in to the basic calculator running in standard mode and saves its output to test.out:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> shlex <span class="hljs-keyword">import</span> split
 <span class="hljs-meta">&gt;&gt;&gt; </span>os.popen(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>run(split(<span class="hljs-string">'bc -s'</span>), stdin=open(<span class="hljs-string">'test.in'</span>), stdout=open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>))
+<span class="hljs-meta">&gt;&gt;&gt; </span>subprocess.run(split(<span class="hljs-string">'bc -s'</span>), stdin=open(<span class="hljs-string">'test.in'</span>), stdout=open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>))
 CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-string">'-s'</span>], returncode=<span class="hljs-number">0</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">'test.out'</span>).read()
 <span class="hljs-string">'2\n'</span>
@@ -1770,7 +1768,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;el&gt;      = op.add/sub/mul/truediv/floordiv/mod(&lt;el&gt;, &lt;el&gt;)  <span class="hljs-comment"># +, -, *, /, //, %</span>
 &lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)            <span class="hljs-comment"># &amp;, |, ^</span>
 &lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)     <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
-&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;el&gt;)      <span class="hljs-comment"># [index/key], .&lt;str&gt;, .&lt;str&gt;()</span>
+&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt;)     <span class="hljs-comment"># [index/key], .name, .name()</span>
 </code></pre></div>
 
 
@@ -2889,7 +2887,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 15, 2022</aside>
+    <aside>April 18, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
