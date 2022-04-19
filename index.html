@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 18, 2022</aside>
+    <aside>April 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -486,8 +486,8 @@ to_exclusive   = &lt;range&gt;.stop
 <div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                    <span class="hljs-comment"># And (0b1100 &amp; 0b1010 == 0b1000).</span>
 &lt;int&gt; = &lt;int&gt; | &lt;int&gt;                    <span class="hljs-comment"># Or  (0b1100 | 0b1010 == 0b1110).</span>
 &lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                    <span class="hljs-comment"># Xor (0b1100 ^ 0b1010 == 0b0110).</span>
-&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                  <span class="hljs-comment"># Left shift (&gt;&gt; for right).</span>
-&lt;int&gt; = ~&lt;int&gt;                           <span class="hljs-comment"># Not (also: -&lt;int&gt; - 1).</span>
+&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                  <span class="hljs-comment"># Left shift. Use &gt;&gt; for right.</span>
+&lt;int&gt; = ~&lt;int&gt;                           <span class="hljs-comment"># Not. Also -&lt;int&gt; - 1.</span>
 </code></pre></div>
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><ul>
@@ -572,13 +572,13 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTa.</span>
 </code></pre></div>
 
-<div><h3 id="format-1">Format</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>dt = datetime.strptime(<span class="hljs-string">'2015-05-14 23:39:00.00 +02:00'</span>, <span class="hljs-string">'%Y-%m-%d %H:%M:%S.%f %z'</span>)
+<div><h3 id="format-1">Format</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>dt = datetime.strptime(<span class="hljs-string">'2015-05-14 23:39:00.00 +2000'</span>, <span class="hljs-string">'%Y-%m-%d %H:%M:%S.%f %z'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>dt.strftime(<span class="hljs-string">"%A, %dth of %B '%y, %I:%M%p %Z"</span>)
 <span class="hljs-string">"Thursday, 14th of May '15, 11:39PM UTC+02:00"</span>
 </code></pre></div>
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> only accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code. <code class="python hljs"><span class="hljs-string">'%z'</span></code> also accepts <code class="python hljs"><span class="hljs-string">'±HHMM'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> only accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code. <code class="python hljs"><span class="hljs-string">'%z'</span></code> also accepts <code class="python hljs"><span class="hljs-string">'±02:00'</span></code>.</strong></li>
 <li><strong>For abbreviated weekday and month use <code class="python hljs"><span class="hljs-string">'%a'</span></code> and <code class="python hljs"><span class="hljs-string">'%b'</span></code>.</strong></li>
 </ul>
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;D/DT&gt;   = &lt;D/DT&gt;  ± &lt;TD&gt;                   <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
@@ -1445,7 +1445,7 @@ os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes t
 shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory.</span>
 </code></pre>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;command&gt;'</span>)      <span class="hljs-comment"># Executes command in sh/cmd and returns its stdout pipe.</span>
-&lt;str&gt;  = &lt;pipe&gt;.read()              <span class="hljs-comment"># Waits for EOF and returns result. Also readline/s().</span>
+&lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)       <span class="hljs-comment"># Reads 'size' chars or until EOF. Also readline/s().</span>
 &lt;int&gt;  = &lt;pipe&gt;.close()             <span class="hljs-comment"># Closes the pipe. Returns None on success, int on error.</span>
 </code></pre></div>
 
@@ -2887,7 +2887,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 18, 2022</aside>
+    <aside>April 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

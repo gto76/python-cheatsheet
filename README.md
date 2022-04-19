@@ -537,8 +537,8 @@ from random import random, randint, choice, shuffle, gauss, seed
 <int> = <int> & <int>                    # And (0b1100 & 0b1010 == 0b1000).
 <int> = <int> | <int>                    # Or  (0b1100 | 0b1010 == 0b1110).
 <int> = <int> ^ <int>                    # Xor (0b1100 ^ 0b1010 == 0b0110).
-<int> = <int> << n_bits                  # Left shift (>> for right).
-<int> = ~<int>                           # Not (also: -<int> - 1).
+<int> = <int> << n_bits                  # Left shift. Use >> for right.
+<int> = ~<int>                           # Not. Also -<int> - 1.
 ```
 
 
@@ -645,11 +645,11 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Format
 ```python
->>> dt = datetime.strptime('2015-05-14 23:39:00.00 +02:00', '%Y-%m-%d %H:%M:%S.%f %z')
+>>> dt = datetime.strptime('2015-05-14 23:39:00.00 +2000', '%Y-%m-%d %H:%M:%S.%f %z')
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
-* **`'%Z'` only accepts `'UTC/GMT'` and local timezone's code. `'%z'` also accepts `'±HHMM'`.**
+* **`'%Z'` only accepts `'UTC/GMT'` and local timezone's code. `'%z'` also accepts `'±02:00'`.**
 * **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
@@ -1718,7 +1718,7 @@ shutil.rmtree(<path>)               # Deletes the directory.
 ### Shell Commands
 ```python
 <pipe> = os.popen('<command>')      # Executes command in sh/cmd and returns its stdout pipe.
-<str>  = <pipe>.read()              # Waits for EOF and returns result. Also readline/s().
+<str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
 <int>  = <pipe>.close()             # Closes the pipe. Returns None on success, int on error.
 ```
 
