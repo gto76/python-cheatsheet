@@ -378,15 +378,15 @@ import re
 ```
 
 ### Special Sequences
-* **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown below, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
-* **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
-
 ```python
 '\d' == '[0-9]'                                # Matches decimal characters.
 '\w' == '[a-zA-Z0-9_]'                         # Matches alphanumerics and underscore.
 '\s' == '[ \t\n\r\f\v]'                        # Matches whitespaces.
 ```
+
+* **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
+* **As shown above, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
+* **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
 
 
 Format
@@ -1436,8 +1436,8 @@ BaseException
       +-- EOFError                # Raised by input() when it hits end-of-file condition.
       +-- LookupError             # Raised when a look-up on a collection fails.
       |    +-- IndexError         # Raised when a sequence index is out of range.
-      |    +-- KeyError           # Raised when a dictionary key or set element is not found.
-      +-- NameError               # Raised when a variable name is not found.
+      |    +-- KeyError           # Raised when a dictionary key or set element is missing.
+      +-- NameError               # Raised when an object is missing.
       +-- OSError                 # Errors such as “file not found” or “disk full” (see Open).
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
