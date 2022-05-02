@@ -461,6 +461,8 @@ function main() {
 function getMd() {
   var readme = readFile('README.md');
   var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
+  var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
+  var readme = readme.replace("#dataframe-plot-encode-decode", "#dataframeplotencodedecode");
   const converter = new showdown.Converter();
   return converter.makeHtml(readme);
 }

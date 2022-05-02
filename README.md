@@ -658,7 +658,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <TD>     = <D/DTn> - <D/DTn>                # Returns the difference, ignoring time jumps.
 <TD>     = <DTa>   - <DTa>                  # Ignores time jumps if they share tzinfo object.
 <TD>     = <TD>    * <real>                 # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also '//'.
+<float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also //.
 ```
 
 
@@ -1637,6 +1637,11 @@ from glob import glob
 <bool> = path.isdir(<path>)         # Or: <DirEntry/Path>.is_dir()
 ```
 
+```python
+<stat> = os.stat(<path>)            # Or: <DirEntry/Path>.stat()
+<real> = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, …
+```
+
 ### DirEntry
 **Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.**
 
@@ -1803,6 +1808,7 @@ import csv
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 <list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
+* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 
 ### Write
