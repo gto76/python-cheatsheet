@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 2, 2022</aside>
+    <aside>May 18, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1096,6 +1096,14 @@ Hello World!
 </code></pre></div>
 
 
+<div><h4 id="discrepanciesbetweenglossarydefinitionsandabstractbaseclasses">Discrepancies between glossary definitions and abstract base classes:</h4><ul>
+<li><strong>Glossary defines iterable as any object with iter() or getitem() and sequence as any object with len() and getitem(). It does not define collection.</strong></li>
+<li><strong>Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
+</ul></div>
+
+
+
+
 <div><h3 id="abcsequence">ABC Sequence</h3><ul>
 <li><strong>It's a richer interface than the basic sequence.</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index() and count().</strong></li>
@@ -1109,10 +1117,7 @@ Hello World!
         <span class="hljs-keyword">return</span> len(self.a)
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, i)</span>:</span>
         <span class="hljs-keyword">return</span> self.a[i]
-</code></pre></div>
-
-
-<div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+</code></pre></div><div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
 ┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃
 ┠────────────┼────────────┼────────────┼────────────┼──────────────┨
 ┃ iter()     │     !      │     !      │     ✓      │      ✓       ┃
@@ -2891,7 +2896,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>May 2, 2022</aside>
+    <aside>May 18, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

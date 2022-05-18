@@ -486,6 +486,7 @@ function modifyPage() {
   highlightCode();
   fixPandasDiagram();
   removePlotImages();
+  fixABCSequenceDiv();
 }
 
 function changeMenu() {
@@ -632,6 +633,10 @@ function fixPandasDiagram() {
 function removePlotImages() {
   $('img[alt="Covid Deaths"]').remove();
   $('img[alt="Covid Cases"]').remove();
+}
+
+function fixABCSequenceDiv() {
+  $('#abcsequence').parent().insertBefore($('#tableofrequiredandautomaticallyavailablespecialmethods').parent())
 }
 
 function updateDate(template) {
