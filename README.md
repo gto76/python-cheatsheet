@@ -1278,7 +1278,7 @@ class MySequence:
 
 #### Discrepancies between glossary definitions and abstract base classes:
 * **Glossary defines iterable as any object with iter() or getitem() and sequence as any object with len() and getitem(). It does not define collection.**
-* **Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has iter(), while ABC Collection checks for iter(), contains() and len().**
+* **Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
 * **It's a richer interface than the basic sequence.**

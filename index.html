@@ -1098,7 +1098,7 @@ Hello World!
 
 <div><h4 id="discrepanciesbetweenglossarydefinitionsandabstractbaseclasses">Discrepancies between glossary definitions and abstract base classes:</h4><ul>
 <li><strong>Glossary defines iterable as any object with iter() or getitem() and sequence as any object with len() and getitem(). It does not define collection.</strong></li>
-<li><strong>Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
+<li><strong>Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
 </ul></div>
 
 
