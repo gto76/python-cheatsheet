@@ -1824,12 +1824,12 @@ import csv
 * **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
-* **`'dialect'` - Master parameter that sets the default values.**
+* **`'dialect'` - Master parameter that sets the default values. String or a dialect object.**
 * **`'delimiter'` - A one-character string used to separate fields.**
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
-* **`'doublequote'` - Whether quotechars inside fields get doubled or escaped.**
-* **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped.**
-* **`'lineterminator'` - Specifies how writer terminates rows.**
+* **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
+* **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped by reader.**
+* **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\r', '\n', '\r\n'.**
 * **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
 * **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
 
@@ -1850,16 +1850,16 @@ import csv
 
 ### Read Rows from CSV File
 ```python
-def read_csv_file(filename):
+def read_csv_file(filename, dialect='excel'):
     with open(filename, encoding='utf-8', newline='') as file:
-        return list(csv.reader(file))
+        return list(csv.reader(file, dialect))
 ```
 
 ### Write Rows to CSV File
 ```python
-def write_to_csv_file(filename, rows):
+def write_to_csv_file(filename, rows, dialect='excel'):
     with open(filename, 'w', encoding='utf-8', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, dialect)
         writer.writerows(rows)
 ```
 
