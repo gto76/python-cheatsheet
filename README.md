@@ -1647,7 +1647,7 @@ from glob import glob
 ```
 
 ### DirEntry
-**Using scandir() instead of listdir() can significantly increase the performance of code that also needs file type information.**
+**Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
 
 ```python
 <iter> = scandir(path='.')          # Returns DirEntry objects located at path.
@@ -1703,32 +1703,32 @@ import os, shutil, subprocess
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ```python
-os.chdir(<path>)                    # Changes the current working directory.
-os.mkdir(<path>, mode=0o777)        # Creates a directory. Mode is in octal.
-os.makedirs(<path>, mode=0o777)     # Creates all directories in the path.
+os.chdir(<path>)                 # Changes the current working directory.
+os.mkdir(<path>, mode=0o777)     # Creates a directory. Mode is in octal.
+os.makedirs(<path>, mode=0o777)  # Creates dirs in path. Also: `exist_ok=False`.
 ```
 
 ```python
-shutil.copy(from, to)               # Copies the file. 'to' can exist or be a dir.
-shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
+shutil.copy(from, to)            # Copies the file. 'to' can exist or be a dir.
+shutil.copytree(from, to)        # Copies the directory. 'to' must not exist.
 ```
 
 ```python
-os.rename(from, to)                 # Renames/moves the file or directory.
-os.replace(from, to)                # Same, but overwrites 'to' if it exists.
+os.rename(from, to)              # Renames/moves the file or directory.
+os.replace(from, to)             # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
-os.remove(<path>)                   # Deletes the file.
-os.rmdir(<path>)                    # Deletes the empty directory.
-shutil.rmtree(<path>)               # Deletes the directory.
+os.remove(<path>)                # Deletes the file.
+os.rmdir(<path>)                 # Deletes the empty directory.
+shutil.rmtree(<path>)            # Deletes the directory.
 ```
 
 ### Shell Commands
 ```python
-<pipe> = os.popen('<command>')      # Executes command in sh/cmd and returns its stdout pipe.
-<str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()             # Closes the pipe. Returns None on success, int on error.
+<pipe> = os.popen('<command>')   # Executes command in sh/cmd and returns its stdout pipe.
+<str>  = <pipe>.read(size=-1)    # Reads 'size' chars or until EOF. Also readline/s().
+<int>  = <pipe>.close()          # Closes the pipe. Returns None on success, int on error.
 ```
 
 #### Sends '1 + 1' to the basic calculator and captures its output:
