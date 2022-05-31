@@ -1946,7 +1946,7 @@ Bytes
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
 <bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
-<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by spaces.
+<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
 ```
 
 ### Decode
@@ -1954,7 +1954,7 @@ Bytes
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
 <int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
-'<hex>' = <bytes>.hex()                  # Returns a string of hexadecimal pairs.
+'<hex>' = <bytes>.hex()                  # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
 ### Read Bytes from File
@@ -2615,11 +2615,11 @@ Line #         Mem usage      Increment   Line Contents
 #### Generates a PNG image of the call graph with highlighted bottlenecks:
 ```python
 # $ pip3 install pycallgraph2
-from pycallgraph2 import output, PyCallGraph
-from datetime import datetime
-filename = f'profile-{datetime.now():%Y%m%d%H%M%S}.png'
-drawer = output.GraphvizOutput(output_file=filename)
-with PyCallGraph(drawer):
+# $ apt install graphviz
+import pycallgraph2 as cg, datetime
+filename = f'profile-{datetime.datetime.now():%Y%m%d%H%M%S}.png'
+drawer = cg.output.GraphvizOutput(output_file=filename)
+with cg.PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
 
