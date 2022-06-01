@@ -3031,7 +3031,7 @@ from random import randint
 
 P = collections.namedtuple('P', 'x y')          # Position
 D = enum.Enum('D', 'n e s w')                   # Direction
-SIZE, MAX_SPEED = 50, P(5, 10)                  # Screen size, Speed limit
+W, H, MAX_S = 50, 50, P(5, 10)                  # Width, Height, Max speed
 
 def main():
     def get_screen():
@@ -3045,9 +3045,9 @@ def main():
         Mario = dataclasses.make_dataclass('Mario', 'rect spd facing_left frame_cycle'.split())
         return Mario(get_rect(1, 1), P(0, 0), False, it.cycle(range(3)))
     def get_tiles():
-        positions = [p for p in it.product(range(SIZE), repeat=2) if {*p} & {0, SIZE-1}] + \
-            [(randint(1, SIZE-2), randint(2, SIZE-2)) for _ in range(SIZE**2 // 10)]
-        return [get_rect(*p) for p in positions]
+        border = [(x, y) for x in range(W) for y in range(H) if x in [0, W-1] or y in [0, H-1]]
+        platforms = [(randint(1, W-2), randint(2, H-2)) for _ in range(W*H // 10)]
+        return [get_rect(x, y) for x, y in border + platforms]
     def get_rect(x, y):
         return pg.Rect(x*16, y*16, 16, 16)
     run(get_screen(), get_images(), get_mario(), get_tiles())
@@ -3067,7 +3067,7 @@ def update_speed(mario, tiles, pressed):
     x += 2 * ((D.e in pressed) - (D.w in pressed))
     x -= (x > 0) - (x < 0)
     y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (D.n in pressed) * -10
-    mario.spd = P(*[max(-limit, min(limit, s)) for limit, s in zip(MAX_SPEED, P(x, y))])
+    mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
 def update_position(mario, tiles):
     x, y = mario.rect.topleft
@@ -3093,8 +3093,8 @@ def draw(screen, images, mario, tiles, pressed):
     screen.fill((85, 168, 255))
     mario.facing_left = (D.w in pressed) if {D.w, D.e} & pressed else mario.facing_left
     screen.blit(images[get_marios_image_index() + mario.facing_left * 9], mario.rect)
-    for rect in tiles:
-        screen.blit(images[18 if {*rect.topleft} & {0, (SIZE-1)*16} else 19], rect)
+    for t in tiles:
+        screen.blit(images[18 if t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16] else 19], t)
     pg.display.flip()
 
 if __name__ == '__main__':

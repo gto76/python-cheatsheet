@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 31, 2022</aside>
+    <aside>June 1, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2461,7 +2461,7 @@ rect(&lt;Surf&gt;, color, &lt;Rect&gt;)                     <span class="hljs-co
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position</span>
 D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                   <span class="hljs-comment"># Direction</span>
-SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)                  <span class="hljs-comment"># Screen size, Speed limit</span>
+W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)                  <span class="hljs-comment"># Width, Height, Max speed</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
@@ -2475,9 +2475,9 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
         Mario = dataclasses.make_dataclass(<span class="hljs-string">'Mario'</span>, <span class="hljs-string">'rect spd facing_left frame_cycle'</span>.split())
         <span class="hljs-keyword">return</span> Mario(get_rect(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, it.cycle(range(<span class="hljs-number">3</span>)))
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_tiles</span><span class="hljs-params">()</span>:</span>
-        positions = [p <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> it.product(range(SIZE), repeat=<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> {*p} &amp; {<span class="hljs-number">0</span>, SIZE<span class="hljs-number">-1</span>}] + \
-            [(randint(<span class="hljs-number">1</span>, SIZE<span class="hljs-number">-2</span>), randint(<span class="hljs-number">2</span>, SIZE<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(SIZE**<span class="hljs-number">2</span> // <span class="hljs-number">10</span>)]
-        <span class="hljs-keyword">return</span> [get_rect(*p) <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> positions]
+        border = [(x, y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(W) <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> range(H) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, W<span class="hljs-number">-1</span>] <span class="hljs-keyword">or</span> y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, H<span class="hljs-number">-1</span>]]
+        platforms = [(randint(<span class="hljs-number">1</span>, W<span class="hljs-number">-2</span>), randint(<span class="hljs-number">2</span>, H<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(W*H // <span class="hljs-number">10</span>)]
+        <span class="hljs-keyword">return</span> [get_rect(x, y) <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> border + platforms]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_rect</span><span class="hljs-params">(x, y)</span>:</span>
         <span class="hljs-keyword">return</span> pg.Rect(x*<span class="hljs-number">16</span>, y*<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)
     run(get_screen(), get_images(), get_mario(), get_tiles())
@@ -2497,7 +2497,7 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
     x -= (x &gt; <span class="hljs-number">0</span>) - (x &lt; <span class="hljs-number">0</span>)
     y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
-    mario.spd = P(*[max(-limit, min(limit, s)) <span class="hljs-keyword">for</span> limit, s <span class="hljs-keyword">in</span> zip(MAX_SPEED, P(x, y))])
+    mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>
     x, y = mario.rect.topleft
@@ -2523,8 +2523,8 @@ SIZE, MAX_SPEED = <span class="hljs-number">50</span>, P(<span class="hljs-numbe
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
     mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
     screen.blit(images[get_marios_image_index() + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
-    <span class="hljs-keyword">for</span> rect <span class="hljs-keyword">in</span> tiles:
-        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> {*rect.topleft} &amp; {<span class="hljs-number">0</span>, (SIZE<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>} <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], rect)
+    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
+        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
     pg.display.flip()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
@@ -2896,7 +2896,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>May 31, 2022</aside>
+    <aside>June 1, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
