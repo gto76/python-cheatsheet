@@ -3036,7 +3036,7 @@ W, H, MAX_S = 50, 50, P(5, 10)                  # Width, Height, Max speed
 def main():
     def get_screen():
         pg.init()
-        return pg.display.set_mode((SIZE*16, SIZE*16))
+        return pg.display.set_mode((W*16, H*16))
     def get_images():
         url = 'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'
         img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))

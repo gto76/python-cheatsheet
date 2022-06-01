@@ -2466,7 +2466,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
         pg.init()
-        <span class="hljs-keyword">return</span> pg.display.set_mode((SIZE*<span class="hljs-number">16</span>, SIZE*<span class="hljs-number">16</span>))
+        <span class="hljs-keyword">return</span> pg.display.set_mode((W*<span class="hljs-number">16</span>, H*<span class="hljs-number">16</span>))
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_images</span><span class="hljs-params">()</span>:</span>
         url = <span class="hljs-string">'https://gto76.github.io/python-cheatsheet/web/mario_bros.png'</span>
         img = pg.image.load(io.BytesIO(urllib.request.urlopen(url).read()))
