@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 1, 2022</aside>
+    <aside>June 2, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2230,8 +2230,8 @@ right = [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</s
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
 &lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
-&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a sequence of pixels.</span>
-&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a sequence of pixels.</span>
+&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a flattened sequence of pixels.</span>
+&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to the image.</span>
 </code></pre>
 <pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image_L&gt;)                <span class="hljs-comment"># Creates NumPy array from greyscale image.</span>
@@ -2282,11 +2282,11 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
-WIDTH, R = <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
+WIDTH, HEIGHT, R = <span class="hljs-number">126</span>, <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []
 <span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
     y = sum(range(velocity))
-    frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, WIDTH))
+    frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, HEIGHT))
     draw  = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
@@ -2896,7 +2896,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 1, 2022</aside>
+    <aside>June 2, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

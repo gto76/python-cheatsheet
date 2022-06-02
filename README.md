@@ -2742,8 +2742,8 @@ from PIL import Image
 ```python
 <int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
 <Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()               # Returns a sequence of pixels.
-<Image>.putdata(<list/ImagingCore>)             # Writes a sequence of pixels.
+<ImagingCore> = <Image>.getdata()               # Returns a flattened sequence of pixels.
+<Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes an image to the image.
 ```
 
@@ -2807,11 +2807,11 @@ Animation
 # $ pip3 install imageio
 from PIL import Image, ImageDraw
 import imageio
-WIDTH, R = 126, 10
+WIDTH, HEIGHT, R = 126, 126, 10
 frames = []
 for velocity in range(1, 16):
     y = sum(range(velocity))
-    frame = Image.new('L', (WIDTH, WIDTH))
+    frame = Image.new('L', (WIDTH, HEIGHT))
     draw  = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
     frames.append(frame)
