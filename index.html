@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 2, 2022</aside>
+    <aside>June 3, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -825,6 +825,7 @@ creature = Creature(point, direction)
 <ul>
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
+<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first arg.</strong></li>
 </ul>
 <div><h4 id="strusecases">Str() use cases:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
@@ -1967,7 +1968,7 @@ plt.clf()                                      <span class="hljs-comment"># Clea
 <span class="hljs-keyword">import</span> csv, tabulate
 <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.csv'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
     rows   = csv.reader(file)
-    header = [a.title() <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> next(rows)]
+    header = next(rows)
     table  = tabulate.tabulate(rows, header)
 print(table)
 </code></pre></div></div>
@@ -2087,8 +2088,8 @@ run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-numb
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> threading, requests
 <span class="hljs-meta">&gt;&gt;&gt; </span>threading.Thread(target=run, daemon=<span class="hljs-keyword">True</span>).start()
 <span class="hljs-meta">&gt;&gt;&gt; </span>url = <span class="hljs-string">'http://localhost:8080/football/odds'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=data)
+<span class="hljs-meta">&gt;&gt;&gt; </span>request_data = {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>}
+<span class="hljs-meta">&gt;&gt;&gt; </span>response = requests.post(url, data=request_data)
 <span class="hljs-meta">&gt;&gt;&gt; </span>response.json()
 {<span class="hljs-string">'team'</span>: <span class="hljs-string">'arsenal f.c.'</span>, <span class="hljs-string">'odds'</span>: [<span class="hljs-number">2.09</span>, <span class="hljs-number">3.74</span>, <span class="hljs-number">3.68</span>]}
 </code></pre></div>
@@ -2354,7 +2355,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
         file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> float_samples))
 </code></pre></div>
 
-<div><h3 id="examples-1">Examples</h3><div><h4 id="savesasinewavetoamonowavfile">Saves a sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
+<div><h3 id="examples-1">Examples</h3><div><h4 id="savesa440hzsinewavetoamonowavfile">Saves a 440 Hz sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
 samples_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100000</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div></div>
@@ -2839,7 +2840,7 @@ print(<span class="hljs-string">f'Hello <span class="hljs-subst">{values[<span c
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
 </ul><pre><code class="python language-python hljs">cdef &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
 cdef &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
-cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name_1&gt;, ...):
+cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name_1&gt;, ...): …
 </code></pre></div>
 
 
@@ -2896,7 +2897,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 2, 2022</aside>
+    <aside>June 3, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

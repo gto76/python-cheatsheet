@@ -964,6 +964,7 @@ class <name>:
 ```
 * **Return value of repr() should be unambiguous and of str() readable.**
 * **If only repr() is defined, it will also be used for str().**
+* **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first arg.**
 
 #### Str() use cases:
 ```python
@@ -2400,7 +2401,7 @@ Table
 import csv, tabulate
 with open('test.csv', encoding='utf-8', newline='') as file:
     rows   = csv.reader(file)
-    header = [a.title() for a in next(rows)]
+    header = next(rows)
     table  = tabulate.tabulate(rows, header)
 print(table)
 ```
@@ -2548,8 +2549,8 @@ def send_json(sport):
 >>> import threading, requests
 >>> threading.Thread(target=run, daemon=True).start()
 >>> url = 'http://localhost:8080/football/odds'
->>> data = {'team': 'arsenal f.c.'}
->>> response = requests.post(url, data=data)
+>>> request_data = {'team': 'arsenal f.c.'}
+>>> response = requests.post(url, data=request_data)
 >>> response.json()
 {'team': 'arsenal f.c.', 'odds': [2.09, 3.74, 3.68]}
 ```
@@ -2891,7 +2892,7 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
 ```
 
 ### Examples
-#### Saves a sine wave to a mono WAV file:
+#### Saves a 440 Hz sine wave to a mono WAV file:
 ```python
 from math import pi, sin
 samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
@@ -3494,7 +3495,7 @@ import <cython_script>
 ```python
 cdef <ctype> <var_name> = <el>
 cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
-cdef <ctype/void> <func_name>(<ctype> <arg_name_1>, ...):
+cdef <ctype/void> <func_name>(<ctype> <arg_name_1>, ...): …
 ```
 
 ```python
