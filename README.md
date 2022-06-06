@@ -1542,9 +1542,9 @@ args  = p.parse_args()                                            # Exits on err
 value = args.<name>
 ```
 
-* **Use `'help=<str>'` to set argument description.**
+* **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<el>'` to set the default value.**
-* **Use `'type=FileType(<mode>)'` for files.**
+* **Use `'type=FileType(<mode>)'` for files. Also accepts 'encoding', but not 'newline'.**
 
 
 Open
@@ -1813,8 +1813,9 @@ import csv
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 <list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
-* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
+* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
+* **To print the table to console use [Tabulate](#table) library.**
 
 ### Write
 ```python
@@ -1830,7 +1831,7 @@ import csv
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
 * **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped by reader.**
-* **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\r', '\n', '\r\n'.**
+* **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
 * **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
 * **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
 
@@ -2980,7 +2981,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 <bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains a point.
 <bool> = <Rect>.colliderect(<Rect>)             # Checks if two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
-<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding Rects.
+<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding rectangles.
 ```
 
 ### Surface
