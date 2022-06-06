@@ -357,10 +357,10 @@ import re
 <list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to include the matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of the pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<iter>  = re.finditer(<regex>, text)           # Returns all occurrences as match objects.
+<iter>  = re.finditer(<regex>, text)           # Returns all occurrences as Match objects.
 ```
 
-* **Argument 'new' can be a function that accepts a match object and returns a string.**
+* **Argument 'new' can be a function that accepts a Match object and returns a string.**
 * **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
@@ -385,21 +385,21 @@ import re
 ```
 
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown above, it restricts special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
+* **As shown above, it restricts all special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
 * **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
 
 
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'
-<str> = '{}, {}'.format(<el_1>, <el_2>)
+<str> = f'{<el_1>}, {<el_2>}'            # Curly braces also accept expressions.
+<str> = '{}, {}'.format(<el_1>, <el_2>)  # Or: '{0}, {1}'.format(<el_1>, <el_2>)
+<str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C style formatting.
 ```
 
 ### Attributes
 ```python
->>> from collections import namedtuple
->>> Person = namedtuple('Person', 'name height')
+>>> Person = collections.namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
 >>> f'{person.height}'
 '187'
@@ -409,40 +409,40 @@ Format
 
 ### General Options
 ```python
-{<el>:<10}                                     # '<el>      '
-{<el>:^10}                                     # '   <el>   '
-{<el>:>10}                                     # '      <el>'
-{<el>:.<10}                                    # '<el>......'
-{<el>:0}                                       # '<el>'
+{<el>:<10}                               # '<el>      '
+{<el>:^10}                               # '   <el>   '
+{<el>:>10}                               # '      <el>'
+{<el>:.<10}                              # '<el>......'
+{<el>:0}                                 # '<el>'
 ```
 * **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
 ```python
-{'abcde':10}                                   # 'abcde     '
-{'abcde':10.3}                                 # 'abc       '
-{'abcde':.3}                                   # 'abc'
-{'abcde'!r:10}                                 # "'abcde'   "
+{'abcde':10}                             # 'abcde     '
+{'abcde':10.3}                           # 'abc       '
+{'abcde':.3}                             # 'abc'
+{'abcde'!r:10}                           # "'abcde'   "
 ```
 
 ### Numbers
 ```python
-{123456:10}                                    # '    123456'
-{123456:10,}                                   # '   123,456'
-{123456:10_}                                   # '   123_456'
-{123456:+10}                                   # '   +123456'
-{123456:=+10}                                  # '+   123456'
-{123456: }                                     # ' 123456'
-{-123456: }                                    # '-123456'
+{123456:10}                              # '    123456'
+{123456:10,}                             # '   123,456'
+{123456:10_}                             # '   123_456'
+{123456:+10}                             # '   +123456'
+{123456:=+10}                            # '+   123456'
+{123456: }                               # ' 123456'
+{-123456: }                              # '-123456'
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                                 # '      1.23'
-{1.23456:10.3f}                                # '     1.235'
-{1.23456:10.3e}                                # ' 1.235e+00'
-{1.23456:10.3%}                                # '  123.456%'
+{1.23456:10.3}                           # '      1.23'
+{1.23456:10.3f}                          # '     1.235'
+{1.23456:10.3e}                          # ' 1.235e+00'
+{1.23456:10.3%}                          # '  123.456%'
 ```
 
 #### Comparison of presentation types:
