@@ -484,7 +484,6 @@ Format
 
 Numbers
 -------
-### Types
 ```python
 <int>      = int(<float/str/bool>)       # Or: math.floor(<float>)
 <float>    = float(<int/str/bool>)       # Or: <real>e±<int>
@@ -494,6 +493,7 @@ Numbers
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers are stored exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
+* **Floats can be compared with: `'math.isclose(<float>, <float>)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 
 ### Basic Functions
