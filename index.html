@@ -365,9 +365,8 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>As shown above, it restricts all special sequence matches to the first 128 characters and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code> (the so-called separator characters).</strong></li>
 <li><strong>Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).</strong></li>
 </ul>
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly braces also accept expressions.</span>
-&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Or: '{0}, {1}'.format(&lt;el_1&gt;, &lt;el_2&gt;)</span>
-&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C style formatting.</span>
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>        <span class="hljs-comment"># Or: '{}, {}'.format(&lt;el_1&gt;, &lt;el_2&gt;)</span>
+&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Redundant and inferior C style formatting.</span>
 </code></pre></div>
 
 <div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Person = collections.namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
@@ -378,36 +377,36 @@ to_exclusive   = &lt;range&gt;.stop
 <span class="hljs-string">'187'</span>
 </code></pre></div>
 
-<div><h3 id="generaloptions">General Options</h3><pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}                               <span class="hljs-comment"># '&lt;el&gt;      '</span>
-{&lt;el&gt;:^<span class="hljs-number">10</span>}                               <span class="hljs-comment"># '   &lt;el&gt;   '</span>
-{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}                               <span class="hljs-comment"># '      &lt;el&gt;'</span>
-{&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}                              <span class="hljs-comment"># '&lt;el&gt;......'</span>
-{&lt;el&gt;:<span class="hljs-number">0</span>}                                 <span class="hljs-comment"># '&lt;el&gt;'</span>
+<div><h3 id="generaloptions">General Options</h3><pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '&lt;el&gt;      '</span>
+{&lt;el&gt;:^<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '   &lt;el&gt;   '</span>
+{&lt;el&gt;:&gt;<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '      &lt;el&gt;'</span>
+{&lt;el&gt;:.&lt;<span class="hljs-number">10</span>}                          <span class="hljs-comment"># '&lt;el&gt;......'</span>
+{&lt;el&gt;:<span class="hljs-number">0</span>}                             <span class="hljs-comment"># '&lt;el&gt;'</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
 </ul>
-<div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                             <span class="hljs-comment"># 'abcde     '</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                           <span class="hljs-comment"># 'abc       '</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                             <span class="hljs-comment"># 'abc'</span>
-{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                           <span class="hljs-comment"># "'abcde'   "</span>
+<div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                         <span class="hljs-comment"># 'abcde     '</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                       <span class="hljs-comment"># 'abc       '</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                         <span class="hljs-comment"># 'abc'</span>
+{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                       <span class="hljs-comment"># "'abcde'   "</span>
 </code></pre></div>
 
-<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                              <span class="hljs-comment"># '    123456'</span>
-{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                             <span class="hljs-comment"># '   123,456'</span>
-{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                             <span class="hljs-comment"># '   123_456'</span>
-{<span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                             <span class="hljs-comment"># '   +123456'</span>
-{<span class="hljs-number">123456</span>:=+<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '+   123456'</span>
-{<span class="hljs-number">123456</span>: }                               <span class="hljs-comment"># ' 123456'</span>
-{<span class="hljs-number">-123456</span>: }                              <span class="hljs-comment"># '-123456'</span>
+<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                          <span class="hljs-comment"># '    123456'</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                         <span class="hljs-comment"># '   123,456'</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                         <span class="hljs-comment"># '   123_456'</span>
+{<span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                         <span class="hljs-comment"># '   +123456'</span>
+{<span class="hljs-number">123456</span>:=+<span class="hljs-number">10</span>}                        <span class="hljs-comment"># '+   123456'</span>
+{<span class="hljs-number">123456</span>: }                           <span class="hljs-comment"># ' 123456'</span>
+{<span class="hljs-number">-123456</span>: }                          <span class="hljs-comment"># '-123456'</span>
 </code></pre></div>
 
-<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                           <span class="hljs-comment"># '      1.23'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}                          <span class="hljs-comment"># '     1.235'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}                          <span class="hljs-comment"># ' 1.235e+00'</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                          <span class="hljs-comment"># '  123.456%'</span>
+<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                       <span class="hljs-comment"># '      1.23'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}                      <span class="hljs-comment"># '     1.235'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}                      <span class="hljs-comment"># ' 1.235e+00'</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                      <span class="hljs-comment"># '  123.456%'</span>
 </code></pre></div>
 
 <div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
@@ -439,9 +438,9 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> a <code class="python hljs"><span class="hljs-string">'6'</span></code> and <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'</span>
-{<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'</span>
-{<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                               <span class="hljs-comment"># 'Z'</span>
+{<span class="hljs-number">90</span>:b}                               <span class="hljs-comment"># '1011010'</span>
+{<span class="hljs-number">90</span>:X}                               <span class="hljs-comment"># '5A'</span>
 </code></pre></div>
 
 <div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)       <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
