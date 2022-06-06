@@ -1776,7 +1776,7 @@ def write_to_json_file(filename, an_object):
 
 Pickle
 ------
-**Binary file format for storing objects.**
+**Binary file format for storing Python objects.**
 
 ```python
 import pickle
@@ -1976,7 +1976,7 @@ def write_bytes(filename, bytes_obj):
 Struct
 ------
 * **Module that performs conversions between a sequence of numbers and a bytes object.**
-* **System’s type sizes and byte order are used by default.**
+* **System’s type sizes, byte order, and alignment rules are used by default.**
 
 ```python
 from struct import pack, unpack, iter_unpack
@@ -1997,7 +1997,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 ```
 
 ### Format
-#### For standard type sizes start format string with:
+#### For standard type sizes and manual alignment (padding) start format string with:
 * **`'='` - system's byte order (usually little-endian)**
 * **`'<'` - little-endian**
 * **`'>'` - big-endian (also `'!'`)**

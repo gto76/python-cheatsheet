@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 3, 2022</aside>
+    <aside>June 6, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1486,7 +1486,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
         json.dump(an_object, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
 </code></pre></div>
 
-<div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
+<div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing Python objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
 &lt;bytes&gt;  = pickle.dumps(&lt;object&gt;)
 &lt;object&gt; = pickle.loads(&lt;bytes&gt;)
 </code></pre></div>
@@ -1640,7 +1640,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h2 id="struct"><a href="#struct" name="struct">#</a>Struct</h2><ul>
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
-<li><strong>System’s type sizes and byte order are used by default.</strong></li>
+<li><strong>System’s type sizes, byte order, and alignment rules are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack, iter_unpack
 </code></pre></div>
 
@@ -1655,7 +1655,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesstartformatstringwith">For standard type sizes start format string with:</h4><ul>
+<div><h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesandmanualalignmentpaddingstartformatstringwith">For standard type sizes and manual alignment (padding) start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - system's byte order (usually little-endian)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - little-endian</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>)</strong></li>
@@ -2897,7 +2897,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 3, 2022</aside>
+    <aside>June 6, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
