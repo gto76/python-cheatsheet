@@ -1,6 +1,6 @@
 How To Create PDF (on macOS)
 ============================
-PDF file can also be purchased here: https://transactions.sendowl.com/products/78175486/4422834F/view
+**PDF file can also be purchased here: https://transactions.sendowl.com/products/78175486/4422834F/view**
 
 
 Setup
