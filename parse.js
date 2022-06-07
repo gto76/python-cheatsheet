@@ -331,6 +331,9 @@ const DIAGRAM_13_B =
   "┃ sr.transform(…) │     y  2    │   y     2   │       y  2    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
+const DIAGRAM_14_A =
+  "|                 |    'rank'   |   ['rank']  | {'r': 'rank'} |";
+
 const DIAGRAM_15_A =
   '+------------------------+---------------+------------+------------+--------------------------+';
 
@@ -385,6 +388,9 @@ const DIAGRAM_16_B =
   "┃ df.transform(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
   "┃                 │             │ b    2    2 │               ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_17_A =
+  "|                 |    'rank'   |   ['rank']  | {'x': 'rank'} |";
 
 const DIAGRAM_18_A =
   '| gb.agg(…)       |      x   y  |      x  y   |      x    y |        x      |';
@@ -515,7 +521,7 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
   $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
   $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
-  $(`code:contains(${DIAGRAM_5_A})`).remove();
+  $(`code:contains(${DIAGRAM_5_A})`).parent().remove();
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
@@ -524,8 +530,10 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_14_A})`).parent().remove();
   $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
+  $(`code:contains(${DIAGRAM_17_A})`).parent().remove();
   $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 
