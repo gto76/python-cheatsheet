@@ -1708,7 +1708,7 @@ import os, shutil, subprocess
 ```python
 os.chdir(<path>)                 # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)     # Creates a directory. Mode is in octal.
-os.makedirs(<path>, mode=0o777)  # Creates dirs in path. Also: `exist_ok=False`.
+os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also: `exist_ok=False`.
 ```
 
 ```python
