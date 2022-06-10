@@ -1094,7 +1094,7 @@ Duck Types
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
 * **That means all objects compare not equal by default.**
-* **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted.**
+* **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.**
 * **Ne() automatically works on any object that has eq() defined.**
 
 ```python
