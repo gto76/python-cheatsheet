@@ -604,7 +604,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <DT> = datetime(year, month, day, hour=0, minute=0, second=0, ...)
 <TD> = timedelta(weeks=0, days=0, hours=0, minutes=0, seconds=0, ...)
 ```
-* **Use `'<D/DT>.weekday()'` to get the day of the week (Mon == 0).**
+* **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
 
@@ -633,16 +633,16 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
-* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.ffffff[±<offset>]'`, or both separated by an arbitrary character. Offset is formatted as: `'HH:MM'`.**
+* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following hours are optional.**
 * **Python uses the Unix Epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
 ```python
-<str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds'.
+<str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds/…'.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
-<float>  = <DTa>.timestamp()                # Seconds since the Epoch, from DTa.
+<float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
 ```
 
 ### Format
