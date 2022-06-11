@@ -392,8 +392,8 @@ import re
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'        # Or: '{}, {}'.format(<el_1>, <el_2>)
-<str> = '%s, %s' % (<el_1>, <el_2>)  # Redundant and inferior C style formatting.
+<str> = f'{<el_1>}, {<el_2>}'            # Or: '{}, {}'.format(<el_1>, <el_2>)
+<str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C style formatting.
 ```
 
 ### Attributes
@@ -409,40 +409,40 @@ Format
 
 ### General Options
 ```python
-{<el>:<10}                           # '<el>      '
-{<el>:^10}                           # '   <el>   '
-{<el>:>10}                           # '      <el>'
-{<el>:.<10}                          # '<el>......'
-{<el>:0}                             # '<el>'
+{<el>:<10}                               # '<el>      '
+{<el>:^10}                               # '   <el>   '
+{<el>:>10}                               # '      <el>'
+{<el>:.<10}                              # '<el>......'
+{<el>:0}                                 # '<el>'
 ```
 * **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
 ```python
-{'abcde':10}                         # 'abcde     '
-{'abcde':10.3}                       # 'abc       '
-{'abcde':.3}                         # 'abc'
-{'abcde'!r:10}                       # "'abcde'   "
+{'abcde':10}                             # 'abcde     '
+{'abcde':10.3}                           # 'abc       '
+{'abcde':.3}                             # 'abc'
+{'abcde'!r:10}                           # "'abcde'   "
 ```
 
 ### Numbers
 ```python
-{123456:10}                          # '    123456'
-{123456:10,}                         # '   123,456'
-{123456:10_}                         # '   123_456'
-{123456:+10}                         # '   +123456'
-{123456:=+10}                        # '+   123456'
-{123456: }                           # ' 123456'
-{-123456: }                          # '-123456'
+{123456:10}                              # '    123456'
+{123456:10,}                             # '   123,456'
+{123456:10_}                             # '   123_456'
+{123456:+10}                             # '   +123456'
+{123456:=+10}                            # '+   123456'
+{123456: }                               # ' 123456'
+{-123456: }                              # '-123456'
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                       # '      1.23'
-{1.23456:10.3f}                      # '     1.235'
-{1.23456:10.3e}                      # ' 1.235e+00'
-{1.23456:10.3%}                      # '  123.456%'
+{1.23456:10.3}                           # '      1.23'
+{1.23456:10.3f}                          # '     1.235'
+{1.23456:10.3e}                          # ' 1.235e+00'
+{1.23456:10.3%}                          # '  123.456%'
 ```
 
 #### Comparison of presentation types:
@@ -478,9 +478,9 @@ Format
 
 ### Ints
 ```python
-{90:c}                               # 'Z'
-{90:b}                               # '1011010'
-{90:X}                               # '5A'
+{90:c}                                   # 'Z'
+{90:b}                                   # '1011010'
+{90:X}                                   # '5A'
 ```
 
 
