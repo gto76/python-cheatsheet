@@ -2656,7 +2656,7 @@ indexes = <array>.argmin(axis)
 ```
 
 * **Shape is a tuple of dimension sizes.**
-* **Axis is an index of the dimension that gets collapsed. Leftmost dimension has index 0.**
+* **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0.**
 
 ### Indexing
 ```bash
