@@ -76,6 +76,9 @@ const OS_RENAME =
   'os.rename(from, to)              <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
   'os.replace(from, to)             <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
+const STRUCT_FORMAT =
+  '<span class="hljs-section">\'&lt;n&gt;s\'</span><span class="hljs-attribute"></span>';
+
 const TYPE =
   '&lt;class&gt; = type(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;tuple_of_parents&gt;, &lt;dict_of_class_attributes&gt;)';
 
@@ -478,6 +481,7 @@ function modifyPage() {
   fixPandasDiagram();
   removePlotImages();
   fixABCSequenceDiv();
+  fixStructFormatDiv();
 }
 
 function changeMenu() {
@@ -569,6 +573,7 @@ function fixHighlights() {
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
+  $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);
   $(`code:contains(\'<class_name>\', <tuple_of_parents>, <dict_of_class_attributes>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
@@ -631,6 +636,19 @@ function removePlotImages() {
 
 function fixABCSequenceDiv() {
   $('#abcsequence').parent().insertBefore($('#tableofrequiredandautomaticallyavailablespecialmethods').parent())
+}
+
+function fixStructFormatDiv() {
+  const div = $('#format-2').parent()
+  $('#format-2').insertBefore(div)
+  $('#forstandardtypesizesandmanualalignmentpaddingstartformatstringwith').parent().insertBefore(div)
+}
+
+
+function fixStructFormat() {
+  const div = $('#format-2').parent()
+  $('#format-2').insertBefore(div)
+  $('#forstandardtypesizesandmanualalignmentpaddingstartformatstringwith').parent().insertBefore(div)
 }
 
 function updateDate(template) {

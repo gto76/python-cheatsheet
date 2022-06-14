@@ -1546,7 +1546,7 @@ value = args.<name>
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<el>'` to set the default value.**
-* **Use `'type=FileType(<mode>)'` for files. Also accepts 'encoding', but not 'newline'.**
+* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is always None.**
 
 
 Open
@@ -1672,7 +1672,7 @@ from pathlib import Path
 ```python
 <Path> = Path()                     # Returns relative cwd. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute cwd. Also Path().resolve().
-<Path> = Path.home()                # Returns user's home directory.
+<Path> = Path.home()                # Returns user's home directory (absolute).
 <Path> = Path(__file__).resolve()   # Returns script's path if cwd wasn't changed.
 ```
 
@@ -1828,13 +1828,13 @@ import csv
 * **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
-* **`'dialect'` - Master parameter that sets the default values. String or a dialect object.**
+* **`'dialect'` - Master parameter that sets the default values. String or a Dialect object.**
 * **`'delimiter'` - A one-character string used to separate fields.**
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
 * **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped by reader.**
 * **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
-* **`'quoting'` - Controls the amount of quoting: 0 - as necessary, 1 - all.**
+* **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
 
 ### Dialects
@@ -1982,16 +1982,11 @@ Struct
 * **System’s type sizes, byte order, and alignment rules are used by default.**
 
 ```python
-from struct import pack, unpack, iter_unpack
+from struct import pack, unpack
+<bytes> = pack('<format>', <el> [, ...])  # Packages arguments into bytes object.
+<tuple> = unpack('<format>', <bytes>)     # Use iter_unpack() for iterator of tuples.
 ```
 
-```python
-<bytes>  = pack('<format>', <num_1> [, <num_2>, ...])
-<tuple>  = unpack('<format>', <bytes>)
-<tuples> = iter_unpack('<format>', <bytes>)
-```
-
-### Example
 ```python
 >>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
@@ -2001,12 +1996,15 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 ### Format
 #### For standard type sizes and manual alignment (padding) start format string with:
-* **`'='` - system's byte order (usually little-endian)**
-* **`'<'` - little-endian**
-* **`'>'` - big-endian (also `'!'`)**
+* **`'='` - System's byte order (usually little-endian).**
+* **`'<'` - Little-endian.**
+* **`'>'` - Big-endian (also `'!'`).**
+
+#### Besides numbers, pack() and unpack() also support bytes objects as part of the seqence:
+* **`'c'` - A bytes object with single element. Use `'x'` for pad byte.**
+* **`'<n>s'` - A bytes object with n elements.**
 
 #### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
-* **`'x'` - pad byte**
 * **`'b'` - char (1/1)**
 * **`'h'` - short (2/2)**
 * **`'i'` - int (2/4)**
@@ -2037,7 +2035,8 @@ Memory View
 * **A sequence object that points to the memory of another object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
-* **Casting only works between char and other types and uses system's sizes and byte order.**
+* **Casting only works between char and other types and uses system's sizes.**
+* **Byte order is always determined by the system.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
