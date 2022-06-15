@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 14, 2022</aside>
+    <aside>June 15, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1322,7 +1322,7 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set the default value.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but 'newline' is always None.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but not 'newline'.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1435,15 +1435,10 @@ value = args.&lt;name&gt;
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
 </code></pre></div>
 
-<div><h3 id="filesanddirectories">Files and Directories</h3><ul>
-<li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
-<li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
-</ul><pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                 <span class="hljs-comment"># Changes the current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                 <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates a directory. Mode is in octal.</span>
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)  <span class="hljs-comment"># Creates all path's dirs. Also: `exist_ok=False`.</span>
-</code></pre></div>
-
-
+</code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)            <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
 shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
 </code></pre>
@@ -1454,6 +1449,10 @@ os.replace(from, to)             <span class="hljs-comment"># Same, but overwrit
 os.rmdir(&lt;path&gt;)                 <span class="hljs-comment"># Deletes the empty directory.</span>
 shutil.rmtree(&lt;path&gt;)            <span class="hljs-comment"># Deletes the directory.</span>
 </code></pre>
+<ul>
+<li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
+<li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
+</ul>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;command&gt;'</span>)   <span class="hljs-comment"># Executes command in sh/cmd and returns its stdout pipe.</span>
 &lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)    <span class="hljs-comment"># Reads 'size' chars or until EOF. Also readline/s().</span>
 &lt;int&gt;  = &lt;pipe&gt;.close()          <span class="hljs-comment"># Closes the pipe. Returns None on success, int on error.</span>
@@ -2903,7 +2902,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 14, 2022</aside>
+    <aside>June 15, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

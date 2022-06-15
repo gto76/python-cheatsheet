@@ -1546,7 +1546,7 @@ value = args.<name>
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<el>'` to set the default value.**
-* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is always None.**
+* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but not 'newline'.**
 
 
 Open
@@ -1701,10 +1701,6 @@ OS Commands
 import os, shutil, subprocess
 ```
 
-### Files and Directories
-* **Paths can be either strings, Paths or DirEntry objects.**
-* **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
-
 ```python
 os.chdir(<path>)                 # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)     # Creates a directory. Mode is in octal.
@@ -1726,6 +1722,8 @@ os.remove(<path>)                # Deletes the file.
 os.rmdir(<path>)                 # Deletes the empty directory.
 shutil.rmtree(<path>)            # Deletes the directory.
 ```
+* **Paths can be either strings, Paths or DirEntry objects.**
+* **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ### Shell Commands
 ```python
