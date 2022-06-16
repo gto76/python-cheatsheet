@@ -894,7 +894,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**Decorator that prints function's name every time it gets called.**
+**Decorator that prints function's name every time the function is called.**
 
 ```python
 from functools import wraps
@@ -1868,7 +1868,7 @@ def write_to_csv_file(filename, rows, dialect='excel'):
 
 SQLite
 ------
-**Server-less database engine that stores each database into a separate file.**
+**A server-less database engine that stores each database into a separate file.**
 
 ### Connect
 **Opens a connection to the database file. Creates a new file if path doesn't exist.**
@@ -1981,8 +1981,8 @@ Struct
 
 ```python
 from struct import pack, unpack
-<bytes> = pack('<format>', <el> [, ...])  # Packages arguments into bytes object.
-<tuple> = unpack('<format>', <bytes>)     # Use iter_unpack() for iterator of tuples.
+<bytes> = pack('<format>', <el_1> [, ...])  # Packages arguments into bytes object.
+<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() for iterator of tuples.
 ```
 
 ```python
@@ -1999,7 +1999,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'>'` - Big-endian (also `'!'`).**
 
 #### Besides numbers, pack() and unpack() also support bytes objects as part of the seqence:
-* **`'c'` - A bytes object with single element. Use `'x'` for pad byte.**
+* **`'c'` - A bytes object with a single element. Use `'x'` for pad byte.**
 * **`'<n>s'` - A bytes object with n elements.**
 
 #### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
