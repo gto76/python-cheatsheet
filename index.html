@@ -862,7 +862,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
 </code></pre></div>
 
-<p><strong>MRO determines the order in which parent classes are traversed when searching for a method:</strong></p>
+<p><strong>MRO determines the order in which parent classes are traversed when searching for a method or an attribute:</strong></p>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>

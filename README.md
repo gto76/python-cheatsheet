@@ -1012,7 +1012,7 @@ class B: pass
 class C(A, B): pass
 ```
 
-**MRO determines the order in which parent classes are traversed when searching for a method:**
+**MRO determines the order in which parent classes are traversed when searching for a method or an attribute:**
 ```python
 >>> C.mro()
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
