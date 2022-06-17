@@ -1440,11 +1440,13 @@ BaseException
  +-- Exception                    # User-defined exceptions should be derived from this class.
       +-- ArithmeticError         # Base class for arithmetic errors.
       |    +-- ZeroDivisionError  # Raised when dividing by zero.
+      +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when an attribute is missing.
       +-- EOFError                # Raised by input() when it hits end-of-file condition.
       +-- LookupError             # Raised when a look-up on a collection fails.
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
+      +-- MemoryError             # Out of memory. Could be too late to start deleting vars.
       +-- NameError               # Raised when an object is missing.
       +-- OSError                 # Errors such as “file not found” or “disk full” (see Open).
       |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.

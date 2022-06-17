@@ -1236,11 +1236,13 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
  └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
       ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors.</span>
       │    └── ZeroDivisionError  <span class="hljs-comment"># Raised when dividing by zero.</span>
+      ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when an attribute is missing.</span>
       ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits end-of-file condition.</span>
       ├── LookupError             <span class="hljs-comment"># Raised when a look-up on a collection fails.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
       │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is missing.</span>
+      ├── MemoryError             <span class="hljs-comment"># Out of memory. Could be too late to start deleting vars.</span>
       ├── NameError               <span class="hljs-comment"># Raised when an object is missing.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as “file not found” or “disk full” (see Open).</span>
       │    └── FileNotFoundError  <span class="hljs-comment"># When a file or directory is requested but doesn't exist.</span>
