@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 16, 2022</aside>
+    <aside>June 17, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1226,6 +1226,7 @@ exc_type  = &lt;name&gt;.__class__
 filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
 func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
+traceback = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
 error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__))
 </code></pre></div>
 
@@ -1266,11 +1267,8 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
 </code></pre></div>
 
-<div><h3 id="userdefinedexceptions">User-defined Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span>
-    <span class="hljs-keyword">pass</span>
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInputError</span><span class="hljs-params">(MyError)</span>:</span>
-    <span class="hljs-keyword">pass</span>
+<div><h3 id="userdefinedexceptions">User-defined Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span> <span class="hljs-keyword">pass</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInputError</span><span class="hljs-params">(MyError)</span>:</span> <span class="hljs-keyword">pass</span>
 </code></pre></div>
 
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
@@ -2902,7 +2900,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 16, 2022</aside>
+    <aside>June 17, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

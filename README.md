@@ -1428,6 +1428,7 @@ exc_type  = <name>.__class__
 filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
+traceback = ''.join(traceback.format_tb(<name>.__traceback__))
 error_msg = ''.join(traceback.format_exception(exc_type, <name>, <name>.__traceback__))
 ```
 
@@ -1476,11 +1477,8 @@ raise RuntimeError('None of above!')
 
 ### User-defined Exceptions
 ```python
-class MyError(Exception):
-    pass
-
-class MyInputError(MyError):
-    pass
+class MyError(Exception): pass
+class MyInputError(MyError): pass
 ```
 
 
