@@ -679,8 +679,8 @@ def f(<nondefault_args>):                      # def f(x, y):
 def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
-* **Value of a default argument is evaluated when function is first encountered in the scope.**
-* **If this value is a mutable object, then all its mutations will persist between invocations.**
+* **Default values are evaluated when function is first encountered in the scope.**
+* **Any mutations of mutable default values will persist between invocations.**
 
 
 Splat Operator

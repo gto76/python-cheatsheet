@@ -601,8 +601,8 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
-<li><strong>Value of a default argument is evaluated when function is first encountered in the scope.</strong></li>
-<li><strong>If this value is a mutable object, then all its mutations will persist between invocations.</strong></li>
+<li><strong>Default values are evaluated when function is first encountered in the scope.</strong></li>
+<li><strong>Any mutations of mutable default values will persist between invocations.</strong></li>
 </ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
