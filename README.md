@@ -679,8 +679,8 @@ def f(<nondefault_args>):                      # def f(x, y):
 def f(<default_args>):                         # def f(x=0, y=0):
 def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
 ```
-* **A function has its default values evaluated when it's first encountered in the scope.**
-* **Any changes to default values that are mutable will persist between invocations.**
+* **Value of a default argument is evaluated when function is first encountered in the scope.**
+* **If this value is a mutable object, then all its mutations will persist between invocations.**
 
 
 Splat Operator
@@ -1814,8 +1814,8 @@ import csv
 <list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
-* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
 * **To print the table to the console use [Tabulate](#table) library.**
+* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
 
 ### Write
 ```python

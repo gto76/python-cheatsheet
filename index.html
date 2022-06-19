@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 17, 2022</aside>
+    <aside>June 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -601,8 +601,8 @@ to_exclusive   = &lt;range&gt;.stop
 </code></pre></div>
 
 <ul>
-<li><strong>A function has its default values evaluated when it's first encountered in the scope.</strong></li>
-<li><strong>Any changes to default values that are mutable will persist between invocations.</strong></li>
+<li><strong>Value of a default argument is evaluated when function is first encountered in the scope.</strong></li>
+<li><strong>If this value is a mutable object, then all its mutations will persist between invocations.</strong></li>
 </ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
@@ -1513,8 +1513,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <ul>
 <li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
-<li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
 <li><strong>To print the table to the console use <a href="#table">Tabulate</a> library.</strong></li>
+<li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
@@ -2902,7 +2902,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 17, 2022</aside>
+    <aside>June 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
