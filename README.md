@@ -668,16 +668,16 @@ Arguments
 ---------
 ### Inside Function Call
 ```python
-<function>(<positional_args>)                  # f(0, 0)
-<function>(<keyword_args>)                     # f(x=0, y=0)
-<function>(<positional_args>, <keyword_args>)  # f(0, y=0)
+func(<positional_args>)                           # func(1, 2)
+func(<keyword_args>)                              # func(x=1, y=2)
+func(<positional_args>, <keyword_args>)           # func(1, y=2)
 ```
 
 ### Inside Function Definition
 ```python
-def f(<nondefault_args>):                      # def f(x, y):
-def f(<default_args>):                         # def f(x=0, y=0):
-def f(<nondefault_args>, <default_args>):      # def f(x, y=0):
+def func(<nondefault_args>): ...                  # def func(x, y): ...
+def func(<default_args>): ...                     # def func(x=0, y=0): ...
+def func(<nondefault_args>, <default_args>): ...  # def func(x, y=0): ...
 ```
 * **Default values are evaluated when function is first encountered in the scope.**
 * **Any mutations of mutable default values will persist between invocations.**
@@ -712,39 +712,39 @@ def add(*a):
 
 #### Legal argument combinations:
 ```python
-def f(*, x, y, z):          # f(x=1, y=2, z=3)
-def f(x, *, y, z):          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(x, y, *, z):          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
+def f(*, x, y, z): ...          # f(x=1, y=2, z=3)
+def f(x, *, y, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
 ```
 
 ```python
-def f(*args):               # f(1, 2, 3)
-def f(x, *args):            # f(1, 2, 3)
-def f(*args, z):            # f(1, 2, z=3)
+def f(*args): ...               # f(1, 2, 3)
+def f(x, *args): ...            # f(1, 2, 3)
+def f(*args, z): ...            # f(1, 2, z=3)
 ```
 
 ```python
-def f(**kwargs):            # f(x=1, y=2, z=3)
-def f(x, **kwargs):         # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(*, x, **kwargs):      # f(x=1, y=2, z=3)
+def f(**kwargs): ...            # f(x=1, y=2, z=3)
+def f(x, **kwargs): ...         # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*, x, **kwargs): ...      # f(x=1, y=2, z=3)
 ```
 
 ```python
-def f(*args, **kwargs):     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(x, *args, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(*args, y, **kwargs):  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(*args, **kwargs): ...     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(x, *args, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
+def f(*args, y, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 ```
 
 ### Other Uses
 ```python
-<list>  = [*<collection> [, ...]]
-<set>   = {*<collection> [, ...]}
-<tuple> = (*<collection>, [...])
-<dict>  = {**<dict> [, ...]}
+<list>  = [*<coll.> [, ...]]    # Or: list(<collection>) [+ ...]
+<tuple> = (*<coll.>, [...])     # Or: tuple(<collection>) [+ ...]
+<set>   = {*<coll.> [, ...]}    # Or: set(<collection>) [| ...]
+<dict>  = {**<dict> [, ...]}    # Or: dict(**<dict> [, ...])
 ```
 
 ```python
-head, *body, tail = <collection>
+head, *body, tail = <coll.>     # Also `head, *body = <coll.>` and `*body, tail = <coll.>`.
 ```
 
 
@@ -752,16 +752,16 @@ Inline
 ------
 ### Lambda
 ```python
-<func> = lambda: <return_value>
-<func> = lambda <arg_1>, <arg_2>: <return_value>
+<func> = lambda: <return_value>                           # A single statement function.
+<func> = lambda <arg_1>, <arg_2>: <return_value>          # Also accepts default arguments.
 ```
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                         # [1, 2, ..., 10]
-<set>  = {i for i in range(10) if i > 5}                  # {6, 7, 8, 9}
-<iter> = (i+5 for i in range(10))                         # (5, 6, ..., 14)
-<dict> = {i: i*2 for i in range(10)}                      # {0: 0, 1: 2, ..., 9: 18}
+<list> = [i+1 for i in range(10)]                         # Or: [1, 2, ..., 10]
+<iter> = (i for i in range(10) if i > 5)                  # Or: iter([6, 7, 8, 9])
+<set>  = {i+5 for i in range(10)}                         # Or: {5, 6, ..., 14}
+<dict> = {i: i*2 for i in range(10)}                      # Or: {0: 0, 1: 2, ..., 9: 18}
 ```
 
 ```python
@@ -771,9 +771,9 @@ Inline
 
 ### Map, Filter, Reduce
 ```python
-<iter> = map(lambda x: x + 1, range(10))                  # (1, 2, ..., 10)
-<iter> = filter(lambda x: x > 5, range(10))               # (6, 7, 8, 9)
-<obj>  = reduce(lambda out, x: out + x, range(10))        # 45
+<iter> = map(lambda x: x + 1, range(10))                  # Or: iter([1, 2, ..., 10])
+<iter> = filter(lambda x: x > 5, range(10))               # Or: iter([6, 7, 8, 9])
+<obj>  = reduce(lambda out, x: out + x, range(10))        # Or: 45
 ```
 * **Reduce must be imported from the functools module.**
 
@@ -1064,7 +1064,7 @@ from dataclasses import make_dataclass
 
 #### Rest of type annotations (CPython interpreter ignores them all):
 ```python
-def func(<arg_name>: <type> [= <obj>]) -> <type>:
+def func(<arg_name>: <type> [= <obj>]) -> <type>: ...
 <var_name>: typing.List/Set/Iterable/Sequence/Optional[<type>]
 <var_name>: typing.Dict/Tuple/Union[<type>, ...]
 ```
