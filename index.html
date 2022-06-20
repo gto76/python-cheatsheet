@@ -2370,8 +2370,7 @@ samples_f = (add_noise(f) <span class="hljs-keyword">for</span> f <span class="h
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div>
 
-<div><h4 id="playsawavfile">Plays a WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ sudo apt install libasound2-dev</span>
-<span class="hljs-comment"># $ pip3 install simpleaudio</span>
+<div><h4 id="playsawavfile">Plays a WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
     p = file.getparams()
@@ -2379,10 +2378,11 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
 </code></pre></div>
 
-<div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ sudo apt install espeak ffmpeg libespeak1</span>
-<span class="hljs-comment"># $ pip3 install pyttsx3</span>
+<div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
 <span class="hljs-keyword">import</span> pyttsx3
-pyttsx3.speak(&lt;str&gt;)                            <span class="hljs-comment"># Reads the string while blocking.</span>
+engine = pyttsx3.init()
+engine.say(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>)
+engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
