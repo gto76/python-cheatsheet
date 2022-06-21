@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 20, 2022</aside>
+    <aside>June 21, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -589,9 +589,9 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;float&gt;  = &lt;TD&gt;    / &lt;TD&gt;                   <span class="hljs-comment"># How many weeks/years there are in TD. Also //.</span>
 </code></pre></div>
 
-<div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(1, 2)</span>
-func(&lt;keyword_args&gt;)                              <span class="hljs-comment"># func(x=1, y=2)</span>
-func(&lt;positional_args&gt;, &lt;keyword_args&gt;)           <span class="hljs-comment"># func(1, y=2)</span>
+<div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
+func(&lt;keyword_args&gt;)                              <span class="hljs-comment"># func(x=0, y=0)</span>
+func(&lt;positional_args&gt;, &lt;keyword_args&gt;)           <span class="hljs-comment"># func(0, y=0)</span>
 </code></pre></div></div>
 
 
@@ -645,7 +645,7 @@ func(*args, **kwargs)
 &lt;dict&gt;  = {**&lt;dict&gt; [, ...]}    <span class="hljs-comment"># Or: dict(**&lt;dict&gt; [, ...])</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Also `head, *body = &lt;coll.&gt;` and `*body, tail = &lt;coll.&gt;`.</span>
+<pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre>
 <div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                           <span class="hljs-comment"># A single statement function.</span>
 &lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;          <span class="hljs-comment"># Also accepts default arguments.</span>
@@ -790,7 +790,7 @@ creature = Creature(point, direction)
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span><span class="hljs-params">(print_result=False)</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span><span class="hljs-params">(print_result=<span class="hljs-keyword">False</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decorator</span><span class="hljs-params">(func)</span>:</span>
 <span class="hljs-meta">        @wraps(func)</span>
         <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(*args, **kwargs)</span>:</span>
@@ -1200,10 +1200,10 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
 </ul>
-<div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;:
-<span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;:
-<span class="hljs-keyword">except</span> (&lt;exception&gt;, [...]):
-<span class="hljs-keyword">except</span> (&lt;exception&gt;, [...]) <span class="hljs-keyword">as</span> &lt;name&gt;:
+<div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
+<span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;: ...
+<span class="hljs-keyword">except</span> (&lt;exception&gt;, [...]): ...
+<span class="hljs-keyword">except</span> (&lt;exception&gt;, [...]) <span class="hljs-keyword">as</span> &lt;name&gt;: ...
 </code></pre></div>
 
 <ul>
@@ -1936,7 +1936,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
     offset = P(curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>)
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         screen.erase()
-        curses.textpad.rectangle(screen, offset.y<span class="hljs-number">-1</span>, offset.x<span class="hljs-number">-1</span>, offset.y+H, offset.x+W)
+        curses.textpad.rectangle(screen, offset.y-<span class="hljs-number">1</span>, offset.x-<span class="hljs-number">1</span>, offset.y+H, offset.x+W)
         <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():
             screen.addstr(offset.y + (p.y - state[<span class="hljs-string">'*'</span>].y + H//<span class="hljs-number">2</span>) % H,
                           offset.x + (p.x - state[<span class="hljs-string">'*'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))
@@ -2140,8 +2140,7 @@ Line #         Mem usage      Increment   Line Contents
      3        38.012 MiB      0.344 MiB       a = [*range(10000)]
      4        38.477 MiB      0.465 MiB       b = {*range(10000)}
 </code></pre>
-<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2</span>
-<span class="hljs-comment"># $ apt install graphviz</span>
+<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2; brew/apt install graphviz</span>
 <span class="hljs-keyword">import</span> pycallgraph2 <span class="hljs-keyword">as</span> cg, datetime
 filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{datetime.datetime.now():%Y%m%d%H%M%S}</span>.png'</span>
 drawer = cg.output.GraphvizOutput(output_file=filename)
@@ -2479,8 +2478,8 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
         Mario = dataclasses.make_dataclass(<span class="hljs-string">'Mario'</span>, <span class="hljs-string">'rect spd facing_left frame_cycle'</span>.split())
         <span class="hljs-keyword">return</span> Mario(get_rect(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-keyword">False</span>, it.cycle(range(<span class="hljs-number">3</span>)))
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_tiles</span><span class="hljs-params">()</span>:</span>
-        border = [(x, y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(W) <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> range(H) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, W<span class="hljs-number">-1</span>] <span class="hljs-keyword">or</span> y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, H<span class="hljs-number">-1</span>]]
-        platforms = [(randint(<span class="hljs-number">1</span>, W<span class="hljs-number">-2</span>), randint(<span class="hljs-number">2</span>, H<span class="hljs-number">-2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(W*H // <span class="hljs-number">10</span>)]
+        border = [(x, y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(W) <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> range(H) <span class="hljs-keyword">if</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, W-<span class="hljs-number">1</span>] <span class="hljs-keyword">or</span> y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, H-<span class="hljs-number">1</span>]]
+        platforms = [(randint(<span class="hljs-number">1</span>, W-<span class="hljs-number">2</span>), randint(<span class="hljs-number">2</span>, H-<span class="hljs-number">2</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(W*H // <span class="hljs-number">10</span>)]
         <span class="hljs-keyword">return</span> [get_rect(x, y) <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> border + platforms]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_rect</span><span class="hljs-params">(x, y)</span>:</span>
         <span class="hljs-keyword">return</span> pg.Rect(x*<span class="hljs-number">16</span>, y*<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>)
@@ -2528,7 +2527,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
     screen.blit(images[get_marios_image_index() + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
     <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
-        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H<span class="hljs-number">-1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
+        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
     pg.display.flip()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
@@ -2902,7 +2901,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 20, 2022</aside>
+    <aside>June 21, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

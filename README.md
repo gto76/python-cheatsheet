@@ -668,9 +668,9 @@ Arguments
 ---------
 ### Inside Function Call
 ```python
-func(<positional_args>)                           # func(1, 2)
-func(<keyword_args>)                              # func(x=1, y=2)
-func(<positional_args>, <keyword_args>)           # func(1, y=2)
+func(<positional_args>)                           # func(0, 0)
+func(<keyword_args>)                              # func(x=0, y=0)
+func(<positional_args>, <keyword_args>)           # func(0, y=0)
 ```
 
 ### Inside Function Definition
@@ -744,7 +744,7 @@ def f(*args, y, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
 ```
 
 ```python
-head, *body, tail = <coll.>     # Also `head, *body = <coll.>` and `*body, tail = <coll.>`.
+head, *body, tail = <coll.>     # Head or tail can be omitted.
 ```
 
 
@@ -1398,10 +1398,10 @@ finally:
 
 ### Catching Exceptions
 ```python
-except <exception>:
-except <exception> as <name>:
-except (<exception>, [...]):
-except (<exception>, [...]) as <name>:
+except <exception>: ...
+except <exception> as <name>: ...
+except (<exception>, [...]): ...
+except (<exception>, [...]) as <name>: ...
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
@@ -2615,8 +2615,7 @@ Line #         Mem usage      Increment   Line Contents
 ### Call Graph
 #### Generates a PNG image of the call graph with highlighted bottlenecks:
 ```python
-# $ pip3 install pycallgraph2
-# $ apt install graphviz
+# $ pip3 install pycallgraph2; brew/apt install graphviz
 import pycallgraph2 as cg, datetime
 filename = f'profile-{datetime.datetime.now():%Y%m%d%H%M%S}.png'
 drawer = cg.output.GraphvizOutput(output_file=filename)
