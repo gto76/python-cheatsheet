@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 21, 2022</aside>
+    <aside>June 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -365,12 +365,12 @@ to_exclusive   = &lt;range&gt;.stop
 <li><strong>As shown above, it restricts all special sequence matches to the first 128 characters and prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code> (the so-called separator characters).</strong></li>
 <li><strong>Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).</strong></li>
 </ul>
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Or: '{}, {}'.format(&lt;el_1&gt;, &lt;el_2&gt;)</span>
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly brackets can also contain expressions.</span>
+&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Or: '{0}, {a}'.format(&lt;el_1&gt;, a=&lt;el_2&gt;)</span>
 &lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C style formatting.</span>
 </code></pre></div>
 
-<div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-<span class="hljs-meta">&gt;&gt;&gt; </span>Person = namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
+<div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Person = collections.namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>person = Person(<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">f'<span class="hljs-subst">{person.height}</span>'</span>
 <span class="hljs-string">'187'</span>
@@ -673,7 +673,7 @@ func(*args, **kwargs)
 &lt;bool&gt; = all(&lt;collection&gt;)                                <span class="hljs-comment"># Is True for all elements or empty.</span>
 </code></pre></div>
 
-<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp_if_false&gt;
+<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp_if_true&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp_if_false&gt;  <span class="hljs-comment"># Only one expression gets evaluated.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
@@ -1513,7 +1513,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <ul>
 <li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
-<li><strong>To print the table to the console use <a href="#table">Tabulate</a> library.</strong></li>
+<li><strong>To print the spreadsheet to the console use <a href="#table">Tabulate</a> library.</strong></li>
 <li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
@@ -2379,9 +2379,9 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 
 <div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
 <span class="hljs-keyword">import</span> pyttsx3
-engine = pyttsx3.init()
-engine.say(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>)
-engine.runAndWait()
+&lt;Engine&gt; = pyttsx3.init()                       <span class="hljs-comment"># Returns a new Engine.</span>
+&lt;Engine&gt;.say(&lt;str&gt;)                             <span class="hljs-comment"># Stages the string to be read.</span>
+&lt;Engine&gt;.runAndWait()                           <span class="hljs-comment"># Reads all staged strings while blocking.</span>
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
@@ -2901,7 +2901,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 21, 2022</aside>
+    <aside>June 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

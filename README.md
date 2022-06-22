@@ -392,14 +392,14 @@ import re
 Format
 ------
 ```python
-<str> = f'{<el_1>}, {<el_2>}'            # Or: '{}, {}'.format(<el_1>, <el_2>)
+<str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
+<str> = '{}, {}'.format(<el_1>, <el_2>)  # Or: '{0}, {a}'.format(<el_1>, a=<el_2>)
 <str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C style formatting.
 ```
 
 ### Attributes
 ```python
->>> from collections import namedtuple
->>> Person = namedtuple('Person', 'name height')
+>>> Person = collections.namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
 >>> f'{person.height}'
 '187'
@@ -785,7 +785,7 @@ Inline
 
 ### Conditional Expression
 ```python
-<obj> = <exp_if_true> if <condition> else <exp_if_false>
+<obj> = <exp_if_true> if <condition> else <exp_if_false>  # Only one expression gets evaluated.
 ```
 
 ```python
@@ -1814,7 +1814,7 @@ import csv
 <list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
-* **To print the table to the console use [Tabulate](#table) library.**
+* **To print the spreadsheet to the console use [Tabulate](#table) library.**
 * **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
 
 ### Write
@@ -2920,9 +2920,9 @@ with wave.open('test.wav', 'rb') as file:
 ```python
 # $ pip3 install pyttsx3
 import pyttsx3
-engine = pyttsx3.init()
-engine.say('Sally sells seashells by the seashore.')
-engine.runAndWait()
+<Engine> = pyttsx3.init()                       # Returns a new Engine.
+<Engine>.say(<str>)                             # Stages the string to be read.
+<Engine>.runAndWait()                           # Reads all staged strings while blocking.
 ```
 
 
