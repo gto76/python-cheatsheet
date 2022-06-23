@@ -109,7 +109,7 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 Set
 ---
 ```python
-<set> = set()
+<set> = set()                                   # {} returns a dictionary.
 ```
 
 ```python
@@ -752,16 +752,16 @@ Inline
 ------
 ### Lambda
 ```python
-<func> = lambda: <return_value>                           # A single statement function.
-<func> = lambda <arg_1>, <arg_2>: <return_value>          # Also accepts default arguments.
+<func> = lambda: <return_value>                     # A single statement function.
+<func> = lambda <arg_1>, <arg_2>: <return_value>    # Also accepts default arguments.
 ```
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                         # Or: [1, 2, ..., 10]
-<iter> = (i for i in range(10) if i > 5)                  # Or: iter([6, 7, 8, 9])
-<set>  = {i+5 for i in range(10)}                         # Or: {5, 6, ..., 14}
-<dict> = {i: i*2 for i in range(10)}                      # Or: {0: 0, 1: 2, ..., 9: 18}
+<list> = [i+1 for i in range(10)]                   # Or: [1, 2, ..., 10]
+<iter> = (i for i in range(10) if i > 5)            # Or: iter([6, 7, 8, 9])
+<set>  = {i+5 for i in range(10)}                   # Or: {5, 6, ..., 14}
+<dict> = {i: i*2 for i in range(10)}                # Or: {0: 0, 1: 2, ..., 9: 18}
 ```
 
 ```python
@@ -771,21 +771,21 @@ Inline
 
 ### Map, Filter, Reduce
 ```python
-<iter> = map(lambda x: x + 1, range(10))                  # Or: iter([1, 2, ..., 10])
-<iter> = filter(lambda x: x > 5, range(10))               # Or: iter([6, 7, 8, 9])
-<obj>  = reduce(lambda out, x: out + x, range(10))        # Or: 45
+<iter> = map(lambda x: x + 1, range(10))            # Or: iter([1, 2, ..., 10])
+<iter> = filter(lambda x: x > 5, range(10))         # Or: iter([6, 7, 8, 9])
+<obj>  = reduce(lambda out, x: out + x, range(10))  # Or: 45
 ```
 * **Reduce must be imported from the functools module.**
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                                # Is `bool(el)` True for any element.
-<bool> = all(<collection>)                                # Is True for all elements or empty.
+<bool> = any(<collection>)                          # Is `bool(el)` True for any element.
+<bool> = all(<collection>)                          # Is True for all elements or empty.
 ```
 
 ### Conditional Expression
 ```python
-<obj> = <exp_if_true> if <condition> else <exp_if_false>  # Only one expression gets evaluated.
+<obj> = <exp> if <condition> else <exp>             # Only one expression gets evaluated.
 ```
 
 ```python
@@ -796,20 +796,20 @@ Inline
 ### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')
-point = Point(0, 0)
+Point = namedtuple('Point', 'x y')                  # Tuple's subclass with named elements.
+point = Point(0, 0)                                 # Tuple with x and y attributes.
 ```
 
 ```python
 from enum import Enum
-Direction = Enum('Direction', 'n e s w')
-direction = Direction.n
+Direction = Enum('Direction', 'n e s w')            # Enum with n, e, s and w members.
+direction = Direction.n                             # Member with name and value attributes.
 ```
 
 ```python
 from dataclasses import make_dataclass
-Creature = make_dataclass('Creature', ['loc', 'dir'])
-creature = Creature(point, direction)
+Player = make_dataclass('Player', ['loc', 'dir'])   # Class with init, repr and eq methods.
+player = Player(point, direction)                   # Object with loc and dir attributes.
 ```
 
 
