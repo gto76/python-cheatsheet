@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 23, 2022</aside>
+    <aside>June 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -182,7 +182,7 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 </code></pre></div>
 
 
-<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()
+<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()                                <span class="hljs-comment"># Or: tuple()</span>
 &lt;tuple&gt; = (&lt;el&gt;,)                           <span class="hljs-comment"># Or: &lt;el&gt;,</span>
 &lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])          <span class="hljs-comment"># Or: &lt;el_1&gt;, &lt;el_2&gt; [, ...]</span>
 </code></pre></div>
@@ -1852,7 +1852,7 @@ delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)   
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>MyClass.a, MyClass.b
 (<span class="hljs-string">'abcde'</span>, <span class="hljs-number">12345</span>)
 </code></pre>
-<div><h3 id="typediagram">Type Diagram</h3><pre><code class="python language-python hljs">type(MyClass)     == MyMetaClass     <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
+<div><h3 id="typediagram">Type Diagram</h3><pre><code class="python language-python hljs">type(MyClass) == MyMetaClass         <span class="hljs-comment"># MyClass is an instance of MyMetaClass.</span>
 type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is an instance of type.</span>
 </code></pre></div>
 
@@ -1866,7 +1866,7 @@ type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is
 ┃     str ──────────╯       ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
-<div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__     == object       <span class="hljs-comment"># MyClass is a subclass of object.</span>
+<div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__ == object           <span class="hljs-comment"># MyClass is a subclass of object.</span>
 MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is a subclass of type.</span>
 </code></pre></div>
 
@@ -2379,9 +2379,9 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 
 <div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
 <span class="hljs-keyword">import</span> pyttsx3
-&lt;Engine&gt; = pyttsx3.init()                       <span class="hljs-comment"># Returns a new Engine.</span>
-&lt;Engine&gt;.say(&lt;str&gt;)                             <span class="hljs-comment"># Stages the string to be read.</span>
-&lt;Engine&gt;.runAndWait()                           <span class="hljs-comment"># Reads all staged strings while blocking.</span>
+engine = pyttsx3.init()
+engine.say(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>)
+engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
@@ -2901,7 +2901,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 23, 2022</aside>
+    <aside>June 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

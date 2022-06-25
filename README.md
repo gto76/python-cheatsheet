@@ -144,7 +144,7 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
-<tuple> = ()
+<tuple> = ()                                # Or: tuple()
 <tuple> = (<el>,)                           # Or: <el>,
 <tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
 ```
@@ -2253,7 +2253,7 @@ class MyClass(metaclass=MyMetaClass):
 
 ### Type Diagram
 ```python
-type(MyClass)     == MyMetaClass     # MyClass is an instance of MyMetaClass.
+type(MyClass) == MyMetaClass         # MyClass is an instance of MyMetaClass.
 type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 ```
 
@@ -2271,7 +2271,7 @@ type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 
 ### Inheritance Diagram
 ```python
-MyClass.__base__     == object       # MyClass is a subclass of object.
+MyClass.__base__ == object           # MyClass is a subclass of object.
 MyMetaClass.__base__ == type         # MyMetaClass is a subclass of type.
 ```
 
@@ -2920,9 +2920,9 @@ with wave.open('test.wav', 'rb') as file:
 ```python
 # $ pip3 install pyttsx3
 import pyttsx3
-<Engine> = pyttsx3.init()                       # Returns a new Engine.
-<Engine>.say(<str>)                             # Stages the string to be read.
-<Engine>.runAndWait()                           # Reads all staged strings while blocking.
+engine = pyttsx3.init()
+engine.say('Sally sells seashells by the seashore.')
+engine.runAndWait()
 ```
 
 
