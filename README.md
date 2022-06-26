@@ -1398,10 +1398,10 @@ finally:
 
 ### Catching Exceptions
 ```python
-except <exception>: ...
-except <exception> as <name>: ...
-except (<exception>, [...]): ...
-except (<exception>, [...]) as <name>: ...
+except <exception>:
+except <exception> as <name>:
+except (<exception>, [...]):
+except (<exception>, [...]) as <name>:
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
@@ -3498,7 +3498,7 @@ import <cython_script>
 ```python
 cdef <ctype> <var_name> = <el>
 cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
-cdef <ctype/void> <func_name>(<ctype> <arg_name_1>, ...): …
+cdef <ctype/void> <func_name>(<ctype> <arg_name>): ...
 ```
 
 ```python
