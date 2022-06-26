@@ -680,17 +680,17 @@ func(*args, **kwargs)
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
 <div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Tuple's subclass with named elements.</span>
-point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Tuple with x and y attributes.</span>
+Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Creates a tuple's subclass.</span>
+point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'n e s w'</span>)            <span class="hljs-comment"># Enum with n, e, s and w members.</span>
-direction = Direction.n                             <span class="hljs-comment"># Member with name and value attributes.</span>
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'n e s w'</span>)            <span class="hljs-comment"># Creates an enum.</span>
+direction = Direction.n                             <span class="hljs-comment"># Returns its member.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Class with init, repr and eq methods.</span>
-player = Player(point, direction)                   <span class="hljs-comment"># Object with loc and dir attributes.</span>
+Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
+player = Player(point, direction)                   <span class="hljs-comment"># Returns its instance.</span>
 </code></pre>
 <div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;           <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/__init__.py'.</span>

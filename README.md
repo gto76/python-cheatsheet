@@ -796,20 +796,20 @@ Inline
 ### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')                  # Tuple's subclass with named elements.
-point = Point(0, 0)                                 # Tuple with x and y attributes.
+Point = namedtuple('Point', 'x y')                  # Creates a tuple's subclass.
+point = Point(0, 0)                                 # Returns its instance.
 ```
 
 ```python
 from enum import Enum
-Direction = Enum('Direction', 'n e s w')            # Enum with n, e, s and w members.
-direction = Direction.n                             # Member with name and value attributes.
+Direction = Enum('Direction', 'n e s w')            # Creates an enum.
+direction = Direction.n                             # Returns its member.
 ```
 
 ```python
 from dataclasses import make_dataclass
-Player = make_dataclass('Player', ['loc', 'dir'])   # Class with init, repr and eq methods.
-player = Player(point, direction)                   # Object with loc and dir attributes.
+Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a class.
+player = Player(point, direction)                   # Returns its instance.
 ```
 
 
