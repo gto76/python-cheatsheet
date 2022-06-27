@@ -1755,8 +1755,8 @@ JSON
 
 ```python
 import json
-<str>    = json.dumps(<object>, ensure_ascii=True, indent=None)
-<object> = json.loads(<str>)
+<str>    = json.dumps(<object>)    # Converts object to JSON string.
+<object> = json.loads(<str>)       # Converts JSON string to object.
 ```
 
 ### Read Object from JSON File
@@ -1780,8 +1780,8 @@ Pickle
 
 ```python
 import pickle
-<bytes>  = pickle.dumps(<object>)
-<object> = pickle.loads(<bytes>)
+<bytes>  = pickle.dumps(<object>)  # Converts object to bytes.
+<object> = pickle.loads(<bytes>)   # Converts bytes to object.
 ```
 
 ### Read Object from File
@@ -2985,8 +2985,8 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ### Surface
 **Object for representing images.**
 ```python
-<Surf> = pg.display.set_mode((width, height))   # Returns display surface.
-<Surf> = pg.Surface((width, height), flags=0)   # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
+<Surf> = pg.display.set_mode((width, height))   # Returns a display surface.
+<Surf> = pg.Surface((width, height))            # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
@@ -3007,8 +3007,8 @@ from pygame.transform import scale, ...
 ```python
 from pygame.draw import line, ...
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
-arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>)
-rect(<Surf>, color, <Rect>)                     # Also: polygon(<Surf>, color, points)
+arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>, width=0)
+rect(<Surf>, color, <Rect>, width=0)            # Also: polygon(<Surf>, color, points, width=0)
 ```
 
 ### Font
