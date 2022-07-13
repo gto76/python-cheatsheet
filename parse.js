@@ -794,13 +794,6 @@ function fixStructFormatDiv() {
   $('#forstandardtypesizesandmanualalignmentpaddingstartformatstringwith').parent().insertBefore(div)
 }
 
-
-function fixStructFormat() {
-  const div = $('#format-2').parent()
-  $('#format-2').insertBefore(div)
-  $('#forstandardtypesizesandmanualalignmentpaddingstartformatstringwith').parent().insertBefore(div)
-}
-
 function updateDate(template) {
   const date = new Date();
   const date_str = date.toLocaleString('en-us', {month: 'long', day: 'numeric', year: 'numeric'});

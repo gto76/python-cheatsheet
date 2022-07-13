@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 27, 2022</aside>
+    <aside>July 13, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -182,9 +182,9 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 </code></pre></div>
 
 
-<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()                                <span class="hljs-comment"># Or: tuple()</span>
-&lt;tuple&gt; = (&lt;el&gt;,)                           <span class="hljs-comment"># Or: &lt;el&gt;,</span>
-&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])          <span class="hljs-comment"># Or: &lt;el_1&gt;, &lt;el_2&gt; [, ...]</span>
+<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()                        <span class="hljs-comment"># Empty tuple.</span>
+&lt;tuple&gt; = (&lt;el&gt;,)                   <span class="hljs-comment"># Or: &lt;el&gt;,</span>
+&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])  <span class="hljs-comment"># Or: &lt;el_1&gt;, &lt;el_2&gt; [, ...]</span>
 </code></pre></div>
 
 
@@ -198,15 +198,14 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-number">1</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>getattr(p, <span class="hljs-string">'y'</span>)
 <span class="hljs-number">2</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>p._fields  <span class="hljs-comment"># Or: Point._fields</span>
-(<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>)
 </code></pre></div>
 
 
-<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive)
-&lt;range&gt; = range(from_inclusive, to_exclusive, ±step_size)
+<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>An immutable and hashable sequence of evenly spaced integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(to_exclusive)                         <span class="hljs-comment"># `list(range(3))        == [0, 1, 2]`</span>
+&lt;range&gt; = range(from_inclusive, to_exclusive)         <span class="hljs-comment"># `list(range(1, 4))     == [1, 2, 3]`</span>
+&lt;range&gt; = range(from_inclusive, to_exclusive, ±step)  <span class="hljs-comment"># `list(range(3, 0, -1)) == [3, 2, 1]`</span>
 </code></pre></div>
+
 
 <pre><code class="python language-python hljs">from_inclusive = &lt;range&gt;.start
 to_exclusive   = &lt;range&gt;.stop
@@ -229,10 +228,10 @@ to_exclusive   = &lt;range&gt;.stop
 &lt;iter&gt; = cycle(&lt;collection&gt;)                <span class="hljs-comment"># Repeats the sequence endlessly.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = chain(&lt;coll_1&gt;, &lt;coll_2&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (figuratively).</span>
-&lt;iter&gt; = chain.from_iterable(&lt;collection&gt;)  <span class="hljs-comment"># Empties collections inside a collection in order.</span>
+&lt;iter&gt; = chain.from_iterable(&lt;coll&gt;)        <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = islice(&lt;coll&gt;, to_exclusive)       <span class="hljs-comment"># Only returns first 'to_exclusive' elements.</span>
-&lt;iter&gt; = islice(&lt;coll&gt;, from_inclusive, …)  <span class="hljs-comment"># `to_exclusive, step_size`.</span>
+&lt;iter&gt; = islice(&lt;coll&gt;, from_inclusive, …)  <span class="hljs-comment"># `to_exclusive, +step`.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
@@ -2901,7 +2900,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 27, 2022</aside>
+    <aside>July 13, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

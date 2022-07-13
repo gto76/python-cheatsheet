@@ -144,9 +144,9 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
-<tuple> = ()                                # Or: tuple()
-<tuple> = (<el>,)                           # Or: <el>,
-<tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
+<tuple> = ()                        # Empty tuple.
+<tuple> = (<el>,)                   # Or: <el>,
+<tuple> = (<el_1>, <el_2> [, ...])  # Or: <el_1>, <el_2> [, ...]
 ```
 
 ### Named Tuple
@@ -163,17 +163,17 @@ Point(x=1, y=2)
 1
 >>> getattr(p, 'y')
 2
->>> p._fields  # Or: Point._fields
-('x', 'y')
 ```
 
 
 Range
 -----
+**An immutable and hashable sequence of evenly spaced integers.**
+
 ```python
-<range> = range(to_exclusive)
-<range> = range(from_inclusive, to_exclusive)
-<range> = range(from_inclusive, to_exclusive, ±step_size)
+<range> = range(to_exclusive)                         # `list(range(3))        == [0, 1, 2]`
+<range> = range(from_inclusive, to_exclusive)         # `list(range(1, 4))     == [1, 2, 3]`
+<range> = range(from_inclusive, to_exclusive, ±step)  # `list(range(3, 0, -1)) == [3, 2, 1]`
 ```
 
 ```python
@@ -212,12 +212,12 @@ from itertools import count, repeat, cycle, chain, islice
 
 ```python
 <iter> = chain(<coll_1>, <coll_2> [, ...])  # Empties collections in order (figuratively).
-<iter> = chain.from_iterable(<collection>)  # Empties collections inside a collection in order.
+<iter> = chain.from_iterable(<coll>)        # Empties collections inside a collection in order.
 ```
 
 ```python
 <iter> = islice(<coll>, to_exclusive)       # Only returns first 'to_exclusive' elements.
-<iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive, step_size`.
+<iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive, +step`.
 ```
 
 
