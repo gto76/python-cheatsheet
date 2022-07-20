@@ -1997,7 +1997,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - Little-endian.**
 * **`'>'` - Big-endian (also `'!'`).**
 
-#### Besides numbers, pack() and unpack() also support bytes objects as part of the seqence:
+#### Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:
 * **`'c'` - A bytes object with a single element. Use `'x'` for pad byte.**
 * **`'<n>s'` - A bytes object with n elements.**
 
