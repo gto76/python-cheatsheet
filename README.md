@@ -1242,7 +1242,7 @@ True
 ```
 
 ### Collection
-* **Only required methods are iter() and len().**
+* **Only required methods are iter() and len(). Len() should return the number of items.**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
 * **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
 ```python
@@ -1779,8 +1779,8 @@ Pickle
 
 ```python
 import pickle
-<bytes>  = pickle.dumps(<object>)  # Converts object to bytes.
-<object> = pickle.loads(<bytes>)   # Converts bytes to object.
+<bytes>  = pickle.dumps(<object>)  # Converts object to bytes object.
+<object> = pickle.loads(<bytes>)   # Converts bytes object to object.
 ```
 
 ### Read Object from File
@@ -2791,7 +2791,7 @@ from PIL import ImageDraw
 <ImageDraw>.line((x1, y1, x2, y2 [, ...]))
 <ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg)
 <ImageDraw>.rectangle((x1, y1, x2, y2))
-<ImageDraw>.polygon((x1, y1, x2, y2 [, ...]))
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))
 <ImageDraw>.ellipse((x1, y1, x2, y2))
 ```
 * **Use `'fill=<color>'` to set the primary color.**
@@ -3000,7 +3000,7 @@ while all(event.type != pg.QUIT for event in pg.event.get()):
 ```python
 from pygame.transform import scale, ...
 <Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
-<Surf> = rotate(<Surf>, degrees)                # Returns rotated and scaled surface.
+<Surf> = rotate(<Surf>, anticlock_degrees)      # Returns rotated and scaled surface.
 <Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
 ```
 

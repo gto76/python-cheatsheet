@@ -1061,7 +1061,7 @@ Hello World!
 <span class="hljs-keyword">True</span>
 </code></pre>
 <div><h3 id="collection">Collection</h3><ul>
-<li><strong>Only required methods are iter() and len().</strong></li>
+<li><strong>Only required methods are iter() and len(). Len() should return the number of items.</strong></li>
 <li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
 <li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
@@ -1486,8 +1486,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing Python objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
-&lt;bytes&gt;  = pickle.dumps(&lt;object&gt;)  <span class="hljs-comment"># Converts object to bytes.</span>
-&lt;object&gt; = pickle.loads(&lt;bytes&gt;)   <span class="hljs-comment"># Converts bytes to object.</span>
+&lt;bytes&gt;  = pickle.dumps(&lt;object&gt;)  <span class="hljs-comment"># Converts object to bytes object.</span>
+&lt;object&gt; = pickle.loads(&lt;bytes&gt;)   <span class="hljs-comment"># Converts bytes object to object.</span>
 </code></pre></div>
 
 
@@ -2277,7 +2277,7 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 &lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))
 &lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg)
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2 [, ...]))
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))
 &lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))
 </code></pre>
 <ul>
@@ -2446,7 +2446,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
 &lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
-&lt;Surf&gt; = rotate(&lt;Surf&gt;, degrees)                <span class="hljs-comment"># Returns rotated and scaled surface.</span>
+&lt;Surf&gt; = rotate(&lt;Surf&gt;, anticlock_degrees)      <span class="hljs-comment"># Returns rotated and scaled surface.</span>
 &lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, ...
