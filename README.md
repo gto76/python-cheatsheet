@@ -2559,18 +2559,10 @@ Profiling
 ---------
 ### Stopwatch
 ```python
-from time import time
-start_time = time()                     # Seconds since the Epoch.
-...
-duration = time() - start_time
-```
-
-#### High performance:
-```python
 from time import perf_counter
-start_time = perf_counter()             # Seconds since the restart.
+start_time = perf_counter()
 ...
-duration = perf_counter() - start_time
+duration_in_seconds = perf_counter() - start_time
 ```
 
 ### Timing a Snippet
@@ -2614,8 +2606,9 @@ Line #         Mem usage      Increment   Line Contents
 ### Call Graph
 #### Generates a PNG image of the call graph with highlighted bottlenecks:
 ```python
-# $ pip3 install pycallgraph2; brew/apt install graphviz
+# $ pip3 install pycallgraph2; apt/brew install graphviz
 import pycallgraph2 as cg, datetime
+
 filename = f'profile-{datetime.datetime.now():%Y%m%d%H%M%S}.png'
 drawer = cg.output.GraphvizOutput(output_file=filename)
 with cg.PyCallGraph(drawer):
@@ -2633,62 +2626,70 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list/list_of_lists>)
-<array> = np.arange(from_inclusive, to_exclusive, ±step_size)
-<array> = np.ones(<shape>)
-<array> = np.random.randint(from_inclusive, to_exclusive, <shape>)
+<array> = np.array(<list/list_of_lists>)                # Returns 1d/2d NumPy array.
+<array> = np.zeros/ones(<shape>)                        # Also np.full(<shape>, <el>).
+<array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, num).
+<array> = np.random.randint(from_inc, to_exc, <shape>)  # Also np.random.random(<shape>).
 ```
 
 ```python
-<array>.shape = <shape>
-<view>  = <array>.reshape(<shape>)
-<view>  = np.broadcast_to(<array>, <shape>)
+<view>  = <array>.reshape(<shape>)                      # Also `<array>.shape = <shape>`.
+<array> = <array>.flatten()                             # Collapses array into one dimension.
+<view>  = <array>.squeeze()                             # Removes dimensions of length one.
 ```
 
 ```python
-<array> = <array>.sum(axis)
-indexes = <array>.argmin(axis)
+<array> = <array>.sum/min/mean/var/std(axis)            # Passed dimension gets aggregated.
+<array> = <array>.argmin(axis)                          # Returns indexes of smallest elements.
+<array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
 
-* **Shape is a tuple of dimension sizes.**
-* **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0.**
+* **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
+* **Axis is an index of the dimension that gets aggregated. Leftmost/outermost dimension has index 0. Summing a 100x50 RGB image along the axis 2 will return a greyscale image with shape (50, 100).**
+* **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1, keepdims=True).<method>(axis_2).squeeze()'`.**
 
 ### Indexing
 ```bash
-<el>       = <2d_array>[row_index, column_index]
-<1d_view>  = <2d_array>[row_index]
-<1d_view>  = <2d_array>[:, column_index]
+<el>       = <2d_array>[row_index, column_index]        # <3d_a>[table_i, row_i, column_i]
+<1d_view>  = <2d_array>[row_index]                      # <3d_a>[table_i, row_i]
+<1d_view>  = <2d_array>[:, column_index]                # <3d_a>[table_i, :, column_i]
 ```
 
 ```bash
-<1d_array> = <2d_array>[row_indexes, column_indexes]
-<2d_array> = <2d_array>[row_indexes]
-<2d_array> = <2d_array>[:, column_indexes]
+<1d_array> = <2d_array>[row_indexes, column_indexes]    # <3d_a>[table_is, row_is, column_is]
+<2d_array> = <2d_array>[row_indexes]                    # <3d_a>[table_is, row_is]
+<2d_array> = <2d_array>[:, column_indexes]              # <3d_a>[table_is, :, column_is]
 ```
 
 ```bash
-<2d_bools> = <2d_array> ><== <el>
-<1d_array> = <2d_array>[<2d_bools>]
+<2d_bools> = <2d_array> ><== <el>                       # <3d_array> ><== <1d_array>
+<1d_array> = <2d_array>[<2d_bools>]                     # <3d_array>[<2d_bools>]
 ```
+* **All examples also allow assignments.**
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 
 ```python
-left  = [[0.1], [0.6], [0.8]]        # Shape: (3, 1)
-right = [ 0.1 ,  0.6 ,  0.8 ]        # Shape: (3)
+left  = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
+right = [ 0.1 ,  0.6 ,  0.8 ]                           # Shape: (3,)
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = [[0.1], [0.6], [0.8]]        # Shape: (3, 1)
-right = [[0.1 ,  0.6 ,  0.8]]        # Shape: (1, 3) <- !
+left  = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
+right = [[0.1 ,  0.6 ,  0.8]]                           # Shape: (1, 3) <- !
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
 ```python
-left  = [[0.1, 0.1, 0.1], [0.6, 0.6, 0.6], [0.8, 0.8, 0.8]]  # Shape: (3, 3) <- !
-right = [[0.1, 0.6, 0.8], [0.1, 0.6, 0.8], [0.1, 0.6, 0.8]]  # Shape: (3, 3) <- !
+left  = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
+         [0.6,  0.6,  0.6],
+         [0.8,  0.8,  0.8]]
+
+right = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
+         [0.1,  0.6,  0.8],
+         [0.1,  0.6,  0.8]]
 ```
 
 #### 3. If neither non-matching dimension has size 1, raise an error.
