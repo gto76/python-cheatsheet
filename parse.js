@@ -498,18 +498,18 @@ const DIAGRAM_15_B =
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃\n" +
   "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
-  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a series, it is  ┃\n" +
+  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a Series, it is  ┃\n" +
   "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
-  "┃           join=…)      │ b  3   4   .  │     4      │            │ A series is treated as a ┃\n" +
+  "┃           join=…)      │ b  3   4   .  │     4      │            │ A Series is treated as a ┃\n" +
   "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(sr) ┃\n" +
   "┃                        │ c  .   6   7  │     6      │            │ to add a row instead.    ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
   "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'  ┃\n" +
-  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A series is  ┃\n" +
+  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A Series is  ┃\n" +
   "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +

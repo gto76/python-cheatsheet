@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 22, 2022</aside>
+    <aside>July 24, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1657,7 +1657,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - Little-endian.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - Big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>).</strong></li>
 </ul><div><h4 id="besidesnumberspackandunpackalsosupportbytesobjectsaspartofthesequence">Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:</h4><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'c'</span></code> - A bytes object with a single element. Use <code class="python hljs"><span class="hljs-string">'x'</span></code> for pad byte.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'c'</span></code> - A bytes object with a single element. For pad byte use <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="apache hljs"><span class="hljs-section">'&lt;n&gt;s'</span><span class="hljs-attribute"></span></code> - A bytes object with n elements.</strong></li>
 </ul></div></div><div><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1/1)</strong></li>
@@ -2007,7 +2007,7 @@ print(table)
 
 <pre><code class="python language-python hljs">logger.add(<span class="hljs-string">'debug_{time}.log'</span>, colorize=<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># Connects a log file.</span>
 logger.add(<span class="hljs-string">'error_{time}.log'</span>, level=<span class="hljs-string">'ERROR'</span>)  <span class="hljs-comment"># Another file for errors or higher.</span>
-logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)
+logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)           <span class="hljs-comment"># Logs to file/s and prints to stderr.</span>
 </code></pre>
 <ul>
 <li><strong>Levels: <code class="python hljs"><span class="hljs-string">'debug'</span></code>, <code class="python hljs"><span class="hljs-string">'info'</span></code>, <code class="python hljs"><span class="hljs-string">'success'</span></code>, <code class="python hljs"><span class="hljs-string">'warning'</span></code>, <code class="python hljs"><span class="hljs-string">'error'</span></code>, <code class="python hljs"><span class="hljs-string">'critical'</span></code>.</strong></li>
@@ -2273,12 +2273,12 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 &lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y))
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))
-&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), from_deg, to_deg)
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))
+<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y))                       <span class="hljs-comment"># Truncates floats into ints.</span>
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use images's resize().</span>
+&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)   <span class="hljs-comment"># Always draws in clockwise direction.</span>
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last and first point get connected.</span>
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use image's rotate() and paste().</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
@@ -2550,31 +2550,31 @@ Name: a, dtype: int64
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Sr&gt; = Series(&lt;list&gt;)                         <span class="hljs-comment"># Assigns RangeIndex starting at 0.</span>
-&lt;Sr&gt; = Series(&lt;dict&gt;)                         <span class="hljs-comment"># Takes dictionary's keys for index.</span>
-&lt;Sr&gt; = Series(&lt;dict/Series&gt;, index=&lt;list&gt;)    <span class="hljs-comment"># Only keeps items with keys specified in index.</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = Series(&lt;list&gt;)                          <span class="hljs-comment"># Assigns RangeIndex starting at 0.</span>
+&lt;Sr&gt; = Series(&lt;dict&gt;)                          <span class="hljs-comment"># Takes dictionary's keys for index.</span>
+&lt;Sr&gt; = Series(&lt;dict/Series&gt;, index=&lt;list&gt;)     <span class="hljs-comment"># Only keeps items with keys specified in index.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.loc[key]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[index]</span>
-&lt;Sr&gt; = &lt;Sr&gt;.loc[keys]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[indexes]</span>
-&lt;Sr&gt; = &lt;Sr&gt;.loc[from_key : to_key_inclusive]  <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i : to_i_exclusive]</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.loc[key]                           <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[index]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[keys]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[indexes]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[from_key : to_key_inclusive]   <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i : to_i_exclusive]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                        <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
-&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                     <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;key_range/range&gt;]</span>
-&lt;Sr&gt; = &lt;Sr&gt;[bools]                            <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[bools]</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
+&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;key_range/range&gt;]</span>
+&lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[bools]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                      <span class="hljs-comment"># Returns a Series of bools.</span>
-&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                      <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                       <span class="hljs-comment"># Returns a Series of bools.</span>
+&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                       <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                      <span class="hljs-comment"># Or: pd.concat(&lt;coll_of_Sr&gt;)</span>
-&lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)               <span class="hljs-comment"># Adds items that are not yet present.</span>
-&lt;Sr&gt;.update(&lt;Sr&gt;)                             <span class="hljs-comment"># Updates items that are already present.</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt;.append(&lt;Sr&gt;)                       <span class="hljs-comment"># Or: pd.concat(&lt;coll_of_Sr&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)                <span class="hljs-comment"># Adds items that are not yet present.</span>
+&lt;Sr&gt;.update(&lt;Sr&gt;)                              <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr&gt;.plot.line/area/bar/pie/hist()            <span class="hljs-comment"># Generates a Matplotlib plot.</span>
-matplotlib.pyplot.show()                      <span class="hljs-comment"># Displays the plot. Also savefig(&lt;path&gt;).</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt;.plot.line/area/bar/pie/hist()             <span class="hljs-comment"># Generates a Matplotlib plot.</span>
+matplotlib.pyplot.show()                       <span class="hljs-comment"># Displays the plot. Also savefig(&lt;path&gt;).</span>
 </code></pre>
-<div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;Sr&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
-&lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
-&lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
+<div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;Sr&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/ffill/interpl()   <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
+&lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -2607,25 +2607,25 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;DF&gt;    = DataFrame(&lt;list_of_rows&gt;)           <span class="hljs-comment"># Rows can be either lists, dicts or series.</span>
-&lt;DF&gt;    = DataFrame(&lt;dict_of_columns&gt;)        <span class="hljs-comment"># Columns can be either lists, dicts or series.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = DataFrame(&lt;list_of_rows&gt;)            <span class="hljs-comment"># Rows can be either lists, dicts or series.</span>
+&lt;DF&gt;    = DataFrame(&lt;dict_of_columns&gt;)         <span class="hljs-comment"># Columns can be either lists, dicts or series.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt;    = &lt;DF&gt;.loc[row_key, column_key]       <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index, column_index]</span>
-&lt;Sr/DF&gt; = &lt;DF&gt;.loc[row_key/s]                 <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index/es]</span>
-&lt;Sr/DF&gt; = &lt;DF&gt;.loc[:, column_key/s]           <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[:, column_index/es]</span>
-&lt;DF&gt;    = &lt;DF&gt;.loc[row_bools, column_bools]   <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_bools, column_bools]</span>
+<pre><code class="python language-python hljs">&lt;el&gt;    = &lt;DF&gt;.loc[row_key, column_key]        <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index, column_index]</span>
+&lt;Sr/DF&gt; = &lt;DF&gt;.loc[row_key/s]                  <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index/es]</span>
+&lt;Sr/DF&gt; = &lt;DF&gt;.loc[:, column_key/s]            <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[:, column_index/es]</span>
+&lt;DF&gt;    = &lt;DF&gt;.loc[row_bools, column_bools]    <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_bools, column_bools]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[column_key/s]                  <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
-&lt;DF&gt;    = &lt;DF&gt;[row_bools]                     <span class="hljs-comment"># Keeps rows as specified by bools.</span>
-&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                 <span class="hljs-comment"># Assigns NaN to False values.</span>
+<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[column_key/s]                   <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
+&lt;DF&gt;    = &lt;DF&gt;[row_bools]                      <span class="hljs-comment"># Keeps rows as specified by bools.</span>
+&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to False values.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
-&lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                 <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
+&lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                 <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)          <span class="hljs-comment"># Replaces row keys with values from a column.</span>
-&lt;DF&gt;    = &lt;DF&gt;.reset_index()                  <span class="hljs-comment"># Moves row keys to a column named index.</span>
-&lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)     <span class="hljs-comment"># Sorts rows by row keys.</span>
-&lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)      <span class="hljs-comment"># Sorts rows by the passed column/s.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)           <span class="hljs-comment"># Replaces row keys with values from a column.</span>
+&lt;DF&gt;    = &lt;DF&gt;.reset_index()                   <span class="hljs-comment"># Moves row keys to a column named index.</span>
+&lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)      <span class="hljs-comment"># Sorts rows by row keys.</span>
+&lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)       <span class="hljs-comment"># Sorts rows by the passed column/s.</span>
 </code></pre>
 <div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2647,18 +2647,18 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃
 ┃           rsuffix=<span class="hljs-string">'r'</span>, │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x yl yr  z │ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ Uses <span class="hljs-string">'left'</span> by default.  ┃
-┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If r is a series, it is  ┃
+┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If r is a Series, it is  ┃
 ┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.     ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
-┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ A series is treated as a ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ A Series is treated as a ┃
 ┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. Use l.append(sr) ┃
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │ to add a row instead.    ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
 ┃           axis=<span class="hljs-number">1</span>,      │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x  y  y  z │            │ right end. Uses <span class="hljs-string">'outer'</span>  ┃
-┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            │ by default. A series is  ┃
+┃           join=…)      │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │            │ by default. A Series is  ┃
 ┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.     ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
@@ -2667,9 +2667,9 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ R must be a DataFrame.   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
-&lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpl()  <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
-&lt;DF&gt; = &lt;DF&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(lambda &lt;el&gt;: &lt;el&gt;)</span>
+<div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpl()   <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transfrm(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
 <ul>
@@ -2701,19 +2701,19 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;[col_key_1, col_key_2][row_key]'</span></code> to get the fifth result's values.</strong></li>
 </ul>
-<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
-&lt;DF&gt;.plot.line/bar/hist/scatter([x=column_key, y=column_key/s]); plt.show()
+<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/bar/hist/scatter()              <span class="hljs-comment"># Also: `x=column_key, y=column_key/s`.</span>
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt; plt.show()    <span class="hljs-comment"># Displays the plot.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)
-&lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)
-&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table_name/query&gt;'</span>, &lt;connection&gt;)
-&lt;DF&gt; = pd.read_clipboard()
+<pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install lxml` to read html.</span>
+&lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)  <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
+&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
+&lt;DF&gt; = pd.read_clipboard()                     <span class="hljs-comment"># Reads a copied table from the clipboard.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/sp/r/i'</span>])
-&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/markdown/latex([&lt;path&gt;])
-&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)
-&lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)
+<pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/…'</span>])             <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
+&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also to_markdown/latex([&lt;path&gt;]).</span>
+&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install openpyxl` for xlsx files.</span>
+&lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
 </code></pre>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], index=list(<span class="hljs-string">'abc'</span>), columns=list(<span class="hljs-string">'xyz'</span>))
 <span class="hljs-meta">&gt;&gt;&gt; </span>df.groupby(<span class="hljs-string">'z'</span>).get_group(<span class="hljs-number">6</span>)
@@ -2723,13 +2723,13 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)             <span class="hljs-comment"># DF is split into groups based on passed column.</span>
-&lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                     <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
-&lt;GB&gt; = &lt;GB&gt;[column_key]                       <span class="hljs-comment"># A single column GB. All operations return a Sr.</span>
+<pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)              <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
+&lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
+&lt;GB&gt; = &lt;GB&gt;[column_key]                        <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
 </code></pre>
-<div><h4 id="groupbyaggregatetransformmap">GroupBy — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()         <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
-&lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()          <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
-&lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                      <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
+<div><h4 id="groupbyaggregatetransformmap">GroupBy — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
+&lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()           <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
+&lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">'z'</span>)
@@ -2753,9 +2753,9 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 ┃                 │  c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │             │               ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;R_Sr/R_DF/R_GB&gt; = &lt;Sr/DF/GB&gt;.rolling(window_size)  <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
-&lt;R_Sr/R_DF&gt;      = &lt;R_DF/R_GB&gt;[column_key/s]        <span class="hljs-comment"># Or: &lt;R&gt;.column_key</span>
-&lt;Sr/DF/DF&gt;       = &lt;R_Sr/R_DF/R_GB&gt;.sum/max/mean()  <span class="hljs-comment"># Or: &lt;R&gt;.apply/agg(&lt;agg_func/str&gt;)</span>
+<div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;RSr/RDF/RGB&gt; = &lt;Sr/DF/GB&gt;.rolling(win_size)   <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
+&lt;RSr/RDF/RGB&gt; = &lt;RDF/RGB&gt;[column_key/s]        <span class="hljs-comment"># Or: &lt;RDF/RGB&gt;.column_key</span>
+&lt;Sr/DF&gt;       = &lt;R&gt;.mean/sum/max()             <span class="hljs-comment"># Or: &lt;R&gt;.apply/agg(&lt;agg_func/str&gt;)</span>
 </code></pre></div>
 
 
@@ -2905,7 +2905,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 22, 2022</aside>
+    <aside>July 24, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -1998,7 +1998,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'>'` - Big-endian (also `'!'`).**
 
 #### Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:
-* **`'c'` - A bytes object with a single element. Use `'x'` for pad byte.**
+* **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
 * **`'<n>s'` - A bytes object with n elements.**
 
 #### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
@@ -2445,7 +2445,7 @@ from loguru import logger
 ```python
 logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
 logger.add('error_{time}.log', level='ERROR')  # Another file for errors or higher.
-logger.<level>('A logging message.')
+logger.<level>('A logging message.')           # Logs to file/s and prints to stderr.
 ```
 * **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
@@ -2787,12 +2787,12 @@ from PIL import ImageDraw
 ```
 
 ```python
-<ImageDraw>.point((x, y))
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))
-<ImageDraw>.arc((x1, y1, x2, y2), from_deg, to_deg)
-<ImageDraw>.rectangle((x1, y1, x2, y2))
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))
-<ImageDraw>.ellipse((x1, y1, x2, y2))
+<ImageDraw>.point((x, y))                       # Truncates floats into ints.
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use images's resize().
+<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
+<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last and first point get connected.
+<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use image's rotate() and paste().
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
@@ -3121,44 +3121,44 @@ Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = Series(<list>)                         # Assigns RangeIndex starting at 0.
-<Sr> = Series(<dict>)                         # Takes dictionary's keys for index.
-<Sr> = Series(<dict/Series>, index=<list>)    # Only keeps items with keys specified in index.
+<Sr> = Series(<list>)                          # Assigns RangeIndex starting at 0.
+<Sr> = Series(<dict>)                          # Takes dictionary's keys for index.
+<Sr> = Series(<dict/Series>, index=<list>)     # Only keeps items with keys specified in index.
 ```
 
 ```python
-<el> = <Sr>.loc[key]                          # Or: <Sr>.iloc[index]
-<Sr> = <Sr>.loc[keys]                         # Or: <Sr>.iloc[indexes]
-<Sr> = <Sr>.loc[from_key : to_key_inclusive]  # Or: <Sr>.iloc[from_i : to_i_exclusive]
+<el> = <Sr>.loc[key]                           # Or: <Sr>.iloc[index]
+<Sr> = <Sr>.loc[keys]                          # Or: <Sr>.iloc[indexes]
+<Sr> = <Sr>.loc[from_key : to_key_inclusive]   # Or: <Sr>.iloc[from_i : to_i_exclusive]
 ```
 
 ```python
-<el> = <Sr>[key/index]                        # Or: <Sr>.key
-<Sr> = <Sr>[keys/indexes]                     # Or: <Sr>[<key_range/range>]
-<Sr> = <Sr>[bools]                            # Or: <Sr>.i/loc[bools]
+<el> = <Sr>[key/index]                         # Or: <Sr>.key
+<Sr> = <Sr>[keys/indexes]                      # Or: <Sr>[<key_range/range>]
+<Sr> = <Sr>[bools]                             # Or: <Sr>.i/loc[bools]
 ```
 
 ```python
-<Sr> = <Sr> ><== <el/Sr>                      # Returns a Series of bools.
-<Sr> = <Sr> +-*/ <el/Sr>                      # Items with non-matching keys get value NaN.
+<Sr> = <Sr> ><== <el/Sr>                       # Returns a Series of bools.
+<Sr> = <Sr> +-*/ <el/Sr>                       # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<Sr> = <Sr>.append(<Sr>)                      # Or: pd.concat(<coll_of_Sr>)
-<Sr> = <Sr>.combine_first(<Sr>)               # Adds items that are not yet present.
-<Sr>.update(<Sr>)                             # Updates items that are already present.
+<Sr> = <Sr>.append(<Sr>)                       # Or: pd.concat(<coll_of_Sr>)
+<Sr> = <Sr>.combine_first(<Sr>)                # Adds items that are not yet present.
+<Sr>.update(<Sr>)                              # Updates items that are already present.
 ```
 
 ```python
-<Sr>.plot.line/area/bar/pie/hist()            # Generates a Matplotlib plot.
-matplotlib.pyplot.show()                      # Displays the plot. Also savefig(<path>).
+<Sr>.plot.line/area/bar/pie/hist()             # Generates a Matplotlib plot.
+matplotlib.pyplot.show()                       # Displays the plot. Also savefig(<path>).
 ```
 
 #### Series — Aggregate, Transform, Map:
 ```python
-<el> = <Sr>.sum/max/mean/idxmax/all()         # Or: <Sr>.agg(lambda <Sr>: <el>)
-<Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()  # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
-<Sr> = <Sr>.fillna(<el>)                      # Or: <Sr>.agg/transform/map(lambda <el>: <el>)
+<el> = <Sr>.sum/max/mean/idxmax/all()          # Or: <Sr>.agg(lambda <Sr>: <el>)
+<Sr> = <Sr>.rank/diff/cumsum/ffill/interpl()   # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
+<Sr> = <Sr>.fillna(<el>)                       # Or: <Sr>.agg/transform/map(lambda <el>: <el>)
 ```
 
 ```python
@@ -3198,33 +3198,33 @@ b  3  4
 ```
 
 ```python
-<DF>    = DataFrame(<list_of_rows>)           # Rows can be either lists, dicts or series.
-<DF>    = DataFrame(<dict_of_columns>)        # Columns can be either lists, dicts or series.
+<DF>    = DataFrame(<list_of_rows>)            # Rows can be either lists, dicts or series.
+<DF>    = DataFrame(<dict_of_columns>)         # Columns can be either lists, dicts or series.
 ```
 
 ```python
-<el>    = <DF>.loc[row_key, column_key]       # Or: <DF>.iloc[row_index, column_index]
-<Sr/DF> = <DF>.loc[row_key/s]                 # Or: <DF>.iloc[row_index/es]
-<Sr/DF> = <DF>.loc[:, column_key/s]           # Or: <DF>.iloc[:, column_index/es]
-<DF>    = <DF>.loc[row_bools, column_bools]   # Or: <DF>.iloc[row_bools, column_bools]
+<el>    = <DF>.loc[row_key, column_key]        # Or: <DF>.iloc[row_index, column_index]
+<Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_index/es]
+<Sr/DF> = <DF>.loc[:, column_key/s]            # Or: <DF>.iloc[:, column_index/es]
+<DF>    = <DF>.loc[row_bools, column_bools]    # Or: <DF>.iloc[row_bools, column_bools]
 ```
 
 ```python
-<Sr/DF> = <DF>[column_key/s]                  # Or: <DF>.column_key
-<DF>    = <DF>[row_bools]                     # Keeps rows as specified by bools.
-<DF>    = <DF>[<DF_of_bools>]                 # Assigns NaN to False values.
+<Sr/DF> = <DF>[column_key/s]                   # Or: <DF>.column_key
+<DF>    = <DF>[row_bools]                      # Keeps rows as specified by bools.
+<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to False values.
 ```
 
 ```python
-<DF>    = <DF> ><== <el/Sr/DF>                # Returns DF of bools. Sr is treated as a row.
-<DF>    = <DF> +-*/ <el/Sr/DF>                # Items with non-matching keys get value NaN.
+<DF>    = <DF> ><== <el/Sr/DF>                 # Returns DF of bools. Sr is treated as a row.
+<DF>    = <DF> +-*/ <el/Sr/DF>                 # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<DF>    = <DF>.set_index(column_key)          # Replaces row keys with values from a column.
-<DF>    = <DF>.reset_index()                  # Moves row keys to a column named index.
-<DF>    = <DF>.sort_index(ascending=True)     # Sorts rows by row keys.
-<DF>    = <DF>.sort_values(column_key/s)      # Sorts rows by the passed column/s.
+<DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from a column.
+<DF>    = <DF>.reset_index()                   # Moves row keys to a column named index.
+<DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys.
+<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by the passed column/s.
 ```
 
 #### DataFrame — Merge, Join, Concat:
@@ -3250,18 +3250,18 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 | l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a series, it is  |
+|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a Series, it is  |
 |                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
-|           join=…)      | b  3   4   .  |     4      |            | A series is treated as a |
+|           join=…)      | b  3   4   .  |     4      |            | A Series is treated as a |
 |                        | b  .   4   5  |     4      |            | column. Use l.append(sr) |
 |                        | c  .   6   7  |     6      |            | to add a row instead.    |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
 |           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
-|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A series is  |
+|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A Series is  |
 |                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
 | l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
@@ -3273,9 +3273,9 @@ c  6  7
 
 #### DataFrame — Aggregate, Transform, Map:
 ```python
-<Sr> = <DF>.sum/max/mean/idxmax/all()         # Or: <DF>.apply/agg(lambda <Sr>: <el>)
-<DF> = <DF>.rank/diff/cumsum/ffill/interpl()  # Or: <DF>.apply/agg/transform(lambda <Sr>: <Sr>)
-<DF> = <DF>.fillna(<el>)                      # Or: <DF>.applymap(lambda <el>: <el>)
+<Sr> = <DF>.sum/max/mean/idxmax/all()          # Or: <DF>.apply/agg(lambda <Sr>: <el>)
+<DF> = <DF>.rank/diff/cumsum/ffill/interpl()   # Or: <DF>.apply/agg/transfrm(lambda <Sr>: <Sr>)
+<DF> = <DF>.fillna(<el>)                       # Or: <DF>.applymap(lambda <el>: <el>)
 ```
 * **All operations operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 
@@ -3310,22 +3310,22 @@ b  3  4
 
 #### DataFrame — Plot, Encode, Decode:
 ```python
-import matplotlib.pyplot as plt
-<DF>.plot.line/bar/hist/scatter([x=column_key, y=column_key/s]); plt.show()
+<DF>.plot.line/bar/hist/scatter()              # Also: `x=column_key, y=column_key/s`.
+import matplotlib.pyplot as plt; plt.show()    # Displays the plot.
 ```
 
 ```python
-<DF> = pd.read_json/html('<str/path/url>')
-<DF> = pd.read_csv/pickle/excel('<path/url>')
-<DF> = pd.read_sql('<table_name/query>', <connection>)
-<DF> = pd.read_clipboard()
+<DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install lxml` to read html.
+<DF> = pd.read_csv/pickle/excel('<path/url>')  # Use `sheet_name=None` to get all Excel sheets.
+<DF> = pd.read_sql('<table/query>', <conn.>)   # Accepts SQLite3 or SQLAlchemy connection.
+<DF> = pd.read_clipboard()                     # Reads a copied table from the clipboard.
 ```
 
 ```python
-<dict> = <DF>.to_dict(['d/l/s/sp/r/i'])
-<str>  = <DF>.to_json/html/csv/markdown/latex([<path>])
-<DF>.to_pickle/excel(<path>)
-<DF>.to_sql('<table_name>', <connection>)
+<dict> = <DF>.to_dict(['d/l/s/…'])             # Returns columns as dicts, lists or series.
+<str>  = <DF>.to_json/html/csv([<path>])       # Also to_markdown/latex([<path>]).
+<DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install openpyxl` for xlsx files.
+<DF>.to_sql('<table_name>', <connection>)      # Accepts SQLite3 or SQLAlchemy connection.
 ```
 
 ### GroupBy
@@ -3340,16 +3340,16 @@ c  7  8
 ```
 
 ```python
-<GB> = <DF>.groupby(column_key/s)             # DF is split into groups based on passed column.
-<DF> = <GB>.apply(<func>)                     # Maps each group. Func can return DF, Sr or el.
-<GB> = <GB>[column_key]                       # A single column GB. All operations return a Sr.
+<GB> = <DF>.groupby(column_key/s)              # Splits DF into groups based on passed column.
+<DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
+<GB> = <GB>[column_key]                        # Single column GB. All operations return a Sr.
 ```
 
 #### GroupBy — Aggregate, Transform, Map:
 ```python
-<DF> = <GB>.sum/max/mean/idxmax/all()         # Or: <GB>.agg(lambda <Sr>: <el>)
-<DF> = <GB>.rank/diff/cumsum/ffill()          # Or: <GB>.transform(lambda <Sr>: <Sr>)
-<DF> = <GB>.fillna(<el>)                      # Or: <GB>.transform(lambda <Sr>: <Sr>)
+<DF> = <GB>.sum/max/mean/idxmax/all()          # Or: <GB>.agg(lambda <Sr>: <el>)
+<DF> = <GB>.rank/diff/cumsum/ffill()           # Or: <GB>.transform(lambda <Sr>: <Sr>)
+<DF> = <GB>.fillna(<el>)                       # Or: <GB>.transform(lambda <Sr>: <Sr>)
 ```
 
 ```python
@@ -3381,9 +3381,9 @@ c  7  8
 **Object for rolling window calculations.**
 
 ```python
-<R_Sr/R_DF/R_GB> = <Sr/DF/GB>.rolling(window_size)  # Also: `min_periods=None, center=False`.
-<R_Sr/R_DF>      = <R_DF/R_GB>[column_key/s]        # Or: <R>.column_key
-<Sr/DF/DF>       = <R_Sr/R_DF/R_GB>.sum/max/mean()  # Or: <R>.apply/agg(<agg_func/str>)
+<RSr/RDF/RGB> = <Sr/DF/GB>.rolling(win_size)   # Also: `min_periods=None, center=False`.
+<RSr/RDF/RGB> = <RDF/RGB>[column_key/s]        # Or: <RDF/RGB>.column_key
+<Sr/DF>       = <R>.mean/sum/max()             # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
 
