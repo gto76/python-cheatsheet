@@ -598,10 +598,10 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Constructors
 ```python
-<D>  = date(year, month, day)
-<T>  = time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, fold=0)
-<DT> = datetime(year, month, day, hour=0, minute=0, second=0, ...)
-<TD> = timedelta(weeks=0, days=0, hours=0, minutes=0, seconds=0, ...)
+<D>  = date(year, month, day)               # Only accepts valid dates from 1 to 9999 AD.
+<T>  = time(hour=0, minute=0, second=0)     # Also: `microsecond=0, tzinfo=None, fold=0`.
+<DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
+<TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microsecond=0`.
 ```
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
@@ -637,7 +637,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Decode
 ```python
-<str>    = <D/T/DT>.isoformat(sep='T')      # Also timespec='auto/hours/minutes/seconds/…'.
+<str>    = <D/T/DT>.isoformat(sep='T')      # Also: `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
@@ -2788,11 +2788,11 @@ from PIL import ImageDraw
 
 ```python
 <ImageDraw>.point((x, y))                       # Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use images's resize().
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
 <ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last and first point get connected.
-<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use image's rotate() and paste().
+<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
+<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 24, 2022</aside>
+    <aside>July 25, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -528,10 +528,10 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 
-<div><h3 id="constructors">Constructors</h3><pre><code class="python language-python apache hljs">&lt;D&gt;  = date(year, month, day)
-&lt;T&gt;  = time(hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>, microsecond=<span class="hljs-number">0</span>, tzinfo=<span class="hljs-keyword">None</span>, fold=<span class="hljs-number">0</span>)
-&lt;DT&gt; = datetime(year, month, day, hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>, ...)
-&lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>, minutes=<span class="hljs-number">0</span>, seconds=<span class="hljs-number">0</span>, ...)
+<div><h3 id="constructors">Constructors</h3><pre><code class="python language-python apache hljs">&lt;D&gt;  = date(year, month, day)               <span class="hljs-comment"># Only accepts valid dates from 1 to 9999 AD.</span>
+&lt;T&gt;  = time(hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>)     <span class="hljs-comment"># Also: `microsecond=0, tzinfo=None, fold=0`.</span>
+&lt;DT&gt; = datetime(year, month, day, hour=<span class="hljs-number">0</span>)   <span class="hljs-comment"># Also: `minute=0, second=0, microsecond=0, …`.</span>
+&lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microsecond=0`.</span>
 </code></pre></div>
 
 <ul>
@@ -565,7 +565,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.mmmuuu[±HH:MM]'</span></code>, or both separated by an arbitrary character. All parts following hours are optional.</strong></li>
 <li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
-<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also timespec='auto/hours/minutes/seconds/…'.</span>
+<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also: `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Gregorian NYE 1, ignoring time and tz.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTn in local tz.</span>
@@ -2274,11 +2274,11 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y))                       <span class="hljs-comment"># Truncates floats into ints.</span>
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use images's resize().</span>
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
 &lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)   <span class="hljs-comment"># Always draws in clockwise direction.</span>
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last and first point get connected.</span>
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
@@ -2905,7 +2905,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 24, 2022</aside>
+    <aside>July 25, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
