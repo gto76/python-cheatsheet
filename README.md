@@ -77,8 +77,8 @@ Dictionary
 ```python
 value  = <dict>.get(key, default=None)          # Returns default if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
-<dict> = collections.defaultdict(<type>)        # Creates a dict with default value of type.
-<dict> = collections.defaultdict(lambda: 1)     # Creates a dict with default value 1.
+<dict> = collections.defaultdict(<type>)        # Returns a dict with default value of type.
+<dict> = collections.defaultdict(lambda: 1)     # Returns a dict with default value 1.
 ```
 
 ```python
@@ -109,7 +109,7 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 Set
 ---
 ```python
-<set> = set()                                   # {} returns a dictionary.
+<set> = set()                                   # `{}` returns a dictionary.
 ```
 
 ```python
@@ -2045,7 +2045,7 @@ Memory View
 
 ### Decode
 ```python
-<bytes> = bytes(<mview>)                       # Creates a new bytes object.
+<bytes> = bytes(<mview>)                       # Returns a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
 <file>.write(<mview>)                          # Writes mview to the binary file.

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 25, 2022</aside>
+    <aside>July 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -137,8 +137,8 @@ list_of_chars    = list(&lt;str&gt;)
 
 <pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns default if key is missing.</span>
 value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes default if key is missing.</span>
-&lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Creates a dict with default value of type.</span>
-&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Creates a dict with default value 1.</span>
+&lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Returns a dict with default value of type.</span>
+&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Returns a dict with default value 1.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = dict(&lt;collection&gt;)                     <span class="hljs-comment"># Creates a dict from coll. of key-value pairs.</span>
 &lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates a dict from two collections.</span>
@@ -158,7 +158,7 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 (<span class="hljs-string">'blue'</span>, <span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = set()                                   <span class="hljs-comment"># {} returns a dictionary.</span>
+<div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = set()                                   <span class="hljs-comment"># `{}` returns a dictionary.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                                 <span class="hljs-comment"># Or: &lt;set&gt; |= {&lt;el&gt;}</span>
@@ -1700,7 +1700,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Creates a new bytes object.</span>
+<div><h3 id="decode-2">Decode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes mview to the binary file.</span>
@@ -2905,7 +2905,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 25, 2022</aside>
+    <aside>July 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
