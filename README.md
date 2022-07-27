@@ -1829,7 +1829,7 @@ import csv
 * **`'delimiter'` - A one-character string used to separate fields.**
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
-* **`'skipinitialspace'` - Whether whitespace after delimiter gets stripped by reader.**
+* **`'skipinitialspace'` - Is space character at the start of the field stripped by reader.**
 * **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
@@ -2192,11 +2192,11 @@ delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name
 
 ### Parameters
 ```python
-from inspect import signature
-<Sig>  = signature(<function>)             # Function's Signature object.
-<dict> = <Sig>.parameters                  # Dict of function's Parameter objects.
-<str>  = <Param>.name                      # Parameter's name.
+<Sig>  = inspect.signature(<function>)     # Function's Signature object.
+<dict> = <Sig>.parameters                  # Dict of Parameter objects.
 <memb> = <Param>.kind                      # Member of ParameterKind enum.
+<obj>  = <Param>.default                   # Default value or <Param>.empty.
+<type> = <Param>.annotation                # Type or <Param>.empty.
 ```
 
 

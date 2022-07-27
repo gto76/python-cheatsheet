@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 26, 2022</aside>
+    <aside>July 27, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1528,7 +1528,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string used to separate fields.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields that contain special characters.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are/get doubled or escaped.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Whether whitespace after delimiter gets stripped by reader.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Is space character at the start of the field stripped by reader.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars if doublequote is False.</strong></li>
@@ -1810,11 +1810,11 @@ setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, va
 delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre></div>
 
-<div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
-&lt;Sig&gt;  = signature(&lt;function&gt;)             <span class="hljs-comment"># Function's Signature object.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of function's Parameter objects.</span>
-&lt;str&gt;  = &lt;Param&gt;.name                      <span class="hljs-comment"># Parameter's name.</span>
+<div><h3 id="parameters-1">Parameters</h3><pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)     <span class="hljs-comment"># Function's Signature object.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of Parameter objects.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
+&lt;obj&gt;  = &lt;Param&gt;.default                   <span class="hljs-comment"># Default value or &lt;Param&gt;.empty.</span>
+&lt;type&gt; = &lt;Param&gt;.annotation                <span class="hljs-comment"># Type or &lt;Param&gt;.empty.</span>
 </code></pre></div>
 
 <div><h2 id="metaprogramming"><a href="#metaprogramming" name="metaprogramming">#</a>Metaprogramming</h2><p><strong>Code that generates code.</strong></p><div><h3 id="type-1">Type</h3><p><strong>Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.</strong></p><pre><code class="python language-python hljs">&lt;class&gt; = type(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;tuple_of_parents&gt;, &lt;dict_of_class_attributes&gt;)</code></pre></div></div>
@@ -2905,7 +2905,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 26, 2022</aside>
+    <aside>July 27, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
