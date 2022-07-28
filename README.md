@@ -1545,7 +1545,7 @@ value = args.<name>
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<el>'` to set the default value.**
-* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but not 'newline'.**
+* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is always None.**
 
 
 Open
@@ -1829,7 +1829,7 @@ import csv
 * **`'delimiter'` - A one-character string used to separate fields.**
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
-* **`'skipinitialspace'` - Is space character at the start of the field stripped by reader.**
+* **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 * **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
@@ -2797,7 +2797,7 @@ from PIL import ImageDraw
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
 * **Use `'outline=<color>'` to set the color of the contours.**
-* **Color can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
+* **Color can be an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation

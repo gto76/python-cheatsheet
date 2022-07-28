@@ -1321,7 +1321,7 @@ value = args.&lt;name&gt;
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set the default value.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but not 'newline'.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but 'newline' is always None.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1528,7 +1528,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string used to separate fields.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields that contain special characters.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are/get doubled or escaped.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Is space character at the start of the field stripped by reader.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Is space character at the start of the field stripped by the reader.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars if doublequote is False.</strong></li>
@@ -2284,7 +2284,7 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
-<li><strong>Color can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
