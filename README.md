@@ -344,7 +344,7 @@ String
 | isdecimal()   |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
-* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85…]'`.**
+* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85\u2000…]'`.**
 
 
 Regex
@@ -679,7 +679,7 @@ def func(<default_args>): ...                     # def func(x=0, y=0): ...
 def func(<nondefault_args>, <default_args>): ...  # def func(x, y=0): ...
 ```
 * **Default values are evaluated when function is first encountered in the scope.**
-* **Any mutations of mutable default values will persist between invocations.**
+* **Any mutation of a mutable default value will persist between invocations.**
 
 
 Splat Operator
@@ -1936,26 +1936,26 @@ Bytes
 **Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
-<int>   = <bytes>[<index>]               # Returns an int in range from 0 to 255.
-<bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
+<bytes> = b'<str>'                          # Only accepts ASCII characters and \x00-\xff.
+<int>   = <bytes>[<index>]                  # Returns an int in range from 0 to 255.
+<bytes> = <bytes>[<slice>]                  # Returns bytes even if it has only one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)     # Joins elements using bytes as a separator.
 ```
 
 ### Encode
 ```python
-<bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
-<bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='little/big', signed=False`.
-<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
+<bytes> = bytes(<coll_of_ints>)             # Ints must be in range from 0 to 255.
+<bytes> = bytes(<str>, 'utf-8')             # Or: <str>.encode('utf-8')
+<bytes> = <int>.to_bytes(n_bytes, …)        # `byteorder='little/big', signed=False`.
+<bytes> = bytes.fromhex('<hex>')            # Hex pairs can be separated by whitespaces.
 ```
 
 ### Decode
 ```python
-<list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
-<str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, …)     # `byteorder='little/big', signed=False`.
-'<hex>' = <bytes>.hex()                  # Returns hex pairs. Accepts `sep=<str>`.
+<list>  = list(<bytes>)                     # Returns ints in range from 0 to 255.
+<str>   = str(<bytes>, 'utf-8')             # Or: <bytes>.decode('utf-8')
+<int>   = int.from_bytes(<bytes>, …)        # `byteorder='little/big', signed=False`.
+'<hex>' = <bytes>.hex()                     # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
 ### Read Bytes from File
@@ -2609,7 +2609,7 @@ Line #         Mem usage      Increment   Line Contents
 # $ pip3 install pycallgraph2; apt/brew install graphviz
 import pycallgraph2 as cg, datetime
 
-filename = f'profile-{datetime.datetime.now():%Y%m%d%H%M%S}.png'
+filename = f'profile-{datetime.datetime.now():%Y%m%d_%H%M%S}.png'
 drawer = cg.output.GraphvizOutput(output_file=filename)
 with cg.PyCallGraph(drawer):
     <code_to_be_profiled>
@@ -2645,7 +2645,7 @@ import numpy as np
 ```
 
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
-* **Axis is an index of the dimension that gets aggregated. Leftmost/outermost dimension has index 0. Summing a 100x50 RGB image along the axis 2 will return a greyscale image with shape (50, 100).**
+* **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
 * **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1, keepdims=True).<method>(axis_2).squeeze()'`.**
 
 ### Indexing
@@ -2744,7 +2744,7 @@ from PIL import Image
 <Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
 <ImagingCore> = <Image>.getdata()               # Returns a flattened sequence of pixels.
 <Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
-<Image>.paste(<Image>, (x, y))                  # Writes an image to the image.
+<Image>.paste(<Image>, (x, y))                  # Writes passed image to the image.
 ```
 
 ```bash
@@ -2797,7 +2797,7 @@ from PIL import ImageDraw
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
 * **Use `'outline=<color>'` to set the color of the contours.**
-* **Colors can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
+* **Color can be specified as an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation
@@ -2807,6 +2807,7 @@ Animation
 # $ pip3 install imageio
 from PIL import Image, ImageDraw
 import imageio
+
 WIDTH, HEIGHT, R = 126, 126, 10
 frames = []
 for velocity in range(1, 16):
@@ -2852,14 +2853,13 @@ nframes      = <Wave_read>.getnframes()         # Number of frames.
 
 ### Sample Values
 ```text
-+-----------+-------------+------+-------------+
-| sampwidth |     min     | zero |     max     |
-+-----------+-------------+------+-------------+
-|     1     |           0 |  128 |         255 |
-|     2     |      -32768 |    0 |       32767 |
-|     3     |    -8388608 |    0 |     8388607 |
-|     4     | -2147483648 |    0 |  2147483647 |
-+-----------+-------------+------+-------------+
++-----------+-----------+------+-----------+
+| sampwidth |    min    | zero |    max    |
++-----------+-----------+------+-----------+
+|     1     |         0 |  128 |       255 |
+|     2     |    -32768 |    0 |     32767 |
+|     3     |  -8388608 |    0 |   8388607 |
++-----------+-----------+------+-----------+
 ```
 
 ### Read Float Samples from WAV File
@@ -2931,18 +2931,18 @@ Synthesizer
 #### Plays Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
-import math, struct, simpleaudio
-from itertools import repeat, chain
+import itertools as it, math, struct, simpleaudio
+
 F  = 44100
 P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,'
 P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,'
-get_pause   = lambda seconds: repeat(0, int(seconds * F))
+get_pause   = lambda seconds: it.repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
 get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
 parse_note  = lambda note: (get_hz(note[:2]), 1/4 if '♩' in note else 1/8)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
-samples_f   = chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.split(','))
+samples_f   = it.chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.split(','))
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
 simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
@@ -2950,10 +2950,10 @@ simpleaudio.play_buffer(samples_b, 1, 2, F)
 
 Pygame
 ------
-### Basic Example
 ```python
 # $ pip3 install pygame
 import pygame as pg
+
 pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)

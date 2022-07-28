@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 27, 2022</aside>
+    <aside>July 28, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -327,7 +327,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'isspace()'</span></code> checks for <code class="python hljs"><span class="hljs-string">'[ \t\n\r\f\v\x1c-\x1f\x85…]'</span></code>.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'isspace()'</span></code> checks for <code class="python hljs"><span class="hljs-string">'[ \t\n\r\f\v\x1c-\x1f\x85\u2000…]'</span></code>.</strong></li>
 </ul>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
 &lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
@@ -601,7 +601,7 @@ func(&lt;positional_args&gt;, &lt;keyword_args&gt;)           <span class="hljs-
 
 <ul>
 <li><strong>Default values are evaluated when function is first encountered in the scope.</strong></li>
-<li><strong>Any mutations of mutable default values will persist between invocations.</strong></li>
+<li><strong>Any mutation of a mutable default value will persist between invocations.</strong></li>
 </ul>
 <div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
@@ -1609,23 +1609,23 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
-&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                          <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
+&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]                  <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]                  <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)     <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
-&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)     <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
-&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)         <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)             <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
+&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)        <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
+&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)            <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
-&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
-&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)     <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
-<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()                  <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                     <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
+&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
+&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)        <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
+<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()                     <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre></div>
 
 <div><h3 id="readbytesfromfile">Read Bytes from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_bytes</span><span class="hljs-params">(filename)</span>:</span>
@@ -2136,7 +2136,7 @@ Line #         Mem usage      Increment   Line Contents
 <div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2; apt/brew install graphviz</span>
 <span class="hljs-keyword">import</span> pycallgraph2 <span class="hljs-keyword">as</span> cg, datetime
 
-filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{datetime.datetime.now():%Y%m%d%H%M%S}</span>.png'</span>
+filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{datetime.datetime.now():%Y%m%d_%H%M%S}</span>.png'</span>
 drawer = cg.output.GraphvizOutput(output_file=filename)
 <span class="hljs-keyword">with</span> cg.PyCallGraph(drawer):
     &lt;code_to_be_profiled&gt;
@@ -2163,7 +2163,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 </code></pre>
 <ul>
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
-<li><strong>Axis is an index of the dimension that gets aggregated. Leftmost/outermost dimension has index 0. Summing a 100x50 RGB image along the axis 2 will return a greyscale image with shape (50, 100).</strong></li>
+<li><strong>Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
 <li><strong>Passing a tuple of axes will chain the operations like this: <code class="python hljs"><span class="hljs-string">'&lt;array&gt;.&lt;method&gt;(axis_1, keepdims=True).&lt;method&gt;(axis_2).squeeze()'</span></code>.</strong></li>
 </ul>
 <div><h3 id="indexing">Indexing</h3><pre><code class="bash language-bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i, column_i]</span>
@@ -2239,7 +2239,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 &lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
 &lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a flattened sequence of pixels.</span>
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
-&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes an image to the image.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes passed image to the image.</span>
 </code></pre>
 <pre><code class="bash language-bash hljs">&lt;2d_array&gt; = np.array(&lt;Image_L&gt;)                <span class="hljs-comment"># Creates NumPy array from greyscale image.</span>
 &lt;3d_array&gt; = np.array(&lt;Image_RGB&gt;)              <span class="hljs-comment"># Creates NumPy array from color image.</span>
@@ -2284,11 +2284,12 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
-<li><strong>Colors can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Color can be specified as an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 <span class="hljs-keyword">import</span> imageio
+
 WIDTH, HEIGHT, R = <span class="hljs-number">126</span>, <span class="hljs-number">126</span>, <span class="hljs-number">10</span>
 frames = []
 <span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
@@ -2327,14 +2328,13 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 <li><strong>If sample width is one byte, then the integer should be encoded unsigned.</strong></li>
 <li><strong>For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
-<div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━━━┓
-┃ sampwidth │     min     │ zero │     max     ┃
-┠───────────┼─────────────┼──────┼─────────────┨
-┃     <span class="hljs-number">1</span>     │           <span class="hljs-number">0</span> │  <span class="hljs-number">128</span> │         <span class="hljs-number">255</span> ┃
-┃     <span class="hljs-number">2</span>     │      <span class="hljs-number">-32768</span> │    <span class="hljs-number">0</span> │       <span class="hljs-number">32767</span> ┃
-┃     <span class="hljs-number">3</span>     │    <span class="hljs-number">-8388608</span> │    <span class="hljs-number">0</span> │     <span class="hljs-number">8388607</span> ┃
-┃     <span class="hljs-number">4</span>     │ <span class="hljs-number">-2147483648</span> │    <span class="hljs-number">0</span> │  <span class="hljs-number">2147483647</span> ┃
-┗━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━━━┛
+<div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━┓
+┃ sampwidth │    min    │ zero │    max    ┃
+┠───────────┼───────────┼──────┼───────────┨
+┃     <span class="hljs-number">1</span>     │         <span class="hljs-number">0</span> │  <span class="hljs-number">128</span> │       <span class="hljs-number">255</span> ┃
+┃     <span class="hljs-number">2</span>     │    <span class="hljs-number">-32768</span> │    <span class="hljs-number">0</span> │     <span class="hljs-number">32767</span> ┃
+┃     <span class="hljs-number">3</span>     │  <span class="hljs-number">-8388608</span> │    <span class="hljs-number">0</span> │   <span class="hljs-number">8388607</span> ┃
+┗━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━┛
 </code></pre></div>
 
 <div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
@@ -2389,25 +2389,26 @@ engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> math, struct, simpleaudio
-<span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> repeat, chain
+<span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it, math, struct, simpleaudio
+
 F  = <span class="hljs-number">44100</span>
 P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,'</span>
 P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,'</span>
-get_pause   = <span class="hljs-keyword">lambda</span> seconds: repeat(<span class="hljs-number">0</span>, int(seconds * F))
+get_pause   = <span class="hljs-keyword">lambda</span> seconds: it.repeat(<span class="hljs-number">0</span>, int(seconds * F))
 sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
 get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
 get_hz      = <span class="hljs-keyword">lambda</span> key: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(key) / <span class="hljs-number">12</span>)
 parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">2</span>]), <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
 get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(*parse_note(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
-samples_f   = chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
+samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
 samples_b   = <span class="hljs-string">b''</span>.join(struct.pack(<span class="hljs-string">'&lt;h'</span>, int(f * <span class="hljs-number">30000</span>)) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
 simpleaudio.play_buffer(samples_b, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, F)
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h3 id="basicexample-1">Basic Example</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
 <span class="hljs-keyword">import</span> pygame <span class="hljs-keyword">as</span> pg
+
 pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
@@ -2418,8 +2419,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
     pg.display.flip()
-</code></pre></div></div>
-
+</code></pre></div>
 
 <div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Floats get truncated into ints.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
@@ -2905,7 +2905,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 27, 2022</aside>
+    <aside>July 28, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
