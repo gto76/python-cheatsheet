@@ -1371,7 +1371,6 @@ LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
 
 Exceptions
 ----------
-### Basic Example
 ```python
 try:
     <code>
@@ -1397,14 +1396,15 @@ finally:
 
 ### Catching Exceptions
 ```python
-except <exception>:
-except <exception> as <name>:
-except (<exception>, [...]):
-except (<exception>, [...]) as <name>:
+except <exception>: ...
+except <exception> as <name>: ...
+except (<exception>, [...]): ...
+except (<exception>, [...]) as <name>: ...
 ```
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the error message to stderr.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
+* **Use `'logging.exception(<message>)'` to log the exception.**
 
 ### Raising Exceptions
 ```python
