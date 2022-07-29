@@ -3105,9 +3105,10 @@ if __name__ == '__main__':
 Pandas
 ------
 ```python
-# $ pip3 install pandas
+# $ pip3 install pandas matplotlib
 import pandas as pd
 from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
 ```
 
 ### Series
@@ -3151,7 +3152,7 @@ Name: a, dtype: int64
 
 ```python
 <Sr>.plot.line/area/bar/pie/hist()             # Generates a Matplotlib plot.
-matplotlib.pyplot.show()                       # Displays the plot. Also savefig(<path>).
+plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 
 #### Series — Aggregate, Transform, Map:
@@ -3310,12 +3311,12 @@ b  3  4
 
 #### DataFrame — Plot, Encode, Decode:
 ```python
-<DF>.plot.line/bar/hist/scatter()              # Also: `x=column_key, y=column_key/s`.
-import matplotlib.pyplot as plt; plt.show()    # Displays the plot.
+<DF>.plot.line/bar/hist/scatter/box()          # Also: `x=column_key, y=column_key/s`.
+plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 
 ```python
-<DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install lxml` to read html.
+<DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
 <DF> = pd.read_csv/pickle/excel('<path/url>')  # Use `sheet_name=None` to get all Excel sheets.
 <DF> = pd.read_sql('<table/query>', <conn.>)   # Accepts SQLite3 or SQLAlchemy connection.
 <DF> = pd.read_clipboard()                     # Reads a copied table from the clipboard.

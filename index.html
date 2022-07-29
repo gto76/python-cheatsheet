@@ -2538,9 +2538,10 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     main()
 </code></pre></div>
 
-<div><h2 id="pandas"><a href="#pandas" name="pandas">#</a>Pandas</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas</span>
+<div><h2 id="pandas"><a href="#pandas" name="pandas">#</a>Pandas</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas matplotlib</span>
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> Series, DataFrame
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 </code></pre></div>
 
 <div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
@@ -2570,7 +2571,7 @@ Name: a, dtype: int64
 &lt;Sr&gt;.update(&lt;Sr&gt;)                              <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt;.plot.line/area/bar/pie/hist()             <span class="hljs-comment"># Generates a Matplotlib plot.</span>
-matplotlib.pyplot.show()                       <span class="hljs-comment"># Displays the plot. Also savefig(&lt;path&gt;).</span>
+plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;Sr&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
 &lt;Sr&gt; = &lt;Sr&gt;.rank/diff/cumsum/ffill/interpl()   <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
@@ -2701,11 +2702,11 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;[col_key_1, col_key_2][row_key]'</span></code> to get the fifth result's values.</strong></li>
 </ul>
-<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/bar/hist/scatter()              <span class="hljs-comment"># Also: `x=column_key, y=column_key/s`.</span>
-<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt; plt.show()    <span class="hljs-comment"># Displays the plot.</span>
+<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/bar/hist/scatter/box()          <span class="hljs-comment"># Also: `x=column_key, y=column_key/s`.</span>
+plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install lxml` to read html.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
 &lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)  <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
 &lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
 &lt;DF&gt; = pd.read_clipboard()                     <span class="hljs-comment"># Reads a copied table from the clipboard.</span>
