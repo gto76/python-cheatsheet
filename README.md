@@ -2732,25 +2732,25 @@ from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple/str>`.
-<Image> = Image.open(<path>)                    # Identifies format based on file contents.
-<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
-<Image>.save(<path>)                            # Selects format based on the path extension.
-<Image>.show()                                  # Opens image in default preview app.
+<Image> = Image.new('<mode>', (width, height))   # Also: `color=<int/tuple/str>`.
+<Image> = Image.open(<path>)                     # Identifies format based on file contents.
+<Image> = <Image>.convert('<mode>')              # Converts image to the new mode.
+<Image>.save(<path>)                             # Selects format based on the path extension.
+<Image>.show()                                   # Opens image in default preview app.
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
-<Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()               # Returns a flattened sequence of pixels.
-<Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
-<Image>.paste(<Image>, (x, y))                  # Writes passed image to the image.
+<int/tuple> = <Image>.getpixel((x, y))           # Returns a pixel.
+<Image>.putpixel((x, y), <int/tuple>)            # Writes a pixel to the image.
+<ImagingCore> = <Image>.getdata()                # Returns a flattened sequence of pixels.
+<Image>.putdata(<list/ImagingCore>)              # Writes a flattened sequence of pixels.
+<Image>.paste(<Image>, (x, y))                   # Writes passed image to the image.
 ```
 
 ```bash
-<2d_array> = np.array(<Image_L>)                # Creates NumPy array from greyscale image.
-<3d_array> = np.array(<Image_RGB>)              # Creates NumPy array from color image.
-<Image>    = Image.fromarray(<array>)           # Creates image from NumPy array of floats.
+<2d_array> = np.array(<Image_L>)                 # Creates NumPy array from greyscale image.
+<3d_array> = np.array(<Image_RGB/A>)             # Creates NumPy array from color image.
+<Image>    = Image.fromarray(np.uint8(<array>))  # Use <array>.clip(0, 255) to clip the values.
 ```
 
 ### Modes
@@ -2787,12 +2787,12 @@ from PIL import ImageDraw
 ```
 
 ```python
-<ImageDraw>.point((x, y))                       # Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
-<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
-<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
+<ImageDraw>.point((x, y))                        # Truncates floats into ints.
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))       # To get anti-aliasing use Image's resize().
+<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)    # Always draws in clockwise direction.
+<ImageDraw>.rectangle((x1, y1, x2, y2))          # To rotate use Image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))       # Last point gets connected to the first.
+<ImageDraw>.ellipse((x1, y1, x2, y2))            # To rotate use Image's rotate() and paste().
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
