@@ -21,7 +21,7 @@ MATCHES = {
     '<strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong>': '<strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use Pandas library (p. 46).</strong>',
     '<strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong>': '<strong>Bools will be stored and returned as ints and dates as ISO formatted strings (p. 9).</strong>',
     '<strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be <a href="#pickle">pickable</a>.</strong>': '<strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be pickable (p. 25).</strong>',
-    '<strong>Asyncio module also provides its own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphore-event-barrier">Semaphore</a> classes.</strong>': '<strong>Asyncio module also provides its own Queue, Event, Lock and Semaphore classes (p. 30).</strong>',
+    '<strong>Asyncio module also provides its own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphoreeventbarrier">Semaphore</a> classes.</strong>': '<strong>Asyncio module also provides its own Queue, Event, Lock and Semaphore classes (p. 30).</strong>',
 }
 
 

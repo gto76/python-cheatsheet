@@ -1545,7 +1545,7 @@ value = args.<name>
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<el>'` to set the default value.**
-* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is always None.**
+* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 
 Open
