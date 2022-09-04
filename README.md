@@ -200,23 +200,23 @@ Iterator
 
 ### Itertools
 ```python
-from itertools import count, repeat, cycle, chain, islice
+import itertools as it
 ```
 
 ```python
-<iter> = count(start=0, step=1)             # Returns updated value endlessly. Accepts floats.
-<iter> = repeat(<el> [, times])             # Returns element endlessly or 'times' times.
-<iter> = cycle(<collection>)                # Repeats the sequence endlessly.
+<iter> = it.count(start=0, step=1)          # Returns updated value endlessly. Accepts floats.
+<iter> = it.repeat(<el> [, times])          # Returns element endlessly or 'times' times.
+<iter> = it.cycle(<collection>)             # Repeats the sequence endlessly.
 ```
 
 ```python
-<iter> = chain(<coll_1>, <coll_2> [, ...])  # Empties collections in order (figuratively).
-<iter> = chain.from_iterable(<coll>)        # Empties collections inside a collection in order.
+<iter> = it.chain(<coll>, <coll> [, ...])   # Empties collections in order (figuratively).
+<iter> = it.chain.from_iterable(<coll>)     # Empties collections inside a collection in order.
 ```
 
 ```python
-<iter> = islice(<coll>, to_exclusive)       # Only returns first 'to_exclusive' elements.
-<iter> = islice(<coll>, from_inclusive, …)  # `to_exclusive, +step_size`. Indices can be None.
+<iter> = it.islice(<coll>, to_exclusive)    # Only returns first 'to_exclusive' elements.
+<iter> = it.islice(<coll>, from_inc, …)     # `to_exclusive, +step_size`. Indices can be None.
 ```
 
 
@@ -486,11 +486,11 @@ Format
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)       # Or: math.floor(<float>)
-<float>    = float(<int/str/bool>)       # Or: <real>e±<int>
-<complex>  = complex(real=0, imag=0)     # Or: <real> ± <real>j
-<Fraction> = fractions.Fraction(0, 1)    # Or: Fraction(numerator=0, denominator=1)
-<Decimal>  = decimal.Decimal(<str/int>)  # Or: Decimal((sign, digits, exponent))
+<int>      = int(<float/str/bool>)                # Or: math.floor(<float>)
+<float>    = float(<int/str/bool>)                # Or: <real>e±<int>
+<complex>  = complex(real=0, imag=0)              # Or: <real> ± <real>j
+<Fraction> = fractions.Fraction(0, 1)             # Or: Fraction(numerator=0, denominator=1)
+<Decimal>  = decimal.Decimal(<str/int>)           # Or: Decimal((sign, digits, exponent))
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers are stored exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
@@ -499,47 +499,46 @@ Numbers
 
 ### Basic Functions
 ```python
-<num> = pow(<num>, <num>)                # Or: <num> ** <num>
-<num> = abs(<num>)                       # <float> = abs(<complex>)
-<num> = round(<num> [, ±ndigits])        # `round(126, -1) == 130`
+<num> = pow(<num>, <num>)                         # Or: <num> ** <num>
+<num> = abs(<num>)                                # <float> = abs(<complex>)
+<num> = round(<num> [, ±ndigits])                 # `round(126, -1) == 130`
 ```
 
 ### Math
 ```python
-from math import e, pi, inf, nan, isinf, isnan
-from math import sin, cos, tan, asin, acos, atan, degrees, radians
-from math import log, log10, log2
+from math import e, pi, inf, nan, isinf, isnan    # `<el> == nan` is always False.
+from math import sin, cos, tan, asin, acos, atan  # Also: degrees, radians.
+from math import log, log10, log2                 # Log can accept base as second arg.
 ```
 
 ### Statistics
 ```python
-from statistics import mean, median, variance, stdev, quantiles, groupby
+from statistics import mean, median, variance     # Also: stdev, quantiles, groupby.
 ```
 
 ### Random
 ```python
-from random import random, randint, choice, shuffle, gauss, seed
-
-<float> = random()                       # A float inside [0, 1).
-<int>   = randint(from_inc, to_inc)      # An int inside [from_inc, to_inc].
-<el>    = choice(<sequence>)             # Keeps the sequence intact.
+from random import random, randint, choice        # Also shuffle, gauss, triangular, seed.
+<float> = random()                                # A float inside [0, 1).
+<int>   = randint(from_inc, to_inc)               # An int inside [from_inc, to_inc].
+<el>    = choice(<sequence>)                      # Keeps the sequence intact.
 ```
 
 ### Bin, Hex
 ```python
-<int> = ±0b<bin>                         # Or: ±0x<hex>
-<int> = int('±<bin>', 2)                 # Or: int('±<hex>', 16)
-<int> = int('±0b<bin>', 0)               # Or: int('±0x<hex>', 0)
-<str> = bin(<int>)                       # Returns '[-]0b<bin>'.
+<int> = ±0b<bin>                                  # Or: ±0x<hex>
+<int> = int('±<bin>', 2)                          # Or: int('±<hex>', 16)
+<int> = int('±0b<bin>', 0)                        # Or: int('±0x<hex>', 0)
+<str> = bin(<int>)                                # Returns '[-]0b<bin>'.
 ```
 
 ### Bitwise Operators
 ```python
-<int> = <int> & <int>                    # And (0b1100 & 0b1010 == 0b1000).
-<int> = <int> | <int>                    # Or  (0b1100 | 0b1010 == 0b1110).
-<int> = <int> ^ <int>                    # Xor (0b1100 ^ 0b1010 == 0b0110).
-<int> = <int> << n_bits                  # Left shift. Use >> for right.
-<int> = ~<int>                           # Not. Also -<int> - 1.
+<int> = <int> & <int>                             # And (0b1100 & 0b1010 == 0b1000).
+<int> = <int> | <int>                             # Or  (0b1100 | 0b1010 == 0b1110).
+<int> = <int> ^ <int>                             # Xor (0b1100 ^ 0b1010 == 0b0110).
+<int> = <int> << n_bits                           # Left shift. Use >> for right.
+<int> = ~<int>                                    # Not. Also -<int> - 1.
 ```
 
 
@@ -549,39 +548,40 @@ Combinatorics
 * **If you want to print the iterator, you need to pass it to the list() function first!**
 
 ```python
-from itertools import product, combinations, combinations_with_replacement, permutations
+import itertools as it
 ```
 
 ```python
->>> product([0, 1], repeat=3)
-[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), ..., (1, 1, 1)]
+>>> it.product([0, 1], repeat=3)
+[(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1),
+ (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
 ```python
->>> product('abc', 'abc')                    #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),         # a x  x  x
- ('b', 'a'), ('b', 'b'), ('b', 'c'),         # b x  x  x
- ('c', 'a'), ('c', 'b'), ('c', 'c')]         # c x  x  x
+>>> it.product('abc', 'abc')                      #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
+ ('b', 'a'), ('b', 'b'), ('b', 'c'),              # b x  x  x
+ ('c', 'a'), ('c', 'b'), ('c', 'c')]              # c x  x  x
 ```
 
 ```python
->>> combinations('abc', 2)                   #   a  b  c
-[('a', 'b'), ('a', 'c'),                     # a .  x  x
- ('b', 'c')]                                 # b .  .  x
+>>> it.combinations('abc', 2)                     #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'c')]                                      # b .  .  x
 ```
 
 ```python
->>> combinations_with_replacement('abc', 2)  #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),         # a x  x  x
- ('b', 'b'), ('b', 'c'),                     # b .  x  x
- ('c', 'c')]                                 # c .  .  x
+>>> it.combinations_with_replacement('abc', 2)    #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
+ ('b', 'b'), ('b', 'c'),                          # b .  x  x
+ ('c', 'c')]                                      # c .  .  x
 ```
 
 ```python
->>> permutations('abc', 2)                   #   a  b  c
-[('a', 'b'), ('a', 'c'),                     # a .  x  x
- ('b', 'a'), ('b', 'c'),                     # b x  .  x
- ('c', 'a'), ('c', 'b')]                     # c x  x  .
+>>> it.permutations('abc', 2)                     #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'a'), ('b', 'c'),                          # b x  .  x
+ ('c', 'a'), ('c', 'b')]                          # c x  x  .
 ```
 
 
@@ -1701,34 +1701,34 @@ import os, shutil, subprocess
 ```
 
 ```python
-os.chdir(<path>)                 # Changes the current working directory.
-os.mkdir(<path>, mode=0o777)     # Creates a directory. Mode is in octal.
-os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also: `exist_ok=False`.
+os.chdir(<path>)                    # Changes the current working directory.
+os.mkdir(<path>, mode=0o777)        # Creates a directory. Permissions are in octal.
+os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also: `exist_ok=False`.
 ```
 
 ```python
-shutil.copy(from, to)            # Copies the file. 'to' can exist or be a dir.
-shutil.copytree(from, to)        # Copies the directory. 'to' must not exist.
+shutil.copy(from, to)               # Copies the file. 'to' can exist or be a dir.
+shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
 ```
 
 ```python
-os.rename(from, to)              # Renames/moves the file or directory.
-os.replace(from, to)             # Same, but overwrites 'to' if it exists.
+os.rename(from, to)                 # Renames/moves the file or directory.
+os.replace(from, to)                # Same, but overwrites 'to' if it exists.
 ```
 
 ```python
-os.remove(<path>)                # Deletes the file.
-os.rmdir(<path>)                 # Deletes the empty directory.
-shutil.rmtree(<path>)            # Deletes the directory.
+os.remove(<path>)                   # Deletes the file.
+os.rmdir(<path>)                    # Deletes the empty directory.
+shutil.rmtree(<path>)               # Deletes the directory.
 ```
 * **Paths can be either strings, Paths or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ### Shell Commands
 ```python
-<pipe> = os.popen('<command>')   # Executes command in sh/cmd and returns its stdout pipe.
-<str>  = <pipe>.read(size=-1)    # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()          # Closes the pipe. Returns None on success, int on error.
+<pipe> = os.popen('<command>')      # Executes command in sh/cmd. Returns its stdout pipe.
+<str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
+<int>  = <pipe>.close()             # Closes the pipe. Returns None on success.
 ```
 
 #### Sends '1 + 1' to the basic calculator and captures its output:
@@ -1754,8 +1754,8 @@ JSON
 
 ```python
 import json
-<str>    = json.dumps(<object>)    # Converts object to JSON string.
-<object> = json.loads(<str>)       # Converts JSON string to object.
+<str>    = json.dumps(<object>)     # Converts object to JSON string.
+<object> = json.loads(<str>)        # Converts JSON string to object.
 ```
 
 ### Read Object from JSON File
@@ -1779,8 +1779,8 @@ Pickle
 
 ```python
 import pickle
-<bytes>  = pickle.dumps(<object>)  # Converts object to bytes object.
-<object> = pickle.loads(<bytes>)   # Converts bytes object to object.
+<bytes>  = pickle.dumps(<object>)   # Converts object to bytes object.
+<object> = pickle.loads(<bytes>)    # Converts bytes object to object.
 ```
 
 ### Read Object from File

@@ -86,12 +86,12 @@ const DATACLASS =
   '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_value&gt;])';
 
 const SHUTIL_COPY =
-  'shutil.copy(from, to)            <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
-  'shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
+  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
+  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
 
 const OS_RENAME =
-  'os.rename(from, to)              <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
-  'os.replace(from, to)             <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
+  'os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
+  'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites \'to\' if it exists.</span>\n';
 
 const STRUCT_FORMAT =
   '<span class="hljs-section">\'&lt;n&gt;s\'</span><span class="hljs-attribute"></span>';
