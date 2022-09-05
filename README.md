@@ -2410,12 +2410,12 @@ Curses
 ------
 #### Runs a basic file explorer in the terminal:
 ```python
-from curses import wrapper, ascii, A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-from os import listdir, path, chdir
+import curses, curses.ascii, os
+from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 def main(screen):
-    ch, first, selected, paths = 0, 0, 0, listdir()
-    while ch != ascii.ESC:
+    ch, first, selected, paths = 0, 0, 0, os.listdir()
+    while ch != curses.ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.erase()
         for y, filename in enumerate(paths[first : first+height]):
@@ -2426,12 +2426,12 @@ def main(screen):
         first += (first <= selected - height) - (first > selected)
         if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, 10, 13]:
             new_dir = '..' if ch == KEY_LEFT else paths[selected]
-            if path.isdir(new_dir):
-                chdir(new_dir)
-                first, selected, paths = 0, 0, listdir()
+            if os.path.isdir(new_dir):
+                os.chdir(new_dir)
+                first, selected, paths = 0, 0, os.listdir()
 
 if __name__ == '__main__':
-    wrapper(main)
+    curses.wrapper(main)
 ```
 
 

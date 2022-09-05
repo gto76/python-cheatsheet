@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 4, 2022</aside>
+    <aside>September 5, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1976,12 +1976,12 @@ print(table)
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> wrapper, ascii, A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> listdir, path, chdir
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> curses, curses.ascii, os
+<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
-    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
-    <span class="hljs-keyword">while</span> ch != ascii.ESC:
+    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
+    <span class="hljs-keyword">while</span> ch != curses.ascii.ESC:
         height, _ = screen.getmaxyx()
         screen.erase()
         <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
@@ -1992,12 +1992,12 @@ print(table)
         first += (first &lt;= selected - height) - (first &gt; selected)
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:
             new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
-            <span class="hljs-keyword">if</span> path.isdir(new_dir):
-                chdir(new_dir)
-                first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, listdir()
+            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):
+                os.chdir(new_dir)
+                first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
-    wrapper(main)
+    curses.wrapper(main)
 </code></pre></div></div>
 
 
@@ -2906,7 +2906,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>September 4, 2022</aside>
+    <aside>September 5, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
