@@ -711,12 +711,6 @@ def add(*a):
 
 #### Legal argument combinations:
 ```python
-def f(*, x, y, z): ...          # f(x=1, y=2, z=3)
-def f(x, *, y, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
-```
-
-```python
 def f(*args): ...               # f(1, 2, 3)
 def f(x, *args): ...            # f(1, 2, 3)
 def f(*args, z): ...            # f(1, 2, z=3)
@@ -725,13 +719,18 @@ def f(*args, z): ...            # f(1, 2, z=3)
 ```python
 def f(**kwargs): ...            # f(x=1, y=2, z=3)
 def f(x, **kwargs): ...         # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(*, x, **kwargs): ...      # f(x=1, y=2, z=3)
 ```
 
 ```python
 def f(*args, **kwargs): ...     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
 def f(x, *args, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
 def f(*args, y, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+```
+
+```python
+def f(*, x, y, z): ...          # f(x=1, y=2, z=3)
+def f(x, *, y, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
+def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
 ```
 
 ### Other Uses
