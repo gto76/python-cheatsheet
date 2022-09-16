@@ -119,11 +119,12 @@ const COROUTINES =
   '    asyncio.run(main_coroutine(screen))        <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>\n' +
-  '    state = {<span class="hljs-string">\'*\'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}\n' +
   '    moves = asyncio.Queue()\n' +
-  '    coros = (*(random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)),\n' +
-  '             human_controller(screen, moves), model(moves, state), view(state, screen))\n' +
-  '    <span class="hljs-keyword">await</span> asyncio.wait(coros, return_when=asyncio.FIRST_COMPLETED)\n' +
+  '    state = {<span class="hljs-string">\'*\'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), **{id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}}\n' +
+  '    ai    = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]\n' +
+  '    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]\n' +
+  '    tasks = [asyncio.create_task(cor) <span class="hljs-keyword">for</span> cor <span class="hljs-keyword">in</span> ai + mvc]\n' +
+  '    <span class="hljs-keyword">await</span> asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
