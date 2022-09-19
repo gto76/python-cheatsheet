@@ -1868,16 +1868,13 @@ SQLite
 ------
 **A server-less database engine that stores each database into a separate file.**
 
-### Connect
-**Opens a connection to the database file. Creates a new file if path doesn't exist.**
 ```python
 import sqlite3
-<conn> = sqlite3.connect(<path>)                # Also ':memory:'.
+<conn> = sqlite3.connect(<path>)                # Opens existing or new file. Also ':memory:'.
 <conn>.close()                                  # Closes the connection.
 ```
 
 ### Read
-**Returned values can be of type str, int, float, bytes or None.**
 ```python
 <cursor> = <conn>.execute('<query>')            # Can raise a subclass of sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
@@ -1898,13 +1895,13 @@ with <conn>:                                    # Exits the block with commit() 
 ```
 
 ### Placeholders
-* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetime.**
-* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 ```python
 <conn>.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
 <conn>.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
 <conn>.executemany('<query>', <coll_of_above>)  # Runs execute() multiple times.
 ```
+* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetime.**
+* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
