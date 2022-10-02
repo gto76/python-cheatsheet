@@ -1914,16 +1914,25 @@ with <conn>:                                    # Exits the block with commit() 
 [(1, 'Jean-Luc', 187)]
 ```
 
-### MySQL
-**Has a very similar interface, with differences listed below.**
+### SqlAlchemy
 ```python
-# $ pip3 install mysql-connector
-from mysql import connector
-<conn>   = connector.connect(host=<str>, …)     # `user=<str>, password=<str>, database=<str>`.
-<cursor> = <conn>.cursor()                      # Only cursor has execute() method.
-<cursor>.execute('<query>')                     # Can raise a subclass of connector.Error.
-<cursor>.execute('<query>', <list/tuple>)       # Replaces '%s's in query with values.
-<cursor>.execute('<query>', <dict/namedtuple>)  # Replaces '%(<key>)s's with values.
+# $ pip3 install sqlalchemy
+from sqlalchemy import create_engine, text
+<engine> = create_engine('<url>').connect()     # Url: 'dialect://user:password@host/dbname'.
+<conn>   = <engine>.connect()                   # Creates a connection. Also <conn>.close().
+<cursor> = <conn>.execute(text('<query>'), …)   # Replaces ':<key>'s with keyword arguments.
+with <conn>.begin(): ...                        # Exits the block with commit or rollback.
+```
+
+```text
++------------+--------------+-----------+-----------------------------------+
+| Dialects   | pip3 install | import    | Dependencies                      |
++------------+--------------+-----------+-----------------------------------+
+| mysql      | mysqlclient  | MySQLdb   | www.pypi.org/project/mysqlclient  |
+| postgresql | psycopg2     | psycopg2  | www.psycopg.org/docs/install.html |
+| mssql      | pyodbc       | pyodbc    | apt install g++ unixodbc-dev      |
+| oracle     | cx_oracle    | cx_Oracle | Oracle Instant Client             |
++------------+--------------+-----------+-----------------------------------+
 ```
 
 

@@ -262,13 +262,13 @@ const DIAGRAM_1_A =
   '+------------------+------------+------------+------------+\n';
 
 const DIAGRAM_1_B =
-'┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
-'┃                  │  Iterable  │ Collection │  Sequence  ┃\n' +
-'┠──────────────────┼────────────┼────────────┼────────────┨\n' +
-'┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
-'┃ dict, set        │     ✓      │     ✓      │            ┃\n' +
-'┃ iter             │     ✓      │            │            ┃\n' +
-'┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
+  '┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓\n' +
+  '┃                  │  Iterable  │ Collection │  Sequence  ┃\n' +
+  '┠──────────────────┼────────────┼────────────┼────────────┨\n' +
+  '┃ list, range, str │     ✓      │     ✓      │     ✓      ┃\n' +
+  '┃ dict, set        │     ✓      │     ✓      │            ┃\n' +
+  '┃ iter             │     ✓      │            │            ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_2_A =
   '+--------------------+----------+----------+----------+----------+----------+\n' +
@@ -413,6 +413,21 @@ const DIAGRAM_9_B =
   "┃ quoting          │         0    │         0    │         1    ┃\n" +
   "┃ escapechar       │      None    │      None    │      None    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_95_A =
+  "+------------+--------------+-----------+-----------------------------------+\n" +
+  "| Dialects   | pip3 install | import    | Dependencies                      |\n" +
+  "+------------+--------------+-----------+-----------------------------------+\n";
+
+const DIAGRAM_95_B =
+  "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃ Dialects   │ pip3 install │ import    │ Dependencies                      ┃\n" +
+  "┠────────────┼──────────────┼───────────┼───────────────────────────────────┨\n" +
+  "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient  ┃\n" +
+  "┃ postgresql │ psycopg2     │ psycopg2  │ www.psycopg.org/docs/install.html ┃\n" +
+  "┃ mssql      │ pyodbc       │ pyodbc    │ apt install g++ unixodbc-dev      ┃\n" +
+  "┃ oracle     │ cx_oracle    │ cx_Oracle │ Oracle Instant Client             ┃\n" +
+  "┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
   '+-------------+-------------+\n' +
@@ -677,6 +692,7 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
+  $(`code:contains(${DIAGRAM_95_A})`).html(DIAGRAM_95_B);
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
