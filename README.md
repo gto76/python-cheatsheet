@@ -2952,7 +2952,42 @@ samples_f   = it.chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.s
 samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
 simpleaudio.play_buffer(samples_b, 1, 2, F)
 ```
+Record Microphone
+-----------------
+```python
+# $ pip install souddevice
+# $ pip install scipy
 
+import sounddevice
+from scipy.io import wavfile
+```
+**List available audio device**
+```python
+available_devices = sounddevice.query_devices()
+```
+*Exemple of a valid device. It is necessary to have a non nul number of in channel.*
+
+`>   1 Microphone (Yeti Classic), MME (2 in, 0 out)`
+
+*Exemple of an invalid device*
+
+`<   23 PLG2773H (NVIDIA High Definitio, MME (0 in, 2 out)`
+
+**Record the microphone and save it to wav file**
+```python
+recording_length = 5 # seconds
+fs = 44100  # Sample rate
+device_index_to_record = 1 # Number before the name of the peripheral displayed at the step before
+
+stream = sounddevice.InputStream(samplerate=fs,device=device_index_to_record,dtype="float32") # Initialise the stream
+stream.start() # Start the stream
+
+record = stream.read(int(recording_length * fs)) # Record the stream
+# This return a tuple with the actual record and the sample frequency
+    
+wavfile.write("my_microphone.wav", fs, record[0]) # Write to the file
+
+```
 
 Pygame
 ------
