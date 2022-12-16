@@ -723,8 +723,9 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 &lt;function&gt; = partial(&lt;function&gt; [, &lt;arg_1&gt;, &lt;arg_2&gt;, ...])
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-<span class="hljs-meta">&gt;&gt;&gt; </span>multiply_by_3 = partial(op.mul, <span class="hljs-number">3</span>)
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">multiply</span><span class="hljs-params">(a, b)</span>:</span>
+<span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> a * b
+<span class="hljs-meta">&gt;&gt;&gt; </span>multiply_by_3 = partial(multiply, <span class="hljs-number">3</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>multiply_by_3(<span class="hljs-number">10</span>)
 <span class="hljs-number">30</span>
 </code></pre>

@@ -852,8 +852,9 @@ from functools import partial
 ```
 
 ```python
->>> import operator as op
->>> multiply_by_3 = partial(op.mul, 3)
+>>> def multiply(a, b):
+...     return a * b
+>>> multiply_by_3 = partial(multiply, 3)
 >>> multiply_by_3(10)
 30
 ```
