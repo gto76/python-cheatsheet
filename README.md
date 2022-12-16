@@ -518,7 +518,7 @@ from statistics import mean, median, variance     # Also: stdev, quantiles, grou
 
 ### Random
 ```python
-from random import random, randint, choice        # Also shuffle, gauss, triangular, seed.
+from random import random, randint, choice        # Also: shuffle, gauss, triangular, seed.
 <float> = random()                                # A float inside [0, 1).
 <int>   = randint(from_inc, to_inc)               # An int inside [from_inc, to_inc].
 <el>    = choice(<sequence>)                      # Keeps the sequence intact.
