@@ -2265,11 +2265,11 @@ type(MyMetaClass) == type            # MyMetaClass is an instance of type.
 +-------------+-------------+
 |   Classes   | Metaclasses |
 +-------------+-------------|
-|   MyClass --> MyMetaClass |
-|             |     v       |
-|    object -----> type <+  |
-|             |     ^ +--+  |
-|     str ----------+       |
+|   MyClass <-- MyMetaClass |
+|             |     ^       |
+|    object <----- type <+  |
+|             |     | +--+  |
+|     str <---------+       |
 +-------------+-------------+
 ```
 
@@ -2284,9 +2284,9 @@ MyMetaClass.__base__ == type         # MyMetaClass is a subclass of type.
 |   Classes   | Metaclasses |
 +-------------+-------------|
 |   MyClass   | MyMetaClass |
-|      v      |     v       |
-|    object <----- type     |
-|      ^      |             |
+|      ^      |     ^       |
+|    object -----> type     |
+|      v      |             |
 |     str     |             |
 +-------------+-------------+
 ```

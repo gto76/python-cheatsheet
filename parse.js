@@ -433,7 +433,7 @@ const DIAGRAM_10_A =
   '+-------------+-------------+\n' +
   '|   Classes   | Metaclasses |\n' +
   '+-------------+-------------|\n' +
-  '|   MyClass --> MyMetaClass |\n';
+  '|   MyClass <-- MyMetaClass |\n';
 
 const DIAGRAM_10_B =
   '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
