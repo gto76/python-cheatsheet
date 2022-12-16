@@ -363,7 +363,7 @@ import re
 * **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
-* **Argument `'flags=re.DOTALL'` makes dot also accept the `'\n'`.**
+* **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
 * **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
 * **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
 
@@ -787,7 +787,7 @@ Inline
 ```
 
 ```python
->>> [a if a else 'zero' for a in (0, 1, 2, 3)]
+>>> [a if a else 'zero' for a in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
 ['zero', 1, 2, 3]
 ```
 
@@ -800,8 +800,8 @@ point = Point(0, 0)                                 # Returns its instance.
 
 ```python
 from enum import Enum
-Direction = Enum('Direction', 'n e s w')            # Creates an enum.
-direction = Direction.n                             # Returns its member.
+Direction = Enum('Direction', 'N E S W')            # Creates an enum.
+direction = Direction.N                             # Returns its member.
 ```
 
 ```python
@@ -1354,9 +1354,9 @@ def get_next_member(member):
 
 ### Inline
 ```python
-Cutlery = Enum('Cutlery', 'fork knife spoon')
-Cutlery = Enum('Cutlery', ['fork', 'knife', 'spoon'])
-Cutlery = Enum('Cutlery', {'fork': 1, 'knife': 2, 'spoon': 3})
+Cutlery = Enum('Cutlery', 'FORK KNIFE SPOON')
+Cutlery = Enum('Cutlery', ['FORK', 'KNIFE', 'SPOON'])
+Cutlery = Enum('Cutlery', {'FORK': 1, 'KNIFE': 2, 'SPOON': 3})
 ```
 
 #### User-defined functions cannot be values, so they must be wrapped:
@@ -1365,7 +1365,6 @@ from functools import partial
 LogicOp = Enum('LogicOp', {'AND': partial(lambda l, r: l and r),
                            'OR':  partial(lambda l, r: l or r)})
 ```
-* **Member names are in all caps because trying to access a member that is named after a reserved keyword raises SyntaxError.**
 
 
 Exceptions
@@ -2156,10 +2155,10 @@ Operator
 **Module of functions that provide the functionality of operators.**
 ```python
 import operator as op
-<el>      = op.add/sub/mul/truediv/floordiv/mod(<el>, <el>)  # +, -, *, /, //, %
-<int/set> = op.and_/or_/xor(<int/set>, <int/set>)            # &, |, ^
-<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)     # ==, !=, <, <=, >, >=
-<func>    = op.itemgetter/attrgetter/methodcaller(<obj>)     # [index/key], .name, .name()
+<obj>     = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
+<int/set> = op.and_/or_/xor(<int/set>, <int/set>)                 # &, |, ^
+<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)          # ==, !=, <, <=, >, >=
+<func>    = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
 ```
 
 ```python
@@ -3071,7 +3070,7 @@ def run(screen, images, mario, tiles):
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
     x += 2 * ((D.e in pressed) - (D.w in pressed))
-    x -= (x > 0) - (x < 0)
+    x += (x < 0) - (x > 0)
     y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (D.n in pressed) * -10
     mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
@@ -3080,7 +3079,7 @@ def update_position(mario, tiles):
     n_steps = max(abs(s) for s in mario.spd)
     for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + mario.spd.x / n_steps, y + mario.spd.y / n_steps
+        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
         mario.rect.topleft = x, y
 
 def get_boundaries(rect, tiles):

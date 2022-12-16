@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 2, 2022</aside>
+    <aside>December 16, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -343,7 +343,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Search() and match() return None if they can't find a match.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
-<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes dot also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference (<code class="python hljs"><span class="hljs-string">'\1'</span></code> returns a character with octal code 1).</strong></li>
 <li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'+'</span></code> to make them non-greedy.</strong></li>
 </ul>
@@ -674,7 +674,7 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression gets evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
 <div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
@@ -683,8 +683,8 @@ point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</s
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'n e s w'</span>)            <span class="hljs-comment"># Creates an enum.</span>
-direction = Direction.n                             <span class="hljs-comment"># Returns its member.</span>
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates an enum.</span>
+direction = Direction.N                             <span class="hljs-comment"># Returns its member.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
@@ -1162,9 +1162,9 @@ random_member   = random.choice(list(&lt;enum&gt;))
     index   = (members.index(member) + <span class="hljs-number">1</span>) % len(members)
     <span class="hljs-keyword">return</span> members[index]
 </code></pre>
-<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'fork knife spoon'</span>)
-Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'fork'</span>, <span class="hljs-string">'knife'</span>, <span class="hljs-string">'spoon'</span>])
-Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'fork'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'knife'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'spoon'</span>: <span class="hljs-number">3</span>})
+<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
+Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
+Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'FORK'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'KNIFE'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'SPOON'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
 
 <div><h4 id="userdefinedfunctionscannotbevaluessotheymustbewrapped">User-defined functions cannot be values, so they must be wrapped:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
@@ -1172,9 +1172,6 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
                            <span class="hljs-string">'OR'</span>:  partial(<span class="hljs-keyword">lambda</span> l, r: l <span class="hljs-keyword">or</span> r)})
 </code></pre></div>
 
-<ul>
-<li><strong>Member names are in all caps because trying to access a member that is named after a reserved keyword raises SyntaxError.</strong></li>
-</ul>
 <div><h2 id="exceptions"><a href="#exceptions" name="exceptions">#</a>Exceptions</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
     &lt;code&gt;
 <span class="hljs-keyword">except</span> &lt;exception&gt;:
@@ -1780,10 +1777,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;el&gt;      = op.add/sub/mul/truediv/floordiv/mod(&lt;el&gt;, &lt;el&gt;)  <span class="hljs-comment"># +, -, *, /, //, %</span>
-&lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)            <span class="hljs-comment"># &amp;, |, ^</span>
-&lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)     <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
-&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt;)     <span class="hljs-comment"># [index/key], .name, .name()</span>
+&lt;obj&gt;     = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)     <span class="hljs-comment"># +, -, *, /, //, %</span>
+&lt;int/set&gt; = op.and_/or_/xor(&lt;int/set&gt;, &lt;int/set&gt;)                 <span class="hljs-comment"># &amp;, |, ^</span>
+&lt;bool&gt;    = op.eq/ne/lt/le/gt/ge(&lt;sortable&gt;, &lt;sortable&gt;)          <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=</span>
+&lt;func&gt;    = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt; [, ...])  <span class="hljs-comment"># [index/key], .name, .name()</span>
 </code></pre></div>
 
 
@@ -1861,11 +1858,11 @@ type(MyMetaClass) == type            <span class="hljs-comment"># MyMetaClass is
 <pre><code class="text language-text">┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓
 ┃   Classes   │ Metaclasses ┃
 ┠─────────────┼─────────────┨
-┃   MyClass ──→ MyMetaClass ┃
-┃             │     ↓       ┃
-┃    object ─────→ type ←╮  ┃
-┃             │     ↑ ╰──╯  ┃
-┃     str ──────────╯       ┃
+┃   MyClass ←──╴MyMetaClass ┃
+┃             │     ↑       ┃
+┃    object ←─────╴type ←╮  ┃
+┃             │     │ ╰──╯  ┃
+┃     str ←─────────╯       ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
 <div><h3 id="inheritancediagram">Inheritance Diagram</h3><pre><code class="python language-python hljs">MyClass.__base__ == object           <span class="hljs-comment"># MyClass is a subclass of object.</span>
@@ -1876,9 +1873,9 @@ MyMetaClass.__base__ == type         <span class="hljs-comment"># MyMetaClass is
 ┃   Classes   │ Metaclasses ┃
 ┠─────────────┼─────────────┨
 ┃   MyClass   │ MyMetaClass ┃
-┃      ↓      │     ↓       ┃
-┃    object ←───── type     ┃
-┃      ↑      │             ┃
+┃      ↑      │     ↑       ┃
+┃    object╶─────→ type     ┃
+┃      ↓      │             ┃
 ┃     str     │             ┃
 ┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛
 </code></pre>
@@ -2506,7 +2503,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
     x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
-    x -= (x &gt; <span class="hljs-number">0</span>) - (x &lt; <span class="hljs-number">0</span>)
+    x += (x &lt; <span class="hljs-number">0</span>) - (x &gt; <span class="hljs-number">0</span>)
     y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
     mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
@@ -2515,7 +2512,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     n_steps = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + mario.spd.x / n_steps, y + mario.spd.y / n_steps
+        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
         mario.rect.topleft = x, y
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>
@@ -2910,7 +2907,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>October 2, 2022</aside>
+    <aside>December 16, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

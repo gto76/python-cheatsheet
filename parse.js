@@ -208,7 +208,7 @@ const MARIO =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>\n' +
   '    x, y = mario.spd\n' +
   '    x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))\n' +
-  '    x -= (x &gt; <span class="hljs-number">0</span>) - (x &lt; <span class="hljs-number">0</span>)\n' +
+  '    x += (x &lt; <span class="hljs-number">0</span>) - (x &gt; <span class="hljs-number">0</span>)\n' +
   '    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>\n' +
   '    mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))\n' +
   '\n' +
@@ -217,7 +217,7 @@ const MARIO =
   '    n_steps = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)\n' +
   '    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(n_steps):\n' +
   '        mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))\n' +
-  '        x, y = x + mario.spd.x / n_steps, y + mario.spd.y / n_steps\n' +
+  '        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)\n' +
   '        mario.rect.topleft = x, y\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>\n' +
@@ -439,11 +439,11 @@ const DIAGRAM_10_B =
   '┏━━━━━━━━━━━━━┯━━━━━━━━━━━━━┓\n' +
   '┃   Classes   │ Metaclasses ┃\n' +
   '┠─────────────┼─────────────┨\n' +
-  '┃   MyClass ──→ MyMetaClass ┃\n' +
-  '┃             │     ↓       ┃\n' +
-  '┃    object ─────→ type ←╮  ┃\n' +
-  '┃             │     ↑ ╰──╯  ┃\n' +
-  '┃     str ──────────╯       ┃\n' +
+  '┃   MyClass ←──╴MyMetaClass ┃\n' +
+  '┃             │     ↑       ┃\n' +
+  '┃    object ←─────╴type ←╮  ┃\n' +
+  '┃             │     │ ╰──╯  ┃\n' +
+  '┃     str ←─────────╯       ┃\n' +
   '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_11_A =
@@ -457,9 +457,9 @@ const DIAGRAM_11_B =
   '┃   Classes   │ Metaclasses ┃\n' +
   '┠─────────────┼─────────────┨\n' +
   '┃   MyClass   │ MyMetaClass ┃\n' +
-  '┃      ↓      │     ↓       ┃\n' +
-  '┃    object ←───── type     ┃\n' +
-  '┃      ↑      │             ┃\n' +
+  '┃      ↑      │     ↑       ┃\n' +
+  '┃    object╶─────→ type     ┃\n' +
+  '┃      ↓      │             ┃\n' +
   '┃     str     │             ┃\n' +
   '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
