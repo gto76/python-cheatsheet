@@ -967,7 +967,7 @@ class <name>:
 * **If only repr() is defined, it will also be used for str().**
 * **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first arg.**
 
-#### Str() use cases:
+#### Expressions that call the str() method:
 ```python
 print(<el>)
 f'{<el>}'
@@ -976,7 +976,7 @@ csv.writer(<file>).writerow([<el>])
 raise Exception(<el>)
 ```
 
-#### Repr() use cases:
+#### Expressions that call the repr() method:
 ```python
 print/str/repr([<el>])
 f'{<el>!r}'
@@ -1261,7 +1261,7 @@ class MyCollection:
 * **Only required methods are len() and getitem().**
 * **Getitem() should return an item at the passed index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
-* **Reversed() automatically works on any object that has len() and getitem() defined.**
+* **Reversed() automatically works on any object that has getitem() and len() defined.**
 ```python
 class MySequence:
     def __init__(self, a):

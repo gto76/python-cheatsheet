@@ -827,14 +827,14 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first arg.</strong></li>
 </ul>
-<div><h4 id="strusecases">Str() use cases:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
+<div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
 logging.warning(&lt;el&gt;)
 csv.writer(&lt;file&gt;).writerow([&lt;el&gt;])
 <span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
 </code></pre></div>
 
-<div><h4 id="reprusecases">Repr() use cases:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;el&gt;])
+<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;el&gt;])
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>
 Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;el&gt;))
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
@@ -1080,7 +1080,7 @@ Hello World!
 <li><strong>Only required methods are len() and getitem().</strong></li>
 <li><strong>Getitem() should return an item at the passed index or raise IndexError.</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
-<li><strong>Reversed() automatically works on any object that has len() and getitem() defined.</strong></li>
+<li><strong>Reversed() automatically works on any object that has getitem() and len() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
