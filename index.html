@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 16, 2022</aside>
+    <aside>December 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1194,6 +1194,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
+<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function blocks delimit scope).</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
 <span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;: ...
@@ -1212,7 +1213,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt; [, ...])
 </code></pre></div>
 
-<div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;:
+<div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt; [<span class="hljs-keyword">as</span> &lt;name&gt;]:
     ...
     <span class="hljs-keyword">raise</span>
 </code></pre></div>
@@ -1222,7 +1223,7 @@ exc_type  = &lt;name&gt;.__class__
 filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
 func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
-traceback = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
+trace_str = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
 error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__))
 </code></pre></div>
 
@@ -2908,7 +2909,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 16, 2022</aside>
+    <aside>December 19, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

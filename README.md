@@ -1392,6 +1392,7 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function blocks delimit scope).**
 
 ### Catching Exceptions
 ```python
@@ -1414,7 +1415,7 @@ raise <exception>(<el> [, ...])
 
 #### Re-raising caught exception:
 ```python
-except <exception> as <name>:
+except <exception> [as <name>]:
     ...
     raise
 ```
@@ -1426,7 +1427,7 @@ exc_type  = <name>.__class__
 filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
-traceback = ''.join(traceback.format_tb(<name>.__traceback__))
+trace_str = ''.join(traceback.format_tb(<name>.__traceback__))
 error_msg = ''.join(traceback.format_exception(exc_type, <name>, <name>.__traceback__))
 ```
 
