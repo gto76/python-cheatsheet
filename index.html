@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 19, 2022</aside>
+    <aside>December 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -387,6 +387,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <ul>
 <li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
+<li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> before the colon prepends the expression to the result.</strong></li>
 </ul>
 <div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                             <span class="hljs-comment"># 'abcde     '</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                           <span class="hljs-comment"># 'abc       '</span>
@@ -1195,6 +1196,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
 <li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function blocks delimit scope).</strong></li>
+<li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, &lt;func&gt;)'</span></code> instead.</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
 <span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;: ...
@@ -2909,7 +2911,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 19, 2022</aside>
+    <aside>December 22, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
