@@ -344,7 +344,7 @@ String
 | isdecimal()   |          |          |          |          |   yes    |
 +---------------+----------+----------+----------+----------+----------+
 ```
-* **Also: `'isspace()'` checks for `'[ \t\n\r\f\v\x1c-\x1f\x85\u2000…]'`.**
+* **`'isspace()'` checks for whitespaces: `'[ \t\n\r\f\v\x1c-\x1f\x85\xa0\u1680…]'`.**
 
 
 Regex
@@ -416,7 +416,6 @@ Format
 ```
 * **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
-* **Adding `'='` before the colon prepends the expression to the result.**
 
 ### Strings
 ```python
@@ -1394,7 +1393,7 @@ finally:
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
 * **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function blocks delimit scope).**
-* **To catch signals use `'signal.signal(signal_number, <func>)'` instead.**
+* **To catch signals use `'signal.signal(signal_number, <func>)'`.**
 
 ### Catching Exceptions
 ```python
