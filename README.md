@@ -679,7 +679,7 @@ def func(<default_args>): ...                     # def func(x=0, y=0): ...
 def func(<nondefault_args>, <default_args>): ...  # def func(x, y=0): ...
 ```
 * **Default values are evaluated when function is first encountered in the scope.**
-* **Any mutation of a mutable default value will persist between invocations.**
+* **Any mutation of a mutable default value will persist between invocations!**
 
 
 Splat Operator
