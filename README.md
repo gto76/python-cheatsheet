@@ -1636,7 +1636,7 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir(path='.')          # Returns filenames located at path.
+<list> = listdir(path='.')          # Returns filenames located at the path.
 <list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
 ```
 
@@ -1648,15 +1648,15 @@ from glob import glob
 
 ```python
 <stat> = os.stat(<path>)            # Or: <DirEntry/Path>.stat()
-<real> = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, …
+<real> = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, ...
 ```
 
 ### DirEntry
 **Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
 
 ```python
-<iter> = scandir(path='.')          # Returns DirEntry objects located at path.
-<str>  = <DirEntry>.path            # Returns whole path as a string.
+<iter> = scandir(path='.')          # Returns DirEntry objects located at the path.
+<str>  = <DirEntry>.path            # Returns the whole path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns a file object.
 ```
