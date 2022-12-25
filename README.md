@@ -1445,13 +1445,13 @@ BaseException
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when an attribute is missing.
       +-- EOFError                # Raised by input() when it hits end-of-file condition.
-      +-- LookupError             # Raised when a look-up on a collection fails.
+      +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
       +-- MemoryError             # Out of memory. Could be too late to start deleting vars.
-      +-- NameError               # Raised when an object is missing.
-      +-- OSError                 # Errors such as “file not found” or “disk full” (see Open).
-      |    +-- FileNotFoundError  # When a file or directory is requested but doesn't exist.
+      +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
+      |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
+      +-- OSError                 # Errors such as FileExistsError/PermissionError (see Open).
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
@@ -2518,6 +2518,7 @@ except requests.exceptions.ConnectionError:
 
 Web
 ---
+**Bottle is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
 # $ pip3 install bottle
 from bottle import run, route, static_file, template, post, request, response

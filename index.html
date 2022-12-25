@@ -1239,13 +1239,13 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when an attribute is missing.</span>
       ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits end-of-file condition.</span>
-      ├── LookupError             <span class="hljs-comment"># Raised when a look-up on a collection fails.</span>
+      ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
       │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is missing.</span>
       ├── MemoryError             <span class="hljs-comment"># Out of memory. Could be too late to start deleting vars.</span>
-      ├── NameError               <span class="hljs-comment"># Raised when an object is missing.</span>
-      ├── OSError                 <span class="hljs-comment"># Errors such as “file not found” or “disk full” (see Open).</span>
-      │    └── FileNotFoundError  <span class="hljs-comment"># When a file or directory is requested but doesn't exist.</span>
+      ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
+      │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
+      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/PermissionError (see Open).</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
       ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
@@ -2067,10 +2067,11 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
 </code></pre></div></div>
 
 
-<div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
+<div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><p><strong>Bottle is a micro web framework/server. If you just want to open a html file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install bottle</span>
 <span class="hljs-keyword">from</span> bottle <span class="hljs-keyword">import</span> run, route, static_file, template, post, request, response
 <span class="hljs-keyword">import</span> json
 </code></pre></div>
+
 
 <div><h3 id="run">Run</h3><pre><code class="python language-python hljs">run(host=<span class="hljs-string">'localhost'</span>, port=<span class="hljs-number">8080</span>)        <span class="hljs-comment"># Runs locally.</span>
 run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-number">80</span>)            <span class="hljs-comment"># Runs globally.</span>
