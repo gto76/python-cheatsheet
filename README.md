@@ -1818,6 +1818,7 @@ import csv
 * **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
 * **To print the spreadsheet to the console use [Tabulate](#table) library.**
 * **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
+* **Reader accepts any iterator of strings, not just files.**
 
 ### Write
 ```python
