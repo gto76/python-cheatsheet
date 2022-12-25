@@ -1331,6 +1331,7 @@ class <enum_name>(Enum):
 ```
 * **If there are no numeric values before auto(), it returns 1.**
 * **Otherwise it returns an increment of the last numeric value.**
+* **Accessing a member named after a reserved keyword causes SyntaxError.**
 
 ```python
 <member> = <enum>.<member_name>                 # Returns a member.
