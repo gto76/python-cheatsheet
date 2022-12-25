@@ -2092,7 +2092,7 @@ Threading
 * **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
 from threading import Thread, RLock, Semaphore, Event, Barrier
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 ```
 
 ### Thread
@@ -2139,6 +2139,7 @@ with <lock>:                                   # Enters the block by calling acq
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
 <bool> = <Futr>.done()                         # Checks if the thread has finished executing.
 <obj>  = <Futr>.result()                       # Waits for thread to finish and returns result.
+<iter> = as_completed(<coll_of_Futr>)          # Each Future is yielded as it completes.
 ```
 
 ### Queue
