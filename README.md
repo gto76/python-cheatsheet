@@ -778,7 +778,7 @@ Inline
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                          # Is `bool(el)` True for any element.
+<bool> = any(<collection>)                          # Is `bool(<el>)` True for any element.
 <bool> = all(<collection>)                          # Is True for all elements or empty.
 ```
 
