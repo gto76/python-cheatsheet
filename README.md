@@ -2650,8 +2650,8 @@ import numpy as np
 ```
 
 ```python
-<array> = <array>.sum/min/mean/var/std(axis)            # Passed dimension gets aggregated.
-<array> = <array>.argmin(axis)                          # Returns indexes of smallest elements.
+<array> = <array>.sum/min/mean/var/std([axis])          # Passed dimension gets aggregated.
+<array> = <array>.argmin([axis])                        # Returns indexes of smallest elements.
 <array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
 

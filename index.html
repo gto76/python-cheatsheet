@@ -2164,8 +2164,8 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 &lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Collapses array into one dimension.</span>
 &lt;view&gt;  = &lt;array&gt;.squeeze()                             <span class="hljs-comment"># Removes dimensions of length one.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = &lt;array&gt;.sum/min/mean/var/std(axis)            <span class="hljs-comment"># Passed dimension gets aggregated.</span>
-&lt;array&gt; = &lt;array&gt;.argmin(axis)                          <span class="hljs-comment"># Returns indexes of smallest elements.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = &lt;array&gt;.sum/min/mean/var/std([axis])          <span class="hljs-comment"># Passed dimension gets aggregated.</span>
+&lt;array&gt; = &lt;array&gt;.argmin([axis])                        <span class="hljs-comment"># Returns indexes of smallest elements.</span>
 &lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
 </code></pre>
 <ul>
