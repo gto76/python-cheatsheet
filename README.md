@@ -2206,8 +2206,8 @@ delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name
 <Sig>  = inspect.signature(<function>)     # Function's Signature object.
 <dict> = <Sig>.parameters                  # Dict of Parameter objects.
 <memb> = <Param>.kind                      # Member of ParameterKind enum.
-<obj>  = <Param>.default                   # Default value or <Param>.empty.
-<type> = <Param>.annotation                # Type or <Param>.empty.
+<obj>  = <Param>.default                   # Default value or Parameter.empty.
+<type> = <Param>.annotation                # Type or Parameter.empty.
 ```
 
 
