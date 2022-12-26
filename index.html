@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 25, 2022</aside>
+    <aside>December 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2371,7 +2371,7 @@ nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesa440hzsinewavetoamonowavfile">Saves a 440 Hz sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
-samples_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100000</span>))
+samples_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100_000</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div></div>
 
@@ -2915,7 +2915,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 25, 2022</aside>
+    <aside>December 26, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

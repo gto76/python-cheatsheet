@@ -2907,7 +2907,7 @@ def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framera
 #### Saves a 440 Hz sine wave to a mono WAV file:
 ```python
 from math import pi, sin
-samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100000))
+samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100_000))
 write_to_wav_file('test.wav', samples_f)
 ```
 
