@@ -1923,7 +1923,7 @@ with <conn>:                                    # Exits the block with commit() 
 ```python
 # $ pip3 install sqlalchemy
 from sqlalchemy import create_engine, text
-<engine> = create_engine('<url>').connect()     # Url: 'dialect://user:password@host/dbname'.
+<engine> = create_engine('<url>')               # Url: 'dialect://user:password@host/dbname'.
 <conn>   = <engine>.connect()                   # Creates a connection. Also <conn>.close().
 <cursor> = <conn>.execute(text('<query>'), …)   # Replaces ':<key>'s with keyword arguments.
 with <conn>.begin(): ...                        # Exits the block with commit or rollback.
