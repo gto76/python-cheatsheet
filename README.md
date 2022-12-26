@@ -313,7 +313,7 @@ String
 ```
 
 ```python
-<bool> = <sub_str> in <str>                  # Checks if string contains a substring.
+<bool> = <sub_str> in <str>                  # Checks if string contains the substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
