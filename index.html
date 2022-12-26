@@ -2839,6 +2839,7 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
 
 <div><h2 id="pysimplegui"><a href="#pysimplegui" name="pysimplegui">#</a>PySimpleGUI</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
 <span class="hljs-keyword">import</span> PySimpleGUI <span class="hljs-keyword">as</span> sg
+
 layout = [[sg.Text(<span class="hljs-string">"What's your name?"</span>)], [sg.Input()], [sg.Button(<span class="hljs-string">'Ok'</span>)]]
 window = sg.Window(<span class="hljs-string">'Window Title'</span>, layout)
 event, values = window.read()
