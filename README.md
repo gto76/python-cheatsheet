@@ -2969,10 +2969,10 @@ import pygame as pg
 pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
-while all(event.type != pg.QUIT for event in pg.event.get()):
-    deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
-    for ch, is_pressed in enumerate(pg.key.get_pressed()):
-        rect = rect.move(deltas[ch]) if ch in deltas and is_pressed else rect
+while not pg.event.get(pg.QUIT):
+    deltas = {pg.K_UP: (0, -20), pg.K_RIGHT: (20, 0), pg.K_DOWN: (0, 20), pg.K_LEFT: (-20, 0)}
+    for event in pg.event.get(pg.KEYDOWN):
+        rect.move_ip(deltas.get(event.key, (0, 0))
     screen.fill((0, 0, 0))
     pg.draw.rect(screen, (255, 255, 255), rect)
     pg.display.flip()
@@ -3065,14 +3065,14 @@ def main():
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 def run(screen, images, mario, tiles):
-    clock = pg.time.Clock()
-    while all(event.type != pg.QUIT for event in pg.event.get()):
+    clock, pressed = pg.time.Clock(), set()
+    while not pg.event.get(pg.QUIT) and clock.tick(28):
         keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed = {keys.get(ch) for ch, is_prsd in enumerate(pg.key.get_pressed()) if is_prsd}
+        pressed |= {keys.get(event.key) for event in pg.event.get(pg.KEYDOWN)}
+        pressed -= {keys.get(event.key) for event in pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
-        clock.tick(28)
 
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
