@@ -2779,7 +2779,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
 &lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
 </code></pre></div>
 
-<div><h4 id="coviddeathsbycontinent">Covid deaths by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
+<div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'</span>
                          <span class="hljs-string">'846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv'</span>,
@@ -2794,7 +2794,7 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
 
 
 
-<div><h4 id="confirmedcovidcasesdowjonesgoldandbitcoinprice">Confirmed covid cases, Dow Jones, Gold, and Bitcoin price:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
