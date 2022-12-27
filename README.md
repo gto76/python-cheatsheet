@@ -2604,9 +2604,7 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
      2                                    def main():
      3      1    955.0    955.0     43.7      a = [*range(10000)]
      4      1   1231.0   1231.0     56.3      b = {*range(10000)}
-```
 
-```text
 $ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
@@ -2627,6 +2625,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 with cg.PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
+* **The "latest and greatest" profiler that can also monitor GPU usage is called [Scalene](https://github.com/plasma-umass/scalene).**
 
 
 NumPy

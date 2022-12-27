@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 26, 2022</aside>
+    <aside>December 27, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2133,8 +2133,8 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
      2                                    def main():
      3      1    955.0    955.0     43.7      a = [*range(10000)]
      4      1   1231.0   1231.0     56.3      b = {*range(10000)}
-</code></pre>
-<pre><code class="text language-text">$ python3 -m memory_profiler test.py
+
+$ python3 -m memory_profiler test.py
 Line #         Mem usage      Increment   Line Contents
 =======================================================
      1        37.668 MiB     37.668 MiB   @profile
@@ -2152,6 +2152,9 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 </code></pre></div></div>
 
 
+<ul>
+<li><strong>The "latest and greatest" profiler that can also monitor GPU usage is called <a href="https://github.com/plasma-umass/scalene">Scalene</a>.</strong></li>
+</ul>
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 </code></pre></div>
@@ -2916,7 +2919,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 26, 2022</aside>
+    <aside>December 27, 2022</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
