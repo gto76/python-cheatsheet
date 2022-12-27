@@ -2427,7 +2427,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):
     deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-20</span>), pg.K_RIGHT: (<span class="hljs-number">20</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">20</span>), pg.K_LEFT: (<span class="hljs-number">-20</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
-        rect.move_ip(deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+        rect.move_ip(deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)))
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
     pg.display.flip()
