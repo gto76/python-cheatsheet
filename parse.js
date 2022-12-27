@@ -204,8 +204,8 @@ const MARIO =
   '    clock, pressed = pg.time.Clock(), set()\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT) <span class="hljs-keyword">and</span> clock.tick(<span class="hljs-number">28</span>):\n' +
   '        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}\n' +
-  '        pressed |= {keys.get(event.key) <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}\n' +
-  '        pressed -= {keys.get(event.key) <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}\n' +
+  '        pressed |= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}\n' +
+  '        pressed -= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}\n' +
   '        update_speed(mario, tiles, pressed)\n' +
   '        update_position(mario, tiles)\n' +
   '        draw(screen, images, mario, tiles, pressed)\n' +

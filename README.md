@@ -3068,8 +3068,8 @@ def run(screen, images, mario, tiles):
     clock, pressed = pg.time.Clock(), set()
     while not pg.event.get(pg.QUIT) and clock.tick(28):
         keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed |= {keys.get(event.key) for event in pg.event.get(pg.KEYDOWN)}
-        pressed -= {keys.get(event.key) for event in pg.event.get(pg.KEYUP)}
+        pressed |= {keys.get(e.key) for e in pg.event.get(pg.KEYDOWN)}
+        pressed -= {keys.get(e.key) for e in pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles, pressed)
