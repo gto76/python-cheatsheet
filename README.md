@@ -2674,8 +2674,8 @@ import numpy as np
 ```
 
 ```bash
-<2d_bools> = <2d_array> ><== <el>                       # <3d_array> ><== <1d_array>
-<1d_array> = <2d_array>[<2d_bools>]                     # <3d_array>[<2d_bools>]
+<2d_bools> = <2d_array> ><== <el/1d/2d_array>           # 1d_array must have size of a row.
+<1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
 * **All examples also allow assignments.**
 

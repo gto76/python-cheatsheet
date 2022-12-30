@@ -2187,8 +2187,8 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 &lt;2d_array&gt; = &lt;2d_array&gt;[row_indexes]                    <span class="hljs-comment"># &lt;3d_a&gt;[table_is, row_is]</span>
 &lt;2d_array&gt; = &lt;2d_array&gt;[:, column_indexes]              <span class="hljs-comment"># &lt;3d_a&gt;[table_is, :, column_is]</span>
 </code></pre>
-<pre><code class="bash language-bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt;&lt;== &lt;el&gt;                       <span class="hljs-comment"># &lt;3d_array&gt; &gt;&lt;== &lt;1d_array&gt;</span>
-&lt;1d_array&gt; = &lt;2d_array&gt;[&lt;2d_bools&gt;]                     <span class="hljs-comment"># &lt;3d_array&gt;[&lt;2d_bools&gt;]</span>
+<pre><code class="bash language-bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt;&lt;== &lt;el/1d/2d_array&gt;           <span class="hljs-comment"># 1d_array must have size of a row.</span>
+&lt;1d/2d_a&gt;  = &lt;2d_array&gt;[&lt;2d/1d_bools&gt;]                  <span class="hljs-comment"># 1d_bools must have size of a column.</span>
 </code></pre>
 <ul>
 <li><strong>All examples also allow assignments.</strong></li>
