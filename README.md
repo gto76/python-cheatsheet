@@ -3211,16 +3211,24 @@ b  3  4
 ```
 
 ```python
+    df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+    df.columns                                 # Get the column names
+    df.index                                   # Get the index values
+```
+
+```python
 <DF>    = DataFrame(<list_of_rows>)            # Rows can be either lists, dicts or series.
 <DF>    = DataFrame(<dict_of_columns>)         # Columns can be either lists, dicts or series.
 ```
 
+For selection of multiple elements:
 ```python
 <el>    = <DF>.loc[row_key, column_key]        # Or: <DF>.iloc[row_index, column_index]
 <Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_index/es]
 <Sr/DF> = <DF>.loc[:, column_key/s]            # Or: <DF>.iloc[:, column_index/es]
 <DF>    = <DF>.loc[row_bools, column_bools]    # Or: <DF>.iloc[row_bools, column_bools]
 ```
+
 
 ```python
 <Sr/DF> = <DF>[column_key/s]                   # Or: <DF>.column_key
