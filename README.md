@@ -3065,7 +3065,8 @@ def main():
     run(get_screen(), get_images(), get_mario(), get_tiles())
 
 def run(screen, images, mario, tiles):
-    clock, pressed = pg.time.Clock(), set()
+    clock = pg.time.Clock()
+    pressed = set()
     while not pg.event.get(pg.QUIT) and clock.tick(28):
         keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
         pressed |= {keys.get(e.key) for e in pg.event.get(pg.KEYDOWN)}
@@ -3086,8 +3087,7 @@ def update_position(mario, tiles):
     n_steps = max(abs(s) for s in mario.spd)
     for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
-        mario.rect.topleft = x, y
+        mario.rect.topleft = x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
