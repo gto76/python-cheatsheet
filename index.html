@@ -2654,12 +2654,12 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃                        │    <span class="hljs-string">'outer'</span>    │   <span class="hljs-string">'inner'</span>  │   <span class="hljs-string">'left'</span>   │       Description        ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
-┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃
-┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ Also accepts left_on and ┃
-┃                        │ <span class="hljs-number">1</span>  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ right_on parameters.     ┃
+┃ l.merge(r, on=<span class="hljs-string">'y'</span>,     │    x   y   z  │ x   y   z  │ x   y   z  │ Merges on column if <span class="hljs-string">'on'</span> ┃
+┃            how=…)      │ <span class="hljs-number">0</span>  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │ or <span class="hljs-string">'left/right_on'</span> are   ┃
+┃                        │ <span class="hljs-number">1</span>  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │ <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │ set, else on shared cols.┃
 ┃                        │ <span class="hljs-number">2</span>  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ Uses <span class="hljs-string">'inner'</span> by default. ┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
-┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃
+┃ l.join(r, lsuffix=<span class="hljs-string">'l'</span>, │    x yl yr  z │            │ x yl yr  z │ Merges on row keys.      ┃
 ┃           rsuffix=<span class="hljs-string">'r'</span>, │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x yl yr  z │ <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ Uses <span class="hljs-string">'left'</span> by default.  ┃
 ┃           how=…)       │ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span> │ If r is a Series, it is  ┃
 ┃                        │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.     ┃
@@ -2667,8 +2667,8 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃
 ┃           axis=<span class="hljs-number">0</span>,      │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │     <span class="hljs-number">2</span>      │            │ Uses <span class="hljs-string">'outer'</span> by default. ┃
 ┃           join=…)      │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   .  │     <span class="hljs-number">4</span>      │            │ A Series is treated as a ┃
-┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. Use l.append(sr) ┃
-┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │ to add a row instead.    ┃
+┃                        │ b  .   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │     <span class="hljs-number">4</span>      │            │ column. To add a row use ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │     <span class="hljs-number">6</span>      │            │ pd.concat([l, DF([sr])]).┃
 ┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨
 ┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃
 ┃           axis=<span class="hljs-number">1</span>,      │ a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  .  . │ x  y  y  z │            │ right end. Uses <span class="hljs-string">'outer'</span>  ┃
@@ -2725,7 +2725,7 @@ plt.show()                                     <span class="hljs-comment"># Disp
 &lt;DF&gt; = pd.read_clipboard()                     <span class="hljs-comment"># Reads a copied table from the clipboard.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/…'</span>])             <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
-&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also &lt;DF&gt;.to_markdown/latex([&lt;path&gt;]).</span>
+&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also to_markdown/latex([&lt;path&gt;]).</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install openpyxl` for xlsx files.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
 </code></pre>

@@ -3257,12 +3257,12 @@ c  6  7
 +------------------------+---------------+------------+------------+--------------------------+
 |                        |    'outer'    |   'inner'  |   'left'   |       Description        |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Joins/merges on column.  |
-|            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | Also accepts left_on and |
-|                        | 1  3   4   5  |            | 3   4   5  | right_on parameters.     |
+| l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Merges on column if 'on' |
+|            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | or 'left/right_on' are   |
+|                        | 1  3   4   5  |            | 3   4   5  | set, else on shared cols.|
 |                        | 2  .   6   7  |            |            | Uses 'inner' by default. |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Joins/merges on row keys.|
+| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Merges on row keys.      |
 |           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
 |           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a Series, it is  |
 |                        | c  .  .  6  7 |            |            | treated as a column.     |
@@ -3270,8 +3270,8 @@ c  6  7
 | pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
 |           join=…)      | b  3   4   .  |     4      |            | A Series is treated as a |
-|                        | b  .   4   5  |     4      |            | column. Use l.append(sr) |
-|                        | c  .   6   7  |     6      |            | to add a row instead.    |
+|                        | b  .   4   5  |     4      |            | column. To add a row use |
+|                        | c  .   6   7  |     6      |            | pd.concat([l, DF([sr])]).|
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
 |           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
