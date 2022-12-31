@@ -3157,7 +3157,7 @@ Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = <Sr>.append(<Sr>)                       # Or: pd.concat(<coll_of_Sr>)
+<Sr> = pd.concat(<coll_of_Sr>)                 # Concats multiple Series into one long Series.
 <Sr> = <Sr>.combine_first(<Sr>)                # Adds items that are not yet present.
 <Sr>.update(<Sr>)                              # Updates items that are already present.
 ```
@@ -3198,6 +3198,7 @@ y    2
 | sr.transform(…) |     y  2    |   y     2   |       y  2    |
 +-----------------+-------------+-------------+---------------+
 ```
+* **Methods ffill(), interpolate() and fillna() accept argument 'inplace' that defaults to False.**
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
 
 ### DataFrame
@@ -3235,9 +3236,9 @@ b  3  4
 
 ```python
 <DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from a column.
-<DF>    = <DF>.reset_index()                   # Moves row keys to a column named index.
-<DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys.
-<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by the passed column/s.
+<DF>    = <DF>.reset_index(drop=False)         # Moves row keys to a column named index.
+<DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
+<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by the passed column/s. Same.
 ```
 
 #### DataFrame — Merge, Join, Concat:
@@ -3323,7 +3324,7 @@ b  3  4
 
 #### DataFrame — Plot, Encode, Decode:
 ```python
-<DF>.plot.line/bar/hist/scatter/box()          # Also: `x=column_key, y=column_key/s`.
+<DF>.plot.line/area/bar/hist/scatter/box()     # Also: `x=column_key, y=column_key/s`.
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 
