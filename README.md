@@ -1829,7 +1829,7 @@ import csv
 * **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
 
 ### Parameters
-* **`'dialect'` - Master parameter that sets the default values. String or a Dialect object.**
+* **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
 * **`'delimiter'` - A one-character string used to separate fields.**
 * **`'quotechar'` - Character for quoting fields that contain special characters.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
@@ -2943,7 +2943,7 @@ Synthesizer
 #### Plays Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
-import itertools as it, math, struct, simpleaudio
+import array, itertools as it, math, simpleaudio
 
 F  = 44100
 P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,'
@@ -2955,8 +2955,8 @@ get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
 parse_note  = lambda note: (get_hz(note[:2]), 1/4 if '♩' in note else 1/8)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
 samples_f   = it.chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.split(','))
-samples_b   = b''.join(struct.pack('<h', int(f * 30000)) for f in samples_f)
-simpleaudio.play_buffer(samples_b, 1, 2, F)
+samples_i   = array.array('h', (int(f * 30000) for f in samples_f))
+simpleaudio.play_buffer(samples_i, 1, 2, F)
 ```
 
 
