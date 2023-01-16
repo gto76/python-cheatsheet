@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 31, 2022</aside>
+    <aside>January 16, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1624,13 +1624,13 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)             <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
 &lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)        <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)        <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
 &lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)            <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
 </code></pre></div>
 
 <div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                     <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
 &lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
-&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)        <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
+&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)        <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()                     <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre></div>
 
@@ -1714,7 +1714,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints or floats.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
-&lt;int&gt;   = int.from_bytes(&lt;mview&gt;, …)           <span class="hljs-comment"># `byteorder='little/big', signed=False`.</span>
+&lt;int&gt;   = int.from_bytes(&lt;mview&gt;, …)           <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
 <span class="hljs-string">'&lt;hex&gt;'</span> = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Treats mview as a bytes object.</span>
 </code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
@@ -2176,7 +2176,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 <ul>
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
 <li><strong>Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
-<li><strong>Passing a tuple of axes will chain the operations like this: <code class="python hljs"><span class="hljs-string">'&lt;array&gt;.&lt;method&gt;(axis_1, keepdims=True).&lt;method&gt;(axis_2).squeeze()'</span></code>.</strong></li>
+<li><strong>Passing a tuple of axes will chain the operations like this: <code class="python hljs"><span class="hljs-string">'&lt;array&gt;.&lt;method&gt;(axis_1).&lt;method&gt;(axis_2 - 1 if axis_2 &gt; axis_1 else axis_2)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="indexing">Indexing</h3><pre><code class="bash language-bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i, column_i]</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[row_index]                      <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i]</span>
@@ -2637,7 +2637,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                 <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)           <span class="hljs-comment"># Replaces row keys with values from a column.</span>
-&lt;DF&gt;    = &lt;DF&gt;.reset_index(drop=<span class="hljs-keyword">False</span>)         <span class="hljs-comment"># Moves row keys to a column named index.</span>
+&lt;DF&gt;    = &lt;DF&gt;.reset_index(drop=<span class="hljs-keyword">False</span>)         <span class="hljs-comment"># Drops or moves row keys to column named index.</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)      <span class="hljs-comment"># Sorts rows by row keys. Use `axis=1` for cols.</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)       <span class="hljs-comment"># Sorts rows by the passed column/s. Same.</span>
 </code></pre>
@@ -2920,7 +2920,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>December 31, 2022</aside>
+    <aside>January 16, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

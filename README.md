@@ -1956,7 +1956,7 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)             # Ints must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')             # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, …)        # `byteorder='little/big', signed=False`.
+<bytes> = <int>.to_bytes(n_bytes, …)        # `byteorder='big/little', signed=False`.
 <bytes> = bytes.fromhex('<hex>')            # Hex pairs can be separated by whitespaces.
 ```
 
@@ -1964,7 +1964,7 @@ Bytes
 ```python
 <list>  = list(<bytes>)                     # Returns ints in range from 0 to 255.
 <str>   = str(<bytes>, 'utf-8')             # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, …)        # `byteorder='little/big', signed=False`.
+<int>   = int.from_bytes(<bytes>, …)        # `byteorder='big/little', signed=False`.
 '<hex>' = <bytes>.hex()                     # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
@@ -2064,7 +2064,7 @@ Memory View
 ```python
 <list>  = list(<mview>)                        # Returns a list of ints or floats.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
-<int>   = int.from_bytes(<mview>, …)           # `byteorder='little/big', signed=False`.
+<int>   = int.from_bytes(<mview>, …)           # `byteorder='big/little', signed=False`.
 '<hex>' = <mview>.hex()                        # Treats mview as a bytes object.
 ```
 
@@ -2658,7 +2658,7 @@ import numpy as np
 
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
 * **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
-* **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1, keepdims=True).<method>(axis_2).squeeze()'`.**
+* **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1).<method>(axis_2 - 1 if axis_2 > axis_1 else axis_2)'`.**
 
 ### Indexing
 ```bash
@@ -3236,7 +3236,7 @@ b  3  4
 
 ```python
 <DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from a column.
-<DF>    = <DF>.reset_index(drop=False)         # Moves row keys to a column named index.
+<DF>    = <DF>.reset_index(drop=False)         # Drops or moves row keys to column named index.
 <DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
 <DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by the passed column/s. Same.
 ```
