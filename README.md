@@ -393,7 +393,7 @@ Format
 ```python
 <str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
 <str> = '{}, {}'.format(<el_1>, <el_2>)  # Or: '{0}, {a}'.format(<el_1>, a=<el_2>)
-<str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C style formatting.
+<str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
 ```
 
 ### Attributes
@@ -2638,7 +2638,7 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list/list_of_lists>)                # Returns 1d/2d NumPy array.
+<array> = np.array(<list/list_of_lists>)                # Returns a 1d/2d NumPy array.
 <array> = np.zeros/ones(<shape>)                        # Also np.full(<shape>, <el>).
 <array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, num).
 <array> = np.random.randint(from_inc, to_exc, <shape>)  # Also np.random.random(<shape>).

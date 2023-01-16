@@ -366,7 +366,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python language-python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly brackets can also contain expressions.</span>
 &lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Or: '{0}, {a}'.format(&lt;el_1&gt;, a=&lt;el_2&gt;)</span>
-&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C style formatting.</span>
+&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C-style formatting.</span>
 </code></pre></div>
 
 <div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Person = collections.namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
@@ -2160,7 +2160,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists&gt;)                <span class="hljs-comment"># Returns 1d/2d NumPy array.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists&gt;)                <span class="hljs-comment"># Returns a 1d/2d NumPy array.</span>
 &lt;array&gt; = np.zeros/ones(&lt;shape&gt;)                        <span class="hljs-comment"># Also np.full(&lt;shape&gt;, &lt;el&gt;).</span>
 &lt;array&gt; = np.arange(from_inc, to_exc, ±step)            <span class="hljs-comment"># Also np.linspace(start, stop, num).</span>
 &lt;array&gt; = np.random.randint(from_inc, to_exc, &lt;shape&gt;)  <span class="hljs-comment"># Also np.random.random(&lt;shape&gt;).</span>
