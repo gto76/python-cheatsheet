@@ -1931,7 +1931,7 @@ with <conn>.begin(): ...                        # Exits the block with commit or
 
 ```text
 +------------+--------------+-----------+-----------------------------------+
-| Dialects   | pip3 install | import    | Dependencies                      |
+| Dialect    | pip3 install | import    | Dependencies                      |
 +------------+--------------+-----------+-----------------------------------+
 | mysql      | mysqlclient  | MySQLdb   | www.pypi.org/project/mysqlclient  |
 | postgresql | psycopg2     | psycopg2  | www.psycopg.org/docs/install.html |

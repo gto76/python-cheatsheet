@@ -421,12 +421,12 @@ const DIAGRAM_9_B =
 
 const DIAGRAM_95_A =
   "+------------+--------------+-----------+-----------------------------------+\n" +
-  "| Dialects   | pip3 install | import    | Dependencies                      |\n" +
+  "| Dialect    | pip3 install | import    | Dependencies                      |\n" +
   "+------------+--------------+-----------+-----------------------------------+\n";
 
 const DIAGRAM_95_B =
   "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃ Dialects   │ pip3 install │ import    │ Dependencies                      ┃\n" +
+  "┃ Dialect    │ pip3 install │ import    │ Dependencies                      ┃\n" +
   "┠────────────┼──────────────┼───────────┼───────────────────────────────────┨\n" +
   "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient  ┃\n" +
   "┃ postgresql │ psycopg2     │ psycopg2  │ www.psycopg.org/docs/install.html ┃\n" +
