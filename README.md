@@ -1731,7 +1731,7 @@ shutil.rmtree(<path>)               # Deletes the directory.
 ```python
 <pipe> = os.popen('<command>')      # Executes command in sh/cmd. Returns its stdout pipe.
 <str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()             # Closes the pipe. Returns None on success.
+<int>  = <pipe>.close()             # Closes the pipe. Returns None on success (returncode 0).
 ```
 
 #### Sends '1 + 1' to the basic calculator and captures its output:

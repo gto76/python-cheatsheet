@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 16, 2023</aside>
+    <aside>January 17, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1455,7 +1455,7 @@ shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes t
 </ul>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;command&gt;'</span>)      <span class="hljs-comment"># Executes command in sh/cmd. Returns its stdout pipe.</span>
 &lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)       <span class="hljs-comment"># Reads 'size' chars or until EOF. Also readline/s().</span>
-&lt;int&gt;  = &lt;pipe&gt;.close()             <span class="hljs-comment"># Closes the pipe. Returns None on success.</span>
+&lt;int&gt;  = &lt;pipe&gt;.close()             <span class="hljs-comment"># Closes the pipe. Returns None on success (returncode 0).</span>
 </code></pre></div>
 
 <div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends '1 + 1' to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>subprocess.run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
@@ -2920,7 +2920,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>January 16, 2023</aside>
+    <aside>January 17, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
