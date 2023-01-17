@@ -2115,7 +2115,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 #### Or:
 ```python
 with <lock>:                                   # Enters the block by calling acquire(),
-    ...                                        # and exits it with release().
+    ...                                        # and exits it with release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
