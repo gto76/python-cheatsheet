@@ -2973,7 +2973,8 @@ rect = pg.Rect(240, 240, 20, 20)
 while not pg.event.get(pg.QUIT):
     deltas = {pg.K_UP: (0, -20), pg.K_RIGHT: (20, 0), pg.K_DOWN: (0, 20), pg.K_LEFT: (-20, 0)}
     for event in pg.event.get(pg.KEYDOWN):
-        rect.move_ip(deltas.get(event.key, (0, 0)))
+        dx, dy = deltas.get(event.key, (0, 0))
+        rect.move_ip((dx, dy))
     screen.fill((0, 0, 0))
     pg.draw.rect(screen, (255, 255, 255), rect)
     pg.display.flip()
