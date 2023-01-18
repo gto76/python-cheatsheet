@@ -980,6 +980,7 @@ raise Exception(<el>)
 #### Expressions that call the repr() method:
 ```python
 print/str/repr([<el>])
+print/str/repr({<el>: <el>})
 f'{<el>!r}'
 Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<el>))
 >>> <el>

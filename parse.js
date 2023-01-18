@@ -70,6 +70,7 @@ const PARAMETRIZED_DECORATOR =
 
 const REPR_USE_CASES =
   'print/str/repr([&lt;el&gt;])\n' +
+  'print/str/repr({&lt;el&gt;: &lt;el&gt;})\n' +
   '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;el&gt;!r}</span>\'</span>\n' +
   'Z = dataclasses.make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;el&gt;))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;\n';
@@ -737,8 +738,8 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
-  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(print/str/repr([<el>]))`).html(REPR_USE_CASES);
+  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
