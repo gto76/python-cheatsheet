@@ -1444,8 +1444,8 @@ BaseException
       +-- ArithmeticError         # Base class for arithmetic errors.
       |    +-- ZeroDivisionError  # Raised when dividing by zero.
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
-      +-- AttributeError          # Raised when an attribute is missing.
-      +-- EOFError                # Raised by input() when it hits end-of-file condition.
+      +-- AttributeError          # Raised when object doesn't have requested attribute/method.
+      +-- EOFError                # Raised by input() when it hits an end-of-file condition.
       +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
@@ -1456,8 +1456,8 @@ BaseException
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
-      +-- TypeError               # Raised when an argument is of wrong type.
-      +-- ValueError              # When an argument is of right type but inappropriate value.
+      +-- TypeError               # Raised when an argument is of the wrong type.
+      +-- ValueError              # When argument has the right type but inappropriate value.
            +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 ```
 
@@ -1475,8 +1475,8 @@ BaseException
 
 #### Useful built-in exceptions:
 ```python
-raise TypeError('Argument is of wrong type!')
-raise ValueError('Argument is of right type but inappropriate value!')
+raise TypeError('Argument is of the wrong type!')
+raise ValueError('Argument has the right type but an inappropriate value!')
 raise RuntimeError('None of above!')
 ```
 
