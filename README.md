@@ -1287,7 +1287,7 @@ class MySequence:
 ### ABC Sequence
 * **It's a richer interface than the basic sequence.**
 * **Extending it generates iter(), contains(), reversed(), index() and count().**
-* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, memoryview and deque, because they are registered as Sequence's virtual subclasses.**
+* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, because they are registered as its virtual subclasses.**
 ```python
 from collections import abc
 
@@ -2026,7 +2026,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system.**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.**
 
 ```python
 from array import array
@@ -2054,7 +2054,6 @@ Memory View
 <mview>.release()                              # Releases the object's memory buffer.
 ```
 
-### Decode
 ```python
 <bytes> = bytes(<mview>)                       # Returns a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
@@ -2662,6 +2661,7 @@ import numpy as np
 * **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1).<method>(axis_2 - 1 if axis_2 > axis_1 else axis_2)'`.**
 
 ### Indexing
+**All examples also allow assignments.**
 ```bash
 <el>       = <2d_array>[row_index, column_index]        # <3d_a>[table_i, row_i, column_i]
 <1d_view>  = <2d_array>[row_index]                      # <3d_a>[table_i, row_i]
@@ -2678,7 +2678,6 @@ import numpy as np
 <2d_bools> = <2d_array> ><== <el/1d/2d_array>           # 1d_array must have size of a row.
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
-* **All examples also allow assignments.**
 
 ### Broadcasting
 **Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
