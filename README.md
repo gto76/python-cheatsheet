@@ -1988,6 +1988,7 @@ Struct
 ------
 * **Module that performs conversions between a sequence of numbers and a bytes object.**
 * **System’s type sizes, byte order, and alignment rules are used by default.**
+* **The only exception being types float and double, that always take up 4 and 8 bytes.**
 
 ```python
 from struct import pack, unpack
