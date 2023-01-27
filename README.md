@@ -2641,19 +2641,19 @@ import numpy as np
 ```python
 <array> = np.array(<list/list_of_lists>)                # Returns a 1d/2d NumPy array.
 <array> = np.zeros/ones(<shape>)                        # Also np.full(<shape>, <el>).
-<array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, num).
+<array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, len).
 <array> = np.random.randint(from_inc, to_exc, <shape>)  # Also np.random.random(<shape>).
 ```
 
 ```python
 <view>  = <array>.reshape(<shape>)                      # Also `<array>.shape = <shape>`.
-<array> = <array>.flatten()                             # Collapses array into one dimension.
-<view>  = <array>.squeeze()                             # Removes dimensions of length one.
+<array> = <array>.flatten()                             # Also `<view> = <array>.ravel()`.
+<view>  = <array>.transpose()                           # Also `<view> = <array>.T`.
 ```
 
 ```python
-<array> = <array>.sum/min/mean/var/std([axis])          # Passed dimension gets aggregated.
-<array> = <array>.argmin([axis])                        # Returns indexes of smallest elements.
+<array> = np.copy/int64/float64(<array>)                # Returns new array of the same shape.
+<array> = <array>.sum/max/mean/argmax/all([axis])       # Passed dimension gets aggregated.
 <array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
 

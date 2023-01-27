@@ -2163,15 +2163,15 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 
 <pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists&gt;)                <span class="hljs-comment"># Returns a 1d/2d NumPy array.</span>
 &lt;array&gt; = np.zeros/ones(&lt;shape&gt;)                        <span class="hljs-comment"># Also np.full(&lt;shape&gt;, &lt;el&gt;).</span>
-&lt;array&gt; = np.arange(from_inc, to_exc, ±step)            <span class="hljs-comment"># Also np.linspace(start, stop, num).</span>
+&lt;array&gt; = np.arange(from_inc, to_exc, ±step)            <span class="hljs-comment"># Also np.linspace(start, stop, len).</span>
 &lt;array&gt; = np.random.randint(from_inc, to_exc, &lt;shape&gt;)  <span class="hljs-comment"># Also np.random.random(&lt;shape&gt;).</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;view&gt;  = &lt;array&gt;.reshape(&lt;shape&gt;)                      <span class="hljs-comment"># Also `&lt;array&gt;.shape = &lt;shape&gt;`.</span>
-&lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Collapses array into one dimension.</span>
-&lt;view&gt;  = &lt;array&gt;.squeeze()                             <span class="hljs-comment"># Removes dimensions of length one.</span>
+&lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.ravel()`.</span>
+&lt;view&gt;  = &lt;array&gt;.transpose()                           <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.T`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = &lt;array&gt;.sum/min/mean/var/std([axis])          <span class="hljs-comment"># Passed dimension gets aggregated.</span>
-&lt;array&gt; = &lt;array&gt;.argmin([axis])                        <span class="hljs-comment"># Returns indexes of smallest elements.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.copy/int64/float64(&lt;array&gt;)                <span class="hljs-comment"># Returns new array of the same shape.</span>
+&lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all([axis])       <span class="hljs-comment"># Passed dimension gets aggregated.</span>
 &lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
 </code></pre>
 <ul>
