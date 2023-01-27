@@ -2682,7 +2682,7 @@ import numpy as np
 * **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`.**
 
 ### Broadcasting
-**Broadcasting is a set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
+**Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 
 ```python
 left  = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
@@ -2705,9 +2705,6 @@ right = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
          [0.1,  0.6,  0.8],
          [0.1,  0.6,  0.8]]
 ```
-
-#### 3. If neither non-matching dimension has size 1, raise an error.
-
 
 ### Example
 #### For each point returns index of its nearest point (`[0.1, 0.6, 0.8] => [1, 2, 1]`):
