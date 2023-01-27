@@ -2170,7 +2170,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 &lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.ravel()`.</span>
 &lt;view&gt;  = &lt;array&gt;.transpose()                           <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.T`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.copy/int64/float64(&lt;array&gt;)                <span class="hljs-comment"># Returns new array of the same shape.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.copy/abs/sqrt/log/int64(&lt;array&gt;)           <span class="hljs-comment"># Returns new array of the same shape.</span>
 &lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all([axis])       <span class="hljs-comment"># Passed dimension gets aggregated.</span>
 &lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
 </code></pre>

@@ -2652,7 +2652,7 @@ import numpy as np
 ```
 
 ```python
-<array> = np.copy/int64/float64(<array>)                # Returns new array of the same shape.
+<array> = np.copy/abs/sqrt/log/int64(<array>)           # Returns new array of the same shape.
 <array> = <array>.sum/max/mean/argmax/all([axis])       # Passed dimension gets aggregated.
 <array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
