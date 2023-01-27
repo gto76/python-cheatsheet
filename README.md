@@ -2680,6 +2680,7 @@ import numpy as np
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
 * **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`.**
+* **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
 **Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
