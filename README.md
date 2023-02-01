@@ -3199,7 +3199,7 @@ y    2
 ```
 * **Methods ffill(), interpolate() and fillna() accept argument 'inplace' that defaults to False.**
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
-* **Keys, indexes and bools can't be tuples because `'obj[x, y]'` becomes `'obj[(x, y)]'`.**
+* **Keys/indexes/bools can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
