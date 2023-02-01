@@ -2740,7 +2740,7 @@ Image
 -----
 ```python
 # $ pip3 install pillow
-from PIL import Image
+from PIL import Image, ImageDraw
 ```
 
 ```python
@@ -2764,6 +2764,8 @@ from PIL import Image
 <3d_array> = np.array(<Image_RGB/A>)             # Creates NumPy array from color image.
 <Image>    = Image.fromarray(np.uint8(<array>))  # Use <array>.clip(0, 255) to clip the values.
 ```
+* **To edit an image use `'ImageEnhance'`, `'ImageFilter'` and `'ImageOps'` submodules.**
+* **Custom filters can be applied to arrays using `'scipy.ndimage.convolve()'` function.**
 
 ### Modes
 * **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
@@ -2794,11 +2796,7 @@ img.show()
 
 ### Image Draw
 ```python
-from PIL import ImageDraw
-<ImageDraw> = ImageDraw.Draw(<Image>)
-```
-
-```python
+<ImageDraw> = ImageDraw.Draw(<Image>)            # Object for adding 2D graphics to the image.
 <ImageDraw>.point((x, y))                        # Truncates floats into ints.
 <ImageDraw>.line((x1, y1, x2, y2 [, ...]))       # To get anti-aliasing use Image's resize().
 <ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)    # Always draws in clockwise direction.

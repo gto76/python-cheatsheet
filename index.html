@@ -2240,7 +2240,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 
 
 <div><h2 id="image"><a href="#image" name="image">#</a>Image</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pillow</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))   <span class="hljs-comment"># Also: `color=&lt;int/tuple/str&gt;`.</span>
@@ -2259,6 +2259,10 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 &lt;3d_array&gt; = np.array(&lt;Image_RGB/A&gt;)             <span class="hljs-comment"># Creates NumPy array from color image.</span>
 &lt;Image&gt;    = Image.fromarray(np.uint8(&lt;array&gt;))  <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
 </code></pre>
+<ul>
+<li><strong>To edit an image use <code class="python hljs"><span class="hljs-string">'ImageEnhance'</span></code>, <code class="python hljs"><span class="hljs-string">'ImageFilter'</span></code> and <code class="python hljs"><span class="hljs-string">'ImageOps'</span></code> submodules.</strong></li>
+<li><strong>Custom filters can be applied to arrays using <code class="python hljs"><span class="hljs-string">'scipy.ndimage.convolve()'</span></code> function.</strong></li>
+</ul>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - 8-bit pixels, greyscale.</strong></li>
@@ -2283,17 +2287,15 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.show()
 </code></pre></div>
 
-<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
-&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)
-</code></pre></div>
-
-<pre><code class="python language-python hljs">&lt;ImageDraw&gt;.point((x, y))                        <span class="hljs-comment"># Truncates floats into ints.</span>
+<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)            <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
+&lt;ImageDraw&gt;.point((x, y))                        <span class="hljs-comment"># Truncates floats into ints.</span>
 &lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))       <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
 &lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)    <span class="hljs-comment"># Always draws in clockwise direction.</span>
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))          <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 &lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))       <span class="hljs-comment"># Last point gets connected to the first.</span>
 &lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))            <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-</code></pre>
+</code></pre></div>
+
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
