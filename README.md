@@ -3120,7 +3120,6 @@ Pandas
 ```python
 # $ pip3 install pandas matplotlib
 import pandas as pd
-from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
 ```
 
@@ -3128,16 +3127,16 @@ import matplotlib.pyplot as plt
 **Ordered dictionary with a name.**
 
 ```python
->>> Series([1, 2], index=['x', 'y'], name='a')
+>>> pd.Series([1, 2], index=['x', 'y'], name='a')
 x    1
 y    2
 Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = Series(<list>)                          # Assigns RangeIndex starting at 0.
-<Sr> = Series(<dict>)                          # Takes dictionary's keys for index.
-<Sr> = Series(<dict/Series>, index=<list>)     # Only keeps items with keys specified in index.
+<Sr> = pd.Series(<list>)                       # Assigns RangeIndex starting at 0.
+<Sr> = pd.Series(<dict>)                       # Takes dictionary's keys for index.
+<Sr> = pd.Series(<dict/Series>, index=<list>)  # Only keeps items with keys specified in index.
 ```
 
 ```python
@@ -3176,7 +3175,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```
 
 ```python
->>> sr = Series([1, 2], index=['x', 'y'])
+>>> sr = pd.Series([1, 2], index=['x', 'y'])
 x    1
 y    2
 ```
@@ -3201,20 +3200,21 @@ y    2
 ```
 * **Methods ffill(), interpolate() and fillna() accept argument 'inplace' that defaults to False.**
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
+* **Keys, indexes and bools can't be tuples because `'obj[x, y]'` becomes `'obj[(x, y)]'`.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
 
 ```python
->>> DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+>>> pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
    x  y
 a  1  2
 b  3  4
 ```
 
 ```python
-<DF>    = DataFrame(<list_of_rows>)            # Rows can be either lists, dicts or series.
-<DF>    = DataFrame(<dict_of_columns>)         # Columns can be either lists, dicts or series.
+<DF>    = pd.DataFrame(<list_of_rows>)         # Rows can be either lists, dicts or series.
+<DF>    = pd.DataFrame(<dict_of_columns>)      # Columns can be either lists, dicts or series.
 ```
 
 ```python
@@ -3244,11 +3244,11 @@ b  3  4
 
 #### DataFrame — Merge, Join, Concat:
 ```python
->>> l = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+>>> l = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
    x  y
 a  1  2
 b  3  4
->>> r = DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z'])
+>>> r = pd.DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z'])
    y  z
 b  4  5
 c  6  7
@@ -3295,7 +3295,7 @@ c  6  7
 * **All operations operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 
 ```python
->>> df = DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+>>> df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
    x  y
 a  1  2
 b  3  4
@@ -3347,7 +3347,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 **Object that groups together rows of a dataframe based on the value of the passed column.**
 
 ```python
->>> df = DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], index=list('abc'), columns=list('xyz'))
+>>> df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], list('abc'), list('xyz'))
 >>> df.groupby('z').get_group(6)
    x  y
 b  4  5
