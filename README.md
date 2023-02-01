@@ -2789,7 +2789,7 @@ from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
 img = Image.open('test.png').convert('HSV')
 img.putdata([(add_noise(h), s, v) for h, s, v in img.getdata()])
-img.convert('RGB').save('test.png')
+img.show()
 ```
 
 ### Image Draw
