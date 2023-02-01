@@ -3119,8 +3119,7 @@ Pandas
 ------
 ```python
 # $ pip3 install pandas matplotlib
-import pandas as pd
-import matplotlib.pyplot as plt
+import pandas as pd, matplotlib.pyplot as plt
 ```
 
 ### Series
