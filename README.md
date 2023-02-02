@@ -2435,7 +2435,7 @@ def main(screen):
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))
-        first += (first <= selected - height) - (first > selected)
+        first += (selected >= first + height) - (selected < first)
         if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, 10, 13]:
             new_dir = '..' if ch == KEY_LEFT else paths[selected]
             if os.path.isdir(new_dir):

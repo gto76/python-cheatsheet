@@ -1997,7 +1997,7 @@ print(table)
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
-        first += (first &lt;= selected - height) - (first &gt; selected)
+        first += (selected &gt;= first + height) - (selected &lt; first)
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:
             new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
             <span class="hljs-keyword">if</span> os.path.isdir(new_dir):
