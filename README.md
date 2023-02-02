@@ -2740,7 +2740,7 @@ Image
 -----
 ```python
 # $ pip3 install pillow
-from PIL import Image, ImageDraw
+from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
 ```
 
 ```python
@@ -2759,13 +2759,16 @@ from PIL import Image, ImageDraw
 <Image>.paste(<Image>, (x, y))                   # Writes passed image to the image.
 ```
 
-```bash
-<2d_array> = np.array(<Image_L>)                 # Creates NumPy array from greyscale image.
-<3d_array> = np.array(<Image_RGB/A>)             # Creates NumPy array from color image.
-<Image>    = Image.fromarray(np.uint8(<array>))  # Use <array>.clip(0, 255) to clip the values.
+```python
+<Image> = <Image>.resize((width, height))        # Use <Image>.width/height for original sizes.
+<Image> = <Image>.filter(<Filter>)               # `<Filter> = ImageFilter.<name>([<args>])`
+<Image> = <Enhance>.enhance(<float>)             # `<Enhance> = ImageEnhance.<name>(<Image>)`
 ```
-* **To edit an image use `'ImageEnhance'`, `'ImageFilter'` and `'ImageOps'` submodules.**
-* **Custom filters can be applied to arrays using `'scipy.ndimage.convolve()'` function.**
+
+```python
+<array> = np.array(<Image>)                      # Creates NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))     # Use <array>.clip(0, 255) to clip the values.
+```
 
 ### Modes
 * **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
@@ -2797,7 +2800,7 @@ img.show()
 ### Image Draw
 ```python
 <ImageDraw> = ImageDraw.Draw(<Image>)            # Object for adding 2D graphics to the image.
-<ImageDraw>.point((x, y))                        # Truncates floats into ints.
+<ImageDraw>.point((x, y))                        # Draws a point. Truncates floats into ints.
 <ImageDraw>.line((x1, y1, x2, y2 [, ...]))       # To get anti-aliasing use Image's resize().
 <ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)    # Always draws in clockwise direction.
 <ImageDraw>.rectangle((x1, y1, x2, y2))          # To rotate use Image's rotate() and paste().
