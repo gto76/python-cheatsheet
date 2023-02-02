@@ -2243,24 +2243,24 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageFilter, ImageEnhance, ImageDraw
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))   <span class="hljs-comment"># Also: `color=&lt;int/tuple/str&gt;`.</span>
-&lt;Image&gt; = Image.open(&lt;path&gt;)                     <span class="hljs-comment"># Identifies format based on file contents.</span>
-&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)              <span class="hljs-comment"># Converts image to the new mode.</span>
-&lt;Image&gt;.save(&lt;path&gt;)                             <span class="hljs-comment"># Selects format based on the path extension.</span>
-&lt;Image&gt;.show()                                   <span class="hljs-comment"># Opens image in default preview app.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also: `color=&lt;int/tuple/str&gt;`.</span>
+&lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file contents.</span>
+&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
+&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on the path extension.</span>
+&lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in default preview app.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))           <span class="hljs-comment"># Returns a pixel.</span>
-&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)            <span class="hljs-comment"># Writes a pixel to the image.</span>
-&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()                <span class="hljs-comment"># Returns a flattened sequence of pixels.</span>
-&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)              <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
-&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                   <span class="hljs-comment"># Writes passed image to the image.</span>
+<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
+&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a flattened sequence of pixels.</span>
+&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes passed image to the image.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.resize((width, height))        <span class="hljs-comment"># Use &lt;Image&gt;.width/height for original sizes.</span>
-&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)               <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
-&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)             <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.resize((width, height))       <span class="hljs-comment"># Use &lt;Image&gt;.width/height for original sizes.</span>
+&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
+&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                      <span class="hljs-comment"># Creates NumPy array from the image.</span>
-&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))     <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates NumPy array from the image.</span>
+&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
@@ -2286,13 +2286,13 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.show()
 </code></pre></div>
 
-<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)            <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;ImageDraw&gt;.point((x, y))                        <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))       <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
-&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)    <span class="hljs-comment"># Always draws in clockwise direction.</span>
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))          <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))       <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))            <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)           <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
+&lt;ImageDraw&gt;.point((x, y))                       <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
+&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)   <span class="hljs-comment"># Always draws in clockwise direction.</span>
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 </code></pre></div>
 
 <ul>

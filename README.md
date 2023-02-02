@@ -2744,30 +2744,30 @@ from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))   # Also: `color=<int/tuple/str>`.
-<Image> = Image.open(<path>)                     # Identifies format based on file contents.
-<Image> = <Image>.convert('<mode>')              # Converts image to the new mode.
-<Image>.save(<path>)                             # Selects format based on the path extension.
-<Image>.show()                                   # Opens image in default preview app.
+<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple/str>`.
+<Image> = Image.open(<path>)                    # Identifies format based on file contents.
+<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
+<Image>.save(<path>)                            # Selects format based on the path extension.
+<Image>.show()                                  # Opens image in default preview app.
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))           # Returns a pixel.
-<Image>.putpixel((x, y), <int/tuple>)            # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()                # Returns a flattened sequence of pixels.
-<Image>.putdata(<list/ImagingCore>)              # Writes a flattened sequence of pixels.
-<Image>.paste(<Image>, (x, y))                   # Writes passed image to the image.
+<int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
+<Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
+<ImagingCore> = <Image>.getdata()               # Returns a flattened sequence of pixels.
+<Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
+<Image>.paste(<Image>, (x, y))                  # Writes passed image to the image.
 ```
 
 ```python
-<Image> = <Image>.resize((width, height))        # Use <Image>.width/height for original sizes.
-<Image> = <Image>.filter(<Filter>)               # `<Filter> = ImageFilter.<name>([<args>])`
-<Image> = <Enhance>.enhance(<float>)             # `<Enhance> = ImageEnhance.<name>(<Image>)`
+<Image> = <Image>.resize((width, height))       # Use <Image>.width/height for original sizes.
+<Image> = <Image>.filter(<Filter>)              # `<Filter> = ImageFilter.<name>([<args>])`
+<Image> = <Enhance>.enhance(<float>)            # `<Enhance> = ImageEnhance.<name>(<Image>)`
 ```
 
 ```python
-<array> = np.array(<Image>)                      # Creates NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))     # Use <array>.clip(0, 255) to clip the values.
+<array> = np.array(<Image>)                     # Creates NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))    # Use <array>.clip(0, 255) to clip the values.
 ```
 
 ### Modes
@@ -2799,13 +2799,13 @@ img.show()
 
 ### Image Draw
 ```python
-<ImageDraw> = ImageDraw.Draw(<Image>)            # Object for adding 2D graphics to the image.
-<ImageDraw>.point((x, y))                        # Draws a point. Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))       # To get anti-aliasing use Image's resize().
-<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)    # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))          # To rotate use Image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))       # Last point gets connected to the first.
-<ImageDraw>.ellipse((x1, y1, x2, y2))            # To rotate use Image's rotate() and paste().
+<ImageDraw> = ImageDraw.Draw(<Image>)           # Object for adding 2D graphics to the image.
+<ImageDraw>.point((x, y))                       # Draws a point. Truncates floats into ints.
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
+<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
+<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
+<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
