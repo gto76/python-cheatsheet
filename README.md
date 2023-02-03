@@ -3349,9 +3349,9 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```python
 >>> df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], list('abc'), list('xyz'))
 >>> df.groupby('z').get_group(6)
-   x  y
-b  4  5
-c  7  8
+   x  y  z
+b  4  5  6
+c  7  8  6
 ```
 
 ```python

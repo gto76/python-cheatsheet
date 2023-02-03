@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 2, 2023</aside>
+    <aside>February 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2734,9 +2734,9 @@ plt.show()                                     <span class="hljs-comment"># Disp
 </code></pre>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], list(<span class="hljs-string">'abc'</span>), list(<span class="hljs-string">'xyz'</span>))
 <span class="hljs-meta">&gt;&gt;&gt; </span>df.groupby(<span class="hljs-string">'z'</span>).get_group(<span class="hljs-number">6</span>)
-   x  y
-b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
-c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>
+   x  y  z
+b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
+c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
 </code></pre></div>
 
 
@@ -2923,7 +2923,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>February 2, 2023</aside>
+    <aside>February 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
