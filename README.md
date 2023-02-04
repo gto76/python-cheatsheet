@@ -2661,21 +2661,21 @@ import numpy as np
 * **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1).<method>(axis_2 - 1 if axis_2 > axis_1 else axis_2)'`.**
 
 ### Indexing
-```bash
+```perl
 <el>       = <2d_array>[row_index, column_index]        # <3d_a>[table_i, row_i, column_i]
 <1d_view>  = <2d_array>[row_index]                      # <3d_a>[table_i, row_i]
 <1d_view>  = <2d_array>[:, column_index]                # <3d_a>[table_i, :, column_i]
 <2d_view>  = <2d_array>[row_range, column_range]        # <3d_a>[table_i, row_r, column_r]
 ```
 
-```bash
+```perl
 <2d_array> = <2d_array>[row_indexes]                    # <3d_a>[table_i/s, row_is]
 <2d_array> = <2d_array>[:, column_indexes]              # <3d_a>[table_i/s, :, column_is]
 <1d_array> = <2d_array>[row_indexes, column_indexes]    # <3d_a>[table_i/s, row_is, column_is]
 <1d_array> = <2d_array>[row_indexes, column_index]      # <3d_a>[table_i/s, row_is, column_i]
 ```
 
-```bash
+```perl
 <2d_bools> = <2d_array> ><== <el/1d/2d_array>           # 1d_array must have size of a row.
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```

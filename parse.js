@@ -711,9 +711,7 @@ function updateDiagrams() {
 }
 
 function highlightCode() {
-  setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
-  $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
-  $('code.perl').removeClass().addClass('python');
+  changeCodeLanguages();
   $('code').each(function(index) {
       hljs.highlightBlock(this);
   });
@@ -723,6 +721,15 @@ function highlightCode() {
   fixPageBreaksFile();
   fixPageBreaksStruct();
   insertPageBreaks();
+}
+
+function changeCodeLanguages() {
+  setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
+  $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
+  $('code:contains(<el>       = <2d_array>[row_index, column_index])').removeClass().addClass('bash');
+  $('code:contains(<2d_array> = <2d_array>[row_indexes])').removeClass().addClass('bash');
+  $('code:contains(<2d_bools> = <2d_array> ><== <el/1d/2d_array>)').removeClass().addClass('bash');
+  $('code.perl').removeClass().addClass('python');
 }
 
 function setApaches(elements) {
