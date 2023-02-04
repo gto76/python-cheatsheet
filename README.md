@@ -558,30 +558,30 @@ import itertools as it
 ```
 
 ```python
->>> it.product('abc', 'abc')                      #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
- ('b', 'a'), ('b', 'b'), ('b', 'c'),              # b x  x  x
- ('c', 'a'), ('c', 'b'), ('c', 'c')]              # c x  x  x
+>>> it.product('abc', 'abc')                    #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),            # a x  x  x
+ ('b', 'a'), ('b', 'b'), ('b', 'c'),            # b x  x  x
+ ('c', 'a'), ('c', 'b'), ('c', 'c')]            # c x  x  x
 ```
 
 ```python
->>> it.combinations('abc', 2)                     #   a  b  c
-[('a', 'b'), ('a', 'c'),                          # a .  x  x
- ('b', 'c')]                                      # b .  .  x
+>>> it.combinations('abc', 2)                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                        # a .  x  x
+ ('b', 'c')]                                    # b .  .  x
 ```
 
 ```python
->>> it.combinations_with_replacement('abc', 2)    #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
- ('b', 'b'), ('b', 'c'),                          # b .  x  x
- ('c', 'c')]                                      # c .  .  x
+>>> it.combinations_with_replacement('abc', 2)  #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),            # a x  x  x
+ ('b', 'b'), ('b', 'c'),                        # b .  x  x
+ ('c', 'c')]                                    # c .  .  x
 ```
 
 ```python
->>> it.permutations('abc', 2)                     #   a  b  c
-[('a', 'b'), ('a', 'c'),                          # a .  x  x
- ('b', 'a'), ('b', 'c'),                          # b x  .  x
- ('c', 'a'), ('c', 'b')]                          # c x  x  .
+>>> it.permutations('abc', 2)                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                        # a .  x  x
+ ('b', 'a'), ('b', 'c'),                        # b x  .  x
+ ('c', 'a'), ('c', 'b')]                        # c x  x  .
 ```
 
 
