@@ -713,6 +713,7 @@ function updateDiagrams() {
 function highlightCode() {
   setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
   $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
+  $('code.perl').removeClass().addClass('python');
   $('code').each(function(index) {
       hljs.highlightBlock(this);
   });
