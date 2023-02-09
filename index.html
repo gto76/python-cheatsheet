@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 4, 2023</aside>
+    <aside>February 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2009,43 +2009,47 @@ print(table)
 </code></pre></div></div>
 
 
-<div><h2 id="logging"><a href="#logging" name="logging">#</a>Logging</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install loguru</span>
-<span class="hljs-keyword">from</span> loguru <span class="hljs-keyword">import</span> logger
+<div><h2 id="logging"><a href="#logging" name="logging">#</a>Logging</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> logging
 </code></pre></div>
 
-<pre><code class="python language-python hljs">logger.add(<span class="hljs-string">'debug_{time}.log'</span>, colorize=<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># Connects a log file.</span>
-logger.add(<span class="hljs-string">'error_{time}.log'</span>, level=<span class="hljs-string">'ERROR'</span>)  <span class="hljs-comment"># Another file for errors or higher.</span>
-logger.&lt;level&gt;(<span class="hljs-string">'A logging message.'</span>)           <span class="hljs-comment"># Logs to file/s and prints to stderr.</span>
+<pre><code class="python language-python hljs">logging.basicConfig(filename=&lt;path&gt;)              <span class="hljs-comment"># Configures the root logger.</span>
+logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-comment"># Logs to the root logger.</span>
+&lt;Logger&gt; = logging.getLogger(__name__)            <span class="hljs-comment"># Creates a logger named after the module.</span>
+&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># All messages propagate to the root logger.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Appends caught exception and calls error().</span>
+</code></pre>
+<div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
+    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console by default.</span>
+    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add `%(asctime)s` for datetime.</span>
+    level=logging.WARNING,                        <span class="hljs-comment"># Drops messages with lower priority.</span>
+    handlers=[logging.StreamHandler()]            <span class="hljs-comment"># [FileHandler(filename)] if filename is set.</span>
+)
+</code></pre></div>
+
+<pre><code class="python language-python hljs">&lt;Formatter&gt; = logging.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)       <span class="hljs-comment"># Creates a Formatter.</span>
+&lt;Handler&gt; = logging.FileHandler(&lt;path&gt;)           <span class="hljs-comment"># Creates a Handler.</span>
+&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Adds Formatter to the Handler.</span>
+&lt;Handler&gt;.setLevel(&lt;str/int&gt;)                     <span class="hljs-comment"># Processes all messages by default. </span>
+&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Adds Handler to the Logger.</span>
+&lt;Logger&gt;.setLevel(&lt;str/int&gt;)                      <span class="hljs-comment"># What is sent to handlers and parents.</span>
 </code></pre>
 <ul>
-<li><strong>Levels: <code class="python hljs"><span class="hljs-string">'debug'</span></code>, <code class="python hljs"><span class="hljs-string">'info'</span></code>, <code class="python hljs"><span class="hljs-string">'success'</span></code>, <code class="python hljs"><span class="hljs-string">'warning'</span></code>, <code class="python hljs"><span class="hljs-string">'error'</span></code>, <code class="python hljs"><span class="hljs-string">'critical'</span></code>.</strong></li>
+<li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
+<li><strong>Formatter also supports: pathname, filename, funcName, lineno, thread and process.</strong></li>
+<li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
-<div><h3 id="exceptions-2">Exceptions</h3><p><strong>Exception description, stack trace and values of variables are appended automatically.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">try</span>:
-    ...
-<span class="hljs-keyword">except</span> &lt;exception&gt;:
-    logger.exception(<span class="hljs-string">'An error happened.'</span>)
+<div><h4 id="createsaloggerthatwritesallmessagestoafileandsendsthemtotherootloggerthatprintstostdout">Creates a logger that writes all messages to a file and sends them to the root logger that prints to stdout:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'WARNING'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">'%(asctime)s - %(levelname)s:%(name)s:%(message)s'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
+CRITICAL:my_module:Running out of disk space.
+<span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">'test.log'</span>).read()
+<span class="hljs-number">2023</span><span class="hljs-number">-02</span><span class="hljs-number">-07</span> <span class="hljs-number">23</span>:<span class="hljs-number">21</span>:<span class="hljs-number">01</span>,<span class="hljs-number">430</span> - CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-
-<div><h3 id="rotation">Rotation</h3><p><strong>Argument that sets a condition when a new log file is created.</strong></p><pre><code class="python language-python hljs">rotation=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;datetime.time&gt;|&lt;str&gt;
-</code></pre></div>
-
-
-<ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;int&gt;'</span></code> - Max file size in bytes.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;timedelta&gt;'</span></code> - Max age of a file.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;time&gt;'</span></code> - Time of day.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Any of above as a string: <code class="python hljs"><span class="hljs-string">'100 MB'</span></code>, <code class="python hljs"><span class="hljs-string">'1 month'</span></code>, <code class="python hljs"><span class="hljs-string">'monday at 12:00'</span></code>, …</strong></li>
-</ul>
-<div><h3 id="retention">Retention</h3><p><strong>Sets a condition which old log files get deleted.</strong></p><pre><code class="python language-python hljs">retention=&lt;int&gt;|&lt;datetime.timedelta&gt;|&lt;str&gt;
-</code></pre></div>
-
-
-<ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;int&gt;'</span></code> - Max number of files.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;timedelta&gt;'</span></code> - Max age of a file.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;str&gt;'</span></code> - Max age as a string: <code class="python hljs"><span class="hljs-string">'1 week, 3 days'</span></code>, <code class="python hljs"><span class="hljs-string">'2 months'</span></code>, …</strong></li>
-</ul>
 <div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlversionnumberandlogofromitswikipediapage">Scrapes Python's URL, version number and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests, bs4, os, sys
 
@@ -2923,7 +2927,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>February 4, 2023</aside>
+    <aside>February 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2449,46 +2449,54 @@ if __name__ == '__main__':
 
 Logging
 -------
+
 ```python
-# $ pip3 install loguru
-from loguru import logger
+import logging
 ```
 
 ```python
-logger.add('debug_{time}.log', colorize=True)  # Connects a log file.
-logger.add('error_{time}.log', level='ERROR')  # Another file for errors or higher.
-logger.<level>('A logging message.')           # Logs to file/s and prints to stderr.
+logging.basicConfig(filename=<path>)              # Configures the root logger.
+logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
+<Logger> = logging.getLogger(__name__)            # Creates a logger named after the module.
+<Logger>.<level>(<str>)                           # All messages propagate to the root logger.
+<Logger>.exception(<str>)                         # Appends caught exception and calls error().
 ```
-* **Levels: `'debug'`, `'info'`, `'success'`, `'warning'`, `'error'`, `'critical'`.**
 
-### Exceptions
-**Exception description, stack trace and values of variables are appended automatically.**
+### Setup
+```python
+logging.basicConfig(
+    filename=None,                                # Logs to console by default.
+    format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for datetime.
+    level=logging.WARNING,                        # Drops messages with lower priority.
+    handlers=[logging.StreamHandler()]            # [FileHandler(filename)] if filename is set.
+)
+```
 
 ```python
-try:
-    ...
-except <exception>:
-    logger.exception('An error happened.')
+<Formatter> = logging.Formatter('<format>')       # Creates a Formatter.
+<Handler> = logging.FileHandler(<path>)           # Creates a Handler.
+<Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
+<Handler>.setLevel(<str/int>)                     # Processes all messages by default. 
+<Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
+<Logger>.setLevel(<str/int>)                      # What is sent to handlers and parents.
 ```
+* **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
+* **Formatter also supports: pathname, filename, funcName, lineno, thread and process.**
+* **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
-### Rotation
-**Argument that sets a condition when a new log file is created.**
+#### Creates a logger that writes all messages to a file and sends them to the root logger that prints to stdout:
 ```python
-rotation=<int>|<datetime.timedelta>|<datetime.time>|<str>
+>>> logging.basicConfig(level='WARNING')
+>>> logger = logging.getLogger('my_module')
+>>> handler = logging.FileHandler('test.log')
+>>> formatter = logging.Formatter('%(asctime)s - %(levelname)s:%(name)s:%(message)s')
+>>> handler.setFormatter(formatter)
+>>> logger.addHandler(handler)
+>>> logger.critical('Running out of disk space.')
+CRITICAL:my_module:Running out of disk space.
+>>> open('test.log').read()
+2023-02-07 23:21:01,430 - CRITICAL:my_module:Running out of disk space.
 ```
-* **`'<int>'` - Max file size in bytes.**
-* **`'<timedelta>'` - Max age of a file.**
-* **`'<time>'` - Time of day.**
-* **`'<str>'` - Any of above as a string: `'100 MB'`, `'1 month'`, `'monday at 12:00'`, ...**
-
-### Retention
-**Sets a condition which old log files get deleted.**
-```python
-retention=<int>|<datetime.timedelta>|<str>
-```
-* **`'<int>'` - Max number of files.**
-* **`'<timedelta>'` - Max age of a file.**
-* **`'<str>'` - Max age as a string: `'1 week, 3 days'`, `'2 months'`, ...**
 
 
 Scraping
