@@ -2449,7 +2449,6 @@ if __name__ == '__main__':
 
 Logging
 -------
-
 ```python
 import logging
 ```
@@ -2468,7 +2467,7 @@ logging.basicConfig(
     filename=None,                                # Logs to console by default.
     format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for datetime.
     level=logging.WARNING,                        # Drops messages with lower priority.
-    handlers=[logging.StreamHandler()]            # [FileHandler(filename)] if filename is set.
+    handlers=[logging.StreamHandler()]            # Uses FileHandler if filename is set.
 )
 ```
 

@@ -2022,7 +2022,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
     filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console by default.</span>
     format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add `%(asctime)s` for datetime.</span>
     level=logging.WARNING,                        <span class="hljs-comment"># Drops messages with lower priority.</span>
-    handlers=[logging.StreamHandler()]            <span class="hljs-comment"># [FileHandler(filename)] if filename is set.</span>
+    handlers=[logging.StreamHandler()]            <span class="hljs-comment"># FileHandler(filename) if filename is set.</span>
 )
 </code></pre></div>
 
