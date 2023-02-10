@@ -2014,9 +2014,9 @@ print(table)
 
 <pre><code class="python language-python hljs">logging.basicConfig(filename=&lt;path&gt;)              <span class="hljs-comment"># Configures the root logger.</span>
 logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-comment"># Logs to the root logger.</span>
-&lt;Logger&gt; = logging.getLogger(__name__)            <span class="hljs-comment"># Creates a logger named after the module.</span>
-&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># All messages propagate to the root logger.</span>
-&lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Appends caught exception and calls error().</span>
+&lt;Logger&gt; = logging.getLogger(__name__)            <span class="hljs-comment"># Logger named after the module.</span>
+&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># Messages propagate to the root logger.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Calls error() with caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
     filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console by default.</span>

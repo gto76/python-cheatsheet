@@ -2456,9 +2456,9 @@ import logging
 ```python
 logging.basicConfig(filename=<path>)              # Configures the root logger.
 logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
-<Logger> = logging.getLogger(__name__)            # Creates a logger named after the module.
-<Logger>.<level>(<str>)                           # All messages propagate to the root logger.
-<Logger>.exception(<str>)                         # Appends caught exception and calls error().
+<Logger> = logging.getLogger(__name__)            # Logger named after the module.
+<Logger>.<level>(<str>)                           # Messages propagate to the root logger.
+<Logger>.exception(<str>)                         # Calls error() with caught exception.
 ```
 
 ### Setup
