@@ -2488,13 +2488,13 @@ logging.basicConfig(
 >>> logging.basicConfig(level='WARNING')
 >>> logger = logging.getLogger('my_module')
 >>> handler = logging.FileHandler('test.log')
->>> formatter = logging.Formatter('%(asctime)s - %(levelname)s:%(name)s:%(message)s')
+>>> formatter = logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s')
 >>> handler.setFormatter(formatter)
 >>> logger.addHandler(handler)
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
 >>> open('test.log').read()
-2023-02-07 23:21:01,430 - CRITICAL:my_module:Running out of disk space.
+2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 ```
 
 
