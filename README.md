@@ -2525,49 +2525,50 @@ except requests.exceptions.ConnectionError:
 
 Web
 ---
-**Bottle is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
+**Flask is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
-# $ pip3 install bottle
-from bottle import run, route, static_file, template, post, request, response
-import json
+# $ pip3 install flask
+from flask import Flask, send_from_directory, render_template_string, request
 ```
 
-### Run
 ```python
-run(host='localhost', port=8080)        # Runs locally.
-run(host='0.0.0.0', port=80)            # Runs globally.
+app = Flask(__name__)
+app.run()
 ```
+* **Starts the app on `'http://localhost:5000'`.**
+* **You will need a WSGI server like [waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) to run globally.**
+
 
 ### Static Request
 ```python
-@route('/img/<filename>')
-def send_file(filename):
-    return static_file(filename, root='img_dir/')
+@app.route('/img/<path:filename>')
+def serve_file(filename):
+    return send_from_directory('dirname/', filename)
 ```
 
 ### Dynamic Request
 ```python
-@route('/<sport>')
-def send_html(sport):
-    return template('<h1>{{title}}</h1>', title=sport)
+@app.route('/<sport>')
+def serve_html(sport):
+    return render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
+* **`'render_template()'` accepts filename of a template stored in 'templates' directory.**
 
 ### REST Request
 ```python
-@post('/<sport>/odds')
-def send_json(sport):
-    team = request.forms.get('team')
-    response.headers['Content-Type'] = 'application/json'
-    response.headers['Cache-Control'] = 'no-cache'
-    return json.dumps({'team': team, 'odds': [2.09, 3.74, 3.68]})
+@app.route('/<sport>/odds', methods=['POST'])
+def serve_json(sport):
+    team = request.form['team']
+    return {'team': team, 'odds': [2.09, 3.74, 3.68]}
 ```
+* **To get a parameter from the query string (part after the ?) use `'request.args.get(<str>)'`.**
 
 #### Test:
 ```python
 # $ pip3 install requests
 >>> import threading, requests
->>> threading.Thread(target=run, daemon=True).start()
->>> url = 'http://localhost:8080/football/odds'
+>>> threading.Thread(target=app.run, daemon=True).start()
+>>> url = 'http://localhost:5000/football/odds'
 >>> request_data = {'team': 'arsenal f.c.'}
 >>> response = requests.post(url, data=request_data)
 >>> response.json()
@@ -2577,7 +2578,7 @@ def send_json(sport):
 
 Profiling
 ---------
-### Stopwatch
+
 ```python
 from time import perf_counter
 start_time = perf_counter()
