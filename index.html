@@ -120,8 +120,8 @@ product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out
 list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
-<li><strong>For details about sorted(), min() and max() see sortable (p. 16).</strong></li>
-<li><strong>Module 'operator' (p. 31) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions (p. 11) above.</strong></li>
+<li><strong>For details about sorted(), min() and max() see <a href="#sortable">sortable</a>.</strong></li>
+<li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)     <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
 &lt;el&gt;  = &lt;list&gt;.pop([&lt;int&gt;])    <span class="hljs-comment"># Removes and returns item at index or from the end.</span>
@@ -386,7 +386,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
-<li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its repr() method (p. 14).</strong></li>
+<li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
 </ul>
 <div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                             <span class="hljs-comment"># 'abcde     '</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                           <span class="hljs-comment"># 'abc       '</span>
@@ -750,7 +750,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 </code></pre>
 <div class="pagebreak"></div><div><h2 id="decorator"><a href="#decorator" name="decorator">#</a>Decorator</h2><ul>
 <li><strong>A decorator takes a function, adds some functionality and returns it.</strong></li>
-<li><strong>It can be any callable, but is usually implemented as a function that returns a closure.</strong></li>
+<li><strong>It can be any <a href="#callable">callable</a>, but is usually implemented as a function that returns a <a href="#closure">closure</a>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-meta">@decorator_name</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">function_that_gets_passed_to_decorator</span><span class="hljs-params">()</span>:</span>
     ...
@@ -894,9 +894,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <ul>
-<li><strong>Objects can be made sortable with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be hashable, all attributes must be hashable and 'frozen' must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any callable (p. 17).</strong></li>
+<li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
+<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
@@ -998,10 +998,10 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
-<li><strong>Sequence iterators returned by the iter() function, such as list_iterator and set_iterator (p.&nbsp;3).</strong></li>
-<li><strong>Objects returned by the itertools module, such as count, repeat and cycle (p. 3).</strong></li>
-<li><strong>Generators returned by the generator functions (p. 4) and generator expressions (p. 11).</strong></li>
-<li><strong>File objects returned by the open() function (p. 22), etc.</strong></li>
+<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
+<li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
+<li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehensions">generator expressions</a>.</strong></li>
+<li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method, hence are callable.</strong></li>
 <li><strong>When this cheatsheet uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it actually means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
@@ -1452,7 +1452,7 @@ shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes t
 </code></pre>
 <ul>
 <li><strong>Paths can be either strings, Paths or DirEntry objects.</strong></li>
-<li><strong>Functions report OS related errors by raising OSError or one of its subclasses (p. 23).</strong></li>
+<li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;command&gt;'</span>)      <span class="hljs-comment"># Executes command in sh/cmd. Returns its stdout pipe.</span>
 &lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)       <span class="hljs-comment"># Reads 'size' chars or until EOF. Also readline/s().</span>
@@ -1514,8 +1514,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <ul>
 <li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
-<li><strong>To print the spreadsheet to the console use Tabulate library (p. 34).</strong></li>
-<li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use Pandas library (p. 46).</strong></li>
+<li><strong>To print the spreadsheet to the console use <a href="#table">Tabulate</a> library.</strong></li>
+<li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
 <li><strong>Reader accepts any iterator of strings, not just files.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
@@ -1588,7 +1588,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <ul>
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetime.</strong></li>
-<li><strong>Bools will be stored and returned as ints and dates as ISO formatted strings (p. 9).</strong></li>
+<li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
 </ul>
 <div><h3 id="example">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)'</span>)
@@ -1761,7 +1761,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><ul>
 <li><strong>Object that manages thread execution.</strong></li>
-<li><strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be pickable (p. 25).</strong></li>
+<li><strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be <a href="#pickle">pickable</a>.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
 &lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
 </code></pre></div>
@@ -1898,7 +1898,7 @@ ValueError: malformed node or string
 <li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> is the main entry point for asynchronous programs.</strong></li>
 <li><strong>Functions wait(), gather() and as_completed() start multiple coroutines at the same time.</strong></li>
-<li><strong>Asyncio module also provides its own Queue, Event, Lock and Semaphore classes (p. 30).</strong></li>
+<li><strong>Asyncio module also provides its own <a href="#queue">Queue</a>, <a href="#semaphoreeventbarrier">Event</a>, <a href="#lock">Lock</a> and <a href="#semaphoreeventbarrier">Semaphore</a> classes.</strong></li>
 </ul><div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)         <span class="hljs-comment"># Position</span>
@@ -2081,7 +2081,7 @@ app.run()
 </code></pre>
 <ul>
 <li><strong>Starts the app on <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>.</strong></li>
-<li><strong>A WSGI server like Waitress and a HTTP server such as Nginx are needed to run globally.</strong></li>
+<li><strong>A WSGI server like <a href="https://flask.palletsprojects.com/en/latest/deploying/waitress/">Waitress</a> and a HTTP server such as <a href="https://flask.palletsprojects.com/en/latest/deploying/nginx/">Nginx</a> are needed to run globally.</strong></li>
 </ul>
 <div><h3 id="staticrequest">Static Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/img/&lt;path:filename&gt;')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_file</span><span class="hljs-params">(filename)</span>:</span>
@@ -2162,7 +2162,7 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 
 
 <ul>
-<li><strong>The "latest and greatest" profiler that can also monitor GPU usage is called Scalene.</strong></li>
+<li><strong>The "latest and greatest" profiler that can also monitor GPU usage is called <a href="https://github.com/plasma-umass/scalene">Scalene</a>.</strong></li>
 </ul>
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
