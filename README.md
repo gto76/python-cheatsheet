@@ -2536,7 +2536,7 @@ app = Flask(__name__)
 app.run()
 ```
 * **Starts the app on `'http://localhost:5000'`.**
-* **You will need a WSGI server like [waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) to run globally.**
+* **A WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) are needed to run globally.**
 
 
 ### Static Request
