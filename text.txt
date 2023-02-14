@@ -11,3 +11,4 @@ sixth commit
 
 clone rep commits:
 branch1 first commit
+branch1 second commit
