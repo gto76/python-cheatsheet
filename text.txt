@@ -6,3 +6,8 @@ second part commits
 fourth commit
 fifth commit
 sixth commit
+
+
+
+clone rep commits:
+branch1 first commit
