@@ -70,6 +70,7 @@ const PARAMETRIZED_DECORATOR =
 
 const REPR_USE_CASES =
   'print/str/repr([&lt;el&gt;])\n' +
+  'print/str/repr({&lt;el&gt;: &lt;el&gt;})\n' +
   '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;el&gt;!r}</span>\'</span>\n' +
   'Z = dataclasses.make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;el&gt;))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;\n';
@@ -167,6 +168,18 @@ const PROGRESS_BAR =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">\'Processing\'</span>):\n' +
   '<span class="hljs-meta">... </span>    sleep(<span class="hljs-number">1</span>)\n' +
   'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
+
+const LOGGING_EXAMPLE =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">\'WARNING\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">\'my_module\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">\'test.log\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
+  'CRITICAL:my_module:Running out of disk space.\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">\'test.log\'</span>).read()\n' +
+  '2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.\n';
 
 const AUDIO =
   '<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin\n' +
@@ -370,8 +383,8 @@ const DIAGRAM_7_B =
   "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors.</span>\n" +
   "      │    └── ZeroDivisionError  <span class='hljs-comment'># Raised when dividing by zero.</span>\n" +
   "      ├── AssertionError          <span class='hljs-comment'># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>\n" +
-  "      ├── AttributeError          <span class='hljs-comment'># Raised when an attribute is missing.</span>\n" +
-  "      ├── EOFError                <span class='hljs-comment'># Raised by input() when it hits end-of-file condition.</span>\n" +
+  "      ├── AttributeError          <span class='hljs-comment'># Raised when object doesn't have requested attribute/method.</span>\n" +
+  "      ├── EOFError                <span class='hljs-comment'># Raised by input() when it hits an end-of-file condition.</span>\n" +
   "      ├── LookupError             <span class='hljs-comment'># Base class for errors when a collection can't find an item.</span>\n" +
   "      │    ├── IndexError         <span class='hljs-comment'># Raised when a sequence index is out of range.</span>\n" +
   "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key or set element is missing.</span>\n" +
@@ -382,8 +395,8 @@ const DIAGRAM_7_B =
   "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall into other categories.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
-  "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of wrong type.</span>\n" +
-  "      └── ValueError              <span class='hljs-comment'># When an argument is of right type but inappropriate value.</span>\n" +
+  "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of the wrong type.</span>\n" +
+  "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n" +
   "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
 
 const DIAGRAM_8_A =
@@ -421,12 +434,12 @@ const DIAGRAM_9_B =
 
 const DIAGRAM_95_A =
   "+------------+--------------+-----------+-----------------------------------+\n" +
-  "| Dialects   | pip3 install | import    | Dependencies                      |\n" +
+  "| Dialect    | pip3 install | import    | Dependencies                      |\n" +
   "+------------+--------------+-----------+-----------------------------------+\n";
 
 const DIAGRAM_95_B =
   "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃ Dialects   │ pip3 install │ import    │ Dependencies                      ┃\n" +
+  "┃ Dialect    │ pip3 install │ import    │ Dependencies                      ┃\n" +
   "┠────────────┼──────────────┼───────────┼───────────────────────────────────┨\n" +
   "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient  ┃\n" +
   "┃ postgresql │ psycopg2     │ psycopg2  │ www.psycopg.org/docs/install.html ┃\n" +
@@ -511,12 +524,12 @@ const DIAGRAM_15_B =
   "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
   "┃                        │    'outer'    │   'inner'  │   'left'   │       Description        ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Joins/merges on column.  ┃\n" +
-  "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ Also accepts left_on and ┃\n" +
-  "┃                        │ 1  3   4   5  │            │ 3   4   5  │ right_on parameters.     ┃\n" +
+  "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Merges on column if 'on' ┃\n" +
+  "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ or 'left/right_on' are   ┃\n" +
+  "┃                        │ 1  3   4   5  │            │ 3   4   5  │ set, else on shared cols.┃\n" +
   "┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Joins/merges on row keys.┃\n" +
+  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Merges on row keys.      ┃\n" +
   "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
   "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a Series, it is  ┃\n" +
   "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
@@ -524,8 +537,8 @@ const DIAGRAM_15_B =
   "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
   "┃           join=…)      │ b  3   4   .  │     4      │            │ A Series is treated as a ┃\n" +
-  "┃                        │ b  .   4   5  │     4      │            │ column. Use l.append(sr) ┃\n" +
-  "┃                        │ c  .   6   7  │     6      │            │ to add a row instead.    ┃\n" +
+  "┃                        │ b  .   4   5  │     4      │            │ column. To add a row use ┃\n" +
+  "┃                        │ c  .   6   7  │     6      │            │ pd.concat([l, DF([sr])]).┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
   "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'  ┃\n" +
@@ -710,8 +723,7 @@ function updateDiagrams() {
 }
 
 function highlightCode() {
-  setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
-  $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
+  changeCodeLanguages();
   $('code').each(function(index) {
       hljs.highlightBlock(this);
   });
@@ -721,6 +733,15 @@ function highlightCode() {
   fixPageBreaksFile();
   fixPageBreaksStruct();
   insertPageBreaks();
+}
+
+function changeCodeLanguages() {
+  setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
+  $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
+  $('code:contains(<el>       = <2d_array>[row_index, column_index])').removeClass().addClass('bash');
+  $('code:contains(<2d_array> = <2d_array>[row_indexes])').removeClass().addClass('bash');
+  $('code:contains(<2d_bools> = <2d_array> ><== <el/1d/2d_array>)').removeClass().addClass('bash');
+  $('code.perl').removeClass().addClass('python');
 }
 
 function setApaches(elements) {
@@ -737,8 +758,8 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
-  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(print/str/repr([<el>]))`).html(REPR_USE_CASES);
+  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
@@ -747,6 +768,7 @@ function fixHighlights() {
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
+  $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
@@ -798,6 +820,9 @@ function fixPandasDiagram() {
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(and)").after("and");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(as)").after("as");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(is)").after("is");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(if)").after("if");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(or)").after("or");
+  $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(else)").after("else");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword").remove();
 }
 
