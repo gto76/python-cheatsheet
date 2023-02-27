@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Artem Matveev?!
+=======
+Artem Matveev?!!!!
+>>>>>>> f747803c2c5bacf5ccb50b6b9b6d2a63134e9aac
 #!/usr/bin/env node
 // Usage: node parse.js
 //
