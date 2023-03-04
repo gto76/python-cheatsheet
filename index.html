@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 10, 2023</aside>
+    <aside>March 4, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2807,8 +2807,7 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
 
 
 
-<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> plotly.graph_objects <span class="hljs-keyword">as</span> go
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     display_data(wrangle_data(*scrape_data()))
@@ -2819,8 +2818,8 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
         <span class="hljs-keyword">return</span> df[df.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(slug)</span>:</span>
-        url = <span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{slug}</span>'</span> + \
-              <span class="hljs-string">'?period1=1579651200&amp;period2=9999999999&amp;interval=1d&amp;events=history'</span>
+        url = (<span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{slug}</span>?'</span>
+               <span class="hljs-string">'period1=1579651200&amp;period2=9999999999&amp;interval=1d&amp;events=history'</span>)
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>])
         <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'Date'</span>).Close
     out = scrape_covid(), scrape_yahoo(<span class="hljs-string">'BTC-USD'</span>), scrape_yahoo(<span class="hljs-string">'GC=F'</span>), scrape_yahoo(<span class="hljs-string">'^DJI'</span>)
@@ -2845,7 +2844,8 @@ line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">
         yaxis2=dict(title=<span class="hljs-string">'%'</span>, rangemode=<span class="hljs-string">'tozero'</span>, overlaying=<span class="hljs-string">'y'</span>, side=<span class="hljs-string">'right'</span>),
         legend=dict(x=<span class="hljs-number">1.1</span>),
         height=<span class="hljs-number">450</span>
-    ).show()
+    )
+    figure.show()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     main()
@@ -2932,7 +2932,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>February 10, 2023</aside>
+    <aside>March 4, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
