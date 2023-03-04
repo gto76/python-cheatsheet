@@ -2428,10 +2428,10 @@ from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, os.listdir()
     while ch != curses.ascii.ESC:
-        height, _ = screen.getmaxyx()
+        height, width = screen.getmaxyx()
         screen.erase()
         for y, filename in enumerate(paths[first : first+height]):
-            screen.addstr(y, 0, filename, A_REVERSE * (selected == first + y))
+            screen.addstr(y, 0, filename[:width-1], A_REVERSE * (filename == paths[selected]))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))

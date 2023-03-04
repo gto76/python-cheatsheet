@@ -1990,10 +1990,10 @@ print(table)
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
     <span class="hljs-keyword">while</span> ch != curses.ascii.ESC:
-        height, _ = screen.getmaxyx()
+        height, width = screen.getmaxyx()
         screen.erase()
         <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
-            screen.addstr(y, <span class="hljs-number">0</span>, filename, A_REVERSE * (selected == first + y))
+            screen.addstr(y, <span class="hljs-number">0</span>, filename[:width<span class="hljs-number">-1</span>], A_REVERSE * (filename == paths[selected]))
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
