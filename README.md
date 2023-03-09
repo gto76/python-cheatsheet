@@ -2633,7 +2633,6 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 with cg.PyCallGraph(drawer):
     <code_to_be_profiled>
 ```
-* **The "latest and greatest" profiler that can also monitor GPU usage is called [Scalene](https://github.com/plasma-umass/scalene).**
 
 
 NumPy
@@ -2655,7 +2654,7 @@ import numpy as np
 ```python
 <view>  = <array>.reshape(<shape>)                      # Also `<array>.shape = <shape>`.
 <array> = <array>.flatten()                             # Also `<view> = <array>.ravel()`.
-<view>  = <array>.transpose()                           # Also `<view> = <array>.T`.
+<view>  = <array>.transpose()                           # Or: <array>.T
 ```
 
 ```python
@@ -2664,9 +2663,13 @@ import numpy as np
 <array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
 
+```python
+<array> = np.concatenate(<list_of_arrays>, axis=0)      # Links arrays along first axis (rows).
+<array> = np.row_stack/column_stack(<list_of_arrays>)   # Treats 1d arrays as rows or columns.
+<array> = np.tile(<array>, <int/shape>)                 # Multiplies passed array.
+```
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
 * **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
-* **Passing a tuple of axes will chain the operations like this: `'<array>.<method>(axis_1).<method>(axis_2 - 1 if axis_2 > axis_1 else axis_2)'`.**
 
 ### Indexing
 ```perl
@@ -3415,9 +3418,9 @@ Plotly
 ```python
 # $ pip3 install plotly kaleido
 from plotly.express import line
-<Figure> = line(<DF>, x=<col_name>, y=<col_name>)        # Or: line(x=<list>, y=<list>)
-<Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Or: paper_bgcolor='rgba(0, 0, 0, 0)'
-<Figure>.write_html/json/image('<path>')                 # Also: <Figure>.show()
+<Figure> = line(<DF>, x=<col_name>, y=<col_name>)           # Or: line(x=<list>, y=<list>)
+<Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0), …)  # `paper_bgcolor='rgb(0, 0, 0)'`.
+<Figure>.write_html/json/image('<path>')                    # Also: <Figure>.show()
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:

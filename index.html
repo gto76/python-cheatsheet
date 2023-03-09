@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 4, 2023</aside>
+    <aside>March 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2161,9 +2161,6 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 </code></pre></div></div>
 
 
-<ul>
-<li><strong>The "latest and greatest" profiler that can also monitor GPU usage is called <a href="https://github.com/plasma-umass/scalene">Scalene</a>.</strong></li>
-</ul>
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 </code></pre></div>
@@ -2176,16 +2173,19 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 </code></pre>
 <pre><code class="python language-python hljs">&lt;view&gt;  = &lt;array&gt;.reshape(&lt;shape&gt;)                      <span class="hljs-comment"># Also `&lt;array&gt;.shape = &lt;shape&gt;`.</span>
 &lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.ravel()`.</span>
-&lt;view&gt;  = &lt;array&gt;.transpose()                           <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.T`.</span>
+&lt;view&gt;  = &lt;array&gt;.transpose()                           <span class="hljs-comment"># Or: &lt;array&gt;.T</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.copy/abs/sqrt/log/int64(&lt;array&gt;)           <span class="hljs-comment"># Returns new array of the same shape.</span>
 &lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all([axis])       <span class="hljs-comment"># Passed dimension gets aggregated.</span>
 &lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
 </code></pre>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.concatenate(&lt;list_of_arrays&gt;, axis=<span class="hljs-number">0</span>)      <span class="hljs-comment"># Links arrays along first axis (rows).</span>
+&lt;array&gt; = np.row_stack/column_stack(&lt;list_of_arrays&gt;)   <span class="hljs-comment"># Treats 1d arrays as rows or columns.</span>
+&lt;array&gt; = np.tile(&lt;array&gt;, &lt;int/shape&gt;)                 <span class="hljs-comment"># Multiplies passed array.</span>
+</code></pre>
 <ul>
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
 <li><strong>Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
-<li><strong>Passing a tuple of axes will chain the operations like this: <code class="python hljs"><span class="hljs-string">'&lt;array&gt;.&lt;method&gt;(axis_1).&lt;method&gt;(axis_2 - 1 if axis_2 &gt; axis_1 else axis_2)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i, column_i]</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[row_index]                      <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i]</span>
@@ -2787,9 +2787,9 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 
 <div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install plotly kaleido</span>
 <span class="hljs-keyword">from</span> plotly.express <span class="hljs-keyword">import</span> line
-&lt;Figure&gt; = line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)        <span class="hljs-comment"># Or: line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
-&lt;Figure&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))  <span class="hljs-comment"># Or: paper_bgcolor='rgba(0, 0, 0, 0)'</span>
-&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
+&lt;Figure&gt; = line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)           <span class="hljs-comment"># Or: line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
+&lt;Figure&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>), …)  <span class="hljs-comment"># `paper_bgcolor='rgb(0, 0, 0)'`.</span>
+&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
 </code></pre></div>
 
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
@@ -2932,7 +2932,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>March 4, 2023</aside>
+    <aside>March 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
