@@ -638,7 +638,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Decode
 ```python
-<str>    = <D/T/DT>.isoformat(sep='T')      # Also: `timespec='auto/hours/minutes/seconds/…'`.
+<str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
 <int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
@@ -2755,7 +2755,7 @@ from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Also: `color=<int/tuple/str>`.
+<Image> = Image.new('<mode>', (width, height))  # Also `color=<int/tuple/str>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
 <Image>.save(<path>)                            # Selects format based on the path extension.
@@ -3032,8 +3032,8 @@ from pygame.transform import scale, ...
 ```python
 from pygame.draw import line, ...
 line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
-arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also: ellipse(<Surf>, color, <Rect>, width=0)
-rect(<Surf>, color, <Rect>, width=0)            # Also: polygon(<Surf>, color, points, width=0)
+arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also ellipse(<Surf>, color, <Rect>, width=0).
+rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, points, width=0).
 ```
 
 ### Font
@@ -3420,7 +3420,7 @@ Plotly
 from plotly.express import line
 <Figure> = line(<DF>, x=<col_name>, y=<col_name>)           # Or: line(x=<list>, y=<list>)
 <Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0), …)  # `paper_bgcolor='rgb(0, 0, 0)'`.
-<Figure>.write_html/json/image('<path>')                    # Also: <Figure>.show()
+<Figure>.write_html/json/image('<path>')                    # Also <Figure>.show().
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:

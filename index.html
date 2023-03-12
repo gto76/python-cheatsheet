@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 9, 2023</aside>
+    <aside>March 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -566,7 +566,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.mmmuuu[±HH:MM]'</span></code>, or both separated by an arbitrary character. All parts following hours are optional.</strong></li>
 <li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
-<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also: `timespec='auto/hours/minutes/seconds/…'`.</span>
+<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Gregorian NYE 1, ignoring time and tz.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTn in local tz.</span>
@@ -2252,7 +2252,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageFilter, ImageEnhance, ImageDraw
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also: `color=&lt;int/tuple/str&gt;`.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also `color=&lt;int/tuple/str&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
 &lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on the path extension.</span>
@@ -2476,8 +2476,8 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, ...
 line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
-arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also: ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0)</span>
-rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also: polygon(&lt;Surf&gt;, color, points, width=0)</span>
+arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0).</span>
+rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
 <div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size)        <span class="hljs-comment"># Loads the system font or default if missing.</span>
 &lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)           <span class="hljs-comment"># Loads the TTF file. Pass None for default.</span>
@@ -2789,7 +2789,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 <span class="hljs-keyword">from</span> plotly.express <span class="hljs-keyword">import</span> line
 &lt;Figure&gt; = line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)           <span class="hljs-comment"># Or: line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
 &lt;Figure&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>), …)  <span class="hljs-comment"># `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also: &lt;Figure&gt;.show()</span>
+&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also &lt;Figure&gt;.show().</span>
 </code></pre></div>
 
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
@@ -2932,7 +2932,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>March 9, 2023</aside>
+    <aside>March 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
