@@ -1262,7 +1262,7 @@ class MyCollection:
 ```
 
 ### Sequence
-* **Only required methods are len() and getitem().**
+* **Only required methods are getitem() and len().**
 * **Getitem() should return an item at the passed index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has getitem() and len() defined.**
