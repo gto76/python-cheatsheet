@@ -1337,25 +1337,25 @@ class <enum_name>(Enum):
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
 
 ```python
-<member> = <enum>.<member_name>                 # Returns a member.
-<member> = <enum>['<member_name>']              # Returns a member or raises KeyError.
-<member> = <enum>(<value>)                      # Returns a member or raises ValueError.
-<str>    = <member>.name                        # Returns member's name.
-<obj>    = <member>.value                       # Returns member's value.
+<member> = <enum>.<member_name>           # Returns a member.
+<member> = <enum>['<member_name>']        # Returns a member. Raises KeyError.
+<member> = <enum>(<value>)                # Returns a member. Raises ValueError.
+<str>    = <member>.name                  # Returns member's name.
+<obj>    = <member>.value                 # Returns member's value.
 ```
 
 ```python
-list_of_members = list(<enum>)
-member_names    = [a.name for a in <enum>]
-member_values   = [a.value for a in <enum>]
-random_member   = random.choice(list(<enum>))
+<list>   = list(<enum>)                   # Returns enum's members.
+<list>   = [a.name for a in <enum>]       # Returns enum's member names.
+<list>   = [a.value for a in <enum>]      # Returns enum's member values.
+<member> = random.choice(list(<enum>))    # Returns a random member.
 ```
 
 ```python
 def get_next_member(member):
     members = list(member.__class__)
-    index   = (members.index(member) + 1) % len(members)
-    return members[index]
+    index = members.index(member) + 1
+    return members[index % len(members)]
 ```
 
 ### Inline
