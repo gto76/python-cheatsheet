@@ -961,6 +961,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.</strong></li>
 <li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
 <li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
+<li><strong>Characters are compared by their Unicode IDs. Use module 'locale' for proper alphabetical order.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
 <span class="hljs-meta">@total_ordering</span>
@@ -1021,10 +1022,11 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h3 id="contextmanager">Context Manager</h3><ul>
+<li><strong>With statements only work with objects that have enter() and exit() special methods.</strong></li>
 <li><strong>Enter() should lock the resources and optionally return an object.</strong></li>
 <li><strong>Exit() should release the resources.</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
-<li><strong>If it wishes to suppress the exception it must return a true value.</strong></li>
+<li><strong>The exit() method can suppress the exception by returning a true value.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename

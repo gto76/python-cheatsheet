@@ -1132,6 +1132,7 @@ class MyHashable:
 * **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
 * **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.**
+* **Characters are compared by their Unicode IDs. Use module 'locale' for proper alphabetical order.**
 
 ```python
 from functools import total_ordering
@@ -1196,10 +1197,11 @@ class Counter:
 ```
 
 ### Context Manager
+* **With statements only work with objects that have enter() and exit() special methods.**
 * **Enter() should lock the resources and optionally return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
-* **If it wishes to suppress the exception it must return a true value.**
+* **The exit() method can suppress the exception by returning a true value.**
 ```python
 class MyOpen:
     def __init__(self, filename):
