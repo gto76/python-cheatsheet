@@ -1518,7 +1518,7 @@ pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 
 Input
 -----
-**Reads a line from user input or pipe if present.**
+**Reads a line from the user input or pipe if present.**
 
 ```python
 <str> = input(prompt=None)
