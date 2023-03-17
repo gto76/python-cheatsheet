@@ -342,6 +342,20 @@ String
 * **Also: `'lstrip()'`, `'rstrip()'` and `'rsplit()'`.**
 * **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
 
+F-Strings
+```python
+var=10.1
+f"v={var}"     # => "v=10.1"
+f"v={{var}}"   # => "v={var}"
+f"{var:_<10}"  # => "10.1______"  # > right, = center, ^ add leading zeros
+f"{var:.4}"    # => "10.1000"
+f"{var:x} {var:#x}" # => "a 0xa" # also allowed d, o, b, D,O,B,X
+
+import datetime
+d = datetime.datetime(2010, 7, 4, 12, 15, 58)
+f"{d:%Y-%m-%d %H:%M:%S}"
+```
+
 ### Property Methods
 ```text
 +---------------+----------+----------+----------+----------+----------+
