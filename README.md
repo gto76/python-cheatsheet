@@ -2692,7 +2692,7 @@ import numpy as np
 <2d_bools> = <2d_array> ><== <el/1d/2d_array>           # 1d_array must have size of a row.
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
-* **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`.**
+* **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
@@ -3194,26 +3194,26 @@ y    2
 ```
 
 ```text
-+-----------------+-------------+-------------+---------------+
-|                 |    'sum'    |   ['sum']   | {'s': 'sum'}  |
-+-----------------+-------------+-------------+---------------+
-| sr.apply(…)     |      3      |    sum  3   |     s  3      |
-| sr.agg(…)       |             |             |               |
-+-----------------+-------------+-------------+---------------+
++---------------+-------------+-------------+---------------+
+|               |    'sum'    |   ['sum']   | {'s': 'sum'}  |
++---------------+-------------+-------------+---------------+
+| sr.apply(…)   |      3      |    sum  3   |     s  3      |
+| sr.agg(…)     |             |             |               |
++---------------+-------------+-------------+---------------+
 ```
 
 ```text
-+-----------------+-------------+-------------+---------------+
-|                 |    'rank'   |   ['rank']  | {'r': 'rank'} |
-+-----------------+-------------+-------------+---------------+
-| sr.apply(…)     |             |      rank   |               |
-| sr.agg(…)       |     x  1    |   x     1   |    r  x  1    |
-| sr.transform(…) |     y  2    |   y     2   |       y  2    |
-+-----------------+-------------+-------------+---------------+
++---------------+-------------+-------------+---------------+
+|               |    'rank'   |   ['rank']  | {'r': 'rank'} |
++---------------+-------------+-------------+---------------+
+| sr.apply(…)   |             |      rank   |               |
+| sr.agg(…)     |     x  1    |   x     1   |    r  x  1    |
+|               |     y  2    |   y     2   |       y  2    |
++---------------+-------------+-------------+---------------+
 ```
-* **Methods ffill(), interpolate() and fillna() accept argument 'inplace' that defaults to False.**
+* **Keys/indexes/bools can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
+* **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
-* **Keys/indexes/bools can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
