@@ -161,6 +161,31 @@ const COROUTINES =
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
   '    curses.wrapper(main)\n';
 
+const CURSES =
+  '<span class="hljs-keyword">import</span> curses, curses.ascii, os\n' +
+  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
+  '\n' +
+  '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
+  '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
+  '    <span class="hljs-keyword">while</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [ord(<span class="hljs-string">\'q\'</span>), curses.ascii.ESC]:\n' +
+  '        height, width = screen.getmaxyx()\n' +
+  '        screen.erase()\n' +
+  '        <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):\n' +
+  '            color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>\n' +
+  '            screen.addstr(y, <span class="hljs-number">0</span>, filename[:width-<span class="hljs-number">1</span>], color)\n' +
+  '        ch = screen.getch()\n' +
+  '        selected += (ch == KEY_DOWN) - (ch == KEY_UP)\n' +
+  '        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))\n' +
+  '        first += (selected &gt;= first + height) - (selected &lt; first)\n' +
+  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:\n' +
+  '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
+  '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +
+  '                os.chdir(new_dir)\n' +
+  '                first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
+  '\n' +
+  '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
+  '    curses.wrapper(main)\n';
+
 const PROGRESS_BAR =
   '<span class="hljs-comment"># $ pip3 install tqdm</span>\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm\n' +
@@ -767,6 +792,7 @@ function fixHighlights() {
   $(`code:contains(\'<class_name>\', <tuple_of_parents>, <dict_of_class_attributes>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
+  $(`code:contains(import curses, curses.ascii, os)`).html(CURSES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);

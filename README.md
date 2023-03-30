@@ -2429,7 +2429,7 @@ from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, os.listdir()
-    while ch not in [curses.ascii.ESC, ord('q')]:
+    while ch not in [ord('q'), curses.ascii.ESC]:
         height, width = screen.getmaxyx()
         screen.erase()
         for y, filename in enumerate(paths[first : first+height]):

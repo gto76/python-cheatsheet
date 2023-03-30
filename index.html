@@ -1991,15 +1991,15 @@ print(table)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
-    <span class="hljs-keyword">while</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [curses.ascii.ESC, ord(<span class="hljs-string">'q'</span>)]:
+    <span class="hljs-keyword">while</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [ord(<span class="hljs-string">'q'</span>), curses.ascii.ESC]:
         height, width = screen.getmaxyx()
         screen.erase()
         <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
             color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
-            screen.addstr(y, <span class="hljs-number">0</span>, filename[:width<span class="hljs-number">-1</span>], color)
+            screen.addstr(y, <span class="hljs-number">0</span>, filename[:width-<span class="hljs-number">1</span>], color)
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
-        selected = max(<span class="hljs-number">0</span>, min(len(paths)<span class="hljs-number">-1</span>, selected))
+        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))
         first += (selected &gt;= first + height) - (selected &lt; first)
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:
             new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
