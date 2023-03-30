@@ -1991,7 +1991,7 @@ print(table)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
-    <span class="hljs-keyword">while</span> ch != curses.ascii.ESC:
+    <span class="hljs-keyword">while</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [curses.ascii.ESC, ord(<span class="hljs-string">'q'</span>)]:
         height, width = screen.getmaxyx()
         screen.erase()
         <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):
