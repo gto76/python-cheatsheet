@@ -2398,11 +2398,11 @@ Plot
 ```python
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
-plt.plot(<x_data>, <y_data> [, label=<str>])   # Or: plt.plot(<y_data>)
-plt.legend()                                   # Adds a legend.
-plt.savefig(<path>)                            # Saves the figure.
-plt.show()                                     # Displays the figure.
-plt.clf()                                      # Clears the figure.
+plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
+plt.legend()                                          # Adds a legend.
+plt.savefig(<path>)                                   # Saves the figure.
+plt.show()                                            # Displays the figure.
+plt.clf()                                             # Clears the figure.
 ```
 
 
@@ -2433,7 +2433,8 @@ def main(screen):
         height, width = screen.getmaxyx()
         screen.erase()
         for y, filename in enumerate(paths[first : first+height]):
-            screen.addstr(y, 0, filename[:width-1], A_REVERSE * (filename == paths[selected]))
+            color = A_REVERSE if filename == paths[selected] else 0
+            screen.addstr(y, 0, filename[:width-1], color)
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))
