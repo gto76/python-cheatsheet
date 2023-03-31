@@ -167,7 +167,7 @@ const CURSES =
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
-  '    <span class="hljs-keyword">while</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [ord(<span class="hljs-string">\'q\'</span>), curses.ascii.ESC]:\n' +
+  '    <span class="hljs-keyword">while</span> ch != curses.ascii.ESC:\n' +
   '        height, width = screen.getmaxyx()\n' +
   '        screen.erase()\n' +
   '        <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):\n' +
@@ -177,7 +177,7 @@ const CURSES =
   '        selected += (ch == KEY_DOWN) - (ch == KEY_UP)\n' +
   '        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))\n' +
   '        first += (selected &gt;= first + height) - (selected &lt; first)\n' +
-  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, <span class="hljs-number">10</span>, <span class="hljs-number">13</span>]:\n' +
+  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">\'\\n\'</span>), ord(<span class="hljs-string">\'\\r\'</span>)]:\n' +
   '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
   '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +
   '                os.chdir(new_dir)\n' +
