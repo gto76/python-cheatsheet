@@ -458,19 +458,19 @@ const DIAGRAM_9_B =
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_95_A =
-  "+------------+--------------+-----------+-----------------------------------+\n" +
-  "| Dialect    | pip3 install | import    | Dependencies                      |\n" +
-  "+------------+--------------+-----------+-----------------------------------+\n";
+  "+------------+--------------+-----------+----------------------------------+\n" +
+  "| Dialect    | pip3 install | import    | Dependencies                     |\n" +
+  "+------------+--------------+-----------+----------------------------------+\n";
 
 const DIAGRAM_95_B =
-  "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃ Dialect    │ pip3 install │ import    │ Dependencies                      ┃\n" +
-  "┠────────────┼──────────────┼───────────┼───────────────────────────────────┨\n" +
-  "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient  ┃\n" +
-  "┃ postgresql │ psycopg2     │ psycopg2  │ www.psycopg.org/docs/install.html ┃\n" +
-  "┃ mssql      │ pyodbc       │ pyodbc    │ apt install g++ unixodbc-dev      ┃\n" +
-  "┃ oracle     │ cx_oracle    │ cx_Oracle │ Oracle Instant Client             ┃\n" +
-  "┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃ Dialect    │ pip3 install │ import    │ Dependencies                     ┃\n" +
+  "┠────────────┼──────────────┼───────────┼──────────────────────────────────┨\n" +
+  "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient ┃\n" +
+  "┃ postgresql │ psycopg2     │ psycopg2  │ www.pypi.org/project/psycopg2    ┃\n" +
+  "┃ mssql      │ pyodbc       │ pyodbc    │ www.pypi.org/project/pyodbc      ┃\n" +
+  "┃ oracle     │ oracledb     │ oracledb  │ www.pypi.org/project/oracledb    ┃\n" +
+  "┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_10_A =
   '+-------------+-------------+\n' +

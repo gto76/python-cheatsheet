@@ -1933,14 +1933,14 @@ with <conn>.begin(): ...                        # Exits the block with commit or
 ```
 
 ```text
-+------------+--------------+-----------+-----------------------------------+
-| Dialect    | pip3 install | import    | Dependencies                      |
-+------------+--------------+-----------+-----------------------------------+
-| mysql      | mysqlclient  | MySQLdb   | www.pypi.org/project/mysqlclient  |
-| postgresql | psycopg2     | psycopg2  | www.psycopg.org/docs/install.html |
-| mssql      | pyodbc       | pyodbc    | apt install g++ unixodbc-dev      |
-| oracle     | cx_oracle    | cx_Oracle | Oracle Instant Client             |
-+------------+--------------+-----------+-----------------------------------+
++------------+--------------+-----------+----------------------------------+
+| Dialect    | pip3 install | import    | Dependencies                     |
++------------+--------------+-----------+----------------------------------+
+| mysql      | mysqlclient  | MySQLdb   | www.pypi.org/project/mysqlclient |
+| postgresql | psycopg2     | psycopg2  | www.pypi.org/project/psycopg2    |
+| mssql      | pyodbc       | pyodbc    | www.pypi.org/project/pyodbc      |
+| oracle     | oracledb     | oracledb  | www.pypi.org/project/oracledb    |
++------------+--------------+-----------+----------------------------------+
 ```
 
 
