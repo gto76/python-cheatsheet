@@ -2032,9 +2032,9 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
 <pre><code class="python language-python hljs">&lt;Formatter&gt; = logging.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)       <span class="hljs-comment"># Creates a Formatter.</span>
 &lt;Handler&gt; = logging.FileHandler(&lt;path&gt;)           <span class="hljs-comment"># Creates a Handler.</span>
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Adds Formatter to the Handler.</span>
-&lt;Handler&gt;.setLevel(&lt;str/int&gt;)                     <span class="hljs-comment"># Processes all messages by default. </span>
+&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Processes all messages by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Adds Handler to the Logger.</span>
-&lt;Logger&gt;.setLevel(&lt;str/int&gt;)                      <span class="hljs-comment"># What is sent to handlers and parents.</span>
+&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to handlers and parent.</span>
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>

@@ -2478,9 +2478,9 @@ logging.basicConfig(
 <Formatter> = logging.Formatter('<format>')       # Creates a Formatter.
 <Handler> = logging.FileHandler(<path>)           # Creates a Handler.
 <Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
-<Handler>.setLevel(<str/int>)                     # Processes all messages by default. 
+<Handler>.setLevel(<int/str>)                     # Processes all messages by default.
 <Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
-<Logger>.setLevel(<str/int>)                      # What is sent to handlers and parents.
+<Logger>.setLevel(<int/str>)                      # What is sent to handlers and parent.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **Formatter also supports: pathname, filename, funcName, lineno, thread and process.**
