@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 2, 2023</aside>
+    <aside>April 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1143,14 +1143,14 @@ Hello World!
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
-    &lt;member_name_1&gt; = &lt;value_1&gt;
-    &lt;member_name_2&gt; = &lt;value_2_a&gt;, &lt;value_2_b&gt;
-    &lt;member_name_3&gt; = auto()
+    &lt;member_name&gt; = auto()
+    &lt;member_name&gt; = &lt;value&gt;
+    &lt;member_name&gt; = &lt;value&gt;, &lt;value&gt;
 </code></pre>
 <ul>
-<li><strong>If there are no numeric values before auto(), it returns 1.</strong></li>
-<li><strong>Otherwise it returns an increment of the last numeric value.</strong></li>
+<li><strong>Function auto() returns an increment of the last numeric value or 1.</strong></li>
 <li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
+<li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;           <span class="hljs-comment"># Returns a member.</span>
 &lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]        <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
@@ -1164,7 +1164,7 @@ Hello World!
 &lt;member&gt; = random.choice(list(&lt;enum&gt;))    <span class="hljs-comment"># Returns a random member.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_next_member</span><span class="hljs-params">(member)</span>:</span>
-    members = list(member.__class__)
+    members = list(type(member))
     index = members.index(member) + <span class="hljs-number">1</span>
     <span class="hljs-keyword">return</span> members[index % len(members)]
 </code></pre>
@@ -2252,7 +2252,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 
 
 <div><h2 id="image"><a href="#image" name="image">#</a>Image</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pillow</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageFilter, ImageEnhance, ImageDraw
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also `color=&lt;int/tuple/str&gt;`.</span>
@@ -2267,8 +2267,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 &lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes passed image to the image.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.resize((width, height))       <span class="hljs-comment"># Use &lt;Image&gt;.width/height for original sizes.</span>
-&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
 &lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates NumPy array from the image.</span>
@@ -2305,6 +2304,7 @@ img.show()
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 &lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
 &lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.text((x, y), text, font=&lt;Font&gt;)     <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
 </code></pre></div>
 
 <ul>
@@ -2935,7 +2935,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 2, 2023</aside>
+    <aside>April 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

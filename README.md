@@ -1328,13 +1328,13 @@ from enum import Enum, auto
 
 ```python
 class <enum_name>(Enum):
-    <member_name_1> = <value_1>
-    <member_name_2> = <value_2_a>, <value_2_b>
-    <member_name_3> = auto()
+    <member_name> = auto()
+    <member_name> = <value>
+    <member_name> = <value>, <value>
 ```
-* **If there are no numeric values before auto(), it returns 1.**
-* **Otherwise it returns an increment of the last numeric value.**
+* **Function auto() returns an increment of the last numeric value or 1.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
+* **Methods receive the member they were called on as the 'self' argument.**
 
 ```python
 <member> = <enum>.<member_name>           # Returns a member.
@@ -1353,7 +1353,7 @@ class <enum_name>(Enum):
 
 ```python
 def get_next_member(member):
-    members = list(member.__class__)
+    members = list(type(member))
     index = members.index(member) + 1
     return members[index % len(members)]
 ```
@@ -2754,7 +2754,7 @@ Image
 -----
 ```python
 # $ pip3 install pillow
-from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
+from PIL import Image, ImageDraw
 ```
 
 ```python
@@ -2774,7 +2774,6 @@ from PIL import Image, ImageFilter, ImageEnhance, ImageDraw
 ```
 
 ```python
-<Image> = <Image>.resize((width, height))       # Use <Image>.width/height for original sizes.
 <Image> = <Image>.filter(<Filter>)              # `<Filter> = ImageFilter.<name>([<args>])`
 <Image> = <Enhance>.enhance(<float>)            # `<Enhance> = ImageEnhance.<name>(<Image>)`
 ```
@@ -2820,6 +2819,7 @@ img.show()
 <ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
 <ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
 <ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
+<ImageDraw>.text((x, y), text, font=<Font>)     # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
