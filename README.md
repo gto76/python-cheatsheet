@@ -770,11 +770,14 @@ Inline
 
 ### Map, Filter, Reduce
 ```python
+from functools import reduce
+```
+
+```python
 <iter> = map(lambda x: x + 1, range(10))            # Or: iter([1, 2, ..., 10])
 <iter> = filter(lambda x: x > 5, range(10))         # Or: iter([6, 7, 8, 9])
 <obj>  = reduce(lambda out, x: out + x, range(10))  # Or: 45
 ```
-* **Reduce must be imported from the functools module.**
 
 ### Any, All
 ```python
@@ -2679,14 +2682,14 @@ import numpy as np
 <el>       = <2d_array>[row_index, column_index]        # <3d_a>[table_i, row_i, column_i]
 <1d_view>  = <2d_array>[row_index]                      # <3d_a>[table_i, row_i]
 <1d_view>  = <2d_array>[:, column_index]                # <3d_a>[table_i, :, column_i]
-<2d_view>  = <2d_array>[row_range, column_range]        # <3d_a>[table_i, row_r, column_r]
+<2d_view>  = <2d_array>[rows_slice, columns_slice]      # <3d_a>[table_i, rows_s, columns_s]
 ```
 
 ```perl
-<2d_array> = <2d_array>[row_indexes]                    # <3d_a>[table_i/s, row_is]
-<2d_array> = <2d_array>[:, column_indexes]              # <3d_a>[table_i/s, :, column_is]
-<1d_array> = <2d_array>[row_indexes, column_indexes]    # <3d_a>[table_i/s, row_is, column_is]
-<1d_array> = <2d_array>[row_indexes, column_index]      # <3d_a>[table_i/s, row_is, column_i]
+<2d_array> = <2d_array>[row_indexes]                    # <3d_a>[table_i/is, row_is]
+<2d_array> = <2d_array>[:, column_indexes]              # <3d_a>[table_i/is, :, column_is]
+<1d_array> = <2d_array>[row_indexes, column_indexes]    # <3d_a>[table_i/is, row_is, column_is]
+<1d_array> = <2d_array>[row_indexes, column_index]      # <3d_a>[table_i/is, row_is, column_i]
 ```
 
 ```perl
@@ -2762,7 +2765,7 @@ from PIL import Image, ImageDraw
 <Image> = Image.open(<path>)                    # Identifies format based on file contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
 <Image>.save(<path>)                            # Selects format based on the path extension.
-<Image>.show()                                  # Opens image in default preview app.
+<Image>.show()                                  # Opens image in the default preview app.
 ```
 
 ```python
@@ -3015,7 +3018,8 @@ while not pg.event.get(pg.QUIT):
 ```python
 <Surf> = pg.display.set_mode((width, height))   # Opens new window and returns its surface.
 <Surf> = pg.Surface((width, height))            # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
-<Surf> = pg.image.load('<path>')                # Loads the image. Format depends on source.
+<Surf> = pg.image.load(<path/file>)             # Loads the image. Format depends on source.
+<Surf> = pg.surfarray.make_surface(<np_array>)  # Also `<array> = surfarray.pixels3d(<Surf>)`.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
@@ -3041,14 +3045,13 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 
 ### Font
 ```python
-<Font> = pg.font.SysFont('<name>', size)        # Loads the system font or default if missing.
-<Font> = pg.font.Font('<path>', size)           # Loads the TTF file. Pass None for default.
+<Font> = pg.font.Font(<path/file>, size)        # Loads the TTF file. Pass None for default.
 <Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
 ```
 
 ### Sound
 ```python
-<Sound> = pg.mixer.Sound('<path>')              # Loads the WAV file.
+<Sound> = pg.mixer.Sound(<path/file/bytes>)     # Loads the WAV file or array of signed shorts.
 <Sound>.play()                                  # Starts playing the sound.
 ```
 
@@ -3161,7 +3164,7 @@ Name: a, dtype: int64
 
 ```python
 <el> = <Sr>[key/index]                         # Or: <Sr>.key
-<Sr> = <Sr>[keys/indexes]                      # Or: <Sr>[<key_range/range>]
+<Sr> = <Sr>[keys/indexes]                      # Or: <Sr>[<keys_slice/slice>]
 <Sr> = <Sr>[bools]                             # Or: <Sr>.i/loc[bools]
 ```
 

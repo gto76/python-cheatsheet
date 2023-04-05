@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 3, 2023</aside>
+    <aside>April 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -660,14 +660,13 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]
 [<span class="hljs-string">'aa'</span>, <span class="hljs-string">'ab'</span>, <span class="hljs-string">'ac'</span>, ..., <span class="hljs-string">'cc'</span>]
 </code></pre>
-<div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Or: iter([1, 2, ..., 10])</span>
-&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Or: iter([6, 7, 8, 9])</span>
-&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Or: 45</span>
+<div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
 </code></pre></div>
 
-<ul>
-<li><strong>Reduce must be imported from the functools module.</strong></li>
-</ul>
+<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Or: iter([1, 2, ..., 10])</span>
+&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Or: iter([6, 7, 8, 9])</span>
+&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Or: 45</span>
+</code></pre>
 <div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any element.</span>
 &lt;bool&gt; = all(&lt;collection&gt;)                          <span class="hljs-comment"># Is True for all elements or empty.</span>
 </code></pre></div>
@@ -2193,13 +2192,13 @@ drawer = cg.output.GraphvizOutput(output_file=filename)
 <div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i, column_i]</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[row_index]                      <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i]</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[:, column_index]                <span class="hljs-comment"># &lt;3d_a&gt;[table_i, :, column_i]</span>
-&lt;2d_view&gt;  = &lt;2d_array&gt;[row_range, column_range]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_r, column_r]</span>
+&lt;2d_view&gt;  = &lt;2d_array&gt;[rows_slice, columns_slice]      <span class="hljs-comment"># &lt;3d_a&gt;[table_i, rows_s, columns_s]</span>
 </code></pre></div>
 
-<pre><code class="bash hljs">&lt;2d_array&gt; = &lt;2d_array&gt;[row_indexes]                    <span class="hljs-comment"># &lt;3d_a&gt;[table_i/s, row_is]</span>
-&lt;2d_array&gt; = &lt;2d_array&gt;[:, column_indexes]              <span class="hljs-comment"># &lt;3d_a&gt;[table_i/s, :, column_is]</span>
-&lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_indexes]    <span class="hljs-comment"># &lt;3d_a&gt;[table_i/s, row_is, column_is]</span>
-&lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_index]      <span class="hljs-comment"># &lt;3d_a&gt;[table_i/s, row_is, column_i]</span>
+<pre><code class="bash hljs">&lt;2d_array&gt; = &lt;2d_array&gt;[row_indexes]                    <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, row_is]</span>
+&lt;2d_array&gt; = &lt;2d_array&gt;[:, column_indexes]              <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, :, column_is]</span>
+&lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_indexes]    <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, row_is, column_is]</span>
+&lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_index]      <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, row_is, column_i]</span>
 </code></pre>
 <pre><code class="bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt;&lt;== &lt;el/1d/2d_array&gt;           <span class="hljs-comment"># 1d_array must have size of a row.</span>
 &lt;1d/2d_a&gt;  = &lt;2d_array&gt;[&lt;2d/1d_bools&gt;]                  <span class="hljs-comment"># 1d_bools must have size of a column.</span>
@@ -2259,7 +2258,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
 &lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on the path extension.</span>
-&lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in default preview app.</span>
+&lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in the default preview app.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
 &lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
@@ -2463,7 +2462,8 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 </code></pre>
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens new window and returns its surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
-&lt;Surf&gt; = pg.image.load(<span class="hljs-string">'&lt;path&gt;'</span>)                <span class="hljs-comment"># Loads the image. Format depends on source.</span>
+&lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)             <span class="hljs-comment"># Loads the image. Format depends on source.</span>
+&lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;array&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
 &lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
 </code></pre></div>
 
@@ -2482,12 +2482,11 @@ line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0).</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
-<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.SysFont(<span class="hljs-string">'&lt;name&gt;'</span>, size)        <span class="hljs-comment"># Loads the system font or default if missing.</span>
-&lt;Font&gt; = pg.font.Font(<span class="hljs-string">'&lt;path&gt;'</span>, size)           <span class="hljs-comment"># Loads the TTF file. Pass None for default.</span>
+<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.Font(&lt;path/file&gt;, size)        <span class="hljs-comment"># Loads the TTF file. Pass None for default.</span>
 &lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
 </code></pre></div>
 
-<div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(<span class="hljs-string">'&lt;path&gt;'</span>)              <span class="hljs-comment"># Loads the WAV file.</span>
+<div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># Loads the WAV file or array of signed shorts.</span>
 &lt;Sound&gt;.play()                                  <span class="hljs-comment"># Starts playing the sound.</span>
 </code></pre></div>
 
@@ -2586,7 +2585,7 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt;.loc[from_key : to_key_inclusive]   <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i : to_i_exclusive]</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
-&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;key_range/range&gt;]</span>
+&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;keys_slice/slice&gt;]</span>
 &lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[bools]</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                       <span class="hljs-comment"># Returns a Series of bools.</span>
@@ -2935,7 +2934,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 3, 2023</aside>
+    <aside>April 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
