@@ -3045,14 +3045,14 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 
 ### Font
 ```python
-<Font> = pg.font.Font(<path/file>, size)        # Loads the TTF file. Pass None for default.
+<Font> = pg.font.Font(<path/file>, size)        # Loads TTF file. Pass None for default font.
 <Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
 ```
 
 ### Sound
 ```python
-<Sound> = pg.mixer.Sound(<path/file/bytes>)     # Loads the WAV file or array of signed shorts.
-<Sound>.play()                                  # Starts playing the sound.
+<Sound> = pg.mixer.Sound(<path/file/bytes>)     # Loads WAV file or array of signed shorts.
+<Sound>.play/stop()                             # Also <Sound>.set_volume(<float>).
 ```
 
 ### Basic Mario Brothers Example
