@@ -129,7 +129,7 @@ a:not(:hover) {
 pre,
 code,
 textarea {
-  font-family: "Menlo", "Menlo Regular", monospace;
+  font-family: "Menlo", "Menlo Web", monospace;
 }
 
 code {
@@ -269,9 +269,16 @@ ul {
 
 /*@import url(web/style.css);*/
 
-@font-face {font-family: "Menlo Regular";
+@font-face {font-family: "Menlo web";
   src: url("OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff2") format("woff2"), /* chrome、firefox */
   url("OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01.woff") format("woff");
+  font-weight: normal;
+}
+
+@font-face {font-family: "Menlo web";
+  src: url("OnlineWebFonts_COM_d6ba633f6ea4cafe1a39ab736fe55e88\\Menlo Bold\\@font-face\\a6ffc5d72a96b65159e710ea6d258ba4.woff2") format("woff2"), /* chrome、firefox */
+  url("OnlineWebFonts_COM_d6ba633f6ea4cafe1a39ab736fe55e88\\Menlo Bold\\@font-face\\a6ffc5d72a96b65159e710ea6d258ba4.woff") format("woff");
+  font-weight: bold;
 }
 
 .join,
