@@ -633,7 +633,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
 ```
-* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following hours are optional.**
+* **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following the hours are optional.**
 * **Python uses the Unix Epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
