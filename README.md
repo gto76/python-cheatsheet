@@ -2539,11 +2539,11 @@ from flask import Flask, send_from_directory, render_template_string, request
 
 ```python
 app = Flask(__name__)
-app.run()
+app.run(host=None, debug=None)
 ```
-* **Starts the app on `'http://localhost:5000'`.**
-* **A WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) are needed to run globally.**
-
+* **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
+* **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
+* **Debug mode restarts the app whenever script changes and displays errors in the browser.**
 
 ### Static Request
 ```python
@@ -2558,18 +2558,19 @@ def serve_file(filename):
 def serve_html(sport):
     return render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
-* **`'render_template()'` accepts filename of a template stored in 'templates' directory.**
+* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
+* **`'request.args[<str>]'` returns parameter from the query string (URL part after the ?).**
+* **Use `'session[key] = value'` to store session data like username, etc.**
 
 ### REST Request
 ```python
-@app.route('/<sport>/odds', methods=['POST'])
+@app.post('/<sport>/odds')
 def serve_json(sport):
     team = request.form['team']
     return {'team': team, 'odds': [2.09, 3.74, 3.68]}
 ```
-* **To get a parameter from the query string (part after the ?) use `'request.args.get(<str>)'`.**
 
-#### Test:
+#### Starts the app in its own thread and queries it with a post request:
 ```python
 # $ pip3 install requests
 >>> import threading, requests
