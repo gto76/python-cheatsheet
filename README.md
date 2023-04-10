@@ -1712,7 +1712,7 @@ import os, shutil, subprocess
 ```python
 os.chdir(<path>)                    # Changes the current working directory.
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Permissions are in octal.
-os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also: `exist_ok=False`.
+os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also `exist_ok=False`.
 ```
 
 ```python
@@ -2499,7 +2499,7 @@ logging.basicConfig(
 >>> logger.addHandler(handler)
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
->>> open('test.log').read()
+>>> print(open('test.log').read())
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 ```
 
@@ -3020,13 +3020,13 @@ while not pg.event.get(pg.QUIT):
 <Surf> = pg.display.set_mode((width, height))   # Opens new window and returns its surface.
 <Surf> = pg.Surface((width, height))            # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load(<path/file>)             # Loads the image. Format depends on source.
-<Surf> = pg.surfarray.make_surface(<np_array>)  # Also `<array> = surfarray.pixels3d(<Surf>)`.
+<Surf> = pg.surfarray.make_surface(<np_array>)  # Also `<np_arr> = surfarray.pixels3d(<Surf>)`.
 <Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
 ```
 
 ```python
 <Surf>.fill(color)                              # Tuple, Color('#rrggbb[aa]') or Color(<name>).
-<Surf>.set_at((x, y), color)                    # Updates pixel.
+<Surf>.set_at((x, y), color)                    # Updates pixel. Also <Surf>.get_at((x, y)).
 <Surf>.blit(<Surf>, (x, y))                     # Draws passed surface to the surface.
 ```
 
@@ -3357,7 +3357,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```python
 <dict> = <DF>.to_dict(['d/l/s/…'])             # Returns columns as dicts, lists or series.
 <str>  = <DF>.to_json/html/csv([<path>])       # Also to_markdown/latex([<path>]).
-<DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install openpyxl` for xlsx files.
+<DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
 <DF>.to_sql('<table_name>', <connection>)      # Accepts SQLite3 or SQLAlchemy connection.
 ```
 

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 9, 2023</aside>
+    <aside>April 11, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1439,7 +1439,7 @@ value = args.&lt;name&gt;
 
 <pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Permissions are in octal.</span>
-os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all path's dirs. Also: `exist_ok=False`.</span>
+os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all path's dirs. Also `exist_ok=False`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
@@ -2048,7 +2048,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
 CRITICAL:my_module:Running out of disk space.
-<span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">'test.log'</span>).read()
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">'test.log'</span>).read())
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
@@ -2463,13 +2463,13 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens new window and returns its surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
 &lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)             <span class="hljs-comment"># Loads the image. Format depends on source.</span>
-&lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;array&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
+&lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;np_arr&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
 &lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Tuple, Color('#rrggbb[aa]') or Color(&lt;name&gt;).</span>
-&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel.</span>
+&lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel. Also &lt;Surf&gt;.get_at((x, y)).</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
@@ -2740,7 +2740,7 @@ plt.show()                                     <span class="hljs-comment"># Disp
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/…'</span>])             <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
 &lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also to_markdown/latex([&lt;path&gt;]).</span>
-&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install openpyxl` for xlsx files.</span>
+&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
 </code></pre>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], list(<span class="hljs-string">'abc'</span>), list(<span class="hljs-string">'xyz'</span>))
@@ -2934,7 +2934,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 9, 2023</aside>
+    <aside>April 11, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

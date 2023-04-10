@@ -203,7 +203,7 @@ const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
   'CRITICAL:my_module:Running out of disk space.\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>open(<span class="hljs-string">\'test.log\'</span>).read()\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +
   '2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.\n';
 
 const AUDIO =
