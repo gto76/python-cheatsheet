@@ -1382,24 +1382,24 @@ value = args.&lt;name&gt;
         file.write(text)
 </code></pre></div>
 
-<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, os.path <span class="hljs-keyword">as</span> path, glob
+<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, glob
 <span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
-&lt;str&gt;  = path.join(&lt;path&gt;, ...)     <span class="hljs-comment"># Joins two or more pathname components.</span>
-&lt;str&gt;  = path.realpath(&lt;path&gt;)      <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
+&lt;str&gt;  = os.path.join(&lt;path&gt;, ...)  <span class="hljs-comment"># Joins two or more pathname components.</span>
+&lt;str&gt;  = os.path.realpath(&lt;path&gt;)   <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(&lt;path&gt;)      <span class="hljs-comment"># Returns final component of the path.</span>
-&lt;str&gt;  = path.dirname(&lt;path&gt;)       <span class="hljs-comment"># Returns path without the final component.</span>
-&lt;tup.&gt; = path.splitext(&lt;path&gt;)      <span class="hljs-comment"># Splits on last period of the final component.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.path.basename(&lt;path&gt;)   <span class="hljs-comment"># Returns final component of the path.</span>
+&lt;str&gt;  = os.path.dirname(&lt;path&gt;)    <span class="hljs-comment"># Returns path without the final component.</span>
+&lt;tup.&gt; = os.path.splitext(&lt;path&gt;)   <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns filenames located at the path.</span>
 &lt;list&gt; = glob.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)     <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;Path&gt;.exists()</span>
-&lt;bool&gt; = path.isfile(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_file()</span>
-&lt;bool&gt; = path.isdir(&lt;path&gt;)         <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_dir()</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = os.path.exists(&lt;path&gt;)     <span class="hljs-comment"># Or: &lt;Path&gt;.exists()</span>
+&lt;bool&gt; = os.path.isfile(&lt;path&gt;)     <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_file()</span>
+&lt;bool&gt; = os.path.isdir(&lt;path&gt;)      <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_dir()</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.stat()</span>
 &lt;real&gt; = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Modification time, size in bytes, ...</span>

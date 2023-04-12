@@ -1625,20 +1625,20 @@ def write_to_file(filename, text):
 Paths
 -----
 ```python
-import os, os.path as path, glob
+import os, glob
 from pathlib import Path
 ```
 
 ```python
 <str>  = os.getcwd()                # Returns the current working directory.
-<str>  = path.join(<path>, ...)     # Joins two or more pathname components.
-<str>  = path.realpath(<path>)      # Resolves symlinks and calls path.abspath().
+<str>  = os.path.join(<path>, ...)  # Joins two or more pathname components.
+<str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
 ```
 
 ```python
-<str>  = path.basename(<path>)      # Returns final component of the path.
-<str>  = path.dirname(<path>)       # Returns path without the final component.
-<tup.> = path.splitext(<path>)      # Splits on last period of the final component.
+<str>  = os.path.basename(<path>)   # Returns final component of the path.
+<str>  = os.path.dirname(<path>)    # Returns path without the final component.
+<tup.> = os.path.splitext(<path>)   # Splits on last period of the final component.
 ```
 
 ```python
@@ -1647,9 +1647,9 @@ from pathlib import Path
 ```
 
 ```python
-<bool> = path.exists(<path>)        # Or: <Path>.exists()
-<bool> = path.isfile(<path>)        # Or: <DirEntry/Path>.is_file()
-<bool> = path.isdir(<path>)         # Or: <DirEntry/Path>.is_dir()
+<bool> = os.path.exists(<path>)     # Or: <Path>.exists()
+<bool> = os.path.isfile(<path>)     # Or: <DirEntry/Path>.is_file()
+<bool> = os.path.isdir(<path>)      # Or: <DirEntry/Path>.is_dir()
 ```
 
 ```python
