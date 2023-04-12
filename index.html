@@ -2099,7 +2099,7 @@ app.run(host=<span class="hljs-keyword">None</span>, debug=<span class="hljs-key
 
 <ul>
 <li><strong>To return an error code use <code class="python hljs"><span class="hljs-string">'abort(&lt;int&gt;)'</span></code> and to redirect use <code class="python hljs"><span class="hljs-string">'redirect(&lt;url&gt;)'</span></code>.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'request.args[&lt;str&gt;]'</span></code> returns parameter from the query string (URL part after the ?).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'request.args[&lt;str&gt;]'</span></code> returns parameter from the query string (URL part after '?').</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'session[key] = value'</span></code> to store session data like username, etc.</strong></li>
 </ul>
 <div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>

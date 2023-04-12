@@ -2558,7 +2558,7 @@ def serve_html(sport):
     return render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
 * **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
-* **`'request.args[<str>]'` returns parameter from the query string (URL part after the ?).**
+* **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
 * **Use `'session[key] = value'` to store session data like username, etc.**
 
 ### REST Request
