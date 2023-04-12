@@ -1049,9 +1049,9 @@ from dataclasses import dataclass, field
 
 @dataclass(order=False, frozen=False)
 class <class_name>:
-    <attr_name_1>: <type>
-    <attr_name_2>: <type> = <default_value>
-    <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
+    <attr_name>: <type>
+    <attr_name>: <type> = <default_value>
+    <attr_name>: list/dict/set = field(default_factory=list/dict/set)
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
@@ -3530,7 +3530,7 @@ import <cython_script>
 
 ```python
 cdef <ctype> <var_name> = <el>
-cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
+cdef <ctype>[n_elements] <var_name> = [<el>, <el>, ...]
 cdef <ctype/void> <func_name>(<ctype> <arg_name>): ...
 ```
 
@@ -3542,7 +3542,7 @@ cdef class <class_name>:
 ```
 
 ```python
-cdef enum <enum_name>: <member_name_1>, <member_name_2>, ...
+cdef enum <enum_name>: <member_name>, <member_name>, ...
 ```
 
 ### PyInstaller

@@ -886,9 +886,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 <span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
-    &lt;attr_name_1&gt;: &lt;type&gt;
-    &lt;attr_name_2&gt;: &lt;type&gt; = &lt;default_value&gt;
-    &lt;attr_name_3&gt;: list/dict/set = field(default_factory=list/dict/set)
+    &lt;attr_name&gt;: &lt;type&gt;
+    &lt;attr_name&gt;: &lt;type&gt; = &lt;default_value&gt;
+    &lt;attr_name&gt;: list/dict/set = field(default_factory=list/dict/set)
 </code></pre></div>
 
 
@@ -2877,7 +2877,7 @@ print(<span class="hljs-string">f'Hello <span class="hljs-subst">{values[<span c
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
 </ul><pre><code class="python language-python hljs">cdef &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
-cdef &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
+cdef &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el&gt;, &lt;el&gt;, ...]
 cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 </code></pre></div>
 
@@ -2887,7 +2887,7 @@ cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype&gt; &lt;arg_name&gt;)</span>:</span>
         self.&lt;attr_name&gt; = &lt;arg_name&gt;
 </code></pre>
-<pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name_1&gt;, &lt;member_name_2&gt;, ...
+<pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...
 </code></pre>
 <div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs">$ pip3 install pyinstaller
 $ pyinstaller script.py                        <span class="hljs-comment"># Compiles into './dist/script' directory.</span>
