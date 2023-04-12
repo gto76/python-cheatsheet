@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 11, 2023</aside>
+    <aside>April 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1382,20 +1382,20 @@ value = args.&lt;name&gt;
         file.write(text)
 </code></pre></div>
 
-<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> getcwd, path, listdir, scandir
-<span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
+<div><h2 id="paths"><a href="#paths" name="paths">#</a>Paths</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, os.path <span class="hljs-keyword">as</span> path, glob
+<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = getcwd()                   <span class="hljs-comment"># Returns the current working directory.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns the current working directory.</span>
 &lt;str&gt;  = path.join(&lt;path&gt;, ...)     <span class="hljs-comment"># Joins two or more pathname components.</span>
-&lt;str&gt;  = path.abspath(&lt;path&gt;)       <span class="hljs-comment"># Returns absolute path.</span>
+&lt;str&gt;  = path.realpath(&lt;path&gt;)      <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = path.basename(&lt;path&gt;)      <span class="hljs-comment"># Returns final component of the path.</span>
 &lt;str&gt;  = path.dirname(&lt;path&gt;)       <span class="hljs-comment"># Returns path without the final component.</span>
 &lt;tup.&gt; = path.splitext(&lt;path&gt;)      <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = listdir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns filenames located at the path.</span>
-&lt;list&gt; = glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)          <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns filenames located at the path.</span>
+&lt;list&gt; = glob.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)     <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = path.exists(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;Path&gt;.exists()</span>
 &lt;bool&gt; = path.isfile(&lt;path&gt;)        <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_file()</span>
@@ -1404,19 +1404,18 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.stat()</span>
 &lt;real&gt; = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Modification time, size in bytes, ...</span>
 </code></pre>
-<div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = scandir(path=<span class="hljs-string">'.'</span>)          <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
+<div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
 </code></pre></div>
 
 
-<div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
+&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second path must be a Path object.</span>
+&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Resolves symlinks and calls &lt;Path&gt;.absolute().</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
-&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second path must be a Path object.</span>
-</code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative cwd. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute cwd. Also Path().resolve().</span>
 &lt;Path&gt; = Path.home()                <span class="hljs-comment"># Returns user's home directory (absolute).</span>
@@ -1442,10 +1441,12 @@ os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all path's dirs. Also `exist_ok=False`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. 'to' can exist or be a dir.</span>
+shutil.copy2(from, to)              <span class="hljs-comment"># Also copies creation and modification time.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>
-os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites 'to' if it exists.</span>
+os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites file 'to' even on Windows.</span>
+shutil.move(from, to)               <span class="hljs-comment"># Rename() that moves into 'to' if it's a dir.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file.</span>
 os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory.</span>
@@ -2934,7 +2935,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>April 11, 2023</aside>
+    <aside>April 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

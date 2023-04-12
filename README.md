@@ -1625,14 +1625,14 @@ def write_to_file(filename, text):
 Paths
 -----
 ```python
-from os import getcwd, path, listdir, scandir
-from glob import glob
+import os, os.path as path, glob
+from pathlib import Path
 ```
 
 ```python
-<str>  = getcwd()                   # Returns the current working directory.
+<str>  = os.getcwd()                # Returns the current working directory.
 <str>  = path.join(<path>, ...)     # Joins two or more pathname components.
-<str>  = path.abspath(<path>)       # Returns absolute path.
+<str>  = path.realpath(<path>)      # Resolves symlinks and calls path.abspath().
 ```
 
 ```python
@@ -1642,8 +1642,8 @@ from glob import glob
 ```
 
 ```python
-<list> = listdir(path='.')          # Returns filenames located at the path.
-<list> = glob('<pattern>')          # Returns paths matching the wildcard pattern.
+<list> = os.listdir(path='.')       # Returns filenames located at the path.
+<list> = glob.glob('<pattern>')     # Returns paths matching the wildcard pattern.
 ```
 
 ```python
@@ -1661,7 +1661,7 @@ from glob import glob
 **Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
 
 ```python
-<iter> = scandir(path='.')          # Returns DirEntry objects located at the path.
+<iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
 <str>  = <DirEntry>.path            # Returns the whole path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns a file object.
@@ -1669,12 +1669,9 @@ from glob import glob
 
 ### Path Object
 ```python
-from pathlib import Path
-```
-
-```python
 <Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
 <Path> = <path> / <path> [/ ...]    # First or second path must be a Path object.
+<Path> = <Path>.resolve()           # Resolves symlinks and calls <Path>.absolute().
 ```
 
 ```python
@@ -1717,12 +1714,14 @@ os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also `exist_ok=Fa
 
 ```python
 shutil.copy(from, to)               # Copies the file. 'to' can exist or be a dir.
+shutil.copy2(from, to)              # Also copies creation and modification time.
 shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
 ```
 
 ```python
 os.rename(from, to)                 # Renames/moves the file or directory.
-os.replace(from, to)                # Same, but overwrites 'to' if it exists.
+os.replace(from, to)                # Same, but overwrites file 'to' even on Windows.
+shutil.move(from, to)               # Rename() that moves into 'to' if it's a dir.
 ```
 
 ```python
