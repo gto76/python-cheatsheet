@@ -2771,7 +2771,7 @@ from PIL import Image, ImageDraw
 ```python
 <int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
 <Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()               # Returns a flattened sequence of pixels.
+<ImagingCore> = <Image>.getdata()               # Returns a flattened view of the pixels.
 <Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
 <Image>.paste(<Image>, (x, y))                  # Writes passed image to the image.
 ```
