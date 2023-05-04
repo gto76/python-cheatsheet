@@ -85,6 +85,8 @@ Dictionary
 ```
 
 ```python
+from collections import defaultdict
+
 value  = <dict>.get(key, default=None)          # Returns default if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
 <dict> = collections.defaultdict(<type>)        # Returns a dict with default value of type.
@@ -102,14 +104,6 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 value = <dict>.pop(key)                         # Removes item or raises KeyError.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
-```
-
-```python
-def constant_factory(value):
-    return lambda: value
-
-d = defaultdict(constant_factory(123))
-d['example']   #=> 123
 ```
 
 ### Counter
