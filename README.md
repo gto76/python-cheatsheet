@@ -104,6 +104,14 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
 ```
 
+```python
+def constant_factory(value):
+    return lambda: value
+
+d = defaultdict(constant_factory(123))
+d['example']   #=> 123
+```
+
 ### Counter
 ```python
 >>> from collections import Counter
