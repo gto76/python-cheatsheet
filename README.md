@@ -1068,9 +1068,10 @@ from dataclasses import make_dataclass
 
 #### Rest of type annotations (CPython interpreter ignores them all):
 ```python
+import typing as tp, collections.abc as abc
+<var_name>: list/set/abc.Iterable/abc.Sequence/tp.Optional[<type>] [= <obj>]
+<var_name>: dict/tuple/tp.Union[<type>, ...] [= <obj>]
 def func(<arg_name>: <type> [= <obj>]) -> <type>: ...
-<var_name>: typing.List/Set/Iterable/Sequence/Optional[<type>]
-<var_name>: typing.Dict/Tuple/Union[<type>, ...]
 ```
 
 ### Slots
