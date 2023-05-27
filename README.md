@@ -2130,36 +2130,32 @@ with <lock>:                                   # Enters the block by calling acq
 <Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n_times.
 ```
 
-### Thread Pool Executor
-* **Object that manages thread execution.**
-* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. All arguments must be [pickable](#pickle).**
-
-```python
-<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
-<Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
-```
-
-```python
-<iter> = <Exec>.map(<func>, <args_1>, ...)     # A multithreaded and non-lazy map().
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
-<bool> = <Futr>.done()                         # Checks if the thread has finished executing.
-<obj>  = <Futr>.result()                       # Waits for thread to finish and returns result.
-<iter> = as_completed(<coll_of_Futr>)          # Each Future is yielded as it completes.
-```
-
 ### Queue
-**A thread-safe FIFO queue. For LIFO queue use LifoQueue.**
 ```python
-from queue import Queue
-<Queue> = Queue(maxsize=0)
-```
-
-```python
+<Queue> = queue.Queue(maxsize=0)               # A thread-safe FIFO queue. Also LifoQueue.
 <Queue>.put(<el>)                              # Blocks until queue stops being full.
 <Queue>.put_nowait(<el>)                       # Raises queue.Full exception if full.
 <el> = <Queue>.get()                           # Blocks until queue stops being empty.
 <el> = <Queue>.get_nowait()                    # Raises queue.Empty exception if empty.
 ```
+
+### Thread Pool Executor
+```python
+<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
+<iter> = <Exec>.map(<func>, <args_1>, ...)     # A multithreaded non-lazy map(). Keeps order.
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
+<Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
+```
+
+```python
+<bool> = <Future>.done()                       # Checks if the thread has finished executing.
+<obj>  = <Future>.result(timeout=None)         # Waits for thread to finish and returns result.
+<bool> = <Future>.cancel()                     # Returns False if thread is already running.
+<iter> = as_completed(<coll_of_Futures>)       # Each Future is yielded as it completes.
+```
+* **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
+* **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. It's exception() method returns exception or None.**
+* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments and results must be [pickable](#pickle).**
 
 
 Operator
