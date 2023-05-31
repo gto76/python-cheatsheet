@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 27, 2023</aside>
+    <aside>May 31, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1237,8 +1237,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
  ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function.</span>
  ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key (ctrl-c).</span>
  └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
-      ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors.</span>
-      │    └── ZeroDivisionError  <span class="hljs-comment"># Raised when dividing by zero.</span>
+      ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors such as ZeroDivisionError.</span>
       ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when object doesn't have requested attribute/method.</span>
       ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits an end-of-file condition.</span>
@@ -1248,13 +1247,14 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── MemoryError             <span class="hljs-comment"># Out of memory. Could be too late to start deleting vars.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
-      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/PermissionError (see Open).</span>
+      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/PermissionError (see #Open).</span>
+      │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
+      │    ├── NotImplementedErr  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
       ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
       ├── TypeError               <span class="hljs-comment"># Raised when an argument is of the wrong type.</span>
       └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
-           └── UnicodeError       <span class="hljs-comment"># Raised when encoding/decoding strings to/from bytes fails.</span>
 </code></pre></div>
 
 <div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
@@ -2935,7 +2935,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>May 27, 2023</aside>
+    <aside>May 31, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

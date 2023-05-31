@@ -407,8 +407,7 @@ const DIAGRAM_7_B =
   " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function.</span>\n" +
   " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key (ctrl-c).</span>\n" +
   " └── Exception                    <span class='hljs-comment'># User-defined exceptions should be derived from this class.</span>\n" +
-  "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors.</span>\n" +
-  "      │    └── ZeroDivisionError  <span class='hljs-comment'># Raised when dividing by zero.</span>\n" +
+  "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors such as ZeroDivisionError.</span>\n" +
   "      ├── AssertionError          <span class='hljs-comment'># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>\n" +
   "      ├── AttributeError          <span class='hljs-comment'># Raised when object doesn't have requested attribute/method.</span>\n" +
   "      ├── EOFError                <span class='hljs-comment'># Raised by input() when it hits an end-of-file condition.</span>\n" +
@@ -418,13 +417,14 @@ const DIAGRAM_7_B =
   "      ├── MemoryError             <span class='hljs-comment'># Out of memory. Could be too late to start deleting vars.</span>\n" +
   "      ├── NameError               <span class='hljs-comment'># Raised when nonexistent name (variable/func/class) is used.</span>\n" +
   "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when local name is used before it's being defined.</span>\n" +
-  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError/PermissionError (see Open).</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError/PermissionError (see #Open).</span>\n" +
+  "      │    └── ConnectionError    <span class='hljs-comment'># Errors such as BrokenPipeError/ConnectionAbortedError.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall into other categories.</span>\n" +
+  "      │    ├── NotImplementedErr  <span class='hljs-comment'># Can be raised by abstract methods or by unfinished code.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
   "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of the wrong type.</span>\n" +
-  "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n" +
-  "           └── UnicodeError       <span class='hljs-comment'># Raised when encoding/decoding strings to/from bytes fails.</span>\n";
+  "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n";
 
 const DIAGRAM_8_A =
   '+-----------+------------+------------+------------+\n' +

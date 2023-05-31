@@ -1447,8 +1447,7 @@ BaseException
  +-- SystemExit                   # Raised by the sys.exit() function.
  +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
  +-- Exception                    # User-defined exceptions should be derived from this class.
-      +-- ArithmeticError         # Base class for arithmetic errors.
-      |    +-- ZeroDivisionError  # Raised when dividing by zero.
+      +-- ArithmeticError         # Base class for arithmetic errors such as ZeroDivisionError.
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when object doesn't have requested attribute/method.
       +-- EOFError                # Raised by input() when it hits an end-of-file condition.
@@ -1458,13 +1457,14 @@ BaseException
       +-- MemoryError             # Out of memory. Could be too late to start deleting vars.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
-      +-- OSError                 # Errors such as FileExistsError/PermissionError (see Open).
+      +-- OSError                 # Errors such as FileExistsError/PermissionError (see #Open).
+      |    +-- ConnectionError    # Errors such as BrokenPipeError/ConnectionAbortedError.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
+      |    +-- NotImplementedErr  # Can be raised by abstract methods or by unfinished code.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of the wrong type.
       +-- ValueError              # When argument has the right type but inappropriate value.
-           +-- UnicodeError       # Raised when encoding/decoding strings to/from bytes fails.
 ```
 
 #### Collections and their exceptions:
