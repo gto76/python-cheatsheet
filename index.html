@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 31, 2023</aside>
+    <aside>June 1, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -369,12 +369,10 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C-style formatting.</span>
 </code></pre></div>
 
-<div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Person = collections.namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
+<div><h3 id="example">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>Person = collections.namedtuple(<span class="hljs-string">'Person'</span>, <span class="hljs-string">'name height'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>person = Person(<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">f'<span class="hljs-subst">{person.height}</span>'</span>
-<span class="hljs-string">'187'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">'{p.height}'</span>.format(p=person)
-<span class="hljs-string">'187'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">f'<span class="hljs-subst">{person.name}</span> is <span class="hljs-subst">{person.height / <span class="hljs-number">100</span>}</span> meters tall.'</span>
+<span class="hljs-string">'Jean-Luc is 1.87 meters tall.'</span>
 </code></pre></div>
 
 <div><h3 id="generaloptions">General Options</h3><pre><code class="python language-python hljs">{&lt;el&gt;:&lt;<span class="hljs-number">10</span>}                               <span class="hljs-comment"># '&lt;el&gt;      '</span>
@@ -386,7 +384,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
-<li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> before the colon converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
+<li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> to the expression prepends it to the output: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{<span class="hljs-number">1</span>+<span class="hljs-number">1</span>=}</span>'</span></code> returns <code class="python hljs"><span class="hljs-string">'1+1=2'</span></code>.</strong></li>
+<li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> to the expression converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
 </ul>
 <div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                             <span class="hljs-comment"># 'abcde     '</span>
 {<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                           <span class="hljs-comment"># 'abc       '</span>
@@ -1593,7 +1592,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetime.</strong></li>
 <li><strong>Bools will be stored and returned as ints and dates as <a href="#encode">ISO formatted strings</a>.</strong></li>
 </ul>
-<div><h3 id="example">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
+<div><h3 id="example-1">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'INSERT INTO person VALUES (NULL, ?, ?)'</span>, (<span class="hljs-string">'Jean-Luc'</span>, <span class="hljs-number">187</span>)).lastrowid
 <span class="hljs-number">1</span>
@@ -1811,7 +1810,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 
 
 
-<div><h3 id="attributes-1">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
+<div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
 &lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
 &lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises an AttributeError.</span>
 value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Raises AttributeError if attribute is missing.</span>
@@ -2226,7 +2225,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
          [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]]
 </code></pre></div>
 
-<div><h3 id="example-1">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
+<div><h3 id="example-2">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
  [ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
 [[ <span class="hljs-number">0.1</span>],
@@ -2935,7 +2934,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>May 31, 2023</aside>
+    <aside>June 1, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

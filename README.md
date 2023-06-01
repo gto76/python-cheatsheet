@@ -396,14 +396,12 @@ Format
 <str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
 ```
 
-### Attributes
+### Example
 ```python
 >>> Person = collections.namedtuple('Person', 'name height')
 >>> person = Person('Jean-Luc', 187)
->>> f'{person.height}'
-'187'
->>> '{p.height}'.format(p=person)
-'187'
+>>> f'{person.name} is {person.height / 100} meters tall.'
+'Jean-Luc is 1.87 meters tall.'
 ```
 
 ### General Options
@@ -415,7 +413,8 @@ Format
 {<el>:0}                                 # '<el>'
 ```
 * **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
-* **Adding `'!r'` before the colon converts object to string by calling its [repr()](#class) method.**
+* **Adding `'='` to the expression prepends it to the output: `f'{1+1=}'` returns `'1+1=2'`.**
+* **Adding `'!r'` to the expression converts object to string by calling its [repr()](#class) method.**
 
 ### Strings
 ```python
