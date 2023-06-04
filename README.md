@@ -2118,8 +2118,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 #### Or:
 ```python
-with <lock>:                                   # Enters the block by calling acquire(),
-    ...                                        # and exits it with release(), even on error.
+with <lock>:                                   # Enters the block by calling acquire() and
+    ...                                        # exits it with release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
@@ -2141,8 +2141,8 @@ with <lock>:                                   # Enters the block by calling acq
 ### Thread Pool Executor
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
-<iter> = <Exec>.map(<func>, <args_1>, ...)     # A multithreaded non-lazy map(). Keeps order.
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Starts a thread and returns its Future object.
+<iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future object.
 <Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
 ```
 
@@ -2153,7 +2153,7 @@ with <lock>:                                   # Enters the block by calling acq
 <iter> = as_completed(<coll_of_Futures>)       # Each Future is yielded as it completes.
 ```
 * **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
-* **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. It's exception() method returns exception or None.**
+* **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
 * **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments and results must be [pickable](#pickle).**
 
 
