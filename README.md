@@ -656,7 +656,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 ### Arithmetics
 ```python
 <D/DT>   = <D/DT>  ± <TD>                   # Returned datetime can fall into missing hour.
-<TD>     = <D/DTn> - <D/DTn>                # Returns the difference, ignoring time jumps.
+<TD>     = <D/DTn> - <D/DTn>                # Returns the difference. Ignores time jumps.
 <TD>     = <DTa>   - <DTa>                  # Ignores time jumps if they share tzinfo object.
 <TD>     = <TD>    * <real>                 # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
 <float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also //.
