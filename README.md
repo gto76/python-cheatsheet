@@ -2154,7 +2154,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```
 * **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
-* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments and results must be [pickable](#pickle).**
+* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments/results must be [pickable](#pickle).**
 
 
 Operator
@@ -2347,10 +2347,9 @@ async def random_controller(id_, moves):
 
 async def human_controller(screen, moves):
     while True:
-        ch = screen.getch()
         key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
-        if ch in key_mappings:
-            moves.put_nowait(('*', key_mappings[ch]))
+        if d := key_mappings.get(screen.getch()):
+            moves.put_nowait(('*', d))
         await asyncio.sleep(0.005)
 
 async def model(moves, state):
@@ -2368,6 +2367,7 @@ async def view(state, screen):
         for id_, p in state.items():
             screen.addstr(offset.y + (p.y - state['*'].y + H//2) % H,
                           offset.x + (p.x - state['*'].x + W//2) % W, str(id_))
+        screen.refresh()
         await asyncio.sleep(0.005)
 
 if __name__ == '__main__':
@@ -2987,7 +2987,7 @@ while not pg.event.get(pg.QUIT):
     deltas = {pg.K_UP: (0, -20), pg.K_RIGHT: (20, 0), pg.K_DOWN: (0, 20), pg.K_LEFT: (-20, 0)}
     for event in pg.event.get(pg.KEYDOWN):
         dx, dy = deltas.get(event.key, (0, 0))
-        rect.move_ip((dx, dy))
+        rect = rect.move((dx, dy))
     screen.fill((0, 0, 0))
     pg.draw.rect(screen, (255, 255, 255), rect)
     pg.display.flip()
@@ -3016,7 +3016,7 @@ while not pg.event.get(pg.QUIT):
 <Surf> = pg.Surface((width, height))            # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load(<path/file>)             # Loads the image. Format depends on source.
 <Surf> = pg.surfarray.make_surface(<np_array>)  # Also `<np_arr> = surfarray.pixels3d(<Surf>)`.
-<Surf> = <Surf>.subsurface(<Rect>)              # Returns a subsurface.
+<Surf> = <Surf>.subsurface(<Rect>)              # Creates a new surface from the cutout.
 ```
 
 ```python
@@ -3161,7 +3161,7 @@ Name: a, dtype: int64
 ```python
 <el> = <Sr>[key/index]                         # Or: <Sr>.key
 <Sr> = <Sr>[keys/indexes]                      # Or: <Sr>[<keys_slice/slice>]
-<Sr> = <Sr>[bools]                             # Or: <Sr>.i/loc[bools]
+<Sr> = <Sr>[bools]                             # Or: <Sr>.loc/iloc[bools]
 ```
 
 ```python

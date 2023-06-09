@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 4, 2023</aside>
+    <aside>June 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1782,7 +1782,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <ul>
 <li><strong>Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.</strong></li>
 <li><strong>Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.</strong></li>
-<li><strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments and results must be <a href="#pickle">pickable</a>.</strong></li>
+<li><strong>An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments/results must be <a href="#pickle">pickable</a>.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
 &lt;obj&gt;     = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)     <span class="hljs-comment"># +, -, *, /, //, %</span>
@@ -1927,10 +1927,9 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-        ch = screen.getch()
         key_mappings = {<span class="hljs-number">258</span>: D.s, <span class="hljs-number">259</span>: D.n, <span class="hljs-number">260</span>: D.w, <span class="hljs-number">261</span>: D.e}
-        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:
-            moves.put_nowait((<span class="hljs-string">'*'</span>, key_mappings[ch]))
+        <span class="hljs-keyword">if</span> d := key_mappings.get(screen.getch()):
+            moves.put_nowait((<span class="hljs-string">'*'</span>, d))
         <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>
@@ -1948,6 +1947,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
         <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():
             screen.addstr(offset.y + (p.y - state[<span class="hljs-string">'*'</span>].y + H//<span class="hljs-number">2</span>) % H,
                           offset.x + (p.x - state[<span class="hljs-string">'*'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))
+        screen.refresh()
         <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
@@ -2442,7 +2442,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-20</span>), pg.K_RIGHT: (<span class="hljs-number">20</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">20</span>), pg.K_LEFT: (<span class="hljs-number">-20</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
         dx, dy = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-        rect.move_ip((dx, dy))
+        rect = rect.move((dx, dy))
     screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
     pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
     pg.display.flip()
@@ -2464,7 +2464,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
 &lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)             <span class="hljs-comment"># Loads the image. Format depends on source.</span>
 &lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;np_arr&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
-&lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Returns a subsurface.</span>
+&lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)              <span class="hljs-comment"># Creates a new surface from the cutout.</span>
 </code></pre></div>
 
 
@@ -2586,7 +2586,7 @@ Name: a, dtype: int64
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
 &lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;keys_slice/slice&gt;]</span>
-&lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.i/loc[bools]</span>
+&lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.loc/iloc[bools]</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                       <span class="hljs-comment"># Returns a Series of bools.</span>
 &lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                       <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
@@ -2934,7 +2934,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 4, 2023</aside>
+    <aside>June 9, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

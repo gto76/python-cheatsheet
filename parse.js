@@ -137,10 +137,9 @@ const COROUTINES =
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
-  '        ch = screen.getch()\n' +
   '        key_mappings = {<span class="hljs-number">258</span>: D.s, <span class="hljs-number">259</span>: D.n, <span class="hljs-number">260</span>: D.w, <span class="hljs-number">261</span>: D.e}\n' +
-  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> key_mappings:\n' +
-  '            moves.put_nowait((<span class="hljs-string">\'*\'</span>, key_mappings[ch]))\n' +
+  '        <span class="hljs-keyword">if</span> d := key_mappings.get(screen.getch()):\n' +
+  '            moves.put_nowait((<span class="hljs-string">\'*\'</span>, d))\n' +
   '        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>\n' +
@@ -158,6 +157,7 @@ const COROUTINES =
   '        <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():\n' +
   '            screen.addstr(offset.y + (p.y - state[<span class="hljs-string">\'*\'</span>].y + H//<span class="hljs-number">2</span>) % H,\n' +
   '                          offset.x + (p.x - state[<span class="hljs-string">\'*\'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))\n' +
+  '        screen.refresh()\n' +
   '        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)\n' +
   '\n' +
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
