@@ -2144,7 +2144,7 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
      4      1    487.0    487.0     68.9      b = set(range(10000))
 </code></pre></div>
 
-<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ pip3 install gprof2dot snakeviz
+<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ pip3 install gprof2dot snakeviz
 $ apt/brew install graphviz
 $ python3 -m cProfile -o test.prof test.py
 $ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png

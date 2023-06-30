@@ -2614,7 +2614,7 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call and Flame Graphs
-```bash
+```text
 $ pip3 install gprof2dot snakeviz
 $ apt/brew install graphviz
 $ python3 -m cProfile -o test.prof test.py
