@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 9, 2023</aside>
+    <aside>June 30, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1609,14 +1609,14 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                        <span class="hljs-comment"># Exits the block with commit or rollback.</span>
 </code></pre></div>
 
-<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Dialect    │ pip3 install │ import    │ Dependencies                     ┃
-┠────────────┼──────────────┼───────────┼──────────────────────────────────┨
-┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient ┃
-┃ postgresql │ psycopg2     │ psycopg2  │ www.pypi.org/project/psycopg2    ┃
-┃ mssql      │ pyodbc       │ pyodbc    │ www.pypi.org/project/pyodbc      ┃
-┃ oracle     │ oracledb     │ oracledb  │ www.pypi.org/project/oracledb    ┃
-┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+<pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Dialect    │ pip3 install │  import  │           Dependencies           ┃
+┠────────────┼──────────────┼──────────┼──────────────────────────────────┨
+┃ mysql      │ mysqlclient  │ MySQLdb  │ www.pypi.org/project/mysqlclient ┃
+┃ postgresql │ psycopg2     │ psycopg2 │ www.pypi.org/project/psycopg2    ┃
+┃ mssql      │ pyodbc       │ pyodbc   │ www.pypi.org/project/pyodbc      ┃
+┃ oracle     │ oracledb     │ oracledb │ www.pypi.org/project/oracledb    ┃
+┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                          <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
 &lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]                  <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
@@ -2124,44 +2124,43 @@ duration_in_seconds = perf_counter() - start_time
 </code></pre></div>
 
 <div><h3 id="timingasnippet">Timing a Snippet</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> timeit <span class="hljs-keyword">import</span> timeit
-<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">"''.join(str(i) for i in range(100))"</span>,
-<span class="hljs-meta">... </span>       number=<span class="hljs-number">10000</span>, globals=globals(), setup=<span class="hljs-string">'pass'</span>)
-<span class="hljs-number">0.34986</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>timeit(<span class="hljs-string">'list(range(10000))'</span>, number=<span class="hljs-number">1000</span>, globals=globals(), setup=<span class="hljs-string">'pass'</span>)
+<span class="hljs-number">0.19373</span>
 </code></pre></div>
 
-<div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install line_profiler memory_profiler</span>
-<span class="hljs-meta">@profile</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    a = [*range(<span class="hljs-number">10000</span>)]
-    b = {*range(<span class="hljs-number">10000</span>)}
-main()
-</code></pre></div>
-
-<pre><code class="text language-text">$ kernprof -lv test.py
+<div><h3 id="profilingbyline">Profiling by Line</h3><pre><code class="text language-text">$ pip3 install line_profiler
+$ echo "
+@profile
+def main():
+    a = list(range(10000))
+    b = set(range(10000))
+main()" &gt; test.py
+$ kernprof -lv test.py
 Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1    955.0    955.0     43.7      a = [*range(10000)]
-     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
+     3      1    219.0    219.0     31.1      a = list(range(10000))
+     4      1    487.0    487.0     68.9      b = set(range(10000))
+</code></pre></div>
 
-$ python3 -m memory_profiler test.py
-Line #         Mem usage      Increment   Line Contents
-=======================================================
-     1        37.668 MiB     37.668 MiB   @profile
-     2                                    def main():
-     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
-     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
-</code></pre>
-<div><h3 id="callgraph">Call Graph</h3><div><h4 id="generatesapngimageofthecallgraphwithhighlightedbottlenecks">Generates a PNG image of the call graph with highlighted bottlenecks:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pycallgraph2; apt/brew install graphviz</span>
-<span class="hljs-keyword">import</span> pycallgraph2 <span class="hljs-keyword">as</span> cg, datetime
+<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ pip3 install gprof2dot snakeviz
+$ apt/brew install graphviz
+$ python3 -m cProfile -o test.prof test.py
+$ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png
+$ snakeviz test.prof
+</code></pre></div>
 
-filename = <span class="hljs-string">f'profile-<span class="hljs-subst">{datetime.datetime.now():%Y%m%d_%H%M%S}</span>.png'</span>
-drawer = cg.output.GraphvizOutput(output_file=filename)
-<span class="hljs-keyword">with</span> cg.PyCallGraph(drawer):
-    &lt;code_to_be_profiled&gt;
-</code></pre></div></div>
-
+<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┓
+┃ pip3 install │          How to run           │   Target   │   Type   │ Live ┃
+┠──────────────┼───────────────────────────────┼────────────┼──────────┼──────┨
+┃ py-spy       │ py-spy top -- python3 test.py │    CPU     │ Sampling │ Yes  ┃
+┃ pyinstrument │ pyinstrument test.py          │    CPU     │ Sampling │ No   ┃
+┃ scalene      │ scalene test.py               │ CPU+Memory │ Sampling │ No   ┃
+┃ memray       │ memray run --live test.py     │   Memory   │ Tracing  │ Yes  ┃
+┃ filprofiler  │ fil-profile run test.py       │   Memory   │ Tracing  │ No   ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┛
+</code></pre></div>
 
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -2934,7 +2933,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>June 9, 2023</aside>
+    <aside>June 30, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

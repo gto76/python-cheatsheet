@@ -460,19 +460,19 @@ const DIAGRAM_9_B =
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_95_A =
-  "+------------+--------------+-----------+----------------------------------+\n" +
-  "| Dialect    | pip3 install | import    | Dependencies                     |\n" +
-  "+------------+--------------+-----------+----------------------------------+\n";
+  '+------------+--------------+----------+----------------------------------+\n' +
+  '| Dialect    | pip3 install |  import  |           Dependencies           |\n' +
+  '+------------+--------------+----------+----------------------------------+\n';
 
 const DIAGRAM_95_B =
-  "┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃ Dialect    │ pip3 install │ import    │ Dependencies                     ┃\n" +
-  "┠────────────┼──────────────┼───────────┼──────────────────────────────────┨\n" +
-  "┃ mysql      │ mysqlclient  │ MySQLdb   │ www.pypi.org/project/mysqlclient ┃\n" +
-  "┃ postgresql │ psycopg2     │ psycopg2  │ www.pypi.org/project/psycopg2    ┃\n" +
-  "┃ mssql      │ pyodbc       │ pyodbc    │ www.pypi.org/project/pyodbc      ┃\n" +
-  "┃ oracle     │ oracledb     │ oracledb  │ www.pypi.org/project/oracledb    ┃\n" +
-  "┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+  '┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n' +
+  '┃ Dialect    │ pip3 install │  import  │           Dependencies           ┃\n' +
+  '┠────────────┼──────────────┼──────────┼──────────────────────────────────┨\n' +
+  '┃ mysql      │ mysqlclient  │ MySQLdb  │ www.pypi.org/project/mysqlclient ┃\n' +
+  '┃ postgresql │ psycopg2     │ psycopg2 │ www.pypi.org/project/psycopg2    ┃\n' +
+  '┃ mssql      │ pyodbc       │ pyodbc   │ www.pypi.org/project/pyodbc      ┃\n' +
+  '┃ oracle     │ oracledb     │ oracledb │ www.pypi.org/project/oracledb    ┃\n' +
+  '┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_10_A =
   '+-------------+-------------+\n' +
@@ -507,6 +507,22 @@ const DIAGRAM_11_B =
   '┃      ↓      │             ┃\n' +
   '┃     str     │             ┃\n' +
   '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
+
+const DIAGRAM_115_A =
+  '+--------------+-------------------------------+------------+----------+------+\n' +
+  '| pip3 install |          How to run           |   Target   |   Type   | Live |\n' +
+  '+--------------+-------------------------------+------------+----------+------+\n';
+
+const DIAGRAM_115_B =
+  '┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┓\n' +
+  '┃ pip3 install │          How to run           │   Target   │   Type   │ Live ┃\n' +
+  '┠──────────────┼───────────────────────────────┼────────────┼──────────┼──────┨\n' +
+  '┃ py-spy       │ py-spy top -- python3 test.py │    CPU     │ Sampling │ Yes  ┃\n' +
+  '┃ pyinstrument │ pyinstrument test.py          │    CPU     │ Sampling │ No   ┃\n' +
+  '┃ scalene      │ scalene test.py               │ CPU+Memory │ Sampling │ No   ┃\n' +
+  '┃ memray       │ memray run --live test.py     │   Memory   │ Tracing  │ Yes  ┃\n' +
+  '┃ filprofiler  │ fil-profile run test.py       │   Memory   │ Tracing  │ No   ┃\n' +
+  '┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┛\n';
 
 const DIAGRAM_12_A =
   '+-----------+-----------+------+-----------+\n' +
@@ -740,6 +756,7 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_95_A})`).html(DIAGRAM_95_B);
   $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
   $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
+  $(`code:contains(${DIAGRAM_115_A})`).html(DIAGRAM_115_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_14_A})`).parent().remove();

@@ -1935,14 +1935,14 @@ with <conn>.begin(): ...                        # Exits the block with commit or
 ```
 
 ```text
-+------------+--------------+-----------+----------------------------------+
-| Dialect    | pip3 install | import    | Dependencies                     |
-+------------+--------------+-----------+----------------------------------+
-| mysql      | mysqlclient  | MySQLdb   | www.pypi.org/project/mysqlclient |
-| postgresql | psycopg2     | psycopg2  | www.pypi.org/project/psycopg2    |
-| mssql      | pyodbc       | pyodbc    | www.pypi.org/project/pyodbc      |
-| oracle     | oracledb     | oracledb  | www.pypi.org/project/oracledb    |
-+------------+--------------+-----------+----------------------------------+
++------------+--------------+----------+----------------------------------+
+| Dialect    | pip3 install |  import  |           Dependencies           |
++------------+--------------+----------+----------------------------------+
+| mysql      | mysqlclient  | MySQLdb  | www.pypi.org/project/mysqlclient |
+| postgresql | psycopg2     | psycopg2 | www.pypi.org/project/psycopg2    |
+| mssql      | pyodbc       | pyodbc   | www.pypi.org/project/pyodbc      |
+| oracle     | oracledb     | oracledb | www.pypi.org/project/oracledb    |
++------------+--------------+----------+----------------------------------+
 ```
 
 
@@ -2591,49 +2591,48 @@ duration_in_seconds = perf_counter() - start_time
 ### Timing a Snippet
 ```python
 >>> from timeit import timeit
->>> timeit("''.join(str(i) for i in range(100))",
-...        number=10000, globals=globals(), setup='pass')
-0.34986
+>>> timeit('list(range(10000))', number=1000, globals=globals(), setup='pass')
+0.19373
 ```
 
 ### Profiling by Line
-```python
-# $ pip3 install line_profiler memory_profiler
+```text
+$ pip3 install line_profiler
+$ echo "
 @profile
 def main():
-    a = [*range(10000)]
-    b = {*range(10000)}
-main()
-```
-
-```text
+    a = list(range(10000))
+    b = set(range(10000))
+main()" > test.py
 $ kernprof -lv test.py
 Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
      1                                    @profile
      2                                    def main():
-     3      1    955.0    955.0     43.7      a = [*range(10000)]
-     4      1   1231.0   1231.0     56.3      b = {*range(10000)}
-
-$ python3 -m memory_profiler test.py
-Line #         Mem usage      Increment   Line Contents
-=======================================================
-     1        37.668 MiB     37.668 MiB   @profile
-     2                                    def main():
-     3        38.012 MiB      0.344 MiB       a = [*range(10000)]
-     4        38.477 MiB      0.465 MiB       b = {*range(10000)}
+     3      1    219.0    219.0     31.1      a = list(range(10000))
+     4      1    487.0    487.0     68.9      b = set(range(10000))
 ```
 
-### Call Graph
-#### Generates a PNG image of the call graph with highlighted bottlenecks:
-```python
-# $ pip3 install pycallgraph2; apt/brew install graphviz
-import pycallgraph2 as cg, datetime
+### Call and Flame Graphs
+```bash
+$ pip3 install gprof2dot snakeviz
+$ apt/brew install graphviz
+$ python3 -m cProfile -o test.prof test.py
+$ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png
+$ snakeviz test.prof
+```
 
-filename = f'profile-{datetime.datetime.now():%Y%m%d_%H%M%S}.png'
-drawer = cg.output.GraphvizOutput(output_file=filename)
-with cg.PyCallGraph(drawer):
-    <code_to_be_profiled>
+### Sampling and Memory Profilers
+```text
++--------------+-------------------------------+------------+----------+------+
+| pip3 install |          How to run           |   Target   |   Type   | Live |
++--------------+-------------------------------+------------+----------+------+
+| py-spy       | py-spy top -- python3 test.py |    CPU     | Sampling | Yes  |
+| pyinstrument | pyinstrument test.py          |    CPU     | Sampling | No   |
+| scalene      | scalene test.py               | CPU+Memory | Sampling | No   |
+| memray       | memray run --live test.py     |   Memory   | Tracing  | Yes  |
+| filprofiler  | fil-profile run test.py       |   Memory   | Tracing  | No   |
++--------------+-------------------------------+------------+----------+------+
 ```
 
 
