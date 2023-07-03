@@ -1936,7 +1936,7 @@ with <conn>.begin(): ...                        # Exits the block with commit or
 
 ```text
 +------------+--------------+----------+----------------------------------+
-| Dialect    | pip3 install |  import  |           Dependencies           |
+| Dialect    | pip3 install | import   |           Dependencies           |
 +------------+--------------+----------+----------------------------------+
 | mysql      | mysqlclient  | MySQLdb  | www.pypi.org/project/mysqlclient |
 | postgresql | psycopg2     | psycopg2 | www.pypi.org/project/psycopg2    |
@@ -2598,8 +2598,7 @@ duration_in_seconds = perf_counter() - start_time
 ### Profiling by Line
 ```text
 $ pip3 install line_profiler
-$ echo "
-@profile
+$ echo "@profile
 def main():
     a = list(range(10000))
     b = set(range(10000))
@@ -2615,8 +2614,8 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 
 ### Call and Flame Graphs
 ```text
-$ pip3 install gprof2dot snakeviz
-$ apt/brew install graphviz
+$ pip3 install gprof2dot snakeviz; apt/brew install graphviz
+$ tail -n 4 test.py > test.py
 $ python3 -m cProfile -o test.prof test.py
 $ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png
 $ snakeviz test.prof
