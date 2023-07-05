@@ -471,6 +471,7 @@ Format
 | 56.789       |    '5.7e+01'   |     '56.79'    |   '5.68e+01'   |   '5678.90%'   |
 +--------------+----------------+----------------+----------------+----------------+
 ```
+* **`'{<float>:g}'` is `'{<float>:.6}'` with stripped zeros, exponent starting at 7 figures.**
 * **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes `'{6.5:.0f}'` a `'6'` and `'{7.5:.0f}'` an `'8'`.**
 * **This rule only effects numbers that can be represented exactly by a float (`.5`, `.25`, …).**
 
