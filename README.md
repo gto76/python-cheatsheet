@@ -2143,7 +2143,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future object.
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
 <Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
 ```
 
