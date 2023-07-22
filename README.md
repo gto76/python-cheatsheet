@@ -1068,7 +1068,7 @@ from dataclasses import make_dataclass
 
 #### Rest of type annotations (CPython interpreter ignores them all):
 ```python
-import typing as tp, collections.abc as abc
+import collections.abc as abc, typing as tp
 <var_name>: list/set/abc.Iterable/abc.Sequence/tp.Optional[<type>] [= <obj>]
 <var_name>: dict/tuple/tp.Union[<type>, ...] [= <obj>]
 def func(<arg_name>: <type> [= <obj>]) -> <type>: ...
@@ -1252,7 +1252,7 @@ True
 ### Collection
 * **Only required methods are iter() and len(). Len() should return the number of items.**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that a reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
+* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
 ```python
 class MyCollection:
     def __init__(self, a):
@@ -1606,7 +1606,7 @@ Open
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
 ```
-* **Methods do not add or strip trailing newlines, even writelines().**
+* **Methods do not add or strip trailing newlines, not even writelines().**
 
 ### Read Text from File
 ```python
@@ -2045,7 +2045,7 @@ from array import array
 
 Memory View
 -----------
-* **A sequence object that points to the memory of another object.**
+* **A sequence object that points to the memory of another bytes-like object.**
 * **Each element can reference a single or multiple consecutive bytes, depending on format.**
 * **Order and number of elements can be changed with slicing.**
 * **Casting only works between char and other types and uses system's sizes.**
@@ -2177,7 +2177,7 @@ product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Binary operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
+* **Bitwise operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
@@ -2250,7 +2250,7 @@ class MyMetaClass(type):
 * **The only difference between the examples above is that my\_meta\_class() returns a class of type type, while MyMetaClass() returns a class of type MyMetaClass.**
 
 ### Metaclass Attribute
-**Right before a class is created it checks if it has the 'metaclass' attribute defined. If not, it recursively checks if any of his parents has it defined and eventually comes to type().**
+**Right before a class is created it checks if it has the 'metaclass' attribute defined. If not, it recursively checks if any of its parents has it defined and eventually comes to type().**
 
 ```python
 class MyClass(metaclass=MyMetaClass):
@@ -2535,7 +2535,7 @@ from flask import Flask, send_from_directory, render_template_string, request
 
 ```python
 app = Flask(__name__)
-app.run(host=None, debug=None)
+app.run(host=None, port=None, debug=None)
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
@@ -2599,11 +2599,11 @@ duration_in_seconds = perf_counter() - start_time
 ### Profiling by Line
 ```text
 $ pip3 install line_profiler
-$ echo "@profile
+$ echo '@profile
 def main():
     a = list(range(10000))
     b = set(range(10000))
-main()" > test.py
+main()' > test.py
 $ kernprof -lv test.py
 Line #   Hits     Time  Per Hit   % Time  Line Contents
 =======================================================
