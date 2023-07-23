@@ -2093,7 +2093,7 @@ from collections import deque
 
 Threading
 ---------
-* **CPython interpreter can only run a single thread at a time.**
+* **CPython interpreter can only run a single thread at a particular time.**
 * **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
 from threading import Thread, RLock, Semaphore, Event, Barrier
@@ -2160,7 +2160,7 @@ with <lock>:                                   # Enters the block by calling acq
 
 Operator
 --------
-**Module of functions that provide the functionality of operators.**
+**Module of functions that provide functionality of operators.**
 ```python
 import operator as op
 <obj>     = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
