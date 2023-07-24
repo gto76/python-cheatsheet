@@ -1438,7 +1438,7 @@ filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
 trace_str = ''.join(traceback.format_tb(<name>.__traceback__))
-error_msg = ''.join(traceback.format_exception(exc_type, <name>, <name>.__traceback__))
+error_msg = ''.join(traceback.format_exception(type(<name>), <name>, <name>.__traceback__))
 ```
 
 ### Built-in Exceptions
@@ -1672,7 +1672,7 @@ from pathlib import Path
 ```python
 <Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
 <Path> = <path> / <path> [/ ...]    # First or second path must be a Path object.
-<Path> = <Path>.resolve()           # Resolves symlinks and calls <Path>.absolute().
+<Path> = <Path>.resolve()           # Returns absolute path with resolved symlinks.
 ```
 
 ```python
@@ -2799,7 +2799,7 @@ img.putdata([(int(h), 255, 255) for h in hues])
 img.convert('RGB').save('test.png')
 ```
 
-#### Adds noise to a PNG image:
+#### Adds noise to a PNG image and displays it:
 ```python
 from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))

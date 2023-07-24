@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 22, 2023</aside>
+    <aside>July 24, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1230,7 +1230,7 @@ filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
 func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
 line      = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
 trace_str = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
-error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(exc_type, &lt;name&gt;, &lt;name&gt;.__traceback__))
+error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(type(&lt;name&gt;), &lt;name&gt;, &lt;name&gt;.__traceback__))
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
@@ -1414,7 +1414,7 @@ value = args.&lt;name&gt;
 
 <div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
 &lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second path must be a Path object.</span>
-&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Resolves symlinks and calls &lt;Path&gt;.absolute().</span>
+&lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute path with resolved symlinks.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative cwd. Also Path('.').</span>
@@ -2288,7 +2288,7 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 
 
 
-<div><h4 id="addsnoisetoapngimage">Adds noise to a PNG image:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
+<div><h4 id="addsnoisetoapngimageanddisplaysit">Adds noise to a PNG image and displays it:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">0</span>, min(<span class="hljs-number">255</span>, value + randint(<span class="hljs-number">-20</span>, <span class="hljs-number">20</span>)))
 img = Image.open(<span class="hljs-string">'test.png'</span>).convert(<span class="hljs-string">'HSV'</span>)
 img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v <span class="hljs-keyword">in</span> img.getdata()])
@@ -2933,7 +2933,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 22, 2023</aside>
+    <aside>July 24, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
