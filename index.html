@@ -445,8 +445,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)                <span class="hljs-comment"># Or: math.floor(&lt;float&gt;)</span>
-&lt;float&gt;    = float(&lt;int/str/bool&gt;)                <span class="hljs-comment"># Or: &lt;real&gt;e±&lt;int&gt;</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)              <span class="hljs-comment"># Or: &lt;real&gt; ± &lt;real&gt;j</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)                <span class="hljs-comment"># Or: &lt;int/float&gt;e±&lt;int&gt;</span>
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)              <span class="hljs-comment"># Or: &lt;int/float/Fraction&gt; ± &lt;int/float&gt;j</span>
 &lt;Fraction&gt; = fractions.Fraction(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)             <span class="hljs-comment"># Or: Fraction(numerator=0, denominator=1)</span>
 &lt;Decimal&gt;  = decimal.Decimal(&lt;str/int&gt;)           <span class="hljs-comment"># Or: Decimal((sign, digits, exponent))</span>
 </code></pre></div>
@@ -1669,16 +1669,16 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </ul><div><h4 id="besidesnumberspackandunpackalsosupportbytesobjectsaspartofthesequence">Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'c'</span></code> - A bytes object with a single element. For pad byte use <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="apache hljs"><span class="hljs-section">'&lt;n&gt;s'</span><span class="hljs-attribute"></span></code> - A bytes object with n elements.</strong></li>
-</ul></div></div><div><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
+</ul><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1/1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2/2)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (2/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8/8)</strong></li>
-</ul></div><div><h4 id="floatingpointtypes">Floating point types:</h4><ul>
+</ul><div><h4 id="floatingpointtypesstructalwaysusesstandardsizes">Floating point types (struct always uses standard sizes):</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8/8)</strong></li>
-</ul></div></div>
+</ul></div></div></div></div><div></div>
 
 
 
@@ -2167,8 +2167,8 @@ $ snakeviz test.prof
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists&gt;)                <span class="hljs-comment"># Returns a 1d/2d NumPy array.</span>
-&lt;array&gt; = np.zeros/ones(&lt;shape&gt;)                        <span class="hljs-comment"># Also np.full(&lt;shape&gt;, &lt;el&gt;).</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists/…&gt;)              <span class="hljs-comment"># Returns a 1d/2d/… NumPy array.</span>
+&lt;array&gt; = np.zeros/ones/empty(&lt;shape&gt;)                  <span class="hljs-comment"># Also np.full(&lt;shape&gt;, &lt;el&gt;).</span>
 &lt;array&gt; = np.arange(from_inc, to_exc, ±step)            <span class="hljs-comment"># Also np.linspace(start, stop, len).</span>
 &lt;array&gt; = np.random.randint(from_inc, to_exc, &lt;shape&gt;)  <span class="hljs-comment"># Also np.random.random(&lt;shape&gt;).</span>
 </code></pre>

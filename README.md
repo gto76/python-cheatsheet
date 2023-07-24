@@ -487,8 +487,8 @@ Numbers
 -------
 ```python
 <int>      = int(<float/str/bool>)                # Or: math.floor(<float>)
-<float>    = float(<int/str/bool>)                # Or: <real>e±<int>
-<complex>  = complex(real=0, imag=0)              # Or: <real> ± <real>j
+<float>    = float(<int/str/bool>)                # Or: <int/float>e±<int>
+<complex>  = complex(real=0, imag=0)              # Or: <int/float/Fraction> ± <int/float>j
 <Fraction> = fractions.Fraction(0, 1)             # Or: Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<str/int>)           # Or: Decimal((sign, digits, exponent))
 ```
@@ -2024,7 +2024,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'l'` - long (4/4)**
 * **`'q'` - long long (8/8)**
 
-#### Floating point types:
+#### Floating point types (struct always uses standard sizes):
 * **`'f'` - float (4/4)**
 * **`'d'` - double (8/8)**
 
@@ -2646,8 +2646,8 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list/list_of_lists>)                # Returns a 1d/2d NumPy array.
-<array> = np.zeros/ones(<shape>)                        # Also np.full(<shape>, <el>).
+<array> = np.array(<list/list_of_lists/…>)              # Returns a 1d/2d/… NumPy array.
+<array> = np.zeros/ones/empty(<shape>)                  # Also np.full(<shape>, <el>).
 <array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, len).
 <array> = np.random.randint(from_inc, to_exc, <shape>)  # Also np.random.random(<shape>).
 ```
