@@ -1861,16 +1861,16 @@ import csv
 
 ### Read Rows from CSV File
 ```python
-def read_csv_file(filename, dialect='excel'):
+def read_csv_file(filename, dialect='excel', **params):
     with open(filename, encoding='utf-8', newline='') as file:
-        return list(csv.reader(file, dialect))
+        return list(csv.reader(file, dialect, **params))
 ```
 
 ### Write Rows to CSV File
 ```python
-def write_to_csv_file(filename, rows, dialect='excel'):
+def write_to_csv_file(filename, rows, dialect='excel', **params):
     with open(filename, 'w', encoding='utf-8', newline='') as file:
-        writer = csv.writer(file, dialect)
+        writer = csv.writer(file, dialect, **params)
         writer.writerows(rows)
 ```
 
@@ -2155,7 +2155,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```
 * **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
-* **An object with the same interface called ProcessPoolExecutor provides true parallelism by running a separate interpreter in each process. Arguments/results must be [pickable](#pickle).**
+* **ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be [pickable](#pickle). Queues must be sent using executor's 'initargs' and 'initializer' parameters.**
 
 
 Operator
@@ -2423,17 +2423,17 @@ Curses
 ------
 #### Runs a basic file explorer in the terminal:
 ```python
-import curses, curses.ascii, os
+import curses, os
 from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, os.listdir()
-    while ch != curses.ascii.ESC:
+    while ch != ord('q'):
         height, width = screen.getmaxyx()
         screen.erase()
         for y, filename in enumerate(paths[first : first+height]):
             color = A_REVERSE if filename == paths[selected] else 0
-            screen.addstr(y, 0, filename[:width-1], color)
+            screen.addnstr(y, 0, filename, width-1, color)
         ch = screen.getch()
         selected += (ch == KEY_DOWN) - (ch == KEY_UP)
         selected = max(0, min(len(paths)-1, selected))

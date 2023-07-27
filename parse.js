@@ -164,17 +164,17 @@ const COROUTINES =
   '    curses.wrapper(main)\n';
 
 const CURSES =
-  '<span class="hljs-keyword">import</span> curses, curses.ascii, os\n' +
+  '<span class="hljs-keyword">import</span> curses, os\n' +
   '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
-  '    <span class="hljs-keyword">while</span> ch != curses.ascii.ESC:\n' +
+  '    <span class="hljs-keyword">while</span> ch != ord(<span class="hljs-string">\'q\'</span>):\n' +
   '        height, width = screen.getmaxyx()\n' +
   '        screen.erase()\n' +
   '        <span class="hljs-keyword">for</span> y, filename <span class="hljs-keyword">in</span> enumerate(paths[first : first+height]):\n' +
   '            color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>\n' +
-  '            screen.addstr(y, <span class="hljs-number">0</span>, filename[:width-<span class="hljs-number">1</span>], color)\n' +
+  '            screen.addnstr(y, <span class="hljs-number">0</span>, filename, width-<span class="hljs-number">1</span>, color)\n' +
   '        ch = screen.getch()\n' +
   '        selected += (ch == KEY_DOWN) - (ch == KEY_UP)\n' +
   '        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))\n' +
@@ -811,7 +811,7 @@ function fixHighlights() {
   $(`code:contains(\'<class_name>\', <tuple_of_parents>, <dict_of_class_attributes>)`).html(TYPE);
   $(`code:contains(ValueError: malformed node)`).html(EVAL);
   $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
-  $(`code:contains(import curses, curses.ascii, os)`).html(CURSES);
+  $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
