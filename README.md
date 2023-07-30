@@ -1136,7 +1136,7 @@ class MyHashable:
 * **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
 * **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.**
-* **Characters are compared by their Unicode IDs. Use module 'locale' for proper alphabetical order.**
+* **For proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
 
 ```python
 from functools import total_ordering
@@ -1842,7 +1842,7 @@ import csv
 * **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 * **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
-* **`'escapechar'` - Character for escaping quotechars if doublequote is False.**
+* **`'escapechar'` - Character for escaping quotechars if 'doublequote' is False.**
 
 ### Dialects
 ```text
@@ -2080,10 +2080,7 @@ Deque
 
 ```python
 from collections import deque
-<deque> = deque(<collection>, maxlen=None)
-```
-
-```python
+<deque> = deque(<collection>)                  # Also `maxlen=None`.
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
 <deque>.extendleft(<collection>)               # Collection gets reversed.
 <el> = <deque>.popleft()                       # Raises IndexError if empty.
@@ -2160,13 +2157,16 @@ with <lock>:                                   # Enters the block by calling acq
 
 Operator
 --------
-**Module of functions that provide the functionality of operators.**
+**Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
-<obj>     = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
-<int/set> = op.and_/or_/xor(<int/set>, <int/set>)                 # &, |, ^
-<bool>    = op.eq/ne/lt/le/gt/ge(<sortable>, <sortable>)          # ==, !=, <, <=, >, >=
-<func>    = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
+<bool> = op.not_(<obj>)                                        # not (or/and are not provided)
+<bool> = op.eq/ne/lt/le/gt/ge/contains(<obj>, <obj>)           # ==, !=, <, <=, >, >=, in
+<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
+<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
+<num>  = op.neg/invert(<num>)                                  # -, ~
+<num>  = op.pow(<num>, <num>)                                  # **
+<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
 ```
 
 ```python
@@ -2177,15 +2177,12 @@ product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Bitwise operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
+* **Bitwise operators require objects to have and(), or() and xor() special methods, unlike logical operators that work on all types of objects.**
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
 Introspection
 -------------
-**Inspecting code at runtime.**
-
-### Variables
 ```python
 <list> = dir()                             # Names of local variables (incl. functions).
 <dict> = vars()                            # Dict of local variables. Also locals().

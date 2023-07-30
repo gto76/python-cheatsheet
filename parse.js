@@ -840,8 +840,8 @@ function fixPageBreaksFile() {
 }
 
 function fixPageBreaksStruct() {
-  const formatDiv = $('#floatingpointtypes').parent().parent().parent().parent()
-  move(formatDiv, 'floatingpointtypes')
+  const formatDiv = $('#floatingpointtypesstructalwaysusesstandardsizes').parent().parent().parent().parent()
+  move(formatDiv, 'floatingpointtypesstructalwaysusesstandardsizes')
   move(formatDiv, 'integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets')
   move(formatDiv, 'forstandardsizesstartformatstringwith')
 }
