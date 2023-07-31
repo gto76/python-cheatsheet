@@ -544,68 +544,65 @@ from random import random, randint, choice        # Also: shuffle, gauss, triang
 
 Combinatorics
 -------------
-* **Every function returns an iterator.**
-* **If you want to print the iterator, you need to pass it to the list() function first!**
-
 ```python
 import itertools as it
 ```
 
 ```python
->>> it.product([0, 1], repeat=3)
+>>> list(it.product([0, 1], repeat=3))
 [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1),
  (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 ```
 
 ```python
->>> it.product('abc', 'abc')                     #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),             # a x  x  x
- ('b', 'a'), ('b', 'b'), ('b', 'c'),             # b x  x  x
- ('c', 'a'), ('c', 'b'), ('c', 'c')]             # c x  x  x
+>>> list(it.product('abc', 'abc'))                    #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),                  # a x  x  x
+ ('b', 'a'), ('b', 'b'), ('b', 'c'),                  # b x  x  x
+ ('c', 'a'), ('c', 'b'), ('c', 'c')]                  # c x  x  x
 ```
 
 ```python
->>> it.combinations('abc', 2)                    #   a  b  c
-[('a', 'b'), ('a', 'c'),                         # a .  x  x
- ('b', 'c')]                                     # b .  .  x
+>>> list(it.combinations('abc', 2))                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                              # a .  x  x
+ ('b', 'c')]                                          # b .  .  x
 ```
 
 ```python
->>> it.combinations_with_replacement('abc', 2)   #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),             # a x  x  x
- ('b', 'b'), ('b', 'c'),                         # b .  x  x
- ('c', 'c')]                                     # c .  .  x
+>>> list(it.combinations_with_replacement('abc', 2))  #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),                  # a x  x  x
+ ('b', 'b'), ('b', 'c'),                              # b .  x  x
+ ('c', 'c')]                                          # c .  .  x
 ```
 
 ```python
->>> it.permutations('abc', 2)                    #   a  b  c
-[('a', 'b'), ('a', 'c'),                         # a .  x  x
- ('b', 'a'), ('b', 'c'),                         # b x  .  x
- ('c', 'a'), ('c', 'b')]                         # c x  x  .
+>>> list(it.permutations('abc', 2))                   #   a  b  c
+[('a', 'b'), ('a', 'c'),                              # a .  x  x
+ ('b', 'a'), ('b', 'c'),                              # b x  .  x
+ ('c', 'a'), ('c', 'b')]                              # c x  x  .
 ```
 
 
 Datetime
 --------
-* **Module 'datetime' provides 'date' `<D>`, 'time' `<T>`, 'datetime' `<DT>` and 'timedelta' `<TD>` classes. All are immutable and hashable.**
-* **Time and datetime objects can be 'aware' `<a>`, meaning they have defined timezone, or 'naive' `<n>`, meaning they don't.**
-* **If object is naive, it is presumed to be in the system's timezone.**
+**Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.**
 
 ```python
-from datetime import date, time, datetime, timedelta
-from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
+# pip3 install python-dateutil
+from datetime import date, time, datetime, timedelta, timezone
+from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 ```
 
-### Constructors
 ```python
 <D>  = date(year, month, day)               # Only accepts valid dates from 1 to 9999 AD.
 <T>  = time(hour=0, minute=0, second=0)     # Also: `microsecond=0, tzinfo=None, fold=0`.
 <DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
 <TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microseconds=0`.
 ```
-* **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
+* **Aware `<a>` time and datetime objects have defined timezone, while naive `<n>` don't.**
+* **If object is naive, it is presumed to be in the system's timezone.**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
+* **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
 * **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
 
 ### Now
@@ -618,12 +615,14 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Timezone
 ```python
-<tzinfo> = UTC                              # UTC timezone. London without DST.
+<tzinfo> = timezone.utc                     # London without daylight saving time.
+<tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
 <DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to the passed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with a new timezone.
 ```
+* **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows.**
 
 ### Encode
 ```python
@@ -651,7 +650,8 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 >>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
 "Thursday, 14th of May '15, 11:39PM UTC+02:00"
 ```
-* **Format code `'%z'` accepts `'±HH[:]MM'` and returns `'±HHMM'` (or `''` if datetime is naive).**
+* **`'%z'` accepts `'±HH[:]MM'` and returns `'±HHMM'` or empty string if datetime is naive.**
+* **`'%Z'` accepts `'UTC/GMT'` and local timezone's code and returns timezone's name, `'UTC[±HH:MM]'` if timezone is nameless, or an empty string if datetime is naive.**
 * **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
@@ -659,7 +659,7 @@ from dateutil.tz import UTC, tzlocal, gettz, datetime_exists, resolve_imaginary
 <D/DT>   = <D/DT>  ± <TD>                   # Returned datetime can fall into missing hour.
 <TD>     = <D/DTn> - <D/DTn>                # Returns the difference. Ignores time jumps.
 <TD>     = <DTa>   - <DTa>                  # Ignores time jumps if they share tzinfo object.
-<TD>     = <TD>    * <real>                 # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
+<TD>     = <TD>    * <int/float>            # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
 <float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also //.
 ```
 
