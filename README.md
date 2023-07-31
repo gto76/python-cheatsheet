@@ -619,8 +619,8 @@ from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
-<DTa>    = <DT>.astimezone(<tzinfo>)        # Datetime, converted to the passed timezone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Unconverted object with a new timezone.
+<DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local timezone.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
 * **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows.**
 
