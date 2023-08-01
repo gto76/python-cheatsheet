@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 31, 2023</aside>
+    <aside>August 1, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1805,9 +1805,9 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <li><strong>Bitwise operators require objects to have and(), or() and xor() special methods, unlike logical operators that work on all types of objects.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'&lt;bool&gt; = &lt;bool&gt; &amp;|^ &lt;bool&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;int&gt; = &lt;bool&gt; &amp;|^ &lt;int&gt;'</span></code>.</strong></li>
 </ul>
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables (incl. functions).</span>
-&lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables. Also locals().</span>
-&lt;dict&gt; = globals()                         <span class="hljs-comment"># Dict of global variables.</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables, functions, classes, etc.</span>
+&lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables, etc. Also locals().</span>
+&lt;dict&gt; = globals()                         <span class="hljs-comment"># Dict of global vars, etc. (incl. '__builtins__').</span>
 </code></pre></div>
 
 <div><h3 id="attributes">Attributes</h3><pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (incl. methods).</span>
@@ -2886,16 +2886,14 @@ cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 </code></pre>
 <pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...
 </code></pre>
-<div><h3 id="pyinstaller">PyInstaller</h3><pre><code class="bash language-bash hljs">$ pip3 install pyinstaller
-$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into './dist/script' directory.</span>
-$ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into './dist/script' console app.</span>
-$ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into './dist/script' windowed app.</span>
-$ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment"># Adds file to the root of the executable.</span>
+<div><h3 id="virtualenvironments">Virtual Environments</h3><p><strong>System for installing libraries directly into project's directory.</strong></p><pre><code class="bash language-bash hljs">$ python3 -m venv &lt;name&gt;      <span class="hljs-comment"># Creates virtual environment in current directory.</span>
+$ <span class="hljs-built_in">source</span> &lt;name&gt;/bin/activate  <span class="hljs-comment"># Activates venv. On Windows run `&lt;name&gt;\Scripts\activate`.</span>
+$ pip3 install &lt;library&gt;      <span class="hljs-comment"># Installs the library into active environment.</span>
+$ python3 &lt;path&gt;              <span class="hljs-comment"># Runs the script in active environment. Also `./&lt;path&gt;`.</span>
+$ deactivate                  <span class="hljs-comment"># Deactivates virtual environment.</span>
 </code></pre></div>
 
-<ul>
-<li><strong>File paths need to be updated to <code class="python hljs"><span class="hljs-string">'os.path.join(sys._MEIPASS, &lt;path&gt;)'</span></code>.</strong></li>
-</ul>
+
 <div><h3 id="basicscripttemplate">Basic Script Template</h3><pre><code class="python language-python hljs"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># Usage: .py</span>
@@ -2932,7 +2930,7 @@ $ pyinstaller script.py --add-data '&lt;path&gt;:.'  <span class="hljs-comment">
  
 
   <footer>
-    <aside>July 31, 2023</aside>
+    <aside>August 1, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2184,9 +2184,9 @@ first_element    = op.methodcaller('pop', 0)(<list>)
 Introspection
 -------------
 ```python
-<list> = dir()                             # Names of local variables (incl. functions).
-<dict> = vars()                            # Dict of local variables. Also locals().
-<dict> = globals()                         # Dict of global variables.
+<list> = dir()                             # Names of local variables, functions, classes, etc.
+<dict> = vars()                            # Dict of local variables, etc. Also locals().
+<dict> = globals()                         # Dict of global vars, etc. (incl. '__builtins__').
 ```
 
 ### Attributes
@@ -3537,15 +3537,16 @@ cdef class <class_name>:
 cdef enum <enum_name>: <member_name>, <member_name>, ...
 ```
 
-### PyInstaller
+### Virtual Environments
+**System for installing libraries directly into project's directory.**
+
 ```bash
-$ pip3 install pyinstaller
-$ pyinstaller script.py                        # Compiles into './dist/script' directory.
-$ pyinstaller script.py --onefile              # Compiles into './dist/script' console app.
-$ pyinstaller script.py --windowed             # Compiles into './dist/script' windowed app.
-$ pyinstaller script.py --add-data '<path>:.'  # Adds file to the root of the executable.
+$ python3 -m venv <name>      # Creates virtual environment in current directory.
+$ source <name>/bin/activate  # Activates venv. On Windows run `<name>\Scripts\activate`.
+$ pip3 install <library>      # Installs the library into active environment.
+$ python3 <path>              # Runs the script in active environment. Also `./<path>`.
+$ deactivate                  # Deactivates virtual environment.
 ```
-* **File paths need to be updated to `'os.path.join(sys._MEIPASS, <path>)'`.**
 
 ### Basic Script Template
 ```python
