@@ -44,6 +44,12 @@ const TOC =
   '}\n' +
   '</code></pre>\n';
 
+const BIN_HEX =
+  '&lt;int&gt; = ±<span class="hljs-number">0b</span>&lt;bin&gt;                                  <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;bin&gt;\'</span>, <span class="hljs-number">2</span>)                          <span class="hljs-comment"># Or: int(\'±&lt;hex&gt;\', 16)</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±0b&lt;bin&gt;\'</span>, <span class="hljs-number">0</span>)                        <span class="hljs-comment"># Or: int(\'±0x&lt;hex&gt;\', 0)</span>\n' +
+  '&lt;str&gt; = bin(&lt;int&gt;)                                <span class="hljs-comment"># Returns \'[-]0b&lt;bin&gt;\'.</span>\n';
+
 const LRU_CACHE =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache\n' +
   '\n' +
@@ -800,6 +806,7 @@ function fixClasses() {
 }
 
 function fixHighlights() {
+  $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<el>]))`).html(REPR_USE_CASES);
