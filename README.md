@@ -21,7 +21,7 @@ Contents
 Main
 ----
 ```python
-if __name__ == '__main__':     # Runs main() if file wasn't imported.
+if __name__ == '__main__':      # Runs main() if file wasn't imported.
     main()
 ```
 
@@ -29,19 +29,19 @@ if __name__ == '__main__':     # Runs main() if file wasn't imported.
 List
 ----
 ```python
-<list> = <list>[<slice>]       # Or: <list>[from_inclusive : to_exclusive : ±step]
+<list> = <list>[<slice>]        # Or: <list>[from_inclusive : to_exclusive : ±step]
 ```
 
 ```python
-<list>.append(<el>)            # Or: <list> += [<el>]
-<list>.extend(<collection>)    # Or: <list> += <collection>
+<list>.append(<el>)             # Or: <list> += [<el>]
+<list>.extend(<collection>)     # Or: <list> += <collection>
 ```
 
 ```python
-<list>.sort()                  # Sorts in ascending order.
-<list>.reverse()               # Reverses the list in-place.
-<list> = sorted(<collection>)  # Returns a new sorted list.
-<iter> = reversed(<list>)      # Returns reversed iterator.
+<list>.sort()                   # Sorts in ascending order.
+<list>.reverse()                # Reverses the list in-place.
+<list> = sorted(<collection>)   # Returns a new sorted list.
+<iter> = reversed(<list>)       # Returns reversed iterator.
 ```
 
 ```python
@@ -57,12 +57,12 @@ list_of_chars    = list(<str>)
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
-<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
-<el>  = <list>.pop([<int>])    # Removes and returns item at index or from the end.
-<int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
-<int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
-<list>.remove(<el>)            # Removes first occurrence of the item or raises ValueError.
-<list>.clear()                 # Removes all items. Also works on dictionary and set.
+<list>.insert(<int>, <el>)      # Inserts item at index and moves the rest to the right.
+<el>  = <list>.pop([<int>])     # Removes and returns item at index or from the end.
+<int> = <list>.count(<el>)      # Returns number of occurrences. Also works on strings.
+<int> = <list>.index(<el>)      # Returns index of the first occurrence or raises ValueError.
+<list>.remove(<el>)             # Removes first occurrence of the item or raises ValueError.
+<list>.clear()                  # Removes all items. Also works on dictionary and set.
 ```
 
 
@@ -144,9 +144,9 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
-<tuple> = ()                                # Empty tuple.
-<tuple> = (<el>,)                           # Or: <el>,
-<tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
+<tuple> = ()                               # Empty tuple.
+<tuple> = (<el>,)                          # Or: <el>,
+<tuple> = (<el_1>, <el_2> [, ...])         # Or: <el_1>, <el_2> [, ...]
 ```
 
 ### Named Tuple
@@ -170,9 +170,9 @@ Range
 -----
 **Immutable and hashable sequence of integers.**
 ```python
-<range> = range(stop)                       # range(to_exclusive)
-<range> = range(start, stop)                # range(from_inclusive, to_exclusive)
-<range> = range(start, stop, ±step)         # range(from_inclusive, to_exclusive, ±step_size)
+<range> = range(stop)                      # range(to_exclusive)
+<range> = range(start, stop)               # range(from_inclusive, to_exclusive)
+<range> = range(start, stop, ±step)        # range(from_inclusive, to_exclusive, ±step_size)
 ```
 
 ```python
@@ -192,10 +192,10 @@ for i, el in enumerate(<collection> [, i_start]):
 Iterator
 --------
 ```python
-<iter> = iter(<collection>)                 # `iter(<iter>)` returns unmodified iterator.
-<iter> = iter(<function>, to_exclusive)     # A sequence of return values until 'to_exclusive'.
-<el>   = next(<iter> [, default])           # Raises StopIteration or returns 'default' on end.
-<list> = list(<iter>)                       # Returns a list of iterator's remaining elements.
+<iter> = iter(<collection>)                # `iter(<iter>)` returns unmodified iterator.
+<iter> = iter(<function>, to_exclusive)    # A sequence of return values until 'to_exclusive'.
+<el>   = next(<iter> [, default])          # Raises StopIteration or returns 'default' on end.
+<list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
 ```
 
 ### Itertools
@@ -204,19 +204,19 @@ import itertools as it
 ```
 
 ```python
-<iter> = it.count(start=0, step=1)          # Returns updated value endlessly. Accepts floats.
-<iter> = it.repeat(<el> [, times])          # Returns element endlessly or 'times' times.
-<iter> = it.cycle(<collection>)             # Repeats the sequence endlessly.
+<iter> = it.count(start=0, step=1)         # Returns updated value endlessly. Accepts floats.
+<iter> = it.repeat(<el> [, times])         # Returns element endlessly or 'times' times.
+<iter> = it.cycle(<collection>)            # Repeats the sequence endlessly.
 ```
 
 ```python
-<iter> = it.chain(<coll>, <coll> [, ...])   # Empties collections in order (figuratively).
-<iter> = it.chain.from_iterable(<coll>)     # Empties collections inside a collection in order.
+<iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (figuratively).
+<iter> = it.chain.from_iterable(<coll>)    # Empties collections inside a collection in order.
 ```
 
 ```python
-<iter> = it.islice(<coll>, to_exclusive)    # Only returns first 'to_exclusive' elements.
-<iter> = it.islice(<coll>, from_inc, …)     # `to_exclusive, +step_size`. Indices can be None.
+<iter> = it.islice(<coll>, to_exclusive)   # Only returns first 'to_exclusive' elements.
+<iter> = it.islice(<coll>, from_inc, …)    # `to_exclusive, +step_size`. Indices can be None.
 ```
 
 
