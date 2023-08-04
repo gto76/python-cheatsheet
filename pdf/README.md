@@ -46,7 +46,7 @@ Adding headers and footers to PDF (the same for both files)
 -----------------------------------------------------------
 * Open the PDF file in Adobe Acrobat Pro DC.
 * Select 'Organize Pages'.
-* Right click on one of the pages and select 'Crop Pages...'.
+* Right click the second page and select 'Crop Pages...'.
 * Select units: 'Inches'.
 * In 'Change page size' section select 'A4' for 'Page Sizes' and set 'XOffset' to '0.1 in'. Then click on 'YOffset' input field, so the x offset gets registered. Select page range 'All' and click OK.
 * Select 'Edit PDF' tab and add headers and footers by clicking 'Header & Footer' button, selecting a preset from 'Saved Settings' dropdown menu and clicking ok. Repeat the process for each preset. (If presets get lost, the font and the margins are as follow: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.)
@@ -54,6 +54,11 @@ Adding headers and footers to PDF (the same for both files)
 * Set title to 'Comprehensive Python Cheatsheet' and author to 'Jure Šorn' by selecting 'File/Properties...'.
 * Save the progress by running 'Save as' in Format: 'Adobe PDF Files'.
 * Run 'Save as' again, this time in 'Adobe PDF Files, Optimized', so that Menlo font error gets fixed.
+
+
+Compressing
+-----------
+* Compress the two files together with HOW_TO_PRINT.txt instruction file that contains the instructions from the next section using: `zip 'Comprehensive Python Cheatsheet.zip' 'Comprehensive Python Cheatsheet.pdf' 'Comprehensive Python Cheatsheet (optimized for printing).pdf' 'HOW_TO_PRINT.txt'`.
 
 
 Printing the PDF
