@@ -105,6 +105,19 @@ Counter({'blue': 3, 'red': 2, 'yellow': 1})
 ('blue', 3)
 ```
 
+### ChainMap
+```python
+>>> from collections import ChainMap
+>>> numbers = {"one": 1, "two": 2}
+>>> letters = {"a": "A", "b": "B"}
+>>> alpha_num = ChainMap(numbers, letters)
+>>> alpha_num["two"]
+2
+>>> alpha_num.get("a")
+'A'
+>>> ChainMap.fromkeys(["one", "two","three"], 0)
+ChainMap({'one': 0, 'two': 0, 'three': 0})
+```
 
 Set
 ---
