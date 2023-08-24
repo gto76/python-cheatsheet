@@ -1727,9 +1727,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
-<li><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Timer, RLock, Semaphore, Event, Barrier
+<div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><p><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Timer, RLock, Semaphore, Event, Barrier
 <span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor, as_completed
 </code></pre></div>
 
