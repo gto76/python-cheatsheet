@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>August 4, 2023</aside>
+    <aside>August 24, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1278,7 +1278,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
 sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints to stderr and exits with 1.</span>
-sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with passed exit code.</span>
+sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with the passed exit code.</span>
 </code></pre></div>
 
 
@@ -2021,7 +2021,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
 &lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Calls error() with caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console by default.</span>
+    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console (stderr) by default.</span>
     format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add `%(asctime)s` for datetime.</span>
     level=logging.WARNING,                        <span class="hljs-comment"># Drops messages with lower priority.</span>
     handlers=[logging.StreamHandler()]            <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
@@ -2040,7 +2040,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
 <li><strong>Formatter also supports: pathname, filename, funcName, lineno, thread and process.</strong></li>
 <li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
-<div><h4 id="createsaloggerthatwritesallmessagestoafileandsendsthemtotherootloggerthatprintstostdout">Creates a logger that writes all messages to a file and sends them to the root logger that prints to stdout:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'WARNING'</span>)
+<div><h4 id="createsaloggerthatwritesallmessagestoafileandsendsthemtotherootloggerthatprintstostderr">Creates a logger that writes all messages to a file and sends them to the root logger that prints to stderr:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>)
@@ -2074,11 +2074,11 @@ WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(prog
 
 
 <div><h2 id="web"><a href="#web" name="web">#</a>Web</h2><p><strong>Flask is a micro web framework/server. If you just want to open a html file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install flask</span>
-<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, send_from_directory, render_template_string, request
+<span class="hljs-keyword">import</span> flask
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">app = Flask(__name__)
+<pre><code class="python language-python hljs">app = flask.Flask(__name__)
 app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)
 </code></pre>
 <ul>
@@ -2088,12 +2088,12 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 </ul>
 <div><h3 id="staticrequest">Static Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/img/&lt;path:filename&gt;')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_file</span><span class="hljs-params">(filename)</span>:</span>
-    <span class="hljs-keyword">return</span> send_from_directory(<span class="hljs-string">'dirname/'</span>, filename)
+    <span class="hljs-keyword">return</span> flask.send_from_directory(<span class="hljs-string">'dirname/'</span>, filename)
 </code></pre></div>
 
 <div><h3 id="dynamicrequest">Dynamic Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/&lt;sport&gt;')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_html</span><span class="hljs-params">(sport)</span>:</span>
-    <span class="hljs-keyword">return</span> render_template_string(<span class="hljs-string">'&lt;h1&gt;{{title}}&lt;/h1&gt;'</span>, title=sport)
+    <span class="hljs-keyword">return</span> flask.render_template_string(<span class="hljs-string">'&lt;h1&gt;{{title}}&lt;/h1&gt;'</span>, title=sport)
 </code></pre></div>
 
 <ul>
@@ -2103,7 +2103,7 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 </ul>
 <div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_json</span><span class="hljs-params">(sport)</span>:</span>
-    team = request.form[<span class="hljs-string">'team'</span>]
+    team = flask.request.form[<span class="hljs-string">'team'</span>]
     <span class="hljs-keyword">return</span> {<span class="hljs-string">'team'</span>: team, <span class="hljs-string">'odds'</span>: [<span class="hljs-number">2.09</span>, <span class="hljs-number">3.74</span>, <span class="hljs-number">3.68</span>]}
 </code></pre></div>
 
@@ -2249,29 +2249,28 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 
 
 <div><h2 id="image"><a href="#image" name="image">#</a>Image</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pillow</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageFilter, ImageEnhance
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Also `color=&lt;int/tuple/str&gt;`.</span>
-&lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file contents.</span>
-&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
-&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on the path extension.</span>
-&lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in the default preview app.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))    <span class="hljs-comment"># Also `color=&lt;int/tuple/str&gt;`.</span>
+&lt;Image&gt; = Image.open(&lt;path&gt;)                      <span class="hljs-comment"># Identifies format based on file contents.</span>
+&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)               <span class="hljs-comment"># Converts image to the new mode.</span>
+&lt;Image&gt;.save(&lt;path&gt;)                              <span class="hljs-comment"># Selects format based on the path extension.</span>
+&lt;Image&gt;.show()                                    <span class="hljs-comment"># Opens image in the default preview app.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns a pixel.</span>
-&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Writes a pixel to the image.</span>
-&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a flattened view of the pixels.</span>
-&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
-&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Writes passed image to the image.</span>
+<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns a pixel.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)             <span class="hljs-comment"># Writes a pixel to the image.</span>
+&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()                 <span class="hljs-comment"># Returns a flattened view of the pixels.</span>
+&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)               <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                    <span class="hljs-comment"># Writes passed image to the image.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
-&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)                <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
+&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)              <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates NumPy array from the image.</span>
-&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                       <span class="hljs-comment"># Creates NumPy array from the image.</span>
+&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))      <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'1'</span></code> - 1-bit pixels, black and white, stored with one pixel per byte.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - 8-bit pixels, greyscale.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - 3x8-bit pixels, true color.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - 4x8-bit pixels, true color with transparency mask.</strong></li>
@@ -2294,14 +2293,15 @@ img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v 
 img.show()
 </code></pre></div>
 
-<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs">&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)           <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;ImageDraw&gt;.point((x, y))                       <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
-&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)   <span class="hljs-comment"># Always draws in clockwise direction.</span>
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.text((x, y), text, font=&lt;Font&gt;)     <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
+<div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw, ImageFont
+&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)             <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
+&lt;ImageDraw&gt;.point((x, y))                         <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
+&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))        <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
+&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)     <span class="hljs-comment"># Always draws in clockwise direction.</span>
+&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))        <span class="hljs-comment"># Last point gets connected to the first.</span>
+&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))             <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;ImageDraw&gt;.text((x, y), text, font=&lt;Font&gt;)       <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
 </code></pre></div>
 
 <ul>
@@ -2890,7 +2890,7 @@ cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 $ <span class="hljs-built_in">source</span> &lt;name&gt;/bin/activate  <span class="hljs-comment"># Activates venv. On Windows run `&lt;name&gt;\Scripts\activate`.</span>
 $ pip3 install &lt;library&gt;      <span class="hljs-comment"># Installs the library into active environment.</span>
 $ python3 &lt;path&gt;              <span class="hljs-comment"># Runs the script in active environment. Also `./&lt;path&gt;`.</span>
-$ deactivate                  <span class="hljs-comment"># Deactivates virtual environment.</span>
+$ deactivate                  <span class="hljs-comment"># Deactivates the active virtual environment.</span>
 </code></pre></div>
 
 
@@ -2930,7 +2930,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates virtual e
  
 
   <footer>
-    <aside>August 4, 2023</aside>
+    <aside>August 24, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

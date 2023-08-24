@@ -294,13 +294,6 @@ const MARIO =
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
   '    main()\n';
 
-const PYINSTALLER =
-  '$ pip3 install pyinstaller\n' +
-  '$ pyinstaller script.py                        <span class="hljs-comment"># Compiles into \'./dist/script\' directory.</span>\n' +
-  '$ pyinstaller script.py --onefile              <span class="hljs-comment"># Compiles into \'./dist/script\' console app.</span>\n' +
-  '$ pyinstaller script.py --windowed             <span class="hljs-comment"># Compiles into \'./dist/script\' windowed app.</span>\n' +
-  '$ pyinstaller script.py --add-data \'&lt;path&gt;:.\'  <span class="hljs-comment"># Adds file to the root of the executable.</span>\n';
-
 const INDEX =
   '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
@@ -823,7 +816,6 @@ function fixHighlights() {
   $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
-  $(`code:contains(pip3 install pyinstaller)`).html(PYINSTALLER);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
 

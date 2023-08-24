@@ -1500,7 +1500,7 @@ Exit
 import sys
 sys.exit()                        # Exits with exit code 0 (success).
 sys.exit(<el>)                    # Prints to stderr and exits with 1.
-sys.exit(<int>)                   # Exits with passed exit code.
+sys.exit(<int>)                   # Exits with the passed exit code.
 ```
 
 
@@ -2463,7 +2463,7 @@ logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
 ### Setup
 ```python
 logging.basicConfig(
-    filename=None,                                # Logs to console by default.
+    filename=None,                                # Logs to console (stderr) by default.
     format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for datetime.
     level=logging.WARNING,                        # Drops messages with lower priority.
     handlers=[logging.StreamHandler()]            # Uses FileHandler if filename is set.
@@ -2482,7 +2482,7 @@ logging.basicConfig(
 * **Formatter also supports: pathname, filename, funcName, lineno, thread and process.**
 * **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
-#### Creates a logger that writes all messages to a file and sends them to the root logger that prints to stdout:
+#### Creates a logger that writes all messages to a file and sends them to the root logger that prints to stderr:
 ```python
 >>> logging.basicConfig(level='WARNING')
 >>> logger = logging.getLogger('my_module')
@@ -2527,11 +2527,11 @@ Web
 **Flask is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
 # $ pip3 install flask
-from flask import Flask, send_from_directory, render_template_string, request
+import flask
 ```
 
 ```python
-app = Flask(__name__)
+app = flask.Flask(__name__)
 app.run(host=None, port=None, debug=None)
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
@@ -2542,14 +2542,14 @@ app.run(host=None, port=None, debug=None)
 ```python
 @app.route('/img/<path:filename>')
 def serve_file(filename):
-    return send_from_directory('dirname/', filename)
+    return flask.send_from_directory('dirname/', filename)
 ```
 
 ### Dynamic Request
 ```python
 @app.route('/<sport>')
 def serve_html(sport):
-    return render_template_string('<h1>{{title}}</h1>', title=sport)
+    return flask.render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
 * **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
 * **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
@@ -2559,7 +2559,7 @@ def serve_html(sport):
 ```python
 @app.post('/<sport>/odds')
 def serve_json(sport):
-    team = request.form['team']
+    team = flask.request.form['team']
     return {'team': team, 'odds': [2.09, 3.74, 3.68]}
 ```
 
@@ -2749,37 +2749,36 @@ Image
 -----
 ```python
 # $ pip3 install pillow
-from PIL import Image, ImageDraw
+from PIL import Image, ImageFilter, ImageEnhance
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Also `color=<int/tuple/str>`.
-<Image> = Image.open(<path>)                    # Identifies format based on file contents.
-<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
-<Image>.save(<path>)                            # Selects format based on the path extension.
-<Image>.show()                                  # Opens image in the default preview app.
+<Image> = Image.new('<mode>', (width, height))    # Also `color=<int/tuple/str>`.
+<Image> = Image.open(<path>)                      # Identifies format based on file contents.
+<Image> = <Image>.convert('<mode>')               # Converts image to the new mode.
+<Image>.save(<path>)                              # Selects format based on the path extension.
+<Image>.show()                                    # Opens image in the default preview app.
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))          # Returns a pixel.
-<Image>.putpixel((x, y), <int/tuple>)           # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()               # Returns a flattened view of the pixels.
-<Image>.putdata(<list/ImagingCore>)             # Writes a flattened sequence of pixels.
-<Image>.paste(<Image>, (x, y))                  # Writes passed image to the image.
+<int/tuple> = <Image>.getpixel((x, y))            # Returns a pixel.
+<Image>.putpixel((x, y), <int/tuple>)             # Writes a pixel to the image.
+<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of the pixels.
+<Image>.putdata(<list/ImagingCore>)               # Writes a flattened sequence of pixels.
+<Image>.paste(<Image>, (x, y))                    # Writes passed image to the image.
 ```
 
 ```python
-<Image> = <Image>.filter(<Filter>)              # `<Filter> = ImageFilter.<name>([<args>])`
-<Image> = <Enhance>.enhance(<float>)            # `<Enhance> = ImageEnhance.<name>(<Image>)`
+<Image> = <Image>.filter(<Filter>)                # `<Filter> = ImageFilter.<name>([<args>])`
+<Image> = <Enhance>.enhance(<float>)              # `<Enhance> = ImageEnhance.<name>(<Image>)`
 ```
 
 ```python
-<array> = np.array(<Image>)                     # Creates NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))    # Use <array>.clip(0, 255) to clip the values.
+<array> = np.array(<Image>)                       # Creates NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))      # Use <array>.clip(0, 255) to clip values.
 ```
 
 ### Modes
-* **`'1'` - 1-bit pixels, black and white, stored with one pixel per byte.**
 * **`'L'` - 8-bit pixels, greyscale.**
 * **`'RGB'` - 3x8-bit pixels, true color.**
 * **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
@@ -2807,14 +2806,15 @@ img.show()
 
 ### Image Draw
 ```python
-<ImageDraw> = ImageDraw.Draw(<Image>)           # Object for adding 2D graphics to the image.
-<ImageDraw>.point((x, y))                       # Draws a point. Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
-<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
-<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
-<ImageDraw>.text((x, y), text, font=<Font>)     # `<Font> = ImageFont.truetype(<path>, size)`
+from PIL import ImageDraw, ImageFont
+<ImageDraw> = ImageDraw.Draw(<Image>)             # Object for adding 2D graphics to the image.
+<ImageDraw>.point((x, y))                         # Draws a point. Truncates floats into ints.
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))        # To get anti-aliasing use Image's resize().
+<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)     # Always draws in clockwise direction.
+<ImageDraw>.rectangle((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))        # Last point gets connected to the first.
+<ImageDraw>.ellipse((x1, y1, x2, y2))             # To rotate use Image's rotate() and paste().
+<ImageDraw>.text((x, y), text, font=<Font>)       # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
@@ -3545,7 +3545,7 @@ $ python3 -m venv <name>      # Creates virtual environment in current directory
 $ source <name>/bin/activate  # Activates venv. On Windows run `<name>\Scripts\activate`.
 $ pip3 install <library>      # Installs the library into active environment.
 $ python3 <path>              # Runs the script in active environment. Also `./<path>`.
-$ deactivate                  # Deactivates virtual environment.
+$ deactivate                  # Deactivates the active virtual environment.
 ```
 
 ### Basic Script Template
