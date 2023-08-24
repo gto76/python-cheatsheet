@@ -527,8 +527,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microseconds=0`.</span>
 </code></pre>
 <ul>
-<li><strong>Aware <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code> time and datetime objects have defined timezone, while naive <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code> don't.</strong></li>
-<li><strong>If object is naive, it is presumed to be in the system's timezone.</strong></li>
+<li><strong>Aware <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code> time and datetime objects have defined timezone, while naive <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code> don't. If object is naive, it is presumed to be in the system's timezone!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
 <li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M).</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an int, with Monday being 0.</strong></li>
@@ -1686,7 +1685,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;collection&gt;)    <span class="hljs-comment"># Array from collection of numbers.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
@@ -1729,9 +1728,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><ul>
-<li><strong>CPython interpreter can only run a single thread at a time.</strong></li>
-<li><strong>That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, RLock, Semaphore, Event, Barrier
+<li><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Timer, RLock, Semaphore, Event, Barrier
 <span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor, as_completed
 </code></pre></div>
 
@@ -1745,6 +1743,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
+<li><strong>To delay thread execution use <code class="python hljs"><span class="hljs-string">'Timer(&lt;float&gt;, &lt;func&gt;)'</span></code> instead of Thread().</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                               <span class="hljs-comment"># Lock that can only be released by acquirer.</span>
 &lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for the lock to be available.</span>
@@ -1760,7 +1759,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n_times.</span>
 </code></pre></div>
 
-<div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A thread-safe FIFO queue. Also LifoQueue.</span>
+<div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A thread-safe first-in-first-out queue.</span>
 &lt;Queue&gt;.put(&lt;el&gt;)                              <span class="hljs-comment"># Blocks until queue stops being full.</span>
 &lt;Queue&gt;.put_nowait(&lt;el&gt;)                       <span class="hljs-comment"># Raises queue.Full exception if full.</span>
 &lt;el&gt; = &lt;Queue&gt;.get()                           <span class="hljs-comment"># Blocks until queue stops being empty.</span>
@@ -1784,8 +1783,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;bool&gt; = op.not_(&lt;obj&gt;)                                        <span class="hljs-comment"># not (or/and are not provided)</span>
-&lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains(&lt;obj&gt;, &lt;obj&gt;)           <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in</span>
+&lt;bool&gt; = op.not_(&lt;obj&gt;)                                        <span class="hljs-comment"># or, and (both missing), not</span>
+&lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains/is_(&lt;obj&gt;, &lt;obj&gt;)       <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in, is</span>
 &lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                 <span class="hljs-comment"># |, ^, &amp;</span>
 &lt;obj&gt;  = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)     <span class="hljs-comment"># +, -, *, /, //, %</span>
 &lt;num&gt;  = op.neg/invert(&lt;num&gt;)                                  <span class="hljs-comment"># -, ~</span>

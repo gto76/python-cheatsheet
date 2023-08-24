@@ -598,8 +598,7 @@ from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 <DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
 <TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microseconds=0`.
 ```
-* **Aware `<a>` time and datetime objects have defined timezone, while naive `<n>` don't.**
-* **If object is naive, it is presumed to be in the system's timezone.**
+* **Aware `<a>` time and datetime objects have defined timezone, while naive `<n>` don't. If object is naive, it is presumed to be in the system's timezone!**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
@@ -2031,7 +2030,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.**
 
 ```python
 from array import array
@@ -2090,10 +2089,9 @@ from collections import deque
 
 Threading
 ---------
-* **CPython interpreter can only run a single thread at a time.**
-* **That is why using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
+* **CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
-from threading import Thread, RLock, Semaphore, Event, Barrier
+from threading import Thread, Timer, RLock, Semaphore, Event, Barrier
 from concurrent.futures import ThreadPoolExecutor, as_completed
 ```
 
@@ -2106,6 +2104,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
+* **To delay thread execution use `'Timer(<float>, <func>)'` instead of Thread().**
 
 ### Lock
 ```python
@@ -2129,7 +2128,7 @@ with <lock>:                                   # Enters the block by calling acq
 
 ### Queue
 ```python
-<Queue> = queue.Queue(maxsize=0)               # A thread-safe FIFO queue. Also LifoQueue.
+<Queue> = queue.Queue(maxsize=0)               # A thread-safe first-in-first-out queue.
 <Queue>.put(<el>)                              # Blocks until queue stops being full.
 <Queue>.put_nowait(<el>)                       # Raises queue.Full exception if full.
 <el> = <Queue>.get()                           # Blocks until queue stops being empty.
@@ -2160,8 +2159,8 @@ Operator
 **Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
-<bool> = op.not_(<obj>)                                        # not (or/and are not provided)
-<bool> = op.eq/ne/lt/le/gt/ge/contains(<obj>, <obj>)           # ==, !=, <, <=, >, >=, in
+<bool> = op.not_(<obj>)                                        # or, and (both missing), not
+<bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)       # ==, !=, <, <=, >, >=, in, is
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
 <obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
 <num>  = op.neg/invert(<num>)                                  # -, ~
