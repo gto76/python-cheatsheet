@@ -2966,7 +2966,8 @@ parse_note  = lambda note: (get_hz(note[:2]), 1/4 if '♩' in note else 1/8)
 get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
 samples_f   = it.chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.split(','))
 samples_i   = array.array('h', (int(f * 30000) for f in samples_f))
-simpleaudio.play_buffer(samples_i, 1, 2, F)
+player = simpleaudio.play_buffer(samples_i, 1, 2, F)
+player.wait_done()
 ```
 
 
