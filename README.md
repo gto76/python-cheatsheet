@@ -589,7 +589,7 @@ Datetime
 ```python
 # pip3 install python-dateutil
 from datetime import date, time, datetime, timedelta, timezone
-from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
+from dateutil.tz import tzlocal, gettz
 ```
 
 ```python
@@ -602,25 +602,24 @@ from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
-* **`'<DTa> = resolve_imaginary(<DTa>)'` fixes DTs that fall into the missing hour.**
 
 ### Now
 ```python
-<D/DTn>  = D/DT.today()                     # Current local date or naive datetime.
-<DTn>    = DT.utcnow()                      # Naive datetime from current UTC time.
-<DTa>    = DT.now(<tzinfo>)                 # Aware datetime from current tz time.
+<D/DTn>  = D/DT.today()                     # Current local date or naive DT. Also DT.now().
+<DTa>    = DT.now(<tzinfo>)                 # Aware DT from current time in passed timezone.
 ```
 * **To extract time use `'<DTn>.time()'`, `'<DTa>.time()'` or `'<DTa>.timetz()'`.**
 
 ### Timezone
 ```python
-<tzinfo> = timezone.utc                     # London without daylight saving time.
+<tzinfo> = timezone.utc                     # London without daylight saving time (DST).
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
 <tzinfo> = tzlocal()                        # Local timezone. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
-<DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local timezone.
+<DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
+* **Timezones returned by gettz(), tzlocal(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.**
 * **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows.**
 
 ### Encode
@@ -637,7 +636,7 @@ from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 ### Decode
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
-<str>    = <D/T/DT>.strftime('<format>')    # Custom string representation.
+<str>    = <D/T/DT>.strftime('<format>')    # Custom string representation of the object.
 <int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
@@ -645,21 +644,22 @@ from dateutil.tz import tzlocal, gettz, datetime_exists, resolve_imaginary
 
 ### Format
 ```python
->>> dt = datetime.strptime('2015-05-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%A, %dth of %B '%y, %I:%M%p %Z")
-"Thursday, 14th of May '15, 11:39PM UTC+02:00"
+>>> dt = datetime.strptime('2025-08-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
+>>> dt.strftime("%dth of %B '%y (%a), %I:%M%p %Z")
+"14th of August '25 (Thu), 11:39PM UTC+02:00"
 ```
 * **`'%z'` accepts `'±HH[:]MM'` and returns `'±HHMM'` or empty string if datetime is naive.**
 * **`'%Z'` accepts `'UTC/GMT'` and local timezone's code and returns timezone's name, `'UTC[±HH:MM]'` if timezone is nameless, or an empty string if datetime is naive.**
-* **For abbreviated weekday and month use `'%a'` and `'%b'`.**
 
 ### Arithmetics
 ```python
-<D/DT>   = <D/DT>  ± <TD>                   # Returned datetime can fall into missing hour.
-<TD>     = <D/DTn> - <D/DTn>                # Returns the difference. Ignores time jumps.
-<TD>     = <DTa>   - <DTa>                  # Ignores time jumps if they share tzinfo object.
-<TD>     = <TD>    * <int/float>            # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>    / <TD>                   # How many weeks/years there are in TD. Also //.
+<bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
+<bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
+<TD>     = <D/DTn>   - <D/DTn>              # Returns the difference. Ignores time jumps.
+<TD>     = <DTa>     - <DTa>                # Ignores time jumps if they share tzinfo object.
+<D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
+<TD>     = <TD>      * <int/float>          # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
+<float>  = <TD>      / <TD>                 # How many weeks/years there are in TD. Also //.
 ```
 
 
