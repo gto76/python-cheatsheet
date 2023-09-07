@@ -2104,7 +2104,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
-* **To delay thread execution use `'Timer(<float>, <func>)'` instead of Thread().**
+* **To delay thread execution use `'Timer(seconds, <func>)'` instead of Thread().**
 
 ### Lock
 ```python
@@ -2137,16 +2137,16 @@ with <lock>:                                   # Enters the block by calling acq
 
 ### Thread Pool Executor
 ```python
-<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: …`
+<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: ...`
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
-<Exec>.shutdown(wait=True)                     # Blocks until all threads finish executing.
+<Exec>.shutdown()                              # Blocks until all threads finish executing.
 ```
 
 ```python
 <bool> = <Future>.done()                       # Checks if the thread has finished executing.
 <obj>  = <Future>.result(timeout=None)         # Waits for thread to finish and returns result.
-<bool> = <Future>.cancel()                     # Returns False if thread is already running.
+<bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # Each Future is yielded as it completes.
 ```
 * **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
@@ -2159,13 +2159,13 @@ Operator
 **Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
-<bool> = op.not_(<obj>)                                        # or, and (both missing), not
-<bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)       # ==, !=, <, <=, >, >=, in, is
-<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
-<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
-<num>  = op.neg/invert(<num>)                                  # -, ~
-<num>  = op.pow(<num>, <num>)                                  # **
-<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
+<bool> = op.not_(<obj>)                                         # not (or/and bind even less)
+<bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)        # ==, !=, <, <=, >, >=, in, is
+<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                  # |, ^, &
+<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)      # +, -, *, /, //, %
+<num>  = op.neg/invert(<num>)                                   # -, ~
+<num>  = op.pow(<num>, <num>)                                   # **
+<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])   # [index/key], .name, .name()
 ```
 
 ```python
@@ -2920,7 +2920,7 @@ samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100_000))
 write_to_wav_file('test.wav', samples_f)
 ```
 
-#### Adds noise to a mono WAV file:
+#### Adds noise to the mono WAV file:
 ```python
 from random import random
 add_noise = lambda value: value + (random() - 0.5) * 0.03
@@ -2928,14 +2928,14 @@ samples_f = (add_noise(f) for f in read_wav_file('test.wav'))
 write_to_wav_file('test.wav', samples_f)
 ```
 
-#### Plays a WAV file:
+#### Plays the WAV file:
 ```python
 # $ pip3 install simpleaudio
 from simpleaudio import play_buffer
 with wave.open('test.wav', 'rb') as file:
     p = file.getparams()
     frames = file.readframes(-1)
-    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
 ```
 
 ### Text to Speech
@@ -3043,7 +3043,7 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 
 ### Sound
 ```python
-<Sound> = pg.mixer.Sound(<path/file/bytes>)     # Loads WAV file or array of signed shorts.
+<Sound> = pg.mixer.Sound(<path/file/bytes>)     # WAV file or bytes/array of signed shorts.
 <Sound>.play/stop()                             # Also <Sound>.set_volume(<float>).
 ```
 

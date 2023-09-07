@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 5, 2023</aside>
+    <aside>September 7, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1741,7 +1741,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
-<li><strong>To delay thread execution use <code class="python hljs"><span class="hljs-string">'Timer(&lt;float&gt;, &lt;func&gt;)'</span></code> instead of Thread().</strong></li>
+<li><strong>To delay thread execution use <code class="python hljs"><span class="hljs-string">'Timer(seconds, &lt;func&gt;)'</span></code> instead of Thread().</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = RLock()                               <span class="hljs-comment"># Lock that can only be released by acquirer.</span>
 &lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for the lock to be available.</span>
@@ -1764,15 +1764,15 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
 </code></pre></div>
 
-<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: …`</span>
+<div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: ...`</span>
 &lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># Multithreaded and non-lazy map(). Keeps order.</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Creates a thread and returns its Future obj.</span>
-&lt;Exec&gt;.shutdown(wait=<span class="hljs-keyword">True</span>)                     <span class="hljs-comment"># Blocks until all threads finish executing.</span>
+&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Blocks until all threads finish executing.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()                       <span class="hljs-comment"># Checks if the thread has finished executing.</span>
 &lt;obj&gt;  = &lt;Future&gt;.result(timeout=<span class="hljs-keyword">None</span>)         <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
-&lt;bool&gt; = &lt;Future&gt;.cancel()                     <span class="hljs-comment"># Returns False if thread is already running.</span>
+&lt;bool&gt; = &lt;Future&gt;.cancel()                     <span class="hljs-comment"># Cancels or returns False if running/finished.</span>
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Each Future is yielded as it completes.</span>
 </code></pre>
 <ul>
@@ -1781,13 +1781,13 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;bool&gt; = op.not_(&lt;obj&gt;)                                        <span class="hljs-comment"># or, and (both missing), not</span>
-&lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains/is_(&lt;obj&gt;, &lt;obj&gt;)       <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in, is</span>
-&lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                 <span class="hljs-comment"># |, ^, &amp;</span>
-&lt;obj&gt;  = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)     <span class="hljs-comment"># +, -, *, /, //, %</span>
-&lt;num&gt;  = op.neg/invert(&lt;num&gt;)                                  <span class="hljs-comment"># -, ~</span>
-&lt;num&gt;  = op.pow(&lt;num&gt;, &lt;num&gt;)                                  <span class="hljs-comment"># **</span>
-&lt;func&gt; = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt; [, ...])  <span class="hljs-comment"># [index/key], .name, .name()</span>
+&lt;bool&gt; = op.not_(&lt;obj&gt;)                                         <span class="hljs-comment"># not (or/and bind even less)</span>
+&lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains/is_(&lt;obj&gt;, &lt;obj&gt;)        <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in, is</span>
+&lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                  <span class="hljs-comment"># |, ^, &amp;</span>
+&lt;obj&gt;  = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)      <span class="hljs-comment"># +, -, *, /, //, %</span>
+&lt;num&gt;  = op.neg/invert(&lt;num&gt;)                                   <span class="hljs-comment"># -, ~</span>
+&lt;num&gt;  = op.pow(&lt;num&gt;, &lt;num&gt;)                                   <span class="hljs-comment"># **</span>
+&lt;func&gt; = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt; [, ...])   <span class="hljs-comment"># [index/key], .name, .name()</span>
 </code></pre></div>
 
 
@@ -2389,18 +2389,18 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div></div>
 
 
-<div><h4 id="addsnoisetoamonowavfile">Adds noise to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
+<div><h4 id="addsnoisetothemonowavfile">Adds noise to the mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
 add_noise = <span class="hljs-keyword">lambda</span> value: value + (random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">0.03</span>
 samples_f = (add_noise(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div>
 
-<div><h4 id="playsawavfile">Plays a WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
+<div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
     p = file.getparams()
     frames = file.readframes(<span class="hljs-number">-1</span>)
-    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate)
+    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
 </code></pre></div>
 
 <div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
@@ -2482,7 +2482,7 @@ rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>
 &lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
 </code></pre></div>
 
-<div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># Loads WAV file or array of signed shorts.</span>
+<div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
 &lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also &lt;Sound&gt;.set_volume(&lt;float&gt;).</span>
 </code></pre></div>
 
@@ -2928,7 +2928,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 5, 2023</aside>
+    <aside>September 7, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
