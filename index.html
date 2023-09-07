@@ -2688,7 +2688,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃
 ┃                        │ a  <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   .  │            │            │ columns. Also updates    ┃
 ┃                        │ b  <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>  │            │            │ items that contain NaN.  ┃
-┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ R must be a DataFrame.   ┃
+┃                        │ c  .   <span class="hljs-number">6</span>   <span class="hljs-number">7</span>  │            │            │ Argument r must be a DF. ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;DF&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>

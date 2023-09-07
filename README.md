@@ -3291,7 +3291,7 @@ c  6  7
 | l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
 |                        | a  1   2   .  |            |            | columns. Also updates    |
 |                        | b  3   4   5  |            |            | items that contain NaN.  |
-|                        | c  .   6   7  |            |            | R must be a DataFrame.   |
+|                        | c  .   6   7  |            |            | Argument r must be a DF. |
 +------------------------+---------------+------------+------------+--------------------------+
 ```
 
