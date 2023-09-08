@@ -488,7 +488,7 @@ Numbers
 ```python
 <int>      = int(<float/str/bool>)                # Or: math.floor(<float>)
 <float>    = float(<int/str/bool>)                # Or: <int/float>e±<int>
-<complex>  = complex(real=0, imag=0)              # Or: <int/float/Fraction> ± <int/float>j
+<complex>  = complex(real=0, imag=0)              # Or: <int/float> ± <int/float>j
 <Fraction> = fractions.Fraction(0, 1)             # Or: Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<str/int>)           # Or: Decimal((sign, digits, exponent))
 ```
@@ -645,8 +645,8 @@ from dateutil.tz import tzlocal, gettz
 ### Format
 ```python
 >>> dt = datetime.strptime('2025-08-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%dth of %B '%y (%a), %I:%M%p %Z")
-"14th of August '25 (Thu), 11:39PM UTC+02:00"
+>>> dt.strftime("%dth of %B '%y (%a), %I:%M %p %Z")
+"14th of August '25 (Thu), 11:39 PM UTC+02:00"
 ```
 * **`'%z'` accepts `'±HH[:]MM'` and returns `'±HHMM'` or empty string if datetime is naive.**
 * **`'%Z'` accepts `'UTC/GMT'` and local timezone's code and returns timezone's name, `'UTC[±HH:MM]'` if timezone is nameless, or an empty string if datetime is naive.**
