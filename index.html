@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 9, 2023</aside>
+    <aside>September 10, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1781,7 +1781,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;bool&gt; = op.not_(&lt;obj&gt;)                                         <span class="hljs-comment"># not (or/and bind even less)</span>
+&lt;bool&gt; = op.not_(&lt;obj&gt;)                                         <span class="hljs-comment"># or, and, not (or/and missing)</span>
 &lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains/is_(&lt;obj&gt;, &lt;obj&gt;)        <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in, is</span>
 &lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                  <span class="hljs-comment"># |, ^, &amp;</span>
 &lt;obj&gt;  = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)      <span class="hljs-comment"># +, -, *, /, //, %</span>
@@ -2284,7 +2284,7 @@ img.convert(<span class="hljs-string">'RGB'</span>).save(<span class="hljs-strin
 
 
 
-<div><h4 id="addsnoisetoapngimageanddisplaysit">Adds noise to a PNG image and displays it:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
+<div><h4 id="addsnoisetothepngimageanddisplaysit">Adds noise to the PNG image and displays it:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 add_noise = <span class="hljs-keyword">lambda</span> value: max(<span class="hljs-number">0</span>, min(<span class="hljs-number">255</span>, value + randint(<span class="hljs-number">-20</span>, <span class="hljs-number">20</span>)))
 img = Image.open(<span class="hljs-string">'test.png'</span>).convert(<span class="hljs-string">'HSV'</span>)
 img.putdata([(add_noise(h), s, v) <span class="hljs-keyword">for</span> h, s, v <span class="hljs-keyword">in</span> img.getdata()])
@@ -2928,7 +2928,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 9, 2023</aside>
+    <aside>September 10, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

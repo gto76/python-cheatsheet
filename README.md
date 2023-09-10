@@ -2159,7 +2159,7 @@ Operator
 **Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
-<bool> = op.not_(<obj>)                                         # not (or/and bind even less)
+<bool> = op.not_(<obj>)                                         # or, and, not (or/and missing)
 <bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)        # ==, !=, <, <=, >, >=, in, is
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                  # |, ^, &
 <obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)      # +, -, *, /, //, %
@@ -2795,7 +2795,7 @@ img.putdata([(int(h), 255, 255) for h in hues])
 img.convert('RGB').save('test.png')
 ```
 
-#### Adds noise to a PNG image and displays it:
+#### Adds noise to the PNG image and displays it:
 ```python
 from random import randint
 add_noise = lambda value: max(0, min(255, value + randint(-20, 20)))
