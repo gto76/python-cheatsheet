@@ -2599,14 +2599,14 @@ plt.show()                                     <span class="hljs-comment"># Disp
 &lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = pd.Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
-x    <span class="hljs-number">1</span>
-y    <span class="hljs-number">2</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = pd.Series([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+x    <span class="hljs-number">2</span>
+y    <span class="hljs-number">3</span>
 </code></pre>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃               │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  ┃
 ┠───────────────┼─────────────┼─────────────┼───────────────┨
-┃ sr.apply(…)   │      <span class="hljs-number">3</span>      │    sum  <span class="hljs-number">3</span>   │     s  <span class="hljs-number">3</span>      ┃
+┃ sr.apply(…)   │      <span class="hljs-number">5</span>      │    sum  <span class="hljs-number">5</span>   │     s  <span class="hljs-number">5</span>      ┃
 ┃ sr.agg(…)     │             │             │               ┃
 ┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 
@@ -2756,12 +2756,12 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 &lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">'z'</span>)
-      x  y  z
-<span class="hljs-number">3</span>: a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>
-<span class="hljs-number">6</span>: b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
-   c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
-</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">'z'</span>); gb.apply(print)
+   x  y  z
+a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>
+   x  y  z
+b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
+c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span></code></pre>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃                 │    <span class="hljs-string">'sum'</span>    │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
 ┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
@@ -2783,14 +2783,14 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 </code></pre></div>
 
 
-<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install plotly kaleido</span>
-<span class="hljs-keyword">from</span> plotly.express <span class="hljs-keyword">import</span> line
-&lt;Figure&gt; = line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)           <span class="hljs-comment"># Or: line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly kaleido</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.express <span class="hljs-keyword">as</span> ex
+&lt;Figure&gt; = ex.line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)        <span class="hljs-comment"># Or: ex.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
 &lt;Figure&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>), …)  <span class="hljs-comment"># `paper_bgcolor='rgb(0, 0, 0)'`.</span>
 &lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also &lt;Figure&gt;.show().</span>
 </code></pre></div>
 
-<div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
+<div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:321px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'</span>
                          <span class="hljs-string">'846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv'</span>,
@@ -2800,7 +2800,7 @@ df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class=
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
 df = df[df.date &gt; <span class="hljs-string">'2020-03-14'</span>]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
-line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
 </code></pre></div>
 
 

@@ -294,6 +294,14 @@ const MARIO =
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
   '    main()\n';
 
+const PLOTLY =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">\'z\'</span>); gb.apply(print)\n' +
+  '   x  y  z\n' +
+  'a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>\n' +
+  '   x  y  z\n' +
+  'b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>\n' +
+  'c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>';
+
 const INDEX =
   '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
@@ -538,13 +546,13 @@ const DIAGRAM_12_B =
   '┗━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━┛\n';
 
 const DIAGRAM_13_A =
-  '| sr.apply(…)   |      3      |    sum  3   |     s  3      |';
+  '| sr.apply(…)   |      5      |    sum  5   |     s  5      |';
 
 const DIAGRAM_13_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃               │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
   "┠───────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ sr.apply(…)   │      3      │    sum  3   │     s  3      ┃\n" +
+  "┃ sr.apply(…)   │      5      │    sum  5   │     s  5      ┃\n" +
   "┃ sr.agg(…)     │             │             │               ┃\n" +
   "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
   "\n" +
@@ -816,6 +824,7 @@ function fixHighlights() {
   $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
+  $(`code:contains(>>> gb = df.groupby)`).html(PLOTLY);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
 

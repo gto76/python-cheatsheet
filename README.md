@@ -3184,16 +3184,16 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```
 
 ```python
->>> sr = pd.Series([1, 2], index=['x', 'y'])
-x    1
-y    2
+>>> sr = pd.Series([2, 3], index=['x', 'y'])
+x    2
+y    3
 ```
 
 ```text
 +---------------+-------------+-------------+---------------+
 |               |    'sum'    |   ['sum']   | {'s': 'sum'}  |
 +---------------+-------------+-------------+---------------+
-| sr.apply(…)   |      3      |    sum  3   |     s  3      |
+| sr.apply(…)   |      5      |    sum  5   |     s  5      |
 | sr.agg(…)     |             |             |               |
 +---------------+-------------+-------------+---------------+
 ```
@@ -3377,11 +3377,12 @@ c  7  8  6
 ```
 
 ```python
->>> gb = df.groupby('z')
-      x  y  z
-3: a  1  2  3
-6: b  4  5  6
-   c  7  8  6
+>>> gb = df.groupby('z'); gb.apply(print)
+   x  y  z
+a  1  2  3
+   x  y  z
+b  4  5  6
+c  7  8  6
 ```
 
 ```text
@@ -3414,9 +3415,9 @@ c  7  8  6
 Plotly
 ------
 ```python
-# $ pip3 install plotly kaleido
-from plotly.express import line
-<Figure> = line(<DF>, x=<col_name>, y=<col_name>)           # Or: line(x=<list>, y=<list>)
+# $ pip3 install pandas plotly kaleido
+import pandas as pd, plotly.express as ex
+<Figure> = ex.line(<DF>, x=<col_name>, y=<col_name>)        # Or: ex.line(x=<list>, y=<list>)
 <Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0), …)  # `paper_bgcolor='rgb(0, 0, 0)'`.
 <Figure>.write_html/json/image('<path>')                    # Also <Figure>.show().
 ```
@@ -3424,7 +3425,7 @@ from plotly.express import line
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
-<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:340px; width:100%;"></div>
+<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:321px; width:100%;"></div>
 
 ```python
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
@@ -3437,7 +3438,7 @@ df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
 df = df[df.date > '2020-03-14']
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
+ex.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
 #### Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:
