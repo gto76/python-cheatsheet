@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 11, 2023</aside>
+    <aside>September 15, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -979,7 +979,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 <div><h3 id="iterator-1">Iterator</h3><ul>
 <li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
-<li><strong>Next() should return next item or raise StopIteration.</strong></li>
+<li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
 <li><strong>Iter() should return 'self'.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -2731,13 +2731,13 @@ plt.show()                                     <span class="hljs-comment"># Disp
 
 <pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
 &lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)  <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
-&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
+&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
 &lt;DF&gt; = pd.read_clipboard()                     <span class="hljs-comment"># Reads a copied table from the clipboard.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/…'</span>])             <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
 &lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also to_markdown/latex([&lt;path&gt;]).</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
-&lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Accepts SQLite3 or SQLAlchemy connection.</span>
+&lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], list(<span class="hljs-string">'abc'</span>), list(<span class="hljs-string">'xyz'</span>))
 <span class="hljs-meta">&gt;&gt;&gt; </span>df.groupby(<span class="hljs-string">'z'</span>).get_group(<span class="hljs-number">6</span>)
@@ -2928,7 +2928,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 11, 2023</aside>
+    <aside>September 15, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

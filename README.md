@@ -1156,7 +1156,7 @@ class MySortable:
 
 ### Iterator
 * **Any object that has methods next() and iter() is an iterator.**
-* **Next() should return next item or raise StopIteration.**
+* **Next() should return next item or raise StopIteration exception.**
 * **Iter() should return 'self'.**
 ```python
 class Counter:
@@ -3341,7 +3341,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
 <DF> = pd.read_csv/pickle/excel('<path/url>')  # Use `sheet_name=None` to get all Excel sheets.
-<DF> = pd.read_sql('<table/query>', <conn.>)   # Accepts SQLite3 or SQLAlchemy connection.
+<DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
 <DF> = pd.read_clipboard()                     # Reads a copied table from the clipboard.
 ```
 
@@ -3349,7 +3349,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 <dict> = <DF>.to_dict(['d/l/s/…'])             # Returns columns as dicts, lists or series.
 <str>  = <DF>.to_json/html/csv([<path>])       # Also to_markdown/latex([<path>]).
 <DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
-<DF>.to_sql('<table_name>', <connection>)      # Accepts SQLite3 or SQLAlchemy connection.
+<DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
 
 ### GroupBy
