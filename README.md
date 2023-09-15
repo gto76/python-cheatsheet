@@ -2550,7 +2550,7 @@ def serve_file(filename):
 def serve_html(sport):
     return flask.render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
-* **Use `'render_template(filename, <kwargs>)'` to render template file.**
+* **Use `'render_template(filename, <kwargs>)'` to render file located in templates dir.**
 * **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
 * **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
 * **Use `'session[key] = value'` to store session data like username, etc.**
