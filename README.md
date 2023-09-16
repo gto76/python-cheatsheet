@@ -77,7 +77,7 @@ Dictionary
 ```python
 value  = <dict>.get(key, default=None)          # Returns default if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
-<dict> = collections.defaultdict(<type>)        # Returns a dict with default value of type.
+<dict> = collections.defaultdict(<type>)        # Returns a dict with default value `<type>()`.
 <dict> = collections.defaultdict(lambda: 1)     # Returns a dict with default value 1.
 ```
 
@@ -353,7 +353,7 @@ Regex
 import re
 <str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences with 'new'.
 <list>  = re.findall(<regex>, text)            # Returns all occurrences as strings.
-<list>  = re.split(<regex>, text, maxsplit=0)  # Use brackets in regex to include the matches.
+<list>  = re.split(<regex>, text, maxsplit=0)  # Add brackets around regex to include matches.
 <Match> = re.search(<regex>, text)             # Searches for first occurrence of the pattern.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as Match objects.
@@ -1400,7 +1400,7 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
-* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function blocks delimit scope).**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function block delimits scope).**
 * **To catch signals use `'signal.signal(signal_number, <func>)'`.**
 
 ### Catching Exceptions
@@ -2452,7 +2452,7 @@ import logging
 ```
 
 ```python
-logging.basicConfig(filename=<path>)              # Configures the root logger.
+logging.basicConfig(filename=<path>)              # Configures the root logger (see Setup).
 logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
 <Logger> = logging.getLogger(__name__)            # Logger named after the module.
 <Logger>.<level>(<str>)                           # Messages propagate to the root logger.
@@ -2463,7 +2463,7 @@ logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
 ```python
 logging.basicConfig(
     filename=None,                                # Logs to console (stderr) by default.
-    format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for datetime.
+    format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for local datetime.
     level=logging.WARNING,                        # Drops messages with lower priority.
     handlers=[logging.StreamHandler()]            # Uses FileHandler if filename is set.
 )
