@@ -1832,6 +1832,7 @@ import csv
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
 * **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
+* **Open existing file with `'mode="w"'` to overwrite it or `'mode="a"'` to append to it.**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
@@ -3466,8 +3467,8 @@ def scrape_data():
     return map(pd.Series.rename, out, ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones'])
 
 def wrangle_data(covid, bitcoin, gold, dow):
-    df = pd.concat([bitcoin, gold, dow], axis=1)  # Joins columns on dates.
-    df = df.sort_index().interpolate()            # Sorts by date and interpolates NaN-s.
+    df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates table by joining columns on dates.
+    df = df.sort_index().interpolate()            # Sorts table by date and interpolates NaN-s.
     df = df.loc['2020-02-23':]                    # Discards rows before '2020-02-23'.
     df = (df / df.iloc[0]) * 100                  # Calculates percentages relative to day 1.
     df = df.join(covid)                           # Adds column with covid cases.
