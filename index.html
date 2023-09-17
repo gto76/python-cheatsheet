@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 16, 2023</aside>
+    <aside>September 17, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2196,7 +2196,7 @@ $ snakeviz test.prof
 &lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_indexes]    <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, row_is, column_is]</span>
 &lt;1d_array&gt; = &lt;2d_array&gt;[row_indexes, column_index]      <span class="hljs-comment"># &lt;3d_a&gt;[table_i/is, row_is, column_i]</span>
 </code></pre>
-<pre><code class="bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt;&lt;== &lt;el/1d/2d_array&gt;           <span class="hljs-comment"># 1d_array must have size of a row.</span>
+<pre><code class="bash hljs">&lt;2d_bools&gt; = &lt;2d_array&gt; &gt; &lt;el/1d/2d_array&gt;              <span class="hljs-comment"># 1d_array must have size of a row.</span>
 &lt;1d/2d_a&gt;  = &lt;2d_array&gt;[&lt;2d/1d_bools&gt;]                  <span class="hljs-comment"># 1d_bools must have size of a column.</span>
 </code></pre>
 <ul>
@@ -2584,8 +2584,8 @@ Name: a, dtype: int64
 &lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;keys_slice/slice&gt;]</span>
 &lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.loc/iloc[bools]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt;&lt;== &lt;el/Sr&gt;                       <span class="hljs-comment"># Returns a Series of bools.</span>
-&lt;Sr&gt; = &lt;Sr&gt; +-*/ &lt;el/Sr&gt;                       <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
+<pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt; &lt;el/Sr&gt;                          <span class="hljs-comment"># Returns a Series of bools.</span>
+&lt;Sr&gt; = &lt;Sr&gt; + &lt;el/Sr&gt;                          <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = pd.concat(&lt;coll_of_Sr&gt;)                 <span class="hljs-comment"># Concats multiple Series into one long Series.</span>
 &lt;Sr&gt; = &lt;Sr&gt;.combine_first(&lt;Sr&gt;)                <span class="hljs-comment"># Adds items that are not yet present.</span>
@@ -2641,15 +2641,15 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[column_key/s]                   <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
 &lt;DF&gt;    = &lt;DF&gt;[row_bools]                      <span class="hljs-comment"># Keeps rows as specified by bools.</span>
-&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to False values.</span>
+&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to values that are False in bools.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt;&lt;== &lt;el/Sr/DF&gt;                 <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
-&lt;DF&gt;    = &lt;DF&gt; +-*/ &lt;el/Sr/DF&gt;                 <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt; &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
+&lt;DF&gt;    = &lt;DF&gt; + &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)           <span class="hljs-comment"># Replaces row keys with values from a column.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)           <span class="hljs-comment"># Replaces row keys with values from the column.</span>
 &lt;DF&gt;    = &lt;DF&gt;.reset_index(drop=<span class="hljs-keyword">False</span>)         <span class="hljs-comment"># Drops or moves row keys to column named index.</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)      <span class="hljs-comment"># Sorts rows by row keys. Use `axis=1` for cols.</span>
-&lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)       <span class="hljs-comment"># Sorts rows by the passed column/s. Same.</span>
+&lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)       <span class="hljs-comment"># Sorts rows by passed column/s. Also `axis=1`.</span>
 </code></pre>
 <div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2928,7 +2928,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 16, 2023</aside>
+    <aside>September 17, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2685,7 +2685,7 @@ import numpy as np
 ```
 
 ```perl
-<2d_bools> = <2d_array> ><== <el/1d/2d_array>           # 1d_array must have size of a row.
+<2d_bools> = <2d_array> > <el/1d/2d_array>              # 1d_array must have size of a row.
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
 * **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
@@ -3161,8 +3161,8 @@ Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = <Sr> ><== <el/Sr>                       # Returns a Series of bools.
-<Sr> = <Sr> +-*/ <el/Sr>                       # Items with non-matching keys get value NaN.
+<Sr> = <Sr> > <el/Sr>                          # Returns a Series of bools.
+<Sr> = <Sr> + <el/Sr>                          # Items with non-matching keys get value NaN.
 ```
 
 ```python
@@ -3236,19 +3236,19 @@ b  3  4
 ```python
 <Sr/DF> = <DF>[column_key/s]                   # Or: <DF>.column_key
 <DF>    = <DF>[row_bools]                      # Keeps rows as specified by bools.
-<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to False values.
+<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to values that are False in bools.
 ```
 
 ```python
-<DF>    = <DF> ><== <el/Sr/DF>                 # Returns DF of bools. Sr is treated as a row.
-<DF>    = <DF> +-*/ <el/Sr/DF>                 # Items with non-matching keys get value NaN.
+<DF>    = <DF> > <el/Sr/DF>                    # Returns DF of bools. Sr is treated as a row.
+<DF>    = <DF> + <el/Sr/DF>                    # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from a column.
+<DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from the column.
 <DF>    = <DF>.reset_index(drop=False)         # Drops or moves row keys to column named index.
 <DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
-<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by the passed column/s. Same.
+<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by passed column/s. Also `axis=1`.
 ```
 
 #### DataFrame — Merge, Join, Concat:

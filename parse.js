@@ -791,7 +791,7 @@ function changeCodeLanguages() {
   $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
   $('code:contains(<el>       = <2d_array>[row_index, column_index])').removeClass().addClass('bash');
   $('code:contains(<2d_array> = <2d_array>[row_indexes])').removeClass().addClass('bash');
-  $('code:contains(<2d_bools> = <2d_array> ><== <el/1d/2d_array>)').removeClass().addClass('bash');
+  $('code:contains(<2d_bools> = <2d_array> > <el/1d/2d_array>)').removeClass().addClass('bash');
   $('code.perl').removeClass().addClass('python');
 }
 
