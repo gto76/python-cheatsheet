@@ -370,7 +370,7 @@ import re
 ### Match Object
 ```python
 <str>   = <Match>.group()                      # Returns the whole match. Also group(0).
-<str>   = <Match>.group(1)                     # Returns part in the first bracket.
+<str>   = <Match>.group(1)                     # Returns the part inside first brackets.
 <tuple> = <Match>.groups()                     # Returns all bracketed parts.
 <int>   = <Match>.start()                      # Returns start index of the match.
 <int>   = <Match>.end()                        # Returns exclusive end index of the match.
@@ -2836,7 +2836,7 @@ frames = []
 for velocity in range(1, 16):
     y = sum(range(velocity))
     frame = Image.new('L', (WIDTH, HEIGHT))
-    draw  = ImageDraw.Draw(frame)
+    draw = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
     frames.append(frame)
 frames += reversed(frames[1:-1])

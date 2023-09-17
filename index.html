@@ -348,7 +348,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'+'</span></code> to make them non-greedy.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                      <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
-&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns part in the first bracket.</span>
+&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns the part inside first brackets.</span>
 &lt;tuple&gt; = &lt;Match&gt;.groups()                     <span class="hljs-comment"># Returns all bracketed parts.</span>
 &lt;int&gt;   = &lt;Match&gt;.start()                      <span class="hljs-comment"># Returns start index of the match.</span>
 &lt;int&gt;   = &lt;Match&gt;.end()                        <span class="hljs-comment"># Returns exclusive end index of the match.</span>
@@ -2318,7 +2318,7 @@ frames = []
 <span class="hljs-keyword">for</span> velocity <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">16</span>):
     y = sum(range(velocity))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, HEIGHT))
-    draw  = ImageDraw.Draw(frame)
+    draw = ImageDraw.Draw(frame)
     draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
