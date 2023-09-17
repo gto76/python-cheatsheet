@@ -1553,7 +1553,7 @@ value = args.<name>
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<el>'` to set the default value.**
+* **Use `'default=<el>'` to set argument's default value.**
 * **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 
@@ -2177,7 +2177,7 @@ product_of_elems = functools.reduce(op.mul, <collection>)
 union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Bitwise operators require objects to have and(), or() and xor() special methods, unlike logical operators that work on all types of objects.**
+* **Bitwise operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
@@ -2191,7 +2191,7 @@ Introspection
 
 ### Attributes
 ```python
-<list> = dir(<object>)                     # Names of object's attributes (incl. methods).
+<list> = dir(<object>)                     # Names of object's attributes (including methods).
 <dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
 value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
@@ -2564,7 +2564,7 @@ def serve_json(sport):
     return {'team': team, 'odds': [2.09, 3.74, 3.68]}
 ```
 
-#### Starts the app in its own thread and queries it with a post request:
+#### Starts the app in its own thread and queries its REST API:
 ```python
 # $ pip3 install requests
 >>> import threading, requests
@@ -3167,7 +3167,7 @@ Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = pd.concat(<coll_of_Sr>)                 # Concats multiple Series into one long Series.
+<Sr> = pd.concat(<coll_of_Sr>)                 # Concats multiple series into one long Series.
 <Sr> = <Sr>.combine_first(<Sr>)                # Adds items that are not yet present.
 <Sr>.update(<Sr>)                              # Updates items that are already present.
 ```
