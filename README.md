@@ -1662,6 +1662,7 @@ from glob import glob
 <str>  = path.basename(<path>)      # Returns final component of the path.
 <str>  = path.dirname(<path>)       # Returns path without the final component.
 <tup.> = path.splitext(<path>)      # Splits on last period of the final component.
+<tup.> = path.expanduser('~')       # Gives homedir path
 ```
 
 ```python
