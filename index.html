@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 17, 2023</aside>
+    <aside>September 18, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2015,7 +2015,7 @@ print(table)
 <pre><code class="python language-python hljs">logging.basicConfig(filename=&lt;path&gt;)              <span class="hljs-comment"># Configures the root logger (see Setup).</span>
 logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-comment"># Logs to the root logger.</span>
 &lt;Logger&gt; = logging.getLogger(__name__)            <span class="hljs-comment"># Logger named after the module.</span>
-&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># Messages propagate to the root logger.</span>
+&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># Logs to the logger.</span>
 &lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Calls error() with caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
@@ -2031,41 +2031,41 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-commen
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Adds Formatter to the Handler.</span>
 &lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Processes all messages by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Adds Handler to the Logger.</span>
-&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to handlers and parent.</span>
+&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to its/ancestor's handlers.</span>
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
+<li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
 <li><strong>Formatter also supports: pathname, filename, funcName, lineno, thread and process.</strong></li>
 <li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
-<div><h4 id="createsaloggerthatwritesallmessagestoafileandsendsthemtotherootloggerthatprintstostderr">Creates a logger that writes all messages to a file and sends them to the root logger that prints to stderr:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'WARNING'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
+<div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'DEBUG'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logging.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
 CRITICAL:my_module:Running out of disk space.
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">'test.log'</span>).read())
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlversionnumberandlogofromitswikipediapage">Scrapes Python's URL, version number and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
+<div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlandlogofromitswikipediapage">Scrapes Python's URL and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests, bs4, os, sys
 
-WIKI_URL = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
 <span class="hljs-keyword">try</span>:
-    html       = requests.get(WIKI_URL).text
-    document   = bs4.BeautifulSoup(html, <span class="hljs-string">'html.parser'</span>)
+    response   = requests.get(<span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>)
+    document   = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.parser'</span>)
     table      = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
     python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
-    version    = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Stable release'</span>).next_sibling.strings.__next__()
     logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
     logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
     filename   = os.path.basename(logo_url)
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.write(logo)
-    print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, <span class="hljs-subst">{version}</span>, file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
+    print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
 <span class="hljs-keyword">except</span> requests.exceptions.ConnectionError:
     print(<span class="hljs-string">"You've got problems with connection."</span>, file=sys.stderr)
 </code></pre></div></div>
@@ -2929,7 +2929,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 17, 2023</aside>
+    <aside>September 18, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

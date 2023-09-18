@@ -2456,7 +2456,7 @@ import logging
 logging.basicConfig(filename=<path>)              # Configures the root logger (see Setup).
 logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
 <Logger> = logging.getLogger(__name__)            # Logger named after the module.
-<Logger>.<level>(<str>)                           # Messages propagate to the root logger.
+<Logger>.<level>(<str>)                           # Logs to the logger.
 <Logger>.exception(<str>)                         # Calls error() with caught exception.
 ```
 
@@ -2476,20 +2476,23 @@ logging.basicConfig(
 <Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
 <Handler>.setLevel(<int/str>)                     # Processes all messages by default.
 <Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
-<Logger>.setLevel(<int/str>)                      # What is sent to handlers and parent.
+<Logger>.setLevel(<int/str>)                      # What is sent to its/ancestor's handlers.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
+* **If logger doesn't have a set level it inherits it from the first ancestor that does.**
 * **Formatter also supports: pathname, filename, funcName, lineno, thread and process.**
 * **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
-#### Creates a logger that writes all messages to a file and sends them to the root logger that prints to stderr:
+
+#### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
->>> logging.basicConfig(level='WARNING')
 >>> logger = logging.getLogger('my_module')
 >>> handler = logging.FileHandler('test.log')
 >>> formatter = logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s')
->>> handler.setFormatter(formatter)
 >>> logger.addHandler(handler)
+>>> handler.setFormatter(formatter)
+>>> logging.basicConfig(level='DEBUG')
+>>> logging.root.handlers[0].setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
 >>> print(open('test.log').read())
@@ -2499,24 +2502,22 @@ CRITICAL:my_module:Running out of disk space.
 
 Scraping
 --------
-#### Scrapes Python's URL, version number and logo from its Wikipedia page:
+#### Scrapes Python's URL and logo from its Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
 import requests, bs4, os, sys
 
-WIKI_URL = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
 try:
-    html       = requests.get(WIKI_URL).text
-    document   = bs4.BeautifulSoup(html, 'html.parser')
+    response   = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+    document   = bs4.BeautifulSoup(response.text, 'html.parser')
     table      = document.find('table', class_='infobox vevent')
     python_url = table.find('th', text='Website').next_sibling.a['href']
-    version    = table.find('th', text='Stable release').next_sibling.strings.__next__()
     logo_url   = table.find('img')['src']
     logo       = requests.get(f'https:{logo_url}').content
     filename   = os.path.basename(logo_url)
     with open(filename, 'wb') as file:
         file.write(logo)
-    print(f'{python_url}, {version}, file://{os.path.abspath(filename)}')
+    print(f'{python_url}, file://{os.path.abspath(filename)}')
 except requests.exceptions.ConnectionError:
     print("You've got problems with connection.", file=sys.stderr)
 ```

@@ -203,12 +203,13 @@ const PROGRESS_BAR =
   'Processing: 100%|████████████████████| 3/3 [00:03&lt;00:00,  1.00s/it]\n';
 
 const LOGGING_EXAMPLE =
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">\'WARNING\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">\'my_module\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">\'test.log\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">\'DEBUG\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
   'CRITICAL:my_module:Running out of disk space.\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +
