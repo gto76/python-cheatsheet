@@ -145,7 +145,7 @@ value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</s
 &lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Creates a dict from collection of keys.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt;.update(&lt;dict&gt;)                           <span class="hljs-comment"># Adds items. Replaces ones with matching keys.</span>
-value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError.</span>
+value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError if missing.</span>
 {k <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> v == value}    <span class="hljs-comment"># Returns set of keys that point to the value.</span>
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Returns a dictionary, filtered by keys.</span>
 </code></pre>
@@ -729,7 +729,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 </code></pre>
 <ul>
 <li><strong>Partial is also useful in cases when function needs to be passed as an argument because it enables us to set its arguments beforehand.</strong></li>
-<li><strong>A few examples being: <code class="python hljs"><span class="hljs-string">'defaultdict(&lt;function&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;function&gt;, to_exclusive)'</span></code> and dataclass's <code class="python hljs"><span class="hljs-string">'field(default_factory=&lt;function&gt;)'</span></code>.</strong></li>
+<li><strong>A few examples being: <code class="python hljs"><span class="hljs-string">'defaultdict(&lt;func&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;func&gt;, to_exc)'</span></code> and dataclass's <code class="python hljs"><span class="hljs-string">'field(default_factory=&lt;func&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
     i = <span class="hljs-number">0</span>

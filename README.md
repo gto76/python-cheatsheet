@@ -89,7 +89,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 
 ```python
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
-value = <dict>.pop(key)                         # Removes item or raises KeyError.
+value = <dict>.pop(key)                         # Removes item or raises KeyError if missing.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
 ```
@@ -862,7 +862,7 @@ from functools import partial
 30
 ```
 * **Partial is also useful in cases when function needs to be passed as an argument because it enables us to set its arguments beforehand.**
-* **A few examples being: `'defaultdict(<function>)'`, `'iter(<function>, to_exclusive)'` and dataclass's `'field(default_factory=<function>)'`.**
+* **A few examples being: `'defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and dataclass's `'field(default_factory=<func>)'`.**
 
 ### Non-Local
 **If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.**
