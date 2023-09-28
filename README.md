@@ -614,21 +614,21 @@ from dateutil.tz import tzlocal, gettz
 ```python
 <tzinfo> = timezone.utc                     # London without daylight saving time (DST).
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
-<tzinfo> = tzlocal()                        # Local timezone. Also gettz().
+<tzinfo> = tzlocal()                        # Local tz with dynamic offset. Also gettz().
 <tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
 * **Timezones returned by gettz(), tzlocal(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.**
-* **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows.**
+* **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows. It doesn't return local tz if arg. is omitted.**
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat('<iso>')    # Object from ISO string. Raises ValueError.
+<D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since the Gregorian NYE 1.
-<DTn>    = DT.fromtimestamp(<real>)         # Local time DTn from seconds since the Epoch.
-<DTa>    = DT.fromtimestamp(<real>, <tz.>)  # Aware datetime from seconds since the Epoch.
+<DTn>    = DT.fromtimestamp(<float>)        # Local time DTn from seconds since the Epoch.
+<DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since the Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following the hours are optional.**
 * **Python uses the Unix Epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**

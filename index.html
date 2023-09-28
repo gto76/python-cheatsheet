@@ -541,7 +541,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># London without daylight saving time (DST).</span>
 &lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from UTC.</span>
-&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local timezone. Also gettz().</span>
+&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local tz with dynamic offset. Also gettz().</span>
 &lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Continent&gt;/&lt;City&gt;'</span>)      <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone([&lt;tzinfo&gt;])      <span class="hljs-comment"># Converts DT to the passed or local fixed zone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Changes object's timezone without conversion.</span>
@@ -549,13 +549,13 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>Timezones returned by gettz(), tzlocal(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.</strong></li>
-<li><strong>Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows.</strong></li>
+<li><strong>Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows. It doesn't return local tz if arg. is omitted.</strong></li>
 </ul>
-<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(<span class="hljs-string">'&lt;iso&gt;'</span>)    <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
+<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since the Gregorian NYE 1.</span>
-&lt;DTn&gt;    = DT.fromtimestamp(&lt;real&gt;)         <span class="hljs-comment"># Local time DTn from seconds since the Epoch.</span>
-&lt;DTa&gt;    = DT.fromtimestamp(&lt;real&gt;, &lt;tz.&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
+&lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local time DTn from seconds since the Epoch.</span>
+&lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
 </code></pre></div>
 
 <ul>
