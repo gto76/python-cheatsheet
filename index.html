@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 29, 2023</aside>
+    <aside>October 4, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -580,7 +580,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also ==.</span>
 &lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
-&lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Returns the difference. Ignores time jumps.</span>
+&lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;int/float&gt;          <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
@@ -1774,7 +1774,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()                       <span class="hljs-comment"># Checks if the thread has finished executing.</span>
 &lt;obj&gt;  = &lt;Future&gt;.result(timeout=<span class="hljs-keyword">None</span>)         <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
 &lt;bool&gt; = &lt;Future&gt;.cancel()                     <span class="hljs-comment"># Cancels or returns False if running/finished.</span>
-&lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Each Future is yielded as it completes.</span>
+&lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Next() waits for next completed Future.</span>
 </code></pre>
 <ul>
 <li><strong>Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.</strong></li>
@@ -1785,6 +1785,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;bool&gt; = op.not_(&lt;obj&gt;)                                         <span class="hljs-comment"># or, and, not (or/and missing)</span>
 &lt;bool&gt; = op.eq/ne/lt/le/gt/ge/contains/is_(&lt;obj&gt;, &lt;obj&gt;)        <span class="hljs-comment"># ==, !=, &lt;, &lt;=, &gt;, &gt;=, in, is</span>
 &lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                  <span class="hljs-comment"># |, ^, &amp;</span>
+&lt;int&gt;  = op.lshift/rshift(&lt;int&gt;, &lt;int&gt;)                         <span class="hljs-comment"># &lt;&lt;, &gt;&gt;</span>
 &lt;obj&gt;  = op.add/sub/mul/truediv/floordiv/mod(&lt;obj&gt;, &lt;obj&gt;)      <span class="hljs-comment"># +, -, *, /, //, %</span>
 &lt;num&gt;  = op.neg/invert(&lt;num&gt;)                                   <span class="hljs-comment"># -, ~</span>
 &lt;num&gt;  = op.pow(&lt;num&gt;, &lt;num&gt;)                                   <span class="hljs-comment"># **</span>
@@ -1796,11 +1797,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 sorted_by_second = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;collection&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
-union_of_sets    = functools.reduce(op.or_, &lt;coll_of_sets&gt;)
 first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span class="hljs-number">0</span>)(&lt;list&gt;)
 </code></pre>
 <ul>
-<li><strong>Bitwise operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.</strong></li>
+<li><strong>Bitwise operators require objects to have or(), xor(), and(), lshift(), rshift() and invert() special methods, unlike logical operators that work on all types of objects.</strong></li>
 <li><strong>Also: <code class="python hljs"><span class="hljs-string">'&lt;bool&gt; = &lt;bool&gt; &amp;|^ &lt;bool&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;int&gt; = &lt;bool&gt; &amp;|^ &lt;int&gt;'</span></code>.</strong></li>
 </ul>
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables, functions, classes, etc.</span>
@@ -2012,31 +2012,31 @@ print(table)
 <div><h2 id="logging"><a href="#logging" name="logging">#</a>Logging</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> logging
 </code></pre></div>
 
-<pre><code class="python language-python hljs">logging.basicConfig(filename=&lt;path&gt;)              <span class="hljs-comment"># Configures the root logger (see Setup).</span>
-logging.debug/info/warning/error/critical(&lt;str&gt;)  <span class="hljs-comment"># Logs to the root logger.</span>
-&lt;Logger&gt; = logging.getLogger(__name__)            <span class="hljs-comment"># Logger named after the module.</span>
-&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># Logs to the logger.</span>
-&lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Calls error() with caught exception.</span>
+<pre><code class="python language-python hljs">logging.basicConfig(filename=&lt;path&gt;, level=<span class="hljs-string">'DEBUG'</span>)  <span class="hljs-comment"># Configures the root logger (see Setup).</span>
+logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-comment"># Logs to the root logger.</span>
+&lt;Logger&gt; = logging.getLogger(__name__)               <span class="hljs-comment"># Logger named after the module.</span>
+&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                              <span class="hljs-comment"># Logs to the logger.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                            <span class="hljs-comment"># Calls error() with caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to console (stderr) by default.</span>
-    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add `%(asctime)s` for local datetime.</span>
-    level=logging.WARNING,                        <span class="hljs-comment"># Drops messages with lower priority.</span>
-    handlers=[logging.StreamHandler()]            <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
+    filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to console (stderr) by default.</span>
+    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,     <span class="hljs-comment"># Add `%(asctime)s` for local datetime.</span>
+    level=logging.WARNING,                           <span class="hljs-comment"># Drops messages with lower priority.</span>
+    handlers=[logging.StreamHandler()]               <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
 )
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Formatter&gt; = logging.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)       <span class="hljs-comment"># Creates a Formatter.</span>
-&lt;Handler&gt; = logging.FileHandler(&lt;path&gt;)           <span class="hljs-comment"># Creates a Handler.</span>
-&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Adds Formatter to the Handler.</span>
-&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Processes all messages by default.</span>
-&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Adds Handler to the Logger.</span>
-&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to its/ancestor's handlers.</span>
+<pre><code class="python language-python hljs">&lt;Formatter&gt; = logging.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)          <span class="hljs-comment"># Creates a Formatter.</span>
+&lt;Handler&gt; = logging.FileHandler(&lt;path&gt;)              <span class="hljs-comment"># Creates a Handler.</span>
+&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)                  <span class="hljs-comment"># Adds Formatter to the Handler.</span>
+&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                        <span class="hljs-comment"># Processes all messages by default.</span>
+&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                       <span class="hljs-comment"># Adds Handler to the Logger.</span>
+&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                         <span class="hljs-comment"># What is sent to its/ancestor's handlers.</span>
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
 <li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
-<li><strong>Formatter also supports: pathname, filename, funcName, lineno, thread and process.</strong></li>
+<li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
 <li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
@@ -2929,7 +2929,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 29, 2023</aside>
+    <aside>October 4, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

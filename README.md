@@ -655,7 +655,7 @@ from dateutil.tz import tzlocal, gettz
 ```python
 <bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
 <bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
-<TD>     = <D/DTn>   - <D/DTn>              # Returns the difference. Ignores time jumps.
+<TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
 <TD>     = <DTa>     - <DTa>                # Ignores time jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <int/float>          # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
@@ -2148,7 +2148,7 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.done()                       # Checks if the thread has finished executing.
 <obj>  = <Future>.result(timeout=None)         # Waits for thread to finish and returns result.
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
-<iter> = as_completed(<coll_of_Futures>)       # Each Future is yielded as it completes.
+<iter> = as_completed(<coll_of_Futures>)       # Next() waits for next completed Future.
 ```
 * **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
@@ -2163,6 +2163,7 @@ import operator as op
 <bool> = op.not_(<obj>)                                         # or, and, not (or/and missing)
 <bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)        # ==, !=, <, <=, >, >=, in, is
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                  # |, ^, &
+<int>  = op.lshift/rshift(<int>, <int>)                         # <<, >>
 <obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)      # +, -, *, /, //, %
 <num>  = op.neg/invert(<num>)                                   # -, ~
 <num>  = op.pow(<num>, <num>)                                   # **
@@ -2174,10 +2175,9 @@ elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
 sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
-union_of_sets    = functools.reduce(op.or_, <coll_of_sets>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Bitwise operators require objects to have and(), or(), xor() and invert() special methods, unlike logical operators that work on all types of objects.**
+* **Bitwise operators require objects to have or(), xor(), and(), lshift(), rshift() and invert() special methods, unlike logical operators that work on all types of objects.**
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
@@ -2453,34 +2453,34 @@ import logging
 ```
 
 ```python
-logging.basicConfig(filename=<path>)              # Configures the root logger (see Setup).
-logging.debug/info/warning/error/critical(<str>)  # Logs to the root logger.
-<Logger> = logging.getLogger(__name__)            # Logger named after the module.
-<Logger>.<level>(<str>)                           # Logs to the logger.
-<Logger>.exception(<str>)                         # Calls error() with caught exception.
+logging.basicConfig(filename=<path>, level='DEBUG')  # Configures the root logger (see Setup).
+logging.debug/info/warning/error/critical(<str>)     # Logs to the root logger.
+<Logger> = logging.getLogger(__name__)               # Logger named after the module.
+<Logger>.<level>(<str>)                              # Logs to the logger.
+<Logger>.exception(<str>)                            # Calls error() with caught exception.
 ```
 
 ### Setup
 ```python
 logging.basicConfig(
-    filename=None,                                # Logs to console (stderr) by default.
-    format='%(levelname)s:%(name)s:%(message)s',  # Add `%(asctime)s` for local datetime.
-    level=logging.WARNING,                        # Drops messages with lower priority.
-    handlers=[logging.StreamHandler()]            # Uses FileHandler if filename is set.
+    filename=None,                                   # Logs to console (stderr) by default.
+    format='%(levelname)s:%(name)s:%(message)s',     # Add `%(asctime)s` for local datetime.
+    level=logging.WARNING,                           # Drops messages with lower priority.
+    handlers=[logging.StreamHandler()]               # Uses FileHandler if filename is set.
 )
 ```
 
 ```python
-<Formatter> = logging.Formatter('<format>')       # Creates a Formatter.
-<Handler> = logging.FileHandler(<path>)           # Creates a Handler.
-<Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
-<Handler>.setLevel(<int/str>)                     # Processes all messages by default.
-<Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
-<Logger>.setLevel(<int/str>)                      # What is sent to its/ancestor's handlers.
+<Formatter> = logging.Formatter('<format>')          # Creates a Formatter.
+<Handler> = logging.FileHandler(<path>)              # Creates a Handler.
+<Handler>.setFormatter(<Formatter>)                  # Adds Formatter to the Handler.
+<Handler>.setLevel(<int/str>)                        # Processes all messages by default.
+<Logger>.addHandler(<Handler>)                       # Adds Handler to the Logger.
+<Logger>.setLevel(<int/str>)                         # What is sent to its/ancestor's handlers.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
-* **Formatter also supports: pathname, filename, funcName, lineno, thread and process.**
+* **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
 * **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
 
