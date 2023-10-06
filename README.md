@@ -1098,6 +1098,46 @@ class Person:
 'Guido van Rossum'
 ```
 
+### Attributes
+
+```python
+# setattr(object, name, value)
+>>> setattr(Person, 'age', 101)  # Class or instance!
+>>> Person.age
+101
+```
+
+### Dataclass
+**Decorator that automatically generates init(), repr() and eq() special methods.**
+```python
+from dataclasses import dataclass, field
+
+@dataclass(order=False, frozen=False)
+class <class_name>:
+    <attr_name_1>: <type>
+    <attr_name_2>: <type> = <default_value>
+    <attr_name_3>: list/dict/set = field(default_factory=list/dict/set)
+```
+* **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
+* **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
+* **For attributes of arbitrary type use `'typing.Any'`.**
+
+#### Inline:
+```python
+from dataclasses import make_dataclass
+<class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
+<class> = make_dataclass('<class_name>', <coll_of_tuples>)
+<tuple> = ('<attr_name>', <type> [, <default_value>])
+```
+
+#### Rest of type annotations (CPython interpreter ignores them all):
+```python
+def func(<arg_name>: <type> [= <obj>]) -> <type>: ...
+<var_name>: typing.List/Set/Iterable/Sequence/Optional[<type>]
+<var_name>: typing.Dict/Tuple/Union[<type>, ...]
+```
+
 ### Slots
 **Mechanism that restricts objects to attributes listed in 'slots'.**
 
