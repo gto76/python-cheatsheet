@@ -1065,6 +1065,15 @@ class Person:
 'Guido van Rossum'
 ```
 
+### Attributes
+
+```python
+# setattr(object, name, value)
+>>> setattr(Person, 'age', 101)  # Class or instance!
+>>> Person.age
+101
+```
+
 ### Dataclass
 **Decorator that automatically generates init(), repr() and eq() special methods.**
 ```python
