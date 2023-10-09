@@ -225,6 +225,7 @@ Generator
 * **Any function that contains a yield statement returns a generator.**
 * **Generators and iterators are interchangeable.**
 
+
 ```python
 def count(start, step):
     while True:
@@ -238,6 +239,20 @@ def count(start, step):
 (10, 12, 14)
 ```
 
+* **`yield` is practical for training machine learning models, while classifiers cannot train a large amount of data simultaneously.**
+```psuedo code 
+def train_func(x,y):
+    while True:
+        xt,yt,lx,ly=[],[],[],[]
+        for page in range(len(magizine)):
+            xt,yt=page,page_category
+            lx.append(xt)
+            ly.append(yt)
+            yield lx,ly
+
+x_train,y_train,x_valid,y_valid=x[:8000],y[:8000],x[8000:],y[8000:]
+classifier.fit_generator(train_func(x_train,y_train),epochs=10,validation_data=train_func(x_valid,y_valid))
+```
 
 Type
 ----
