@@ -300,9 +300,11 @@ True
 
 String
 ------
+**Immutable sequence of characters.**
+
 ```python
 <str>  = <str>.strip()                       # Strips all whitespace characters from both ends.
-<str>  = <str>.strip('<chars>')              # Strips all passed characters from both ends.
+<str>  = <str>.strip('<chars>')              # Strips passed characters. Also lstrip/rstrip().
 ```
 
 ```python
@@ -321,6 +323,7 @@ String
 ```
 
 ```python
+<str>  = <str>.lower()                       # Changes the case. Also upper/capitalize/title().
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 ```
@@ -329,38 +332,37 @@ String
 <str>  = chr(<int>)                          # Converts int to Unicode character.
 <int>  = ord(<str>)                          # Converts Unicode character to int.
 ```
-* **Also: `'lstrip()'`, `'rstrip()'` and `'rsplit()'`.**
-* **Also: `'lower()'`, `'upper()'`, `'capitalize()'` and `'title()'`.**
+* **Use `'unicodedata.normalize("NFC", <str>)'` on strings that may contain characters like `'Ö'` before comparing them, because they can be stored as one or two characters.**
 
 ### Property Methods
-```text
-+---------------+----------+----------+----------+----------+----------+
-|               | [ !#$%…] | [a-zA-Z] |  [¼½¾]   |  [²³¹]   |  [0-9]   |
-+---------------+----------+----------+----------+----------+----------+
-| isprintable() |   yes    |   yes    |   yes    |   yes    |   yes    |
-| isalnum()     |          |   yes    |   yes    |   yes    |   yes    |
-| isnumeric()   |          |          |   yes    |   yes    |   yes    |
-| isdigit()     |          |          |          |   yes    |   yes    |
-| isdecimal()   |          |          |          |          |   yes    |
-+---------------+----------+----------+----------+----------+----------+
+```python
+<bool> = <str>.isdecimal()                   # Checks for [0-9].
+<bool> = <str>.isdigit()                     # Checks for [²³¹] and isdecimal().
+<bool> = <str>.isnumeric()                   # Checks for [¼½¾] and isdigit().
+<bool> = <str>.isalnum()                     # Checks for [a-zA-Z] and isnumeric().
+<bool> = <str>.isprintable()                 # Checks for [ !#$%…] and isalnum().
+<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].
 ```
-* **`'isspace()'` checks for whitespaces: `'[ \t\n\r\f\v\x1c-\x1f\x85\xa0\u1680…]'`.**
 
 
 Regex
 -----
+**Functions for regular expression matching.**
+
 ```python
 import re
+```
+
+```python
 <str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences with 'new'.
 <list>  = re.findall(<regex>, text)            # Returns all occurrences as strings.
 <list>  = re.split(<regex>, text, maxsplit=0)  # Add brackets around regex to include matches.
-<Match> = re.search(<regex>, text)             # Searches for first occurrence of the pattern.
+<Match> = re.search(<regex>, text)             # First occurrence of the pattern or None.
 <Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
 <iter>  = re.finditer(<regex>, text)           # Returns all occurrences as Match objects.
 ```
 
 * **Argument 'new' can be a function that accepts a Match object and returns a string.**
-* **Search() and match() return None if they can't find a match.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
