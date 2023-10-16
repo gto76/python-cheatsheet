@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 11, 2023</aside>
+    <aside>October 16, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1553,8 +1553,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
         <span class="hljs-keyword">return</span> list(csv.reader(file, dialect, **params))
 </code></pre></div>
 
-<div><h3 id="writerowstocsvfile">Write Rows to CSV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows, dialect=<span class="hljs-string">'excel'</span>, **params)</span>:</span>
-    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+<div><h3 id="writerowstocsvfile">Write Rows to CSV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_csv_file</span><span class="hljs-params">(filename, rows, mode=<span class="hljs-string">'w'</span>, dialect=<span class="hljs-string">'excel'</span>, **params)</span>:</span>
+    <span class="hljs-keyword">with</span> open(filename, mode, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
         writer = csv.writer(file, dialect, **params)
         writer.writerows(rows)
 </code></pre></div>
@@ -1979,7 +1979,7 @@ print(table)
 </code></pre></div></div>
 
 
-<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheterminal">Runs a basic file explorer in the terminal:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> curses, os
+<div><h2 id="curses"><a href="#curses" name="curses">#</a>Curses</h2><div><h4 id="runsabasicfileexplorerintheconsole">Runs a basic file explorer in the console:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> curses, os
 <span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
@@ -2141,7 +2141,7 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 <div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ pip3 install gprof2dot snakeviz; apt/brew install graphviz
 $ tail -n 4 test.py &gt; test.py
 $ python3 -m cProfile -o test.prof test.py
-$ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png
+$ gprof2dot -f pstats test.prof | dot -T png -o test.png; xdg-open/open test.png
 $ snakeviz test.prof
 </code></pre></div>
 
@@ -2262,7 +2262,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 <pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)                <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
 &lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)              <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                       <span class="hljs-comment"># Creates NumPy array from the image.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                       <span class="hljs-comment"># Creates a NumPy array from the image.</span>
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))      <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
@@ -2638,7 +2638,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[column_key/s]                   <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
 &lt;DF&gt;    = &lt;DF&gt;[row_bools]                      <span class="hljs-comment"># Keeps rows as specified by bools.</span>
-&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to values that are False in bools.</span>
+&lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to items that are False in bools.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt; &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
 &lt;DF&gt;    = &lt;DF&gt; + &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
@@ -2925,7 +2925,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>October 11, 2023</aside>
+    <aside>October 16, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

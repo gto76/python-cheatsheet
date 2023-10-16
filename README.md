@@ -1870,8 +1870,8 @@ def read_csv_file(filename, dialect='excel', **params):
 
 ### Write Rows to CSV File
 ```python
-def write_to_csv_file(filename, rows, dialect='excel', **params):
-    with open(filename, 'w', encoding='utf-8', newline='') as file:
+def write_to_csv_file(filename, rows, mode='w', dialect='excel', **params):
+    with open(filename, mode, encoding='utf-8', newline='') as file:
         writer = csv.writer(file, dialect, **params)
         writer.writerows(rows)
 ```
@@ -2383,10 +2383,9 @@ Progress Bar
 ------------
 ```python
 # $ pip3 install tqdm
->>> from tqdm import tqdm
->>> from time import sleep
->>> for el in tqdm([1, 2, 3], desc='Processing'):
-...     sleep(1)
+>>> import tqdm, time
+>>> for el in tqdm.tqdm([1, 2, 3], desc='Processing'):
+...     time.sleep(1)
 Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
 ```
 
@@ -2420,8 +2419,9 @@ print(table)
 
 Curses
 ------
-#### Runs a basic file explorer in the terminal:
+#### Runs a basic file explorer in the console:
 ```python
+# pip3 install windows-curses
 import curses, os
 from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
@@ -2619,7 +2619,7 @@ Line #   Hits     Time  Per Hit   % Time  Line Contents
 $ pip3 install gprof2dot snakeviz; apt/brew install graphviz
 $ tail -n 4 test.py > test.py
 $ python3 -m cProfile -o test.prof test.py
-$ gprof2dot -f pstats test.prof | dot -Tpng -o test.png; xdg-open/open test.png
+$ gprof2dot -f pstats test.prof | dot -T png -o test.png; xdg-open/open test.png
 $ snakeviz test.prof
 ```
 
@@ -2778,7 +2778,7 @@ from PIL import Image, ImageFilter, ImageEnhance
 ```
 
 ```python
-<array> = np.array(<Image>)                       # Creates NumPy array from the image.
+<array> = np.array(<Image>)                       # Creates a NumPy array from the image.
 <Image> = Image.fromarray(np.uint8(<array>))      # Use <array>.clip(0, 255) to clip values.
 ```
 
@@ -3240,7 +3240,7 @@ b  3  4
 ```python
 <Sr/DF> = <DF>[column_key/s]                   # Or: <DF>.column_key
 <DF>    = <DF>[row_bools]                      # Keeps rows as specified by bools.
-<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to values that are False in bools.
+<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to items that are False in bools.
 ```
 
 ```python
