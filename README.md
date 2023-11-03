@@ -2693,6 +2693,7 @@ import numpy as np
 <1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
 ```
 * **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
+* **`':'` returns a slice of all dimension's indexes. Omitted dimensions default to `':'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
@@ -2738,9 +2739,7 @@ right = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
 [[ 0. ,  0.5,  0.7],
  [ 0.5,  0. ,  0.2],
  [ 0.7,  0.2,  0. ]]
->>> i = np.arange(3)
-[0, 1, 2]
->>> distances[i, i] = np.inf
+>>> distances[range(3), range(3)] = np.inf
 [[ inf,  0.5,  0.7],
  [ 0.5,  inf,  0.2],
  [ 0.7,  0.2,  inf]]
@@ -2765,11 +2764,11 @@ from PIL import Image, ImageFilter, ImageEnhance
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))            # Returns a pixel.
-<Image>.putpixel((x, y), <int/tuple>)             # Writes a pixel to the image.
-<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of the pixels.
-<Image>.putdata(<list/ImagingCore>)               # Writes a flattened sequence of pixels.
-<Image>.paste(<Image>, (x, y))                    # Writes passed image to the image.
+<int/tuple> = <Image>.getpixel((x, y))            # Returns pixel's color.
+<Image>.putpixel((x, y), <int/tuple>)             # Changes pixel's color.
+<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of all pixels.
+<Image>.putdata(<list/ImagingCore>)               # Updates pixels with a copy of the sequence.
+<Image>.paste(<Image>, (x, y))                    # Draws passed image at specified location.
 ```
 
 ```python
@@ -3344,9 +3343,9 @@ plt.show()                                     # Displays the plot. Also plt.sav
 
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
-<DF> = pd.read_csv/pickle/excel('<path/url>')  # Use `sheet_name=None` to get all Excel sheets.
+<DF> = pd.read_csv('<path/url>')               # Also `names=<list>, parse_dates=False`.
+<DF> = pd.read_pickle/excel('<path/url>')      # Use `sheet_name=None` to get all Excel sheets.
 <DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
-<DF> = pd.read_clipboard()                     # Reads a copied table from the clipboard.
 ```
 
 ```python
@@ -3371,6 +3370,7 @@ c  7  8  6
 <GB> = <DF>.groupby(column_key/s)              # Splits DF into groups based on passed column.
 <DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
 <GB> = <GB>[column_key]                        # Single column GB. All operations return a Sr.
+<Sr> = <GB>.size()                             # A Sr of group sizes. Keys are group "names".
 ```
 
 #### GroupBy — Aggregate, Transform, Map:

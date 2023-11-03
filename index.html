@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 16, 2023</aside>
+    <aside>November 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2198,6 +2198,7 @@ $ snakeviz test.prof
 </code></pre>
 <ul>
 <li><strong>Indexes should not be tuples because Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code>  to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>!</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indexes. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
 <div><h3 id="broadcasting">Broadcasting</h3><p><strong>Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
@@ -2232,9 +2233,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 [[ <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
  [ <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.2</span>],
  [ <span class="hljs-number">0.7</span>,  <span class="hljs-number">0.2</span>,  <span class="hljs-number">0.</span> ]]
-<span class="hljs-meta">&gt;&gt;&gt; </span>i = np.arange(<span class="hljs-number">3</span>)
-[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>distances[i, i] = np.inf
+<span class="hljs-meta">&gt;&gt;&gt; </span>distances[range(<span class="hljs-number">3</span>), range(<span class="hljs-number">3</span>)] = np.inf
 [[ inf,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
  [ <span class="hljs-number">0.5</span>,  inf,  <span class="hljs-number">0.2</span>],
  [ <span class="hljs-number">0.7</span>,  <span class="hljs-number">0.2</span>,  inf]]
@@ -2253,11 +2252,11 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</
 &lt;Image&gt;.save(&lt;path&gt;)                              <span class="hljs-comment"># Selects format based on the path extension.</span>
 &lt;Image&gt;.show()                                    <span class="hljs-comment"># Opens image in the default preview app.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns a pixel.</span>
-&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)             <span class="hljs-comment"># Writes a pixel to the image.</span>
-&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()                 <span class="hljs-comment"># Returns a flattened view of the pixels.</span>
-&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)               <span class="hljs-comment"># Writes a flattened sequence of pixels.</span>
-&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                    <span class="hljs-comment"># Writes passed image to the image.</span>
+<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's color.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)             <span class="hljs-comment"># Changes pixel's color.</span>
+&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()                 <span class="hljs-comment"># Returns a flattened view of all pixels.</span>
+&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)               <span class="hljs-comment"># Updates pixels with a copy of the sequence.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                    <span class="hljs-comment"># Draws passed image at specified location.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)                <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;([&lt;args&gt;])`</span>
 &lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)              <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
@@ -2727,9 +2726,9 @@ plt.show()                                     <span class="hljs-comment"># Disp
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
-&lt;DF&gt; = pd.read_csv/pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)  <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
+&lt;DF&gt; = pd.read_csv(<span class="hljs-string">'&lt;path/url&gt;'</span>)               <span class="hljs-comment"># Also `names=&lt;list&gt;, parse_dates=False`.</span>
+&lt;DF&gt; = pd.read_pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)      <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
 &lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
-&lt;DF&gt; = pd.read_clipboard()                     <span class="hljs-comment"># Reads a copied table from the clipboard.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict([<span class="hljs-string">'d/l/s/…'</span>])             <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
 &lt;str&gt;  = &lt;DF&gt;.to_json/html/csv([&lt;path&gt;])       <span class="hljs-comment"># Also to_markdown/latex([&lt;path&gt;]).</span>
@@ -2747,6 +2746,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 <pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)              <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
 &lt;GB&gt; = &lt;GB&gt;[column_key]                        <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
+&lt;Sr&gt; = &lt;GB&gt;.size()                             <span class="hljs-comment"># A Sr of group sizes. Keys are group "names".</span>
 </code></pre>
 <div><h4 id="groupbyaggregatetransformmap">GroupBy — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()           <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
@@ -2925,7 +2925,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>October 16, 2023</aside>
+    <aside>November 3, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
