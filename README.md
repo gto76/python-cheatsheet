@@ -660,7 +660,7 @@ from dateutil.tz import tzlocal, gettz
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
 <TD>     = <DTa>     - <DTa>                # Ignores time jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
-<TD>     = <TD>      * <int/float>          # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
+<TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
 <float>  = <TD>      / <TD>                 # How many weeks/years there are in TD. Also //.
 ```
 
