@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>November 3, 2023</aside>
+    <aside>November 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2703,18 +2703,17 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃                 │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  ┃
 ┠─────────────────┼─────────────┼─────────────┼───────────────┨
-┃ df.apply(…)     │             │       x  y  │               ┃
-┃ df.agg(…)       │     x  <span class="hljs-number">4</span>    │  sum  <span class="hljs-number">4</span>  <span class="hljs-number">6</span>  │     x  <span class="hljs-number">4</span>      ┃
-┃                 │     y  <span class="hljs-number">6</span>    │             │               ┃
+┃ df.apply(…)     │     x  <span class="hljs-number">4</span>    │       x  y  │     x  <span class="hljs-number">4</span>      ┃
+┃ df.agg(…)       │     y  <span class="hljs-number">6</span>    │  sum  <span class="hljs-number">4</span>  <span class="hljs-number">6</span>  │               ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 
 ┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃                 │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
 ┠─────────────────┼─────────────┼─────────────┼───────────────┨
-┃ df.apply(…)     │      x  y   │      x    y │        x      ┃
-┃ df.agg(…)       │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │   rank rank │     a  <span class="hljs-number">1</span>      ┃
-┃ df.transform(…) │   b  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">2</span>      ┃
-┃                 │             │ b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │               ┃
+┃ df.apply(…)     │             │      x    y │               ┃
+┃ df.agg(…)       │      x  y   │   rank rank │        x      ┃
+┃ df.transform(…) │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     a  <span class="hljs-number">1</span>      ┃
+┃                 │   b  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ b    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │     b  <span class="hljs-number">2</span>      ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 
@@ -2762,11 +2761,11 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
 ┃                 │    <span class="hljs-string">'sum'</span>    │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
 ┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
-┃ gb.agg(…)       │      x   y  │      x  y   │      x    y │        x      ┃
-┃                 │  z          │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │   rank rank │     a  <span class="hljs-number">1</span>      ┃
-┃                 │  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">1</span>      ┃
-┃                 │  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     c  <span class="hljs-number">2</span>      ┃
-┃                 │             │             │ c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │               ┃
+┃ gb.agg(…)       │      x   y  │             │      x    y │               ┃
+┃                 │  z          │      x  y   │   rank rank │        x      ┃
+┃                 │  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     a  <span class="hljs-number">1</span>      ┃
+┃                 │  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">1</span>      ┃
+┃                 │             │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │     c  <span class="hljs-number">2</span>      ┃
 ┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
 ┃ gb.transform(…) │      x   y  │      x  y   │             │               ┃
 ┃                 │  a   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
@@ -2925,7 +2924,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>November 3, 2023</aside>
+    <aside>November 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

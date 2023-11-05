@@ -603,48 +603,46 @@ const DIAGRAM_15_B =
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_16_A =
-  '| df.apply(…)     |             |       x  y  |               |';
+  '| df.apply(…)     |     x  4    |       x  y  |     x  4      |';
 
 const DIAGRAM_16_B =
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…)     │             │       x  y  │               ┃\n" +
-  "┃ df.agg(…)       │     x  4    │  sum  4  6  │     x  4      ┃\n" +
-  "┃                 │     y  6    │             │               ┃\n" +
+  "┃ df.apply(…)     │     x  4    │       x  y  │     x  4      ┃\n" +
+  "┃ df.agg(…)       │     y  6    │  sum  4  6  │               ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
   "\n" +
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…)     │      x  y   │      x    y │        x      ┃\n" +
-  "┃ df.agg(…)       │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃ df.transform(…) │   b  2  2   │ a    1    1 │     b  2      ┃\n" +
-  "┃                 │             │ b    2    2 │               ┃\n" +
+  "┃ df.apply(…)     │             │      x    y │               ┃\n" +
+  "┃ df.agg(…)       │      x  y   │   rank rank │        x      ┃\n" +
+  "┃ df.transform(…) │   a  1  1   │ a    1    1 │     a  1      ┃\n" +
+  "┃                 │   b  2  2   │ b    2    2 │     b  2      ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_17_A =
   "|                 |    'rank'   |   ['rank']  | {'x': 'rank'} |";
 
 const DIAGRAM_18_A =
-  '| gb.agg(…)       |      x   y  |      x  y   |      x    y |        x      |';
+  '| gb.agg(…)       |      x   y  |             |      x    y |               |';
 
 const DIAGRAM_18_B =
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'sum'    │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ gb.agg(…)       │      x   y  │      x  y   │      x    y │        x      ┃\n" +
-  "┃                 │  z          │   a  1  1   │   rank rank │     a  1      ┃\n" +
-  "┃                 │  3   1   2  │   b  1  1   │ a    1    1 │     b  1      ┃\n" +
-  "┃                 │  6  11  13  │   c  2  2   │ b    1    1 │     c  2      ┃\n" +
-  "┃                 │             │             │ c    2    2 │               ┃\n" +
+  "┃ gb.agg(…)       │      x   y  │             │      x    y │               ┃\n" +
+  "┃                 │  z          │      x  y   │   rank rank │        x      ┃\n" +
+  "┃                 │  3   1   2  │   a  1  1   │ a    1    1 │     a  1      ┃\n" +
+  "┃                 │  6  11  13  │   b  1  1   │ b    1    1 │     b  1      ┃\n" +
+  "┃                 │             │   c  2  2   │ c    2    2 │     c  2      ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨\n" +
   "┃ gb.transform(…) │      x   y  │      x  y   │             │               ┃\n" +
   "┃                 │  a   1   2  │   a  1  1   │             │               ┃\n" +
   "┃                 │  b  11  13  │   b  1  1   │             │               ┃\n" +
   "┃                 │  c  11  13  │   c  2  2   │             │               ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
-
 
 const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.\n';
 
