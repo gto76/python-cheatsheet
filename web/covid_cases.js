@@ -6224,7 +6224,7 @@ if (document.getElementById("e23ccacc-a456-478b-b467-7282a2165921")) {
               "side": "right"
             },
             "legend": {
-              "x": 1.1
+              "x": 1.08
             },
             "margin": {
               "t": 24,

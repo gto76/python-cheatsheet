@@ -3428,7 +3428,7 @@ import pandas as pd, plotly.express as ex
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
-<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:321px; width:100%;"></div>
+<div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div>
 
 ```python
 covid = pd.read_csv('https://covid.ourworldindata.org/data/owid-covid-data.csv',
@@ -3447,25 +3447,26 @@ ex.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 #### Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:
 
 ![Covid Cases](web/covid_cases.png)
-<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div>
+<div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div>
 
 ```python
 import pandas as pd, plotly.graph_objects as go
 
 def main():
-    display_data(wrangle_data(*scrape_data()))
+    covid, bitcoin, gold, dow = scrape_data()
+    display_data(wrangle_data(covid, bitcoin, gold, dow))
 
 def scrape_data():
-    def scrape_covid():
+    def get_covid_cases():
         url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
         df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'])
         return df[df.location == 'World'].set_index('date').total_cases
-    def scrape_yahoo(slug):
-        url = (f'https://query1.finance.yahoo.com/v7/finance/download/{slug}?'
+    def get_ticker(symbol):
+        url = (f'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?'
                'period1=1579651200&period2=9999999999&interval=1d&events=history')
         df = pd.read_csv(url, usecols=['Date', 'Close'])
         return df.set_index('Date').Close
-    out = scrape_covid(), scrape_yahoo('BTC-USD'), scrape_yahoo('GC=F'), scrape_yahoo('^DJI')
+    out = get_covid_cases(), get_ticker('BTC-USD'), get_ticker('GC=F'), get_ticker('^DJI')
     return map(pd.Series.rename, out, ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones'])
 
 def wrangle_data(covid, bitcoin, gold, dow):
@@ -3485,8 +3486,9 @@ def display_data(df):
     figure.update_layout(
         yaxis1=dict(title='Total Cases', rangemode='tozero'),
         yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),
-        legend=dict(x=1.1),
-        height=450
+        legend=dict(x=1.08),
+        width=944,
+        height=423
     )
     figure.show()
 

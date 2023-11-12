@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>November 5, 2023</aside>
+    <aside>November 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2786,7 +2786,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 &lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also &lt;Figure&gt;.show().</span>
 </code></pre></div>
 
-<div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:321px; width:100%;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
+<div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>,
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff'</span>
                          <span class="hljs-string">'846ea5d35e5fc47f26c/raw/country-and-continent-codes-list-csv.csv'</span>,
@@ -2801,22 +2801,23 @@ ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 
-<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:315px; width:100%;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.graph_objects <span class="hljs-keyword">as</span> go
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    display_data(wrangle_data(*scrape_data()))
+    covid, bitcoin, gold, dow = scrape_data()
+    display_data(wrangle_data(covid, bitcoin, gold, dow))
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_covid</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
         url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
         <span class="hljs-keyword">return</span> df[df.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_yahoo</span><span class="hljs-params">(slug)</span>:</span>
-        url = (<span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{slug}</span>?'</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ticker</span><span class="hljs-params">(symbol)</span>:</span>
+        url = (<span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{symbol}</span>?'</span>
                <span class="hljs-string">'period1=1579651200&amp;period2=9999999999&amp;interval=1d&amp;events=history'</span>)
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>])
         <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'Date'</span>).Close
-    out = scrape_covid(), scrape_yahoo(<span class="hljs-string">'BTC-USD'</span>), scrape_yahoo(<span class="hljs-string">'GC=F'</span>), scrape_yahoo(<span class="hljs-string">'^DJI'</span>)
+    out = get_covid_cases(), get_ticker(<span class="hljs-string">'BTC-USD'</span>), get_ticker(<span class="hljs-string">'GC=F'</span>), get_ticker(<span class="hljs-string">'^DJI'</span>)
     <span class="hljs-keyword">return</span> map(pd.Series.rename, out, [<span class="hljs-string">'Total Cases'</span>, <span class="hljs-string">'Bitcoin'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Dow Jones'</span>])
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, bitcoin, gold, dow)</span>:</span>
@@ -2836,8 +2837,9 @@ ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
     figure.update_layout(
         yaxis1=dict(title=<span class="hljs-string">'Total Cases'</span>, rangemode=<span class="hljs-string">'tozero'</span>),
         yaxis2=dict(title=<span class="hljs-string">'%'</span>, rangemode=<span class="hljs-string">'tozero'</span>, overlaying=<span class="hljs-string">'y'</span>, side=<span class="hljs-string">'right'</span>),
-        legend=dict(x=<span class="hljs-number">1.1</span>),
-        height=<span class="hljs-number">450</span>
+        legend=dict(x=<span class="hljs-number">1.08</span>),
+        width=<span class="hljs-number">944</span>,
+        height=<span class="hljs-number">423</span>
     )
     figure.show()
 
@@ -2924,7 +2926,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>November 5, 2023</aside>
+    <aside>November 12, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
