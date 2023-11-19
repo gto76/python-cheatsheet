@@ -2016,7 +2016,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
     filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to console (stderr) by default.</span>
-    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,     <span class="hljs-comment"># Add `%(asctime)s` for local datetime.</span>
+    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,     <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
     level=logging.WARNING,                           <span class="hljs-comment"># Drops messages with lower priority.</span>
     handlers=[logging.StreamHandler(sys.stderr)]     <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
 )

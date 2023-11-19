@@ -2466,7 +2466,7 @@ logging.debug/info/warning/error/critical(<str>)     # Logs to the root logger.
 ```python
 logging.basicConfig(
     filename=None,                                   # Logs to console (stderr) by default.
-    format='%(levelname)s:%(name)s:%(message)s',     # Add `%(asctime)s` for local datetime.
+    format='%(levelname)s:%(name)s:%(message)s',     # Add '%(asctime)s' for local datetime.
     level=logging.WARNING,                           # Drops messages with lower priority.
     handlers=[logging.StreamHandler(sys.stderr)]     # Uses FileHandler if filename is set.
 )
