@@ -2468,13 +2468,13 @@ logging.basicConfig(
     filename=None,                                   # Logs to console (stderr) by default.
     format='%(levelname)s:%(name)s:%(message)s',     # Add `%(asctime)s` for local datetime.
     level=logging.WARNING,                           # Drops messages with lower priority.
-    handlers=[logging.StreamHandler()]               # Uses FileHandler if filename is set.
+    handlers=[logging.StreamHandler(sys.stderr)]     # Uses FileHandler if filename is set.
 )
 ```
 
 ```python
 <Formatter> = logging.Formatter('<format>')          # Creates a Formatter.
-<Handler> = logging.FileHandler(<path>)              # Creates a Handler.
+<Handler> = logging.FileHandler(<path>, mode='a')    # Creates a Handler. Also `encoding=None`.
 <Handler>.setFormatter(<Formatter>)                  # Adds Formatter to the Handler.
 <Handler>.setLevel(<int/str>)                        # Processes all messages by default.
 <Logger>.addHandler(<Handler>)                       # Adds Handler to the Logger.
@@ -2485,14 +2485,13 @@ logging.basicConfig(
 * **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
 * **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
-
 #### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
 >>> logger = logging.getLogger('my_module')
->>> handler = logging.FileHandler('test.log')
+>>> handler = logging.FileHandler('test.log', encoding='utf-8')
 >>> formatter = logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s')
->>> logger.addHandler(handler)
 >>> handler.setFormatter(formatter)
+>>> logger.addHandler(handler)
 >>> logging.basicConfig(level='DEBUG')
 >>> logging.root.handlers[0].setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')

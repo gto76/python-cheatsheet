@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>November 14, 2023</aside>
+    <aside>November 19, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2018,12 +2018,12 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
     filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to console (stderr) by default.</span>
     format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,     <span class="hljs-comment"># Add `%(asctime)s` for local datetime.</span>
     level=logging.WARNING,                           <span class="hljs-comment"># Drops messages with lower priority.</span>
-    handlers=[logging.StreamHandler()]               <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
+    handlers=[logging.StreamHandler(sys.stderr)]     <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
 )
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Formatter&gt; = logging.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)          <span class="hljs-comment"># Creates a Formatter.</span>
-&lt;Handler&gt; = logging.FileHandler(&lt;path&gt;)              <span class="hljs-comment"># Creates a Handler.</span>
+&lt;Handler&gt; = logging.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)    <span class="hljs-comment"># Creates a Handler. Also `encoding=None`.</span>
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)                  <span class="hljs-comment"># Adds Formatter to the Handler.</span>
 &lt;Handler&gt;.setLevel(&lt;int/str&gt;)                        <span class="hljs-comment"># Processes all messages by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                       <span class="hljs-comment"># Adds Handler to the Logger.</span>
@@ -2036,10 +2036,10 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 <li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'DEBUG'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logging.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
@@ -2926,7 +2926,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>November 14, 2023</aside>
+    <aside>November 19, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
