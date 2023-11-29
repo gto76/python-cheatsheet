@@ -517,20 +517,19 @@ const DIAGRAM_11_B =
   '┗━━━━━━━━━━━━━┷━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_115_A =
-  '+--------------+-------------------------------+------------+----------+------+\n' +
-  '| pip3 install |          How to run           |   Target   |   Type   | Live |\n' +
-  '+--------------+-------------------------------+------------+----------+------+\n';
+  '+--------------+----------+------------+-------------------------------+------+\n' +
+  '| pip3 install |   Type   |   Target   |          How to run           | Live |\n' +
+  '+--------------+----------+------------+-------------------------------+------+\n';
 
 const DIAGRAM_115_B =
-  '┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┓\n' +
-  '┃ pip3 install │          How to run           │   Target   │   Type   │ Live ┃\n' +
-  '┠──────────────┼───────────────────────────────┼────────────┼──────────┼──────┨\n' +
-  '┃ py-spy       │ py-spy top -- python3 test.py │    CPU     │ Sampling │ Yes  ┃\n' +
-  '┃ pyinstrument │ pyinstrument test.py          │    CPU     │ Sampling │ No   ┃\n' +
-  '┃ scalene      │ scalene test.py               │ CPU+Memory │ Sampling │ No   ┃\n' +
-  '┃ memray       │ memray run --live test.py     │   Memory   │ Tracing  │ Yes  ┃\n' +
-  '┃ filprofiler  │ fil-profile run test.py       │   Memory   │ Tracing  │ No   ┃\n' +
-  '┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┛\n';
+  '┏━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┓\n' +
+  '┃ pip3 install │   Type   │   Target   │          How to run           │ Live ┃\n' +
+  '┠──────────────┼──────────┼────────────┼───────────────────────────────┼──────┨\n' +
+  '┃ pyinstrument │ Sampling │    CPU     │ pyinstrument test.py          │  ×   ┃\n' +
+  '┃ py-spy       │ Sampling │    CPU     │ py-spy top -- python3 test.py │  ✓   ┃\n' +
+  '┃ scalene      │ Sampling │ CPU+Memory │ scalene test.py               │  ×   ┃\n' +
+  '┃ memray       │ Tracing  │   Memory   │ memray run --live test.py     │  ✓   ┃\n' +
+  '┗━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┛\n';
 
 const DIAGRAM_12_A =
   '+-----------+-----------+------+-----------+\n' +

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>November 19, 2023</aside>
+    <aside>November 29, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2130,12 +2130,12 @@ def main():
     b = set(range(10000))
 main()' &gt; test.py
 $ kernprof -lv test.py
-Line #   Hits     Time  Per Hit   % Time  Line Contents
-=======================================================
-     1                                    @profile
-     2                                    def main():
-     3      1    219.0    219.0     31.1      a = list(range(10000))
-     4      1    487.0    487.0     68.9      b = set(range(10000))
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           @profile
+     2                                           def main():
+     3         1        253.4    253.4     32.2      a = list(range(10000))
+     4         1        534.1    534.1     67.8      b = set(range(10000))
 </code></pre></div>
 
 <div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ pip3 install gprof2dot snakeviz; apt/brew install graphviz
@@ -2145,15 +2145,14 @@ $ gprof2dot -f pstats test.prof | dot -T png -o test.png; xdg-open/open test.png
 $ snakeviz test.prof
 </code></pre></div>
 
-<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━┓
-┃ pip3 install │          How to run           │   Target   │   Type   │ Live ┃
-┠──────────────┼───────────────────────────────┼────────────┼──────────┼──────┨
-┃ py-spy       │ py-spy top -- python3 test.py │    CPU     │ Sampling │ Yes  ┃
-┃ pyinstrument │ pyinstrument test.py          │    CPU     │ Sampling │ No   ┃
-┃ scalene      │ scalene test.py               │ CPU+Memory │ Sampling │ No   ┃
-┃ memray       │ memray run --live test.py     │   Memory   │ Tracing  │ Yes  ┃
-┃ filprofiler  │ fil-profile run test.py       │   Memory   │ Tracing  │ No   ┃
-┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━┛
+<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┓
+┃ pip3 install │   Type   │   Target   │          How to run           │ Live ┃
+┠──────────────┼──────────┼────────────┼───────────────────────────────┼──────┨
+┃ pyinstrument │ Sampling │    CPU     │ pyinstrument test.py          │  ×   ┃
+┃ py-spy       │ Sampling │    CPU     │ py-spy top -- python3 test.py │  ✓   ┃
+┃ scalene      │ Sampling │ CPU+Memory │ scalene test.py               │  ×   ┃
+┃ memray       │ Tracing  │   Memory   │ memray run --live test.py     │  ✓   ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┛
 </code></pre></div>
 
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
@@ -2926,7 +2925,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>November 19, 2023</aside>
+    <aside>November 29, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2605,12 +2605,12 @@ def main():
     b = set(range(10000))
 main()' > test.py
 $ kernprof -lv test.py
-Line #   Hits     Time  Per Hit   % Time  Line Contents
-=======================================================
-     1                                    @profile
-     2                                    def main():
-     3      1    219.0    219.0     31.1      a = list(range(10000))
-     4      1    487.0    487.0     68.9      b = set(range(10000))
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           @profile
+     2                                           def main():
+     3         1        253.4    253.4     32.2      a = list(range(10000))
+     4         1        534.1    534.1     67.8      b = set(range(10000))
 ```
 
 ### Call and Flame Graphs
@@ -2624,15 +2624,14 @@ $ snakeviz test.prof
 
 ### Sampling and Memory Profilers
 ```text
-+--------------+-------------------------------+------------+----------+------+
-| pip3 install |          How to run           |   Target   |   Type   | Live |
-+--------------+-------------------------------+------------+----------+------+
-| py-spy       | py-spy top -- python3 test.py |    CPU     | Sampling | Yes  |
-| pyinstrument | pyinstrument test.py          |    CPU     | Sampling | No   |
-| scalene      | scalene test.py               | CPU+Memory | Sampling | No   |
-| memray       | memray run --live test.py     |   Memory   | Tracing  | Yes  |
-| filprofiler  | fil-profile run test.py       |   Memory   | Tracing  | No   |
-+--------------+-------------------------------+------------+----------+------+
++--------------+----------+------------+-------------------------------+------+
+| pip3 install |   Type   |   Target   |          How to run           | Live |
++--------------+----------+------------+-------------------------------+------+
+| pyinstrument | Sampling |    CPU     | pyinstrument test.py          | No   |
+| py-spy       | Sampling |    CPU     | py-spy top -- python3 test.py | Yes  |
+| scalene      | Sampling | CPU+Memory | scalene test.py               | No   |
+| memray       | Tracing  |   Memory   | memray run --live test.py     | Yes  |
++--------------+----------+------------+-------------------------------+------+
 ```
 
 
