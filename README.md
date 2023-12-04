@@ -2604,7 +2604,7 @@ def main():
     a = list(range(10000))
     b = set(range(10000))
 main()' > test.py
-$ kernprof -lv test.py
+$ kernprof --line-by-line --view test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
      1                                           @profile
@@ -2615,10 +2615,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 
 ### Call and Flame Graphs
 ```text
-$ pip3 install gprof2dot snakeviz; apt/brew install graphviz
-$ tail -n 4 test.py > test.py
+$ apt/brew install graphviz && pip3 install gprof2dot snakeviz
+$ tail --lines=4 test.py > test.py
 $ python3 -m cProfile -o test.prof test.py
-$ gprof2dot -f pstats test.prof | dot -T png -o test.png; xdg-open/open test.png
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png
+$ xdg-open/open test.png
 $ snakeviz test.prof
 ```
 

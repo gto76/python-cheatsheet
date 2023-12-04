@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>November 29, 2023</aside>
+    <aside>December 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2129,7 +2129,7 @@ def main():
     a = list(range(10000))
     b = set(range(10000))
 main()' &gt; test.py
-$ kernprof -lv test.py
+$ kernprof --line-by-line --view test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
      1                                           @profile
@@ -2138,10 +2138,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1        534.1    534.1     67.8      b = set(range(10000))
 </code></pre></div>
 
-<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ pip3 install gprof2dot snakeviz; apt/brew install graphviz
-$ tail -n 4 test.py &gt; test.py
+<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz
+$ tail --lines=4 test.py &gt; test.py
 $ python3 -m cProfile -o test.prof test.py
-$ gprof2dot -f pstats test.prof | dot -T png -o test.png; xdg-open/open test.png
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png
+$ xdg-open/open test.png
 $ snakeviz test.prof
 </code></pre></div>
 
@@ -2925,7 +2926,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>November 29, 2023</aside>
+    <aside>December 5, 2023</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
