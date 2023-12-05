@@ -2604,7 +2604,7 @@ def main():
     a = list(range(10000))
     b = set(range(10000))
 main()' > test.py
-$ kernprof --line-by-line --view test.py
+$ kernprof -lv test.py
 Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
      1                                           @profile
