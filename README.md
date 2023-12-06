@@ -2667,7 +2667,7 @@ import numpy as np
 ```python
 <array> = np.concatenate(<list_of_arrays>, axis=0)      # Links arrays along first axis (rows).
 <array> = np.row_stack/column_stack(<list_of_arrays>)   # Treats 1d arrays as rows or columns.
-<array> = np.tile/repeat(<array>, <int/list>)           # Tiles array or repeats its elements.
+<array> = np.tile/repeat(<array>, <int/list> [, axis])  # Tiles array or repeats its elements.
 ```
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
 * **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
