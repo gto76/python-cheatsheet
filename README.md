@@ -16,6 +16,9 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprogramming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Tables`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__.__  
 **&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__,__ **[`PySimpleGUI`](#pysimplegui)**__.__
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Introspection`](#introspection)**__,__ **[`Logging`](#logging)**__,__ **[`Coroutines`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plots`](#plot)**__,__ **[`Tables`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`GUIs`](#pysimplegui)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profiling`](#profiling)**__.__  
+**&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
 
 
 Main
@@ -317,7 +320,6 @@ String
 ```python
 <bool> = <sub_str> in <str>                  # Checks if string contains the substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
-<bool> = <str>.endswith(<sub_str>)           # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
 <int>  = <str>.index(<sub_str>)              # Same, but raises ValueError if missing.
 ```
@@ -333,6 +335,7 @@ String
 <int>  = ord(<str>)                          # Converts Unicode character to int.
 ```
 * **Use `'unicodedata.normalize("NFC", <str>)'` on strings that may contain characters like `'Ö'` before comparing them, because they can be stored as one or two characters.**
+* **`'NFC'` converts such characters to a single character, while `'NFD'` converts them to two.**
 
 ### Property Methods
 ```python
@@ -351,9 +354,6 @@ Regex
 
 ```python
 import re
-```
-
-```python
 <str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences with 'new'.
 <list>  = re.findall(<regex>, text)            # Returns all occurrences as strings.
 <list>  = re.split(<regex>, text, maxsplit=0)  # Add brackets around regex to include matches.
@@ -368,6 +368,7 @@ import re
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
 * **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
 * **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
+* **`'re.compile(<regex>)'` returns a Pattern object with listed methods.**
 
 ### Match Object
 ```python
@@ -589,7 +590,7 @@ Datetime
 **Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.**
 
 ```python
-# pip3 install python-dateutil
+# $ pip3 install python-dateutil
 from datetime import date, time, datetime, timedelta, timezone
 from dateutil.tz import tzlocal, gettz
 ```
@@ -740,7 +741,7 @@ def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=
 <list>  = [*<coll.> [, ...]]    # Or: list(<collection>) [+ ...]
 <tuple> = (*<coll.>, [...])     # Or: tuple(<collection>) [+ ...]
 <set>   = {*<coll.> [, ...]}    # Or: set(<collection>) [| ...]
-<dict>  = {**<dict> [, ...]}    # Or: dict(**<dict> [, ...])
+<dict>  = {**<dict> [, ...]}    # Or: dict(<dict>) [| ...] (since 3.9)
 ```
 
 ```python
@@ -2183,6 +2184,48 @@ first_element    = op.methodcaller('pop', 0)(<list>)
 * **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
 
 
+Match Statement
+---------------
+**Executes the first block with matching pattern. Added in Python 3.10.**
+
+```python
+match <object/expression>:
+    case <pattern> [if <condition>]:
+        <code>
+    ...
+```
+
+### Patterns
+```python
+<value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or a dotted name.
+<class_pattern> = <type>()                         # Matches any object of that type.
+<capture_patt>  = <name>                           # Matches any object and binds it to name.
+<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
+<as_pattern>    = <pattern> as <name>              # Binds the match to the name.
+<sequence_patt> = [<pattern>, ...]                 # Matches sequence with matching items.
+<mapping_patt>  = {<value_patt>: <pattern>, ...}   # Matches dictionary with matching items.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.
+```
+* **Sequence pattern can also be written as a tuple.**
+* **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
+* **Patterns can be surrounded with brackets to override precedence (`'|'` > `'as'` > `','`).**
+* **Built-in types allow a single positional pattern that is matched against the entire object.**
+* **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.**
+
+### Example
+```python
+>>> from pathlib import Path
+>>> match Path('/home/gto/python-cheatsheet/README.md'):
+...     case Path(
+...         parts=['/', 'home', user, *_],
+...         stem=stem,
+...         suffix=('.md' | '.txt') as suffix
+...     ) if stem.lower() == 'readme':
+...         print(f'{stem}{suffix} is a readme file that belongs to user {user}.')
+'README.md is a readme file that belongs to user gto.'
+```
+
+
 Introspection
 -------------
 ```python
@@ -2191,7 +2234,6 @@ Introspection
 <dict> = globals()                         # Dict of global vars, etc. (incl. '__builtins__').
 ```
 
-### Attributes
 ```python
 <list> = dir(<object>)                     # Names of object's attributes (including methods).
 <dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
@@ -2201,250 +2243,12 @@ setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict_
 delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 ```
 
-### Parameters
 ```python
 <Sig>  = inspect.signature(<function>)     # Function's Signature object.
 <dict> = <Sig>.parameters                  # Dict of Parameter objects.
 <memb> = <Param>.kind                      # Member of ParameterKind enum.
 <obj>  = <Param>.default                   # Default value or Parameter.empty.
 <type> = <Param>.annotation                # Type or Parameter.empty.
-```
-
-
-Metaprogramming
----------------
-**Code that generates code.**
-
-### Type
-**Type is the root class. If only passed an object it returns its type (class). Otherwise it creates a new class.**
-
-```python
-<class> = type('<class_name>', <tuple_of_parents>, <dict_of_class_attributes>)
-```
-
-```python
->>> Z = type('Z', (), {'a': 'abcde', 'b': 12345})
->>> z = Z()
-```
-
-### Meta Class
-**A class that creates classes.**
-
-```python
-def my_meta_class(name, parents, attrs):
-    attrs['a'] = 'abcde'
-    return type(name, parents, attrs)
-```
-
-#### Or:
-```python
-class MyMetaClass(type):
-    def __new__(cls, name, parents, attrs):
-        attrs['a'] = 'abcde'
-        return type.__new__(cls, name, parents, attrs)
-```
-* **New() is a class method that gets called before init(). If it returns an instance of its class, then that instance gets passed to init() as a 'self' argument.**
-* **It receives the same arguments as init(), except for the first one that specifies the desired type of the returned instance (MyMetaClass in our case).**
-* **Like in our case, new() can also be called directly, usually from a new() method of a child class (**`def __new__(cls): return super().__new__(cls)`**).**
-* **The only difference between the examples above is that my\_meta\_class() returns a class of type type, while MyMetaClass() returns a class of type MyMetaClass.**
-
-### Metaclass Attribute
-**Right before a class is created it checks if it has the 'metaclass' attribute defined. If not, it recursively checks if any of its parents has it defined and eventually comes to type().**
-
-```python
-class MyClass(metaclass=MyMetaClass):
-    b = 12345
-```
-
-```python
->>> MyClass.a, MyClass.b
-('abcde', 12345)
-```
-
-### Type Diagram
-```python
-type(MyClass) == MyMetaClass         # MyClass is an instance of MyMetaClass.
-type(MyMetaClass) == type            # MyMetaClass is an instance of type.
-```
-
-```text
-+-------------+-------------+
-|   Classes   | Metaclasses |
-+-------------+-------------|
-|   MyClass <-- MyMetaClass |
-|             |     ^       |
-|    object <----- type <+  |
-|             |     | +--+  |
-|     str <---------+       |
-+-------------+-------------+
-```
-
-### Inheritance Diagram
-```python
-MyClass.__base__ == object           # MyClass is a subclass of object.
-MyMetaClass.__base__ == type         # MyMetaClass is a subclass of type.
-```
-
-```text
-+-------------+-------------+
-|   Classes   | Metaclasses |
-+-------------+-------------|
-|   MyClass   | MyMetaClass |
-|      ^      |     ^       |
-|    object -----> type     |
-|      v      |             |
-|     str     |             |
-+-------------+-------------+
-```
-
-
-Eval
-----
-```python
->>> from ast import literal_eval
->>> literal_eval('[1, 2, 3]')
-[1, 2, 3]
->>> literal_eval('1 + 2')
-ValueError: malformed node or string
-```
-
-
-Coroutines
-----------
-* **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
-* **Coroutine definition starts with `'async'` and its call with `'await'`.**
-* **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
-* **Functions wait(), gather() and as_completed() start multiple coroutines at the same time.**
-* **Asyncio module also provides its own [Queue](#queue), [Event](#semaphore-event-barrier), [Lock](#lock) and [Semaphore](#semaphore-event-barrier) classes.**
-
-#### Runs a terminal game where you control an asterisk that must avoid numbers:
-
-```python
-import asyncio, collections, curses, curses.textpad, enum, random
-
-P = collections.namedtuple('P', 'x y')         # Position
-D = enum.Enum('D', 'n e s w')                  # Direction
-W, H = 15, 7                                   # Width, Height
-
-def main(screen):
-    curses.curs_set(0)                         # Makes cursor invisible.
-    screen.nodelay(True)                       # Makes getch() non-blocking.
-    asyncio.run(main_coroutine(screen))        # Starts running asyncio code.
-
-async def main_coroutine(screen):
-    moves = asyncio.Queue()
-    state = {'*': P(0, 0), **{id_: P(W//2, H//2) for id_ in range(10)}}
-    ai    = [random_controller(id_, moves) for id_ in range(10)]
-    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
-    tasks = [asyncio.create_task(cor) for cor in ai + mvc]
-    await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
-
-async def random_controller(id_, moves):
-    while True:
-        d = random.choice(list(D))
-        moves.put_nowait((id_, d))
-        await asyncio.sleep(random.triangular(0.01, 0.65))
-
-async def human_controller(screen, moves):
-    while True:
-        key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
-        if d := key_mappings.get(screen.getch()):
-            moves.put_nowait(('*', d))
-        await asyncio.sleep(0.005)
-
-async def model(moves, state):
-    while state['*'] not in (state[id_] for id_ in range(10)):
-        id_, d = await moves.get()
-        x, y   = state[id_]
-        deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        state[id_] = P((x + deltas[d].x) % W, (y + deltas[d].y) % H)
-
-async def view(state, screen):
-    offset = P(curses.COLS//2 - W//2, curses.LINES//2 - H//2)
-    while True:
-        screen.erase()
-        curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
-        for id_, p in state.items():
-            screen.addstr(offset.y + (p.y - state['*'].y + H//2) % H,
-                          offset.x + (p.x - state['*'].x + W//2) % W, str(id_))
-        screen.refresh()
-        await asyncio.sleep(0.005)
-
-if __name__ == '__main__':
-    curses.wrapper(main)
-```
-<br>
-
-
-Libraries
-=========
-
-Progress Bar
-------------
-```python
-# $ pip3 install tqdm
->>> import tqdm, time
->>> for el in tqdm.tqdm([1, 2, 3], desc='Processing'):
-...     time.sleep(1)
-Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
-```
-
-
-Plot
-----
-```python
-# $ pip3 install matplotlib
-import matplotlib.pyplot as plt
-plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
-plt.legend()                                          # Adds a legend.
-plt.savefig(<path>)                                   # Saves the figure.
-plt.show()                                            # Displays the figure.
-plt.clf()                                             # Clears the figure.
-```
-
-
-Table
------
-#### Prints a CSV file as an ASCII table:
-```python
-# $ pip3 install tabulate
-import csv, tabulate
-with open('test.csv', encoding='utf-8', newline='') as file:
-    rows   = csv.reader(file)
-    header = next(rows)
-    table  = tabulate.tabulate(rows, header)
-print(table)
-```
-
-
-Curses
-------
-#### Runs a basic file explorer in the console:
-```python
-# pip3 install windows-curses
-import curses, os
-from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-
-def main(screen):
-    ch, first, selected, paths = 0, 0, 0, os.listdir()
-    while ch != ord('q'):
-        height, width = screen.getmaxyx()
-        screen.erase()
-        for y, filename in enumerate(paths[first : first+height]):
-            color = A_REVERSE if filename == paths[selected] else 0
-            screen.addnstr(y, 0, filename, width-1, color)
-        ch = screen.getch()
-        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
-        selected = max(0, min(len(paths)-1, selected))
-        first += (selected >= first + height) - (selected < first)
-        if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord('\n'), ord('\r')]:
-            new_dir = '..' if ch == KEY_LEFT else paths[selected]
-            if os.path.isdir(new_dir):
-                os.chdir(new_dir)
-                first, selected, paths = 0, 0, os.listdir()
-
-if __name__ == '__main__':
-    curses.wrapper(main)
 ```
 
 
@@ -2501,26 +2305,224 @@ CRITICAL:my_module:Running out of disk space.
 ```
 
 
+Coroutines
+----------
+* **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
+* **Coroutine definition starts with `'async'` and its call with `'await'`.**
+* **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
+* **Functions wait(), gather() and as_completed() start multiple coroutines at the same time.**
+* **Asyncio module also provides its own [Queue](#queue), [Event](#semaphore-event-barrier), [Lock](#lock) and [Semaphore](#semaphore-event-barrier) classes.**
+
+#### Runs a terminal game where you control an asterisk that must avoid numbers:
+
+```python
+import asyncio, collections, curses, curses.textpad, enum, random, time
+
+P = collections.namedtuple('P', 'x y')         # Position
+D = enum.Enum('D', 'n e s w')                  # Direction
+W, H = 15, 7                                   # Width, Height
+
+def main(screen):
+    curses.curs_set(0)                         # Makes cursor invisible.
+    screen.nodelay(True)                       # Makes getch() non-blocking.
+    asyncio.run(main_coroutine(screen))        # Starts running asyncio code.
+
+async def main_coroutine(screen):
+    moves = asyncio.Queue()
+    state = {'*': P(0, 0), **{id_: P(W//2, H//2) for id_ in range(10)}}
+    ai    = [random_controller(id_, moves) for id_ in range(10)]
+    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
+    tasks = [asyncio.create_task(cor) for cor in ai + mvc]
+    await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+
+async def random_controller(id_, moves):
+    while True:
+        d = random.choice(list(D))
+        moves.put_nowait((id_, d))
+        await asyncio.sleep(random.triangular(0.01, 0.65))
+
+async def human_controller(screen, moves):
+    while True:
+        key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
+        ch = screen.getch()
+        if d := key_mappings.get(ch):
+            moves.put_nowait(('*', d))
+        await asyncio.sleep(0.005)
+
+async def model(moves, state):
+    while state['*'] not in (state[id_] for id_ in range(10)):
+        id_, d = await moves.get()
+        x, y   = state[id_]
+        deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
+        dx, dy = deltas[d]
+        state[id_] = P((x + dx) % W, (y + dy) % H)
+
+async def view(state, screen):
+    offset = P(curses.COLS//2 - W//2, curses.LINES//2 - H//2)
+    while True:
+        screen.erase()
+        curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
+        for id_, p in state.items():
+            screen.addstr(
+                offset.y + (p.y - state['*'].y + H//2) % H,
+                offset.x + (p.x - state['*'].x + W//2) % W,
+                str(id_)
+            )
+        screen.refresh()
+        await asyncio.sleep(0.005)
+
+if __name__ == '__main__':
+    start_time = time.perf_counter()
+    curses.wrapper(main)
+    print(f'You survived {time.perf_counter() - start_time:.2f} seconds.')
+```
+<br>
+
+
+Libraries
+=========
+
+Progress Bar
+------------
+```python
+# $ pip3 install tqdm
+>>> import tqdm, time
+>>> for el in tqdm.tqdm([1, 2, 3], desc='Processing'):
+...     time.sleep(1)
+Processing: 100%|████████████████████| 3/3 [00:03<00:00,  1.00s/it]
+```
+
+
+Plot
+----
+```python
+# $ pip3 install matplotlib
+import matplotlib.pyplot as plt
+plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
+plt.legend()                                          # Adds a legend.
+plt.savefig(<path>)                                   # Saves the figure.
+plt.show()                                            # Displays the figure.
+plt.clf()                                             # Clears the figure.
+```
+
+
+Table
+-----
+#### Prints a CSV file as an ASCII table:
+```python
+# $ pip3 install tabulate
+import csv, tabulate
+with open('test.csv', encoding='utf-8', newline='') as file:
+    rows   = csv.reader(file)
+    header = next(rows)
+    table  = tabulate.tabulate(rows, header)
+print(table)
+```
+
+
+Curses
+------
+#### Runs a basic file explorer in the console:
+```python
+# $ pip3 install windows-curses
+import curses, os
+from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+
+def main(screen):
+    ch, first, selected, paths = 0, 0, 0, os.listdir()
+    while ch != ord('q'):
+        height, width = screen.getmaxyx()
+        screen.erase()
+        for y, filename in enumerate(paths[first : first+height]):
+            color = A_REVERSE if filename == paths[selected] else 0
+            screen.addnstr(y, 0, filename, width-1, color)
+        ch = screen.getch()
+        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
+        selected = max(0, min(len(paths)-1, selected))
+        first += (selected >= first + height) - (selected < first)
+        if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord('\n'), ord('\r')]:
+            new_dir = '..' if ch == KEY_LEFT else paths[selected]
+            if os.path.isdir(new_dir):
+                os.chdir(new_dir)
+                first, selected, paths = 0, 0, os.listdir()
+
+if __name__ == '__main__':
+    curses.wrapper(main)
+```
+
+
+PySimpleGUI
+-----------
+#### A weight converter GUI application:
+
+```python
+# $ pip3 install PySimpleGUI
+import PySimpleGUI as sg
+
+text_box = sg.Input(default_text='100', enable_events=True, key='-VALUE-')
+dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='-UNIT-')
+label    = sg.Text('100 kg is 220.462 lbs.', key='-OUTPUT-')
+button   = sg.Button('Close')
+window   = sg.Window('Weight Converter', [[text_box, dropdown], [label], [button]])
+
+while True:
+    event, values = window.read()
+    if event in [sg.WIN_CLOSED, 'Close']:
+        break
+    try:
+        value = float(values['-VALUE-'])
+    except ValueError:
+        continue
+    unit = values['-UNIT-']
+    units = {'g': 0.001, 'kg': 1, 't': 1000}
+    lbs = value * units[unit] / 0.45359237
+    window['-OUTPUT-'].update(value=f'{value} {unit} is {lbs:g} lbs.')
+window.close()
+```
+
+
 Scraping
 --------
 #### Scrapes Python's URL and logo from its Wikipedia page:
 ```python
 # $ pip3 install requests beautifulsoup4
-import requests, bs4, os, sys
+import requests, bs4, os
 
-try:
-    response   = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
-    document   = bs4.BeautifulSoup(response.text, 'html.parser')
-    table      = document.find('table', class_='infobox vevent')
-    python_url = table.find('th', text='Website').next_sibling.a['href']
-    logo_url   = table.find('img')['src']
-    logo       = requests.get(f'https:{logo_url}').content
-    filename   = os.path.basename(logo_url)
-    with open(filename, 'wb') as file:
-        file.write(logo)
-    print(f'{python_url}, file://{os.path.abspath(filename)}')
-except requests.exceptions.ConnectionError:
-    print("You've got problems with connection.", file=sys.stderr)
+response   = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+document   = bs4.BeautifulSoup(response.text, 'html.parser')
+table      = document.find('table', class_='infobox vevent')
+python_url = table.find('th', text='Website').next_sibling.a['href']
+logo_url   = table.find('img')['src']
+logo       = requests.get(f'https:{logo_url}').content
+filename   = os.path.basename(logo_url)
+with open(filename, 'wb') as file:
+    file.write(logo)
+print(f'{python_url}, file://{os.path.abspath(filename)}')
+```
+
+### Selenium
+**Library for scraping websites with dynamic content.**
+```python
+# $ pip3 install selenium
+from selenium import webdriver
+
+<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens a browser. Also <Drv>.quit().
+<Drv>.get('<url>')                                     # Also <Drv>.implicitly_wait(seconds).
+<El> = <Drv/El>.find_element('css selector', '<css>')  # '<tag>#<id>.<class>[<attr>="<val>"]'.
+<list> = <Drv/El>.find_elements('xpath', '<xpath>')    # '//<tag>[@<attr>="<val>"]'.
+<str> = <El>.get_attribute/get_property(<str>)         # Also <El>.text/tag_name.
+<El>.click/clear()                                     # Also <El>.send_keys(<str>).
+```
+
+#### XPath — also available in browser's console via `'$x(<xpath>)'`:
+```python
+<xpath>     = //<element>[/ or // <element>]           # Child: /, Descendant: //, Parent: /..
+<xpath>     = //<element>/following::<element>         # Next sibling. Also preceding/parent/…
+<element>   = <tag><conditions><index>                 # `<tag> = */a/…`, `<index> = [1/2/…]`.
+<condition> = [<sub_cond> [and/or <sub_cond>]]         # `and` is same as chaining conditions.
+<sub_cond>  = @<attr>="<val>"                          # `.="<val>"` matches complete text.
+<sub_cond>  = contains(@<attr>, "<val>")               # Is <val> a substring of attr's value?
+<sub_cond>  = [//]<element>                            # Has matching child? Descendant if //.
 ```
 
 
@@ -2763,9 +2765,9 @@ from PIL import Image, ImageFilter, ImageEnhance
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))            # Returns pixel's color.
-<Image>.putpixel((x, y), <int/tuple>)             # Changes pixel's color.
-<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of all pixels.
+<int/tuple> = <Image>.getpixel((x, y))            # Returns pixel's value (its color).
+<Image>.putpixel((x, y), <int/tuple>)             # Updates pixel's value.
+<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of pixel values.
 <Image>.putdata(<list/ImagingCore>)               # Updates pixels with a copy of the sequence.
 <Image>.paste(<Image>, (x, y))                    # Draws passed image at specified location.
 ```
@@ -2776,8 +2778,8 @@ from PIL import Image, ImageFilter, ImageEnhance
 ```
 
 ```python
-<array> = np.array(<Image>)                       # Creates a NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))      # Use <array>.clip(0, 255) to clip values.
+<array> = np.array(<Image>)                       # Creates a 2d/3d NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))      # Use `<array>.clip(0, 255)` to clip values.
 ```
 
 ### Modes
@@ -3493,19 +3495,6 @@ def display_data(df):
 
 if __name__ == '__main__':
     main()
-```
-
-
-PySimpleGUI
------------
-```python
-# $ pip3 install PySimpleGUI
-import PySimpleGUI as sg
-
-layout = [[sg.Text("What's your name?")], [sg.Input()], [sg.Button('Ok')]]
-window = sg.Window('Window Title', layout)
-event, values = window.read()
-print(f'Hello {values[0]}!' if event == 'Ok' else '')
 ```
 
 

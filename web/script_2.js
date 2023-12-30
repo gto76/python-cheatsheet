@@ -5,9 +5,9 @@ const TOC =
   '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
-  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#introspection">Introspection</a>, <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>, <a href="#coroutines">Coroutine</a>],\n' +
-  '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Tables</a>, <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>],\n' +
-  '    <strong><span class="hljs-string">\'8. Multimedia\'</span></strong>:  [<a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>, <a href="#plotly">Plotly</a>, <a href="#pysimplegui">PySimpleGUI</a>]\n' +
+  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#introspection">Introspection</a>, <a href="#logging">Logging</a>, <a href="#coroutines">Coroutines</a>],\n' +
+  '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plots</a>, <a href="#table">Tables</a>, <a href="#curses">Curses</a>, <a href="#pysimplegui">GUIs</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profiling</a>],\n' +
+  '    <strong><span class="hljs-string">\'8. Multimedia\'</span></strong>:  [<a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>, <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>, <a href="#plotly">Plotly</a>]\n' +
   '}\n';
 
 const TOC_MOBILE =
@@ -29,15 +29,14 @@ const TOC_MOBILE =
   '                       <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>,\n' +
   '                       <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>,\n' +
-  '                       <a href="#introspection">Introspection</a>,\n' +
-  '                       <a href="#metaprogramming">Metaprograming</a>, <a href="#eval">Eval</a>,\n' +
-  '                       <a href="#coroutines">Coroutine</a>],\n' +
+  '                       <a href="#matchstatement">Match_Stmt</a>, <a href="#introspection">Introspection</a>,\n' +
+  '                       <a href="#logging">Logging</a>, <a href="#coroutines">Coroutines</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>,\n' +
-  '                       <a href="#curses">Curses</a>, <a href="#logging">Logging</a>, <a href="#scraping">Scraping</a>,\n' +
-  '                       <a href="#web">Web</a>, <a href="#profiling">Profile</a>],\n' +
+  '                       <a href="#curses">Curses</a>, <a href="#pysimplegui">GUIs</a>, <a href="#scraping">Scraping</a>,\n' +
+  '                       <a href="#web">Web</a>, <a href="#profiling">Profiling</a>],\n' +
   '    <strong><span class="hljs-string">\'8. Multimedia\'</span></strong>:  [<a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>,\n' +
-  '                       <a href="#audio">Audio</a>, <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>,\n' +
-  '                       <a href="#plotly">Plotly</a>, <a href="#pysimplegui">PySimpleGUI</a>]\n' +
+  '                       <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>,\n' +
+  '                       <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>, <a href="#plotly">Plotly</a>]\n' +
   '}\n';
 
 
