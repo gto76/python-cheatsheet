@@ -370,7 +370,7 @@ import re
 ### Match Object
 ```python
 <str>   = <Match>.group()                      # Returns the whole match. Also group(0).
-<str>   = <Match>.group(1)                     # Returns the part inside first brackets.
+<str>   = <Match>.group(1)                     # Returns part inside the first brackets.
 <tuple> = <Match>.groups()                     # Returns all bracketed parts.
 <int>   = <Match>.start()                      # Returns start index of the match.
 <int>   = <Match>.end()                        # Returns exclusive end index of the match.
@@ -378,13 +378,13 @@ import re
 
 ### Special Sequences
 ```python
-'\d' == '[0-9]'                                # Matches decimal characters.
-'\w' == '[a-zA-Z0-9_]'                         # Matches alphanumerics and underscore.
-'\s' == '[ \t\n\r\f\v]'                        # Matches whitespaces.
+'\d' == '[0-9]'                                # Also [०-९…]. Matches a decimal character.
+'\w' == '[a-zA-Z0-9_]'                         # Also [ª²³…]. Matches an alphanumeric or _.
+'\s' == '[ \t\n\r\f\v]'                        # Also [\x1c-\x1f…]. Matches a whitespace.
 ```
 
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **As shown above, it restricts all special sequence matches to the first 128 characters and prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
+* **It restricts special sequence matches to `'[\x00-\x7f]'` (the first 128 characters) and also prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
 * **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
 
 
