@@ -331,15 +331,15 @@ String
 <str>  = chr(<int>)                          # Converts int to Unicode character.
 <int>  = ord(<str>)                          # Converts Unicode character to int.
 ```
-* **Use `'unicodedata.normalize("NFC", <str>)'` on strings that may contain characters like `'Ö'` before comparing them, because they can be stored as one or two characters.**
+* **Use `'unicodedata.normalize("NFC", <str>)'` on strings like `'Motörhead'` before comparing them to other strings, because `'ö'` can be stored as one or two characters.**
 * **`'NFC'` converts such characters to a single character, while `'NFD'` converts them to two.**
 
 ### Property Methods
 ```python
-<bool> = <str>.isdecimal()                   # Checks for [0-9].
-<bool> = <str>.isdigit()                     # Checks for [²³¹] and isdecimal().
-<bool> = <str>.isnumeric()                   # Checks for [¼½¾] and isdigit().
-<bool> = <str>.isalnum()                     # Checks for [a-zA-Z] and isnumeric().
+<bool> = <str>.isdecimal()                   # Checks for [0-9]. Also [०-९] and [٠-٩].
+<bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal().
+<bool> = <str>.isnumeric()                   # Checks for [¼½¾], [零〇一…] and isdigit().
+<bool> = <str>.isalnum()                     # Checks for [a-zA-Z…] and isnumeric().
 <bool> = <str>.isprintable()                 # Checks for [ !#$%…] and isalnum().
 <bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].
 ```
@@ -2194,17 +2194,19 @@ match <object/expression>:
 
 ### Patterns
 ```python
-<value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or a dotted name.
-<class_pattern> = <type>()                         # Matches any object of that type.
-<capture_patt>  = <name>                           # Matches any object and binds it to name.
-<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
-<as_pattern>    = <pattern> as <name>              # Binds the match to the name.
-<sequence_patt> = [<pattern>, ...]                 # Matches sequence with matching items.
-<mapping_patt>  = {<value_patt>: <pattern>, ...}   # Matches dictionary with matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.
+<value_pattern> = 1/'abc'/True/None/math.pi          # Matches the literal or a dotted name.
+<class_pattern> = <type>()                           # Matches any object of that type.
+<wildcard_patt> = _                                  # Matches any object.
+<capture_patt>  = <name>                             # Matches any object and binds it to name.
+<or_pattern>    = <pattern> | <pattern> [| ...]      # Matches any of the patterns.
+<as_pattern>    = <pattern> as <name>                # Binds the match to the name.
+<sequence_patt> = [<pattern>, ...]                   # Matches sequence with matching items.
+<mapping_patt>  = {<value_pattern>: <pattern>, ...}  # Matches dictionary with matching items.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)    # Matches object with matching attributes.
 ```
 * **Sequence pattern can also be written as a tuple.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
+* **Sequence pattern must match all items, while mapping pattern does not.**
 * **Patterns can be surrounded with brackets to override precedence (`'|'` > `'as'` > `','`).**
 * **Built-in types allow a single positional pattern that is matched against the entire object.**
 * **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.**
@@ -2957,15 +2959,15 @@ Synthesizer
 import array, itertools as it, math, simpleaudio
 
 F  = 44100
-P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,'
-P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,'
+P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'
+P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'
 get_pause   = lambda seconds: it.repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz      = lambda key: 8.176 * 2 ** (int(key) / 12)
-parse_note  = lambda note: (get_hz(note[:2]), 1/4 if '♩' in note else 1/8)
-get_samples = lambda note: get_wave(*parse_note(note)) if note else get_pause(1/8)
-samples_f   = it.chain.from_iterable(get_samples(n) for n in f'{P1},{P1},{P2}'.split(','))
+get_hz      = lambda note: 8.176 * 2 ** (int(note[:2]) / 12)
+get_sec     = lambda note: 1/4 if '♩' in note else 1/8
+get_samples = lambda note: get_wave(get_hz(note), get_sec(note)) if note else get_pause(1/8)
+samples_f   = it.chain.from_iterable(get_samples(n) for n in (P1+P2).split(','))
 samples_i   = array.array('h', (int(f * 30000) for f in samples_f))
 simpleaudio.play_buffer(samples_i, 1, 2, F).wait_done()
 ```

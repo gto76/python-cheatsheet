@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>December 30, 2023</aside>
+    <aside>January 4, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -313,13 +313,13 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts Unicode character to int.</span>
 </code></pre>
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'unicodedata.normalize("NFC", &lt;str&gt;)'</span></code> on strings that may contain characters like <code class="python hljs"><span class="hljs-string">'Ö'</span></code> before comparing them, because they can be stored as one or two characters.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'unicodedata.normalize("NFC", &lt;str&gt;)'</span></code> on strings like <code class="python hljs"><span class="hljs-string">'Motörhead'</span></code> before comparing them to other strings, because <code class="python hljs"><span class="hljs-string">'ö'</span></code> can be stored as one or two characters.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'NFC'</span></code> converts such characters to a single character, while <code class="python hljs"><span class="hljs-string">'NFD'</span></code> converts them to two.</strong></li>
 </ul>
-<div><h3 id="propertymethods">Property Methods</h3><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># Checks for [0-9].</span>
-&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Checks for [²³¹] and isdecimal().</span>
-&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾] and isdigit().</span>
-&lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [a-zA-Z] and isnumeric().</span>
+<div><h3 id="propertymethods">Property Methods</h3><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># Checks for [0-9]. Also [०-९] and [٠-٩].</span>
+&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Checks for [²³¹…] and isdecimal().</span>
+&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾], [零〇一…] and isdigit().</span>
+&lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [a-zA-Z…] and isnumeric().</span>
 &lt;bool&gt; = &lt;str&gt;.isprintable()                 <span class="hljs-comment"># Checks for [ !#$%…] and isalnum().</span>
 &lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].</span>
 </code></pre></div>
@@ -1806,19 +1806,21 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 </code></pre></div>
 
 
-<div><h3 id="patterns">Patterns</h3><pre><code class="python language-python hljs">&lt;value_pattern&gt; = <span class="hljs-number">1</span>/<span class="hljs-string">'abc'</span>/<span class="hljs-keyword">True</span>/<span class="hljs-keyword">None</span>/math.pi        <span class="hljs-comment"># Matches the literal or a dotted name.</span>
-&lt;class_pattern&gt; = &lt;type&gt;()                         <span class="hljs-comment"># Matches any object of that type.</span>
-&lt;capture_patt&gt;  = &lt;name&gt;                           <span class="hljs-comment"># Matches any object and binds it to name.</span>
-&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches any of the patterns.</span>
-&lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;              <span class="hljs-comment"># Binds the match to the name.</span>
-&lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches sequence with matching items.</span>
-&lt;mapping_patt&gt;  = {&lt;value_patt&gt;: &lt;pattern&gt;, ...}   <span class="hljs-comment"># Matches dictionary with matching items.</span>
-&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object with matching attributes.</span>
+<div><h3 id="patterns">Patterns</h3><pre><code class="python language-python hljs">&lt;value_pattern&gt; = <span class="hljs-number">1</span>/<span class="hljs-string">'abc'</span>/<span class="hljs-keyword">True</span>/<span class="hljs-keyword">None</span>/math.pi          <span class="hljs-comment"># Matches the literal or a dotted name.</span>
+&lt;class_pattern&gt; = &lt;type&gt;()                           <span class="hljs-comment"># Matches any object of that type.</span>
+&lt;wildcard_patt&gt; = _                                  <span class="hljs-comment"># Matches any object.</span>
+&lt;capture_patt&gt;  = &lt;name&gt;                             <span class="hljs-comment"># Matches any object and binds it to name.</span>
+&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]      <span class="hljs-comment"># Matches any of the patterns.</span>
+&lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;                <span class="hljs-comment"># Binds the match to the name.</span>
+&lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                   <span class="hljs-comment"># Matches sequence with matching items.</span>
+&lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;pattern&gt;, ...}  <span class="hljs-comment"># Matches dictionary with matching items.</span>
+&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)    <span class="hljs-comment"># Matches object with matching attributes.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Sequence pattern can also be written as a tuple.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
+<li><strong>Sequence pattern must match all items, while mapping pattern does not.</strong></li>
 <li><strong>Patterns can be surrounded with brackets to override precedence (<code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>).</strong></li>
 <li><strong>Built-in types allow a single positional pattern that is matched against the entire object.</strong></li>
 <li><strong>All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.</strong></li>
@@ -2424,15 +2426,15 @@ engine.runAndWait()
 <span class="hljs-keyword">import</span> array, itertools <span class="hljs-keyword">as</span> it, math, simpleaudio
 
 F  = <span class="hljs-number">44100</span>
-P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,'</span>
-P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,'</span>
+P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'</span>
+P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'</span>
 get_pause   = <span class="hljs-keyword">lambda</span> seconds: it.repeat(<span class="hljs-number">0</span>, int(seconds * F))
 sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
 get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
-get_hz      = <span class="hljs-keyword">lambda</span> key: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(key) / <span class="hljs-number">12</span>)
-parse_note  = <span class="hljs-keyword">lambda</span> note: (get_hz(note[:<span class="hljs-number">2</span>]), <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
-get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(*parse_note(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
-samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">f'<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P1}</span>,<span class="hljs-subst">{P2}</span>'</span>.split(<span class="hljs-string">','</span>))
+get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(note[:<span class="hljs-number">2</span>]) / <span class="hljs-number">12</span>)
+get_sec     = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>
+get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(get_hz(note), get_sec(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
+samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> (P1+P2).split(<span class="hljs-string">','</span>))
 samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(f * <span class="hljs-number">30000</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))
 simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, F).wait_done()
 </code></pre></div></div>
@@ -2931,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>December 30, 2023</aside>
+    <aside>January 4, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
