@@ -1338,7 +1338,6 @@ value = args.&lt;name&gt;
 <li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write (truncate).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'t'</span></code>  - Text mode (default).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'br'</span></code>, <code class="python hljs"><span class="hljs-string">'bw'</span></code>, <code class="python hljs"><span class="hljs-string">'bx'</span></code>, …).</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
@@ -1363,6 +1362,7 @@ value = args.&lt;name&gt;
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer. Runs every 4096/8192 B.</span>
+&lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing.</span>
 </code></pre>
 <ul>
 <li><strong>Methods do not add or strip trailing newlines, not even writelines().</strong></li>

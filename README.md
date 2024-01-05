@@ -1576,7 +1576,6 @@ Open
 * **`'w+'` - Read and write (truncate).**
 * **`'r+'` - Read and write from the start.**
 * **`'a+'` - Read and write from the end.**
-* **`'t'`  - Text mode (default).**
 * **`'b'`  - Binary mode (`'br'`, `'bw'`, `'bx'`, …).**
 
 ### Exceptions
@@ -1604,6 +1603,7 @@ Open
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
+<file>.close()                      # Closes the file after flushing.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
 
