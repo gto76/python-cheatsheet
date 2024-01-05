@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 4, 2024</aside>
+    <aside>January 5, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2039,8 +2039,8 @@ window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text
     <span class="hljs-keyword">except</span> ValueError:
         <span class="hljs-keyword">continue</span>
     unit = values[<span class="hljs-string">'-UNIT-'</span>]
-    units = {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}
-    lbs = value * units[unit] / <span class="hljs-number">0.45359237</span>
+    factors = {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}
+    lbs = value * factors[unit] / <span class="hljs-number">0.45359237</span>
     window[<span class="hljs-string">'-OUTPUT-'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{value}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
 window.close()
 </code></pre></div></div>
@@ -2933,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 4, 2024</aside>
+    <aside>January 5, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

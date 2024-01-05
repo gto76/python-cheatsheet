@@ -2473,8 +2473,8 @@ while True:
     except ValueError:
         continue
     unit = values['-UNIT-']
-    units = {'g': 0.001, 'kg': 1, 't': 1000}
-    lbs = value * units[unit] / 0.45359237
+    factors = {'g': 0.001, 'kg': 1, 't': 1000}
+    lbs = value * factors[unit] / 0.45359237
     window['-OUTPUT-'].update(value=f'{value} {unit} is {lbs:g} lbs.')
 window.close()
 ```
