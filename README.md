@@ -659,7 +659,7 @@ from dateutil.tz import tzlocal, gettz
 <TD>     = <DTa>     - <DTa>                # Ignores time jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>      / <TD>                 # How many weeks/years there are in TD. Also //.
+<float>  = <TD>      / <TD>                 # How many hours/weeks/years are in TD. Also //.
 ```
 
 
@@ -1459,7 +1459,7 @@ BaseException
       +-- OSError                 # Errors such as FileExistsError/PermissionError (see #Open).
       |    +-- ConnectionError    # Errors such as BrokenPipeError/ConnectionAbortedError.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
-      |    +-- NotImplementedErr  # Can be raised by abstract methods or by unfinished code.
+      |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
       +-- StopIteration           # Raised by next() when run on an empty iterator.
       +-- TypeError               # Raised when an argument is of the wrong type.
@@ -1482,7 +1482,7 @@ BaseException
 ```python
 raise TypeError('Argument is of the wrong type!')
 raise ValueError('Argument has the right type but an inappropriate value!')
-raise RuntimeError('None of above!')
+raise RuntimeError('I am too lazy to define my own exception!')
 ```
 
 ### User-defined Exceptions

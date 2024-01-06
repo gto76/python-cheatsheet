@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 5, 2024</aside>
+    <aside>January 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -580,7 +580,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># How many weeks/years there are in TD. Also //.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># How many hours/weeks/years are in TD. Also //.</span>
 </code></pre></div>
 
 <div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
@@ -1244,7 +1244,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/PermissionError (see #Open).</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
-      │    ├── NotImplementedErr  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
+      │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
       ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
       ├── TypeError               <span class="hljs-comment"># Raised when an argument is of the wrong type.</span>
@@ -1263,7 +1263,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 
 <div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of the wrong type!'</span>)
 <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument has the right type but an inappropriate value!'</span>)
-<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'None of above!'</span>)
+<span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'I am too lazy to define my own exception!'</span>)
 </code></pre></div>
 
 <div><h3 id="userdefinedexceptions">User-defined Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span><span class="hljs-params">(Exception)</span>:</span> <span class="hljs-keyword">pass</span>
@@ -2933,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 5, 2024</aside>
+    <aside>January 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
