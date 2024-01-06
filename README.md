@@ -998,13 +998,12 @@ class <name>:
 ### Inheritance
 ```python
 class Person:
-    def __init__(self, name, age):
+    def __init__(self, name):
         self.name = name
-        self.age  = age
 
 class Employee(Person):
-    def __init__(self, name, age, staff_num):
-        super().__init__(name, age)
+    def __init__(self, name, staff_num):
+        super().__init__(name)
         self.staff_num = staff_num
 ```
 
