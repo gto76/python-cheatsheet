@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Introspection`](#introspection)**__,__ **[`Logging`](#logging)**__,__ **[`Coroutines`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plots`](#plot)**__,__ **[`Tables`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`GUIs`](#pysimplegui)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profiling`](#profiling)**__.__  
 **&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
 
@@ -2037,6 +2037,7 @@ from array import array
 <array> = array('<typecode>', <collection>)    # Array from collection of numbers.
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
+<array>.fromfile(<file>, n_items)              # Appends items. Raises EOFError on end.
 <bytes> = bytes(<array>)                       # Or: <array>.tobytes()
 <file>.write(<array>)                          # Writes array to the binary file.
 ```
@@ -2224,32 +2225,6 @@ match <object/expression>:
 ```
 
 
-Introspection
--------------
-```python
-<list> = dir()                             # Names of local variables, functions, classes, etc.
-<dict> = vars()                            # Dict of local variables, etc. Also locals().
-<dict> = globals()                         # Dict of global vars, etc. (incl. '__builtins__').
-```
-
-```python
-<list> = dir(<object>)                     # Names of object's attributes (including methods).
-<dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
-<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
-value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
-setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict__' attribute.
-delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
-```
-
-```python
-<Sig>  = inspect.signature(<function>)     # Function's Signature object.
-<dict> = <Sig>.parameters                  # Dict of Parameter objects.
-<memb> = <Param>.kind                      # Member of ParameterKind enum.
-<obj>  = <Param>.default                   # Default value or Parameter.empty.
-<type> = <Param>.annotation                # Type or Parameter.empty.
-```
-
-
 Logging
 -------
 ```python
@@ -2300,6 +2275,32 @@ logging.basicConfig(
 CRITICAL:my_module:Running out of disk space.
 >>> print(open('test.log').read())
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
+```
+
+
+Introspection
+-------------
+```python
+<list> = dir()                             # Names of local variables, functions, classes, etc.
+<dict> = vars()                            # Dict of local variables, etc. Also locals().
+<dict> = globals()                         # Dict of global vars, etc. (incl. '__builtins__').
+```
+
+```python
+<list> = dir(<object>)                     # Names of object's attributes (including methods).
+<dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
+<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
+value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
+setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict__' attribute.
+delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
+```
+
+```python
+<Sig>  = inspect.signature(<function>)     # Function's Signature object.
+<dict> = <Sig>.parameters                  # Dict of Parameter objects.
+<memb> = <Param>.kind                      # Member of ParameterKind enum.
+<obj>  = <Param>.default                   # Default value or Parameter.empty.
+<type> = <Param>.annotation                # Type or Parameter.empty.
 ```
 
 
