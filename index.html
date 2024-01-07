@@ -1977,6 +1977,7 @@ Processing: 100%|████████████████████| 3
 
 <div><h2 id="plot"><a href="#plot" name="plot">#</a>Plot</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install matplotlib</span>
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Or: plt.plot(y_data)</span>
 plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
 plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the figure.</span>
@@ -1987,10 +1988,8 @@ plt.clf()                                             <span class="hljs-comment"
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">import</span> csv, tabulate
 <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.csv'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
-    rows   = csv.reader(file)
-    header = next(rows)
-    table  = tabulate.tabulate(rows, header)
-print(table)
+    rows = list(csv.reader(file))
+print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span>))
 </code></pre></div></div>
 
 

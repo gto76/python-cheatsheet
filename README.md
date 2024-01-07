@@ -2397,6 +2397,7 @@ Plot
 ```python
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
+
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
 plt.legend()                                          # Adds a legend.
 plt.savefig(<path>)                                   # Saves the figure.
@@ -2412,10 +2413,8 @@ Table
 # $ pip3 install tabulate
 import csv, tabulate
 with open('test.csv', encoding='utf-8', newline='') as file:
-    rows   = csv.reader(file)
-    header = next(rows)
-    table  = tabulate.tabulate(rows, header)
-print(table)
+    rows = list(csv.reader(file))
+print(tabulate.tabulate(rows, headers='firstrow'))
 ```
 
 
