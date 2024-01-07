@@ -30,7 +30,7 @@ const TOC_MOBILE =
   '                       <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>,\n' +
   '                       <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, \n' +
-  '                        <a href="#introspection">Introspection</a>, <a href="#coroutines">Coroutines</a>],\n' +
+  '                       <a href="#introspection">Introspection</a>, <a href="#coroutines">Coroutines</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>,\n' +
   '                       <a href="#curses">Curses</a>, <a href="#pysimplegui">GUIs</a>, <a href="#scraping">Scraping</a>,\n' +
   '                       <a href="#web">Web</a>, <a href="#profiling">Profiling</a>],\n' +
