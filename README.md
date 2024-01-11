@@ -914,7 +914,7 @@ def add(x, y):
     return x + y
 ```
 * **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out).**
-* **Without it `'add.__name__'` would return `'out'`.**
+* **Without it, `'add.__name__'` would return `'out'`.**
 
 ### LRU Cache
 **Decorator that caches function's return values. All function's arguments must be hashable.**
@@ -2505,7 +2505,7 @@ print(f'{python_url}, file://{os.path.abspath(filename)}')
 # $ pip3 install selenium
 from selenium import webdriver
 
-<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens a browser. Also <Drv>.quit().
+<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens the browser. Also <Drv>.quit().
 <Drv>.get('<url>')                                     # Also <Drv>.implicitly_wait(seconds).
 <El> = <Drv/El>.find_element('css selector', '<css>')  # '<tag>#<id>.<class>[<attr>="<val>"]'.
 <list> = <Drv/El>.find_elements('xpath', '<xpath>')    # '//<tag>[@<attr>="<val>"]'.
@@ -2752,33 +2752,33 @@ Image
 -----
 ```python
 # $ pip3 install pillow
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))    # Also `color=<int/tuple/str>`.
-<Image> = Image.open(<path>)                      # Identifies format based on file contents.
-<Image> = <Image>.convert('<mode>')               # Converts image to the new mode.
-<Image>.save(<path>)                              # Selects format based on the path extension.
-<Image>.show()                                    # Opens image in the default preview app.
+<Image> = Image.new('<mode>', (width, height))  # Also `color=<int/tuple/str>`.
+<Image> = Image.open(<path>)                    # Identifies format based on file contents.
+<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
+<Image>.save(<path>)                            # Selects format based on the path extension.
+<Image>.show()                                  # Opens image in the default preview app.
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))            # Returns pixel's value (its color).
-<Image>.putpixel((x, y), <int/tuple>)             # Updates pixel's value.
-<ImagingCore> = <Image>.getdata()                 # Returns a flattened view of pixel values.
-<Image>.putdata(<list/ImagingCore>)               # Updates pixels with a copy of the sequence.
-<Image>.paste(<Image>, (x, y))                    # Draws passed image at specified location.
+<int/tuple> = <Image>.getpixel((x, y))          # Returns pixel's value (its color).
+<Image>.putpixel((x, y), <int/tuple>)           # Updates pixel's value.
+<ImagingCore> = <Image>.getdata()               # Returns a flattened view of pixel values.
+<Image>.putdata(<list/ImagingCore>)             # Updates pixels with a copy of the sequence.
+<Image>.paste(<Image>, (x, y))                  # Draws passed image at specified location.
 ```
 
 ```python
-<Image> = <Image>.filter(<Filter>)                # `<Filter> = ImageFilter.<name>([<args>])`
-<Image> = <Enhance>.enhance(<float>)              # `<Enhance> = ImageEnhance.<name>(<Image>)`
+<Image> = <Image>.filter(<Filter>)              # `<Filter> = ImageFilter.<name>([<args>])`
+<Image> = <Enhance>.enhance(<float>)            # `<Enhance> = ImageEnhance.<name>(<Image>)`
 ```
 
 ```python
-<array> = np.array(<Image>)                       # Creates a 2d/3d NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))      # Use `<array>.clip(0, 255)` to clip values.
+<array> = np.array(<Image>)                     # Creates a 2d/3d NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))    # Use `<array>.clip(0, 255)` to clip values.
 ```
 
 ### Modes
@@ -2809,15 +2809,15 @@ img.show()
 
 ### Image Draw
 ```python
-from PIL import ImageDraw, ImageFont
-<ImageDraw> = ImageDraw.Draw(<Image>)             # Object for adding 2D graphics to the image.
-<ImageDraw>.point((x, y))                         # Draws a point. Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))        # To get anti-aliasing use Image's resize().
-<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)     # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))        # Last point gets connected to the first.
-<ImageDraw>.ellipse((x1, y1, x2, y2))             # To rotate use Image's rotate() and paste().
-<ImageDraw>.text((x, y), text, font=<Font>)       # `<Font> = ImageFont.truetype(<path>, size)`
+from PIL import ImageDraw
+<ImageDraw> = ImageDraw.Draw(<Image>)           # Object for adding 2D graphics to the image.
+<ImageDraw>.point((x, y))                       # Draws a point. Truncates floats into ints.
+<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
+<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
+<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
+<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
+<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
+<ImageDraw>.text((x, y), text, font=<Font>)     # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
