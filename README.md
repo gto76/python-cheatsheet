@@ -2853,22 +2853,21 @@ import wave
 ```
 
 ```python
-<Wave_read>  = wave.open('<path>', 'rb')        # Opens the WAV file.
-framerate    = <Wave_read>.getframerate()       # Number of frames per second.
-nchannels    = <Wave_read>.getnchannels()       # Number of samples per frame.
-sampwidth    = <Wave_read>.getsampwidth()       # Sample size in bytes.
-nframes      = <Wave_read>.getnframes()         # Number of frames.
-<params>     = <Wave_read>.getparams()          # Immutable collection of above.
-<bytes>      = <Wave_read>.readframes(nframes)  # Returns next 'nframes' frames.
+<Wave>   = wave.open('<path>', 'rb')   # Opens the WAV file.
+<int>    = <Wave>.getframerate()       # Returns number of frames per second.
+<int>    = <Wave>.getnchannels()       # Returns number of samples per frame.
+<int>    = <Wave>.getsampwidth()       # Returns number of bytes per sample.
+<params> = <Wave>.getparams()          # Returns collection of listed params.
+<bytes>  = <Wave>.readframes(nframes)  # Returns next n frames. All if -1.
 ```
 
 ```python
-<Wave_write> = wave.open('<path>', 'wb')        # Truncates existing file.
-<Wave_write>.setframerate(<int>)                # 44100 for CD, 48000 for video.
-<Wave_write>.setnchannels(<int>)                # 1 for mono, 2 for stereo.
-<Wave_write>.setsampwidth(<int>)                # 2 for CD quality sound.
-<Wave_write>.setparams(<params>)                # Sets all parameters.
-<Wave_write>.writeframes(<bytes>)               # Appends frames to the file.
+<Wave> = wave.open('<path>', 'wb')     # Opens WAV file for writing.
+<Wave>.setframerate(<int>)             # Pass 44100 for CD, 48000 for video.
+<Wave>.setnchannels(<int>)             # Pass 1 for mono, 2 for stereo.
+<Wave>.setsampwidth(<int>)             # Pass 1 for 8-bit sound, 2 for CD.
+<Wave>.setparams(<params>)             # Sets all parameters.
+<Wave>.writeframes(<bytes>)            # Appends frames to the file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**

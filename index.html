@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 11, 2024</aside>
+    <aside>January 13, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2340,20 +2340,19 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave_read&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)        <span class="hljs-comment"># Opens the WAV file.</span>
-framerate    = &lt;Wave_read&gt;.getframerate()       <span class="hljs-comment"># Number of frames per second.</span>
-nchannels    = &lt;Wave_read&gt;.getnchannels()       <span class="hljs-comment"># Number of samples per frame.</span>
-sampwidth    = &lt;Wave_read&gt;.getsampwidth()       <span class="hljs-comment"># Sample size in bytes.</span>
-nframes      = &lt;Wave_read&gt;.getnframes()         <span class="hljs-comment"># Number of frames.</span>
-&lt;params&gt;     = &lt;Wave_read&gt;.getparams()          <span class="hljs-comment"># Immutable collection of above.</span>
-&lt;bytes&gt;      = &lt;Wave_read&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next 'nframes' frames.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt;   = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)   <span class="hljs-comment"># Opens the WAV file.</span>
+&lt;int&gt;    = &lt;Wave&gt;.getframerate()       <span class="hljs-comment"># Returns number of frames per second.</span>
+&lt;int&gt;    = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
+&lt;int&gt;    = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
+&lt;params&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns collection of listed params.</span>
+&lt;bytes&gt;  = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames. All if -1.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Wave_write&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)        <span class="hljs-comment"># Truncates existing file.</span>
-&lt;Wave_write&gt;.setframerate(&lt;int&gt;)                <span class="hljs-comment"># 44100 for CD, 48000 for video.</span>
-&lt;Wave_write&gt;.setnchannels(&lt;int&gt;)                <span class="hljs-comment"># 1 for mono, 2 for stereo.</span>
-&lt;Wave_write&gt;.setsampwidth(&lt;int&gt;)                <span class="hljs-comment"># 2 for CD quality sound.</span>
-&lt;Wave_write&gt;.setparams(&lt;params&gt;)                <span class="hljs-comment"># Sets all parameters.</span>
-&lt;Wave_write&gt;.writeframes(&lt;bytes&gt;)               <span class="hljs-comment"># Appends frames to the file.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)     <span class="hljs-comment"># Opens WAV file for writing.</span>
+&lt;Wave&gt;.setframerate(&lt;int&gt;)             <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
+&lt;Wave&gt;.setnchannels(&lt;int&gt;)             <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
+&lt;Wave&gt;.setsampwidth(&lt;int&gt;)             <span class="hljs-comment"># Pass 1 for 8-bit sound, 2 for CD.</span>
+&lt;Wave&gt;.setparams(&lt;params&gt;)             <span class="hljs-comment"># Sets all parameters.</span>
+&lt;Wave&gt;.writeframes(&lt;bytes&gt;)            <span class="hljs-comment"># Appends frames to the file.</span>
 </code></pre>
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
@@ -2933,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 11, 2024</aside>
+    <aside>January 13, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
