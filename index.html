@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 13, 2024</aside>
+    <aside>January 15, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -341,7 +341,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference (<code class="python hljs"><span class="hljs-string">'\1'</span></code> returns a character with octal code 1).</strong></li>
 <li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'+'</span></code> to make them non-greedy.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with listed methods.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with listed functions.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                      <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns part inside the first brackets.</span>
@@ -1774,7 +1774,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Next() waits for next completed Future.</span>
 </code></pre>
 <ul>
-<li><strong>Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.</strong></li>
+<li><strong>Map() and as_completed() also accept 'timeout' arg. that causes TimeoutError when next() is called. Map() times from the original call, while as_completed() from the call to next().</strong></li>
 <li><strong>Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
@@ -2350,7 +2350,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)     <span class="hljs-comment"># Opens WAV file for writing.</span>
 &lt;Wave&gt;.setframerate(&lt;int&gt;)             <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
 &lt;Wave&gt;.setnchannels(&lt;int&gt;)             <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
-&lt;Wave&gt;.setsampwidth(&lt;int&gt;)             <span class="hljs-comment"># Pass 1 for 8-bit sound, 2 for CD.</span>
+&lt;Wave&gt;.setsampwidth(&lt;int&gt;)             <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res sound.</span>
 &lt;Wave&gt;.setparams(&lt;params&gt;)             <span class="hljs-comment"># Sets all parameters.</span>
 &lt;Wave&gt;.writeframes(&lt;bytes&gt;)            <span class="hljs-comment"># Appends frames to the file.</span>
 </code></pre>
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 13, 2024</aside>
+    <aside>January 15, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

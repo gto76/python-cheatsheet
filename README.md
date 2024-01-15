@@ -365,7 +365,7 @@ import re
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
 * **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
 * **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
-* **`'re.compile(<regex>)'` returns a Pattern object with listed methods.**
+* **`'re.compile(<regex>)'` returns a Pattern object with listed functions.**
 
 ### Match Object
 ```python
@@ -2151,7 +2151,7 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # Next() waits for next completed Future.
 ```
-* **Map() and as_completed() also accept 'timeout' argument that causes TimeoutError if result isn't available in 'timeout' seconds after next() is called.**
+* **Map() and as\_completed() also accept 'timeout' arg. that causes TimeoutError when next() is called. Map() times from the original call, while as\_completed() from the call to next().**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
 * **ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be [pickable](#pickle). Queues must be sent using executor's 'initargs' and 'initializer' parameters.**
 
@@ -2865,7 +2865,7 @@ import wave
 <Wave> = wave.open('<path>', 'wb')     # Opens WAV file for writing.
 <Wave>.setframerate(<int>)             # Pass 44100 for CD, 48000 for video.
 <Wave>.setnchannels(<int>)             # Pass 1 for mono, 2 for stereo.
-<Wave>.setsampwidth(<int>)             # Pass 1 for 8-bit sound, 2 for CD.
+<Wave>.setsampwidth(<int>)             # Pass 2 for CD, 3 for hi-res sound.
 <Wave>.setparams(<params>)             # Sets all parameters.
 <Wave>.writeframes(<bytes>)            # Appends frames to the file.
 ```
