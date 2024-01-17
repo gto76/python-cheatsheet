@@ -365,7 +365,7 @@ import re
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
 * **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
 * **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
-* **`'re.compile(<regex>)'` returns a Pattern object with listed functions.**
+* **`'re.compile(<regex>)'` returns a Pattern object with methods sub(), findall(), …**
 
 ### Match Object
 ```python
