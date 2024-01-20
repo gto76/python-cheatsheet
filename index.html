@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 17, 2024</aside>
+    <aside>January 20, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1241,13 +1241,13 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── MemoryError             <span class="hljs-comment"># Out of memory. Could be too late to start deleting vars.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
-      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/PermissionError (see #Open).</span>
+      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/TimeoutError (see #Open).</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
-      ├── StopIteration           <span class="hljs-comment"># Raised by next() when run on an empty iterator.</span>
-      ├── TypeError               <span class="hljs-comment"># Raised when an argument is of the wrong type.</span>
+      ├── StopIteration           <span class="hljs-comment"># Raised when an empty iterator is passed to next().</span>
+      ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
       └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
 </code></pre></div>
 
@@ -1774,7 +1774,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Next() waits for next completed Future.</span>
 </code></pre>
 <ul>
-<li><strong>Map() and as_completed() also accept 'timeout' arg. that causes TimeoutError when next() is called. Map() times from the original call, while as_completed() from the call to next().</strong></li>
+<li><strong>Map() and as_completed() also accept 'timeout' argument. It causes TimeoutError when next() is called if result isn't available in 'timeout' seconds from the original call.</strong></li>
 <li><strong>Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 17, 2024</aside>
+    <aside>January 20, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

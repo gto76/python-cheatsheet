@@ -439,13 +439,13 @@ const DIAGRAM_7_B =
   "      ├── MemoryError             <span class='hljs-comment'># Out of memory. Could be too late to start deleting vars.</span>\n" +
   "      ├── NameError               <span class='hljs-comment'># Raised when nonexistent name (variable/func/class) is used.</span>\n" +
   "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when local name is used before it's being defined.</span>\n" +
-  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError/PermissionError (see #Open).</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError/TimeoutError (see #Open).</span>\n" +
   "      │    └── ConnectionError    <span class='hljs-comment'># Errors such as BrokenPipeError/ConnectionAbortedError.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall into other categories.</span>\n" +
   "      │    ├── NotImplementedEr…  <span class='hljs-comment'># Can be raised by abstract methods or by unfinished code.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
-  "      ├── StopIteration           <span class='hljs-comment'># Raised by next() when run on an empty iterator.</span>\n" +
-  "      ├── TypeError               <span class='hljs-comment'># Raised when an argument is of the wrong type.</span>\n" +
+  "      ├── StopIteration           <span class='hljs-comment'># Raised when an empty iterator is passed to next().</span>\n" +
+  "      ├── TypeError               <span class='hljs-comment'># When an argument of the wrong type is passed to function.</span>\n" +
   "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n";
 
 const DIAGRAM_8_A =

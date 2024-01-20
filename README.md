@@ -1456,13 +1456,13 @@ BaseException
       +-- MemoryError             # Out of memory. Could be too late to start deleting vars.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
-      +-- OSError                 # Errors such as FileExistsError/PermissionError (see #Open).
+      +-- OSError                 # Errors such as FileExistsError/TimeoutError (see #Open).
       |    +-- ConnectionError    # Errors such as BrokenPipeError/ConnectionAbortedError.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
       |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
-      +-- StopIteration           # Raised by next() when run on an empty iterator.
-      +-- TypeError               # Raised when an argument is of the wrong type.
+      +-- StopIteration           # Raised when an empty iterator is passed to next().
+      +-- TypeError               # When an argument of the wrong type is passed to function.
       +-- ValueError              # When argument has the right type but inappropriate value.
 ```
 
@@ -2151,7 +2151,7 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # Next() waits for next completed Future.
 ```
-* **Map() and as\_completed() also accept 'timeout' arg. that causes TimeoutError when next() is called. Map() times from the original call, while as\_completed() from the call to next().**
+* **Map() and as\_completed() also accept 'timeout' argument. It causes TimeoutError when next() is called if result isn't available in 'timeout' seconds from the original call.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
 * **ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be [pickable](#pickle). Queues must be sent using executor's 'initargs' and 'initializer' parameters.**
 
