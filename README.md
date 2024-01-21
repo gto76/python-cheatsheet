@@ -1509,24 +1509,23 @@ Print
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 * **Use `'file=sys.stderr'` for messages about errors.**
-* **Use `'flush=True'` to forcibly flush the stream.**
+* **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or program exits.**
 
 ### Pretty Print
 ```python
 from pprint import pprint
 pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
-* **Levels deeper than 'depth' get replaced by '...'.**
+* **Each item is printed on its own line if collection takes up more than 'width' characters.**
+* **Nested collections that are 'depth' levels deep get printed as '...'.**
 
 
 Input
 -----
-**Reads a line from the user input or pipe if present.**
-
 ```python
 <str> = input(prompt=None)
 ```
-* **Trailing newline gets stripped.**
+* **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
 * **Prompt string is printed to the standard output before reading input.**
 * **Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
 
@@ -1542,18 +1541,18 @@ arguments    = sys.argv[1:]
 ### Argument Parser
 ```python
 from argparse import ArgumentParser, FileType
-p = ArgumentParser(description=<str>)
-p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag.
-p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option.
-p.add_argument('<name>', type=<type>, nargs=1)                    # First argument.
-p.add_argument('<name>', type=<type>, nargs='+')                  # Remaining arguments.
+p = ArgumentParser(description=<str>)                             # Returns a parser.
+p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaults to False).
+p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
+p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
+p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
 p.add_argument('<name>', type=<type>, nargs='*')                  # Optional arguments.
-args  = p.parse_args()                                            # Exits on error.
-value = args.<name>
+<args> = p.parse_args()                                           # Exits on parsing error.
+<obj>  = <args>.<name>                                            # Returns `<type>(<arg>)`.
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<el>'` to set argument's default value.**
+* **Use `'default=<el>'` to set option's default value.**
 * **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 

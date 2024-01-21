@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 20, 2024</aside>
+    <aside>January 22, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1282,21 +1282,21 @@ sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with 
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> for messages about errors.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> to forcibly flush the stream.</strong></li>
+<li><strong>Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> is used, or program exits.</strong></li>
 </ul>
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
 pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<span class="hljs-keyword">None</span>, compact=<span class="hljs-keyword">False</span>, sort_dicts=<span class="hljs-keyword">True</span>)
 </code></pre></div>
 
 <ul>
-<li><strong>Levels deeper than 'depth' get replaced by '…'.</strong></li>
+<li><strong>Each item is printed on its own line if collection takes up more than 'width' characters.</strong></li>
+<li><strong>Nested collections that are 'depth' levels deep get printed as '…'.</strong></li>
 </ul>
-<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><p><strong>Reads a line from the user input or pipe if present.</strong></p><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
+<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
 </code></pre></div>
 
-
 <ul>
-<li><strong>Trailing newline gets stripped.</strong></li>
+<li><strong>Reads a line from the user input or pipe if present (trailing newline gets stripped).</strong></li>
 <li><strong>Prompt string is printed to the standard output before reading input.</strong></li>
 <li><strong>Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.</strong></li>
 </ul>
@@ -1306,19 +1306,19 @@ arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
 <div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
-p = ArgumentParser(description=&lt;str&gt;)
-p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag.</span>
-p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option.</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># First argument.</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Remaining arguments.</span>
+p = ArgumentParser(description=&lt;str&gt;)                             <span class="hljs-comment"># Returns a parser.</span>
+p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
+p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># Mandatory first argument.</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Mandatory remaining args.</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'*'</span>)                  <span class="hljs-comment"># Optional arguments.</span>
-args  = p.parse_args()                                            <span class="hljs-comment"># Exits on error.</span>
-value = args.&lt;name&gt;
+&lt;args&gt; = p.parse_args()                                           <span class="hljs-comment"># Exits on parsing error.</span>
+&lt;obj&gt;  = &lt;args&gt;.&lt;name&gt;                                            <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set argument's default value.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set option's default value.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but 'newline' is None.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 20, 2024</aside>
+    <aside>January 22, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
