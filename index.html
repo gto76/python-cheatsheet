@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 22, 2024</aside>
+    <aside>January 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1774,7 +1774,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># Next() waits for next completed Future.</span>
 </code></pre>
 <ul>
-<li><strong>Map() and as_completed() also accept 'timeout' argument. It causes TimeoutError when next() is called if result isn't available in 'timeout' seconds from the original call.</strong></li>
+<li><strong>Map() and as_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called. Map() times from original call and as_completed() from first call to next().</strong></li>
 <li><strong>Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be <a href="#pickle">pickable</a>. Queues must be sent using executor's 'initargs' and 'initializer' parameters.</strong></li>
 </ul>
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 22, 2024</aside>
+    <aside>January 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2150,7 +2150,7 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # Next() waits for next completed Future.
 ```
-* **Map() and as\_completed() also accept 'timeout' argument. It causes TimeoutError when next() is called if result isn't available in 'timeout' seconds from the original call.**
+* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called. Map() times from original call and as_completed() from first call to next().**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
 * **ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be [pickable](#pickle). Queues must be sent using executor's 'initargs' and 'initializer' parameters.**
 
