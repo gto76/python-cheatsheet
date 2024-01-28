@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>January 27, 2024</aside>
+    <aside>January 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -550,8 +550,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
-&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DTn from days since the Gregorian NYE 1.</span>
-&lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local time DTn from seconds since the Epoch.</span>
+&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DT from days since the Gregorian NYE 1.</span>
+&lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local naive DT from seconds since the Epoch.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
 </code></pre></div>
 
@@ -562,7 +562,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation of the object.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Gregorian NYE 1, ignoring time and tz.</span>
-&lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from DTn in local tz.</span>
+&lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from aware datetime.</span>
 </code></pre></div>
 
@@ -642,7 +642,7 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre>
 <div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                     <span class="hljs-comment"># A single statement function.</span>
-&lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;    <span class="hljs-comment"># Also accepts default arguments.</span>
+&lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;    <span class="hljs-comment"># Also allows default arguments.</span>
 </code></pre></div></div>
 
 
@@ -652,7 +652,7 @@ func(*args, **kwargs)
 &lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># Or: {0: 0, 1: 2, ..., 9: 18}</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]             <span class="hljs-comment"># Inner loop is on the right side.</span>
 [<span class="hljs-string">'aa'</span>, <span class="hljs-string">'ab'</span>, <span class="hljs-string">'ac'</span>, ..., <span class="hljs-string">'cc'</span>]
 </code></pre>
 <div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
@@ -662,11 +662,11 @@ func(*args, **kwargs)
 &lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Or: iter([6, 7, 8, 9])</span>
 &lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Or: 45</span>
 </code></pre>
-<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any element.</span>
-&lt;bool&gt; = all(&lt;collection&gt;)                          <span class="hljs-comment"># Is True for all elements or empty.</span>
+<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any el?</span>
+&lt;bool&gt; = all(&lt;collection&gt;)                          <span class="hljs-comment"># Is True for all or is it empty?</span>
 </code></pre></div>
 
-<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression gets evaluated.</span>
+<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
@@ -1844,7 +1844,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-comment"># Logs to the root logger.</span>
 &lt;Logger&gt; = logging.getLogger(__name__)               <span class="hljs-comment"># Logger named after the module.</span>
 &lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                              <span class="hljs-comment"># Logs to the logger.</span>
-&lt;Logger&gt;.exception(&lt;str&gt;)                            <span class="hljs-comment"># Calls error() with caught exception.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                            <span class="hljs-comment"># Error() that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
     filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to console (stderr) by default.</span>
@@ -2311,7 +2311,7 @@ img.show()
 &lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 &lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
 &lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.text((x, y), text, font=&lt;Font&gt;)     <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
+&lt;ImageDraw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)    <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
 </code></pre></div>
 
 <ul>
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>January 27, 2024</aside>
+    <aside>January 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

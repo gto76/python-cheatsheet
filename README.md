@@ -627,8 +627,8 @@ from dateutil.tz import tzlocal, gettz
 ```python
 <D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DTn from days since the Gregorian NYE 1.
-<DTn>    = DT.fromtimestamp(<float>)        # Local time DTn from seconds since the Epoch.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since the Gregorian NYE 1.
+<DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since the Epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following the hours are optional.**
@@ -639,7 +639,7 @@ from dateutil.tz import tzlocal, gettz
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation of the object.
 <int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
-<float>  = <DTn>.timestamp()                # Seconds since the Epoch, from DTn in local tz.
+<float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
 ```
 
@@ -752,7 +752,7 @@ Inline
 ### Lambda
 ```python
 <func> = lambda: <return_value>                     # A single statement function.
-<func> = lambda <arg_1>, <arg_2>: <return_value>    # Also accepts default arguments.
+<func> = lambda <arg_1>, <arg_2>: <return_value>    # Also allows default arguments.
 ```
 
 ### Comprehensions
@@ -764,7 +764,7 @@ Inline
 ```
 
 ```python
->>> [l+r for l in 'abc' for r in 'abc']
+>>> [l+r for l in 'abc' for r in 'abc']             # Inner loop is on the right side.
 ['aa', 'ab', 'ac', ..., 'cc']
 ```
 
@@ -781,13 +781,13 @@ from functools import reduce
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                          # Is `bool(<el>)` True for any element.
-<bool> = all(<collection>)                          # Is True for all elements or empty.
+<bool> = any(<collection>)                          # Is `bool(<el>)` True for any el?
+<bool> = all(<collection>)                          # Is True for all or is it empty?
 ```
 
 ### Conditional Expression
 ```python
-<obj> = <exp> if <condition> else <exp>             # Only one expression gets evaluated.
+<obj> = <exp> if <condition> else <exp>             # Only one expression is evaluated.
 ```
 
 ```python
@@ -2236,7 +2236,7 @@ logging.basicConfig(filename=<path>, level='DEBUG')  # Configures the root logge
 logging.debug/info/warning/error/critical(<str>)     # Logs to the root logger.
 <Logger> = logging.getLogger(__name__)               # Logger named after the module.
 <Logger>.<level>(<str>)                              # Logs to the logger.
-<Logger>.exception(<str>)                            # Calls error() with caught exception.
+<Logger>.exception(<str>)                            # Error() that appends caught exception.
 ```
 
 ### Setup
@@ -2816,7 +2816,7 @@ from PIL import ImageDraw
 <ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
 <ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
 <ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
-<ImageDraw>.text((x, y), text, font=<Font>)     # `<Font> = ImageFont.truetype(<path>, size)`
+<ImageDraw>.text((x, y), <str>, font=<Font>)    # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
