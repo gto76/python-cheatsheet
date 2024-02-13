@@ -2517,7 +2517,7 @@ from selenium import webdriver
 <xpath>     = //<element>[/ or // <element>]           # Child: /, Descendant: //, Parent: /..
 <xpath>     = //<element>/following::<element>         # Next sibling. Also preceding/parent/…
 <element>   = <tag><conditions><index>                 # `<tag> = */a/…`, `<index> = [1/2/…]`.
-<condition> = [<sub_cond> [and/or <sub_cond>]]         # `and` is same as chaining conditions.
+<condition> = [<sub_cond> [and/or <sub_cond>]]         # For negation use `not(<sub_cond>)`.
 <sub_cond>  = @<attr>="<val>"                          # `.="<val>"` matches complete text.
 <sub_cond>  = contains(@<attr>, "<val>")               # Is <val> a substring of attr's value?
 <sub_cond>  = [//]<element>                            # Has matching child? Descendant if //.
