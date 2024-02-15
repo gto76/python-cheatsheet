@@ -2512,7 +2512,7 @@ from selenium import webdriver
 <El>.click/clear()                                     # Also <El>.send_keys(<str>).
 ```
 
-#### XPath — also available in browser's console via `'$x(<xpath>)'`:
+#### XPath — also available in browser's console via `'$x(<xpath>)'` and by lxml library:
 ```python
 <xpath>     = //<element>[/ or // <element>]           # Child: /, Descendant: //, Parent: /..
 <xpath>     = //<element>/following::<element>         # Next sibling. Also preceding/parent/…
