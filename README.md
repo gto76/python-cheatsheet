@@ -2309,22 +2309,36 @@ Coroutines
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
 * **Coroutine definition starts with `'async'` and its call with `'await'`.**
 * **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
-* **Functions wait(), gather() and as_completed() start multiple coroutines at the same time.**
-* **Asyncio module also provides its own [Queue](#queue), [Event](#semaphore-event-barrier), [Lock](#lock) and [Semaphore](#semaphore-event-barrier) classes.**
+
+```python
+import asyncio as aio
+```
+
+```python
+<coro> = <async_func>(<args>)             # Creates a coroutine.
+<obj>  = await <coroutine>                # Starts the coroutine and returns result.
+<task> = aio.create_task(<coroutine>)     # Schedules coroutine for execution.
+<obj>  = await <task>                     # Returns result.
+```
+
+```python
+<coro> = aio.gather(<coro/task>, ...)     # Schedules coroutines. Returns results when awaited.
+<coro> = aio.wait(<tasks>, …)             # `aio.ALL/FIRST_COMPLETED`. Returns (done, pending).
+<iter> = aio.as_completed(<coros/tasks>)  # Iter of coros. All return next result when awaited.
+```
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
-
 ```python
 import asyncio, collections, curses, curses.textpad, enum, random, time
 
-P = collections.namedtuple('P', 'x y')         # Position
-D = enum.Enum('D', 'n e s w')                  # Direction
-W, H = 15, 7                                   # Width, Height
+P = collections.namedtuple('P', 'x y')    # Position
+D = enum.Enum('D', 'n e s w')             # Direction
+W, H = 15, 7                              # Width, Height
 
 def main(screen):
-    curses.curs_set(0)                         # Makes cursor invisible.
-    screen.nodelay(True)                       # Makes getch() non-blocking.
-    asyncio.run(main_coroutine(screen))        # Starts running asyncio code.
+    curses.curs_set(0)                    # Makes cursor invisible.
+    screen.nodelay(True)                  # Makes getch() non-blocking.
+    asyncio.run(main_coroutine(screen))   # Starts running asyncio code.
 
 async def main_coroutine(screen):
     moves = asyncio.Queue()
@@ -2343,18 +2357,15 @@ async def random_controller(id_, moves):
 async def human_controller(screen, moves):
     while True:
         key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
-        ch = screen.getch()
-        if d := key_mappings.get(ch):
+        if d := key_mappings.get(screen.getch()):
             moves.put_nowait(('*', d))
         await asyncio.sleep(0.005)
 
 async def model(moves, state):
     while state['*'] not in (state[id_] for id_ in range(10)):
         id_, d = await moves.get()
-        x, y   = state[id_]
         deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        dx, dy = deltas[d]
-        state[id_] = P((x + dx) % W, (y + dy) % H)
+        state[id_] = P((state[id_].x + deltas[d].x) % W, (state[id_].y + deltas[d].y) % H)
 
 async def view(state, screen):
     offset = P(curses.COLS//2 - W//2, curses.LINES//2 - H//2)
@@ -2362,18 +2373,13 @@ async def view(state, screen):
         screen.erase()
         curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
         for id_, p in state.items():
-            screen.addstr(
-                offset.y + (p.y - state['*'].y + H//2) % H,
-                offset.x + (p.x - state['*'].x + W//2) % W,
-                str(id_)
-            )
+            screen.addstr(offset.y + (p.y - state['*'].y + H//2) % H,
+                          offset.x + (p.x - state['*'].x + W//2) % W, str(id_))
         screen.refresh()
         await asyncio.sleep(0.005)
 
 if __name__ == '__main__':
-    start_time = time.perf_counter()
     curses.wrapper(main)
-    print(f'You survived {time.perf_counter() - start_time:.2f} seconds.')
 ```
 <br>
 

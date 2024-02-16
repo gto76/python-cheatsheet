@@ -830,7 +830,7 @@ function fixHighlights() {
   $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);
   $(`code:contains(match <object/expression>:)`).html(MATCH);
   $(`code:contains(>>> match Path)`).html(MATCH_EXAMPLE);
-  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
+  //$(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
   $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
