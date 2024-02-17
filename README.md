@@ -2,9 +2,9 @@ Comprehensive Python Cheatsheet
 ===============================
 <sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
 </sup>
-#CHANGE 1
-#CHANGE 2
-#CHANGE 3
+#change 1
+#change 2
+#change 3
 ![Monty Python](web/image_888.jpeg)
 
 
