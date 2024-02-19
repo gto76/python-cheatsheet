@@ -655,9 +655,9 @@ from dateutil.tz import tzlocal, gettz
 ### Arithmetics
 ```python
 <bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
-<bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
+<bool>   = <DTa>     > <DTa>                # Ignores jumps if they share tz object. Broken ==.
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
-<TD>     = <DTa>     - <DTa>                # Ignores time jumps if they share tzinfo object.
+<TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
 <float>  = <TD>      / <TD>                 # How many hours/weeks/years are in TD. Also //.
@@ -1951,26 +1951,26 @@ Bytes
 **Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                          # Only accepts ASCII characters and \x00-\xff.
-<int>   = <bytes>[<index>]                  # Returns an int in range from 0 to 255.
-<bytes> = <bytes>[<slice>]                  # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)     # Joins elements using bytes as a separator.
+<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
+<int>   = <bytes>[<index>]               # Returns an int in range from 0 to 255.
+<bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
 
 ### Encode
 ```python
-<bytes> = bytes(<coll_of_ints>)             # Ints must be in range from 0 to 255.
-<bytes> = bytes(<str>, 'utf-8')             # Or: <str>.encode('utf-8')
-<bytes> = <int>.to_bytes(n_bytes, …)        # `byteorder='big/little', signed=False`.
-<bytes> = bytes.fromhex('<hex>')            # Hex pairs can be separated by whitespaces.
+<bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
+<bytes> = bytes(<str>, 'utf-8')          # Or: <str>.encode('utf-8')
+<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
+<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
 ```
 
 ### Decode
 ```python
-<list>  = list(<bytes>)                     # Returns ints in range from 0 to 255.
-<str>   = str(<bytes>, 'utf-8')             # Or: <bytes>.decode('utf-8')
-<int>   = int.from_bytes(<bytes>, …)        # `byteorder='big/little', signed=False`.
-'<hex>' = <bytes>.hex()                     # Returns hex pairs. Accepts `sep=<str>`.
+<list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
+<str>   = str(<bytes>, 'utf-8')          # Or: <bytes>.decode('utf-8')
+<int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
+'<hex>' = <bytes>.hex()                  # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
 ### Read Bytes from File
@@ -2009,12 +2009,12 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 ### Format
 #### For standard type sizes and manual alignment (padding) start format string with:
 * **`'='` - System's byte order (usually little-endian).**
-* **`'<'` - Little-endian.**
+* **`'<'` - Little-endian (i.e. least significant byte first).**
 * **`'>'` - Big-endian (also `'!'`).**
 
 #### Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:
 * **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
-* **`'<n>s'` - A bytes object with n elements.**
+* **`'<n>s'` - A bytes object with n elements (not effected by byte order).**
 
 #### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
 * **`'b'` - char (1/1)**
@@ -2414,7 +2414,7 @@ plt.clf()                                             # Clears the figure.
 
 Table
 -----
-#### Prints a CSV file as an ASCII table:
+#### Prints a CSV spreadsheet to the console:
 ```python
 # $ pip3 install tabulate
 import csv, tabulate
@@ -2676,7 +2676,7 @@ import numpy as np
 <array> = np.tile/repeat(<array>, <int/list> [, axis])  # Tiles array or repeats its elements.
 ```
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
-* **Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
+* **Axis is an index of a dimension. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
 
 ### Indexing
 ```perl
@@ -2858,21 +2858,21 @@ import wave
 ```
 
 ```python
-<Wave>   = wave.open('<path>', 'rb')   # Opens the WAV file.
-<int>    = <Wave>.getframerate()       # Returns number of frames per second.
-<int>    = <Wave>.getnchannels()       # Returns number of samples per frame.
-<int>    = <Wave>.getsampwidth()       # Returns number of bytes per sample.
-<params> = <Wave>.getparams()          # Returns collection of listed params.
-<bytes>  = <Wave>.readframes(nframes)  # Returns next n frames. All if -1.
+<Wave>  = wave.open('<path>', 'rb')   # Opens the WAV file.
+<int>   = <Wave>.getframerate()       # Returns number of frames per second.
+<int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
+<int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
+<tuple> = <Wave>.getparams()          # Returns namedtuple of all parameters.
+<bytes> = <Wave>.readframes(nframes)  # Returns next n frames. All if -1.
 ```
 
 ```python
-<Wave> = wave.open('<path>', 'wb')     # Opens WAV file for writing.
-<Wave>.setframerate(<int>)             # Pass 44100 for CD, 48000 for video.
-<Wave>.setnchannels(<int>)             # Pass 1 for mono, 2 for stereo.
-<Wave>.setsampwidth(<int>)             # Pass 2 for CD, 3 for hi-res sound.
-<Wave>.setparams(<params>)             # Sets all parameters.
-<Wave>.writeframes(<bytes>)            # Appends frames to the file.
+<Wave> = wave.open('<path>', 'wb')    # Creates/truncates a file for writing.
+<Wave>.setframerate(<int>)            # Pass 44100 for CD, 48000 for video.
+<Wave>.setnchannels(<int>)            # Pass 1 for mono, 2 for stereo.
+<Wave>.setsampwidth(<int>)            # Pass 2 for CD, 3 for hi-res sound.
+<Wave>.setparams(<tuple>)             # Sets all parameters.
+<Wave>.writeframes(<bytes>)           # Appends frames to the file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**
@@ -3007,7 +3007,7 @@ while not pg.event.get(pg.QUIT):
 
 ```python
 <bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains the point.
-<bool> = <Rect>.colliderect(<Rect>)             # Checks if two rectangles overlap.
+<bool> = <Rect>.colliderect(<Rect>)             # Checks if the two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding rectangles.
 ```
@@ -3025,7 +3025,7 @@ while not pg.event.get(pg.QUIT):
 ```python
 <Surf>.fill(color)                              # Tuple, Color('#rrggbb[aa]') or Color(<name>).
 <Surf>.set_at((x, y), color)                    # Updates pixel. Also <Surf>.get_at((x, y)).
-<Surf>.blit(<Surf>, (x, y))                     # Draws passed surface to the surface.
+<Surf>.blit(<Surf>, (x, y))                     # Draws passed surface at specified location.
 ```
 
 ```python
@@ -3051,7 +3051,7 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 ### Sound
 ```python
 <Sound> = pg.mixer.Sound(<path/file/bytes>)     # WAV file or bytes/array of signed shorts.
-<Sound>.play/stop()                             # Also <Sound>.set_volume(<float>).
+<Sound>.play/stop()                             # Also set_volume(<float>), fadeout(msec).
 ```
 
 ### Basic Mario Brothers Example
@@ -3373,7 +3373,7 @@ c  7  8  6
 <GB> = <DF>.groupby(column_key/s)              # Splits DF into groups based on passed column.
 <DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
 <GB> = <GB>[column_key]                        # Single column GB. All operations return a Sr.
-<Sr> = <GB>.size()                             # A Sr of group sizes. Keys are group "names".
+<Sr> = <GB>.size()                             # A Sr of group sizes. Same keys as get_group().
 ```
 
 #### GroupBy — Aggregate, Transform, Map:

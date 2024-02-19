@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 16, 2024</aside>
+    <aside>February 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -576,9 +576,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code and returns timezone's name, <code class="python hljs"><span class="hljs-string">'UTC[±HH:MM]'</span></code> if timezone is nameless, or an empty string if datetime is naive.</strong></li>
 </ul>
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also ==.</span>
-&lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
+&lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tz object. Broken ==.</span>
 &lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
-&lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
+&lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
 &lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># How many hours/weeks/years are in TD. Also //.</span>
@@ -1614,23 +1614,23 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 ┃ oracle     │ oracledb     │ oracledb │ www.pypi.org/project/oracledb    ┃
 ┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                          <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
-&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]                  <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]                  <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)     <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
+&lt;int&gt;   = &lt;bytes&gt;[&lt;index&gt;]               <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)             <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
-&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)        <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
-&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)            <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
+&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;str&gt;.encode('utf-8')</span>
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
+&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)         <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                     <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
-&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)             <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
-&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)        <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
-<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()                     <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
+&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Or: &lt;bytes&gt;.decode('utf-8')</span>
+&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
+<span class="hljs-string">'&lt;hex&gt;'</span> = &lt;bytes&gt;.hex()                  <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre></div>
 
 <div><h3 id="readbytesfromfile">Read Bytes from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_bytes</span><span class="hljs-params">(filename)</span>:</span>
@@ -1659,11 +1659,11 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre>
 <h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesandmanualalignmentpaddingstartformatstringwith">For standard type sizes and manual alignment (padding) start format string with:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'='</span></code> - System's byte order (usually little-endian).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - Little-endian.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'&lt;'</span></code> - Little-endian (i.e. least significant byte first).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'&gt;'</span></code> - Big-endian (also <code class="python hljs"><span class="hljs-string">'!'</span></code>).</strong></li>
 </ul><div><h4 id="besidesnumberspackandunpackalsosupportbytesobjectsaspartofthesequence">Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'c'</span></code> - A bytes object with a single element. For pad byte use <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
-<li><strong><code class="apache hljs"><span class="hljs-section">'&lt;n&gt;s'</span><span class="hljs-attribute"></span></code> - A bytes object with n elements.</strong></li>
+<li><strong><code class="apache hljs"><span class="hljs-section">'&lt;n&gt;s'</span><span class="hljs-attribute"></span></code> - A bytes object with n elements (not effected by byte order).</strong></li>
 </ul></div></div><div><div><h4 id="integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1/1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2/2)</strong></li>
@@ -1987,7 +1987,7 @@ plt.show()                                            <span class="hljs-comment"
 plt.clf()                                             <span class="hljs-comment"># Clears the figure.</span>
 </code></pre></div>
 
-<div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvfileasanasciitable">Prints a CSV file as an ASCII table:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
+<div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvspreadsheettotheconsole">Prints a CSV spreadsheet to the console:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
 <span class="hljs-keyword">import</span> csv, tabulate
 <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.csv'</span>, encoding=<span class="hljs-string">'utf-8'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
     rows = list(csv.reader(file))
@@ -2197,7 +2197,7 @@ $ snakeviz test.prof
 </code></pre>
 <ul>
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
-<li><strong>Axis is an index of the dimension that gets aggregated. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
+<li><strong>Axis is an index of a dimension. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
 </ul>
 <div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d_array&gt;[row_index, column_index]        <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i, column_i]</span>
 &lt;1d_view&gt;  = &lt;2d_array&gt;[row_index]                      <span class="hljs-comment"># &lt;3d_a&gt;[table_i, row_i]</span>
@@ -2341,19 +2341,19 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave&gt;   = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)   <span class="hljs-comment"># Opens the WAV file.</span>
-&lt;int&gt;    = &lt;Wave&gt;.getframerate()       <span class="hljs-comment"># Returns number of frames per second.</span>
-&lt;int&gt;    = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
-&lt;int&gt;    = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
-&lt;params&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns collection of listed params.</span>
-&lt;bytes&gt;  = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames. All if -1.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)   <span class="hljs-comment"># Opens the WAV file.</span>
+&lt;int&gt;   = &lt;Wave&gt;.getframerate()       <span class="hljs-comment"># Returns number of frames per second.</span>
+&lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
+&lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
+&lt;tuple&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
+&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames. All if -1.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)     <span class="hljs-comment"># Opens WAV file for writing.</span>
-&lt;Wave&gt;.setframerate(&lt;int&gt;)             <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
-&lt;Wave&gt;.setnchannels(&lt;int&gt;)             <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
-&lt;Wave&gt;.setsampwidth(&lt;int&gt;)             <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res sound.</span>
-&lt;Wave&gt;.setparams(&lt;params&gt;)             <span class="hljs-comment"># Sets all parameters.</span>
-&lt;Wave&gt;.writeframes(&lt;bytes&gt;)            <span class="hljs-comment"># Appends frames to the file.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)    <span class="hljs-comment"># Creates/truncates a file for writing.</span>
+&lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
+&lt;Wave&gt;.setnchannels(&lt;int&gt;)            <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
+&lt;Wave&gt;.setsampwidth(&lt;int&gt;)            <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res sound.</span>
+&lt;Wave&gt;.setparams(&lt;tuple&gt;)             <span class="hljs-comment"># Sets all parameters.</span>
+&lt;Wave&gt;.writeframes(&lt;bytes&gt;)           <span class="hljs-comment"># Appends frames to the file.</span>
 </code></pre>
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
@@ -2464,7 +2464,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks if rectangle contains the point.</span>
-&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks if two rectangles overlap.</span>
+&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks if the two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indexes of all colliding rectangles.</span>
 </code></pre>
@@ -2478,7 +2478,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 
 <pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Tuple, Color('#rrggbb[aa]') or Color(&lt;name&gt;).</span>
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel. Also &lt;Surf&gt;.get_at((x, y)).</span>
-&lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface to the surface.</span>
+&lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface at specified location.</span>
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
 &lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
@@ -2495,7 +2495,7 @@ rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>
 </code></pre></div>
 
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
-&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also &lt;Sound&gt;.set_volume(&lt;float&gt;).</span>
+&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;), fadeout(msec).</span>
 </code></pre></div>
 
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools <span class="hljs-keyword">as</span> it, pygame <span class="hljs-keyword">as</span> pg, urllib.request
@@ -2761,7 +2761,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 <pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)              <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
 &lt;GB&gt; = &lt;GB&gt;[column_key]                        <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
-&lt;Sr&gt; = &lt;GB&gt;.size()                             <span class="hljs-comment"># A Sr of group sizes. Keys are group "names".</span>
+&lt;Sr&gt; = &lt;GB&gt;.size()                             <span class="hljs-comment"># A Sr of group sizes. Same keys as get_group().</span>
 </code></pre>
 <div><h4 id="groupbyaggregatetransformmap">GroupBy — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()           <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
@@ -2933,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>February 16, 2024</aside>
+    <aside>February 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
