@@ -2318,7 +2318,7 @@ import asyncio as aio
 <coro> = <async_func>(<args>)             # Creates a coroutine.
 <obj>  = await <coroutine>                # Starts the coroutine and returns result.
 <task> = aio.create_task(<coroutine>)     # Schedules coroutine for execution.
-<obj>  = await <task>                     # Returns result.
+<obj>  = await <task>                     # Returns result. Also <task>.cancel().
 ```
 
 ```python
@@ -3346,7 +3346,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
-<DF> = pd.read_csv('<path/url>')               # Also `names=<list>, parse_dates=False`.
+<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/parse_dates=<obj>`.
 <DF> = pd.read_pickle/excel('<path/url>')      # Use `sheet_name=None` to get all Excel sheets.
 <DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
 ```
