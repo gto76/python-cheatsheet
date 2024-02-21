@@ -782,7 +782,7 @@ from functools import reduce
 ### Any, All
 ```python
 <bool> = any(<collection>)                          # Is `bool(<el>)` True for any el?
-<bool> = all(<collection>)                          # Is True for all or is it empty?
+<bool> = all(<collection>)                          # True for all? Also True if empty.
 ```
 
 ### Conditional Expression
