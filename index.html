@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 21, 2024</aside>
+    <aside>February 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -860,6 +860,37 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
+<div><h3 id="typeannotations">Type Annotations</h3><ul>
+<li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
+<li><strong>Are ignored by CPython interpreter, but used by tools such as <a href="https://pypi.org/project/mypy/">mypy</a>, <a href="https://pypi.org/project/pydantic/">Pydantic</a> and <a href="https://pypi.org/project/Cython/">Cython</a>.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
+
+&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
+&lt;name&gt;: list/set[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]
+</code></pre></div>
+
+
+<div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that uses class variables to generate init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field, make_dataclass
+
+<span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
+    &lt;attr_name&gt;: &lt;type&gt;
+    &lt;attr_name&gt;: &lt;type&gt; = &lt;default_value&gt;
+    &lt;attr_name&gt;: list/dict/set = field(default_factory=list/dict/set)
+</code></pre></div>
+
+
+<ul>
+<li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
+<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
+<li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
+</ul>
+<pre><code class="python language-python hljs">&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
+&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
+&lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre>
 <div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
@@ -876,34 +907,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">&gt;&gt;&gt; </span>person.name
 <span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
-<div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that automatically generates init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field
-
-<span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
-    &lt;attr_name&gt;: &lt;type&gt;
-    &lt;attr_name&gt;: &lt;type&gt; = &lt;default_value&gt;
-    &lt;attr_name&gt;: list/dict/set = field(default_factory=list/dict/set)
-</code></pre></div>
-
-
-<ul>
-<li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
-<li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
-</ul>
-<div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
-&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
-&lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre></div>
-
-<div><h4 id="restoftypeannotationscpythoninterpreterignoresthemall">Rest of type annotations (CPython interpreter ignores them all):</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections.abc <span class="hljs-keyword">as</span> abc, typing <span class="hljs-keyword">as</span> tp
-&lt;var_name&gt;: list/set/abc.Iterable/abc.Sequence/tp.Optional[&lt;type&gt;] [= &lt;obj&gt;]
-&lt;var_name&gt;: dict/tuple/tp.Union[&lt;type&gt;, ...] [= &lt;obj&gt;]
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;arg_name&gt;: &lt;type&gt; [= &lt;obj&gt;])</span> -&gt; &lt;type&gt;:</span> ...
-</code></pre></div>
-
-<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
+<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots', reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.a = <span class="hljs-number">1</span>
@@ -911,8 +915,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 
 
 <div><h3 id="copy">Copy</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy, deepcopy
-&lt;object&gt; = copy(&lt;object&gt;)
-&lt;object&gt; = deepcopy(&lt;object&gt;)
+&lt;object&gt; = copy/deepcopy(&lt;object&gt;)
 </code></pre></div>
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
@@ -1162,7 +1165,7 @@ Hello World!
     index = members.index(member) + <span class="hljs-number">1</span>
     <span class="hljs-keyword">return</span> members[index % len(members)]
 </code></pre>
-<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
+<div><h3 id="inline-1">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'FORK'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'KNIFE'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'SPOON'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>
@@ -2933,7 +2936,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>February 21, 2024</aside>
+    <aside>February 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

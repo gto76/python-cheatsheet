@@ -1021,6 +1021,40 @@ class C(A, B): pass
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
 ```
 
+### Type Annotations
+* **They add type hints to variables, arguments and functions (`'def f() -> <type>:'`).**
+* **Are ignored by CPython interpreter, but used by tools such as [mypy](https://pypi.org/project/mypy/), [Pydantic](https://pypi.org/project/pydantic/) and [Cython](https://pypi.org/project/Cython/).**
+```python
+from collections import abc
+
+<name>: <type> [| ...] [= <obj>]
+<name>: list/set[<type>] [= <obj>]
+<name>: abc.Iterable/abc.Sequence[<type>] [= <obj>]
+<name>: dict/tuple[<type>, ...] [= <obj>]
+```
+
+### Dataclass
+**Decorator that uses class variables to generate init(), repr() and eq() special methods.**
+```python
+from dataclasses import dataclass, field, make_dataclass
+
+@dataclass(order=False, frozen=False)
+class <class_name>:
+    <attr_name>: <type>
+    <attr_name>: <type> = <default_value>
+    <attr_name>: list/dict/set = field(default_factory=list/dict/set)
+```
+* **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
+* **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
+* **For attributes of arbitrary type use `'typing.Any'`.**
+
+```python
+<class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
+<class> = make_dataclass('<class_name>', <coll_of_tuples>)
+<tuple> = ('<attr_name>', <type> [, <default_value>])
+```
+
 ### Property
 **Pythonic way of implementing getters and setters.**
 ```python
@@ -1041,40 +1075,8 @@ class Person:
 'Guido van Rossum'
 ```
 
-### Dataclass
-**Decorator that automatically generates init(), repr() and eq() special methods.**
-```python
-from dataclasses import dataclass, field
-
-@dataclass(order=False, frozen=False)
-class <class_name>:
-    <attr_name>: <type>
-    <attr_name>: <type> = <default_value>
-    <attr_name>: list/dict/set = field(default_factory=list/dict/set)
-```
-* **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
-* **For attributes of arbitrary type use `'typing.Any'`.**
-
-#### Inline:
-```python
-from dataclasses import make_dataclass
-<class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
-<class> = make_dataclass('<class_name>', <coll_of_tuples>)
-<tuple> = ('<attr_name>', <type> [, <default_value>])
-```
-
-#### Rest of type annotations (CPython interpreter ignores them all):
-```python
-import collections.abc as abc, typing as tp
-<var_name>: list/set/abc.Iterable/abc.Sequence/tp.Optional[<type>] [= <obj>]
-<var_name>: dict/tuple/tp.Union[<type>, ...] [= <obj>]
-def func(<arg_name>: <type> [= <obj>]) -> <type>: ...
-```
-
 ### Slots
-**Mechanism that restricts objects to attributes listed in 'slots' and significantly reduces their memory footprint.**
+**Mechanism that restricts objects to attributes listed in 'slots', reduces their memory footprint.**
 
 ```python
 class MyClassWithSlots:
@@ -1086,8 +1088,7 @@ class MyClassWithSlots:
 ### Copy
 ```python
 from copy import copy, deepcopy
-<object> = copy(<object>)
-<object> = deepcopy(<object>)
+<object> = copy/deepcopy(<object>)
 ```
 
 
