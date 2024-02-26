@@ -5,6 +5,8 @@ Comprehensive Python Cheatsheet
 
 ![Monty Python](web/image_888.jpeg)
 
+ЗДЕСЬ БЫЛ МАСРУР НАБИЕВ
+
 
 Contents
 --------
