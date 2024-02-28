@@ -2256,7 +2256,8 @@ logging.basicConfig(
 <Handler>.setFormatter(<Formatter>)                  # Adds Formatter to the Handler.
 <Handler>.setLevel(<int/str>)                        # Processes all messages by default.
 <Logger>.addHandler(<Handler>)                       # Adds Handler to the Logger.
-<Logger>.setLevel(<int/str>)                         # What is sent to its/ancestor's handlers.
+<Logger>.setLevel(<int/str>)                         # What is sent to its/ancestors' handlers.
+<Logger>.propagate = <bool>                          # Cuts off ancestors' handlers if false.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
@@ -2267,10 +2268,10 @@ logging.basicConfig(
 ```python
 >>> logger = logging.getLogger('my_module')
 >>> handler = logging.FileHandler('test.log', encoding='utf-8')
->>> formatter = logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s')
->>> handler.setFormatter(formatter)
+>>> handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s'))
 >>> logger.addHandler(handler)
->>> logging.basicConfig(level='DEBUG')
+>>> logger.setLevel('DEBUG')
+>>> logging.basicConfig()
 >>> logging.root.handlers[0].setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
@@ -2291,7 +2292,7 @@ Introspection
 <list> = dir(<object>)                     # Names of object's attributes (including methods).
 <dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
-value  = getattr(<object>, '<attr_name>')  # Raises AttributeError if attribute is missing.
+value  = getattr(<object>, '<attr_name>')  # Default value can be passed as the third argument.
 setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict__' attribute.
 delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 ```

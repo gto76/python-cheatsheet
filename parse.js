@@ -218,10 +218,10 @@ const PROGRESS_BAR =
 const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">\'my_module\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">\'test.log\'</span>, encoding=<span class="hljs-string">\'utf-8\'</span>)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(logging.Formatter(<span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">\'DEBUG\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">\'DEBUG\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig()\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logging.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
   'CRITICAL:my_module:Running out of disk space.\n' +
@@ -832,7 +832,7 @@ function fixHighlights() {
   //$(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
   $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
-  $(`code:contains(>>> logging.basicConfig(level=)`).html(LOGGING_EXAMPLE);
+  $(`code:contains(>>> logging.basicConfig()`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(PLOTLY);

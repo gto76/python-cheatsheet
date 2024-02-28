@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 24, 2024</aside>
+    <aside>February 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1862,7 +1862,8 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)                  <span class="hljs-comment"># Adds Formatter to the Handler.</span>
 &lt;Handler&gt;.setLevel(&lt;int/str&gt;)                        <span class="hljs-comment"># Processes all messages by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                       <span class="hljs-comment"># Adds Handler to the Logger.</span>
-&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                         <span class="hljs-comment"># What is sent to its/ancestor's handlers.</span>
+&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                         <span class="hljs-comment"># What is sent to its/ancestors' handlers.</span>
+&lt;Logger&gt;.propagate = &lt;bool&gt;                          <span class="hljs-comment"># Cuts off ancestors' handlers if false.</span>
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
@@ -1872,10 +1873,10 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = logging.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = logging.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>formatter = logging.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(formatter)
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(logging.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>))
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
-<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig(level=<span class="hljs-string">'DEBUG'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">'DEBUG'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>logging.basicConfig()
 <span class="hljs-meta">&gt;&gt;&gt; </span>logging.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
 CRITICAL:my_module:Running out of disk space.
@@ -1891,7 +1892,7 @@ CRITICAL:my_module:Running out of disk space.
 <pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (including methods).</span>
 &lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
 &lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises an AttributeError.</span>
-value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Raises AttributeError if attribute is missing.</span>
+value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Default value can be passed as the third argument.</span>
 setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with '__dict__' attribute.</span>
 delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre>
@@ -2936,7 +2937,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>February 24, 2024</aside>
+    <aside>February 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
