@@ -1341,25 +1341,23 @@ class <enum_name>(Enum):
 * **Methods receive the member they were called on as the 'self' argument.**
 
 ```python
-<member> = <enum>.<member_name>           # Returns a member.
-<member> = <enum>['<member_name>']        # Returns a member. Raises KeyError.
-<member> = <enum>(<value>)                # Returns a member. Raises ValueError.
-<str>    = <member>.name                  # Returns member's name.
-<obj>    = <member>.value                 # Returns member's value.
+<member> = <enum>.<member_name>         # Returns a member.
+<member> = <enum>['<member_name>']      # Returns a member. Raises KeyError.
+<member> = <enum>(<value>)              # Returns a member. Raises ValueError.
+<str>    = <member>.name                # Returns member's name.
+<obj>    = <member>.value               # Returns member's value.
 ```
 
 ```python
-<list>   = list(<enum>)                   # Returns enum's members.
-<list>   = [a.name for a in <enum>]       # Returns enum's member names.
-<list>   = [a.value for a in <enum>]      # Returns enum's member values.
-<member> = random.choice(list(<enum>))    # Returns a random member.
+<list>   = list(<enum>)                 # Returns enum's members.
+<list>   = [a.name for a in <enum>]     # Returns enum's member names.
+<list>   = [a.value for a in <enum>]    # Returns enum's member values.
 ```
 
 ```python
-def get_next_member(member):
-    members = list(type(member))
-    index = members.index(member) + 1
-    return members[index % len(members)]
+<enum>   = type(<member>)               # Returns member's enum.
+<iter>   = itertools.cycle(<enum>)      # Retruns endless iterator of members.
+<member> = random.choice(list(<enum>))  # Returns a random member.
 ```
 
 ### Inline

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>February 28, 2024</aside>
+    <aside>March 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1149,21 +1149,19 @@ Hello World!
 <li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;           <span class="hljs-comment"># Returns a member.</span>
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]        <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)                <span class="hljs-comment"># Returns a member. Raises ValueError.</span>
-&lt;str&gt;    = &lt;member&gt;.name                  <span class="hljs-comment"># Returns member's name.</span>
-&lt;obj&gt;    = &lt;member&gt;.value                 <span class="hljs-comment"># Returns member's value.</span>
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)              <span class="hljs-comment"># Returns a member. Raises ValueError.</span>
+&lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns member's name.</span>
+&lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Returns member's value.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                   <span class="hljs-comment"># Returns enum's members.</span>
-&lt;list&gt;   = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]       <span class="hljs-comment"># Returns enum's member names.</span>
-&lt;list&gt;   = [a.value <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]      <span class="hljs-comment"># Returns enum's member values.</span>
-&lt;member&gt; = random.choice(list(&lt;enum&gt;))    <span class="hljs-comment"># Returns a random member.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns enum's members.</span>
+&lt;list&gt;   = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]     <span class="hljs-comment"># Returns enum's member names.</span>
+&lt;list&gt;   = [a.value <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns enum's member values.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_next_member</span><span class="hljs-params">(member)</span>:</span>
-    members = list(type(member))
-    index = members.index(member) + <span class="hljs-number">1</span>
-    <span class="hljs-keyword">return</span> members[index % len(members)]
+<pre><code class="python language-python hljs">&lt;enum&gt;   = type(&lt;member&gt;)               <span class="hljs-comment"># Returns member's enum.</span>
+&lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Retruns endless iterator of members.</span>
+&lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Returns a random member.</span>
 </code></pre>
 <div><h3 id="inline-1">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
@@ -2937,7 +2935,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>February 28, 2024</aside>
+    <aside>March 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
