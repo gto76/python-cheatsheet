@@ -862,12 +862,11 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 </span></code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
-<li><strong>Are ignored by CPython interpreter, but used by tools such as <a href="https://pypi.org/project/mypy/">mypy</a>, <a href="https://pypi.org/project/pydantic/">Pydantic</a> and <a href="https://pypi.org/project/Cython/">Cython</a>.</strong></li>
+<li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
 
 &lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
-&lt;name&gt;: list/set[&lt;type&gt;] [= &lt;obj&gt;]
-&lt;name&gt;: abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
 &lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]
 </code></pre></div>
 

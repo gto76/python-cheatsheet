@@ -1023,13 +1023,12 @@ class C(A, B): pass
 
 ### Type Annotations
 * **They add type hints to variables, arguments and functions (`'def f() -> <type>:'`).**
-* **Are ignored by CPython interpreter, but used by tools such as [mypy](https://pypi.org/project/mypy/), [Pydantic](https://pypi.org/project/pydantic/) and [Cython](https://pypi.org/project/Cython/).**
+* **Hints are used by type checkers like [mypy](https://pypi.org/project/mypy/), data validation libraries such as [Pydantic](https://pypi.org/project/pydantic/) and lately also by [Cython](https://pypi.org/project/Cython/) compiler. However, they are not enforced by CPython interpreter.**
 ```python
 from collections import abc
 
 <name>: <type> [| ...] [= <obj>]
-<name>: list/set[<type>] [= <obj>]
-<name>: abc.Iterable/abc.Sequence[<type>] [= <obj>]
+<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]
 <name>: dict/tuple[<type>, ...] [= <obj>]
 ```
 
