@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 9, 2024</aside>
+    <aside>March 11, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2157,12 +2157,12 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1        534.1    534.1     67.8      b = set(range(10000))
 </code></pre></div>
 
-<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="text language-text">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz
-$ tail --lines=4 test.py &gt; test.py
-$ python3 -m cProfile -o test.prof test.py
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png
-$ xdg-open/open test.png
-$ snakeviz test.prof
+<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or download installer.</span>
+$ tail --lines=4 test.py &gt; test.py                              <span class="hljs-comment"># Removes first line.</span>
+$ python3 -m cProfile -o test.prof test.py                      <span class="hljs-comment"># Runs built-in profiler.</span>
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  <span class="hljs-comment"># Generates call graph.</span>
+$ xdg-open/open test.png                                        <span class="hljs-comment"># Displays call graph.</span>
+$ snakeviz test.prof                                            <span class="hljs-comment"># Displays flame graph.</span>
 </code></pre></div>
 
 <div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┓
@@ -2935,7 +2935,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>March 9, 2024</aside>
+    <aside>March 11, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

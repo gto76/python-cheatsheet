@@ -2620,13 +2620,13 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ```
 
 ### Call and Flame Graphs
-```text
-$ apt/brew install graphviz && pip3 install gprof2dot snakeviz
-$ tail --lines=4 test.py > test.py
-$ python3 -m cProfile -o test.prof test.py
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png
-$ xdg-open/open test.png
-$ snakeviz test.prof
+```bash
+$ apt/brew install graphviz && pip3 install gprof2dot snakeviz  # Or download installer.
+$ tail --lines=4 test.py > test.py                              # Removes first line.
+$ python3 -m cProfile -o test.prof test.py                      # Runs built-in profiler.
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  # Generates call graph.
+$ xdg-open/open test.png                                        # Displays call graph.
+$ snakeviz test.prof                                            # Displays flame graph.
 ```
 
 ### Sampling and Memory Profilers
