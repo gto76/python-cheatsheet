@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>March 11, 2024</aside>
+    <aside>March 12, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -325,34 +325,33 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
-&lt;str&gt;   = re.sub(&lt;regex&gt;, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
-&lt;list&gt;  = re.findall(&lt;regex&gt;, text)            <span class="hljs-comment"># Returns all occurrences as strings.</span>
-&lt;list&gt;  = re.split(&lt;regex&gt;, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Add brackets around regex to include matches.</span>
-&lt;Match&gt; = re.search(&lt;regex&gt;, text)             <span class="hljs-comment"># First occurrence of the pattern or None.</span>
-&lt;Match&gt; = re.match(&lt;regex&gt;, text)              <span class="hljs-comment"># Searches only at the beginning of the text.</span>
-&lt;iter&gt;  = re.finditer(&lt;regex&gt;, text)           <span class="hljs-comment"># Returns all occurrences as Match objects.</span>
+&lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
+&lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns all occurrences as strings.</span>
+&lt;list&gt;  = re.split(<span class="hljs-string">r'&lt;regex&gt;'</span>, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Add brackets around regex to keep matches.</span>
+&lt;Match&gt; = re.search(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)             <span class="hljs-comment"># First occurrence of the pattern or None.</span>
+&lt;Match&gt; = re.match(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)              <span class="hljs-comment"># Searches only at the beginning of the text.</span>
+&lt;iter&gt;  = re.finditer(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)           <span class="hljs-comment"># Returns all occurrences as Match objects.</span>
 </code></pre></div>
 
 
 <ul>
-<li><strong>Argument 'new' can be a function that accepts a Match object and returns a string.</strong></li>
+<li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals.</strong></li>
+<li><strong>Argument 'new' of re.sub() can be a function that accepts a Match object and returns a str.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">r'\1'</span></code> or <code class="python hljs"><span class="hljs-string">'\\1'</span></code> for backreference (<code class="python hljs"><span class="hljs-string">'\1'</span></code> returns a character with octal code 1).</strong></li>
-<li><strong>Add <code class="python hljs"><span class="hljs-string">'?'</span></code> after <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'+'</span></code> to make them non-greedy.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), …</strong></li>
 </ul>
-<div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                      <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
-&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                     <span class="hljs-comment"># Returns part inside the first brackets.</span>
-&lt;tuple&gt; = &lt;Match&gt;.groups()                     <span class="hljs-comment"># Returns all bracketed parts.</span>
-&lt;int&gt;   = &lt;Match&gt;.start()                      <span class="hljs-comment"># Returns start index of the match.</span>
-&lt;int&gt;   = &lt;Match&gt;.end()                        <span class="hljs-comment"># Returns exclusive end index of the match.</span>
+<div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                         <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
+&lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                        <span class="hljs-comment"># Returns part inside the first brackets.</span>
+&lt;tuple&gt; = &lt;Match&gt;.groups()                        <span class="hljs-comment"># Returns all bracketed parts.</span>
+&lt;int&gt;   = &lt;Match&gt;.start()                         <span class="hljs-comment"># Returns start index of the match.</span>
+&lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns exclusive end index of the match.</span>
 </code></pre></div>
 
-<div><h3 id="specialsequences">Special Sequences</h3><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                <span class="hljs-comment"># Also [०-९…]. Matches a decimal character.</span>
-<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                         <span class="hljs-comment"># Also [ª²³…]. Matches an alphanumeric or _.</span>
-<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                        <span class="hljs-comment"># Also [\x1c-\x1f…]. Matches a whitespace.</span>
+<div><h3 id="specialsequences">Special Sequences</h3><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                   <span class="hljs-comment"># Also [०-९…]. Matches a decimal character.</span>
+<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                            <span class="hljs-comment"># Also [ª²³…]. Matches an alphanumeric or _.</span>
+<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                           <span class="hljs-comment"># Also [\x1c-\x1f…]. Matches a whitespace.</span>
 </code></pre></div>
 
 <ul>
@@ -2934,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>March 11, 2024</aside>
+    <aside>March 12, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

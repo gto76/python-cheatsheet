@@ -351,36 +351,35 @@ Regex
 
 ```python
 import re
-<str>   = re.sub(<regex>, new, text, count=0)  # Substitutes all occurrences with 'new'.
-<list>  = re.findall(<regex>, text)            # Returns all occurrences as strings.
-<list>  = re.split(<regex>, text, maxsplit=0)  # Add brackets around regex to include matches.
-<Match> = re.search(<regex>, text)             # First occurrence of the pattern or None.
-<Match> = re.match(<regex>, text)              # Searches only at the beginning of the text.
-<iter>  = re.finditer(<regex>, text)           # Returns all occurrences as Match objects.
+<str>   = re.sub(r'<regex>', new, text, count=0)  # Substitutes all occurrences with 'new'.
+<list>  = re.findall(r'<regex>', text)            # Returns all occurrences as strings.
+<list>  = re.split(r'<regex>', text, maxsplit=0)  # Add brackets around regex to keep matches.
+<Match> = re.search(r'<regex>', text)             # First occurrence of the pattern or None.
+<Match> = re.match(r'<regex>', text)              # Searches only at the beginning of the text.
+<iter>  = re.finditer(r'<regex>', text)           # Returns all occurrences as Match objects.
 ```
 
-* **Argument 'new' can be a function that accepts a Match object and returns a string.**
+* **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals.**
+* **Argument 'new' of re.sub() can be a function that accepts a Match object and returns a str.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
-* **Use `r'\1'` or `'\\1'` for backreference (`'\1'` returns a character with octal code 1).**
-* **Add `'?'` after `'*'` and `'+'` to make them non-greedy.**
 * **`'re.compile(<regex>)'` returns a Pattern object with methods sub(), findall(), …**
 
 ### Match Object
 ```python
-<str>   = <Match>.group()                      # Returns the whole match. Also group(0).
-<str>   = <Match>.group(1)                     # Returns part inside the first brackets.
-<tuple> = <Match>.groups()                     # Returns all bracketed parts.
-<int>   = <Match>.start()                      # Returns start index of the match.
-<int>   = <Match>.end()                        # Returns exclusive end index of the match.
+<str>   = <Match>.group()                         # Returns the whole match. Also group(0).
+<str>   = <Match>.group(1)                        # Returns part inside the first brackets.
+<tuple> = <Match>.groups()                        # Returns all bracketed parts.
+<int>   = <Match>.start()                         # Returns start index of the match.
+<int>   = <Match>.end()                           # Returns exclusive end index of the match.
 ```
 
 ### Special Sequences
 ```python
-'\d' == '[0-9]'                                # Also [०-९…]. Matches a decimal character.
-'\w' == '[a-zA-Z0-9_]'                         # Also [ª²³…]. Matches an alphanumeric or _.
-'\s' == '[ \t\n\r\f\v]'                        # Also [\x1c-\x1f…]. Matches a whitespace.
+'\d' == '[0-9]'                                   # Also [०-९…]. Matches a decimal character.
+'\w' == '[a-zA-Z0-9_]'                            # Also [ª²³…]. Matches an alphanumeric or _.
+'\s' == '[ \t\n\r\f\v]'                           # Also [\x1c-\x1f…]. Matches a whitespace.
 ```
 
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
