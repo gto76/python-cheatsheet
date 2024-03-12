@@ -359,7 +359,7 @@ import re
 <iter>  = re.finditer(r'<regex>', text)           # Returns all occurrences as Match objects.
 ```
 
-* **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals.**
+* **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).**
 * **Argument 'new' of re.sub() can be a function that accepts a Match object and returns a str.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
@@ -1026,9 +1026,9 @@ class C(A, B): pass
 ```python
 from collections import abc
 
-<name>: <type> [| ...] [= <obj>]
-<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]
-<name>: dict/tuple[<type>, ...] [= <obj>]
+<name>: <type> [| ...] [= <obj>]                              # `|` since 3.10.
+<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]  # Since 3.9.
+<name>: dict/tuple[<type>, ...] [= <obj>]                     # Since 3.9.
 ```
 
 ### Dataclass

@@ -335,7 +335,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 
 <ul>
-<li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals.</strong></li>
+<li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).</strong></li>
 <li><strong>Argument 'new' of re.sub() can be a function that accepts a Match object and returns a str.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
@@ -864,9 +864,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
 
-&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
-&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
-&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]
+&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]                              <span class="hljs-comment"># `|` since 3.10.</span>
+&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]  <span class="hljs-comment"># Since 3.9.</span>
+&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]                     <span class="hljs-comment"># Since 3.9.</span>
 </code></pre></div>
 
 
