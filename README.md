@@ -1309,7 +1309,7 @@ class MyAbcSequence(abc.Sequence):
 +------------+------------+------------+------------+--------------+
 |            |  Iterable  | Collection |  Sequence  | abc.Sequence |
 +------------+------------+------------+------------+--------------+
-| iter()     |    REQ     |    REQ     |    Yes     |     Yes      |
+| iter()     |    REQ*    |    REQ     |    Yes     |     Yes      |
 | contains() |    Yes     |    Yes     |    Yes     |     Yes      |
 | len()      |            |    REQ     |    REQ     |     REQ      |
 | getitem()  |            |            |    REQ     |     REQ      |
@@ -1318,7 +1318,8 @@ class MyAbcSequence(abc.Sequence):
 | count()    |            |            |            |     Yes      |
 +------------+------------+------------+------------+--------------+
 ```
-* **Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
+* **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() will work just fine with any code expecting an iterable.**
+* **Abstract base classes that generate missing methods when extended are: Sequence, MutableSequence, Set, MutableSet, Mapping and MutableMapping.**
 * **Names of their required methods are stored in `'<abc>.__abstractmethods__'`.**
 
 

@@ -1120,7 +1120,7 @@ Hello World!
 </code></pre></div><div><h4 id="tableofrequiredandautomaticallyavailablespecialmethods">Table of required and automatically available special methods:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
 ┃            │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃
 ┠────────────┼────────────┼────────────┼────────────┼──────────────┨
-┃ iter()     │     !      │     !      │     ✓      │      ✓       ┃
+┃ iter()     │     !*     │     !      │     ✓      │      ✓       ┃
 ┃ contains() │     ✓      │     ✓      │     ✓      │      ✓       ┃
 ┃ len()      │            │     !      │     !      │      !       ┃
 ┃ getitem()  │            │            │     !      │      !       ┃
@@ -1131,7 +1131,8 @@ Hello World!
 </code></pre></div>
 
 <ul>
-<li><strong>Other ABCs that generate missing methods are: MutableSequence, Set, MutableSet, Mapping and MutableMapping.</strong></li>
+<li><strong>Method iter() is required for <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, abc.Iterable)'</span></code> to return True, however any object with getitem() will work just fine with any code expecting an iterable.</strong></li>
+<li><strong>Abstract base classes that generate missing methods when extended are: Sequence, MutableSequence, Set, MutableSet, Mapping and MutableMapping.</strong></li>
 <li><strong>Names of their required methods are stored in <code class="python hljs"><span class="hljs-string">'&lt;abc&gt;.__abstractmethods__'</span></code>.</strong></li>
 </ul>
 <div><h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum, auto
