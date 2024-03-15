@@ -1309,7 +1309,7 @@ class MyAbcSequence(abc.Sequence):
 +------------+------------+------------+------------+--------------+
 |            |  Iterable  | Collection |  Sequence  | abc.Sequence |
 +------------+------------+------------+------------+--------------+
-| iter()     |    REQ*    |    REQ     |    Yes     |     Yes      |
+| iter()     |    REQ     |    REQ     |    Yes     |     Yes      |
 | contains() |    Yes     |    Yes     |    Yes     |     Yes      |
 | len()      |            |    REQ     |    REQ     |     REQ      |
 | getitem()  |            |            |    REQ     |     REQ      |
