@@ -800,9 +800,9 @@ function highlightCode() {
 function changeCodeLanguages() {
   setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
   $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
-  $('code:contains(<el>       = <2d_array>[row_index, column_index])').removeClass().addClass('bash');
-  $('code:contains(<2d_array> = <2d_array>[row_indexes])').removeClass().addClass('bash');
-  $('code:contains(<2d_bools> = <2d_array> > <el/1d/2d_array>)').removeClass().addClass('bash');
+  $('code:contains(<el>       = <2d>[row_index, col_index])').removeClass().addClass('bash');
+  $('code:contains(<1d_array> = <2d>[row_indices, col_indices])').removeClass().addClass('bash');
+  $('code:contains(<2d_bools> = <2d> > <el/1d/2d>)').removeClass().addClass('bash');
   $('code.perl').removeClass().addClass('python');
 }
 

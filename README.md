@@ -2680,25 +2680,25 @@ import numpy as np
 
 ### Indexing
 ```perl
-<el>       = <2d_array>[row_index, column_index]        # <3d_a>[table_i, row_i, column_i]
-<1d_view>  = <2d_array>[row_index]                      # <3d_a>[table_i, row_i]
-<1d_view>  = <2d_array>[:, column_index]                # <3d_a>[table_i, :, column_i]
-<2d_view>  = <2d_array>[rows_slice, columns_slice]      # <3d_a>[table_i, rows_s, columns_s]
+<el>       = <2d>[row_index, col_index]                 # Or: <3d>[<int>, <int>, <int>]
+<1d_view>  = <2d>[row_index]                            # Or: <3d>[<int>, <int>, <slice>]
+<1d_view>  = <2d>[:, col_index]                         # Or: <3d>[<int>, <slice>, <int>]
+<2d_view>  = <2d>[from:to_row_i, from:to_col_i]         # Or: <3d>[<int>, <slice>, <slice>]
 ```
 
 ```perl
-<2d_array> = <2d_array>[row_indexes]                    # <3d_a>[table_i/is, row_is]
-<2d_array> = <2d_array>[:, column_indexes]              # <3d_a>[table_i/is, :, column_is]
-<1d_array> = <2d_array>[row_indexes, column_indexes]    # <3d_a>[table_i/is, row_is, column_is]
-<1d_array> = <2d_array>[row_indexes, column_index]      # <3d_a>[table_i/is, row_is, column_i]
+<1d_array> = <2d>[row_indices, col_indices]             # Or: <3d>[<int/1d>, <1d>, <1d>]
+<2d_array> = <2d>[row_indices]                          # Or: <3d>[<int/1d>, <1d>, <slice>]
+<2d_array> = <2d>[:, col_indices]                       # Or: <3d>[<int/1d>, <slice>, <1d>]
+<2d_array> = <2d>[np.ix_(row_indices, col_indices)]     # Or: <3d>[<int/1d/2d>, <2d>, <2d>]
 ```
 
 ```perl
-<2d_bools> = <2d_array> > <el/1d/2d_array>              # 1d_array must have size of a row.
-<1d/2d_a>  = <2d_array>[<2d/1d_bools>]                  # 1d_bools must have size of a column.
+<2d_bools> = <2d> > <el/1d/2d>                          # 1d object must have size of a row.
+<1/2d_arr> = <2d>[<2d/1d_bools>]                        # 1d_bools must have size of a column.
 ```
-* **Indexes should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
-* **`':'` returns a slice of all dimension's indexes. Omitted dimensions default to `':'`.**
+* **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
+* **Indices should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
