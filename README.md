@@ -1995,7 +1995,7 @@ Struct
 ```python
 from struct import pack, unpack
 <bytes> = pack('<format>', <el_1> [, ...])  # Packages arguments or raises struct.error.
-<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() for iterator of tuples.
+<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
 ```
 
 ```python
@@ -2055,7 +2055,7 @@ Memory View
 <real>  = <mview>[<index>]                     # Returns an int or a float.
 <mview> = <mview>[<slice>]                     # Mview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Casts memoryview to the new format.
-<mview>.release()                              # Releases the object's memory buffer.
+<mview>.release()                              # Releases memory buffer of target object.
 ```
 
 ```python
@@ -2291,7 +2291,7 @@ Introspection
 <dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
 value  = getattr(<object>, '<attr_name>')  # Default value can be passed as the third argument.
-setattr(<object>, '<attr_name>', value)    # Only works on objects with '__dict__' attribute.
+setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
 delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 ```
 
