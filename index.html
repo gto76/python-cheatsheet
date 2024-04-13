@@ -1894,11 +1894,11 @@ value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</
 setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with __dict__ attribute.</span>
 delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)     <span class="hljs-comment"># Function's Signature object.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of Parameter objects.</span>
-&lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum.</span>
-&lt;obj&gt;  = &lt;Param&gt;.default                   <span class="hljs-comment"># Default value or Parameter.empty.</span>
-&lt;type&gt; = &lt;Param&gt;.annotation                <span class="hljs-comment"># Type or Parameter.empty.</span>
+<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)     <span class="hljs-comment"># Returns function's Signature object.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of Parameter objects. Also &lt;Sig&gt;.return_type.</span>
+&lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum (KEYWORD_ONLY, ...).</span>
+&lt;obj&gt;  = &lt;Param&gt;.default                   <span class="hljs-comment"># Returns param's default value or Parameter.empty.</span>
+&lt;type&gt; = &lt;Param&gt;.annotation                <span class="hljs-comment"># Returns param's type hint or Parameter.empty.</span>
 </code></pre>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>

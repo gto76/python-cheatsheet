@@ -2296,11 +2296,11 @@ delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name
 ```
 
 ```python
-<Sig>  = inspect.signature(<function>)     # Function's Signature object.
-<dict> = <Sig>.parameters                  # Dict of Parameter objects.
-<memb> = <Param>.kind                      # Member of ParameterKind enum.
-<obj>  = <Param>.default                   # Default value or Parameter.empty.
-<type> = <Param>.annotation                # Type or Parameter.empty.
+<Sig>  = inspect.signature(<function>)     # Returns function's Signature object.
+<dict> = <Sig>.parameters                  # Dict of Parameter objects. Also <Sig>.return_type.
+<memb> = <Param>.kind                      # Member of ParameterKind enum (KEYWORD_ONLY, ...).
+<obj>  = <Param>.default                   # Returns param's default value or Parameter.empty.
+<type> = <Param>.annotation                # Returns param's type hint or Parameter.empty.
 ```
 
 
