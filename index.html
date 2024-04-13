@@ -805,11 +805,11 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <div><h2 id="class"><a href="#class" name="class">#</a>Class</h2><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> str(self.a)
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__repr__</span><span class="hljs-params">(self)</span>:</span>
         class_name = self.__class__.__name__
         <span class="hljs-keyword">return</span> <span class="hljs-string">f'<span class="hljs-subst">{class_name}</span>(<span class="hljs-subst">{self.a!r}</span>)'</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> str(self.a)
 
 <span class="hljs-meta">    @classmethod</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_class_name</span><span class="hljs-params">(cls)</span>:</span>
@@ -1861,7 +1861,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 &lt;Handler&gt;.setLevel(&lt;int/str&gt;)                        <span class="hljs-comment"># Processes all messages by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                       <span class="hljs-comment"># Adds Handler to the Logger.</span>
 &lt;Logger&gt;.setLevel(&lt;int/str&gt;)                         <span class="hljs-comment"># What is sent to its/ancestors' handlers.</span>
-&lt;Logger&gt;.propagate = &lt;bool&gt;                          <span class="hljs-comment"># Cuts off ancestors' handlers if false.</span>
+&lt;Logger&gt;.propagate = &lt;bool&gt;                          <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>

@@ -956,11 +956,11 @@ Class
 class <name>:
     def __init__(self, a):
         self.a = a
+    def __str__(self):
+        return str(self.a)
     def __repr__(self):
         class_name = self.__class__.__name__
         return f'{class_name}({self.a!r})'
-    def __str__(self):
-        return str(self.a)
 
     @classmethod
     def get_class_name(cls):
@@ -2255,7 +2255,7 @@ logging.basicConfig(
 <Handler>.setLevel(<int/str>)                        # Processes all messages by default.
 <Logger>.addHandler(<Handler>)                       # Adds Handler to the Logger.
 <Logger>.setLevel(<int/str>)                         # What is sent to its/ancestors' handlers.
-<Logger>.propagate = <bool>                          # Cuts off ancestors' handlers if false.
+<Logger>.propagate = <bool>                          # Cuts off ancestors' handlers if False.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
