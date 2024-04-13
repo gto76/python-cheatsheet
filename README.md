@@ -1020,6 +1020,26 @@ class C(A, B): pass
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
 ```
 
+### Property
+**Pythonic way of implementing getters and setters.**
+```python
+class Person:
+    @property
+    def name(self):
+        return ' '.join(self._name)
+
+    @name.setter
+    def name(self, value):
+        self._name = value.split()
+```
+
+```python
+>>> person = Person()
+>>> person.name = '\t Guido  van Rossum \n'
+>>> person.name
+'Guido van Rossum'
+```
+
 ### Type Annotations
 * **They add type hints to variables, arguments and functions (`'def f() -> <type>:'`).**
 * **Hints are used by type checkers like [mypy](https://pypi.org/project/mypy/), data validation libraries such as [Pydantic](https://pypi.org/project/pydantic/) and lately also by [Cython](https://pypi.org/project/Cython/) compiler. However, they are not enforced by CPython interpreter.**
@@ -1051,26 +1071,6 @@ class <class_name>:
 <class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
 <class> = make_dataclass('<class_name>', <coll_of_tuples>)
 <tuple> = ('<attr_name>', <type> [, <default_value>])
-```
-
-### Property
-**Pythonic way of implementing getters and setters.**
-```python
-class Person:
-    @property
-    def name(self):
-        return ' '.join(self._name)
-
-    @name.setter
-    def name(self, value):
-        self._name = value.split()
-```
-
-```python
->>> person = Person()
->>> person.name = '\t Guido  van Rossum \n'
->>> person.name
-'Guido van Rossum'
 ```
 
 ### Slots

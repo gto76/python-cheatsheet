@@ -859,6 +859,22 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
+<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
+<span class="hljs-meta">    @property</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(self._name)
+
+<span class="hljs-meta">    @name.setter</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
+        self._name = value.split()
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">'\t Guido  van Rossum \n'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name
+<span class="hljs-string">'Guido van Rossum'</span>
+</code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
@@ -889,22 +905,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs">&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
 &lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre>
-<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
-<span class="hljs-meta">    @property</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(self._name)
-
-<span class="hljs-meta">    @name.setter</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
-        self._name = value.split()
-</code></pre></div>
-
-
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
-<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">'\t Guido  van Rossum \n'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>person.name
-<span class="hljs-string">'Guido van Rossum'</span>
-</code></pre>
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots', reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
