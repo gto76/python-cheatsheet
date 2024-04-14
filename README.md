@@ -1199,7 +1199,7 @@ class Counter:
 ```
 
 ### Context Manager
-* **With statements only work with objects that have enter() and exit() special methods.**
+* **With statements only work on objects that have enter() and exit() special methods.**
 * **Enter() should lock the resources and optionally return an object.**
 * **Exit() should release the resources.**
 * **Any exception that happens inside the with block is passed to the exit() method.**
@@ -2160,7 +2160,7 @@ Operator
 ```python
 import operator as op
 <bool> = op.not_(<obj>)                                         # or, and, not (or/and missing)
-<bool> = op.eq/ne/lt/le/gt/ge/contains/is_(<obj>, <obj>)        # ==, !=, <, <=, >, >=, in, is
+<bool> = op.eq/ne/lt/le/gt/ge/is_/contains(<obj>, <obj>)        # ==, !=, <, <=, >, >=, is, in
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                  # |, ^, &
 <int>  = op.lshift/rshift(<int>, <int>)                         # <<, >>
 <obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)      # +, -, *, /, //, %
@@ -2666,7 +2666,7 @@ import numpy as np
 
 ```python
 <array> = np.copy/abs/sqrt/log/int64(<array>)           # Returns new array of the same shape.
-<array> = <array>.sum/max/mean/argmax/all(axis)         # Passed dimension gets aggregated.
+<array> = <array>.sum/max/mean/argmax/all(axis)         # Aggregates specified dimension.
 <array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
 ```
 
