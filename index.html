@@ -336,7 +336,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).</strong></li>
-<li><strong>Argument 'new' of re.sub() can be a function that accepts a Match object and returns a str.</strong></li>
+<li><strong>Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
@@ -1131,7 +1131,7 @@ Hello World!
 </code></pre></div>
 
 <ul>
-<li><strong>Method iter() is required for <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, abc.Iterable)'</span></code> to return True, however any object with getitem() will work just fine with any code expecting an iterable.</strong></li>
+<li><strong>Method iter() is required for <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, abc.Iterable)'</span></code> to return True, however any object with getitem() will work with any code expecting an iterable.</strong></li>
 <li><strong>Abstract base classes that generate missing methods when extended are: Sequence, MutableSequence, Set, MutableSet, Mapping and MutableMapping.</strong></li>
 <li><strong>Names of their required methods are stored in <code class="python hljs"><span class="hljs-string">'&lt;abc&gt;.__abstractmethods__'</span></code>.</strong></li>
 </ul>
