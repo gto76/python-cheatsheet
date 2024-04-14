@@ -464,12 +464,12 @@ const DIAGRAM_9_B =
   "┃                  │     excel    │   excel-tab  │     unix     ┃\n" +
   "┠──────────────────┼──────────────┼──────────────┼──────────────┨\n" +
   "┃ delimiter        │       ','    │      '\\t'    │       ','    ┃\n" +
-  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
-  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
-  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
   "┃ lineterminator   │    '\\r\\n'    │    '\\r\\n'    │      '\\n'    ┃\n" +
-  "┃ quoting          │         0    │         0    │         1    ┃\n" +
+  "┃ quotechar        │       '\"'    │       '\"'    │       '\"'    ┃\n" +
   "┃ escapechar       │      None    │      None    │      None    ┃\n" +
+  "┃ doublequote      │      True    │      True    │      True    ┃\n" +
+  "┃ quoting          │         0    │         0    │         1    ┃\n" +
+  "┃ skipinitialspace │     False    │     False    │     False    ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_95_A =

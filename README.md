@@ -1835,12 +1835,12 @@ import csv
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
 * **`'delimiter'` - A one-character string used to separate fields.**
-* **`'quotechar'` - Character for quoting fields that contain special characters.**
-* **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
-* **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 * **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
+* **`'quotechar'` - Character for quoting fields that contain special characters.**
+* **`'escapechar'` - Character for escaping quotechars.**
+* **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
-* **`'escapechar'` - Character for escaping quotechars if 'doublequote' is False.**
+* **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 
 ### Dialects
 ```text
@@ -1848,12 +1848,12 @@ import csv
 |                  |     excel    |   excel-tab  |     unix     |
 +------------------+--------------+--------------+--------------+
 | delimiter        |       ','    |      '\t'    |       ','    |
-| quotechar        |       '"'    |       '"'    |       '"'    |
-| doublequote      |      True    |      True    |      True    |
-| skipinitialspace |     False    |     False    |     False    |
 | lineterminator   |    '\r\n'    |    '\r\n'    |      '\n'    |
-| quoting          |         0    |         0    |         1    |
+| quotechar        |       '"'    |       '"'    |       '"'    |
 | escapechar       |      None    |      None    |      None    |
+| doublequote      |      True    |      True    |      True    |
+| quoting          |         0    |         0    |         1    |
+| skipinitialspace |     False    |     False    |     False    |
 +------------------+--------------+--------------+--------------+
 ```
 
