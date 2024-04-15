@@ -693,7 +693,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
-<li><strong>Imports are relative to the location of file that was passed to python command, but can be made relative to their own location with <code class="python hljs"><span class="hljs-string">'from .[…][&lt;file&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
+<li><strong>Imports are relative to the location of file that was passed to python command, but can be made relative to their location with <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
 </ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(b)</span>:</span>

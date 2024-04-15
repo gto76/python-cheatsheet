@@ -824,7 +824,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **Package is a collection of modules, but it can also define its own objects.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
-* **Imports are relative to the location of file that was passed to python command, but can be made relative to their own location with `'from .[…][<file>[.…]] import <obj>'`.**
+* **Imports are relative to the location of file that was passed to python command, but can be made relative to their location with `'from .[…][<pkg/module>[.…]] import <obj>'`.**
 
 
 Closure
