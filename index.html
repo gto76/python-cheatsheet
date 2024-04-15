@@ -2088,8 +2088,8 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">app = flask.Flask(__name__)
-app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)
+<pre><code class="python language-python hljs">app = flask.Flask(__name__)                <span class="hljs-comment"># Put above function definitions.</span>
+app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Run after function definitions.</span>
 </code></pre>
 <ul>
 <li><strong>Starts the app at <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>. Use <code class="python hljs"><span class="hljs-string">'host="0.0.0.0"'</span></code> to run externally.</strong></li>
@@ -2110,7 +2110,7 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'render_template(filename, &lt;kwargs&gt;)'</span></code> to render file located in templates dir.</strong></li>
 <li><strong>To return an error code use <code class="python hljs"><span class="hljs-string">'abort(&lt;int&gt;)'</span></code> and to redirect use <code class="python hljs"><span class="hljs-string">'redirect(&lt;url&gt;)'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'request.args[&lt;str&gt;]'</span></code> returns parameter from the query string (URL part after '?').</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'session[key] = value'</span></code> to store session data like username, etc.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'session[&lt;str&gt;] = &lt;obj&gt;'</span></code> stores session data. Needs <code class="python hljs"><span class="hljs-string">'app.secret_key = &lt;str&gt;'</span></code>.</strong></li>
 </ul>
 <div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_json</span><span class="hljs-params">(sport)</span>:</span>

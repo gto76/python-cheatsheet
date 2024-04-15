@@ -2538,8 +2538,8 @@ import flask
 ```
 
 ```python
-app = flask.Flask(__name__)
-app.run(host=None, port=None, debug=None)
+app = flask.Flask(__name__)                # Put above function definitions.
+app.run(host=None, port=None, debug=None)  # Run after function definitions.
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
@@ -2561,7 +2561,7 @@ def serve_html(sport):
 * **Use `'render_template(filename, <kwargs>)'` to render file located in templates dir.**
 * **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
 * **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
-* **Use `'session[key] = value'` to store session data like username, etc.**
+* **`'session[<str>] = <obj>'` stores session data. Needs `'app.secret_key = <str>'`.**
 
 ### REST Request
 ```python
