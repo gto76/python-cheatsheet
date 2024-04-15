@@ -824,13 +824,12 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **Package is a collection of modules, but it can also define its own objects.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
+* **Imports are relative to the location of file that was passed to python command, but can be made relative to their own location with `'from .[…][<file>[.…]] import <obj>'`.**
 
 
 Closure
 -------
-**We have/get a closure in Python when:**
-* **A nested function references a value of its enclosing function and then**
-* **the enclosing function returns the nested function.**
+**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.**
 
 ```python
 def get_multiplier(a):
@@ -2622,7 +2621,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ### Call and Flame Graphs
 ```bash
 $ apt/brew install graphviz && pip3 install gprof2dot snakeviz  # Or download installer.
-$ tail --lines=4 test.py > test.py                              # Removes first line.
+$ tail --lines=+2 test.py > test.py                             # Removes first line.
 $ python3 -m cProfile -o test.prof test.py                      # Runs built-in profiler.
 $ gprof2dot --format=pstats test.prof | dot -T png -o test.png  # Generates call graph.
 $ xdg-open/open test.png                                        # Displays call graph.
@@ -2631,14 +2630,14 @@ $ snakeviz test.prof                                            # Displays flame
 
 ### Sampling and Memory Profilers
 ```text
-+--------------+----------+------------+-------------------------------+------+
-| pip3 install |   Type   |   Target   |          How to run           | Live |
-+--------------+----------+------------+-------------------------------+------+
-| pyinstrument | Sampling |    CPU     | pyinstrument test.py          | No   |
-| py-spy       | Sampling |    CPU     | py-spy top -- python3 test.py | Yes  |
-| scalene      | Sampling | CPU+Memory | scalene test.py               | No   |
-| memray       | Tracing  |   Memory   | memray run --live test.py     | Yes  |
-+--------------+----------+------------+-------------------------------+------+
++--------------+------------+-------------------------------+-------+------+
+| pip3 install |   Target   |          How to run           | Lines | Live |
++--------------+------------+-------------------------------+-------+------+
+| pyinstrument |    CPU     | pyinstrument test.py          |  No   | No   |
+| py-spy       |    CPU     | py-spy top -- python3 test.py |  No   | Yes  |
+| scalene      | CPU+Memory | scalene test.py               |  Yes  | No   |
+| memray       |   Memory   | memray run --live test.py     |  Yes  | Yes  |
++--------------+------------+-------------------------------+-------+------+
 ```
 
 

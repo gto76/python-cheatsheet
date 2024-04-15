@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 14, 2024</aside>
+    <aside>April 15, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -693,16 +693,13 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
+<li><strong>Imports are relative to the location of file that was passed to python command, but can be made relative to their own location with <code class="python hljs"><span class="hljs-string">'from .[…][&lt;file&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
 </ul>
-<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when:</strong></p><ul>
-<li><strong>A nested function references a value of its enclosing function and then</strong></li>
-<li><strong>the enclosing function returns the nested function.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
+<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(b)</span>:</span>
         <span class="hljs-keyword">return</span> a * b
     <span class="hljs-keyword">return</span> out
 </code></pre></div>
-
 
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>multiply_by_3 = get_multiplier(<span class="hljs-number">3</span>)
@@ -2158,21 +2155,21 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 </code></pre></div>
 
 <div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or download installer.</span>
-$ tail --lines=4 test.py &gt; test.py                              <span class="hljs-comment"># Removes first line.</span>
+$ tail --lines=+2 test.py &gt; test.py                             <span class="hljs-comment"># Removes first line.</span>
 $ python3 -m cProfile -o test.prof test.py                      <span class="hljs-comment"># Runs built-in profiler.</span>
 $ gprof2dot --format=pstats test.prof | dot -T png -o test.png  <span class="hljs-comment"># Generates call graph.</span>
 $ xdg-open/open test.png                                        <span class="hljs-comment"># Displays call graph.</span>
 $ snakeviz test.prof                                            <span class="hljs-comment"># Displays flame graph.</span>
 </code></pre></div>
 
-<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┓
-┃ pip3 install │   Type   │   Target   │          How to run           │ Live ┃
-┠──────────────┼──────────┼────────────┼───────────────────────────────┼──────┨
-┃ pyinstrument │ Sampling │    CPU     │ pyinstrument test.py          │  ×   ┃
-┃ py-spy       │ Sampling │    CPU     │ py-spy top -- python3 test.py │  ✓   ┃
-┃ scalene      │ Sampling │ CPU+Memory │ scalene test.py               │  ×   ┃
-┃ memray       │ Tracing  │   Memory   │ memray run --live test.py     │  ✓   ┃
-┗━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┛
+<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━┯━━━━━━┓
+┃ pip3 install │   Target   │          How to run           │ Lines │ Live ┃
+┠──────────────┼────────────┼───────────────────────────────┼───────┼──────┨
+┃ pyinstrument │    CPU     │ pyinstrument test.py          │   ×   │  ×   ┃
+┃ py-spy       │    CPU     │ py-spy top -- python3 test.py │   ×   │  ✓   ┃
+┃ scalene      │ CPU+Memory │ scalene test.py               │   ✓   │  ×   ┃
+┃ memray       │   Memory   │ memray run --live test.py     │   ✓   │  ✓   ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━┷━━━━━━┛
 </code></pre></div>
 
 <div><h2 id="numpy"><a href="#numpy" name="numpy">#</a>NumPy</h2><p><strong>Array manipulation mini-language. It can run up to one hundred times faster than the equivalent Python code. An even faster alternative that runs on a GPU is called CuPy.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy</span>
@@ -2935,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>April 14, 2024</aside>
+    <aside>April 15, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
