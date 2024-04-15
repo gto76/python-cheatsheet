@@ -2314,9 +2314,9 @@ import asyncio as aio
 ```
 
 ```python
-<coro> = <async_func>(<args>)             # Creates a coroutine.
+<coro> = <async_function>(<args>)         # Creates a coroutine by calling async def function.
 <obj>  = await <coroutine>                # Starts the coroutine and returns result.
-<task> = aio.create_task(<coroutine>)     # Schedules coroutine for execution.
+<task> = aio.create_task(<coroutine>)     # Schedules the coroutine for execution.
 <obj>  = await <task>                     # Returns result. Also <task>.cancel().
 ```
 
