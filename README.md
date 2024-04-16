@@ -1544,7 +1544,7 @@ p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaul
 p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
 p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
 p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
-p.add_argument('<name>', type=<type>, nargs='*')                  # Optional arguments.
+p.add_argument('<name>', type=<type>, nargs='?/*')                # Optional argument/s.
 <args> = p.parse_args()                                           # Exits on parsing error.
 <obj>  = <args>.<name>                                            # Returns `<type>(<arg>)`.
 ```
