@@ -55,6 +55,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 var TOC_SCREEN_WIDTH_CUTOFF = 667
 var TOC_EM = '2em'
+var TOC_EM_DESKTOP = '1.327em'
 
 if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
     $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
@@ -64,7 +65,7 @@ function updateToc() {
   if (isMobile && window.screen.width < TOC_SCREEN_WIDTH_CUTOFF) {
       $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
   } else {
-      $(`code:contains(ToC)`).html(TOC).css("line-height", TOC_EM);
+      $(`code:contains(ToC)`).html(TOC).css("line-height", TOC_EM_DESKTOP);
   }
 }
 window.addEventListener("orientationchange", updateToc, false);
