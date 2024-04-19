@@ -3339,7 +3339,7 @@ b  3  4
 
 #### DataFrame — Plot, Encode, Decode:
 ```python
-<DF>.plot.line/area/bar/hist/scatter/box()     # Also: `x=column_key, y=column_key/s`.
+<DF>.plot.line/area/bar/scatter(x=col_key, …)  # `y=col_key/s`. Also hist/box(by=col_key).
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 

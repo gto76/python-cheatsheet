@@ -2735,7 +2735,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;[col_key_1, col_key_2][row_key]'</span></code> to get the fifth result's values.</strong></li>
 </ul>
-<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/hist/scatter/box()     <span class="hljs-comment"># Also: `x=column_key, y=column_key/s`.</span>
+<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(by=col_key).</span>
 plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre></div>
 
