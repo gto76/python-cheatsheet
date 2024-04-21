@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 19, 2024</aside>
+    <aside>April 21, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1190,7 +1190,8 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
-<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function block delimits scope).</strong></li>
+<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks
+, as well as outside the try statement (only function block delimits scope).</strong></li>
 <li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, &lt;func&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
@@ -2587,12 +2588,12 @@ Name: a, dtype: int64
 &lt;Sr&gt; = pd.Series(&lt;dict&gt;)                       <span class="hljs-comment"># Takes dictionary's keys for index.</span>
 &lt;Sr&gt; = pd.Series(&lt;dict/Series&gt;, index=&lt;list&gt;)  <span class="hljs-comment"># Only keeps items with keys specified in index.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.loc[key]                           <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[index]</span>
-&lt;Sr&gt; = &lt;Sr&gt;.loc[keys]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[indexes]</span>
-&lt;Sr&gt; = &lt;Sr&gt;.loc[from_key : to_key_inclusive]   <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i : to_i_exclusive]</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;.loc[key]                           <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[i]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[keys]                          <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[coll_of_i]</span>
+&lt;Sr&gt; = &lt;Sr&gt;.loc[from_key:to_key_inc]           <span class="hljs-comment"># Or: &lt;Sr&gt;.iloc[from_i:to_i_exc]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/index]                         <span class="hljs-comment"># Or: &lt;Sr&gt;.key</span>
-&lt;Sr&gt; = &lt;Sr&gt;[keys/indexes]                      <span class="hljs-comment"># Or: &lt;Sr&gt;[&lt;keys_slice/slice&gt;]</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;Sr&gt;[key/i]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.&lt;key&gt;</span>
+&lt;Sr&gt; = &lt;Sr&gt;[keys/coll_of_i]                    <span class="hljs-comment"># Or: &lt;Sr&gt;[key/i : key/i]</span>
 &lt;Sr&gt; = &lt;Sr&gt;[bools]                             <span class="hljs-comment"># Or: &lt;Sr&gt;.loc/iloc[bools]</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sr&gt; = &lt;Sr&gt; &gt; &lt;el/Sr&gt;                          <span class="hljs-comment"># Returns a Series of bools.</span>
@@ -2631,7 +2632,7 @@ y    <span class="hljs-number">3</span>
 </code></pre>
 
 <ul>
-<li><strong>Keys/indexes/bools can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>!</strong></li>
+<li><strong>Keys/indices/bools can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>!</strong></li>
 <li><strong>Methods ffill(), interpolate(), fillna() and dropna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
 <li><strong>Last result has a hierarchical index. Use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
@@ -2645,22 +2646,22 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = pd.DataFrame(&lt;list_of_rows&gt;)         <span class="hljs-comment"># Rows can be either lists, dicts or series.</span>
 &lt;DF&gt;    = pd.DataFrame(&lt;dict_of_columns&gt;)      <span class="hljs-comment"># Columns can be either lists, dicts or series.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt;    = &lt;DF&gt;.loc[row_key, column_key]        <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index, column_index]</span>
-&lt;Sr/DF&gt; = &lt;DF&gt;.loc[row_key/s]                  <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_index/es]</span>
-&lt;Sr/DF&gt; = &lt;DF&gt;.loc[:, column_key/s]            <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[:, column_index/es]</span>
-&lt;DF&gt;    = &lt;DF&gt;.loc[row_bools, column_bools]    <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_bools, column_bools]</span>
+<pre><code class="python language-python hljs">&lt;el&gt;    = &lt;DF&gt;.loc[row_key, col_key]           <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_i, col_i]</span>
+&lt;Sr/DF&gt; = &lt;DF&gt;.loc[row_key/s]                  <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_i/s]</span>
+&lt;Sr/DF&gt; = &lt;DF&gt;.loc[:, col_key/s]               <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[:, col_i/s]</span>
+&lt;DF&gt;    = &lt;DF&gt;.loc[row_bools, col_bools]       <span class="hljs-comment"># Or: &lt;DF&gt;.iloc[row_bools, col_bools]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[column_key/s]                   <span class="hljs-comment"># Or: &lt;DF&gt;.column_key</span>
+<pre><code class="python language-python hljs">&lt;Sr/DF&gt; = &lt;DF&gt;[col_key/s]                      <span class="hljs-comment"># Or: &lt;DF&gt;.&lt;col_key&gt;</span>
 &lt;DF&gt;    = &lt;DF&gt;[row_bools]                      <span class="hljs-comment"># Keeps rows as specified by bools.</span>
 &lt;DF&gt;    = &lt;DF&gt;[&lt;DF_of_bools&gt;]                  <span class="hljs-comment"># Assigns NaN to items that are False in bools.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt; &gt; &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Returns DF of bools. Sr is treated as a row.</span>
 &lt;DF&gt;    = &lt;DF&gt; + &lt;el/Sr/DF&gt;                    <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(column_key)           <span class="hljs-comment"># Replaces row keys with values from the column.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;    = &lt;DF&gt;.set_index(col_key)              <span class="hljs-comment"># Replaces row keys with column's values.</span>
 &lt;DF&gt;    = &lt;DF&gt;.reset_index(drop=<span class="hljs-keyword">False</span>)         <span class="hljs-comment"># Drops or moves row keys to column named index.</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)      <span class="hljs-comment"># Sorts rows by row keys. Use `axis=1` for cols.</span>
-&lt;DF&gt;    = &lt;DF&gt;.sort_values(column_key/s)       <span class="hljs-comment"># Sorts rows by passed column/s. Also `axis=1`.</span>
+&lt;DF&gt;    = &lt;DF&gt;.sort_values(col_key/s)          <span class="hljs-comment"># Sorts rows by passed column/s. Also `axis=1`.</span>
 </code></pre>
 <div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
    x  y
@@ -2932,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>April 19, 2024</aside>
+    <aside>April 21, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -1397,7 +1397,8 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
-* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try/except clause (only function block delimits scope).**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks
+, as well as outside the try statement (only function block delimits scope).**
 * **To catch signals use `'signal.signal(signal_number, <func>)'`.**
 
 ### Catching Exceptions
@@ -3155,14 +3156,14 @@ Name: a, dtype: int64
 ```
 
 ```python
-<el> = <Sr>.loc[key]                           # Or: <Sr>.iloc[index]
-<Sr> = <Sr>.loc[keys]                          # Or: <Sr>.iloc[indexes]
-<Sr> = <Sr>.loc[from_key : to_key_inclusive]   # Or: <Sr>.iloc[from_i : to_i_exclusive]
+<el> = <Sr>.loc[key]                           # Or: <Sr>.iloc[i]
+<Sr> = <Sr>.loc[keys]                          # Or: <Sr>.iloc[coll_of_i]
+<Sr> = <Sr>.loc[from_key:to_key_inc]           # Or: <Sr>.iloc[from_i:to_i_exc]
 ```
 
 ```python
-<el> = <Sr>[key/index]                         # Or: <Sr>.key
-<Sr> = <Sr>[keys/indexes]                      # Or: <Sr>[<keys_slice/slice>]
+<el> = <Sr>[key/i]                             # Or: <Sr>.<key>
+<Sr> = <Sr>[keys/coll_of_i]                    # Or: <Sr>[key/i : key/i]
 <Sr> = <Sr>[bools]                             # Or: <Sr>.loc/iloc[bools]
 ```
 
@@ -3213,7 +3214,7 @@ y    3
 |               |     y  2    |   y     2   |       y  2    |
 +---------------+-------------+-------------+---------------+
 ```
-* **Keys/indexes/bools can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
+* **Keys/indices/bools can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
 * **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
 * **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
 
@@ -3233,14 +3234,14 @@ b  3  4
 ```
 
 ```python
-<el>    = <DF>.loc[row_key, column_key]        # Or: <DF>.iloc[row_index, column_index]
-<Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_index/es]
-<Sr/DF> = <DF>.loc[:, column_key/s]            # Or: <DF>.iloc[:, column_index/es]
-<DF>    = <DF>.loc[row_bools, column_bools]    # Or: <DF>.iloc[row_bools, column_bools]
+<el>    = <DF>.loc[row_key, col_key]           # Or: <DF>.iloc[row_i, col_i]
+<Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_i/s]
+<Sr/DF> = <DF>.loc[:, col_key/s]               # Or: <DF>.iloc[:, col_i/s]
+<DF>    = <DF>.loc[row_bools, col_bools]       # Or: <DF>.iloc[row_bools, col_bools]
 ```
 
 ```python
-<Sr/DF> = <DF>[column_key/s]                   # Or: <DF>.column_key
+<Sr/DF> = <DF>[col_key/s]                      # Or: <DF>.<col_key>
 <DF>    = <DF>[row_bools]                      # Keeps rows as specified by bools.
 <DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to items that are False in bools.
 ```
@@ -3251,10 +3252,10 @@ b  3  4
 ```
 
 ```python
-<DF>    = <DF>.set_index(column_key)           # Replaces row keys with values from the column.
+<DF>    = <DF>.set_index(col_key)              # Replaces row keys with column's values.
 <DF>    = <DF>.reset_index(drop=False)         # Drops or moves row keys to column named index.
 <DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
-<DF>    = <DF>.sort_values(column_key/s)       # Sorts rows by passed column/s. Also `axis=1`.
+<DF>    = <DF>.sort_values(col_key/s)          # Sorts rows by passed column/s. Also `axis=1`.
 ```
 
 #### DataFrame — Merge, Join, Concat:
