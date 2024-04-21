@@ -1237,7 +1237,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
       │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is missing.</span>
-      ├── MemoryError             <span class="hljs-comment"># Out of memory. Could be too late to start deleting vars.</span>
+      ├── MemoryError             <span class="hljs-comment"># Out of memory. May be too late to start deleting objects.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/TimeoutError (see #Open).</span>
@@ -1288,7 +1288,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 </code></pre></div>
 
 <ul>
-<li><strong>Each item is printed on its own line if collection takes up more than 'width' characters.</strong></li>
+<li><strong>Each item is printed on its own line if collection exceeds 'width' characters.</strong></li>
 <li><strong>Nested collections that are 'depth' levels deep get printed as '…'.</strong></li>
 </ul>
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
@@ -1361,7 +1361,7 @@ p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer. Runs every 4096/8192 B.</span>
-&lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing.</span>
+&lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing write buffer.</span>
 </code></pre>
 <ul>
 <li><strong>Methods do not add or strip trailing newlines, not even writelines().</strong></li>

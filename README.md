@@ -1452,7 +1452,7 @@ BaseException
       +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
-      +-- MemoryError             # Out of memory. Could be too late to start deleting vars.
+      +-- MemoryError             # Out of memory. May be too late to start deleting objects.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
       +-- OSError                 # Errors such as FileExistsError/TimeoutError (see #Open).
@@ -1515,7 +1515,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 from pprint import pprint
 pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
-* **Each item is printed on its own line if collection takes up more than 'width' characters.**
+* **Each item is printed on its own line if collection exceeds 'width' characters.**
 * **Nested collections that are 'depth' levels deep get printed as '...'.**
 
 
@@ -1601,7 +1601,7 @@ Open
 <file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
-<file>.close()                      # Closes the file after flushing.
+<file>.close()                      # Closes the file after flushing write buffer.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
 
