@@ -1525,7 +1525,7 @@ Input
 <str> = input(prompt=None)
 ```
 * **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
-* **Prompt string is printed to the standard output before reading input.**
+* **Prompt string is printed to the standard output before input is read.**
 * **Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
 
 
