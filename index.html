@@ -684,10 +684,11 @@ direction = Direction.N                             <span class="hljs-comment">#
 Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
 player = Player(point, direction)                   <span class="hljs-comment"># Returns its instance.</span>
 </code></pre>
-<div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
+<div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one module available to another module.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;           <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/__init__.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;  <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/&lt;module&gt;.py'.</span>
 </code></pre></div>
+
 
 <ul>
 <li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
@@ -695,7 +696,6 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
 <li><strong>Location of the file that is passed to python command serves as a root of all local imports.</strong></li>
 <li><strong>For relative imports use <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
-<li><strong>To install your package go to its parent dir, add 'import setuptools; setuptools.setup()' to setup.py, '[options]' and 'packages = &lt;dir&gt;' to setup.cfg, and run <code class="python hljs"><span class="hljs-string">'pip3 install -e .'</span></code>.</strong></li>
 </ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(b)</span>:</span>
@@ -800,7 +800,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <ul>
 <li><strong>Using only <code class="python hljs"><span class="hljs-string">'@debug'</span></code> to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can however manually check if the argument they received is a function and act accordingly.</strong></li>
 </ul>
-<div><h2 id="class"><a href="#class" name="class">#</a>Class</h2><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
+<div><h2 id="class"><a href="#class" name="class">#</a>Class</h2><p><strong>A template for creating user-defined objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
@@ -814,11 +814,16 @@ player = Player(point, direction)                   <span class="hljs-comment">#
         <span class="hljs-keyword">return</span> cls.__name__
 </code></pre></div>
 
+
 <ul>
 <li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first arg.</strong></li>
 </ul>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>obj = MyClass(<span class="hljs-number">1</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>obj.a, str(obj), repr(obj)
+(<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
+</code></pre>
 <div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
 logging.warning(&lt;el&gt;)
@@ -833,11 +838,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
 </code></pre></div>
 
-<div><h3 id="constructoroverloading">Constructor Overloading</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=<span class="hljs-keyword">None</span>)</span>:</span>
-        self.a = a
-</code></pre></div>
-
 <div><h3 id="inheritance">Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name)</span>:</span>
         self.name = name
@@ -848,7 +848,7 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
         self.staff_num = staff_num
 </code></pre></div>
 
-<div><h3 id="multipleinheritance">Multiple Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span> <span class="hljs-keyword">pass</span>
+<div><h4 id="multipleinheritance">Multiple inheritance:</h4><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span> <span class="hljs-keyword">pass</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span>:</span> <span class="hljs-keyword">pass</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
 </code></pre></div>
@@ -857,22 +857,6 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
 [&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
 </span></code></pre>
-<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
-<span class="hljs-meta">    @property</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(self._name)
-
-<span class="hljs-meta">    @name.setter</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
-        self._name = value.split()
-</code></pre></div>
-
-
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
-<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">'\t Guido  van Rossum \n'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>person.name
-<span class="hljs-string">'Guido van Rossum'</span>
-</code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
@@ -903,6 +887,22 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <pre><code class="python language-python hljs">&lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_attribute_names&gt;)
 &lt;class&gt; = make_dataclass(<span class="hljs-string">'&lt;class_name&gt;'</span>, &lt;coll_of_tuples&gt;)
 &lt;tuple&gt; = (<span class="hljs-string">'&lt;attr_name&gt;'</span>, &lt;type&gt; [, &lt;default_value&gt;])</code></pre>
+<div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
+<span class="hljs-meta">    @property</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(self._name)
+
+<span class="hljs-meta">    @name.setter</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self, value)</span>:</span>
+        self._name = value.split()
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>person = Person()
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name = <span class="hljs-string">'\t Guido  van Rossum \n'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>person.name
+<span class="hljs-string">'Guido van Rossum'</span>
+</code></pre>
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots', reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>

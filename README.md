@@ -816,6 +816,8 @@ player = Player(point, direction)                   # Returns its instance.
 
 Imports
 -------
+**Mechanism that makes code in one module available to another module.**
+
 ```python
 import <module>            # Imports a built-in or '<module>.py'.
 import <package>           # Imports a built-in or '<package>/__init__.py'.
@@ -826,7 +828,6 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
 * **Location of the file that is passed to python command serves as a root of all local imports.**
 * **For relative imports use `'from .[…][<pkg/module>[.…]] import <obj>'`.**
-* **To install your package go to its parent dir, add 'import setuptools; setuptools.setup()' to setup.py, '[options]' and 'packages = &lt;dir&gt;' to setup.cfg, and run `'pip3 install -e .'`.**
 
 
 Closure
@@ -951,8 +952,10 @@ def add(x, y):
 
 Class
 -----
+**A template for creating user-defined objects.**
+
 ```python
-class <name>:
+class MyClass:
     def __init__(self, a):
         self.a = a
     def __str__(self):
@@ -968,6 +971,12 @@ class <name>:
 * **Return value of repr() should be unambiguous and of str() readable.**
 * **If only repr() is defined, it will also be used for str().**
 * **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first arg.**
+
+```python
+>>> obj = MyClass(1)
+>>> obj.a, str(obj), repr(obj)
+(1, '1', 'MyClass(1)')
+```
 
 #### Expressions that call the str() method:
 ```python
@@ -987,13 +996,6 @@ Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<el>))
 >>> <el>
 ```
 
-### Constructor Overloading
-```python
-class <name>:
-    def __init__(self, a=None):
-        self.a = a
-```
-
 ### Inheritance
 ```python
 class Person:
@@ -1006,7 +1008,7 @@ class Employee(Person):
         self.staff_num = staff_num
 ```
 
-### Multiple Inheritance
+#### Multiple inheritance:
 ```python
 class A: pass
 class B: pass
@@ -1017,26 +1019,6 @@ class C(A, B): pass
 ```python
 >>> C.mro()
 [<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
-```
-
-### Property
-**Pythonic way of implementing getters and setters.**
-```python
-class Person:
-    @property
-    def name(self):
-        return ' '.join(self._name)
-
-    @name.setter
-    def name(self, value):
-        self._name = value.split()
-```
-
-```python
->>> person = Person()
->>> person.name = '\t Guido  van Rossum \n'
->>> person.name
-'Guido van Rossum'
 ```
 
 ### Type Annotations
@@ -1070,6 +1052,26 @@ class <class_name>:
 <class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
 <class> = make_dataclass('<class_name>', <coll_of_tuples>)
 <tuple> = ('<attr_name>', <type> [, <default_value>])
+```
+
+### Property
+**Pythonic way of implementing getters and setters.**
+```python
+class Person:
+    @property
+    def name(self):
+        return ' '.join(self._name)
+
+    @name.setter
+    def name(self, value):
+        self._name = value.split()
+```
+
+```python
+>>> person = Person()
+>>> person.name = '\t Guido  van Rossum \n'
+>>> person.name
+'Guido van Rossum'
 ```
 
 ### Slots
