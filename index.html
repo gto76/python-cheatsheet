@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>April 22, 2024</aside>
+    <aside>April 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -693,7 +693,9 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
-<li><strong>Imports are relative to the location of file that was passed to python command, but can be made relative to their location with <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
+<li><strong>Location of the file that is passed to python command serves as a root of all local imports.</strong></li>
+<li><strong>For relative imports use <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
+<li><strong>To install your package go to its parent dir, add 'import setuptools; setuptools.setup()' to setup.py, '[options]' and 'packages = &lt;dir&gt;' to setup.cfg, and run <code class="python hljs"><span class="hljs-string">'pip3 install -e .'</span></code>.</strong></li>
 </ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(b)</span>:</span>
@@ -707,8 +709,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <span class="hljs-number">30</span>
 </code></pre>
 <ul>
-<li><strong>If multiple nested functions within enclosing function reference the same value, that value gets shared.</strong></li>
-<li><strong>To dynamically access function's first free variable use <code class="python hljs"><span class="hljs-string">'&lt;function&gt;.__closure__[0].cell_contents'</span></code>.</strong></li>
+<li><strong>Any value that is referenced from within multiple nested functions gets shared.</strong></li>
 </ul>
 <div><h3 id="partial">Partial</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
 &lt;function&gt; = partial(&lt;function&gt; [, &lt;arg_1&gt;, &lt;arg_2&gt;, ...])
@@ -2933,7 +2934,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>April 22, 2024</aside>
+    <aside>April 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
