@@ -300,13 +300,27 @@ const MARIO =
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
   '    main()\n';
 
-const PLOTLY =
+const GROUPBY =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">\'z\'</span>); gb.apply(print)\n' +
   '   x  y  z\n' +
   'a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>\n' +
   '   x  y  z\n' +
   'b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>\n' +
   'c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>';
+
+const CYTHON_1 =
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el&gt;, &lt;el&gt;, ...]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...\n';
+
+const CYTHON_2 =
+  '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>\n' +
+  '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype&gt; &lt;attr_name&gt;\n' +
+  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype&gt; &lt;arg_name&gt;)</span>:</span>\n' +
+  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;\n';
+
+const CYTHON_3 =
+  '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">enum</span> &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...\n';
 
 const INDEX =
   '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
@@ -827,7 +841,10 @@ function fixHighlights() {
   $(`code:contains(>>> logging.basicConfig()`).html(LOGGING_EXAMPLE);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
-  $(`code:contains(>>> gb = df.groupby)`).html(PLOTLY);
+  $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
+  $(`code:contains(cdef <ctype> <var_name> = <el>)`).html(CYTHON_1);
+  $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
+  $(`code:contains(cdef enum <enum_name>: <member_name>, <member_name>, ...)`).html(CYTHON_3);
   $(`ul:contains(Only available in)`).html(INDEX);
 }
 

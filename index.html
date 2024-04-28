@@ -2877,18 +2877,18 @@ ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 <div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
-</ul><pre><code class="python language-python hljs">cdef &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
-cdef &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el&gt;, &lt;el&gt;, ...]
-cdef &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el&gt;, &lt;el&gt;, ...]
+<span class="hljs-keyword">cdef</span> &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">cdef <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
-    cdef public &lt;ctype&gt; &lt;attr_name&gt;
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
+    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype&gt; &lt;attr_name&gt;
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype&gt; &lt;arg_name&gt;)</span>:</span>
         self.&lt;attr_name&gt; = &lt;arg_name&gt;
 </code></pre>
-<pre><code class="python language-python hljs">cdef enum &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-keyword">enum</span> &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...
 </code></pre>
 <div><h3 id="virtualenvironments">Virtual Environments</h3><p><strong>System for installing libraries directly into project's directory.</strong></p><pre><code class="bash language-bash hljs">$ python3 -m venv &lt;name&gt;      <span class="hljs-comment"># Creates virtual environment in current directory.</span>
 $ <span class="hljs-built_in">source</span> &lt;name&gt;/bin/activate  <span class="hljs-comment"># Activates venv. On Windows run `&lt;name&gt;\Scripts\activate`.</span>
