@@ -816,7 +816,7 @@ player = Player(point, direction)                   # Returns its instance.
 
 Imports
 -------
-**Mechanism that makes code in one module available to another module.**
+**Mechanism that makes code in one file available to another file.**
 
 ```python
 import <module>            # Imports a built-in or '<module>.py'.
