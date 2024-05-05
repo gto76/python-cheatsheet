@@ -970,7 +970,7 @@ class MyClass:
     def get_class_name(cls):
         return cls.__name__
 ```
-* **Return value of repr() should be unambiguous and of str() readable.**
+* **Return value of str() should be readable and of repr() unambiguous.**
 * **If only repr() is defined, it will also be used for str().**
 * **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first arg.**
 
@@ -2038,11 +2038,17 @@ Array
 
 ```python
 from array import array
+```
+
+```python
 <array> = array('<typecode>', <coll_of_nums>)  # Array from collection of numbers.
 <array> = array('<typecode>', <bytes>)         # Array from bytes object.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends items. Also frombytes().
-<bytes> = bytes(<array>)                       # Or: <array>.tobytes()
+<array>.fromfile(<file>, n_items)              # Appends items from the binary file.
+```
+
+```python
+<bytes> = bytes(<array>)                       # Converts array to a bytes object.
 <file>.write(<array>)                          # Writes array to the binary file.
 ```
 
@@ -2071,10 +2077,9 @@ Memory View
 ```
 
 ```python
-<list> = list(<mview>)                         # Returns a list of ints or floats.
-<str>  = str(<mview>, 'utf-8')                 # Treats mview as a bytes object.
-<str>  = <mview>.hex()                         # Returns hex pairs. Accepts `sep=<str>`.
-<int>  = int.from_bytes(<mview>, …)            # `byteorder='big/little', signed=False`.
+<list>  = list(<mview>)                        # Returns a list of ints or floats.
+<str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
+<str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
 

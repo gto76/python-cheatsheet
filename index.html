@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 4, 2024</aside>
+    <aside>May 5, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -818,7 +818,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Return value of repr() should be unambiguous and of str() readable.</strong></li>
+<li><strong>Return value of str() should be readable and of repr() unambiguous.</strong></li>
 <li><strong>If only repr() is defined, it will also be used for str().</strong></li>
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first arg.</strong></li>
 </ul>
@@ -1685,15 +1685,17 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 <div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Array from collection of numbers.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
-&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items. Also frombytes().</span>
-&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Or: &lt;array&gt;.tobytes()</span>
-&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array to the binary file.</span>
 </code></pre></div>
 
 
+<pre><code class="python language-python hljs">&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Array from collection of numbers.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
+&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from the binary file.</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Converts array to a bytes object.</span>
+&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array to the binary file.</span>
+</code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><ul>
 <li><strong>A sequence object that points to the memory of another bytes-like object.</strong></li>
 <li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
@@ -1713,10 +1715,9 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes mview to the binary file.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = list(&lt;mview&gt;)                         <span class="hljs-comment"># Returns a list of ints or floats.</span>
-&lt;str&gt;  = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                 <span class="hljs-comment"># Treats mview as a bytes object.</span>
-&lt;str&gt;  = &lt;mview&gt;.hex()                         <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
-&lt;int&gt;  = int.from_bytes(&lt;mview&gt;, …)            <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints or floats.</span>
+&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
+&lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 &lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Also `maxlen=None`.</span>
@@ -2936,7 +2937,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>May 4, 2024</aside>
+    <aside>May 5, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
