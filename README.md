@@ -1416,7 +1416,7 @@ except (<exception>, [...]) as <name>: ...
 * **Use `'traceback.print_exc()'` to print the full error message to stderr.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
 * **Use `'logging.exception(<message>)'` to log the passed message, followed by the full error message of the caught exception. For details see [logging](#logging).**
-* **Use `'sys.exc_info()'` to get exception type, object and traceback of caught exception.**
+* **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
 ### Raising Exceptions
 ```python
