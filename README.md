@@ -1555,7 +1555,7 @@ p.add_argument('<name>', type=<type>, nargs='?/*')                # Optional arg
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<el>'` to set option's default value.**
+* **Use `'default=<el>'` to set option's or optional argument's default value.**
 * **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 
