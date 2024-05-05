@@ -1340,8 +1340,8 @@ class <enum_name>(Enum):
     <member_name> = <value>             # Values don't have to be hashable.
     <member_name> = <value>, <value>    # Tuple can be used for multiple values.
 ```
-* **Accessing a member named after a reserved keyword causes SyntaxError.**
 * **Methods receive the member they were called on as the 'self' argument.**
+* **Accessing a member named after a reserved keyword causes SyntaxError.**
 
 ```python
 <member> = <enum>.<member_name>         # Returns a member.
@@ -1402,8 +1402,7 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
-* **All variables that are initialized in executed blocks are also visible in all subsequent blocks
-, as well as outside the try statement (only function block delimits scope).**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only function block delimits scope).**
 * **To catch signals use `'signal.signal(signal_number, <func>)'`.**
 
 ### Catching Exceptions

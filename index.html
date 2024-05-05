@@ -1145,8 +1145,8 @@ Hello World!
     &lt;member_name&gt; = &lt;value&gt;, &lt;value&gt;    <span class="hljs-comment"># Tuple can be used for multiple values.</span>
 </code></pre>
 <ul>
-<li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
+<li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member.</span>
 &lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
@@ -1193,8 +1193,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
-<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks
-, as well as outside the try statement (only function block delimits scope).</strong></li>
+<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only function block delimits scope).</strong></li>
 <li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, &lt;func&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
