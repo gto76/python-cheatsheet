@@ -1648,7 +1648,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
 <li><strong>System’s type sizes, byte order, and alignment rules are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack
-&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packages arguments or raises struct.error.</span>
+&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packages arguments. Can raise struct.error.</span>
 &lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use iter_unpack() to get iterator of tuples.</span>
 </code></pre></div>
 

@@ -1998,7 +1998,7 @@ Struct
 
 ```python
 from struct import pack, unpack
-<bytes> = pack('<format>', <el_1> [, ...])  # Packages arguments or raises struct.error.
+<bytes> = pack('<format>', <el_1> [, ...])  # Packages arguments. Can raise struct.error.
 <tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
 ```
 
