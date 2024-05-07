@@ -2048,7 +2048,7 @@ from array import array
 ```
 
 ```python
-<bytes> = bytes(<array>)                       # Converts array to a bytes object.
+<bytes> = bytes(<array>)                       # Returns a copy of array's memory.
 <file>.write(<array>)                          # Writes array to the binary file.
 ```
 
