@@ -1998,7 +1998,8 @@ Struct
 
 ```python
 from struct import pack, unpack
-<bytes> = pack('<format>', <el_1> [, ...])  # Packages arguments. Can raise struct.error.
+
+<bytes> = pack('<format>', <el_1> [, ...])  # Packs objects according to format string.
 <tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
 ```
 
@@ -2054,23 +2055,19 @@ from array import array
 
 Memory View
 -----------
-* **A sequence object that points to the memory of another bytes-like object.**
-* **Each element can reference a single or multiple consecutive bytes, depending on format.**
-* **Order and number of elements can be changed with slicing.**
-* **Casting only works between char and other types and uses system's sizes.**
-* **Byte order is always determined by the system.**
+**A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.**
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
 <real>  = <mview>[index]                       # Returns an int or a float.
-<mview> = <mview>[<slice>]                     # Mview with rearranged elements.
-<mview> = <mview>.cast('<typecode>')           # Casts memoryview to the new format.
-<mview>.release()                              # Releases memory buffer of target object.
+<mview> = <mview>[<slice>]                     # Returns mview with rearranged elements.
+<mview> = <mview>.cast('<typecode>')           # Only works between b/B/c and other types.
+<mview>.release()                              # Releases memory buffer of the base object.
 ```
 
 ```python
 <bytes> = bytes(<mview>)                       # Returns a new bytes object.
-<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes object as sep.
+<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes as a separator.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
 <file>.write(<mview>)                          # Writes mview to the binary file.
 ```
@@ -2088,11 +2085,14 @@ Deque
 
 ```python
 from collections import deque
+```
+
+```python
 <deque> = deque(<collection>)                  # Also `maxlen=None`.
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
-<deque>.extendleft(<collection>)               # Collection gets reversed.
-<el> = <deque>.popleft()                       # Raises IndexError if empty.
+<deque>.extendleft(<collection>)               # Passed collection gets reversed.
 <deque>.rotate(n=1)                            # Rotates elements to the right.
+<el> = <deque>.popleft()                       # Raises IndexError if empty.
 ```
 
 

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 5, 2024</aside>
+    <aside>May 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1648,7 +1648,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Module that performs conversions between a sequence of numbers and a bytes object.</strong></li>
 <li><strong>System’s type sizes, byte order, and alignment rules are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack
-&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packages arguments. Can raise struct.error.</span>
+
+&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packs objects according to format string.</span>
 &lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use iter_unpack() to get iterator of tuples.</span>
 </code></pre></div>
 
@@ -1695,22 +1696,16 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Converts array to a bytes object.</span>
 &lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array to the binary file.</span>
 </code></pre>
-<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><ul>
-<li><strong>A sequence object that points to the memory of another bytes-like object.</strong></li>
-<li><strong>Each element can reference a single or multiple consecutive bytes, depending on format.</strong></li>
-<li><strong>Order and number of elements can be changed with slicing.</strong></li>
-<li><strong>Casting only works between char and other types and uses system's sizes.</strong></li>
-<li><strong>Byte order is always determined by the system.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
+<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
 &lt;real&gt;  = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns an int or a float.</span>
-&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Mview with rearranged elements.</span>
-&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Casts memoryview to the new format.</span>
-&lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of target object.</span>
+&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns mview with rearranged elements.</span>
+&lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Only works between b/B/c and other types.</span>
+&lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of the base object.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes object as sep.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes as a separator.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes mview to the binary file.</span>
 </code></pre>
@@ -1719,14 +1714,15 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
-&lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Also `maxlen=None`.</span>
-&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Collection gets reversed.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
 </code></pre></div>
 
 
+<pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Also `maxlen=None`.</span>
+&lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Passed collection gets reversed.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
+</code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><p><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Timer, RLock, Semaphore, Event, Barrier
 <span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor, as_completed
 </code></pre></div>
@@ -2936,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>May 5, 2024</aside>
+    <aside>May 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
