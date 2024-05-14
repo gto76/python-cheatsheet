@@ -2708,6 +2708,7 @@ import numpy as np
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
 * **Indices should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
+* **`'ix_()'` returns two 2d arrays. Indices of different shapes get unified with broadcasting.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting

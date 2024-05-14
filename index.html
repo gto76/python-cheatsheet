@@ -2215,6 +2215,7 @@ $ snakeviz test.prof                                            <span class="hlj
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
 <li><strong>Indices should not be tuples because Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code>  to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>!</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'ix_()'</span></code> returns two 2d arrays. Indices of different shapes get unified with broadcasting.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
 <div><h3 id="broadcasting">Broadcasting</h3><p><strong>Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
