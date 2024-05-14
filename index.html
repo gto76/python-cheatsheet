@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 11, 2024</aside>
+    <aside>May 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1717,11 +1717,11 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Also `maxlen=None`.</span>
+<pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Use `maxlen=&lt;int&gt;` to set size limit.</span>
 &lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
 &lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Passed collection gets reversed.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Rotates elements to the right.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if empty.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Last element becomes first.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if deque is empty.</span>
 </code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><p><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Timer, RLock, Semaphore, Event, Barrier
 <span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor, as_completed
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>May 11, 2024</aside>
+    <aside>May 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

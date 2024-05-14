@@ -2088,11 +2088,11 @@ from collections import deque
 ```
 
 ```python
-<deque> = deque(<collection>)                  # Also `maxlen=None`.
+<deque> = deque(<collection>)                  # Use `maxlen=<int>` to set size limit.
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
 <deque>.extendleft(<collection>)               # Passed collection gets reversed.
-<deque>.rotate(n=1)                            # Rotates elements to the right.
-<el> = <deque>.popleft()                       # Raises IndexError if empty.
+<deque>.rotate(n=1)                            # Last element becomes first.
+<el> = <deque>.popleft()                       # Raises IndexError if deque is empty.
 ```
 
 
