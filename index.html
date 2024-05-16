@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>May 14, 2024</aside>
+    <aside>May 16, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2088,8 +2088,8 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">app = flask.Flask(__name__)                <span class="hljs-comment"># Put above function definitions.</span>
-app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Run after function definitions.</span>
+<pre><code class="python language-python hljs">app = flask.Flask(__name__)                <span class="hljs-comment"># Returns app object. Run at the top.</span>
+app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Starts the app. Run at the bottom.</span>
 </code></pre>
 <ul>
 <li><strong>Starts the app at <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>. Use <code class="python hljs"><span class="hljs-string">'host="0.0.0.0"'</span></code> to run externally.</strong></li>
@@ -2933,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>May 14, 2024</aside>
+    <aside>May 16, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
