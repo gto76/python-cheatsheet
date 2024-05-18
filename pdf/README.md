@@ -51,9 +51,9 @@ Adding headers and footers to PDF (the same for both files)
 * Select 'Edit PDF' tab and add headers and footers by clicking 'Header & Footer' button, selecting a preset from 'Saved Settings' dropdown menu and clicking ok. Popup will say that font 'Menlo' contains invalid encoding. This is fine.
 * Start by adding the bottom_line preset and check afterward if bottom line on the first page is aligned properly with the text. If it is not close the file and start over.
 * Repeat the process for each preset. When popup asks you if you want to replace existing header or footer click 'Add New'.
-* If presets get lost, the font and the margins are as follow: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.
-* Select 'Organize Pages' tab and remove last empty page.
-* Set title to 'Comprehensive Python Cheatsheet' and author to 'Jure Šorn' by selecting 'File/Properties...'.
+* Use this values for font and margins if presets get lost: Borders: left-line: 0.6, left-text: 0.8, top-line: 11.4, bottom-text: 0.27, right-text-odd: 0.57, font-name: menlo, font-size: 8.
+* Select 'Organize Pages' tab and remove the last page (it should be empty).
+* Select 'File/Properties...' and set title to 'Comprehensive Python Cheatsheet' and author to 'Jure Šorn'.
 * Save the progress by running 'Save as' in Format: 'Adobe PDF Files'.
 * Run 'Save as' again, this time in 'Adobe PDF Files, Optimized', so that Menlo font error gets fixed.
 
