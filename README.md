@@ -103,8 +103,8 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 >>> counter = Counter(colors)
 >>> counter['yellow'] += 1
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> counter.most_common()[0]
-('blue', 3)
+>>> counter.most_common(1)
+[('blue', 3)]
 ```
 
 
