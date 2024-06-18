@@ -2100,15 +2100,14 @@ Threading
 ---------
 **CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
-from threading import Thread, RLock, Semaphore, Event, Barrier
+from threading import Thread, Lock, RLock, Semaphore, Event, Barrier
 from concurrent.futures import ThreadPoolExecutor, as_completed
 ```
 
 ### Thread
 ```python
 <Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
-<Thread>.start()                               # Starts the thread.
-<bool> = <Thread>.is_alive()                   # Checks if the thread has finished executing.
+<Thread>.start()                               # Starts the thread. Also <Thread>.is_alive().
 <Thread>.join()                                # Waits for the thread to finish.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
@@ -2116,7 +2115,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ### Lock
 ```python
-<lock> = RLock()                               # Lock that can only be released by acquirer.
+<lock> = Lock/RLock()                          # RLock can only be released by acquirer.
 <lock>.acquire()                               # Waits for the lock to be available.
 <lock>.release()                               # Makes the lock available again.
 ```
@@ -2159,7 +2158,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```
 * **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if thread finished on time.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
-* **ProcessPoolExecutor provides true parallelism, but everything sent to/from workers must be [pickable](#pickle). Queues must be sent using executor's 'initargs' and 'initializer' parameters.**
+* **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor needs to be reachable via `'if __name__ == "__main__": ...'`.**
 
 
 Operator
@@ -2167,20 +2166,20 @@ Operator
 **Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
-<bool> = op.not_(<obj>)                                         # or, and, not (or/and missing)
-<bool> = op.eq/ne/lt/le/gt/ge/is_/contains(<obj>, <obj>)        # ==, !=, <, <=, >, >=, is, in
-<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                  # |, ^, &
-<int>  = op.lshift/rshift(<int>, <int>)                         # <<, >>
-<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)      # +, -, *, /, //, %
-<num>  = op.neg/invert(<num>)                                   # -, ~
-<num>  = op.pow(<num>, <num>)                                   # **
-<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])   # [index/key], .name, .name()
+<bool> = op.not_(<obj>)                                        # or, and, not (or/and missing)
+<bool> = op.eq/ne/lt/le/gt/ge/is_/contains(<obj>, <obj>)       # ==, !=, <, <=, >, >=, is, in
+<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
+<int>  = op.lshift/rshift(<int>, <int>)                        # <<, >>
+<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
+<num>  = op.neg/invert(<num>)                                  # -, ~
+<num>  = op.pow(<num>, <num>)                                  # **
+<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
 ```
 
 ```python
 elementwise_sum  = map(op.add, list_a, list_b)
-sorted_by_second = sorted(<collection>, key=op.itemgetter(1))
-sorted_by_both   = sorted(<collection>, key=op.itemgetter(1, 0))
+sorted_by_second = sorted(<coll.>, key=op.itemgetter(1))
+sorted_by_both   = sorted(<coll.>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
@@ -2773,7 +2772,7 @@ from PIL import Image
 <Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file's contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
-<Image>.save(<path>)                            # Selects format based on the path extension.
+<Image>.save(<path>)                            # Selects format based on extension (png/jpg…).
 <Image>.show()                                  # Opens image in the default preview app.
 ```
 
