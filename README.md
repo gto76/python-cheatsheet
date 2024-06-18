@@ -2770,8 +2770,8 @@ from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Also `color=<int/tuple/str>`.
-<Image> = Image.open(<path>)                    # Identifies format based on file contents.
+<Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
+<Image> = Image.open(<path>)                    # Identifies format based on file's contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
 <Image>.save(<path>)                            # Selects format based on the path extension.
 <Image>.show()                                  # Opens image in the default preview app.
@@ -2782,7 +2782,7 @@ from PIL import Image
 <Image>.putpixel((x, y), <int/tuple>)           # Updates pixel's value.
 <ImagingCore> = <Image>.getdata()               # Returns a flattened view of pixel values.
 <Image>.putdata(<list/ImagingCore>)             # Updates pixels with a copy of the sequence.
-<Image>.paste(<Image>, (x, y))                  # Draws passed image at specified location.
+<Image>.paste(<Image>, (x, y))                  # Draws passed image at the specified location.
 ```
 
 ```python
@@ -2796,10 +2796,10 @@ from PIL import Image
 ```
 
 ### Modes
-* **`'L'` - 8-bit pixels, greyscale.**
-* **`'RGB'` - 3x8-bit pixels, true color.**
-* **`'RGBA'` - 4x8-bit pixels, true color with transparency mask.**
-* **`'HSV'` - 3x8-bit pixels, Hue, Saturation, Value color space.**
+* **`'L'` - Lightness (i.e. greyscale). Each pixel is an int between 0 and 255.**
+* **`'RGB'` - Red, green, blue (i.e. true color). Each pixel is a tuple of three ints.**
+* **`'RGBA'` - RGB with alpha. Low alpha (forth int) means more transparency.**
+* **`'HSV'` - Hue, saturation, value color space.**
 
 ### Examples
 #### Creates a PNG image of a rainbow gradient:
