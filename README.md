@@ -1338,13 +1338,13 @@ from enum import Enum, auto
 class <enum_name>(Enum):
     <member_name> = auto()              # Increment of the last numeric value or 1.
     <member_name> = <value>             # Values don't have to be hashable.
-    <member_name> = <value>, <value>    # Tuple can be used for multiple values.
+    <member_name> = <value>, <value>    # Values can be collections (like this tuple).
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
 
 ```python
-<member> = <enum>.<member_name>         # Returns a member.
+<member> = <enum>.<member_name>         # Returns a member. Raises AttributeError.
 <member> = <enum>['<member_name>']      # Returns a member. Raises KeyError.
 <member> = <enum>(<value>)              # Returns a member. Raises ValueError.
 <str>    = <member>.name                # Returns member's name.

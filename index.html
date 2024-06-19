@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 18, 2024</aside>
+    <aside>June 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1142,13 +1142,13 @@ Hello World!
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
     &lt;member_name&gt; = auto()              <span class="hljs-comment"># Increment of the last numeric value or 1.</span>
     &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable.</span>
-    &lt;member_name&gt; = &lt;value&gt;, &lt;value&gt;    <span class="hljs-comment"># Tuple can be used for multiple values.</span>
+    &lt;member_name&gt; = &lt;value&gt;, &lt;value&gt;    <span class="hljs-comment"># Values can be collections (like this tuple).</span>
 </code></pre>
 <ul>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
 <li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member.</span>
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member. Raises AttributeError.</span>
 &lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
 &lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)              <span class="hljs-comment"># Returns a member. Raises ValueError.</span>
 &lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns member's name.</span>
@@ -2931,7 +2931,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>June 18, 2024</aside>
+    <aside>June 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
