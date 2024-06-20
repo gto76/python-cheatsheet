@@ -779,7 +779,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 <ul>
 <li><strong>Default size of the cache is 128 values. Passing <code class="python hljs"><span class="hljs-string">'maxsize=None'</span></code> makes it unbounded.</strong></li>
-<li><strong>CPython interpreter limits recursion depth to 1000 by default. To increase it use <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;depth&gt;)'</span></code>.</strong></li>
+<li><strong>CPython interpreter limits recursion depth to 1000 by default. To increase it use <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
@@ -1382,7 +1382,7 @@ p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt
 <span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns current directory. Same as `$ pwd`.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns shell's working dir unless changed.</span>
 &lt;str&gt;  = os.path.join(&lt;path&gt;, ...)  <span class="hljs-comment"># Joins two or more pathname components.</span>
 &lt;str&gt;  = os.path.realpath(&lt;path&gt;)   <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
 </code></pre>
@@ -2449,8 +2449,8 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
         dx, dy = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
         rect = rect.move((dx, dy))
-    screen.fill((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-    pg.draw.rect(screen, (<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), rect)
+    screen.fill(pg.Color(<span class="hljs-string">'black'</span>))
+    pg.draw.rect(screen, pg.Color(<span class="hljs-string">'white'</span>), rect)
     pg.display.flip()
 </code></pre></div>
 

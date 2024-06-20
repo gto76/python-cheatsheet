@@ -928,7 +928,7 @@ def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
 * **Default size of the cache is 128 values. Passing `'maxsize=None'` makes it unbounded.**
-* **CPython interpreter limits recursion depth to 1000 by default. To increase it use `'sys.setrecursionlimit(<depth>)'`.**
+* **CPython interpreter limits recursion depth to 1000 by default. To increase it use `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
@@ -1632,7 +1632,7 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = os.getcwd()                # Returns current directory. Same as `$ pwd`.
+<str>  = os.getcwd()                # Returns shell's working dir unless changed.
 <str>  = os.path.join(<path>, ...)  # Joins two or more pathname components.
 <str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
 ```
@@ -2999,8 +2999,8 @@ while not pg.event.get(pg.QUIT):
     for event in pg.event.get(pg.KEYDOWN):
         dx, dy = deltas.get(event.key, (0, 0))
         rect = rect.move((dx, dy))
-    screen.fill((0, 0, 0))
-    pg.draw.rect(screen, (255, 255, 255), rect)
+    screen.fill(pg.Color('black'))
+    pg.draw.rect(screen, pg.Color('white'), rect)
     pg.display.flip()
 ```
 
