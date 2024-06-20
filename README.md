@@ -1963,7 +1963,7 @@ Bytes
 ### Encode
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Ints must be in range from 0 to 255.
-<bytes> = bytes(<str>, 'utf-8')          # Encodes string. Also <str>.encode('utf-8').
+<bytes> = bytes(<str>, 'utf-8')          # Encodes the string. Also <str>.encode().
 <bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
 <bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
 ```
@@ -1971,7 +1971,7 @@ Bytes
 ### Decode
 ```python
 <list>  = list(<bytes>)                  # Returns ints in range from 0 to 255.
-<str>   = str(<bytes>, 'utf-8')          # Decodes bytes. Also <bytes>.decode('utf-8').
+<str>   = str(<bytes>, 'utf-8')          # Returns a string. Also <bytes>.decode().
 <str>   = <bytes>.hex()                  # Returns hex pairs. Accepts `sep=<str>`.
 <int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
 ```
