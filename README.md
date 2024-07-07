@@ -21,8 +21,8 @@ Contents
 Main
 ----
 ```python
-if __name__ == '__main__':      # Runs main() if file wasn't imported.
-    main()
+if __name__ == '__main__':      # Skips next line if file was imported.
+    main()                      # Runs `def main(): ...` function.
 ```
 
 
@@ -99,9 +99,9 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 ### Counter
 ```python
 >>> from collections import Counter
->>> colors = ['blue', 'blue', 'blue', 'red', 'red']
->>> counter = Counter(colors)
+>>> counter = Counter(['blue', 'blue', 'blue', 'red', 'red'])
 >>> counter['yellow'] += 1
+>>> print(counter)
 Counter({'blue': 3, 'red': 2, 'yellow': 1})
 >>> counter.most_common()[0]
 ('blue', 3)
@@ -153,11 +153,10 @@ Tuple
 
 ### Named Tuple
 **Tuple's subclass with named elements.**
-
 ```python
 >>> from collections import namedtuple
 >>> Point = namedtuple('Point', 'x y')
->>> p = Point(1, y=2)
+>>> p = Point(1, y=2); p
 Point(x=1, y=2)
 >>> p[0]
 1
@@ -186,7 +185,7 @@ Range
 Enumerate
 ---------
 ```python
-for i, el in enumerate(<collection> [, i_start]):
+for i, el in enumerate(<coll>, start=0):   # Returns iterator of `(index+start, <el>)` tuples.
     ...
 ```
 

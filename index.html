@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>June 20, 2024</aside>
+    <aside>July 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -96,8 +96,8 @@
 
 
 
-<div><h2 id="main"><a href="#main" name="main">#</a>Main</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:      <span class="hljs-comment"># Runs main() if file wasn't imported.</span>
-    main()
+<div><h2 id="main"><a href="#main" name="main">#</a>Main</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:      <span class="hljs-comment"># Skips next line if file was imported.</span>
+    main()                      <span class="hljs-comment"># Runs `def main(): ...` function.</span>
 </code></pre></div>
 
 <div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;el&gt;   = &lt;list&gt;[index]          <span class="hljs-comment"># First index is 0. Last -1. Allows assignments.</span>
@@ -152,9 +152,9 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Filters the dictionary by keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
-<span class="hljs-meta">&gt;&gt;&gt; </span>colors = [<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'red'</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter(colors)
+<span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter([<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'red'</span>])
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter[<span class="hljs-string">'yellow'</span>] += <span class="hljs-number">1</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(counter)
 Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'red'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'yellow'</span>: <span class="hljs-number">1</span>})
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter.most_common()[<span class="hljs-number">0</span>]
 (<span class="hljs-string">'blue'</span>, <span class="hljs-number">3</span>)
@@ -192,7 +192,7 @@ Counter({<span class="hljs-string">'blue'</span>: <span class="hljs-number">3</s
 
 <div><h3 id="namedtuple">Named Tuple</h3><p><strong>Tuple's subclass with named elements.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>); p
 Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>]
 <span class="hljs-number">1</span>
@@ -212,7 +212,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>)]
 [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
 </code></pre>
-<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;collection&gt; [, i_start]):
+<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;coll&gt;, start=<span class="hljs-number">0</span>):   <span class="hljs-comment"># Returns iterator of `(index+start, &lt;el&gt;)` tuples.</span>
     ...
 </code></pre></div>
 
@@ -2931,7 +2931,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>June 20, 2024</aside>
+    <aside>July 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
