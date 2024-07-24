@@ -122,7 +122,7 @@ const MATCH_EXAMPLE =
   '<span class="hljs-string">\'README.md is a readme file that belongs to user gto.\'</span>\n';
 
 const COROUTINES =
-  '<span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random, time\n' +
+  '<span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random\n' +
   '\n' +
   'P = collections.namedtuple(<span class="hljs-string">\'P\'</span>, <span class="hljs-string">\'x y\'</span>)    <span class="hljs-comment"># Position</span>\n' +
   'D = enum.Enum(<span class="hljs-string">\'D\'</span>, <span class="hljs-string">\'n e s w\'</span>)             <span class="hljs-comment"># Direction</span>\n' +

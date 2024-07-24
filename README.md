@@ -852,7 +852,7 @@ def get_multiplier(a):
 ### Partial
 ```python
 from functools import partial
-<function> = partial(<function> [, <arg_1>, <arg_2>, ...])
+<function> = partial(<function> [, <arg_1> [, ...]])
 ```
 
 ```python
@@ -2167,13 +2167,13 @@ Operator
 ```python
 import operator as op
 <bool> = op.not_(<obj>)                                        # or, and, not (or/and missing)
-<bool> = op.eq/ne/lt/le/gt/ge/is_/contains(<obj>, <obj>)       # ==, !=, <, <=, >, >=, is, in
+<bool> = op.eq/ne/lt/ge/is_/is_not/contains(<obj>, <obj>)      # ==, !=, <, >=, is, is not, in
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
 <int>  = op.lshift/rshift(<int>, <int>)                        # <<, >>
 <obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
 <num>  = op.neg/invert(<num>)                                  # -, ~
 <num>  = op.pow(<num>, <num>)                                  # **
-<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name()
+<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name([…])
 ```
 
 ```python
@@ -2183,8 +2183,8 @@ sorted_by_both   = sorted(<coll.>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Bitwise operators require objects to have or(), xor(), and(), lshift(), rshift() and invert() special methods, unlike logical operators that work on all types of objects.**
-* **Also: `'<bool> = <bool> &|^ <bool>'` and `'<int> = <bool> &|^ <int>'`.**
+* **Comparisons can be chained: `'x < y < z'` is the same as `'(x < y) and (y < z)`'.**
+* **Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().**
 
 
 Match Statement
@@ -2336,7 +2336,7 @@ import asyncio as aio
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 ```python
-import asyncio, collections, curses, curses.textpad, enum, random, time
+import asyncio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple('P', 'x y')    # Position
 D = enum.Enum('D', 'n e s w')             # Direction
