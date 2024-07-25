@@ -1794,8 +1794,8 @@ product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
 first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span class="hljs-number">0</span>)(&lt;list&gt;)
 </code></pre>
 <ul>
-<li><strong>Comparisons can be chained: <code class="python hljs"><span class="hljs-string">'x &lt; y &lt; z'</span></code> is the same as <code class="python hljs"><span class="hljs-string">'(x &lt; y) and (y &lt; z)</span></code>'.</strong></li>
 <li><strong>Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().</strong></li>
+<li><strong>Comparisons can be chained: <code class="python hljs"><span class="hljs-string">'x &lt; y &lt; z'</span></code> is the same as <code class="python hljs"><span class="hljs-string">'(x &lt; y) and (y &lt; z)</span></code>'.</strong></li>
 </ul>
 <div><h2 id="matchstatement"><a href="#matchstatement" name="matchstatement">#</a>Match Statement</h2><p><strong>Executes the first block with matching pattern. Added in Python 3.10.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">match</span> &lt;object/expression&gt;:
     <span class="hljs-keyword">case</span> &lt;pattern&gt; [<span class="hljs-keyword">if</span> &lt;condition&gt;]:

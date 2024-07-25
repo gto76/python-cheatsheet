@@ -2183,8 +2183,8 @@ sorted_by_both   = sorted(<coll.>, key=op.itemgetter(1, 0))
 product_of_elems = functools.reduce(op.mul, <collection>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
-* **Comparisons can be chained: `'x < y < z'` is the same as `'(x < y) and (y < z)`'.**
 * **Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().**
+* **Comparisons can be chained: `'x < y < z'` is the same as `'(x < y) and (y < z)`'.**
 
 
 Match Statement
