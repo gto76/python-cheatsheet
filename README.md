@@ -185,7 +185,7 @@ Range
 Enumerate
 ---------
 ```python
-for i, el in enumerate(<coll>, start=0):   # Returns iterator of `(index+start, <el>)` tuples.
+for i, el in enumerate(<coll>, start=0):   # Returns next element and its index on each pass.
     ...
 ```
 
@@ -981,20 +981,20 @@ class MyClass:
 
 #### Expressions that call the str() method:
 ```python
-print(<el>)
-f'{<el>}'
-logging.warning(<el>)
-csv.writer(<file>).writerow([<el>])
-raise Exception(<el>)
+print(<obj>)
+f'{<obj>}'
+logging.warning(<obj>)
+csv.writer(<file>).writerow([<obj>])
+raise Exception(<obj>)
 ```
 
 #### Expressions that call the repr() method:
 ```python
-print/str/repr([<el>])
-print/str/repr({<el>: <el>})
-f'{<el>!r}'
-Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<el>))
->>> <el>
+print/str/repr([<obj>])
+print/str/repr({<obj>: <obj>})
+f'{<obj>!r}'
+Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
+>>> <obj>
 ```
 
 ### Inheritance
@@ -1415,14 +1415,14 @@ except (<exception>, [...]) as <name>: ...
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the full error message to stderr.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
-* **Use `'logging.exception(<message>)'` to log the passed message, followed by the full error message of the caught exception. For details see [logging](#logging).**
+* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details see [logging](#logging).**
 * **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
 ### Raising Exceptions
 ```python
 raise <exception>
 raise <exception>()
-raise <exception>(<el> [, ...])
+raise <exception>(<obj> [, ...])
 ```
 
 #### Re-raising caught exception:
@@ -1555,7 +1555,7 @@ p.add_argument('<name>', type=<type>, nargs='?/*')                # Optional arg
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<el>'` to set option's or optional argument's default value.**
+* **Use `'default=<obj>'` to set option's or optional argument's default value.**
 * **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 
@@ -2200,15 +2200,15 @@ match <object/expression>:
 
 ### Patterns
 ```python
-<value_pattern> = 1/'abc'/True/None/math.pi          # Matches the literal or a dotted name.
-<class_pattern> = <type>()                           # Matches any object of that type.
-<wildcard_patt> = _                                  # Matches any object.
-<capture_patt>  = <name>                             # Matches any object and binds it to name.
-<or_pattern>    = <pattern> | <pattern> [| ...]      # Matches any of the patterns.
-<as_pattern>    = <pattern> as <name>                # Binds the match to the name.
-<sequence_patt> = [<pattern>, ...]                   # Matches sequence with matching items.
-<mapping_patt>  = {<value_pattern>: <pattern>, ...}  # Matches dictionary with matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)    # Matches object with matching attributes.
+<value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or a dotted name.
+<class_pattern> = <type>()                         # Matches any object of that type.
+<wildcard_patt> = _                                # Matches any object.
+<capture_patt>  = <name>                           # Matches any object and binds it to name.
+<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
+<as_pattern>    = <pattern> as <name>              # Binds match to name. Also <type>(<name>).
+<sequence_patt> = [<pattern>, ...]                 # Matches sequence with matching items.
+<mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches dictionary with matching items.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.
 ```
 * **Sequence pattern can also be written as a tuple.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
@@ -2288,26 +2288,26 @@ CRITICAL:my_module:Running out of disk space.
 Introspection
 -------------
 ```python
-<list> = dir()                             # Names of local variables, functions, classes, etc.
-<dict> = vars()                            # Dict of local variables, etc. Also locals().
-<dict> = globals()                         # Dict of global vars, etc. (incl. '__builtins__').
+<list> = dir()                          # Names of local vars, functions, classes and modules.
+<dict> = vars()                         # Dict of local vars, functions, etc. Also locals().
+<dict> = globals()                      # Dict of global vars, etc. (including '__builtins__').
 ```
 
 ```python
-<list> = dir(<object>)                     # Names of object's attributes (including methods).
-<dict> = vars(<object>)                    # Dict of writable attributes. Also <obj>.__dict__.
-<bool> = hasattr(<object>, '<attr_name>')  # Checks if getattr() raises an AttributeError.
-value  = getattr(<object>, '<attr_name>')  # Default value can be passed as the third argument.
-setattr(<object>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
-delattr(<object>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
+<list> = dir(<obj>)                     # Names of all object's attributes (including methods).
+<dict> = vars(<obj>)                    # Dict of writable attributes. Also <obj>.__dict__.
+<bool> = hasattr(<obj>, '<attr_name>')  # Checks if getattr() raises AttributeError.
+value  = getattr(<obj>, '<attr_name>')  # Default value can be passed as the third argument.
+setattr(<obj>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
+delattr(<obj>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 ```
 
 ```python
-<Sig>  = inspect.signature(<function>)     # Returns function's Signature object.
-<dict> = <Sig>.parameters                  # Dict of Parameter objects. Also <Sig>.return_type.
-<memb> = <Param>.kind                      # Member of ParameterKind enum (KEYWORD_ONLY, ...).
-<obj>  = <Param>.default                   # Returns param's default value or Parameter.empty.
-<type> = <Param>.annotation                # Returns param's type hint or Parameter.empty.
+<Sig>  = inspect.signature(<function>)  # Returns function's Signature object.
+<dict> = <Sig>.parameters               # Dict of Parameter objects. Also <Sig>.return_type.
+<memb> = <Param>.kind                   # Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).
+<obj>  = <Param>.default                # Returns parameter's default value or Parameter.empty.
+<type> = <Param>.annotation             # Returns parameter's type hint or Parameter.empty.
 ```
 
 
@@ -3526,8 +3526,8 @@ import <cython_script>
 * **Script needs to be saved with a `'pyx'` extension.**
 
 ```python
-cdef <ctype> <var_name> = <el>
-cdef <ctype>[n_elements] <var_name> = [<el>, <el>, ...]
+cdef <ctype> <var_name> = <obj>
+cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
 cdef <ctype/void> <func_name>(<ctype> <arg_name>): ...
 ```
 

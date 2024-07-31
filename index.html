@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>July 24, 2024</aside>
+    <aside>July 31, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -212,7 +212,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>)]
 [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
 </code></pre>
-<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;coll&gt;, start=<span class="hljs-number">0</span>):   <span class="hljs-comment"># Returns iterator of `(index+start, &lt;el&gt;)` tuples.</span>
+<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;coll&gt;, start=<span class="hljs-number">0</span>):   <span class="hljs-comment"># Returns next element and its index on each pass.</span>
     ...
 </code></pre></div>
 
@@ -826,18 +826,18 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <span class="hljs-meta">&gt;&gt;&gt; </span>obj.a, str(obj), repr(obj)
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
-<div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;el&gt;)
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;}</span>'</span>
-logging.warning(&lt;el&gt;)
-csv.writer(&lt;file&gt;).writerow([&lt;el&gt;])
-<span class="hljs-keyword">raise</span> Exception(&lt;el&gt;)
+<div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;obj&gt;)
+<span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>'</span>
+logging.warning(&lt;obj&gt;)
+csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
+<span class="hljs-keyword">raise</span> Exception(&lt;obj&gt;)
 </code></pre></div>
 
-<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;el&gt;])
-print/str/repr({&lt;el&gt;: &lt;el&gt;})
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;!r}</span>'</span>
-Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;el&gt;))
-<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;el&gt;
+<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">print</span>/str/repr([&lt;obj&gt;])
+<span class="hljs-keyword">print</span>/str/repr({&lt;obj&gt;: &lt;obj&gt;})
+<span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
+Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); <span class="hljs-keyword">print</span>/str/repr(Z(&lt;obj&gt;))
+<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
 </code></pre></div>
 
 <div><h3 id="inheritance">Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
@@ -1207,12 +1207,12 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <li><strong>Also catches subclasses of the exception.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to stderr.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (its arguments).</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;message&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details see <a href="#logging">logging</a>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details see <a href="#logging">logging</a>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'sys.exc_info()'</span></code> to get exception type, object, and traceback of caught exception.</strong></li>
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
 <span class="hljs-keyword">raise</span> &lt;exception&gt;()
-<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;el&gt; [, ...])
+<span class="hljs-keyword">raise</span> &lt;exception&gt;(&lt;obj&gt; [, ...])
 </code></pre></div>
 
 <div><h4 id="reraisingcaughtexception">Re-raising caught exception:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt; [<span class="hljs-keyword">as</span> &lt;name&gt;]:
@@ -1320,7 +1320,7 @@ p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;el&gt;'</span></code> to set option's or optional argument's default value.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;obj&gt;'</span></code> to set option's or optional argument's default value.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but 'newline' is None.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens the file and returns a corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
@@ -1804,15 +1804,15 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 </code></pre></div>
 
 
-<div><h3 id="patterns">Patterns</h3><pre><code class="python language-python hljs">&lt;value_pattern&gt; = <span class="hljs-number">1</span>/<span class="hljs-string">'abc'</span>/<span class="hljs-keyword">True</span>/<span class="hljs-keyword">None</span>/math.pi          <span class="hljs-comment"># Matches the literal or a dotted name.</span>
-&lt;class_pattern&gt; = &lt;type&gt;()                           <span class="hljs-comment"># Matches any object of that type.</span>
-&lt;wildcard_patt&gt; = _                                  <span class="hljs-comment"># Matches any object.</span>
-&lt;capture_patt&gt;  = &lt;name&gt;                             <span class="hljs-comment"># Matches any object and binds it to name.</span>
-&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]      <span class="hljs-comment"># Matches any of the patterns.</span>
-&lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;                <span class="hljs-comment"># Binds the match to the name.</span>
-&lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                   <span class="hljs-comment"># Matches sequence with matching items.</span>
-&lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;pattern&gt;, ...}  <span class="hljs-comment"># Matches dictionary with matching items.</span>
-&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)    <span class="hljs-comment"># Matches object with matching attributes.</span>
+<div><h3 id="patterns">Patterns</h3><pre><code class="python language-python hljs">&lt;value_pattern&gt; = <span class="hljs-number">1</span>/<span class="hljs-string">'abc'</span>/<span class="hljs-keyword">True</span>/<span class="hljs-keyword">None</span>/math.pi        <span class="hljs-comment"># Matches the literal or a dotted name.</span>
+&lt;class_pattern&gt; = &lt;type&gt;()                         <span class="hljs-comment"># Matches any object of that type.</span>
+&lt;wildcard_patt&gt; = _                                <span class="hljs-comment"># Matches any object.</span>
+&lt;capture_patt&gt;  = &lt;name&gt;                           <span class="hljs-comment"># Matches any object and binds it to name.</span>
+&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches any of the patterns.</span>
+&lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;              <span class="hljs-comment"># Binds match to name. Also &lt;type&gt;(&lt;name&gt;).</span>
+&lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches sequence with matching items.</span>
+&lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches dictionary with matching items.</span>
+&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object with matching attributes.</span>
 </code></pre></div>
 
 <ul>
@@ -1878,23 +1878,23 @@ CRITICAL:my_module:Running out of disk space.
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                             <span class="hljs-comment"># Names of local variables, functions, classes, etc.</span>
-&lt;dict&gt; = vars()                            <span class="hljs-comment"># Dict of local variables, etc. Also locals().</span>
-&lt;dict&gt; = globals()                         <span class="hljs-comment"># Dict of global vars, etc. (incl. '__builtins__').</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                          <span class="hljs-comment"># Names of local vars, functions, classes and modules.</span>
+&lt;dict&gt; = vars()                         <span class="hljs-comment"># Dict of local vars, functions, etc. Also locals().</span>
+&lt;dict&gt; = globals()                      <span class="hljs-comment"># Dict of global vars, etc. (including '__builtins__').</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;object&gt;)                     <span class="hljs-comment"># Names of object's attributes (including methods).</span>
-&lt;dict&gt; = vars(&lt;object&gt;)                    <span class="hljs-comment"># Dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
-&lt;bool&gt; = hasattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises an AttributeError.</span>
-value  = getattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Default value can be passed as the third argument.</span>
-setattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with __dict__ attribute.</span>
-delattr(&lt;object&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                     <span class="hljs-comment"># Names of all object's attributes (including methods).</span>
+&lt;dict&gt; = vars(&lt;obj&gt;)                    <span class="hljs-comment"># Dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
+&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises AttributeError.</span>
+value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Default value can be passed as the third argument.</span>
+setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with __dict__ attribute.</span>
+delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)     <span class="hljs-comment"># Returns function's Signature object.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters                  <span class="hljs-comment"># Dict of Parameter objects. Also &lt;Sig&gt;.return_type.</span>
-&lt;memb&gt; = &lt;Param&gt;.kind                      <span class="hljs-comment"># Member of ParameterKind enum (KEYWORD_ONLY, ...).</span>
-&lt;obj&gt;  = &lt;Param&gt;.default                   <span class="hljs-comment"># Returns param's default value or Parameter.empty.</span>
-&lt;type&gt; = &lt;Param&gt;.annotation                <span class="hljs-comment"># Returns param's type hint or Parameter.empty.</span>
+<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)  <span class="hljs-comment"># Returns function's Signature object.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters               <span class="hljs-comment"># Dict of Parameter objects. Also &lt;Sig&gt;.return_type.</span>
+&lt;memb&gt; = &lt;Param&gt;.kind                   <span class="hljs-comment"># Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).</span>
+&lt;obj&gt;  = &lt;Param&gt;.default                <span class="hljs-comment"># Returns parameter's default value or Parameter.empty.</span>
+&lt;type&gt; = &lt;Param&gt;.annotation             <span class="hljs-comment"># Returns parameter's type hint or Parameter.empty.</span>
 </code></pre>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>
@@ -2875,8 +2875,8 @@ ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 <div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;el&gt;
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el&gt;, &lt;el&gt;, ...]
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;obj&gt;
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
 <span class="hljs-keyword">cdef</span> &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 </code></pre></div>
 
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>July 24, 2024</aside>
+    <aside>July 31, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
