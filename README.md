@@ -620,7 +620,7 @@ from dateutil.tz import tzlocal, gettz
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
-* **Timezones returned by gettz(), tzlocal(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.**
+* **Timezones returned by tzlocal(), gettz(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.**
 * **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows. It doesn't return local tz if arg. is omitted.**
 
 ### Encode
@@ -2158,7 +2158,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```
 * **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if thread finished on time.**
 * **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
-* **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and all executors should only be reachable via `'if __name__ == "__main__": ...'`.**
+* **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
 
 
 Operator
@@ -2184,7 +2184,7 @@ product_of_elems = functools.reduce(op.mul, <collection>)
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
 * **Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().**
-* **Comparisons can be chained: `'x < y < z'` is the same as `'(x < y) and (y < z)`'.**
+* **Comparisons can be chained: `'x < y < z'` gets converted to `'(x < y) and (y < z)`'.**
 
 
 Match Statement
@@ -2352,7 +2352,7 @@ async def main_coroutine(screen):
     state = {'*': P(0, 0), **{id_: P(W//2, H//2) for id_ in range(10)}}
     ai    = [random_controller(id_, moves) for id_ in range(10)]
     mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
-    tasks = [asyncio.create_task(cor) for cor in ai + mvc]
+    tasks = [asyncio.create_task(coro) for coro in ai + mvc]
     await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
 
 async def random_controller(id_, moves):
@@ -3354,7 +3354,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
-<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/parse_dates=<obj>`.
+<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/parse_dates/…=<obj>`.
 <DF> = pd.read_pickle/excel('<path/url>')      # Use `sheet_name=None` to get all Excel sheets.
 <DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
 ```

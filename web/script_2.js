@@ -18,7 +18,7 @@ const TOC_MOBILE =
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>,\n' +
   '                       <a href="#format">Format</a>, <a href="#numbers">Numbers</a>,\n' +
   '                       <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
-  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>,\n' +
+  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Arguments</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>,\n' +
   '                       <a href="#decorator">Decorator</a>, <a href="#class">Class</a>,\n' +
   '                       <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>,\n' +
