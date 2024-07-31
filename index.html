@@ -1844,7 +1844,7 @@ logging.debug/info/warning/error/critical(&lt;str&gt;)     <span class="hljs-com
 &lt;Logger&gt;.exception(&lt;str&gt;)                            <span class="hljs-comment"># Error() that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">logging.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to console (stderr) by default.</span>
+    filename=<span class="hljs-keyword">None</span>,                                   <span class="hljs-comment"># Logs to stderr or appends to file.</span>
     format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,     <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
     level=logging.WARNING,                           <span class="hljs-comment"># Drops messages with lower priority.</span>
     handlers=[logging.StreamHandler(sys.stderr)]     <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
@@ -2073,7 +2073,7 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 </code></pre></div>
 
 
-<div><h4 id="xpathalsoavailableinbrowsersconsoleviadxxpathandbylxmllibrary">XPath — also available in browser's console via <code class="python hljs"><span class="hljs-string">'$x(&lt;xpath&gt;)'</span></code> and by lxml library:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]           <span class="hljs-comment"># Child: /, Descendant: //, Parent: /..</span>
+<div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x(&lt;xpath&gt;)'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]           <span class="hljs-comment"># Child: /, Descendant: //, Parent: /..</span>
 &lt;xpath&gt;     = //&lt;element&gt;/following::&lt;element&gt;         <span class="hljs-comment"># Next sibling. Also preceding/parent/…</span>
 &lt;element&gt;   = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;                 <span class="hljs-comment"># `&lt;tag&gt; = */a/…`, `&lt;index&gt; = [1/2/…]`.</span>
 &lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]         <span class="hljs-comment"># For negation use `not(&lt;sub_cond&gt;)`.</span>

@@ -2248,7 +2248,7 @@ logging.debug/info/warning/error/critical(<str>)     # Logs to the root logger.
 ### Setup
 ```python
 logging.basicConfig(
-    filename=None,                                   # Logs to console (stderr) by default.
+    filename=None,                                   # Logs to stderr or appends to file.
     format='%(levelname)s:%(name)s:%(message)s',     # Add '%(asctime)s' for local datetime.
     level=logging.WARNING,                           # Drops messages with lower priority.
     handlers=[logging.StreamHandler(sys.stderr)]     # Uses FileHandler if filename is set.
@@ -2525,7 +2525,7 @@ from selenium import webdriver
 <El>.click/clear()                                     # Also <El>.send_keys(<str>).
 ```
 
-#### XPath — also available in browser's console via `'$x(<xpath>)'` and by lxml library:
+#### XPath — also available in lxml, Scrapy, and browser's console via `'$x(<xpath>)'`:
 ```python
 <xpath>     = //<element>[/ or // <element>]           # Child: /, Descendant: //, Parent: /..
 <xpath>     = //<element>/following::<element>         # Next sibling. Also preceding/parent/…
