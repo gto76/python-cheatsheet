@@ -2547,7 +2547,7 @@ import flask
 
 ```python
 app = flask.Flask(__name__)                # Returns app object. Put at the top.
-app.run(host=None, port=None, debug=None)  # Or: `$ flask --app <module> run`
+app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=VAL]]
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
