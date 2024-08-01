@@ -2527,11 +2527,11 @@ from selenium import webdriver
 
 #### XPath — also available in lxml, Scrapy, and browser's console via `'$x(<xpath>)'`:
 ```python
-<xpath>     = //<element>[/ or // <element>]           # Child: /, Descendant: //, Parent: /..
-<xpath>     = //<element>/following::<element>         # Next sibling. Also preceding/parent/…
+<xpath>     = //<element>[/ or // <element>]           # /<child>, //<descendant>, /../<siblng>
+<xpath>     = //<element>/following::<element>         # Next element. Also preceding/parent/…
 <element>   = <tag><conditions><index>                 # `<tag> = */a/…`, `<index> = [1/2/…]`.
 <condition> = [<sub_cond> [and/or <sub_cond>]]         # For negation use `not(<sub_cond>)`.
-<sub_cond>  = @<attr>="<val>"                          # `.="<val>"` matches complete text.
+<sub_cond>  = @<attr>[="<val>"]                        # `text()=`, `.=` match (complete) text.
 <sub_cond>  = contains(@<attr>, "<val>")               # Is <val> a substring of attr's value?
 <sub_cond>  = [//]<element>                            # Has matching child? Descendant if //.
 ```
