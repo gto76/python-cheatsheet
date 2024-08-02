@@ -3237,15 +3237,37 @@ b  3  4
 ```
 
 ```python
+x_col   = [1, 3]
+y_col   = [2, 4]
+<DF>    = pd.DataFrame({'x': x_col, 'y': y_cal}, index=['a', 'b'])
+<DF>.columns                                   # Get the column names: {x, y}
+<DF>.index                                     # Get the index values: {a, b}
+```
+
+```python
 <DF>    = pd.DataFrame(<list_of_rows>)         # Rows can be either lists, dicts or series.
 <DF>    = pd.DataFrame(<dict_of_columns>)      # Columns can be either lists, dicts or series.
 ```
 
+Descriptive information about dataframe:
+```python
+<DF>.head(n=5)                                 # Return first n occurrences
+<DF>.dtypes                                    # Return data types of each columns
+<DF>.isna/isnull()                             # Return empty values in <DF>
+<DF>.describe()                                # Get statistical description of <DF> (both numeric & object)
+```
+
+For selection of multiple elements:
 ```python
 <el>    = <DF>.loc[row_key, col_key]           # Or: <DF>.iloc[row_i, col_i]
 <Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_i/s]
 <Sr/DF> = <DF>.loc[:, col_key/s]               # Or: <DF>.iloc[:, col_i/s]
 <DF>    = <DF>.loc[row_bools, col_bools]       # Or: <DF>.iloc[row_bools, col_bools]
+```
+
+For selection of single element:
+```python
+<el>    = <DF>.at[row_index, column_key]
 ```
 
 ```python
@@ -3265,6 +3287,7 @@ b  3  4
 <DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
 <DF>    = <DF>.sort_values(col_key/s)          # Sorts rows by passed column/s. Also `axis=1`.
 ```
+Those methods have optional parameter *inplace*, which would make the changes in the object from they are called and return None.
 
 #### DataFrame — Merge, Join, Concat:
 ```python
