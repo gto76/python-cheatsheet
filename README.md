@@ -339,7 +339,7 @@ String
 ```python
 <bool> = <str>.isdecimal()                   # Checks for [0-9]. Also [०-९] and [٠-٩].
 <bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal().
-<bool> = <str>.isnumeric()                   # Checks for [¼½¾], [零〇一…] and isdigit().
+<bool> = <str>.isnumeric()                   # Checks for [¼½¾…], [零〇一…] and isdigit().
 <bool> = <str>.isalnum()                     # Checks for [a-zA-Z…] and isnumeric().
 <bool> = <str>.isprintable()                 # Checks for [ !#$%…] and isalnum().
 <bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].
@@ -2521,7 +2521,7 @@ from selenium import webdriver
 <Drv>.get('<url>')                                     # Also <Drv>.implicitly_wait(seconds).
 <El> = <Drv/El>.find_element('css selector', '<css>')  # '<tag>#<id>.<class>[<attr>="<val>"]'.
 <list> = <Drv/El>.find_elements('xpath', '<xpath>')    # '//<tag>[@<attr>="<val>"]'.
-<str> = <El>.get_attribute/get_property(<str>)         # Also <El>.text/tag_name.
+<str> = <El>.get_attribute(<str>)                      # Property if exists. Also <El>.text.
 <El>.click/clear()                                     # Also <El>.send_keys(<str>).
 ```
 

@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>August 1, 2024</aside>
+    <aside>August 13, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -320,7 +320,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="propertymethods">Property Methods</h3><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># Checks for [0-9]. Also [०-९] and [٠-٩].</span>
 &lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Checks for [²³¹…] and isdecimal().</span>
-&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾], [零〇一…] and isdigit().</span>
+&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾…], [零〇一…] and isdigit().</span>
 &lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [a-zA-Z…] and isnumeric().</span>
 &lt;bool&gt; = &lt;str&gt;.isprintable()                 <span class="hljs-comment"># Checks for [ !#$%…] and isalnum().</span>
 &lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].</span>
@@ -2068,7 +2068,7 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 &lt;Drv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                                     <span class="hljs-comment"># Also &lt;Drv&gt;.implicitly_wait(seconds).</span>
 &lt;El&gt; = &lt;Drv/El&gt;.find_element(<span class="hljs-string">'css selector'</span>, <span class="hljs-string">'&lt;css&gt;'</span>)  <span class="hljs-comment"># '&lt;tag&gt;#&lt;id&gt;.&lt;class&gt;[&lt;attr&gt;="&lt;val&gt;"]'.</span>
 &lt;list&gt; = &lt;Drv/El&gt;.find_elements(<span class="hljs-string">'xpath'</span>, <span class="hljs-string">'&lt;xpath&gt;'</span>)    <span class="hljs-comment"># '//&lt;tag&gt;[@&lt;attr&gt;="&lt;val&gt;"]'.</span>
-&lt;str&gt; = &lt;El&gt;.get_attribute/get_property(&lt;str&gt;)         <span class="hljs-comment"># Also &lt;El&gt;.text/tag_name.</span>
+&lt;str&gt; = &lt;El&gt;.get_attribute(&lt;str&gt;)                      <span class="hljs-comment"># Property if exists. Also &lt;El&gt;.text.</span>
 &lt;El&gt;.click/clear()                                     <span class="hljs-comment"># Also &lt;El&gt;.send_keys(&lt;str&gt;).</span>
 </code></pre></div>
 
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>August 1, 2024</aside>
+    <aside>August 13, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
