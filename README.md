@@ -530,7 +530,7 @@ from random import random, randint, choice        # Also: shuffle, gauss, triang
 <int> = ±0b<bin>                                  # Or: ±0x<hex>
 <int> = int('±<bin>', 2)                          # Or: int('±<hex>', 16)
 <int> = int('±0b<bin>', 0)                        # Or: int('±0x<hex>', 0)
-<str> = bin(<int>)                                # Returns '[-]0b<bin>'.
+<str> = bin(<int>)                                # Returns '[-]0b<bin>'. Also hex().
 ```
 
 ### Bitwise Operators
@@ -1456,7 +1456,7 @@ BaseException
       +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when a sequence index is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
-      +-- MemoryError             # Out of memory. May be too late to start deleting objects.
+      +-- MemoryError             # Out of memory. May be too late to start deleting variables.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
       +-- OSError                 # Errors such as FileExistsError/TimeoutError (see #Open).
