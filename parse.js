@@ -827,7 +827,7 @@ function fixHighlights() {
   $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
   $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
-  $(`code:contains(print/str/repr([obj]))`).html(REPR_USE_CASES);
+  $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
   $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
