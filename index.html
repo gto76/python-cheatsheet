@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>August 15, 2024</aside>
+    <aside>August 18, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -696,7 +696,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Package is a collection of modules, but it can also define its own objects.</strong></li>
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in its init script.</strong></li>
-<li><strong>Location of the file that is passed to python command serves as a root of all local imports.</strong></li>
+<li><strong>Directory of the file that is passed to python command serves as a root of local imports.</strong></li>
 <li><strong>For relative imports use <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
 </ul>
 <div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
@@ -779,7 +779,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 <ul>
 <li><strong>Default size of the cache is 128 values. Passing <code class="python hljs"><span class="hljs-string">'maxsize=None'</span></code> makes it unbounded.</strong></li>
-<li><strong>CPython interpreter limits recursion depth to 1000 by default. To increase it use <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
+<li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase it use <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
@@ -1274,8 +1274,8 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 
 <div><h2 id="exit"><a href="#exit" name="exit">#</a>Exit</h2><p><strong>Exits the interpreter by raising SystemExit exception.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 sys.exit()                        <span class="hljs-comment"># Exits with exit code 0 (success).</span>
-sys.exit(&lt;el&gt;)                    <span class="hljs-comment"># Prints to stderr and exits with 1.</span>
 sys.exit(&lt;int&gt;)                   <span class="hljs-comment"># Exits with the passed exit code.</span>
+sys.exit(&lt;obj&gt;)                   <span class="hljs-comment"># Prints to stderr and exits with 1.</span>
 </code></pre></div>
 
 
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>August 15, 2024</aside>
+    <aside>August 18, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

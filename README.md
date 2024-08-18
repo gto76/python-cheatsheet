@@ -827,7 +827,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 * **Package is a collection of modules, but it can also define its own objects.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
-* **Location of the file that is passed to python command serves as a root of all local imports.**
+* **Directory of the file that is passed to python command serves as a root of local imports.**
 * **For relative imports use `'from .[…][<pkg/module>[.…]] import <obj>'`.**
 
 
@@ -927,7 +927,7 @@ def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
 * **Default size of the cache is 128 values. Passing `'maxsize=None'` makes it unbounded.**
-* **CPython interpreter limits recursion depth to 1000 by default. To increase it use `'sys.setrecursionlimit(<int>)'`.**
+* **CPython interpreter limits recursion depth to 3000 by default. To increase it use `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
@@ -1501,8 +1501,8 @@ Exit
 ```python
 import sys
 sys.exit()                        # Exits with exit code 0 (success).
-sys.exit(<el>)                    # Prints to stderr and exits with 1.
 sys.exit(<int>)                   # Exits with the passed exit code.
+sys.exit(<obj>)                   # Prints to stderr and exits with 1.
 ```
 
 
