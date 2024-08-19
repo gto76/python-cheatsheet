@@ -2234,35 +2234,35 @@ match <object/expression>:
 Logging
 -------
 ```python
-import logging
+import logging as log
 ```
 
 ```python
-logging.basicConfig(filename=<path>, level='DEBUG')  # Configures the root logger (see Setup).
-logging.debug/info/warning/error/critical(<str>)     # Logs to the root logger.
-<Logger> = logging.getLogger(__name__)               # Logger named after the module.
-<Logger>.<level>(<str>)                              # Logs to the logger.
-<Logger>.exception(<str>)                            # Error() that appends caught exception.
+log.basicConfig(filename=<path>, level='DEBUG')   # Configures the root logger (see Setup).
+log.debug/info/warning/error/critical(<str>)      # Logs to the root logger.
+<Logger> = log.getLogger(__name__)                # Logger named after the module.
+<Logger>.<level>(<str>)                           # Logs to the logger.
+<Logger>.exception(<str>)                         # Error() that appends caught exception.
 ```
 
 ### Setup
 ```python
-logging.basicConfig(
-    filename=None,                                   # Logs to stderr or appends to file.
-    format='%(levelname)s:%(name)s:%(message)s',     # Add '%(asctime)s' for local datetime.
-    level=logging.WARNING,                           # Drops messages with lower priority.
-    handlers=[logging.StreamHandler(sys.stderr)]     # Uses FileHandler if filename is set.
+log.basicConfig(
+    filename=None,                                # Logs to stderr or appends to file.
+    format='%(levelname)s:%(name)s:%(message)s',  # Add '%(asctime)s' for local datetime.
+    level=log.WARNING,                            # Drops messages with lower priority.
+    handlers=[log.StreamHandler(sys.stderr)]      # Uses FileHandler if filename is set.
 )
 ```
 
 ```python
-<Formatter> = logging.Formatter('<format>')          # Creates a Formatter.
-<Handler> = logging.FileHandler(<path>, mode='a')    # Creates a Handler. Also `encoding=None`.
-<Handler>.setFormatter(<Formatter>)                  # Adds Formatter to the Handler.
-<Handler>.setLevel(<int/str>)                        # Processes all messages by default.
-<Logger>.addHandler(<Handler>)                       # Adds Handler to the Logger.
-<Logger>.setLevel(<int/str>)                         # What is sent to its/ancestors' handlers.
-<Logger>.propagate = <bool>                          # Cuts off ancestors' handlers if False.
+<Formatter> = log.Formatter('<format>')           # Creates a Formatter.
+<Handler> = log.FileHandler(<path>, mode='a')     # Creates a Handler. Also `encoding=None`.
+<Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
+<Handler>.setLevel(<int/str>)                     # Processes all messages by default.
+<Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
+<Logger>.setLevel(<int/str>)                      # What is sent to its/ancestors' handlers.
+<Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
@@ -2271,13 +2271,13 @@ logging.basicConfig(
 
 #### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
->>> logger = logging.getLogger('my_module')
->>> handler = logging.FileHandler('test.log', encoding='utf-8')
->>> handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s'))
+>>> logger = log.getLogger('my_module')
+>>> handler = log.FileHandler('test.log', encoding='utf-8')
+>>> handler.setFormatter(log.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s'))
 >>> logger.addHandler(handler)
 >>> logger.setLevel('DEBUG')
->>> logging.basicConfig()
->>> logging.root.handlers[0].setLevel('WARNING')
+>>> log.basicConfig()
+>>> log.root.handlers[0].setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
 >>> print(open('test.log').read())
