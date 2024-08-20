@@ -847,6 +847,31 @@ Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a class.
 player = Player(point, direction)                   # Returns its instance.
 ```
 
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Player:
+  loc: Point
+  direction: Direction
+
+player = Player(point, direction)                   # Returns its instance.
+```
+
+```python
+@dataclass(order=True)  # <- enable >,<,etc
+class Person():
+    sort_index: int = field(init=False, repr=False) # exclude from __init__ args, don't print
+    name: str
+    age: int
+    height: float
+    email: str
+
+    def __post_init__(self):
+        self.sort_index = self.age   # sort by age
+
+# Note: __eq__ in dataclass compares all attributes, not a instance id!
+```
 
 Imports
 -------
