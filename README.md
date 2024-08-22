@@ -2204,8 +2204,8 @@ match <object/expression>:
 <class_pattern> = <type>()                         # Matches any object of that type.
 <wildcard_patt> = _                                # Matches any object.
 <capture_patt>  = <name>                           # Matches any object and binds it to name.
-<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
 <as_pattern>    = <pattern> as <name>              # Binds match to name. Also <type>(<name>).
+<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
 <sequence_patt> = [<pattern>, ...]                 # Matches sequence with matching items.
 <mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches dictionary with matching items.
 <class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.

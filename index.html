@@ -1808,8 +1808,8 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 &lt;class_pattern&gt; = &lt;type&gt;()                         <span class="hljs-comment"># Matches any object of that type.</span>
 &lt;wildcard_patt&gt; = _                                <span class="hljs-comment"># Matches any object.</span>
 &lt;capture_patt&gt;  = &lt;name&gt;                           <span class="hljs-comment"># Matches any object and binds it to name.</span>
-&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches any of the patterns.</span>
 &lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;              <span class="hljs-comment"># Binds match to name. Also &lt;type&gt;(&lt;name&gt;).</span>
+&lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches any of the patterns.</span>
 &lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches sequence with matching items.</span>
 &lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches dictionary with matching items.</span>
 &lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object with matching attributes.</span>
