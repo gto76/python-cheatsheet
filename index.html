@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>August 20, 2024</aside>
+    <aside>August 22, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1563,7 +1563,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>A server-less database engine that stores each database into a separate file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
 &lt;conn&gt; = sqlite3.connect(&lt;path&gt;)                <span class="hljs-comment"># Opens existing or new file. Also ':memory:'.</span>
-&lt;conn&gt;.close()                                  <span class="hljs-comment"># Closes the connection.</span>
+&lt;conn&gt;.close()                                  <span class="hljs-comment"># Closes connection. Discards uncommitted data.</span>
 </code></pre></div>
 
 
@@ -1863,7 +1863,7 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
 <li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
 <li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
-<li><strong>A <code class="python hljs"><span class="hljs-string">'handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
+<li><strong>A <code class="python hljs"><span class="hljs-string">'log.handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = log.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
@@ -2932,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>August 20, 2024</aside>
+    <aside>August 22, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

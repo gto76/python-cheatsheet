@@ -1884,7 +1884,7 @@ SQLite
 ```python
 import sqlite3
 <conn> = sqlite3.connect(<path>)                # Opens existing or new file. Also ':memory:'.
-<conn>.close()                                  # Closes the connection.
+<conn>.close()                                  # Closes connection. Discards uncommitted data.
 ```
 
 ### Read
@@ -2267,7 +2267,7 @@ log.basicConfig(
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
 * **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
-* **A `'handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
+* **A `'log.handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
 
 #### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
