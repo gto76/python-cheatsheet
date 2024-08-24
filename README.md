@@ -1572,7 +1572,7 @@ Open
 
 ### Modes
 * **`'r'`  - Read (default).**
-* **`'w'`  - Write (truncate).**
+* **`'w'`  - Write (truncate, i.e. delete existing contents).**
 * **`'x'`  - Write or fail if the file already exists.**
 * **`'a'`  - Append.**
 * **`'w+'` - Read and write (truncate).**
@@ -2049,7 +2049,7 @@ from array import array
 
 ```python
 <bytes> = bytes(<array>)                       # Returns a copy of array's memory.
-<file>.write(<array>)                          # Writes array to the binary file.
+<file>.write(<array>)                          # Writes array's memory to the file.
 ```
 
 
@@ -2059,9 +2059,9 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
-<real>  = <mview>[index]                       # Returns an int or a float.
+<obj>   = <mview>[index]                       # Returns int, float or bytes ('c' format).
 <mview> = <mview>[<slice>]                     # Returns mview with rearranged elements.
-<mview> = <mview>.cast('<typecode>')           # Only works between b/B/c and other types.
+<mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
 <mview>.release()                              # Releases memory buffer of the base object.
 ```
 
@@ -2069,11 +2069,11 @@ Memory View
 <bytes> = bytes(<mview>)                       # Returns a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes as a separator.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
-<file>.write(<mview>)                          # Writes mview to the binary file.
+<file>.write(<mview>)                          # Writes `bytes(<mview>)` to the file.
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns a list of ints or floats.
+<list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
 <str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
 <str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
@@ -2413,6 +2413,7 @@ import matplotlib.pyplot as plt
 
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
 plt.legend()                                          # Adds a legend.
+plt.title/xlabel/ylabel(<str>)                        # Adds a title/labels.
 plt.savefig(<path>)                                   # Saves the figure.
 plt.show()                                            # Displays the figure.
 plt.clf()                                             # Clears the figure.
