@@ -1571,14 +1571,14 @@ Open
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.**
 
 ### Modes
-* **`'r'`  - Read (default).**
-* **`'w'`  - Write (truncate, i.e. delete existing contents).**
+* **`'r'`  - Read. Used by default.**
+* **`'w'`  - Write. Deletes existing contents.**
 * **`'x'`  - Write or fail if the file already exists.**
-* **`'a'`  - Append.**
-* **`'w+'` - Read and write (truncate).**
+* **`'a'`  - Append. Creates new file if it doesn't exist.**
+* **`'w+'` - Read and write. Deletes existing contents.**
 * **`'r+'` - Read and write from the start.**
 * **`'a+'` - Read and write from the end.**
-* **`'b'`  - Binary mode (`'br'`, `'bw'`, `'bx'`, …).**
+* **`'b'`  - Binary mode (`'br'`, `'bw'`, `'bx'`, …)**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
@@ -2304,7 +2304,7 @@ delattr(<obj>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 
 ```python
 <Sig>  = inspect.signature(<function>)  # Returns function's Signature object.
-<dict> = <Sig>.parameters               # Dict of Parameter objects. Also <Sig>.return_type.
+<dict> = <Sig>.parameters               # Dict of Parameters. Also <Sig>.return_annotation.
 <memb> = <Param>.kind                   # Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).
 <obj>  = <Param>.default                # Returns parameter's default value or Parameter.empty.
 <type> = <Param>.annotation             # Returns parameter's type hint or Parameter.empty.
@@ -2413,7 +2413,7 @@ import matplotlib.pyplot as plt
 
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
 plt.legend()                                          # Adds a legend.
-plt.title/xlabel/ylabel(<str>)                        # Adds a title/labels.
+plt.title/xlabel/ylabel(<str>)                        # Adds a title/label.
 plt.savefig(<path>)                                   # Saves the figure.
 plt.show()                                            # Displays the figure.
 plt.clf()                                             # Clears the figure.
@@ -3100,7 +3100,7 @@ def run(screen, images, mario, tiles):
         pressed -= {keys.get(e.key) for e in pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
-        draw(screen, images, mario, tiles, pressed)
+        draw(screen, images, mario, tiles)
 
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
@@ -3114,7 +3114,8 @@ def update_position(mario, tiles):
     n_steps = max(abs(s) for s in mario.spd)
     for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        mario.rect.topleft = x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
+        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
+        mario.rect.topleft = x, y
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
@@ -3124,16 +3125,15 @@ def stop_on_collision(spd, bounds):
     return P(x=0 if (D.w in bounds and spd.x < 0) or (D.e in bounds and spd.x > 0) else spd.x,
              y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
 
-def draw(screen, images, mario, tiles, pressed):
-    def get_marios_image_index():
-        if D.s not in get_boundaries(mario.rect, tiles):
-            return 4
-        return next(mario.frame_cycle) if {D.w, D.e} & pressed else 6
+def draw(screen, images, mario, tiles):
     screen.fill((85, 168, 255))
-    mario.facing_left = (D.w in pressed) if {D.w, D.e} & pressed else mario.facing_left
-    screen.blit(images[get_marios_image_index() + mario.facing_left * 9], mario.rect)
+    mario.facing_left = mario.spd.x < 0 if mario.spd.x else mario.facing_left
+    is_airborne = D.s not in get_boundaries(mario.rect, tiles)
+    image_index = 4 if is_airborne else (next(mario.frame_cycle) if mario.spd.x else 6)
+    screen.blit(images[image_index + mario.facing_left * 9], mario.rect)
     for t in tiles:
-        screen.blit(images[18 if t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16] else 19], t)
+        is_border = t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16]
+        screen.blit(images[18 if is_border else 19], t)
     pg.display.flip()
 
 if __name__ == '__main__':

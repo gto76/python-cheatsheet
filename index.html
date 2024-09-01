@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>August 28, 2024</aside>
+    <aside>September 1, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1333,14 +1333,14 @@ p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read (default).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'w'</span></code>  - Write (truncate, i.e. delete existing contents).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read. Used by default.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'w'</span></code>  - Write. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code>  - Write or fail if the file already exists.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code>  - Append.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write (truncate).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code>  - Append. Creates new file if it doesn't exist.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'br'</span></code>, <code class="python hljs"><span class="hljs-string">'bw'</span></code>, <code class="python hljs"><span class="hljs-string">'bx'</span></code>, …).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'br'</span></code>, <code class="python hljs"><span class="hljs-string">'bw'</span></code>, <code class="python hljs"><span class="hljs-string">'bx'</span></code>, …)</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
@@ -1891,7 +1891,7 @@ setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value
 delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)  <span class="hljs-comment"># Returns function's Signature object.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters               <span class="hljs-comment"># Dict of Parameter objects. Also &lt;Sig&gt;.return_type.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters               <span class="hljs-comment"># Dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind                   <span class="hljs-comment"># Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).</span>
 &lt;obj&gt;  = &lt;Param&gt;.default                <span class="hljs-comment"># Returns parameter's default value or Parameter.empty.</span>
 &lt;type&gt; = &lt;Param&gt;.annotation             <span class="hljs-comment"># Returns parameter's type hint or Parameter.empty.</span>
@@ -1980,7 +1980,7 @@ Processing: 100%|████████████████████| 3
 
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Or: plt.plot(y_data)</span>
 plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
-plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title/labels.</span>
+plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title/label.</span>
 plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the figure.</span>
 plt.show()                                            <span class="hljs-comment"># Displays the figure.</span>
 plt.clf()                                             <span class="hljs-comment"># Clears the figure.</span>
@@ -2533,7 +2533,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
         pressed -= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
-        draw(screen, images, mario, tiles, pressed)
+        draw(screen, images, mario, tiles)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
@@ -2547,7 +2547,8 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     n_steps = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        mario.rect.topleft = x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
+        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
+        mario.rect.topleft = x, y
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>
     deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
@@ -2557,16 +2558,15 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     <span class="hljs-keyword">return</span> P(x=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.w <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.e <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.x &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.x,
              y=<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> (D.n <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> (D.s <span class="hljs-keyword">in</span> bounds <span class="hljs-keyword">and</span> spd.y &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">else</span> spd.y)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen, images, mario, tiles, pressed)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_marios_image_index</span><span class="hljs-params">()</span>:</span>
-        <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles):
-            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-        <span class="hljs-keyword">return</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(screen, images, mario, tiles)</span>:</span>
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
-    mario.facing_left = (D.w <span class="hljs-keyword">in</span> pressed) <span class="hljs-keyword">if</span> {D.w, D.e} &amp; pressed <span class="hljs-keyword">else</span> mario.facing_left
-    screen.blit(images[get_marios_image_index() + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
+    mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
+    is_airborne = D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles)
+    image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> (next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>)
+    screen.blit(images[image_index + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
     <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
-        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
+        is_border = t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]
+        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> is_border <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
     pg.display.flip()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
@@ -2933,7 +2933,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>August 28, 2024</aside>
+    <aside>September 1, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
