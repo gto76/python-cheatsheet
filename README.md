@@ -1814,6 +1814,16 @@ CompletedProcess(args=['bc', '-s'], returncode=0)
 '2\n'
 ```
 
+#### Run command and process output:
+```python
+import subprocess
+io = subprocess.Popen(["ls", "-l"], stdout=subprocess.PIPE)
+while True:
+    line = io.stdout.readline()
+    if not line:
+        break
+    ...
+```
 
 JSON
 ----
