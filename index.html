@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 1, 2024</aside>
+    <aside>September 8, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1863,7 +1863,8 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
 <li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
 <li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
-<li><strong>A <code class="python hljs"><span class="hljs-string">'log.handlers.RotatingFileHandler'</span></code> creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.</strong></li>
+<li><strong>RotatingFileHandler creates and deletes files based on 'maxBytes' and 'backupCount' args.</strong></li>
+<li><strong>An object with <code class="python hljs"><span class="hljs-string">'filter(&lt;LogRecord&gt;)'</span></code> method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = log.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
@@ -1875,7 +1876,7 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
 CRITICAL:my_module:Running out of disk space.
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">'test.log'</span>).read())
-<span class="hljs-number">2023</span><span class="hljs-number">-02</span><span class="hljs-number">-07</span> <span class="hljs-number">23</span>:<span class="hljs-number">21</span>:<span class="hljs-number">01</span>,<span class="hljs-number">430</span> CRITICAL:my_module:Running out of disk space.
+2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                          <span class="hljs-comment"># Names of local vars, functions, classes and modules.</span>
@@ -1893,8 +1894,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)      
 <pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)  <span class="hljs-comment"># Returns function's Signature object.</span>
 &lt;dict&gt; = &lt;Sig&gt;.parameters               <span class="hljs-comment"># Dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind                   <span class="hljs-comment"># Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).</span>
-&lt;obj&gt;  = &lt;Param&gt;.default                <span class="hljs-comment"># Returns parameter's default value or Parameter.empty.</span>
-&lt;type&gt; = &lt;Param&gt;.annotation             <span class="hljs-comment"># Returns parameter's type hint or Parameter.empty.</span>
+&lt;obj&gt;  = &lt;Param&gt;.default                <span class="hljs-comment"># Parameter.empty if missing. Also &lt;Param&gt;.annotation.</span>
 </code></pre>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>
@@ -2215,37 +2215,36 @@ $ snakeviz test.prof                                            <span class="hlj
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
 <li><strong>Indices should not be tuples because Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code>  to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>!</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'ix_()'</span></code> returns two 2d arrays. Indices of different shapes get unified with broadcasting.</strong></li>
+<li><strong>Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
-right = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]                           <span class="hljs-comment"># Shape: (3,)</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]                           <span class="hljs-comment"># Shape: (3,)</span>
+right = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
 </code></pre></div>
 
 
-<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
-right = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (1, 3) &lt;- !</span>
+<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (1, 3) &lt;- !</span>
+right = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
 </code></pre></div>
 
-<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
-         [<span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>],
-         [<span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>]]
-
-right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
+<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
          [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],
          [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]]
+
+right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
+         [<span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>],
+         [<span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>]]
 </code></pre></div>
 
 <div><h3 id="example-3">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
- [ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]
+[ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span> ]
 <span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
-[[ <span class="hljs-number">0.1</span>],
- [ <span class="hljs-number">0.6</span>],
- [ <span class="hljs-number">0.8</span>]]
-<span class="hljs-meta">&gt;&gt;&gt; </span>distances = wrapped_points - points
-[[ <span class="hljs-number">0.</span> , <span class="hljs-number">-0.5</span>, <span class="hljs-number">-0.7</span>],
- [ <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.</span> , <span class="hljs-number">-0.2</span>],
- [ <span class="hljs-number">0.7</span>,  <span class="hljs-number">0.2</span>,  <span class="hljs-number">0.</span> ]]
+[[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]
+<span class="hljs-meta">&gt;&gt;&gt; </span>distances = points - wrapped_points
+[[ <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
+ [<span class="hljs-number">-0.5</span>,  <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.2</span>],
+ [<span class="hljs-number">-0.7</span>, <span class="hljs-number">-0.2</span>,  <span class="hljs-number">0.</span> ]]
 <span class="hljs-meta">&gt;&gt;&gt; </span>distances = np.abs(distances)
 [[ <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
  [ <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.2</span>],
@@ -2933,7 +2932,7 @@ $ deactivate                  <span class="hljs-comment"># Deactivates the activ
  
 
   <footer>
-    <aside>September 1, 2024</aside>
+    <aside>September 8, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

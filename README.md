@@ -2267,7 +2267,8 @@ log.basicConfig(
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
 * **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
-* **A `'log.handlers.RotatingFileHandler'` creates and deletes log files based on 'maxBytes' and 'backupCount' arguments.**
+* **RotatingFileHandler creates and deletes files based on 'maxBytes' and 'backupCount' args.**
+* **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
 
 #### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
@@ -2306,8 +2307,7 @@ delattr(<obj>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
 <Sig>  = inspect.signature(<function>)  # Returns function's Signature object.
 <dict> = <Sig>.parameters               # Dict of Parameters. Also <Sig>.return_annotation.
 <memb> = <Param>.kind                   # Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).
-<obj>  = <Param>.default                # Returns parameter's default value or Parameter.empty.
-<type> = <Param>.annotation             # Returns parameter's type hint or Parameter.empty.
+<obj>  = <Param>.default                # Parameter.empty if missing. Also <Param>.annotation.
 ```
 
 
@@ -2707,32 +2707,33 @@ import numpy as np
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
 * **Indices should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
-* **`'ix_()'` returns two 2d arrays. Indices of different shapes get unified with broadcasting.**
+* **Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).**
+* **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as using `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
 **Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
 
 ```python
-left  = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
-right = [ 0.1 ,  0.6 ,  0.8 ]                           # Shape: (3,)
+left  = [ 0.1 ,  0.6 ,  0.8 ]                           # Shape: (3,)
+right = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
-right = [[0.1 ,  0.6 ,  0.8]]                           # Shape: (1, 3) <- !
+left  = [[0.1 ,  0.6 ,  0.8]]                           # Shape: (1, 3) <- !
+right = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
 ```python
-left  = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
-         [0.6,  0.6,  0.6],
-         [0.8,  0.8,  0.8]]
-
-right = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
+left  = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
          [0.1,  0.6,  0.8],
          [0.1,  0.6,  0.8]]
+
+right = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
+         [0.6,  0.6,  0.6],
+         [0.8,  0.8,  0.8]]
 ```
 
 ### Example
@@ -2740,15 +2741,13 @@ right = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
 
 ```python
 >>> points = np.array([0.1, 0.6, 0.8])
- [ 0.1,  0.6,  0.8]
+[ 0.1,  0.6,  0.8 ]
 >>> wrapped_points = points.reshape(3, 1)
-[[ 0.1],
- [ 0.6],
- [ 0.8]]
->>> distances = wrapped_points - points
-[[ 0. , -0.5, -0.7],
- [ 0.5,  0. , -0.2],
- [ 0.7,  0.2,  0. ]]
+[[0.1], [0.6], [0.8]]
+>>> distances = points - wrapped_points
+[[ 0. ,  0.5,  0.7],
+ [-0.5,  0. ,  0.2],
+ [-0.7, -0.2,  0. ]]
 >>> distances = np.abs(distances)
 [[ 0. ,  0.5,  0.7],
  [ 0.5,  0. ,  0.2],
