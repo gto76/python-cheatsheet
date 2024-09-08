@@ -3538,22 +3538,19 @@ cdef class <class_name>:
         self.<attr_name> = <arg_name>
 ```
 
-```python
-cdef enum <enum_name>: <member_name>, <member_name>, ...
-```
-
 ### Virtual Environments
 **System for installing libraries directly into project's directory.**
 
 ```bash
-$ python3 -m venv <name>      # Creates virtual environment in current directory.
-$ source <name>/bin/activate  # Activates venv. On Windows run `<name>\Scripts\activate`.
-$ pip3 install <library>      # Installs the library into active environment.
-$ python3 <path>              # Runs the script in active environment. Also `./<path>`.
-$ deactivate                  # Deactivates the active virtual environment.
+$ python3 -m venv NAME      # Creates virtual environment in current directory.
+$ source NAME/bin/activate  # Activates env. On Windows run `NAME\Scripts\activate`.
+$ pip3 install LIBRARY      # Installs the library into active environment.
+$ python3 FILE              # Runs the script in active environment. Also `./FILE`.
+$ deactivate                # Deactivates the active virtual environment.
 ```
 
 ### Basic Script Template
+**Run the script with `'$ python3 FILE'` or `'$ chmod u+x FILE; ./FILE'`. To automatically start the debugger when uncaught exception occurs run `'$ python3 -m pdb -cc FILE'`.**
 ```python
 #!/usr/bin/env python3
 #
