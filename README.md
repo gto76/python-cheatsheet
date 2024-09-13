@@ -1632,7 +1632,7 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = os.getcwd()                # Returns shell's working dir unless changed.
+<str>  = os.getcwd()                # Returns working dir. Starts as shell's $PWD.
 <str>  = os.path.join(<path>, ...)  # Joins two or more pathname components.
 <str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
 ```

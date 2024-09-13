@@ -23,7 +23,7 @@ const TOC_MOBILE =
   '                       <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>,\n' +
   '                       <a href="#commandlinearguments">Command_Line_Arguments</a>,\n' +
-  '                       <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
+  '                       <a href="#open">Open</a>, <a href="#paths">Paths</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>,\n' +
   '                       <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>,\n' +
   '                       <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
