@@ -1913,8 +1913,7 @@ with <conn>:                                    # Exits the block with commit() 
 <conn>.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
 <conn>.executemany('<query>', <coll_of_above>)  # Runs execute() multiple times.
 ```
-* **Passed values can be of type str, int, float, bytes, None, bool, datetime.date or datetime.datetime.**
-* **Bools will be stored and returned as ints and dates as [ISO formatted strings](#encode).**
+* **Passed values can be of type str, int, float, bytes, None or bool (stored as 1 or 0).**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
@@ -1928,6 +1927,7 @@ with <conn>:                                    # Exits the block with commit() 
 ```
 
 ### SqlAlchemy
+**Library for interacting with various DB systems via SQL, method chaining, or ORM.**
 ```python
 # $ pip3 install sqlalchemy
 from sqlalchemy import create_engine, text
