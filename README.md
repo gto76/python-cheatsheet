@@ -1731,7 +1731,7 @@ os.remove(<path>)                   # Deletes the file.
 os.rmdir(<path>)                    # Deletes the empty directory.
 shutil.rmtree(<path>)               # Deletes the directory.
 ```
-* **Paths can be either strings, Paths or DirEntry objects.**
+* **Paths can be either strings, Paths, or DirEntry objects.**
 * **Functions report OS related errors by raising either OSError or one of its [subclasses](#exceptions-1).**
 
 ### Shell Commands
