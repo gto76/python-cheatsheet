@@ -323,9 +323,15 @@ String
 ```
 
 ```python
-<str>  = <str>.lower()                       # Changes the case. Also upper/capitalize/title().
+<bool> = <str>.isupper()                     # Returns True if all characters are uppercase.
+<bool> = <str>.islower()                     # Returns True if all characters are lowercase.
+<str>  = <str>.lower()                       # Changes all characters to lowercase.
+<str>  = <str>.upper()                       # Changes all characters to uppercase.
+<str>  = <str>.capitalize()                  # Changes the first character to uppercase, rest to lowercase.
+<str>  = <str>.title()                       # Capitalizes the first letter of each word in the string.
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
-<str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
+<str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate translation table.
+
 ```
 
 ```python
