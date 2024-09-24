@@ -1926,7 +1926,7 @@ with <conn>:                                    # Exits the block with commit() 
 [(1, 'Jean-Luc', 187)]
 ```
 
-### SqlAlchemy
+### SQLAlchemy
 **Library for interacting with various DB systems via SQL, method chaining, or ORM.**
 ```python
 # $ pip3 install sqlalchemy
@@ -2034,7 +2034,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.**
 
 ```python
 from array import array
@@ -2042,14 +2042,14 @@ from array import array
 
 ```python
 <array> = array('<typecode>', <coll_of_nums>)  # Array from collection of numbers.
-<array> = array('<typecode>', <bytes>)         # Array from bytes object.
+<array> = array('<typecode>', <bytes>)         # Copies bytes to array's memory.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends items from the binary file.
+<array>.fromfile(<file>, n_items)              # Appends items from binary file.
 ```
 
 ```python
 <bytes> = bytes(<array>)                       # Returns a copy of array's memory.
-<file>.write(<array>)                          # Writes array's memory to the file.
+<file>.write(<array>)                          # Writes array's memory to binary file.
 ```
 
 
@@ -2059,7 +2059,7 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
-<obj>   = <mview>[index]                       # Returns int, float or bytes ('c' format).
+<obj>   = <mview>[index]                       # Returns int/float (bytes if format is 'c').
 <mview> = <mview>[<slice>]                     # Returns mview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
 <mview>.release()                              # Releases memory buffer of the base object.
@@ -2069,7 +2069,7 @@ Memory View
 <bytes> = bytes(<mview>)                       # Returns a new bytes object.
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes as a separator.
 <array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
-<file>.write(<mview>)                          # Writes `bytes(<mview>)` to the file.
+<file>.write(<mview>)                          # Writes `bytes(<mview>)` to binary file.
 ```
 
 ```python
@@ -2156,8 +2156,8 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
-* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if thread finished on time.**
-* **Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.**
+* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads have finished.**
+* **Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns exception object or None.**
 * **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
 
 
@@ -2680,7 +2680,7 @@ import numpy as np
 
 ```python
 <array> = np.concatenate(<list_of_arrays>, axis=0)      # Links arrays along first axis (rows).
-<array> = np.row_stack/column_stack(<list_of_arrays>)   # Treats 1d arrays as rows or columns.
+<array> = np.vstack/column_stack(<list_of_arrays>)      # Treats 1d arrays as rows or columns.
 <array> = np.tile/repeat(<array>, <int/list> [, axis])  # Tiles array or repeats its elements.
 ```
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
@@ -2772,7 +2772,7 @@ from PIL import Image
 <Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file's contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
-<Image>.save(<path>)                            # Selects format based on extension (png/jpg…).
+<Image>.save(<path>)                            # Selects format based on extension (PNG/JPG…).
 <Image>.show()                                  # Opens image in the default preview app.
 ```
 
@@ -2795,10 +2795,11 @@ from PIL import Image
 ```
 
 ### Modes
-* **`'L'` - Lightness (i.e. greyscale). Each pixel is an int between 0 and 255.**
-* **`'RGB'` - Red, green, blue (i.e. true color). Each pixel is a tuple of three ints.**
-* **`'RGBA'` - RGB with alpha. Low alpha (forth int) means more transparency.**
-* **`'HSV'` - Hue, saturation, value color space.**
+* **`'L'` - Lightness (greyscale image). Each pixel is an int between 0 and 255.**
+* **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three ints.**
+* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.**
+* **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**
+
 
 ### Examples
 #### Creates a PNG image of a rainbow gradient:
@@ -2823,14 +2824,14 @@ img.show()
 ### Image Draw
 ```python
 from PIL import ImageDraw
-<ImageDraw> = ImageDraw.Draw(<Image>)           # Object for adding 2D graphics to the image.
-<ImageDraw>.point((x, y))                       # Draws a point. Truncates floats into ints.
-<ImageDraw>.line((x1, y1, x2, y2 [, ...]))      # To get anti-aliasing use Image's resize().
-<ImageDraw>.arc((x1, y1, x2, y2), deg1, deg2)   # Always draws in clockwise direction.
-<ImageDraw>.rectangle((x1, y1, x2, y2))         # To rotate use Image's rotate() and paste().
-<ImageDraw>.polygon((x1, y1, x2, y2, ...))      # Last point gets connected to the first.
-<ImageDraw>.ellipse((x1, y1, x2, y2))           # To rotate use Image's rotate() and paste().
-<ImageDraw>.text((x, y), <str>, font=<Font>)    # `<Font> = ImageFont.truetype(<path>, size)`
+<Draw> = ImageDraw.Draw(<Image>)                # Object for adding 2D graphics to the image.
+<Draw>.point((x, y))                            # Draws a point. Truncates floats into ints.
+<Draw>.line((x1, y1, x2, y2 [, ...]))           # To get anti-aliasing use Image's resize().
+<Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Always draws in clockwise direction.
+<Draw>.rectangle((x1, y1, x2, y2))              # To rotate use Image's rotate() and paste().
+<Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first.
+<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use Image's rotate() and paste().
+<Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**

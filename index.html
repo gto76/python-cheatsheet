@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 13, 2024</aside>
+    <aside>September 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1598,7 +1598,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="sqlalchemy">SqlAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, method chaining, or ORM.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
+<div><h3 id="sqlalchemy">SQLAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, method chaining, or ORM.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)               <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                   <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
@@ -1685,20 +1685,20 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be swapped with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Array from collection of numbers.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Array from bytes object.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Copies bytes to array's memory.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
-&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from the binary file.</span>
+&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from binary file.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Returns a copy of array's memory.</span>
-&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to the file.</span>
+&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
-&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int, float or bytes ('c' format).</span>
+&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int/float (bytes if format is 'c').</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns mview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Only works between B/b/c and other types.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of the base object.</span>
@@ -1708,7 +1708,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes as a separator.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
-&lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to the file.</span>
+&lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to binary file.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats or bytes.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
@@ -1771,8 +1771,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># `next(&lt;iter&gt;)` returns next completed Future.</span>
 </code></pre>
 <ul>
-<li><strong>Map() and as_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As_completed() fails if next() is called too late, even if thread finished on time.</strong></li>
-<li><strong>Exceptions that happen inside threads are raised when next() is called on map's iterator or when result() is called on a Future. Its exception() method returns exception or None.</strong></li>
+<li><strong>Map() and as_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As_completed() fails if next() is called too late, even if all threads have finished.</strong></li>
+<li><strong>Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns exception object or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": ...'</span></code>.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
@@ -2191,7 +2191,7 @@ $ snakeviz test.prof                                            <span class="hlj
 &lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.concatenate(&lt;list_of_arrays&gt;, axis=<span class="hljs-number">0</span>)      <span class="hljs-comment"># Links arrays along first axis (rows).</span>
-&lt;array&gt; = np.row_stack/column_stack(&lt;list_of_arrays&gt;)   <span class="hljs-comment"># Treats 1d arrays as rows or columns.</span>
+&lt;array&gt; = np.vstack/column_stack(&lt;list_of_arrays&gt;)      <span class="hljs-comment"># Treats 1d arrays as rows or columns.</span>
 &lt;array&gt; = np.tile/repeat(&lt;array&gt;, &lt;int/list&gt; [, axis])  <span class="hljs-comment"># Tiles array or repeats its elements.</span>
 </code></pre>
 <ul>
@@ -2265,7 +2265,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Creates new image. Also `color=&lt;int/tuple&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
-&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (png/jpg…).</span>
+&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (PNG/JPG…).</span>
 &lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in the default preview app.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns pixel's value (its color).</span>
@@ -2281,10 +2281,10 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (i.e. greyscale). Each pixel is an int between 0 and 255.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (i.e. true color). Each pixel is a tuple of three ints.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (forth int) means more transparency.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value color space.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three ints.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 n_pixels = WIDTH * HEIGHT
 hues = (<span class="hljs-number">255</span> * i/n_pixels <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n_pixels))
@@ -2304,14 +2304,14 @@ img.show()
 </code></pre></div>
 
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
-&lt;ImageDraw&gt; = ImageDraw.Draw(&lt;Image&gt;)           <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;ImageDraw&gt;.point((x, y))                       <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
-&lt;ImageDraw&gt;.line((x1, y1, x2, y2 [, ...]))      <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
-&lt;ImageDraw&gt;.arc((x1, y1, x2, y2), deg1, deg2)   <span class="hljs-comment"># Always draws in clockwise direction.</span>
-&lt;ImageDraw&gt;.rectangle((x1, y1, x2, y2))         <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.polygon((x1, y1, x2, y2, ...))      <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;ImageDraw&gt;.ellipse((x1, y1, x2, y2))           <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;ImageDraw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)    <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
+&lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)                <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
+&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
+&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
+&lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Always draws in clockwise direction.</span>
+&lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first.</span>
+&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
 </code></pre></div>
 
 <ul>
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 13, 2024</aside>
+    <aside>September 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
