@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 24, 2024</aside>
+    <aside>September 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1692,26 +1692,26 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <pre><code class="python language-python hljs">&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Array from collection of numbers.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Copies bytes to array's memory.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
-&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from binary file.</span>
+&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from the binary file.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Returns a copy of array's memory.</span>
 &lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to binary file.</span>
 </code></pre>
-<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes, else mutable.</span>
-&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int/float (bytes if format is 'c').</span>
-&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns mview with rearranged elements.</span>
+<div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes is passed, else mutable.</span>
+&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int/float. Bytes if format is 'c'.</span>
+&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns memoryview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Only works between B/b/c and other types.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of the base object.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins mviews using bytes as a separator.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats mview as a sequence of numbers.</span>
-&lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to binary file.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins memoryviews using bytes as a separator.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats memoryview as a sequence of numbers.</span>
+&lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to the binary file.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats or bytes.</span>
-&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats mview as a bytes object.</span>
+&lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats memoryview as a bytes object.</span>
 &lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>A thread-safe list with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 24, 2024</aside>
+    <aside>September 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

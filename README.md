@@ -2044,7 +2044,7 @@ from array import array
 <array> = array('<typecode>', <coll_of_nums>)  # Array from collection of numbers.
 <array> = array('<typecode>', <bytes>)         # Copies bytes to array's memory.
 <array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends items from binary file.
+<array>.fromfile(<file>, n_items)              # Appends items from the binary file.
 ```
 
 ```python
@@ -2058,23 +2058,23 @@ Memory View
 **A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.**
 
 ```python
-<mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes, else mutable.
-<obj>   = <mview>[index]                       # Returns int/float (bytes if format is 'c').
-<mview> = <mview>[<slice>]                     # Returns mview with rearranged elements.
+<mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes is passed, else mutable.
+<obj>   = <mview>[index]                       # Returns int/float. Bytes if format is 'c'.
+<mview> = <mview>[<slice>]                     # Returns memoryview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
 <mview>.release()                              # Releases memory buffer of the base object.
 ```
 
 ```python
 <bytes> = bytes(<mview>)                       # Returns a new bytes object.
-<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins mviews using bytes as a separator.
-<array> = array('<typecode>', <mview>)         # Treats mview as a sequence of numbers.
-<file>.write(<mview>)                          # Writes `bytes(<mview>)` to binary file.
+<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins memoryviews using bytes as a separator.
+<array> = array('<typecode>', <mview>)         # Treats memoryview as a sequence of numbers.
+<file>.write(<mview>)                          # Writes `bytes(<mview>)` to the binary file.
 ```
 
 ```python
 <list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
-<str>   = str(<mview>, 'utf-8')                # Treats mview as a bytes object.
+<str>   = str(<mview>, 'utf-8')                # Treats memoryview as a bytes object.
 <str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
