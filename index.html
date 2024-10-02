@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>September 27, 2024</aside>
+    <aside>October 2, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -380,7 +380,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Objects are rendered using <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, &lt;options&gt;)'</span></code>.</strong></li>
+<li><strong>Objects are rendered using <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, "&lt;options&gt;")'</span></code>.</strong></li>
 <li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> to the expression prepends it to the output: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{<span class="hljs-number">1</span>+<span class="hljs-number">1</span>=}</span>'</span></code> returns <code class="python hljs"><span class="hljs-string">'1+1=2'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> to the expression converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
@@ -1314,8 +1314,8 @@ p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span cla
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># Mandatory first argument.</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Mandatory remaining args.</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'?/*'</span>)                <span class="hljs-comment"># Optional argument/s.</span>
-&lt;args&gt; = p.parse_args()                                           <span class="hljs-comment"># Exits on parsing error.</span>
-&lt;obj&gt;  = &lt;args&gt;.&lt;name&gt;                                            <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
+args  = p.parse_args()                                            <span class="hljs-comment"># Exits on parsing error.</span>
+&lt;obj&gt; = args.&lt;name&gt;                                               <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
 </code></pre></div>
 
 <ul>
@@ -1349,7 +1349,7 @@ p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt
 </ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
 &lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
-&lt;bin_file&gt;.seek(±offset, &lt;anchor&gt;)  <span class="hljs-comment"># Anchor: 0 start, 1 current position, 2 end.</span>
+&lt;bin_file&gt;.seek(±offset, origin)    <span class="hljs-comment"># Origin: 0 start, 1 current position, 2 end.</span>
 </code></pre></div></div></div>
 
 
@@ -2108,7 +2108,7 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'render_template(filename, &lt;kwargs&gt;)'</span></code> to render file located in templates dir.</strong></li>
-<li><strong>To return an error code use <code class="python hljs"><span class="hljs-string">'abort(&lt;int&gt;)'</span></code> and to redirect use <code class="python hljs"><span class="hljs-string">'redirect(&lt;url&gt;)'</span></code>.</strong></li>
+<li><strong>To return an error code use <code class="python hljs"><span class="hljs-string">'abort(&lt;int&gt;)'</span></code> and to redirect use <code class="python hljs"><span class="hljs-string">'redirect("&lt;url&gt;")'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'request.args[&lt;str&gt;]'</span></code> returns parameter from the query string (URL part after '?').</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'session[&lt;str&gt;] = &lt;obj&gt;'</span></code> stores session data. Needs <code class="python hljs"><span class="hljs-string">'app.secret_key = &lt;str&gt;'</span></code>.</strong></li>
 </ul>
@@ -2264,18 +2264,18 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Creates new image. Also `color=&lt;int/tuple&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
-&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode.</span>
+&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode (see Modes).</span>
 &lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (PNG/JPG…).</span>
 &lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in the default preview app.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;int/tuple&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns pixel's value (its color).</span>
-&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Updates pixel's value.</span>
-&lt;ImagingCore&gt; = &lt;Image&gt;.getdata()               <span class="hljs-comment"># Returns a flattened view of pixel values.</span>
-&lt;Image&gt;.putdata(&lt;list/ImagingCore&gt;)             <span class="hljs-comment"># Updates pixels with a copy of the sequence.</span>
+<pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's value (its color).</span>
+&lt;ImgCore&gt; = &lt;Image&gt;.getdata()                   <span class="hljs-comment"># Returns a flattened view of pixel values.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Updates pixel's value. Clips passed int/s.</span>
+&lt;Image&gt;.putdata(&lt;list/ImgCore&gt;)                 <span class="hljs-comment"># Updates pixels with a copy of the sequence.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Draws passed image at the specified location.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># `&lt;Filter&gt; = ImageFilter.&lt;name&gt;(&lt;args&gt;)`</span>
-&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># `&lt;Enhance&gt; = ImageEnhance.&lt;name&gt;(&lt;Image&gt;)`</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># Use ImageFilter.&lt;name&gt;(&lt;args&gt;) for Filter.</span>
+&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># Use ImageEnhance.&lt;name&gt;(&lt;Image&gt;) for Enhance.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates a 2d/3d NumPy array from the image.</span>
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip values.</span>
@@ -2283,7 +2283,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three ints.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixels more transparent.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 n_pixels = WIDTH * HEIGHT
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 27, 2024</aside>
+    <aside>October 2, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

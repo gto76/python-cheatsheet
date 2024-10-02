@@ -412,7 +412,7 @@ Format
 {<el>:.<10}                              # '<el>......'
 {<el>:0}                                 # '<el>'
 ```
-* **Objects are rendered using `'format(<el>, <options>)'`.**
+* **Objects are rendered using `'format(<el>, "<options>")'`.**
 * **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'='` to the expression prepends it to the output: `f'{1+1=}'` returns `'1+1=2'`.**
 * **Adding `'!r'` to the expression converts object to string by calling its [repr()](#class) method.**
@@ -1550,8 +1550,8 @@ p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defa
 p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
 p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
 p.add_argument('<name>', type=<type>, nargs='?/*')                # Optional argument/s.
-<args> = p.parse_args()                                           # Exits on parsing error.
-<obj>  = <args>.<name>                                            # Returns `<type>(<arg>)`.
+args  = p.parse_args()                                            # Exits on parsing error.
+<obj> = args.<name>                                               # Returns `<type>(<arg>)`.
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
@@ -1591,7 +1591,7 @@ Open
 <file>.seek(0)                      # Moves to the start of the file.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
 <file>.seek(0, 2)                   # Moves to the end of the file.
-<bin_file>.seek(±offset, <anchor>)  # Anchor: 0 start, 1 current position, 2 end.
+<bin_file>.seek(±offset, origin)    # Origin: 0 start, 1 current position, 2 end.
 ```
 
 ```python
@@ -2568,7 +2568,7 @@ def serve_html(sport):
     return flask.render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
 * **Use `'render_template(filename, <kwargs>)'` to render file located in templates dir.**
-* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
+* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect("<url>")'`.**
 * **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
 * **`'session[<str>] = <obj>'` stores session data. Needs `'app.secret_key = <str>'`.**
 
@@ -2771,22 +2771,22 @@ from PIL import Image
 ```python
 <Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file's contents.
-<Image> = <Image>.convert('<mode>')             # Converts image to the new mode.
+<Image> = <Image>.convert('<mode>')             # Converts image to the new mode (see Modes).
 <Image>.save(<path>)                            # Selects format based on extension (PNG/JPG…).
 <Image>.show()                                  # Opens image in the default preview app.
 ```
 
 ```python
-<int/tuple> = <Image>.getpixel((x, y))          # Returns pixel's value (its color).
-<Image>.putpixel((x, y), <int/tuple>)           # Updates pixel's value.
-<ImagingCore> = <Image>.getdata()               # Returns a flattened view of pixel values.
-<Image>.putdata(<list/ImagingCore>)             # Updates pixels with a copy of the sequence.
+<int/tup> = <Image>.getpixel((x, y))            # Returns pixel's value (its color).
+<ImgCore> = <Image>.getdata()                   # Returns a flattened view of pixel values.
+<Image>.putpixel((x, y), <int/tuple>)           # Updates pixel's value. Clips passed int/s.
+<Image>.putdata(<list/ImgCore>)                 # Updates pixels with a copy of the sequence.
 <Image>.paste(<Image>, (x, y))                  # Draws passed image at the specified location.
 ```
 
 ```python
-<Image> = <Image>.filter(<Filter>)              # `<Filter> = ImageFilter.<name>(<args>)`
-<Image> = <Enhance>.enhance(<float>)            # `<Enhance> = ImageEnhance.<name>(<Image>)`
+<Image> = <Image>.filter(<Filter>)              # Use ImageFilter.<name>(<args>) for Filter.
+<Image> = <Enhance>.enhance(<float>)            # Use ImageEnhance.<name>(<Image>) for Enhance.
 ```
 
 ```python
@@ -2797,7 +2797,7 @@ from PIL import Image
 ### Modes
 * **`'L'` - Lightness (greyscale image). Each pixel is an int between 0 and 255.**
 * **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three ints.**
-* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.**
+* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixels more transparent.**
 * **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**
 
 
