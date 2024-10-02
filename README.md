@@ -1834,7 +1834,7 @@ import csv
 <writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
 ```
 * **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
-* **Open existing file with `'mode="w"'` to overwrite it or `'mode="a"'` to append to it.**
+* **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
 
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
@@ -2059,14 +2059,14 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes is passed, else mutable.
-<obj>   = <mview>[index]                       # Returns int/float. Bytes if format is 'c'.
+<obj>   = <mview>[index]                       # Returns int or float. Bytes if format is 'c'.
 <mview> = <mview>[<slice>]                     # Returns memoryview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
 <mview>.release()                              # Releases memory buffer of the base object.
 ```
 
 ```python
-<bytes> = bytes(<mview>)                       # Returns a new bytes object.
+<bytes> = bytes(<mview>)                       # Returns a new bytes object. Also bytearray().
 <bytes> = <bytes>.join(<coll_of_mviews>)       # Joins memoryviews using bytes as a separator.
 <array> = array('<typecode>', <mview>)         # Treats memoryview as a sequence of numbers.
 <file>.write(<mview>)                          # Writes `bytes(<mview>)` to the binary file.

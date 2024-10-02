@@ -1524,7 +1524,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <ul>
 <li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!</strong></li>
-<li><strong>Open existing file with <code class="python hljs"><span class="hljs-string">'mode="w"'</span></code> to overwrite it or <code class="python hljs"><span class="hljs-string">'mode="a"'</span></code> to append to it.</strong></li>
+<li><strong>Open existing file with <code class="python hljs"><span class="hljs-string">'mode="a"'</span></code> to append to it or <code class="python hljs"><span class="hljs-string">'mode="w"'</span></code> to overwrite it.</strong></li>
 </ul>
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values. String or a 'csv.Dialect' object.</strong></li>
@@ -1698,14 +1698,14 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes is passed, else mutable.</span>
-&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int/float. Bytes if format is 'c'.</span>
+&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int or float. Bytes if format is 'c'.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns memoryview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Only works between B/b/c and other types.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of the base object.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object.</span>
+<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;mview&gt;)                       <span class="hljs-comment"># Returns a new bytes object. Also bytearray().</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_mviews&gt;)       <span class="hljs-comment"># Joins memoryviews using bytes as a separator.</span>
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats memoryview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to the binary file.</span>
