@@ -220,7 +220,20 @@ const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +
   '2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.\n';
 
-const AUDIO =
+const AUDIO_1 =
+  '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>\n' +
+  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>\n' +
+  '        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))\n' +
+  '        a_float += p.sampwidth == <span class="hljs-number">1</span>\n' +
+  '        a_float *= pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)\n' +
+  '        <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">\'little\'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))\n' +
+  '    <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:\n' +
+  '        p = wave._wave_params(nchannels, sampwidth, framerate, <span class="hljs-number">0</span>, <span class="hljs-string">\'NONE\'</span>, <span class="hljs-string">\'not compressed\'</span>)\n' +
+  '    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">\'wb\'</span>) <span class="hljs-keyword">as</span> file:\n' +
+  '        file.setparams(p)\n' +
+  '        file.writeframes(<span class="hljs-string">b\'\'</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))\n';
+
+const AUDIO_2 =
   '<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin\n' +
   'samples_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100_000</span>))\n' +
   'write_to_wav_file(<span class="hljs-string">\'test.wav\'</span>, samples_f)\n';
@@ -839,7 +852,8 @@ function fixHighlights() {
   $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> log.basicConfig()`).html(LOGGING_EXAMPLE);
-  $(`code:contains(samples_f = (sin(i *)`).html(AUDIO);
+  $(`code:contains(a_float = max()`).html(AUDIO_1);
+  $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
   $(`code:contains(cdef <ctype> <var_name> = <obj>)`).html(CYTHON_1);

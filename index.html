@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 2, 2024</aside>
+    <aside>October 3, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2340,7 +2340,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'rb'</span>)   <span class="hljs-comment"># Opens the WAV file.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># Opens the WAV file for reading.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getframerate()       <span class="hljs-comment"># Returns number of frames per second.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
@@ -2351,7 +2351,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
 &lt;Wave&gt;.setnchannels(&lt;int&gt;)            <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
 &lt;Wave&gt;.setsampwidth(&lt;int&gt;)            <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res sound.</span>
-&lt;Wave&gt;.setparams(&lt;tuple&gt;)             <span class="hljs-comment"># Sets all parameters.</span>
+&lt;Wave&gt;.setparams(&lt;tuple&gt;)             <span class="hljs-comment"># Tuple must contain all parameters.</span>
 &lt;Wave&gt;.writeframes(&lt;bytes&gt;)           <span class="hljs-comment"># Appends frames to the file.</span>
 </code></pre>
 <ul>
@@ -2372,26 +2372,26 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 
 <div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_int</span><span class="hljs-params">(bytes_obj)</span>:</span>
-        an_int = int.from_bytes(bytes_obj, <span class="hljs-string">'little'</span>, signed=(sampwidth != <span class="hljs-number">1</span>))
-        <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (sampwidth == <span class="hljs-number">1</span>)
-    <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
-        sampwidth = file.getsampwidth()
+        an_int = int.from_bytes(bytes_obj, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
+        <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (p.sampwidth == <span class="hljs-number">1</span>)
+    <span class="hljs-keyword">with</span> wave.open(filename) <span class="hljs-keyword">as</span> file:
+        p = file.getparams()
         frames = file.readframes(<span class="hljs-number">-1</span>)
-    bytes_samples = (frames[i : i+sampwidth] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), sampwidth))
-    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> bytes_samples]
+    bytes_samples = (frames[i : i + p.sampwidth] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), p.sampwidth))
+    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> bytes_samples], p
 </code></pre></div>
 
-<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, float_samples, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
+<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
-        a_float += sampwidth == <span class="hljs-number">1</span>
-        a_float *= pow(<span class="hljs-number">2</span>, sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)
-        <span class="hljs-keyword">return</span> int(a_float).to_bytes(sampwidth, <span class="hljs-string">'little'</span>, signed=(sampwidth != <span class="hljs-number">1</span>))
+        a_float += p.sampwidth == <span class="hljs-number">1</span>
+        a_float *= pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
+    <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
+        p = wave._wave_params(nchannels, sampwidth, framerate, <span class="hljs-number">0</span>, <span class="hljs-string">'NONE'</span>, <span class="hljs-string">'not compressed'</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-        file.setnchannels(nchannels)
-        file.setsampwidth(sampwidth)
-        file.setframerate(framerate)
-        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> float_samples))
+        file.setparams(p)
+        file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))
 </code></pre></div>
 
 <div><h3 id="examples-1">Examples</h3><div><h4 id="savesa440hzsinewavetoamonowavfile">Saves a 440 Hz sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
@@ -2400,10 +2400,10 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 </code></pre></div></div>
 
 
-<div><h4 id="addsnoisetothemonowavfile">Adds noise to the mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random
-add_noise = <span class="hljs-keyword">lambda</span> value: value + (random() - <span class="hljs-number">0.5</span>) * <span class="hljs-number">0.03</span>
-samples_f = (add_noise(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> read_wav_file(<span class="hljs-string">'test.wav'</span>))
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
+<div><h4 id="addsnoisetothewavfile">Adds noise to the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> uniform
+samples_f, params = read_wav_file(<span class="hljs-string">'test.wav'</span>)
+samples_f = (f + uniform(<span class="hljs-number">-0.05</span>, <span class="hljs-number">0.05</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, params)
 </code></pre></div>
 
 <div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>October 2, 2024</aside>
+    <aside>October 3, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

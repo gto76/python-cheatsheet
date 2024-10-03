@@ -2867,7 +2867,7 @@ import wave
 ```
 
 ```python
-<Wave>  = wave.open('<path>', 'rb')   # Opens the WAV file.
+<Wave>  = wave.open('<path>')         # Opens the WAV file for reading.
 <int>   = <Wave>.getframerate()       # Returns number of frames per second.
 <int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
 <int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
@@ -2880,7 +2880,7 @@ import wave
 <Wave>.setframerate(<int>)            # Pass 44100 for CD, 48000 for video.
 <Wave>.setnchannels(<int>)            # Pass 1 for mono, 2 for stereo.
 <Wave>.setsampwidth(<int>)            # Pass 2 for CD, 3 for hi-res sound.
-<Wave>.setparams(<tuple>)             # Sets all parameters.
+<Wave>.setparams(<tuple>)             # Tuple must contain all parameters.
 <Wave>.writeframes(<bytes>)           # Appends frames to the file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
@@ -2904,28 +2904,28 @@ import wave
 ```python
 def read_wav_file(filename):
     def get_int(bytes_obj):
-        an_int = int.from_bytes(bytes_obj, 'little', signed=(sampwidth != 1))
-        return an_int - 128 * (sampwidth == 1)
-    with wave.open(filename, 'rb') as file:
-        sampwidth = file.getsampwidth()
+        an_int = int.from_bytes(bytes_obj, 'little', signed=(p.sampwidth != 1))
+        return an_int - 128 * (p.sampwidth == 1)
+    with wave.open(filename) as file:
+        p = file.getparams()
         frames = file.readframes(-1)
-    bytes_samples = (frames[i : i+sampwidth] for i in range(0, len(frames), sampwidth))
-    return [get_int(b) / pow(2, sampwidth * 8 - 1) for b in bytes_samples]
+    bytes_samples = (frames[i : i + p.sampwidth] for i in range(0, len(frames), p.sampwidth))
+    return [get_int(b) / pow(2, p.sampwidth * 8 - 1) for b in bytes_samples], p
 ```
 
 ### Write Float Samples to WAV File
 ```python
-def write_to_wav_file(filename, float_samples, nchannels=1, sampwidth=2, framerate=44100):
+def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, framerate=44100):
     def get_bytes(a_float):
         a_float = max(-1, min(1 - 2e-16, a_float))
-        a_float += sampwidth == 1
-        a_float *= pow(2, sampwidth * 8 - 1)
-        return int(a_float).to_bytes(sampwidth, 'little', signed=(sampwidth != 1))
+        a_float += p.sampwidth == 1
+        a_float *= pow(2, p.sampwidth * 8 - 1)
+        return int(a_float).to_bytes(p.sampwidth, 'little', signed=(p.sampwidth != 1))
+    if p is None:
+        p = wave._wave_params(nchannels, sampwidth, framerate, 0, 'NONE', 'not compressed')
     with wave.open(filename, 'wb') as file:
-        file.setnchannels(nchannels)
-        file.setsampwidth(sampwidth)
-        file.setframerate(framerate)
-        file.writeframes(b''.join(get_bytes(f) for f in float_samples))
+        file.setparams(p)
+        file.writeframes(b''.join(get_bytes(f) for f in samples_f))
 ```
 
 ### Examples
@@ -2936,12 +2936,12 @@ samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100_000))
 write_to_wav_file('test.wav', samples_f)
 ```
 
-#### Adds noise to the mono WAV file:
+#### Adds noise to the WAV file:
 ```python
-from random import random
-add_noise = lambda value: value + (random() - 0.5) * 0.03
-samples_f = (add_noise(f) for f in read_wav_file('test.wav'))
-write_to_wav_file('test.wav', samples_f)
+from random import uniform
+samples_f, params = read_wav_file('test.wav')
+samples_f = (f + uniform(-0.05, 0.05) for f in samples_f)
+write_to_wav_file('test.wav', samples_f, params)
 ```
 
 #### Plays the WAV file:
