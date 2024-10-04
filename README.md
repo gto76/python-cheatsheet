@@ -590,7 +590,7 @@ Datetime
 ```python
 # $ pip3 install python-dateutil
 from datetime import date, time, datetime, timedelta, timezone
-from dateutil.tz import tzlocal, gettz
+import zoneinfo, dateutil.tz
 ```
 
 ```python
@@ -601,7 +601,7 @@ from dateutil.tz import tzlocal, gettz
 ```
 * **Aware `<a>` time and datetime objects have defined timezone, while naive `<n>` don't. If object is naive, it is presumed to be in the system's timezone!**
 * **`'fold=1'` means the second pass in case of time jumping back for one hour.**
-* **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M).**
+* **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M). Its str() method returns `'[±D, ]H:MM:SS[.…]'` and total_seconds() a float of all seconds.**
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
 
 ### Now
@@ -615,13 +615,13 @@ from dateutil.tz import tzlocal, gettz
 ```python
 <tzinfo> = timezone.utc                     # London without daylight saving time (DST).
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
-<tzinfo> = tzlocal()                        # Local tz with dynamic offset. Also gettz().
-<tzinfo> = gettz('<Continent>/<City>')      # 'Continent/City_Name' timezone or None.
+<tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from UTC.
+<tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
-* **Timezones returned by tzlocal(), gettz(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.**
-* **Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows. It doesn't return local tz if arg. is omitted.**
+* **Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
+* **To get zoneinfo module to work on Windows run `'> pip3 install tzdata'`.**
 
 ### Encode
 ```python
@@ -660,7 +660,7 @@ from dateutil.tz import tzlocal, gettz
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>      / <TD>                 # How many hours/weeks/years are in TD. Also //.
+<float>  = <TD>      / <TD>                 # E.g. how many hours are in timedelta. Also //.
 ```
 
 
@@ -739,7 +739,7 @@ def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=
 <list>  = [*<coll.> [, ...]]    # Or: list(<collection>) [+ ...]
 <tuple> = (*<coll.>, [...])     # Or: tuple(<collection>) [+ ...]
 <set>   = {*<coll.> [, ...]}    # Or: set(<collection>) [| ...]
-<dict>  = {**<dict> [, ...]}    # Or: <dict> | ... (since 3.9)
+<dict>  = {**<dict> [, ...]}    # Or: <dict> | ...
 ```
 
 ```python
@@ -913,21 +913,20 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out).**
-* **Without it, `'add.__name__'` would return `'out'`.**
+* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out). Without it, `'add.__name__'` would return `'out'`.**
 
-### LRU Cache
+### Cache
 **Decorator that caches function's return values. All function's arguments must be hashable.**
 
 ```python
-from functools import lru_cache
+from functools import cache
 
-@lru_cache(maxsize=None)
+@cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
-* **Default size of the cache is 128 values. Passing `'maxsize=None'` makes it unbounded.**
-* **CPython interpreter limits recursion depth to 3000 by default. To increase it use `'sys.setrecursionlimit(<int>)'`.**
+* **Potential problem with cache is that it can grow indefinitely. To clear the cache run `'fib.cache_clear()'` or use `'@functools.lru_cache(maxsize=<int>)'` instead.**
+* **CPython interpreter limits recursion depth to 3000 by default. To increase it run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
@@ -1253,7 +1252,7 @@ True
 ### Collection
 * **Only required methods are iter() and len(). Len() should return the number of items.**
 * **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
-* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
+* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
 ```python
 class MyCollection:
     def __init__(self, a):
@@ -2201,8 +2200,8 @@ match <object/expression>:
 ### Patterns
 ```python
 <value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or a dotted name.
-<class_pattern> = <type>()                         # Matches any object of that type.
-<wildcard_patt> = _                                # Matches any object.
+<class_pattern> = <type>()                         # Matches any object of that type (or ABC).
+<wildcard_patt> = _                                # Matches any object. Useful in last case.
 <capture_patt>  = <name>                           # Matches any object and binds it to name.
 <as_pattern>    = <pattern> as <name>              # Binds match to name. Also <type>(<name>).
 <or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
@@ -2212,7 +2211,7 @@ match <object/expression>:
 ```
 * **Sequence pattern can also be written as a tuple.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
-* **Sequence pattern must match all items, while mapping pattern does not.**
+* **Sequence pattern must match all items of the collection, while mapping pattern does not.**
 * **Patterns can be surrounded with brackets to override precedence (`'|'` > `'as'` > `','`).**
 * **Built-in types allow a single positional pattern that is matched against the entire object.**
 * **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.**

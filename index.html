@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 3, 2024</aside>
+    <aside>October 4, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -515,7 +515,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <div><h2 id="datetime"><a href="#datetime" name="datetime">#</a>Datetime</h2><p><strong>Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install python-dateutil</span>
 <span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, time, datetime, timedelta, timezone
-<span class="hljs-keyword">from</span> dateutil.tz <span class="hljs-keyword">import</span> tzlocal, gettz
+<span class="hljs-keyword">import</span> zoneinfo, dateutil.tz
 </code></pre></div>
 
 
@@ -527,7 +527,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <ul>
 <li><strong>Aware <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code> time and datetime objects have defined timezone, while naive <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code> don't. If object is naive, it is presumed to be in the system's timezone!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
-<li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M).</strong></li>
+<li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of all seconds.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an int, with Monday being 0.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt; = D/DT.today()                      <span class="hljs-comment"># Current local date or naive DT. Also DT.now().</span>
@@ -539,15 +539,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># London without daylight saving time (DST).</span>
 &lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from UTC.</span>
-&lt;tzinfo&gt; = tzlocal()                        <span class="hljs-comment"># Local tz with dynamic offset. Also gettz().</span>
-&lt;tzinfo&gt; = gettz(<span class="hljs-string">'&lt;Continent&gt;/&lt;City&gt;'</span>)      <span class="hljs-comment"># 'Continent/City_Name' timezone or None.</span>
+&lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from UTC.</span>
+&lt;tzinfo&gt; = zoneinfo.ZoneInfo(<span class="hljs-string">'&lt;iana_key&gt;'</span>)  <span class="hljs-comment"># 'Continent/City_Name' zone with dynamic offset.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone([&lt;tzinfo&gt;])      <span class="hljs-comment"># Converts DT to the passed or local fixed zone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Changes object's timezone without conversion.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Timezones returned by tzlocal(), gettz(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the zone's base offset.</strong></li>
-<li><strong>Standard library's zoneinfo.ZoneInfo() can be used instead of gettz() on Python 3.9 and later. It requires 'tzdata' package on Windows. It doesn't return local tz if arg. is omitted.</strong></li>
+<li><strong>Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
+<li><strong>To get zoneinfo module to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
@@ -582,7 +582,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># How many hours/weeks/years are in TD. Also //.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># E.g. how many hours are in timedelta. Also //.</span>
 </code></pre></div>
 
 <div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
@@ -637,7 +637,7 @@ func(*args, **kwargs)
 <div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;coll.&gt; [, ...]]    <span class="hljs-comment"># Or: list(&lt;collection&gt;) [+ ...]</span>
 &lt;tuple&gt; = (*&lt;coll.&gt;, [...])     <span class="hljs-comment"># Or: tuple(&lt;collection&gt;) [+ ...]</span>
 &lt;set&gt;   = {*&lt;coll.&gt; [, ...]}    <span class="hljs-comment"># Or: set(&lt;collection&gt;) [| ...]</span>
-&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}    <span class="hljs-comment"># Or: &lt;dict&gt; | ... (since 3.9)</span>
+&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}    <span class="hljs-comment"># Or: &lt;dict&gt; | ...</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Head or tail can be omitted.</span>
@@ -766,20 +766,18 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out).</strong></li>
-<li><strong>Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
+<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out). Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
 </ul>
-<div><h3 id="lrucache">LRU Cache</h3><p><strong>Decorator that caches function's return values. All function's arguments must be hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache
+<div><h3 id="cache">Cache</h3><p><strong>Decorator that caches function's return values. All function's arguments must be hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache
 
-<span class="hljs-meta">@lru_cache(maxsize=None)</span>
+<span class="hljs-meta">@cache</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>
-    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)
-</code></pre></div>
+    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)</code></pre></div>
 
 
 <ul>
-<li><strong>Default size of the cache is 128 values. Passing <code class="python hljs"><span class="hljs-string">'maxsize=None'</span></code> makes it unbounded.</strong></li>
-<li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase it use <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
+<li><strong>Potential problem with cache is that it can grow indefinitely. To clear the cache run <code class="python hljs"><span class="hljs-string">'fib.cache_clear()'</span></code> or use <code class="python hljs"><span class="hljs-string">'@functools.lru_cache(maxsize=&lt;int&gt;)'</span></code> instead.</strong></li>
+<li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase it run <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
@@ -1063,7 +1061,7 @@ Hello World!
 <div><h3 id="collection">Collection</h3><ul>
 <li><strong>Only required methods are iter() and len(). Len() should return the number of items.</strong></li>
 <li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
-<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The only drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.</strong></li>
+<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1805,8 +1803,8 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 
 
 <div><h3 id="patterns">Patterns</h3><pre><code class="python language-python hljs">&lt;value_pattern&gt; = <span class="hljs-number">1</span>/<span class="hljs-string">'abc'</span>/<span class="hljs-keyword">True</span>/<span class="hljs-keyword">None</span>/math.pi        <span class="hljs-comment"># Matches the literal or a dotted name.</span>
-&lt;class_pattern&gt; = &lt;type&gt;()                         <span class="hljs-comment"># Matches any object of that type.</span>
-&lt;wildcard_patt&gt; = _                                <span class="hljs-comment"># Matches any object.</span>
+&lt;class_pattern&gt; = &lt;type&gt;()                         <span class="hljs-comment"># Matches any object of that type (or ABC).</span>
+&lt;wildcard_patt&gt; = _                                <span class="hljs-comment"># Matches any object. Useful in last case.</span>
 &lt;capture_patt&gt;  = &lt;name&gt;                           <span class="hljs-comment"># Matches any object and binds it to name.</span>
 &lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;              <span class="hljs-comment"># Binds match to name. Also &lt;type&gt;(&lt;name&gt;).</span>
 &lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches any of the patterns.</span>
@@ -1818,7 +1816,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <ul>
 <li><strong>Sequence pattern can also be written as a tuple.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
-<li><strong>Sequence pattern must match all items, while mapping pattern does not.</strong></li>
+<li><strong>Sequence pattern must match all items of the collection, while mapping pattern does not.</strong></li>
 <li><strong>Patterns can be surrounded with brackets to override precedence (<code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>).</strong></li>
 <li><strong>Built-in types allow a single positional pattern that is matched against the entire object.</strong></li>
 <li><strong>All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.</strong></li>
@@ -2931,7 +2929,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>October 3, 2024</aside>
+    <aside>October 4, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

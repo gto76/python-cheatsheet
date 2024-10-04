@@ -50,12 +50,12 @@ const BIN_HEX =
   '&lt;int&gt; = int(<span class="hljs-string">\'±0b&lt;bin&gt;\'</span>, <span class="hljs-number">0</span>)                        <span class="hljs-comment"># Or: int(\'±0x&lt;hex&gt;\', 0)</span>\n' +
   '&lt;str&gt; = bin(&lt;int&gt;)                                <span class="hljs-comment"># Returns \'[-]0b&lt;bin&gt;\'. Also hex().</span>\n';
 
-const LRU_CACHE =
-  '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache\n' +
+const CACHE =
+  '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache\n' +
   '\n' +
-  '<span class="hljs-meta">@lru_cache(maxsize=None)</span>\n' +
+  '<span class="hljs-meta">@cache</span>\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
-  '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)\n';
+  '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)';
 
 const PARAMETRIZED_DECORATOR =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps\n' +
@@ -838,7 +838,7 @@ function fixClasses() {
 
 function fixHighlights() {
   $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
-  $(`code:contains(@lru_cache(maxsize=None))`).html(LRU_CACHE);
+  $(`code:contains(@cache)`).html(CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
   $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
