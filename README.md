@@ -2885,8 +2885,7 @@ import wave
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**
 * **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
-* **If sample width is one byte, then the integer should be encoded unsigned.**
-* **For all other sizes, the integer should be encoded signed with little-endian byte order.**
+* **If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
 ```text
@@ -2947,7 +2946,7 @@ write_to_wav_file('test.wav', samples_f, params)
 ```python
 # $ pip3 install simpleaudio
 from simpleaudio import play_buffer
-with wave.open('test.wav', 'rb') as file:
+with wave.open('test.wav') as file:
     p = file.getparams()
     frames = file.readframes(-1)
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
@@ -2976,7 +2975,7 @@ P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,6
 get_pause   = lambda seconds: it.repeat(0, int(seconds * F))
 sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
 get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz      = lambda note: 8.176 * 2 ** (int(note[:2]) / 12)
+get_hz      = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
 get_sec     = lambda note: 1/4 if '♩' in note else 1/8
 get_samples = lambda note: get_wave(get_hz(note), get_sec(note)) if note else get_pause(1/8)
 samples_f   = it.chain.from_iterable(get_samples(n) for n in (P1+P2).split(','))

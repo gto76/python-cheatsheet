@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 4, 2024</aside>
+    <aside>October 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2356,8 +2356,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
 <li><strong>In a stereo signal, the first sample of a frame belongs to the left channel.</strong></li>
 <li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.</strong></li>
-<li><strong>If sample width is one byte, then the integer should be encoded unsigned.</strong></li>
-<li><strong>For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
+<li><strong>If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━┓
 ┃ sampwidth │    min    │ zero │    max    ┃
@@ -2406,7 +2405,7 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, params
 
 <div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
-<span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
+<span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>) <span class="hljs-keyword">as</span> file:
     p = file.getparams()
     frames = file.readframes(<span class="hljs-number">-1</span>)
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
@@ -2428,7 +2427,7 @@ P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71
 get_pause   = <span class="hljs-keyword">lambda</span> seconds: it.repeat(<span class="hljs-number">0</span>, int(seconds * F))
 sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
 get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
-get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">8.176</span> * <span class="hljs-number">2</span> ** (int(note[:<span class="hljs-number">2</span>]) / <span class="hljs-number">12</span>)
+get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
 get_sec     = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>
 get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(get_hz(note), get_sec(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
 samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> (P1+P2).split(<span class="hljs-string">','</span>))
@@ -2929,7 +2928,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>October 4, 2024</aside>
+    <aside>October 6, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
