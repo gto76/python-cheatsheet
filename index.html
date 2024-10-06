@@ -582,7 +582,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># E.g. how many hours are in timedelta. Also //.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># E.g. how many hours are in TD. Also //, divmod().</span>
 </code></pre></div>
 
 <div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
@@ -2462,7 +2462,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks if rectangle contains the point.</span>
 &lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks if the two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
-&lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indexes of all colliding rectangles.</span>
+&lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colliding rectangles.</span>
 </code></pre>
 <div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens new window and returns its surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
@@ -2559,7 +2559,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
     is_airborne = D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles)
     image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> (next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>)
-    screen.blit(images[image_index + mario.facing_left * <span class="hljs-number">9</span>], mario.rect)
+    screen.blit(images[image_index + (mario.facing_left * <span class="hljs-number">9</span>)], mario.rect)
     <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
         is_border = t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]
         screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> is_border <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)

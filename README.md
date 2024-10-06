@@ -660,7 +660,7 @@ import zoneinfo, dateutil.tz
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>      / <TD>                 # E.g. how many hours are in timedelta. Also //.
+<float>  = <TD>      / <TD>                 # E.g. how many hours are in TD. Also //, divmod().
 ```
 
 
@@ -3016,7 +3016,7 @@ while not pg.event.get(pg.QUIT):
 <bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains the point.
 <bool> = <Rect>.colliderect(<Rect>)             # Checks if the two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
-<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indexes of all colliding rectangles.
+<list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colliding rectangles.
 ```
 
 ### Surface
@@ -3128,7 +3128,7 @@ def draw(screen, images, mario, tiles):
     mario.facing_left = mario.spd.x < 0 if mario.spd.x else mario.facing_left
     is_airborne = D.s not in get_boundaries(mario.rect, tiles)
     image_index = 4 if is_airborne else (next(mario.frame_cycle) if mario.spd.x else 6)
-    screen.blit(images[image_index + mario.facing_left * 9], mario.rect)
+    screen.blit(images[image_index + (mario.facing_left * 9)], mario.rect)
     for t in tiles:
         is_border = t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16]
         screen.blit(images[18 if is_border else 19], t)
