@@ -1183,7 +1183,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
-* **To check if object is callable use `'callable(<obj>)'`, `'isinstance(<obj>, collections.abc.Callable)'`, or `'isinstance(<obj>, typing.Callable)'`.**
+* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable.**
 * **When this cheatsheet uses `'<function>'` as an argument, it means `'<callable>'`.**
 ```python
 class Counter:
