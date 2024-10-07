@@ -925,7 +925,7 @@ from functools import cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
-* **Potential problem with cache is that it can grow indefinitely. To clear the cache run `'fib.cache_clear()'` or use `'@functools.lru_cache(maxsize=<int>)'` instead.**
+* **Potential problem with cache is that it can grow indefinitely. To clear its stored values run `'fib.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
 * **CPython interpreter limits recursion depth to 3000 by default. To increase it run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
@@ -1937,14 +1937,14 @@ with <conn>.begin(): ...                        # Exits the block with commit or
 ```
 
 ```text
-+------------+--------------+----------+----------------------------------+
-| Dialect    | pip3 install | import   |           Dependencies           |
-+------------+--------------+----------+----------------------------------+
-| mysql      | mysqlclient  | MySQLdb  | www.pypi.org/project/mysqlclient |
-| postgresql | psycopg2     | psycopg2 | www.pypi.org/project/psycopg2    |
-| mssql      | pyodbc       | pyodbc   | www.pypi.org/project/pyodbc      |
-| oracle     | oracledb     | oracledb | www.pypi.org/project/oracledb    |
-+------------+--------------+----------+----------------------------------+
++-----------------+--------------+----------------------------------+
+| Dialect         | pip3 install |           Dependencies           |
++-----------------+--------------+----------------------------------+
+| mysql           | mysqlclient  | www.pypi.org/project/mysqlclient |
+| postgresql      | psycopg2     | www.pypi.org/project/psycopg2    |
+| mssql           | pyodbc       | www.pypi.org/project/pyodbc      |
+| oracle+oracledb | oracledb     | www.pypi.org/project/oracledb    |
++-----------------+--------------+----------------------------------+
 ```
 
 
@@ -2525,7 +2525,7 @@ from selenium import webdriver
 <El>.click/clear()                                     # Also <El>.send_keys(<str>).
 ```
 
-#### XPath — also available in lxml, Scrapy, and browser's console via `'$x(<xpath>)'`:
+#### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
 ```python
 <xpath>     = //<element>[/ or // <element>]           # /<child>, //<descendant>, /../<siblng>
 <xpath>     = //<element>/following::<element>         # Next element. Also preceding/parent/…
@@ -2567,7 +2567,7 @@ def serve_html(sport):
     return flask.render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
 * **Use `'render_template(filename, <kwargs>)'` to render file located in templates dir.**
-* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect("<url>")'`.**
+* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
 * **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
 * **`'session[<str>] = <obj>'` stores session data. Needs `'app.secret_key = <str>'`.**
 

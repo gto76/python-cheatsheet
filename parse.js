@@ -500,19 +500,19 @@ const DIAGRAM_9_B =
   "┗━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_95_A =
-  '+------------+--------------+----------+----------------------------------+\n' +
-  '| Dialect    | pip3 install | import   |           Dependencies           |\n' +
-  '+------------+--------------+----------+----------------------------------+\n';
+  '+-----------------+--------------+----------------------------------+\n' +
+  '| Dialect         | pip3 install |           Dependencies           |\n' +
+  '+-----------------+--------------+----------------------------------+\n';
 
 const DIAGRAM_95_B =
-  '┏━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n' +
-  '┃ Dialect    │ pip3 install │ import   │           Dependencies           ┃\n' +
-  '┠────────────┼──────────────┼──────────┼──────────────────────────────────┨\n' +
-  '┃ mysql      │ mysqlclient  │ MySQLdb  │ www.pypi.org/project/mysqlclient ┃\n' +
-  '┃ postgresql │ psycopg2     │ psycopg2 │ www.pypi.org/project/psycopg2    ┃\n' +
-  '┃ mssql      │ pyodbc       │ pyodbc   │ www.pypi.org/project/pyodbc      ┃\n' +
-  '┃ oracle     │ oracledb     │ oracledb │ www.pypi.org/project/oracledb    ┃\n' +
-  '┗━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n';
+  '┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n' +
+  '┃ Dialect         │ pip3 install │           Dependencies           ┃\n' +
+  '┠─────────────────┼──────────────┼──────────────────────────────────┨\n' +
+  '┃ mysql           │ mysqlclient  │ www.pypi.org/project/mysqlclient ┃\n' +
+  '┃ postgresql      │ psycopg2     │ www.pypi.org/project/psycopg2    ┃\n' +
+  '┃ mssql           │ pyodbc       │ www.pypi.org/project/pyodbc      ┃\n' +
+  '┃ oracle+oracledb │ oracledb     │ www.pypi.org/project/oracledb    ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n';
 
 const DIAGRAM_10_A =
   '+-------------+-------------+\n' +
@@ -838,7 +838,7 @@ function fixClasses() {
 
 function fixHighlights() {
   $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
-  $(`code:contains(@cache)`).html(CACHE);
+  $(`code:contains( + fib(n)`).html(CACHE);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
   $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
