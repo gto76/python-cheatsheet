@@ -29,20 +29,24 @@ if __name__ == '__main__':      # Skips next line if file was imported.
 List
 ----
 ```python
+<list> = [<el_1>, <el_2>, ...]  # Creates new list. Also list(<collection>).
+```
+
+```python
 <el>   = <list>[index]          # First index is 0. Last -1. Allows assignments.
-<list> = <list>[<slice>]        # Or: <list>[from_inclusive : to_exclusive : ±step]
+<list> = <list>[<slice>]        # Also <list>[from_inclusive : to_exclusive : ±step].
 ```
 
 ```python
-<list>.append(<el>)             # Or: <list> += [<el>]
-<list>.extend(<collection>)     # Or: <list> += <collection>
+<list>.append(<el>)             # Appends element to the end. Also <list> += [<el>].
+<list>.extend(<collection>)     # Appends elements to the end. Also <list> += <coll>.
 ```
 
 ```python
-<list>.sort()                   # Sorts in ascending order.
+<list>.sort()                   # Sorts elements in ascending order.
 <list>.reverse()                # Reverses the list in-place.
-<list> = sorted(<collection>)   # Returns a new sorted list.
-<iter> = reversed(<list>)       # Returns reversed iterator.
+<list> = sorted(<collection>)   # Returns new list with sorted elements.
+<iter> = reversed(<list>)       # Returns reversed iterator of elements.
 ```
 
 ```python
@@ -70,6 +74,10 @@ list_of_chars    = list(<str>)
 
 Dictionary
 ----------
+```python
+<dict> = {key_1: val_1, key_2: val_2, ...}      # Use `<dict>[key]` to get or set the value.
+```
+
 ```python
 <view> = <dict>.keys()                          # Coll. of keys that reflects changes.
 <view> = <dict>.values()                        # Coll. of values that reflects changes.
@@ -101,17 +109,15 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 >>> from collections import Counter
 >>> counter = Counter(['blue', 'blue', 'blue', 'red', 'red'])
 >>> counter['yellow'] += 1
->>> print(counter)
-Counter({'blue': 3, 'red': 2, 'yellow': 1})
->>> counter.most_common()[0]
-('blue', 3)
+>>> print(counter.most_common())
+[('blue', 3), ('red', 2), ('yellow', 1)]
 ```
 
 
 Set
 ---
 ```python
-<set> = set()                                   # `{}` returns a dictionary.
+<set> = {<el_1>, <el_2>, ...}                   # Use `set()` for empty set.
 ```
 
 ```python
