@@ -1275,7 +1275,7 @@ class MyCollection:
 * **Only required methods are getitem() and len().**
 * **Getitem() should return an item at the passed index or raise IndexError.**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
-* **Reversed() automatically works on any object that has getitem() and len() defined.**
+* **Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.**
 ```python
 class MySequence:
     def __init__(self, a):
@@ -1583,7 +1583,7 @@ Open
 * **`'w+'` - Read and write. Deletes existing contents.**
 * **`'r+'` - Read and write from the start.**
 * **`'a+'` - Read and write from the end.**
-* **`'b'`  - Binary mode (`'br'`, `'bw'`, `'bx'`, …)**
+* **`'b'`  - Binary mode (`'rb'`, `'wb'`, `'xb'`, …)**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
@@ -1682,10 +1682,10 @@ from pathlib import Path
 ```
 
 ```python
-<Path> = Path()                     # Returns relative cwd. Also Path('.').
-<Path> = Path.cwd()                 # Returns absolute cwd. Also Path().resolve().
+<Path> = Path()                     # Returns relative CWD. Also Path('.').
+<Path> = Path.cwd()                 # Returns absolute CWD. Also Path().resolve().
 <Path> = Path.home()                # Returns user's home directory (absolute).
-<Path> = Path(__file__).resolve()   # Returns script's path if cwd wasn't changed.
+<Path> = Path(__file__).resolve()   # Returns script's path if CWD wasn't changed.
 ```
 
 ```python
@@ -1868,16 +1868,16 @@ import csv
 
 ### Read Rows from CSV File
 ```python
-def read_csv_file(filename, dialect='excel', **params):
+def read_csv_file(filename, **csv_params):
     with open(filename, encoding='utf-8', newline='') as file:
-        return list(csv.reader(file, dialect, **params))
+        return list(csv.reader(file, **csv_params))
 ```
 
 ### Write Rows to CSV File
 ```python
-def write_to_csv_file(filename, rows, mode='w', dialect='excel', **params):
+def write_to_csv_file(filename, rows, mode='w', **csv_params):
     with open(filename, mode, encoding='utf-8', newline='') as file:
-        writer = csv.writer(file, dialect, **params)
+        writer = csv.writer(file, **csv_params)
         writer.writerows(rows)
 ```
 
