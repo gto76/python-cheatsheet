@@ -2171,6 +2171,9 @@ Operator
 **Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
 ```python
 import operator as op
+```
+
+```python
 <bool> = op.not_(<obj>)                                        # or, and, not (or/and missing)
 <bool> = op.eq/ne/lt/ge/is_/is_not/contains(<obj>, <obj>)      # ==, !=, <, >=, is, is not, in
 <obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
@@ -2227,11 +2230,9 @@ match <object/expression>:
 >>> from pathlib import Path
 >>> match Path('/home/gto/python-cheatsheet/README.md'):
 ...     case Path(
-...         parts=['/', 'home', user, *_],
-...         stem=stem,
-...         suffix=('.md' | '.txt') as suffix
-...     ) if stem.lower() == 'readme':
-...         print(f'{stem}{suffix} is a readme file that belongs to user {user}.')
+...         parts=['/', 'home', user, *_]
+...     ) as p if p.stem.lower() == 'readme' and p.suffix.lower() in ['.md', '.txt']:
+...         print(f'{p.name} is a readme file that belongs to user {user}.')
 'README.md is a readme file that belongs to user gto.'
 ```
 

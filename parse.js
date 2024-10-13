@@ -112,11 +112,9 @@ const MATCH_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">match</span> Path(<span class="hljs-string">\'/home/gto/python-cheatsheet/README.md\'</span>):\n' +
   '<span class="hljs-meta">... </span>    <span class="hljs-keyword">case</span> Path(\n' +
-  '<span class="hljs-meta">... </span>        parts=[<span class="hljs-string">\'/\'</span>, <span class="hljs-string">\'home\'</span>, user, *_],\n' +
-  '<span class="hljs-meta">... </span>        stem=stem,\n' +
-  '<span class="hljs-meta">... </span>        suffix=(<span class="hljs-string">\'.md\'</span> | <span class="hljs-string">\'.txt\'</span>) <span class="hljs-keyword">as</span> suffix\n' +
-  '<span class="hljs-meta">... </span>    ) <span class="hljs-keyword">if</span> stem.lower() == <span class="hljs-string">\'readme\'</span>:\n' +
-  '<span class="hljs-meta">... </span>        print(<span class="hljs-string">f\'<span class="hljs-subst">{stem}</span><span class="hljs-subst">{suffix}</span> is a readme file that belongs to user <span class="hljs-subst">{user}</span>.\'</span>)\n' +
+  '<span class="hljs-meta">... </span>        parts=[<span class="hljs-string">\'/\'</span>, <span class="hljs-string">\'home\'</span>, user, *_]\n' +
+  '<span class="hljs-meta">... </span>    ) <span class="hljs-keyword">as</span> p <span class="hljs-keyword">if</span> p.stem.lower() == <span class="hljs-string">\'readme\'</span> <span class="hljs-keyword">and</span> p.suffix.lower() <span class="hljs-keyword">in</span> [<span class="hljs-string">\'.md\'</span>, <span class="hljs-string">\'.txt\'</span>]:\n' +
+  '<span class="hljs-meta">... </span>        print(<span class="hljs-string">f\'<span class="hljs-subst">{p.name}</span> is a readme file that belongs to user <span class="hljs-subst">{user}</span>.\'</span>)\n' +
   '<span class="hljs-string">\'README.md is a readme file that belongs to user gto.\'</span>\n';
 
 const COROUTINES =

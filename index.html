@@ -1775,7 +1775,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": ...'</span></code>.</strong></li>
 </ul>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
-&lt;bool&gt; = op.not_(&lt;obj&gt;)                                        <span class="hljs-comment"># or, and, not (or/and missing)</span>
+</code></pre></div>
+
+
+<pre><code class="python language-python hljs">&lt;bool&gt; = op.not_(&lt;obj&gt;)                                        <span class="hljs-comment"># or, and, not (or/and missing)</span>
 &lt;bool&gt; = op.eq/ne/lt/ge/is_/is_not/contains(&lt;obj&gt;, &lt;obj&gt;)      <span class="hljs-comment"># ==, !=, &lt;, &gt;=, is, is not, in</span>
 &lt;obj&gt;  = op.or_/xor/and_(&lt;int/set&gt;, &lt;int/set&gt;)                 <span class="hljs-comment"># |, ^, &amp;</span>
 &lt;int&gt;  = op.lshift/rshift(&lt;int&gt;, &lt;int&gt;)                        <span class="hljs-comment"># &lt;&lt;, &gt;&gt;</span>
@@ -1783,9 +1786,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;num&gt;  = op.neg/invert(&lt;num&gt;)                                  <span class="hljs-comment"># -, ~</span>
 &lt;num&gt;  = op.pow(&lt;num&gt;, &lt;num&gt;)                                  <span class="hljs-comment"># **</span>
 &lt;func&gt; = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt; [, ...])  <span class="hljs-comment"># [index/key], .name, .name([…])</span>
-</code></pre></div>
-
-
+</code></pre>
 <pre><code class="python language-python hljs">elementwise_sum  = map(op.add, list_a, list_b)
 sorted_by_second = sorted(&lt;coll.&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
 sorted_by_both   = sorted(&lt;coll.&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
@@ -1825,11 +1826,9 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <div><h3 id="example-2">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">match</span> Path(<span class="hljs-string">'/home/gto/python-cheatsheet/README.md'</span>):
 <span class="hljs-meta">... </span>    <span class="hljs-keyword">case</span> Path(
-<span class="hljs-meta">... </span>        parts=[<span class="hljs-string">'/'</span>, <span class="hljs-string">'home'</span>, user, *_],
-<span class="hljs-meta">... </span>        stem=stem,
-<span class="hljs-meta">... </span>        suffix=(<span class="hljs-string">'.md'</span> | <span class="hljs-string">'.txt'</span>) <span class="hljs-keyword">as</span> suffix
-<span class="hljs-meta">... </span>    ) <span class="hljs-keyword">if</span> stem.lower() == <span class="hljs-string">'readme'</span>:
-<span class="hljs-meta">... </span>        print(<span class="hljs-string">f'<span class="hljs-subst">{stem}</span><span class="hljs-subst">{suffix}</span> is a readme file that belongs to user <span class="hljs-subst">{user}</span>.'</span>)
+<span class="hljs-meta">... </span>        parts=[<span class="hljs-string">'/'</span>, <span class="hljs-string">'home'</span>, user, *_]
+<span class="hljs-meta">... </span>    ) <span class="hljs-keyword">as</span> p <span class="hljs-keyword">if</span> p.stem.lower() == <span class="hljs-string">'readme'</span> <span class="hljs-keyword">and</span> p.suffix.lower() <span class="hljs-keyword">in</span> [<span class="hljs-string">'.md'</span>, <span class="hljs-string">'.txt'</span>]:
+<span class="hljs-meta">... </span>        print(<span class="hljs-string">f'<span class="hljs-subst">{p.name}</span> is a readme file that belongs to user <span class="hljs-subst">{user}</span>.'</span>)
 <span class="hljs-string">'README.md is a readme file that belongs to user gto.'</span>
 </code></pre></div>
 
