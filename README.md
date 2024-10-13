@@ -2231,7 +2231,7 @@ match <object/expression>:
 >>> match Path('/home/gto/python-cheatsheet/README.md'):
 ...     case Path(
 ...         parts=['/', 'home', user, *_]
-...     ) as p if p.stem.lower() == 'readme' and p.suffix.lower() in ['.md', '.txt']:
+...     ) as p if p.name.lower().startswith('readme') and p.is_file():
 ...         print(f'{p.name} is a readme file that belongs to user {user}.')
 'README.md is a readme file that belongs to user gto.'
 ```
