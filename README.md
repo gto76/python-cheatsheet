@@ -1327,8 +1327,7 @@ class MyAbcSequence(abc.Sequence):
 +------------+------------+------------+------------+--------------+
 ```
 * **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() will work with any code expecting an iterable.**
-* **Other extendable ABCs: MutableSequence, Set, MutableSet, Mapping, MutableMapping.**
-* **Names of their required methods are stored in `'<abc>.__abstractmethods__'`.**
+* **MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also extendable. Use `'<abc>.__abstractmethods__'` to get names of required methods.**
 
 
 Enum
@@ -2161,7 +2160,7 @@ with <lock>:                                   # Enters the block by calling acq
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
-* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads have finished.**
+* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
 * **Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns exception object or None.**
 * **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
 
@@ -2245,9 +2244,9 @@ import logging as log
 
 ```python
 log.basicConfig(filename=<path>, level='DEBUG')   # Configures the root logger (see Setup).
-log.debug/info/warning/error/critical(<str>)      # Logs to the root logger.
-<Logger> = log.getLogger(__name__)                # Logger named after the module.
-<Logger>.<level>(<str>)                           # Logs to the logger.
+log.debug/info/warning/error/critical(<str>)      # Sends message to the root logger.
+<Logger> = log.getLogger(__name__)                # Returns logger named after the module.
+<Logger>.<level>(<str>)                           # Sends message to the logger.
 <Logger>.exception(<str>)                         # Error() that appends caught exception.
 ```
 
@@ -2321,7 +2320,7 @@ Coroutines
 ----------
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
 * **Coroutine definition starts with `'async'` and its call with `'await'`.**
-* **`'asyncio.run(<coroutine>)'` is the main entry point for asynchronous programs.**
+* **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
 
 ```python
 import asyncio as aio
@@ -2329,9 +2328,9 @@ import asyncio as aio
 
 ```python
 <coro> = <async_function>(<args>)         # Creates a coroutine by calling async def function.
-<obj>  = await <coroutine>                # Starts the coroutine and returns result.
+<obj>  = await <coroutine>                # Starts the coroutine and returns its result.
 <task> = aio.create_task(<coroutine>)     # Schedules the coroutine for execution.
-<obj>  = await <task>                     # Returns result. Also <task>.cancel().
+<obj>  = await <task>                     # Returns coroutine's result. Also <task>.cancel().
 ```
 
 ```python
@@ -2355,7 +2354,7 @@ def main(screen):
 
 async def main_coroutine(screen):
     moves = asyncio.Queue()
-    state = {'*': P(0, 0), **{id_: P(W//2, H//2) for id_ in range(10)}}
+    state = {'*': P(0, 0)} | {id_: P(W//2, H//2) for id_ in range(10)}
     ai    = [random_controller(id_, moves) for id_ in range(10)]
     mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
     tasks = [asyncio.create_task(coro) for coro in ai + mvc]
@@ -2549,12 +2548,12 @@ Web
 **Flask is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
 # $ pip3 install flask
-import flask
+import flask as fl
 ```
 
 ```python
-app = flask.Flask(__name__)                # Returns app object. Put at the top.
-app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=VAL]]
+app = fl.Flask(__name__)                   # Returns app object. Put at the top.
+app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=VAL] …]
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
@@ -2564,25 +2563,25 @@ app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=
 ```python
 @app.route('/img/<path:filename>')
 def serve_file(filename):
-    return flask.send_from_directory('dirname/', filename)
+    return fl.send_from_directory('dirname/', filename)
 ```
 
 ### Dynamic Request
 ```python
 @app.route('/<sport>')
 def serve_html(sport):
-    return flask.render_template_string('<h1>{{title}}</h1>', title=sport)
+    return fl.render_template_string('<h1>{{title}}</h1>', title=sport)
 ```
-* **Use `'render_template(filename, <kwargs>)'` to render file located in templates dir.**
-* **To return an error code use `'abort(<int>)'` and to redirect use `'redirect(<url>)'`.**
-* **`'request.args[<str>]'` returns parameter from the query string (URL part after '?').**
-* **`'session[<str>] = <obj>'` stores session data. Needs `'app.secret_key = <str>'`.**
+* **`'fl.render_template(filename, <kwargs>)'` renders a file located in 'templates' dir.**
+* **`'fl.abort(<int>)'` returns error code and `'return fl.redirect(<url>)'` redirects.**
+* **`'fl.request.args[<str>]'` returns parameter from the query string (URL right of '?').**
+* **`'fl.session[<str>] = <obj>'` stores session data. It requires secret key to be set at the startup with `'app.secret_key = <str>'`.**
 
 ### REST Request
 ```python
 @app.post('/<sport>/odds')
 def serve_json(sport):
-    team = flask.request.form['team']
+    team = fl.request.form['team']
     return {'team': team, 'odds': [2.09, 3.74, 3.68]}
 ```
 
@@ -2592,8 +2591,7 @@ def serve_json(sport):
 >>> import threading, requests
 >>> threading.Thread(target=app.run, daemon=True).start()
 >>> url = 'http://localhost:5000/football/odds'
->>> request_data = {'team': 'arsenal f.c.'}
->>> response = requests.post(url, data=request_data)
+>>> response = requests.post(url, data={'team': 'arsenal f.c.'})
 >>> response.json()
 {'team': 'arsenal f.c.', 'odds': [2.09, 3.74, 3.68]}
 ```
@@ -2833,10 +2831,10 @@ from PIL import ImageDraw
 <Draw> = ImageDraw.Draw(<Image>)                # Object for adding 2D graphics to the image.
 <Draw>.point((x, y))                            # Draws a point. Truncates floats into ints.
 <Draw>.line((x1, y1, x2, y2 [, ...]))           # To get anti-aliasing use Image's resize().
-<Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Always draws in clockwise direction.
+<Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Draws in clockwise dir. Also pieslice().
 <Draw>.rectangle((x1, y1, x2, y2))              # To rotate use Image's rotate() and paste().
 <Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first.
-<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use Image's rotate() and paste().
+<Draw>.ellipse((x1, y1, x2, y2))                # Also rounded_rectangle(), regular_polygon().
 <Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
