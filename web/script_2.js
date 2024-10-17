@@ -62,7 +62,7 @@ var PLOTLY_WIDTH_DESKTOP = 914
 function switch_to_mobile_view() {
   $(`code:contains(ToC)`).html(TOC_MOBILE).css("line-height", TOC_EM);
   const body = document.querySelector("body");
-  body.style["width"] = `${TOC_SCREEN_WIDTH_CUTOFF}px`;
+  body.style["width"] = `${TOC_SCREEN_WIDTH_CUTOFF+12}px`;
   const plotlyDivs = document.querySelectorAll(".plotly-graph-div");
   plotlyDivs.forEach((div) => {
     div.style["width"] = `${TOC_SCREEN_WIDTH_CUTOFF}px`;
