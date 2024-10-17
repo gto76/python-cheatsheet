@@ -1860,7 +1860,7 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
 <li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
 <li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
-<li><strong>RotatingFileHandler creates and deletes files based on 'maxBytes' and 'backupCount' args.</strong></li>
+<li><strong>RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.</strong></li>
 <li><strong>An object with <code class="python hljs"><span class="hljs-string">'filter(&lt;LogRecord&gt;)'</span></code> method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
@@ -2756,7 +2756,7 @@ c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span
 
 <pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
-&lt;DF&gt; = &lt;GB&gt;.get_group(&lt;num&gt;)                   <span class="hljs-comment"># Selects a group by grouping column's value.</span>
+&lt;DF&gt; = &lt;GB&gt;.get_group(&lt;el&gt;)                    <span class="hljs-comment"># Selects a group by grouping column's value.</span>
 &lt;Sr&gt; = &lt;GB&gt;.size()                             <span class="hljs-comment"># A Sr of group sizes. Same keys as get_group().</span>
 &lt;GB&gt; = &lt;GB&gt;[col_key]                           <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
 </code></pre>

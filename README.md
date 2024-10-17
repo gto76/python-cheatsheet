@@ -2272,7 +2272,7 @@ log.basicConfig(
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
 * **If logger doesn't have a set level it inherits it from the first ancestor that does.**
 * **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
-* **RotatingFileHandler creates and deletes files based on 'maxBytes' and 'backupCount' args.**
+* **RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.**
 * **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
 
 #### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
@@ -3386,7 +3386,7 @@ c  7  8  6
 ```python
 <GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
 <DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
-<DF> = <GB>.get_group(<num>)                   # Selects a group by grouping column's value.
+<DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
 <Sr> = <GB>.size()                             # A Sr of group sizes. Same keys as get_group().
 <GB> = <GB>[col_key]                           # Single column GB. All operations return a Sr.
 ```
