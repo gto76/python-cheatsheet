@@ -868,7 +868,7 @@ from functools import partial
 >>> multiply_by_3(10)
 30
 ```
-* **Partial is also useful in cases when function needs to be passed as an argument because it enables us to set its arguments beforehand.**
+* **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand.**
 * **A few examples being: `'defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and dataclass's `'field(default_factory=<func>)'`.**
 
 ### Non-Local
@@ -1664,7 +1664,7 @@ from pathlib import Path
 ```
 
 ### DirEntry
-**Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
+**Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
 
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
@@ -2275,7 +2275,7 @@ log.basicConfig(
 * **RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.**
 * **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
 
-#### Creates a logger that writes all messages to file and sends them to the root's handler that prints warnings or higher:
+#### Creates a logger that writes all messages to a file and sends them to the root's handler that prints warnings or higher:
 ```python
 >>> logger = log.getLogger('my_module')
 >>> handler = log.FileHandler('test.log', encoding='utf-8')
@@ -2523,7 +2523,7 @@ print(f'{python_url}, file://{os.path.abspath(filename)}')
 # $ pip3 install selenium
 from selenium import webdriver
 
-<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens the browser. Also <Drv>.quit().
+<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens a browser. Also <Drv>.quit().
 <Drv>.get('<url>')                                     # Also <Drv>.implicitly_wait(seconds).
 <El> = <Drv/El>.find_element('css selector', '<css>')  # '<tag>#<id>.<class>[<attr>="<val>"]'.
 <list> = <Drv/El>.find_elements('xpath', '<xpath>')    # '//<tag>[@<attr>="<val>"]'.
