@@ -3155,7 +3155,7 @@ import pandas as pd, matplotlib.pyplot as plt
 **Ordered dictionary with a name.**
 
 ```python
->>> pd.Series([1, 2], index=['x', 'y'], name='a')
+>>> sr = pd.Series([1, 2], index=['x', 'y'], name='a'); sr
 x    1
 y    2
 Name: a, dtype: int64
@@ -3203,7 +3203,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 ```
 
 ```python
->>> sr = pd.Series([2, 3], index=['x', 'y'])
+>>> sr = pd.Series([2, 3], index=['x', 'y']); sr
 x    2
 y    3
 ```
@@ -3234,7 +3234,7 @@ y    3
 **Table with labeled rows and columns.**
 
 ```python
->>> pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+>>> l = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y']); l
    x  y
 a  1  2
 b  3  4
@@ -3270,13 +3270,14 @@ b  3  4
 <DF>    = <DF>.sort_values(col_key/s)          # Sorts rows by passed column/s. Also `axis=1`.
 ```
 
+```python
+<DF>.plot.line/area/bar/scatter(x=col_key, …)  # `y=col_key/s`. Also hist/box(by=col_key).
+plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
+```
+
 #### DataFrame — Merge, Join, Concat:
 ```python
->>> l = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
-   x  y
-a  1  2
-b  3  4
->>> r = pd.DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z'])
+>>> r = pd.DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z']); r
    y  z
 b  4  5
 c  6  7
@@ -3323,7 +3324,7 @@ c  6  7
 * **All operations operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 
 ```python
->>> df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y'])
+>>> df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y']); df
    x  y
 a  1  2
 b  3  4
@@ -3350,15 +3351,11 @@ b  3  4
 ```
 * **Use `'<DF>[col_key_1, col_key_2][row_key]'` to get the fifth result's values.**
 
-#### DataFrame — Plot, Encode, Decode:
-```python
-<DF>.plot.line/area/bar/scatter(x=col_key, …)  # `y=col_key/s`. Also hist/box(by=col_key).
-plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
-```
+#### DataFrame — Encode, Decode:
 
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
-<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/parse_dates/…=<obj>`.
+<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/usecols/…=<obj>`.
 <DF> = pd.read_pickle/excel('<path/url>')      # Use `sheet_name=None` to get all Excel sheets.
 <DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
 ```
@@ -3369,23 +3366,29 @@ plt.show()                                     # Displays the plot. Also plt.sav
 <DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
+* **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
+* **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<Sr> = pd.to_datetime(<Sr>, errors="coerce")'`, which uses pd.NaT.**
+* **To get specific attributes from a series of Timestamps use `'<Sr>.dt.year/date/…'`.**
 
 ### GroupBy
 **Object that groups together rows of a dataframe based on the value of the passed column.**
 
 ```python
 >>> df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], list('abc'), list('xyz'))
->>> df.groupby('z').get_group(6)
+>>> gb = df.groupby('z'); gb.apply(print)
+   x  y  z
+a  1  2  3
    x  y  z
 b  4  5  6
 c  7  8  6
 ```
 
 ```python
-<GB> = <DF>.groupby(column_key/s)              # Splits DF into groups based on passed column.
+<GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
 <DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
-<GB> = <GB>[column_key]                        # Single column GB. All operations return a Sr.
+<DF> = <GB>.get_group(<num>)                   # Selects a group by grouping column's value.
 <Sr> = <GB>.size()                             # A Sr of group sizes. Same keys as get_group().
+<GB> = <GB>[col_key]                           # Single column GB. All operations return a Sr.
 ```
 
 #### GroupBy — Aggregate, Transform, Map:
@@ -3396,37 +3399,20 @@ c  7  8  6
 ```
 
 ```python
->>> gb = df.groupby('z'); gb.apply(print)
-   x  y  z
-a  1  2  3
-   x  y  z
-b  4  5  6
-c  7  8  6
+>>> gb.sum()
+    x   y
+z
+3   1   2
+6  11  13
 ```
-
-```text
-+-----------------+-------------+-------------+-------------+---------------+
-|                 |    'sum'    |    'rank'   |   ['rank']  | {'x': 'rank'} |
-+-----------------+-------------+-------------+-------------+---------------+
-| gb.agg(…)       |      x   y  |             |      x    y |               |
-|                 |  z          |      x  y   |   rank rank |        x      |
-|                 |  3   1   2  |   a  1  1   | a    1    1 |     a  1      |
-|                 |  6  11  13  |   b  1  1   | b    1    1 |     b  1      |
-|                 |             |   c  2  2   | c    2    2 |     c  2      |
-+-----------------+-------------+-------------+-------------+---------------+
-| gb.transform(…) |      x   y  |      x  y   |             |               |
-|                 |  a   1   2  |   a  1  1   |             |               |
-|                 |  b  11  13  |   b  1  1   |             |               |
-|                 |  c  11  13  |   c  2  2   |             |               |
-+-----------------+-------------+-------------+-------------+---------------+
-```
+* **Result has a named index that creates column `'z'` instead of `'index'` on reset_index().**
 
 ### Rolling
 **Object for rolling window calculations.**
 
 ```python
 <RSr/RDF/RGB> = <Sr/DF/GB>.rolling(win_size)   # Also: `min_periods=None, center=False`.
-<RSr/RDF/RGB> = <RDF/RGB>[column_key/s]        # Or: <RDF/RGB>.column_key
+<RSr/RDF/RGB> = <RDF/RGB>[col_key/s]           # Or: <RDF/RGB>.col_key
 <Sr/DF>       = <R>.mean/sum/max()             # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
@@ -3435,10 +3421,20 @@ Plotly
 ------
 ```python
 # $ pip3 install pandas plotly kaleido
-import pandas as pd, plotly.express as ex
-<Figure> = ex.line(<DF>, x=<col_name>, y=<col_name>)        # Or: ex.line(x=<list>, y=<list>)
-<Figure>.update_layout(margin=dict(t=0, r=0, b=0, l=0), …)  # `paper_bgcolor='rgb(0, 0, 0)'`.
-<Figure>.write_html/json/image('<path>')                    # Also <Figure>.show().
+import pandas as pd, plotly.express as px
+```
+
+```python
+<Fig> = px.line(<DF>, x=col_key, y=col_key)            # Or: px.line(x=<list>, y=<list>)
+<Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))   # Also `paper_bgcolor='rgb(0, 0, 0)'`.
+<Fig>.write_html/json/image('<path>')                  # Also <Fig>.show().
+```
+
+```python
+<Fig> = px.area/bar/box(<DF>, x=col_key, y=col_key)    # Also `color=col_key`.
+<Fig> = px.scatter(<DF>, x=col_key, y=col_key)         # Also `color/size/symbol=col_key`.
+<Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)   # `z=col_key`. Also color/size/symbol.
+<Fig> = px.histogram(<DF>, x=col_key [, nbins=<int>])  # Number of bins depends on DF size.
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:
@@ -3457,7 +3453,7 @@ df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
 df = df[df.date > '2020-03-14']
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-ex.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
+px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 ```
 
 #### Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:
@@ -3470,20 +3466,23 @@ import pandas as pd, plotly.graph_objects as go
 
 def main():
     covid, bitcoin, gold, dow = scrape_data()
-    display_data(wrangle_data(covid, bitcoin, gold, dow))
+    df = wrangle_data(covid, bitcoin, gold, dow)
+    display_data(df)
 
 def scrape_data():
     def get_covid_cases():
         url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
         df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'])
-        return df[df.location == 'World'].set_index('date').total_cases
+        df = df[df.location == 'World']
+        return df.set_index('date').total_cases
     def get_ticker(symbol):
         url = (f'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?'
                'period1=1579651200&period2=9999999999&interval=1d&events=history')
         df = pd.read_csv(url, usecols=['Date', 'Close'])
         return df.set_index('Date').Close
     out = get_covid_cases(), get_ticker('BTC-USD'), get_ticker('GC=F'), get_ticker('^DJI')
-    return map(pd.Series.rename, out, ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones'])
+    names = ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones']
+    return map(pd.Series.rename, out, names)
 
 def wrangle_data(covid, bitcoin, gold, dow):
     df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates table by joining columns on dates.

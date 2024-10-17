@@ -310,6 +310,7 @@ const MARIO =
   '    main()\n';
 
 const GROUPBY =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], list(<span class="hljs-string">\'abc\'</span>), list(<span class="hljs-string">\'xyz\'</span>))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">\'z\'</span>); gb.apply(print)\n' +
   '   x  y  z\n' +
   'a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>\n' +

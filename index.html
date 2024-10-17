@@ -54,7 +54,7 @@
 
 <body>
   <header>
-    <aside>October 15, 2024</aside>
+    <aside>October 17, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2571,7 +2571,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 </code></pre></div>
 
-<div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pd.Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>)
+<div><h3 id="series">Series</h3><p><strong>Ordered dictionary with a name.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = pd.Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>], name=<span class="hljs-string">'a'</span>); sr
 x    <span class="hljs-number">1</span>
 y    <span class="hljs-number">2</span>
 Name: a, dtype: int64
@@ -2605,7 +2605,7 @@ plt.show()                                     <span class="hljs-comment"># Disp
 &lt;Sr&gt; = &lt;Sr&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;Sr&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = pd.Series([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sr = pd.Series([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], index=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); sr
 x    <span class="hljs-number">2</span>
 y    <span class="hljs-number">3</span>
 </code></pre>
@@ -2630,7 +2630,7 @@ y    <span class="hljs-number">3</span>
 <li><strong>Methods ffill(), interpolate(), fillna() and dropna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
 <li><strong>Last result has a hierarchical index. Use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
-<div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+<div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); l
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
@@ -2657,11 +2657,10 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_index(ascending=<span class="hljs-keyword">True</span>)      <span class="hljs-comment"># Sorts rows by row keys. Use `axis=1` for cols.</span>
 &lt;DF&gt;    = &lt;DF&gt;.sort_values(col_key/s)          <span class="hljs-comment"># Sorts rows by passed column/s. Also `axis=1`.</span>
 </code></pre>
-<div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>l = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
-   x  y
-a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
-b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>r = pd.DataFrame([[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>]], index=[<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], columns=[<span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>])
+<pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(by=col_key).</span>
+plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
+</code></pre>
+<div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>r = pd.DataFrame([[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>]], index=[<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], columns=[<span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>]); r
    y  z
 b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>
 c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
@@ -2705,7 +2704,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <ul>
 <li><strong>All operations operate on columns by default. Pass <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> to process the rows instead.</strong></li>
 </ul>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); df
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
 b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
@@ -2730,72 +2729,70 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;[col_key_1, col_key_2][row_key]'</span></code> to get the fifth result's values.</strong></li>
 </ul>
-<div><h4 id="dataframeplotencodedecode">DataFrame — Plot, Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(by=col_key).</span>
-plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
-</code></pre></div>
-
-<pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
-&lt;DF&gt; = pd.read_csv(<span class="hljs-string">'&lt;path/url&gt;'</span>)               <span class="hljs-comment"># `header/index_col/dtype/parse_dates/…=&lt;obj&gt;`.</span>
+<div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
+&lt;DF&gt; = pd.read_csv(<span class="hljs-string">'&lt;path/url&gt;'</span>)               <span class="hljs-comment"># `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
 &lt;DF&gt; = pd.read_pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)      <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
 &lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
-</code></pre>
+</code></pre></div>
+
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict(<span class="hljs-string">'d/l/s/…'</span>)               <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
 &lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/latex()         <span class="hljs-comment"># Saves output to file if path is passed.</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
+<ul>
+<li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It automatically tries to detect the format, but it can be helped with 'date_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
+<li><strong>If there's a single invalid date then it returns the whole column as a series of strings, unlike <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt; = pd.to_datetime(&lt;Sr&gt;, errors="coerce")'</span></code>, which uses pd.NaT.</strong></li>
+<li><strong>To get specific attributes from a series of Timestamps use <code class="python hljs"><span class="hljs-string">'&lt;Sr&gt;.dt.year/date/…'</span></code>.</strong></li>
+</ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]], list(<span class="hljs-string">'abc'</span>), list(<span class="hljs-string">'xyz'</span>))
-<span class="hljs-meta">&gt;&gt;&gt; </span>df.groupby(<span class="hljs-string">'z'</span>).get_group(<span class="hljs-number">6</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">'z'</span>); gb.apply(print)
+   x  y  z
+a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>
    x  y  z
 b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
-c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>
-</code></pre></div>
+c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span></code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(column_key/s)              <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
+<pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, Sr or el.</span>
-&lt;GB&gt; = &lt;GB&gt;[column_key]                        <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
+&lt;DF&gt; = &lt;GB&gt;.get_group(&lt;num&gt;)                   <span class="hljs-comment"># Selects a group by grouping column's value.</span>
 &lt;Sr&gt; = &lt;GB&gt;.size()                             <span class="hljs-comment"># A Sr of group sizes. Same keys as get_group().</span>
+&lt;GB&gt; = &lt;GB&gt;[col_key]                           <span class="hljs-comment"># Single column GB. All operations return a Sr.</span>
 </code></pre>
 <div><h4 id="groupbyaggregatetransformmap">GroupBy — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;Sr&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()           <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;Sr&gt;: &lt;Sr&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>gb = df.groupby(<span class="hljs-string">'z'</span>); gb.apply(print)
-   x  y  z
-a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>
-   x  y  z
-b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>
-c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span></code></pre>
-<pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
-┃                 │    <span class="hljs-string">'sum'</span>    │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
-┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
-┃ gb.agg(…)       │      x   y  │             │      x    y │               ┃
-┃                 │  z          │      x  y   │   rank rank │        x      ┃
-┃                 │  <span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ a    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     a  <span class="hljs-number">1</span>      ┃
-┃                 │  <span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │ b    <span class="hljs-number">1</span>    <span class="hljs-number">1</span> │     b  <span class="hljs-number">1</span>      ┃
-┃                 │             │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │ c    <span class="hljs-number">2</span>    <span class="hljs-number">2</span> │     c  <span class="hljs-number">2</span>      ┃
-┠─────────────────┼─────────────┼─────────────┼─────────────┼───────────────┨
-┃ gb.transform(…) │      x   y  │      x  y   │             │               ┃
-┃                 │  a   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>  │   a  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
-┃                 │  b  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   b  <span class="hljs-number">1</span>  <span class="hljs-number">1</span>   │             │               ┃
-┃                 │  c  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>  │   c  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>   │             │               ┃
-┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>gb.sum()
+    x   y
+z
+<span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>
+<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>
 </code></pre>
+<ul>
+<li><strong>Result has a named index that creates column <code class="python hljs"><span class="hljs-string">'z'</span></code> instead of <code class="python hljs"><span class="hljs-string">'index'</span></code> on reset_index().</strong></li>
+</ul>
 <div><h3 id="rolling">Rolling</h3><p><strong>Object for rolling window calculations.</strong></p><pre><code class="python language-python hljs">&lt;RSr/RDF/RGB&gt; = &lt;Sr/DF/GB&gt;.rolling(win_size)   <span class="hljs-comment"># Also: `min_periods=None, center=False`.</span>
-&lt;RSr/RDF/RGB&gt; = &lt;RDF/RGB&gt;[column_key/s]        <span class="hljs-comment"># Or: &lt;RDF/RGB&gt;.column_key</span>
+&lt;RSr/RDF/RGB&gt; = &lt;RDF/RGB&gt;[col_key/s]           <span class="hljs-comment"># Or: &lt;RDF/RGB&gt;.col_key</span>
 &lt;Sr/DF&gt;       = &lt;R&gt;.mean/sum/max()             <span class="hljs-comment"># Or: &lt;R&gt;.apply/agg(&lt;agg_func/str&gt;)</span>
 </code></pre></div>
 
 
 <div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly kaleido</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.express <span class="hljs-keyword">as</span> ex
-&lt;Figure&gt; = ex.line(&lt;DF&gt;, x=&lt;col_name&gt;, y=&lt;col_name&gt;)        <span class="hljs-comment"># Or: ex.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
-&lt;Figure&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>), …)  <span class="hljs-comment"># `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Figure&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                    <span class="hljs-comment"># Also &lt;Figure&gt;.show().</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.express <span class="hljs-keyword">as</span> px
 </code></pre></div>
 
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)            <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
+&lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))   <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># Also &lt;Fig&gt;.show().</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)    <span class="hljs-comment"># Also `color=col_key`.</span>
+&lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)         <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
+&lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)   <span class="hljs-comment"># `z=col_key`. Also color/size/symbol.</span>
+&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_key [, nbins=&lt;int&gt;])  <span class="hljs-comment"># Number of bins depends on DF size.</span>
+</code></pre>
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'</span>
                     <span class="hljs-string">'6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv'</span>,
                     usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
@@ -2806,7 +2803,7 @@ df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class=
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
 df = df[df.date &gt; <span class="hljs-string">'2020-03-14'</span>]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
-ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
 </code></pre></div>
 
 
@@ -2815,20 +2812,23 @@ ex.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     covid, bitcoin, gold, dow = scrape_data()
-    display_data(wrangle_data(covid, bitcoin, gold, dow))
+    df = wrangle_data(covid, bitcoin, gold, dow)
+    display_data(df)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
         url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
-        <span class="hljs-keyword">return</span> df[df.location == <span class="hljs-string">'World'</span>].set_index(<span class="hljs-string">'date'</span>).total_cases
+        df = df[df.location == <span class="hljs-string">'World'</span>]
+        <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'date'</span>).total_cases
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ticker</span><span class="hljs-params">(symbol)</span>:</span>
         url = (<span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{symbol}</span>?'</span>
                <span class="hljs-string">'period1=1579651200&amp;period2=9999999999&amp;interval=1d&amp;events=history'</span>)
         df = pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>])
         <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'Date'</span>).Close
     out = get_covid_cases(), get_ticker(<span class="hljs-string">'BTC-USD'</span>), get_ticker(<span class="hljs-string">'GC=F'</span>), get_ticker(<span class="hljs-string">'^DJI'</span>)
-    <span class="hljs-keyword">return</span> map(pd.Series.rename, out, [<span class="hljs-string">'Total Cases'</span>, <span class="hljs-string">'Bitcoin'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Dow Jones'</span>])
+    names = [<span class="hljs-string">'Total Cases'</span>, <span class="hljs-string">'Bitcoin'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Dow Jones'</span>]
+    <span class="hljs-keyword">return</span> map(pd.Series.rename, out, names)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, bitcoin, gold, dow)</span>:</span>
     df = pd.concat([bitcoin, gold, dow], axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># Creates table by joining columns on dates.</span>
@@ -2926,7 +2926,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>October 15, 2024</aside>
+    <aside>October 17, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
