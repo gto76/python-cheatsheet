@@ -2270,7 +2270,7 @@ log.basicConfig(
 <Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
-* **If logger doesn't have a set level it inherits it from the first ancestor that does.**
+* **If logger doesn't have a set level, it inherits it from the first ancestor that does.**
 * **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
 * **RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.**
 * **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
@@ -3362,7 +3362,7 @@ b  3  4
 
 ```python
 <dict> = <DF>.to_dict('d/l/s/…')               # Returns columns as dicts, lists or series.
-<str>  = <DF>.to_json/html/csv/latex()         # Saves output to file if path is passed.
+<str>  = <DF>.to_json/html/csv/latex()         # Saves output to a file if path is passed.
 <DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```

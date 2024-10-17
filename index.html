@@ -1858,7 +1858,7 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 </code></pre>
 <ul>
 <li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
-<li><strong>If logger doesn't have a set level it inherits it from the first ancestor that does.</strong></li>
+<li><strong>If logger doesn't have a set level, it inherits it from the first ancestor that does.</strong></li>
 <li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
 <li><strong>RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.</strong></li>
 <li><strong>An object with <code class="python hljs"><span class="hljs-string">'filter(&lt;LogRecord&gt;)'</span></code> method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.</strong></li>
@@ -2736,7 +2736,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict(<span class="hljs-string">'d/l/s/…'</span>)               <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
-&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/latex()         <span class="hljs-comment"># Saves output to file if path is passed.</span>
+&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/latex()         <span class="hljs-comment"># Saves output to a file if path is passed.</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
