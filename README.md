@@ -1293,7 +1293,7 @@ class MySequence:
 ```
 
 #### Discrepancies between glossary definitions and abstract base classes:
-* **Glossary defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.**
+* **Glossary on Python's website defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.**
 * **Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
@@ -2416,9 +2416,9 @@ Plot
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
 
-plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Or: plt.plot(y_data)
+plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Also plt.plot(y_data).
 plt.legend()                                          # Adds a legend.
-plt.title/xlabel/ylabel(<str>)                        # Adds a title/label.
+plt.title/xlabel/ylabel(<str>)                        # Adds a title or label.
 plt.savefig(<path>)                                   # Saves the figure.
 plt.show()                                            # Displays the figure.
 plt.clf()                                             # Clears the figure.
@@ -2476,7 +2476,7 @@ GUI App
 # $ pip3 install PySimpleGUI
 import PySimpleGUI as sg
 
-text_box = sg.Input(default_text='100', enable_events=True, key='-VALUE-')
+text_box = sg.Input(default_text='100', enable_events=True, key='-QUANTITY-')
 dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='-UNIT-')
 label    = sg.Text('100 kg is 220.462 lbs.', key='-OUTPUT-')
 button   = sg.Button('Close')
@@ -2487,13 +2487,13 @@ while True:
     if event in [sg.WIN_CLOSED, 'Close']:
         break
     try:
-        value = float(values['-VALUE-'])
+        quantity = float(values['-QUANTITY-'])
     except ValueError:
         continue
     unit = values['-UNIT-']
     factors = {'g': 0.001, 'kg': 1, 't': 1000}
-    lbs = value * factors[unit] / 0.45359237
-    window['-OUTPUT-'].update(value=f'{value} {unit} is {lbs:g} lbs.')
+    lbs = quantity * factors[unit] / 0.45359237
+    window['-OUTPUT-'].update(value=f'{quantity} {unit} is {lbs:g} lbs.')
 window.close()
 ```
 
@@ -2523,28 +2523,28 @@ print(f'{python_url}, file://{os.path.abspath(filename)}')
 # $ pip3 install selenium
 from selenium import webdriver
 
-<Drv> = webdriver.Chrome/Firefox/Safari/Edge()         # Opens a browser. Also <Drv>.quit().
-<Drv>.get('<url>')                                     # Also <Drv>.implicitly_wait(seconds).
-<El> = <Drv/El>.find_element('css selector', '<css>')  # '<tag>#<id>.<class>[<attr>="<val>"]'.
-<list> = <Drv/El>.find_elements('xpath', '<xpath>')    # '//<tag>[@<attr>="<val>"]'.
-<str> = <El>.get_attribute(<str>)                      # Property if exists. Also <El>.text.
-<El>.click/clear()                                     # Also <El>.send_keys(<str>).
+<WebDrv> = webdriver.Chrome/Firefox/Safari/Edge()     # Opens a browser. Also <WebDrv>.quit().
+<WebDrv>.get('<url>')                                 # Also <WebDrv>.implicitly_wait(seconds).
+<El>   = <WebDrv/El>.find_element('css selector', …)  # '<tag>#<id>.<class>[<attr>="<val>"]…'.
+<list> = <WebDrv/El>.find_elements('xpath', …)        # '//<tag>[@<attr>="<val>"]…'. See XPath.
+<str>  = <El>.get_attribute(<str>)                    # Property if exists. Also <El>.text.
+<El>.click/clear()                                    # Also <El>.send_keys(<str>).
 ```
 
 #### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
 ```python
-<xpath>     = //<element>[/ or // <element>]           # /<child>, //<descendant>, /../<siblng>
-<xpath>     = //<element>/following::<element>         # Next element. Also preceding/parent/…
-<element>   = <tag><conditions><index>                 # `<tag> = */a/…`, `<index> = [1/2/…]`.
-<condition> = [<sub_cond> [and/or <sub_cond>]]         # For negation use `not(<sub_cond>)`.
-<sub_cond>  = @<attr>[="<val>"]                        # `text()=`, `.=` match (complete) text.
-<sub_cond>  = contains(@<attr>, "<val>")               # Is <val> a substring of attr's value?
-<sub_cond>  = [//]<element>                            # Has matching child? Descendant if //.
+<xpath>     = //<element>[/ or // <element>]          # /<child>, //<descendant>, /../<sibling>
+<xpath>     = //<element>/following::<element>        # Next element. Also preceding/parent/…
+<element>   = <tag><conditions><index>                # `<tag> = */a/…`, `<index> = [1/2/…]`.
+<condition> = [<sub_cond> [and/or <sub_cond>]]        # For negation use `not(<sub_cond>)`.
+<sub_cond>  = @<attr>[="<val>"]                       # `text()=`, `.=` match (complete) text.
+<sub_cond>  = contains(@<attr>, "<val>")              # Is <val> a substring of attr's value?
+<sub_cond>  = [//]<element>                           # Has matching child? Descendant if //.
 ```
 
 
-Web
----
+Web App
+-------
 **Flask is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
 # $ pip3 install flask
@@ -2552,7 +2552,7 @@ import flask as fl
 ```
 
 ```python
-app = fl.Flask(__name__)                   # Returns app object. Put at the top.
+app = fl.Flask(__name__)                   # Returns the app object. Put at the top.
 app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=VAL] …]
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
