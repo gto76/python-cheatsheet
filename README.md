@@ -2294,25 +2294,25 @@ CRITICAL:my_module:Running out of disk space.
 Introspection
 -------------
 ```python
-<list> = dir()                          # Names of local vars, functions, classes and modules.
-<dict> = vars()                         # Dict of local vars, functions, etc. Also locals().
-<dict> = globals()                      # Dict of global vars, etc. (including '__builtins__').
+<list> = dir()                      # List of of local names (including functions and classes).
+<dict> = vars()                     # Dict of local names and their objects. Also locals().
+<dict> = globals()                  # Dict of global names (for instance '__builtin__' module).
 ```
 
 ```python
-<list> = dir(<obj>)                     # Names of all object's attributes (including methods).
-<dict> = vars(<obj>)                    # Dict of writable attributes. Also <obj>.__dict__.
-<bool> = hasattr(<obj>, '<attr_name>')  # Checks if getattr() raises AttributeError.
-value  = getattr(<obj>, '<attr_name>')  # Default value can be passed as the third argument.
-setattr(<obj>, '<attr_name>', value)    # Only works on objects with __dict__ attribute.
-delattr(<obj>, '<attr_name>')           # Same. Also `del <object>.<attr_name>`.
+<list> = dir(<obj>)                 # Returns names of all object's attributes (incl. methods).
+<dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
+<bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute with passed name.
+value  = getattr(<obj>, '<name>')   # Returns object's attribute or raises AttributeError.
+setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__.
+delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del <obj>.<name>`.
 ```
 
 ```python
-<Sig>  = inspect.signature(<function>)  # Returns function's Signature object.
-<dict> = <Sig>.parameters               # Dict of Parameters. Also <Sig>.return_annotation.
-<memb> = <Param>.kind                   # Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).
-<obj>  = <Param>.default                # Parameter.empty if missing. Also <Param>.annotation.
+<Sig>  = inspect.signature(<func>)  # Returns function's Signature object. Can accept a class.
+<dict> = <Sig>.parameters           # Returns dict of Parameters. Also <Sig>.return_annotation.
+<memb> = <Param>.kind               # Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).
+<type> = <Param>.annotation         # Returns Parameter.empty if missing. Also <Param>.default.
 ```
 
 

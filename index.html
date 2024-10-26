@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>October 25, 2024</aside>
+    <aside>October 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1877,22 +1877,22 @@ CRITICAL:my_module:Running out of disk space.
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                          <span class="hljs-comment"># Names of local vars, functions, classes and modules.</span>
-&lt;dict&gt; = vars()                         <span class="hljs-comment"># Dict of local vars, functions, etc. Also locals().</span>
-&lt;dict&gt; = globals()                      <span class="hljs-comment"># Dict of global vars, etc. (including '__builtins__').</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># List of of local names (including functions and classes).</span>
+&lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Also locals().</span>
+&lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names (for instance '__builtin__' module).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                     <span class="hljs-comment"># Names of all object's attributes (including methods).</span>
-&lt;dict&gt; = vars(&lt;obj&gt;)                    <span class="hljs-comment"># Dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
-&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Checks if getattr() raises AttributeError.</span>
-value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)  <span class="hljs-comment"># Default value can be passed as the third argument.</span>
-setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>, value)    <span class="hljs-comment"># Only works on objects with __dict__ attribute.</span>
-delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;attr_name&gt;'</span>)           <span class="hljs-comment"># Same. Also `del &lt;object&gt;.&lt;attr_name&gt;`.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                 <span class="hljs-comment"># Returns names of all object's attributes (incl. methods).</span>
+&lt;dict&gt; = vars(&lt;obj&gt;)                <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
+&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute with passed name.</span>
+value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns object's attribute or raises AttributeError.</span>
+setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__.</span>
+delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;function&gt;)  <span class="hljs-comment"># Returns function's Signature object.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters               <span class="hljs-comment"># Dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
-&lt;memb&gt; = &lt;Param&gt;.kind                   <span class="hljs-comment"># Member of ParamKind enum (Parameter.KEYWORD_ONLY, …).</span>
-&lt;obj&gt;  = &lt;Param&gt;.default                <span class="hljs-comment"># Parameter.empty if missing. Also &lt;Param&gt;.annotation.</span>
+<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns function's Signature object. Can accept a class.</span>
+&lt;dict&gt; = &lt;Sig&gt;.parameters           <span class="hljs-comment"># Returns dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
+&lt;memb&gt; = &lt;Param&gt;.kind               <span class="hljs-comment"># Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).</span>
+&lt;type&gt; = &lt;Param&gt;.annotation         <span class="hljs-comment"># Returns Parameter.empty if missing. Also &lt;Param&gt;.default.</span>
 </code></pre>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>
@@ -2927,7 +2927,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>October 25, 2024</aside>
+    <aside>October 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
