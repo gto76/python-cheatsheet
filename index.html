@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>October 26, 2024</aside>
+    <aside>October 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -360,7 +360,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> argument is used.</strong></li>
-<li><strong>It restricts special sequence matches to <code class="python hljs"><span class="hljs-string">'[\x00-\x7f]'</span></code> (the first 128 characters) and also prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code> (the so-called separator characters).</strong></li>
+<li><strong>It restricts special sequence matches to <code class="python hljs"><span class="hljs-string">'[\x00-\x7f]'</span></code> (the first 128 characters) and also prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'[\x1c-\x1f]'</span></code> (file, table, row, and field separators).</strong></li>
 <li><strong>Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).</strong></li>
 </ul>
 <div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly brackets can also contain expressions.</span>
@@ -549,7 +549,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong>Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
-<li><strong>To get zoneinfo module to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
+<li><strong>To get ZoneInfo() to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
 &lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
@@ -1407,7 +1407,7 @@ args  = p.parse_args()                                            <span class="h
 </code></pre></div>
 
 
-<div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths and DirEntry objects.</span>
+<div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths, and DirEntry objects.</span>
 &lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second path must be a Path object.</span>
 &lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute path with resolved symlinks.</span>
 </code></pre></div>
@@ -2216,7 +2216,7 @@ $ snakeviz test.prof                                            <span class="hlj
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.</strong></p><pre><code class="python language-python hljs">left  = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]                           <span class="hljs-comment"># Shape: (3,)</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]                           <span class="hljs-comment"># Shape: (3,)</span>
 right = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
 </code></pre></div>
 
@@ -2781,8 +2781,8 @@ z
 </code></pre></div>
 
 
-<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas plotly kaleido</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.express <span class="hljs-keyword">as</span> px
+<div><h2 id="plotly"><a href="#plotly" name="plotly">#</a>Plotly</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install plotly kaleido pandas</span>
+<span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px, pandas <span class="hljs-keyword">as</span> pd
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)            <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
@@ -2923,11 +2923,12 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
 <div><h2 id="index"><a href="#index" name="index">#</a>Index</h2><ul><li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>
 <li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>
 <li><strong>Searching <code class="python hljs"><span class="hljs-string">'#&lt;title&gt;'</span></code> will limit the search to the titles.</strong></li>
+<li><strong>Click on the <code class="python hljs"><span class="hljs-string">'#'</span></code> symbol to get a link to specific section.</strong></li>
 </ul></div>
  
 
   <footer>
-    <aside>October 26, 2024</aside>
+    <aside>October 28, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

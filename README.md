@@ -390,7 +390,7 @@ import re
 ```
 
 * **By default, decimal characters, alphanumerics and whitespaces from all alphabets are matched unless `'flags=re.ASCII'` argument is used.**
-* **It restricts special sequence matches to `'[\x00-\x7f]'` (the first 128 characters) and also prevents `'\s'` from accepting `'[\x1c-\x1f]'` (the so-called separator characters).**
+* **It restricts special sequence matches to `'[\x00-\x7f]'` (the first 128 characters) and also prevents `'\s'` from accepting `'[\x1c-\x1f]'` (file, table, row, and field separators).**
 * **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
 
 
@@ -627,7 +627,7 @@ import zoneinfo, dateutil.tz
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
 ```
 * **Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
-* **To get zoneinfo module to work on Windows run `'> pip3 install tzdata'`.**
+* **To get ZoneInfo() to work on Windows run `'> pip3 install tzdata'`.**
 
 ### Encode
 ```python
@@ -1675,7 +1675,7 @@ from pathlib import Path
 
 ### Path Object
 ```python
-<Path> = Path(<path> [, ...])       # Accepts strings, Paths and DirEntry objects.
+<Path> = Path(<path> [, ...])       # Accepts strings, Paths, and DirEntry objects.
 <Path> = <path> / <path> [/ ...]    # First or second path must be a Path object.
 <Path> = <Path>.resolve()           # Returns absolute path with resolved symlinks.
 ```
@@ -2716,7 +2716,7 @@ import numpy as np
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
-**Set of rules by which NumPy functions operate on arrays of different sizes and/or dimensions.**
+**A set of rules by which NumPy functions operate on arrays of different shapes.**
 
 ```python
 left  = [ 0.1 ,  0.6 ,  0.8 ]                           # Shape: (3,)
@@ -3420,8 +3420,8 @@ z
 Plotly
 ------
 ```python
-# $ pip3 install pandas plotly kaleido
-import pandas as pd, plotly.express as px
+# $ pip3 install plotly kaleido pandas
+import plotly.express as px, pandas as pd
 ```
 
 ```python
@@ -3590,3 +3590,4 @@ Index
 * **Only available in the [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
 * **Ctrl+F / ⌘F is usually sufficient.**
 * **Searching `'#<title>'` on the [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
+* **Click on the `'🔗'` symbol to get a link to specific section.**
