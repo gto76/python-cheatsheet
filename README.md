@@ -3146,7 +3146,7 @@ if __name__ == '__main__':
 
 Pandas
 ------
-**Data analysis library. For examples see [Plotly](#displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent).**
+**Data analysis library. For examples see [Plotly](#displays-a-line-chart-of-total-coronavirus-deaths-per-million-grouped-by-continent).**
 
 ```python
 # $ pip3 install pandas matplotlib
