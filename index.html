@@ -2611,20 +2611,20 @@ plt.show()                                     <span class="hljs-comment"># Disp
 &lt;S&gt;  = &lt;S&gt;.isna/fillna/isin([&lt;el/coll&gt;])       <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python hljs">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
-┃               │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  ┃
-┠───────────────┼─────────────┼─────────────┼───────────────┨
-┃ s.apply(…)    │      <span class="hljs-number">3</span>      │    sum  <span class="hljs-number">3</span>   │     s  <span class="hljs-number">3</span>      ┃
-┃ s.agg(…)      │             │             │               ┃
-┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
+<pre><code class="python hljs">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃              │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'s'</span>: <span class="hljs-string">'sum'</span>}  ┃
+┠──────────────┼─────────────┼─────────────┼───────────────┨
+┃ s.apply(…)   │      <span class="hljs-number">3</span>      │    sum  <span class="hljs-number">3</span>   │     s  <span class="hljs-number">3</span>      ┃
+┃ s.agg(…)     │             │             │               ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 
-┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
-┃               │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} ┃
-┠───────────────┼─────────────┼─────────────┼───────────────┨
-┃ s.apply(…)    │             │      rank   │               ┃
-┃ s.agg(…)      │    x  <span class="hljs-number">1.0</span>   │   x   <span class="hljs-number">1.0</span>   │   r  x  <span class="hljs-number">1.0</span>   ┃
-┃               │    y  <span class="hljs-number">2.0</span>   │   y   <span class="hljs-number">2.0</span>   │      y  <span class="hljs-number">2.0</span>   ┃
-┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃              │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'r'</span>: <span class="hljs-string">'rank'</span>} ┃
+┠──────────────┼─────────────┼─────────────┼───────────────┨
+┃ s.apply(…)   │             │      rank   │               ┃
+┃ s.agg(…)     │    x  <span class="hljs-number">1.0</span>   │   x   <span class="hljs-number">1.0</span>   │   r  x  <span class="hljs-number">1.0</span>   ┃
+┃              │    y  <span class="hljs-number">2.0</span>   │   y   <span class="hljs-number">2.0</span>   │      y  <span class="hljs-number">2.0</span>   ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 
 <ul>
