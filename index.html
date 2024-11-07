@@ -2701,21 +2701,21 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 &lt;DF&gt; = &lt;DF&gt;.isna/fillna/isin([&lt;el/coll&gt;])      <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
-<pre><code class="python hljs">┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
-┃                 │    <span class="hljs-string">'sum'</span>    │   [<span class="hljs-string">'sum'</span>]   │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  ┃
-┠─────────────────┼─────────────┼─────────────┼───────────────┨
-┃ l.apply(…)      │     x  <span class="hljs-number">4</span>    │       x  y  │     x  <span class="hljs-number">4</span>      ┃
-┃ l.agg(…)        │     y  <span class="hljs-number">6</span>    │  sum  <span class="hljs-number">4</span>  <span class="hljs-number">6</span>  │               ┃
-┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
+<pre><code class="python hljs">┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃                │     <span class="hljs-string">'sum'</span>     │    [<span class="hljs-string">'sum'</span>]    │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'sum'</span>}  ┃
+┠────────────────┼───────────────┼───────────────┼───────────────┨
+┃ l.apply(…)     │      x  <span class="hljs-number">4</span>     │        x  y   │     x  <span class="hljs-number">4</span>      ┃
+┃ l.agg(…)       │      y  <span class="hljs-number">6</span>     │   sum  <span class="hljs-number">4</span>  <span class="hljs-number">6</span>   │               ┃
+┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 
-┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
-┃                 │    <span class="hljs-string">'rank'</span>   │   [<span class="hljs-string">'rank'</span>]  │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
-┠─────────────────┼─────────────┼─────────────┼───────────────┨
-┃ l.apply(…)      │             │      x    y │               ┃
-┃ l.agg(…)        │      x    y │   rank rank │         x     ┃
-┃ l.transform(…)  │ a  <span class="hljs-number">1.0</span>  <span class="hljs-number">1.0</span> │ a  <span class="hljs-number">1.0</span>  <span class="hljs-number">1.0</span> │    a  <span class="hljs-number">1.0</span>     ┃
-┃                 │ b  <span class="hljs-number">2.0</span>  <span class="hljs-number">2.0</span> │ b  <span class="hljs-number">2.0</span>  <span class="hljs-number">2.0</span> │    b  <span class="hljs-number">2.0</span>     ┃
-┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
+┃                │     <span class="hljs-string">'rank'</span>    │    [<span class="hljs-string">'rank'</span>]   │ {<span class="hljs-string">'x'</span>: <span class="hljs-string">'rank'</span>} ┃
+┠────────────────┼───────────────┼───────────────┼───────────────┨
+┃ l.apply(…)     │               │       x    y  │               ┃
+┃ l.agg(…)       │       x    y  │    rank rank  │         x     ┃
+┃ l.transform(…) │  a  <span class="hljs-number">1.0</span>  <span class="hljs-number">1.0</span>  │  a  <span class="hljs-number">1.0</span>  <span class="hljs-number">1.0</span>  │    a  <span class="hljs-number">1.0</span>     ┃
+┃                │  b  <span class="hljs-number">2.0</span>  <span class="hljs-number">2.0</span>  │  b  <span class="hljs-number">2.0</span>  <span class="hljs-number">2.0</span>  │    b  <span class="hljs-number">2.0</span>     ┃
+┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 
 <ul>
