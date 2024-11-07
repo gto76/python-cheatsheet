@@ -1740,9 +1740,9 @@ shutil.rmtree(<path>)               # Deletes the directory.
 
 ### Shell Commands
 ```python
-<pipe> = os.popen('<command>')      # Executes command in sh/cmd. Returns its stdout pipe.
+<pipe> = os.popen('<commands>')     # Executes commands in sh/cmd. Returns combined stdout.
 <str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()             # Closes the pipe. Returns None on success (returncode 0).
+<int>  = <pipe>.close()             # Returns None if last command exited with returncode 0.
 ```
 
 #### Sends '1 + 1' to the basic calculator and captures its output:
@@ -3146,6 +3146,8 @@ if __name__ == '__main__':
 
 Pandas
 ------
+**Data analysis library. For examples see [Plotly](#displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent).**
+
 ```python
 # $ pip3 install pandas matplotlib
 import pandas as pd, matplotlib.pyplot as plt
@@ -3155,65 +3157,61 @@ import pandas as pd, matplotlib.pyplot as plt
 **Ordered dictionary with a name.**
 
 ```python
->>> sr = pd.Series([1, 2], index=['x', 'y'], name='a'); sr
+>>> s = pd.Series([1, 2], index=['x', 'y'], name='a'); s
 x    1
 y    2
 Name: a, dtype: int64
 ```
 
 ```python
-<Sr> = pd.Series(<list>)                       # Assigns RangeIndex starting at 0.
-<Sr> = pd.Series(<dict>)                       # Takes dictionary's keys for index.
-<Sr> = pd.Series(<dict/Series>, index=<list>)  # Only keeps items with keys specified in index.
+<S>  = pd.Series(<list>)                       # Assigns RangeIndex starting at 0.
+<S>  = pd.Series(<dict>)                       # Takes dictionary's keys for index.
+<S>  = pd.Series(<dict/Series>, index=<list>)  # Only keeps items with keys specified in index.
 ```
 
 ```python
-<el> = <Sr>.loc[key]                           # Or: <Sr>.iloc[i]
-<Sr> = <Sr>.loc[coll_of_keys]                  # Or: <Sr>.iloc[coll_of_i]
-<Sr> = <Sr>.loc[from_key : to_key_inc]         # Or: <Sr>.iloc[from_i : to_i_exc]
+<el> = <S>.loc[key]                            # Or: <S>.iloc[i]
+<S>  = <S>.loc[coll_of_keys]                   # Or: <S>.iloc[coll_of_i]
+<S>  = <S>.loc[from_key : to_key_inc]          # Or: <S>.iloc[from_i : to_i_exc]
 ```
 
 ```python
-<el> = <Sr>[key/i]                             # Or: <Sr>.<key>
-<Sr> = <Sr>[coll_of_keys/coll_of_i]            # Or: <Sr>[key/i : key/i]
-<Sr> = <Sr>[bools]                             # Or: <Sr>.loc/iloc[bools]
+<el> = <S>[key/i]                              # Or: <S>.<key>
+<S>  = <S>[coll_of_keys/coll_of_i]             # Or: <S>[key/i : key/i]
+<S>  = <S>[bools]                              # Or: <S>.loc/iloc[bools]
 ```
 
 ```python
-<Sr> = <Sr> > <el/Sr>                          # Returns a Series of bools.
-<Sr> = <Sr> + <el/Sr>                          # Items with non-matching keys get value NaN.
+<S>  = <S> > <el/S>                            # Returns a Series of bools.
+<S>  = <S> + <el/S>                            # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<Sr> = pd.concat(<coll_of_Sr>)                 # Concats multiple series into one long Series.
-<Sr> = <Sr>.combine_first(<Sr>)                # Adds items that are not yet present.
-<Sr>.update(<Sr>)                              # Updates items that are already present.
+<S> = pd.concat(<coll_of_S>)                   # Concats multiple series into one long Series.
+<S> = <S>.combine_first(<S>)                   # Adds items that are not yet present.
+<S>.update(<S>)                                # Updates items that are already present.
 ```
 
 ```python
-<Sr>.plot.line/area/bar/pie/hist()             # Generates a Matplotlib plot.
+<S>.plot.line/area/bar/pie/hist()              # Generates a Matplotlib plot.
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
+* **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
+* **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 
 #### Series — Aggregate, Transform, Map:
 ```python
-<el> = <Sr>.sum/max/mean/idxmax/all()          # Or: <Sr>.agg(lambda <Sr>: <el>)
-<Sr> = <Sr>.rank/diff/cumsum/ffill/interpo…()  # Or: <Sr>.agg/transform(lambda <Sr>: <Sr>)
-<Sr> = <Sr>.fillna(<el>)                       # Or: <Sr>.agg/transform/map(lambda <el>: <el>)
-```
-
-```python
->>> sr = pd.Series([2, 3], index=['x', 'y']); sr
-x    2
-y    3
+<el> = <S>.sum/max/mean/idxmax/all()           # Or: <S>.agg(lambda <S>: <el>)
+<S>  = <S>.rank/diff/cumsum/ffill/interpol…()  # Or: <S>.agg/transform(lambda <S>: <S>)
+<S>  = <S>.isna/fillna/isin([<el/coll>])       # Or: <S>.agg/transform/map(lambda <el>: <el>)
 ```
 
 ```text
 +---------------+-------------+-------------+---------------+
 |               |    'sum'    |   ['sum']   | {'s': 'sum'}  |
 +---------------+-------------+-------------+---------------+
-| sr.apply(…)   |      5      |    sum  5   |     s  5      |
-| sr.agg(…)     |             |             |               |
+| s.apply(…)    |      3      |    sum  3   |     s  3      |
+| s.agg(…)      |             |             |               |
 +---------------+-------------+-------------+---------------+
 ```
 
@@ -3221,14 +3219,13 @@ y    3
 +---------------+-------------+-------------+---------------+
 |               |    'rank'   |   ['rank']  | {'r': 'rank'} |
 +---------------+-------------+-------------+---------------+
-| sr.apply(…)   |             |      rank   |               |
-| sr.agg(…)     |     x  1    |   x     1   |    r  x  1    |
-|               |     y  2    |   y     2   |       y  2    |
+| s.apply(…)    |             |      rank   |               |
+| s.agg(…)      |    x  1.0   |   x   1.0   |   r  x  1.0   |
+|               |    y  2.0   |   y   2.0   |      y  2.0   |
 +---------------+-------------+-------------+---------------+
 ```
-* **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
 * **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
-* **Last result has a hierarchical index. Use `'<Sr>[key_1, key_2]'` to get its values.**
+* **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 
 ### DataFrame
 **Table with labeled rows and columns.**
@@ -3241,33 +3238,39 @@ b  3  4
 ```
 
 ```python
-<DF>    = pd.DataFrame(<list_of_rows>)         # Rows can be either lists, dicts or series.
-<DF>    = pd.DataFrame(<dict_of_columns>)      # Columns can be either lists, dicts or series.
+<DF>   = pd.DataFrame(<list_of_rows>)          # Rows can be either lists, dicts or series.
+<DF>   = pd.DataFrame(<dict_of_columns>)       # Columns can be either lists, dicts or series.
 ```
 
 ```python
-<el>    = <DF>.loc[row_key, col_key]           # Or: <DF>.iloc[row_i, col_i]
-<Sr/DF> = <DF>.loc[row_key/s]                  # Or: <DF>.iloc[row_i/s]
-<Sr/DF> = <DF>.loc[:, col_key/s]               # Or: <DF>.iloc[:, col_i/s]
-<DF>    = <DF>.loc[row_bools, col_bools]       # Or: <DF>.iloc[row_bools, col_bools]
+<el>   = <DF>.loc[row_key, col_key]            # Or: <DF>.iloc[row_i, col_i]
+<S/DF> = <DF>.loc[row_key/s]                   # Or: <DF>.iloc[row_i/s]
+<S/DF> = <DF>.loc[:, col_key/s]                # Or: <DF>.iloc[:, col_i/s]
+<DF>   = <DF>.loc[row_bools, col_bools]        # Or: <DF>.iloc[row_bools, col_bools]
 ```
 
 ```python
-<Sr/DF> = <DF>[col_key/s]                      # Or: <DF>.<col_key>
-<DF>    = <DF>[row_bools]                      # Keeps rows as specified by bools.
-<DF>    = <DF>[<DF_of_bools>]                  # Assigns NaN to items that are False in bools.
+<S/DF> = <DF>[col_key/s]                       # Or: <DF>.<col_key>
+<DF>   = <DF>[row_bools]                       # Keeps rows as specified by bools.
+<DF>   = <DF>[<DF_of_bools>]                   # Assigns NaN to items that are False in bools.
 ```
 
 ```python
-<DF>    = <DF> > <el/Sr/DF>                    # Returns DF of bools. Sr is treated as a row.
-<DF>    = <DF> + <el/Sr/DF>                    # Items with non-matching keys get value NaN.
+<DF>   = <DF> > <el/S/DF>                      # Returns DF of bools. S is treated as a row.
+<DF>   = <DF> + <el/S/DF>                      # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<DF>    = <DF>.set_index(col_key)              # Replaces row keys with column's values.
-<DF>    = <DF>.reset_index(drop=False)         # Drops or moves row keys to column named index.
-<DF>    = <DF>.sort_index(ascending=True)      # Sorts rows by row keys. Use `axis=1` for cols.
-<DF>    = <DF>.sort_values(col_key/s)          # Sorts rows by passed column/s. Also `axis=1`.
+<DF>   = <DF>.set_index(col_key)               # Replaces row keys with column's values.
+<DF>   = <DF>.reset_index(drop=False)          # Drops or moves row keys to column named index.
+<DF>   = <DF>.sort_index(ascending=True)       # Sorts rows by row keys. Use `axis=1` for cols.
+<DF>   = <DF>.sort_values(col_key/s)           # Sorts rows by passed column/s. Also `axis=1`.
+```
+
+```python
+<DF>   = <DF>.head/tail/sample(<int>)          # Returns first, last, or random n elements.
+<DF>   = <DF>.describe()                       # Describes columns. Also shape, info(), corr().
+<DF>   = <DF>.query('<query>')                 # Filters rows with e.g. 'col_1 == val_1 and …'.
 ```
 
 ```python
@@ -3301,41 +3304,28 @@ c  6  7
 |           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
 |           join=…)      | b  3   4   .  |     4      |            | A Series is treated as a |
 |                        | b  .   4   5  |     4      |            | column. To add a row use |
-|                        | c  .   6   7  |     6      |            | pd.concat([l, DF([sr])]).|
+|                        | c  .   6   7  |     6      |            | pd.concat([l, DF([s])]). |
 +------------------------+---------------+------------+------------+--------------------------+
 | pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
 |           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
 |           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A Series is  |
 |                        | c  .  .  6  7 |            |            | treated as a column.     |
 +------------------------+---------------+------------+------------+--------------------------+
-| l.combine_first(r)     |    x   y   z  |            |            | Adds missing rows and    |
-|                        | a  1   2   .  |            |            | columns. Also updates    |
-|                        | b  3   4   5  |            |            | items that contain NaN.  |
-|                        | c  .   6   7  |            |            | Argument r must be a DF. |
-+------------------------+---------------+------------+------------+--------------------------+
 ```
 
 #### DataFrame — Aggregate, Transform, Map:
 ```python
-<Sr> = <DF>.sum/max/mean/idxmax/all()          # Or: <DF>.apply/agg(lambda <Sr>: <el>)
-<DF> = <DF>.rank/diff/cumsum/ffill/interpo…()  # Or: <DF>.apply/agg/transfo…(lambda <Sr>: <Sr>)
-<DF> = <DF>.fillna(<el>)                       # Or: <DF>.applymap(lambda <el>: <el>)
-```
-* **All operations operate on columns by default. Pass `'axis=1'` to process the rows instead.**
-
-```python
->>> df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y']); df
-   x  y
-a  1  2
-b  3  4
+<S>  = <DF>.sum/max/mean/idxmax/all()          # Or: <DF>.apply/agg(lambda <S>: <el>)
+<DF> = <DF>.rank/diff/cumsum/ffill/interpo…()  # Or: <DF>.apply/agg/transform(lambda <S>: <S>)
+<DF> = <DF>.isna/fillna/isin([<el/coll>])      # Or: <S>.agg/transform/map(lambda <el>: <el>)
 ```
 
 ```text
 +-----------------+-------------+-------------+---------------+
 |                 |    'sum'    |   ['sum']   | {'x': 'sum'}  |
 +-----------------+-------------+-------------+---------------+
-| df.apply(…)     |     x  4    |       x  y  |     x  4      |
-| df.agg(…)       |     y  6    |  sum  4  6  |               |
+| l.apply(…)      |     x  4    |       x  y  |     x  4      |
+| l.agg(…)        |     y  6    |  sum  4  6  |               |
 +-----------------+-------------+-------------+---------------+
 ```
 
@@ -3343,16 +3333,25 @@ b  3  4
 +-----------------+-------------+-------------+---------------+
 |                 |    'rank'   |   ['rank']  | {'x': 'rank'} |
 +-----------------+-------------+-------------+---------------+
-| df.apply(…)     |             |      x    y |               |
-| df.agg(…)       |      x  y   |   rank rank |        x      |
-| df.transform(…) |   a  1  1   | a    1    1 |     a  1      |
-|                 |   b  2  2   | b    2    2 |     b  2      |
+| l.apply(…)      |             |      x    y |               |
+| l.agg(…)        |      x    y |   rank rank |         x     |
+| l.transform(…)  | a  1.0  1.0 | a  1.0  1.0 |    a  1.0     |
+|                 | b  2.0  2.0 | b  2.0  2.0 |    b  2.0     |
 +-----------------+-------------+-------------+---------------+
 ```
-* **Use `'<DF>[col_key_1, col_key_2][row_key]'` to get the fifth result's values.**
+* **All methods operate on columns by default. Pass `'axis=1'` to process the rows instead.**
+* **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a single column: `'<DF>.loc[row_k, (col_k_1, col_k_2)]'`.**
+
+#### DataFrame — Multi-Index:
+```python
+<DF>   = <DF>.xs(row_key, level=<int>)         # Rows with key on passed level of multi-index.
+<DF>   = <DF>.xs(row_keys, level=<ints>)       # Rows that have first key on first level, etc.
+<DF>   = <DF>.set_index(col_keys)              # Combines multiple columns into a multi-index.
+<S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
+<DF>   = <DF>.pivot_table(index=col_key/s, …)  # `columns=col_key/s, values=col_key/s`.
+```
 
 #### DataFrame — Encode, Decode:
-
 ```python
 <DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
 <DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/usecols/…=<obj>`.
@@ -3367,12 +3366,27 @@ b  3  4
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
 * **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
-* **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<Sr> = pd.to_datetime(<Sr>, errors="coerce")'`, which uses pd.NaT.**
-* **To get specific attributes from a series of Timestamps use `'<Sr>.dt.year/date/…'`.**
+* **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<S> = pd.to_datetime(<S>, errors="coerce")'`, which uses pd.NaT.**
+* **To get specific attributes from a series of Timestamps use `'<S>.dt.year/date/…'`.**
 
 ### GroupBy
 **Object that groups together rows of a dataframe based on the value of the passed column.**
 
+```python
+<GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
+<DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, S or el.
+<DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
+<S>  = <GB>.size()                             # S of group sizes. Same keys as get_group().
+<GB> = <GB>[col_key]                           # Single column GB. All operations return S.
+```
+
+```python
+<DF> = <GB>.sum/max/mean/idxmax/all()          # Or: <GB>.agg(lambda <S>: <el>)
+<DF> = <GB>.rank/diff/cumsum/ffill()           # Or: <GB>.transform(lambda <S>: <S>)
+<DF> = <GB>.fillna(<el>)                       # Or: <GB>.transform(lambda <S>: <S>)
+```
+
+#### Divides rows into groups and sums their columns. Result has a named index that creates column `'z'` on reset_index():
 ```python
 >>> df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 6]], list('abc'), list('xyz'))
 >>> gb = df.groupby('z'); gb.apply(print)
@@ -3381,39 +3395,20 @@ a  1  2  3
    x  y  z
 b  4  5  6
 c  7  8  6
-```
-
-```python
-<GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
-<DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, Sr or el.
-<DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
-<Sr> = <GB>.size()                             # A Sr of group sizes. Same keys as get_group().
-<GB> = <GB>[col_key]                           # Single column GB. All operations return a Sr.
-```
-
-#### GroupBy — Aggregate, Transform, Map:
-```python
-<DF> = <GB>.sum/max/mean/idxmax/all()          # Or: <GB>.agg(lambda <Sr>: <el>)
-<DF> = <GB>.rank/diff/cumsum/ffill()           # Or: <GB>.transform(lambda <Sr>: <Sr>)
-<DF> = <GB>.fillna(<el>)                       # Or: <GB>.transform(lambda <Sr>: <Sr>)
-```
-
-```python
 >>> gb.sum()
     x   y
 z
 3   1   2
 6  11  13
 ```
-* **Result has a named index that creates column `'z'` instead of `'index'` on reset_index().**
 
 ### Rolling
 **Object for rolling window calculations.**
 
 ```python
-<RSr/RDF/RGB> = <Sr/DF/GB>.rolling(win_size)   # Also: `min_periods=None, center=False`.
-<RSr/RDF/RGB> = <RDF/RGB>[col_key/s]           # Or: <RDF/RGB>.col_key
-<Sr/DF>       = <R>.mean/sum/max()             # Or: <R>.apply/agg(<agg_func/str>)
+<RS/RDF/RGB> = <S/DF/GB>.rolling(win_size)     # Also: `min_periods=None, center=False`.
+<RS/RDF/RGB> = <RDF/RGB>[col_key/s]            # Or: <RDF/RGB>.col_key
+<S/DF>       = <R>.mean/sum/max()              # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
 

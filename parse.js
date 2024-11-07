@@ -316,7 +316,13 @@ const GROUPBY =
   'a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>\n' +
   '   x  y  z\n' +
   'b  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>\n' +
-  'c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>';
+  'c  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">6</span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>gb.sum()\n' +
+  '    x   y\n' +
+  'z\n' +
+  '<span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>\n' +
+  '<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>';
+
 
 const CYTHON_1 =
   '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;obj&gt;\n' +
@@ -576,22 +582,22 @@ const DIAGRAM_12_B =
   '┗━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━━┛\n';
 
 const DIAGRAM_13_A =
-  '| sr.apply(…)   |      5      |    sum  5   |     s  5      |';
+  '| s.apply(…)    |      3      |    sum  3   |     s  3      |';
 
 const DIAGRAM_13_B =
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃               │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
   "┠───────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ sr.apply(…)   │      5      │    sum  5   │     s  5      ┃\n" +
-  "┃ sr.agg(…)     │             │             │               ┃\n" +
+  "┃ s.apply(…)    │      3      │    sum  3   │     s  3      ┃\n" +
+  "┃ s.agg(…)      │             │             │               ┃\n" +
   "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
   "\n" +
   "┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃               │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
   "┠───────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ sr.apply(…)   │             │      rank   │               ┃\n" +
-  "┃ sr.agg(…)     │     x  1    │   x     1   │    r  x  1    ┃\n" +
-  "┃               │     y  2    │   y     2   │       y  2    ┃\n" +
+  "┃ s.apply(…)    │             │      rank   │               ┃\n" +
+  "┃ s.agg(…)      │    x  1.0   │   x   1.0   │   r  x  1.0   ┃\n" +
+  "┃               │    y  2.0   │   y   2.0   │      y  2.0   ┃\n" +
   "┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_14_A =
@@ -618,37 +624,32 @@ const DIAGRAM_15_B =
   "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
   "┃           join=…)      │ b  3   4   .  │     4      │            │ A Series is treated as a ┃\n" +
   "┃                        │ b  .   4   5  │     4      │            │ column. To add a row use ┃\n" +
-  "┃                        │ c  .   6   7  │     6      │            │ pd.concat([l, DF([sr])]).┃\n" +
+  "┃                        │ c  .   6   7  │     6      │            │ pd.concat([l, DF([s])]). ┃\n" +
   "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
   "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
   "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'  ┃\n" +
   "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A Series is  ┃\n" +
   "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
-  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.combine_first(r)     │    x   y   z  │            │            │ Adds missing rows and    ┃\n" +
-  "┃                        │ a  1   2   .  │            │            │ columns. Also updates    ┃\n" +
-  "┃                        │ b  3   4   5  │            │            │ items that contain NaN.  ┃\n" +
-  "┃                        │ c  .   6   7  │            │            │ Argument r must be a DF. ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_16_A =
-  '| df.apply(…)     |     x  4    |       x  y  |     x  4      |';
+  '| l.apply(…)      |     x  4    |       x  y  |     x  4      |';
 
 const DIAGRAM_16_B =
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'sum'    │   ['sum']   │ {'x': 'sum'}  ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…)     │     x  4    │       x  y  │     x  4      ┃\n" +
-  "┃ df.agg(…)       │     y  6    │  sum  4  6  │               ┃\n" +
+  "┃ l.apply(…)      │     x  4    │       x  y  │     x  4      ┃\n" +
+  "┃ l.agg(…)        │     y  6    │  sum  4  6  │               ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
   "\n" +
   "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
   "┃                 │    'rank'   │   ['rank']  │ {'x': 'rank'} ┃\n" +
   "┠─────────────────┼─────────────┼─────────────┼───────────────┨\n" +
-  "┃ df.apply(…)     │             │      x    y │               ┃\n" +
-  "┃ df.agg(…)       │      x  y   │   rank rank │        x      ┃\n" +
-  "┃ df.transform(…) │   a  1  1   │ a    1    1 │     a  1      ┃\n" +
-  "┃                 │   b  2  2   │ b    2    2 │     b  2      ┃\n" +
+  "┃ l.apply(…)      │             │      x    y │               ┃\n" +
+  "┃ l.agg(…)        │      x    y │   rank rank │         x     ┃\n" +
+  "┃ l.transform(…)  │ a  1.0  1.0 │ a  1.0  1.0 │    a  1.0     ┃\n" +
+  "┃                 │ b  2.0  2.0 │ b  2.0  2.0 │    b  2.0     ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_17_A =
