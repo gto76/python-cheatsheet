@@ -493,7 +493,7 @@ Format
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)                # Or: math.floor(<float>)
+<int>      = int(<float/str/bool>)                # Or: math.trunc(<float>)
 <float>    = float(<int/str/bool>)                # Or: <int/float>e±<int>
 <complex>  = complex(real=0, imag=0)              # Or: <int/float> ± <int/float>j
 <Fraction> = fractions.Fraction(0, 1)             # Or: Fraction(numerator=0, denominator=1)
@@ -931,7 +931,7 @@ from functools import cache
 def fib(n):
     return n if n < 2 else fib(n-2) + fib(n-1)
 ```
-* **Potential problem with cache is that it can grow indefinitely. To clear its stored values run `'fib.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
+* **Potential problem with cache is that it can grow indefinitely. To clear stored return values run `'fib.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
 * **CPython interpreter limits recursion depth to 3000 by default. To increase it run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
@@ -1055,9 +1055,9 @@ class <class_name>:
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 ```python
-<class> = make_dataclass('<class_name>', <coll_of_attribute_names>)
-<class> = make_dataclass('<class_name>', <coll_of_tuples>)
-<tuple> = ('<attr_name>', <type> [, <default_value>])
+Point = make_dataclass('Point', ['x', 'y'])
+Point = make_dataclass('Point', [('x', float), ('y', float)])
+Point = make_dataclass('Point', [('x', float, 0), ('y', float, 0)])
 ```
 
 ### Property
@@ -1293,7 +1293,7 @@ class MySequence:
 ```
 
 #### Discrepancies between glossary definitions and abstract base classes:
-* **Glossary on Python's website defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.**
+* **Python's glossary defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.**
 * **Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
