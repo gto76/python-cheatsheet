@@ -60,7 +60,7 @@ sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
-* **For details about sort(), sorted(), max() and min() see [sortable](#sortable).**
+* **For details about sort(), sorted(), min() and max() see [sortable](#sortable).**
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python

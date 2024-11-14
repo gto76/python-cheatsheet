@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 MATCHES = {
-    '<strong>For details about sort(), sorted(), max() and min() see <a href="#sortable">sortable</a>.</strong>': '<strong>For details about sort(), sorted(), max() and min() see sortable (p. 16).</strong>',
+    '<strong>For details about sort(), sorted(), min() and max() see <a href="#sortable">sortable</a>.</strong>': '<strong>For details about sort(), sorted(), min() and max() see sortable (p. 16).</strong>',
     '<strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong>': '<strong>Module \'operator\' (p. 31) provides functions itemgetter() and mul() that offer the same functionality as lambda expressions (p. 11) above.</strong>',
     '<strong>Adding <code class="python hljs"><span class="hljs-string">\'!r\'</span></code> to the expression converts object to string by calling its <a href="#class">repr()</a> method.</strong>': '<strong>Adding <code class="python hljs"><span class="hljs-string">\'!r\'</span></code> to the expression converts object to string by calling its repr() method.</strong>',
     '<strong>It can be any <a href="#callable">callable</a>, but is usually implemented as a function that returns a <a href="#closure">closure</a>.</strong>': '<strong>It can be any callable, but is usually implemented as a function that returns a closure.</strong>',
