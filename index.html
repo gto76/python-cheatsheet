@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 13, 2024</aside>
+    <aside>November 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -114,16 +114,16 @@
 &lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns new list with sorted elements.</span>
 &lt;iter&gt; = reversed(&lt;list&gt;)       <span class="hljs-comment"># Returns reversed iterator of elements.</span>
 </code></pre>
-<pre><code class="python language-python hljs">sum_of_elements  = sum(&lt;collection&gt;)
-elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(list_a, list_b)]
+<pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns largest element. Also max(&lt;el_1&gt;, ...).</span>
+&lt;num&gt; = sum(&lt;collection&gt;)       <span class="hljs-comment"># Returns sum of elements. Also math.prod(&lt;coll&gt;).</span>
+</code></pre>
+<pre><code class="python language-python hljs">elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(list_a, list_b)]
 sorted_by_second = sorted(&lt;collection&gt;, key=<span class="hljs-keyword">lambda</span> el: el[<span class="hljs-number">1</span>])
 sorted_by_both   = sorted(&lt;collection&gt;, key=<span class="hljs-keyword">lambda</span> el: (el[<span class="hljs-number">1</span>], el[<span class="hljs-number">0</span>]))
 flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
-product_of_elems = functools.reduce(<span class="hljs-keyword">lambda</span> out, el: out * el, &lt;collection&gt;)
-list_of_chars    = list(&lt;str&gt;)
 </code></pre>
 <ul>
-<li><strong>For details about sorted(), min() and max() see <a href="#sortable">sortable</a>.</strong></li>
+<li><strong>For details about sort(), sorted(), max() and min() see <a href="#sortable">sortable</a>.</strong></li>
 <li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on other collections.</span>
@@ -527,7 +527,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microseconds=0`.</span>
 </code></pre>
 <ul>
-<li><strong>Aware <code class="apache hljs"><span class="hljs-section">&lt;a&gt;</span></code> time and datetime objects have defined timezone, while naive <code class="apache hljs"><span class="hljs-section">&lt;n&gt;</span></code> don't. If object is naive, it is presumed to be in the system's timezone!</strong></li>
+<li><strong>Aware times and datetimes have defined timezone, while naive don't. If object is naive, it is presumed to be in the system's timezone!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
 <li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of all seconds.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an int, with Monday being 0.</strong></li>
@@ -1789,9 +1789,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;func&gt; = op.itemgetter/attrgetter/methodcaller(&lt;obj&gt; [, ...])  <span class="hljs-comment"># [index/key], .name, .name([…])</span>
 </code></pre>
 <pre><code class="python language-python hljs">elementwise_sum  = map(op.add, list_a, list_b)
-sorted_by_second = sorted(&lt;coll.&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
-sorted_by_both   = sorted(&lt;coll.&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
-product_of_elems = functools.reduce(op.mul, &lt;collection&gt;)
+sorted_by_second = sorted(&lt;coll&gt;, key=op.itemgetter(<span class="hljs-number">1</span>))
+sorted_by_both   = sorted(&lt;coll&gt;, key=op.itemgetter(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
 first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span class="hljs-number">0</span>)(&lt;list&gt;)
 </code></pre>
 <ul>
@@ -2924,7 +2923,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 13, 2024</aside>
+    <aside>November 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
