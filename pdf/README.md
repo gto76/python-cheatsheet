@@ -14,8 +14,8 @@ Printing to PDF
 ### Normal PDF
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the index and footer with contents of `pdf/index_for_pdf.html` file and save.
-* Disable internet connection and open the file in Chromium version 108.0.5328.0 (later versions will render the site incorrectly after index is added) with 'Cache killer' extension enabled.
-* Right click on the border of the site and select inspect. Select `<body>` element under 'Elements' tab and change top margin from 16 to 0 and top padding from 16 to 5 in 'Styles' tab.
+* Disable internet connection and open Chromium version 108.0.5328.0 (later versions will render the site incorrectly after index is added). Right click anywhere in the window and choose 'inspect'. Go to 'Network' tab and check 'Disable Cache'. Open the `index.html` file while keeping the inspect window open.
+* Right click on the border of the site and select inspect. Select `<body>` element under 'Elements' tab and change top margin and top padding from 16 to 0 in 'Styles' tab.
 * Change brightness of comments by right clicking on one of them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows. Change lightness (L) percentage to 77%.
 * Change the brightness of text to 13%.
 * Select 'Print...' with destination 'Save as PDF', paper size 'A4', 'Default' margins (top 10mm, right 9.5mm, bottom 8mm and left 10mm), 'Default' scale and no headers and footers and save (the document should be 51 pages long with last page empty).
@@ -26,8 +26,8 @@ Printing to PDF
 * Change all links in text to normal text and add a page number in brackets like that: '(p. <page_num>)' by running './pdf/remove_links.py' (Links can be found with this regex: `<strong>.*a href.*</strong>`).
 * Open `index.html` in text editor and first remove element `<p><br></p>` before the `<h1>Libraries</h1>`.
 * Then replace the index and footer with contents of `pdf/index_for_pdf_print.html` file and save.
-* Disable internet connection and open the file in Chromium version 108.0.5328.0 (later versions will render the site incorrectly after index is added) with 'Cache killer' extension enabled.
-* Right click on the border of the site and select inspect. Select `<body>` element under 'Elements' tab and change top margin from 16 to 0 and top padding from 16 to 5 in 'Styles' tab.
+* Disable internet connection and open Chromium version 108.0.5328.0 (later versions will render the site incorrectly after index is added). Right click anywhere in the window and choose 'inspect'. Go to 'Network' tab and check 'Disable Cache'. Open the `index.html` file while keeping the inspect window open.
+* Right click on the border of the site and select inspect. Select `<body>` element under 'Elements' tab and change top margin and top padding from 16 to 0 in 'Styles' tab.
 * Change brightness of elements by right clicking on them and selecting inspect. Then click on the rectangle that represents color and toggle the color space to HSLA by clicking on the button with two vertical arrows.
 * Change lightness (L) percentage to:
 * 0% for the text.
