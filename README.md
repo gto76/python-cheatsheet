@@ -50,7 +50,7 @@ List
 ```
 
 ```python
-<el>  = max(<collection>)       # Returns largest element. Also max(<el_1>, ...).
+<el>  = max(<collection>)       # Returns largest element. Also min(<el_1>, ...).
 <num> = sum(<collection>)       # Returns sum of elements. Also math.prod(<coll>).
 ```
 
@@ -61,10 +61,11 @@ sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
 * **For details about sort(), sorted(), min() and max() see [sortable](#sortable).**
-* **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
+* **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
+* **This text uses the term 'collection' instead of 'iterable'. For rationale see [collection](#collection).**
 
 ```python
-<int> = len(<list>)             # Returns number of items. Also works on other collections.
+<int> = len(<list>)             # Returns number of items. Also works on dict, set and string.
 <int> = <list>.count(<el>)      # Returns number of occurrences. Also `if <el> in <coll>: ...`.
 <int> = <list>.index(<el>)      # Returns index of the first occurrence or raises ValueError.
 <el>  = <list>.pop()            # Removes and returns item from the end or at index if passed.

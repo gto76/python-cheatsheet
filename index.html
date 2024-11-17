@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 14, 2024</aside>
+    <aside>November 17, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -114,7 +114,7 @@
 &lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns new list with sorted elements.</span>
 &lt;iter&gt; = reversed(&lt;list&gt;)       <span class="hljs-comment"># Returns reversed iterator of elements.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns largest element. Also max(&lt;el_1&gt;, ...).</span>
+<pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns largest element. Also min(&lt;el_1&gt;, ...).</span>
 &lt;num&gt; = sum(&lt;collection&gt;)       <span class="hljs-comment"># Returns sum of elements. Also math.prod(&lt;coll&gt;).</span>
 </code></pre>
 <pre><code class="python language-python hljs">elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(list_a, list_b)]
@@ -124,9 +124,10 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 </code></pre>
 <ul>
 <li><strong>For details about sort(), sorted(), min() and max() see <a href="#sortable">sortable</a>.</strong></li>
-<li><strong>Module <a href="#operator">operator</a> provides functions itemgetter() and mul() that offer the same functionality as <a href="#lambda">lambda</a> expressions above.</strong></li>
+<li><strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong></li>
+<li><strong>This text uses the term 'collection' instead of 'iterable'. For rationale see <a href="#collection">collection</a>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on other collections.</span>
+<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on dict, set and string.</span>
 &lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Returns number of occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
 &lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
 &lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end or at index if passed.</span>
@@ -2923,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 14, 2024</aside>
+    <aside>November 17, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
