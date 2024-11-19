@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 18, 2024</aside>
+    <aside>November 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -87,7 +87,7 @@
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#threading">Threading</a>, <a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#coroutines">Coroutines</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#consoleapp">Console_App</a>, <a href="#guiapp">GUI</a>, <a href="#scraping">Scraping</a>, <a href="#web">Web</a>, <a href="#profiling">Profile</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#consoleapp">Console_App</a>, <a href="#guiapp">GUI</a>, <a href="#scraping">Scraping</a>, <a href="#webapp">Web</a>, <a href="#profiling">Profile</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'8. Multimedia'</span></span></strong>:  [<a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>, <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>, <a href="#plotly">Plotly</a>]
 }
 </code></pre></div>
@@ -1340,7 +1340,7 @@ args  = p.parse_args()                                            <span class="h
 <li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'rb'</span></code>, <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, …)</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'rb'</span></code>, <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, …).</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
@@ -1399,7 +1399,7 @@ args  = p.parse_args()                                            <span class="h
 &lt;bool&gt; = os.path.isdir(&lt;path&gt;)      <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.is_dir()</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># Or: &lt;DirEntry/Path&gt;.stat()</span>
-&lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Modification time, size in bytes, ...</span>
+&lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Modification time, size in bytes, etc.</span>
 </code></pre>
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path as a string.</span>
@@ -2568,7 +2568,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     main()
 </code></pre></div>
 
-<div><h2 id="pandas"><a href="#pandas" name="pandas">#</a>Pandas</h2><p><strong>Data analysis library. For examples see <a href="#displays-a-line-chart-of-total-coronavirus-deaths-per-million-grouped-by-continent">Plotly</a>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas matplotlib</span>
+<div><h2 id="pandas"><a href="#pandas" name="pandas">#</a>Pandas</h2><p><strong>Data analysis library. For examples see <a href="#displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Plotly</a>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas matplotlib</span>
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 </code></pre></div>
 
@@ -2923,7 +2923,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 18, 2024</aside>
+    <aside>November 19, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
