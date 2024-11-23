@@ -975,15 +975,15 @@ class MyClass:
     def get_class_name(cls):
         return cls.__name__
 ```
-* **Return value of str() should be readable and of repr() unambiguous.**
-* **If only repr() is defined, it will also be used for str().**
-* **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first arg.**
 
 ```python
 >>> obj = MyClass(1)
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
+* **Return value of str() should be readable and of repr() unambiguous.**
+* **If only repr() is defined, it will also be used for str().**
+* **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first argument.**
 
 #### Expressions that call the str() method:
 ```python
@@ -1769,22 +1769,22 @@ JSON
 
 ```python
 import json
-<str>    = json.dumps(<object>)     # Converts object to JSON string.
-<object> = json.loads(<str>)        # Converts JSON string to object.
+<str>  = json.dumps(<list/dict>)    # Converts collection to JSON string.
+<coll> = json.loads(<str>)          # Converts JSON string to collection.
 ```
 
-### Read Object from JSON File
+### Read Collection from JSON File
 ```python
 def read_json_file(filename):
     with open(filename, encoding='utf-8') as file:
         return json.load(file)
 ```
 
-### Write Object to JSON File
+### Write Collection to JSON File
 ```python
-def write_to_json_file(filename, an_object):
+def write_to_json_file(filename, list_or_dict):
     with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(an_object, file, ensure_ascii=False, indent=2)
+        json.dump(list_or_dict, file, ensure_ascii=False, indent=2)
 ```
 
 
@@ -1884,41 +1884,41 @@ def write_to_csv_file(filename, rows, mode='w', **csv_params):
 
 SQLite
 ------
-**A server-less database engine that stores each database into a separate file.**
+**A server-less database engine that stores each database into its own file.**
 
 ```python
 import sqlite3
-<conn> = sqlite3.connect(<path>)                # Opens existing or new file. Also ':memory:'.
-<conn>.close()                                  # Closes connection. Discards uncommitted data.
+<conn> = sqlite3.connect(<path>)               # Opens existing or new file. Also ':memory:'.
+<conn>.close()                                 # Closes connection. Discards uncommitted data.
 ```
 
 ### Read
 ```python
-<cursor> = <conn>.execute('<query>')            # Can raise a subclass of sqlite3.Error.
-<tuple>  = <cursor>.fetchone()                  # Returns next row. Also next(<cursor>).
-<list>   = <cursor>.fetchall()                  # Returns remaining rows. Also list(<cursor>).
+<cursor> = <conn>.execute('<query>')           # Can raise a subclass of sqlite3.Error.
+<tuple>  = <cursor>.fetchone()                 # Returns next row. Also next(<cursor>).
+<list>   = <cursor>.fetchall()                 # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<conn>.execute('<query>')                       # Can raise a subclass of sqlite3.Error.
-<conn>.commit()                                 # Saves all changes since the last commit.
-<conn>.rollback()                               # Discards all changes since the last commit.
+<conn>.execute('<query>')                      # Can raise a subclass of sqlite3.Error.
+<conn>.commit()                                # Saves all changes since the last commit.
+<conn>.rollback()                              # Discards all changes since the last commit.
 ```
 
 #### Or:
 ```python
-with <conn>:                                    # Exits the block with commit() or rollback(),
-    <conn>.execute('<query>')                   # depending on whether any exception occurred.
+with <conn>:                                   # Exits the block with commit() or rollback(),
+    <conn>.execute('<query>')                  # depending on whether any exception occurred.
 ```
 
 ### Placeholders
 ```python
-<conn>.execute('<query>', <list/tuple>)         # Replaces '?'s in query with values.
-<conn>.execute('<query>', <dict/namedtuple>)    # Replaces ':<key>'s with values.
-<conn>.executemany('<query>', <coll_of_above>)  # Runs execute() multiple times.
+<conn>.execute('<query>', <list/tuple>)        # Replaces '?'s in query with values.
+<conn>.execute('<query>', <dict/namedtuple>)   # Replaces ':<key>'s with values.
+<conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
 ```
-* **Passed values can be of type str, int, float, bytes, None or bool (stored as 1 or 0).**
+* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
@@ -1936,10 +1936,10 @@ with <conn>:                                    # Exits the block with commit() 
 ```python
 # $ pip3 install sqlalchemy
 from sqlalchemy import create_engine, text
-<engine> = create_engine('<url>')               # Url: 'dialect://user:password@host/dbname'.
-<conn>   = <engine>.connect()                   # Creates a connection. Also <conn>.close().
-<cursor> = <conn>.execute(text('<query>'), …)   # Replaces ':<key>'s with keyword arguments.
-with <conn>.begin(): ...                        # Exits the block with commit or rollback.
+<engine> = create_engine('<url>')              # Url: 'dialect://user:password@host/dbname'.
+<conn>   = <engine>.connect()                  # Creates a connection. Also <conn>.close().
+<cursor> = <conn>.execute(text('<query>'), …)  # Replaces ':<key>'s with keyword arguments.
+with <conn>.begin(): ...                       # Exits the block with commit or rollback.
 ```
 
 ```text
@@ -2832,9 +2832,9 @@ from PIL import ImageDraw
 <Draw>.point((x, y))                            # Draws a point. Truncates floats into ints.
 <Draw>.line((x1, y1, x2, y2 [, ...]))           # To get anti-aliasing use Image's resize().
 <Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Draws in clockwise dir. Also pieslice().
-<Draw>.rectangle((x1, y1, x2, y2))              # To rotate use Image's rotate() and paste().
+<Draw>.rectangle((x1, y1, x2, y2))              # Also rounded_rectangle(), regular_polygon().
 <Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first.
-<Draw>.ellipse((x1, y1, x2, y2))                # Also rounded_rectangle(), regular_polygon().
+<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use Image's rotate() and paste().
 <Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`
 ```
 * **Use `'fill=<color>'` to set the primary color.**
@@ -3340,7 +3340,7 @@ c  6  7
 +----------------+---------------+---------------+---------------+
 ```
 * **All methods operate on columns by default. Pass `'axis=1'` to process the rows instead.**
-* **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a single column: `'<DF>.loc[row_k, (col_k_1, col_k_2)]'`.**
+* **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: `'<DF>.loc[row_key, (col_key_1, col_key_2)]'`.**
 
 #### DataFrame — Multi-Index:
 ```python
@@ -3348,7 +3348,7 @@ c  6  7
 <DF>   = <DF>.xs(row_keys, level=<ints>)       # Rows that have first key on first level, etc.
 <DF>   = <DF>.set_index(col_keys)              # Combines multiple columns into a multi-index.
 <S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
-<DF>   = <DF>.pivot_table(index=col_key/s, …)  # `columns=col_key/s, values=col_key/s`.
+<DF>   = <DF>.pivot_table(index=col_key/s, …)  # `columns=key/s, values=key/s, aggfunc='mean'`.
 ```
 
 #### DataFrame — Encode, Decode:

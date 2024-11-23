@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 19, 2024</aside>
+    <aside>November 23, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -817,15 +817,15 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 </code></pre></div>
 
 
-<ul>
-<li><strong>Return value of str() should be readable and of repr() unambiguous.</strong></li>
-<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
-<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first arg.</strong></li>
-</ul>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>obj = MyClass(<span class="hljs-number">1</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>obj.a, str(obj), repr(obj)
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
+<ul>
+<li><strong>Return value of str() should be readable and of repr() unambiguous.</strong></li>
+<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
+<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first argument.</strong></li>
+</ul>
 <div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;obj&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>'</span>
 logging.warning(&lt;obj&gt;)
@@ -1471,19 +1471,19 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <div><h2 id="json"><a href="#json" name="json">#</a>JSON</h2><p><strong>Text file format for storing collections of strings and numbers.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> json
-&lt;str&gt;    = json.dumps(&lt;object&gt;)     <span class="hljs-comment"># Converts object to JSON string.</span>
-&lt;object&gt; = json.loads(&lt;str&gt;)        <span class="hljs-comment"># Converts JSON string to object.</span>
+&lt;str&gt;  = json.dumps(&lt;list/dict&gt;)    <span class="hljs-comment"># Converts collection to JSON string.</span>
+&lt;coll&gt; = json.loads(&lt;str&gt;)          <span class="hljs-comment"># Converts JSON string to collection.</span>
 </code></pre></div>
 
 
-<div><h3 id="readobjectfromjsonfile">Read Object from JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_json_file</span><span class="hljs-params">(filename)</span>:</span>
+<div><h3 id="readcollectionfromjsonfile">Read Collection from JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_json_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
         <span class="hljs-keyword">return</span> json.load(file)
 </code></pre></div>
 
-<div><h3 id="writeobjecttojsonfile">Write Object to JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_json_file</span><span class="hljs-params">(filename, an_object)</span>:</span>
+<div><h3 id="writecollectiontojsonfile">Write Collection to JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_json_file</span><span class="hljs-params">(filename, list_or_dict)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
-        json.dump(an_object, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
+        json.dump(list_or_dict, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
 </code></pre></div>
 
 <div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing Python objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
@@ -1561,33 +1561,33 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
         writer.writerows(rows)
 </code></pre></div>
 
-<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>A server-less database engine that stores each database into a separate file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-&lt;conn&gt; = sqlite3.connect(&lt;path&gt;)                <span class="hljs-comment"># Opens existing or new file. Also ':memory:'.</span>
-&lt;conn&gt;.close()                                  <span class="hljs-comment"># Closes connection. Discards uncommitted data.</span>
+<div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>A server-less database engine that stores each database into its own file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
+&lt;conn&gt; = sqlite3.connect(&lt;path&gt;)               <span class="hljs-comment"># Opens existing or new file. Also ':memory:'.</span>
+&lt;conn&gt;.close()                                 <span class="hljs-comment"># Closes connection. Discards uncommitted data.</span>
 </code></pre></div>
 
 
-<div><h3 id="read-1">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)            <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
-&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                  <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
-&lt;list&gt;   = &lt;cursor&gt;.fetchall()                  <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
+<div><h3 id="read-1">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                 <span class="hljs-comment"># Returns next row. Also next(&lt;cursor&gt;).</span>
+&lt;list&gt;   = &lt;cursor&gt;.fetchall()                 <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                       <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
-&lt;conn&gt;.commit()                                 <span class="hljs-comment"># Saves all changes since the last commit.</span>
-&lt;conn&gt;.rollback()                               <span class="hljs-comment"># Discards all changes since the last commit.</span>
+<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+&lt;conn&gt;.commit()                                <span class="hljs-comment"># Saves all changes since the last commit.</span>
+&lt;conn&gt;.rollback()                              <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                    <span class="hljs-comment"># Exits the block with commit() or rollback(),</span>
-    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                   <span class="hljs-comment"># depending on whether any exception occurred.</span>
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                   <span class="hljs-comment"># Exits the block with commit() or rollback(),</span>
+    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)         <span class="hljs-comment"># Replaces '?'s in query with values.</span>
-&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)    <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
-&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_above&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Passed values can be of type str, int, float, bytes, None or bool (stored as 1 or 0).</strong></li>
+<li><strong>Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).</strong></li>
 </ul>
 <div><h3 id="example-1">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)'</span>)
@@ -1600,10 +1600,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h3 id="sqlalchemy">SQLAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, method chaining, or ORM.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
-&lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)               <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
-&lt;conn&gt;   = &lt;engine&gt;.connect()                   <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
-&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)   <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with keyword arguments.</span>
-<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                        <span class="hljs-comment"># Exits the block with commit or rollback.</span>
+&lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
+&lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
+&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with keyword arguments.</span>
+<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with commit or rollback.</span>
 </code></pre></div>
 
 
@@ -2305,9 +2305,9 @@ img.show()
 &lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
 &lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
 &lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Draws in clockwise dir. Also pieslice().</span>
-&lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
 &lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
+&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
 &lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
 </code></pre></div>
 
@@ -2720,13 +2720,13 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 
 <ul>
 <li><strong>All methods operate on columns by default. Pass <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> to process the rows instead.</strong></li>
-<li><strong>Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a single column: <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.loc[row_k, (col_k_1, col_k_2)]'</span></code>.</strong></li>
+<li><strong>Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.loc[row_key, (col_key_1, col_key_2)]'</span></code>.</strong></li>
 </ul>
 <div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(row_key, level=&lt;int&gt;)         <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
 &lt;DF&gt;   = &lt;DF&gt;.xs(row_keys, level=&lt;ints&gt;)       <span class="hljs-comment"># Rows that have first key on first level, etc.</span>
 &lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Combines multiple columns into a multi-index.</span>
 &lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
-&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s, …)  <span class="hljs-comment"># `columns=col_key/s, values=col_key/s`.</span>
+&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s, …)  <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
 </code></pre></div>
 
 <div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
@@ -2923,7 +2923,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 19, 2024</aside>
+    <aside>November 23, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
