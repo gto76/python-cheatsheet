@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 23, 2024</aside>
+    <aside>November 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1689,13 +1689,13 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Array from collection of numbers.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Copies bytes to array's memory.</span>
-&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats array as a sequence of numbers.</span>
-&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends items from the binary file.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;coll_of_nums&gt;)  <span class="hljs-comment"># Creates array from collection of numbers.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;bytes&gt;)         <span class="hljs-comment"># Writes passed bytes to array's memory.</span>
+&lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)         <span class="hljs-comment"># Treats passed array as a sequence of numbers.</span>
+&lt;array&gt;.fromfile(&lt;file&gt;, n_items)              <span class="hljs-comment"># Appends file's contents to array's memory.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                       <span class="hljs-comment"># Returns a copy of array's memory.</span>
-&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to binary file.</span>
+&lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to the binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes is passed, else mutable.</span>
 &lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int or float. Bytes if format is 'c'.</span>
@@ -2923,7 +2923,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 23, 2024</aside>
+    <aside>November 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -2046,15 +2046,15 @@ from array import array
 ```
 
 ```python
-<array> = array('<typecode>', <coll_of_nums>)  # Array from collection of numbers.
-<array> = array('<typecode>', <bytes>)         # Copies bytes to array's memory.
-<array> = array('<typecode>', <array>)         # Treats array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends items from the binary file.
+<array> = array('<typecode>', <coll_of_nums>)  # Creates array from collection of numbers.
+<array> = array('<typecode>', <bytes>)         # Writes passed bytes to array's memory.
+<array> = array('<typecode>', <array>)         # Treats passed array as a sequence of numbers.
+<array>.fromfile(<file>, n_items)              # Appends file's contents to array's memory.
 ```
 
 ```python
 <bytes> = bytes(<array>)                       # Returns a copy of array's memory.
-<file>.write(<array>)                          # Writes array's memory to binary file.
+<file>.write(<array>)                          # Writes array's memory to the binary file.
 ```
 
 
