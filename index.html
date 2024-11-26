@@ -1877,7 +1877,7 @@ CRITICAL:my_module:Running out of disk space.
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># List of of local names (including functions and classes).</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># List of local names (variables, funcs, classes, modules).</span>
 &lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Also locals().</span>
 &lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names (for instance '__builtin__' module).</span>
 </code></pre></div>
@@ -1886,7 +1886,7 @@ CRITICAL:my_module:Running out of disk space.
 &lt;dict&gt; = vars(&lt;obj&gt;)                <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
 &lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute with passed name.</span>
 value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns object's attribute or raises AttributeError.</span>
-setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__.</span>
+setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
 delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns function's Signature object. Can accept a class.</span>

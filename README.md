@@ -2294,7 +2294,7 @@ CRITICAL:my_module:Running out of disk space.
 Introspection
 -------------
 ```python
-<list> = dir()                      # List of of local names (including functions and classes).
+<list> = dir()                      # List of local names (variables, funcs, classes, modules).
 <dict> = vars()                     # Dict of local names and their objects. Also locals().
 <dict> = globals()                  # Dict of global names (for instance '__builtin__' module).
 ```
@@ -2304,7 +2304,7 @@ Introspection
 <dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute with passed name.
 value  = getattr(<obj>, '<name>')   # Returns object's attribute or raises AttributeError.
-setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__.
+setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__ attr.
 delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del <obj>.<name>`.
 ```
 
