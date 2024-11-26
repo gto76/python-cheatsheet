@@ -1918,7 +1918,7 @@ with <conn>:                                   # Exits the block with commit() o
 <conn>.execute('<query>', <dict/namedtuple>)   # Replaces ':<key>'s with values.
 <conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
 ```
-* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
+* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 0 or 1).**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
@@ -2835,7 +2835,7 @@ from PIL import ImageDraw
 <Draw>.rectangle((x1, y1, x2, y2))              # Also rounded_rectangle(), regular_polygon().
 <Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first.
 <Draw>.ellipse((x1, y1, x2, y2))                # To rotate use Image's rotate() and paste().
-<Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`
+<Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`.
 ```
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
@@ -3348,7 +3348,7 @@ c  6  7
 <DF>   = <DF>.xs(row_keys, level=<ints>)       # Rows that have first key on first level, etc.
 <DF>   = <DF>.set_index(col_keys)              # Combines multiple columns into a multi-index.
 <S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
-<DF>   = <DF>.pivot_table(index=col_key/s, …)  # `columns=key/s, values=key/s, aggfunc='mean'`.
+<DF>   = <DF>.pivot_table(index=col_key/s)     # `columns=key/s, values=key/s, aggfunc='mean'`.
 ```
 
 #### DataFrame — Encode, Decode:

@@ -1587,7 +1587,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).</strong></li>
+<li><strong>Passed values can be of type str, int, float, bytes, None, or bool (stored as 0 or 1).</strong></li>
 </ul>
 <div><h3 id="example-1">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)'</span>)
@@ -2308,7 +2308,7 @@ img.show()
 &lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
 &lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first.</span>
 &lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
-&lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`</span>
+&lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`.</span>
 </code></pre></div>
 
 <ul>
@@ -2726,7 +2726,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 &lt;DF&gt;   = &lt;DF&gt;.xs(row_keys, level=&lt;ints&gt;)       <span class="hljs-comment"># Rows that have first key on first level, etc.</span>
 &lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Combines multiple columns into a multi-index.</span>
 &lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
-&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s, …)  <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
+&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
 </code></pre></div>
 
 <div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
