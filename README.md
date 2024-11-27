@@ -2777,7 +2777,7 @@ from PIL import Image
 <Image> = Image.open(<path>)                    # Identifies format based on file's contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode (see Modes).
 <Image>.save(<path>)                            # Selects format based on extension (PNG/JPG…).
-<Image>.show()                                  # Opens image in the default preview app.
+<Image>.show()                                  # Displays image in default preview app.
 ```
 
 ```python
@@ -2795,7 +2795,7 @@ from PIL import Image
 
 ```python
 <array> = np.array(<Image>)                     # Creates a 2d/3d NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))    # Use `<array>.clip(0, 255)` to clip values.
+<Image> = Image.fromarray(np.uint8(<array>))    # Use <array>.clip(0, 255) to clip the values.
 ```
 
 ### Modes
@@ -3422,7 +3422,7 @@ import plotly.express as px, pandas as pd
 ```python
 <Fig> = px.line(<DF>, x=col_key, y=col_key)            # Or: px.line(x=<list>, y=<list>)
 <Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))   # Also `paper_bgcolor='rgb(0, 0, 0)'`.
-<Fig>.write_html/json/image('<path>')                  # Also <Fig>.show().
+<Fig>.write_html/json/image('<path>')                  # <Fig>.show() displays the plot.
 ```
 
 ```python

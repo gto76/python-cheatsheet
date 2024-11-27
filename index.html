@@ -2263,7 +2263,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode (see Modes).</span>
 &lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (PNG/JPG…).</span>
-&lt;Image&gt;.show()                                  <span class="hljs-comment"># Opens image in the default preview app.</span>
+&lt;Image&gt;.show()                                  <span class="hljs-comment"># Displays image in default preview app.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's value (its color).</span>
 &lt;ImgCore&gt; = &lt;Image&gt;.getdata()                   <span class="hljs-comment"># Returns a flattened view of pixel values.</span>
@@ -2275,7 +2275,7 @@ right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</
 &lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># Use ImageEnhance.&lt;name&gt;(&lt;Image&gt;) for Enhance.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates a 2d/3d NumPy array from the image.</span>
-&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip values.</span>
+&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
@@ -2782,7 +2782,7 @@ z
 
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)            <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
 &lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))   <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># Also &lt;Fig&gt;.show().</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># &lt;Fig&gt;.show() displays the plot.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)    <span class="hljs-comment"># Also `color=col_key`.</span>
 &lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)         <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
