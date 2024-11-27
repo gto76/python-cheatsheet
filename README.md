@@ -2296,7 +2296,7 @@ Introspection
 ```python
 <list> = dir()                      # List of local names (variables, funcs, classes, modules).
 <dict> = vars()                     # Dict of local names and their objects. Also locals().
-<dict> = globals()                  # Dict of global names (for instance '__builtin__' module).
+<dict> = globals()                  # Dict of global names and their objects, e.g. __builtin__.
 ```
 
 ```python
@@ -2309,7 +2309,7 @@ delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del
 ```
 
 ```python
-<Sig>  = inspect.signature(<func>)  # Returns function's Signature object. Can accept a class.
+<Sig>  = inspect.signature(<func>)  # Returns a Signature object of the passed function.
 <dict> = <Sig>.parameters           # Returns dict of Parameters. Also <Sig>.return_annotation.
 <memb> = <Param>.kind               # Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).
 <type> = <Param>.annotation         # Returns Parameter.empty if missing. Also <Param>.default.

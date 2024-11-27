@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 26, 2024</aside>
+    <aside>November 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1879,7 +1879,7 @@ CRITICAL:my_module:Running out of disk space.
 
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># List of local names (variables, funcs, classes, modules).</span>
 &lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Also locals().</span>
-&lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names (for instance '__builtin__' module).</span>
+&lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names and their objects, e.g. __builtin__.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                 <span class="hljs-comment"># Returns names of all object's attributes (incl. methods).</span>
@@ -1889,7 +1889,7 @@ value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)  
 setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
 delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns function's Signature object. Can accept a class.</span>
+<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns a Signature object of the passed function.</span>
 &lt;dict&gt; = &lt;Sig&gt;.parameters           <span class="hljs-comment"># Returns dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind               <span class="hljs-comment"># Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).</span>
 &lt;type&gt; = &lt;Param&gt;.annotation         <span class="hljs-comment"># Returns Parameter.empty if missing. Also &lt;Param&gt;.default.</span>
@@ -2923,7 +2923,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 26, 2024</aside>
+    <aside>November 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
