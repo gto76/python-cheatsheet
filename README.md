@@ -2168,7 +2168,7 @@ with <lock>:                                   # Enters the block by calling acq
 
 Operator
 --------
-**Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.**
+**Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence from least to most binding. Logical and arithmetic operators in rows 1, 3 and 5 are also ordered by precedence within a group.**
 ```python
 import operator as op
 ```
@@ -2419,9 +2419,9 @@ import matplotlib.pyplot as plt
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Also plt.plot(y_data).
 plt.legend()                                          # Adds a legend.
 plt.title/xlabel/ylabel(<str>)                        # Adds a title or label.
-plt.savefig(<path>)                                   # Saves the figure.
-plt.show()                                            # Displays the figure.
-plt.clf()                                             # Clears the figure.
+plt.savefig(<path>)                                   # Saves the plot.
+plt.show()                                            # Displays the plot.
+plt.clf()                                             # Clears the plot.
 ```
 
 
@@ -2876,7 +2876,7 @@ import wave
 <int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
 <int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
 <tuple> = <Wave>.getparams()          # Returns namedtuple of all parameters.
-<bytes> = <Wave>.readframes(nframes)  # Returns next n frames. All if -1.
+<bytes> = <Wave>.readframes(nframes)  # Returns next n frames (-1 returns all).
 ```
 
 ```python
@@ -2913,7 +2913,7 @@ def read_wav_file(filename):
         p = file.getparams()
         frames = file.readframes(-1)
     bytes_samples = (frames[i : i + p.sampwidth] for i in range(0, len(frames), p.sampwidth))
-    return [get_int(b) / pow(2, p.sampwidth * 8 - 1) for b in bytes_samples], p
+    return [get_int(b) / pow(2, (p.sampwidth * 8) - 1) for b in bytes_samples], p
 ```
 
 ### Write Float Samples to WAV File
@@ -2922,7 +2922,7 @@ def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, fra
     def get_bytes(a_float):
         a_float = max(-1, min(1 - 2e-16, a_float))
         a_float += p.sampwidth == 1
-        a_float *= pow(2, p.sampwidth * 8 - 1)
+        a_float *= pow(2, (p.sampwidth * 8) - 1)
         return int(a_float).to_bytes(p.sampwidth, 'little', signed=(p.sampwidth != 1))
     if p is None:
         p = wave._wave_params(nchannels, sampwidth, framerate, 0, 'NONE', 'not compressed')

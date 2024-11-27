@@ -84,11 +84,6 @@ const CONSTRUCTOR_OVERLOADING =
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a=<span class="hljs-keyword">None</span>)</span>:</span>\n' +
   '        self.a = a\n';
 
-const DATACLASS =
-  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_attribute_names&gt;)\n' +
-  '&lt;class&gt; = make_dataclass(<span class="hljs-string">\'&lt;class_name&gt;\'</span>, &lt;coll_of_tuples&gt;)\n' +
-  '&lt;tuple&gt; = (<span class="hljs-string">\'&lt;attr_name&gt;\'</span>, &lt;type&gt; [, &lt;default_value&gt;])';
-
 const SHUTIL_COPY =
   'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
   'shutil.copy2(from, to)              <span class="hljs-comment"># Also copies creation and modification time.</span>\n' +
@@ -221,7 +216,7 @@ const AUDIO_1 =
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>\n' +
   '        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))\n' +
   '        a_float += p.sampwidth == <span class="hljs-number">1</span>\n' +
-  '        a_float *= pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)\n' +
+  '        a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)\n' +
   '        <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">\'little\'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))\n' +
   '    <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:\n' +
   '        p = wave._wave_params(nchannels, sampwidth, framerate, <span class="hljs-number">0</span>, <span class="hljs-string">\'NONE\'</span>, <span class="hljs-string">\'not compressed\'</span>)\n' +
@@ -843,7 +838,6 @@ function fixHighlights() {
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
   $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
-  //$(`code:contains(make_dataclass(\'<class_name>\')`).html(DATACLASS);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);

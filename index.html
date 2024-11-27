@@ -1775,7 +1775,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns exception object or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": ...'</span></code>.</strong></li>
 </ul>
-<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered by operator precedence, starting with least binding.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
+<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence from least to most binding. Logical and arithmetic operators in rows 1, 3 and 5 are also ordered by precedence within a group.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
 </code></pre></div>
 
 
@@ -1979,9 +1979,9 @@ Processing: 100%|████████████████████| 3
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Also plt.plot(y_data).</span>
 plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
 plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title or label.</span>
-plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the figure.</span>
-plt.show()                                            <span class="hljs-comment"># Displays the figure.</span>
-plt.clf()                                             <span class="hljs-comment"># Clears the figure.</span>
+plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the plot.</span>
+plt.show()                                            <span class="hljs-comment"># Displays the plot.</span>
+plt.clf()                                             <span class="hljs-comment"># Clears the plot.</span>
 </code></pre></div>
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvspreadsheettotheconsole">Prints a CSV spreadsheet to the console:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
@@ -2342,7 +2342,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
 &lt;tuple&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
-&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames. All if -1.</span>
+&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames (-1 returns all).</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)    <span class="hljs-comment"># Creates/truncates a file for writing.</span>
 &lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
@@ -2374,14 +2374,14 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
         p = file.getparams()
         frames = file.readframes(<span class="hljs-number">-1</span>)
     bytes_samples = (frames[i : i + p.sampwidth] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), p.sampwidth))
-    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> bytes_samples], p
+    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> bytes_samples], p
 </code></pre></div>
 
 <div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
         a_float += p.sampwidth == <span class="hljs-number">1</span>
-        a_float *= pow(<span class="hljs-number">2</span>, p.sampwidth * <span class="hljs-number">8</span> - <span class="hljs-number">1</span>)
+        a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
     <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
         p = wave._wave_params(nchannels, sampwidth, framerate, <span class="hljs-number">0</span>, <span class="hljs-string">'NONE'</span>, <span class="hljs-string">'not compressed'</span>)
