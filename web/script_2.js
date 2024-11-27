@@ -27,7 +27,7 @@ const TOC_MOBILE =
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>,\n' +
   '                       <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>,\n' +
   '                       <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
-  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [, <a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>,\n' +
+  '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>,\n' +
   '                       <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>,\n' +
   '                       <a href="#threading">Threading</a>, <a href="#coroutines">Coroutines</a>],\n' +
   '    <strong><span class="hljs-string">\'7. Libraries\'</span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>,\n' +
