@@ -1918,7 +1918,7 @@ with <conn>:                                   # Exits the block with commit() o
 <conn>.execute('<query>', <dict/namedtuple>)   # Replaces ':<key>'s with values.
 <conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
 ```
-* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 0 or 1).**
+* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
@@ -3182,7 +3182,7 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>  = <S> > <el/S>                            # Returns a Series of bools.
+<S>  = <S> > <el/S>                            # Returns S of bools. Pairs items by keys.
 <S>  = <S> + <el/S>                            # Items with non-matching keys get value NaN.
 ```
 
