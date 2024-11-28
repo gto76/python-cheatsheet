@@ -3164,8 +3164,8 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>  = pd.Series(<list>)                       # Assigns RangeIndex starting at 0.
-<S>  = pd.Series(<dict>)                       # Takes dictionary's keys for index.
+<S>  = pd.Series(<list>)                       # Creates index from list's indices.
+<S>  = pd.Series(<dict>)                       # Creates index from dictionary's keys.
 <S>  = pd.Series(<dict/Series>, index=<list>)  # Only keeps items with keys specified in index.
 ```
 
@@ -3193,7 +3193,7 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>.plot.line/area/bar/pie/hist()              # Generates a Matplotlib plot.
+<S>.plot.line/area/bar/pie/hist()              # Generates a plot. Accepts `title=<str>`.
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
@@ -3269,7 +3269,7 @@ b  3  4
 
 ```python
 <DF>   = <DF>.head/tail/sample(<int>)          # Returns first, last, or random n rows.
-<DF>   = <DF>.describe()                       # Describes columns. Also shape, info(), corr().
+<DF>   = <DF>.describe()                       # Describes columns. Also info(), corr(), shape.
 <DF>   = <DF>.query('<query>')                 # Filters rows with e.g. 'col_1 == val_1 and …'.
 ```
 

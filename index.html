@@ -2580,8 +2580,8 @@ Name: a, dtype: int64
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;S&gt;  = pd.Series(&lt;list&gt;)                       <span class="hljs-comment"># Assigns RangeIndex starting at 0.</span>
-&lt;S&gt;  = pd.Series(&lt;dict&gt;)                       <span class="hljs-comment"># Takes dictionary's keys for index.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;  = pd.Series(&lt;list&gt;)                       <span class="hljs-comment"># Creates index from list's indices.</span>
+&lt;S&gt;  = pd.Series(&lt;dict&gt;)                       <span class="hljs-comment"># Creates index from dictionary's keys.</span>
 &lt;S&gt;  = pd.Series(&lt;dict/Series&gt;, index=&lt;list&gt;)  <span class="hljs-comment"># Only keeps items with keys specified in index.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;.loc[key]                            <span class="hljs-comment"># Or: &lt;S&gt;.iloc[i]</span>
@@ -2599,7 +2599,7 @@ Name: a, dtype: int64
 &lt;S&gt; = &lt;S&gt;.combine_first(&lt;S&gt;)                   <span class="hljs-comment"># Adds items that are not yet present.</span>
 &lt;S&gt;.update(&lt;S&gt;)                                <span class="hljs-comment"># Updates items that are already present.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a Matplotlib plot.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. Accepts `title=&lt;str&gt;`.</span>
 plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <ul>
@@ -2659,7 +2659,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;   = &lt;DF&gt;.sort_values(col_key/s)           <span class="hljs-comment"># Sorts rows by passed column/s. Also `axis=1`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.head/tail/sample(&lt;int&gt;)          <span class="hljs-comment"># Returns first, last, or random n rows.</span>
-&lt;DF&gt;   = &lt;DF&gt;.describe()                       <span class="hljs-comment"># Describes columns. Also shape, info(), corr().</span>
+&lt;DF&gt;   = &lt;DF&gt;.describe()                       <span class="hljs-comment"># Describes columns. Also info(), corr(), shape.</span>
 &lt;DF&gt;   = &lt;DF&gt;.query(<span class="hljs-string">'&lt;query&gt;'</span>)                 <span class="hljs-comment"># Filters rows with e.g. 'col_1 == val_1 and …'.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(by=col_key).</span>
