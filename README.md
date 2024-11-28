@@ -3268,7 +3268,7 @@ b  3  4
 ```
 
 ```python
-<DF>   = <DF>.head/tail/sample(<int>)          # Returns first, last, or random n elements.
+<DF>   = <DF>.head/tail/sample(<int>)          # Returns first, last, or random n rows.
 <DF>   = <DF>.describe()                       # Describes columns. Also shape, info(), corr().
 <DF>   = <DF>.query('<query>')                 # Filters rows with e.g. 'col_1 == val_1 and …'.
 ```
