@@ -2235,7 +2235,7 @@ Introspection
 ```
 
 ```python
-<list> = dir(<obj>)                 # Returns names of all object's attributes (incl. methods).
+<list> = dir(<obj>)                 # Returns names of object's attributes (including methods).
 <dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute with passed name.
 value  = getattr(<obj>, '<name>')   # Returns object's attribute or raises AttributeError.
