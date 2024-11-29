@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 28, 2024</aside>
+    <aside>November 29, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2747,6 +2747,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, S or el.</span>
+&lt;DF&gt; = &lt;GB&gt;.filter(&lt;func&gt;)                     <span class="hljs-comment"># Drops a group if function returns False.</span>
 &lt;DF&gt; = &lt;GB&gt;.get_group(&lt;el&gt;)                    <span class="hljs-comment"># Selects a group by grouping column's value.</span>
 &lt;S&gt;  = &lt;GB&gt;.size()                             <span class="hljs-comment"># S of group sizes. Same keys as get_group().</span>
 &lt;GB&gt; = &lt;GB&gt;[col_key]                           <span class="hljs-comment"># Single column GB. All operations return S.</span>
@@ -2923,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 28, 2024</aside>
+    <aside>November 29, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

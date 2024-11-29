@@ -3375,6 +3375,7 @@ c  6  7
 ```python
 <GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
 <DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, S or el.
+<DF> = <GB>.filter(<func>)                     # Drops a group if function returns False.
 <DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
 <S>  = <GB>.size()                             # S of group sizes. Same keys as get_group().
 <GB> = <GB>[col_key]                           # Single column GB. All operations return S.
