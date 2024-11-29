@@ -337,7 +337,7 @@ const INDEX =
   '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n' +
-  '<li><strong>Click on the title\'s <code class="python hljs"><span class="hljs-string">\'#\'</span></code> symbol to get a link to specific section.</strong></li>\n';
+  '<li><strong>Click on the title\'s <code class="python hljs"><span class="hljs-string">\'#\'</span></code> to get a link to its section.</strong></li>\n';
 
 
 const DIAGRAM_1_A =
