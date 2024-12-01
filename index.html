@@ -2698,7 +2698,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre>
 <div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;S&gt;  = &lt;DF&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpo…()  <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(lambda &lt;S&gt;: &lt;S&gt;)</span>
-&lt;DF&gt; = &lt;DF&gt;.isna/fillna/isin([&lt;el/coll&gt;])      <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
+&lt;DF&gt; = &lt;DF&gt;.isna/fillna/isin([&lt;el/coll&gt;])      <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
 
 <pre><code class="python hljs">┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓

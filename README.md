@@ -3317,7 +3317,7 @@ c  6  7
 ```python
 <S>  = <DF>.sum/max/mean/idxmax/all()          # Or: <DF>.apply/agg(lambda <S>: <el>)
 <DF> = <DF>.rank/diff/cumsum/ffill/interpo…()  # Or: <DF>.apply/agg/transform(lambda <S>: <S>)
-<DF> = <DF>.isna/fillna/isin([<el/coll>])      # Or: <S>.agg/transform/map(lambda <el>: <el>)
+<DF> = <DF>.isna/fillna/isin([<el/coll>])      # Or: <DF>.applymap(lambda <el>: <el>)
 ```
 
 ```text
