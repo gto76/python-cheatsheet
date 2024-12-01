@@ -2285,7 +2285,7 @@ with <lock>:                                   # Enters the block by calling acq
 ```python
 <Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
 <Event>     = Event()                          # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n_times.
+<Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n times.
 ```
 
 ### Queue
@@ -2710,7 +2710,7 @@ import numpy as np
 <1/2d_arr> = <2d>[<2d/1d_bools>]                        # 1d_bools must have size of a column.
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
-* **Indices should not be tuples because Python converts `'obj[i, j]'`  to `'obj[(i, j)]'`!**
+* **Sixth line fails if tuple is used because Python converts `'obj[i, j]'` to `'obj[(i, j)]'`!**
 * **Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).**
 * **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as using `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
@@ -3011,7 +3011,7 @@ while not pg.event.get(pg.QUIT):
 ### Rectangle
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(x, y, width, height)           # Floats get truncated into ints.
+<Rect> = pg.Rect(x, y, width, height)           # Returns a rectangle. Floats get truncated.
 <int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
 <tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft. Same.
 <Rect> = <Rect>.move((delta_x, delta_y))        # Use move_ip() to move in-place.

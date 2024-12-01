@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>November 29, 2024</aside>
+    <aside>December 1, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1868,7 +1868,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
 &lt;Event&gt;     = Event()                          <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n_times.</span>
+&lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n times.</span>
 </code></pre></div>
 
 <div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A thread-safe first-in-first-out queue.</span>
@@ -2211,7 +2211,7 @@ $ snakeviz test.prof                                            <span class="hlj
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
-<li><strong>Indices should not be tuples because Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code>  to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>!</strong></li>
+<li><strong>Sixth line fails if tuple is used because Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code> to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>!</strong></li>
 <li><strong>Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
@@ -2451,7 +2451,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     pg.display.flip()
 </code></pre></div>
 
-<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Floats get truncated into ints.</span>
+<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Returns a rectangle. Floats get truncated.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft. Same.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move in-place.</span>
@@ -2924,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>November 29, 2024</aside>
+    <aside>December 1, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
