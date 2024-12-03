@@ -3297,8 +3297,8 @@ c  6  7
 +-----------------------+---------------+------------+------------+---------------------------+
 | df.join(df_2,         |    x yl yr  z |            | x yl yr  z | Merges on row keys.       |
 |         lsuffix='l',  | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.   |
-|         rsuffix='r',  | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a Series, it is   |
-|         how=…)        | c  .  .  6  7 |            |            | treated as a column.      |
+|         rsuffix='r',  | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If Series is passed, it   |
+|         how=…)        | c  .  .  6  7 |            |            | is treated as a column.   |
 +-----------------------+---------------+------------+------------+---------------------------+
 | pd.concat([df, df_2], |    x   y   z  |     y      |            | Adds rows at the bottom.  |
 |           axis=0,     | a  1   2   .  |     2      |            | Uses 'outer' by default.  |

@@ -612,8 +612,8 @@ const DIAGRAM_15_B =
   "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
   "┃ df.join(df_2,         │    x yl yr  z │            │ x yl yr  z │ Merges on row keys.       ┃\n" +
   "┃         lsuffix='l',  │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.   ┃\n" +
-  "┃         rsuffix='r',  │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a Series, it is   ┃\n" +
-  "┃         how=…)        │ c  .  .  6  7 │            │            │ treated as a column.      ┃\n" +
+  "┃         rsuffix='r',  │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If Series is passed, it   ┃\n" +
+  "┃         how=…)        │ c  .  .  6  7 │            │            │ is treated as a column.   ┃\n" +
   "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
   "┃ pd.concat([df, df_2], │    x   y   z  │     y      │            │ Adds rows at the bottom.  ┃\n" +
   "┃           axis=0,     │ a  1   2   .  │     2      │            │ Uses 'outer' by default.  ┃\n" +
