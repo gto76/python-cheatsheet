@@ -599,56 +599,57 @@ const DIAGRAM_14_A =
   "|              |    'rank'   |   ['rank']  | {'r': 'rank'} |";
 
 const DIAGRAM_15_A =
-  '+------------------------+---------------+------------+------------+--------------------------+';
+  '+-----------------------+---------------+------------+------------+---------------------------+';
 
 const DIAGRAM_15_B =
-  "┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-  "┃                        │    'outer'    │   'inner'  │   'left'   │       Description        ┃\n" +
-  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.merge(r, on='y',     │    x   y   z  │ x   y   z  │ x   y   z  │ Merges on column if 'on' ┃\n" +
-  "┃            how=…)      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ or 'left/right_on' are   ┃\n" +
-  "┃                        │ 1  3   4   5  │            │ 3   4   5  │ set, else on shared cols.┃\n" +
-  "┃                        │ 2  .   6   7  │            │            │ Uses 'inner' by default. ┃\n" +
-  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ l.join(r, lsuffix='l', │    x yl yr  z │            │ x yl yr  z │ Merges on row keys.      ┃\n" +
-  "┃           rsuffix='r', │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.  ┃\n" +
-  "┃           how=…)       │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a Series, it is  ┃\n" +
-  "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
-  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ pd.concat([l, r],      │    x   y   z  │     y      │            │ Adds rows at the bottom. ┃\n" +
-  "┃           axis=0,      │ a  1   2   .  │     2      │            │ Uses 'outer' by default. ┃\n" +
-  "┃           join=…)      │ b  3   4   .  │     4      │            │ A Series is treated as a ┃\n" +
-  "┃                        │ b  .   4   5  │     4      │            │ column. To add a row use ┃\n" +
-  "┃                        │ c  .   6   7  │     6      │            │ pd.concat([l, DF([s])]). ┃\n" +
-  "┠────────────────────────┼───────────────┼────────────┼────────────┼──────────────────────────┨\n" +
-  "┃ pd.concat([l, r],      │    x  y  y  z │            │            │ Adds columns at the      ┃\n" +
-  "┃           axis=1,      │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'  ┃\n" +
-  "┃           join=…)      │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A Series is  ┃\n" +
-  "┃                        │ c  .  .  6  7 │            │            │ treated as a column.     ┃\n" +
-  "┗━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃                       │    'outer'    │   'inner'  │   'left'   │       Description         ┃\n" +
+  "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
+  "┃ df.merge(df_2,        │    x   y   z  │ x   y   z  │ x   y   z  │ Merges on column if 'on'  ┃\n" +
+  "┃          on='y',      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ or 'left/right_on' are    ┃\n" +
+  "┃          how=…)       │ 1  3   4   5  │            │ 3   4   5  │ set, else on shared cols. ┃\n" +
+  "┃                       │ 2  .   6   7  │            │            │ Uses 'inner' by default.  ┃\n" +
+  "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
+  "┃ df.join(df_2,         │    x yl yr  z │            │ x yl yr  z │ Merges on row keys.       ┃\n" +
+  "┃         lsuffix='l',  │ a  1  2  .  . │ x yl yr  z │ 1  2  .  . │ Uses 'left' by default.   ┃\n" +
+  "┃         rsuffix='r',  │ b  3  4  4  5 │ 3  4  4  5 │ 3  4  4  5 │ If r is a Series, it is   ┃\n" +
+  "┃         how=…)        │ c  .  .  6  7 │            │            │ treated as a column.      ┃\n" +
+  "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
+  "┃ pd.concat([df, df_2], │    x   y   z  │     y      │            │ Adds rows at the bottom.  ┃\n" +
+  "┃           axis=0,     │ a  1   2   .  │     2      │            │ Uses 'outer' by default.  ┃\n" +
+  "┃           join=…)     │ b  3   4   .  │     4      │            │ A Series is treated as a  ┃\n" +
+  "┃                       │ b  .   4   5  │     4      │            │ column. To add a row use  ┃\n" +
+  "┃                       │ c  .   6   7  │     6      │            │ pd.concat([df, DF([s])]). ┃\n" +
+  "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
+  "┃ pd.concat([df, df_2], │    x  y  y  z │            │            │ Adds columns at the       ┃\n" +
+  "┃           axis=1,     │ a  1  2  .  . │ x  y  y  z │            │ right end. Uses 'outer'   ┃\n" +
+  "┃           join=…)     │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A Series is   ┃\n" +
+  "┃                       │ c  .  .  6  7 │            │            │ treated as a column.      ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
+
 
 const DIAGRAM_16_A =
-  '| l.apply(…)     |      x  4     |        x  y   |     x  4      |';
+  '| df.apply(…)     |      x  4     |        x  y   |     x  4      |';
 
 const DIAGRAM_16_B =
-  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃                │     'sum'     │    ['sum']    │ {'x': 'sum'}  ┃\n" +
-  "┠────────────────┼───────────────┼───────────────┼───────────────┨\n" +
-  "┃ l.apply(…)     │      x  4     │        x  y   │     x  4      ┃\n" +
-  "┃ l.agg(…)       │      y  6     │   sum  4  6   │               ┃\n" +
-  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │     'sum'     │    ['sum']    │ {'x': 'sum'}  ┃\n" +
+  "┠─────────────────┼───────────────┼───────────────┼───────────────┨\n" +
+  "┃ df.apply(…)     │      x  4     │        x  y   │     x  4      ┃\n" +
+  "┃ df.agg(…)       │      y  6     │   sum  4  6   │               ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
   "\n" +
-  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
-  "┃                │     'rank'    │    ['rank']   │ {'x': 'rank'} ┃\n" +
-  "┠────────────────┼───────────────┼───────────────┼───────────────┨\n" +
-  "┃ l.apply(…)     │               │       x    y  │               ┃\n" +
-  "┃ l.agg(…)       │       x    y  │    rank rank  │         x     ┃\n" +
-  "┃ l.transform(…) │  a  1.0  1.0  │  a  1.0  1.0  │    a  1.0     ┃\n" +
-  "┃                │  b  2.0  2.0  │  b  2.0  2.0  │    b  2.0     ┃\n" +
-  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+  "┏━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                 │     'rank'    │    ['rank']   │ {'x': 'rank'} ┃\n" +
+  "┠─────────────────┼───────────────┼───────────────┼───────────────┨\n" +
+  "┃ df.apply(…)     │               │       x    y  │               ┃\n" +
+  "┃ df.agg(…)       │       x    y  │    rank rank  │         x     ┃\n" +
+  "┃ df.transform(…) │  a  1.0  1.0  │  a  1.0  1.0  │    a  1.0     ┃\n" +
+  "┃                 │  b  2.0  2.0  │  b  2.0  2.0  │    b  2.0     ┃\n" +
+  "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
 const DIAGRAM_17_A =
-  "|                |     'rank'    |    ['rank']   | {'x': 'rank'} |";
+  "|                 |     'rank'    |    ['rank']   | {'x': 'rank'} |";
 
 const DIAGRAM_18_A =
   '| gb.agg(…)       |      x   y  |             |      x    y |               |';
@@ -897,7 +898,7 @@ function insertPageBreakBefore(an_id) {
 }
 
 function fixPandasDiagram() {
-  const diagram_15 = '┏━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┓';
+  const diagram_15 = '┏━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━┓';
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(and)").after("and");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(as)").after("as");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(is)").after("is");
@@ -905,6 +906,10 @@ function fixPandasDiagram() {
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(or)").after("or");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(else)").after("else");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword").remove();
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left/right_on\')").after("\'left/right_on\'");
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left/right_on\')").remove();
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains('on')").after("'on'");
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains('on')").remove();
 }
 
 function removePlotImages() {

@@ -3231,7 +3231,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 **Table with labeled rows and columns.**
 
 ```python
->>> l = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y']); l
+>>> df = pd.DataFrame([[1, 2], [3, 4]], index=['a', 'b'], columns=['x', 'y']); df
    x  y
 a  1  2
 b  3  4
@@ -3251,7 +3251,7 @@ b  3  4
 
 ```python
 <S/DF> = <DF>[col_key/s]                       # Or: <DF>.<col_key>
-<DF>   = <DF>[row_bools]                       # Keeps rows as specified by bools.
+<DF>   = <DF>[<S_of_bools>]                    # Filters rows. For example `df[df.x > 1]`.
 <DF>   = <DF>[<DF_of_bools>]                   # Assigns NaN to items that are False in bools.
 ```
 
@@ -3270,7 +3270,7 @@ b  3  4
 ```python
 <DF>   = <DF>.head/tail/sample(<int>)          # Returns first, last, or random n rows.
 <DF>   = <DF>.describe()                       # Describes columns. Also info(), corr(), shape.
-<DF>   = <DF>.query('<query>')                 # Filters rows with e.g. 'col_1 == val_1 and …'.
+<DF>   = <DF>.query('<query>')                 # Filters rows. For example `df.query('x > 1')`.
 ```
 
 ```python
@@ -3280,37 +3280,37 @@ plt.show()                                     # Displays the plot. Also plt.sav
 
 #### DataFrame — Merge, Join, Concat:
 ```python
->>> r = pd.DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z']); r
+>>> df_2 = pd.DataFrame([[4, 5], [6, 7]], index=['b', 'c'], columns=['y', 'z']); df_2
    y  z
 b  4  5
 c  6  7
 ```
 
 ```text
-+------------------------+---------------+------------+------------+--------------------------+
-|                        |    'outer'    |   'inner'  |   'left'   |       Description        |
-+------------------------+---------------+------------+------------+--------------------------+
-| l.merge(r, on='y',     |    x   y   z  | x   y   z  | x   y   z  | Merges on column if 'on' |
-|            how=…)      | 0  1   2   .  | 3   4   5  | 1   2   .  | or 'left/right_on' are   |
-|                        | 1  3   4   5  |            | 3   4   5  | set, else on shared cols.|
-|                        | 2  .   6   7  |            |            | Uses 'inner' by default. |
-+------------------------+---------------+------------+------------+--------------------------+
-| l.join(r, lsuffix='l', |    x yl yr  z |            | x yl yr  z | Merges on row keys.      |
-|           rsuffix='r', | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.  |
-|           how=…)       | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a Series, it is  |
-|                        | c  .  .  6  7 |            |            | treated as a column.     |
-+------------------------+---------------+------------+------------+--------------------------+
-| pd.concat([l, r],      |    x   y   z  |     y      |            | Adds rows at the bottom. |
-|           axis=0,      | a  1   2   .  |     2      |            | Uses 'outer' by default. |
-|           join=…)      | b  3   4   .  |     4      |            | A Series is treated as a |
-|                        | b  .   4   5  |     4      |            | column. To add a row use |
-|                        | c  .   6   7  |     6      |            | pd.concat([l, DF([s])]). |
-+------------------------+---------------+------------+------------+--------------------------+
-| pd.concat([l, r],      |    x  y  y  z |            |            | Adds columns at the      |
-|           axis=1,      | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'  |
-|           join=…)      | b  3  4  4  5 | 3  4  4  5 |            | by default. A Series is  |
-|                        | c  .  .  6  7 |            |            | treated as a column.     |
-+------------------------+---------------+------------+------------+--------------------------+
++-----------------------+---------------+------------+------------+---------------------------+
+|                       |    'outer'    |   'inner'  |   'left'   |       Description         |
++-----------------------+---------------+------------+------------+---------------------------+
+| df.merge(df_2,        |    x   y   z  | x   y   z  | x   y   z  | Merges on column if 'on'  |
+|          on='y',      | 0  1   2   .  | 3   4   5  | 1   2   .  | or 'left/right_on' are    |
+|          how=…)       | 1  3   4   5  |            | 3   4   5  | set, else on shared cols. |
+|                       | 2  .   6   7  |            |            | Uses 'inner' by default.  |
++-----------------------+---------------+------------+------------+---------------------------+
+| df.join(df_2,         |    x yl yr  z |            | x yl yr  z | Merges on row keys.       |
+|         lsuffix='l',  | a  1  2  .  . | x yl yr  z | 1  2  .  . | Uses 'left' by default.   |
+|         rsuffix='r',  | b  3  4  4  5 | 3  4  4  5 | 3  4  4  5 | If r is a Series, it is   |
+|         how=…)        | c  .  .  6  7 |            |            | treated as a column.      |
++-----------------------+---------------+------------+------------+---------------------------+
+| pd.concat([df, df_2], |    x   y   z  |     y      |            | Adds rows at the bottom.  |
+|           axis=0,     | a  1   2   .  |     2      |            | Uses 'outer' by default.  |
+|           join=…)     | b  3   4   .  |     4      |            | A Series is treated as a  |
+|                       | b  .   4   5  |     4      |            | column. To add a row use  |
+|                       | c  .   6   7  |     6      |            | pd.concat([df, DF([s])]). |
++-----------------------+---------------+------------+------------+---------------------------+
+| pd.concat([df, df_2], |    x  y  y  z |            |            | Adds columns at the       |
+|           axis=1,     | a  1  2  .  . | x  y  y  z |            | right end. Uses 'outer'   |
+|           join=…)     | b  3  4  4  5 | 3  4  4  5 |            | by default. A Series is   |
+|                       | c  .  .  6  7 |            |            | treated as a column.      |
++-----------------------+---------------+------------+------------+---------------------------+
 ```
 
 #### DataFrame — Aggregate, Transform, Map:
@@ -3321,23 +3321,23 @@ c  6  7
 ```
 
 ```text
-+----------------+---------------+---------------+---------------+
-|                |     'sum'     |    ['sum']    | {'x': 'sum'}  |
-+----------------+---------------+---------------+---------------+
-| l.apply(…)     |      x  4     |        x  y   |     x  4      |
-| l.agg(…)       |      y  6     |   sum  4  6   |               |
-+----------------+---------------+---------------+---------------+
++-----------------+---------------+---------------+---------------+
+|                 |     'sum'     |    ['sum']    | {'x': 'sum'}  |
++-----------------+---------------+---------------+---------------+
+| df.apply(…)     |      x  4     |        x  y   |     x  4      |
+| df.agg(…)       |      y  6     |   sum  4  6   |               |
++-----------------+---------------+---------------+---------------+
 ```
 
 ```text
-+----------------+---------------+---------------+---------------+
-|                |     'rank'    |    ['rank']   | {'x': 'rank'} |
-+----------------+---------------+---------------+---------------+
-| l.apply(…)     |               |       x    y  |               |
-| l.agg(…)       |       x    y  |    rank rank  |         x     |
-| l.transform(…) |  a  1.0  1.0  |  a  1.0  1.0  |    a  1.0     |
-|                |  b  2.0  2.0  |  b  2.0  2.0  |    b  2.0     |
-+----------------+---------------+---------------+---------------+
++-----------------+---------------+---------------+---------------+
+|                 |     'rank'    |    ['rank']   | {'x': 'rank'} |
++-----------------+---------------+---------------+---------------+
+| df.apply(…)     |               |       x    y  |               |
+| df.agg(…)       |       x    y  |    rank rank  |         x     |
+| df.transform(…) |  a  1.0  1.0  |  a  1.0  1.0  |    a  1.0     |
+|                 |  b  2.0  2.0  |  b  2.0  2.0  |    b  2.0     |
++-----------------+---------------+---------------+---------------+
 ```
 * **All methods operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 * **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: `'<DF>.loc[row_key, (col_key_1, col_key_2)]'`.**
