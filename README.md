@@ -3166,7 +3166,6 @@ Name: a, dtype: int64
 ```python
 <S>  = pd.Series(<list>)                       # Creates index from list's indices.
 <S>  = pd.Series(<dict>)                       # Creates index from dictionary's keys.
-<S>  = pd.Series(<dict/Series>, index=<list>)  # Only keeps items with keys specified in index.
 ```
 
 ```python
@@ -3193,11 +3192,11 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>.plot.line/area/bar/pie/hist()              # Generates a plot. Accepts `title=<str>`.
-plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
+<S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
+* **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`.**
 
 #### Series — Aggregate, Transform, Map:
 ```python
@@ -3225,6 +3224,7 @@ plt.show()                                     # Displays the plot. Also plt.sav
 +--------------+-------------+-------------+---------------+
 ```
 * **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
+* **Agg/transform() pass Series to functions that raise Type/Value/AttrError on single item.**
 * **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 
 ### DataFrame
