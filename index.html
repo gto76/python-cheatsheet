@@ -1710,7 +1710,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats memoryview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to the binary file.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats or bytes.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats, or bytes.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats memoryview as a bytes object.</span>
 &lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
@@ -2829,7 +2829,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, bitcoin, gold, dow)</span>:</span>
     df = pd.concat([bitcoin, gold, dow], axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># Creates table by joining columns on dates.</span>
-    df = df.sort_index().interpolate()            <span class="hljs-comment"># Sorts table by date and interpolates NaN-s.</span>
+    df = df.sort_index().interpolate()            <span class="hljs-comment"># Sorts rows by date and interpolates NaN-s.</span>
     df = df.loc[<span class="hljs-string">'2020-02-23'</span>:]                    <span class="hljs-comment"># Discards rows before '2020-02-23'.</span>
     df = (df / df.iloc[<span class="hljs-number">0</span>]) * <span class="hljs-number">100</span>                  <span class="hljs-comment"># Calculates percentages relative to day 1.</span>
     df = df.join(covid)                           <span class="hljs-comment"># Adds column with covid cases.</span>

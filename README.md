@@ -2078,7 +2078,7 @@ Memory View
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
+<list>  = list(<mview>)                        # Returns a list of ints, floats, or bytes.
 <str>   = str(<mview>, 'utf-8')                # Treats memoryview as a bytes object.
 <str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
@@ -3482,7 +3482,7 @@ def scrape_data():
 
 def wrangle_data(covid, bitcoin, gold, dow):
     df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates table by joining columns on dates.
-    df = df.sort_index().interpolate()            # Sorts table by date and interpolates NaN-s.
+    df = df.sort_index().interpolate()            # Sorts rows by date and interpolates NaN-s.
     df = df.loc['2020-02-23':]                    # Discards rows before '2020-02-23'.
     df = (df / df.iloc[0]) * 100                  # Calculates percentages relative to day 1.
     df = df.join(covid)                           # Adds column with covid cases.
