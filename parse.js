@@ -606,7 +606,7 @@ const DIAGRAM_15_B =
   "┃                       │    'outer'    │   'inner'  │   'left'   │       Description         ┃\n" +
   "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
   "┃ df.merge(df_2,        │    x   y   z  │ x   y   z  │ x   y   z  │ Merges on column if 'on'  ┃\n" +
-  "┃          on='y',      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ or 'left/right_on' are    ┃\n" +
+  "┃          on='y',      │ 0  1   2   .  │ 3   4   5  │ 1   2   .  │ or 'left_on/right_on' are ┃\n" +
   "┃          how=…)       │ 1  3   4   5  │            │ 3   4   5  │ set, else on shared cols. ┃\n" +
   "┃                       │ 2  .   6   7  │            │            │ Uses 'inner' by default.  ┃\n" +
   "┠───────────────────────┼───────────────┼────────────┼────────────┼───────────────────────────┨\n" +
@@ -906,8 +906,8 @@ function fixPandasDiagram() {
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(or)").after("or");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword:contains(else)").after("else");
   $(`code:contains(${diagram_15})`).find(".hljs-keyword").remove();
-  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left/right_on\')").after("\'left/right_on\'");
-  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left/right_on\')").remove();
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left_on/right_on\')").after("\'left_on/right_on\'");
+  $(`code:contains(${diagram_15})`).find(".hljs-string:contains(\'left_on/right_on\')").remove();
   $(`code:contains(${diagram_15})`).find(".hljs-string:contains('on')").after("'on'");
   $(`code:contains(${diagram_15})`).find(".hljs-string:contains('on')").remove();
 }

@@ -3291,7 +3291,7 @@ c  6  7
 |                       |    'outer'    |   'inner'  |   'left'   |       Description         |
 +-----------------------+---------------+------------+------------+---------------------------+
 | df.merge(df_2,        |    x   y   z  | x   y   z  | x   y   z  | Merges on column if 'on'  |
-|          on='y',      | 0  1   2   .  | 3   4   5  | 1   2   .  | or 'left/right_on' are    |
+|          on='y',      | 0  1   2   .  | 3   4   5  | 1   2   .  | or 'left_on/right_on' are |
 |          how=…)       | 1  3   4   5  |            | 3   4   5  | set, else on shared cols. |
 |                       | 2  .   6   7  |            |            | Uses 'inner' by default.  |
 +-----------------------+---------------+------------+------------+---------------------------+
