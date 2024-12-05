@@ -1706,6 +1706,58 @@ from pathlib import Path
 <file> = open(<Path>)               # Also <Path>.read/write_text/bytes(<args>).
 ```
 
+### DATA STRUCTURES LIBRARIES IN PYTHON
+
+pip install binarytree  ==> Implementation of binary trees
+pip install llist   ==> Implementation of singly and doubly linkedlist
+from collections import deque ==> Implementation of deque
+
+```
+import llist
+
+double_linkedlist = llist.dllist(['a','b','c','d','e','f'])
+single_linkedlist = llist.sllist(['a','b','c','d','e','f'])
+
+from binarytree import Node
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.right = Node(4)
+print(root)
+
+
+from collections import deque
+
+queue = deque(['name','address','Fighter Squadern'])
+```
+### Implementing sorting of lists with ease
+```
+import sorting
+
+data = [1, 8, 3, 5, 6, 9, 2, 4]
+
+res = sorting.bubble(data)
+print('Bubble Sort      : ', res)
+
+res = sorting.bucket(data)
+print('Bucket Sort      : ', res)
+
+res = sorting.comb(data)
+print('Comb Sort        : ', res)
+
+res = sorting.counting(data)
+print('Counting Sort    : ', res)
+
+res = sorting.maxheap(data)
+print('Max Heap Sort    : ', res)
+
+res = sorting.minheap(data)
+print('Min Heap Sort    : ', res)
+
+res = sorting.merge(data)
+print('Merge Sort       : ', res)
+```
 
 OS Commands
 -----------
@@ -3143,6 +3195,44 @@ if __name__ == '__main__':
     main()
 ```
 
+tty
+-----
+**terminal control functions ; A TTY is essentially a pseudo device(kernel resource), which is used by processes to access a specific terminal. TTYs can be tied to hardware such as a serial port, or can be virtual, eg log the keystrokes made by the user. The shell is a program which is used for controlling and running programs.**
+
+```python
+# $ pip3 install tty
+import sys
+import tty
+import time
+
+# Disable newline buffering on stdin
+tty.setcbreak(sys.stdin.fileno())
+
+seconds = 60
+
+keys = []
+x = sys.stdin.read(1)
+while x:
+    now = time.time()
+    keys.append((now, x))
+
+    # Filter out old keys
+    keys = [(timestamp, key) for timestamp, key in keys if timestamp > now - seconds]
+
+    if keys:
+        # Calculate how many seconds our current list spans
+        timestamps = [timestamp for timestamp, _key in keys]
+        total = max(timestamps) - min(timestamps)
+          
+        # Wait until at-least 1 second passed before showing results
+        if total > 1:
+            keys_per_second = len(keys) / total
+            print(keys_per_second * seconds)
+            
+
+    x = sys.stdin.read(1)
+```
+The above code will hook the keyboard and log all the keystrokes made by the user and calculate users approximate typing speed. The code uses tty.setcbreak(fd) that change the mode of file descriptor fd to cbreak, which disables line buffering and remove character-processing. This package is really helpful in making system monitoring systems.
 
 Pandas
 ------
