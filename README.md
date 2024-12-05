@@ -1938,7 +1938,7 @@ with <conn>:                                   # Exits the block with commit() o
 from sqlalchemy import create_engine, text
 <engine> = create_engine('<url>')              # Url: 'dialect://user:password@host/dbname'.
 <conn>   = <engine>.connect()                  # Creates a connection. Also <conn>.close().
-<cursor> = <conn>.execute(text('<query>'), …)  # Replaces ':<key>'s with keyword arguments.
+<cursor> = <conn>.execute(text('<query>'), …)  # `<dict>`. Replaces ':<key>'s with values.
 with <conn>.begin(): ...                       # Exits the block with commit or rollback.
 ```
 
