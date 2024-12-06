@@ -3164,8 +3164,8 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>  = pd.Series(<list>)                       # Creates index from list's indices.
-<S>  = pd.Series(<dict>)                       # Creates index from dictionary's keys.
+<S>  = pd.Series(<list>)                       # Uses list's indices for 'index'.
+<S>  = pd.Series(<dict>)                       # Uses dictionary's keys for 'index'.
 ```
 
 ```python
@@ -3365,7 +3365,7 @@ c  6  7
 <DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
-* **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
+* **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
 * **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<S> = pd.to_datetime(<S>, errors="coerce")'`, which uses pd.NaT.**
 * **To get specific attributes from a series of Timestamps use `'<S>.dt.year/date/…'`.**
 
