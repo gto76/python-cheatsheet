@@ -2451,7 +2451,7 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     pg.display.flip()
 </code></pre></div>
 
-<div><h3 id="rectangle">Rectangle</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Returns a rectangle. Floats get truncated.</span>
+<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft. Same.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move in-place.</span>

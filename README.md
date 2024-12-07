@@ -3008,10 +3008,10 @@ while not pg.event.get(pg.QUIT):
     pg.display.flip()
 ```
 
-### Rectangle
+### Rect
 **Object for storing rectangular coordinates.**
 ```python
-<Rect> = pg.Rect(x, y, width, height)           # Returns a rectangle. Floats get truncated.
+<Rect> = pg.Rect(x, y, width, height)           # Creates Rect object. Truncates passed floats.
 <int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
 <tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft. Same.
 <Rect> = <Rect>.move((delta_x, delta_y))        # Use move_ip() to move in-place.
