@@ -3525,8 +3525,8 @@ import <cython_script>
 * **Script needs to be saved with a `'pyx'` extension.**
 
 ```python
-cdef <ctype> <var_name> = <obj>
-cdef <ctype>[n_elements] <var_name> = [<el_1>, <el_2>, ...]
+cdef <ctype> <var_name> [= <obj>]
+cdef <ctype>[n_elements] <var_name> [= <collection>]
 cdef <ctype/void> <func_name>(<ctype> <arg_name>): ...
 ```
 

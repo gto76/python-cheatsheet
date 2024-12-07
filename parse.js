@@ -320,8 +320,8 @@ const GROUPBY =
 
 
 const CYTHON_1 =
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;obj&gt;\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; [= &lt;obj&gt;]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;collection&gt;]\n' +
   '<span class="hljs-keyword">cdef</span> &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...\n';
 
 const CYTHON_2 =
@@ -851,7 +851,7 @@ function fixHighlights() {
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
-  $(`code:contains(cdef <ctype> <var_name> = <obj>)`).html(CYTHON_1);
+  $(`code:contains(cdef <ctype> <var_name> [= <obj>])`).html(CYTHON_1);
   $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
   $(`code:contains(cdef enum <enum_name>: <member_name>, <member_name>, ...)`).html(CYTHON_3);
   $(`ul:contains(Only available in)`).html(INDEX);

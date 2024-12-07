@@ -2867,8 +2867,8 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 <div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
 <li><strong>Script needs to be saved with a <code class="python hljs"><span class="hljs-string">'pyx'</span></code> extension.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; = &lt;obj&gt;
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]
+</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype&gt; &lt;var_name&gt; [= &lt;obj&gt;]
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;collection&gt;]
 <span class="hljs-keyword">cdef</span> &lt;ctype/void&gt; &lt;func_name&gt;(&lt;ctype&gt; &lt;arg_name&gt;): ...
 </code></pre></div>
 
