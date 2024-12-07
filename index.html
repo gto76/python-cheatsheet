@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 6, 2024</aside>
+    <aside>December 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2628,7 +2628,7 @@ Name: a, dtype: int64
 
 <ul>
 <li><strong>Methods ffill(), interpolate(), fillna() and dropna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
-<li><strong>Agg/transform() pass Series to functions that raise Type/Value/AttrError on single item.</strong></li>
+<li><strong>Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.</strong></li>
 <li><strong>Last result has a multi-index. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); df
@@ -2924,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 6, 2024</aside>
+    <aside>December 7, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

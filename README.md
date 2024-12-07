@@ -3224,7 +3224,7 @@ Name: a, dtype: int64
 +--------------+-------------+-------------+---------------+
 ```
 * **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
-* **Agg/transform() pass Series to functions that raise Type/Value/AttrError on single item.**
+* **Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.**
 * **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 
 ### DataFrame
