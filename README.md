@@ -3525,15 +3525,15 @@ import <cython_script>
 * **Script needs to be saved with a `'pyx'` extension.**
 
 ```python
-cdef <ctype> <var_name> [= <obj>]
-cdef <ctype>[n_elements] <var_name> [= <collection>]
-cdef <ctype/void> <func_name>(<ctype> <arg_name>): ...
+cdef <ctype/type> <var_name> [= <obj>]
+cdef <ctype>[n_elements] <var_name> [= <coll_of_nums>]
+cdef <ctype/type/void> <func_name>(<ctype/type> <arg_name>): ...
 ```
 
 ```python
 cdef class <class_name>:
-    cdef public <ctype> <attr_name>
-    def __init__(self, <ctype> <arg_name>):
+    cdef public <ctype/type> <attr_name>
+    def __init__(self, <ctype/type> <arg_name>):
         self.<attr_name> = <arg_name>
 ```
 
