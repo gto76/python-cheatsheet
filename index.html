@@ -1294,13 +1294,13 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <li><strong>Each item is printed on its own line if collection exceeds 'width' characters.</strong></li>
 <li><strong>Nested collections that are 'depth' levels deep get printed as '…'.</strong></li>
 </ul>
-<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><pre><code class="python language-python hljs">&lt;str&gt; = input(prompt=<span class="hljs-keyword">None</span>)
+<div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><pre><code class="python language-python hljs">&lt;str&gt; = input([&lt;obj&gt;])
 </code></pre></div>
 
 <ul>
 <li><strong>Reads a line from the user input or pipe if present (trailing newline gets stripped).</strong></li>
-<li><strong>Prompt string is printed to the standard output before input is read.</strong></li>
-<li><strong>Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.</strong></li>
+<li><strong>If argument is passed, it gets printed to the standard output before input is read.</strong></li>
+<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 scripts_path = sys.argv[<span class="hljs-number">0</span>]
@@ -2858,7 +2858,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python-like code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
 <span class="hljs-keyword">import</span> pyximport; pyximport.install()  <span class="hljs-comment"># Module that runs imported Cython scripts.</span>
-<span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script needs a '.pyx' extension.</span>
+<span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script's filename needs a '.pyx' extension.</span>
 &lt;cython_script&gt;.main()                 <span class="hljs-comment"># Main() isn't automatically executed.</span>
 </code></pre></div></div>
 

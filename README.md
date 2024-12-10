@@ -1531,11 +1531,11 @@ pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 Input
 -----
 ```python
-<str> = input(prompt=None)
+<str> = input([<obj>])
 ```
 * **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
-* **Prompt string is printed to the standard output before input is read.**
-* **Raises EOFError when user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
+* **If argument is passed, it gets printed to the standard output before input is read.**
+* **EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
 
 
 Command Line Arguments
@@ -3516,7 +3516,7 @@ Appendix
 ```python
 # $ pip3 install cython
 import pyximport; pyximport.install()  # Module that runs imported Cython scripts.
-import <cython_script>                 # Script needs a '.pyx' extension.
+import <cython_script>                 # Script's filename needs a '.pyx' extension.
 <cython_script>.main()                 # Main() isn't automatically executed.
 ```
 
