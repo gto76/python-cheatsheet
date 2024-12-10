@@ -3511,18 +3511,18 @@ if __name__ == '__main__':
 Appendix
 --------
 ### Cython
-**Library that compiles Python code into C.**
+**Library that compiles Python-like code into C.**
 
 ```python
 # $ pip3 install cython
-import pyximport; pyximport.install()
-import <cython_script>
-<cython_script>.main()
+import pyximport; pyximport.install()  # Module that runs imported Cython scripts.
+import <cython_script>                 # Script needs a '.pyx' extension.
+<cython_script>.main()                 # Main() isn't automatically executed.
 ```
 
 #### Definitions:
 * **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
-* **Script needs to be saved with a `'pyx'` extension.**
+* **Also supports C pointers via `'*'` and `'&'`, structs, unions, and enums.**
 
 ```python
 cdef <ctype/type> <var_name> [= <obj>]
