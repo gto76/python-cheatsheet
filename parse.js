@@ -733,6 +733,7 @@ function modifyPage() {
   unindentBanner();
   updateDiagrams();
   highlightCode();
+  fixMatchHighlights();
   fixPandasDiagram();
   removePlotImages();
   fixABCSequenceDiv();
@@ -895,6 +896,12 @@ function insertPageBreaks() {
 
 function insertPageBreakBefore(an_id) {
   $('<div class="pagebreak"></div>').insertBefore($(an_id).parent())
+}
+
+function fixMatchHighlights() {
+  const line = $(`span:contains(README.md is a readme file that belongs to user gto.)`);
+  line.after('README.md is a readme file that belongs to user gto.');
+  line.remove();
 }
 
 function fixPandasDiagram() {
