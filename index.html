@@ -2435,7 +2435,7 @@ simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span cla
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h4 id="opesawindowanddrawsasquarethatcanbemovedwitharrowkeys">Opes a window and draws a square that can be moved with arrow keys:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
 <span class="hljs-keyword">import</span> pygame <span class="hljs-keyword">as</span> pg
 
 pg.init()
@@ -2449,7 +2449,9 @@ rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">2
     screen.fill(pg.Color(<span class="hljs-string">'black'</span>))
     pg.draw.rect(screen, pg.Color(<span class="hljs-string">'white'</span>), rect)
     pg.display.flip()
-</code></pre></div>
+pg.quit()
+</code></pre></div></div>
+
 
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
@@ -2485,10 +2487,9 @@ line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0).</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
-<div><h3 id="font">Font</h3><pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.Font(&lt;path/file&gt;, size)        <span class="hljs-comment"># Loads TTF file. Pass None for default font.</span>
+<pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.Font(&lt;path/file&gt;, size)        <span class="hljs-comment"># Loads TTF file. Pass None for default font.</span>
 &lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
-</code></pre></div>
-
+</code></pre>
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
 &lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;), fadeout(msec).</span>
 </code></pre></div>

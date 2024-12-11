@@ -2991,6 +2991,7 @@ simpleaudio.play_buffer(samples_i, 1, 2, F).wait_done()
 
 Pygame
 ------
+#### Opes a window and draws a square that can be moved with arrow keys:
 ```python
 # $ pip3 install pygame
 import pygame as pg
@@ -3006,6 +3007,7 @@ while not pg.event.get(pg.QUIT):
     screen.fill(pg.Color('black'))
     pg.draw.rect(screen, pg.Color('white'), rect)
     pg.display.flip()
+pg.quit()
 ```
 
 ### Rect
@@ -3054,7 +3056,6 @@ arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also ellipse(<Surf>, color, <R
 rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, points, width=0).
 ```
 
-### Font
 ```python
 <Font> = pg.font.Font(<path/file>, size)        # Loads TTF file. Pass None for default font.
 <Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
