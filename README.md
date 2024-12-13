@@ -2710,7 +2710,7 @@ import numpy as np
 <1/2d_arr> = <2d>[<2d/1d_bools>]                        # 1d_bools must have size of a column.
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
-* **Sixth line fails if tuple is used because Python converts `'obj[i, j]'` to `'obj[(i, j)]'`!**
+* **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of indices is passed!**
 * **Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).**
 * **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as using `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
@@ -2734,7 +2734,9 @@ right = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
 left  = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
          [0.1,  0.6,  0.8],
          [0.1,  0.6,  0.8]]
+```
 
+```python
 right = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
          [0.6,  0.6,  0.6],
          [0.8,  0.8,  0.8]]
@@ -2748,14 +2750,11 @@ right = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
 [ 0.1,  0.6,  0.8 ]
 >>> wrapped_points = points.reshape(3, 1)
 [[0.1], [0.6], [0.8]]
->>> distances = points - wrapped_points
+>>> deltas = points - wrapped_points
 [[ 0. ,  0.5,  0.7],
  [-0.5,  0. ,  0.2],
  [-0.7, -0.2,  0. ]]
->>> distances = np.abs(distances)
-[[ 0. ,  0.5,  0.7],
- [ 0.5,  0. ,  0.2],
- [ 0.7,  0.2,  0. ]]
+>>> distances = np.abs(deltas)
 >>> distances[range(3), range(3)] = np.inf
 [[ inf,  0.5,  0.7],
  [ 0.5,  inf,  0.2],
