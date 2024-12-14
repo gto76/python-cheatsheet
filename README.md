@@ -60,9 +60,9 @@ sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
-* **For details about sort(), sorted(), min() and max() see [sortable](#sortable).**
+* **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
 * **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
-* **This text uses the term 'collection' instead of 'iterable'. For rationale see [collection](#collection).**
+* **This text uses the term collection instead of iterable. For rationale see [Collection](#collection).**
 
 ```python
 <int> = len(<list>)             # Returns number of items. Also works on dict, set and string.
@@ -1420,7 +1420,7 @@ except (<exception>, [...]) as <name>: ...
 * **Also catches subclasses of the exception.**
 * **Use `'traceback.print_exc()'` to print the full error message to stderr.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
-* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details see [logging](#logging).**
+* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details see [Logging](#logging).**
 * **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
 ### Raising Exceptions
