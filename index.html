@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 13, 2024</aside>
+    <aside>December 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2720,8 +2720,8 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <li><strong>All methods operate on columns by default. Pass <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> to process the rows instead.</strong></li>
 <li><strong>Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.loc[row_key, (col_key_1, col_key_2)]'</span></code>.</strong></li>
 </ul>
-<div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(row_key, level=&lt;int&gt;)         <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
-&lt;DF&gt;   = &lt;DF&gt;.xs(row_keys, level=&lt;ints&gt;)       <span class="hljs-comment"># Rows that have first key on first level, etc.</span>
+<div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(key, level=&lt;int&gt;)             <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
+&lt;DF&gt;   = &lt;DF&gt;.xs(keys, level=&lt;ints&gt;, axis=<span class="hljs-number">1</span>)   <span class="hljs-comment"># Cols that have first key on first level, etc.</span>
 &lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Combines multiple columns into a multi-index.</span>
 &lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
 &lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
@@ -2922,7 +2922,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 13, 2024</aside>
+    <aside>December 14, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -3344,8 +3344,8 @@ c  6  7
 
 #### DataFrame — Multi-Index:
 ```python
-<DF>   = <DF>.xs(row_key, level=<int>)         # Rows with key on passed level of multi-index.
-<DF>   = <DF>.xs(row_keys, level=<ints>)       # Rows that have first key on first level, etc.
+<DF>   = <DF>.xs(key, level=<int>)             # Rows with key on passed level of multi-index.
+<DF>   = <DF>.xs(keys, level=<ints>, axis=1)   # Cols that have first key on first level, etc.
 <DF>   = <DF>.set_index(col_keys)              # Combines multiple columns into a multi-index.
 <S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
 <DF>   = <DF>.pivot_table(index=col_key/s)     # `columns=key/s, values=key/s, aggfunc='mean'`.
