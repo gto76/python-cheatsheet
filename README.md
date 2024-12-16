@@ -840,7 +840,7 @@ import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 
 Closure
 -------
-**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.**
+**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function.**
 
 ```python
 def get_multiplier(a):
@@ -2717,50 +2717,49 @@ import numpy as np
 
 ### Broadcasting
 **A set of rules by which NumPy functions operate on arrays of different shapes.**
-
 ```python
-left  = [ 0.1 ,  0.6 ,  0.8 ]                           # Shape: (3,)
-right = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
+left  = np.array([ 0.1,  0.6,  0.8 ])                   # `left.shape  == (3,)`
+right = np.array([[0.1],[0.6],[0.8]])                   # `right.shape == (3, 1)`
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = [[0.1 ,  0.6 ,  0.8]]                           # Shape: (1, 3) <- !
-right = [[0.1], [0.6], [0.8]]                           # Shape: (3, 1)
+left  = np.array([[0.1,  0.6,  0.8]])                   # `left.shape  == (1, 3)`
+right = np.array([[0.1],[0.6],[0.8]])                   # `right.shape == (3, 1)`
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
 ```python
-left  = [[0.1,  0.6,  0.8],                             # Shape: (3, 3) <- !
-         [0.1,  0.6,  0.8],
-         [0.1,  0.6,  0.8]]
-```
+left  = np.array([[0.1,  0.6,  0.8],                    # `left.shape  == (3, 3)`
+                  [0.1,  0.6,  0.8],
+                  [0.1,  0.6,  0.8]])
 
-```python
-right = [[0.1,  0.1,  0.1],                             # Shape: (3, 3) <- !
-         [0.6,  0.6,  0.6],
-         [0.8,  0.8,  0.8]]
+right = np.array([[0.1,  0.1,  0.1],                    # `right.shape == (3, 3)`
+                  [0.6,  0.6,  0.6],
+                  [0.8,  0.8,  0.8]])
 ```
 
 ### Example
 #### For each point returns index of its nearest point (`[0.1, 0.6, 0.8] => [1, 2, 1]`):
 
 ```python
->>> points = np.array([0.1, 0.6, 0.8])
-[ 0.1,  0.6,  0.8 ]
->>> wrapped_points = points.reshape(3, 1)
-[[0.1], [0.6], [0.8]]
->>> deltas = points - wrapped_points
-[[ 0. ,  0.5,  0.7],
- [-0.5,  0. ,  0.2],
- [-0.7, -0.2,  0. ]]
->>> distances = np.abs(deltas)
->>> distances[range(3), range(3)] = np.inf
-[[ inf,  0.5,  0.7],
- [ 0.5,  inf,  0.2],
- [ 0.7,  0.2,  inf]]
->>> distances.argmin(1)
-[1, 2, 1]
+>>> print(points := np.array([0.1, 0.6, 0.8]))
+[0.1  0.6  0.8]
+>>> print(wrapped_points := points.reshape(3, 1))
+[[0.1]
+ [0.6]
+ [0.8]]
+>>> print(deltas := points - wrapped_points)
+[[ 0.   0.5  0.7]
+ [-0.5  0.   0.2]
+ [-0.7 -0.2  0. ]]
+>>> deltas[range(3), range(3)] = np.inf
+>>> print(distances := np.abs(deltas))
+[[inf  0.5  0.7]
+ [0.5  inf  0.2]
+ [0.7  0.2  inf]]
+>>> print(distances.argmin(axis=1))
+[1 2 1]
 ```
 
 

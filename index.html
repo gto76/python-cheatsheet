@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 14, 2024</aside>
+    <aside>December 16, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -701,7 +701,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Directory of the file that is passed to python command serves as a root of local imports.</strong></li>
 <li><strong>For relative imports use <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/module&gt;[.…]] import &lt;obj&gt;'</span></code>.</strong></li>
 </ul>
-<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns the nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
+<div><h2 id="closure"><a href="#closure" name="closure">#</a>Closure</h2><p><strong>We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multiplier</span><span class="hljs-params">(a)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(b)</span>:</span>
         <span class="hljs-keyword">return</span> a * b
     <span class="hljs-keyword">return</span> out
@@ -2216,39 +2216,41 @@ $ snakeviz test.prof                                            <span class="hlj
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = [ <span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span> ]                           <span class="hljs-comment"># Shape: (3,)</span>
-right = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = np.array([ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span> ])                   <span class="hljs-comment"># `left.shape  == (3,)`</span>
+right = np.array([[<span class="hljs-number">0.1</span>],[<span class="hljs-number">0.6</span>],[<span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `right.shape == (3, 1)`</span>
 </code></pre></div>
 
 
-<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span> ,  <span class="hljs-number">0.6</span> ,  <span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (1, 3) &lt;- !</span>
-right = [[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]                           <span class="hljs-comment"># Shape: (3, 1)</span>
+<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `left.shape  == (1, 3)`</span>
+right = np.array([[<span class="hljs-number">0.1</span>],[<span class="hljs-number">0.6</span>],[<span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `right.shape == (3, 1)`</span>
 </code></pre></div>
 
-<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
-         [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],
-         [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]]
+<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                    <span class="hljs-comment"># `left.shape  == (3, 3)`</span>
+                  [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],
+                  [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])
+
+right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                    <span class="hljs-comment"># `right.shape == (3, 3)`</span>
+                  [<span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>],
+                  [<span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>]])
 </code></pre></div>
 
-<pre><code class="python language-python hljs">right = [[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                             <span class="hljs-comment"># Shape: (3, 3) &lt;- !</span>
-         [<span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>],
-         [<span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>]]
-</code></pre>
-<div><h3 id="example-3">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>points = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>])
-[ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span> ]
-<span class="hljs-meta">&gt;&gt;&gt; </span>wrapped_points = points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
-[[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]]
-<span class="hljs-meta">&gt;&gt;&gt; </span>deltas = points - wrapped_points
-[[ <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
- [<span class="hljs-number">-0.5</span>,  <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.2</span>],
- [<span class="hljs-number">-0.7</span>, <span class="hljs-number">-0.2</span>,  <span class="hljs-number">0.</span> ]]
-<span class="hljs-meta">&gt;&gt;&gt; </span>distances = np.abs(deltas)
-<span class="hljs-meta">&gt;&gt;&gt; </span>distances[range(<span class="hljs-number">3</span>), range(<span class="hljs-number">3</span>)] = np.inf
-[[ inf,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.7</span>],
- [ <span class="hljs-number">0.5</span>,  inf,  <span class="hljs-number">0.2</span>],
- [ <span class="hljs-number">0.7</span>,  <span class="hljs-number">0.2</span>,  inf]]
-<span class="hljs-meta">&gt;&gt;&gt; </span>distances.argmin(<span class="hljs-number">1</span>)
-[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]
+<div><h3 id="example-3">Example</h3><div><h4 id="foreachpointreturnsindexofitsnearestpoint010608121">For each point returns index of its nearest point (<code class="python hljs">[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>] =&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]</code>):</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>print(points := np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>]))
+[<span class="hljs-number">0.1</span>  <span class="hljs-number">0.6</span>  <span class="hljs-number">0.8</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(wrapped_points := points.reshape(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>))
+[[<span class="hljs-number">0.1</span>]
+ [<span class="hljs-number">0.6</span>]
+ [<span class="hljs-number">0.8</span>]]
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(deltas := points - wrapped_points)
+[[ <span class="hljs-number">0.</span>   <span class="hljs-number">0.5</span>  <span class="hljs-number">0.7</span>]
+ [<span class="hljs-number">-0.5</span>  <span class="hljs-number">0.</span>   <span class="hljs-number">0.2</span>]
+ [<span class="hljs-number">-0.7</span> <span class="hljs-number">-0.2</span>  <span class="hljs-number">0.</span> ]]
+<span class="hljs-meta">&gt;&gt;&gt; </span>deltas[range(<span class="hljs-number">3</span>), range(<span class="hljs-number">3</span>)] = np.inf
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(distances := np.abs(deltas))
+[[inf  <span class="hljs-number">0.5</span>  <span class="hljs-number">0.7</span>]
+ [<span class="hljs-number">0.5</span>  inf  <span class="hljs-number">0.2</span>]
+ [<span class="hljs-number">0.7</span>  <span class="hljs-number">0.2</span>  inf]]
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(distances.argmin(axis=<span class="hljs-number">1</span>))
+[<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span>]
 </code></pre></div></div>
 
 
@@ -2922,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 14, 2024</aside>
+    <aside>December 16, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
