@@ -2212,7 +2212,7 @@ $ snakeviz test.prof                                            <span class="hlj
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
 <li><strong>Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code> to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>. This makes <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_i, col_i]'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_indices]'</span></code> indistinguishable to NumPy if tuple of indices is passed!</strong></li>
-<li><strong>Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).</strong></li>
+<li><strong>Indexing with a slice and 1d object works the same as when using two slices (lines 4, 6, 7).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>

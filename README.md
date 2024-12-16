@@ -2711,7 +2711,7 @@ import numpy as np
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
 * **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of indices is passed!**
-* **Indexing with a slice and 1d array works the same as when using two slices (lines 4, 6, 7).**
+* **Indexing with a slice and 1d object works the same as when using two slices (lines 4, 6, 7).**
 * **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as using `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
