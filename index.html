@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 16, 2024</aside>
+    <aside>December 18, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1099,8 +1099,8 @@ Hello World!
 
 
 <div><h4 id="discrepanciesbetweenglossarydefinitionsandabstractbaseclasses">Discrepancies between glossary definitions and abstract base classes:</h4><ul>
-<li><strong>Python's glossary defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.</strong></li>
-<li><strong>Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
+<li><strong>Python's glossary defines iterable as any object with special methods iter() and/or getitem() and sequence as any object with getitem() and len(). It doesn't define collection.</strong></li>
+<li><strong>Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
 </ul></div>
 
 
@@ -1714,7 +1714,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats memoryview as a bytes object.</span>
 &lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
-<div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>List with efficient appends and pops from either side. Pronounced "deck".</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
+<div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>List with efficient appends and pops from either side.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 </code></pre></div>
 
 
@@ -1826,7 +1826,7 @@ CRITICAL:my_module:Running out of disk space.
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># List of local names (variables, funcs, classes, modules).</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># Local names of variables, functions, classes and modules.</span>
 &lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Also locals().</span>
 &lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names and their objects, e.g. __builtin__.</span>
 </code></pre></div>
@@ -2924,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 16, 2024</aside>
+    <aside>December 18, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

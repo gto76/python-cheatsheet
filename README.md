@@ -1294,8 +1294,8 @@ class MySequence:
 ```
 
 #### Discrepancies between glossary definitions and abstract base classes:
-* **Python's glossary defines iterable as any object with iter() or getitem() and sequence as any object with getitem() and len(). It does not define collection.**
-* **Passing ABC Iterable to isinstance() or issubclass() checks whether object/class has method iter(), while ABC Collection checks for iter(), contains() and len().**
+* **Python's glossary defines iterable as any object with special methods iter() and/or getitem() and sequence as any object with getitem() and len(). It doesn't define collection.**
+* **Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
 * **It's a richer interface than the basic sequence.**
@@ -2086,7 +2086,7 @@ Memory View
 
 Deque
 -----
-**List with efficient appends and pops from either side. Pronounced "deck".**
+**List with efficient appends and pops from either side.**
 
 ```python
 from collections import deque
@@ -2229,7 +2229,7 @@ CRITICAL:my_module:Running out of disk space.
 Introspection
 -------------
 ```python
-<list> = dir()                      # List of local names (variables, funcs, classes, modules).
+<list> = dir()                      # Local names of variables, functions, classes and modules.
 <dict> = vars()                     # Dict of local names and their objects. Also locals().
 <dict> = globals()                  # Dict of global names and their objects, e.g. __builtin__.
 ```
