@@ -1566,7 +1566,7 @@ args  = p.parse_args()                                            # Exits on par
 
 Open
 ----
-**Opens the file and returns a corresponding file object.**
+**Opens a file and returns the corresponding file object.**
 
 ```python
 <file> = open(<path>, mode='r', encoding=None, newline=None)
@@ -2103,7 +2103,7 @@ from collections import deque
 
 Operator
 --------
-**Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence, from least to most binding. Logical and arithmetic operators in rows 1, 3 and 5 are ordered by precedence also within a group.**
+**Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence, from least to most binding. Logical and arithmetic operators in lines 1, 3 and 5 are also ordered by precedence within their own group.**
 ```python
 import operator as op
 ```
