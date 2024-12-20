@@ -3352,15 +3352,16 @@ c  6  7
 
 #### DataFrame — Encode, Decode:
 ```python
-<DF> = pd.read_json/html('<str/path/url>')     # Run `$ pip3 install beautifulsoup4 lxml`.
-<DF> = pd.read_csv('<path/url>')               # `header/index_col/dtype/usecols/…=<obj>`.
-<DF> = pd.read_pickle/excel('<path/url>')      # Use `sheet_name=None` to get all Excel sheets.
-<DF> = pd.read_sql('<table/query>', <conn.>)   # SQLite3/SQLAlchemy connection (see #SQLite).
+<DF>   = pd.read_json/pickle(<path/url/file>)  # Also accepts io.StringIO/BytesIO(<str/bytes>).
+<DF>   = pd.read_csv(<path/url/file>)          # `header/index_col/dtype/usecols/…=<obj>`.
+<DF>   = pd.read_excel(<path/url/file>)        # `sheet_name=None` returns dict of all sheets.
+<DF>   = pd.read_sql('<table/query>', <conn>)  # SQLite3/SQLAlchemy connection (see #SQLite).
+<list> = pd.read_html(<path/url/file>)         # Run `$ pip3 install beautifulsoup4 lxml`.
 ```
 
 ```python
 <dict> = <DF>.to_dict('d/l/s/…')               # Returns columns as dicts, lists or series.
-<str>  = <DF>.to_json/html/csv/latex()         # Saves output to a file if path is passed.
+<str>  = <DF>.to_json/csv/html/latex()         # Saves output to a file if path is passed.
 <DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
@@ -3373,8 +3374,7 @@ c  6  7
 
 ```python
 <GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
-<DF> = <GB>.apply(<func>)                      # Maps each group. Func can return DF, S or el.
-<DF> = <GB>.filter(<func>)                     # Drops a group if function returns False.
+<DF> = <GB>.apply/filter(<func>)               # Filter drops a group if func returns False.
 <DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
 <S>  = <GB>.size()                             # S of group sizes. Same keys as get_group().
 <GB> = <GB>[col_key]                           # Single column GB. All operations return S.

@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 19, 2024</aside>
+    <aside>December 20, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2729,14 +2729,15 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 &lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
 </code></pre></div>
 
-<div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt; = pd.read_json/html(<span class="hljs-string">'&lt;str/path/url&gt;'</span>)     <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
-&lt;DF&gt; = pd.read_csv(<span class="hljs-string">'&lt;path/url&gt;'</span>)               <span class="hljs-comment"># `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
-&lt;DF&gt; = pd.read_pickle/excel(<span class="hljs-string">'&lt;path/url&gt;'</span>)      <span class="hljs-comment"># Use `sheet_name=None` to get all Excel sheets.</span>
-&lt;DF&gt; = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn.&gt;)   <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
+<div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
+&lt;DF&gt;   = pd.read_csv(&lt;path/url/file&gt;)          <span class="hljs-comment"># `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
+&lt;DF&gt;   = pd.read_excel(&lt;path/url/file&gt;)        <span class="hljs-comment"># `sheet_name=None` returns dict of all sheets.</span>
+&lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
+&lt;list&gt; = pd.read_html(&lt;path/url/file&gt;)         <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict(<span class="hljs-string">'d/l/s/…'</span>)               <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
-&lt;str&gt;  = &lt;DF&gt;.to_json/html/csv/latex()         <span class="hljs-comment"># Saves output to a file if path is passed.</span>
+&lt;str&gt;  = &lt;DF&gt;.to_json/csv/html/latex()         <span class="hljs-comment"># Saves output to a file if path is passed.</span>
 &lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
@@ -2746,8 +2747,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <li><strong>To get specific attributes from a series of Timestamps use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.dt.year/date/…'</span></code>.</strong></li>
 </ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
-&lt;DF&gt; = &lt;GB&gt;.apply(&lt;func&gt;)                      <span class="hljs-comment"># Maps each group. Func can return DF, S or el.</span>
-&lt;DF&gt; = &lt;GB&gt;.filter(&lt;func&gt;)                     <span class="hljs-comment"># Drops a group if function returns False.</span>
+&lt;DF&gt; = &lt;GB&gt;.apply/filter(&lt;func&gt;)               <span class="hljs-comment"># Filter drops a group if func returns False.</span>
 &lt;DF&gt; = &lt;GB&gt;.get_group(&lt;el&gt;)                    <span class="hljs-comment"># Selects a group by grouping column's value.</span>
 &lt;S&gt;  = &lt;GB&gt;.size()                             <span class="hljs-comment"># S of group sizes. Same keys as get_group().</span>
 &lt;GB&gt; = &lt;GB&gt;[col_key]                           <span class="hljs-comment"># Single column GB. All operations return S.</span>
@@ -2924,7 +2924,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 19, 2024</aside>
+    <aside>December 20, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
