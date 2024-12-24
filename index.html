@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 20, 2024</aside>
+    <aside>December 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2052,10 +2052,9 @@ document   = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.pa
 table      = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
 python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
 logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
-logo       = requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content
 filename   = os.path.basename(logo_url)
 <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-    file.write(logo)
+    file.write(requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content)
 print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
 </code></pre></div></div>
 
@@ -2065,6 +2064,7 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 
 &lt;WebDrv&gt; = webdriver.Chrome/Firefox/Safari/Edge()     <span class="hljs-comment"># Opens a browser. Also &lt;WebDrv&gt;.quit().</span>
 &lt;WebDrv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                                 <span class="hljs-comment"># Also &lt;WebDrv&gt;.implicitly_wait(seconds).</span>
+&lt;str&gt;  = &lt;WebDrv&gt;.page_source                         <span class="hljs-comment"># Returns HTML of fully rendered page.</span>
 &lt;El&gt;   = &lt;WebDrv/El&gt;.find_element(<span class="hljs-string">'css selector'</span>, …)  <span class="hljs-comment"># '&lt;tag&gt;#&lt;id&gt;.&lt;class&gt;[&lt;attr&gt;="&lt;val&gt;"]…'.</span>
 &lt;list&gt; = &lt;WebDrv/El&gt;.find_elements(<span class="hljs-string">'xpath'</span>, …)        <span class="hljs-comment"># '//&lt;tag&gt;[@&lt;attr&gt;="&lt;val&gt;"]…'. See XPath.</span>
 &lt;str&gt;  = &lt;El&gt;.get_attribute(&lt;str&gt;)                    <span class="hljs-comment"># Property if exists. Also &lt;El&gt;.text.</span>
@@ -2805,32 +2805,41 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 
-<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, plotly.graph_objects <span class="hljs-keyword">as</span> go
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas selenium plotly lxml</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, plotly.graph_objects <span class="hljs-keyword">as</span> go
+
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    covid, bitcoin, gold, dow = scrape_data()
+    covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
     df = wrangle_data(covid, bitcoin, gold, dow)
     display_data(df)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scrape_data</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
-        url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
-        df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>])
-        df = df[df.location == <span class="hljs-string">'World'</span>]
-        <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'date'</span>).total_cases
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ticker</span><span class="hljs-params">(symbol)</span>:</span>
-        url = (<span class="hljs-string">f'https://query1.finance.yahoo.com/v7/finance/download/<span class="hljs-subst">{symbol}</span>?'</span>
-               <span class="hljs-string">'period1=1579651200&amp;period2=9999999999&amp;interval=1d&amp;events=history'</span>)
-        df = pd.read_csv(url, usecols=[<span class="hljs-string">'Date'</span>, <span class="hljs-string">'Close'</span>])
-        <span class="hljs-keyword">return</span> df.set_index(<span class="hljs-string">'Date'</span>).Close
-    out = get_covid_cases(), get_ticker(<span class="hljs-string">'BTC-USD'</span>), get_ticker(<span class="hljs-string">'GC=F'</span>), get_ticker(<span class="hljs-string">'^DJI'</span>)
-    names = [<span class="hljs-string">'Total Cases'</span>, <span class="hljs-string">'Bitcoin'</span>, <span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Dow Jones'</span>]
-    <span class="hljs-keyword">return</span> map(pd.Series.rename, out, names)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
+    url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
+    df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>], parse_dates=[<span class="hljs-string">'date'</span>])
+    df = df[df.location == <span class="hljs-string">'World'</span>]
+    s = df.set_index(<span class="hljs-string">'date'</span>).total_cases
+    <span class="hljs-keyword">return</span> s.rename(<span class="hljs-string">'Total Cases'</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_tickers</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">with</span> selenium.webdriver.Chrome() <span class="hljs-keyword">as</span> driver:
+        symbols = {<span class="hljs-string">'Bitcoin'</span>: <span class="hljs-string">'BTC-USD'</span>, <span class="hljs-string">'Gold'</span>: <span class="hljs-string">'GC=F'</span>, <span class="hljs-string">'Dow Jones'</span>: <span class="hljs-string">'%5EDJI'</span>}
+        <span class="hljs-keyword">for</span> name, symbol <span class="hljs-keyword">in</span> symbols.items():
+            <span class="hljs-keyword">yield</span> get_ticker(driver, name, symbol)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ticker</span><span class="hljs-params">(driver, name, symbol)</span>:</span>
+    url = <span class="hljs-string">f'https://finance.yahoo.com/quote/<span class="hljs-subst">{symbol}</span>/history/'</span>
+    driver.get(url + <span class="hljs-string">'?period1=1579651200&amp;period2=9999999999'</span>)
+    <span class="hljs-keyword">if</span> buttons := driver.find_elements(<span class="hljs-string">'xpath'</span>, <span class="hljs-string">'//button[@name="reject"]'</span>):
+        buttons[<span class="hljs-number">0</span>].click()
+    dataframes = pd.read_html(driver.page_source, parse_dates=[<span class="hljs-string">'Date'</span>])
+    s = dataframes[<span class="hljs-number">0</span>].set_index(<span class="hljs-string">'Date'</span>).Open
+    <span class="hljs-keyword">return</span> s.rename(name)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wrangle_data</span><span class="hljs-params">(covid, bitcoin, gold, dow)</span>:</span>
     df = pd.concat([bitcoin, gold, dow], axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># Creates table by joining columns on dates.</span>
     df = df.sort_index().interpolate()            <span class="hljs-comment"># Sorts rows by date and interpolates NaN-s.</span>
-    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:]                    <span class="hljs-comment"># Discards rows before '2020-02-23'.</span>
+    df = df.loc[<span class="hljs-string">'2020-02-23'</span>:<span class="hljs-string">'2021-12-20'</span>]        <span class="hljs-comment"># Keeps rows between specified dates.</span>
     df = (df / df.iloc[<span class="hljs-number">0</span>]) * <span class="hljs-number">100</span>                  <span class="hljs-comment"># Calculates percentages relative to day 1.</span>
     df = df.join(covid)                           <span class="hljs-comment"># Adds column with covid cases.</span>
     <span class="hljs-keyword">return</span> df.sort_values(df.index[<span class="hljs-number">-1</span>], axis=<span class="hljs-number">1</span>)   <span class="hljs-comment"># Sorts columns by last day's value.</span>
@@ -2842,11 +2851,12 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
         trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
         figure.add_trace(trace)
     figure.update_layout(
+        width=<span class="hljs-number">944</span>,
+        height=<span class="hljs-number">423</span>,
         yaxis1=dict(title=<span class="hljs-string">'Total Cases'</span>, rangemode=<span class="hljs-string">'tozero'</span>),
         yaxis2=dict(title=<span class="hljs-string">'%'</span>, rangemode=<span class="hljs-string">'tozero'</span>, overlaying=<span class="hljs-string">'y'</span>, side=<span class="hljs-string">'right'</span>),
-        legend=dict(x=<span class="hljs-number">1.08</span>),
-        width=<span class="hljs-number">944</span>,
-        height=<span class="hljs-number">423</span>
+        colorway=[<span class="hljs-string">'#EF553B'</span>, <span class="hljs-string">'#636EFA'</span>, <span class="hljs-string">'#00CC96'</span>, <span class="hljs-string">'#FFA152'</span>],
+        legend=dict(x=<span class="hljs-number">1.08</span>)
     )
     figure.show()
 
@@ -2924,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 20, 2024</aside>
+    <aside>December 24, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

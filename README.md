@@ -2510,10 +2510,9 @@ document   = bs4.BeautifulSoup(response.text, 'html.parser')
 table      = document.find('table', class_='infobox vevent')
 python_url = table.find('th', text='Website').next_sibling.a['href']
 logo_url   = table.find('img')['src']
-logo       = requests.get(f'https:{logo_url}').content
 filename   = os.path.basename(logo_url)
 with open(filename, 'wb') as file:
-    file.write(logo)
+    file.write(requests.get(f'https:{logo_url}').content)
 print(f'{python_url}, file://{os.path.abspath(filename)}')
 ```
 
@@ -2525,6 +2524,7 @@ from selenium import webdriver
 
 <WebDrv> = webdriver.Chrome/Firefox/Safari/Edge()     # Opens a browser. Also <WebDrv>.quit().
 <WebDrv>.get('<url>')                                 # Also <WebDrv>.implicitly_wait(seconds).
+<str>  = <WebDrv>.page_source                         # Returns HTML of fully rendered page.
 <El>   = <WebDrv/El>.find_element('css selector', …)  # '<tag>#<id>.<class>[<attr>="<val>"]…'.
 <list> = <WebDrv/El>.find_elements('xpath', …)        # '//<tag>[@<attr>="<val>"]…'. See XPath.
 <str>  = <El>.get_attribute(<str>)                    # Property if exists. Also <El>.text.
@@ -3457,32 +3457,41 @@ px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 <div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div>
 
 ```python
-import pandas as pd, plotly.graph_objects as go
+# $ pip3 install pandas selenium plotly lxml
+import pandas as pd, selenium.webdriver, plotly.graph_objects as go
+
 
 def main():
-    covid, bitcoin, gold, dow = scrape_data()
+    covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
     df = wrangle_data(covid, bitcoin, gold, dow)
     display_data(df)
 
-def scrape_data():
-    def get_covid_cases():
-        url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
-        df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'])
-        df = df[df.location == 'World']
-        return df.set_index('date').total_cases
-    def get_ticker(symbol):
-        url = (f'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?'
-               'period1=1579651200&period2=9999999999&interval=1d&events=history')
-        df = pd.read_csv(url, usecols=['Date', 'Close'])
-        return df.set_index('Date').Close
-    out = get_covid_cases(), get_ticker('BTC-USD'), get_ticker('GC=F'), get_ticker('^DJI')
-    names = ['Total Cases', 'Bitcoin', 'Gold', 'Dow Jones']
-    return map(pd.Series.rename, out, names)
+def get_covid_cases():
+    url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
+    df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'], parse_dates=['date'])
+    df = df[df.location == 'World']
+    s = df.set_index('date').total_cases
+    return s.rename('Total Cases')
+
+def get_tickers():
+    with selenium.webdriver.Chrome() as driver:
+        symbols = {'Bitcoin': 'BTC-USD', 'Gold': 'GC=F', 'Dow Jones': '%5EDJI'}
+        for name, symbol in symbols.items():
+            yield get_ticker(driver, name, symbol)
+
+def get_ticker(driver, name, symbol):
+    url = f'https://finance.yahoo.com/quote/{symbol}/history/'
+    driver.get(url + '?period1=1579651200&period2=9999999999')
+    if buttons := driver.find_elements('xpath', '//button[@name="reject"]'):
+        buttons[0].click()
+    dataframes = pd.read_html(driver.page_source, parse_dates=['Date'])
+    s = dataframes[0].set_index('Date').Open
+    return s.rename(name)
 
 def wrangle_data(covid, bitcoin, gold, dow):
     df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates table by joining columns on dates.
     df = df.sort_index().interpolate()            # Sorts rows by date and interpolates NaN-s.
-    df = df.loc['2020-02-23':]                    # Discards rows before '2020-02-23'.
+    df = df.loc['2020-02-23':'2021-12-20']        # Keeps rows between specified dates.
     df = (df / df.iloc[0]) * 100                  # Calculates percentages relative to day 1.
     df = df.join(covid)                           # Adds column with covid cases.
     return df.sort_values(df.index[-1], axis=1)   # Sorts columns by last day's value.
@@ -3494,11 +3503,12 @@ def display_data(df):
         trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
         figure.add_trace(trace)
     figure.update_layout(
+        width=944,
+        height=423,
         yaxis1=dict(title='Total Cases', rangemode='tozero'),
         yaxis2=dict(title='%', rangemode='tozero', overlaying='y', side='right'),
-        legend=dict(x=1.08),
-        width=944,
-        height=423
+        colorway=['#EF553B', '#636EFA', '#00CC96', '#FFA152'],
+        legend=dict(x=1.08)
     )
     figure.show()
 
