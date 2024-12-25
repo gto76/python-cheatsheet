@@ -2167,7 +2167,7 @@ match <object/expression>:
 ...         parts=['/', 'home', user, *_]
 ...     ) as p if p.name.lower().startswith('readme') and p.is_file():
 ...         print(f'{p.name} is a readme file that belongs to user {user}.')
-README.md is a readme file that belongs to user gto.
+'README.md is a readme file that belongs to user gto.'
 ```
 
 
@@ -2220,9 +2220,9 @@ log.basicConfig(
 >>> log.basicConfig()
 >>> log.root.handlers[0].setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')
-CRITICAL:my_module:Running out of disk space.
+'CRITICAL:my_module:Running out of disk space.'
 >>> print(open('test.log').read())
-2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
+'2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.'
 ```
 
 
