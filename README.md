@@ -1531,7 +1531,7 @@ pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 Input
 -----
 ```python
-<str> = input([<obj>])
+<str> = input()
 ```
 * **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
 * **If argument is passed, it gets printed to the standard output before input is read.**
@@ -3193,9 +3193,9 @@ Name: a, dtype: int64
 ```python
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
-* **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`!**
+* **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
-* **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`.**
+* **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**
 
 #### Series — Aggregate, Transform, Map:
 ```python
@@ -3407,7 +3407,7 @@ z
 
 ```python
 <RS/RDF/RGB> = <S/DF/GB>.rolling(win_size)     # Also: `min_periods=None, center=False`.
-<RS/RDF/RGB> = <RDF/RGB>[col_key/s]            # Or: <RDF/RGB>.col_key
+<RS/RDF/RGB> = <RDF/RGB>[col_key/s]            # Or: <RDF/RGB>.<col_key>
 <S/DF>       = <R>.mean/sum/max()              # Or: <R>.apply/agg(<agg_func/str>)
 ```
 
