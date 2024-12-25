@@ -2167,7 +2167,7 @@ match <object/expression>:
 ...         parts=['/', 'home', user, *_]
 ...     ) as p if p.name.lower().startswith('readme') and p.is_file():
 ...         print(f'{p.name} is a readme file that belongs to user {user}.')
-'README.md is a readme file that belongs to user gto.'
+README.md is a readme file that belongs to user gto.
 ```
 
 

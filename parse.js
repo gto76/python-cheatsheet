@@ -110,7 +110,7 @@ const MATCH_EXAMPLE =
   '<span class="hljs-meta">... </span>        parts=[<span class="hljs-string">\'/\'</span>, <span class="hljs-string">\'home\'</span>, user, *_]\n' +
   '<span class="hljs-meta">... </span>    ) <span class="hljs-keyword">as</span> p <span class="hljs-keyword">if</span> p.name.lower().startswith(<span class="hljs-string">\'readme\'</span>) <span class="hljs-keyword">and</span> p.is_file():\n' +
   '<span class="hljs-meta">... </span>        print(<span class="hljs-string">f\'<span class="hljs-subst">{p.name}</span> is a readme file that belongs to user <span class="hljs-subst">{user}</span>.\'</span>)\n' +
-  '<span class="hljs-string">\'README.md is a readme file that belongs to user gto.\'</span>\n';
+  'README.md is a readme file that belongs to user gto.\n';
 
 const COROUTINES =
   '<span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random\n' +
@@ -733,7 +733,6 @@ function modifyPage() {
   unindentBanner();
   updateDiagrams();
   highlightCode();
-  fixMatchHighlights();
   fixPandasDiagram();
   removePlotImages();
   fixABCSequenceDiv();
@@ -896,12 +895,6 @@ function insertPageBreaks() {
 
 function insertPageBreakBefore(an_id) {
   $('<div class="pagebreak"></div>').insertBefore($(an_id).parent())
-}
-
-function fixMatchHighlights() {
-  const line = $(`span:contains(README.md is a readme file that belongs to user gto.)`);
-  line.after('README.md is a readme file that belongs to user gto.');
-  line.remove();
 }
 
 function fixPandasDiagram() {
