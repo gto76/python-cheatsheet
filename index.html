@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 25, 2024</aside>
+    <aside>December 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -978,7 +978,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 <div><h3 id="iterator-1">Iterator</h3><ul>
 <li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
 <li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
-<li><strong>Iter() should return 'self'.</strong></li>
+<li><strong>Iter() should return 'self', i.e. unmodified object on which it was called.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.i = <span class="hljs-number">0</span>
@@ -2216,13 +2216,13 @@ $ snakeviz test.prof                                            <span class="hlj
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = np.array([ <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span> ])                   <span class="hljs-comment"># `left.shape  == (3,)`</span>
-right = np.array([[<span class="hljs-number">0.1</span>],[<span class="hljs-number">0.6</span>],[<span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `right.shape == (3, 1)`</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = np.array([<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>])                     <span class="hljs-comment"># `left.shape  == (3,)`</span>
+right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])                 <span class="hljs-comment"># `right.shape == (3, 1)`</span>
 </code></pre></div>
 
 
 <div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `left.shape  == (1, 3)`</span>
-right = np.array([[<span class="hljs-number">0.1</span>],[<span class="hljs-number">0.6</span>],[<span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `right.shape == (3, 1)`</span>
+right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])                 <span class="hljs-comment"># `right.shape == (3, 1)`</span>
 </code></pre></div>
 
 <div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                    <span class="hljs-comment"># `left.shape  == (3, 3)`</span>
@@ -2868,7 +2868,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python-like code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
 <span class="hljs-keyword">import</span> pyximport; pyximport.install()  <span class="hljs-comment"># Module that runs imported Cython scripts.</span>
-<span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script's filename needs a '.pyx' extension.</span>
+<span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script must be saved with '.pyx' extension.</span>
 &lt;cython_script&gt;.main()                 <span class="hljs-comment"># Main() isn't automatically executed.</span>
 </code></pre></div></div>
 
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 25, 2024</aside>
+    <aside>December 26, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

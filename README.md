@@ -1164,7 +1164,7 @@ class MySortable:
 ### Iterator
 * **Any object that has methods next() and iter() is an iterator.**
 * **Next() should return next item or raise StopIteration exception.**
-* **Iter() should return 'self'.**
+* **Iter() should return 'self', i.e. unmodified object on which it was called.**
 ```python
 class Counter:
     def __init__(self):
@@ -2718,14 +2718,14 @@ import numpy as np
 ### Broadcasting
 **A set of rules by which NumPy functions operate on arrays of different shapes.**
 ```python
-left  = np.array([ 0.1,  0.6,  0.8 ])                   # `left.shape  == (3,)`
-right = np.array([[0.1],[0.6],[0.8]])                   # `right.shape == (3, 1)`
+left  = np.array([0.1,  0.6,  0.8])                     # `left.shape  == (3,)`
+right = np.array([[0.1], [0.6], [0.8]])                 # `right.shape == (3, 1)`
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
 left  = np.array([[0.1,  0.6,  0.8]])                   # `left.shape  == (1, 3)`
-right = np.array([[0.1],[0.6],[0.8]])                   # `right.shape == (3, 1)`
+right = np.array([[0.1], [0.6], [0.8]])                 # `right.shape == (3, 1)`
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
@@ -3525,7 +3525,7 @@ Appendix
 ```python
 # $ pip3 install cython
 import pyximport; pyximport.install()  # Module that runs imported Cython scripts.
-import <cython_script>                 # Script's filename needs a '.pyx' extension.
+import <cython_script>                 # Script must be saved with '.pyx' extension.
 <cython_script>.main()                 # Main() isn't automatically executed.
 ```
 
