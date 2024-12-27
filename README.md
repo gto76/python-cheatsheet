@@ -3345,27 +3345,27 @@ c  6  7
 ```python
 <DF>   = <DF>.xs(key, level=<int>)             # Rows with key on passed level of multi-index.
 <DF>   = <DF>.xs(keys, level=<ints>, axis=1)   # Cols that have first key on first level, etc.
-<DF>   = <DF>.set_index(col_keys)              # Combines multiple columns into a multi-index.
+<DF>   = <DF>.set_index(col_keys)              # Creates index from cols. Also `append=False`.
 <S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
 <DF>   = <DF>.pivot_table(index=col_key/s)     # `columns=key/s, values=key/s, aggfunc='mean'`.
 ```
 
-#### DataFrame — Encode, Decode:
+### File Formats
 ```python
-<DF>   = pd.read_json/pickle(<path/url/file>)  # Also accepts io.StringIO/BytesIO(<str/bytes>).
-<DF>   = pd.read_csv(<path/url/file>)          # `header/index_col/dtype/usecols/…=<obj>`.
-<DF>   = pd.read_excel(<path/url/file>)        # `sheet_name=None` returns dict of all sheets.
-<DF>   = pd.read_sql('<table/query>', <conn>)  # SQLite3/SQLAlchemy connection (see #SQLite).
-<list> = pd.read_html(<path/url/file>)         # Run `$ pip3 install beautifulsoup4 lxml`.
+<S/DF> = pd.read_json/pickle(<path/url/file>)  # Also accepts io.StringIO/BytesIO(<str/bytes>).
+<DF>   = pd.read_csv/excel(<path/url/file>)    # Also `header/index_col/dtype/usecols/…=<obj>`.
+<list> = pd.read_html(<path/url/file>)         # Raises ImportError if webpage has zero tables.
+<S/DF> = pd.read_parquet/feather/hdf(<path…>)  # Read_hdf() accepts `key='<df_name>'` argument.
+<DF>   = pd.read_sql('<table/query>', <conn>)  # Pass SQLite3/Alchemy connection (see #SQLite).
 ```
 
 ```python
-<dict> = <DF>.to_dict('d/l/s/…')               # Returns columns as dicts, lists or series.
-<str>  = <DF>.to_json/csv/html/latex()         # Saves output to a file if path is passed.
-<DF>.to_pickle/excel(<path>)                   # Run `$ pip3 install "pandas[excel]" odfpy`.
+<DF>.to_json/csv/html/parquet/latex(<path>)    # Returns a string/bytes if path is omitted.
+<DF>.to_pickle/excel/feather/hdf(<path>)       # To_hdf() requires `key='<df_name>'` argument.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
-* **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
+* **`'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'` installs dependencies.**
+* **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
 * **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<S> = pd.to_datetime(<S>, errors="coerce")'`, which uses pd.NaT.**
 * **To get specific attributes from a series of Timestamps use `'<S>.dt.year/date/…'`.**
 

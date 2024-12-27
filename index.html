@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>December 26, 2024</aside>
+    <aside>December 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2724,25 +2724,25 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </ul>
 <div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(key, level=&lt;int&gt;)             <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
 &lt;DF&gt;   = &lt;DF&gt;.xs(keys, level=&lt;ints&gt;, axis=<span class="hljs-number">1</span>)   <span class="hljs-comment"># Cols that have first key on first level, etc.</span>
-&lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Combines multiple columns into a multi-index.</span>
+&lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Creates index from cols. Also `append=False`.</span>
 &lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
 &lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
 </code></pre></div>
 
-<div><h4 id="dataframeencodedecode">DataFrame — Encode, Decode:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
-&lt;DF&gt;   = pd.read_csv(&lt;path/url/file&gt;)          <span class="hljs-comment"># `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
-&lt;DF&gt;   = pd.read_excel(&lt;path/url/file&gt;)        <span class="hljs-comment"># `sheet_name=None` returns dict of all sheets.</span>
-&lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># SQLite3/SQLAlchemy connection (see #SQLite).</span>
-&lt;list&gt; = pd.read_html(&lt;path/url/file&gt;)         <span class="hljs-comment"># Run `$ pip3 install beautifulsoup4 lxml`.</span>
+<div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
+&lt;DF&gt;   = pd.read_csv/excel(&lt;path/url/file&gt;)    <span class="hljs-comment"># Also `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
+&lt;list&gt; = pd.read_html(&lt;path/url/file&gt;)         <span class="hljs-comment"># Raises ImportError if webpage has zero tables.</span>
+&lt;S/DF&gt; = pd.read_parquet/feather/hdf(&lt;path…&gt;)  <span class="hljs-comment"># Read_hdf() accepts `key='&lt;df_name&gt;'` argument.</span>
+&lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># Pass SQLite3/Alchemy connection (see #SQLite).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;dict&gt; = &lt;DF&gt;.to_dict(<span class="hljs-string">'d/l/s/…'</span>)               <span class="hljs-comment"># Returns columns as dicts, lists or series.</span>
-&lt;str&gt;  = &lt;DF&gt;.to_json/csv/html/latex()         <span class="hljs-comment"># Saves output to a file if path is passed.</span>
-&lt;DF&gt;.to_pickle/excel(&lt;path&gt;)                   <span class="hljs-comment"># Run `$ pip3 install "pandas[excel]" odfpy`.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/parquet/latex(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
+&lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># To_hdf() requires `key='&lt;df_name&gt;'` argument.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
 <ul>
-<li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It&nbsp;automatically tries to detect the format, but it can be helped with 'date_format' or 'datefirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'</span></code> installs dependencies.</strong></li>
+<li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It&nbsp;automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
 <li><strong>If there's a single invalid date then it returns the whole column as a series of strings, unlike <code class="python hljs"><span class="hljs-string">'&lt;S&gt; = pd.to_datetime(&lt;S&gt;, errors="coerce")'</span></code>, which uses pd.NaT.</strong></li>
 <li><strong>To get specific attributes from a series of Timestamps use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.dt.year/date/…'</span></code>.</strong></li>
 </ul>
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 26, 2024</aside>
+    <aside>December 27, 2024</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
