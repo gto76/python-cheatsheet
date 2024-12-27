@@ -3460,7 +3460,6 @@ px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 # $ pip3 install pandas lxml selenium plotly
 import pandas as pd, selenium.webdriver, plotly.graph_objects as go
 
-
 def main():
     covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
     df = wrangle_data(covid, bitcoin, gold, dow)
