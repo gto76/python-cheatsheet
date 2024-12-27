@@ -3457,7 +3457,7 @@ px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 <div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div>
 
 ```python
-# $ pip3 install pandas selenium plotly lxml
+# $ pip3 install pandas lxml selenium plotly
 import pandas as pd, selenium.webdriver, plotly.graph_objects as go
 
 
@@ -3500,7 +3500,7 @@ def display_data(df):
     figure = go.Figure()
     for col_name in reversed(df.columns):
         yaxis = 'y1' if col_name == 'Total Cases' else 'y2'
-        trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
+        trace = go.Scatter(x=df.index, y=df[col_name], yaxis=yaxis, name=col_name)
         figure.add_trace(trace)
     figure.update_layout(
         width=944,

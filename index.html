@@ -2805,7 +2805,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 
-<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas selenium plotly lxml</span>
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas lxml selenium plotly</span>
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 
@@ -2848,7 +2848,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
     figure = go.Figure()
     <span class="hljs-keyword">for</span> col_name <span class="hljs-keyword">in</span> reversed(df.columns):
         yaxis = <span class="hljs-string">'y1'</span> <span class="hljs-keyword">if</span> col_name == <span class="hljs-string">'Total Cases'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'y2'</span>
-        trace = go.Scatter(x=df.index, y=df[col_name], name=col_name, yaxis=yaxis)
+        trace = go.Scatter(x=df.index, y=df[col_name], yaxis=yaxis, name=col_name)
         figure.add_trace(trace)
     figure.update_layout(
         width=<span class="hljs-number">944</span>,
