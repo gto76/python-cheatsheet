@@ -3548,7 +3548,7 @@ cdef class <class_name>:
 ### Virtual Environments
 **System for installing libraries directly into project's directory.**
 
-```r
+```bash
 $ python3 -m venv NAME      # Creates virtual environment in current directory.
 $ source NAME/bin/activate  # Activates env. On Windows run `NAME\Scripts\activate`.
 $ pip3 install LIBRARY      # Installs the library into active environment.
