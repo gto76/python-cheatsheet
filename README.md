@@ -1915,13 +1915,6 @@ except ImportError:
 <str>    = dump(<object>)     # Converts object to JSON string.
 ```
 
-### Read Object from JSON File
-```python
-def read_json_file(filename):
-    with open(filename, encoding='utf-8') as file:
-        return json.load(file)
-```
-
 
 Pickle
 ------
