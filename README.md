@@ -660,7 +660,7 @@ import zoneinfo, dateutil.tz
 * **`'%Z'` accepts `'UTC/GMT'` and local timezone's code and returns timezone's name, `'UTC[±HH:MM]'` if timezone is nameless, or an empty string if datetime is naive.**
 
 ### Arithmetics
-```python
+```bash
 <bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
 <bool>   = <DTa>     > <DTa>                # Ignores jumps if they share tz object. Broken ==.
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
