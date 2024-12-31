@@ -1922,6 +1922,39 @@ def write_to_json_file(filename, collection):
         json.dump(collection, file, ensure_ascii=False, indent=2)
 ```
 
+### Write Object to JSON File
+```python
+def write_to_json_file(filename, an_object):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(an_object, file, ensure_ascii=False, indent=2)
+```
+
+YAML
+----
+**Text file format for storing collections of strings and numbers.**
+
+```python
+# pip install pyyaml
+import yaml
+<str>    = yaml.dump(<object>)     # Converts object to JSON string.
+
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
+<object> = load(<str>)        # Converts JSON string to object.
+<str>    = dump(<object>)     # Converts object to JSON string.
+```
+
+### Read Object from JSON File
+```python
+def read_json_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return json.load(file)
+```
+
 
 Pickle
 ------
