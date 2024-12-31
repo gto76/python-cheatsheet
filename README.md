@@ -1944,8 +1944,8 @@ try:
 except ImportError:
     from yaml import Loader, Dumper
 
-<object> = load(<str>)        # Converts JSON string to object.
-<str>    = dump(<object>)     # Converts object to JSON string.
+<obj>  = load(stream, Loader=Loader)
+dump(<obj>, Dumper=Dumper)
 ```
 
 
