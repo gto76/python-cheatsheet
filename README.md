@@ -12,7 +12,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers-1)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
-**&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
+**&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`YAML`](#yaml)**__,__  **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Threading`](#threading)**__,__ **[`Coroutines`](#coroutines)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Console_App`](#console-app)**__,__ **[`GUI`](#gui-app)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web-app)**__,__ **[`Profile`](#profiling)**__.__  
 **&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
@@ -1887,6 +1887,39 @@ def read_json_file(filename):
 def write_to_json_file(filename, list_or_dict):
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(list_or_dict, file, ensure_ascii=False, indent=2)
+```
+
+### Write Object to JSON File
+```python
+def write_to_json_file(filename, an_object):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(an_object, file, ensure_ascii=False, indent=2)
+```
+
+YAML
+----
+**Text file format for storing collections of strings and numbers.**
+
+```python
+# pip install pyyaml
+import yaml
+<str>    = yaml.dump(<object>)     # Converts object to JSON string.
+
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
+<object> = load(<str>)        # Converts JSON string to object.
+<str>    = dump(<object>)     # Converts object to JSON string.
+```
+
+### Read Object from JSON File
+```python
+def read_json_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return json.load(file)
 ```
 
 
