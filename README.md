@@ -1,6 +1,6 @@
 Comprehensive Python Cheatsheet
 ===============================
-<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Buy PDF](https://transactions.sendowl.com/products/78175486/4422834F/view), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
+<sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
 </sup>
 
 ![Monty Python](web/image_888.jpeg)
@@ -3591,7 +3591,6 @@ if __name__ == '__main__':
 
 Index
 -----
-* **Only available in the [PDF](https://transactions.sendowl.com/products/78175486/4422834F/view).**
 * **Ctrl+F / ⌘F is usually sufficient.**
 * **Searching `'#<title>'` on the [webpage](https://gto76.github.io/python-cheatsheet/) will limit the search to the titles.**
 * **Click on the title's `'🔗'` to get a link to its section.**

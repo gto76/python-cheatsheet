@@ -334,7 +334,6 @@ const CYTHON_3 =
   '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">enum</span> &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...\n';
 
 const INDEX =
-  '<li><strong>Only available in the <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">PDF</a>.</strong></li>\n' +
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n' +
   '<li><strong>Click on the title\'s <code class="python hljs"><span class="hljs-string">\'#\'</span></code> to get a link to its section.</strong></li>\n';
@@ -670,7 +669,7 @@ const DIAGRAM_18_B =
   "┃                 │  c  11  13  │   c  2  2   │             │               ┃\n" +
   "┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
-const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://transactions.sendowl.com/products/78175486/4422834F/view">Buy PDF</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.\n';
+const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.\n';
 
 const DARK_THEME_SCRIPT =
   '<script>\n' +
@@ -854,7 +853,7 @@ function fixHighlights() {
   $(`code:contains(cdef <ctype/type> <var_name> [= <obj>])`).html(CYTHON_1);
   $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
   $(`code:contains(cdef enum <enum_name>: <member_name>, <member_name>, ...)`).html(CYTHON_3);
-  $(`ul:contains(Only available in)`).html(INDEX);
+  $(`ul:contains(Ctrl+F / ⌘F is usually sufficient.)`).html(INDEX);
 }
 
 function preventPageBreaks() {
