@@ -330,9 +330,6 @@ const CYTHON_2 =
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; &lt;arg_name&gt;)</span>:</span>\n' +
   '        self.&lt;attr_name&gt; = &lt;arg_name&gt;\n';
 
-const CYTHON_3 =
-  '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">enum</span> &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...\n';
-
 const INDEX =
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
   '<li><strong>Searching <code class="python hljs"><span class="hljs-string">\'#&lt;title&gt;\'</span></code> will limit the search to the titles.</strong></li>\n' +
@@ -778,7 +775,6 @@ function unindentBanner() {
 function updateDiagrams() {
   $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
   $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
-  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
   $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
   $(`code:contains(${DIAGRAM_5_A})`).parent().remove();
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
@@ -786,8 +782,6 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
   $(`code:contains(${DIAGRAM_95_A})`).html(DIAGRAM_95_B);
-  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
-  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_115_A})`).html(DIAGRAM_115_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
@@ -795,7 +789,6 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_17_A})`).parent().remove();
-  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 
 function highlightCode() {
@@ -852,7 +845,6 @@ function fixHighlights() {
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
   $(`code:contains(cdef <ctype/type> <var_name> [= <obj>])`).html(CYTHON_1);
   $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
-  $(`code:contains(cdef enum <enum_name>: <member_name>, <member_name>, ...)`).html(CYTHON_3);
   $(`ul:contains(Ctrl+F / ⌘F is usually sufficient.)`).html(INDEX);
 }
 
