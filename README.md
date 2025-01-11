@@ -662,12 +662,12 @@ import zoneinfo, dateutil.tz
 ### Arithmetics
 ```python
 <bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
-<bool>   = <DTa>     > <DTa>                # Ignores jumps if they share tz object. Broken ==.
+<bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
-<TD>     = <TD>      * <float>              # Also: <TD> = abs(<TD>) and <TD> = <TD> ±% <TD>.
-<float>  = <TD>      / <TD>                 # E.g. how many hours are in TD. Also //, divmod().
+<TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
+<float>  = <TD>      / <TD>                 # Also `<int>, <TD> = divmod(<TD>, <TD>)`.
 ```
 
 
@@ -3165,6 +3165,7 @@ Name: a, dtype: int64
 ```python
 <S>  = pd.Series(<list>)                       # Uses list's indices for 'index'.
 <S>  = pd.Series(<dict>)                       # Uses dictionary's keys for 'index'.
+<S>  = pd.concat(<coll_of_S>)                  # Also <S>.combine_first(<S>), <S>.update(<S>).
 ```
 
 ```python
@@ -3176,18 +3177,17 @@ Name: a, dtype: int64
 ```python
 <el> = <S>[key/i]                              # Or: <S>.<key>
 <S>  = <S>[coll_of_keys/coll_of_i]             # Or: <S>[key/i : key/i]
-<S>  = <S>[bools]                              # Or: <S>.loc/iloc[bools]
+<S>  = <S>[<S_of_bools>]                       # Or: <S>.loc/iloc[<S_of_bools>]
 ```
 
 ```python
-<S>  = <S> > <el/S>                            # Returns S of bools. Pairs items by keys.
+<S>  = <S> > <el/S>                            # Returns S of bools. For logic use &, |, ~.
 <S>  = <S> + <el/S>                            # Items with non-matching keys get value NaN.
 ```
 
 ```python
-<S> = pd.concat(<coll_of_S>)                   # Concats multiple series into one long Series.
-<S> = <S>.combine_first(<S>)                   # Adds items that are not yet present.
-<S>.update(<S>)                                # Updates items that are already present.
+<S>  = <S>.value_counts(normalize=False)       # Returns S of unique values and their counts.
+<S>  = <S>.str.strip/lower/contains/replace()  # Processes strings. For dates see File Formats.
 ```
 
 ```python
@@ -3199,7 +3199,7 @@ Name: a, dtype: int64
 
 #### Series — Aggregate, Transform, Map:
 ```python
-<el> = <S>.sum/max/mean/idxmax/all()           # Or: <S>.agg(lambda <S>: <el>)
+<el> = <S>.sum/max/mean/idxmax/all/count()     # Or: <S>.agg(lambda <S>: <el>)
 <S>  = <S>.rank/diff/cumsum/ffill/interpol…()  # Or: <S>.agg/transform(lambda <S>: <S>)
 <S>  = <S>.isna/fillna/isin([<el/coll>])       # Or: <S>.agg/transform/map(lambda <el>: <el>)
 ```
@@ -3314,7 +3314,7 @@ c  6  7
 
 #### DataFrame — Aggregate, Transform, Map:
 ```python
-<S>  = <DF>.sum/max/mean/idxmax/all()          # Or: <DF>.apply/agg(lambda <S>: <el>)
+<S>  = <DF>.sum/max/mean/idxmax/all/count()    # Or: <DF>.apply/agg(lambda <S>: <el>)
 <DF> = <DF>.rank/diff/cumsum/ffill/interpo…()  # Or: <DF>.apply/agg/transform(lambda <S>: <S>)
 <DF> = <DF>.isna/fillna/isin([<el/coll>])      # Or: <DF>.applymap(lambda <el>: <el>)
 ```
