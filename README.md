@@ -3165,7 +3165,6 @@ Name: a, dtype: int64
 ```python
 <S>  = pd.Series(<list>)                       # Uses list's indices for 'index'.
 <S>  = pd.Series(<dict>)                       # Uses dictionary's keys for 'index'.
-<S>  = pd.concat(<coll_of_S>)                  # Also <S>.combine_first(<S>), <S>.update(<S>).
 ```
 
 ```python
@@ -3186,8 +3185,9 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>  = <S>.value_counts(normalize=False)       # Returns S of unique values and their counts.
-<S>  = <S>.str.strip/lower/contains/replace()  # Processes strings. For dates see File Formats.
+<S>  = <S>.head/describe/copy/sort_values()    # Also <S>.unique/value_counts/round/dropna().
+<S>  = <S>.str.strip/lower/contains/replace()  # Also split().str[<int>] and split().explode().
+<S>  = <S>.dt.year/month/day/hour              # Use pd.to_datetime(<S>) to get S of dates.
 ```
 
 ```python
@@ -3222,7 +3222,7 @@ Name: a, dtype: int64
 |              |    y  2.0   |   y   2.0   |      y  2.0   |
 +--------------+-------------+-------------+---------------+
 ```
-* **Methods ffill(), interpolate(), fillna() and dropna() accept `'inplace=True'`.**
+* **Methods sort_values(), dropna(), ffill(), interpolate() and fillna() accept `'inplace=True'`.**
 * **Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.**
 * **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 

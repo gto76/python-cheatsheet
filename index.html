@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>January 11, 2025</aside>
+    <aside>January 24, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2582,7 +2582,6 @@ Name: a, dtype: int64
 
 <pre><code class="python language-python hljs">&lt;S&gt;  = pd.Series(&lt;list&gt;)                       <span class="hljs-comment"># Uses list's indices for 'index'.</span>
 &lt;S&gt;  = pd.Series(&lt;dict&gt;)                       <span class="hljs-comment"># Uses dictionary's keys for 'index'.</span>
-&lt;S&gt;  = pd.concat(&lt;coll_of_S&gt;)                  <span class="hljs-comment"># Also &lt;S&gt;.combine_first(&lt;S&gt;), &lt;S&gt;.update(&lt;S&gt;).</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;.loc[key]                            <span class="hljs-comment"># Or: &lt;S&gt;.iloc[i]</span>
 &lt;S&gt;  = &lt;S&gt;.loc[coll_of_keys]                   <span class="hljs-comment"># Or: &lt;S&gt;.iloc[coll_of_i]</span>
@@ -2595,8 +2594,9 @@ Name: a, dtype: int64
 <pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt; &gt; &lt;el/S&gt;                            <span class="hljs-comment"># Returns S of bools. For logic use &amp;, |, ~.</span>
 &lt;S&gt;  = &lt;S&gt; + &lt;el/S&gt;                            <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.value_counts(normalize=<span class="hljs-keyword">False</span>)       <span class="hljs-comment"># Returns S of unique values and their counts.</span>
-&lt;S&gt;  = &lt;S&gt;.str.strip/lower/contains/replace()  <span class="hljs-comment"># Processes strings. For dates see File Formats.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.head/describe/copy/sort_values()    <span class="hljs-comment"># Also &lt;S&gt;.unique/value_counts/round/dropna().</span>
+&lt;S&gt;  = &lt;S&gt;.str.strip/lower/contains/replace()  <span class="hljs-comment"># Also split().str[&lt;int&gt;] and split().explode().</span>
+&lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of dates.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
 </code></pre>
@@ -2627,7 +2627,7 @@ Name: a, dtype: int64
 </code></pre>
 
 <ul>
-<li><strong>Methods ffill(), interpolate(), fillna() and dropna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
+<li><strong>Methods sort_values(), dropna(), ffill(), interpolate() and fillna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
 <li><strong>Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.</strong></li>
 <li><strong>Last result has a multi-index. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
@@ -2932,7 +2932,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>January 11, 2025</aside>
+    <aside>January 24, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
