@@ -3367,7 +3367,6 @@ c  6  7
 * **`'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'` installs dependencies.**
 * **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
 * **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<S> = pd.to_datetime(<S>, errors="coerce")'`, which uses pd.NaT.**
-* **To get specific attributes from a series of Timestamps use `'<S>.dt.year/date/…'`.**
 
 ### GroupBy
 **Object that groups together rows of a dataframe based on the value of the passed column.**
