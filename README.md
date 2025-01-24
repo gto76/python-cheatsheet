@@ -3193,7 +3193,7 @@ Name: a, dtype: int64
 ```python
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
-* **Also: `'pd.cut(<S>, bins=<int/coll>)'`, `'<S>.quantile(<float/coll>)'`.**
+* **Also: `'pd.cut(<S>, bins=<int/coll>)'` and `'<S>.quantile(<float/coll>)'`.**
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 * **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**

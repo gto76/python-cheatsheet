@@ -2601,7 +2601,7 @@ Name: a, dtype: int64
 <pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
 </code></pre>
 <ul>
-<li><strong>Also: <code class="python hljs"><span class="hljs-string">'pd.cut(&lt;S&gt;, bins=&lt;int/coll&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.quantile(&lt;float/coll&gt;)'</span></code>.</strong></li>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'pd.cut(&lt;S&gt;, bins=&lt;int/coll&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.quantile(&lt;float/coll&gt;)'</span></code>.</strong></li>
 <li><strong>Indexing objects can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>.</strong></li>
 <li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if we assign np.nan to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
 <li><strong>Series will silently overflow if we run <code class="python hljs"><span class="hljs-string">'pd.Series([100], dtype="int8") + 100'</span></code>!</strong></li>
