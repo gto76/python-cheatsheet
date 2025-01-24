@@ -3185,7 +3185,7 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>  = <S>.head/describe/copy/sort_values()    # Also <S>.unique/value_counts/round/dropna().
+<S>  = <S>.head/describe/sort_values()         # Also <S>.unique/value_counts/round/dropna().
 <S>  = <S>.str.strip/lower/contains/replace()  # Also split().str[<int>] and split().explode().
 <S>  = <S>.dt.year/month/day/hour              # Use pd.to_datetime(<S>) to get S of dates.
 ```
@@ -3193,6 +3193,7 @@ Name: a, dtype: int64
 ```python
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
+* **Also: `'pd.cut(<S>, bins=<int/coll>)'`, `'<S>.quantile(<float/coll>)'`.**
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 * **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**
@@ -3222,7 +3223,6 @@ Name: a, dtype: int64
 |              |    y  2.0   |   y   2.0   |      y  2.0   |
 +--------------+-------------+-------------+---------------+
 ```
-* **Methods sort_values(), dropna(), ffill(), interpolate() and fillna() accept `'inplace=True'`.**
 * **Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.**
 * **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 

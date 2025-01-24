@@ -2594,13 +2594,14 @@ Name: a, dtype: int64
 <pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt; &gt; &lt;el/S&gt;                            <span class="hljs-comment"># Returns S of bools. For logic use &amp;, |, ~.</span>
 &lt;S&gt;  = &lt;S&gt; + &lt;el/S&gt;                            <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.head/describe/copy/sort_values()    <span class="hljs-comment"># Also &lt;S&gt;.unique/value_counts/round/dropna().</span>
+<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.head/describe/sort_values()         <span class="hljs-comment"># Also &lt;S&gt;.unique/value_counts/round/dropna().</span>
 &lt;S&gt;  = &lt;S&gt;.str.strip/lower/contains/replace()  <span class="hljs-comment"># Also split().str[&lt;int&gt;] and split().explode().</span>
 &lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of dates.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
 </code></pre>
 <ul>
+<li><strong>Also: <code class="python hljs"><span class="hljs-string">'pd.cut(&lt;S&gt;, bins=&lt;int/coll&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.quantile(&lt;float/coll&gt;)'</span></code>.</strong></li>
 <li><strong>Indexing objects can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>.</strong></li>
 <li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if we assign np.nan to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
 <li><strong>Series will silently overflow if we run <code class="python hljs"><span class="hljs-string">'pd.Series([100], dtype="int8") + 100'</span></code>!</strong></li>
@@ -2627,7 +2628,6 @@ Name: a, dtype: int64
 </code></pre>
 
 <ul>
-<li><strong>Methods sort_values(), dropna(), ffill(), interpolate() and fillna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
 <li><strong>Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.</strong></li>
 <li><strong>Last result has a multi-index. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
