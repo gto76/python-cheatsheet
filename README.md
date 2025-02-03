@@ -1104,7 +1104,7 @@ Duck Types
 
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`.**
-* **That means all objects compare not equal by default.**
+* **That means all user-defined objects compare not equal by default.**
 * **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.**
 * **Ne() automatically works on any object that has eq() defined.**
 
@@ -3341,13 +3341,13 @@ c  6  7
 * **All methods operate on columns by default. Pass `'axis=1'` to process the rows instead.**
 * **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: `'<DF>.loc[row_key, (col_key_1, col_key_2)]'`.**
 
-#### DataFrame — Multi-Index:
+### Multi-Index
 ```python
-<DF>   = <DF>.xs(key, level=<int>)             # Rows with key on passed level of multi-index.
-<DF>   = <DF>.xs(keys, level=<ints>, axis=1)   # Cols that have first key on first level, etc.
-<DF>   = <DF>.set_index(col_keys)              # Creates index from cols. Also `append=False`.
-<S/DF> = <DF>.stack/unstack(level=-1)          # Combines col keys with row keys or vice versa.
-<DF>   = <DF>.pivot_table(index=col_key/s)     # `columns=key/s, values=key/s, aggfunc='mean'`.
+<DF> = <DF>.loc[row_key_1]                     # Or: <DF>.xs(row_key_1)
+<DF> = <DF>.loc[:, (slice(None), col_key_2)]   # Or: <DF>.xs(col_key_2, axis=1, level=1)
+<DF> = <DF>.set_index(col_keys)                # Creates index from cols. Also `append=False`.
+<DF> = <DF>.pivot_table(index=col_key/s)       # `columns=key/s, values=key/s, aggfunc='mean'`.
+<S>  = <DF>.stack/unstack(level=-1)            # Combines col keys with row keys or vice versa.
 ```
 
 ### File Formats

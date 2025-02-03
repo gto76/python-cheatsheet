@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>January 24, 2025</aside>
+    <aside>February 3, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -919,7 +919,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
 <li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>.</strong></li>
-<li><strong>That means all objects compare not equal by default.</strong></li>
+<li><strong>That means all user-defined objects compare not equal by default.</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.</strong></li>
 <li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
@@ -2722,11 +2722,11 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <li><strong>All methods operate on columns by default. Pass <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> to process the rows instead.</strong></li>
 <li><strong>Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.loc[row_key, (col_key_1, col_key_2)]'</span></code>.</strong></li>
 </ul>
-<div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(key, level=&lt;int&gt;)             <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
-&lt;DF&gt;   = &lt;DF&gt;.xs(keys, level=&lt;ints&gt;, axis=<span class="hljs-number">1</span>)   <span class="hljs-comment"># Cols that have first key on first level, etc.</span>
-&lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Creates index from cols. Also `append=False`.</span>
-&lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
-&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
+<div><h3 id="multiindex">Multi-Index</h3><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;DF&gt;.loc[row_key_1]                     <span class="hljs-comment"># Or: &lt;DF&gt;.xs(row_key_1)</span>
+&lt;DF&gt; = &lt;DF&gt;.loc[:, (slice(<span class="hljs-keyword">None</span>), col_key_2)]   <span class="hljs-comment"># Or: &lt;DF&gt;.xs(col_key_2, axis=1, level=1)</span>
+&lt;DF&gt; = &lt;DF&gt;.set_index(col_keys)                <span class="hljs-comment"># Creates index from cols. Also `append=False`.</span>
+&lt;DF&gt; = &lt;DF&gt;.pivot_table(index=col_key/s)       <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
+&lt;S&gt;  = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)            <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
 </code></pre></div>
 
 <div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>January 24, 2025</aside>
+    <aside>February 3, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
