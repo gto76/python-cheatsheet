@@ -3352,16 +3352,16 @@ c  6  7
 
 ### File Formats
 ```python
-<S/DF> = pd.read_json/pickle(<path/url/file>)  # Also accepts io.StringIO/BytesIO(<str/bytes>).
+<S/DF> = pd.read_json/pickle(<path/url/file>)  # Also io.StringIO(<str>), io.BytesIO(<bytes>).
 <DF>   = pd.read_csv/excel(<path/url/file>)    # Also `header/index_col/dtype/usecols/…=<obj>`.
 <list> = pd.read_html(<path/url/file>)         # Raises ImportError if webpage has zero tables.
-<S/DF> = pd.read_parquet/feather/hdf(<path…>)  # Read_hdf() accepts `key='<df_name>'` argument.
+<S/DF> = pd.read_parquet/feather/hdf(<path…>)  # Read_hdf() accepts `key=<s/df_name>` argument.
 <DF>   = pd.read_sql('<table/query>', <conn>)  # Pass SQLite3/Alchemy connection (see #SQLite).
 ```
 
 ```python
 <DF>.to_json/csv/html/parquet/latex(<path>)    # Returns a string/bytes if path is omitted.
-<DF>.to_pickle/excel/feather/hdf(<path>)       # To_hdf() requires `key='<df_name>'` argument.
+<DF>.to_pickle/excel/feather/hdf(<path>)       # To_hdf() requires `key=<s/df_name>` argument.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
 * **`'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'` installs dependencies.**

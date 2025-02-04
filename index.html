@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>February 3, 2025</aside>
+    <aside>February 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2729,15 +2729,15 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 &lt;S&gt;  = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)            <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
 </code></pre></div>
 
-<div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
+<div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also io.StringIO(&lt;str&gt;), io.BytesIO(&lt;bytes&gt;).</span>
 &lt;DF&gt;   = pd.read_csv/excel(&lt;path/url/file&gt;)    <span class="hljs-comment"># Also `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
 &lt;list&gt; = pd.read_html(&lt;path/url/file&gt;)         <span class="hljs-comment"># Raises ImportError if webpage has zero tables.</span>
-&lt;S/DF&gt; = pd.read_parquet/feather/hdf(&lt;path…&gt;)  <span class="hljs-comment"># Read_hdf() accepts `key='&lt;df_name&gt;'` argument.</span>
+&lt;S/DF&gt; = pd.read_parquet/feather/hdf(&lt;path…&gt;)  <span class="hljs-comment"># Read_hdf() accepts `key=&lt;s/df_name&gt;` argument.</span>
 &lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># Pass SQLite3/Alchemy connection (see #SQLite).</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/parquet/latex(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
-&lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># To_hdf() requires `key='&lt;df_name&gt;'` argument.</span>
+&lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># To_hdf() requires `key=&lt;s/df_name&gt;` argument.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
 <ul>
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>February 3, 2025</aside>
+    <aside>February 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
