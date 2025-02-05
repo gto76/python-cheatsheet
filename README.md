@@ -1844,8 +1844,8 @@ import csv
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
 * **`'delimiter'` - A one-character string used to separate fields.**
-* **`'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.**
-* **`'quotechar'` - Character for quoting fields that contain special characters.**
+* **`'lineterminator'` - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
+* **`'quotechar'` - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.**
 * **`'escapechar'` - Character for escaping quotechars.**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
@@ -3186,14 +3186,14 @@ Name: a, dtype: int64
 
 ```python
 <S>  = <S>.head/describe/sort_values()         # Also <S>.unique/value_counts/round/dropna().
-<S>  = <S>.str.strip/lower/contains/replace()  # Also split().str[<int>] and split().explode().
+<S>  = <S>.str.strip/lower/contains/replace()  # Also split().str[i] or split(expand=True).
 <S>  = <S>.dt.year/month/day/hour              # Use pd.to_datetime(<S>) to get S of dates.
 ```
 
 ```python
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
-* **Also: `'pd.cut(<S>, bins=<int/coll>)'` and `'<S>.quantile(<float/coll>)'`.**
+* **Also `'<S>.quantile(<float/coll>)'` and `'pd.cut(<S>, bins=<int/coll>)'`.**
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 * **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**
@@ -3255,7 +3255,7 @@ b  3  4
 ```
 
 ```python
-<DF>   = <DF> > <el/S/DF>                      # Returns DF of bools. S is treated as a row.
+<DF>   = <DF> > <el/S/DF>                      # Returns DF of bools. Treats series as a row.
 <DF>   = <DF> + <el/S/DF>                      # Items with non-matching keys get value NaN.
 ```
 
@@ -3338,7 +3338,7 @@ c  6  7
 |                 |  b  2.0  2.0  |  b  2.0  2.0  |    b  2.0     |
 +-----------------+---------------+---------------+---------------+
 ```
-* **All methods operate on columns by default. Pass `'axis=1'` to process the rows instead.**
+* **Listed methods process the columns unless they receive `'axis=1'`. Exceptions to this rule are `'<DF>.dropna()'`, `'<DF>.drop(row_key/s)'` and `'<DF>.rename(<dict/func>)'`.**
 * **Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: `'<DF>.loc[row_key, (col_key_1, col_key_2)]'`.**
 
 ### Multi-Index
