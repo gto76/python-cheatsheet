@@ -55,7 +55,7 @@
 
 <body>
   <header>
-    <aside>February 5, 2025</aside>
+    <aside>February 6, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1902,25 +1902,25 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;coro&gt; = &lt;async_function&gt;(&lt;args&gt;)         <span class="hljs-comment"># Creates a coroutine by calling async def function.</span>
-&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                <span class="hljs-comment"># Starts the coroutine and returns its result.</span>
-&lt;task&gt; = aio.create_task(&lt;coroutine&gt;)     <span class="hljs-comment"># Schedules the coroutine for execution.</span>
-&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;task&gt;                     <span class="hljs-comment"># Returns coroutine's result. Also &lt;task&gt;.cancel().</span>
+<pre><code class="python language-python hljs">&lt;coro&gt; = &lt;async_function&gt;(&lt;args&gt;)          <span class="hljs-comment"># Creates a coroutine by calling async def function.</span>
+&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                 <span class="hljs-comment"># Starts the coroutine and returns its result.</span>
+&lt;task&gt; = aio.create_task(&lt;coroutine&gt;)      <span class="hljs-comment"># Schedules the coroutine for execution.</span>
+&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;task&gt;                      <span class="hljs-comment"># Returns coroutine's result. Also &lt;task&gt;.cancel().</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)     <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
-&lt;coro&gt; = aio.wait(&lt;tasks&gt;, …)             <span class="hljs-comment"># `aio.ALL/FIRST_COMPLETED`. Returns (done, pending).</span>
-&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)  <span class="hljs-comment"># Iterator of coros. All return next result on await.</span>
+<pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)      <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
+&lt;coro&gt; = aio.wait(&lt;tasks&gt;, return_when=…)  <span class="hljs-comment"># `'ALL/FIRST_COMPLETED'`. Returns (done, pending).</span>
+&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Iter of coros that return next result on await.</span>
 </code></pre>
 <div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
-P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)    <span class="hljs-comment"># Position</span>
-D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)             <span class="hljs-comment"># Direction</span>
-W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                              <span class="hljs-comment"># Width, Height</span>
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction</span>
+W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width, Height</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
-    curses.curs_set(<span class="hljs-number">0</span>)                    <span class="hljs-comment"># Makes cursor invisible.</span>
-    screen.nodelay(<span class="hljs-keyword">True</span>)                  <span class="hljs-comment"># Makes getch() non-blocking.</span>
-    asyncio.run(main_coroutine(screen))   <span class="hljs-comment"># Starts running asyncio code.</span>
+    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes cursor invisible.</span>
+    screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>
+    asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
     moves = asyncio.Queue()
@@ -2931,7 +2931,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>February 5, 2025</aside>
+    <aside>February 6, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

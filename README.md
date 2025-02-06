@@ -2327,30 +2327,30 @@ import asyncio as aio
 ```
 
 ```python
-<coro> = <async_function>(<args>)         # Creates a coroutine by calling async def function.
-<obj>  = await <coroutine>                # Starts the coroutine and returns its result.
-<task> = aio.create_task(<coroutine>)     # Schedules the coroutine for execution.
-<obj>  = await <task>                     # Returns coroutine's result. Also <task>.cancel().
+<coro> = <async_function>(<args>)          # Creates a coroutine by calling async def function.
+<obj>  = await <coroutine>                 # Starts the coroutine and returns its result.
+<task> = aio.create_task(<coroutine>)      # Schedules the coroutine for execution.
+<obj>  = await <task>                      # Returns coroutine's result. Also <task>.cancel().
 ```
 
 ```python
-<coro> = aio.gather(<coro/task>, ...)     # Schedules coros. Returns list of results on await.
-<coro> = aio.wait(<tasks>, …)             # `aio.ALL/FIRST_COMPLETED`. Returns (done, pending).
-<iter> = aio.as_completed(<coros/tasks>)  # Iterator of coros. All return next result on await.
+<coro> = aio.gather(<coro/task>, ...)      # Schedules coros. Returns list of results on await.
+<coro> = aio.wait(<tasks>, return_when=…)  # `'ALL/FIRST_COMPLETED'`. Returns (done, pending).
+<iter> = aio.as_completed(<coros/tasks>)   # Iter of coros that return next result on await.
 ```
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 ```python
 import asyncio, collections, curses, curses.textpad, enum, random
 
-P = collections.namedtuple('P', 'x y')    # Position
-D = enum.Enum('D', 'n e s w')             # Direction
-W, H = 15, 7                              # Width, Height
+P = collections.namedtuple('P', 'x y')     # Position
+D = enum.Enum('D', 'n e s w')              # Direction
+W, H = 15, 7                               # Width, Height
 
 def main(screen):
-    curses.curs_set(0)                    # Makes cursor invisible.
-    screen.nodelay(True)                  # Makes getch() non-blocking.
-    asyncio.run(main_coroutine(screen))   # Starts running asyncio code.
+    curses.curs_set(0)                     # Makes cursor invisible.
+    screen.nodelay(True)                   # Makes getch() non-blocking.
+    asyncio.run(main_coroutine(screen))    # Starts running asyncio code.
 
 async def main_coroutine(screen):
     moves = asyncio.Queue()
