@@ -1782,9 +1782,9 @@ def read_json_file(filename):
 
 ### Write Collection to JSON File
 ```python
-def write_to_json_file(filename, list_or_dict):
+def write_to_json_file(filename, collection):
     with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(list_or_dict, file, ensure_ascii=False, indent=2)
+        json.dump(collection, file, ensure_ascii=False, indent=2)
 ```
 
 
@@ -1798,14 +1798,14 @@ import pickle
 <object> = pickle.loads(<bytes>)    # Converts bytes object to object.
 ```
 
-### Read Object from File
+### Read Object from Pickle File
 ```python
 def read_pickle_file(filename):
     with open(filename, 'rb') as file:
         return pickle.load(file)
 ```
 
-### Write Object to File
+### Write Object to Pickle File
 ```python
 def write_to_pickle_file(filename, an_object):
     with open(filename, 'wb') as file:
