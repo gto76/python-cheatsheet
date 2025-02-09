@@ -2263,7 +2263,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ```python
 <Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
 <Thread>.start()                               # Starts the thread. Also <Thread>.is_alive().
-<Thread>.join()                                # Waits for the thread to finish.
+<Thread>.join()                                # Waits for the thread to finish executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program will not be able to exit while the thread is alive.**
@@ -2563,7 +2563,7 @@ app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=
 ```python
 @app.route('/img/<path:filename>')
 def serve_file(filename):
-    return fl.send_from_directory('dirname/', filename)
+    return fl.send_from_directory('DIRNAME/', filename)
 ```
 
 ### Dynamic Request
@@ -2574,7 +2574,7 @@ def serve_html(sport):
 ```
 * **`'fl.render_template(filename, <kwargs>)'` renders a file located in 'templates' dir.**
 * **`'fl.abort(<int>)'` returns error code and `'return fl.redirect(<url>)'` redirects.**
-* **`'fl.request.args[<str>]'` returns parameter from the query string (URL right of '?').**
+* **`'fl.request.args[<str>]'` returns parameter from query string (URL part right of '?').**
 * **`'fl.session[<str>] = <obj>'` stores session data. It requires secret key to be set at the startup with `'app.secret_key = <str>'`.**
 
 ### REST Request
