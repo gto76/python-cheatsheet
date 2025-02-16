@@ -742,7 +742,7 @@ const DARK_THEME_SCRIPT =
   '    var link_to_theme = document.createElement("a")\n' +
   '    link_to_theme.href = "index.html"\n' +
   '    link_to_theme.text = "Switch to light theme"\n' +
-  '    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)\n' +
+  '    document.getElementsByClassName("banner")[0].firstChild.children[3].replaceWith(link_to_theme)\n' +
   '\n' +
   '    var img_dark = document.createElement("img");\n' +
   '    img_dark.src = "web/image_orig_blue6.png";\n' +
