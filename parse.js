@@ -736,11 +736,15 @@ const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet
 
 const DARK_THEME_SCRIPT =
   '<script>\n' +
-  '  // Changes the image and link to theme if URL ends with "index.html?theme=dark". \n' +
-  '  if (window.location.search.search(/[?&]theme=dark/) !== -1) {\n' +
+  '  // Changes the banner image and link-to-theme if "theme=dark" is in query string\n' +
+  '  // or if browser prefers dark mode and theme is not explicitly set.\n' +
+  '  if ( (window.location.search.search(/[?&]theme=dark/) !== -1) || ((window.location.search.search(/[?&]theme=light/) == -1) && (window.matchMedia(\'(prefers-color-scheme: dark)\').matches)) ) {\n' +
+  '    activateDarkMode();\n' +
+  '  }\n' +
   '\n' +
+  '  function activateDarkMode() {\n' +
   '    var link_to_theme = document.createElement("a")\n' +
-  '    link_to_theme.href = "index.html"\n' +
+  '    link_to_theme.href = "index.html?theme=light"\n' +
   '    link_to_theme.text = "Switch to light theme"\n' +
   '    document.getElementsByClassName("banner")[0].firstChild.children[3].replaceWith(link_to_theme)\n' +
   '\n' +
