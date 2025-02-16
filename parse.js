@@ -738,7 +738,12 @@ const DARK_THEME_SCRIPT =
   '<script>\n' +
   '  // Changes the banner image and link-to-theme if "theme=dark" is in query string\n' +
   '  // or if browser prefers dark mode and theme is not explicitly set.\n' +
-  '  if ( (window.location.search.search(/[?&]theme=dark/) !== -1) || ((window.location.search.search(/[?&]theme=light/) == -1) && (window.matchMedia(\'(prefers-color-scheme: dark)\').matches)) ) {\n' +
+  '\n' +
+  'const theme_not_set_in_query = window.location.search.search(/[?&]theme=light/) == -1\n' +
+  'const browser_prefers_dark = window.matchMedia(\'(prefers-color-scheme: dark)\').matches;\n' +
+  '\n' +
+  '  if ((window.location.search.search(/[?&]theme=dark/) !== -1) || \n' +
+  '      (theme_not_set_in_query && browser_prefers_dark)) {\n' +
   '    activateDarkMode();\n' +
   '  }\n' +
   '\n' +
@@ -752,7 +757,8 @@ const DARK_THEME_SCRIPT =
   '    img_dark.src = "web/image_orig_blue6.png";\n' +
   '    img_dark.alt = "Monthy Python";\n' +
   '    if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||\n' +
-  '        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {\n' +
+  '        (window.location.search.search(/[?&]theme=dark3/) !== -1) ||\n' +
+  '        (theme_not_set_in_query && browser_prefers_dark)) {\n' +
   '      img_dark.style = "width: 910px;";\n' +
   '    } else {\n' +
   '      img_dark.style = "width: 960px;";\n' +

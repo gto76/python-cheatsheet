@@ -64,7 +64,12 @@
 </sup></p><p class="banner" style="margin-bottom: 20px; padding-bottom: 7px;"><img src="web/image_888.jpeg" alt="Monty Python"></p><script>
   // Changes the banner image and link-to-theme if "theme=dark" is in query string
   // or if browser prefers dark mode and theme is not explicitly set.
-  if ( (window.location.search.search(/[?&]theme=dark/) !== -1) || ((window.location.search.search(/[?&]theme=light/) == -1) && (window.matchMedia('(prefers-color-scheme: dark)').matches)) ) {
+
+const theme_not_set_in_query = window.location.search.search(/[?&]theme=light/) == -1
+const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if ((window.location.search.search(/[?&]theme=dark/) !== -1) || 
+      (theme_not_set_in_query && browser_prefers_dark)) {
     activateDarkMode();
   }
 
@@ -78,7 +83,8 @@
     img_dark.src = "web/image_orig_blue6.png";
     img_dark.alt = "Monthy Python";
     if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||
-        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {
+        (window.location.search.search(/[?&]theme=dark3/) !== -1) ||
+        (theme_not_set_in_query && browser_prefers_dark)) {
       img_dark.style = "width: 910px;";
     } else {
       img_dark.style = "width: 960px;";
