@@ -3187,7 +3187,8 @@ Name: a, dtype: int64
 ```python
 <S>  = <S>.head/describe/sort_values()         # Also <S>.unique/value_counts/round/dropna().
 <S>  = <S>.str.strip/lower/contains/replace()  # Also split().str[i] or split(expand=True).
-<S>  = <S>.dt.year/month/day/hour              # Use pd.to_datetime(<S>) to get S of dates.
+<S>  = <S>.dt.year/month/day/hour              # Use pd.to_datetime(<S>) to get S of datetimes.
+<S>  = <S>.dt.to_period('y/m/d/h')             # Quantizes datetimes into Period objects.
 ```
 
 ```python
@@ -3223,7 +3224,6 @@ Name: a, dtype: int64
 |              |    y  2.0   |   y   2.0   |      y  2.0   |
 +--------------+-------------+-------------+---------------+
 ```
-* **Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.**
 * **Last result has a multi-index. Use `'<S>[key_1, key_2]'` to get its values.**
 
 ### DataFrame
@@ -3366,7 +3366,7 @@ c  6  7
 ```
 * **`'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'` installs dependencies.**
 * **Read\_csv() only parses dates of columns that were specified by 'parse\_dates' argument. It automatically tries to detect the format, but it can be helped with 'date\_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.**
-* **If there's a single invalid date then it returns the whole column as a series of strings, unlike `'<S> = pd.to_datetime(<S>, errors="coerce")'`, which uses pd.NaT.**
+* **If 'parse\_dates' and 'index_col' are the same column, we get a DF with DatetimeIndex. Its `'resample("y/m/d/h")'` method returns a Resampler object that is similar to GroupBy.**
 
 ### GroupBy
 **Object that groups together rows of a dataframe based on the value of the passed column.**

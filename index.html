@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 16, 2025</aside>
+    <aside>February 17, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2607,7 +2607,8 @@ Name: a, dtype: int64
 </code></pre>
 <pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.head/describe/sort_values()         <span class="hljs-comment"># Also &lt;S&gt;.unique/value_counts/round/dropna().</span>
 &lt;S&gt;  = &lt;S&gt;.str.strip/lower/contains/replace()  <span class="hljs-comment"># Also split().str[i] or split(expand=True).</span>
-&lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of dates.</span>
+&lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of datetimes.</span>
+&lt;S&gt;  = &lt;S&gt;.dt.to_period(<span class="hljs-string">'y/m/d/h'</span>)             <span class="hljs-comment"># Quantizes datetimes into Period objects.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
 </code></pre>
@@ -2639,7 +2640,6 @@ Name: a, dtype: int64
 </code></pre>
 
 <ul>
-<li><strong>Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.</strong></li>
 <li><strong>Last result has a multi-index. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
 </ul>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); df
@@ -2754,7 +2754,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'</span></code> installs dependencies.</strong></li>
 <li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It&nbsp;automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
-<li><strong>If there's a single invalid date then it returns the whole column as a series of strings, unlike <code class="python hljs"><span class="hljs-string">'&lt;S&gt; = pd.to_datetime(&lt;S&gt;, errors="coerce")'</span></code>, which uses pd.NaT.</strong></li>
+<li><strong>If 'parse_dates' and 'index_col' are the same column, we get a DF with DatetimeIndex. Its <code class="python hljs"><span class="hljs-string">'resample("y/m/d/h")'</span></code> method returns a Resampler object that is similar to GroupBy.</strong></li>
 </ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply/filter(&lt;func&gt;)               <span class="hljs-comment"># Filter drops a group if func returns False.</span>
@@ -2942,7 +2942,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>February 16, 2025</aside>
+    <aside>February 17, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
