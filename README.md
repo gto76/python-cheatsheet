@@ -3273,7 +3273,7 @@ b  3  4
 ```
 
 ```python
-<DF>.plot.line/area/bar/scatter(x=col_key, …)  # `y=col_key/s`. Also hist/box(by=col_key).
+<DF>.plot.line/area/bar/scatter(x=col_key, …)  # `y=col_key/s`. Also hist/box(column/by=col_k).
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 
