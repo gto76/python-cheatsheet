@@ -3096,19 +3096,19 @@ def main():
 def run(screen, images, mario, tiles):
     clock = pg.time.Clock()
     pressed = set()
-    while not pg.event.get(pg.QUIT) and clock.tick(28):
-        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed |= {keys.get(e.key) for e in pg.event.get(pg.KEYDOWN)}
-        pressed -= {keys.get(e.key) for e in pg.event.get(pg.KEYUP)}
+    while not pg.event.get(pg.QUIT):
+        clock.tick(28)
+        pressed |= {e.key for e in pg.event.get(pg.KEYDOWN)}
+        pressed -= {e.key for e in pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles)
 
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
-    x += 2 * ((D.e in pressed) - (D.w in pressed))
+    x += 2 * ((pg.K_RIGHT in pressed) - (pg.K_LEFT in pressed))
     x += (x < 0) - (x > 0)
-    y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (D.n in pressed) * -10
+    y += 1 if D.s not in get_boundaries(mario.rect, tiles) else (pg.K_UP in pressed) * -10
     mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
 def update_position(mario, tiles):
