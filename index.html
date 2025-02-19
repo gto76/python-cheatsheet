@@ -2290,7 +2290,7 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three ints.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixels more transparent.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 n_pixels = WIDTH * HEIGHT
@@ -2352,7 +2352,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
 &lt;tuple&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
-&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames (-1 returns all).</span>
+&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns all frames if -1 is passed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)    <span class="hljs-comment"># Creates/truncates a file for writing.</span>
 &lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
@@ -2390,7 +2390,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
-        a_float += p.sampwidth == <span class="hljs-number">1</span>
+        a_float += (p.sampwidth == <span class="hljs-number">1</span>)
         a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
     <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:

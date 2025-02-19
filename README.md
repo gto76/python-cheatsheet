@@ -2799,7 +2799,7 @@ from PIL import Image
 ### Modes
 * **`'L'` - Lightness (greyscale image). Each pixel is an int between 0 and 255.**
 * **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three ints.**
-* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixels more transparent.**
+* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.**
 * **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**
 
 
@@ -2874,7 +2874,7 @@ import wave
 <int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
 <int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
 <tuple> = <Wave>.getparams()          # Returns namedtuple of all parameters.
-<bytes> = <Wave>.readframes(nframes)  # Returns next n frames (-1 returns all).
+<bytes> = <Wave>.readframes(nframes)  # Returns all frames if -1 is passed.
 ```
 
 ```python
@@ -2919,7 +2919,7 @@ def read_wav_file(filename):
 def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, framerate=44100):
     def get_bytes(a_float):
         a_float = max(-1, min(1 - 2e-16, a_float))
-        a_float += p.sampwidth == 1
+        a_float += (p.sampwidth == 1)
         a_float *= pow(2, (p.sampwidth * 8) - 1)
         return int(a_float).to_bytes(p.sampwidth, 'little', signed=(p.sampwidth != 1))
     if p is None:
