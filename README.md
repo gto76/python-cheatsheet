@@ -2419,8 +2419,7 @@ import matplotlib.pyplot as plt
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Also plt.plot(y_data).
 plt.legend()                                          # Adds a legend.
 plt.title/xlabel/ylabel(<str>)                        # Adds a title or label.
-plt.savefig(<path>)                                   # Saves the plot.
-plt.show()                                            # Displays the plot.
+plt.show()                                            # Also plt.savefig(<path>).
 plt.clf()                                             # Clears the plot.
 ```
 
@@ -2443,7 +2442,7 @@ Console App
 ```python
 # $ pip3 install windows-curses
 import curses, os
-from curses import A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+from curses import A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 def main(screen):
     ch, first, selected, paths = 0, 0, 0, os.listdir()
@@ -2454,9 +2453,10 @@ def main(screen):
             color = A_REVERSE if filename == paths[selected] else 0
             screen.addnstr(y, 0, filename, width-1, color)
         ch = screen.getch()
-        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
-        selected = max(0, min(len(paths)-1, selected))
-        first += (selected >= first + height) - (selected < first)
+        selected -= (ch == KEY_UP) and (selected > 0)
+        selected += (ch == KEY_DOWN) and (selected < len(paths)-1)
+        first = min(first, selected)
+        first = max(first, selected - (height-1))
         if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord('\n'), ord('\r')]:
             new_dir = '..' if ch == KEY_LEFT else paths[selected]
             if os.path.isdir(new_dir):

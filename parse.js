@@ -168,7 +168,7 @@ const COROUTINES =
 const CURSES =
   '<span class="hljs-comment"># $ pip3 install windows-curses</span>\n' +
   '<span class="hljs-keyword">import</span> curses, os\n' +
-  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
+  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
@@ -179,9 +179,10 @@ const CURSES =
   '            color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>\n' +
   '            screen.addnstr(y, <span class="hljs-number">0</span>, filename, width-<span class="hljs-number">1</span>, color)\n' +
   '        ch = screen.getch()\n' +
-  '        selected += (ch == KEY_DOWN) - (ch == KEY_UP)\n' +
-  '        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))\n' +
-  '        first += (selected &gt;= first + height) - (selected &lt; first)\n' +
+  '        selected -= (ch == KEY_UP) <span class="hljs-keyword">and</span> (selected &gt; <span class="hljs-number">0</span>)\n' +
+  '        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)\n' +
+  '        first = min(first, selected)\n' +
+  '        first = max(first, selected - (height-<span class="hljs-number">1</span>))\n' +
   '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">\'\\n\'</span>), ord(<span class="hljs-string">\'\\r\'</span>)]:\n' +
   '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
   '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +

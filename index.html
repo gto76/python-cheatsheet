@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 19, 2025</aside>
+    <aside>February 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1990,8 +1990,7 @@ Processing: 100%|████████████████████| 3
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Also plt.plot(y_data).</span>
 plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
 plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title or label.</span>
-plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the plot.</span>
-plt.show()                                            <span class="hljs-comment"># Displays the plot.</span>
+plt.show()                                            <span class="hljs-comment"># Also plt.savefig(&lt;path&gt;).</span>
 plt.clf()                                             <span class="hljs-comment"># Clears the plot.</span>
 </code></pre></div>
 
@@ -2005,7 +2004,7 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 
 <div><h2 id="consoleapp"><a href="#consoleapp" name="consoleapp">#</a>Console App</h2><div><h4 id="runsabasicfileexplorerintheconsole">Runs a basic file explorer in the console:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install windows-curses</span>
 <span class="hljs-keyword">import</span> curses, os
-<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
@@ -2016,9 +2015,10 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
             color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
             screen.addnstr(y, <span class="hljs-number">0</span>, filename, width-<span class="hljs-number">1</span>, color)
         ch = screen.getch()
-        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
-        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))
-        first += (selected &gt;= first + height) - (selected &lt; first)
+        selected -= (ch == KEY_UP) <span class="hljs-keyword">and</span> (selected &gt; <span class="hljs-number">0</span>)
+        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)
+        first = min(first, selected)
+        first = max(first, selected - (height-<span class="hljs-number">1</span>))
         <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">'\n'</span>), ord(<span class="hljs-string">'\r'</span>)]:
             new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
             <span class="hljs-keyword">if</span> os.path.isdir(new_dir):
@@ -2942,7 +2942,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>February 19, 2025</aside>
+    <aside>February 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
