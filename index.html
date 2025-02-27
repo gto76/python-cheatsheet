@@ -1427,13 +1427,13 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative CWD. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute CWD. Also Path().resolve().</span>
 &lt;Path&gt; = Path.home()                <span class="hljs-comment"># Returns user's home directory (absolute).</span>
-&lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns script's path if CWD wasn't changed.</span>
+&lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns module's path if CWD wasn't changed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without the final component.</span>
 &lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns final component without extension.</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns final component's extension.</span>
-&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all components as strings.</span>
+&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns final component w/o last extension.</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns last extension prepended with a dot.</span>
+&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all path's components as strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>

@@ -1685,15 +1685,15 @@ from pathlib import Path
 <Path> = Path()                     # Returns relative CWD. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute CWD. Also Path().resolve().
 <Path> = Path.home()                # Returns user's home directory (absolute).
-<Path> = Path(__file__).resolve()   # Returns script's path if CWD wasn't changed.
+<Path> = Path(__file__).resolve()   # Returns module's path if CWD wasn't changed.
 ```
 
 ```python
 <Path> = <Path>.parent              # Returns Path without the final component.
 <str>  = <Path>.name                # Returns final component as a string.
-<str>  = <Path>.stem                # Returns final component without extension.
-<str>  = <Path>.suffix              # Returns final component's extension.
-<tup.> = <Path>.parts               # Returns all components as strings.
+<str>  = <Path>.stem                # Returns final component w/o last extension.
+<str>  = <Path>.suffix              # Returns last extension prepended with a dot.
+<tup.> = <Path>.parts               # Returns all path's components as strings.
 ```
 
 ```python
