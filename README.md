@@ -667,7 +667,7 @@ import zoneinfo, dateutil.tz
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
-<float>  = <TD>      / <TD>                 # Also `<int>, <TD> = divmod(<TD>, <TD>)`.
+<float>  = <TD>      / <TD>                 # Also `(<int>, <TD>) = divmod(<TD>, <TD>)`.
 ```
 
 
@@ -3062,7 +3062,7 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 ### Sound
 ```python
 <Sound> = pg.mixer.Sound(<path/file/bytes>)     # WAV file or bytes/array of signed shorts.
-<Sound>.play/stop()                             # Also set_volume(<float>), fadeout(msec).
+<Sound>.play/stop()                             # Also set_volume(<float>) and fadeout(msec).
 ```
 
 ### Basic Mario Brothers Example

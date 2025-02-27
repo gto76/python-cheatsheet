@@ -595,7 +595,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `&lt;int&gt;, &lt;TD&gt; = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
 </code></pre></div>
 
 <div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
@@ -2501,7 +2501,7 @@ rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>
 &lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
 </code></pre>
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
-&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;), fadeout(msec).</span>
+&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;) and fadeout(msec).</span>
 </code></pre></div>
 
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools <span class="hljs-keyword">as</span> it, pygame <span class="hljs-keyword">as</span> pg, urllib.request
