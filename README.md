@@ -2563,7 +2563,7 @@ app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=
 ```python
 @app.route('/img/<path:filename>')
 def serve_file(filename):
-    return fl.send_from_directory('DIRNAME/', filename)
+    return fl.send_from_directory('DIRNAME', filename)
 ```
 
 ### Dynamic Request
@@ -3549,7 +3549,7 @@ cdef class <class_name>:
 
 ```perl
 $ python3 -m venv NAME      # Creates virtual environment in current directory.
-$ source NAME/bin/activate  # Activates env. On Windows run `NAME\Scripts\activate`.
+$ source NAME/bin/activate  # Activates it. On Windows run `NAME\Scripts\activate`.
 $ pip3 install LIBRARY      # Installs the library into active environment.
 $ python3 FILE              # Runs the script in active environment. Also `./FILE`.
 $ deactivate                # Deactivates the active virtual environment.
