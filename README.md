@@ -2828,11 +2828,11 @@ img.show()
 from PIL import ImageDraw
 <Draw> = ImageDraw.Draw(<Image>)                # Object for adding 2D graphics to the image.
 <Draw>.point((x, y))                            # Draws a point. Truncates floats into ints.
-<Draw>.line((x1, y1, x2, y2 [, ...]))           # To get anti-aliasing use Image's resize().
+<Draw>.line((x1, y1, x2, y2 [, ...]))           # For anti-aliasing use <Image>.resize((w, h)).
 <Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Draws in clockwise dir. Also pieslice().
 <Draw>.rectangle((x1, y1, x2, y2))              # Also rounded_rectangle(), regular_polygon().
-<Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first.
-<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use Image's rotate() and paste().
+<Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first one.
+<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use <Image>.rotate(anticlock_deg).
 <Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`.
 ```
 * **Use `'fill=<color>'` to set the primary color.**
@@ -3457,7 +3457,7 @@ px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
 
 ```python
 # $ pip3 install pandas lxml selenium plotly
-import pandas as pd, selenium.webdriver, plotly.graph_objects as go
+import pandas as pd, selenium.webdriver, io, plotly.graph_objects as go
 
 def main():
     covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
@@ -3466,7 +3466,7 @@ def main():
 
 def get_covid_cases():
     url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
-    df = pd.read_csv(url, usecols=['location', 'date', 'total_cases'], parse_dates=['date'])
+    df = pd.read_csv(url, parse_dates=['date'])
     df = df[df.location == 'World']
     s = df.set_index('date').total_cases
     return s.rename('Total Cases')
@@ -3482,7 +3482,7 @@ def get_ticker(driver, name, symbol):
     driver.get(url + '?period1=1579651200&period2=9999999999')
     if buttons := driver.find_elements('xpath', '//button[@name="reject"]'):
         buttons[0].click()
-    dataframes = pd.read_html(driver.page_source, parse_dates=['Date'])
+    dataframes = pd.read_html(io.StringIO(driver.page_source), parse_dates=['Date'])
     s = dataframes[0].set_index('Date').Open
     return s.rename(name)
 
@@ -3529,7 +3529,7 @@ import <cython_script>                 # Script must be saved with '.pyx' extens
 
 #### Definitions:
 * **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
-* **Also supports C pointers via `'*'` and `'&'`, structs, unions, and enums.**
+* **Also supports C pointers (via `'*'` and `'&'`), structs, unions and enums.**
 
 ```python
 cdef <ctype/type> <var_name> [= <obj>]

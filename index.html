@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 28, 2025</aside>
+    <aside>March 2, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2313,11 +2313,11 @@ img.show()
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
 &lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)                <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
 &lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
-&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
+&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
 &lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Draws in clockwise dir. Also pieslice().</span>
 &lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
-&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first one.</span>
+&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use &lt;Image&gt;.rotate(anticlock_deg).</span>
 &lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`.</span>
 </code></pre></div>
 
@@ -2816,7 +2816,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 <div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas lxml selenium plotly</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, plotly.graph_objects <span class="hljs-keyword">as</span> go
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, io, plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
@@ -2825,7 +2825,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
     url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
-    df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>], parse_dates=[<span class="hljs-string">'date'</span>])
+    df = pd.read_csv(url, parse_dates=[<span class="hljs-string">'date'</span>])
     df = df[df.location == <span class="hljs-string">'World'</span>]
     s = df.set_index(<span class="hljs-string">'date'</span>).total_cases
     <span class="hljs-keyword">return</span> s.rename(<span class="hljs-string">'Total Cases'</span>)
@@ -2841,7 +2841,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
     driver.get(url + <span class="hljs-string">'?period1=1579651200&amp;period2=9999999999'</span>)
     <span class="hljs-keyword">if</span> buttons := driver.find_elements(<span class="hljs-string">'xpath'</span>, <span class="hljs-string">'//button[@name="reject"]'</span>):
         buttons[<span class="hljs-number">0</span>].click()
-    dataframes = pd.read_html(driver.page_source, parse_dates=[<span class="hljs-string">'Date'</span>])
+    dataframes = pd.read_html(io.StringIO(driver.page_source), parse_dates=[<span class="hljs-string">'Date'</span>])
     s = dataframes[<span class="hljs-number">0</span>].set_index(<span class="hljs-string">'Date'</span>).Open
     <span class="hljs-keyword">return</span> s.rename(name)
 
@@ -2885,7 +2885,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <div><h4 id="definitions">Definitions:</h4><ul>
 <li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
-<li><strong>Also supports C pointers via <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'&amp;'</span></code>, structs, unions, and enums.</strong></li>
+<li><strong>Also supports C pointers (via <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'&amp;'</span></code>), structs, unions and enums.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; &lt;var_name&gt; [= &lt;obj&gt;]
 <span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;coll_of_nums&gt;]
 <span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; &lt;arg_name&gt;): ...
@@ -2942,7 +2942,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>February 28, 2025</aside>
+    <aside>March 2, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
