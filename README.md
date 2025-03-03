@@ -2078,7 +2078,7 @@ Memory View
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns a list of ints, floats, or bytes.
+<list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
 <str>   = str(<mview>, 'utf-8')                # Treats memoryview as a bytes object.
 <str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
@@ -2942,7 +2942,7 @@ write_to_wav_file('test.wav', samples_f)
 from random import uniform
 samples_f, params = read_wav_file('test.wav')
 samples_f = (f + uniform(-0.05, 0.05) for f in samples_f)
-write_to_wav_file('test.wav', samples_f, params)
+write_to_wav_file('test.wav', samples_f, p=params)
 ```
 
 #### Plays the WAV file:
