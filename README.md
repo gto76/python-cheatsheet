@@ -2103,7 +2103,7 @@ from collections import deque
 
 Operator
 --------
-**Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence, from least to most binding. Logical and arithmetic operators in lines 1, 3 and 5 are also ordered by precedence within their own group.**
+**Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in lines 1, 3 and 5 are also ordered by precedence within a group.**
 ```python
 import operator as op
 ```
