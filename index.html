@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 3, 2025</aside>
+    <aside>March 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2753,8 +2753,9 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'</span></code> installs dependencies.</strong></li>
-<li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It&nbsp;automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
-<li><strong>If 'parse_dates' and 'index_col' are the same column, we get a DF with DatetimeIndex. Its <code class="python hljs"><span class="hljs-string">'resample("y/m/d/h")'</span></code> method returns a Resampler object that is similar to GroupBy.</strong></li>
+<li><strong>Csv functions use the same dialect as standard library's csv module (e.g. <code class="python hljs"><span class="hljs-string">'sep=","'</span></code>).</strong></li>
+<li><strong>Read_csv() only parses dates of columns that are listed in 'parse_dates'. It automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments.</strong></li>
+<li><strong>We get a dataframe with DatetimeIndex if 'parse_dates' argument includes 'index_col'. Its <code class="python hljs"><span class="hljs-string">'resample("y/m/d/h")'</span></code> method returns Resampler object that is similar to GroupBy.</strong></li>
 </ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply/filter(&lt;func&gt;)               <span class="hljs-comment"># Filter drops a group if func returns False.</span>
@@ -2942,7 +2943,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>March 3, 2025</aside>
+    <aside>March 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
