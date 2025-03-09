@@ -754,6 +754,88 @@ head, *body, tail = <coll.>     # Head or tail can be omitted.
 ```
 
 
+Walrus Operator
+---------------
+**The Walrus Operator (:=) is a new addition to Python 3.8 and higher. 
+ Walrus Operator allows you to assign a value to a variable within an expression. 
+ This can be useful when you need to use a value multiple times in a loop, but don’t want to repeat the calculation.**
+
+### Walrus Operator with 'while' loop:
+```python
+def print_nums(numbers):
+    while (n := len(numbers)) > 0:
+        print(numbers.pop())
+```
+
+```python
+>>> numbers = [1, 2, 3, 4]
+>>> print_nums(numbers)
+4
+3
+2
+1
+```
+
+### Walrus Operator with 'if' statements:
+```python
+def check_name(data):
+    if name := data.get("name"):
+        print(f'Found name: "{name}"')
+```
+
+```python
+>>> data = {"userId": 1, "name": "Jerry", "age": 20}
+>>> check_name(data)
+Found name: "Jerry"
+```
+
+### Walrus Operator VS Equivalent assignment operation:
+### Example-1:
+**Walrus Operator:**
+```python
+data = [
+    {"userId": 1, "name": "Jack", "age": 20},
+    {"userId": 1, "name": "John", "age": 24}
+]
+
+for entry in sample_data:
+    if name := entry.get("name"):
+        print(f'Found name: "{name}"')
+```
+
+**Equivalent assignment operation without Walrus Operator:**
+```python
+data = [
+    {"userId": 1, "name": "Jack", "age": 20},
+    {"userId": 1, "name": "John", "age": 24}
+]
+
+for entry in sample_data:
+    name = entry.get("name")
+    if name:
+        print(f'Found name: "{name}"')
+```
+### Example-2:
+**Walrus Operator:**
+```python
+fruits = list()
+
+while (fruit := input("What fruit do you like:=  ")) != "quit":
+    fruits.append(fruit)
+```
+
+**Equivalent assignment operation without Walrus Operator:**
+```python
+fruits = list()
+
+while True:
+  fruit = input("What fruit do you like?: ")
+  if fruit == "quit":
+    break
+    fruits.append(fruit)
+```
+
+
 Inline
 ------
 ### Lambda
