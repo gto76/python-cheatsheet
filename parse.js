@@ -76,7 +76,7 @@ const REPR_USE_CASES =
   'print/str/repr([&lt;obj&gt;])\n' +
   'print/str/repr({&lt;obj&gt;: &lt;obj&gt;})\n' +
   '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;obj&gt;!r}</span>\'</span>\n' +
-  'Z = dataclasses.make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n' +
+  'Z = make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;\n';
 
 const CONSTRUCTOR_OVERLOADING =

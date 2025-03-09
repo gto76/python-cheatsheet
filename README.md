@@ -999,7 +999,7 @@ raise Exception(<obj>)
 print/str/repr([<obj>])
 print/str/repr({<obj>: <obj>})
 f'{<obj>!r}'
-Z = dataclasses.make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
+Z = make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
 >>> <obj>
 ```
 
@@ -1034,9 +1034,9 @@ class C(A, B): pass
 ```python
 from collections import abc
 
-<name>: <type> [| ...] [= <obj>]                              # `|` since 3.10.
-<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]  # Since 3.9.
-<name>: dict/tuple[<type>, ...] [= <obj>]                     # Since 3.9.
+<name>: <type> [| ...] [= <obj>]
+<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]
+<name>: dict/tuple[<type>, ...] [= <obj>]
 ```
 
 ### Dataclass
@@ -1056,9 +1056,9 @@ class <class_name>:
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 ```python
-Point = make_dataclass('Point', ['x', 'y'])
-Point = make_dataclass('Point', [('x', float), ('y', float)])
-Point = make_dataclass('Point', [('x', float, 0), ('y', float, 0)])
+P = make_dataclass('P', ['x', 'y'])
+P = make_dataclass('P', [('x', float), ('y', float)])
+P = make_dataclass('P', [('x', float, 0), ('y', float, 0)])
 ```
 
 ### Property
@@ -3440,7 +3440,7 @@ import plotly.express as px, pandas as pd
 ```python
 covid = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'
                     '6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv',
-                    usecols=['iso_code', 'date', 'total_deaths', 'population'])
+                    usecols=['iso_code', 'date', 'population', 'total_deaths'])
 continents = pd.read_csv('https://gto76.github.io/python-cheatsheet/web/continents.csv',
                          usecols=['Three_Letter_Country_Code', 'Continent_Name'])
 df = pd.merge(covid, continents, left_on='iso_code', right_on='Three_Letter_Country_Code')
@@ -3483,7 +3483,8 @@ def get_ticker(driver, name, symbol):
     driver.get(url + '?period1=1579651200&period2=9999999999')
     if buttons := driver.find_elements('xpath', '//button[@name="reject"]'):
         buttons[0].click()
-    dataframes = pd.read_html(io.StringIO(driver.page_source), parse_dates=['Date'])
+    html = io.StringIO(driver.page_source)
+    dataframes = pd.read_html(html, parse_dates=['Date'])
     s = dataframes[0].set_index('Date').Open
     return s.rename(name)
 

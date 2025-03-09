@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 8, 2025</aside>
+    <aside>March 9, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -847,7 +847,7 @@ csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
 <div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;])
 print/str/repr({&lt;obj&gt;: &lt;obj&gt;})
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
-Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
+Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
 </code></pre></div>
 
@@ -875,9 +875,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
 
-&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]                              <span class="hljs-comment"># `|` since 3.10.</span>
-&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]  <span class="hljs-comment"># Since 3.9.</span>
-&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]                     <span class="hljs-comment"># Since 3.9.</span>
+&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
+&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]
 </code></pre></div>
 
 
@@ -897,9 +897,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">Point = make_dataclass(<span class="hljs-string">'Point'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
-Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
-Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="hljs-string">'x'</span>, float, <span class="hljs-number">0</span>), (<span class="hljs-string">'y'</span>, float, <span class="hljs-number">0</span>)])
+<pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
+P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float, <span class="hljs-number">0</span>), (<span class="hljs-string">'y'</span>, float, <span class="hljs-number">0</span>)])
 </code></pre>
 <div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
@@ -2803,7 +2803,7 @@ z
 </code></pre>
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'</span>
                     <span class="hljs-string">'6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv'</span>,
-                    usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
+                    usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'population'</span>, <span class="hljs-string">'total_deaths'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gto76.github.io/python-cheatsheet/web/continents.csv'</span>,
                          usecols=[<span class="hljs-string">'Three_Letter_Country_Code'</span>, <span class="hljs-string">'Continent_Name'</span>])
 df = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
@@ -2842,7 +2842,8 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
     driver.get(url + <span class="hljs-string">'?period1=1579651200&amp;period2=9999999999'</span>)
     <span class="hljs-keyword">if</span> buttons := driver.find_elements(<span class="hljs-string">'xpath'</span>, <span class="hljs-string">'//button[@name="reject"]'</span>):
         buttons[<span class="hljs-number">0</span>].click()
-    dataframes = pd.read_html(io.StringIO(driver.page_source), parse_dates=[<span class="hljs-string">'Date'</span>])
+    html = io.StringIO(driver.page_source)
+    dataframes = pd.read_html(html, parse_dates=[<span class="hljs-string">'Date'</span>])
     s = dataframes[<span class="hljs-number">0</span>].set_index(<span class="hljs-string">'Date'</span>).Open
     <span class="hljs-keyword">return</span> s.rename(name)
 
@@ -2943,7 +2944,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>March 8, 2025</aside>
+    <aside>March 9, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
