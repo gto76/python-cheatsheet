@@ -3420,16 +3420,16 @@ import plotly.express as px, pandas as pd
 ```
 
 ```python
-<Fig> = px.line(<DF>, x=col_key, y=col_key)            # Or: px.line(x=<list>, y=<list>)
-<Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))   # Also `paper_bgcolor='rgb(0, 0, 0)'`.
-<Fig>.write_html/json/image('<path>')                  # <Fig>.show() displays the plot.
+<Fig> = px.line(<DF>, x=col_key, y=col_key)           # Or: px.line(x=<list>, y=<list>)
+<Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Also `paper_bgcolor='rgb(0, 0, 0)'`.
+<Fig>.write_html/json/image('<path>')                 # <Fig>.show() displays the plot.
 ```
 
 ```python
-<Fig> = px.area/bar/box(<DF>, x=col_key, y=col_key)    # Also `color=col_key`.
-<Fig> = px.scatter(<DF>, x=col_key, y=col_key)         # Also `color/size/symbol=col_key`.
-<Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)   # `z=col_key`. Also color/size/symbol.
-<Fig> = px.histogram(<DF>, x=col_key [, nbins=<int>])  # Number of bins depends on DF size.
+<Fig> = px.area/bar/box(<DF>, x=col_key, y=col_key)   # Also `color=col_key`.
+<Fig> = px.scatter(<DF>, x=col_key, y=col_key)        # Also `color/size/symbol=col_key`.
+<Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)  # `z=col_key`. Also color/size/symbol.
+<Fig> = px.histogram(<DF>, x=col_key)                 # Also `nbins=<int>`.
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:

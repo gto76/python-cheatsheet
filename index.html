@@ -2792,14 +2792,14 @@ z
 <span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px, pandas <span class="hljs-keyword">as</span> pd
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)            <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
-&lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))   <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># &lt;Fig&gt;.show() displays the plot.</span>
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)           <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
+&lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))  <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># &lt;Fig&gt;.show() displays the plot.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)    <span class="hljs-comment"># Also `color=col_key`.</span>
-&lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)         <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
-&lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)   <span class="hljs-comment"># `z=col_key`. Also color/size/symbol.</span>
-&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_key [, nbins=&lt;int&gt;])  <span class="hljs-comment"># Number of bins depends on DF size.</span>
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)   <span class="hljs-comment"># Also `color=col_key`.</span>
+&lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)        <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
+&lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)  <span class="hljs-comment"># `z=col_key`. Also color/size/symbol.</span>
+&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_key)                 <span class="hljs-comment"># Also `nbins=&lt;int&gt;`.</span>
 </code></pre>
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'</span>
                     <span class="hljs-string">'6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv'</span>,
