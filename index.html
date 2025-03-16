@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 10, 2025</aside>
+    <aside>March 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -94,7 +94,7 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
 </script><pre style="border-left: none;padding-left: 1.9px;"><code class="hljs bash" style="line-height: 1.327em;"><strong>ToC</strong> = {
     <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threading</a>, <a href="#coroutines">Coroutines</a>],
@@ -598,62 +598,55 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
 </code></pre></div>
 
-<div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
-func(&lt;keyword_args&gt;)                              <span class="hljs-comment"># func(x=0, y=0)</span>
-func(&lt;positional_args&gt;, &lt;keyword_args&gt;)           <span class="hljs-comment"># func(0, y=0)</span>
-</code></pre></div></div>
-
-
-<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># def func(x, y): ...</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;default_args&gt;)</span>:</span> ...                     <span class="hljs-comment"># def func(x=0, y=0): ...</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span> ...  <span class="hljs-comment"># def func(x, y=0): ...</span>
+<div><h2 id="function"><a href="#function" name="function">#</a>Function</h2><p><strong>Independent block of code that returns a value when called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># E.g. `def func(x, y): ...`.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;default_args&gt;)</span>:</span> ...                     <span class="hljs-comment"># E.g. `def func(x=0, y=0): ...`.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span> ...  <span class="hljs-comment"># E.g. `def func(x, y=0): ...`.</span>
 </code></pre></div>
+
 
 <ul>
-<li><strong>Default values are evaluated when function is first encountered in the scope.</strong></li>
-<li><strong>Any mutation of a mutable default value will persist between invocations!</strong></li>
+<li><strong>Function returns None if it doesn't encounter <code class="python hljs"><span class="hljs-string">'return &lt;obj/exp&gt;'</span></code> statement.</strong></li>
+<li><strong>Before modifying a global variable from within the function run <code class="python hljs"><span class="hljs-string">'global &lt;var_name&gt;'</span></code>.</strong></li>
+<li><strong>Default values are evaluated when function is first encountered in the scope. Any mutation of a mutable default value will persist between invocations!</strong></li>
 </ul>
-<div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
-kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
+<div><h3 id="functioncall">Function Call</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;function&gt;(&lt;positional_args&gt;)                    <span class="hljs-comment"># E.g. `func(0, 0)`.</span>
+&lt;obj&gt; = &lt;function&gt;(&lt;keyword_args&gt;)                       <span class="hljs-comment"># E.g. `func(x=0, y=0)`.</span>
+&lt;obj&gt; = &lt;function&gt;(&lt;positional_args&gt;, &lt;keyword_args&gt;)    <span class="hljs-comment"># E.g. `func(0, y=0)`.</span>
+</code></pre></div>
+
+<div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args, kwargs = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), {<span class="hljs-string">'z'</span>: <span class="hljs-number">3</span>}
 func(*args, **kwargs)
-</code></pre></div></div>
-
-
-
-<div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, x=<span class="hljs-number">3</span>, y=<span class="hljs-number">4</span>, z=<span class="hljs-number">5</span>)
-</code></pre></div>
-
-<div><h3 id="insidefunctiondefinition-1">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
-    <span class="hljs-keyword">return</span> sum(a)
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>)
+</code></pre></div>
+
+<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
+<span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> sum(a)
+<span class="hljs-meta">... </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-number">6</span>
-</code></pre>
-<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args)</span>:</span> ...               <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args)</span>:</span> ...            <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, z)</span>:</span> ...            <span class="hljs-comment"># f(1, 2, z=3)</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span> ...            <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span> ...         <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span> ...     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span> ...  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span> ...  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *, y, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, *, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
-</code></pre>
-<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;coll.&gt; [, ...]]    <span class="hljs-comment"># Or: list(&lt;collection&gt;) [+ ...]</span>
-&lt;tuple&gt; = (*&lt;coll.&gt;, [...])     <span class="hljs-comment"># Or: tuple(&lt;collection&gt;) [+ ...]</span>
-&lt;set&gt;   = {*&lt;coll.&gt; [, ...]}    <span class="hljs-comment"># Or: set(&lt;collection&gt;) [| ...]</span>
-&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}    <span class="hljs-comment"># Or: &lt;dict&gt; | ...</span>
+
+<div><h4 id="allowedcompositionsofargumentsinsidefunctiondefinitionandthewaystheycanbecalled">Allowed compositions of arguments inside function definition and the ways they can be called:</h4><pre><code class="python language-python hljs">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓
+┃                    │ f(<span class="hljs-number"><span class="hljs-number">1</span></span>, <span class="hljs-number"><span class="hljs-number">2</span></span>, <span class="hljs-number"><span class="hljs-number">3</span></span>) │ f(<span class="hljs-number"><span class="hljs-number">1</span></span>, <span class="hljs-number"><span class="hljs-number">2</span></span>, z=<span class="hljs-number"><span class="hljs-number">3</span></span>) │ f(<span class="hljs-number"><span class="hljs-number">1</span></span>, y=<span class="hljs-number"><span class="hljs-number">2</span></span>, z=<span class="hljs-number"><span class="hljs-number">3</span></span>) │ f(x=<span class="hljs-number"><span class="hljs-number">1</span></span>, y=<span class="hljs-number"><span class="hljs-number">2</span></span>, z=<span class="hljs-number"><span class="hljs-number">3</span></span>) ┃
+┠────────────────────┼────────────┼──────────────┼────────────────┼──────────────────┨
+┃ <span class="hljs-title">f</span>(x, *args, **kw): │      ✓     │      ✓       │        ✓       │        ✓         ┃
+┃ <span class="hljs-title">f</span>(*args, z, **kw): │            │      ✓       │        ✓       │        ✓         ┃
+┃ <span class="hljs-title">f</span>(x, **kw):        │            │              │        ✓       │        ✓         ┃
+┃ <span class="hljs-title">f</span>(*, x, **kw):     │            │              │                │        ✓         ┃
+┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛
 </code></pre></div>
 
-<pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Head or tail can be omitted.</span>
+<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]  <span class="hljs-comment"># Or: list(&lt;collection&gt;) [+ ...]</span>
+&lt;tuple&gt; = (*&lt;collection&gt;, [...])   <span class="hljs-comment"># Or: tuple(&lt;collection&gt;) [+ ...]</span>
+&lt;set&gt;   = {*&lt;collection&gt; [, ...]}  <span class="hljs-comment"># Or: set(&lt;collection&gt;) [| ...]</span>
+&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}       <span class="hljs-comment"># Or: &lt;dict&gt; | ...</span>
+</code></pre></div>
+
+<pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;   <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre>
 <div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                     <span class="hljs-comment"># A single statement function.</span>
 &lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;    <span class="hljs-comment"># Also allows default arguments.</span>
@@ -683,22 +676,30 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Creates a tuple's subclass.</span>
-point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
+<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last operand.</span>
+&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last operand.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates an enum.</span>
+<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(a)) &gt; <span class="hljs-number">0</span>]        <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+</code></pre></div>
+
+<div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
+Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Creates tuple's subclass.</span>
+point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
+
+<span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates Enum's subclass.</span>
 direction = Direction.N                             <span class="hljs-comment"># Returns its member.</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
+
+<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
 player = Player(point, direction)                   <span class="hljs-comment"># Returns its instance.</span>
-</code></pre>
+</code></pre></div>
+
 <div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one file available to another file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;           <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/__init__.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;  <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/&lt;module&gt;.py'.</span>
@@ -2944,7 +2945,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>March 10, 2025</aside>
+    <aside>March 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

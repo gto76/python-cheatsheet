@@ -10,7 +10,7 @@ Contents
 --------
 **&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dictionary`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
 **&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers-1)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
-**&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
+**&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Function`](#function)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Type`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Except`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Threading`](#threading)**__,__ **[`Coroutines`](#coroutines)**__.__  
@@ -671,86 +671,72 @@ import zoneinfo, dateutil.tz
 ```
 
 
-Arguments
----------
-### Inside Function Call
+Function
+--------
+**Independent block of code that returns a value when called.**
 ```python
-func(<positional_args>)                           # func(0, 0)
-func(<keyword_args>)                              # func(x=0, y=0)
-func(<positional_args>, <keyword_args>)           # func(0, y=0)
+def <func_name>(<nondefault_args>): ...                  # E.g. `def func(x, y): ...`.
+def <func_name>(<default_args>): ...                     # E.g. `def func(x=0, y=0): ...`.
+def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `def func(x, y=0): ...`.
 ```
+* **Function returns None if it doesn't encounter `'return <obj/exp>'` statement.**
+* **Before modifying a global variable from within the function run `'global <var_name>'`.**
+* **Default values are evaluated when function is first encountered in the scope. Any mutation of a mutable default value will persist between invocations!**
 
-### Inside Function Definition
+### Function Call
+
 ```python
-def func(<nondefault_args>): ...                  # def func(x, y): ...
-def func(<default_args>): ...                     # def func(x=0, y=0): ...
-def func(<nondefault_args>, <default_args>): ...  # def func(x, y=0): ...
+<obj> = <function>(<positional_args>)                    # E.g. `func(0, 0)`.
+<obj> = <function>(<keyword_args>)                       # E.g. `func(x=0, y=0)`.
+<obj> = <function>(<positional_args>, <keyword_args>)    # E.g. `func(0, y=0)`.
 ```
-* **Default values are evaluated when function is first encountered in the scope.**
-* **Any mutation of a mutable default value will persist between invocations!**
 
 
 Splat Operator
 --------------
-### Inside Function Call
 **Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.**
 ```python
-args   = (1, 2)
-kwargs = {'x': 3, 'y': 4, 'z': 5}
+args, kwargs = (1, 2), {'z': 3}
 func(*args, **kwargs)
 ```
 
 #### Is the same as:
 ```python
-func(1, 2, x=3, y=4, z=5)
+func(1, 2, z=3)
 ```
 
 ### Inside Function Definition
 **Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.**
 ```python
-def add(*a):
-    return sum(a)
-```
-
-```python
+>>> def add(*a):
+...     return sum(a)
+...
 >>> add(1, 2, 3)
 6
 ```
 
-#### Legal argument combinations:
+#### Allowed compositions of arguments inside function definition and the ways they can be called:
 ```python
-def f(*args): ...               # f(1, 2, 3)
-def f(x, *args): ...            # f(1, 2, 3)
-def f(*args, z): ...            # f(1, 2, z=3)
-```
-
-```python
-def f(**kwargs): ...            # f(x=1, y=2, z=3)
-def f(x, **kwargs): ...         # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-```
-
-```python
-def f(*args, **kwargs): ...     # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(x, *args, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)
-def f(*args, y, **kwargs): ...  # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-```
-
-```python
-def f(*, x, y, z): ...          # f(x=1, y=2, z=3)
-def f(x, *, y, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3)
-def f(x, y, *, z): ...          # f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)
++--------------------+------------+--------------+----------------+------------------+
+|                    | f(1, 2, 3) | f(1, 2, z=3) | f(1, y=2, z=3) | f(x=1, y=2, z=3) |
++--------------------+------------+--------------+----------------+------------------+
+| f(x, *args, **kw): |     yes    |     yes      |       yes      |       yes        |
+| f(*args, z, **kw): |            |     yes      |       yes      |       yes        |
+| f(x, **kw):        |            |              |       yes      |       yes        |
+| f(*, x, **kw):     |            |              |                |       yes        |
++--------------------+------------+--------------+----------------+------------------+
 ```
 
 ### Other Uses
 ```python
-<list>  = [*<coll.> [, ...]]    # Or: list(<collection>) [+ ...]
-<tuple> = (*<coll.>, [...])     # Or: tuple(<collection>) [+ ...]
-<set>   = {*<coll.> [, ...]}    # Or: set(<collection>) [| ...]
-<dict>  = {**<dict> [, ...]}    # Or: <dict> | ...
+<list>  = [*<collection> [, ...]]  # Or: list(<collection>) [+ ...]
+<tuple> = (*<collection>, [...])   # Or: tuple(<collection>) [+ ...]
+<set>   = {*<collection> [, ...]}  # Or: set(<collection>) [| ...]
+<dict>  = {**<dict> [, ...]}       # Or: <dict> | ...
 ```
 
 ```python
-head, *body, tail = <coll.>     # Head or tail can be omitted.
+head, *body, tail = <collection>   # Head or tail can be omitted.
 ```
 
 
@@ -798,24 +784,32 @@ from functools import reduce
 ```
 
 ```python
->>> [a if a else 'zero' for a in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
+>>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
 ['zero', 1, 2, 3]
+```
+
+### And, Or
+```python
+<obj> = <exp> and <exp> [and ...]                   # Returns first false or last operand.
+<obj> = <exp> or <exp> [or ...]                     # Returns first true or last operand.
+```
+
+### Walrus Operator
+```python
+>>> [i for a in '0123' if (i := int(a)) > 0]        # Assigns to variable mid-sentence.
+[1, 2, 3]
 ```
 
 ### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')                  # Creates a tuple's subclass.
+Point = namedtuple('Point', 'x y')                  # Creates tuple's subclass.
 point = Point(0, 0)                                 # Returns its instance.
-```
 
-```python
 from enum import Enum
-Direction = Enum('Direction', 'N E S W')            # Creates an enum.
+Direction = Enum('Direction', 'N E S W')            # Creates Enum's subclass.
 direction = Direction.N                             # Returns its member.
-```
 
-```python
 from dataclasses import make_dataclass
 Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a class.
 player = Player(point, direction)                   # Returns its instance.

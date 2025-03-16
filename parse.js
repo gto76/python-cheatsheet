@@ -33,7 +33,7 @@ const TOC =
   '<pre style="border-left: none;padding-left: 1.9px;"><code class="hljs bash" style="line-height: 1.327em;"><strong>ToC</strong> = {\n' +
   '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
-  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
+  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threading</a>, <a href="#coroutines">Coroutines</a>],\n' +
@@ -54,6 +54,13 @@ const CACHE =
   '<span class="hljs-meta">@cache</span>\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
   '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)';
+
+const SPLAT =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>\n' +
+  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> sum(a)\n' +
+  '<span class="hljs-meta">... </span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)\n' +
+  '<span class="hljs-number">6</span>\n';
 
 const PARAMETRIZED_DECORATOR =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps\n' +
@@ -416,6 +423,19 @@ const DIAGRAM_5_A =
   "|              |  {<float>:.2}  |  {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%} |\n" +
   "+--------------+----------------+----------------+----------------+----------------+\n";
 
+const DIAGRAM_55_A =
+  "+--------------------+------------+--------------+----------------+------------------+\n";
+
+const DIAGRAM_55_B =
+  '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓\n' +
+  '┃                    │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) ┃\n' +
+  '┠────────────────────┼────────────┼──────────────┼────────────────┼──────────────────┨\n' +
+  '┃ <span class="hljs-title">f</span>(x, *args, **kw): │      ✓     │      ✓       │        ✓       │        ✓         ┃\n' +
+  '┃ <span class="hljs-title">f</span>(*args, z, **kw): │            │      ✓       │        ✓       │        ✓         ┃\n' +
+  '┃ <span class="hljs-title">f</span>(x, **kw):        │            │              │        ✓       │        ✓         ┃\n' +
+  '┃ <span class="hljs-title">f</span>(*, x, **kw):     │            │              │                │        ✓         ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛\n';
+
 const DIAGRAM_6_A =
   '+------------+------------+------------+------------+--------------+\n' +
   '|            |  Iterable  | Collection |  Sequence  | abc.Sequence |\n' +
@@ -690,7 +710,6 @@ const DIAGRAM_15_B =
   "┃                       │ c  .  .  6  7 │            │            │ treated as a column.      ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
 
-
 const DIAGRAM_16_A =
   '| df.apply(…)     |      x  4     |        x  y   |     x  4      |';
 
@@ -854,6 +873,7 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
   $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
   $(`code:contains(${DIAGRAM_5_A})`).parent().remove();
+  $(`code:contains(${DIAGRAM_55_A})`).html(DIAGRAM_55_B);
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
@@ -904,18 +924,18 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
   $(`code:contains( + fib(n)`).html(CACHE);
+  $(`code:contains(>>> def add)`).html(SPLAT);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
-  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);
   $(`code:contains(match <object/expression>:)`).html(MATCH);
   $(`code:contains(>>> match Path)`).html(MATCH_EXAMPLE);
-  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
-  $(`code:contains(import curses, os)`).html(CURSES);
-  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> log.basicConfig()`).html(LOGGING_EXAMPLE);
+  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
+  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
+  $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(a_float = max()`).html(AUDIO_1);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
