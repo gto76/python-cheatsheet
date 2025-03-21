@@ -500,10 +500,10 @@ Numbers
 <Fraction> = fractions.Fraction(0, 1)             # Or: Fraction(numerator=0, denominator=1)
 <Decimal>  = decimal.Decimal(<str/int>)           # Or: Decimal((sign, digits, exponent))
 ```
-* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
-* **Decimal numbers are stored exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
+* **Decimal numbers are stored exactly, unlike most floats where: `'1.1 + 2.2 != 3.3'`.**
 * **Floats can be compared with: `'math.isclose(<float>, <float>)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
+* **Bools can be used anywhere ints can, because bool is a subclass of int: `'True + 1 == 2'`.**
 
 ### Basic Functions
 ```python
@@ -526,18 +526,23 @@ from statistics import mean, median, variance     # Also: stdev, quantiles, grou
 
 ### Random
 ```python
-from random import random, randint, choice        # Also: shuffle, gauss, triangular, seed.
-<float> = random()                                # A float inside [0, 1).
-<int>   = randint(from_inc, to_inc)               # An int inside [from_inc, to_inc].
-<el>    = choice(<sequence>)                      # Keeps the sequence intact.
+from random import random, randint, uniform       # Also: gauss, choice, shuffle, seed.
 ```
 
-### Bin, Hex
 ```python
-<int> = ±0b<bin>                                  # Or: ±0x<hex>
-<int> = int('±<bin>', 2)                          # Or: int('±<hex>', 16)
-<int> = int('±0b<bin>', 0)                        # Or: int('±0x<hex>', 0)
-<str> = bin(<int>)                                # Returns '[-]0b<bin>'. Also hex().
+<float> = random()                                # Returns a float inside [0, 1).
+<num>   = randint/uniform(a, b)                   # Returns an int/float inside [a, b].
+<float> = gauss(mean, stdev)                      # Also triangular(low, high, mode).
+<el>    = choice(<sequence>)                      # Keeps it intact. Also sample(pop, k).
+shuffle(<list>)                                   # Shuffles the list in place.
+```
+
+### Hexadecimal Numbers
+```python
+<int> = ±0x<hex>                                  # Or: ±0b<bin>
+<int> = int('±<hex>', 16)                         # Or: int('±<bin>', 2)
+<int> = int('±0x<hex>', 0)                        # Or: int('±0b<bin>', 0)
+<str> = hex(<int>)                                # Returns '[-]0x<hex>'. Also bin().
 ```
 
 ### Bitwise Operators
@@ -563,30 +568,24 @@ import itertools as it
 ```
 
 ```python
->>> list(it.product('abc', 'abc'))                    #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),                  # a x  x  x
- ('b', 'a'), ('b', 'b'), ('b', 'c'),                  # b x  x  x
- ('c', 'a'), ('c', 'b'), ('c', 'c')]                  # c x  x  x
+>>> list(it.product('abc', 'abc'))                #   a  b  c
+[('a', 'a'), ('a', 'b'), ('a', 'c'),              # a x  x  x
+ ('b', 'a'), ('b', 'b'), ('b', 'c'),              # b x  x  x
+ ('c', 'a'), ('c', 'b'), ('c', 'c')]              # c x  x  x
 ```
 
 ```python
->>> list(it.combinations('abc', 2))                   #   a  b  c
-[('a', 'b'), ('a', 'c'),                              # a .  x  x
- ('b', 'c')]                                          # b .  .  x
+>>> list(it.permutations('abc', 2))               #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'a'), ('b', 'c'),                          # b x  .  x
+ ('c', 'a'), ('c', 'b')]                          # c x  x  .
 ```
 
 ```python
->>> list(it.combinations_with_replacement('abc', 2))  #   a  b  c
-[('a', 'a'), ('a', 'b'), ('a', 'c'),                  # a x  x  x
- ('b', 'b'), ('b', 'c'),                              # b .  x  x
- ('c', 'c')]                                          # c .  .  x
-```
-
-```python
->>> list(it.permutations('abc', 2))                   #   a  b  c
-[('a', 'b'), ('a', 'c'),                              # a .  x  x
- ('b', 'a'), ('b', 'c'),                              # b x  .  x
- ('c', 'a'), ('c', 'b')]                              # c x  x  .
+>>> list(it.combinations('abc', 2))               #   a  b  c
+[('a', 'b'), ('a', 'c'),                          # a .  x  x
+ ('b', 'c'),                                      # b .  .  x
+]                                                 # c .  .  .
 ```
 
 
