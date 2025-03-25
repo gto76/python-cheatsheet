@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 21, 2025</aside>
+    <aside>March 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2415,8 +2415,7 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, p=para
 <div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>) <span class="hljs-keyword">as</span> file:
-    p = file.getparams()
-    frames = file.readframes(<span class="hljs-number">-1</span>)
+    frames, p = file.readframes(<span class="hljs-number">-1</span>), file.getparams()
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
 </code></pre></div>
 
@@ -2428,20 +2427,21 @@ engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> array, itertools <span class="hljs-keyword">as</span> it, math, simpleaudio
+<span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it, math, array, simpleaudio
 
-F  = <span class="hljs-number">44100</span>
-P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'</span>
-P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'</span>
-get_pause   = <span class="hljs-keyword">lambda</span> seconds: it.repeat(<span class="hljs-number">0</span>, int(seconds * F))
-sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
-get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
-get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
-get_sec     = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>
-get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(get_hz(note), get_sec(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
-samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> (P1+P2).split(<span class="hljs-string">','</span>))
-samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(f * <span class="hljs-number">30000</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))
-simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, F).wait_done()
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">play_notes</span><span class="hljs-params">(notes, bpm=<span class="hljs-number">132</span>, f=<span class="hljs-number">44100</span>)</span>:</span>
+    get_pause   = <span class="hljs-keyword">lambda</span> n_beats: it.repeat(<span class="hljs-number">0</span>, int(n_beats * <span class="hljs-number">60</span>/bpm * f))
+    sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / f)
+    get_wave    = <span class="hljs-keyword">lambda</span> hz, n_beats: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(n_beats * <span class="hljs-number">60</span>/bpm * f)))
+    get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
+    get_nbeats  = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
+    get_samples = <span class="hljs-keyword">lambda</span> n: get_wave(get_hz(n), get_nbeats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
+    samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> notes.split(<span class="hljs-string">','</span>))
+    samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(fl * <span class="hljs-number">5000</span>) <span class="hljs-keyword">for</span> fl <span class="hljs-keyword">in</span> samples_f))
+    simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, f).wait_done()
+
+play_notes(<span class="hljs-string">'83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,'</span>
+           <span class="hljs-string">'83♩,85♪,,86♪,,85♪,,86♪,,83♪,,85♩,83♪,,85♪,,81♪,,83♪,,81♪,,83♪,,79♪,,83♪,,,,'</span>)
 </code></pre></div></div>
 
 
@@ -2944,7 +2944,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>March 21, 2025</aside>
+    <aside>March 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

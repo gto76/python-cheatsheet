@@ -2943,8 +2943,7 @@ write_to_wav_file('test.wav', samples_f, p=params)
 # $ pip3 install simpleaudio
 from simpleaudio import play_buffer
 with wave.open('test.wav') as file:
-    p = file.getparams()
-    frames = file.readframes(-1)
+    frames, p = file.readframes(-1), file.getparams()
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
 ```
 
@@ -2963,20 +2962,21 @@ Synthesizer
 #### Plays Popcorn by Gershon Kingsley:
 ```python
 # $ pip3 install simpleaudio
-import array, itertools as it, math, simpleaudio
+import itertools as it, math, array, simpleaudio
 
-F  = 44100
-P1 = '71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'
-P2 = '71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'
-get_pause   = lambda seconds: it.repeat(0, int(seconds * F))
-sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / F)
-get_wave    = lambda hz, seconds: (sin_f(i, hz) for i in range(int(seconds * F)))
-get_hz      = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
-get_sec     = lambda note: 1/4 if '♩' in note else 1/8
-get_samples = lambda note: get_wave(get_hz(note), get_sec(note)) if note else get_pause(1/8)
-samples_f   = it.chain.from_iterable(get_samples(n) for n in (P1+P2).split(','))
-samples_i   = array.array('h', (int(f * 30000) for f in samples_f))
-simpleaudio.play_buffer(samples_i, 1, 2, F).wait_done()
+def play_notes(notes, bpm=132, f=44100):
+    get_pause   = lambda n_beats: it.repeat(0, int(n_beats * 60/bpm * f))
+    sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / f)
+    get_wave    = lambda hz, n_beats: (sin_f(i, hz) for i in range(int(n_beats * 60/bpm * f)))
+    get_hz      = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
+    get_nbeats  = lambda note: 1/2 if '♩' in note else 1/4 if '♪' in note else 1
+    get_samples = lambda n: get_wave(get_hz(n), get_nbeats(n)) if n else get_pause(1/4)
+    samples_f   = it.chain.from_iterable(get_samples(n) for n in notes.split(','))
+    samples_i   = array.array('h', (int(fl * 5000) for fl in samples_f))
+    simpleaudio.play_buffer(samples_i, 1, 2, f).wait_done()
+
+play_notes('83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,'
+           '83♩,85♪,,86♪,,85♪,,86♪,,83♪,,85♩,83♪,,85♪,,81♪,,83♪,,81♪,,83♪,,79♪,,83♪,,,,')
 ```
 
 
