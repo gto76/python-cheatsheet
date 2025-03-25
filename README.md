@@ -3124,7 +3124,7 @@ def draw(screen, images, mario, tiles):
     screen.fill((85, 168, 255))
     mario.facing_left = mario.spd.x < 0 if mario.spd.x else mario.facing_left
     is_airborne = D.s not in get_boundaries(mario.rect, tiles)
-    image_index = 4 if is_airborne else (next(mario.frame_cycle) if mario.spd.x else 6)
+    image_index = 4 if is_airborne else next(mario.frame_cycle) if mario.spd.x else 6
     screen.blit(images[image_index + (mario.facing_left * 9)], mario.rect)
     for t in tiles:
         is_border = t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16]
