@@ -728,10 +728,10 @@ func(1, 2, z=3)
 
 ### Other Uses
 ```python
-<list>  = [*<collection> [, ...]]  # Or: list(<collection>) [+ ...]
-<tuple> = (*<collection>, [...])   # Or: tuple(<collection>) [+ ...]
-<set>   = {*<collection> [, ...]}  # Or: set(<collection>) [| ...]
-<dict>  = {**<dict> [, ...]}       # Or: <dict> | ...
+<list>  = [*<collection> [, ...]]  # Or: list(<coll>) [+ ...]
+<tuple> = (*<collection>, [...])   # Or: tuple(<coll>) [+ ...]
+<set>   = {*<collection> [, ...]}  # Or: set(<coll>) [| ...]
+<dict>  = {**<dict>, ...}          # Or: <dict> | ...
 ```
 
 ```python
