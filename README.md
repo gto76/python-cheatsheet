@@ -731,7 +731,7 @@ func(1, 2, z=3)
 <list>  = [*<collection> [, ...]]  # Or: list(<coll>) [+ ...]
 <tuple> = (*<collection>, [...])   # Or: tuple(<coll>) [+ ...]
 <set>   = {*<collection> [, ...]}  # Or: set(<coll>) [| ...]
-<dict>  = {**<dict>, ...}          # Or: <dict> | ...
+<dict>  = {**<dict> [, ...]}       # Or: <dict> | ...
 ```
 
 ```python
