@@ -486,8 +486,8 @@ Format
 ### Ints
 ```python
 {90:c}                                   # 'Z'. Unicode character with value 90.
-{90:b}                                   # '1011010'. Number 90 in binary.
-{90:X}                                   # '5A'. Number 90 in uppercase hexadecimal.
+{90:b}                                   # '1011010'. Binary representation of the int.
+{90:X}                                   # '5A'. Hexadecimal with upper-case letters.
 ```
 
 
