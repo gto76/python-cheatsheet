@@ -430,8 +430,8 @@ const DIAGRAM_55_B =
   '┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓\n' +
   '┃                    │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) ┃\n' +
   '┠────────────────────┼────────────┼──────────────┼────────────────┼──────────────────┨\n' +
-  '┃ <span class="hljs-title">f</span>(x, *args, **kw): │      ✓     │      ✓       │        ✓       │        ✓         ┃\n' +
-  '┃ <span class="hljs-title">f</span>(*args, z, **kw): │            │      ✓       │        ✓       │        ✓         ┃\n' +
+  '┃ <span class="hljs-title">f</span>(x, *args, **kw): │      ✓     │       ✓      │        ✓       │        ✓         ┃\n' +
+  '┃ <span class="hljs-title">f</span>(*args, z, **kw): │            │       ✓      │        ✓       │        ✓         ┃\n' +
   '┃ <span class="hljs-title">f</span>(x, **kw):        │            │              │        ✓       │        ✓         ┃\n' +
   '┃ <span class="hljs-title">f</span>(*, x, **kw):     │            │              │                │        ✓         ┃\n' +
   '┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛\n';
