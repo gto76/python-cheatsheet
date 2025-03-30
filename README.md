@@ -632,7 +632,7 @@ import zoneinfo, dateutil.tz
 ### Encode
 ```python
 <D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from ISO string. Raises ValueError.
-<DT>     = DT.strptime(<str>, '<format>')   # Datetime from str, according to format.
+<DT>     = DT.strptime(<str>, '<format>')   # Datetime from custom string. See Format.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since the Gregorian NYE 1.
 <DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since the Epoch.
@@ -3349,7 +3349,7 @@ c  6  7
 <DF>   = pd.read_csv/excel(<path/url/file>)    # Also `header/index_col/dtype/usecols/…=<obj>`.
 <list> = pd.read_html(<path/url/file>)         # Raises ImportError if webpage has zero tables.
 <S/DF> = pd.read_parquet/feather/hdf(<path…>)  # Function read_hdf() accepts `key=<s/df_name>`.
-<DF>   = pd.read_sql('<table/query>', <conn>)  # Pass SQLite3/Alchemy connection (see #SQLite).
+<DF>   = pd.read_sql('<table/query>', <conn>)  # Pass SQLite3/Alchemy connection. See #SQLite.
 ```
 
 ```python
