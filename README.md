@@ -2448,8 +2448,8 @@ def main(screen):
         ch = screen.getch()
         selected -= (ch == KEY_UP) and (selected > 0)
         selected += (ch == KEY_DOWN) and (selected < len(paths)-1)
-        first = min(first, selected)
-        first = max(first, selected - (height-1))
+        first -= (first > selected)
+        first += (first < selected-(height-1))
         if ch in [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord('\n'), ord('\r')]:
             new_dir = '..' if ch == KEY_LEFT else paths[selected]
             if os.path.isdir(new_dir):
@@ -2703,8 +2703,7 @@ import numpy as np
 <1/2d_arr> = <2d>[<2d/1d_bools>]                        # 1d_bools must have size of a column.
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
-* **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of indices is passed!**
-* **Indexing with a slice and 1d object works the same as when using two slices (lines 4, 6, 7).**
+* **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of two indices is passed!**
 * **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as using `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 

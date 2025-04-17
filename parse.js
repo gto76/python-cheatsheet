@@ -80,11 +80,10 @@ const PARAMETRIZED_DECORATOR =
   '    <span class="hljs-keyword">return</span> x + y\n';
 
 const REPR_USE_CASES =
-  'print/str/repr([&lt;obj&gt;])\n' +
-  'print/str/repr({&lt;obj&gt;: &lt;obj&gt;})\n' +
-  '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;obj&gt;!r}</span>\'</span>\n' +
+  'print/str/repr([&lt;obj&gt;, ...])\n' +
+  'print/str/repr({&lt;obj&gt;: &lt;obj&gt;, ...})\n' +
   'Z = make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;\n';
+  '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;obj&gt;!r}</span>\'</span>\n';
 
 const CONSTRUCTOR_OVERLOADING =
   '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
@@ -188,8 +187,8 @@ const CURSES =
   '        ch = screen.getch()\n' +
   '        selected -= (ch == KEY_UP) <span class="hljs-keyword">and</span> (selected &gt; <span class="hljs-number">0</span>)\n' +
   '        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)\n' +
-  '        first = min(first, selected)\n' +
-  '        first = max(first, selected - (height-<span class="hljs-number">1</span>))\n' +
+  '        first -= (first &gt; selected)\n' +
+  '        first += (first &lt; selected-(height-<span class="hljs-number">1</span>))\n' +
   '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">\'\\n\'</span>), ord(<span class="hljs-string">\'\\r\'</span>)]:\n' +
   '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
   '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +
