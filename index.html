@@ -844,10 +844,11 @@ csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
 <span class="hljs-keyword">raise</span> Exception(&lt;obj&gt;)
 </code></pre></div>
 
-<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;, ...])
-print/str/repr({&lt;obj&gt;: &lt;obj&gt;, ...})
-Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
+<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;])
+print/str/repr({&lt;obj&gt;: &lt;obj&gt;})
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
+Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
+<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
 </code></pre></div>
 
 <div><h3 id="inheritance">Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
