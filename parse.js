@@ -43,10 +43,10 @@ const TOC =
   '</code></pre>\n';
 
 const BIN_HEX =
-  '&lt;int&gt; = ±<span class="hljs-number">0x</span>&lt;hex&gt;                                  <span class="hljs-comment"># Or: ±0b&lt;bin&gt;</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                         <span class="hljs-comment"># Or: int(\'±&lt;bin&gt;\', 2)</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±0x&lt;hex&gt;\'</span>, <span class="hljs-number">0</span>)                        <span class="hljs-comment"># Or: int(\'±0b&lt;bin&gt;\', 0)</span>\n' +
-  '&lt;str&gt; = hex(&lt;int&gt;)                                <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
+  '&lt;int&gt; = ±<span class="hljs-number">0x</span>&lt;hex&gt;                             <span class="hljs-comment"># Or: ±0b&lt;bin&gt;</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                    <span class="hljs-comment"># Or: int(\'±&lt;bin&gt;\', 2)</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±0x&lt;hex&gt;\'</span>, <span class="hljs-number">0</span>)                   <span class="hljs-comment"># Or: int(\'±0b&lt;bin&gt;\', 0)</span>\n' +
+  '&lt;str&gt; = hex(&lt;int&gt;)                           <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
 
 const CACHE =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache\n' +
@@ -175,7 +175,7 @@ const COROUTINES =
 const CURSES =
   '<span class="hljs-comment"># $ pip3 install windows-curses</span>\n' +
   '<span class="hljs-keyword">import</span> curses, os\n' +
-  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
+  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
@@ -190,7 +190,7 @@ const CURSES =
   '        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)\n' +
   '        first -= (first &gt; selected)\n' +
   '        first += (first &lt; selected-(height-<span class="hljs-number">1</span>))\n' +
-  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">\'\\n\'</span>), ord(<span class="hljs-string">\'\\r\'</span>)]:\n' +
+  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, ord(<span class="hljs-string">\'\\n\'</span>)]:\n' +
   '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
   '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +
   '                os.chdir(new_dir)\n' +
