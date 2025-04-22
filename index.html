@@ -476,7 +476,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;num&gt; = sum(&lt;collection&gt;)                    <span class="hljs-comment"># Also math.prod(&lt;collection&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan, isnan      <span class="hljs-comment"># `inf*0` and `nan+1` return nan.</span>
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan         <span class="hljs-comment"># `inf*0` and `nan+1` return nan.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial             <span class="hljs-comment"># `sqrt(-1)` raises ValueError.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan               <span class="hljs-comment"># Also: asin, degrees, radians.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2            <span class="hljs-comment"># Log accepts base as second arg.</span>
@@ -523,7 +523,7 @@ shuffle(&lt;list&gt;)                              <span class="hljs-comment"># 
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.combinations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))          <span class="hljs-comment">#   a  b  c</span>
 [(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                     <span class="hljs-comment"># a .  x  x</span>
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                                 <span class="hljs-comment"># b .  .  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>)                                  <span class="hljs-comment"># b .  .  x</span>
 ]                                            <span class="hljs-comment"># c .  .  .</span>
 </code></pre>
 <div><h2 id="datetime"><a href="#datetime" name="datetime">#</a>Datetime</h2><p><strong>Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install python-dateutil</span>

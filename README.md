@@ -517,7 +517,7 @@ Numbers
 
 ### Math
 ```python
-from math import e, pi, inf, nan, isnan      # `inf*0` and `nan+1` return nan.
+from math import pi, inf, nan, isnan         # `inf*0` and `nan+1` return nan.
 from math import sqrt, factorial             # `sqrt(-1)` raises ValueError.
 from math import sin, cos, tan               # Also: asin, degrees, radians.
 from math import log, log10, log2            # Log accepts base as second arg.
@@ -583,7 +583,7 @@ import itertools as it
 ```python
 >>> list(it.combinations('abc', 2))          #   a  b  c
 [('a', 'b'), ('a', 'c'),                     # a .  x  x
- ('b', 'c'),                                 # b .  .  x
+ ('b', 'c')                                  # b .  .  x
 ]                                            # c .  .  .
 ```
 
