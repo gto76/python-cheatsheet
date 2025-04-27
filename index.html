@@ -206,20 +206,17 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 
 <div><h3 id="namedtuple">Named Tuple</h3><p><strong>Tuple's subclass with named elements.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>); p
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(p)
 Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>]
-<span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>p.x
-<span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>getattr(p, <span class="hljs-string">'y'</span>)
-<span class="hljs-number">2</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>], p.x
+(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
 </code></pre></div>
 
 
-<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>Immutable and hashable sequence of integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                      <span class="hljs-comment"># range(to_exclusive)</span>
-&lt;range&gt; = range(start, stop)               <span class="hljs-comment"># range(from_inclusive, to_exclusive)</span>
-&lt;range&gt; = range(start, stop, ±step)        <span class="hljs-comment"># range(from_inclusive, to_exclusive, ±step_size)</span>
+<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>Immutable and hashable sequence of integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                      <span class="hljs-comment"># I.e. range(to_exclusive).</span>
+&lt;range&gt; = range(start, stop)               <span class="hljs-comment"># I.e. range(from_inclusive, to_exclusive).</span>
+&lt;range&gt; = range(start, stop, ±step)        <span class="hljs-comment"># I.e. range(from_inclusive, to_exclusive, ±step).</span>
 </code></pre></div>
 
 
@@ -230,11 +227,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
 &lt;iter&gt; = iter(&lt;function&gt;, to_exclusive)    <span class="hljs-comment"># A sequence of return values until 'to_exclusive'.</span>
 &lt;el&gt;   = next(&lt;iter&gt; [, default])          <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
 &lt;list&gt; = list(&lt;iter&gt;)                      <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
 </code></pre></div>
+
 
 <div><h3 id="itertools">Itertools</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
 </code></pre></div>

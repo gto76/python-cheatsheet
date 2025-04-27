@@ -165,14 +165,11 @@ Tuple
 ```python
 >>> from collections import namedtuple
 >>> Point = namedtuple('Point', 'x y')
->>> p = Point(1, y=2); p
+>>> p = Point(1, y=2)
+>>> print(p)
 Point(x=1, y=2)
->>> p[0]
-1
->>> p.x
-1
->>> getattr(p, 'y')
-2
+>>> p[0], p.x
+(1, 1)
 ```
 
 
@@ -180,9 +177,9 @@ Range
 -----
 **Immutable and hashable sequence of integers.**
 ```python
-<range> = range(stop)                      # range(to_exclusive)
-<range> = range(start, stop)               # range(from_inclusive, to_exclusive)
-<range> = range(start, stop, ±step)        # range(from_inclusive, to_exclusive, ±step_size)
+<range> = range(stop)                      # I.e. range(to_exclusive).
+<range> = range(start, stop)               # I.e. range(from_inclusive, to_exclusive).
+<range> = range(start, stop, ±step)        # I.e. range(from_inclusive, to_exclusive, ±step).
 ```
 
 ```python
@@ -201,6 +198,8 @@ for i, el in enumerate(<coll>, start=0):   # Returns next element and its index 
 
 Iterator
 --------
+**Potentially endless stream of elements.**
+
 ```python
 <iter> = iter(<collection>)                # `iter(<iter>)` returns unmodified iterator.
 <iter> = iter(<function>, to_exclusive)    # A sequence of return values until 'to_exclusive'.
