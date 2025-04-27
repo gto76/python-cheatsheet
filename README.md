@@ -3026,7 +3026,7 @@ pg.quit()
 ```
 
 ```python
-<Surf>.fill(color)                              # Pass tuple or pg.Color('<name/rgb_code>').
+<Surf>.fill(color)                              # Pass tuple of ints or pg.Color('<name/hex>').
 <Surf>.set_at((x, y), color)                    # Updates pixel. Also <Surf>.get_at((x, y)).
 <Surf>.blit(<Surf>, (x, y))                     # Draws passed surface at specified location.
 ```
