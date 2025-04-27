@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>April 22, 2025</aside>
+    <aside>April 27, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2312,7 +2312,7 @@ img.show()
 
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
 &lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)                <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
+&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Also `fill=&lt;int/tuple/str&gt;`.</span>
 &lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
 &lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Draws in clockwise dir. Also pieslice().</span>
 &lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
@@ -2325,7 +2325,7 @@ img.show()
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
-<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
@@ -2452,10 +2452,10 @@ pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):
-    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-20</span>), pg.K_RIGHT: (<span class="hljs-number">20</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">20</span>), pg.K_LEFT: (<span class="hljs-number">-20</span>, <span class="hljs-number">0</span>)}
+    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), pg.K_RIGHT: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), pg.K_LEFT: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
-        dx, dy = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-        rect = rect.move((dx, dy))
+        x, y = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+        rect = rect.move((x*<span class="hljs-number">20</span>, y*<span class="hljs-number">20</span>))
     screen.fill(pg.Color(<span class="hljs-string">'black'</span>))
     pg.draw.rect(screen, pg.Color(<span class="hljs-string">'white'</span>), rect)
     pg.display.flip()
@@ -2464,8 +2464,8 @@ pg.quit()
 
 
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
-&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft. Same.</span>
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># `top/right/bottom/left`. Allows assignments.</span>
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># `topright/bottomright/bottomleft`. Same.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move in-place.</span>
 </code></pre></div>
 
@@ -2483,7 +2483,7 @@ pg.quit()
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Tuple, Color('#rrggbb[aa]') or Color(&lt;name&gt;).</span>
+<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Pass tuple or pg.Color('&lt;name/hex_code&gt;').</span>
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel. Also &lt;Surf&gt;.get_at((x, y)).</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface at specified location.</span>
 </code></pre>
@@ -2613,7 +2613,7 @@ Name: a, dtype: int64
 <pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
 </code></pre>
 <ul>
-<li><strong>Also <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.quantile(&lt;float/coll&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'pd.cut(&lt;S&gt;, bins=&lt;int/coll&gt;)'</span></code>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;S&gt;.to_string())'</span></code> to print a Series that has more than 60 items.</strong></li>
 <li><strong>Indexing objects can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>.</strong></li>
 <li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if we assign np.nan to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
 <li><strong>Series will silently overflow if we run <code class="python hljs"><span class="hljs-string">'pd.Series([100], dtype="int8") + 100'</span></code>!</strong></li>
@@ -2944,7 +2944,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>April 22, 2025</aside>
+    <aside>April 27, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

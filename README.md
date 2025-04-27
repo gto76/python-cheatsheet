@@ -2818,7 +2818,7 @@ img.show()
 ```python
 from PIL import ImageDraw
 <Draw> = ImageDraw.Draw(<Image>)                # Object for adding 2D graphics to the image.
-<Draw>.point((x, y))                            # Draws a point. Truncates floats into ints.
+<Draw>.point((x, y))                            # Draws a point. Also `fill=<int/tuple/str>`.
 <Draw>.line((x1, y1, x2, y2 [, ...]))           # For anti-aliasing use <Image>.resize((w, h)).
 <Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Draws in clockwise dir. Also pieslice().
 <Draw>.rectangle((x1, y1, x2, y2))              # Also rounded_rectangle(), regular_polygon().
@@ -2829,7 +2829,7 @@ from PIL import ImageDraw
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
 * **Use `'outline=<color>'` to set the color of the contours.**
-* **Color can be an int, tuple, `'#rrggbb[aa]'` string or a color name.**
+* **Color can be an int, tuple, `'#rrggbb[aa]'` or a color name.**
 
 
 Animation
@@ -2989,10 +2989,10 @@ pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
 while not pg.event.get(pg.QUIT):
-    deltas = {pg.K_UP: (0, -20), pg.K_RIGHT: (20, 0), pg.K_DOWN: (0, 20), pg.K_LEFT: (-20, 0)}
+    deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
     for event in pg.event.get(pg.KEYDOWN):
-        dx, dy = deltas.get(event.key, (0, 0))
-        rect = rect.move((dx, dy))
+        x, y = deltas.get(event.key, (0, 0))
+        rect = rect.move((x*20, y*20))
     screen.fill(pg.Color('black'))
     pg.draw.rect(screen, pg.Color('white'), rect)
     pg.display.flip()
@@ -3003,8 +3003,8 @@ pg.quit()
 **Object for storing rectangular coordinates.**
 ```python
 <Rect> = pg.Rect(x, y, width, height)           # Creates Rect object. Truncates passed floats.
-<int>  = <Rect>.x/y/centerx/centery/…           # Top, right, bottom, left. Allows assignments.
-<tup.> = <Rect>.topleft/center/…                # Topright, bottomright, bottomleft. Same.
+<int>  = <Rect>.x/y/centerx/centery/…           # `top/right/bottom/left`. Allows assignments.
+<tup.> = <Rect>.topleft/center/…                # `topright/bottomright/bottomleft`. Same.
 <Rect> = <Rect>.move((delta_x, delta_y))        # Use move_ip() to move in-place.
 ```
 
@@ -3026,7 +3026,7 @@ pg.quit()
 ```
 
 ```python
-<Surf>.fill(color)                              # Tuple, Color('#rrggbb[aa]') or Color(<name>).
+<Surf>.fill(color)                              # Pass tuple or pg.Color('<name/hex_code>').
 <Surf>.set_at((x, y), color)                    # Updates pixel. Also <Surf>.get_at((x, y)).
 <Surf>.blit(<Surf>, (x, y))                     # Draws passed surface at specified location.
 ```
@@ -3185,7 +3185,7 @@ Name: a, dtype: int64
 ```python
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
 ```
-* **Also `'<S>.quantile(<float/coll>)'` and `'pd.cut(<S>, bins=<int/coll>)'`.**
+* **Use `'print(<S>.to_string())'` to print a Series that has more than 60 items.**
 * **Indexing objects can't be tuples because `'obj[x, y]'` is converted to `'obj[(x, y)]'`.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 * **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**
