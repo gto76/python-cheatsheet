@@ -3189,7 +3189,7 @@ Name: a, dtype: int64
 * **Use `'<S>.index'` to get collection of keys and `'<S>.index = <coll>'` to update them.**
 * **Only pass a list or Series to loc/iloc because `'obj[x, y]'` is converted to `'obj[(x, y)]'` and `'<S>.loc[key_1, key_2]'` is how you retrieve a value from a multi-indexed Series.**
 * **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
-* **Series will silently overflow if you run `'pd.Series([100], dtype="int8") + 100'`!**
+* **Series will silently overflow if we run `'pd.Series([100], dtype="int8") + 100'`!**
 
 #### Series — Aggregate, Transform, Map:
 ```python
