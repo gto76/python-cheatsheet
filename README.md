@@ -1156,7 +1156,7 @@ class MySortable:
 * **Any object that has methods next() and iter() is an iterator.**
 * **Next() should return next item or raise StopIteration exception.**
 * **Iter() should return an iterator of remaining items, i.e. 'self'.**
-* **Only objects that have iter() method can be used in for loops.**
+* **Any object that has iter() method can be used in a for loop.**
 ```python
 class Counter:
     def __init__(self):

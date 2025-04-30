@@ -989,7 +989,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
 <li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
 <li><strong>Iter() should return an iterator of remaining items, i.e. 'self'.</strong></li>
-<li><strong>Only objects that have iter() method can be used in for loops.</strong></li>
+<li><strong>Any object that has iter() method can be used in a for loop.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.i = <span class="hljs-number">0</span>
