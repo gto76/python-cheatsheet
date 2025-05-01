@@ -705,23 +705,24 @@ func(1, 2, z=3)
 ### Inside Function Definition
 **Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.**
 ```python
->>> def add(*a):
-...     return sum(a)
-...
+def add(*a):
+    return sum(a)
+```
+
+```python
 >>> add(1, 2, 3)
 6
 ```
 
-#### Allowed compositions of arguments inside function definition and the ways they can be called:
+#### Allowed compositions of arguments and the ways they can be called:
 ```text
-+--------------------+------------+--------------+----------------+------------------+
-|                    | f(1, 2, 3) | f(1, 2, z=3) | f(1, y=2, z=3) | f(x=1, y=2, z=3) |
-+--------------------+------------+--------------+----------------+------------------+
-| f(x, *args, **kw): |     yes    |      yes     |       yes      |       yes        |
-| f(*args, z, **kw): |            |      yes     |       yes      |       yes        |
-| f(x, **kw):        |            |              |       yes      |       yes        |
-| f(*, x, **kw):     |            |              |                |       yes        |
-+--------------------+------------+--------------+----------------+------------------+
++---------------------------+--------------+--------------+----------------+
+|                           |  func(1, 2)  | func(1, y=2) | func(x=1, y=2) |
++---------------------------+--------------+--------------+----------------+
+| func(x, *args, **kwargs): |     yes      |     yes      |      yes       |
+| func(*args, y, **kwargs): |              |     yes      |      yes       |
+| func(*, x, **kwargs):     |              |              |      yes       |
++---------------------------+--------------+--------------+----------------+
 ```
 
 ### Other Uses

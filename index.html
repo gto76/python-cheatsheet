@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>April 30, 2025</aside>
+    <aside>May 1, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -620,22 +620,21 @@ func(*args, **kwargs)
 <div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
-<span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> sum(a)
-<span class="hljs-meta">... </span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
-<span class="hljs-number">6</span>
+<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
+    <span class="hljs-keyword">return</span> sum(a)
 </code></pre></div>
 
 
-<div><h4 id="allowedcompositionsofargumentsinsidefunctiondefinitionandthewaystheycanbecalled">Allowed compositions of arguments inside function definition and the ways they can be called:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓
-┃                    │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) │ f(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>) ┃
-┠────────────────────┼────────────┼──────────────┼────────────────┼──────────────────┨
-┃ <span class="hljs-title">f</span>(x, *args, **kw): │      ✓     │       ✓      │        ✓       │        ✓         ┃
-┃ <span class="hljs-title">f</span>(*args, z, **kw): │            │       ✓      │        ✓       │        ✓         ┃
-┃ <span class="hljs-title">f</span>(x, **kw):        │            │              │        ✓       │        ✓         ┃
-┃ <span class="hljs-title">f</span>(*, x, **kw):     │            │              │                │        ✓         ┃
-┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-number">6</span>
+</code></pre>
+<div><h4 id="allowedcompositionsofargumentsandthewaystheycanbecalled">Allowed compositions of arguments and the ways they can be called:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
+┃                           │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) ┃
+┠───────────────────────────┼──────────────┼──────────────┼────────────────┨
+┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │      ✓       │      ✓       │       ✓        ┃
+┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │              │      ✓       │       ✓        ┃
+┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │              │              │       ✓        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛
 </code></pre></div>
 
 <div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]  <span class="hljs-comment"># Or: list(&lt;coll&gt;) [+ ...]</span>
@@ -2940,7 +2939,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>April 30, 2025</aside>
+    <aside>May 1, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
