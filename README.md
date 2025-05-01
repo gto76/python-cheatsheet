@@ -3184,7 +3184,8 @@ Name: a, dtype: int64
 ```
 
 ```python
-<S>.plot.line/area/bar/pie/hist()              # Generates a plot. `plt.show()` displays it.
+<S>.plot.line/area/bar/pie/hist()              # Generates a plot. Accepts `title=<str>`.
+plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
 * **Use `'print(<S>.to_string())'` to print a Series that has more than 60 items.**
 * **Use `'<S>.index'` to get collection of keys and `'<S>.index = <coll>'` to update them.**

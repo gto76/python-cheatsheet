@@ -2608,7 +2608,8 @@ Name: a, dtype: int64
 &lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of datetimes.</span>
 &lt;S&gt;  = &lt;S&gt;.dt.to_period(<span class="hljs-string">'y/m/d/h'</span>)             <span class="hljs-comment"># Quantizes datetimes into Period objects.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. Accepts `title=&lt;str&gt;`.</span>
+plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;S&gt;.to_string())'</span></code> to print a Series that has more than 60 items.</strong></li>
