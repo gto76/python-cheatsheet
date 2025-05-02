@@ -1600,7 +1600,7 @@ Open
 ```
 
 ```python
-<file>.write(<str/bytes>)           # Writes a string or bytes object.
+<file>.write(<str/bytes>)           # Writes a string or bytes object to the file.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
 <file>.close()                      # Closes the file after flushing write buffer.
@@ -1707,7 +1707,7 @@ import os, shutil, subprocess
 ```
 
 ```python
-os.chdir(<path>)                    # Changes the current working directory.
+os.chdir(<path>)                    # Changes the current working directory (CWD).
 os.mkdir(<path>, mode=0o777)        # Creates a directory. Permissions are in octal.
 os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also `exist_ok=False`.
 ```

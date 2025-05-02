@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 1, 2025</aside>
+    <aside>May 2, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1371,7 +1371,7 @@ args  = p.parse_args()                                            <span class="h
 &lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns a list of remaining lines.</span>
 &lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
+<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object to the file.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer. Runs every 4096/8192 B.</span>
 &lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing write buffer.</span>
@@ -1443,7 +1443,7 @@ args  = p.parse_args()                                            <span class="h
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
 </code></pre></div>
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory (CWD).</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Permissions are in octal.</span>
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all path's dirs. Also `exist_ok=False`.</span>
 </code></pre>
@@ -2940,7 +2940,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 1, 2025</aside>
+    <aside>May 2, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
