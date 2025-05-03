@@ -29,7 +29,7 @@ if __name__ == '__main__':      # Skips next line if file was imported.
 List
 ----
 ```python
-<list> = [<el_1>, <el_2>, ...]  # Creates new list. Also list(<collection>).
+<list> = [<el_1>, <el_2>, ...]  # Creates a list object. Also list(<collection>).
 ```
 
 ```python
@@ -1664,7 +1664,7 @@ from pathlib import Path
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
 <str>  = <DirEntry>.path            # Returns the whole path as a string.
 <str>  = <DirEntry>.name            # Returns final component as a string.
-<file> = open(<DirEntry>)           # Opens the file and returns a file object.
+<file> = open(<DirEntry>)           # Opens the file and returns its file object.
 ```
 
 ### Path Object
