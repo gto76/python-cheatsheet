@@ -1600,7 +1600,7 @@ Open
 ```
 
 ```python
-<file>.write(<str/bytes>)           # Writes a string or bytes object to the file.
+<file>.write(<str/bytes>)           # Writes a string or bytes object.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
 <file>.close()                      # Closes the file after flushing write buffer.
