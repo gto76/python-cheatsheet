@@ -1997,8 +1997,8 @@ Struct
 ```python
 from struct import pack, unpack
 
-<bytes> = pack('<format>', <el_1> [, ...])  # Packs objects according to format string.
-<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
+<bytes> = pack('<format>', <num_1> [, ...])  # Packs numbers according to format string.
+<tuple> = unpack('<format>', <bytes>)        # Use iter_unpack() to get iterator of tuples.
 ```
 
 ```python
@@ -2259,7 +2259,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 <Thread>.join()                                # Waits for the thread to finish executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
-* **Use `'daemon=True'`, or program won't be able to exit while the thread is alive.**
+* **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
 
 ### Lock
 ```python
@@ -2295,7 +2295,7 @@ with <lock>:                                   # Enters the block by calling acq
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: ...`
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
-<Exec>.shutdown()                              # Blocks until all threads finish executing.
+<Exec>.shutdown()                              # Waits for all submitted threads to finish.
 ```
 
 ```python
