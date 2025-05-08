@@ -1684,8 +1684,8 @@ from pathlib import Path
 ```python
 <Path> = <Path>.parent              # Returns Path without the final component.
 <str>  = <Path>.name                # Returns final component as a string.
-<str>  = <Path>.stem                # Returns final component w/o last extension.
-<str>  = <Path>.suffix              # Returns last extension prepended with a dot.
+<str>  = <Path>.suffix              # Returns name's last extension, e.g. '.py'.
+<str>  = <Path>.stem                # Returns name without last extension.
 <tup.> = <Path>.parts               # Returns all path's components as strings.
 ```
 

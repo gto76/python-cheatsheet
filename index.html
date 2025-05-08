@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 7, 2025</aside>
+    <aside>May 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1430,8 +1430,8 @@ args  = p.parse_args()                                            <span class="h
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without the final component.</span>
 &lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension (e.g. '.py').</span>
-&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without its last extension.</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension, e.g. '.py'.</span>
+&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without last extension.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all path's components as strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
@@ -1591,8 +1591,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every '?' with an item.</span>
-&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every ':&lt;key&gt;' with a value.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces '?'s in query with values.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
 &lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
 </code></pre></div>
 
@@ -1612,7 +1612,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
-&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces every ':&lt;key&gt;' with value.</span>
+&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces ':&lt;key&gt;'s with values.</span>
 <span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with commit or rollback.</span>
 </code></pre></div>
 
@@ -2940,7 +2940,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 7, 2025</aside>
+    <aside>May 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
