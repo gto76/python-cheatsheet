@@ -1907,8 +1907,8 @@ with <conn>:                                   # Exits the block with commit() o
 
 ### Placeholders
 ```python
-<conn>.execute('<query>', <list/tuple>)        # Replaces '?'s in query with values.
-<conn>.execute('<query>', <dict/namedtuple>)   # Replaces ':<key>'s with values.
+<conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
+<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with value.
 <conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
@@ -1931,7 +1931,7 @@ with <conn>:                                   # Exits the block with commit() o
 from sqlalchemy import create_engine, text
 <engine> = create_engine('<url>')              # Url: 'dialect://user:password@host/dbname'.
 <conn>   = <engine>.connect()                  # Creates a connection. Also <conn>.close().
-<cursor> = <conn>.execute(text('<query>'), …)  # `<dict>`. Replaces ':<key>'s with values.
+<cursor> = <conn>.execute(text('<query>'), …)  # `<dict>`. Replaces every :<key> with value.
 with <conn>.begin(): ...                       # Exits the block with commit or rollback.
 ```
 
@@ -3048,7 +3048,7 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 
 ```python
 <Font> = pg.font.Font(<path/file>, size)        # Loads TTF file. Pass None for default font.
-<Surf> = <Font>.render(text, antialias, color)  # Background color can be specified at the end.
+<Surf> = <Font>.render(text, antialias, color)  # Accepts background color as fourth argument.
 ```
 
 ### Sound

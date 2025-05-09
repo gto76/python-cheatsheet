@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 8, 2025</aside>
+    <aside>May 9, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1591,8 +1591,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces '?'s in query with values.</span>
-&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with an item.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with value.</span>
 &lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
 </code></pre></div>
 
@@ -1612,7 +1612,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
-&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces ':&lt;key&gt;'s with values.</span>
+&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces every :&lt;key&gt; with value.</span>
 <span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with commit or rollback.</span>
 </code></pre></div>
 
@@ -2496,7 +2496,7 @@ arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-co
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.Font(&lt;path/file&gt;, size)        <span class="hljs-comment"># Loads TTF file. Pass None for default font.</span>
-&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
+&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Accepts background color as fourth argument.</span>
 </code></pre>
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
 &lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;) and fadeout(msec).</span>
@@ -2940,7 +2940,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 8, 2025</aside>
+    <aside>May 9, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
