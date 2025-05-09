@@ -1461,7 +1461,7 @@ BaseException
       |    +-- ConnectionError    # Errors such as BrokenPipeError/ConnectionAbortedError.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
-      |    +-- RecursionError     # Raised when the maximum recursion depth is exceeded.
+      |    +-- RecursionError     # Raised if max recursion depth is exceeded (3k by default).
       +-- StopIteration           # Raised when an empty iterator is passed to next().
       +-- TypeError               # When an argument of the wrong type is passed to function.
       +-- ValueError              # When argument has the right type but inappropriate value.
@@ -1528,7 +1528,7 @@ Input
 ```
 * **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
 * **If argument is passed, it gets printed to the standard output before input is read.**
-* **EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.**
+* **EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or if input stream is exhausted.**
 
 
 Command Line Arguments

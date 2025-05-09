@@ -1257,7 +1257,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
-      │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
+      │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
       ├── StopIteration           <span class="hljs-comment"># Raised when an empty iterator is passed to next().</span>
       ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
       └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
@@ -1310,7 +1310,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Reads a line from the user input or pipe if present (trailing newline gets stripped).</strong></li>
 <li><strong>If argument is passed, it gets printed to the standard output before input is read.</strong></li>
-<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.</strong></li>
+<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or if input stream is exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 scripts_path = sys.argv[<span class="hljs-number">0</span>]
