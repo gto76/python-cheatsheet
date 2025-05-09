@@ -3352,7 +3352,7 @@ c  6  7
 ```
 
 ```python
-<DF>.to_json/csv/html/parquet/latex(<path>)    # Returns a string/bytes if path is omitted.
+<DF>.to_json/csv/html/latex/parquet(<path>)    # Returns a string/bytes if path is omitted.
 <DF>.to_pickle/excel/feather/hdf(<path>)       # Method to_hdf() requires `key=<s/df_name>`.
 <DF>.to_sql('<table_name>', <connection>)      # Also `if_exists='fail/replace/append'`.
 ```
@@ -3414,7 +3414,7 @@ import plotly.express as px, pandas as pd
 ```python
 <Fig> = px.line(<DF>, x=col_key, y=col_key)           # Or: px.line(x=<list>, y=<list>)
 <Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Also `paper_bgcolor='rgb(0, 0, 0)'`.
-<Fig>.write_html/json/image('<path>')                 # <Fig>.show() displays the plot.
+<Fig>.write_html/json/image('<path>')                 # `<Fig>.show()` displays the plot.
 ```
 
 ```python

@@ -2743,7 +2743,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 &lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># Pass SQLite3/Alchemy connection. See #SQLite.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/parquet/latex(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/latex/parquet(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
 &lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># Method to_hdf() requires `key=&lt;s/df_name&gt;`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
@@ -2790,7 +2790,7 @@ z
 
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)           <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
 &lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))  <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># &lt;Fig&gt;.show() displays the plot.</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># `&lt;Fig&gt;.show()` displays the plot.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)   <span class="hljs-comment"># Also `color=col_key`.</span>
 &lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)        <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
