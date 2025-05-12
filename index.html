@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 9, 2025</aside>
+    <aside>May 12, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -849,25 +849,30 @@ Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-stri
 <span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
 </code></pre></div>
 
-<div><h3 id="inheritance">Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
+<div><h3 id="subclass">Subclass</h3><ul>
+<li><strong>Inheritance is a mechanism that enables a class to extend another class (subclass to extend its parent), and by doing so inherit all its methods and attributes.</strong></li>
+<li><strong>Subclass can then add its own methods and attributes or override inherited ones by reusing their names.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name)</span>:</span>
         self.name = name
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__repr__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f'Person(<span class="hljs-subst">{self.name!r}</span>)'</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span><span class="hljs-params">(self, other)</span>:</span>
+        <span class="hljs-keyword">return</span> self.name &lt; other.name
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span><span class="hljs-params">(Person)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name, staff_num)</span>:</span>
         super().__init__(name)
         self.staff_num = staff_num
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__repr__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f'Employee(<span class="hljs-subst">{self.name!r}</span>, <span class="hljs-subst">{self.staff_num}</span>)'</span>
 </code></pre></div>
 
-<div><h4 id="multipleinheritance">Multiple inheritance:</h4><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span> <span class="hljs-keyword">pass</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span>:</span> <span class="hljs-keyword">pass</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
-</code></pre></div>
 
-<p><strong>MRO determines the order in which parent classes are traversed when searching for a method or an attribute:</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
-[&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
-</span></code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>people = {Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)}
+<span class="hljs-meta">&gt;&gt;&gt; </span>sorted(people)
+[Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)]
+</code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
@@ -1431,8 +1436,8 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without the final component.</span>
 &lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
 &lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension, e.g. '.py'.</span>
-&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without last extension.</span>
-&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all path's components as strings.</span>
+&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without the last extension.</span>
+&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all components as strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
@@ -1522,10 +1527,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
+<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or all '\r\n' sequences inside quoted fields will get converted to '\n'!</strong></li>
 <li><strong>To print the spreadsheet to the console use <a href="#table">Tabulate</a> library.</strong></li>
 <li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
-<li><strong>Reader accepts any iterator of strings, not just files.</strong></li>
+<li><strong>Reader accepts any collection of strings, not just files.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
@@ -2940,7 +2945,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 9, 2025</aside>
+    <aside>May 12, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

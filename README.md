@@ -995,29 +995,31 @@ Z = make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
 >>> <obj>
 ```
 
-### Inheritance
+### Subclass
+* **Inheritance is a mechanism that enables a class to extend another class (subclass to extend its parent), and by doing so inherit all its methods and attributes.**
+* **Subclass can then add its own methods and attributes or override inherited ones by reusing their names.**
+
 ```python
 class Person:
     def __init__(self, name):
         self.name = name
+    def __repr__(self):
+        return f'Person({self.name!r})'
+    def __lt__(self, other):
+        return self.name < other.name
 
 class Employee(Person):
     def __init__(self, name, staff_num):
         super().__init__(name)
         self.staff_num = staff_num
+    def __repr__(self):
+        return f'Employee({self.name!r}, {self.staff_num})'
 ```
 
-#### Multiple inheritance:
 ```python
-class A: pass
-class B: pass
-class C(A, B): pass
-```
-
-**MRO determines the order in which parent classes are traversed when searching for a method or an attribute:**
-```python
->>> C.mro()
-[<class 'C'>, <class 'A'>, <class 'B'>, <class 'object'>]
+>>> people = {Person('Ann'), Employee('Bob', 0)}
+>>> sorted(people)
+[Person('Ann'), Employee('Bob', 0)]
 ```
 
 ### Type Annotations
@@ -1685,8 +1687,8 @@ from pathlib import Path
 <Path> = <Path>.parent              # Returns Path without the final component.
 <str>  = <Path>.name                # Returns final component as a string.
 <str>  = <Path>.suffix              # Returns name's last extension, e.g. '.py'.
-<str>  = <Path>.stem                # Returns name without last extension.
-<tup.> = <Path>.parts               # Returns all path's components as strings.
+<str>  = <Path>.stem                # Returns name without the last extension.
+<tup.> = <Path>.parts               # Returns all components as strings.
 ```
 
 ```python
@@ -1820,10 +1822,10 @@ import csv
 <list>   = next(<reader>)           # Returns next row as a list of strings.
 <list>   = list(<reader>)           # Returns a list of remaining rows.
 ```
-* **File must be opened with a `'newline=""'` argument, or newlines embedded inside quoted fields will not be interpreted correctly!**
+* **File must be opened with a `'newline=""'` argument, or all '\r\n' sequences inside quoted fields will get converted to '\n'!**
 * **To print the spreadsheet to the console use [Tabulate](#table) library.**
 * **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
-* **Reader accepts any iterator of strings, not just files.**
+* **Reader accepts any collection of strings, not just files.**
 
 ### Write
 ```python
