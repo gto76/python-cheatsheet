@@ -1697,7 +1697,7 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = str(<Path>)                # Returns path as a string.
+<str>  = str(<Path>)                # Returns path as str. Also <Path>.as_uri().
 <file> = open(<Path>)               # Also <Path>.read/write_text/bytes(<args>).
 ```
 
