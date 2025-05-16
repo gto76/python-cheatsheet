@@ -1741,7 +1741,7 @@ shutil.rmtree(<path>)               # Deletes the directory.
 <int>  = <pipe>.close()             # Returns None if last command exited with returncode 0.
 ```
 
-#### Sends '1 + 1' to the basic calculator and captures its output:
+#### Sends "1 + 1" to the basic calculator and captures its output:
 ```python
 >>> subprocess.run('bc', input='1 + 1\n', capture_output=True, text=True)
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
@@ -1910,7 +1910,7 @@ with <conn>:                                   # Exits the block with commit() o
 ### Placeholders
 ```python
 <conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
-<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with value.
+<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a value.
 <conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
 ```
 * **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
@@ -1999,8 +1999,8 @@ Struct
 ```python
 from struct import pack, unpack
 
-<bytes> = pack('<format>', <num_1> [, ...])  # Packs numbers according to format string.
-<tuple> = unpack('<format>', <bytes>)        # Use iter_unpack() to get iterator of tuples.
+<bytes> = pack('<format>', <el_1> [, ...])  # Packs numbers according to format string.
+<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
 ```
 
 ```python
