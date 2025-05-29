@@ -3,9 +3,6 @@ Comprehensive Python Cheatsheet
 <sup>[Download text file](https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md), [Fork me on GitHub](https://github.com/gto76/python-cheatsheet) or [Check out FAQ](https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions).
 </sup>
 
-![Monty Python](web/image_888.jpeg)
-
-
 Contents
 --------
 **&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dictionary`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
@@ -65,6 +62,8 @@ List
 ```
 
 ```python
+# list comprehension
+filtered         = [x*x for x in iterable if x>0] # -> x^2 for positive x's in iterable
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
 sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
