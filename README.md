@@ -337,8 +337,8 @@ String
 ```
 
 ```python
-<str>  = chr(<int>)                          # Converts int to Unicode character.
-<int>  = ord(<str>)                          # Converts Unicode character to int.
+<str>  = chr(<int>)                          # Converts passed integer to Unicode character.
+<int>  = ord(<str>)                          # Converts passed Unicode character to integer.
 ```
 * **Use `'unicodedata.normalize("NFC", <str>)'` on strings like `'Motörhead'` before comparing them to other strings, because `'ö'` can be stored as one or two characters.**
 * **`'NFC'` converts such characters to a single character, while `'NFD'` converts them to two.**
@@ -972,9 +972,8 @@ class MyClass:
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
-* **Return value of str() should be readable and of repr() unambiguous.**
-* **If only repr() is defined, it will also be used for str().**
-* **Methods decorated with `'@staticmethod'` do not receive 'self' nor 'cls' as their first argument.**
+* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
 
 #### Expressions that call the str() method:
 ```python
@@ -982,7 +981,6 @@ print(<obj>)
 f'{<obj>}'
 logging.warning(<obj>)
 csv.writer(<file>).writerow([<obj>])
-raise Exception(<obj>)
 ```
 
 #### Expressions that call the repr() method:
@@ -991,11 +989,10 @@ print/str/repr([<obj>])
 print/str/repr({<obj>: <obj>})
 f'{<obj>!r}'
 Z = make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
->>> <obj>
 ```
 
 ### Subclass
-* **Inheritance is a mechanism that enables a class to extend another class (subclass to extend its parent), and by doing so inherit all its methods and attributes.**
+* **Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all its methods and attributes.**
 * **Subclass can then add its own methods and attributes or override inherited ones by reusing their names.**
 
 ```python
@@ -1694,7 +1691,7 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = str(<Path>)                # Returns path as str. Also <Path>.as_uri().
+<str>  = str(<Path>)                # Returns path as string. Also <Path>.as_uri().
 <file> = open(<Path>)               # Also <Path>.read/write_text/bytes(<args>).
 ```
 
@@ -2765,7 +2762,7 @@ from PIL import Image
 <Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
 <Image> = Image.open(<path>)                    # Identifies format based on file's contents.
 <Image> = <Image>.convert('<mode>')             # Converts image to the new mode (see Modes).
-<Image>.save(<path>)                            # Selects format based on extension (PNG/JPG…).
+<Image>.save(<path>)                            # Accepts `quality=<int>` if extension is jpg.
 <Image>.show()                                  # Displays image in default preview app.
 ```
 
@@ -2788,8 +2785,8 @@ from PIL import Image
 ```
 
 ### Modes
-* **`'L'` - Lightness (greyscale image). Each pixel is an int between 0 and 255.**
-* **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three ints.**
+* **`'L'` - Lightness (greyscale image). Each pixel is an integer between 0 and 255.**
+* **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three integers.**
 * **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.**
 * **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**
 
@@ -2989,10 +2986,10 @@ pg.init()
 screen = pg.display.set_mode((500, 500))
 rect = pg.Rect(240, 240, 20, 20)
 while not pg.event.get(pg.QUIT):
-    deltas = {pg.K_UP: (0, -1), pg.K_RIGHT: (1, 0), pg.K_DOWN: (0, 1), pg.K_LEFT: (-1, 0)}
     for event in pg.event.get(pg.KEYDOWN):
-        x, y = deltas.get(event.key, (0, 0))
-        rect = rect.move((x*20, y*20))
+        dx = (event.key == pg.K_RIGHT) - (event.key == pg.K_LEFT)
+        dy = (event.key == pg.K_DOWN) - (event.key == pg.K_UP)
+        rect = rect.move((dx * 20, dy * 20))
     screen.fill(pg.Color('black'))
     pg.draw.rect(screen, pg.Color('white'), rect)
     pg.display.flip()
@@ -3004,13 +3001,13 @@ pg.quit()
 ```python
 <Rect> = pg.Rect(x, y, width, height)           # Creates Rect object. Truncates passed floats.
 <int>  = <Rect>.x/y/centerx/centery/…           # `top/right/bottom/left`. Allows assignments.
-<tup.> = <Rect>.topleft/center/…                # `topright/bottomright/bottomleft`. Same.
-<Rect> = <Rect>.move((delta_x, delta_y))        # Use move_ip() to move in-place.
+<tup.> = <Rect>.topleft/center/…                # `topright/bottomright/bottomleft/size`. Same.
+<Rect> = <Rect>.move((delta_x, delta_y))        # Use move_ip() to move the rectangle in-place.
 ```
 
 ```python
-<bool> = <Rect>.collidepoint((x, y))            # Checks if rectangle contains the point.
-<bool> = <Rect>.colliderect(<Rect>)             # Checks if the two rectangles overlap.
+<bool> = <Rect>.collidepoint((x, y))            # Checks whether rectangle contains the point.
+<bool> = <Rect>.colliderect(<Rect>)             # Checks whether the two rectangles overlap.
 <int>  = <Rect>.collidelist(<list_of_Rect>)     # Returns index of first colliding Rect or -1.
 <list> = <Rect>.collidelistall(<list_of_Rect>)  # Returns indices of all colliding rectangles.
 ```
@@ -3018,7 +3015,7 @@ pg.quit()
 ### Surface
 **Object for representing images.**
 ```python
-<Surf> = pg.display.set_mode((width, height))   # Opens new window and returns its surface.
+<Surf> = pg.display.set_mode((width, height))   # Opens a new window and returns its surface.
 <Surf> = pg.Surface((width, height))            # New RGB surface. RGBA if `flags=pg.SRCALPHA`.
 <Surf> = pg.image.load(<path/file>)             # Loads the image. Format depends on source.
 <Surf> = pg.surfarray.make_surface(<np_array>)  # Also `<np_arr> = surfarray.pixels3d(<Surf>)`.
@@ -3032,15 +3029,15 @@ pg.quit()
 ```
 
 ```python
-from pygame.transform import scale, ...
-<Surf> = scale(<Surf>, (width, height))         # Returns scaled surface.
-<Surf> = rotate(<Surf>, anticlock_degrees)      # Returns rotated and scaled surface.
-<Surf> = flip(<Surf>, x_bool, y_bool)           # Returns flipped surface.
+from pygame.transform import scale, rotate      # Also: flip, smoothscale, scale_by.
+<Surf> = scale(<Surf>, (width, height))         # Scales the surface. `smoothscale()` blurs it.
+<Surf> = rotate(<Surf>, angle)                  # Rotates the surface for counterclock degrees.
+<Surf> = flip(<Surf>, flip_x=False)             # Mirrors the surface. Also `flip_y=False`.
 ```
 
 ```python
-from pygame.draw import line, ...
-line(<Surf>, color, (x1, y1), (x2, y2), width)  # Draws a line to the surface.
+from pygame.draw import line, arc, rect         # Also: ellipse, polygon, circle, aaline.
+line(<Surf>, color, (x1, y1), (x2, y2))         # Draws a line to the surface. Also `width=1`.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also ellipse(<Surf>, color, <Rect>, width=0).
 rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, points, width=0).
 ```

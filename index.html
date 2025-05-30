@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 21, 2025</aside>
+    <aside>May 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -323,8 +323,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts int to Unicode character.</span>
-&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts Unicode character to int.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts passed integer to Unicode character.</span>
+&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts passed Unicode character to integer.</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'unicodedata.normalize("NFC", &lt;str&gt;)'</span></code> on strings like <code class="python hljs"><span class="hljs-string">'Motörhead'</span></code> before comparing them to other strings, because <code class="python hljs"><span class="hljs-string">'ö'</span></code> can be stored as one or two characters.</strong></li>
@@ -830,26 +830,23 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
 <ul>
-<li><strong>Return value of str() should be readable and of repr() unambiguous.</strong></li>
-<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
-<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first argument.</strong></li>
+<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
+<li><strong>Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
 <div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;obj&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>'</span>
 logging.warning(&lt;obj&gt;)
 csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
-<span class="hljs-keyword">raise</span> Exception(&lt;obj&gt;)
 </code></pre></div>
 
 <div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;])
 print/str/repr({&lt;obj&gt;: &lt;obj&gt;})
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
 Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
-<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
 </code></pre></div>
 
 <div><h3 id="subclass">Subclass</h3><ul>
-<li><strong>Inheritance is a mechanism that enables a class to extend another class (subclass to extend its parent), and by doing so inherit all its methods and attributes.</strong></li>
+<li><strong>Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all its methods and attributes.</strong></li>
 <li><strong>Subclass can then add its own methods and attributes or override inherited ones by reusing their names.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name)</span>:</span>
@@ -1439,7 +1436,7 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as str. Also &lt;Path&gt;.as_uri().</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as string. Also &lt;Path&gt;.as_uri().</span>
 &lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read/write_text/bytes(&lt;args&gt;).</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
@@ -2272,7 +2269,7 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Creates new image. Also `color=&lt;int/tuple&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode (see Modes).</span>
-&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (PNG/JPG…).</span>
+&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Accepts `quality=&lt;int&gt;` if extension is jpg.</span>
 &lt;Image&gt;.show()                                  <span class="hljs-comment"># Displays image in default preview app.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's value (its color).</span>
@@ -2288,8 +2285,8 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three ints.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an integer between 0 and 255.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three integers.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
@@ -2452,10 +2449,10 @@ pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):
-    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), pg.K_RIGHT: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), pg.K_LEFT: (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
-        x, y = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-        rect = rect.move((x*<span class="hljs-number">20</span>, y*<span class="hljs-number">20</span>))
+        dx = (event.key == pg.K_RIGHT) - (event.key == pg.K_LEFT)
+        dy = (event.key == pg.K_DOWN) - (event.key == pg.K_UP)
+        rect = rect.move((dx * <span class="hljs-number">20</span>, dy * <span class="hljs-number">20</span>))
     screen.fill(pg.Color(<span class="hljs-string">'black'</span>))
     pg.draw.rect(screen, pg.Color(<span class="hljs-string">'white'</span>), rect)
     pg.display.flip()
@@ -2465,17 +2462,17 @@ pg.quit()
 
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># `top/right/bottom/left`. Allows assignments.</span>
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># `topright/bottomright/bottomleft`. Same.</span>
-&lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move in-place.</span>
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># `topright/bottomright/bottomleft/size`. Same.</span>
+&lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move the rectangle in-place.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks if rectangle contains the point.</span>
-&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks if the two rectangles overlap.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks whether rectangle contains the point.</span>
+&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks whether the two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colliding rectangles.</span>
 </code></pre>
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens new window and returns its surface.</span>
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens a new window and returns its surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
 &lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)             <span class="hljs-comment"># Loads the image. Format depends on source.</span>
 &lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;np_arr&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
@@ -2487,13 +2484,13 @@ pg.quit()
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel. Also &lt;Surf&gt;.get_at((x, y)).</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface at specified location.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
-&lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
-&lt;Surf&gt; = rotate(&lt;Surf&gt;, anticlock_degrees)      <span class="hljs-comment"># Returns rotated and scaled surface.</span>
-&lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, rotate      <span class="hljs-comment"># Also: flip, smoothscale, scale_by.</span>
+&lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Scales the surface. `smoothscale()` blurs it.</span>
+&lt;Surf&gt; = rotate(&lt;Surf&gt;, angle)                  <span class="hljs-comment"># Rotates the surface for counterclock degrees.</span>
+&lt;Surf&gt; = flip(&lt;Surf&gt;, flip_x=<span class="hljs-keyword">False</span>)             <span class="hljs-comment"># Mirrors the surface. Also `flip_y=False`.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, ...
-line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, arc, rect         <span class="hljs-comment"># Also: ellipse, polygon, circle, aaline.</span>
+line(&lt;Surf&gt;, color, (x1, y1), (x2, y2))         <span class="hljs-comment"># Draws a line to the surface. Also `width=1`.</span>
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0).</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
@@ -2942,7 +2939,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 21, 2025</aside>
+    <aside>May 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
