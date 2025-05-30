@@ -973,6 +973,7 @@ class MyClass:
 (1, '1', 'MyClass(1)')
 ```
 * **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
 * **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
 
 #### Expressions that call the str() method:
@@ -3408,16 +3409,16 @@ import plotly.express as px, pandas as pd
 ```
 
 ```python
-<Fig> = px.line(<DF>, x=col_key, y=col_key)           # Or: px.line(x=<list>, y=<list>)
-<Fig>.update_layout(margin=dict(t=0, r=0, b=0, l=0))  # Also `paper_bgcolor='rgb(0, 0, 0)'`.
+<Fig> = px.line(<DF> [, y=col_key/s [, x=col_key]])   # Also px.line(y=<list> [, x=<list>]).
+<Fig>.update_layout(paper_bgcolor='rgb(0, 0, 0)')     # Also `margin=dict(t=0, r=0, b=0, l=0)`.
 <Fig>.write_html/json/image('<path>')                 # `<Fig>.show()` displays the plot.
 ```
 
 ```python
-<Fig> = px.area/bar/box(<DF>, x=col_key, y=col_key)   # Also `color=col_key`.
-<Fig> = px.scatter(<DF>, x=col_key, y=col_key)        # Also `color/size/symbol=col_key`.
-<Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)  # `z=col_key`. Also color/size/symbol.
-<Fig> = px.histogram(<DF>, x=col_key)                 # Also `nbins=<int>`.
+<Fig> = px.area/bar/box(<DF>, x=col_key, y=col_keys)  # Also `color=col_key`. All are optional.
+<Fig> = px.scatter(<DF>, x=col_key, y=col_keys)       # Also `color/size/symbol=col_key`. Same.
+<Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)  # `z=col_key`. Also color, size, symbol.
+<Fig> = px.histogram(<DF>, x=col_keys, y=col_key)     # Also `nbins=<int>`. All are optional.
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:
