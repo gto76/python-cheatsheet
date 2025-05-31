@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>May 30, 2025</aside>
+    <aside>May 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2790,12 +2790,12 @@ z
 
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt; [, y=col_key/s [, x=col_key]])   <span class="hljs-comment"># Also px.line(y=&lt;list&gt; [, x=&lt;list&gt;]).</span>
 &lt;Fig&gt;.update_layout(paper_bgcolor=<span class="hljs-string">'rgb(0, 0, 0)'</span>)     <span class="hljs-comment"># Also `margin=dict(t=0, r=0, b=0, l=0)`.</span>
-&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># `&lt;Fig&gt;.show()` displays the plot.</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># Use &lt;Fig&gt;.show() to display the plot.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_keys)  <span class="hljs-comment"># Also `color=col_key`. All are optional.</span>
 &lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_keys)       <span class="hljs-comment"># Also `color/size/symbol=col_key`. Same.</span>
 &lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)  <span class="hljs-comment"># `z=col_key`. Also color, size, symbol.</span>
-&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_keys, y=col_key)     <span class="hljs-comment"># Also `nbins=&lt;int&gt;`. All are optional.</span>
+&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_keys, y=col_key)     <span class="hljs-comment"># Also color, nbins. All are optional.</span>
 </code></pre>
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'</span>
                     <span class="hljs-string">'6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv'</span>,
@@ -2807,7 +2807,7 @@ df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class=
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
 df = df[df.date &gt; <span class="hljs-string">'2020-03-14'</span>]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
-px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>)
 </code></pre></div>
 
 
@@ -2940,7 +2940,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>May 30, 2025</aside>
+    <aside>May 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -3411,14 +3411,14 @@ import plotly.express as px, pandas as pd
 ```python
 <Fig> = px.line(<DF> [, y=col_key/s [, x=col_key]])   # Also px.line(y=<list> [, x=<list>]).
 <Fig>.update_layout(paper_bgcolor='rgb(0, 0, 0)')     # Also `margin=dict(t=0, r=0, b=0, l=0)`.
-<Fig>.write_html/json/image('<path>')                 # `<Fig>.show()` displays the plot.
+<Fig>.write_html/json/image('<path>')                 # Use <Fig>.show() to display the plot.
 ```
 
 ```python
 <Fig> = px.area/bar/box(<DF>, x=col_key, y=col_keys)  # Also `color=col_key`. All are optional.
 <Fig> = px.scatter(<DF>, x=col_key, y=col_keys)       # Also `color/size/symbol=col_key`. Same.
 <Fig> = px.scatter_3d(<DF>, x=col_key, y=col_key, …)  # `z=col_key`. Also color, size, symbol.
-<Fig> = px.histogram(<DF>, x=col_keys, y=col_key)     # Also `nbins=<int>`. All are optional.
+<Fig> = px.histogram(<DF>, x=col_keys, y=col_key)     # Also color, nbins. All are optional.
 ```
 
 #### Displays a line chart of total coronavirus deaths per million grouped by continent:
@@ -3437,7 +3437,7 @@ df = df.groupby(['Continent_Name', 'date']).sum().reset_index()
 df['Total Deaths per Million'] = df.total_deaths * 1e6 / df.population
 df = df[df.date > '2020-03-14']
 df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
-px.line(df, x='Date', y='Total Deaths per Million', color='Continent').show()
+px.line(df, x='Date', y='Total Deaths per Million', color='Continent')
 ```
 
 #### Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:
