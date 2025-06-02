@@ -327,11 +327,11 @@ String
 <bool> = <sub_str> in <str>                  # Checks if string contains the substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
-<int>  = <str>.index(<sub_str>)              # Same, but raises ValueError if there's no match.
 ```
 
 ```python
-<str>  = <str>.lower()                       # Changes the case. Also upper/capitalize/title().
+<str>  = <str>.lower()                       # Lowers the case. Also upper/capitalize/title().
+<str>  = <str>.casefold()                    # Same, but converts ẞ/ß to ss, Σ/ς to σ, etc.
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 ```
@@ -2788,7 +2788,7 @@ from PIL import Image
 ### Modes
 * **`'L'` - Lightness (greyscale image). Each pixel is an integer between 0 and 255.**
 * **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three integers.**
-* **`'RGBA'` - RGB with alpha. Low alpha (i.e. forth int) makes pixel more transparent.**
+* **`'RGBA'` - RGB with alpha. Low alpha (i.e. fourth int) makes pixel more transparent.**
 * **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**
 
 
@@ -3410,7 +3410,7 @@ import plotly.express as px, pandas as pd
 
 ```python
 <Fig> = px.line(<DF> [, y=col_key/s [, x=col_key]])   # Also px.line(y=<list> [, x=<list>]).
-<Fig>.update_layout(paper_bgcolor='rgb(0, 0, 0)')     # Also `margin=dict(t=0, r=0, b=0, l=0)`.
+<Fig>.update_layout(paper_bgcolor='#rrggbb')          # Also `margin=dict(t=0, r=0, b=0, l=0)`.
 <Fig>.write_html/json/image('<path>')                 # Use <Fig>.show() to display the plot.
 ```
 
@@ -3518,21 +3518,24 @@ import <cython_script>                 # Script must be saved with '.pyx' extens
 <cython_script>.main()                 # Main() isn't automatically executed.
 ```
 
-#### Definitions:
-* **All `'cdef'` definitions are optional, but they contribute to the speed-up.**
-* **Also supports C pointers (via `'*'` and `'&'`), structs, unions and enums.**
+#### All `'cdef'` definitions are optional, but they contribute to the speed-up:
 
 ```python
-cdef <ctype/type> <var_name> [= <obj>]
+cdef <ctype/type> [*]<var_name> [= <obj>]
 cdef <ctype>[n_elements] <var_name> [= <coll_of_nums>]
-cdef <ctype/type/void> <func_name>(<ctype/type> <arg_name>): ...
+cdef <ctype/type/void> <func_name>(<ctype/type> [*]<arg_name>): ...
 ```
 
 ```python
 cdef class <class_name>:
-    cdef public <ctype/type> <attr_name>
-    def __init__(self, <ctype/type> <arg_name>):
-        self.<attr_name> = <arg_name>
+    cdef public <ctype/type> [*]<attr_name>
+    def __init__(self, <ctype/type> [*]<arg_name>):
+        self.<attr_name> = [&]<arg_name>
+```
+
+```python
+cdef struct <struct_name>:
+    <ctype> [*]<field_name>
 ```
 
 ### Virtual Environments
