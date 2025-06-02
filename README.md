@@ -318,7 +318,7 @@ String
 
 ```python
 <list> = <str>.split()                       # Splits on one or more whitespace characters.
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' str at most 'maxsplit' times.
+<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' string at most 'maxsplit' times.
 <list> = <str>.splitlines(keepends=False)    # On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.
 <str>  = <str>.join(<coll_of_strings>)       # Joins elements by using string as a separator.
 ```
