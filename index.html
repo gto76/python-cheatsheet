@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>June 2, 2025</aside>
+    <aside>June 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2876,13 +2876,13 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 <div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python-like code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
 <span class="hljs-keyword">import</span> pyximport; pyximport.install()  <span class="hljs-comment"># Module that runs imported Cython scripts.</span>
 <span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script must be saved with '.pyx' extension.</span>
-&lt;cython_script&gt;.main()                 <span class="hljs-comment"># Main() isn't automatically executed.</span>
 </code></pre></div></div>
 
 
 
 <div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;obj&gt;]
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;coll_of_nums&gt;]
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_items] &lt;array_name&gt; [= &lt;coll_of_nums/structs&gt;]
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; = &lt;&lt;ctype&gt; *&gt; malloc(n_items * sizeof(&lt;ctype&gt;))
 <span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; [*]&lt;arg_name&gt;): ...
 </code></pre></div>
 
@@ -2939,7 +2939,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>June 2, 2025</aside>
+    <aside>June 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

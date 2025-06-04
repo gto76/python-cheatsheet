@@ -3515,14 +3515,14 @@ Appendix
 # $ pip3 install cython
 import pyximport; pyximport.install()  # Module that runs imported Cython scripts.
 import <cython_script>                 # Script must be saved with '.pyx' extension.
-<cython_script>.main()                 # Main() isn't automatically executed.
 ```
 
 #### All `'cdef'` definitions are optional, but they contribute to the speed-up:
 
 ```python
 cdef <ctype/type> [*]<var_name> [= <obj>]
-cdef <ctype>[n_elements] <var_name> [= <coll_of_nums>]
+cdef <ctype>[n_items] <array_name> [= <coll_of_nums/structs>]
+cdef <ctype> *<array_name> = <<ctype> *> malloc(n_items * sizeof(<ctype>))
 cdef <ctype/type/void> <func_name>(<ctype/type> [*]<arg_name>): ...
 ```
 

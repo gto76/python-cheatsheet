@@ -325,10 +325,10 @@ const GROUPBY =
   '<span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>\n' +
   '<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>';
 
-
 const CYTHON_1 =
   '<span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;obj&gt;]\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;coll_of_nums&gt;]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_items] &lt;array_name&gt; [= &lt;coll_of_nums/structs&gt;]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; = &lt;&lt;ctype&gt; *&gt; malloc(n_items * sizeof(&lt;ctype&gt;))\n' +
   '<span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; [*]&lt;arg_name&gt;): ...\n';
 
 const CYTHON_2 =
