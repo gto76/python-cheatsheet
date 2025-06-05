@@ -3520,7 +3520,7 @@ import <cython_script>                 # Script must be saved with '.pyx' extens
 #### All `'cdef'` definitions are optional, but they contribute to the speed-up:
 
 ```python
-cdef <ctype/type> [*]<var_name> [= <obj>]
+cdef <ctype/type> [*]<var_name> [= <object>]
 cdef <ctype>[n_items] <array_name> [= <coll_of_nums/structs>]
 cdef <ctype> *<array_name> = <<ctype> *> malloc(n_items * sizeof(<ctype>))
 cdef <ctype/type/void> <func_name>(<ctype/type> [*]<arg_name>): ...
@@ -3530,7 +3530,7 @@ cdef <ctype/type/void> <func_name>(<ctype/type> [*]<arg_name>): ...
 cdef class <class_name>:
     cdef public <ctype/type> [*]<attr_name>
     def __init__(self, <ctype/type> [*]<arg_name>):
-        self.<attr_name> = [&]<arg_name>
+        self.<attr_name> = <arg_name>
 ```
 
 ```python

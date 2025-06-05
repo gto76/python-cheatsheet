@@ -326,7 +326,7 @@ const GROUPBY =
   '<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>';
 
 const CYTHON_1 =
-  '<span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;obj&gt;]\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;object&gt;]\n' +
   '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_items] &lt;array_name&gt; [= &lt;coll_of_nums/structs&gt;]\n' +
   '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; = &lt;&lt;ctype&gt; *&gt; malloc(n_items * sizeof(&lt;ctype&gt;))\n' +
   '<span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; [*]&lt;arg_name&gt;): ...\n';
@@ -335,7 +335,7 @@ const CYTHON_2 =
   '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>\n' +
   '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype/type&gt; [*]&lt;attr_name&gt;\n' +
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; [*]&lt;arg_name&gt;)</span>:</span>\n' +
-  '        self.&lt;attr_name&gt; = [&amp;]&lt;arg_name&gt;\n';
+  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;\n';
 
 const CYTHON_3 =
   '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">struct</span> &lt;<span class="hljs-title">struct_name</span>&gt;:\n' +
@@ -942,7 +942,7 @@ function fixHighlights() {
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
-  $(`code:contains(cdef <ctype/type> [*]<var_name> [= <obj>])`).html(CYTHON_1);
+  $(`code:contains(cdef <ctype/type> [*]<var_name> [= <object>])`).html(CYTHON_1);
   $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
   $(`code:contains(cdef struct <struct_name>:)`).html(CYTHON_3);
   $(`ul:contains(Ctrl+F / ⌘F is usually sufficient.)`).html(INDEX);

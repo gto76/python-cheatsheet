@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>June 4, 2025</aside>
+    <aside>June 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2880,7 +2880,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 
-<div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;obj&gt;]
+<div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;object&gt;]
 <span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_items] &lt;array_name&gt; [= &lt;coll_of_nums/structs&gt;]
 <span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; = &lt;&lt;ctype&gt; *&gt; malloc(n_items * sizeof(&lt;ctype&gt;))
 <span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; [*]&lt;arg_name&gt;): ...
@@ -2889,7 +2889,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 <pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
     <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype/type&gt; [*]&lt;attr_name&gt;
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; [*]&lt;arg_name&gt;)</span>:</span>
-        self.&lt;attr_name&gt; = [&amp;]&lt;arg_name&gt;
+        self.&lt;attr_name&gt; = &lt;arg_name&gt;
 </code></pre>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-keyword">struct</span> &lt;<span class="hljs-title">struct_name</span>&gt;:
     &lt;ctype&gt; [*]&lt;field_name&gt;
@@ -2939,7 +2939,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>June 4, 2025</aside>
+    <aside>June 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
