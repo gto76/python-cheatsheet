@@ -326,20 +326,19 @@ const GROUPBY =
   '<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>';
 
 const CYTHON_1 =
-  '<span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; [*]&lt;var_name&gt; [= &lt;object&gt;]\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_items] &lt;array_name&gt; [= &lt;coll_of_nums/structs&gt;]\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; = &lt;&lt;ctype&gt; *&gt; malloc(n_items * sizeof(&lt;ctype&gt;))\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; [*]&lt;arg_name&gt;): ...\n';
+  '<span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;var_name&gt; [= &lt;obj/var&gt;]                <span class="hljs-comment"># Either Python or C type variable.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;pointer_name&gt; [= &amp;&lt;var&gt;]             <span class="hljs-comment"># Use &lt;pointer&gt;[0] to get the value.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[size] &lt;array_name&gt; [= &lt;coll/array&gt;]    <span class="hljs-comment"># Also `from cpython cimport array`.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; [= &lt;coll/array&gt;]         <span class="hljs-comment"># Also `&lt;&lt;ctype&gt; *&gt; malloc(n_bytes)`.</span>\n';
 
 const CYTHON_2 =
-  '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>\n' +
-  '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype/type&gt; [*]&lt;attr_name&gt;\n' +
-  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; [*]&lt;arg_name&gt;)</span>:</span>\n' +
-  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;\n';
+  '<span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;func_name&gt;(&lt;type&gt; [*]&lt;arg_name&gt;): ...  <span class="hljs-comment"># Omitted types default to `object`.</span>\n';
 
 const CYTHON_3 =
-  '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">struct</span> &lt;<span class="hljs-title">struct_name</span>&gt;:\n' +
-  '    &lt;ctype&gt; [*]&lt;field_name&gt;\n';
+  '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                            <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>\n' +
+  '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;               <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>\n' +
+  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>          <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>\n' +
+  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;               <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>\n';
 
 const INDEX =
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
@@ -942,9 +941,9 @@ function fixHighlights() {
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
-  $(`code:contains(cdef <ctype/type> [*]<var_name> [= <object>])`).html(CYTHON_1);
-  $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
-  $(`code:contains(cdef struct <struct_name>:)`).html(CYTHON_3);
+  $(`code:contains(cdef <type> <var_name> [= <obj/var>])`).html(CYTHON_1);
+  $(`code:contains(cdef <type> <func_name>(<type> [*]<arg_name>): ...)`).html(CYTHON_2);
+  $(`code:contains(cdef class <class_name>:)`).html(CYTHON_3);
   $(`ul:contains(Ctrl+F / ⌘F is usually sufficient.)`).html(INDEX);
 }
 

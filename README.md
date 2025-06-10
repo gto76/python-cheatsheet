@@ -379,7 +379,7 @@ import re
 ```python
 <str>   = <Match>.group()                         # Returns the whole match. Also group(0).
 <str>   = <Match>.group(1)                        # Returns part inside the first brackets.
-<tuple> = <Match>.groups()                        # Returns all bracketed parts.
+<tuple> = <Match>.groups()                        # Returns all bracketed parts as strings.
 <int>   = <Match>.start()                         # Returns start index of the match.
 <int>   = <Match>.end()                           # Returns exclusive end index of the match.
 ```
@@ -3513,29 +3513,27 @@ Appendix
 
 ```python
 # $ pip3 install cython
-import pyximport; pyximport.install()  # Module that runs imported Cython scripts.
-import <cython_script>                 # Script must be saved with '.pyx' extension.
+import pyximport; pyximport.install()               # Module that runs Cython scripts.
+import <cython_script>                              # Script must have '.pyx' extension.
 ```
 
 #### All `'cdef'` definitions are optional, but they contribute to the speed-up:
-
 ```python
-cdef <ctype/type> [*]<var_name> [= <object>]
-cdef <ctype>[n_items] <array_name> [= <coll_of_nums/structs>]
-cdef <ctype> *<array_name> = <<ctype> *> malloc(n_items * sizeof(<ctype>))
-cdef <ctype/type/void> <func_name>(<ctype/type> [*]<arg_name>): ...
+cdef <type> <var_name> [= <obj/var>]                # Either Python or C type variable.
+cdef <ctype> *<pointer_name> [= &<var>]             # Use <pointer>[0] to get the value.
+cdef <ctype>[size] <array_name> [= <coll/array>]    # Also `from cpython cimport array`.
+cdef <ctype> *<array_name> [= <coll/array>]         # Also `<<ctype> *> malloc(n_bytes)`.
 ```
 
 ```python
-cdef class <class_name>:
-    cdef public <ctype/type> [*]<attr_name>
-    def __init__(self, <ctype/type> [*]<arg_name>):
-        self.<attr_name> = <arg_name>
+cdef <type> <func_name>(<type> [*]<arg_name>): ...  # Omitted types default to `object`.
 ```
 
 ```python
-cdef struct <struct_name>:
-    <ctype> [*]<field_name>
+cdef class <class_name>:                            # Also `cdef struct <struct_name>:`.
+    cdef public <type> [*]<attr_name>               # Also `... <ctype> [*]<field_name>`.
+    def __init__(self, <type> <arg_name>):          # Also `cdef __dealloc__(self):`.
+        self.<attr_name> = <arg_name>               # Also `... free(<pointer/array>)`.
 ```
 
 ### Virtual Environments
