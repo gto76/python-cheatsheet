@@ -2612,10 +2612,10 @@ Name: a, dtype: int64
 plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;S&gt;.to_string())'</span></code> to print a Series that has more than 60 items.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;S&gt;.to_string())'</span></code> to print a Series that has more than sixty items.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.index'</span></code> to get collection of keys and <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.index = &lt;coll&gt;'</span></code> to update them.</strong></li>
 <li><strong>Only pass a list or Series to loc/iloc because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.loc[key_1, key_2]'</span></code> is how you retrieve a value from a multi-indexed Series.</strong></li>
-<li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if we assign np.nan to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
+<li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if np.nan is assigned to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
 </ul>
 <div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;.sum/max/mean/std/idxmax/count()     <span class="hljs-comment"># Or: &lt;S&gt;.agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
 &lt;S&gt;  = &lt;S&gt;.rank/diff/cumsum/ffill/interpol…()  <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform(lambda &lt;S&gt;: &lt;S&gt;)</span>

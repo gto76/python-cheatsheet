@@ -3184,10 +3184,10 @@ Name: a, dtype: int64
 <S>.plot.line/area/bar/pie/hist()              # Generates a plot. Accepts `title=<str>`.
 plt.show()                                     # Displays the plot. Also plt.savefig(<path>).
 ```
-* **Use `'print(<S>.to_string())'` to print a Series that has more than 60 items.**
+* **Use `'print(<S>.to_string())'` to print a Series that has more than sixty items.**
 * **Use `'<S>.index'` to get collection of keys and `'<S>.index = <coll>'` to update them.**
 * **Only pass a list or Series to loc/iloc because `'obj[x, y]'` is converted to `'obj[(x, y)]'` and `'<S>.loc[key_1, key_2]'` is how you retrieve a value from a multi-indexed Series.**
-* **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if we assign np.nan to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
+* **Pandas uses NumPy types like `'np.int64'`. Series is converted to `'float64'` if np.nan is assigned to any item. Use `'<S>.astype(<str/type>)'` to get converted Series.**
 
 #### Series — Aggregate, Transform, Map:
 ```python
