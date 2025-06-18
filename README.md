@@ -493,11 +493,11 @@ Format
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)           # Or: math.trunc(<float>)
-<float>    = float(<int/str/bool>)           # Or: <int/float>e±<int>
-<complex>  = complex(real=0, imag=0)         # Or: <int/float> ± <int/float>j
-<Fraction> = fractions.Fraction(0, 1)        # Or: Fraction(numerator=0, denominator=1)
-<Decimal>  = decimal.Decimal(<str/int>)      # Or: Decimal((sign, digits, exponent))
+<int>      = int(<float/str/bool>)             # Whole number of any size. Truncates floats.
+<float>    = float(<int/str/bool>)             # 64-bit decimal number. Also <float>e±<int>.
+<complex>  = complex(real=0, imag=0)           # Complex number. Also `<float> ± <float>j`.
+<Fraction> = fractions.Fraction(<int>, <int>)  # E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.
+<Decimal>  = decimal.Decimal(<str/int/tuple>)  # E.g. `Decimal((1, (2, 3), 4)) == -230_000`.
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
 * **Decimal numbers are stored exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
@@ -507,54 +507,55 @@ Numbers
 
 ### Built-in Functions
 ```python
-<num> = pow(<num>, <num>)                    # Or: <number> ** <number>
-<num> = abs(<num>)                           # <float> = abs(<complex>)
-<num> = round(<num> [, ±ndigits])            # Also math.floor/ceil(<number>).
-<num> = min(<collection>)                    # Also max(<num>, <num> [, ...]).
-<num> = sum(<collection>)                    # Also math.prod(<collection>).
+<num> = pow(<num>, <num>)                      # E.g. `pow(2, 3) == 2 ** 3 == 8`.
+<num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
+<num> = round(<num> [, ±ndigits])              # E.g. `round(123, -1) == 120`.
+<num> = min(<collection>)                      # Also max(<num>, <num> [, ...]).
+<num> = sum(<collection>)                      # Also math.prod(<collection>).
 ```
 
 ### Math
 ```python
-from math import pi, inf, nan, isnan         # `inf*0` and `nan+1` return nan.
-from math import sqrt, factorial             # `sqrt(-1)` raises ValueError.
-from math import sin, cos, tan               # Also: asin, degrees, radians.
-from math import log, log10, log2            # Log accepts base as second arg.
+from math import floor, ceil, trunc            # They convert floats into integers.
+from math import pi, inf, nan, isnan           # `inf * 0` and `nan + 1` return nan.
+from math import sqrt, factorial               # `sqrt(-1)` will raise ValueError.
+from math import sin, cos, tan                 # Also: asin, acos, degrees, radians.
+from math import log, log10, log2              # Log accepts base as second argument.
 ```
 
 ### Statistics
 ```python
-from statistics import mean, median, mode    # Also: variance, stdev, quantiles.
+from statistics import mean, median, mode      # Mode returns the most common item.
+from statistics import variance, stdev         # Also: pvariance, pstdev, quantiles.
 ```
 
 ### Random
 ```python
-from random import random, randint, uniform  # Also: gauss, choice, shuffle, seed.
+from random import random, randint, uniform    # Also: gauss, choice, shuffle, seed.
 ```
 
 ```python
-<float> = random()                           # Returns a float inside [0, 1).
-<num>   = randint/uniform(a, b)              # Returns an int/float inside [a, b].
-<float> = gauss(mean, stdev)                 # Also triangular(low, high, mode).
-<el>    = choice(<sequence>)                 # Keeps it intact. Also sample(pop, k).
-shuffle(<list>)                              # Shuffles the list in place.
+<float> = random()                             # Returns a float inside [0, 1).
+<num>   = randint/uniform(a, b)                # Returns an int/float inside [a, b].
+<float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
+<el>    = choice(<sequence>)                   # Keeps it intact. Also sample(p, n).
+shuffle(<list>)                                # Works on any mutable sequence.
 ```
 
 ### Hexadecimal Numbers
 ```python
-<int> = ±0x<hex>                             # Or: ±0b<bin>
-<int> = int('±<hex>', 16)                    # Or: int('±<bin>', 2)
-<int> = int('±0x<hex>', 0)                   # Or: int('±0b<bin>', 0)
-<str> = hex(<int>)                           # Returns '[-]0x<hex>'. Also bin().
+<int> = 0x<hex>                                # E.g. `0xFF == 255`. Also 0b<bin>.
+<int> = int('±<hex>', 16)                      # Also int('±0x<hex>/±0b<bin>', 0).
+<str> = hex(<int>)                             # Returns '[-]0x<hex>'. Also bin().
 ```
 
 ### Bitwise Operators
 ```python
-<int> = <int> & <int>                        # And (0b1100 & 0b1010 == 0b1000).
-<int> = <int> | <int>                        # Or  (0b1100 | 0b1010 == 0b1110).
-<int> = <int> ^ <int>                        # Xor (0b1100 ^ 0b1010 == 0b0110).
-<int> = <int> << n_bits                      # Left shift. Use >> for right.
-<int> = ~<int>                               # Not. Also -<int> - 1.
+<int> = <int> & <int>                          # E.g. `0b1100 & 0b1010 == 0b1000`.
+<int> = <int> | <int>                          # E.g. `0b1100 | 0b1010 == 0b1110`.
+<int> = <int> ^ <int>                          # E.g. `0b1100 ^ 0b1010 == 0b0110`.
+<int> = <int> << n_bits                        # Left shift. Use >> for right.
+<int> = ~<int>                                 # Not. Same as `-<int> - 1`.
 ```
 
 
@@ -747,10 +748,10 @@ Inline
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # Or: [1, 2, ..., 10]
-<iter> = (i for i in range(10) if i > 5)            # Or: iter([6, 7, 8, 9])
-<set>  = {i+5 for i in range(10)}                   # Or: {5, 6, ..., 14}
-<dict> = {i: i*2 for i in range(10)}                # Or: {0: 0, 1: 2, ..., 9: 18}
+<list> = [i+1 for i in range(10)]                   # Returns `[1, 2, ..., 10]`.
+<iter> = (i for i in range(10) if i > 5)            # Returns `iter([6, 7, 8, 9])`.
+<set>  = {i+5 for i in range(10)}                   # Returns `{5, 6, ..., 14}`.
+<dict> = {i: i*2 for i in range(10)}                # Returns `{0: 0, 1: 2, ..., 9: 18}`.
 ```
 
 ```python
@@ -764,9 +765,9 @@ from functools import reduce
 ```
 
 ```python
-<iter> = map(lambda x: x + 1, range(10))            # Or: iter([1, 2, ..., 10])
-<iter> = filter(lambda x: x > 5, range(10))         # Or: iter([6, 7, 8, 9])
-<obj>  = reduce(lambda out, x: out + x, range(10))  # Or: 45
+<iter> = map(lambda x: x + 1, range(10))            # Returns `iter([1, 2, ..., 10])`.
+<iter> = filter(lambda x: x > 5, range(10))         # Returns `iter([6, 7, 8, 9])`.
+<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns `45`.
 ```
 
 ### Any, All
@@ -860,8 +861,7 @@ from functools import partial
 >>> multiply_by_3(10)
 30
 ```
-* **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand.**
-* **A few examples being: `'defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and dataclass's `'field(default_factory=<func>)'`.**
+* **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (`'collections.defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and `'dataclasses.field(default_factory=<func>)'`).**
 
 ### Non-Local
 **If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.**

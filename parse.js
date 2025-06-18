@@ -43,10 +43,9 @@ const TOC =
   '</code></pre>\n';
 
 const BIN_HEX =
-  '&lt;int&gt; = ±<span class="hljs-number">0x</span>&lt;hex&gt;                             <span class="hljs-comment"># Or: ±0b&lt;bin&gt;</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                    <span class="hljs-comment"># Or: int(\'±&lt;bin&gt;\', 2)</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±0x&lt;hex&gt;\'</span>, <span class="hljs-number">0</span>)                   <span class="hljs-comment"># Or: int(\'±0b&lt;bin&gt;\', 0)</span>\n' +
-  '&lt;str&gt; = hex(&lt;int&gt;)                           <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
+  '&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int(\'±0x&lt;hex&gt;/±0b&lt;bin&gt;\', 0).</span>\n' +
+  '&lt;str&gt; = hex(&lt;int&gt;)                             <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
 
 const CACHE =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache\n' +
@@ -923,7 +922,7 @@ function fixClasses() {
 }
 
 function fixHighlights() {
-  $(`code:contains(<int> = ±0x<hex>)`).html(BIN_HEX);
+  $(`code:contains(<int> = 0x<hex>)`).html(BIN_HEX);
   $(`code:contains( + fib(n)`).html(CACHE);
   $(`code:contains(>>> def add)`).html(SPLAT);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
