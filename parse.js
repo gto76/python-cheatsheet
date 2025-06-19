@@ -33,7 +33,7 @@ const TOC =
   '<pre style="border-left: none;padding-left: 1.9px;"><code class="hljs bash" style="line-height: 1.327em;"><strong>ToC</strong> = {\n' +
   '    <strong><span class="hljs-string">\'1. Collections\'</span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],\n' +
   '    <strong><span class="hljs-string">\'2. Types\'</span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],\n' +
-  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],\n' +
+  '    <strong><span class="hljs-string">\'3. Syntax\'</span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],\n' +
   '    <strong><span class="hljs-string">\'4. System\'</span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],\n' +
   '    <strong><span class="hljs-string">\'5. Data\'</span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],\n' +
   '    <strong><span class="hljs-string">\'6. Advanced\'</span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threading</a>, <a href="#coroutines">Coroutines</a>],\n' +
@@ -43,10 +43,9 @@ const TOC =
   '</code></pre>\n';
 
 const BIN_HEX =
-  '&lt;int&gt; = ±<span class="hljs-number">0b</span>&lt;bin&gt;                                  <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;bin&gt;\'</span>, <span class="hljs-number">2</span>)                          <span class="hljs-comment"># Or: int(\'±&lt;hex&gt;\', 16)</span>\n' +
-  '&lt;int&gt; = int(<span class="hljs-string">\'±0b&lt;bin&gt;\'</span>, <span class="hljs-number">0</span>)                        <span class="hljs-comment"># Or: int(\'±0x&lt;hex&gt;\', 0)</span>\n' +
-  '&lt;str&gt; = bin(&lt;int&gt;)                                <span class="hljs-comment"># Returns \'[-]0b&lt;bin&gt;\'. Also hex().</span>\n';
+  '&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>\n' +
+  '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int(\'±0x&lt;hex&gt;/±0b&lt;bin&gt;\', 0).</span>\n' +
+  '&lt;str&gt; = hex(&lt;int&gt;)                             <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
 
 const CACHE =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache\n' +
@@ -54,6 +53,13 @@ const CACHE =
   '<span class="hljs-meta">@cache</span>\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>\n' +
   '    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)';
+
+const SPLAT =
+  '<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>\n' +
+  '<span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> sum(a)\n' +
+  '<span class="hljs-meta">... </span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)\n' +
+  '<span class="hljs-number">6</span>\n';
 
 const PARAMETRIZED_DECORATOR =
   '<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps\n' +
@@ -76,8 +82,7 @@ const REPR_USE_CASES =
   'print/str/repr([&lt;obj&gt;])\n' +
   'print/str/repr({&lt;obj&gt;: &lt;obj&gt;})\n' +
   '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;obj&gt;!r}</span>\'</span>\n' +
-  'Z = dataclasses.make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;\n';
+  'Z = make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n';
 
 const CONSTRUCTOR_OVERLOADING =
   '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
@@ -115,14 +120,14 @@ const MATCH_EXAMPLE =
 const COROUTINES =
   '<span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random\n' +
   '\n' +
-  'P = collections.namedtuple(<span class="hljs-string">\'P\'</span>, <span class="hljs-string">\'x y\'</span>)    <span class="hljs-comment"># Position</span>\n' +
-  'D = enum.Enum(<span class="hljs-string">\'D\'</span>, <span class="hljs-string">\'n e s w\'</span>)             <span class="hljs-comment"># Direction</span>\n' +
-  'W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                              <span class="hljs-comment"># Width, Height</span>\n' +
+  'P = collections.namedtuple(<span class="hljs-string">\'P\'</span>, <span class="hljs-string">\'x y\'</span>)     <span class="hljs-comment"># Position</span>\n' +
+  'D = enum.Enum(<span class="hljs-string">\'D\'</span>, <span class="hljs-string">\'n e s w\'</span>)              <span class="hljs-comment"># Direction</span>\n' +
+  'W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width, Height</span>\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
-  '    curses.curs_set(<span class="hljs-number">0</span>)                    <span class="hljs-comment"># Makes cursor invisible.</span>\n' +
-  '    screen.nodelay(<span class="hljs-keyword">True</span>)                  <span class="hljs-comment"># Makes getch() non-blocking.</span>\n' +
-  '    asyncio.run(main_coroutine(screen))   <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
+  '    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes cursor invisible.</span>\n' +
+  '    screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>\n' +
+  '    asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    moves = asyncio.Queue()\n' +
@@ -168,7 +173,7 @@ const COROUTINES =
 const CURSES =
   '<span class="hljs-comment"># $ pip3 install windows-curses</span>\n' +
   '<span class="hljs-keyword">import</span> curses, os\n' +
-  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER\n' +
+  '<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()\n' +
@@ -179,10 +184,11 @@ const CURSES =
   '            color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>\n' +
   '            screen.addnstr(y, <span class="hljs-number">0</span>, filename, width-<span class="hljs-number">1</span>, color)\n' +
   '        ch = screen.getch()\n' +
-  '        selected += (ch == KEY_DOWN) - (ch == KEY_UP)\n' +
-  '        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))\n' +
-  '        first += (selected &gt;= first + height) - (selected &lt; first)\n' +
-  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">\'\\n\'</span>), ord(<span class="hljs-string">\'\\r\'</span>)]:\n' +
+  '        selected -= (ch == KEY_UP) <span class="hljs-keyword">and</span> (selected &gt; <span class="hljs-number">0</span>)\n' +
+  '        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)\n' +
+  '        first -= (first &gt; selected)\n' +
+  '        first += (first &lt; selected-(height-<span class="hljs-number">1</span>))\n' +
+  '        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, ord(<span class="hljs-string">\'\\n\'</span>)]:\n' +
   '            new_dir = <span class="hljs-string">\'..\'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]\n' +
   '            <span class="hljs-keyword">if</span> os.path.isdir(new_dir):\n' +
   '                os.chdir(new_dir)\n' +
@@ -215,7 +221,7 @@ const AUDIO_1 =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>\n' +
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>\n' +
   '        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))\n' +
-  '        a_float += p.sampwidth == <span class="hljs-number">1</span>\n' +
+  '        a_float += (p.sampwidth == <span class="hljs-number">1</span>)\n' +
   '        a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)\n' +
   '        <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">\'little\'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))\n' +
   '    <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:\n' +
@@ -259,19 +265,19 @@ const MARIO =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(screen, images, mario, tiles)</span>:</span>\n' +
   '    clock = pg.time.Clock()\n' +
   '    pressed = set()\n' +
-  '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT) <span class="hljs-keyword">and</span> clock.tick(<span class="hljs-number">28</span>):\n' +
-  '        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}\n' +
-  '        pressed |= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}\n' +
-  '        pressed -= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}\n' +
+  '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):\n' +
+  '        clock.tick(<span class="hljs-number">28</span>)\n' +
+  '        pressed |= {e.key <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}\n' +
+  '        pressed -= {e.key <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}\n' +
   '        update_speed(mario, tiles, pressed)\n' +
   '        update_position(mario, tiles)\n' +
   '        draw(screen, images, mario, tiles)\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>\n' +
   '    x, y = mario.spd\n' +
-  '    x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))\n' +
+  '    x += <span class="hljs-number">2</span> * ((pg.K_RIGHT <span class="hljs-keyword">in</span> pressed) - (pg.K_LEFT <span class="hljs-keyword">in</span> pressed))\n' +
   '    x += (x &lt; <span class="hljs-number">0</span>) - (x &gt; <span class="hljs-number">0</span>)\n' +
-  '    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>\n' +
+  '    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (pg.K_UP <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>\n' +
   '    mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>\n' +
@@ -294,7 +300,7 @@ const MARIO =
   '    screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))\n' +
   '    mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left\n' +
   '    is_airborne = D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles)\n' +
-  '    image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> (next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>)\n' +
+  '    image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>\n' +
   '    screen.blit(images[image_index + (mario.facing_left * <span class="hljs-number">9</span>)], mario.rect)\n' +
   '    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:\n' +
   '        is_border = t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]\n' +
@@ -318,20 +324,20 @@ const GROUPBY =
   '<span class="hljs-number">3</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>\n' +
   '<span class="hljs-number">6</span>  <span class="hljs-number">11</span>  <span class="hljs-number">13</span>';
 
-
 const CYTHON_1 =
-  '<span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; &lt;var_name&gt; [= &lt;obj&gt;]\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;coll_of_nums&gt;]\n' +
-  '<span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; &lt;arg_name&gt;): ...\n';
+  '<span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;var_name&gt; [= &lt;obj/var&gt;]                <span class="hljs-comment"># Either Python or C type variable.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;pointer_name&gt; [= &amp;&lt;var&gt;]             <span class="hljs-comment"># Use &lt;pointer&gt;[0] to get the value.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[size] &lt;array_name&gt; [= &lt;coll/array&gt;]    <span class="hljs-comment"># Also `from cpython cimport array`.</span>\n' +
+  '<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; [= &lt;coll/array&gt;]         <span class="hljs-comment"># Also `&lt;&lt;ctype&gt; *&gt; malloc(n_bytes)`.</span>\n';
 
 const CYTHON_2 =
-  '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>\n' +
-  '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype/type&gt; &lt;attr_name&gt;\n' +
-  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; &lt;arg_name&gt;)</span>:</span>\n' +
-  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;\n';
+  '<span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;func_name&gt;(&lt;type&gt; [*]&lt;arg_name&gt;): ...  <span class="hljs-comment"># Omitted types default to `object`.</span>\n';
 
 const CYTHON_3 =
-  '<span class="hljs-keyword">cdef</span> <span class="hljs-keyword">enum</span> &lt;enum_name&gt;: &lt;member_name&gt;, &lt;member_name&gt;, ...\n';
+  '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                            <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>\n' +
+  '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;               <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>\n' +
+  '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>          <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>\n' +
+  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;               <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>\n';
 
 const INDEX =
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +
@@ -418,6 +424,18 @@ const DIAGRAM_5_A =
   "|              |  {<float>:.2}  |  {<float>:.2f} |  {<float>:.2e} |  {<float>:.2%} |\n" +
   "+--------------+----------------+----------------+----------------+----------------+\n";
 
+const DIAGRAM_55_A =
+  "+---------------------------+--------------+--------------+----------------+\n";
+
+const DIAGRAM_55_B =
+  '┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n' +
+  '┃                           │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) ┃\n' +
+  '┠───────────────────────────┼──────────────┼──────────────┼────────────────┨\n' +
+  '┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │      ✓       │      ✓       │       ✓        ┃\n' +
+  '┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │              │      ✓       │       ✓        ┃\n' +
+  '┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │              │              │       ✓        ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n';
+
 const DIAGRAM_6_A =
   '+------------+------------+------------+------------+--------------+\n' +
   '|            |  Iterable  | Collection |  Sequence  | abc.Sequence |\n' +
@@ -459,7 +477,7 @@ const DIAGRAM_7_B =
   "      │    └── ConnectionError    <span class='hljs-comment'># Errors such as BrokenPipeError/ConnectionAbortedError.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Raised by errors that don't fall into other categories.</span>\n" +
   "      │    ├── NotImplementedEr…  <span class='hljs-comment'># Can be raised by abstract methods or by unfinished code.</span>\n" +
-  "      │    └── RecursionError     <span class='hljs-comment'># Raised when the maximum recursion depth is exceeded.</span>\n" +
+  "      │    └── RecursionError     <span class='hljs-comment'># Raised if max recursion depth is exceeded (3k by default).</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised when an empty iterator is passed to next().</span>\n" +
   "      ├── TypeError               <span class='hljs-comment'># When an argument of the wrong type is passed to function.</span>\n" +
   "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n";
@@ -594,6 +612,72 @@ const DIAGRAM_13_B =
   "┃              │    y  2.0   │   y   2.0   │      y  2.0   ┃\n" +
   "┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
 
+const DIAGRAM_13_BB =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                │    'mean'   │   ['mean']  │ {'m': 'mean'} ┃\n" +
+  "┠────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ s.apply/agg(…) │     1.5     │  mean  1.5  │     m  1.5    ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
+  "┠────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ s.apply/agg(…) │             │      rank   │               ┃\n" +
+  "┃                │    x  1.0   │   x   1.0   │   r  x  1.0   ┃\n" +
+  "┃                │    y  2.0   │   y   2.0   │      y  2.0   ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_13_XXX =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃                │   'sum'   │ ['sum', 'max'] │   'rank'  │ ['rank', 'diff'] ┃\n" +
+  "┠────────────────┼───────────┼────────────────┼───────────┼──────────────────┨\n" +
+  "┃ s.apply/agg(…) │     3     │    sum    3    │  x  1.0   │     rank  diff   ┃\n" +
+  "┃                │           │    max    2    │  y  2.0   │  x   1.0   NaN   ┃\n" +
+  "┃                │           │    Name: a     │  Name: a  │  y   2.0   1.0   ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_13_XX =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n" +
+  "┃                │   'sum'   │   'rank'  │ ['sum', 'max'] ┃\n" +
+  "┠────────────────┼───────────┼───────────┼────────────────┨\n" +
+  "┃ s.apply/agg(…) │     3     │  x  1.0   │    sum    3    ┃\n" +
+  "┃                │           │  y  2.0   │    max    2    ┃\n" +
+  "┃                │           │  Name: a  │    Name: a     ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_13_X =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┓\n" +
+  "┃                │   'sum'   │   'rank'  │ ['sum', 'max'] │ ['rank', 'diff'] ┃\n" +
+  "┠────────────────┼───────────┼───────────┼────────────────┼──────────────────┨\n" +
+  "┃ s.apply/agg(…) │     3     │  x  1.0   │    sum    3    │     rank  diff   ┃\n" +
+  "┃                │           │  y  2.0   │    max    2    │  x   1.0   NaN   ┃\n" +
+  "┃                │           │  Name: a  │    Name: a     │  y   2.0   1.0   ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┛\n";
+
+const DIAGRAM_13_Y =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┓\n" +
+  "┃                │   'sum'   │   'rank'  │  ['sum']  │ ['rank']  ┃\n" +
+  "┠────────────────┼───────────┼───────────┼───────────┼───────────┨\n" +
+  "┃ s.apply/agg(…) │     3     │  x  1.0   │  sum 3    │     rank  ┃\n" +
+  "┃                │           │  y  2.0   │  Name: a  │  x   1.0  ┃\n" +
+  "┃                │           │  Name: a  │           │  y   2.0  ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┛\n";
+
+const DIAGRAM_13_BBB =
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                │    'sum'    │   ['sum']   │ {'s': 'sum'}  ┃\n" +
+  "┠────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ s.apply/agg(…) │      3      │    sum  3   │     s  3      ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n" +
+  "\n" +
+  "┏━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓\n" +
+  "┃                │    'rank'   │   ['rank']  │ {'r': 'rank'} ┃\n" +
+  "┠────────────────┼─────────────┼─────────────┼───────────────┨\n" +
+  "┃ s.apply/agg(…) │             │      rank   │               ┃\n" +
+  "┃                │    x  1.0   │   x   1.0   │   r  x  1.0   ┃\n" +
+  "┃                │    y  2.0   │   y   2.0   │      y  2.0   ┃\n" +
+  "┗━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛\n";
+
 const DIAGRAM_14_A =
   "|              |    'rank'   |   ['rank']  | {'r': 'rank'} |";
 
@@ -625,7 +709,6 @@ const DIAGRAM_15_B =
   "┃           join=…)     │ b  3  4  4  5 │ 3  4  4  5 │            │ by default. A Series is   ┃\n" +
   "┃                       │ c  .  .  6  7 │            │            │ treated as a column.      ┃\n" +
   "┗━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
-
 
 const DIAGRAM_16_A =
   '| df.apply(…)     |      x  4     |        x  y   |     x  4      |';
@@ -673,19 +756,29 @@ const MENU = '<a href="https://raw.githubusercontent.com/gto76/python-cheatsheet
 
 const DARK_THEME_SCRIPT =
   '<script>\n' +
-  '  // Changes the image and link to theme if URL ends with "index.html?theme=dark". \n' +
-  '  if (window.location.search.search(/[?&]theme=dark/) !== -1) {\n' +
+  '  // Changes the banner image and link-to-theme if "theme=dark" is in query string\n' +
+  '  // or if browser prefers dark mode and theme is not explicitly set.\n' +
   '\n' +
+  'const theme_not_set_in_query = window.location.search.search(/[?&]theme=light/) == -1\n' +
+  'const browser_prefers_dark = window.matchMedia(\'(prefers-color-scheme: dark)\').matches;\n' +
+  '\n' +
+  '  if ((window.location.search.search(/[?&]theme=dark/) !== -1) || \n' +
+  '      (theme_not_set_in_query && browser_prefers_dark)) {\n' +
+  '    activateDarkMode();\n' +
+  '  }\n' +
+  '\n' +
+  '  function activateDarkMode() {\n' +
   '    var link_to_theme = document.createElement("a")\n' +
-  '    link_to_theme.href = "index.html"\n' +
+  '    link_to_theme.href = "index.html?theme=light"\n' +
   '    link_to_theme.text = "Switch to light theme"\n' +
-  '    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)\n' +
+  '    document.getElementsByClassName("banner")[0].firstChild.children[3].replaceWith(link_to_theme)\n' +
   '\n' +
   '    var img_dark = document.createElement("img");\n' +
   '    img_dark.src = "web/image_orig_blue6.png";\n' +
   '    img_dark.alt = "Monthy Python";\n' +
   '    if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||\n' +
-  '        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {\n' +
+  '        (window.location.search.search(/[?&]theme=dark3/) !== -1) ||\n' +
+  '        (theme_not_set_in_query && browser_prefers_dark)) {\n' +
   '      img_dark.style = "width: 910px;";\n' +
   '    } else {\n' +
   '      img_dark.style = "width: 960px;";\n' +
@@ -778,16 +871,14 @@ function unindentBanner() {
 function updateDiagrams() {
   $(`code:contains(${DIAGRAM_1_A})`).html(DIAGRAM_1_B);
   $(`code:contains(${DIAGRAM_2_A})`).html(DIAGRAM_2_B);
-  $(`code:contains(${DIAGRAM_3_A})`).html(DIAGRAM_3_B);
   $(`code:contains(${DIAGRAM_4_A})`).html(DIAGRAM_4_B);
   $(`code:contains(${DIAGRAM_5_A})`).parent().remove();
+  $(`code:contains(${DIAGRAM_55_A})`).html(DIAGRAM_55_B);
   $(`code:contains(${DIAGRAM_6_A})`).html(DIAGRAM_6_B);
   $(`code:contains(${DIAGRAM_7_A})`).html(DIAGRAM_7_B);
   $(`code:contains(${DIAGRAM_8_A})`).html(DIAGRAM_8_B);
   $(`code:contains(${DIAGRAM_9_A})`).html(DIAGRAM_9_B);
   $(`code:contains(${DIAGRAM_95_A})`).html(DIAGRAM_95_B);
-  $(`code:contains(${DIAGRAM_10_A})`).html(DIAGRAM_10_B);
-  $(`code:contains(${DIAGRAM_11_A})`).html(DIAGRAM_11_B);
   $(`code:contains(${DIAGRAM_115_A})`).html(DIAGRAM_115_B);
   $(`code:contains(${DIAGRAM_12_A})`).html(DIAGRAM_12_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_13_A})`).html(DIAGRAM_13_B).removeClass("text").removeClass("language-text").addClass("python");
@@ -795,7 +886,6 @@ function updateDiagrams() {
   $(`code:contains(${DIAGRAM_15_A})`).html(DIAGRAM_15_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_16_A})`).html(DIAGRAM_16_B).removeClass("text").removeClass("language-text").addClass("python");
   $(`code:contains(${DIAGRAM_17_A})`).parent().remove();
-  $(`code:contains(${DIAGRAM_18_A})`).html(DIAGRAM_18_B).removeClass("text").removeClass("language-text").addClass("python");
 }
 
 function highlightCode() {
@@ -832,27 +922,27 @@ function fixClasses() {
 }
 
 function fixHighlights() {
-  $(`code:contains(<int> = ±0b<bin>)`).html(BIN_HEX);
+  $(`code:contains(<int> = 0x<hex>)`).html(BIN_HEX);
   $(`code:contains( + fib(n)`).html(CACHE);
+  $(`code:contains(>>> def add)`).html(SPLAT);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
-  $(`code:contains((self, a=None):)`).html(CONSTRUCTOR_OVERLOADING);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);
   $(`code:contains(match <object/expression>:)`).html(MATCH);
   $(`code:contains(>>> match Path)`).html(MATCH_EXAMPLE);
-  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
-  $(`code:contains(import curses, os)`).html(CURSES);
-  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(>>> log.basicConfig()`).html(LOGGING_EXAMPLE);
+  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
+  $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
+  $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(a_float = max()`).html(AUDIO_1);
   $(`code:contains(samples_f = (sin(i *)`).html(AUDIO_2);
   $(`code:contains(collections, dataclasses, enum, io, itertools)`).html(MARIO);
   $(`code:contains(>>> gb = df.groupby)`).html(GROUPBY);
-  $(`code:contains(cdef <ctype/type> <var_name> [= <obj>])`).html(CYTHON_1);
-  $(`code:contains(cdef class <class_name>:)`).html(CYTHON_2);
-  $(`code:contains(cdef enum <enum_name>: <member_name>, <member_name>, ...)`).html(CYTHON_3);
+  $(`code:contains(cdef <type> <var_name> [= <obj/var>])`).html(CYTHON_1);
+  $(`code:contains(cdef <type> <func_name>(<type> [*]<arg_name>): ...)`).html(CYTHON_2);
+  $(`code:contains(cdef class <class_name>:)`).html(CYTHON_3);
   $(`ul:contains(Ctrl+F / ⌘F is usually sufficient.)`).html(INDEX);
 }
 

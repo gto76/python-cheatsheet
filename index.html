@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="web/style.css">
 
   <script>
-    // Checks if URL ends with "index.html?dark=true"
-    if (window.location.search.search(/[?&]theme=dark3/) !== -1) {
+    // Uses dark theme 3 if it's specified in query string orbrowser prefers dark mode and 
+    // theme is not explicitly set.
+    if ((window.location.search.search(/[?&]theme=dark3/) !== -1) || ((window.location.search.search(/[?&]theme=/) == -1) && (window.matchMedia('(prefers-color-scheme: dark)').matches))) {
       document.write("<link rel=\"stylesheet\" href=\"web/default_dark3.min.css\">");
       document.write("<link rel=\"stylesheet\" href=\"web/style_dark3.css\">");
     }
@@ -55,25 +56,35 @@
 
 <body>
   <header>
-    <aside>December 31, 2024</aside>
+    <aside>June 18, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
    <div><h1 id="comprehensivepythoncheatsheet">Comprehensive Python Cheatsheet</h1><p class="banner"><sup><a href="https://raw.githubusercontent.com/gto76/python-cheatsheet/main/README.md">Download text file</a>, <a href="https://github.com/gto76/python-cheatsheet">Fork me on GitHub</a>, <a href="https://github.com/gto76/python-cheatsheet/wiki/Frequently-Asked-Questions">Check out FAQ</a> or <a href="index.html?theme=dark3">Switch to dark theme</a>.
 </sup></p><p class="banner" style="margin-bottom: 20px; padding-bottom: 7px;"><img src="web/image_888.jpeg" alt="Monty Python"></p><script>
-  // Changes the image and link to theme if URL ends with "index.html?theme=dark". 
-  if (window.location.search.search(/[?&]theme=dark/) !== -1) {
+  // Changes the banner image and link-to-theme if "theme=dark" is in query string
+  // or if browser prefers dark mode and theme is not explicitly set.
 
+const theme_not_set_in_query = window.location.search.search(/[?&]theme=light/) == -1
+const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if ((window.location.search.search(/[?&]theme=dark/) !== -1) || 
+      (theme_not_set_in_query && browser_prefers_dark)) {
+    activateDarkMode();
+  }
+
+  function activateDarkMode() {
     var link_to_theme = document.createElement("a")
-    link_to_theme.href = "index.html"
+    link_to_theme.href = "index.html?theme=light"
     link_to_theme.text = "Switch to light theme"
-    document.getElementsByClassName("banner")[0].firstChild.children[4].replaceWith(link_to_theme)
+    document.getElementsByClassName("banner")[0].firstChild.children[3].replaceWith(link_to_theme)
 
     var img_dark = document.createElement("img");
     img_dark.src = "web/image_orig_blue6.png";
     img_dark.alt = "Monthy Python";
     if ((window.location.search.search(/[?&]theme=dark2/) !== -1) ||
-        (window.location.search.search(/[?&]theme=dark3/) !== -1)) {
+        (window.location.search.search(/[?&]theme=dark3/) !== -1) ||
+        (theme_not_set_in_query && browser_prefers_dark)) {
       img_dark.style = "width: 910px;";
     } else {
       img_dark.style = "width: 960px;";
@@ -83,7 +94,7 @@
 </script><pre style="border-left: none;padding-left: 1.9px;"><code class="hljs bash" style="line-height: 1.327em;"><strong>ToC</strong> = {
     <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#arguments">Args</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Types</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Exception</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Stmt</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threading</a>, <a href="#coroutines">Coroutines</a>],
@@ -100,7 +111,7 @@
     main()                      <span class="hljs-comment"># Runs `def main(): ...` function.</span>
 </code></pre></div>
 
-<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates new list. Also list(&lt;collection&gt;).</span>
+<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates a list object. Also list(&lt;collection&gt;).</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;el&gt;   = &lt;list&gt;[index]          <span class="hljs-comment"># First index is 0. Last -1. Allows assignments.</span>
@@ -195,20 +206,17 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 
 <div><h3 id="namedtuple">Named Tuple</h3><p><strong>Tuple's subclass with named elements.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
 <span class="hljs-meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>); p
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>print(p)
 Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>]
-<span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>p.x
-<span class="hljs-number">1</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>getattr(p, <span class="hljs-string">'y'</span>)
-<span class="hljs-number">2</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>], p.x
+(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
 </code></pre></div>
 
 
-<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>Immutable and hashable sequence of integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                      <span class="hljs-comment"># range(to_exclusive)</span>
-&lt;range&gt; = range(start, stop)               <span class="hljs-comment"># range(from_inclusive, to_exclusive)</span>
-&lt;range&gt; = range(start, stop, ±step)        <span class="hljs-comment"># range(from_inclusive, to_exclusive, ±step_size)</span>
+<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>Immutable and hashable sequence of integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                      <span class="hljs-comment"># I.e. range(to_exclusive).</span>
+&lt;range&gt; = range(start, stop)               <span class="hljs-comment"># I.e. range(from_inclusive, to_exclusive).</span>
+&lt;range&gt; = range(start, stop, ±step)        <span class="hljs-comment"># I.e. range(from_inclusive, to_exclusive, ±step).</span>
 </code></pre></div>
 
 
@@ -219,11 +227,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># `iter(&lt;iter&gt;)` returns unmodified iterator.</span>
 &lt;iter&gt; = iter(&lt;function&gt;, to_exclusive)    <span class="hljs-comment"># A sequence of return values until 'to_exclusive'.</span>
 &lt;el&gt;   = next(&lt;iter&gt; [, default])          <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
 &lt;list&gt; = list(&lt;iter&gt;)                      <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
 </code></pre></div>
+
 
 <div><h3 id="itertools">Itertools</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
 </code></pre></div>
@@ -301,21 +310,21 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 
 <pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
-&lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' str at most 'maxsplit' times.</span>
+&lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' string at most 'maxsplit' times.</span>
 &lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.</span>
-&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements using string as a separator.</span>
+&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements by using string as a separator.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains the substring.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or -1.</span>
-&lt;int&gt;  = &lt;str&gt;.index(&lt;sub_str&gt;)              <span class="hljs-comment"># Same, but raises ValueError if there's no match.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.lower()                       <span class="hljs-comment"># Changes the case. Also upper/capitalize/title().</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.lower()                       <span class="hljs-comment"># Lowers the case. Also upper/capitalize/title().</span>
+&lt;str&gt;  = &lt;str&gt;.casefold()                    <span class="hljs-comment"># Same, but converts ẞ/ß to ss, Σ/ς to σ, etc.</span>
 &lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts int to Unicode character.</span>
-&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts Unicode character to int.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts passed integer to Unicode character.</span>
+&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts passed Unicode character to integer.</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'unicodedata.normalize("NFC", &lt;str&gt;)'</span></code> on strings like <code class="python hljs"><span class="hljs-string">'Motörhead'</span></code> before comparing them to other strings, because <code class="python hljs"><span class="hljs-string">'ö'</span></code> can be stored as one or two characters.</strong></li>
@@ -345,11 +354,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), …</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), etc.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                         <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                        <span class="hljs-comment"># Returns part inside the first brackets.</span>
-&lt;tuple&gt; = &lt;Match&gt;.groups()                        <span class="hljs-comment"># Returns all bracketed parts.</span>
+&lt;tuple&gt; = &lt;Match&gt;.groups()                        <span class="hljs-comment"># Returns all bracketed parts as strings.</span>
 &lt;int&gt;   = &lt;Match&gt;.start()                         <span class="hljs-comment"># Returns start index of the match.</span>
 &lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns exclusive end index of the match.</span>
 </code></pre></div>
@@ -440,80 +449,80 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
 <div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'. Unicode character with value 90.</span>
-{<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'. Number 90 in binary.</span>
-{<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'. Number 90 in uppercase hexadecimal.</span>
+{<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'. Binary representation of the int.</span>
+{<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'. Hexadecimal with upper-case letters.</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)                <span class="hljs-comment"># Or: math.trunc(&lt;float&gt;)</span>
-&lt;float&gt;    = float(&lt;int/str/bool&gt;)                <span class="hljs-comment"># Or: &lt;int/float&gt;e±&lt;int&gt;</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)              <span class="hljs-comment"># Or: &lt;int/float&gt; ± &lt;int/float&gt;j</span>
-&lt;Fraction&gt; = fractions.Fraction(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)             <span class="hljs-comment"># Or: Fraction(numerator=0, denominator=1)</span>
-&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int&gt;)           <span class="hljs-comment"># Or: Decimal((sign, digits, exponent))</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># Whole number of any size. Truncates floats.</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># 64-bit decimal number. Also &lt;float&gt;e±&lt;int&gt;.</span>
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also `&lt;float&gt; ± &lt;float&gt;j`.</span>
+&lt;Fraction&gt; = fractions.Fraction(&lt;int&gt;, &lt;int&gt;)  <span class="hljs-comment"># E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.</span>
+&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># E.g. `Decimal((1, (2, 3), 4)) == -230_000`.</span>
 </code></pre></div>
 
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
-<li><strong>Decimal numbers are stored exactly, unlike most floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 != 3.3'</span></code>.</strong></li>
+<li><strong>Decimal objects store numbers exactly, unlike most floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 != 3.3'</span></code>.</strong></li>
 <li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;)'</span></code>.</strong></li>
 <li><strong>Precision of decimal operations is set with: <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
+<li><strong>Bools can be used anywhere ints can, because bool is a subclass of int: <code class="python hljs"><span class="hljs-string">'True + 1 == 2'</span></code>.</strong></li>
 </ul>
-<div><h3 id="basicfunctions">Basic Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                         <span class="hljs-comment"># Or: &lt;number&gt; ** &lt;number&gt;</span>
-&lt;num&gt; = abs(&lt;num&gt;)                                <span class="hljs-comment"># &lt;float&gt; = abs(&lt;complex&gt;)</span>
-&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])                 <span class="hljs-comment"># `round(126, -1) == 130`</span>
+<div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(2, 3) == 2 ** 3 == 8`.</span>
+&lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
+&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(123, -1) == 120`.</span>
+&lt;num&gt; = min(&lt;collection&gt;)                      <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
+&lt;num&gt; = sum(&lt;collection&gt;)                      <span class="hljs-comment"># Also math.prod(&lt;collection&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> e, pi, inf, nan, isinf, isnan    <span class="hljs-comment"># `&lt;el&gt; == nan` is always False.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan, asin, acos, atan  <span class="hljs-comment"># Also: degrees, radians.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2                 <span class="hljs-comment"># Log can accept base as second arg.</span>
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># They convert floats into integers.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf * 0` and `nan + 1` return nan.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` will raise ValueError.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: asin, acos, degrees, radians.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Log accepts base as second argument.</span>
 </code></pre></div>
 
-<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, variance     <span class="hljs-comment"># Also: stdev, quantiles, groupby.</span>
+<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, mode      <span class="hljs-comment"># Mode returns the most common item.</span>
+<span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> variance, stdev         <span class="hljs-comment"># Also: pvariance, pstdev, quantiles.</span>
 </code></pre></div>
 
-<div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, choice        <span class="hljs-comment"># Also: shuffle, gauss, triangular, seed.</span>
-&lt;float&gt; = random()                                <span class="hljs-comment"># A float inside [0, 1).</span>
-&lt;int&gt;   = randint(from_inc, to_inc)               <span class="hljs-comment"># An int inside [from_inc, to_inc].</span>
-&lt;el&gt;    = choice(&lt;sequence&gt;)                      <span class="hljs-comment"># Keeps the sequence intact.</span>
+<div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, uniform    <span class="hljs-comment"># Also: gauss, choice, shuffle, seed.</span>
 </code></pre></div>
 
-<div><h3 id="binhex">Bin, Hex</h3><pre><code class="python language-python hljs">&lt;int&gt; = ±<span class="hljs-number">0b</span>&lt;bin&gt;                                  <span class="hljs-comment"># Or: ±0x&lt;hex&gt;</span>
-&lt;int&gt; = int(<span class="hljs-string">'±&lt;bin&gt;'</span>, <span class="hljs-number">2</span>)                          <span class="hljs-comment"># Or: int('±&lt;hex&gt;', 16)</span>
-&lt;int&gt; = int(<span class="hljs-string">'±0b&lt;bin&gt;'</span>, <span class="hljs-number">0</span>)                        <span class="hljs-comment"># Or: int('±0x&lt;hex&gt;', 0)</span>
-&lt;str&gt; = bin(&lt;int&gt;)                                <span class="hljs-comment"># Returns '[-]0b&lt;bin&gt;'. Also hex().</span>
+<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Returns a float inside [0, 1).</span>
+&lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Returns an int/float inside [a, b].</span>
+&lt;float&gt; = gauss(mean, stdev)                   <span class="hljs-comment"># Also triangular(low, high, mode).</span>
+&lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Keeps it intact. Also sample(p, n).</span>
+shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works on any mutable sequence.</span>
+</code></pre>
+<div><h3 id="hexadecimalnumbers">Hexadecimal Numbers</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>
+&lt;int&gt; = int(<span class="hljs-string">'±&lt;hex&gt;'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int('±0x&lt;hex&gt;/±0b&lt;bin&gt;', 0).</span>
+&lt;str&gt; = hex(&lt;int&gt;)                             <span class="hljs-comment"># Returns '[-]0x&lt;hex&gt;'. Also bin().</span>
 </code></pre></div>
 
-<div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                             <span class="hljs-comment"># And (0b1100 &amp; 0b1010 == 0b1000).</span>
-&lt;int&gt; = &lt;int&gt; | &lt;int&gt;                             <span class="hljs-comment"># Or  (0b1100 | 0b1010 == 0b1110).</span>
-&lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                             <span class="hljs-comment"># Xor (0b1100 ^ 0b1010 == 0b0110).</span>
-&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                           <span class="hljs-comment"># Left shift. Use &gt;&gt; for right.</span>
-&lt;int&gt; = ~&lt;int&gt;                                    <span class="hljs-comment"># Not. Also -&lt;int&gt; - 1.</span>
+<div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 &amp; 0b1010 == 0b1000`.</span>
+&lt;int&gt; = &lt;int&gt; | &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 | 0b1010 == 0b1110`.</span>
+&lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 ^ 0b1010 == 0b0110`.</span>
+&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># Left shift. Use &gt;&gt; for right.</span>
+&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># Not. Same as `-&lt;int&gt; - 1`.</span>
 </code></pre></div>
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.product([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], repeat=<span class="hljs-number">3</span>))
-[(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
- (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.product(<span class="hljs-string">'abc'</span>, repeat=<span class="hljs-number">2</span>))        <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),         <span class="hljs-comment"># a x  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),         <span class="hljs-comment"># b x  x  x</span>
+ (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>)]         <span class="hljs-comment"># c x  x  x</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.product(<span class="hljs-string">'abc'</span>, <span class="hljs-string">'abc'</span>))                    <span class="hljs-comment">#   a  b  c</span>
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                  <span class="hljs-comment"># a x  x  x</span>
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                  <span class="hljs-comment"># b x  x  x</span>
- (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>)]                  <span class="hljs-comment"># c x  x  x</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.permutations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))          <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                     <span class="hljs-comment"># a .  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                     <span class="hljs-comment"># b x  .  x</span>
+ (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>)]                     <span class="hljs-comment"># c x  x  .</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.combinations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))                   <span class="hljs-comment">#   a  b  c</span>
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                              <span class="hljs-comment"># a .  x  x</span>
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>)]                                          <span class="hljs-comment"># b .  .  x</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.combinations_with_replacement(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))  <span class="hljs-comment">#   a  b  c</span>
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                  <span class="hljs-comment"># a x  x  x</span>
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                              <span class="hljs-comment"># b .  x  x</span>
- (<span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>)]                                          <span class="hljs-comment"># c .  .  x</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.permutations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))                   <span class="hljs-comment">#   a  b  c</span>
-[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                              <span class="hljs-comment"># a .  x  x</span>
- (<span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>),                              <span class="hljs-comment"># b x  .  x</span>
- (<span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-string">'b'</span>)]                              <span class="hljs-comment"># c x  x  .</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>list(it.combinations(<span class="hljs-string">'abc'</span>, <span class="hljs-number">2</span>))          <span class="hljs-comment">#   a  b  c</span>
+[(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>), (<span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>),                     <span class="hljs-comment"># a .  x  x</span>
+ (<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>)                                  <span class="hljs-comment"># b .  .  x</span>
+]                                            <span class="hljs-comment"># c .  .  .</span>
 </code></pre>
 <div><h2 id="datetime"><a href="#datetime" name="datetime">#</a>Datetime</h2><p><strong>Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install python-dateutil</span>
 <span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, time, datetime, timedelta, timezone
@@ -527,10 +536,10 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microseconds=0`.</span>
 </code></pre>
 <ul>
-<li><strong>Aware times and datetimes have defined timezone, while naive don't. If object is naive, it is presumed to be in the system's timezone!</strong></li>
+<li><strong>Times and datetimes that have defined timezone are called aware and ones that don't, naive. If object is naive, it is presumed to be in the system's timezone!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
 <li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of all seconds.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an int, with Monday being 0.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an integer, with Monday being 0.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt; = D/DT.today()                      <span class="hljs-comment"># Current local date or naive DT. Also DT.now().</span>
 &lt;DTa&gt;   = DT.now(&lt;tzinfo&gt;)                  <span class="hljs-comment"># Aware DT from current time in passed timezone.</span>
@@ -552,7 +561,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>To get ZoneInfo() to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
-&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from str, according to format.</span>
+&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from custom string. See Format.</span>
 &lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DT from days since the Gregorian NYE 1.</span>
 &lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local naive DT from seconds since the Epoch.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
@@ -575,44 +584,43 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'%z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'±HH[:]MM'</span></code> and returns <code class="python hljs"><span class="hljs-string">'±HHMM'</span></code> or empty string if datetime is naive.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code and returns timezone's name, <code class="python hljs"><span class="hljs-string">'UTC[±HH:MM]'</span></code> if timezone is nameless, or an empty string if datetime is naive.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'%z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'±HH[:]MM'</span></code> and returns <code class="python hljs"><span class="hljs-string">'±HHMM'</span></code> or empty string if object is naive.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code and returns timezone's name, <code class="python hljs"><span class="hljs-string">'UTC[±HH:MM]'</span></code> if timezone is nameless, or an empty string if object is naive.</strong></li>
 </ul>
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also ==.</span>
-&lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tz object. Broken ==.</span>
+&lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
 &lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
-&lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also: &lt;TD&gt; = abs(&lt;TD&gt;) and &lt;TD&gt; = &lt;TD&gt; ±% &lt;TD&gt;.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># E.g. how many hours are in TD. Also //, divmod().</span>
+&lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
 </code></pre></div>
 
-<div><h2 id="arguments"><a href="#arguments" name="arguments">#</a>Arguments</h2><div><h3 id="insidefunctioncall">Inside Function Call</h3><pre><code class="python language-python hljs">func(&lt;positional_args&gt;)                           <span class="hljs-comment"># func(0, 0)</span>
-func(&lt;keyword_args&gt;)                              <span class="hljs-comment"># func(x=0, y=0)</span>
-func(&lt;positional_args&gt;, &lt;keyword_args&gt;)           <span class="hljs-comment"># func(0, y=0)</span>
-</code></pre></div></div>
-
-
-<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># def func(x, y): ...</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;default_args&gt;)</span>:</span> ...                     <span class="hljs-comment"># def func(x=0, y=0): ...</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span> ...  <span class="hljs-comment"># def func(x, y=0): ...</span>
+<div><h2 id="function"><a href="#function" name="function">#</a>Function</h2><p><strong>Independent block of code that returns a value when called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># E.g. `def func(x, y): ...`.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;default_args&gt;)</span>:</span> ...                     <span class="hljs-comment"># E.g. `def func(x=0, y=0): ...`.</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;, &lt;default_args&gt;)</span>:</span> ...  <span class="hljs-comment"># E.g. `def func(x, y=0): ...`.</span>
 </code></pre></div>
+
 
 <ul>
-<li><strong>Default values are evaluated when function is first encountered in the scope.</strong></li>
-<li><strong>Any mutation of a mutable default value will persist between invocations!</strong></li>
+<li><strong>Function returns None if it doesn't encounter <code class="python hljs"><span class="hljs-string">'return &lt;obj/exp&gt;'</span></code> statement.</strong></li>
+<li><strong>Run <code class="python hljs"><span class="hljs-string">'global &lt;var_name&gt;'</span></code> inside the function before assigning to global variable.</strong></li>
+<li><strong>Default values are evaluated when function is first encountered in the scope. Any mutation of a mutable default value will persist between invocations!</strong></li>
 </ul>
-<div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><div><h3 id="insidefunctioncall-1">Inside Function Call</h3><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args   = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
-kwargs = {<span class="hljs-string">'x'</span>: <span class="hljs-number">3</span>, <span class="hljs-string">'y'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'z'</span>: <span class="hljs-number">5</span>}
-func(*args, **kwargs)
-</code></pre></div></div>
-
-
-
-<div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, x=<span class="hljs-number">3</span>, y=<span class="hljs-number">4</span>, z=<span class="hljs-number">5</span>)
+<div><h3 id="functioncall">Function Call</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;function&gt;(&lt;positional_args&gt;)                    <span class="hljs-comment"># E.g. `func(0, 0)`.</span>
+&lt;obj&gt; = &lt;function&gt;(&lt;keyword_args&gt;)                       <span class="hljs-comment"># E.g. `func(x=0, y=0)`.</span>
+&lt;obj&gt; = &lt;function&gt;(&lt;positional_args&gt;, &lt;keyword_args&gt;)    <span class="hljs-comment"># E.g. `func(0, y=0)`.</span>
 </code></pre></div>
 
-<div><h3 id="insidefunctiondefinition-1">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
+<div><h2 id="splatoperator"><a href="#splatoperator" name="splatoperator">#</a>Splat Operator</h2><p><strong>Splat expands a collection into positional arguments, while splatty-splat expands a dictionary into keyword arguments.</strong></p><pre><code class="python language-python hljs">args, kwargs = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), {<span class="hljs-string">'z'</span>: <span class="hljs-number">3</span>}
+func(*args, **kwargs)
+</code></pre></div>
+
+
+<div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>)
+</code></pre></div>
+
+<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*a)</span>:</span>
     <span class="hljs-keyword">return</span> sum(a)
 </code></pre></div>
 
@@ -620,39 +628,32 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-number">6</span>
 </code></pre>
-<div><h4 id="legalargumentcombinations">Legal argument combinations:</h4><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args)</span>:</span> ...               <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args)</span>:</span> ...            <span class="hljs-comment"># f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, z)</span>:</span> ...            <span class="hljs-comment"># f(1, 2, z=3)</span>
+<div><h4 id="allowedcompositionsofargumentsandthewaystheycanbecalled">Allowed compositions of arguments and the ways they can be called:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
+┃                           │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) ┃
+┠───────────────────────────┼──────────────┼──────────────┼────────────────┨
+┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │      ✓       │      ✓       │       ✓        ┃
+┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │              │      ✓       │       ✓        ┃
+┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │              │              │       ✓        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(**kwargs)</span>:</span> ...            <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, **kwargs)</span>:</span> ...         <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, **kwargs)</span>:</span> ...     <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *args, **kwargs)</span>:</span> ...  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3) | f(1, 2, 3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*args, y, **kwargs)</span>:</span> ...  <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(*, x, y, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, *, y, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3)</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(x, y, *, z)</span>:</span> ...          <span class="hljs-comment"># f(x=1, y=2, z=3) | f(1, y=2, z=3) | f(1, 2, z=3)</span>
-</code></pre>
-<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;coll.&gt; [, ...]]    <span class="hljs-comment"># Or: list(&lt;collection&gt;) [+ ...]</span>
-&lt;tuple&gt; = (*&lt;coll.&gt;, [...])     <span class="hljs-comment"># Or: tuple(&lt;collection&gt;) [+ ...]</span>
-&lt;set&gt;   = {*&lt;coll.&gt; [, ...]}    <span class="hljs-comment"># Or: set(&lt;collection&gt;) [| ...]</span>
-&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}    <span class="hljs-comment"># Or: &lt;dict&gt; | ...</span>
+<div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]  <span class="hljs-comment"># Or: list(&lt;coll&gt;) [+ ...]</span>
+&lt;tuple&gt; = (*&lt;collection&gt;, [...])   <span class="hljs-comment"># Or: tuple(&lt;coll&gt;) [+ ...]</span>
+&lt;set&gt;   = {*&lt;collection&gt; [, ...]}  <span class="hljs-comment"># Or: set(&lt;coll&gt;) [| ...]</span>
+&lt;dict&gt;  = {**&lt;dict&gt; [, ...]}       <span class="hljs-comment"># Or: &lt;dict&gt; | ...</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">head, *body, tail = &lt;coll.&gt;     <span class="hljs-comment"># Head or tail can be omitted.</span>
+<pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;   <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre>
 <div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                     <span class="hljs-comment"># A single statement function.</span>
 &lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;    <span class="hljs-comment"># Also allows default arguments.</span>
 </code></pre></div></div>
 
 
-<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Or: [1, 2, ..., 10]</span>
-&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)            <span class="hljs-comment"># Or: iter([6, 7, 8, 9])</span>
-&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Or: {5, 6, ..., 14}</span>
-&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># Or: {0: 0, 1: 2, ..., 9: 18}</span>
+<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Returns `[1, 2, ..., 10]`.</span>
+&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)            <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
+&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Returns `{5, 6, ..., 14}`.</span>
+&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># Returns `{0: 0, 1: 2, ..., 9: 18}`.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]             <span class="hljs-comment"># Inner loop is on the right side.</span>
@@ -661,9 +662,9 @@ func(*args, **kwargs)
 <div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Or: iter([1, 2, ..., 10])</span>
-&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Or: iter([6, 7, 8, 9])</span>
-&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Or: 45</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Returns `iter([1, 2, ..., 10])`.</span>
+&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
+&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Returns `45`.</span>
 </code></pre>
 <div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any el?</span>
 &lt;bool&gt; = all(&lt;collection&gt;)                          <span class="hljs-comment"># True for all? Also True if empty.</span>
@@ -672,22 +673,30 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[a <span class="hljs-keyword">if</span> a <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Creates a tuple's subclass.</span>
-point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
+<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last operand.</span>
+&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last operand.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates an enum.</span>
+<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(a)) &gt; <span class="hljs-number">0</span>]        <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+</code></pre></div>
+
+<div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
+Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                  <span class="hljs-comment"># Creates tuple's subclass.</span>
+point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
+
+<span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates Enum's subclass.</span>
 direction = Direction.N                             <span class="hljs-comment"># Returns its member.</span>
-</code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
+
+<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
 Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
 player = Player(point, direction)                   <span class="hljs-comment"># Returns its instance.</span>
-</code></pre>
+</code></pre></div>
+
 <div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one file available to another file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;            <span class="hljs-comment"># Imports a built-in or '&lt;module&gt;.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;           <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/__init__.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;  <span class="hljs-comment"># Imports a built-in or '&lt;package&gt;/&lt;module&gt;.py'.</span>
@@ -726,8 +735,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <span class="hljs-number">30</span>
 </code></pre>
 <ul>
-<li><strong>Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand.</strong></li>
-<li><strong>A few examples being: <code class="python hljs"><span class="hljs-string">'defaultdict(&lt;func&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;func&gt;, to_exc)'</span></code> and dataclass's <code class="python hljs"><span class="hljs-string">'field(default_factory=&lt;func&gt;)'</span></code>.</strong></li>
+<li><strong>Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (<code class="python hljs"><span class="hljs-string">'collections.defaultdict(&lt;func&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;func&gt;, to_exc)'</span></code> and <code class="python hljs"><span class="hljs-string">'dataclasses.field(default_factory=&lt;func&gt;)'</span></code>).</strong></li>
 </ul>
 <div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
     i = <span class="hljs-number">0</span>
@@ -778,7 +786,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Potential problem with cache is that it can grow indefinitely. To clear stored values run <code class="python hljs"><span class="hljs-string">'fib.cache_clear()'</span></code>, or use <code class="python hljs"><span class="hljs-string">'@lru_cache(maxsize=&lt;int&gt;)'</span></code> decorator instead.</strong></li>
+<li><strong>Potential problem with cache is that it can grow indefinitely. To clear stored values run <code class="python hljs"><span class="hljs-string">'&lt;func&gt;.cache_clear()'</span></code>, or use <code class="python hljs"><span class="hljs-string">'@lru_cache(maxsize=&lt;int&gt;)'</span></code> decorator instead.</strong></li>
 <li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase it run <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
@@ -822,51 +830,54 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
 <ul>
-<li><strong>Return value of str() should be readable and of repr() unambiguous.</strong></li>
-<li><strong>If only repr() is defined, it will also be used for str().</strong></li>
-<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> do not receive 'self' nor 'cls' as their first argument.</strong></li>
+<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
+<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
+<li><strong>Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
 <div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;obj&gt;)
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>'</span>
 logging.warning(&lt;obj&gt;)
 csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
-<span class="hljs-keyword">raise</span> Exception(&lt;obj&gt;)
 </code></pre></div>
 
 <div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;])
 print/str/repr({&lt;obj&gt;: &lt;obj&gt;})
 <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
-Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
-<span class="hljs-meta">&gt;&gt;&gt; </span>&lt;obj&gt;
+Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
 </code></pre></div>
 
-<div><h3 id="inheritance">Inheritance</h3><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
+<div><h3 id="subclass">Subclass</h3><ul>
+<li><strong>Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all its methods and attributes.</strong></li>
+<li><strong>Subclass can then add its own methods and attributes or override inherited ones by reusing their names.</strong></li>
+</ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name)</span>:</span>
         self.name = name
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__repr__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f'Person(<span class="hljs-subst">{self.name!r}</span>)'</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span><span class="hljs-params">(self, other)</span>:</span>
+        <span class="hljs-keyword">return</span> self.name &lt; other.name
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span><span class="hljs-params">(Person)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name, staff_num)</span>:</span>
         super().__init__(name)
         self.staff_num = staff_num
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__repr__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f'Employee(<span class="hljs-subst">{self.name!r}</span>, <span class="hljs-subst">{self.staff_num}</span>)'</span>
 </code></pre></div>
 
-<div><h4 id="multipleinheritance">Multiple inheritance:</h4><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span> <span class="hljs-keyword">pass</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span>:</span> <span class="hljs-keyword">pass</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span><span class="hljs-params">(A, B)</span>:</span> <span class="hljs-keyword">pass</span>
-</code></pre></div>
 
-<p><strong>MRO determines the order in which parent classes are traversed when searching for a method or an attribute:</strong></p>
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>C.mro()
-[&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">C</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">A</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">B</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">object</span>'&gt;]
-</span></code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>people = {Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)}
+<span class="hljs-meta">&gt;&gt;&gt; </span>sorted(people)
+[Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)]
+</code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
 <li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
 
-&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]                              <span class="hljs-comment"># `|` since 3.10.</span>
-&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]  <span class="hljs-comment"># Since 3.9.</span>
-&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]                     <span class="hljs-comment"># Since 3.9.</span>
+&lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
+&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: dict/tuple[&lt;type&gt;, ...] [= &lt;obj&gt;]
 </code></pre></div>
 
 
@@ -886,9 +897,9 @@ Z = dataclasses.make_dataclass(<span class="hljs-string">'Z'</span>, [<span clas
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">Point = make_dataclass(<span class="hljs-string">'Point'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
-Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
-Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="hljs-string">'x'</span>, float, <span class="hljs-number">0</span>), (<span class="hljs-string">'y'</span>, float, <span class="hljs-number">0</span>)])
+<pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
+P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float, <span class="hljs-number">0</span>), (<span class="hljs-string">'y'</span>, float, <span class="hljs-number">0</span>)])
 </code></pre>
 <div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
@@ -906,7 +917,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 <span class="hljs-meta">&gt;&gt;&gt; </span>person.name
 <span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
-<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots', reduces their memory footprint.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
+<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.a = <span class="hljs-number">1</span>
@@ -918,8 +929,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 </code></pre></div>
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
-<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>.</strong></li>
-<li><strong>That means all objects compare not equal by default.</strong></li>
+<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default, because id() returns object's unique identification number (its memory address).</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.</strong></li>
 <li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
@@ -935,9 +945,8 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 
 
 <div><h3 id="hashable">Hashable</h3><ul>
-<li><strong>Hashable object needs both hash() and eq() methods and its hash value should never change.</strong></li>
-<li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do.</strong></li>
-<li><strong>That is why Python automatically makes classes unhashable if you only implement eq().</strong></li>
+<li><strong>Hashable object needs both hash() and eq() methods and its hash value must not change.</strong></li>
+<li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do. That is why Python automatically makes classes unhashable if you only implement eq().</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self._a = a
@@ -954,7 +963,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 
 
 <div><h3 id="sortable">Sortable</h3><ul>
-<li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods and the rest will be automatically generated.</strong></li>
+<li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by &lt;, &gt;, &lt;=, &gt;=) and the rest will be automatically generated.</strong></li>
 <li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
 <li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
 <li><strong>To sort collection of strings in proper alphabetical order pass <code class="python hljs"><span class="hljs-string">'key=locale.strxfrm'</span></code> to sorted() after running <code class="python hljs"><span class="hljs-string">'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'</span></code>.</strong></li>
@@ -978,7 +987,8 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 <div><h3 id="iterator-1">Iterator</h3><ul>
 <li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
 <li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
-<li><strong>Iter() should return 'self', i.e. unmodified object on which it was called.</strong></li>
+<li><strong>Iter() should return an iterator of remaining items, i.e. 'self'.</strong></li>
+<li><strong>Any object that has iter() method can be used in a for loop.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.i = <span class="hljs-number">0</span>
@@ -1001,7 +1011,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 <li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method, hence are callable.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable. Calling an uncallable object raises TypeError.</strong></li>
 <li><strong>When this cheatsheet uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1021,7 +1031,7 @@ Point = make_dataclass(<span class="hljs-string">'Point'</span>, [(<span class="
 <div><h3 id="contextmanager">Context Manager</h3><ul>
 <li><strong>With statements only work on objects that have enter() and exit() special methods.</strong></li>
 <li><strong>Enter() should lock the resources and optionally return an object.</strong></li>
-<li><strong>Exit() should release the resources.</strong></li>
+<li><strong>Exit() should release the resources (for example close a file).</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>The exit() method can suppress the exception by returning a true value.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
@@ -1247,7 +1257,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
-      │    └── RecursionError     <span class="hljs-comment"># Raised when the maximum recursion depth is exceeded.</span>
+      │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
       ├── StopIteration           <span class="hljs-comment"># Raised when an empty iterator is passed to next().</span>
       ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
       └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
@@ -1300,7 +1310,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Reads a line from the user input or pipe if present (trailing newline gets stripped).</strong></li>
 <li><strong>If argument is passed, it gets printed to the standard output before input is read.</strong></li>
-<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or input stream gets exhausted.</strong></li>
+<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or if stream is already exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 scripts_path = sys.argv[<span class="hljs-number">0</span>]
@@ -1404,7 +1414,7 @@ args  = p.parse_args()                                            <span class="h
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path as a string.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns a file object.</span>
+&lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns its file object.</span>
 </code></pre></div>
 
 
@@ -1416,24 +1426,24 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative CWD. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute CWD. Also Path().resolve().</span>
 &lt;Path&gt; = Path.home()                <span class="hljs-comment"># Returns user's home directory (absolute).</span>
-&lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns script's path if CWD wasn't changed.</span>
+&lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns module's path if CWD wasn't changed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without the final component.</span>
 &lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns final component without extension.</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns final component's extension.</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension, e.g. '.py'.</span>
+&lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without the last extension.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all components as strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as a string.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as string. Also &lt;Path&gt;.as_uri().</span>
 &lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read/write_text/bytes(&lt;args&gt;).</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
 </code></pre></div>
 
-<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory.</span>
+<pre><code class="python language-python hljs">os.chdir(&lt;path&gt;)                    <span class="hljs-comment"># Changes the current working directory (CWD).</span>
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)        <span class="hljs-comment"># Creates a directory. Permissions are in octal.</span>
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates all path's dirs. Also `exist_ok=False`.</span>
 </code></pre>
@@ -1450,15 +1460,15 @@ os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes t
 shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory.</span>
 </code></pre>
 <ul>
-<li><strong>Paths can be either strings, Paths, or DirEntry objects.</strong></li>
-<li><strong>Functions report OS related errors by raising either OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
+<li><strong>Paths can be either strings, Path objects, or DirEntry objects.</strong></li>
+<li><strong>Functions report OS related errors by raising OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul>
 <div><h3 id="shellcommands">Shell Commands</h3><pre><code class="python language-python hljs">&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;commands&gt;'</span>)     <span class="hljs-comment"># Executes commands in sh/cmd. Returns combined stdout.</span>
 &lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)       <span class="hljs-comment"># Reads 'size' chars or until EOF. Also readline/s().</span>
 &lt;int&gt;  = &lt;pipe&gt;.close()             <span class="hljs-comment"># Returns None if last command exited with returncode 0.</span>
 </code></pre></div>
 
-<div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends '1 + 1' to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>subprocess.run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
+<div><h4 id="sends11tothebasiccalculatorandcapturesitsoutput">Sends "1 + 1" to the basic calculator and captures its output:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>subprocess.run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1 + 1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
 </code></pre></div>
 
@@ -1481,9 +1491,9 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
         <span class="hljs-keyword">return</span> json.load(file)
 </code></pre></div>
 
-<div><h3 id="writecollectiontojsonfile">Write Collection to JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_json_file</span><span class="hljs-params">(filename, list_or_dict)</span>:</span>
+<div><h3 id="writecollectiontojsonfile">Write Collection to JSON File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_json_file</span><span class="hljs-params">(filename, collection)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, encoding=<span class="hljs-string">'utf-8'</span>) <span class="hljs-keyword">as</span> file:
-        json.dump(list_or_dict, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
+        json.dump(collection, file, ensure_ascii=<span class="hljs-keyword">False</span>, indent=<span class="hljs-number">2</span>)
 </code></pre></div>
 
 <div><h2 id="pickle"><a href="#pickle" name="pickle">#</a>Pickle</h2><p><strong>Binary file format for storing Python objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> pickle
@@ -1492,12 +1502,12 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="readobjectfromfile">Read Object from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_pickle_file</span><span class="hljs-params">(filename)</span>:</span>
+<div><h3 id="readobjectfrompicklefile">Read Object from Pickle File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_pickle_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> file:
         <span class="hljs-keyword">return</span> pickle.load(file)
 </code></pre></div>
 
-<div><h3 id="writeobjecttofile">Write Object to File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_pickle_file</span><span class="hljs-params">(filename, an_object)</span>:</span>
+<div><h3 id="writeobjecttopicklefile">Write Object to Pickle File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_pickle_file</span><span class="hljs-params">(filename, an_object)</span>:</span>
     <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         pickle.dump(an_object, file)
 </code></pre></div>
@@ -1512,10 +1522,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 <ul>
-<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or newlines embedded inside quoted fields will not be interpreted correctly!</strong></li>
+<li><strong>File must be opened with a <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, or every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'!</strong></li>
 <li><strong>To print the spreadsheet to the console use <a href="#table">Tabulate</a> library.</strong></li>
 <li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#dataframeplotencodedecode">Pandas</a> library.</strong></li>
-<li><strong>Reader accepts any iterator of strings, not just files.</strong></li>
+<li><strong>Reader accepts any collection of strings, not just files.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;writer&gt; = csv.writer(&lt;file&gt;)       <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;writer&gt;.writerow(&lt;collection&gt;)     <span class="hljs-comment"># Encodes objects using `str(&lt;el&gt;)`.</span>
@@ -1528,10 +1538,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </ul>
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values. String or a 'csv.Dialect' object.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string used to separate fields.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields that contain special characters.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string that separates fields (comma, tab, semicolon, etc.).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars (not needed if doublequote is True).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are/get doubled or escaped.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Is space character at the start of the field stripped by the reader.</strong></li>
@@ -1581,8 +1591,8 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces '?'s in query with values.</span>
-&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces ':&lt;key&gt;'s with values.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with an item.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a value.</span>
 &lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Runs execute() multiple times.</span>
 </code></pre></div>
 
@@ -1602,7 +1612,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
-&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces ':&lt;key&gt;'s with values.</span>
+&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces every :&lt;key&gt; with value.</span>
 <span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with commit or rollback.</span>
 </code></pre></div>
 
@@ -1617,19 +1627,19 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
-&lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns an int in range from 0 to 255.</span>
+&lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns an integer in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements by using bytes as a separator.</span>
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Ints must be in range from 0 to 255.</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Integers must be in range from 0 to 255.</span>
 &lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Encodes the string. Also &lt;str&gt;.encode().</span>
 &lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)         <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
 &lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns ints in range from 0 to 255.</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns integers in range from 0 to 255.</span>
 &lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Returns a string. Also &lt;bytes&gt;.decode().</span>
 &lt;str&gt;   = &lt;bytes&gt;.hex()                  <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 &lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
@@ -1650,7 +1660,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>System’s type sizes, byte order, and alignment rules are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack
 
-&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packs objects according to format string.</span>
+&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packs numbers according to format string.</span>
 &lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use iter_unpack() to get iterator of tuples.</span>
 </code></pre></div>
 
@@ -1698,7 +1708,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;file&gt;.write(&lt;array&gt;)                          <span class="hljs-comment"># Writes array's memory to the binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/bytearray/array&gt;)  <span class="hljs-comment"># Immutable if bytes is passed, else mutable.</span>
-&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int or float. Bytes if format is 'c'.</span>
+&lt;obj&gt;   = &lt;mview&gt;[index]                       <span class="hljs-comment"># Returns int/float. Bytes if format is 'c'.</span>
 &lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                     <span class="hljs-comment"># Returns memoryview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)           <span class="hljs-comment"># Only works between B/b/c and other types.</span>
 &lt;mview&gt;.release()                              <span class="hljs-comment"># Releases memory buffer of the base object.</span>
@@ -1710,7 +1720,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;mview&gt;)         <span class="hljs-comment"># Treats memoryview as a sequence of numbers.</span>
 &lt;file&gt;.write(&lt;mview&gt;)                          <span class="hljs-comment"># Writes `bytes(&lt;mview&gt;)` to the binary file.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats, or bytes.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                        <span class="hljs-comment"># Returns a list of ints, floats or bytes.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)                <span class="hljs-comment"># Treats memoryview as a bytes object.</span>
 &lt;str&gt;   = &lt;mview&gt;.hex()                        <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
 </code></pre>
@@ -1724,7 +1734,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Last element becomes first.</span>
 &lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if deque is empty.</span>
 </code></pre>
-<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are ordered and grouped by operator precedence, from least to most binding. Logical and arithmetic operators in lines 1, 3 and 5 are also ordered by precedence within their own group.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
+<div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in lines 1, 3 and 5 are also ordered by precedence within a group.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
 </code></pre></div>
 
 
@@ -1746,7 +1756,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <li><strong>Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().</strong></li>
 <li><strong>Comparisons can be chained: <code class="python hljs"><span class="hljs-string">'x &lt; y &lt; z'</span></code> gets converted to <code class="python hljs"><span class="hljs-string">'(x &lt; y) and (y &lt; z)</span></code>'.</strong></li>
 </ul>
-<div><h2 id="matchstatement"><a href="#matchstatement" name="matchstatement">#</a>Match Statement</h2><p><strong>Executes the first block with matching pattern. Added in Python 3.10.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">match</span> &lt;object/expression&gt;:
+<div><h2 id="matchstatement"><a href="#matchstatement" name="matchstatement">#</a>Match Statement</h2><p><strong>Executes the first block with matching pattern.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">match</span> &lt;object/expression&gt;:
     <span class="hljs-keyword">case</span> &lt;pattern&gt; [<span class="hljs-keyword">if</span> &lt;condition&gt;]:
         &lt;code&gt;
     ...
@@ -1765,7 +1775,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 </code></pre></div>
 
 <ul>
-<li><strong>Sequence pattern can also be written as a tuple.</strong></li>
+<li><strong>Sequence pattern can also be written as a tuple, i.e. <code class="python hljs"><span class="hljs-string">'(&lt;patt_1&gt;, [...])'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
 <li><strong>Sequence pattern must match all items of the collection, while mapping pattern does not.</strong></li>
 <li><strong>Patterns can be surrounded with brackets to override precedence (<code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>).</strong></li>
@@ -1850,12 +1860,12 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set the arguments.</span>
 &lt;Thread&gt;.start()                               <span class="hljs-comment"># Starts the thread. Also &lt;Thread&gt;.is_alive().</span>
-&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for the thread to finish.</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for the thread to finish executing.</span>
 </code></pre></div>
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program will not be able to exit while the thread is alive.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program won't be able to exit while the thread is alive.</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = Lock/RLock()                          <span class="hljs-comment"># RLock can only be released by acquirer.</span>
 &lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for the lock to be available.</span>
@@ -1881,7 +1891,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: `with ThreadPoolExecutor() as &lt;name&gt;: ...`</span>
 &lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># Multithreaded and non-lazy map(). Keeps order.</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Creates a thread and returns its Future obj.</span>
-&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Blocks until all threads finish executing.</span>
+&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Waits for all submitted threads to finish.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()                       <span class="hljs-comment"># Checks if the thread has finished executing.</span>
@@ -1902,25 +1912,25 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;coro&gt; = &lt;async_function&gt;(&lt;args&gt;)         <span class="hljs-comment"># Creates a coroutine by calling async def function.</span>
-&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                <span class="hljs-comment"># Starts the coroutine and returns its result.</span>
-&lt;task&gt; = aio.create_task(&lt;coroutine&gt;)     <span class="hljs-comment"># Schedules the coroutine for execution.</span>
-&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;task&gt;                     <span class="hljs-comment"># Returns coroutine's result. Also &lt;task&gt;.cancel().</span>
+<pre><code class="python language-python hljs">&lt;coro&gt; = &lt;async_function&gt;(&lt;args&gt;)          <span class="hljs-comment"># Creates a coroutine by calling async def function.</span>
+&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                 <span class="hljs-comment"># Starts the coroutine and returns its result.</span>
+&lt;task&gt; = aio.create_task(&lt;coroutine&gt;)      <span class="hljs-comment"># Schedules the coroutine for execution.</span>
+&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;task&gt;                      <span class="hljs-comment"># Returns coroutine's result. Also &lt;task&gt;.cancel().</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)     <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
-&lt;coro&gt; = aio.wait(&lt;tasks&gt;, …)             <span class="hljs-comment"># `aio.ALL/FIRST_COMPLETED`. Returns (done, pending).</span>
-&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)  <span class="hljs-comment"># Iterator of coros. All return next result on await.</span>
+<pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)      <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
+&lt;coro&gt; = aio.wait(&lt;tasks&gt;, return_when=…)  <span class="hljs-comment"># `'ALL/FIRST_COMPLETED'`. Returns (done, pending).</span>
+&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Iter of coros that return next result on await.</span>
 </code></pre>
 <div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
-P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)    <span class="hljs-comment"># Position</span>
-D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)             <span class="hljs-comment"># Direction</span>
-W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                              <span class="hljs-comment"># Width, Height</span>
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position</span>
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction</span>
+W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width, Height</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
-    curses.curs_set(<span class="hljs-number">0</span>)                    <span class="hljs-comment"># Makes cursor invisible.</span>
-    screen.nodelay(<span class="hljs-keyword">True</span>)                  <span class="hljs-comment"># Makes getch() non-blocking.</span>
-    asyncio.run(main_coroutine(screen))   <span class="hljs-comment"># Starts running asyncio code.</span>
+    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes cursor invisible.</span>
+    screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>
+    asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
     moves = asyncio.Queue()
@@ -1979,8 +1989,7 @@ Processing: 100%|████████████████████| 3
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Also plt.plot(y_data).</span>
 plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
 plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title or label.</span>
-plt.savefig(&lt;path&gt;)                                   <span class="hljs-comment"># Saves the plot.</span>
-plt.show()                                            <span class="hljs-comment"># Displays the plot.</span>
+plt.show()                                            <span class="hljs-comment"># Also plt.savefig(&lt;path&gt;).</span>
 plt.clf()                                             <span class="hljs-comment"># Clears the plot.</span>
 </code></pre></div>
 
@@ -1994,7 +2003,7 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 
 <div><h2 id="consoleapp"><a href="#consoleapp" name="consoleapp">#</a>Console App</h2><div><h4 id="runsabasicfileexplorerintheconsole">Runs a basic file explorer in the console:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install windows-curses</span>
 <span class="hljs-keyword">import</span> curses, os
-<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+<span class="hljs-keyword">from</span> curses <span class="hljs-keyword">import</span> A_REVERSE, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     ch, first, selected, paths = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, os.listdir()
@@ -2005,10 +2014,11 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
             color = A_REVERSE <span class="hljs-keyword">if</span> filename == paths[selected] <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
             screen.addnstr(y, <span class="hljs-number">0</span>, filename, width-<span class="hljs-number">1</span>, color)
         ch = screen.getch()
-        selected += (ch == KEY_DOWN) - (ch == KEY_UP)
-        selected = max(<span class="hljs-number">0</span>, min(len(paths)-<span class="hljs-number">1</span>, selected))
-        first += (selected &gt;= first + height) - (selected &lt; first)
-        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, KEY_ENTER, ord(<span class="hljs-string">'\n'</span>), ord(<span class="hljs-string">'\r'</span>)]:
+        selected -= (ch == KEY_UP) <span class="hljs-keyword">and</span> (selected &gt; <span class="hljs-number">0</span>)
+        selected += (ch == KEY_DOWN) <span class="hljs-keyword">and</span> (selected &lt; len(paths)-<span class="hljs-number">1</span>)
+        first -= (first &gt; selected)
+        first += (first &lt; selected-(height-<span class="hljs-number">1</span>))
+        <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">in</span> [KEY_LEFT, KEY_RIGHT, ord(<span class="hljs-string">'\n'</span>)]:
             new_dir = <span class="hljs-string">'..'</span> <span class="hljs-keyword">if</span> ch == KEY_LEFT <span class="hljs-keyword">else</span> paths[selected]
             <span class="hljs-keyword">if</span> os.path.isdir(new_dir):
                 os.chdir(new_dir)
@@ -2022,9 +2032,9 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 <div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="aweightconverterguiapplication">A weight converter GUI application:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
 <span class="hljs-keyword">import</span> PySimpleGUI <span class="hljs-keyword">as</span> sg
 
-text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'-QUANTITY-'</span>)
-dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'-UNIT-'</span>)
-label    = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'-OUTPUT-'</span>)
+text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
+dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
+label    = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'OUTPUT'</span>)
 button   = sg.Button(<span class="hljs-string">'Close'</span>)
 window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text_box, dropdown], [label], [button]])
 
@@ -2033,13 +2043,13 @@ window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text
     <span class="hljs-keyword">if</span> event <span class="hljs-keyword">in</span> [sg.WIN_CLOSED, <span class="hljs-string">'Close'</span>]:
         <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">try</span>:
-        quantity = float(values[<span class="hljs-string">'-QUANTITY-'</span>])
+        quantity = float(values[<span class="hljs-string">'QUANTITY'</span>])
     <span class="hljs-keyword">except</span> ValueError:
         <span class="hljs-keyword">continue</span>
-    unit = values[<span class="hljs-string">'-UNIT-'</span>]
+    unit = values[<span class="hljs-string">'UNIT'</span>]
     factors = {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}
     lbs = quantity * factors[unit] / <span class="hljs-number">0.45359237</span>
-    window[<span class="hljs-string">'-OUTPUT-'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
+    window[<span class="hljs-string">'OUTPUT'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
 window.close()
 </code></pre></div></div>
 
@@ -2094,12 +2104,12 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 <li><strong>Install a WSGI server like <a href="https://flask.palletsprojects.com/en/latest/deploying/waitress/">Waitress</a> and a HTTP server such as <a href="https://flask.palletsprojects.com/en/latest/deploying/nginx/">Nginx</a> for better security.</strong></li>
 <li><strong>Debug mode restarts the app whenever script changes and displays errors in the browser.</strong></li>
 </ul>
-<div><h3 id="staticrequest">Static Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/img/&lt;path:filename&gt;')</span>
+<div><h3 id="servingfiles">Serving Files</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/img/&lt;path:filename&gt;')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_file</span><span class="hljs-params">(filename)</span>:</span>
-    <span class="hljs-keyword">return</span> fl.send_from_directory(<span class="hljs-string">'dirname/'</span>, filename)
+    <span class="hljs-keyword">return</span> fl.send_from_directory(<span class="hljs-string">'DIRNAME'</span>, filename)
 </code></pre></div>
 
-<div><h3 id="dynamicrequest">Dynamic Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/&lt;sport&gt;')</span>
+<div><h3 id="servinghtml">Serving HTML</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/&lt;sport&gt;')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_html</span><span class="hljs-params">(sport)</span>:</span>
     <span class="hljs-keyword">return</span> fl.render_template_string(<span class="hljs-string">'&lt;h1&gt;{{title}}&lt;/h1&gt;'</span>, title=sport)
 </code></pre></div>
@@ -2107,10 +2117,10 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.render_template(filename, &lt;kwargs&gt;)'</span></code> renders a file located in 'templates' dir.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.abort(&lt;int&gt;)'</span></code> returns error code and <code class="python hljs"><span class="hljs-string">'return fl.redirect(&lt;url&gt;)'</span></code> redirects.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'fl.request.args[&lt;str&gt;]'</span></code> returns parameter from the query string (URL right of '?').</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'fl.request.args[&lt;str&gt;]'</span></code> returns parameter from query string (URL part right of '?').</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.session[&lt;str&gt;] = &lt;obj&gt;'</span></code> stores session data. It requires secret key to be set at the startup with <code class="python hljs"><span class="hljs-string">'app.secret_key = &lt;str&gt;'</span></code>.</strong></li>
 </ul>
-<div><h3 id="restrequest">REST Request</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>
+<div><h3 id="servingjson">Serving JSON</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_json</span><span class="hljs-params">(sport)</span>:</span>
     team = fl.request.form[<span class="hljs-string">'team'</span>]
     <span class="hljs-keyword">return</span> {<span class="hljs-string">'team'</span>: team, <span class="hljs-string">'odds'</span>: [<span class="hljs-number">2.09</span>, <span class="hljs-number">3.74</span>, <span class="hljs-number">3.68</span>]}
@@ -2211,8 +2221,7 @@ $ snakeviz test.prof                                            <span class="hlj
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
-<li><strong>Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code> to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>. This makes <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_i, col_i]'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_indices]'</span></code> indistinguishable to NumPy if tuple of indices is passed!</strong></li>
-<li><strong>Indexing with a slice and 1d object works the same as when using two slices (lines 4, 6, 7).</strong></li>
+<li><strong>Python converts <code class="python hljs"><span class="hljs-string">'obj[i, j]'</span></code> to <code class="python hljs"><span class="hljs-string">'obj[(i, j)]'</span></code>. This makes <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_i, col_i]'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;2d&gt;[row_indices]'</span></code> indistinguishable to NumPy if tuple of two indices is passed!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
@@ -2261,7 +2270,7 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 <pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Creates new image. Also `color=&lt;int/tuple&gt;`.</span>
 &lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
 &lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode (see Modes).</span>
-&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Selects format based on extension (PNG/JPG…).</span>
+&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Accepts `quality=&lt;int&gt;` if extension is jpg.</span>
 &lt;Image&gt;.show()                                  <span class="hljs-comment"># Displays image in default preview app.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's value (its color).</span>
@@ -2277,9 +2286,9 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an int between 0 and 255.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three ints.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. forth int) makes pixels more transparent.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an integer between 0 and 255.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three integers.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. fourth int) makes pixel more transparent.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
 </ul><div><h3 id="examples">Examples</h3><div><h4 id="createsapngimageofarainbowgradient">Creates a PNG image of a rainbow gradient:</h4><pre><code class="python language-python hljs">WIDTH, HEIGHT = <span class="hljs-number">100</span>, <span class="hljs-number">100</span>
 n_pixels = WIDTH * HEIGHT
@@ -2301,12 +2310,12 @@ img.show()
 
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
 &lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)                <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Truncates floats into ints.</span>
-&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># To get anti-aliasing use Image's resize().</span>
+&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Also `fill=&lt;int/tuple/str&gt;`.</span>
+&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
 &lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Draws in clockwise dir. Also pieslice().</span>
 &lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
-&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first.</span>
-&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use Image's rotate() and paste().</span>
+&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first one.</span>
+&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use &lt;Image&gt;.rotate(anticlock_deg).</span>
 &lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`.</span>
 </code></pre></div>
 
@@ -2314,7 +2323,7 @@ img.show()
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
-<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
@@ -2341,7 +2350,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
 &lt;tuple&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
-&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns next n frames (-1 returns all).</span>
+&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns all frames if -1 is passed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)    <span class="hljs-comment"># Creates/truncates a file for writing.</span>
 &lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
@@ -2379,7 +2388,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
         a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
-        a_float += p.sampwidth == <span class="hljs-number">1</span>
+        a_float += (p.sampwidth == <span class="hljs-number">1</span>)
         a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
     <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
@@ -2398,14 +2407,13 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
 <div><h4 id="addsnoisetothewavfile">Adds noise to the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> uniform
 samples_f, params = read_wav_file(<span class="hljs-string">'test.wav'</span>)
 samples_f = (f + uniform(<span class="hljs-number">-0.05</span>, <span class="hljs-number">0.05</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, params)
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, p=params)
 </code></pre></div>
 
 <div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
 <span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
 <span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>) <span class="hljs-keyword">as</span> file:
-    p = file.getparams()
-    frames = file.readframes(<span class="hljs-number">-1</span>)
+    frames, p = file.readframes(<span class="hljs-number">-1</span>), file.getparams()
     play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
 </code></pre></div>
 
@@ -2417,20 +2425,21 @@ engine.runAndWait()
 </code></pre></div>
 
 <div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> array, itertools <span class="hljs-keyword">as</span> it, math, simpleaudio
+<span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it, math, array, simpleaudio
 
-F  = <span class="hljs-number">44100</span>
-P1 = <span class="hljs-string">'71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,71♩,69♪,,71♩,66♪,,62♩,66♪,,59♩,,,'</span>
-P2 = <span class="hljs-string">'71♩,73♪,,74♩,73♪,,74♪,,71♪,,73♩,71♪,,73♪,,69♪,,71♩,69♪,,71♪,,67♪,,71♩,,,'</span>
-get_pause   = <span class="hljs-keyword">lambda</span> seconds: it.repeat(<span class="hljs-number">0</span>, int(seconds * F))
-sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / F)
-get_wave    = <span class="hljs-keyword">lambda</span> hz, seconds: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(seconds * F)))
-get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
-get_sec     = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">8</span>
-get_samples = <span class="hljs-keyword">lambda</span> note: get_wave(get_hz(note), get_sec(note)) <span class="hljs-keyword">if</span> note <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">8</span>)
-samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> (P1+P2).split(<span class="hljs-string">','</span>))
-samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(f * <span class="hljs-number">30000</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))
-simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, F).wait_done()
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">play_notes</span><span class="hljs-params">(notes, bpm=<span class="hljs-number">132</span>, f=<span class="hljs-number">44100</span>)</span>:</span>
+    get_pause   = <span class="hljs-keyword">lambda</span> n_beats: it.repeat(<span class="hljs-number">0</span>, int(n_beats * <span class="hljs-number">60</span>/bpm * f))
+    sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / f)
+    get_wave    = <span class="hljs-keyword">lambda</span> hz, n_beats: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(n_beats * <span class="hljs-number">60</span>/bpm * f)))
+    get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
+    get_nbeats  = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
+    get_samples = <span class="hljs-keyword">lambda</span> n: get_wave(get_hz(n), get_nbeats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
+    samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> notes.split(<span class="hljs-string">','</span>))
+    samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(fl * <span class="hljs-number">5000</span>) <span class="hljs-keyword">for</span> fl <span class="hljs-keyword">in</span> samples_f))
+    simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, f).wait_done()
+
+play_notes(<span class="hljs-string">'83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,'</span>
+           <span class="hljs-string">'83♩,85♪,,86♪,,85♪,,86♪,,83♪,,85♩,83♪,,85♪,,81♪,,83♪,,81♪,,83♪,,79♪,,83♪,,,,'</span>)
 </code></pre></div></div>
 
 
@@ -2441,10 +2450,10 @@ pg.init()
 screen = pg.display.set_mode((<span class="hljs-number">500</span>, <span class="hljs-number">500</span>))
 rect = pg.Rect(<span class="hljs-number">240</span>, <span class="hljs-number">240</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):
-    deltas = {pg.K_UP: (<span class="hljs-number">0</span>, <span class="hljs-number">-20</span>), pg.K_RIGHT: (<span class="hljs-number">20</span>, <span class="hljs-number">0</span>), pg.K_DOWN: (<span class="hljs-number">0</span>, <span class="hljs-number">20</span>), pg.K_LEFT: (<span class="hljs-number">-20</span>, <span class="hljs-number">0</span>)}
     <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN):
-        dx, dy = deltas.get(event.key, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-        rect = rect.move((dx, dy))
+        dx = (event.key == pg.K_RIGHT) - (event.key == pg.K_LEFT)
+        dy = (event.key == pg.K_DOWN) - (event.key == pg.K_UP)
+        rect = rect.move((dx * <span class="hljs-number">20</span>, dy * <span class="hljs-number">20</span>))
     screen.fill(pg.Color(<span class="hljs-string">'black'</span>))
     pg.draw.rect(screen, pg.Color(<span class="hljs-string">'white'</span>), rect)
     pg.display.flip()
@@ -2453,18 +2462,18 @@ pg.quit()
 
 
 <div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)           <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
-&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># Top, right, bottom, left. Allows assignments.</span>
-&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># Topright, bottomright, bottomleft. Same.</span>
-&lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move in-place.</span>
+&lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery/…           <span class="hljs-comment"># `top/right/bottom/left`. Allows assignments.</span>
+&lt;tup.&gt; = &lt;Rect&gt;.topleft/center/…                <span class="hljs-comment"># `topright/bottomright/bottomleft/size`. Same.</span>
+&lt;Rect&gt; = &lt;Rect&gt;.move((delta_x, delta_y))        <span class="hljs-comment"># Use move_ip() to move the rectangle in-place.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks if rectangle contains the point.</span>
-&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks if the two rectangles overlap.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Rect&gt;.collidepoint((x, y))            <span class="hljs-comment"># Checks whether rectangle contains the point.</span>
+&lt;bool&gt; = &lt;Rect&gt;.colliderect(&lt;Rect&gt;)             <span class="hljs-comment"># Checks whether the two rectangles overlap.</span>
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;list_of_Rect&gt;)     <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;list_of_Rect&gt;)  <span class="hljs-comment"># Returns indices of all colliding rectangles.</span>
 </code></pre>
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens new window and returns its surface.</span>
+<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.display.set_mode((width, height))   <span class="hljs-comment"># Opens a new window and returns its surface.</span>
 &lt;Surf&gt; = pg.Surface((width, height))            <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
 &lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)             <span class="hljs-comment"># Loads the image. Format depends on source.</span>
 &lt;Surf&gt; = pg.surfarray.make_surface(&lt;np_array&gt;)  <span class="hljs-comment"># Also `&lt;np_arr&gt; = surfarray.pixels3d(&lt;Surf&gt;)`.</span>
@@ -2472,25 +2481,25 @@ pg.quit()
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Tuple, Color('#rrggbb[aa]') or Color(&lt;name&gt;).</span>
+<pre><code class="python language-python hljs">&lt;Surf&gt;.fill(color)                              <span class="hljs-comment"># Pass tuple of ints or pg.Color('&lt;name/hex&gt;').</span>
 &lt;Surf&gt;.set_at((x, y), color)                    <span class="hljs-comment"># Updates pixel. Also &lt;Surf&gt;.get_at((x, y)).</span>
 &lt;Surf&gt;.blit(&lt;Surf&gt;, (x, y))                     <span class="hljs-comment"># Draws passed surface at specified location.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, ...
-&lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Returns scaled surface.</span>
-&lt;Surf&gt; = rotate(&lt;Surf&gt;, anticlock_degrees)      <span class="hljs-comment"># Returns rotated and scaled surface.</span>
-&lt;Surf&gt; = flip(&lt;Surf&gt;, x_bool, y_bool)           <span class="hljs-comment"># Returns flipped surface.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.transform <span class="hljs-keyword">import</span> scale, rotate      <span class="hljs-comment"># Also: flip, smoothscale, scale_by.</span>
+&lt;Surf&gt; = scale(&lt;Surf&gt;, (width, height))         <span class="hljs-comment"># Scales the surface. `smoothscale()` blurs it.</span>
+&lt;Surf&gt; = rotate(&lt;Surf&gt;, angle)                  <span class="hljs-comment"># Rotates the surface for counterclock degrees.</span>
+&lt;Surf&gt; = flip(&lt;Surf&gt;, flip_x=<span class="hljs-keyword">False</span>)             <span class="hljs-comment"># Mirrors the surface. Also `flip_y=False`.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, ...
-line(&lt;Surf&gt;, color, (x1, y1), (x2, y2), width)  <span class="hljs-comment"># Draws a line to the surface.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pygame.draw <span class="hljs-keyword">import</span> line, arc, rect         <span class="hljs-comment"># Also: ellipse, polygon, circle, aaline.</span>
+line(&lt;Surf&gt;, color, (x1, y1), (x2, y2))         <span class="hljs-comment"># Draws a line to the surface. Also `width=1`.</span>
 arc(&lt;Surf&gt;, color, &lt;Rect&gt;, from_rad, to_rad)    <span class="hljs-comment"># Also ellipse(&lt;Surf&gt;, color, &lt;Rect&gt;, width=0).</span>
 rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>)            <span class="hljs-comment"># Also polygon(&lt;Surf&gt;, color, points, width=0).</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Font&gt; = pg.font.Font(&lt;path/file&gt;, size)        <span class="hljs-comment"># Loads TTF file. Pass None for default font.</span>
-&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Background color can be specified at the end.</span>
+&lt;Surf&gt; = &lt;Font&gt;.render(text, antialias, color)  <span class="hljs-comment"># Accepts background color as fourth argument.</span>
 </code></pre>
 <div><h3 id="sound">Sound</h3><pre><code class="python language-python hljs">&lt;Sound&gt; = pg.mixer.Sound(&lt;path/file/bytes&gt;)     <span class="hljs-comment"># WAV file or bytes/array of signed shorts.</span>
-&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;), fadeout(msec).</span>
+&lt;Sound&gt;.play/stop()                             <span class="hljs-comment"># Also set_volume(&lt;float&gt;) and fadeout(msec).</span>
 </code></pre></div>
 
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools <span class="hljs-keyword">as</span> it, pygame <span class="hljs-keyword">as</span> pg, urllib.request
@@ -2522,19 +2531,19 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(screen, images, mario, tiles)</span>:</span>
     clock = pg.time.Clock()
     pressed = set()
-    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT) <span class="hljs-keyword">and</span> clock.tick(<span class="hljs-number">28</span>):
-        keys = {pg.K_UP: D.n, pg.K_RIGHT: D.e, pg.K_DOWN: D.s, pg.K_LEFT: D.w}
-        pressed |= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}
-        pressed -= {keys.get(e.key) <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> pg.event.get(pg.QUIT):
+        clock.tick(<span class="hljs-number">28</span>)
+        pressed |= {e.key <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYDOWN)}
+        pressed -= {e.key <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> pg.event.get(pg.KEYUP)}
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
-    x += <span class="hljs-number">2</span> * ((D.e <span class="hljs-keyword">in</span> pressed) - (D.w <span class="hljs-keyword">in</span> pressed))
+    x += <span class="hljs-number">2</span> * ((pg.K_RIGHT <span class="hljs-keyword">in</span> pressed) - (pg.K_LEFT <span class="hljs-keyword">in</span> pressed))
     x += (x &lt; <span class="hljs-number">0</span>) - (x &gt; <span class="hljs-number">0</span>)
-    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (D.n <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
+    y += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles) <span class="hljs-keyword">else</span> (pg.K_UP <span class="hljs-keyword">in</span> pressed) * <span class="hljs-number">-10</span>
     mario.spd = P(x=max(-MAX_S.x, min(MAX_S.x, x)), y=max(-MAX_S.y, min(MAX_S.y, y)))
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_position</span><span class="hljs-params">(mario, tiles)</span>:</span>
@@ -2557,7 +2566,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     screen.fill((<span class="hljs-number">85</span>, <span class="hljs-number">168</span>, <span class="hljs-number">255</span>))
     mario.facing_left = mario.spd.x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> mario.facing_left
     is_airborne = D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles)
-    image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> (next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>)
+    image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
     screen.blit(images[image_index + (mario.facing_left * <span class="hljs-number">9</span>)], mario.rect)
     <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
         is_border = t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]
@@ -2589,23 +2598,26 @@ Name: a, dtype: int64
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;[key/i]                              <span class="hljs-comment"># Or: &lt;S&gt;.&lt;key&gt;</span>
 &lt;S&gt;  = &lt;S&gt;[coll_of_keys/coll_of_i]             <span class="hljs-comment"># Or: &lt;S&gt;[key/i : key/i]</span>
-&lt;S&gt;  = &lt;S&gt;[bools]                              <span class="hljs-comment"># Or: &lt;S&gt;.loc/iloc[bools]</span>
+&lt;S&gt;  = &lt;S&gt;[&lt;S_of_bools&gt;]                       <span class="hljs-comment"># Or: &lt;S&gt;.loc/iloc[&lt;S_of_bools&gt;]</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt; &gt; &lt;el/S&gt;                            <span class="hljs-comment"># Returns S of bools. Pairs items by keys.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt; &gt; &lt;el/S&gt;                            <span class="hljs-comment"># Returns S of bools. For logic use &amp;, |, ~.</span>
 &lt;S&gt;  = &lt;S&gt; + &lt;el/S&gt;                            <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt; = pd.concat(&lt;coll_of_S&gt;)                   <span class="hljs-comment"># Concats multiple series into one long Series.</span>
-&lt;S&gt; = &lt;S&gt;.combine_first(&lt;S&gt;)                   <span class="hljs-comment"># Adds items that are not yet present.</span>
-&lt;S&gt;.update(&lt;S&gt;)                                <span class="hljs-comment"># Updates items that are already present.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;  = &lt;S&gt;.head/describe/sort_values()         <span class="hljs-comment"># Also &lt;S&gt;.unique/value_counts/round/dropna().</span>
+&lt;S&gt;  = &lt;S&gt;.str.strip/lower/contains/replace()  <span class="hljs-comment"># Also split().str[i] or split(expand=True).</span>
+&lt;S&gt;  = &lt;S&gt;.dt.year/month/day/hour              <span class="hljs-comment"># Use pd.to_datetime(&lt;S&gt;) to get S of datetimes.</span>
+&lt;S&gt;  = &lt;S&gt;.dt.to_period(<span class="hljs-string">'y/m/d/h'</span>)             <span class="hljs-comment"># Quantizes datetimes into Period objects.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. `plt.show()` displays it.</span>
+<pre><code class="python language-python hljs">&lt;S&gt;.plot.line/area/bar/pie/hist()              <span class="hljs-comment"># Generates a plot. Accepts `title=&lt;str&gt;`.</span>
+plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <ul>
-<li><strong>Indexing objects can't be tuples because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code>.</strong></li>
-<li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if we assign np.nan to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
-<li><strong>Series will silently overflow if we run <code class="python hljs"><span class="hljs-string">'pd.Series([100], dtype="int8") + 100'</span></code>!</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;S&gt;.to_string())'</span></code> to print a Series that has more than sixty items.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.index'</span></code> to get collection of keys and <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.index = &lt;coll&gt;'</span></code> to update them.</strong></li>
+<li><strong>Only pass a list or Series to loc/iloc because <code class="python hljs"><span class="hljs-string">'obj[x, y]'</span></code> is converted to <code class="python hljs"><span class="hljs-string">'obj[(x, y)]'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.loc[key_1, key_2]'</span></code> is how you retrieve a value from a multi-indexed Series.</strong></li>
+<li><strong>Pandas uses NumPy types like <code class="python hljs"><span class="hljs-string">'np.int64'</span></code>. Series is converted to <code class="python hljs"><span class="hljs-string">'float64'</span></code> if np.nan is assigned to any item. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.astype(&lt;str/type&gt;)'</span></code> to get converted Series.</strong></li>
 </ul>
-<div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;.sum/max/mean/idxmax/all()           <span class="hljs-comment"># Or: &lt;S&gt;.agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
+<div><h4 id="seriesaggregatetransformmap">Series — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;el&gt; = &lt;S&gt;.sum/max/mean/std/idxmax/count()     <span class="hljs-comment"># Or: &lt;S&gt;.agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
 &lt;S&gt;  = &lt;S&gt;.rank/diff/cumsum/ffill/interpol…()  <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform(lambda &lt;S&gt;: &lt;S&gt;)</span>
 &lt;S&gt;  = &lt;S&gt;.isna/fillna/isin([&lt;el/coll&gt;])       <span class="hljs-comment"># Or: &lt;S&gt;.agg/transform/map(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
@@ -2626,11 +2638,6 @@ Name: a, dtype: int64
 ┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┛
 </code></pre>
 
-<ul>
-<li><strong>Methods ffill(), interpolate(), fillna() and dropna() accept <code class="python hljs"><span class="hljs-string">'inplace=True'</span></code>.</strong></li>
-<li><strong>Agg() and transform() pass a Series to a function if it raises Type/Val/AttrError on a scalar.</strong></li>
-<li><strong>Last result has a multi-index. Use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;[key_1, key_2]'</span></code> to get its values.</strong></li>
-</ul>
 <div><h3 id="dataframe">DataFrame</h3><p><strong>Table with labeled rows and columns.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], index=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>], columns=[<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]); df
    x  y
 a  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>
@@ -2650,7 +2657,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;   = &lt;DF&gt;[&lt;S_of_bools&gt;]                    <span class="hljs-comment"># Filters rows. For example `df[df.x &gt; 1]`.</span>
 &lt;DF&gt;   = &lt;DF&gt;[&lt;DF_of_bools&gt;]                   <span class="hljs-comment"># Assigns NaN to items that are False in bools.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt; &gt; &lt;el/S/DF&gt;                      <span class="hljs-comment"># Returns DF of bools. S is treated as a row.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt; &gt; &lt;el/S/DF&gt;                      <span class="hljs-comment"># Returns DF of bools. Treats series as a row.</span>
 &lt;DF&gt;   = &lt;DF&gt; + &lt;el/S/DF&gt;                      <span class="hljs-comment"># Items with non-matching keys get value NaN.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.set_index(col_key)               <span class="hljs-comment"># Replaces row keys with column's values.</span>
@@ -2662,7 +2669,7 @@ b  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>
 &lt;DF&gt;   = &lt;DF&gt;.describe()                       <span class="hljs-comment"># Describes columns. Also info(), corr(), shape.</span>
 &lt;DF&gt;   = &lt;DF&gt;.query(<span class="hljs-string">'&lt;query&gt;'</span>)                 <span class="hljs-comment"># Filters rows. For example `df.query('x &gt; 1')`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(by=col_key).</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;.plot.line/area/bar/scatter(x=col_key, …)  <span class="hljs-comment"># `y=col_key/s`. Also hist/box(column/by=col_k).</span>
 plt.show()                                     <span class="hljs-comment"># Displays the plot. Also plt.savefig(&lt;path&gt;).</span>
 </code></pre>
 <div><h4 id="dataframemergejoinconcat">DataFrame — Merge, Join, Concat:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>df_2 = pd.DataFrame([[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>]], index=[<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>], columns=[<span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>]); df_2
@@ -2696,7 +2703,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 ┃                       │ c  .  .  <span class="hljs-number">6</span>  <span class="hljs-number">7</span> │            │            │ treated as a column.      ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;S&gt;  = &lt;DF&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
+<div><h4 id="dataframeaggregatetransformmap">DataFrame — Aggregate, Transform, Map:</h4><pre><code class="python language-python hljs">&lt;S&gt;  = &lt;DF&gt;.sum/max/mean/std/idxmax/count()    <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;DF&gt;.rank/diff/cumsum/ffill/interpo…()  <span class="hljs-comment"># Or: &lt;DF&gt;.apply/agg/transform(lambda &lt;S&gt;: &lt;S&gt;)</span>
 &lt;DF&gt; = &lt;DF&gt;.isna/fillna/isin([&lt;el/coll&gt;])      <span class="hljs-comment"># Or: &lt;DF&gt;.applymap(lambda &lt;el&gt;: &lt;el&gt;)</span>
 </code></pre></div>
@@ -2719,32 +2726,32 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre>
 
 <ul>
-<li><strong>All methods operate on columns by default. Pass <code class="python hljs"><span class="hljs-string">'axis=1'</span></code> to process the rows instead.</strong></li>
+<li><strong>Listed methods process the columns unless they receive <code class="python hljs"><span class="hljs-string">'axis=1'</span></code>. Exceptions to this rule are <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.dropna()'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.drop(row_key/s)'</span></code> and <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.rename(&lt;dict/func&gt;)'</span></code>.</strong></li>
 <li><strong>Fifth result's columns are indexed with a multi-index. This means we need a tuple of column keys to specify a column: <code class="python hljs"><span class="hljs-string">'&lt;DF&gt;.loc[row_key, (col_key_1, col_key_2)]'</span></code>.</strong></li>
 </ul>
-<div><h4 id="dataframemultiindex">DataFrame — Multi-Index:</h4><pre><code class="python language-python hljs">&lt;DF&gt;   = &lt;DF&gt;.xs(key, level=&lt;int&gt;)             <span class="hljs-comment"># Rows with key on passed level of multi-index.</span>
-&lt;DF&gt;   = &lt;DF&gt;.xs(keys, level=&lt;ints&gt;, axis=<span class="hljs-number">1</span>)   <span class="hljs-comment"># Cols that have first key on first level, etc.</span>
-&lt;DF&gt;   = &lt;DF&gt;.set_index(col_keys)              <span class="hljs-comment"># Creates index from cols. Also `append=False`.</span>
-&lt;S/DF&gt; = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)          <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
-&lt;DF&gt;   = &lt;DF&gt;.pivot_table(index=col_key/s)     <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
+<div><h3 id="multiindex">Multi-Index</h3><pre><code class="python language-python hljs">&lt;DF&gt; = &lt;DF&gt;.loc[row_key_1]                     <span class="hljs-comment"># Or: &lt;DF&gt;.xs(row_key_1)</span>
+&lt;DF&gt; = &lt;DF&gt;.loc[:, (slice(<span class="hljs-keyword">None</span>), col_key_2)]   <span class="hljs-comment"># Or: &lt;DF&gt;.xs(col_key_2, axis=1, level=1)</span>
+&lt;DF&gt; = &lt;DF&gt;.set_index(col_keys)                <span class="hljs-comment"># Creates index from cols. Also `append=False`.</span>
+&lt;DF&gt; = &lt;DF&gt;.pivot_table(index=col_key/s)       <span class="hljs-comment"># `columns=key/s, values=key/s, aggfunc='mean'`.</span>
+&lt;S&gt;  = &lt;DF&gt;.stack/unstack(level=<span class="hljs-number">-1</span>)            <span class="hljs-comment"># Combines col keys with row keys or vice versa.</span>
 </code></pre></div>
 
-<div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also accepts io.StringIO/BytesIO(&lt;str/bytes&gt;).</span>
+<div><h3 id="fileformats">File Formats</h3><pre><code class="python language-python hljs">&lt;S/DF&gt; = pd.read_json/pickle(&lt;path/url/file&gt;)  <span class="hljs-comment"># Also io.StringIO(&lt;str&gt;), io.BytesIO(&lt;bytes&gt;).</span>
 &lt;DF&gt;   = pd.read_csv/excel(&lt;path/url/file&gt;)    <span class="hljs-comment"># Also `header/index_col/dtype/usecols/…=&lt;obj&gt;`.</span>
 &lt;list&gt; = pd.read_html(&lt;path/url/file&gt;)         <span class="hljs-comment"># Raises ImportError if webpage has zero tables.</span>
-&lt;S/DF&gt; = pd.read_parquet/feather/hdf(&lt;path…&gt;)  <span class="hljs-comment"># Read_hdf() accepts `key='&lt;df_name&gt;'` argument.</span>
-&lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># Pass SQLite3/Alchemy connection (see #SQLite).</span>
+&lt;S/DF&gt; = pd.read_parquet/feather/hdf(&lt;path…&gt;)  <span class="hljs-comment"># Function read_hdf() accepts `key=&lt;s/df_name&gt;`.</span>
+&lt;DF&gt;   = pd.read_sql(<span class="hljs-string">'&lt;table/query&gt;'</span>, &lt;conn&gt;)  <span class="hljs-comment"># Pass SQLite3/Alchemy connection. See #SQLite.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/parquet/latex(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
-&lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># To_hdf() requires `key='&lt;df_name&gt;'` argument.</span>
+<pre><code class="python language-python hljs">&lt;DF&gt;.to_json/csv/html/latex/parquet(&lt;path&gt;)    <span class="hljs-comment"># Returns a string/bytes if path is omitted.</span>
+&lt;DF&gt;.to_pickle/excel/feather/hdf(&lt;path&gt;)       <span class="hljs-comment"># Method to_hdf() requires `key=&lt;s/df_name&gt;`.</span>
 &lt;DF&gt;.to_sql(<span class="hljs-string">'&lt;table_name&gt;'</span>, &lt;connection&gt;)      <span class="hljs-comment"># Also `if_exists='fail/replace/append'`.</span>
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'$ pip3 install "pandas[excel]" odfpy lxml pyarrow'</span></code> installs dependencies.</strong></li>
-<li><strong>Read_csv() only parses dates of columns that were specified by 'parse_dates' argument. It&nbsp;automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments. Both dates and datetimes get stored as pd.Timestamp objects.</strong></li>
-<li><strong>If there's a single invalid date then it returns the whole column as a series of strings, unlike <code class="python hljs"><span class="hljs-string">'&lt;S&gt; = pd.to_datetime(&lt;S&gt;, errors="coerce")'</span></code>, which uses pd.NaT.</strong></li>
-<li><strong>To get specific attributes from a series of Timestamps use <code class="python hljs"><span class="hljs-string">'&lt;S&gt;.dt.year/date/…'</span></code>.</strong></li>
+<li><strong>Csv functions use the same dialect as standard library's csv module (e.g. <code class="python hljs"><span class="hljs-string">'sep=","'</span></code>).</strong></li>
+<li><strong>Read_csv() only parses dates of columns that are listed in 'parse_dates'. It automatically tries to detect the format, but it can be helped with 'date_format' or 'dayfirst' arguments.</strong></li>
+<li><strong>We get a dataframe with DatetimeIndex if 'parse_dates' argument includes 'index_col'. Its <code class="python hljs"><span class="hljs-string">'resample("y/m/d/h")'</span></code> method returns Resampler object that is similar to GroupBy.</strong></li>
 </ul>
 <div><h3 id="groupby">GroupBy</h3><p><strong>Object that groups together rows of a dataframe based on the value of the passed column.</strong></p><pre><code class="python language-python hljs">&lt;GB&gt; = &lt;DF&gt;.groupby(col_key/s)                 <span class="hljs-comment"># Splits DF into groups based on passed column.</span>
 &lt;DF&gt; = &lt;GB&gt;.apply/filter(&lt;func&gt;)               <span class="hljs-comment"># Filter drops a group if func returns False.</span>
@@ -2754,7 +2761,7 @@ c  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/idxmax/all()          <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
+<pre><code class="python language-python hljs">&lt;DF&gt; = &lt;GB&gt;.sum/max/mean/std/idxmax/count()    <span class="hljs-comment"># Or: &lt;GB&gt;.agg(lambda &lt;S&gt;: &lt;el&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.rank/diff/cumsum/ffill()           <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;S&gt;: &lt;S&gt;)</span>
 &lt;DF&gt; = &lt;GB&gt;.fillna(&lt;el&gt;)                       <span class="hljs-comment"># Or: &lt;GB&gt;.transform(lambda &lt;S&gt;: &lt;S&gt;)</span>
 </code></pre>
@@ -2781,18 +2788,18 @@ z
 <span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px, pandas <span class="hljs-keyword">as</span> pd
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt;, x=col_key, y=col_key)            <span class="hljs-comment"># Or: px.line(x=&lt;list&gt;, y=&lt;list&gt;)</span>
-&lt;Fig&gt;.update_layout(margin=dict(t=<span class="hljs-number">0</span>, r=<span class="hljs-number">0</span>, b=<span class="hljs-number">0</span>, l=<span class="hljs-number">0</span>))   <span class="hljs-comment"># Also `paper_bgcolor='rgb(0, 0, 0)'`.</span>
-&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                  <span class="hljs-comment"># &lt;Fig&gt;.show() displays the plot.</span>
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.line(&lt;DF&gt; [, y=col_key/s [, x=col_key]])   <span class="hljs-comment"># Also px.line(y=&lt;list&gt; [, x=&lt;list&gt;]).</span>
+&lt;Fig&gt;.update_layout(paper_bgcolor=<span class="hljs-string">'#rrggbb'</span>)          <span class="hljs-comment"># Also `margin=dict(t=0, r=0, b=0, l=0)`.</span>
+&lt;Fig&gt;.write_html/json/image(<span class="hljs-string">'&lt;path&gt;'</span>)                 <span class="hljs-comment"># Use &lt;Fig&gt;.show() to display the plot.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_key)    <span class="hljs-comment"># Also `color=col_key`.</span>
-&lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_key)         <span class="hljs-comment"># Also `color/size/symbol=col_key`.</span>
-&lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)   <span class="hljs-comment"># `z=col_key`. Also color/size/symbol.</span>
-&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_key [, nbins=&lt;int&gt;])  <span class="hljs-comment"># Number of bins depends on DF size.</span>
+<pre><code class="python language-python hljs">&lt;Fig&gt; = px.area/bar/box(&lt;DF&gt;, x=col_key, y=col_keys)  <span class="hljs-comment"># Also `color=col_key`. All are optional.</span>
+&lt;Fig&gt; = px.scatter(&lt;DF&gt;, x=col_key, y=col_keys)       <span class="hljs-comment"># Also `color/size/symbol=col_key`. Same.</span>
+&lt;Fig&gt; = px.scatter_3d(&lt;DF&gt;, x=col_key, y=col_key, …)  <span class="hljs-comment"># `z=col_key`. Also color, size, symbol.</span>
+&lt;Fig&gt; = px.histogram(&lt;DF&gt;, x=col_keys, y=col_key)     <span class="hljs-comment"># Also color, nbins. All are optional.</span>
 </code></pre>
 <div><h4 id="displaysalinechartoftotalcoronavirusdeathspermilliongroupedbycontinent">Displays a line chart of total coronavirus deaths per million grouped by continent:</h4><p></p><div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div><pre><code class="python language-python hljs">covid = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/owid/covid-19-data/8dde8ca49b'</span>
                     <span class="hljs-string">'6e648c17dd420b2726ca0779402651/public/data/owid-covid-data.csv'</span>,
-                    usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_deaths'</span>, <span class="hljs-string">'population'</span>])
+                    usecols=[<span class="hljs-string">'iso_code'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'population'</span>, <span class="hljs-string">'total_deaths'</span>])
 continents = pd.read_csv(<span class="hljs-string">'https://gto76.github.io/python-cheatsheet/web/continents.csv'</span>,
                          usecols=[<span class="hljs-string">'Three_Letter_Country_Code'</span>, <span class="hljs-string">'Continent_Name'</span>])
 df = pd.merge(covid, continents, left_on=<span class="hljs-string">'iso_code'</span>, right_on=<span class="hljs-string">'Three_Letter_Country_Code'</span>)
@@ -2800,13 +2807,13 @@ df = df.groupby([<span class="hljs-string">'Continent_Name'</span>, <span class=
 df[<span class="hljs-string">'Total Deaths per Million'</span>] = df.total_deaths * <span class="hljs-number">1e6</span> / df.population
 df = df[df.date &gt; <span class="hljs-string">'2020-03-14'</span>]
 df = df.rename({<span class="hljs-string">'date'</span>: <span class="hljs-string">'Date'</span>, <span class="hljs-string">'Continent_Name'</span>: <span class="hljs-string">'Continent'</span>}, axis=<span class="hljs-string">'columns'</span>)
-px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>).show()
+px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-string">'Total Deaths per Million'</span>, color=<span class="hljs-string">'Continent'</span>)
 </code></pre></div>
 
 
 
-<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:287px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas lxml selenium plotly</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, plotly.graph_objects <span class="hljs-keyword">as</span> go
+<div><h4 id="displaysamultiaxislinechartoftotalcoronaviruscasesandchangesinpricesofbitcoindowjonesandgold">Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:</h4><p></p><div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:285px; width:935px;"></div><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pandas lxml selenium plotly</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd, selenium.webdriver, io, plotly.graph_objects <span class="hljs-keyword">as</span> go
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     covid, (bitcoin, gold, dow) = get_covid_cases(), get_tickers()
@@ -2815,7 +2822,7 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_covid_cases</span><span class="hljs-params">()</span>:</span>
     url = <span class="hljs-string">'https://covid.ourworldindata.org/data/owid-covid-data.csv'</span>
-    df = pd.read_csv(url, usecols=[<span class="hljs-string">'location'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'total_cases'</span>], parse_dates=[<span class="hljs-string">'date'</span>])
+    df = pd.read_csv(url, parse_dates=[<span class="hljs-string">'date'</span>])
     df = df[df.location == <span class="hljs-string">'World'</span>]
     s = df.set_index(<span class="hljs-string">'date'</span>).total_cases
     <span class="hljs-keyword">return</span> s.rename(<span class="hljs-string">'Total Cases'</span>)
@@ -2831,7 +2838,8 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
     driver.get(url + <span class="hljs-string">'?period1=1579651200&amp;period2=9999999999'</span>)
     <span class="hljs-keyword">if</span> buttons := driver.find_elements(<span class="hljs-string">'xpath'</span>, <span class="hljs-string">'//button[@name="reject"]'</span>):
         buttons[<span class="hljs-number">0</span>].click()
-    dataframes = pd.read_html(driver.page_source, parse_dates=[<span class="hljs-string">'Date'</span>])
+    html = io.StringIO(driver.page_source)
+    dataframes = pd.read_html(html, parse_dates=[<span class="hljs-string">'Date'</span>])
     s = dataframes[<span class="hljs-number">0</span>].set_index(<span class="hljs-string">'Date'</span>).Open
     <span class="hljs-keyword">return</span> s.rename(name)
 
@@ -2866,29 +2874,27 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 <div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python-like code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
-<span class="hljs-keyword">import</span> pyximport; pyximport.install()  <span class="hljs-comment"># Module that runs imported Cython scripts.</span>
-<span class="hljs-keyword">import</span> &lt;cython_script&gt;                 <span class="hljs-comment"># Script must be saved with '.pyx' extension.</span>
-&lt;cython_script&gt;.main()                 <span class="hljs-comment"># Main() isn't automatically executed.</span>
+<span class="hljs-keyword">import</span> pyximport; pyximport.install()               <span class="hljs-comment"># Module that runs Cython scripts.</span>
+<span class="hljs-keyword">import</span> &lt;cython_script&gt;                              <span class="hljs-comment"># Script must have '.pyx' extension.</span>
 </code></pre></div></div>
 
 
 
-<div><h4 id="definitions">Definitions:</h4><ul>
-<li><strong>All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up.</strong></li>
-<li><strong>Also supports C pointers via <code class="python hljs"><span class="hljs-string">'*'</span></code> and <code class="python hljs"><span class="hljs-string">'&amp;'</span></code>, structs, unions, and enums.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;ctype/type&gt; &lt;var_name&gt; [= &lt;obj&gt;]
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[n_elements] &lt;var_name&gt; [= &lt;coll_of_nums&gt;]
-<span class="hljs-keyword">cdef</span> &lt;ctype/type/void&gt; &lt;func_name&gt;(&lt;ctype/type&gt; &lt;arg_name&gt;): ...
+<div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;var_name&gt; [= &lt;obj/var&gt;]                <span class="hljs-comment"># Either Python or C type variable.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;pointer_name&gt; [= &amp;&lt;var&gt;]             <span class="hljs-comment"># Use &lt;pointer&gt;[0] to get the value.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[size] &lt;array_name&gt; [= &lt;coll/array&gt;]    <span class="hljs-comment"># Also `from cpython cimport array`.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; [= &lt;coll/array&gt;]         <span class="hljs-comment"># Also `&lt;&lt;ctype&gt; *&gt; malloc(n_bytes)`.</span>
 </code></pre></div>
 
-
-<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
-    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;ctype/type&gt; &lt;attr_name&gt;
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;ctype/type&gt; &lt;arg_name&gt;)</span>:</span>
-        self.&lt;attr_name&gt; = &lt;arg_name&gt;
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;func_name&gt;(&lt;type&gt; [*]&lt;arg_name&gt;): ...  <span class="hljs-comment"># Omitted types default to `object`.</span>
+</code></pre>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                            <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>
+    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;               <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>          <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>
+        self.&lt;attr_name&gt; = &lt;arg_name&gt;               <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>
 </code></pre>
 <div><h3 id="virtualenvironments">Virtual Environments</h3><p><strong>System for installing libraries directly into project's directory.</strong></p><pre><code class="python hljs">$ python3 -m venv NAME      <span class="hljs-comment"># Creates virtual environment in current directory.</span>
-$ source NAME/bin/activate  <span class="hljs-comment"># Activates env. On Windows run `NAME\Scripts\activate`.</span>
+$ source NAME/bin/activate  <span class="hljs-comment"># Activates it. On Windows run `NAME\Scripts\activate`.</span>
 $ pip3 install LIBRARY      <span class="hljs-comment"># Installs the library into active environment.</span>
 $ python3 FILE              <span class="hljs-comment"># Runs the script in active environment. Also `./FILE`.</span>
 $ deactivate                <span class="hljs-comment"># Deactivates the active virtual environment.</span>
@@ -2932,7 +2938,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>December 31, 2024</aside>
+    <aside>June 18, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
