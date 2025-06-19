@@ -1,7 +1,20 @@
 #!/usr/bin/env python3
 
 def convert_table(lines):
+    """
+    Convert a table from ASCII art to Unicode box drawing characters or vice versa.
+
+    :param lines: A list of strings representing the lines of the table.
+    :type lines: list(str)
+    """
     def from_ascii():
+        """
+        Convert a list of lines from an ASCII table to a reStructuredText grid table.
+
+        :param lines: A list of strings representing the rows in the ASCII
+        table.
+        :returns: A string containing the equivalent reStructuredText grid table.
+        """
         out = []
         first, header, third, *body, last = lines
         first = first.translate(str.maketrans({'-': '━', '+': '┯'}))
@@ -18,6 +31,13 @@ def convert_table(lines):
         out.append(f'┗{last[1:-1]}┛')
         return '\n'.join(out)
     def from_unicode():
+        """
+        Convert a Unicode box-drawing character string to ASCII.
+
+        :param str lines: A string of Unicode box-drawing characters.
+        :returns str out: The same
+        text with all the Unicode box drawing characters replaced by ASCII ones.
+        """
         out = []
         for line in lines:
             line = line.translate(str.maketrans('┏┓┗┛┠┼┨┯┷━─┃│', '+++++++++--||'))
