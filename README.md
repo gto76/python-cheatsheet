@@ -3513,27 +3513,27 @@ Appendix
 
 ```python
 # $ pip3 install cython
-import pyximport; pyximport.install()               # Module that runs Cython scripts.
-import <cython_script>                              # Script must have '.pyx' extension.
+import pyximport; pyximport.install()                # Module that runs Cython scripts.
+import <cython_script>                               # Script must have '.pyx' extension.
 ```
 
 #### All `'cdef'` definitions are optional, but they contribute to the speed-up:
 ```python
-cdef <type> <var_name> [= <obj/var>]                # Either Python or C type variable.
-cdef <ctype> *<pointer_name> [= &<var>]             # Use <pointer>[0] to get the value.
-cdef <ctype>[size] <array_name> [= <coll/array>]    # Also `from cpython cimport array`.
-cdef <ctype> *<array_name> [= <coll/array>]         # Also `<<ctype> *> malloc(n_bytes)`.
+cdef <type> <var_name> [= <obj/var>]                 # Either Python or C type variable.
+cdef <ctype> *<pointer_name> [= &<var>]              # Use <pointer>[0] to get the value.
+cdef <ctype>[size] <array_name> [= <coll/array>]     # Also `<ctype>[:] <mview> = <array>`.
+cdef <ctype> *<array_name> [= <coll/array/pointer>]  # E.g. `<<ctype> *> malloc(n_bytes)`.
 ```
 
 ```python
-cdef <type> <func_name>(<type> [*]<arg_name>): ...  # Omitted types default to `object`.
+cdef <type> <func_name>(<type> [*]<arg_name>): ...   # Omitted types default to `object`.
 ```
 
 ```python
-cdef class <class_name>:                            # Also `cdef struct <struct_name>:`.
-    cdef public <type> [*]<attr_name>               # Also `... <ctype> [*]<field_name>`.
-    def __init__(self, <type> <arg_name>):          # Also `cdef __dealloc__(self):`.
-        self.<attr_name> = <arg_name>               # Also `... free(<pointer/array>)`.
+cdef class <class_name>:                             # Also `cdef struct <struct_name>:`.
+    cdef public <type> [*]<attr_name>                # Also `... <ctype> [*]<field_name>`.
+    def __init__(self, <type> <arg_name>):           # Also `cdef __dealloc__(self):`.
+        self.<attr_name> = <arg_name>                # Also `... free(<pointer/array>)`.
 ```
 
 ### Virtual Environments

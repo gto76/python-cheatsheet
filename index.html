@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>June 18, 2025</aside>
+    <aside>June 19, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2874,24 +2874,24 @@ px.line(df, x=<span class="hljs-string">'Date'</span>, y=<span class="hljs-strin
 
 
 <div><h2 id="appendix"><a href="#appendix" name="appendix">#</a>Appendix</h2><div><h3 id="cython">Cython</h3><p><strong>Library that compiles Python-like code into C.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install cython</span>
-<span class="hljs-keyword">import</span> pyximport; pyximport.install()               <span class="hljs-comment"># Module that runs Cython scripts.</span>
-<span class="hljs-keyword">import</span> &lt;cython_script&gt;                              <span class="hljs-comment"># Script must have '.pyx' extension.</span>
+<span class="hljs-keyword">import</span> pyximport; pyximport.install()                <span class="hljs-comment"># Module that runs Cython scripts.</span>
+<span class="hljs-keyword">import</span> &lt;cython_script&gt;                               <span class="hljs-comment"># Script must have '.pyx' extension.</span>
 </code></pre></div></div>
 
 
 
-<div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;var_name&gt; [= &lt;obj/var&gt;]                <span class="hljs-comment"># Either Python or C type variable.</span>
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;pointer_name&gt; [= &amp;&lt;var&gt;]             <span class="hljs-comment"># Use &lt;pointer&gt;[0] to get the value.</span>
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[size] &lt;array_name&gt; [= &lt;coll/array&gt;]    <span class="hljs-comment"># Also `from cpython cimport array`.</span>
-<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; [= &lt;coll/array&gt;]         <span class="hljs-comment"># Also `&lt;&lt;ctype&gt; *&gt; malloc(n_bytes)`.</span>
+<div><h4 id="allcdefdefinitionsareoptionalbuttheycontributetothespeedup">All <code class="python hljs"><span class="hljs-string">'cdef'</span></code> definitions are optional, but they contribute to the speed-up:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;var_name&gt; [= &lt;obj/var&gt;]                 <span class="hljs-comment"># Either Python or C type variable.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;pointer_name&gt; [= &amp;&lt;var&gt;]              <span class="hljs-comment"># Use &lt;pointer&gt;[0] to get the value.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt;[size] &lt;array_name&gt; [= &lt;coll/array&gt;]     <span class="hljs-comment"># Also `&lt;ctype&gt;[:] &lt;mview&gt; = &lt;array&gt;`.</span>
+<span class="hljs-keyword">cdef</span> &lt;ctype&gt; *&lt;array_name&gt; [= &lt;coll/array/pointer&gt;]  <span class="hljs-comment"># E.g. `&lt;&lt;ctype&gt; *&gt; malloc(n_bytes)`.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;func_name&gt;(&lt;type&gt; [*]&lt;arg_name&gt;): ...  <span class="hljs-comment"># Omitted types default to `object`.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> &lt;type&gt; &lt;func_name&gt;(&lt;type&gt; [*]&lt;arg_name&gt;): ...   <span class="hljs-comment"># Omitted types default to `object`.</span>
 </code></pre>
-<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                            <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>
-    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;               <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>          <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>
-        self.&lt;attr_name&gt; = &lt;arg_name&gt;               <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                             <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>
+    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;                <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>           <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>
+        self.&lt;attr_name&gt; = &lt;arg_name&gt;                <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>
 </code></pre>
 <div><h3 id="virtualenvironments">Virtual Environments</h3><p><strong>System for installing libraries directly into project's directory.</strong></p><pre><code class="python hljs">$ python3 -m venv NAME      <span class="hljs-comment"># Creates virtual environment in current directory.</span>
 $ source NAME/bin/activate  <span class="hljs-comment"># Activates it. On Windows run `NAME\Scripts\activate`.</span>
@@ -2938,7 +2938,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>June 18, 2025</aside>
+    <aside>June 19, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
