@@ -337,7 +337,7 @@ const CYTHON_3 =
   '<span class="hljs-keyword">cdef</span> <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>                             <span class="hljs-comment"># Also `cdef struct &lt;struct_name&gt;:`.</span>\n' +
   '    <span class="hljs-keyword">cdef</span> <span class="hljs-keyword">public</span> &lt;type&gt; [*]&lt;attr_name&gt;                <span class="hljs-comment"># Also `... &lt;ctype&gt; [*]&lt;field_name&gt;`.</span>\n' +
   '    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, &lt;type&gt; &lt;arg_name&gt;)</span>:</span>           <span class="hljs-comment"># Also `cdef __dealloc__(self):`.</span>\n' +
-  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;                <span class="hljs-comment"># Also `... free(&lt;pointer/array&gt;)`.</span>\n';
+  '        self.&lt;attr_name&gt; = &lt;arg_name&gt;                <span class="hljs-comment"># Also `... free(&lt;array/pointer&gt;)`.</span>\n';
 
 const INDEX =
   '<li><strong>Ctrl+F / ⌘F is usually sufficient.</strong></li>\n' +

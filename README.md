@@ -3533,7 +3533,7 @@ cdef <type> <func_name>(<type> [*]<arg_name>): ...   # Omitted types default to 
 cdef class <class_name>:                             # Also `cdef struct <struct_name>:`.
     cdef public <type> [*]<attr_name>                # Also `... <ctype> [*]<field_name>`.
     def __init__(self, <type> <arg_name>):           # Also `cdef __dealloc__(self):`.
-        self.<attr_name> = <arg_name>                # Also `... free(<pointer/array>)`.
+        self.<attr_name> = <arg_name>                # Also `... free(<array/pointer>)`.
 ```
 
 ### Virtual Environments
