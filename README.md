@@ -361,7 +361,7 @@ Regex
 ```python
 import re
 <str>   = re.sub(r'<regex>', new, text, count=0)  # Substitutes all occurrences with 'new'.
-<list>  = re.findall(r'<regex>', text)            # Returns all occurrences as strings.
+<list>  = re.findall(r'<regex>', text)            # Returns all occurrences of the pattern.
 <list>  = re.split(r'<regex>', text, maxsplit=0)  # Add brackets around regex to keep matches.
 <Match> = re.search(r'<regex>', text)             # First occurrence of the pattern or None.
 <Match> = re.match(r'<regex>', text)              # Searches only at the beginning of the text.
@@ -398,7 +398,7 @@ Format
 ------
 ```perl
 <str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
-<str> = '{}, {}'.format(<el_1>, <el_2>)  # Or: '{0}, {a}'.format(<el_1>, a=<el_2>)
+<str> = '{}, {}'.format(<el_1>, <el_2>)  # Same as '{0}, {a}'.format(<el_1>, a=<el_2>).
 <str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
 ```
 
@@ -2289,7 +2289,7 @@ with <lock>:                                   # Enters the block by calling acq
 
 ### Thread Pool Executor
 ```python
-<Exec> = ThreadPoolExecutor(max_workers=None)  # Or: `with ThreadPoolExecutor() as <name>: ...`
+<Exec> = ThreadPoolExecutor(max_workers=None)  # Also `with ThreadPoolExecutor() as <name>: …`.
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
 <Exec>.shutdown()                              # Waits for all submitted threads to finish.
@@ -2663,7 +2663,7 @@ import numpy as np
 ```python
 <view>  = <array>.reshape(<shape>)                      # Also `<array>.shape = <shape>`.
 <array> = <array>.flatten()                             # Also `<view> = <array>.ravel()`.
-<view>  = <array>.transpose()                           # Or: <array>.T
+<view>  = <array>.transpose()                           # Flips the table over its diagonal.
 ```
 
 ```python
@@ -2827,7 +2827,7 @@ from PIL import ImageDraw
 * **Use `'fill=<color>'` to set the primary color.**
 * **Use `'width=<int>'` to set the width of lines or contours.**
 * **Use `'outline=<color>'` to set the color of the contours.**
-* **Color can be an int, tuple, `'#rrggbb[aa]'` or a color name.**
+* **Color can be an int, tuple, `'#rrggbb[aa]'` string or a color name.**
 
 
 Animation
@@ -3421,7 +3421,7 @@ import plotly.express as px, pandas as pd
 <Fig> = px.histogram(<DF>, x=col_keys, y=col_key)     # Also color, nbins. All are optional.
 ```
 
-#### Displays a line chart of total coronavirus deaths per million grouped by continent:
+#### Displays a line chart of total COVID-19 deaths per million grouped by continent:
 
 ![Covid Deaths](web/covid_deaths.png)
 <div id="2a950764-39fc-416d-97fe-0a6226a3095f" class="plotly-graph-div" style="height:312px; width:914px;"></div>
@@ -3440,7 +3440,7 @@ df = df.rename({'date': 'Date', 'Continent_Name': 'Continent'}, axis='columns')
 px.line(df, x='Date', y='Total Deaths per Million', color='Continent')
 ```
 
-#### Displays a multi-axis line chart of total coronavirus cases and changes in prices of Bitcoin, Dow Jones and gold:
+#### Displays a multi-axis line chart of total COVID-19 cases and changes in prices of Bitcoin, Dow Jones and gold:
 
 ![Covid Cases](web/covid_cases.png)
 <div id="e23ccacc-a456-478b-b467-7282a2165921" class="plotly-graph-div" style="height:285px; width:935px;"></div>
