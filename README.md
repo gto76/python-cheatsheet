@@ -168,8 +168,8 @@ Tuple
 >>> p = Point(1, y=2)
 >>> print(p)
 Point(x=1, y=2)
->>> p[0], p.x
-(1, 1)
+>>> p[0], p.y
+(1, 2)
 ```
 
 
@@ -748,10 +748,10 @@ Inline
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # Returns `[1, 2, ..., 10]`.
-<iter> = (i for i in range(10) if i > 5)            # Returns `iter([6, 7, 8, 9])`.
-<set>  = {i+5 for i in range(10)}                   # Returns `{5, 6, ..., 14}`.
-<dict> = {i: i*2 for i in range(10)}                # Returns `{0: 0, 1: 2, ..., 9: 18}`.
+<list> = [i+1 for i in range(10)]                   # Returns [1, 2, ..., 10].
+<iter> = (i for i in range(10) if i > 5)            # Returns iter([6, 7, 8, 9]).
+<set>  = {i+5 for i in range(10)}                   # Returns {5, 6, ..., 14}.
+<dict> = {i: i*2 for i in range(10)}                # Returns {0: 0, 1: 2, ..., 9: 18}.
 ```
 
 ```python
@@ -765,9 +765,9 @@ from functools import reduce
 ```
 
 ```python
-<iter> = map(lambda x: x + 1, range(10))            # Returns `iter([1, 2, ..., 10])`.
-<iter> = filter(lambda x: x > 5, range(10))         # Returns `iter([6, 7, 8, 9])`.
-<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns `45`.
+<iter> = map(lambda x: x + 1, range(10))            # Returns iter([1, 2, ..., 10]).
+<iter> = filter(lambda x: x > 5, range(10))         # Returns iter([6, 7, 8, 9]).
+<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns 45.
 ```
 
 ### Any, All
@@ -993,7 +993,7 @@ Z = make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
 ```
 
 ### Subclass
-* **Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all its methods and attributes.**
+* **Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all of its methods and attributes.**
 * **Subclass can then add its own methods and attributes or override inherited ones by reusing their names.**
 
 ```python
@@ -1027,7 +1027,7 @@ from collections import abc
 
 <name>: <type> [| ...] [= <obj>]
 <name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]
-<name>: dict/tuple[<type>, ...] [= <obj>]
+<name>: tuple/dict[<type>, ...] [= <obj>]
 ```
 
 ### Dataclass
@@ -1644,13 +1644,13 @@ from pathlib import Path
 ```
 
 ```python
-<bool> = os.path.exists(<path>)     # Or: <Path>.exists()
-<bool> = os.path.isfile(<path>)     # Or: <DirEntry/Path>.is_file()
-<bool> = os.path.isdir(<path>)      # Or: <DirEntry/Path>.is_dir()
+<bool> = os.path.exists(<path>)     # Same as <Path>.exists().
+<bool> = os.path.isfile(<path>)     # Same as <DirEntry/Path>.is_file().
+<bool> = os.path.isdir(<path>)      # Same as <DirEntry/Path>.is_dir().
 ```
 
 ```python
-<stat> = os.stat(<path>)            # Or: <DirEntry/Path>.stat()
+<stat> = os.stat(<path>)            # Same as <DirEntry/Path>.stat().
 <num>  = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, etc.
 ```
 
@@ -1820,7 +1820,7 @@ import csv
 * **File must be opened with a `'newline=""'` argument, or every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'!**
 * **To print the spreadsheet to the console use [Tabulate](#table) library.**
 * **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
-* **Reader accepts any collection of strings, not just files.**
+* **Reader accepts any iterator or collection of strings, not just files.**
 
 ### Write
 ```python
