@@ -1749,50 +1749,6 @@ from glob import glob
 ```
 
 ### DirEntry
-**Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
-
-```python
-<iter> = scandir(path='.')          # Returns DirEntry objects located at the path.
-<str>  = <DirEntry>.path            # Returns the whole path as a string.
-<str>  = <DirEntry>.name            # Returns final component as a string.
-<file> = open(<DirEntry>)           # Opens the file and returns a file object.
-```
-
-### Path Object
-```python
-from pathlib import Path
-```
-
-```python
-<str>  = os.getcwd()                # Returns working dir. Starts as shell's $PWD.
-<str>  = os.path.join(<path>, ...)  # Joins two or more pathname components.
-<str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
-```
-
-```python
-<str>  = path.basename(<path>)      # Returns final component of the path.
-<str>  = path.dirname(<path>)       # Returns path without the final component.
-<tup.> = path.splitext(<path>)      # Splits on last period of the final component.
-<tup.> = path.expanduser('~')       # Gives homedir path
-```
-
-```python
-<list> = os.listdir(path='.')       # Returns filenames located at the path.
-<list> = glob.glob('<pattern>')     # Returns paths matching the wildcard pattern.
-```
-
-```python
-<bool> = os.path.exists(<path>)     # Or: <Path>.exists()
-<bool> = os.path.isfile(<path>)     # Or: <DirEntry/Path>.is_file()
-<bool> = os.path.isdir(<path>)      # Or: <DirEntry/Path>.is_dir()
-```
-
-```python
-<stat> = os.stat(<path>)            # Or: <DirEntry/Path>.stat()
-<num>  = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, etc.
-```
-
-### DirEntry
 **Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.**
 
 ```python
