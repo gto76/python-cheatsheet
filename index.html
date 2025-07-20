@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 19, 2025</aside>
+    <aside>July 20, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -120,9 +120,9 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
 <pre><code class="python language-python hljs">&lt;list&gt;.append(&lt;el&gt;)             <span class="hljs-comment"># Appends element to the end. Also &lt;list&gt; += [&lt;el&gt;].</span>
 &lt;list&gt;.extend(&lt;collection&gt;)     <span class="hljs-comment"># Appends elements to the end. Also &lt;list&gt; += &lt;coll&gt;.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;.sort()                   <span class="hljs-comment"># Sorts elements in ascending order.</span>
-&lt;list&gt;.reverse()                <span class="hljs-comment"># Reverses the list in-place.</span>
-&lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns new list with sorted elements.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;.sort()                   <span class="hljs-comment"># Sorts the elements in ascending order.</span>
+&lt;list&gt;.reverse()                <span class="hljs-comment"># Reverses the order of list's elements.</span>
+&lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns a new list with sorted elements.</span>
 &lt;iter&gt; = reversed(&lt;list&gt;)       <span class="hljs-comment"># Returns reversed iterator of elements.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns largest element. Also min(&lt;el_1&gt;, ...).</span>
@@ -153,7 +153,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;view&gt; = &lt;dict&gt;.values()                        <span class="hljs-comment"># Collection of values that reflects changes.</span>
 &lt;view&gt; = &lt;dict&gt;.items()                         <span class="hljs-comment"># Coll. of key-value tuples that reflects chgs.</span>
 </code></pre>
-<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns default if key is missing.</span>
+<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns default argument if key is missing.</span>
 value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes default if key is missing.</span>
 &lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Returns a dict with default value `&lt;type&gt;()`.</span>
 &lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Returns a dict with default value 1.</span>
@@ -209,7 +209,7 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 <span class="hljs-meta">&gt;&gt;&gt; </span>p = Point(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(p)
 Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>p[<span class="hljs-number">0</span>], p.y
+<span class="hljs-meta">&gt;&gt;&gt; </span>p.x, p[<span class="hljs-number">1</span>]
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
 </code></pre></div>
 
@@ -239,9 +239,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)         <span class="hljs-comment"># Returns updated value endlessly. Accepts floats.</span>
 &lt;iter&gt; = it.repeat(&lt;el&gt; [, times])         <span class="hljs-comment"># Returns element endlessly or 'times' times.</span>
-&lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the sequence endlessly.</span>
+&lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the passed sequence of elements endlessly.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (figuratively).</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (only figuratively).</span>
 &lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.islice(&lt;coll&gt;, to_exclusive)   <span class="hljs-comment"># Only returns first 'to_exclusive' elements.</span>
@@ -2938,7 +2938,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 19, 2025</aside>
+    <aside>July 20, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

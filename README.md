@@ -43,9 +43,9 @@ List
 ```
 
 ```python
-<list>.sort()                   # Sorts elements in ascending order.
-<list>.reverse()                # Reverses the list in-place.
-<list> = sorted(<collection>)   # Returns new list with sorted elements.
+<list>.sort()                   # Sorts the elements in ascending order.
+<list>.reverse()                # Reverses the order of list's elements.
+<list> = sorted(<collection>)   # Returns a new list with sorted elements.
 <iter> = reversed(<list>)       # Returns reversed iterator of elements.
 ```
 
@@ -88,7 +88,7 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key, default=None)          # Returns default if key is missing.
+value  = <dict>.get(key, default=None)          # Returns default argument if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
 <dict> = collections.defaultdict(<type>)        # Returns a dict with default value `<type>()`.
 <dict> = collections.defaultdict(lambda: 1)     # Returns a dict with default value 1.
@@ -168,7 +168,7 @@ Tuple
 >>> p = Point(1, y=2)
 >>> print(p)
 Point(x=1, y=2)
->>> p[0], p.y
+>>> p.x, p[1]
 (1, 2)
 ```
 
@@ -215,11 +215,11 @@ import itertools as it
 ```python
 <iter> = it.count(start=0, step=1)         # Returns updated value endlessly. Accepts floats.
 <iter> = it.repeat(<el> [, times])         # Returns element endlessly or 'times' times.
-<iter> = it.cycle(<collection>)            # Repeats the sequence endlessly.
+<iter> = it.cycle(<collection>)            # Repeats the passed sequence of elements endlessly.
 ```
 
 ```python
-<iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (figuratively).
+<iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (only figuratively).
 <iter> = it.chain.from_iterable(<coll>)    # Empties collections inside a collection in order.
 ```
 
