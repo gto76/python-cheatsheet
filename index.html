@@ -165,7 +165,7 @@ value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</s
 <pre><code class="python language-python hljs">&lt;dict&gt;.update(&lt;dict&gt;)                           <span class="hljs-comment"># Adds items. Replaces ones with matching keys.</span>
 value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError if missing.</span>
 {k <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> v == value}    <span class="hljs-comment"># Returns set of keys that point to the value.</span>
-{k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Filters the dictionary by keys.</span>
+{k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Filters the dictionary by specified keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter([<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'red'</span>])
@@ -335,7 +335,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾…], [零〇一…] and isdigit().</span>
 &lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [a-zA-Z…] and isnumeric().</span>
 &lt;bool&gt; = &lt;str&gt;.isprintable()                 <span class="hljs-comment"># Checks for [ !#$%…] and isalnum().</span>
-&lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].</span>
+&lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c-\x1f\x85…].</span>
 </code></pre></div>
 
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
@@ -502,7 +502,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 &amp; 0b1010 == 0b1000`.</span>
 &lt;int&gt; = &lt;int&gt; | &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 | 0b1010 == 0b1110`.</span>
 &lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 ^ 0b1010 == 0b0110`.</span>
-&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># E.g. `0b1100 &lt;&lt; 4 == 0b1100_0000`.</span>
+&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># E.g. `0b1111 &lt;&lt; 4 == 0b11110000`.</span>
 &lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~0b1 == -0b10 == -(0b1+1)`.</span>
 </code></pre></div>
 

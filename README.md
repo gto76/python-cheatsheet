@@ -104,7 +104,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
 value = <dict>.pop(key)                         # Removes item or raises KeyError if missing.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
-{k: v for k, v in <dict>.items() if k in keys}  # Filters the dictionary by keys.
+{k: v for k, v in <dict>.items() if k in keys}  # Filters the dictionary by specified keys.
 ```
 
 ### Counter
@@ -350,7 +350,7 @@ String
 <bool> = <str>.isnumeric()                   # Checks for [¼½¾…], [零〇一…] and isdigit().
 <bool> = <str>.isalnum()                     # Checks for [a-zA-Z…] and isnumeric().
 <bool> = <str>.isprintable()                 # Checks for [ !#$%…] and isalnum().
-<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85\xa0…].
+<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85…].
 ```
 
 
@@ -554,7 +554,7 @@ shuffle(<list>)                                # Works on all mutable sequences.
 <int> = <int> & <int>                          # E.g. `0b1100 & 0b1010 == 0b1000`.
 <int> = <int> | <int>                          # E.g. `0b1100 | 0b1010 == 0b1110`.
 <int> = <int> ^ <int>                          # E.g. `0b1100 ^ 0b1010 == 0b0110`.
-<int> = <int> << n_bits                        # E.g. `0b1100 << 4 == 0b1100_0000`.
+<int> = <int> << n_bits                        # E.g. `0b1111 << 4 == 0b11110000`.
 <int> = ~<int>                                 # E.g. `~0b1 == -0b10 == -(0b1+1)`.
 ```
 
