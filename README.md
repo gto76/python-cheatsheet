@@ -69,9 +69,9 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 <int> = <list>.count(<el>)      # Returns number of occurrences. Also `if <el> in <coll>: ...`.
 <int> = <list>.index(<el>)      # Returns index of the first occurrence or raises ValueError.
 <el>  = <list>.pop()            # Removes and returns item from the end or at index if passed.
-<list>.insert(<int>, <el>)      # Inserts item at index and moves the rest to the right.
+<list>.insert(<int>, <el>)      # Inserts item at passed index and moves the rest to the right.
 <list>.remove(<el>)             # Removes first occurrence of the item or raises ValueError.
-<list>.clear()                  # Removes all items. Also works on dictionary and set.
+<list>.clear()                  # Removes all items. Also works on dictionaries and sets.
 ```
 
 
@@ -370,9 +370,9 @@ import re
 
 * **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).**
 * **Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.**
-* **Argument `'flags=re.IGNORECASE'` can be used with all functions.**
+* **Argument `'flags=re.IGNORECASE'` can be used with all listed regex functions.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
-* **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'`.**
+* **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'` (besides all other chars).**
 * **`'re.compile(<regex>)'` returns a Pattern object with methods sub(), findall(), etc.**
 
 ### Match Object
@@ -380,8 +380,8 @@ import re
 <str>   = <Match>.group()                         # Returns the whole match. Also group(0).
 <str>   = <Match>.group(1)                        # Returns part inside the first brackets.
 <tuple> = <Match>.groups()                        # Returns all bracketed parts as strings.
-<int>   = <Match>.start()                         # Returns start index of the match.
-<int>   = <Match>.end()                           # Returns exclusive end index of the match.
+<int>   = <Match>.start()                         # Returns start index of the whole match.
+<int>   = <Match>.end()                           # Returns its exclusive end index.
 ```
 
 ### Special Sequences
@@ -397,7 +397,7 @@ import re
 Format
 ------
 ```perl
-<str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
+<str> = f'{<el_1>}, {<el_2>}'            # Curly braces can also contain expressions.
 <str> = '{}, {}'.format(<el_1>, <el_2>)  # Same as '{0}, {a}'.format(<el_1>, a=<el_2>).
 <str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
 ```
@@ -418,8 +418,8 @@ Format
 {<el>:.<10}                              # '<el>......'
 {<el>:0}                                 # '<el>'
 ```
-* **Objects are rendered using `'format(<el>, "<options>")'`.**
-* **Options can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
+* **Objects are rendered by calling the `'format(<el>, "<options>")'` function.**
+* **Options inside curly braces can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'='` to the expression prepends it to the output: `f'{1+1=}'` returns `'1+1=2'`.**
 * **Adding `'!r'` to the expression converts object to string by calling its [repr()](#class) method.**
 
@@ -495,13 +495,13 @@ Numbers
 ```python
 <int>      = int(<float/str/bool>)             # Whole number of any size. Truncates floats.
 <float>    = float(<int/str/bool>)             # 64-bit decimal number. Also <float>e±<int>.
-<complex>  = complex(real=0, imag=0)           # Complex number. Also `<float> ± <float>j`.
+<complex>  = complex(real=0, imag=0)           # A complex number. Also `<float> ± <float>j`.
 <Fraction> = fractions.Fraction(<int>, <int>)  # E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.
 <Decimal>  = decimal.Decimal(<str/int/tuple>)  # E.g. `Decimal((1, (2, 3), 4)) == -230_000`.
 ```
-* **`'int(<str>)'` and `'float(<str>)'` raise ValueError on malformed strings.**
+* **`'int(<str>)'` and `'float(<str>)'` raise ValueError if passed string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
-* **Floats can be compared with: `'math.isclose(<float>, <float>)'`.**
+* **Floats can be compared with: `'math.isclose(<float>, <float>, rel_tol=1e-09)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 * **Bools can be used anywhere ints can, because bool is a subclass of int: `'True + 1 == 2'`.**
 
@@ -539,7 +539,7 @@ from random import random, randint, uniform    # Also: gauss, choice, shuffle, s
 <num>   = randint/uniform(a, b)                # Returns an int/float inside [a, b].
 <float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
 <el>    = choice(<sequence>)                   # Keeps it intact. Also sample(p, n).
-shuffle(<list>)                                # Works on any mutable sequence.
+shuffle(<list>)                                # Works on all mutable sequences.
 ```
 
 ### Hexadecimal Numbers
@@ -554,8 +554,8 @@ shuffle(<list>)                                # Works on any mutable sequence.
 <int> = <int> & <int>                          # E.g. `0b1100 & 0b1010 == 0b1000`.
 <int> = <int> | <int>                          # E.g. `0b1100 | 0b1010 == 0b1110`.
 <int> = <int> ^ <int>                          # E.g. `0b1100 ^ 0b1010 == 0b0110`.
-<int> = <int> << n_bits                        # Left shift. Use >> for right.
-<int> = ~<int>                                 # Not. Same as `-<int> - 1`.
+<int> = <int> << n_bits                        # E.g. `0b1100 << 4 == 0b1100_0000`.
+<int> = ~<int>                                 # E.g. `~0b1 == -0b10 == -(0b1+1)`.
 ```
 
 
@@ -603,8 +603,8 @@ import zoneinfo, dateutil.tz
 <DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
 <TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microseconds=0`.
 ```
-* **Times and datetimes that have defined timezone are called aware and ones that don't, naive. If object is naive, it is presumed to be in the system's timezone!**
-* **`'fold=1'` means the second pass in case of time jumping back for one hour.**
+* **Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!**
+* **`'fold=1'` means the second pass in case of time jumping back (usually for one hour).**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M). Its str() method returns `'[±D, ]H:MM:SS[.…]'` and total_seconds() a float of all seconds.**
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an integer, with Monday being 0.**
 
@@ -615,10 +615,10 @@ import zoneinfo, dateutil.tz
 ```
 * **To extract time use `'<DTn>.time()'`, `'<DTa>.time()'` or `'<DTa>.timetz()'`.**
 
-### Timezone
+### Timezones
 ```python
-<tzinfo> = timezone.utc                     # London without daylight saving time (DST).
-<tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from UTC.
+<tzinfo> = timezone.utc                     # Coordinated universal time (UK without DST).
+<tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from universal time.
 <tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from UTC.
 <tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
@@ -642,7 +642,7 @@ import zoneinfo, dateutil.tz
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation of the object.
-<int>    = <D/DT>.toordinal()               # Days since Gregorian NYE 1, ignoring time and tz.
+<int>    = <D/DT>.toordinal()               # Days since NYE 1, ignoring time and timezone.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
 ```
@@ -661,7 +661,7 @@ import zoneinfo, dateutil.tz
 <bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
 <bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
-<TD>     = <DTa>     - <DTa>                # Ignores jumps if they share tzinfo object.
+<TD>     = <DTa>     - <DTa>                # Ignores jumps if they share the tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
 <float>  = <TD>      / <TD>                 # Also `(<int>, <TD>) = divmod(<TD>, <TD>)`.
@@ -788,8 +788,8 @@ from functools import reduce
 
 ### And, Or
 ```python
-<obj> = <exp> and <exp> [and ...]                   # Returns first false or last operand.
-<obj> = <exp> or <exp> [or ...]                     # Returns first true or last operand.
+<obj> = <exp> and <exp> [and ...]                   # Returns first false or last object.
+<obj> = <exp> or <exp> [or ...]                     # Returns first true or last object.
 ```
 
 ### Walrus Operator

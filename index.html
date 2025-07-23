@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 20, 2025</aside>
+    <aside>July 23, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -142,9 +142,9 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Returns number of occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
 &lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
 &lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end or at index if passed.</span>
-&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at index and moves the rest to the right.</span>
+&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at passed index and moves the rest to the right.</span>
 &lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes first occurrence of the item or raises ValueError.</span>
-&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all items. Also works on dictionary and set.</span>
+&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all items. Also works on dictionaries and sets.</span>
 </code></pre>
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or set the value.</span>
 </code></pre></div>
@@ -351,16 +351,16 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <ul>
 <li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).</strong></li>
 <li><strong>Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.</strong></li>
-<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all listed regex functions.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
-<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code>.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code> (besides all other chars).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), etc.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                         <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                        <span class="hljs-comment"># Returns part inside the first brackets.</span>
 &lt;tuple&gt; = &lt;Match&gt;.groups()                        <span class="hljs-comment"># Returns all bracketed parts as strings.</span>
-&lt;int&gt;   = &lt;Match&gt;.start()                         <span class="hljs-comment"># Returns start index of the match.</span>
-&lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns exclusive end index of the match.</span>
+&lt;int&gt;   = &lt;Match&gt;.start()                         <span class="hljs-comment"># Returns start index of the whole match.</span>
+&lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns its exclusive end index.</span>
 </code></pre></div>
 
 <div><h3 id="specialsequences">Special Sequences</h3><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                   <span class="hljs-comment"># Also [०-९…]. Matches a decimal character.</span>
@@ -372,7 +372,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>By default, decimal characters and alphanumerics from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> is used. It restricts special sequence matches to the first 128 Unicode characters and also prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'\x1c'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1d'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1e'</span></code> and <code class="python hljs"><span class="hljs-string">'\x1f'</span></code> (non-printable characters that divide text into files, tables, rows and fields, respectively).</strong></li>
 <li><strong>Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).</strong></li>
 </ul>
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly brackets can also contain expressions.</span>
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly braces can also contain expressions.</span>
 &lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Same as '{0}, {a}'.format(&lt;el_1&gt;, a=&lt;el_2&gt;).</span>
 &lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C-style formatting.</span>
 </code></pre></div>
@@ -391,8 +391,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Objects are rendered using <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, "&lt;options&gt;")'</span></code>.</strong></li>
-<li><strong>Options can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
+<li><strong>Objects are rendered by calling the <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, "&lt;options&gt;")'</span></code> function.</strong></li>
+<li><strong>Options inside curly braces can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> to the expression prepends it to the output: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{<span class="hljs-number">1</span>+<span class="hljs-number">1</span>=}</span>'</span></code> returns <code class="python hljs"><span class="hljs-string">'1+1=2'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> to the expression converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
 </ul>
@@ -455,15 +455,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># Whole number of any size. Truncates floats.</span>
 &lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># 64-bit decimal number. Also &lt;float&gt;e±&lt;int&gt;.</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also `&lt;float&gt; ± &lt;float&gt;j`.</span>
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># A complex number. Also `&lt;float&gt; ± &lt;float&gt;j`.</span>
 &lt;Fraction&gt; = fractions.Fraction(&lt;int&gt;, &lt;int&gt;)  <span class="hljs-comment"># E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.</span>
 &lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># E.g. `Decimal((1, (2, 3), 4)) == -230_000`.</span>
 </code></pre></div>
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError on malformed strings.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError if passed string is malformed.</strong></li>
 <li><strong>Decimal objects store numbers exactly, unlike most floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 != 3.3'</span></code>.</strong></li>
-<li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;)'</span></code>.</strong></li>
+<li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;, rel_tol=1e-09)'</span></code>.</strong></li>
 <li><strong>Precision of decimal operations is set with: <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
 <li><strong>Bools can be used anywhere ints can, because bool is a subclass of int: <code class="python hljs"><span class="hljs-string">'True + 1 == 2'</span></code>.</strong></li>
 </ul>
@@ -492,7 +492,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Returns an int/float inside [a, b].</span>
 &lt;float&gt; = gauss(mean, stdev)                   <span class="hljs-comment"># Also triangular(low, high, mode).</span>
 &lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Keeps it intact. Also sample(p, n).</span>
-shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works on any mutable sequence.</span>
+shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works on all mutable sequences.</span>
 </code></pre>
 <div><h3 id="hexadecimalnumbers">Hexadecimal Numbers</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>
 &lt;int&gt; = int(<span class="hljs-string">'±&lt;hex&gt;'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int('±0x&lt;hex&gt;/±0b&lt;bin&gt;', 0).</span>
@@ -502,8 +502,8 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <div><h3 id="bitwiseoperators">Bitwise Operators</h3><pre><code class="python language-python hljs">&lt;int&gt; = &lt;int&gt; &amp; &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 &amp; 0b1010 == 0b1000`.</span>
 &lt;int&gt; = &lt;int&gt; | &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 | 0b1010 == 0b1110`.</span>
 &lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 ^ 0b1010 == 0b0110`.</span>
-&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># Left shift. Use &gt;&gt; for right.</span>
-&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># Not. Same as `-&lt;int&gt; - 1`.</span>
+&lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># E.g. `0b1100 &lt;&lt; 4 == 0b1100_0000`.</span>
+&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~0b1 == -0b10 == -(0b1+1)`.</span>
 </code></pre></div>
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
@@ -536,8 +536,8 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 &lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microseconds=0`.</span>
 </code></pre>
 <ul>
-<li><strong>Times and datetimes that have defined timezone are called aware and ones that don't, naive. If object is naive, it is presumed to be in the system's timezone!</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back for one hour.</strong></li>
+<li><strong>Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back (usually for one hour).</strong></li>
 <li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of all seconds.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an integer, with Monday being 0.</strong></li>
 </ul>
@@ -548,8 +548,8 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <ul>
 <li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
 </ul>
-<div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># London without daylight saving time (DST).</span>
-&lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from UTC.</span>
+<div><h3 id="timezones">Timezones</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># Coordinated universal time (UK without DST).</span>
+&lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from universal time.</span>
 &lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from UTC.</span>
 &lt;tzinfo&gt; = zoneinfo.ZoneInfo(<span class="hljs-string">'&lt;iana_key&gt;'</span>)  <span class="hljs-comment"># 'Continent/City_Name' zone with dynamic offset.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone([&lt;tzinfo&gt;])      <span class="hljs-comment"># Converts DT to the passed or local fixed zone.</span>
@@ -573,7 +573,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 </ul>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation of the object.</span>
-&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since Gregorian NYE 1, ignoring time and tz.</span>
+&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1, ignoring time and timezone.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from aware datetime.</span>
 </code></pre></div>
@@ -590,7 +590,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also ==.</span>
 &lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
 &lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
-&lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share tzinfo object.</span>
+&lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share the tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`.</span>
 &lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
@@ -676,8 +676,8 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last operand.</span>
-&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last operand.</span>
+<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last object.</span>
+&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last object.</span>
 </code></pre></div>
 
 <div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(a)) &gt; <span class="hljs-number">0</span>]        <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
@@ -2938,7 +2938,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 20, 2025</aside>
+    <aside>July 23, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
