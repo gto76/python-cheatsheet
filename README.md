@@ -640,9 +640,9 @@ import zoneinfo, dateutil.tz
 
 ### Decode
 ```python
-<str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
+<str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Custom string representation of the object.
-<int>    = <D/DT>.toordinal()               # Days since NYE 1, ignoring time and timezone.
+<int>    = <D/DT>.toordinal()               # Days since NYE 1. Ignores DT's time and zone.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
 ```
@@ -794,7 +794,7 @@ from functools import reduce
 
 ### Walrus Operator
 ```python
->>> [i for a in '0123' if (i := int(a)) > 0]        # Assigns to variable mid-sentence.
+>>> [i for ch in '0123' if (i := int(ch)) > 0]      # Assigns to variable mid-sentence.
 [1, 2, 3]
 ```
 
@@ -885,8 +885,7 @@ def get_counter():
 
 Decorator
 ---------
-* **A decorator takes a function, adds some functionality and returns it.**
-* **It can be any [callable](#callable), but is usually implemented as a function that returns a [closure](#closure).**
+**A decorator takes a function, adds some functionality and returns it. It can be any [callable](#callable), but is usually implemented as a function that returns a [closure](#closure).**
 
 ```python
 @decorator_name
@@ -1094,7 +1093,7 @@ Duck Types
 **A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.**
 
 ### Comparable
-* **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default, because id() returns object's unique identification number (its memory address).**
+* **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is unique during its lifetime).**
 * **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.**
 * **Ne() automatically works on any object that has eq() defined.**
 
@@ -1199,8 +1198,8 @@ class Counter:
 
 ### Context Manager
 * **With statements only work on objects that have enter() and exit() special methods.**
-* **Enter() should lock the resources and optionally return an object.**
-* **Exit() should release the resources (for example close a file).**
+* **Enter() should lock the resources and optionally return an object (file, lock, etc.).**
+* **Exit() should release the resources (for example close a file, release a lock, etc.).**
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **The exit() method can suppress the exception by returning a true value.**
 ```python
@@ -1332,8 +1331,8 @@ from enum import Enum, auto
 ```python
 class <enum_name>(Enum):
     <member_name> = auto()              # Increment of the last numeric value or 1.
-    <member_name> = <value>             # Values don't have to be hashable.
-    <member_name> = <el_1>, <el_2>      # Values can be collections (this is a tuple).
+    <member_name> = <value>             # Values don't have to be hashable or unique.
+    <member_name> = <el_1>, <el_2>      # Values can be collections, like this tuple.
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
@@ -1342,20 +1341,20 @@ class <enum_name>(Enum):
 <member> = <enum>.<member_name>         # Returns a member. Raises AttributeError.
 <member> = <enum>['<member_name>']      # Returns a member. Raises KeyError.
 <member> = <enum>(<value>)              # Returns a member. Raises ValueError.
-<str>    = <member>.name                # Returns member's name.
-<obj>    = <member>.value               # Returns member's value.
+<str>    = <member>.name                # Returns the member's name.
+<obj>    = <member>.value               # Returns the member's value.
 ```
 
 ```python
-<list>   = list(<enum>)                 # Returns enum's members.
-<list>   = [a.name for a in <enum>]     # Returns enum's member names.
-<list>   = [a.value for a in <enum>]    # Returns enum's member values.
+<list>   = list(<enum>)                 # Returns a list of enum's members.
+<list>   = <enum>._member_names_        # Returns a list of member names.
+<list>   = [m.value for m in <enum>]    # Returns a list of member values.
 ```
 
 ```python
-<enum>   = type(<member>)               # Returns member's enum.
-<iter>   = itertools.cycle(<enum>)      # Returns endless iterator of members.
-<member> = random.choice(list(<enum>))  # Returns a random member.
+<enum>   = type(<member>)               # Returns an enum. Also <memb>.__class__.
+<iter>   = itertools.cycle(<enum>)      # Returns an endless iterator of members.
+<member> = random.choice(list(<enum>))  # Randomly selects one of the members.
 ```
 
 ### Inline
@@ -1397,8 +1396,8 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
-* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only function block delimits scope).**
-* **To catch signals use `'signal.signal(signal_number, <func>)'`.**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only a function block delimits scope).**
+* **To catch signals use `'signal.signal(signal_number, handler_function)'`.**
 
 ### Catching Exceptions
 ```python
@@ -1407,10 +1406,10 @@ except <exception> as <name>: ...
 except (<exception>, [...]): ...
 except (<exception>, [...]) as <name>: ...
 ```
-* **Also catches subclasses of the exception.**
-* **Use `'traceback.print_exc()'` to print the full error message to stderr.**
-* **Use `'print(<name>)'` to print just the cause of the exception (its arguments).**
-* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details see [Logging](#logging).**
+* **Also catches subclasses, e.g. `'IndexError'` is caught by `'except LookupError:'`.**
+* **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
+* **Use `'print(<name>)'` to print just the cause of the exception (i.e. its arguments).**
+* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see [Logging](#logging).**
 * **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
 ### Raising Exceptions
@@ -1433,7 +1432,7 @@ arguments = <name>.args
 exc_type  = <name>.__class__
 filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
-line      = linecache.getline(filename, <name>.__traceback__.tb_lineno)
+line_str  = linecache.getline(filename, <name>.__traceback__.tb_lineno)
 trace_str = ''.join(traceback.format_tb(<name>.__traceback__))
 error_msg = ''.join(traceback.format_exception(type(<name>), <name>, <name>.__traceback__))
 ```
@@ -1441,25 +1440,25 @@ error_msg = ''.join(traceback.format_exception(type(<name>), <name>, <name>.__tr
 ### Built-in Exceptions
 ```text
 BaseException
- +-- SystemExit                   # Raised by the sys.exit() function.
- +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (ctrl-c).
+ +-- SystemExit                   # Raised by the sys.exit() function (see #Exit for details).
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (control-c).
  +-- Exception                    # User-defined exceptions should be derived from this class.
       +-- ArithmeticError         # Base class for arithmetic errors such as ZeroDivisionError.
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when object doesn't have requested attribute/method.
       +-- EOFError                # Raised by input() when it hits an end-of-file condition.
       +-- LookupError             # Base class for errors when a collection can't find an item.
-      |    +-- IndexError         # Raised when a sequence index is out of range.
+      |    +-- IndexError         # Raised when index of a sequence (list/str) is out of range.
       |    +-- KeyError           # Raised when a dictionary key or set element is missing.
       +-- MemoryError             # Out of memory. May be too late to start deleting variables.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
-      +-- OSError                 # Errors such as FileExistsError/TimeoutError (see #Open).
-      |    +-- ConnectionError    # Errors such as BrokenPipeError/ConnectionAbortedError.
+      +-- OSError                 # Errors such as FileExistsError, TimeoutError (see #Open).
+      |    +-- ConnectionError    # Errors such as BrokenPipeError and ConnectionAbortedError.
       +-- RuntimeError            # Raised by errors that don't fall into other categories.
       |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
       |    +-- RecursionError     # Raised if max recursion depth is exceeded (3k by default).
-      +-- StopIteration           # Raised when an empty iterator is passed to next().
+      +-- StopIteration           # Raised when exhausted (empty) iterator is passed to next().
       +-- TypeError               # When an argument of the wrong type is passed to function.
       +-- ValueError              # When argument has the right type but inappropriate value.
 ```

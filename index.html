@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 23, 2025</aside>
+    <aside>July 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -571,9 +571,9 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.mmmuuu[±HH:MM]'</span></code>, or both separated by an arbitrary character. All parts following the hours are optional.</strong></li>
 <li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
-<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
+<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation of the object.</span>
-&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1, ignoring time and timezone.</span>
+&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1. Ignores DT's time and zone.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from aware datetime.</span>
 </code></pre></div>
@@ -680,7 +680,7 @@ func(*args, **kwargs)
 &lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last object.</span>
 </code></pre></div>
 
-<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(a)) &gt; <span class="hljs-number">0</span>]        <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
+<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(ch)) &gt; <span class="hljs-number">0</span>]      <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
 [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre></div>
 
@@ -751,10 +751,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <span class="hljs-meta">&gt;&gt;&gt; </span>counter(), counter(), counter()
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
-<div class="pagebreak"></div><div><h2 id="decorator"><a href="#decorator" name="decorator">#</a>Decorator</h2><ul>
-<li><strong>A decorator takes a function, adds some functionality and returns it.</strong></li>
-<li><strong>It can be any <a href="#callable">callable</a>, but is usually implemented as a function that returns a <a href="#closure">closure</a>.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-meta">@decorator_name</span>
+<div class="pagebreak"></div><div><h2 id="decorator"><a href="#decorator" name="decorator">#</a>Decorator</h2><p><strong>A decorator takes a function, adds some functionality and returns it. It can be any <a href="#callable">callable</a>, but is usually implemented as a function that returns a <a href="#closure">closure</a>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">@decorator_name</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">function_that_gets_passed_to_decorator</span><span class="hljs-params">()</span>:</span>
     ...
 </code></pre></div>
@@ -929,7 +926,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 </code></pre></div>
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
-<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default, because id() returns object's unique identification number (its memory address).</strong></li>
+<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is unique during its lifetime).</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.</strong></li>
 <li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
@@ -1030,8 +1027,8 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 </code></pre>
 <div><h3 id="contextmanager">Context Manager</h3><ul>
 <li><strong>With statements only work on objects that have enter() and exit() special methods.</strong></li>
-<li><strong>Enter() should lock the resources and optionally return an object.</strong></li>
-<li><strong>Exit() should release the resources (for example close a file).</strong></li>
+<li><strong>Enter() should lock the resources and optionally return an object (file, lock, etc.).</strong></li>
+<li><strong>Exit() should release the resources (for example close a file, release a lock, etc.).</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>The exit() method can suppress the exception by returning a true value.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
@@ -1152,8 +1149,8 @@ Hello World!
 
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
     &lt;member_name&gt; = auto()              <span class="hljs-comment"># Increment of the last numeric value or 1.</span>
-    &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable.</span>
-    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Values can be collections (this is a tuple).</span>
+    &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable or unique.</span>
+    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Values can be collections, like this tuple.</span>
 </code></pre>
 <ul>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
@@ -1162,16 +1159,16 @@ Hello World!
 <pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member. Raises AttributeError.</span>
 &lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
 &lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)              <span class="hljs-comment"># Returns a member. Raises ValueError.</span>
-&lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns member's name.</span>
-&lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Returns member's value.</span>
+&lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns the member's name.</span>
+&lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Returns the member's value.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns enum's members.</span>
-&lt;list&gt;   = [a.name <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]     <span class="hljs-comment"># Returns enum's member names.</span>
-&lt;list&gt;   = [a.value <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns enum's member values.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns a list of enum's members.</span>
+&lt;list&gt;   = &lt;enum&gt;._member_names_        <span class="hljs-comment"># Returns a list of member names.</span>
+&lt;list&gt;   = [m.value <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns a list of member values.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;enum&gt;   = type(&lt;member&gt;)               <span class="hljs-comment"># Returns member's enum.</span>
-&lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Returns endless iterator of members.</span>
-&lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Returns a random member.</span>
+<pre><code class="python language-python hljs">&lt;enum&gt;   = type(&lt;member&gt;)               <span class="hljs-comment"># Returns an enum. Also &lt;memb&gt;.__class__.</span>
+&lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Returns an endless iterator of members.</span>
+&lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Randomly selects one of the members.</span>
 </code></pre>
 <div><h3 id="inline-1">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
@@ -1204,8 +1201,8 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
-<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only function block delimits scope).</strong></li>
-<li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, &lt;func&gt;)'</span></code>.</strong></li>
+<li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only a function block delimits scope).</strong></li>
+<li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, handler_function)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
 <span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;: ...
@@ -1214,10 +1211,10 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </code></pre></div>
 
 <ul>
-<li><strong>Also catches subclasses of the exception.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to stderr.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (its arguments).</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details see <a href="#logging">Logging</a>.</strong></li>
+<li><strong>Also catches subclasses, e.g. <code class="python hljs"><span class="hljs-string">'IndexError'</span></code> is caught by <code class="python hljs"><span class="hljs-string">'except LookupError:'</span></code>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to standard error stream.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (i.e. its arguments).</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see <a href="#logging">Logging</a>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'sys.exc_info()'</span></code> to get exception type, object, and traceback of caught exception.</strong></li>
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
@@ -1234,31 +1231,31 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 exc_type  = &lt;name&gt;.__class__
 filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
 func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
-line      = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
+line_str  = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
 trace_str = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
 error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(type(&lt;name&gt;), &lt;name&gt;, &lt;name&gt;.__traceback__))
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
- ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function.</span>
- ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key (ctrl-c).</span>
+ ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function (see #Exit for details).</span>
+ ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key (control-c).</span>
  └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
       ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors such as ZeroDivisionError.</span>
       ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when object doesn't have requested attribute/method.</span>
       ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits an end-of-file condition.</span>
       ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
-      │    ├── IndexError         <span class="hljs-comment"># Raised when a sequence index is out of range.</span>
+      │    ├── IndexError         <span class="hljs-comment"># Raised when index of a sequence (list/str) is out of range.</span>
       │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is missing.</span>
       ├── MemoryError             <span class="hljs-comment"># Out of memory. May be too late to start deleting variables.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
-      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError/TimeoutError (see #Open).</span>
-      │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError/ConnectionAbortedError.</span>
+      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError, TimeoutError (see #Open).</span>
+      │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError and ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
-      ├── StopIteration           <span class="hljs-comment"># Raised when an empty iterator is passed to next().</span>
+      ├── StopIteration           <span class="hljs-comment"># Raised when exhausted (empty) iterator is passed to next().</span>
       ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
       └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
 </code></pre></div>
@@ -2938,7 +2935,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 23, 2025</aside>
+    <aside>July 25, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
