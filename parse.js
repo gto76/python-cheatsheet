@@ -95,7 +95,7 @@ const SHUTIL_COPY =
   'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
 
 const OS_RENAME =
-  'os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>\n' +
+  'os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory \'from\'.</span>\n' +
   'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites file \'to\' even on Windows.</span>\n' +
   'shutil.move(from, to)               <span class="hljs-comment"># Rename() that moves into \'to\' if it\'s a dir.</span>\n';
 

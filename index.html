@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 25, 2025</aside>
+    <aside>July 26, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1315,7 +1315,7 @@ arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
 <div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
-p = ArgumentParser(description=&lt;str&gt;)                             <span class="hljs-comment"># Returns a parser.</span>
+p = ArgumentParser(description=&lt;str&gt;)                             <span class="hljs-comment"># Returns a parser object.</span>
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># Mandatory first argument.</span>
@@ -1353,9 +1353,9 @@ args  = p.parse_args()                                            <span class="h
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
-</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves to the start of the file.</span>
+</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the start of file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
-&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves to the end of the file.</span>
+&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves current position to the end of file.</span>
 &lt;bin_file&gt;.seek(±offset, origin)    <span class="hljs-comment"># Origin: 0 start, 1 current position, 2 end.</span>
 </code></pre></div></div></div>
 
@@ -1363,12 +1363,12 @@ args  = p.parse_args()                                            <span class="h
 
 
 
-<pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until EOF.</span>
+<pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until the EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line or empty string/bytes on EOF.</span>
-&lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns a list of remaining lines.</span>
-&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using buffer. Do not mix.</span>
+&lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns remaining lines. Also list(&lt;file&gt;).</span>
+&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Uses read-ahead buffer. Don't mix with above.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a string or bytes object.</span>
+<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a str or bytes object to write buffer.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer. Runs every 4096/8192 B.</span>
 &lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing write buffer.</span>
@@ -1398,19 +1398,19 @@ args  = p.parse_args()                                            <span class="h
 &lt;str&gt;  = os.path.dirname(&lt;path&gt;)    <span class="hljs-comment"># Returns path without the final component.</span>
 &lt;tup.&gt; = os.path.splitext(&lt;path&gt;)   <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns filenames located at the path.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns all filenames located at the path.</span>
 &lt;list&gt; = glob.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)     <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = os.path.exists(&lt;path&gt;)     <span class="hljs-comment"># Same as &lt;Path&gt;.exists().</span>
-&lt;bool&gt; = os.path.isfile(&lt;path&gt;)     <span class="hljs-comment"># Same as &lt;DirEntry/Path&gt;.is_file().</span>
-&lt;bool&gt; = os.path.isdir(&lt;path&gt;)      <span class="hljs-comment"># Same as &lt;DirEntry/Path&gt;.is_dir().</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = os.path.exists(&lt;path&gt;)     <span class="hljs-comment"># Checks if path exists. Also &lt;Path&gt;.exists().</span>
+&lt;bool&gt; = os.path.isfile(&lt;path&gt;)     <span class="hljs-comment"># Also &lt;Path&gt;.is_file() and &lt;DirEntry&gt;.is_file().</span>
+&lt;bool&gt; = os.path.isdir(&lt;path&gt;)      <span class="hljs-comment"># Also &lt;Path&gt;.is_dir() and &lt;DirEntry&gt;.is_dir().</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># Same as &lt;DirEntry/Path&gt;.stat().</span>
-&lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Modification time, size in bytes, etc.</span>
+<pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># File's status. Also &lt;Path/DirEntry&gt;.stat().</span>
+&lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Returns modification time, size in bytes, etc.</span>
 </code></pre>
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path as a string.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns final component as a string.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path (relative by default).</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns path's final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns its file object.</span>
 </code></pre></div>
 
@@ -1420,22 +1420,22 @@ args  = p.parse_args()                                            <span class="h
 &lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute path with resolved symlinks.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns relative CWD. Also Path('.').</span>
+<pre><code class="python language-python hljs">&lt;Path&gt; = Path()                     <span class="hljs-comment"># Returns current working dir. Also Path('.').</span>
 &lt;Path&gt; = Path.cwd()                 <span class="hljs-comment"># Returns absolute CWD. Also Path().resolve().</span>
 &lt;Path&gt; = Path.home()                <span class="hljs-comment"># Returns user's home directory (absolute).</span>
 &lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns module's path if CWD wasn't changed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns Path without the final component.</span>
-&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component as a string.</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension, e.g. '.py'.</span>
+&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns path's final component as a string.</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns name's last extension, e.g. '.gz'.</span>
 &lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns name without the last extension.</span>
-&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all components as strings.</span>
+&lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Returns all path's components as strings.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = &lt;Path&gt;.iterdir()           <span class="hljs-comment"># Returns directory contents as Path objects.</span>
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as string. Also &lt;Path&gt;.as_uri().</span>
-&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read/write_text/bytes(&lt;args&gt;).</span>
+&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read_text/write_bytes(&lt;args&gt;).</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil, subprocess
 </code></pre></div>
@@ -1448,13 +1448,13 @@ os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span
 shutil.copy2(from, to)              <span class="hljs-comment"># Also copies creation and modification time.</span>
 shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. 'to' must not exist.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames/moves the file or directory.</span>
+<pre><code class="python language-python hljs">os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory 'from'.</span>
 os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites file 'to' even on Windows.</span>
 shutil.move(from, to)               <span class="hljs-comment"># Rename() that moves into 'to' if it's a dir.</span>
 </code></pre>
-<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file.</span>
-os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory.</span>
-shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory.</span>
+<pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                   <span class="hljs-comment"># Deletes the file. Or `pip3 install send2trash`.</span>
+os.rmdir(&lt;path&gt;)                    <span class="hljs-comment"># Deletes the empty directory or raises OSError.</span>
+shutil.rmtree(&lt;path&gt;)               <span class="hljs-comment"># Deletes the directory and all of its contents.</span>
 </code></pre>
 <ul>
 <li><strong>Paths can be either strings, Path objects, or DirEntry objects.</strong></li>
@@ -2935,7 +2935,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 25, 2025</aside>
+    <aside>July 26, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

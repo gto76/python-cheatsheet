@@ -1538,7 +1538,7 @@ arguments    = sys.argv[1:]
 ### Argument Parser
 ```python
 from argparse import ArgumentParser, FileType
-p = ArgumentParser(description=<str>)                             # Returns a parser.
+p = ArgumentParser(description=<str>)                             # Returns a parser object.
 p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaults to False).
 p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
 p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
@@ -1582,21 +1582,21 @@ Open
 
 ### File Object
 ```python
-<file>.seek(0)                      # Moves to the start of the file.
+<file>.seek(0)                      # Moves current position to the start of file.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
-<file>.seek(0, 2)                   # Moves to the end of the file.
+<file>.seek(0, 2)                   # Moves current position to the end of file.
 <bin_file>.seek(±offset, origin)    # Origin: 0 start, 1 current position, 2 end.
 ```
 
 ```python
-<str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until EOF.
+<str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until the EOF.
 <str/bytes> = <file>.readline()     # Returns a line or empty string/bytes on EOF.
-<list>      = <file>.readlines()    # Returns a list of remaining lines.
-<str/bytes> = next(<file>)          # Returns a line using buffer. Do not mix.
+<list>      = <file>.readlines()    # Returns remaining lines. Also list(<file>).
+<str/bytes> = next(<file>)          # Uses read-ahead buffer. Don't mix with above.
 ```
 
 ```python
-<file>.write(<str/bytes>)           # Writes a string or bytes object.
+<file>.write(<str/bytes>)           # Writes a str or bytes object to write buffer.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
 <file>.close()                      # Closes the file after flushing write buffer.
@@ -1638,19 +1638,19 @@ from pathlib import Path
 ```
 
 ```python
-<list> = os.listdir(path='.')       # Returns filenames located at the path.
+<list> = os.listdir(path='.')       # Returns all filenames located at the path.
 <list> = glob.glob('<pattern>')     # Returns paths matching the wildcard pattern.
 ```
 
 ```python
-<bool> = os.path.exists(<path>)     # Same as <Path>.exists().
-<bool> = os.path.isfile(<path>)     # Same as <DirEntry/Path>.is_file().
-<bool> = os.path.isdir(<path>)      # Same as <DirEntry/Path>.is_dir().
+<bool> = os.path.exists(<path>)     # Checks if path exists. Also <Path>.exists().
+<bool> = os.path.isfile(<path>)     # Also <Path>.is_file() and <DirEntry>.is_file().
+<bool> = os.path.isdir(<path>)      # Also <Path>.is_dir() and <DirEntry>.is_dir().
 ```
 
 ```python
-<stat> = os.stat(<path>)            # Same as <DirEntry/Path>.stat().
-<num>  = <stat>.st_mtime/st_size/…  # Modification time, size in bytes, etc.
+<stat> = os.stat(<path>)            # File's status. Also <Path/DirEntry>.stat().
+<num>  = <stat>.st_mtime/st_size/…  # Returns modification time, size in bytes, etc.
 ```
 
 ### DirEntry
@@ -1658,8 +1658,8 @@ from pathlib import Path
 
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
-<str>  = <DirEntry>.path            # Returns the whole path as a string.
-<str>  = <DirEntry>.name            # Returns final component as a string.
+<str>  = <DirEntry>.path            # Returns the whole path (relative by default).
+<str>  = <DirEntry>.name            # Returns path's final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns its file object.
 ```
 
@@ -1671,7 +1671,7 @@ from pathlib import Path
 ```
 
 ```python
-<Path> = Path()                     # Returns relative CWD. Also Path('.').
+<Path> = Path()                     # Returns current working dir. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute CWD. Also Path().resolve().
 <Path> = Path.home()                # Returns user's home directory (absolute).
 <Path> = Path(__file__).resolve()   # Returns module's path if CWD wasn't changed.
@@ -1679,10 +1679,10 @@ from pathlib import Path
 
 ```python
 <Path> = <Path>.parent              # Returns Path without the final component.
-<str>  = <Path>.name                # Returns final component as a string.
-<str>  = <Path>.suffix              # Returns name's last extension, e.g. '.py'.
+<str>  = <Path>.name                # Returns path's final component as a string.
+<str>  = <Path>.suffix              # Returns name's last extension, e.g. '.gz'.
 <str>  = <Path>.stem                # Returns name without the last extension.
-<tup.> = <Path>.parts               # Returns all components as strings.
+<tup.> = <Path>.parts               # Returns all path's components as strings.
 ```
 
 ```python
@@ -1692,7 +1692,7 @@ from pathlib import Path
 
 ```python
 <str>  = str(<Path>)                # Returns path as string. Also <Path>.as_uri().
-<file> = open(<Path>)               # Also <Path>.read/write_text/bytes(<args>).
+<file> = open(<Path>)               # Also <Path>.read_text/write_bytes(<args>).
 ```
 
 
@@ -1715,15 +1715,15 @@ shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
 ```
 
 ```python
-os.rename(from, to)                 # Renames/moves the file or directory.
+os.rename(from, to)                 # Renames or moves the file or directory 'from'.
 os.replace(from, to)                # Same, but overwrites file 'to' even on Windows.
 shutil.move(from, to)               # Rename() that moves into 'to' if it's a dir.
 ```
 
 ```python
-os.remove(<path>)                   # Deletes the file.
-os.rmdir(<path>)                    # Deletes the empty directory.
-shutil.rmtree(<path>)               # Deletes the directory.
+os.remove(<path>)                   # Deletes the file. Or `pip3 install send2trash`.
+os.rmdir(<path>)                    # Deletes the empty directory or raises OSError.
+shutil.rmtree(<path>)               # Deletes the directory and all of its contents.
 ```
 * **Paths can be either strings, Path objects, or DirEntry objects.**
 * **Functions report OS related errors by raising OSError or one of its [subclasses](#exceptions-1).**
