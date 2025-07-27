@@ -1915,9 +1915,9 @@ with <conn>:                                   # Exits the block with commit() o
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
 ```python
 >>> conn = sqlite3.connect('test.db')
->>> conn.execute('CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height) STRICT')
->>> conn.execute('INSERT INTO person VALUES (NULL, ?, ?)', ('Jean-Luc', 187))
->>> conn.execute('SELECT * FROM person').fetchall()
+>>> conn.execute('CREATE TABLE person (name TEXT, height INTEGER) STRICT')
+>>> conn.execute('INSERT INTO person VALUES (?, ?)', ('Jean-Luc', 187))
+>>> conn.execute('SELECT rowid, * FROM person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ```
 
