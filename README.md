@@ -823,9 +823,9 @@ import <module>            # Imports a built-in or '<module>.py'.
 import <package>           # Imports a built-in or '<package>/__init__.py'.
 import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 ```
-* **Package is a collection of modules, but it can also define its own objects.**
+* **Package is a collection of modules, but it can also define its own objects, classes, etc.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
-* **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in its init script.**
+* **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in the `'<package>/__init__.py'` script.**
 * **Directory of the file that is passed to python command serves as a root of local imports.**
 * **For relative imports use `'from .[…][<pkg/module>[.…]] import <obj>'`.**
 
@@ -1178,7 +1178,7 @@ class Counter:
 * **File objects returned by the [open()](#open) function, etc.**
 
 ### Callable
-* **All functions and classes have a call() method, hence are callable.**
+* **All functions and classes have a call() method that is executed when they are called.**
 * **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. You can also just call the object and check if it raised TypeError.**
 * **When this cheatsheet uses `'<function>'` as an argument, it means `'<callable>'`.**
 ```python
@@ -1396,7 +1396,7 @@ finally:
 ```
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
-* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only a function block delimits scope).**
+* **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only the function block delimits scope).**
 * **To catch signals use `'signal.signal(signal_number, handler_function)'`.**
 
 ### Catching Exceptions
@@ -1505,7 +1505,7 @@ Print
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
-* **Use `'file=sys.stderr'` for messages about errors.**
+* **Use `'file=sys.stderr'` for messages about errors so they can be processed separately.**
 * **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or program exits.**
 
 ### Pretty Print
@@ -1549,7 +1549,7 @@ args  = p.parse_args()                                            # Exits on par
 ```
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<obj>'` to set option's or optional argument's default value.**
+* **Use `'default=<obj>'` to override None as option's or optional argument's default value.**
 * **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
 
 
@@ -1560,7 +1560,7 @@ Open
 ```python
 <file> = open(<path>, mode='r', encoding=None, newline=None)
 ```
-* **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` whenever possible.**
+* **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.**
 
@@ -1817,7 +1817,7 @@ import csv
 <list>   = list(<reader>)                 # Returns a list of all remaining rows.
 ```
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see [Open](#open).**
-* **To print the spreadsheet to the console use [Tabulate](#table) library.**
+* **To print the spreadsheet to the console use [Tabulate](#table) or PrettyTable library.**
 * **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
 * **Reader accepts any iterator (or collection) of strings, not just files.**
 
