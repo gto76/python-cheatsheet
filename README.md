@@ -71,7 +71,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 <el>  = <list>.pop()            # Removes and returns item from the end or at index if passed.
 <list>.insert(<int>, <el>)      # Inserts item at passed index and moves the rest to the right.
 <list>.remove(<el>)             # Removes first occurrence of the item or raises ValueError.
-<list>.clear()                  # Removes all items. Also works on dictionaries and sets.
+<list>.clear()                  # Removes all list's items. Also works on dictionary and set.
 ```
 
 
@@ -1179,7 +1179,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method, hence are callable.**
-* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. Calling an uncallable object raises TypeError.**
+* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. You can also just call the object and check if it raised TypeError.**
 * **When this cheatsheet uses `'<function>'` as an argument, it means `'<callable>'`.**
 ```python
 class Counter:
@@ -1627,7 +1627,7 @@ from pathlib import Path
 
 ```python
 <str>  = os.getcwd()                # Returns working dir. Starts as shell's $PWD.
-<str>  = os.path.join(<path>, ...)  # Joins two or more pathname components.
+<str>  = os.path.join(<path>, ...)  # Uses os.sep to join strings or Path objects.
 <str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
 ```
 
@@ -1810,24 +1810,25 @@ CSV
 import csv
 ```
 
-### Read
 ```python
-<reader> = csv.reader(<file>)       # Also: `dialect='excel', delimiter=','`.
-<list>   = next(<reader>)           # Returns next row as a list of strings.
-<list>   = list(<reader>)           # Returns a list of remaining rows.
+<file>   = open(<path>, newline='')       # Opens the CSV (text) file for reading.
+<reader> = csv.reader(<file>)             # Also: `dialect='excel', delimiter=','`.
+<list>   = next(<reader>)                 # Returns next row as a list of strings.
+<list>   = list(<reader>)                 # Returns a list of all remaining rows.
 ```
-* **File must be opened with a `'newline=""'` argument, or every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'!**
+* **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see [Open](#open).**
 * **To print the spreadsheet to the console use [Tabulate](#table) library.**
-* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#dataframe-plot-encode-decode) library.**
-* **Reader accepts any iterator or collection of strings, not just files.**
+* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
+* **Reader accepts any iterator (or collection) of strings, not just files.**
 
 ### Write
 ```python
-<writer> = csv.writer(<file>)       # Also: `dialect='excel', delimiter=','`.
-<writer>.writerow(<collection>)     # Encodes objects using `str(<el>)`.
-<writer>.writerows(<coll_of_coll>)  # Appends multiple rows.
+<file>   = open(<path>, 'w', newline='')  # Opens the CSV (text) file for writing.
+<writer> = csv.writer(<file>)             # Also: `dialect='excel', delimiter=','`.
+<writer>.writerow(<collection>)           # Encodes each object using `str(<el>)`.
+<writer>.writerows(<coll_of_coll>)        # Appends multiple rows to the file.
 ```
-* **File must be opened with a `'newline=""'` argument, or '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings!**
+* **If file is opened without the `'newline=""'` argument, '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings (i.e., newlines may get doubled on Windows)!**
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
 
 ### Parameters
@@ -1836,7 +1837,7 @@ import csv
 * **`'lineterminator'` - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
 * **`'quotechar'` - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.**
 * **`'escapechar'` - Character for escaping quotechars (not needed if doublequote is True).**
-* **`'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.**
+* **`'doublequote'` - Whether quotechars inside fields are (or get) doubled or escaped.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 
@@ -1904,18 +1905,18 @@ with <conn>:                                   # Exits the block with commit() o
 ### Placeholders
 ```python
 <conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
-<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a value.
-<conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() multiple times.
+<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with matching value.
+<conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() once for each collection.
 ```
 * **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
+* **SQLite does not restrict columns to any type unless table is declared as strict.**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
 ```python
 >>> conn = sqlite3.connect('test.db')
->>> conn.execute('CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height)')
->>> conn.execute('INSERT INTO person VALUES (NULL, ?, ?)', ('Jean-Luc', 187)).lastrowid
-1
+>>> conn.execute('CREATE TABLE person (person_id INTEGER PRIMARY KEY, name, height) STRICT')
+>>> conn.execute('INSERT INTO person VALUES (NULL, ?, ?)', ('Jean-Luc', 187))
 >>> conn.execute('SELECT * FROM person').fetchall()
 [(1, 'Jean-Luc', 187)]
 ```
@@ -2317,8 +2318,8 @@ import asyncio as aio
 
 ```python
 <coro> = <async_function>(<args>)          # Creates a coroutine by calling async def function.
-<obj>  = await <coroutine>                 # Starts the coroutine and returns its result.
-<task> = aio.create_task(<coroutine>)      # Schedules the coroutine for execution.
+<obj>  = await <coroutine>                 # Starts the coroutine and waits for its result.
+<task> = aio.create_task(<coroutine>)      # Schedules it for execution. Always keep the task.
 <obj>  = await <task>                      # Returns coroutine's result. Also <task>.cancel().
 ```
 
