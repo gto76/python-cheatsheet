@@ -823,7 +823,7 @@ import <module>            # Imports a built-in or '<module>.py'.
 import <package>           # Imports a built-in or '<package>/__init__.py'.
 import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
 ```
-* **Package is a collection of modules, but it can also define its own objects, classes, etc.**
+* **Package is a collection of modules, but it can also define its own functions, classes, etc.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in the `'<package>/__init__.py'` script.**
 * **Directory of the file that is passed to python command serves as a root of local imports.**
@@ -1262,7 +1262,7 @@ class MyCollection:
 ```
 
 ### Sequence
-* **Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (this excludes dictionaries because they accept keys).**
+* **Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (it may also support negative indices and/or slices).**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.**
 ```python

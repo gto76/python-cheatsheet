@@ -704,7 +704,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Package is a collection of modules, but it can also define its own objects, classes, etc.</strong></li>
+<li><strong>Package is a collection of modules, but it can also define its own functions, classes, etc.</strong></li>
 <li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in the <code class="python hljs"><span class="hljs-string">'&lt;package&gt;/__init__.py'</span></code> script.</strong></li>
 <li><strong>Directory of the file that is passed to python command serves as a root of local imports.</strong></li>
@@ -1085,7 +1085,7 @@ Hello World!
 
 
 <div><h3 id="sequence">Sequence</h3><ul>
-<li><strong>Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (this excludes dictionaries because they accept keys).</strong></li>
+<li><strong>Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (it may also support negative indices and/or slices).</strong></li>
 <li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
 <li><strong>Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
