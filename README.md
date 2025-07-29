@@ -1286,7 +1286,7 @@ class MySequence:
 * **Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
-* **It's a richer interface than the basic sequence that also just requires getitem() and len().**
+* **It's a richer interface than the basic sequence that also requires just getitem() and len().**
 * **Extending it generates iter(), contains(), reversed(), index() and count() special methods.**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, since they are registered as Sequence's virtual subclasses.**
 ```python

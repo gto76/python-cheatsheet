@@ -1113,7 +1113,7 @@ Hello World!
 
 
 <div><h3 id="abcsequence">ABC Sequence</h3><ul>
-<li><strong>It's a richer interface than the basic sequence that also just requires getitem() and len().</strong></li>
+<li><strong>It's a richer interface than the basic sequence that also requires just getitem() and len().</strong></li>
 <li><strong>Extending it generates iter(), contains(), reversed(), index() and count() special methods.</strong></li>
 <li><strong>Unlike <code class="python hljs"><span class="hljs-string">'abc.Iterable'</span></code> and <code class="python hljs"><span class="hljs-string">'abc.Collection'</span></code>, it is not a duck type. That is why <code class="python hljs"><span class="hljs-string">'issubclass(MySequence, abc.Sequence)'</span></code> would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, since they are registered as Sequence's virtual subclasses.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
