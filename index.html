@@ -926,7 +926,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 </code></pre></div>
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
-<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is unique during its lifetime).</strong></li>
+<li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.</strong></li>
 <li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
@@ -1365,7 +1365,7 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until the EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line or empty string/bytes on EOF.</span>
 &lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns remaining lines. Also list(&lt;file&gt;).</span>
-&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Uses read-ahead buffer. Don't mix with above.</span>
+&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using a read-ahead buffer.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a str or bytes object to write buffer.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
@@ -1408,7 +1408,7 @@ args  = p.parse_args()                                            <span class="h
 &lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Returns modification time, size in bytes, etc.</span>
 </code></pre>
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns the whole path (relative by default).</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns object's path (relative by default).</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns path's final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns its file object.</span>
 </code></pre></div>

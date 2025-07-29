@@ -1093,7 +1093,7 @@ Duck Types
 **A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.**
 
 ### Comparable
-* **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is unique during its lifetime).**
+* **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).**
 * **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.**
 * **Ne() automatically works on any object that has eq() defined.**
 
@@ -1591,7 +1591,7 @@ Open
 <str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until the EOF.
 <str/bytes> = <file>.readline()     # Returns a line or empty string/bytes on EOF.
 <list>      = <file>.readlines()    # Returns remaining lines. Also list(<file>).
-<str/bytes> = next(<file>)          # Uses read-ahead buffer. Don't mix with above.
+<str/bytes> = next(<file>)          # Returns a line using a read-ahead buffer.
 ```
 
 ```python
@@ -1657,7 +1657,7 @@ from pathlib import Path
 
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
-<str>  = <DirEntry>.path            # Returns the whole path (relative by default).
+<str>  = <DirEntry>.path            # Returns object's path (relative by default).
 <str>  = <DirEntry>.name            # Returns path's final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns its file object.
 ```
