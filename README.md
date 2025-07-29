@@ -1262,8 +1262,7 @@ class MyCollection:
 ```
 
 ### Sequence
-* **Only required methods are getitem() and len().**
-* **Getitem() should return an item at the passed index or raise IndexError.**
+* **Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (this excludes dictionaries because they accept keys).**
 * **Iter() and contains() automatically work on any object that has getitem() defined.**
 * **Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.**
 ```python
@@ -1287,8 +1286,8 @@ class MySequence:
 * **Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
-* **It's a richer interface than the basic sequence.**
-* **Extending it generates iter(), contains(), reversed(), index() and count().**
+* **It's a richer interface than the basic sequence that also just requires getitem() and len().**
+* **Extending it generates iter(), contains(), reversed(), index() and count() special methods.**
 * **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, since they are registered as Sequence's virtual subclasses.**
 ```python
 from collections import abc
@@ -1885,7 +1884,7 @@ import sqlite3
 ### Read
 ```python
 <cursor> = <conn>.execute('<query>')           # Can raise a subclass of sqlite3.Error.
-<tuple>  = <cursor>.fetchone()                 # Returns next row. Also next(<cursor>).
+<tuple>  = <cursor>.fetchone()                 # Returns the next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                 # Returns remaining rows. Also list(<cursor>).
 ```
 
@@ -1905,7 +1904,7 @@ with <conn>:                                   # Exits the block with commit() o
 ### Placeholders
 ```python
 <conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
-<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with matching value.
+<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
 <conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() once for each collection.
 ```
 * **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
@@ -2029,21 +2028,21 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.**
+**List that can only hold numbers of a predefined C type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.**
 
 ```python
 from array import array
 ```
 
 ```python
-<array> = array('<typecode>', <coll_of_nums>)  # Creates array from collection of numbers.
-<array> = array('<typecode>', <bytes>)         # Writes passed bytes to array's memory.
+<array> = array('<typecode>', <coll_of_nums>)  # Creates an array from collection of numbers.
+<array> = array('<typecode>', <bytes>)         # Writes passed bytes to the array's memory.
 <array> = array('<typecode>', <array>)         # Treats passed array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends file's contents to array's memory.
+<array>.fromfile(<file>, n_items)              # Appends file contents to the array's memory.
 ```
 
 ```python
-<bytes> = bytes(<array>)                       # Returns a copy of array's memory.
+<bytes> = bytes(<array>)                       # Returns a copy of array's memory as bytes.
 <file>.write(<array>)                          # Writes array's memory to the binary file.
 ```
 
@@ -2054,7 +2053,7 @@ Memory View
 
 ```python
 <mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes is passed, else mutable.
-<obj>   = <mview>[index]                       # Returns int/float. Bytes if format is 'c'.
+<obj>   = <mview>[index]                       # Returns ints/floats. Bytes if format is 'c'.
 <mview> = <mview>[<slice>]                     # Returns memoryview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
 <mview>.release()                              # Releases memory buffer of the base object.
@@ -2069,7 +2068,7 @@ Memory View
 
 ```python
 <list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
-<str>   = str(<mview>, 'utf-8')                # Treats memoryview as a bytes object.
+<str>   = str(<mview>, 'utf-8')                # Treats passed memoryview as a bytes object.
 <str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
 ```
 
@@ -2085,15 +2084,15 @@ from collections import deque
 ```python
 <deque> = deque(<collection>)                  # Use `maxlen=<int>` to set size limit.
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
-<deque>.extendleft(<collection>)               # Passed collection gets reversed.
-<deque>.rotate(n=1)                            # Last element becomes first.
+<deque>.extendleft(<collection>)               # Appends elements in reversed order.
+<deque>.rotate(n=1)                            # Last element becomes the first one.
 <el> = <deque>.popleft()                       # Raises IndexError if deque is empty.
 ```
 
 
 Operator
 --------
-**Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in lines 1, 3 and 5 are also ordered by precedence within a group.**
+**Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in first, third and fifth line are also ordered by precedence within a group.**
 ```python
 import operator as op
 ```
@@ -2101,11 +2100,11 @@ import operator as op
 ```python
 <bool> = op.not_(<obj>)                                        # or, and, not (or/and missing)
 <bool> = op.eq/ne/lt/ge/is_/is_not/contains(<obj>, <obj>)      # ==, !=, <, >=, is, is not, in
-<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, &
-<int>  = op.lshift/rshift(<int>, <int>)                        # <<, >>
-<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, %
-<num>  = op.neg/invert(<num>)                                  # -, ~
-<num>  = op.pow(<num>, <num>)                                  # **
+<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, & (sorted by precedence)
+<int>  = op.lshift/rshift(<int>, <int>)                        # <<, >> (i.e. <int> << n_bits)
+<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, % (two groups)
+<num>  = op.neg/invert(<num>)                                  # -, ~ (negate and bitwise not)
+<num>  = op.pow(<num>, <num>)                                  # ** (pow() accepts 3 arguments)
 <func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name([…])
 ```
 
@@ -2137,16 +2136,15 @@ match <object/expression>:
 <wildcard_patt> = _                                # Matches any object. Useful in last case.
 <capture_patt>  = <name>                           # Matches any object and binds it to name.
 <as_pattern>    = <pattern> as <name>              # Binds match to name. Also <type>(<name>).
-<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches any of the patterns.
-<sequence_patt> = [<pattern>, ...]                 # Matches sequence with matching items.
-<mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches dictionary with matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.
+<or_pattern>    = <pattern> | <pattern> [| ...]    # Matches if any of listed patterns match.
+<sequence_patt> = [<pattern>, ...]                 # Matches a sequence. All items must match.
+<mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict that has matching items.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches an object if attributes match.
 ```
-* **Sequence pattern can also be written as a tuple, i.e. `'(<patt_1>, [...])'`.**
+* **Sequence pattern can also be written as a tuple, i.e. `'(<pattern_1>, [...])'`.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
 * **Sequence pattern must match all items of the collection, while mapping pattern does not.**
 * **Patterns can be surrounded with brackets to override precedence (`'|'` > `'as'` > `','`).**
-* **Built-in types allow a single positional pattern that is matched against the entire object.**
 * **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.**
 
 ### Example
@@ -2169,9 +2167,9 @@ import logging as log
 
 ```python
 log.basicConfig(filename=<path>, level='DEBUG')   # Configures the root logger (see Setup).
-log.debug/info/warning/error/critical(<str>)      # Sends message to the root logger.
-<Logger> = log.getLogger(__name__)                # Returns logger named after the module.
-<Logger>.<level>(<str>)                           # Sends message to the logger.
+log.debug/info/warning/error/critical(<str>)      # Sends passed message to the root logger.
+<Logger> = log.getLogger(__name__)                # Returns a logger named after the module.
+<Logger>.<level>(<str>)                           # Sends the message. Same levels as above.
 <Logger>.exception(<str>)                         # Error() that appends caught exception.
 ```
 
@@ -2186,11 +2184,11 @@ log.basicConfig(
 ```
 
 ```python
-<Formatter> = log.Formatter('<format>')           # Creates a Formatter.
-<Handler> = log.FileHandler(<path>, mode='a')     # Creates a Handler. Also `encoding=None`.
-<Handler>.setFormatter(<Formatter>)               # Adds Formatter to the Handler.
-<Handler>.setLevel(<int/str>)                     # Processes all messages by default.
-<Logger>.addHandler(<Handler>)                    # Adds Handler to the Logger.
+<Formatter> = log.Formatter('<format>')           # Formats messages according to format str.
+<Handler> = log.FileHandler(<path>, mode='a')     # Creates a handler. Also `encoding=None`.
+<Handler>.setFormatter(<Formatter>)               # Assigns the formatter to the handler.
+<Handler>.setLevel(<int/str>)                     # It will process all messages by default.
+<Logger>.addHandler(<Handler>)                    # Appends handler to logger's 'handlers'.
 <Logger>.setLevel(<int/str>)                      # What is sent to its/ancestors' handlers.
 <Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
 ```
@@ -2333,9 +2331,9 @@ import asyncio as aio
 ```python
 import asyncio, collections, curses, curses.textpad, enum, random
 
-P = collections.namedtuple('P', 'x y')     # Position
-D = enum.Enum('D', 'n e s w')              # Direction
-W, H = 15, 7                               # Width, Height
+P = collections.namedtuple('P', 'x y')     # Position (x and y coordinates).
+D = enum.Enum('D', 'n e s w')              # Direction (north, east, etc.).
+W, H = 15, 7                               # Width and height constants.
 
 def main(screen):
     curses.curs_set(0)                     # Makes cursor invisible.
