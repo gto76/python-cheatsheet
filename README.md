@@ -1331,7 +1331,7 @@ from enum import Enum, auto
 class <enum_name>(Enum):
     <member_name> = auto()              # Increment of the last numeric value or 1.
     <member_name> = <value>             # Values don't have to be hashable or unique.
-    <member_name> = <el_1>, <el_2>      # Values can be collections, like this tuple.
+    <member_name> = <el_1>, <el_2>      # Values can be collections. This is a tuple.
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
