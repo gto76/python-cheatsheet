@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 30, 2025</aside>
+    <aside>July 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1775,7 +1775,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <li><strong>Sequence pattern can also be written as a tuple, either with or without the brackets.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
 <li><strong>Sequence pattern must match all items of the collection, while mapping pattern does not.</strong></li>
-<li><strong>Patterns can be surrounded with brackets to override their precedence: <code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>. For example, <code class="python hljs"><span class="hljs-string">'[1, 2]'</span></code> gets caught by the <code class="python hljs"><span class="hljs-string">'case 1 | 0, 2 as x if x == 2'</span></code> clause.</strong></li>
+<li><strong>Patterns can be surrounded with brackets to override their precedence: <code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>. For example, <code class="python hljs"><span class="hljs-string">'[1, 2]'</span></code> gets caught by the <code class="python hljs"><span class="hljs-string">'case 1|2, 2|3 as x if x == 2:'</span></code> clause.</strong></li>
 <li><strong>All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement (only the function block delimits scope).</strong></li>
 </ul>
 <div><h3 id="example-2">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
@@ -1840,11 +1840,11 @@ CRITICAL:my_module:Running out of disk space.
 <pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                 <span class="hljs-comment"># Returns names of object's attributes (including methods).</span>
 &lt;dict&gt; = vars(&lt;obj&gt;)                <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
 &lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute with passed name.</span>
-value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns object's attribute or raises AttributeError.</span>
+value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns the object's attribute or raises AttributeError.</span>
 setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
 delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns a Signature object of the passed function.</span>
+<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns Signature object of the passed function or class.</span>
 &lt;dict&gt; = &lt;Sig&gt;.parameters           <span class="hljs-comment"># Returns dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
 &lt;memb&gt; = &lt;Param&gt;.kind               <span class="hljs-comment"># Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).</span>
 &lt;type&gt; = &lt;Param&gt;.annotation         <span class="hljs-comment"># Returns Parameter.empty if missing. Also &lt;Param&gt;.default.</span>
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 30, 2025</aside>
+    <aside>July 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

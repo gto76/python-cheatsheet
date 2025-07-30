@@ -2144,7 +2144,7 @@ match <object/expression>:
 * **Sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
 * **Sequence pattern must match all items of the collection, while mapping pattern does not.**
-* **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` gets caught by the `'case 1 | 0, 2 as x if x == 2'` clause.**
+* **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` gets caught by the `'case 1|2, 2|3 as x if x == 2:'` clause.**
 * **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement (only the function block delimits scope).**
 
 ### Example
@@ -2226,13 +2226,13 @@ Introspection
 <list> = dir(<obj>)                 # Returns names of object's attributes (including methods).
 <dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
 <bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute with passed name.
-value  = getattr(<obj>, '<name>')   # Returns object's attribute or raises AttributeError.
+value  = getattr(<obj>, '<name>')   # Returns the object's attribute or raises AttributeError.
 setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__ attr.
 delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del <obj>.<name>`.
 ```
 
 ```python
-<Sig>  = inspect.signature(<func>)  # Returns a Signature object of the passed function.
+<Sig>  = inspect.signature(<func>)  # Returns Signature object of the passed function or class.
 <dict> = <Sig>.parameters           # Returns dict of Parameters. Also <Sig>.return_annotation.
 <memb> = <Param>.kind               # Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).
 <type> = <Param>.annotation         # Returns Parameter.empty if missing. Also <Param>.default.
