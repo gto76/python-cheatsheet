@@ -370,7 +370,7 @@ import re
 
 * **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).**
 * **Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.**
-* **Argument `'flags=re.IGNORECASE'` can be used with all listed regex functions.**
+* **Argument `'flags=re.IGNORECASE'` can be used with all functions that are listed above.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'` (besides all other chars).**
 * **`'re.compile(<regex>)'` returns a Pattern object with methods sub(), findall(), etc.**
@@ -971,7 +971,7 @@ class MyClass:
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
-* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand,<br>for example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
 * **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
 * **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
 
@@ -1042,7 +1042,7 @@ class <class_name>:
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument accepts any callable object.**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 ```python
@@ -2336,7 +2336,7 @@ D = enum.Enum('D', 'n e s w')              # Direction (north, east, etc.).
 W, H = 15, 7                               # Width and height constants.
 
 def main(screen):
-    curses.curs_set(0)                     # Makes cursor invisible.
+    curses.curs_set(0)                     # Makes the cursor invisible.
     screen.nodelay(True)                   # Makes getch() non-blocking.
     asyncio.run(main_coroutine(screen))    # Starts running asyncio code.
 

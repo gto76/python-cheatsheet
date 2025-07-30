@@ -351,7 +351,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <ul>
 <li><strong>Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).</strong></li>
 <li><strong>Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.</strong></li>
-<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all listed regex functions.</strong></li>
+<li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions that are listed above.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code> (besides all other chars).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), etc.</strong></li>
@@ -827,7 +827,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
 <ul>
-<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand,<br>for example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
+<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for&nbsp;example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
 <li><strong>Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
@@ -891,7 +891,7 @@ Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-stri
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument accepts any callable object.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument accepts any <a href="#callable">callable</a> object.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -1924,7 +1924,7 @@ D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n
 W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width and height constants.</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
-    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes cursor invisible.</span>
+    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes the cursor invisible.</span>
     screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>
     asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>
 

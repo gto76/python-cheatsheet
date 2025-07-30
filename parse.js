@@ -125,7 +125,7 @@ const COROUTINES =
   'W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width and height constants.</span>\n' +
   '\n' +
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
-  '    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes cursor invisible.</span>\n' +
+  '    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes the cursor invisible.</span>\n' +
   '    screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>\n' +
   '    asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
   '\n' +
