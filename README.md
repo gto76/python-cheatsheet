@@ -971,7 +971,7 @@ class MyClass:
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
-* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand,<br>for example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
 * **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
 * **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
 
@@ -1042,7 +1042,7 @@ class <class_name>:
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument can be any [callable](#callable).**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument accepts any callable object.**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 ```python
@@ -1094,7 +1094,7 @@ Duck Types
 
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).**
-* **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.**
+* **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. Result is False if both return NotImplemented.**
 * **Ne() automatically works on any object that has eq() defined.**
 
 ```python
@@ -1172,7 +1172,7 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Sequence iterators returned by the [iter()](#iterator) function, such as list\_iterator and set\_iterator.**
+* **Sequence iterators returned by the [iter()](#iterator) function, such as list\_iterator, etc.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
 * **File objects returned by the [open()](#open) function, etc.**
@@ -1407,7 +1407,7 @@ except (<exception>, [...]) as <name>: ...
 ```
 * **Also catches subclasses, e.g. `'IndexError'` is caught by `'except LookupError:'`.**
 * **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
-* **Use `'print(<name>)'` to print just the cause of the exception (i.e. its arguments).**
+* **Use `'print(<name>)'` to print just the cause of the exception (that is, its arguments).**
 * **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see [Logging](#logging).**
 * **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
@@ -1549,7 +1549,7 @@ args  = p.parse_args()                                            # Exits on par
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<obj>'` to override None as option's or optional argument's default value.**
-* **Use `'type=FileType(<mode>)'` for files. Accepts 'encoding', but 'newline' is None.**
+* **Use `'type=FileType(<mode>)'` for files. It accepts 'encoding', but 'newline' is None.**
 
 
 Open
@@ -1657,7 +1657,7 @@ from pathlib import Path
 
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
-<str>  = <DirEntry>.path            # Returns object's path (relative by default).
+<str>  = <DirEntry>.path            # Is absolute if 'path' argument was absolute.
 <str>  = <DirEntry>.name            # Returns path's final component as a string.
 <file> = open(<DirEntry>)           # Opens the file and returns its file object.
 ```
@@ -1836,7 +1836,7 @@ import csv
 * **`'lineterminator'` - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
 * **`'quotechar'` - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.**
 * **`'escapechar'` - Character for escaping quotechars (not needed if doublequote is True).**
-* **`'doublequote'` - Whether quotechars inside fields are (or get) doubled or escaped.**
+* **`'doublequote'` - Whether quotechars inside fields are/get doubled instead of escaped.**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 
@@ -2028,7 +2028,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined C type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.**
 
 ```python
 from array import array
@@ -2084,7 +2084,7 @@ from collections import deque
 ```python
 <deque> = deque(<collection>)                  # Use `maxlen=<int>` to set size limit.
 <deque>.appendleft(<el>)                       # Opposite element is dropped if full.
-<deque>.extendleft(<collection>)               # Appends elements in reversed order.
+<deque>.extendleft(<collection>)               # Prepends reversed coll. to the deque.
 <deque>.rotate(n=1)                            # Last element becomes the first one.
 <el> = <deque>.popleft()                       # Raises IndexError if deque is empty.
 ```

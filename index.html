@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 29, 2025</aside>
+    <aside>July 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -827,7 +827,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
 <ul>
-<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
+<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand,<br>for example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
 <li><strong>Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
@@ -891,7 +891,7 @@ Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-stri
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument can be any <a href="#callable">callable</a>.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument accepts any callable object.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -927,7 +927,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
 <li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).</strong></li>
-<li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. False is returned if both return NotImplemented.</strong></li>
+<li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. Result is False if both return NotImplemented.</strong></li>
 <li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -1002,7 +1002,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
-<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator and set_iterator.</strong></li>
+<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator, etc.</strong></li>
 <li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
 <li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehensions">generator expressions</a>.</strong></li>
 <li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
@@ -1212,7 +1212,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>Also catches subclasses, e.g. <code class="python hljs"><span class="hljs-string">'IndexError'</span></code> is caught by <code class="python hljs"><span class="hljs-string">'except LookupError:'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to standard error stream.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (i.e. its arguments).</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (that is, its arguments).</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see <a href="#logging">Logging</a>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'sys.exc_info()'</span></code> to get exception type, object, and traceback of caught exception.</strong></li>
 </ul>
@@ -1327,7 +1327,7 @@ args  = p.parse_args()                                            <span class="h
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;obj&gt;'</span></code> to override None as option's or optional argument's default value.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. Accepts 'encoding', but 'newline' is None.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. It accepts 'encoding', but 'newline' is None.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens a file and returns the corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1408,7 +1408,7 @@ args  = p.parse_args()                                            <span class="h
 &lt;num&gt;  = &lt;stat&gt;.st_mtime/st_size/…  <span class="hljs-comment"># Returns modification time, size in bytes, etc.</span>
 </code></pre>
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Returns object's path (relative by default).</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Is absolute if 'path' argument was absolute.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns path's final component as a string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns its file object.</span>
 </code></pre></div>
@@ -1539,7 +1539,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars (not needed if doublequote is True).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are (or get) doubled or escaped.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are/get doubled instead of escaped.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quoting'</span></code> - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'skipinitialspace'</span></code> - Is space character at the start of the field stripped by the reader.</strong></li>
 </ul><div><h3 id="dialects">Dialects</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
@@ -1692,7 +1692,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined C type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed with byteswap() method.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 </code></pre></div>
 
 
@@ -1727,7 +1727,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)                  <span class="hljs-comment"># Use `maxlen=&lt;int&gt;` to set size limit.</span>
 &lt;deque&gt;.appendleft(&lt;el&gt;)                       <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Appends elements in reversed order.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)               <span class="hljs-comment"># Prepends reversed coll. to the deque.</span>
 &lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)                            <span class="hljs-comment"># Last element becomes the first one.</span>
 &lt;el&gt; = &lt;deque&gt;.popleft()                       <span class="hljs-comment"># Raises IndexError if deque is empty.</span>
 </code></pre>
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 29, 2025</aside>
+    <aside>July 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
