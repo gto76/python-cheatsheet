@@ -1247,7 +1247,7 @@ True
 
 ### Collection
 * **Only required methods are iter() and len(). Len() should return the number of items.**
-* **This cheatsheet actually means `'<iterable>'` when it uses `'<collection>'`.**
+* **This cheatsheet actually means `'<iterable>'` when it uses the `'<collection>'`.**
 * **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
 ```python
 class MyCollection:
@@ -2141,11 +2141,11 @@ match <object/expression>:
 <mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict that has matching items.
 <class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches an object if attributes match.
 ```
-* **Sequence pattern can also be written as a tuple, i.e. `'(<pattern_1>, [...])'`.**
+* **Sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
 * **Sequence pattern must match all items of the collection, while mapping pattern does not.**
-* **Patterns can be surrounded with brackets to override precedence (`'|'` > `'as'` > `','`).**
-* **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement.**
+* **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` gets caught by the `'case 1 | 0, 2 as x if x == 2'` clause.**
+* **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement (only the function block delimits scope).**
 
 ### Example
 ```python
@@ -2300,7 +2300,7 @@ with <lock>:                                   # Enters the block by calling acq
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
 * **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
-* **Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns exception object or None.**
+* **Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns an exception object or None.**
 * **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
 
 
