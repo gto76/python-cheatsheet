@@ -1008,7 +1008,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method that is executed when they are called.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable. You can also just call the object and check if it raised TypeError.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable. You can also call the object and check if it raised TypeError.</strong></li>
 <li><strong>When this cheatsheet uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1692,7 +1692,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each/every element can be reversed (by calling the byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed (by calling the byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 </code></pre></div>
 
 
