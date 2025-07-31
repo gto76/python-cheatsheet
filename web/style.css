@@ -129,7 +129,7 @@ a:not(:hover) {
 pre,
 code,
 textarea {
-  font-family: "Menlo", "Menlo Web", monospace;
+  font-family: "Menlo", "Menlo Web", "Menlo Web ss", monospace;
 }
 
 code {
@@ -276,6 +276,12 @@ ul {
   url("OnlineWebFonts_COM_d6ba633f6ea4cafe1a39ab736fe55e88\\Menlo Bold\\@font-face\\a6ffc5d72a96b65159e710ea6d258ba4.woff") format("woff");
   font-weight: bold;
 }
+
+@font-face {font-family: "Menlo web ss";
+  src: url("OnlineWebFonts_COM_cb7eb796ae7de7195a34c485cacebad1\\@font-face\\9f94dc20bb2a09c15241d3a880b7ad01-ss2.woff") format("woff");
+  font-weight: normal;
+}
+
 
 .join,
 .link,
