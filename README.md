@@ -3453,17 +3453,17 @@ def main():
     display_data(df)
 
 def get_covid_cases():
-    url = 'https://covid.ourworldindata.org/data/owid-covid-data.csv'
+    url = 'https://catalog.ourworldindata.org/garden/covid/latest/compact/compact.csv'
     df = pd.read_csv(url, parse_dates=['date'])
-    df = df[df.location == 'World']
+    df = df[df.country == 'World']
     s = df.set_index('date').total_cases
     return s.rename('Total Cases')
 
 def get_tickers():
     with selenium.webdriver.Chrome() as driver:
+        driver.implicitly_wait(10)
         symbols = {'Bitcoin': 'BTC-USD', 'Gold': 'GC=F', 'Dow Jones': '%5EDJI'}
-        for name, symbol in symbols.items():
-            yield get_ticker(driver, name, symbol)
+        return [get_ticker(driver, name, symbol) for name, symbol in symbols.items()]
 
 def get_ticker(driver, name, symbol):
     url = f'https://finance.yahoo.com/quote/{symbol}/history/'
