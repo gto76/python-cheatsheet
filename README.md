@@ -1179,7 +1179,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method that is executed when they are called.**
-* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. You can also just call the object and check if it raised TypeError.**
+* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. You can also call the object and check if it raised TypeError.**
 * **When this cheatsheet uses `'<function>'` as an argument, it means `'<callable>'`.**
 ```python
 class Counter:
@@ -2028,7 +2028,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each/every element can be reversed (by calling the byteswap() method).**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array
