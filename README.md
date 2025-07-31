@@ -2144,8 +2144,8 @@ match <object/expression>:
 * **Sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
 * **Sequence pattern must match all items of the collection, while mapping pattern does not.**
-* **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` gets caught by the `'case 1|2, 2|3 as x if x == 2:'` clause.**
-* **All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement (only the function block delimits scope).**
+* **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` is matched by the `'case 1|2, 2|3 as x if x == 2:'` block.**
+* **All names that are bound in the matching case, as well as variables initialized in its body, are visible after the match statement (only function block delimits scope).**
 
 ### Example
 ```python
@@ -2185,10 +2185,10 @@ log.basicConfig(
 
 ```python
 <Formatter> = log.Formatter('<format>')           # Formats messages according to format str.
-<Handler> = log.FileHandler(<path>, mode='a')     # Creates a handler. Also `encoding=None`.
-<Handler>.setFormatter(<Formatter>)               # Assigns the formatter to the handler.
-<Handler>.setLevel(<int/str>)                     # It will process all messages by default.
-<Logger>.addHandler(<Handler>)                    # Appends handler to logger's 'handlers'.
+<Handler> = log.FileHandler(<path>, mode='a')     # Appends to file. Also `encoding=None`.
+<Handler>.setFormatter(<Formatter>)               # Only outputs bare messages by default.
+<Handler>.setLevel(<int/str>)                     # Prints or saves every message by default.
+<Logger>.addHandler(<Handler>)                    # Logger can have more than one handler.
 <Logger>.setLevel(<int/str>)                      # What is sent to its/ancestors' handlers.
 <Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
 ```

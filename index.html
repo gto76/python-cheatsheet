@@ -1775,8 +1775,8 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 <li><strong>Sequence pattern can also be written as a tuple, either with or without the brackets.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
 <li><strong>Sequence pattern must match all items of the collection, while mapping pattern does not.</strong></li>
-<li><strong>Patterns can be surrounded with brackets to override their precedence: <code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>. For example, <code class="python hljs"><span class="hljs-string">'[1, 2]'</span></code> gets caught by the <code class="python hljs"><span class="hljs-string">'case 1|2, 2|3 as x if x == 2:'</span></code> clause.</strong></li>
-<li><strong>All names that are bound in the matching case, as well as variables initialized in its block, are visible after the match statement (only the function block delimits scope).</strong></li>
+<li><strong>Patterns can be surrounded with brackets to override their precedence: <code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>. For example, <code class="python hljs"><span class="hljs-string">'[1, 2]'</span></code> is matched by the <code class="python hljs"><span class="hljs-string">'case 1|2, 2|3 as x if x == 2:'</span></code> block.</strong></li>
+<li><strong>All names that are bound in the matching case, as well as variables initialized in its body, are visible after the match statement (only function block delimits scope).</strong></li>
 </ul>
 <div><h3 id="example-2">Example</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">match</span> Path(<span class="hljs-string">'/home/gto/python-cheatsheet/README.md'</span>):
@@ -1805,10 +1805,10 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)           <span class="hljs-comment"># Formats messages according to format str.</span>
-&lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)     <span class="hljs-comment"># Creates a handler. Also `encoding=None`.</span>
-&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Assigns the formatter to the handler.</span>
-&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># It will process all messages by default.</span>
-&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Appends handler to logger's 'handlers'.</span>
+&lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)     <span class="hljs-comment"># Appends to file. Also `encoding=None`.</span>
+&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Only outputs bare messages by default.</span>
+&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Prints or saves every message by default.</span>
+&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Logger can have more than one handler.</span>
 &lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to its/ancestors' handlers.</span>
 &lt;Logger&gt;.propagate = &lt;bool&gt;                       <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
 </code></pre>
