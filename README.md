@@ -15,7 +15,6 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
 
 Linters
-
 -------
 ```
 pass # noqa: E731,E123
@@ -24,6 +23,13 @@ For entire files/projets put in `.flake8`, `setup.cfg`, or `tox.ini`
 ```
 [flake8]
 ignore = D203
+```
+
+Examples
+--------
+```
+# dict -> string
+custom_string = ", ".join(f"{key}:{value}" for key, value in my_dict.items())
 ```
 
 Main
