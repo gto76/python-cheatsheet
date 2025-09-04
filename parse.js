@@ -133,7 +133,7 @@ const COROUTINES =
   '    moves = asyncio.Queue()\n' +
   '    state = {<span class="hljs-string">\'*\'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)} | {id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}\n' +
   '    ai    = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]\n' +
-  '    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]\n' +
+  '    mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]\n' +
   '    tasks = [asyncio.create_task(coro) <span class="hljs-keyword">for</span> coro <span class="hljs-keyword">in</span> ai + mvc]\n' +
   '    <span class="hljs-keyword">await</span> asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)\n' +
   '\n' +
@@ -143,7 +143,7 @@ const COROUTINES =
   '        moves.put_nowait((id_, d))\n' +
   '        <span class="hljs-keyword">await</span> asyncio.sleep(random.triangular(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.65</span>))\n' +
   '\n' +
-  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>\n' +
+  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">controller</span><span class="hljs-params">(screen, moves)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
   '        key_mappings = {<span class="hljs-number">258</span>: D.s, <span class="hljs-number">259</span>: D.n, <span class="hljs-number">260</span>: D.w, <span class="hljs-number">261</span>: D.e}\n' +
   '        <span class="hljs-keyword">if</span> d := key_mappings.get(screen.getch()):\n' +

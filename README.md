@@ -2258,15 +2258,15 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ### Lock
 ```python
-<lock> = Lock/RLock()                          # RLock can only be released by acquirer.
-<lock>.acquire()                               # Waits for the lock to be available.
-<lock>.release()                               # Makes the lock available again.
+<lock> = Lock/RLock()                          # RLock can only be released by acquirer thread.
+<lock>.acquire()                               # Blocks (waits) until lock becomes available.
+<lock>.release()                               # It makes the acquired lock available again.
 ```
 
 #### Or:
 ```python
-with <lock>:                                   # Enters the block by calling acquire() and
-    ...                                        # exits it with release(), even on error.
+with <lock>:                                   # Enters the block by calling method acquire().
+    ...                                        # Exits by calling release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
@@ -2278,11 +2278,11 @@ with <lock>:                                   # Enters the block by calling acq
 
 ### Queue
 ```python
-<Queue> = queue.Queue(maxsize=0)               # A thread-safe first-in-first-out queue.
-<Queue>.put(<el>)                              # Blocks until queue stops being full.
-<Queue>.put_nowait(<el>)                       # Raises queue.Full exception if full.
-<el> = <Queue>.get()                           # Blocks until queue stops being empty.
-<el> = <Queue>.get_nowait()                    # Raises queue.Empty exception if empty.
+<Queue> = queue.Queue(maxsize=0)               # A first-in-first-out queue. It's thread safe.
+<Queue>.put(<obj>)                             # Call blocks until queue stops being full.
+<Queue>.put_nowait(<obj>)                      # Raises queue.Full exception if queue is full.
+<obj> = <Queue>.get()                          # Call blocks until queue stops being empty.
+<obj> = <Queue>.get_nowait()                   # Raises queue.Empty exception if it's empty.
 ```
 
 ### Thread Pool Executor
@@ -2290,12 +2290,12 @@ with <lock>:                                   # Enters the block by calling acq
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Also `with ThreadPoolExecutor() as <name>: …`.
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
-<Exec>.shutdown()                              # Waits for all submitted threads to finish.
+<Exec>.shutdown()                              # Waits for all threads to finish executing.
 ```
 
 ```python
 <bool> = <Future>.done()                       # Checks if the thread has finished executing.
-<obj>  = <Future>.result(timeout=None)         # Waits for thread to finish and returns result.
+<obj>  = <Future>.result(timeout=None)         # Raises TimeoutError after 'timeout' seconds.
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
@@ -2306,8 +2306,8 @@ with <lock>:                                   # Enters the block by calling acq
 
 Coroutines
 ----------
-* **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.**
-* **Coroutine definition starts with `'async'` and its call with `'await'`.**
+* **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.**
+* **Coroutine definition starts with `'async'` and its call with `'await'` keyword.**
 * **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
 
 ```python
@@ -2316,7 +2316,7 @@ import asyncio as aio
 
 ```python
 <coro> = <async_function>(<args>)          # Creates a coroutine by calling async def function.
-<obj>  = await <coroutine>                 # Starts the coroutine and waits for its result.
+<obj>  = await <coroutine>                 # Starts the coroutine. Returns its result or None.
 <task> = aio.create_task(<coroutine>)      # Schedules it for execution. Always keep the task.
 <obj>  = await <task>                      # Returns coroutine's result. Also <task>.cancel().
 ```
@@ -2344,7 +2344,7 @@ async def main_coroutine(screen):
     moves = asyncio.Queue()
     state = {'*': P(0, 0)} | {id_: P(W//2, H//2) for id_ in range(10)}
     ai    = [random_controller(id_, moves) for id_ in range(10)]
-    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
+    mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]
     tasks = [asyncio.create_task(coro) for coro in ai + mvc]
     await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
 
@@ -2354,7 +2354,7 @@ async def random_controller(id_, moves):
         moves.put_nowait((id_, d))
         await asyncio.sleep(random.triangular(0.01, 0.65))
 
-async def human_controller(screen, moves):
+async def controller(screen, moves):
     while True:
         key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
         if d := key_mappings.get(screen.getch()):

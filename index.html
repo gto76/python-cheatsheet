@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>July 31, 2025</aside>
+    <aside>September 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1863,13 +1863,13 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program won't be able to exit while the thread is alive.</strong></li>
 </ul>
-<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = Lock/RLock()                          <span class="hljs-comment"># RLock can only be released by acquirer.</span>
-&lt;lock&gt;.acquire()                               <span class="hljs-comment"># Waits for the lock to be available.</span>
-&lt;lock&gt;.release()                               <span class="hljs-comment"># Makes the lock available again.</span>
+<div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = Lock/RLock()                          <span class="hljs-comment"># RLock can only be released by acquirer thread.</span>
+&lt;lock&gt;.acquire()                               <span class="hljs-comment"># Blocks (waits) until lock becomes available.</span>
+&lt;lock&gt;.release()                               <span class="hljs-comment"># It makes the acquired lock available again.</span>
 </code></pre></div>
 
-<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;lock&gt;:                                   <span class="hljs-comment"># Enters the block by calling acquire() and</span>
-    ...                                        <span class="hljs-comment"># exits it with release(), even on error.</span>
+<div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;lock&gt;:                                   <span class="hljs-comment"># Enters the block by calling method acquire().</span>
+    ...                                        <span class="hljs-comment"># Exits by calling release(), even on error.</span>
 </code></pre></div>
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
@@ -1877,21 +1877,21 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 &lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n times.</span>
 </code></pre></div>
 
-<div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A thread-safe first-in-first-out queue.</span>
-&lt;Queue&gt;.put(&lt;el&gt;)                              <span class="hljs-comment"># Blocks until queue stops being full.</span>
-&lt;Queue&gt;.put_nowait(&lt;el&gt;)                       <span class="hljs-comment"># Raises queue.Full exception if full.</span>
-&lt;el&gt; = &lt;Queue&gt;.get()                           <span class="hljs-comment"># Blocks until queue stops being empty.</span>
-&lt;el&gt; = &lt;Queue&gt;.get_nowait()                    <span class="hljs-comment"># Raises queue.Empty exception if empty.</span>
+<div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A first-in-first-out queue. It's thread safe.</span>
+&lt;Queue&gt;.put(&lt;obj&gt;)                             <span class="hljs-comment"># Call blocks until queue stops being full.</span>
+&lt;Queue&gt;.put_nowait(&lt;obj&gt;)                      <span class="hljs-comment"># Raises queue.Full exception if queue is full.</span>
+&lt;obj&gt; = &lt;Queue&gt;.get()                          <span class="hljs-comment"># Call blocks until queue stops being empty.</span>
+&lt;obj&gt; = &lt;Queue&gt;.get_nowait()                   <span class="hljs-comment"># Raises queue.Empty exception if it's empty.</span>
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Also `with ThreadPoolExecutor() as &lt;name&gt;: …`.</span>
 &lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># Multithreaded and non-lazy map(). Keeps order.</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Creates a thread and returns its Future obj.</span>
-&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Waits for all submitted threads to finish.</span>
+&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Waits for all threads to finish executing.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()                       <span class="hljs-comment"># Checks if the thread has finished executing.</span>
-&lt;obj&gt;  = &lt;Future&gt;.result(timeout=<span class="hljs-keyword">None</span>)         <span class="hljs-comment"># Waits for thread to finish and returns result.</span>
+&lt;obj&gt;  = &lt;Future&gt;.result(timeout=<span class="hljs-keyword">None</span>)         <span class="hljs-comment"># Raises TimeoutError after 'timeout' seconds.</span>
 &lt;bool&gt; = &lt;Future&gt;.cancel()                     <span class="hljs-comment"># Cancels or returns False if running/finished.</span>
 &lt;iter&gt; = as_completed(&lt;coll_of_Futures&gt;)       <span class="hljs-comment"># `next(&lt;iter&gt;)` returns next completed Future.</span>
 </code></pre>
@@ -1901,15 +1901,15 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 <li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": ...'</span></code>.</strong></li>
 </ul>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
-<li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t use as much memory.</strong></li>
-<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
+<li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.</strong></li>
+<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code> keyword.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> to start the first/main coroutine.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio <span class="hljs-keyword">as</span> aio
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs">&lt;coro&gt; = &lt;async_function&gt;(&lt;args&gt;)          <span class="hljs-comment"># Creates a coroutine by calling async def function.</span>
-&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                 <span class="hljs-comment"># Starts the coroutine and waits for its result.</span>
+&lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;coroutine&gt;                 <span class="hljs-comment"># Starts the coroutine. Returns its result or None.</span>
 &lt;task&gt; = aio.create_task(&lt;coroutine&gt;)      <span class="hljs-comment"># Schedules it for execution. Always keep the task.</span>
 &lt;obj&gt;  = <span class="hljs-keyword">await</span> &lt;task&gt;                      <span class="hljs-comment"># Returns coroutine's result. Also &lt;task&gt;.cancel().</span>
 </code></pre>
@@ -1932,7 +1932,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
     moves = asyncio.Queue()
     state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)} | {id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}
     ai    = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
-    mvc   = [human_controller(screen, moves), model(moves, state), view(state, screen)]
+    mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]
     tasks = [asyncio.create_task(coro) <span class="hljs-keyword">for</span> coro <span class="hljs-keyword">in</span> ai + mvc]
     <span class="hljs-keyword">await</span> asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
 
@@ -1942,7 +1942,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
         moves.put_nowait((id_, d))
         <span class="hljs-keyword">await</span> asyncio.sleep(random.triangular(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.65</span>))
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">human_controller</span><span class="hljs-params">(screen, moves)</span>:</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">controller</span><span class="hljs-params">(screen, moves)</span>:</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         key_mappings = {<span class="hljs-number">258</span>: D.s, <span class="hljs-number">259</span>: D.n, <span class="hljs-number">260</span>: D.w, <span class="hljs-number">261</span>: D.e}
         <span class="hljs-keyword">if</span> d := key_mappings.get(screen.getch()):
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>July 31, 2025</aside>
+    <aside>September 4, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
