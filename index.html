@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>September 4, 2025</aside>
+    <aside>September 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1833,7 +1833,7 @@ CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
 <div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># Local names of variables, functions, classes and modules.</span>
-&lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Also locals().</span>
+&lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Same as locals().</span>
 &lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names and their objects, e.g. __builtin__.</span>
 </code></pre></div>
 
@@ -1865,16 +1865,16 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = Lock/RLock()                          <span class="hljs-comment"># RLock can only be released by acquirer thread.</span>
 &lt;lock&gt;.acquire()                               <span class="hljs-comment"># Blocks (waits) until lock becomes available.</span>
-&lt;lock&gt;.release()                               <span class="hljs-comment"># It makes the acquired lock available again.</span>
+&lt;lock&gt;.release()                               <span class="hljs-comment"># Releases the lock so it can be acquired again.</span>
 </code></pre></div>
 
 <div><h4 id="or-1">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;lock&gt;:                                   <span class="hljs-comment"># Enters the block by calling method acquire().</span>
-    ...                                        <span class="hljs-comment"># Exits by calling release(), even on error.</span>
+    ...                                        <span class="hljs-comment"># Exits it by calling release(), even on error.</span>
 </code></pre></div>
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
 &lt;Event&gt;     = Event()                          <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(n_times)                 <span class="hljs-comment"># Wait() blocks until it's called n times.</span>
+&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                   <span class="hljs-comment"># Wait() blocks until it's called int times.</span>
 </code></pre></div>
 
 <div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A first-in-first-out queue. It's thread safe.</span>
@@ -1902,7 +1902,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </ul>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.</strong></li>
-<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code> keyword.</strong></li>
+<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> keyword and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> to start the first/main coroutine.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio <span class="hljs-keyword">as</span> aio
 </code></pre></div>
@@ -1921,7 +1921,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)     <span class="hljs-comment"># Position (x and y coordinates).</span>
 D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)              <span class="hljs-comment"># Direction (north, east, etc.).</span>
-W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width and height constants.</span>
+W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>                               <span class="hljs-comment"># Width and height of the field.</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>
     curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes the cursor invisible.</span>
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 4, 2025</aside>
+    <aside>September 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

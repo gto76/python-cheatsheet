@@ -2218,7 +2218,7 @@ Introspection
 -------------
 ```python
 <list> = dir()                      # Local names of variables, functions, classes and modules.
-<dict> = vars()                     # Dict of local names and their objects. Also locals().
+<dict> = vars()                     # Dict of local names and their objects. Same as locals().
 <dict> = globals()                  # Dict of global names and their objects, e.g. __builtin__.
 ```
 
@@ -2260,20 +2260,20 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ```python
 <lock> = Lock/RLock()                          # RLock can only be released by acquirer thread.
 <lock>.acquire()                               # Blocks (waits) until lock becomes available.
-<lock>.release()                               # It makes the acquired lock available again.
+<lock>.release()                               # Releases the lock so it can be acquired again.
 ```
 
 #### Or:
 ```python
 with <lock>:                                   # Enters the block by calling method acquire().
-    ...                                        # Exits by calling release(), even on error.
+    ...                                        # Exits it by calling release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
 ```python
 <Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
 <Event>     = Event()                          # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(n_times)                 # Wait() blocks until it's called n times.
+<Barrier>   = Barrier(<int>)                   # Wait() blocks until it's called int times.
 ```
 
 ### Queue
@@ -2307,7 +2307,7 @@ with <lock>:                                   # Enters the block by calling met
 Coroutines
 ----------
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.**
-* **Coroutine definition starts with `'async'` and its call with `'await'` keyword.**
+* **Coroutine definition starts with `'async'` keyword and its call with `'await'`.**
 * **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
 
 ```python
@@ -2333,7 +2333,7 @@ import asyncio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple('P', 'x y')     # Position (x and y coordinates).
 D = enum.Enum('D', 'n e s w')              # Direction (north, east, etc.).
-W, H = 15, 7                               # Width and height constants.
+W, H = 15, 7                               # Width and height of the field.
 
 def main(screen):
     curses.curs_set(0)                     # Makes the cursor invisible.
