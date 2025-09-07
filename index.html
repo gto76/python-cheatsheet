@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>September 5, 2025</aside>
+    <aside>September 7, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2025,14 +2025,13 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 </code></pre></div></div>
 
 
-<div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="aweightconverterguiapplication">A weight converter GUI application:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
+<div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="runsadesktopappforconvertingweightsfrommetricunitsintopounds">Runs a desktop app for converting weights from metric units into pounds:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
 <span class="hljs-keyword">import</span> PySimpleGUI <span class="hljs-keyword">as</span> sg
 
 text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
 dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
 label    = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'OUTPUT'</span>)
-button   = sg.Button(<span class="hljs-string">'Close'</span>)
-window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text_box, dropdown], [label], [button]])
+window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text_box, dropdown], [label], [sg.Button(<span class="hljs-string">'Close'</span>)]])
 
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
     event, values = window.read()
@@ -2043,8 +2042,7 @@ window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text
     <span class="hljs-keyword">except</span> ValueError:
         <span class="hljs-keyword">continue</span>
     unit = values[<span class="hljs-string">'UNIT'</span>]
-    factors = {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}
-    lbs = quantity * factors[unit] / <span class="hljs-number">0.45359237</span>
+    lbs = quantity * {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}[unit] / <span class="hljs-number">0.45359237</span>
     window[<span class="hljs-string">'OUTPUT'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
 window.close()
 </code></pre></div></div>
@@ -2053,7 +2051,8 @@ window.close()
 <div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlandlogofromitswikipediapage">Scrapes Python's URL and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests, bs4, os
 
-response   = requests.get(<span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>)
+url        = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
+response   = requests.get(url, headers={<span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'cpc-bot'</span>})
 document   = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.parser'</span>)
 table      = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
 python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
@@ -2067,24 +2066,24 @@ print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, 
 
 <div><h3 id="selenium">Selenium</h3><p><strong>Library for scraping websites with dynamic content.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install selenium</span>
 <span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver
-
-&lt;WebDrv&gt; = webdriver.Chrome/Firefox/Safari/Edge()     <span class="hljs-comment"># Opens a browser. Also &lt;WebDrv&gt;.quit().</span>
-&lt;WebDrv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                                 <span class="hljs-comment"># Also &lt;WebDrv&gt;.implicitly_wait(seconds).</span>
-&lt;str&gt;  = &lt;WebDrv&gt;.page_source                         <span class="hljs-comment"># Returns HTML of fully rendered page.</span>
-&lt;El&gt;   = &lt;WebDrv/El&gt;.find_element(<span class="hljs-string">'css selector'</span>, …)  <span class="hljs-comment"># '&lt;tag&gt;#&lt;id&gt;.&lt;class&gt;[&lt;attr&gt;="&lt;val&gt;"]…'.</span>
-&lt;list&gt; = &lt;WebDrv/El&gt;.find_elements(<span class="hljs-string">'xpath'</span>, …)        <span class="hljs-comment"># '//&lt;tag&gt;[@&lt;attr&gt;="&lt;val&gt;"]…'. See XPath.</span>
-&lt;str&gt;  = &lt;El&gt;.get_attribute(&lt;str&gt;)                    <span class="hljs-comment"># Property if exists. Also &lt;El&gt;.text.</span>
-&lt;El&gt;.click/clear()                                    <span class="hljs-comment"># Also &lt;El&gt;.send_keys(&lt;str&gt;).</span>
 </code></pre></div>
 
 
-<div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x("&lt;xpath&gt;")'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]          <span class="hljs-comment"># /&lt;child&gt;, //&lt;descendant&gt;, /../&lt;sibling&gt;</span>
-&lt;xpath&gt;     = //&lt;element&gt;/following::&lt;element&gt;        <span class="hljs-comment"># Next element. Also preceding/parent/…</span>
-&lt;element&gt;   = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;                <span class="hljs-comment"># `&lt;tag&gt; = */a/…`, `&lt;index&gt; = [1/2/…]`.</span>
-&lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]        <span class="hljs-comment"># For negation use `not(&lt;sub_cond&gt;)`.</span>
-&lt;sub_cond&gt;  = @&lt;attr&gt;[=<span class="hljs-string">"&lt;val&gt;"</span>]                       <span class="hljs-comment"># `text()=`, `.=` match (complete) text.</span>
-&lt;sub_cond&gt;  = contains(@&lt;attr&gt;, <span class="hljs-string">"&lt;val&gt;"</span>)              <span class="hljs-comment"># Is &lt;val&gt; a substring of attr's value?</span>
-&lt;sub_cond&gt;  = [//]&lt;element&gt;                           <span class="hljs-comment"># Has matching child? Descendant if //.</span>
+<pre><code class="python language-python hljs">&lt;Drv&gt; = webdriver.Chrome/Firefox/Safari/Edge()  <span class="hljs-comment"># Opens the browser. Also &lt;Driver&gt;.quit().</span>
+&lt;Drv&gt;.implicitly_wait(seconds)                  <span class="hljs-comment"># Sets timeout for find_element/s() methods.</span>
+&lt;Drv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                              <span class="hljs-comment"># Blocks until browser fires the load event.</span>
+&lt;str&gt; = &lt;Drv&gt;.page_source                       <span class="hljs-comment"># Returns HTML of the page's current state.</span>
+&lt;El&gt;  = &lt;Drv/El&gt;.find_element(<span class="hljs-string">'xpath'</span>, &lt;str&gt;)   <span class="hljs-comment"># Accepts '//&lt;tag&gt;[@&lt;attr_name&gt;="&lt;val&gt;"]…'.</span>
+&lt;str&gt; = &lt;El&gt;.get_attribute(<span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Returns attribute or property if exists.</span>
+&lt;El&gt;.click/clear()                              <span class="hljs-comment"># Also &lt;El&gt;.text and &lt;El&gt;.send_keys(&lt;str&gt;).</span>
+</code></pre>
+<div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x("&lt;xpath&gt;")'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]    <span class="hljs-comment"># E.g. …/child, …//descendant, …/../sibling.</span>
+&lt;xpath&gt;     = //&lt;element&gt;/following::&lt;element&gt;  <span class="hljs-comment"># Next element. Also preceding::, parent::.</span>
+&lt;element&gt;   = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;          <span class="hljs-comment"># Tag accepts */a/…. Use [1/2/…] for index.</span>
+&lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]  <span class="hljs-comment"># Use not(&lt;sub_cond&gt;) to negate condition.</span>
+&lt;sub_cond&gt;  = @&lt;attr&gt;[=<span class="hljs-string">"&lt;val&gt;"</span>]                 <span class="hljs-comment"># `text()=` and `.=` match (complete) text.</span>
+&lt;sub_cond&gt;  = contains(@&lt;attr&gt;, <span class="hljs-string">"&lt;val&gt;"</span>)        <span class="hljs-comment"># Is &lt;val&gt; a substring of attribute's value?</span>
+&lt;sub_cond&gt;  = [//]&lt;element&gt;                     <span class="hljs-comment"># Has matching child? Descendant if //&lt;el&gt;.</span>
 </code></pre></div>
 
 <div><h2 id="webapp"><a href="#webapp" name="webapp">#</a>Web App</h2><p><strong>Flask is a micro web framework/server. If you just want to open a html file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install flask</span>
@@ -2934,7 +2933,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 5, 2025</aside>
+    <aside>September 7, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

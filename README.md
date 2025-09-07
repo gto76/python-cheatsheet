@@ -2458,7 +2458,7 @@ if __name__ == '__main__':
 
 GUI App
 -------
-#### A weight converter GUI application:
+#### Runs a desktop app for converting weights from metric units into pounds:
 
 ```python
 # $ pip3 install PySimpleGUI
@@ -2467,8 +2467,7 @@ import PySimpleGUI as sg
 text_box = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
 dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
 label    = sg.Text('100 kg is 220.462 lbs.', key='OUTPUT')
-button   = sg.Button('Close')
-window   = sg.Window('Weight Converter', [[text_box, dropdown], [label], [button]])
+window   = sg.Window('Weight Converter', [[text_box, dropdown], [label], [sg.Button('Close')]])
 
 while True:
     event, values = window.read()
@@ -2479,8 +2478,7 @@ while True:
     except ValueError:
         continue
     unit = values['UNIT']
-    factors = {'g': 0.001, 'kg': 1, 't': 1000}
-    lbs = quantity * factors[unit] / 0.45359237
+    lbs = quantity * {'g': 0.001, 'kg': 1, 't': 1000}[unit] / 0.45359237
     window['OUTPUT'].update(value=f'{quantity} {unit} is {lbs:g} lbs.')
 window.close()
 ```
@@ -2493,7 +2491,8 @@ Scraping
 # $ pip3 install requests beautifulsoup4
 import requests, bs4, os
 
-response   = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+url        = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
+response   = requests.get(url, headers={'User-Agent': 'cpc-bot'})
 document   = bs4.BeautifulSoup(response.text, 'html.parser')
 table      = document.find('table', class_='infobox vevent')
 python_url = table.find('th', text='Website').next_sibling.a['href']
@@ -2509,25 +2508,27 @@ print(f'{python_url}, file://{os.path.abspath(filename)}')
 ```python
 # $ pip3 install selenium
 from selenium import webdriver
+```
 
-<WebDrv> = webdriver.Chrome/Firefox/Safari/Edge()     # Opens a browser. Also <WebDrv>.quit().
-<WebDrv>.get('<url>')                                 # Also <WebDrv>.implicitly_wait(seconds).
-<str>  = <WebDrv>.page_source                         # Returns HTML of fully rendered page.
-<El>   = <WebDrv/El>.find_element('css selector', …)  # '<tag>#<id>.<class>[<attr>="<val>"]…'.
-<list> = <WebDrv/El>.find_elements('xpath', …)        # '//<tag>[@<attr>="<val>"]…'. See XPath.
-<str>  = <El>.get_attribute(<str>)                    # Property if exists. Also <El>.text.
-<El>.click/clear()                                    # Also <El>.send_keys(<str>).
+```python
+<Drv> = webdriver.Chrome/Firefox/Safari/Edge()  # Opens the browser. Also <Driver>.quit().
+<Drv>.implicitly_wait(seconds)                  # Sets timeout for find_element/s() methods.
+<Drv>.get('<url>')                              # Blocks until browser fires the load event.
+<str> = <Drv>.page_source                       # Returns HTML of the page's current state.
+<El>  = <Drv/El>.find_element('xpath', <str>)   # Accepts '//<tag>[@<attr_name>="<val>"]…'.
+<str> = <El>.get_attribute('<name>')            # Returns attribute or property if exists.
+<El>.click/clear()                              # Also <El>.text and <El>.send_keys(<str>).
 ```
 
 #### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
 ```python
-<xpath>     = //<element>[/ or // <element>]          # /<child>, //<descendant>, /../<sibling>
-<xpath>     = //<element>/following::<element>        # Next element. Also preceding/parent/…
-<element>   = <tag><conditions><index>                # `<tag> = */a/…`, `<index> = [1/2/…]`.
-<condition> = [<sub_cond> [and/or <sub_cond>]]        # For negation use `not(<sub_cond>)`.
-<sub_cond>  = @<attr>[="<val>"]                       # `text()=`, `.=` match (complete) text.
-<sub_cond>  = contains(@<attr>, "<val>")              # Is <val> a substring of attr's value?
-<sub_cond>  = [//]<element>                           # Has matching child? Descendant if //.
+<xpath>     = //<element>[/ or // <element>]    # E.g. …/child, …//descendant, …/../sibling.
+<xpath>     = //<element>/following::<element>  # Next element. Also preceding::, parent::.
+<element>   = <tag><conditions><index>          # Tag accepts */a/…. Use [1/2/…] for index.
+<condition> = [<sub_cond> [and/or <sub_cond>]]  # Use not(<sub_cond>) to negate condition.
+<sub_cond>  = @<attr>[="<val>"]                 # `text()=` and `.=` match (complete) text.
+<sub_cond>  = contains(@<attr>, "<val>")        # Is <val> a substring of attribute's value?
+<sub_cond>  = [//]<element>                     # Has matching child? Descendant if //<el>.
 ```
 
 
