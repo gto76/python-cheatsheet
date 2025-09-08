@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>September 7, 2025</aside>
+    <aside>September 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1983,10 +1983,10 @@ Processing: 100%|████████████████████| 3
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.plot/bar/scatter(x_data, y_data [, label=&lt;str&gt;])  <span class="hljs-comment"># Also plt.plot(y_data).</span>
-plt.legend()                                          <span class="hljs-comment"># Adds a legend.</span>
-plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds a title or label.</span>
+plt.legend()                                          <span class="hljs-comment"># Adds a legend of labels.</span>
+plt.title/xlabel/ylabel(&lt;str&gt;)                        <span class="hljs-comment"># Adds title or axis label.</span>
 plt.show()                                            <span class="hljs-comment"># Also plt.savefig(&lt;path&gt;).</span>
-plt.clf()                                             <span class="hljs-comment"># Clears the plot.</span>
+plt.clf()                                             <span class="hljs-comment"># Clears the plot (figure).</span>
 </code></pre></div>
 
 <div><h2 id="table"><a href="#table" name="table">#</a>Table</h2><div><h4 id="printsacsvspreadsheettotheconsole">Prints a CSV spreadsheet to the console:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tabulate</span>
@@ -2051,16 +2051,16 @@ window.close()
 <div><h2 id="scraping"><a href="#scraping" name="scraping">#</a>Scraping</h2><div><h4 id="scrapespythonsurlandlogofromitswikipediapage">Scrapes Python's URL and logo from its Wikipedia page:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install requests beautifulsoup4</span>
 <span class="hljs-keyword">import</span> requests, bs4, os
 
-url        = <span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>
-response   = requests.get(url, headers={<span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'cpc-bot'</span>})
-document   = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.parser'</span>)
-table      = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
+get = <span class="hljs-keyword">lambda</span> url: requests.get(url, headers={<span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'cpc-bot'</span>})
+response = get(<span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>)
+document = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.parser'</span>)
+table = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
 python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
-logo_url   = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
-filename   = os.path.basename(logo_url)
+logo_url = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
+filename = os.path.basename(logo_url)
 <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
-    file.write(requests.get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content)
-print(<span class="hljs-string">f'<span class="hljs-subst">{python_url}</span>, file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
+    file.write(get(<span class="hljs-string">f'https:<span class="hljs-subst">{logo_url}</span>'</span>).content)
+print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</span>, logo: file://<span class="hljs-subst">{os.path.abspath(filename)}</span>'</span>)
 </code></pre></div></div>
 
 
@@ -2933,7 +2933,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 7, 2025</aside>
+    <aside>September 8, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

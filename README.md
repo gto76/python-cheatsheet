@@ -2405,10 +2405,10 @@ Plot
 import matplotlib.pyplot as plt
 
 plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Also plt.plot(y_data).
-plt.legend()                                          # Adds a legend.
-plt.title/xlabel/ylabel(<str>)                        # Adds a title or label.
+plt.legend()                                          # Adds a legend of labels.
+plt.title/xlabel/ylabel(<str>)                        # Adds title or axis label.
 plt.show()                                            # Also plt.savefig(<path>).
-plt.clf()                                             # Clears the plot.
+plt.clf()                                             # Clears the plot (figure).
 ```
 
 
@@ -2491,16 +2491,16 @@ Scraping
 # $ pip3 install requests beautifulsoup4
 import requests, bs4, os
 
-url        = 'https://en.wikipedia.org/wiki/Python_(programming_language)'
-response   = requests.get(url, headers={'User-Agent': 'cpc-bot'})
-document   = bs4.BeautifulSoup(response.text, 'html.parser')
-table      = document.find('table', class_='infobox vevent')
+get = lambda url: requests.get(url, headers={'User-Agent': 'cpc-bot'})
+response = get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+document = bs4.BeautifulSoup(response.text, 'html.parser')
+table = document.find('table', class_='infobox vevent')
 python_url = table.find('th', text='Website').next_sibling.a['href']
-logo_url   = table.find('img')['src']
-filename   = os.path.basename(logo_url)
+logo_url = table.find('img')['src']
+filename = os.path.basename(logo_url)
 with open(filename, 'wb') as file:
-    file.write(requests.get(f'https:{logo_url}').content)
-print(f'{python_url}, file://{os.path.abspath(filename)}')
+    file.write(get(f'https:{logo_url}').content)
+print(f'URL: {python_url}, logo: file://{os.path.abspath(filename)}')
 ```
 
 ### Selenium
