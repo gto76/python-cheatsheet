@@ -310,6 +310,9 @@ True
 String
 ------
 **Immutable sequence of characters.**
+```python
+<str>  = 'abc'                               # Also "abc". Interprets \n, \t, \x00-\xff, etc.
+```
 
 ```python
 <str>  = <str>.strip()                       # Strips all whitespace characters from both ends.
@@ -317,40 +320,39 @@ String
 ```
 
 ```python
-<list> = <str>.split()                       # Splits on one or more whitespace characters.
+<list> = <str>.split()                       # Splits it on one or more whitespace characters.
 <list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' string at most 'maxsplit' times.
 <list> = <str>.splitlines(keepends=False)    # On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.
-<str>  = <str>.join(<coll_of_strings>)       # Joins elements by using string as a separator.
+<str>  = <str>.join(<coll_of_strings>)       # Joins items by using the string as a separator.
 ```
 
 ```python
-<bool> = <sub_str> in <str>                  # Checks if string contains the substring.
-<bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings for multiple options.
+<bool> = <sub_str> in <str>                  # Returns True if string contains the substring.
+<bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings to give multiple options.
 <int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
 ```
 
 ```python
 <str>  = <str>.lower()                       # Lowers the case. Also upper/capitalize/title().
-<str>  = <str>.casefold()                    # Same, but converts ẞ/ß to ss, Σ/ς to σ, etc.
+<str>  = <str>.casefold()                    # Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
 <str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
 ```
 
 ```python
-<str>  = chr(<int>)                          # Converts passed integer to Unicode character.
-<int>  = ord(<str>)                          # Converts passed Unicode character to integer.
+<str>  = chr(<int>)                          # Converts passed integer into Unicode character.
+<int>  = ord(<str>)                          # Converts passed Unicode character into integer.
 ```
 * **Use `'unicodedata.normalize("NFC", <str>)'` on strings like `'Motörhead'` before comparing them to other strings, because `'ö'` can be stored as one or two characters.**
 * **`'NFC'` converts such characters to a single character, while `'NFD'` converts them to two.**
 
-### Property Methods
 ```python
-<bool> = <str>.isdecimal()                   # Checks for [0-9]. Also [०-९] and [٠-٩].
-<bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal().
-<bool> = <str>.isnumeric()                   # Checks for [¼½¾…], [零〇一…] and isdigit().
-<bool> = <str>.isalnum()                     # Checks for [a-zA-Z…] and isnumeric().
-<bool> = <str>.isprintable()                 # Checks for [ !#$%…] and isalnum().
-<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c-\x1f\x85…].
+<bool> = <str>.isdecimal()                   # Checks all chars for [0-9]. Also [०-९], [٠-٩].
+<bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal(). Also [፩-፱].
+<bool> = <str>.isnumeric()                   # Checks for [¼½¾…] and isdigit(). Also [零〇一…].
+<bool> = <str>.isalnum()                     # Checks for [ABC…] and isnumeric(). Also [ªµº…].
+<bool> = <str>.isprintable()                 # Checks for [ !"#$…] and isalnum(). Also emojis.
+<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].
 ```
 
 

@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>September 8, 2025</aside>
+    <aside>September 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -304,40 +304,41 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 ┃ decimal.Decimal    │    ✓     │          │          │          │          ┃
 ┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="string"><a href="#string" name="string">#</a>String</h2><p><strong>Immutable sequence of characters.</strong></p><pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
-&lt;str&gt;  = &lt;str&gt;.strip(<span class="hljs-string">'&lt;chars&gt;'</span>)              <span class="hljs-comment"># Strips passed characters. Also lstrip/rstrip().</span>
+<div><h2 id="string"><a href="#string" name="string">#</a>String</h2><p><strong>Immutable sequence of characters.</strong></p><pre><code class="python language-python hljs">&lt;str&gt;  = <span class="hljs-string">'abc'</span>                               <span class="hljs-comment"># Also "abc". Interprets \n, \t, \x00-\xff, etc.</span>
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits on one or more whitespace characters.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.strip()                       <span class="hljs-comment"># Strips all whitespace characters from both ends.</span>
+&lt;str&gt;  = &lt;str&gt;.strip(<span class="hljs-string">'&lt;chars&gt;'</span>)              <span class="hljs-comment"># Strips passed characters. Also lstrip/rstrip().</span>
+</code></pre>
+<pre><code class="python language-python hljs">&lt;list&gt; = &lt;str&gt;.split()                       <span class="hljs-comment"># Splits it on one or more whitespace characters.</span>
 &lt;list&gt; = &lt;str&gt;.split(sep=<span class="hljs-keyword">None</span>, maxsplit=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Splits on 'sep' string at most 'maxsplit' times.</span>
 &lt;list&gt; = &lt;str&gt;.splitlines(keepends=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.</span>
-&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins elements by using string as a separator.</span>
+&lt;str&gt;  = &lt;str&gt;.join(&lt;coll_of_strings&gt;)       <span class="hljs-comment"># Joins items by using the string as a separator.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Checks if string contains the substring.</span>
-&lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings for multiple options.</span>
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Returns True if string contains the substring.</span>
+&lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings to give multiple options.</span>
 &lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or -1.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.lower()                       <span class="hljs-comment"># Lowers the case. Also upper/capitalize/title().</span>
-&lt;str&gt;  = &lt;str&gt;.casefold()                    <span class="hljs-comment"># Same, but converts ẞ/ß to ss, Σ/ς to σ, etc.</span>
+&lt;str&gt;  = &lt;str&gt;.casefold()                    <span class="hljs-comment"># Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.</span>
 &lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
 &lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts passed integer to Unicode character.</span>
-&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts passed Unicode character to integer.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts passed integer into Unicode character.</span>
+&lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts passed Unicode character into integer.</span>
 </code></pre>
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'unicodedata.normalize("NFC", &lt;str&gt;)'</span></code> on strings like <code class="python hljs"><span class="hljs-string">'Motörhead'</span></code> before comparing them to other strings, because <code class="python hljs"><span class="hljs-string">'ö'</span></code> can be stored as one or two characters.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'NFC'</span></code> converts such characters to a single character, while <code class="python hljs"><span class="hljs-string">'NFD'</span></code> converts them to two.</strong></li>
 </ul>
-<div><h3 id="propertymethods">Property Methods</h3><pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># Checks for [0-9]. Also [०-९] and [٠-٩].</span>
-&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Checks for [²³¹…] and isdecimal().</span>
-&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾…], [零〇一…] and isdigit().</span>
-&lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [a-zA-Z…] and isnumeric().</span>
-&lt;bool&gt; = &lt;str&gt;.isprintable()                 <span class="hljs-comment"># Checks for [ !#$%…] and isalnum().</span>
-&lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c-\x1f\x85…].</span>
-</code></pre></div>
-
+<pre><code class="python language-python hljs">&lt;bool&gt; = &lt;str&gt;.isdecimal()                   <span class="hljs-comment"># Checks all chars for [0-9]. Also [०-९], [٠-٩].</span>
+&lt;bool&gt; = &lt;str&gt;.isdigit()                     <span class="hljs-comment"># Checks for [²³¹…] and isdecimal(). Also [፩-፱].</span>
+&lt;bool&gt; = &lt;str&gt;.isnumeric()                   <span class="hljs-comment"># Checks for [¼½¾…] and isdigit(). Also [零〇一…].</span>
+&lt;bool&gt; = &lt;str&gt;.isalnum()                     <span class="hljs-comment"># Checks for [ABC…] and isnumeric(). Also [ªµº…].</span>
+&lt;bool&gt; = &lt;str&gt;.isprintable()                 <span class="hljs-comment"># Checks for [ !"#$…] and isalnum(). Also emojis.</span>
+&lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].</span>
+</code></pre>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
 &lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
 &lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns all occurrences of the pattern.</span>
@@ -2933,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 8, 2025</aside>
+    <aside>September 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
