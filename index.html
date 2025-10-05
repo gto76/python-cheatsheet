@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>September 16, 2025</aside>
+    <aside>October 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -107,26 +107,26 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
 
 
 
-<div><h2 id="main"><a href="#main" name="main">#</a>Main</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:      <span class="hljs-comment"># Skips next line if file was imported.</span>
-    main()                      <span class="hljs-comment"># Runs `def main(): ...` function.</span>
+<div><h2 id="main"><a href="#main" name="main">#</a>Main</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:      <span class="hljs-comment"># Skips indented lines of code if file was imported.</span>
+    main()                      <span class="hljs-comment"># Executes user-defined `def main(): ...` function.</span>
 </code></pre></div>
 
-<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates a list object. Also list(&lt;collection&gt;).</span>
+<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates a new list object. Also list(&lt;collection&gt;).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;el&gt;   = &lt;list&gt;[index]          <span class="hljs-comment"># First index is 0. Last -1. Allows assignments.</span>
+<pre><code class="python language-python hljs">&lt;el&gt;   = &lt;list&gt;[index]          <span class="hljs-comment"># First index is 0, last -1. Also `&lt;list&gt;[i] = &lt;el&gt;`.</span>
 &lt;list&gt; = &lt;list&gt;[&lt;slice&gt;]        <span class="hljs-comment"># Also &lt;list&gt;[from_inclusive : to_exclusive : ±step].</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;.append(&lt;el&gt;)             <span class="hljs-comment"># Appends element to the end. Also &lt;list&gt; += [&lt;el&gt;].</span>
-&lt;list&gt;.extend(&lt;collection&gt;)     <span class="hljs-comment"># Appends elements to the end. Also &lt;list&gt; += &lt;coll&gt;.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;.append(&lt;el&gt;)             <span class="hljs-comment"># Appends element to the end. Also `&lt;list&gt; += [&lt;el&gt;]`.</span>
+&lt;list&gt;.extend(&lt;collection&gt;)     <span class="hljs-comment"># Appends multiple elements. Also `&lt;list&gt; += &lt;coll&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;.sort()                   <span class="hljs-comment"># Sorts the elements in ascending order.</span>
-&lt;list&gt;.reverse()                <span class="hljs-comment"># Reverses the order of list's elements.</span>
-&lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns a new list with sorted elements.</span>
-&lt;iter&gt; = reversed(&lt;list&gt;)       <span class="hljs-comment"># Returns reversed iterator of elements.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;.sort(reverse=<span class="hljs-keyword">False</span>)      <span class="hljs-comment"># Sorts the elements of the list in ascending order.</span>
+&lt;list&gt;.reverse()                <span class="hljs-comment"># Reverses the order of elements. Takes linear time.</span>
+&lt;list&gt; = sorted(&lt;collection&gt;)   <span class="hljs-comment"># Returns a new sorted list. Accepts `reverse=True`.</span>
+&lt;iter&gt; = reversed(&lt;list&gt;)       <span class="hljs-comment"># Returns reversed iterator. Also list(&lt;iterator&gt;).</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns largest element. Also min(&lt;el_1&gt;, ...).</span>
-&lt;num&gt; = sum(&lt;collection&gt;)       <span class="hljs-comment"># Returns sum of elements. Also math.prod(&lt;coll&gt;).</span>
+<pre><code class="python language-python hljs">&lt;el&gt;  = max(&lt;collection&gt;)       <span class="hljs-comment"># Returns the largest element. Also min(&lt;el_1&gt;, ...).</span>
+&lt;num&gt; = sum(&lt;collection&gt;)       <span class="hljs-comment"># Returns a sum of elements. Also math.prod(&lt;coll&gt;).</span>
 </code></pre>
 <pre><code class="python language-python hljs">elementwise_sum  = [sum(pair) <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> zip(list_a, list_b)]
 sorted_by_second = sorted(&lt;collection&gt;, key=<span class="hljs-keyword">lambda</span> el: el[<span class="hljs-number">1</span>])
@@ -143,7 +143,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
 &lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end or at index if passed.</span>
 &lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at passed index and moves the rest to the right.</span>
-&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes first occurrence of the item or raises ValueError.</span>
+&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes the first occurrence or raises ValueError exception.</span>
 &lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all list's items. Also works on dictionary and set.</span>
 </code></pre>
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or set the value.</span>
@@ -153,14 +153,14 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;view&gt; = &lt;dict&gt;.values()                        <span class="hljs-comment"># Collection of values that reflects changes.</span>
 &lt;view&gt; = &lt;dict&gt;.items()                         <span class="hljs-comment"># Coll. of key-value tuples that reflects chgs.</span>
 </code></pre>
-<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns default argument if key is missing.</span>
+<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns argument default if key is missing.</span>
 value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes default if key is missing.</span>
-&lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Returns a dict with default value `&lt;type&gt;()`.</span>
-&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Returns a dict with default value 1.</span>
+&lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Dict with automatic default value `&lt;type&gt;()`.</span>
+&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Dictionary with automatic default value 1.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = dict(&lt;collection&gt;)                     <span class="hljs-comment"># Creates a dict from coll. of key-value pairs.</span>
-&lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates a dict from two collections.</span>
-&lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Creates a dict from collection of keys.</span>
+&lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates a dictionary from two collections.</span>
+&lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Creates a dictionary from collection of keys.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt;.update(&lt;dict&gt;)                           <span class="hljs-comment"># Adds items. Replaces ones with matching keys.</span>
 value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError if missing.</span>
@@ -174,26 +174,26 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 [(<span class="hljs-string">'blue'</span>, <span class="hljs-number">3</span>), (<span class="hljs-string">'red'</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">'yellow'</span>, <span class="hljs-number">1</span>)]
 </code></pre></div>
 
-<div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = {&lt;el_1&gt;, &lt;el_2&gt;, ...}                   <span class="hljs-comment"># Use `set()` for empty set.</span>
+<div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = {&lt;el_1&gt;, &lt;el_2&gt;, ...}                <span class="hljs-comment"># Coll. of unique items. Also set(), set(&lt;coll&gt;).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                                 <span class="hljs-comment"># Or: &lt;set&gt; |= {&lt;el&gt;}</span>
-&lt;set&gt;.update(&lt;collection&gt; [, ...])              <span class="hljs-comment"># Or: &lt;set&gt; |= &lt;set&gt;</span>
+<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                              <span class="hljs-comment"># Adds item to the set. Also `&lt;set&gt; |= {&lt;el&gt;}`.</span>
+&lt;set&gt;.update(&lt;collection&gt; [, ...])           <span class="hljs-comment"># Adds items to the set. Also `&lt;set&gt; |= &lt;set&gt;`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll.&gt;)                   <span class="hljs-comment"># Or: &lt;set&gt; | &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll.&gt;)            <span class="hljs-comment"># Or: &lt;set&gt; &amp; &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.difference(&lt;coll.&gt;)              <span class="hljs-comment"># Or: &lt;set&gt; - &lt;set&gt;</span>
-&lt;set&gt;  = &lt;set&gt;.symmetric_difference(&lt;coll.&gt;)    <span class="hljs-comment"># Or: &lt;set&gt; ^ &lt;set&gt;</span>
-&lt;bool&gt; = &lt;set&gt;.issubset(&lt;coll.&gt;)                <span class="hljs-comment"># Or: &lt;set&gt; &lt;= &lt;set&gt;</span>
-&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll.&gt;)              <span class="hljs-comment"># Or: &lt;set&gt; &gt;= &lt;set&gt;</span>
+<pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll&gt;)                 <span class="hljs-comment"># Returns a set of all items. Also &lt;set&gt; | &lt;set&gt;.</span>
+&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll&gt;)          <span class="hljs-comment"># Returns all shared items. Also &lt;set&gt; &amp; &lt;set&gt;.</span>
+&lt;set&gt;  = &lt;set&gt;.difference(&lt;coll&gt;)            <span class="hljs-comment"># Returns set's unique items. Also &lt;set&gt; - &lt;set&gt;.</span>
+&lt;set&gt;  = &lt;set&gt;.symmetric_difference(&lt;coll&gt;)  <span class="hljs-comment"># Returns non-shared items. Also &lt;set&gt; ^ &lt;set&gt;.</span>
+&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll&gt;)            <span class="hljs-comment"># Returns False if collection has unique items.</span>
+&lt;bool&gt; = &lt;set&gt;.issubset(&lt;coll&gt;)              <span class="hljs-comment"># Is collection a superset? Also &lt;set&gt; &lt;= &lt;set&gt;.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                              <span class="hljs-comment"># Raises KeyError if empty.</span>
-&lt;set&gt;.remove(&lt;el&gt;)                              <span class="hljs-comment"># Raises KeyError if missing.</span>
-&lt;set&gt;.discard(&lt;el&gt;)                             <span class="hljs-comment"># Doesn't raise an error.</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                           <span class="hljs-comment"># Removes and returns an item or raises KeyError.</span>
+&lt;set&gt;.remove(&lt;el&gt;)                           <span class="hljs-comment"># Removes the item or raises KeyError if missing.</span>
+&lt;set&gt;.discard(&lt;el&gt;)                          <span class="hljs-comment"># Same as remove() but it doesn't raise an error.</span>
 </code></pre>
 <div><h3 id="frozenset">Frozen Set</h3><ul>
 <li><strong>Is immutable and hashable.</strong></li>
-<li><strong>That means it can be used as a key in a dictionary or as an element in a set.</strong></li>
+<li><strong>That means it can be used as a key in a dictionary or as an item in a set.</strong></li>
 </ul><pre><code class="python language-python hljs">&lt;frozenset&gt; = frozenset(&lt;collection&gt;)
 </code></pre></div>
 
@@ -2934,7 +2934,7 @@ $ deactivate                <span class="hljs-comment"># Deactivates the active 
  
 
   <footer>
-    <aside>September 16, 2025</aside>
+    <aside>October 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

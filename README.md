@@ -21,37 +21,37 @@ Contents
 Main
 ----
 ```python
-if __name__ == '__main__':      # Skips next line if file was imported.
-    main()                      # Runs `def main(): ...` function.
+if __name__ == '__main__':      # Skips indented lines of code if file was imported.
+    main()                      # Executes user-defined `def main(): ...` function.
 ```
 
 
 List
 ----
 ```python
-<list> = [<el_1>, <el_2>, ...]  # Creates a list object. Also list(<collection>).
+<list> = [<el_1>, <el_2>, ...]  # Creates a new list object. Also list(<collection>).
 ```
 
 ```python
-<el>   = <list>[index]          # First index is 0. Last -1. Allows assignments.
+<el>   = <list>[index]          # First index is 0, last -1. Also `<list>[i] = <el>`.
 <list> = <list>[<slice>]        # Also <list>[from_inclusive : to_exclusive : ±step].
 ```
 
 ```python
-<list>.append(<el>)             # Appends element to the end. Also <list> += [<el>].
-<list>.extend(<collection>)     # Appends elements to the end. Also <list> += <coll>.
+<list>.append(<el>)             # Appends element to the end. Also `<list> += [<el>]`.
+<list>.extend(<collection>)     # Appends multiple elements. Also `<list> += <coll>`.
 ```
 
 ```python
-<list>.sort()                   # Sorts the elements in ascending order.
-<list>.reverse()                # Reverses the order of list's elements.
-<list> = sorted(<collection>)   # Returns a new list with sorted elements.
-<iter> = reversed(<list>)       # Returns reversed iterator of elements.
+<list>.sort(reverse=False)      # Sorts the elements of the list in ascending order.
+<list>.reverse()                # Reverses the order of elements. Takes linear time.
+<list> = sorted(<collection>)   # Returns a new sorted list. Accepts `reverse=True`.
+<iter> = reversed(<list>)       # Returns reversed iterator. Also list(<iterator>).
 ```
 
 ```python
-<el>  = max(<collection>)       # Returns largest element. Also min(<el_1>, ...).
-<num> = sum(<collection>)       # Returns sum of elements. Also math.prod(<coll>).
+<el>  = max(<collection>)       # Returns the largest element. Also min(<el_1>, ...).
+<num> = sum(<collection>)       # Returns a sum of elements. Also math.prod(<coll>).
 ```
 
 ```python
@@ -70,7 +70,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 <int> = <list>.index(<el>)      # Returns index of the first occurrence or raises ValueError.
 <el>  = <list>.pop()            # Removes and returns item from the end or at index if passed.
 <list>.insert(<int>, <el>)      # Inserts item at passed index and moves the rest to the right.
-<list>.remove(<el>)             # Removes first occurrence of the item or raises ValueError.
+<list>.remove(<el>)             # Removes the first occurrence or raises ValueError exception.
 <list>.clear()                  # Removes all list's items. Also works on dictionary and set.
 ```
 
@@ -88,16 +88,16 @@ Dictionary
 ```
 
 ```python
-value  = <dict>.get(key, default=None)          # Returns default argument if key is missing.
+value  = <dict>.get(key, default=None)          # Returns argument default if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
-<dict> = collections.defaultdict(<type>)        # Returns a dict with default value `<type>()`.
-<dict> = collections.defaultdict(lambda: 1)     # Returns a dict with default value 1.
+<dict> = collections.defaultdict(<type>)        # Dict with automatic default value `<type>()`.
+<dict> = collections.defaultdict(lambda: 1)     # Dictionary with automatic default value 1.
 ```
 
 ```python
 <dict> = dict(<collection>)                     # Creates a dict from coll. of key-value pairs.
-<dict> = dict(zip(keys, values))                # Creates a dict from two collections.
-<dict> = dict.fromkeys(keys [, value])          # Creates a dict from collection of keys.
+<dict> = dict(zip(keys, values))                # Creates a dictionary from two collections.
+<dict> = dict.fromkeys(keys [, value])          # Creates a dictionary from collection of keys.
 ```
 
 ```python
@@ -120,32 +120,32 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 Set
 ---
 ```python
-<set> = {<el_1>, <el_2>, ...}                   # Use `set()` for empty set.
+<set> = {<el_1>, <el_2>, ...}                # Coll. of unique items. Also set(), set(<coll>).
 ```
 
 ```python
-<set>.add(<el>)                                 # Or: <set> |= {<el>}
-<set>.update(<collection> [, ...])              # Or: <set> |= <set>
+<set>.add(<el>)                              # Adds item to the set. Also `<set> |= {<el>}`.
+<set>.update(<collection> [, ...])           # Adds items to the set. Also `<set> |= <set>`.
 ```
 
 ```python
-<set>  = <set>.union(<coll.>)                   # Or: <set> | <set>
-<set>  = <set>.intersection(<coll.>)            # Or: <set> & <set>
-<set>  = <set>.difference(<coll.>)              # Or: <set> - <set>
-<set>  = <set>.symmetric_difference(<coll.>)    # Or: <set> ^ <set>
-<bool> = <set>.issubset(<coll.>)                # Or: <set> <= <set>
-<bool> = <set>.issuperset(<coll.>)              # Or: <set> >= <set>
+<set>  = <set>.union(<coll>)                 # Returns a set of all items. Also <set> | <set>.
+<set>  = <set>.intersection(<coll>)          # Returns all shared items. Also <set> & <set>.
+<set>  = <set>.difference(<coll>)            # Returns set's unique items. Also <set> - <set>.
+<set>  = <set>.symmetric_difference(<coll>)  # Returns non-shared items. Also <set> ^ <set>.
+<bool> = <set>.issuperset(<coll>)            # Returns False if collection has unique items.
+<bool> = <set>.issubset(<coll>)              # Is collection a superset? Also <set> <= <set>.
 ```
 
 ```python
-<el> = <set>.pop()                              # Raises KeyError if empty.
-<set>.remove(<el>)                              # Raises KeyError if missing.
-<set>.discard(<el>)                             # Doesn't raise an error.
+<el> = <set>.pop()                           # Removes and returns an item or raises KeyError.
+<set>.remove(<el>)                           # Removes the item or raises KeyError if missing.
+<set>.discard(<el>)                          # Same as remove() but it doesn't raise an error.
 ```
 
 ### Frozen Set
 * **Is immutable and hashable.**
-* **That means it can be used as a key in a dictionary or as an element in a set.**
+* **That means it can be used as a key in a dictionary or as an item in a set.**
 ```python
 <frozenset> = frozenset(<collection>)
 ```
