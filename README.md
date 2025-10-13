@@ -2979,7 +2979,7 @@ play_notes('83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83�
 
 Pygame
 ------
-#### Opes a window and draws a square that can be moved with arrow keys:
+#### Opens a window and draws a square that can be moved with arrow keys:
 ```python
 # $ pip3 install pygame
 import pygame as pg
