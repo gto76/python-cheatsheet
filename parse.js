@@ -90,14 +90,14 @@ const CONSTRUCTOR_OVERLOADING =
   '        self.a = a\n';
 
 const SHUTIL_COPY =
-  'shutil.copy(from, to)               <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
-  'shutil.copy2(from, to)              <span class="hljs-comment"># Also copies creation and modification time.</span>\n' +
-  'shutil.copytree(from, to)           <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
+  'shutil.copy(from, to)            <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
+  'shutil.copy2(from, to)           <span class="hljs-comment"># Also copies creation and modification time.</span>\n' +
+  'shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
 
 const OS_RENAME =
-  'os.rename(from, to)                 <span class="hljs-comment"># Renames or moves the file or directory \'from\'.</span>\n' +
-  'os.replace(from, to)                <span class="hljs-comment"># Same, but overwrites file \'to\' even on Windows.</span>\n' +
-  'shutil.move(from, to)               <span class="hljs-comment"># Rename() that moves into \'to\' if it\'s a dir.</span>\n';
+  'os.rename(from, to)              <span class="hljs-comment"># Renames or moves the file or directory \'from\'.</span>\n' +
+  'os.replace(from, to)             <span class="hljs-comment"># Same, but overwrites file \'to\' even on Windows.</span>\n' +
+  'shutil.move(from, to)            <span class="hljs-comment"># Rename() that moves into \'to\' if it\'s a dir.</span>\n';
 
 const STRUCT_FORMAT =
   '<span class="hljs-section">\'&lt;n&gt;s\'</span><span class="hljs-attribute"></span>';

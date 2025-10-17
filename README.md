@@ -78,12 +78,12 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 Dictionary
 ----------
 ```python
-<dict> = {key_1: val_1, key_2: val_2, ...}      # Use `<dict>[key]` to get or set the value.
+<dict> = {key_1: val_1, key_2: val_2, ...}      # Use <dict>[key] to get or assign the value.
 ```
 
 ```python
-<view> = <dict>.keys()                          # Collection of keys that reflects changes.
-<view> = <dict>.values()                        # Collection of values that reflects changes.
+<view> = <dict>.keys()                          # A collection of keys that reflects changes.
+<view> = <dict>.values()                        # A collection of values that reflects changes.
 <view> = <dict>.items()                         # Coll. of key-value tuples that reflects chgs.
 ```
 
@@ -104,7 +104,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 <dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
 value = <dict>.pop(key)                         # Removes item or raises KeyError if missing.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
-{k: v for k, v in <dict>.items() if k in keys}  # Filters the dictionary by specified keys.
+{k: v for k, v in <dict>.items() if k in keys}  # Returns a dict of items with specified keys.
 ```
 
 ### Counter
@@ -155,9 +155,9 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
-<tuple> = ()                               # Empty tuple.
-<tuple> = (<el>,)                          # Or: <el>,
-<tuple> = (<el_1>, <el_2> [, ...])         # Or: <el_1>, <el_2> [, ...]
+<tuple> = ()                        # Returns empty tuple. Also tuple(), tuple(<coll>).
+<tuple> = (<el>,)                   # Returns a tuple with single element. Also `<el>,`.
+<tuple> = (<el_1>, <el_2> [, ...])  # Returns a tuple. Also `<el_1>, <el_2> [, ...]`.
 ```
 
 ### Named Tuple
@@ -177,9 +177,9 @@ Range
 -----
 **Immutable and hashable sequence of integers.**
 ```python
-<range> = range(stop)                      # I.e. range(to_exclusive).
-<range> = range(start, stop)               # I.e. range(from_inclusive, to_exclusive).
-<range> = range(start, stop, ±step)        # I.e. range(from_inclusive, to_exclusive, ±step).
+<range> = range(stop)                # I.e. range(to_exclusive). Integers from 0 to `stop-1`.
+<range> = range(start, stop)         # I.e. range(from_inc, to_exc). From start to `stop-1`.
+<range> = range(start, stop, ±step)  # I.e. range(from_inclusive, to_exclusive, ±step_size).
 ```
 
 ```python
@@ -201,7 +201,7 @@ Iterator
 **Potentially endless stream of elements.**
 
 ```python
-<iter> = iter(<collection>)                # `iter(<iter>)` returns unmodified iterator.
+<iter> = iter(<collection>)                # Calling iter(<iter>) returns unmodified iterator.
 <iter> = iter(<function>, to_exclusive)    # A sequence of return values until 'to_exclusive'.
 <el>   = next(<iter> [, default])          # Raises StopIteration or returns 'default' on end.
 <list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
@@ -214,7 +214,7 @@ import itertools as it
 
 ```python
 <iter> = it.count(start=0, step=1)         # Returns updated value endlessly. Accepts floats.
-<iter> = it.repeat(<el> [, times])         # Returns element endlessly or 'times' times.
+<iter> = it.repeat(<el> [, times])         # Returns passed element endlessly or 'times' times.
 <iter> = it.cycle(<collection>)            # Repeats the passed sequence of elements endlessly.
 ```
 
@@ -224,8 +224,8 @@ import itertools as it
 ```
 
 ```python
-<iter> = it.islice(<coll>, to_exclusive)   # Only returns first 'to_exclusive' elements.
-<iter> = it.islice(<coll>, from_inc, …)    # `to_exclusive, +step_size`. Indices can be None.
+<iter> = it.islice(<coll>, stop)           # Only returns (i.e. yields) first 'stop' elements.
+<iter> = it.islice(<coll>, start, stop)    # Also accepts `+step`. Start and stop can be None.
 ```
 
 
@@ -252,11 +252,11 @@ Type
 ----
 * **Everything is an object.**
 * **Every object has a type.**
-* **Type and class are synonymous.**
+* **Type and class are synonyms.**
 
 ```python
-<type> = type(<el>)                          # Or: <el>.__class__
-<bool> = isinstance(<el>, <type>)            # Or: issubclass(type(<el>), <type>)
+<type> = type(<el>)                # Returns object's type. Also <el>.__class__.
+<bool> = isinstance(<el>, <type>)  # Same as issubclass(type(<el>), <type>).
 ```
 
 ```python
@@ -666,7 +666,6 @@ import zoneinfo, dateutil.tz
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share the tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
-<float>  = <TD>      / <TD>                 # Also `(<int>, <TD>) = divmod(<TD>, <TD>)`.
 ```
 
 
@@ -821,9 +820,9 @@ Imports
 **Mechanism that makes code in one file available to another file.**
 
 ```python
-import <module>            # Imports a built-in or '<module>.py'.
-import <package>           # Imports a built-in or '<package>/__init__.py'.
-import <package>.<module>  # Imports a built-in or '<package>/<module>.py'.
+import <module>                # Imports a built-in or '<module>.py'.
+import <package>               # Imports a built-in or '<package>/__init__.py'.
+import <package>.<module>      # Imports a built-in or '<package>/<module>.py'.
 ```
 * **Package is a collection of modules, but it can also define its own functions, classes, etc.**
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
@@ -1495,9 +1494,9 @@ Exit
 **Exits the interpreter by raising SystemExit exception.**
 ```python
 import sys
-sys.exit()                        # Exits with exit code 0 (success).
-sys.exit(<int>)                   # Exits with the passed exit code.
-sys.exit(<obj>)                   # Prints to stderr and exits with 1.
+sys.exit()                     # Exits with exit code 0 (success).
+sys.exit(<int>)                # Exits with the passed exit code.
+sys.exit(<obj>)                # Prints to stderr and exits with 1.
 ```
 
 
@@ -1704,36 +1703,36 @@ import os, shutil, subprocess
 ```
 
 ```python
-os.chdir(<path>)                    # Changes the current working directory (CWD).
-os.mkdir(<path>, mode=0o777)        # Creates a directory. Permissions are in octal.
-os.makedirs(<path>, mode=0o777)     # Creates all path's dirs. Also `exist_ok=False`.
+os.chdir(<path>)                 # Changes the current working directory (CWD).
+os.mkdir(<path>, mode=0o777)     # Creates a directory. Permissions are in octal.
+os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False`.
 ```
 
 ```python
-shutil.copy(from, to)               # Copies the file. 'to' can exist or be a dir.
-shutil.copy2(from, to)              # Also copies creation and modification time.
-shutil.copytree(from, to)           # Copies the directory. 'to' must not exist.
+shutil.copy(from, to)            # Copies the file. 'to' can exist or be a dir.
+shutil.copy2(from, to)           # Also copies creation and modification time.
+shutil.copytree(from, to)        # Copies the directory. 'to' must not exist.
 ```
 
 ```python
-os.rename(from, to)                 # Renames or moves the file or directory 'from'.
-os.replace(from, to)                # Same, but overwrites file 'to' even on Windows.
-shutil.move(from, to)               # Rename() that moves into 'to' if it's a dir.
+os.rename(from, to)              # Renames or moves the file or directory 'from'.
+os.replace(from, to)             # Same, but overwrites file 'to' even on Windows.
+shutil.move(from, to)            # Rename() that moves into 'to' if it's a dir.
 ```
 
 ```python
-os.remove(<path>)                   # Deletes the file. Or `pip3 install send2trash`.
-os.rmdir(<path>)                    # Deletes the empty directory or raises OSError.
-shutil.rmtree(<path>)               # Deletes the directory and all of its contents.
+os.remove(<path>)                # Deletes the file. Or `pip3 install send2trash`.
+os.rmdir(<path>)                 # Deletes the empty directory or raises OSError.
+shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
 * **Paths can be either strings, Path objects, or DirEntry objects.**
 * **Functions report OS related errors by raising OSError or one of its [subclasses](#exceptions-1).**
 
 ### Shell Commands
 ```python
-<pipe> = os.popen('<commands>')     # Executes commands in sh/cmd. Returns combined stdout.
-<str>  = <pipe>.read(size=-1)       # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()             # Returns None if last command exited with returncode 0.
+<pipe> = os.popen('<commands>')  # Executes commands in sh/cmd. Returns combined stdout.
+<str>  = <pipe>.read(size=-1)    # Reads 'size' chars or until EOF. Also readline/s().
+<int>  = <pipe>.close()          # Returns None if last command exited with returncode 0.
 ```
 
 #### Sends "1 + 1" to the basic calculator and captures its output:
@@ -1759,8 +1758,8 @@ JSON
 
 ```python
 import json
-<str>  = json.dumps(<list/dict>)    # Converts collection to JSON string.
-<coll> = json.loads(<str>)          # Converts JSON string to collection.
+<str>  = json.dumps(<list/dict>)  # Converts collection to JSON string.
+<coll> = json.loads(<str>)        # Converts JSON string to collection.
 ```
 
 ### Read Collection from JSON File
@@ -1784,8 +1783,8 @@ Pickle
 
 ```python
 import pickle
-<bytes>  = pickle.dumps(<object>)   # Converts object to bytes object.
-<object> = pickle.loads(<bytes>)    # Converts bytes object to object.
+<bytes>  = pickle.dumps(<object>)  # Converts object to bytes object.
+<object> = pickle.loads(<bytes>)   # Converts bytes object to object.
 ```
 
 ### Read Object from Pickle File
@@ -2030,22 +2029,22 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, however bytes of each element can be reversed (by calling the byteswap() method).**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys-tem, however bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array
 ```
 
 ```python
-<array> = array('<typecode>', <coll_of_nums>)  # Creates an array from collection of numbers.
-<array> = array('<typecode>', <bytes>)         # Writes passed bytes to the array's memory.
-<array> = array('<typecode>', <array>)         # Treats passed array as a sequence of numbers.
-<array>.fromfile(<file>, n_items)              # Appends file contents to the array's memory.
+<array> = array('<typecode>' [, <coll>])  # Creates array. Accepts collection of numbers.
+<array> = array('<typecode>', <bytes>)    # Copies passed bytes into the array's memory.
+<array> = array('<typecode>', <array>)    # Treats passed array as a sequence of numbers.
+<array>.fromfile(<file>, n_items)         # Appends file contents to the array's memory.
 ```
 
 ```python
-<bytes> = bytes(<array>)                       # Returns a copy of array's memory as bytes.
-<file>.write(<array>)                          # Writes array's memory to the binary file.
+<bytes> = bytes(<array>)                  # Returns a copy of array's memory as bytes.
+<file>.write(<array>)                     # Appends array's memory to the binary file.
 ```
 
 
@@ -2054,24 +2053,24 @@ Memory View
 **A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.**
 
 ```python
-<mview> = memoryview(<bytes/bytearray/array>)  # Immutable if bytes is passed, else mutable.
-<obj>   = <mview>[index]                       # Returns ints/floats. Bytes if format is 'c'.
-<mview> = <mview>[<slice>]                     # Returns memoryview with rearranged elements.
-<mview> = <mview>.cast('<typecode>')           # Only works between B/b/c and other types.
-<mview>.release()                              # Releases memory buffer of the base object.
+<mview> = memoryview(<bytes/array>)       # Returns mutable memoryview if array is passed.
+<obj>   = <mview>[index]                  # Returns an int/float. Bytes if format is 'c'.
+<mview> = <mview>[<slice>]                # Returns memoryview with rearranged elements.
+<mview> = <mview>.cast('<typecode>')      # Only works between B/b/c and the other types.
+<mview>.release()                         # Releases the memory buffer of the base object.
 ```
 
 ```python
-<bytes> = bytes(<mview>)                       # Returns a new bytes object. Also bytearray().
-<bytes> = <bytes>.join(<coll_of_mviews>)       # Joins memoryviews using bytes as a separator.
-<array> = array('<typecode>', <mview>)         # Treats memoryview as a sequence of numbers.
-<file>.write(<mview>)                          # Writes `bytes(<mview>)` to the binary file.
+<bytes> = bytes(<mview>)                  # Returns a new bytes object. Also bytearray().
+<bytes> = <bytes>.join(<coll_of_mviews>)  # Joins memoryviews using bytes as a separator.
+<array> = array('<typecode>', <mview>)    # Treats passed mview as a sequence of numbers.
+<file>.write(<mview>)                     # Appends `bytes(<mview>)` to the binary file.
 ```
 
 ```python
-<list>  = list(<mview>)                        # Returns a list of ints, floats or bytes.
-<str>   = str(<mview>, 'utf-8')                # Treats passed memoryview as a bytes object.
-<str>   = <mview>.hex()                        # Returns hex pairs. Accepts `sep=<str>`.
+<list>  = list(<mview>)                   # Returns list of ints, floats or bytes objects.
+<str>   = str(<mview>, 'utf-8')           # Treats passed memoryview as `bytes(<mview>)`.
+<str>   = <mview>.hex()                   # Returns hexadecimal pairs. Also `sep=<str>`.
 ```
 
 
@@ -2084,11 +2083,11 @@ from collections import deque
 ```
 
 ```python
-<deque> = deque(<collection>)                  # Use `maxlen=<int>` to set size limit.
-<deque>.appendleft(<el>)                       # Opposite element is dropped if full.
-<deque>.extendleft(<collection>)               # Prepends reversed coll. to the deque.
-<deque>.rotate(n=1)                            # Last element becomes the first one.
-<el> = <deque>.popleft()                       # Raises IndexError if deque is empty.
+<deque> = deque(<collection>)     # Use `maxlen=<int>` to set size limit.
+<deque>.appendleft(<el>)          # Opposite element is dropped if full.
+<deque>.extendleft(<collection>)  # Prepends reversed coll. to the deque.
+<deque>.rotate(n=1)               # Last element becomes the first one.
+<el> = <deque>.popleft()          # Raises IndexError if deque is empty.
 ```
 
 
@@ -2117,7 +2116,7 @@ sorted_by_both   = sorted(<coll>, key=op.itemgetter(1, 0))
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
 * **Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().**
-* **Comparisons can be chained: `'x < y < z'` gets converted to `'(x < y) and (y < z)`'.**
+* **Comparisons can be chained: `'x < y < z'` gets converted to `'(x < y) and (y < z)'`.**
 
 
 Match Statement
@@ -2133,7 +2132,7 @@ match <object/expression>:
 
 ### Patterns
 ```python
-<value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or a dotted name.
+<value_pattern> = 1/'abc'/True/None/math.pi        # Matches the literal or attribute's value.
 <class_pattern> = <type>()                         # Matches any object of that type (or ABC).
 <wildcard_patt> = _                                # Matches any object. Useful in last case.
 <capture_patt>  = <name>                           # Matches any object and binds it to name.
@@ -2383,7 +2382,6 @@ async def view(state, screen):
 if __name__ == '__main__':
     curses.wrapper(main)
 ```
-<br>
 
 
 Libraries
@@ -3541,11 +3539,11 @@ cdef class <class_name>:                             # Also `cdef struct <struct
 **System for installing libraries directly into project's directory.**
 
 ```perl
-$ python3 -m venv NAME      # Creates virtual environment in current directory.
-$ source NAME/bin/activate  # Activates it. On Windows run `NAME\Scripts\activate`.
-$ pip3 install LIBRARY      # Installs the library into active environment.
-$ python3 FILE              # Runs the script in active environment. Also `./FILE`.
-$ deactivate                # Deactivates the active virtual environment.
+$ python3 -m venv NAME         # Creates virtual environment in current directory.
+$ source NAME/bin/activate     # Activates it. On Windows run `NAME\Scripts\activate`.
+$ pip3 install LIBRARY         # Installs the library into active environment.
+$ python3 FILE                 # Runs the script in active environment. Also `./FILE`.
+$ deactivate                   # Deactivates the active virtual environment.
 ```
 
 ### Basic Script Template
