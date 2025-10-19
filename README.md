@@ -1949,10 +1949,10 @@ Bytes
 **A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                       # Only accepts ASCII characters and \x00-\xff.
+<bytes> = b'<str>'                       # Only accepts ASCII chars and [\x00-\xff].
 <int>   = <bytes>[index]                 # Returns an integer in range from 0 to 255.
-<bytes> = <bytes>[<slice>]               # Returns bytes even if it has only one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements by using bytes as a separator.
+<bytes> = <bytes>[<slice>]               # Returns bytes even if it has one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
 
 ### Encode
@@ -1995,7 +1995,7 @@ Struct
 from struct import pack, unpack
 
 <bytes> = pack('<format>', <el_1> [, ...])  # Packs numbers according to format string.
-<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iterator of tuples.
+<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iter of tuples.
 ```
 
 ```python
@@ -2140,7 +2140,7 @@ match <object/expression>:
 <or_pattern>    = <pattern> | <pattern> [| ...]    # Matches if any of listed patterns match.
 <sequence_patt> = [<pattern>, ...]                 # Matches a sequence. All items must match.
 <mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict if it has matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object that has matching attribs.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object that has matching attrbs.
 ```
 * **Sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
@@ -2252,7 +2252,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ```python
 <Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
 <Thread>.start()                               # Starts the thread. Also <Thread>.is_alive().
-<Thread>.join()                                # Waits for the thread to finish executing.
+<Thread>.join()                                # Waits until the thread has finished executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
@@ -2274,16 +2274,16 @@ with <lock>:                                   # Enters the block by calling met
 ```python
 <Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
 <Event>     = Event()                          # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(<int>)                   # Wait() blocks until it's called int times.
+<Barrier>   = Barrier(<int>)                   # Wait() blocks until it's called integer times.
 ```
 
 ### Queue
 ```python
 <Queue> = queue.Queue(maxsize=0)               # A first-in-first-out queue. It's thread safe.
-<Queue>.put(<obj>)                             # Call blocks until queue stops being full.
+<Queue>.put(<obj>)                             # The call blocks until queue stops being full.
 <Queue>.put_nowait(<obj>)                      # Raises queue.Full exception if queue is full.
-<obj> = <Queue>.get()                          # Call blocks until queue stops being empty.
-<obj> = <Queue>.get_nowait()                   # Raises queue.Empty exception if it's empty.
+<obj> = <Queue>.get()                          # The call blocks until queue stops being empty.
+<obj> = <Queue>.get_nowait()                   # Raises queue.Empty exception if it is empty.
 ```
 
 ### Thread Pool Executor
@@ -2291,7 +2291,7 @@ with <lock>:                                   # Enters the block by calling met
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Also `with ThreadPoolExecutor() as <name>: …`.
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
-<Exec>.shutdown()                              # Waits for all threads to finish executing.
+<Exec>.shutdown()                              # Waits for all the threads to finish executing.
 ```
 
 ```python
@@ -2308,7 +2308,7 @@ with <lock>:                                   # Enters the block by calling met
 Coroutines
 ----------
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.**
-* **Coroutine definition starts with `'async'` keyword and its call with `'await'`.**
+* **Coroutine definition starts with `'async'` keyword and its call with `'await'` keyword.**
 * **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
 
 ```python
@@ -2325,7 +2325,7 @@ import asyncio as aio
 ```python
 <coro> = aio.gather(<coro/task>, ...)      # Schedules coros. Returns list of results on await.
 <coro> = aio.wait(<tasks>, return_when=…)  # `'ALL/FIRST_COMPLETED'`. Returns (done, pending).
-<iter> = aio.as_completed(<coros/tasks>)   # Iter of coros that return next result on await.
+<iter> = aio.as_completed(<coros/tasks>)   # Iter of coros. Each returns next result on await.
 ```
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:

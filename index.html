@@ -1624,10 +1624,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 ┃ oracle+oracledb │ oracledb     │ www.pypi.org/project/oracledb    ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII characters and \x00-\xff.</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII chars and [\x00-\xff].</span>
 &lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns an integer in range from 0 to 255.</span>
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has only one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements by using bytes as a separator.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
@@ -1659,7 +1659,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack
 
 &lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packs numbers according to format string.</span>
-&lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use iter_unpack() to get iterator of tuples.</span>
+&lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use iter_unpack() to get iter of tuples.</span>
 </code></pre></div>
 
 
@@ -1769,7 +1769,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 &lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches if any of listed patterns match.</span>
 &lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches a sequence. All items must match.</span>
 &lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches a dict if it has matching items.</span>
-&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object that has matching attribs.</span>
+&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object that has matching attrbs.</span>
 </code></pre></div>
 
 <ul>
@@ -1857,7 +1857,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set the arguments.</span>
 &lt;Thread&gt;.start()                               <span class="hljs-comment"># Starts the thread. Also &lt;Thread&gt;.is_alive().</span>
-&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits for the thread to finish executing.</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits until the thread has finished executing.</span>
 </code></pre></div>
 
 <ul>
@@ -1875,20 +1875,20 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
 &lt;Event&gt;     = Event()                          <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                   <span class="hljs-comment"># Wait() blocks until it's called int times.</span>
+&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                   <span class="hljs-comment"># Wait() blocks until it's called integer times.</span>
 </code></pre></div>
 
 <div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A first-in-first-out queue. It's thread safe.</span>
-&lt;Queue&gt;.put(&lt;obj&gt;)                             <span class="hljs-comment"># Call blocks until queue stops being full.</span>
+&lt;Queue&gt;.put(&lt;obj&gt;)                             <span class="hljs-comment"># The call blocks until queue stops being full.</span>
 &lt;Queue&gt;.put_nowait(&lt;obj&gt;)                      <span class="hljs-comment"># Raises queue.Full exception if queue is full.</span>
-&lt;obj&gt; = &lt;Queue&gt;.get()                          <span class="hljs-comment"># Call blocks until queue stops being empty.</span>
-&lt;obj&gt; = &lt;Queue&gt;.get_nowait()                   <span class="hljs-comment"># Raises queue.Empty exception if it's empty.</span>
+&lt;obj&gt; = &lt;Queue&gt;.get()                          <span class="hljs-comment"># The call blocks until queue stops being empty.</span>
+&lt;obj&gt; = &lt;Queue&gt;.get_nowait()                   <span class="hljs-comment"># Raises queue.Empty exception if it is empty.</span>
 </code></pre></div>
 
 <div><h3 id="threadpoolexecutor">Thread Pool Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = ThreadPoolExecutor(max_workers=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Also `with ThreadPoolExecutor() as &lt;name&gt;: …`.</span>
 &lt;iter&gt; = &lt;Exec&gt;.map(&lt;func&gt;, &lt;args_1&gt;, ...)     <span class="hljs-comment"># Multithreaded and non-lazy map(). Keeps order.</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;func&gt;, &lt;arg_1&gt;, ...)   <span class="hljs-comment"># Creates a thread and returns its Future obj.</span>
-&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Waits for all threads to finish executing.</span>
+&lt;Exec&gt;.shutdown()                              <span class="hljs-comment"># Waits for all the threads to finish executing.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;Future&gt;.done()                       <span class="hljs-comment"># Checks if the thread has finished executing.</span>
@@ -1903,7 +1903,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </ul>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.</strong></li>
-<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> keyword and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code>.</strong></li>
+<li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> keyword and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code> keyword.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> to start the first/main coroutine.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio <span class="hljs-keyword">as</span> aio
 </code></pre></div>
@@ -1916,7 +1916,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </code></pre>
 <pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)      <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
 &lt;coro&gt; = aio.wait(&lt;tasks&gt;, return_when=…)  <span class="hljs-comment"># `'ALL/FIRST_COMPLETED'`. Returns (done, pending).</span>
-&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Iter of coros that return next result on await.</span>
+&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Iter of coros. Each returns next result on await.</span>
 </code></pre>
 <div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
