@@ -324,7 +324,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.lower()                       <span class="hljs-comment"># Lowers the case. Also upper/capitalize/title().</span>
 &lt;str&gt;  = &lt;str&gt;.casefold()                    <span class="hljs-comment"># Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.</span>
 &lt;str&gt;  = &lt;str&gt;.replace(old, new [, count])   <span class="hljs-comment"># Replaces 'old' with 'new' at most 'count' times.</span>
-&lt;str&gt;  = &lt;str&gt;.translate(&lt;table&gt;)            <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
+&lt;str&gt;  = &lt;str&gt;.translate(table)              <span class="hljs-comment"># Use `str.maketrans(&lt;dict&gt;)` to generate table.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = chr(&lt;int&gt;)                          <span class="hljs-comment"># Converts passed integer into Unicode character.</span>
 &lt;int&gt;  = ord(&lt;str&gt;)                          <span class="hljs-comment"># Converts passed Unicode character into integer.</span>
@@ -450,7 +450,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> a <code class="python hljs"><span class="hljs-string">'6'</span></code> and <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'. Unicode character with value 90.</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'. Returns Unicode character with value 90.</span>
 {<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'. Binary representation of the int.</span>
 {<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'. Hexadecimal with upper-case letters.</span>
 </code></pre></div>
@@ -490,8 +490,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, uniform    <span class="hljs-comment"># Also: gauss, choice, shuffle, seed.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Returns a float inside [0, 1).</span>
-&lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Returns an int/float inside [a, b].</span>
+<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Select a random float from [0, 1).</span>
+&lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Select an int/float from [a, b].</span>
 &lt;float&gt; = gauss(mean, stdev)                   <span class="hljs-comment"># Also triangular(low, high, mode).</span>
 &lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Keeps it intact. Also sample(p, n).</span>
 shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works on all mutable sequences.</span>
@@ -1320,7 +1320,7 @@ p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span cla
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># Mandatory first argument.</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Mandatory remaining args.</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'?/*'</span>)                <span class="hljs-comment"># Optional argument/s.</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'?'</span>)                  <span class="hljs-comment"># Optional argument. Also *.</span>
 args  = p.parse_args()                                            <span class="hljs-comment"># Exits on parsing error.</span>
 &lt;obj&gt; = args.&lt;name&gt;                                               <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
 </code></pre></div>
@@ -1394,8 +1394,8 @@ args  = p.parse_args()                                            <span class="h
 &lt;str&gt;  = os.path.join(&lt;path&gt;, ...)  <span class="hljs-comment"># Uses os.sep to join strings or Path objects.</span>
 &lt;str&gt;  = os.path.realpath(&lt;path&gt;)   <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;str&gt;  = os.path.basename(&lt;path&gt;)   <span class="hljs-comment"># Returns final component of the path.</span>
-&lt;str&gt;  = os.path.dirname(&lt;path&gt;)    <span class="hljs-comment"># Returns path without the final component.</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.path.basename(&lt;path&gt;)   <span class="hljs-comment"># Returns path's final component, i.e. file/dir.</span>
+&lt;str&gt;  = os.path.dirname(&lt;path&gt;)    <span class="hljs-comment"># Returns path with its final component removed.</span>
 &lt;tup.&gt; = os.path.splitext(&lt;path&gt;)   <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns all filenames located at the path.</span>

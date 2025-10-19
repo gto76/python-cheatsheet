@@ -336,7 +336,7 @@ String
 <str>  = <str>.lower()                       # Lowers the case. Also upper/capitalize/title().
 <str>  = <str>.casefold()                    # Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.
 <str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
-<str>  = <str>.translate(<table>)            # Use `str.maketrans(<dict>)` to generate table.
+<str>  = <str>.translate(table)              # Use `str.maketrans(<dict>)` to generate table.
 ```
 
 ```python
@@ -486,7 +486,7 @@ Format
 
 ### Ints
 ```python
-{90:c}                                   # 'Z'. Unicode character with value 90.
+{90:c}                                   # 'Z'. Returns Unicode character with value 90.
 {90:b}                                   # '1011010'. Binary representation of the int.
 {90:X}                                   # '5A'. Hexadecimal with upper-case letters.
 ```
@@ -537,8 +537,8 @@ from random import random, randint, uniform    # Also: gauss, choice, shuffle, s
 ```
 
 ```python
-<float> = random()                             # Returns a float inside [0, 1).
-<num>   = randint/uniform(a, b)                # Returns an int/float inside [a, b].
+<float> = random()                             # Select a random float from [0, 1).
+<num>   = randint/uniform(a, b)                # Select an int/float from [a, b].
 <float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
 <el>    = choice(<sequence>)                   # Keeps it intact. Also sample(p, n).
 shuffle(<list>)                                # Works on all mutable sequences.
@@ -1543,7 +1543,7 @@ p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaul
 p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
 p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
 p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
-p.add_argument('<name>', type=<type>, nargs='?/*')                # Optional argument/s.
+p.add_argument('<name>', type=<type>, nargs='?')                  # Optional argument. Also *.
 args  = p.parse_args()                                            # Exits on parsing error.
 <obj> = args.<name>                                               # Returns `<type>(<arg>)`.
 ```
@@ -1632,8 +1632,8 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = os.path.basename(<path>)   # Returns final component of the path.
-<str>  = os.path.dirname(<path>)    # Returns path without the final component.
+<str>  = os.path.basename(<path>)   # Returns path's final component, i.e. file/dir.
+<str>  = os.path.dirname(<path>)    # Returns path with its final component removed.
 <tup.> = os.path.splitext(<path>)   # Splits on last period of the final component.
 ```
 
