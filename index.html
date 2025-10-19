@@ -57,7 +57,7 @@
 <body>
   <div class="pagebreak"></div>
   <header>
-    <aside>October 15, 2025</aside>
+    <aside>October 19, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -147,7 +147,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes the first occurrence or raises ValueError exception.</span>
 &lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all list's items. Also works on dictionary and set.</span>
 </code></pre>
-<div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use &lt;dict&gt;[key] to get or assign the value.</span>
+<div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or assign the value.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;view&gt; = &lt;dict&gt;.keys()                          <span class="hljs-comment"># A collection of keys that reflects changes.</span>
@@ -178,8 +178,8 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 <div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = {&lt;el_1&gt;, &lt;el_2&gt;, ...}                <span class="hljs-comment"># Coll. of unique items. Also set(), set(&lt;coll&gt;).</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                              <span class="hljs-comment"># Adds item to the set. Also `&lt;set&gt; |= {&lt;el&gt;}`.</span>
-&lt;set&gt;.update(&lt;collection&gt; [, ...])           <span class="hljs-comment"># Adds items to the set. Also `&lt;set&gt; |= &lt;set&gt;`.</span>
+<pre><code class="python language-python hljs">&lt;set&gt;.add(&lt;el&gt;)                              <span class="hljs-comment"># Adds item to the set. Same as `&lt;set&gt; |= {&lt;el&gt;}`.</span>
+&lt;set&gt;.update(&lt;collection&gt; [, ...])           <span class="hljs-comment"># Adds items to the set. Same as `&lt;set&gt; |= &lt;set&gt;`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll&gt;)                 <span class="hljs-comment"># Returns a set of all items. Also &lt;set&gt; | &lt;set&gt;.</span>
 &lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll&gt;)          <span class="hljs-comment"># Returns all shared items. Also &lt;set&gt; &amp; &lt;set&gt;.</span>
@@ -199,9 +199,9 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 </code></pre></div>
 
 
-<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()                        <span class="hljs-comment"># Returns empty tuple. Also tuple(), tuple(&lt;coll&gt;).</span>
-&lt;tuple&gt; = (&lt;el&gt;,)                   <span class="hljs-comment"># Returns a tuple with single element. Also `&lt;el&gt;,`.</span>
-&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])  <span class="hljs-comment"># Returns a tuple. Also `&lt;el_1&gt;, &lt;el_2&gt; [, ...]`.</span>
+<div><h2 id="tuple"><a href="#tuple" name="tuple">#</a>Tuple</h2><p><strong>Tuple is an immutable and hashable list.</strong></p><pre><code class="python language-python hljs">&lt;tuple&gt; = ()                        <span class="hljs-comment"># Returns an empty tuple. Also tuple(), tuple(&lt;coll&gt;).</span>
+&lt;tuple&gt; = (&lt;el&gt;,)                   <span class="hljs-comment"># Returns a tuple with single element. Same as `&lt;el&gt;,`.</span>
+&lt;tuple&gt; = (&lt;el_1&gt;, &lt;el_2&gt; [, ...])  <span class="hljs-comment"># Returns a tuple. Same as `&lt;el_1&gt;, &lt;el_2&gt; [, ...]`.</span>
 </code></pre></div>
 
 
@@ -263,11 +263,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 (<span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">14</span>)
 </code></pre>
 <div><h2 id="type"><a href="#type" name="type">#</a>Type</h2><ul>
-<li><strong>Everything is an object.</strong></li>
-<li><strong>Every object has a type.</strong></li>
-<li><strong>Type and class are synonyms.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;el&gt;)                <span class="hljs-comment"># Returns object's type. Also &lt;el&gt;.__class__.</span>
-&lt;bool&gt; = isinstance(&lt;el&gt;, &lt;type&gt;)  <span class="hljs-comment"># Same as issubclass(type(&lt;el&gt;), &lt;type&gt;).</span>
+<li><strong>Everything in Python is an object.</strong></li>
+<li><strong>Every object has a certain type.</strong></li>
+<li><strong>Type and class are synonymous.</strong></li>
+</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;el&gt;)                <span class="hljs-comment"># Returns object's type. Same as `&lt;el&gt;.__class__`.</span>
+&lt;bool&gt; = isinstance(&lt;el&gt;, &lt;type&gt;)  <span class="hljs-comment"># Same result as `issubclass(type(&lt;el&gt;), &lt;type&gt;)`.</span>
 </code></pre></div>
 
 
@@ -1768,8 +1768,8 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 &lt;as_pattern&gt;    = &lt;pattern&gt; <span class="hljs-keyword">as</span> &lt;name&gt;              <span class="hljs-comment"># Binds match to name. Also &lt;type&gt;(&lt;name&gt;).</span>
 &lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches if any of listed patterns match.</span>
 &lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches a sequence. All items must match.</span>
-&lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches a dict that has matching items.</span>
-&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches an object if attributes match.</span>
+&lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches a dict if it has matching items.</span>
+&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object that has matching attribs.</span>
 </code></pre></div>
 
 <ul>
@@ -2933,7 +2933,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 15, 2025</aside>
+    <aside>October 19, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -78,7 +78,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 Dictionary
 ----------
 ```python
-<dict> = {key_1: val_1, key_2: val_2, ...}      # Use <dict>[key] to get or assign the value.
+<dict> = {key_1: val_1, key_2: val_2, ...}      # Use `<dict>[key]` to get or assign the value.
 ```
 
 ```python
@@ -124,8 +124,8 @@ Set
 ```
 
 ```python
-<set>.add(<el>)                              # Adds item to the set. Also `<set> |= {<el>}`.
-<set>.update(<collection> [, ...])           # Adds items to the set. Also `<set> |= <set>`.
+<set>.add(<el>)                              # Adds item to the set. Same as `<set> |= {<el>}`.
+<set>.update(<collection> [, ...])           # Adds items to the set. Same as `<set> |= <set>`.
 ```
 
 ```python
@@ -155,9 +155,9 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
-<tuple> = ()                        # Returns empty tuple. Also tuple(), tuple(<coll>).
-<tuple> = (<el>,)                   # Returns a tuple with single element. Also `<el>,`.
-<tuple> = (<el_1>, <el_2> [, ...])  # Returns a tuple. Also `<el_1>, <el_2> [, ...]`.
+<tuple> = ()                        # Returns an empty tuple. Also tuple(), tuple(<coll>).
+<tuple> = (<el>,)                   # Returns a tuple with single element. Same as `<el>,`.
+<tuple> = (<el_1>, <el_2> [, ...])  # Returns a tuple. Same as `<el_1>, <el_2> [, ...]`.
 ```
 
 ### Named Tuple
@@ -250,13 +250,13 @@ def count(start, step):
 
 Type
 ----
-* **Everything is an object.**
-* **Every object has a type.**
-* **Type and class are synonyms.**
+* **Everything in Python is an object.**
+* **Every object has a certain type.**
+* **Type and class are synonymous.**
 
 ```python
-<type> = type(<el>)                # Returns object's type. Also <el>.__class__.
-<bool> = isinstance(<el>, <type>)  # Same as issubclass(type(<el>), <type>).
+<type> = type(<el>)                # Returns object's type. Same as `<el>.__class__`.
+<bool> = isinstance(<el>, <type>)  # Same result as `issubclass(type(<el>), <type>)`.
 ```
 
 ```python
@@ -2139,8 +2139,8 @@ match <object/expression>:
 <as_pattern>    = <pattern> as <name>              # Binds match to name. Also <type>(<name>).
 <or_pattern>    = <pattern> | <pattern> [| ...]    # Matches if any of listed patterns match.
 <sequence_patt> = [<pattern>, ...]                 # Matches a sequence. All items must match.
-<mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict that has matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches an object if attributes match.
+<mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict if it has matching items.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object that has matching attribs.
 ```
 * **Sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
