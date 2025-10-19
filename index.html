@@ -55,7 +55,6 @@
 </head>
 
 <body>
-  <div class="pagebreak"></div>
   <header>
     <aside>October 19, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
@@ -595,6 +594,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share the tzinfo object.</span>
 &lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
 &lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
 </code></pre></div>
 
 <div><h2 id="function"><a href="#function" name="function">#</a>Function</h2><p><strong>Independent block of code that returns a value when called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># E.g. `def func(x, y): ...`.</span>
@@ -1798,19 +1798,19 @@ log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-commen
 &lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Error() that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">log.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Logs to stderr or appends to file.</span>
+    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Prints to stderr or appends to file.</span>
     format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
-    level=log.WARNING,                            <span class="hljs-comment"># Drops messages with lower priority.</span>
+    level=log.WARNING,                            <span class="hljs-comment"># Drops messages with a lower priority.</span>
     handlers=[log.StreamHandler(sys.stderr)]      <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
 )
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)           <span class="hljs-comment"># Formats messages according to format str.</span>
+<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)           <span class="hljs-comment"># Formats messages according to format.</span>
 &lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)     <span class="hljs-comment"># Appends to file. Also `encoding=None`.</span>
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Only outputs bare messages by default.</span>
-&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Prints or saves every message by default.</span>
+&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Prints/saves every message by default.</span>
 &lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Logger can have more than one handler.</span>
-&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What is sent to its/ancestors' handlers.</span>
+&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What's sent to its/ancestors' handlers.</span>
 &lt;Logger&gt;.propagate = &lt;bool&gt;                       <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
 </code></pre>
 <ul>
@@ -1840,7 +1840,7 @@ CRITICAL:my_module:Running out of disk space.
 
 <pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                 <span class="hljs-comment"># Returns names of object's attributes (including methods).</span>
 &lt;dict&gt; = vars(&lt;obj&gt;)                <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
-&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute with passed name.</span>
+&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute of the passed name.</span>
 value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns the object's attribute or raises AttributeError.</span>
 setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
 delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
@@ -1971,6 +1971,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
     curses.wrapper(main)
 </code></pre></div>
 
+<p><br></p>
 <div><h1 id="libraries">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> tqdm, time
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm.tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">'Processing'</span>):

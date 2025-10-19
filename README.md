@@ -666,6 +666,7 @@ import zoneinfo, dateutil.tz
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share the tzinfo object.
 <D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
 <TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
+<float>  = <TD>      / <TD>                 # Also `(<int>, <TD>) = divmod(<TD>, <TD>)`.
 ```
 
 
@@ -2177,20 +2178,20 @@ log.debug/info/warning/error/critical(<str>)      # Sends passed message to the 
 ### Setup
 ```python
 log.basicConfig(
-    filename=None,                                # Logs to stderr or appends to file.
+    filename=None,                                # Prints to stderr or appends to file.
     format='%(levelname)s:%(name)s:%(message)s',  # Add '%(asctime)s' for local datetime.
-    level=log.WARNING,                            # Drops messages with lower priority.
+    level=log.WARNING,                            # Drops messages with a lower priority.
     handlers=[log.StreamHandler(sys.stderr)]      # Uses FileHandler if filename is set.
 )
 ```
 
 ```python
-<Formatter> = log.Formatter('<format>')           # Formats messages according to format str.
+<Formatter> = log.Formatter('<format>')           # Formats messages according to format.
 <Handler> = log.FileHandler(<path>, mode='a')     # Appends to file. Also `encoding=None`.
 <Handler>.setFormatter(<Formatter>)               # Only outputs bare messages by default.
-<Handler>.setLevel(<int/str>)                     # Prints or saves every message by default.
+<Handler>.setLevel(<int/str>)                     # Prints/saves every message by default.
 <Logger>.addHandler(<Handler>)                    # Logger can have more than one handler.
-<Logger>.setLevel(<int/str>)                      # What is sent to its/ancestors' handlers.
+<Logger>.setLevel(<int/str>)                      # What's sent to its/ancestors' handlers.
 <Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
 ```
 * **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
@@ -2226,7 +2227,7 @@ Introspection
 ```python
 <list> = dir(<obj>)                 # Returns names of object's attributes (including methods).
 <dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
-<bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute with passed name.
+<bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute of the passed name.
 value  = getattr(<obj>, '<name>')   # Returns the object's attribute or raises AttributeError.
 setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__ attr.
 delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del <obj>.<name>`.
@@ -2382,6 +2383,7 @@ async def view(state, screen):
 if __name__ == '__main__':
     curses.wrapper(main)
 ```
+<br>
 
 
 Libraries
