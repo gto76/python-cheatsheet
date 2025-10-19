@@ -768,7 +768,7 @@ from functools import reduce
 ```python
 <iter> = map(lambda x: x + 1, range(10))            # Returns iter([1, 2, ..., 10]).
 <iter> = filter(lambda x: x > 5, range(10))         # Returns iter([6, 7, 8, 9]).
-<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns 45.
+<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns 45. Accepts 'initial'.
 ```
 
 ### Any, All
@@ -945,7 +945,7 @@ def debug(print_result=False):
 def add(x, y):
     return x + y
 ```
-* **Using only `'@debug'` to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can however manually check if the argument they received is a function and act accordingly.**
+* **Using only `'@debug'` to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can how&shy;ever manually check if the argument they received is a function and act accordingly.**
 
 
 Class
@@ -1434,7 +1434,7 @@ filename  = <name>.__traceback__.tb_frame.f_code.co_filename
 func_name = <name>.__traceback__.tb_frame.f_code.co_name
 line_str  = linecache.getline(filename, <name>.__traceback__.tb_lineno)
 trace_str = ''.join(traceback.format_tb(<name>.__traceback__))
-error_msg = ''.join(traceback.format_exception(type(<name>), <name>, <name>.__traceback__))
+error_msg = ''.join(traceback.format_exception(*sys.exc_info()))
 ```
 
 ### Built-in Exceptions
@@ -1446,16 +1446,16 @@ BaseException
       +-- ArithmeticError         # Base class for arithmetic errors such as ZeroDivisionError.
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when object doesn't have requested attribute/method.
-      +-- EOFError                # Raised by input() when it hits an end-of-file condition.
+      +-- EOFError                # Is raised by input() when it hits an end-of-file condition.
       +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when index of a sequence (list/str) is out of range.
-      |    +-- KeyError           # Raised when a dictionary key or set element is missing.
+      |    +-- KeyError           # Raised when a dictionary key or a set element is missing.
       +-- MemoryError             # Out of memory. May be too late to start deleting variables.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
       +-- OSError                 # Errors such as FileExistsError, TimeoutError (see #Open).
       |    +-- ConnectionError    # Errors such as BrokenPipeError and ConnectionAbortedError.
-      +-- RuntimeError            # Raised by errors that don't fall into other categories.
+      +-- RuntimeError            # Is raised by errors that don't fit into other categories.
       |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
       |    +-- RecursionError     # Raised if max recursion depth is exceeded (3k by default).
       +-- StopIteration           # Raised when exhausted (empty) iterator is passed to next().
@@ -1477,8 +1477,8 @@ BaseException
 
 #### Useful built-in exceptions:
 ```python
-raise TypeError('Argument is of the wrong type!')
-raise ValueError('Argument has the right type but an inappropriate value!')
+raise TypeError('Passed argument is of the wrong type!')
+raise ValueError('Argument has the right type but its value is off!')
 raise RuntimeError('I am too lazy to define my own exception!')
 ```
 
@@ -1817,16 +1817,16 @@ import csv
 <list>   = list(<reader>)                 # Returns a list of all remaining rows.
 ```
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see [Open](#open).**
-* **To print the spreadsheet to the console use [Tabulate](#table) or PrettyTable library.**
-* **For XML and binary Excel files (xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
-* **Reader accepts any iterator (or collection) of strings, not just files.**
+* **To print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
+* **For XML and binary Excel files (extensions xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
+* **Reader accepts any iterator (or collection) of strings, not just text files.**
 
 ### Write
 ```python
 <file>   = open(<path>, 'w', newline='')  # Opens the CSV (text) file for writing.
 <writer> = csv.writer(<file>)             # Also: `dialect='excel', delimiter=','`.
 <writer>.writerow(<collection>)           # Encodes each object using `str(<el>)`.
-<writer>.writerows(<coll_of_coll>)        # Appends multiple rows to the file.
+<writer>.writerows(<coll_of_coll>)        # Appends multiple rows to opened file.
 ```
 * **If file is opened without the `'newline=""'` argument, '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings (i.e., newlines may get doubled on Windows)!**
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
@@ -1834,7 +1834,7 @@ import csv
 ### Parameters
 * **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
 * **`'delimiter'` - A one-character string that separates fields (comma, tab, semicolon, etc.).**
-* **`'lineterminator'` - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
+* **`'lineterminator'` - Sets how writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
 * **`'quotechar'` - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.**
 * **`'escapechar'` - Character for escaping quotechars (not needed if doublequote is True).**
 * **`'doublequote'` - Whether quotechars inside fields are/get doubled instead of escaped.**
@@ -1884,14 +1884,14 @@ import sqlite3
 
 ### Read
 ```python
-<cursor> = <conn>.execute('<query>')           # Can raise a subclass of sqlite3.Error.
+<cursor> = <conn>.execute('<query>')           # Can raise a subclass of the sqlite3.Error.
 <tuple>  = <cursor>.fetchone()                 # Returns the next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                 # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<conn>.execute('<query>')                      # Can raise a subclass of sqlite3.Error.
+<conn>.execute('<query>')                      # Can raise a subclass of the sqlite3.Error.
 <conn>.commit()                                # Saves all changes since the last commit.
 <conn>.rollback()                              # Discards all changes since the last commit.
 ```
@@ -1906,7 +1906,7 @@ with <conn>:                                   # Exits the block with commit() o
 ```python
 <conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
 <conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
-<conn>.executemany('<query>', <coll_of_coll>)  # Runs execute() once for each collection.
+<conn>.executemany('<query>', <coll_of_coll>)  # Executes the query once for each collection.
 ```
 * **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
 * **SQLite does not restrict columns to any type unless table is declared as strict.**
@@ -1929,7 +1929,7 @@ from sqlalchemy import create_engine, text
 <engine> = create_engine('<url>')              # Url: 'dialect://user:password@host/dbname'.
 <conn>   = <engine>.connect()                  # Creates a connection. Also <conn>.close().
 <cursor> = <conn>.execute(text('<query>'), …)  # `<dict>`. Replaces every :<key> with value.
-with <conn>.begin(): ...                       # Exits the block with commit or rollback.
+with <conn>.begin(): ...                       # Exits the block with a commit or rollback.
 ```
 
 ```text
@@ -2029,7 +2029,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys-tem, however bytes of each element can be reversed (by calling the byteswap() method).**
+**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys&shy;tem,&nbsp;however bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array

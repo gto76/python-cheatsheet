@@ -665,7 +665,7 @@ func(*args, **kwargs)
 
 <pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Returns iter([1, 2, ..., 10]).</span>
 &lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Returns iter([6, 7, 8, 9]).</span>
-&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Returns 45.</span>
+&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Returns 45. Accepts 'initial'.</span>
 </code></pre>
 <div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any el?</span>
 &lt;bool&gt; = all(&lt;collection&gt;)                          <span class="hljs-comment"># True for all? Also True if empty.</span>
@@ -806,7 +806,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Using only <code class="python hljs"><span class="hljs-string">'@debug'</span></code> to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can however manually check if the argument they received is a function and act accordingly.</strong></li>
+<li><strong>Using only <code class="python hljs"><span class="hljs-string">'@debug'</span></code> to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can how­ever manually check if the argument they received is a function and act accordingly.</strong></li>
 </ul>
 <div><h2 id="class"><a href="#class" name="class">#</a>Class</h2><p><strong>A template for creating user-defined objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -1233,7 +1233,7 @@ filename  = &lt;name&gt;.__traceback__.tb_frame.f_code.co_filename
 func_name = &lt;name&gt;.__traceback__.tb_frame.f_code.co_name
 line_str  = linecache.getline(filename, &lt;name&gt;.__traceback__.tb_lineno)
 trace_str = <span class="hljs-string">''</span>.join(traceback.format_tb(&lt;name&gt;.__traceback__))
-error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(type(&lt;name&gt;), &lt;name&gt;, &lt;name&gt;.__traceback__))
+error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(*sys.exc_info()))
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
@@ -1243,16 +1243,16 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors such as ZeroDivisionError.</span>
       ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when object doesn't have requested attribute/method.</span>
-      ├── EOFError                <span class="hljs-comment"># Raised by input() when it hits an end-of-file condition.</span>
+      ├── EOFError                <span class="hljs-comment"># Is raised by input() when it hits an end-of-file condition.</span>
       ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when index of a sequence (list/str) is out of range.</span>
-      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or set element is missing.</span>
+      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or a set element is missing.</span>
       ├── MemoryError             <span class="hljs-comment"># Out of memory. May be too late to start deleting variables.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError, TimeoutError (see #Open).</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError and ConnectionAbortedError.</span>
-      ├── RuntimeError            <span class="hljs-comment"># Raised by errors that don't fall into other categories.</span>
+      ├── RuntimeError            <span class="hljs-comment"># Is raised by errors that don't fit into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
       ├── StopIteration           <span class="hljs-comment"># Raised when exhausted (empty) iterator is passed to next().</span>
@@ -1270,8 +1270,8 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 ┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
 </code></pre></div>
 
-<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Argument is of the wrong type!'</span>)
-<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument has the right type but an inappropriate value!'</span>)
+<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Passed argument is of the wrong type!'</span>)
+<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument has the right type but its value is off!'</span>)
 <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'I am too lazy to define my own exception!'</span>)
 </code></pre></div>
 
@@ -1520,14 +1520,14 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre>
 <ul>
 <li><strong>Without the <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see <a href="#open">Open</a>.</strong></li>
-<li><strong>To print the spreadsheet to the console use <a href="#table">Tabulate</a> or PrettyTable library.</strong></li>
-<li><strong>For XML and binary Excel files (xlsx, xlsm and xlsb) use <a href="#fileformats">Pandas</a> library.</strong></li>
-<li><strong>Reader accepts any iterator (or collection) of strings, not just files.</strong></li>
+<li><strong>To print the spreadsheet to the console use either <a href="#table">Tabulate</a> or PrettyTable library.</strong></li>
+<li><strong>For XML and binary Excel files (extensions xlsx, xlsm and xlsb) use <a href="#fileformats">Pandas</a> library.</strong></li>
+<li><strong>Reader accepts any iterator (or collection) of strings, not just text files.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, <span class="hljs-string">'w'</span>, newline=<span class="hljs-string">''</span>)  <span class="hljs-comment"># Opens the CSV (text) file for writing.</span>
 &lt;writer&gt; = csv.writer(&lt;file&gt;)             <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
 &lt;writer&gt;.writerow(&lt;collection&gt;)           <span class="hljs-comment"># Encodes each object using `str(&lt;el&gt;)`.</span>
-&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)        <span class="hljs-comment"># Appends multiple rows to the file.</span>
+&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)        <span class="hljs-comment"># Appends multiple rows to opened file.</span>
 </code></pre></div>
 
 <ul>
@@ -1537,7 +1537,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <div><h3 id="parameters">Parameters</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values. String or a 'csv.Dialect' object.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string that separates fields (comma, tab, semicolon, etc.).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - How writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - Sets how writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'quotechar'</span></code> - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'escapechar'</span></code> - Character for escaping quotechars (not needed if doublequote is True).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'doublequote'</span></code> - Whether quotechars inside fields are/get doubled instead of escaped.</strong></li>
@@ -1575,12 +1575,12 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of the sqlite3.Error.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                 <span class="hljs-comment"># Returns the next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                 <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of sqlite3.Error.</span>
+<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of the sqlite3.Error.</span>
 &lt;conn&gt;.commit()                                <span class="hljs-comment"># Saves all changes since the last commit.</span>
 &lt;conn&gt;.rollback()                              <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
@@ -1591,7 +1591,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 <div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with an item.</span>
 &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a matching value.</span>
-&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Runs execute() once for each collection.</span>
+&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Executes the query once for each collection.</span>
 </code></pre></div>
 
 <ul>
@@ -1611,7 +1611,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
 &lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces every :&lt;key&gt; with value.</span>
-<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with commit or rollback.</span>
+<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with a commit or rollback.</span>
 </code></pre></div>
 
 
@@ -1693,7 +1693,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys-tem, however bytes of each element can be reversed (by calling the byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys­tem,&nbsp;however bytes of each element can be reversed (by calling the byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 </code></pre></div>
 
 
@@ -2438,7 +2438,7 @@ play_notes(<span class="hljs-string">'83♩,81♪,,83♪,,78♪,,74♪,,78♪,,7
 </code></pre></div></div>
 
 
-<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h4 id="opesawindowanddrawsasquarethatcanbemovedwitharrowkeys">Opes a window and draws a square that can be moved with arrow keys:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
+<div><h2 id="pygame"><a href="#pygame" name="pygame">#</a>Pygame</h2><div><h4 id="opensawindowanddrawsasquarethatcanbemovedwitharrowkeys">Opens a window and draws a square that can be moved with arrow keys:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pygame</span>
 <span class="hljs-keyword">import</span> pygame <span class="hljs-keyword">as</span> pg
 
 pg.init()
