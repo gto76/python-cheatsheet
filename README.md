@@ -65,13 +65,13 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 * **This text uses the term collection instead of iterable. For rationale see [Collection](#collection).**
 
 ```python
-<int> = len(<list>)             # Returns number of items. Also works on dict, set and string.
-<int> = <list>.count(<el>)      # Returns number of occurrences. Also `if <el> in <coll>: ...`.
-<int> = <list>.index(<el>)      # Returns index of the first occurrence or raises ValueError.
-<el>  = <list>.pop()            # Removes and returns item from the end or at index if passed.
-<list>.insert(<int>, <el>)      # Inserts item at passed index and moves the rest to the right.
-<list>.remove(<el>)             # Removes the first occurrence or raises ValueError exception.
-<list>.clear()                  # Removes all list's items. Also works on dictionary and set.
+<int> = len(<list>)             # Returns number of items. Also works on dict and set.
+<int> = <list>.count(<el>)      # Number of occurrences. Also `if <el> in <coll>: ...`.
+<int> = <list>.index(<el>)      # Returns index of the first occ. or raises ValueError.
+<el>  = <list>.pop()            # Removes and returns item from the end. Accepts index.
+<list>.insert(<int>, <el>)      # Inserts item at the index and shifts remaining items.
+<list>.remove(<el>)             # Removes first occurrence of item. Raises ValueError.
+<list>.clear()                  # Removes all items. Also works on dictionary and set.
 ```
 
 
@@ -295,15 +295,15 @@ True
 ```
 
 ```text
-+--------------------+----------+----------+----------+----------+----------+
-|                    |  Number  |  Complex |   Real   | Rational | Integral |
-+--------------------+----------+----------+----------+----------+----------+
-| int                |   yes    |   yes    |   yes    |   yes    |   yes    |
-| fractions.Fraction |   yes    |   yes    |   yes    |   yes    |          |
-| float              |   yes    |   yes    |   yes    |          |          |
-| complex            |   yes    |   yes    |          |          |          |
-| decimal.Decimal    |   yes    |          |          |          |          |
-+--------------------+----------+----------+----------+----------+----------+
++--------------------+-----------+-----------+----------+----------+----------+
+|                    |   Number  |  Complex  |   Real   | Rational | Integral |
++--------------------+-----------+-----------+----------+----------+----------+
+| int                |    yes    |    yes    |   yes    |   yes    |   yes    |
+| fractions.Fraction |    yes    |    yes    |   yes    |   yes    |          |
+| float              |    yes    |    yes    |   yes    |          |          |
+| complex            |    yes    |    yes    |          |          |          |
+| decimal.Decimal    |    yes    |           |          |          |          |
++--------------------+-----------+-----------+----------+----------+----------+
 ```
 
 

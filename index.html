@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>October 19, 2025</aside>
+    <aside>October 27, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -138,13 +138,13 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 <li><strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong></li>
 <li><strong>This text uses the term collection instead of iterable. For rationale see <a href="#collection">Collection</a>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on dict, set and string.</span>
-&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Returns number of occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
-&lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occurrence or raises ValueError.</span>
-&lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end or at index if passed.</span>
-&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at passed index and moves the rest to the right.</span>
-&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes the first occurrence or raises ValueError exception.</span>
-&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all list's items. Also works on dictionary and set.</span>
+<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on dict and set.</span>
+&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Number of occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
+&lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occ. or raises ValueError.</span>
+&lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end. Accepts index.</span>
+&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at the index and shifts remaining items.</span>
+&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes first occurrence of item. Raises ValueError.</span>
+&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all items. Also works on dictionary and set.</span>
 </code></pre>
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or assign the value.</span>
 </code></pre></div>
@@ -294,15 +294,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Number)
 <span class="hljs-keyword">True</span>
 </code></pre>
-<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
-┃                    │  Number  │  Complex │   Real   │ Rational │ Integral ┃
-┠────────────────────┼──────────┼──────────┼──────────┼──────────┼──────────┨
-┃ int                │    ✓     │    ✓     │    ✓     │    ✓     │    ✓     ┃
-┃ fractions.Fraction │    ✓     │    ✓     │    ✓     │    ✓     │          ┃
-┃ float              │    ✓     │    ✓     │    ✓     │          │          ┃
-┃ complex            │    ✓     │    ✓     │          │          │          ┃
-┃ decimal.Decimal    │    ✓     │          │          │          │          ┃
-┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
+<pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┓
+┃                    │   Number  │  Complex  │   Real   │ Rational │ Integral ┃
+┠────────────────────┼───────────┼───────────┼──────────┼──────────┼──────────┨
+┃ int                │     ✓     │     ✓     │    ✓     │    ✓     │    ✓     ┃
+┃ fractions.Fraction │     ✓     │     ✓     │    ✓     │    ✓     │          ┃
+┃ float              │     ✓     │     ✓     │    ✓     │          │          ┃
+┃ complex            │     ✓     │     ✓     │          │          │          ┃
+┃ decimal.Decimal    │     ✓     │           │          │          │          ┃
+┗━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 </code></pre>
 <div><h2 id="string"><a href="#string" name="string">#</a>String</h2><p><strong>Immutable sequence of characters.</strong></p><pre><code class="python language-python hljs">&lt;str&gt;  = <span class="hljs-string">'abc'</span>                               <span class="hljs-comment"># Also "abc". Interprets \n, \t, \x00-\xff, etc.</span>
 </code></pre></div>
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 19, 2025</aside>
+    <aside>October 27, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
