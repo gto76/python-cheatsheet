@@ -1825,7 +1825,7 @@ import csv
 ### Write
 ```python
 <file>   = open(<path>, mode='a', newline='')   # Opens the CSV (text) file for writing.
-<reader> = csv.reader(<file>, dialect='excel')  # Also `delimiter=','`. See Parameters.
+<writer> = csv.writer(<file>, dialect='excel')  # Also `delimiter=','`. See Parameters.
 <writer>.writerow(<collection>)                 # Encodes each object using `str(<el>)`.
 <writer>.writerows(<coll_of_coll>)              # Appends multiple rows to opened file.
 ```
