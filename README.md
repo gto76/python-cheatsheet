@@ -1812,10 +1812,10 @@ import csv
 ```
 
 ```python
-<file>   = open(<path>, newline='')       # Opens the CSV (text) file for reading.
-<reader> = csv.reader(<file>)             # Also: `dialect='excel', delimiter=','`.
-<list>   = next(<reader>)                 # Returns next row as a list of strings.
-<list>   = list(<reader>)                 # Returns a list of all remaining rows.
+<file>   = open(<path>, newline='')             # Opens the CSV (text) file for reading.
+<reader> = csv.reader(<file>, dialect='excel')  # Also `delimiter=','`. See Parameters.
+<list>   = next(<reader>)                       # Returns next row as a list of strings.
+<list>   = list(<reader>)                       # Returns a list of all remaining rows.
 ```
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see [Open](#open).**
 * **To print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
@@ -1824,10 +1824,10 @@ import csv
 
 ### Write
 ```python
-<file>   = open(<path>, 'w', newline='')  # Opens the CSV (text) file for writing.
-<writer> = csv.writer(<file>)             # Also: `dialect='excel', delimiter=','`.
-<writer>.writerow(<collection>)           # Encodes each object using `str(<el>)`.
-<writer>.writerows(<coll_of_coll>)        # Appends multiple rows to opened file.
+<file>   = open(<path>, mode='a', newline='')   # Opens the CSV (text) file for writing.
+<reader> = csv.reader(<file>, dialect='excel')  # Also `delimiter=','`. See Parameters.
+<writer>.writerow(<collection>)                 # Encodes each object using `str(<el>)`.
+<writer>.writerows(<coll_of_coll>)              # Appends multiple rows to opened file.
 ```
 * **If file is opened without the `'newline=""'` argument, '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings (i.e., newlines may get doubled on Windows)!**
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**

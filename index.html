@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>October 27, 2025</aside>
+    <aside>October 29, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1513,10 +1513,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, newline=<span class="hljs-string">''</span>)       <span class="hljs-comment"># Opens the CSV (text) file for reading.</span>
-&lt;reader&gt; = csv.reader(&lt;file&gt;)             <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
-&lt;list&gt;   = next(&lt;reader&gt;)                 <span class="hljs-comment"># Returns next row as a list of strings.</span>
-&lt;list&gt;   = list(&lt;reader&gt;)                 <span class="hljs-comment"># Returns a list of all remaining rows.</span>
+<pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, newline=<span class="hljs-string">''</span>)             <span class="hljs-comment"># Opens the CSV (text) file for reading.</span>
+&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>)  <span class="hljs-comment"># Also `delimiter=','`. See Parameters.</span>
+&lt;list&gt;   = next(&lt;reader&gt;)                       <span class="hljs-comment"># Returns next row as a list of strings.</span>
+&lt;list&gt;   = list(&lt;reader&gt;)                       <span class="hljs-comment"># Returns a list of all remaining rows.</span>
 </code></pre>
 <ul>
 <li><strong>Without the <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see <a href="#open">Open</a>.</strong></li>
@@ -1524,10 +1524,10 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 <li><strong>For XML and binary Excel files (extensions xlsx, xlsm and xlsb) use <a href="#fileformats">Pandas</a> library.</strong></li>
 <li><strong>Reader accepts any iterator (or collection) of strings, not just text files.</strong></li>
 </ul>
-<div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, <span class="hljs-string">'w'</span>, newline=<span class="hljs-string">''</span>)  <span class="hljs-comment"># Opens the CSV (text) file for writing.</span>
-&lt;writer&gt; = csv.writer(&lt;file&gt;)             <span class="hljs-comment"># Also: `dialect='excel', delimiter=','`.</span>
-&lt;writer&gt;.writerow(&lt;collection&gt;)           <span class="hljs-comment"># Encodes each object using `str(&lt;el&gt;)`.</span>
-&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)        <span class="hljs-comment"># Appends multiple rows to opened file.</span>
+<div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>, newline=<span class="hljs-string">''</span>)   <span class="hljs-comment"># Opens the CSV (text) file for writing.</span>
+&lt;reader&gt; = csv.reader(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>)  <span class="hljs-comment"># Also `delimiter=','`. See Parameters.</span>
+&lt;writer&gt;.writerow(&lt;collection&gt;)                 <span class="hljs-comment"># Encodes each object using `str(&lt;el&gt;)`.</span>
+&lt;writer&gt;.writerows(&lt;coll_of_coll&gt;)              <span class="hljs-comment"># Appends multiple rows to opened file.</span>
 </code></pre></div>
 
 <ul>
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 27, 2025</aside>
+    <aside>October 29, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
