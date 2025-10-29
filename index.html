@@ -340,11 +340,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].</span>
 </code></pre>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
-&lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes all occurrences with 'new'.</span>
-&lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns all occurrences of the pattern.</span>
+&lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes every occurrence with 'new'.</span>
+&lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns every occurrence of the pattern.</span>
 &lt;list&gt;  = re.split(<span class="hljs-string">r'&lt;regex&gt;'</span>, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Add brackets around regex to keep matches.</span>
-&lt;Match&gt; = re.search(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)             <span class="hljs-comment"># First occurrence of the pattern or None.</span>
-&lt;Match&gt; = re.match(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)              <span class="hljs-comment"># Searches only at the beginning of the text.</span>
+&lt;Match&gt; = re.search(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)             <span class="hljs-comment"># Returns first occ. of the pattern or None.</span>
+&lt;Match&gt; = re.match(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)              <span class="hljs-comment"># Only searches at the start of the 'text'.</span>
 &lt;iter&gt;  = re.finditer(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)           <span class="hljs-comment"># Returns all occurrences as Match objects.</span>
 </code></pre></div>
 
@@ -361,12 +361,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                        <span class="hljs-comment"># Returns part inside the first brackets.</span>
 &lt;tuple&gt; = &lt;Match&gt;.groups()                        <span class="hljs-comment"># Returns all bracketed parts as strings.</span>
 &lt;int&gt;   = &lt;Match&gt;.start()                         <span class="hljs-comment"># Returns start index of the whole match.</span>
-&lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns its exclusive end index.</span>
+&lt;int&gt;   = &lt;Match&gt;.end()                           <span class="hljs-comment"># Returns a match's exclusive end index.</span>
 </code></pre></div>
 
-<div><h3 id="specialsequences">Special Sequences</h3><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                   <span class="hljs-comment"># Also [०-९…]. Matches a decimal character.</span>
-<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                            <span class="hljs-comment"># Also [ª²³…]. Matches an alphanumeric or _.</span>
-<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                           <span class="hljs-comment"># Also [\x1c-\x1f…]. Matches a whitespace.</span>
+<div><h3 id="specialsequences">Special Sequences</h3><pre><code class="python language-python hljs"><span class="hljs-string">'\d'</span> == <span class="hljs-string">'[0-9]'</span>                                   <span class="hljs-comment"># Also [०-९…]. Matches decimal character.</span>
+<span class="hljs-string">'\w'</span> == <span class="hljs-string">'[a-zA-Z0-9_]'</span>                            <span class="hljs-comment"># Also [ª²³…]. Matches alphanumeric or _.</span>
+<span class="hljs-string">'\s'</span> == <span class="hljs-string">'[ \t\n\r\f\v]'</span>                           <span class="hljs-comment"># Also [\x1c-\x1f…]. Matches whitespace.</span>
 </code></pre></div>
 
 <ul>
