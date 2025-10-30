@@ -92,6 +92,242 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
     document.getElementsByClassName("banner")[1].firstChild.replaceWith(img_dark);
   }
 </script><pre style="border-left: none;padding-left: 1.9px;"><code class="hljs bash" style="line-height: 1.327em;"><strong>ToC</strong> = {
+
+<!-- Floating Table of Contents -->
+<button id="toc-toggle" onclick="toggleFloatingTOC()">☰ TOC</button>
+
+<div id="floating-toc" style="display: none;">
+  <h3>Quick Navigation</h3>
+  <ul>
+    <li><strong>1. Collections</strong>
+      <ul>
+        <li><a href="#list">List</a></li>
+        <li><a href="#dictionary">Dictionary</a></li>
+        <li><a href="#set">Set</a></li>
+        <li><a href="#tuple">Tuple</a></li>
+        <li><a href="#range">Range</a></li>
+        <li><a href="#enumerate">Enumerate</a></li>
+        <li><a href="#iterator">Iterator</a></li>
+        <li><a href="#generator">Generator</a></li>
+      </ul>
+    </li>
+    <li><strong>2. Types</strong>
+      <ul>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#string">String</a></li>
+        <li><a href="#regex">Regular Expressions</a></li>
+        <li><a href="#format">Format</a></li>
+        <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#combinatorics">Combinatorics</a></li>
+        <li><a href="#datetime">Datetime</a></li>
+      </ul>
+    </li>
+    <li><strong>3. Syntax</strong>
+      <ul>
+        <li><a href="#function">Function</a></li>
+        <li><a href="#inline">Inline</a></li>
+        <li><a href="#imports">Import</a></li>
+        <li><a href="#decorator">Decorator</a></li>
+        <li><a href="#class">Class</a></li>
+        <li><a href="#ducktypes">Duck Types</a></li>
+        <li><a href="#enum">Enum</a></li>
+        <li><a href="#exceptions">Exceptions</a></li>
+      </ul>
+    </li>
+    <li><strong>4. System</strong>
+      <ul>
+        <li><a href="#exit">Exit</a></li>
+        <li><a href="#print">Print</a></li>
+        <li><a href="#input">Input</a></li>
+        <li><a href="#commandlinearguments">Command Line Arguments</a></li>
+        <li><a href="#open">Open</a></li>
+        <li><a href="#paths">Path</a></li>
+        <li><a href="#oscommands">OS Commands</a></li>
+      </ul>
+    </li>
+    <li><strong>5. Data</strong>
+      <ul>
+        <li><a href="#json">JSON</a></li>
+        <li><a href="#pickle">Pickle</a></li>
+        <li><a href="#csv">CSV</a></li>
+        <li><a href="#sqlite">SQLite</a></li>
+        <li><a href="#bytes">Bytes</a></li>
+        <li><a href="#struct">Struct</a></li>
+        <li><a href="#array">Array</a></li>
+        <li><a href="#memoryview">Memory View</a></li>
+        <li><a href="#deque">Deque</a></li>
+      </ul>
+    </li>
+    <li><strong>6. Advanced</strong>
+      <ul>
+        <li><a href="#operator">Operator</a></li>
+        <li><a href="#matchstatement">Match Statement</a></li>
+        <li><a href="#logging">Logging</a></li>
+        <li><a href="#introspection">Introspection</a></li>
+        <li><a href="#threading">Threading</a></li>
+        <li><a href="#coroutines">Coroutines</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<style>
+  #floating-toc {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 280px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    z-index: 1000;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  #floating-toc h3 {
+    margin: 0 0 15px 0;
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    color: #333;
+  }
+  
+  #floating-toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  #floating-toc > ul > li {
+    margin: 12px 0;
+  }
+  
+  #floating-toc ul ul {
+    padding-left: 15px;
+    margin-top: 5px;
+  }
+  
+  #floating-toc ul ul li {
+    margin: 4px 0;
+  }
+  
+  #floating-toc a {
+    color: #0066cc;
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  #floating-toc a:hover {
+    background: #e6f2ff;
+    color: #004499;
+    transform: translateX(3px);
+  }
+  
+  #toc-toggle {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  
+  #toc-toggle:hover {
+    background: #555;
+    transform: scale(1.05);
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    #floating-toc {
+      background: rgba(40, 40, 40, 0.98);
+      border-color: #555;
+    }
+    
+    #floating-toc h3 {
+      color: #eee;
+      border-bottom-color: #666;
+    }
+    
+    #floating-toc a {
+      color: #66b3ff;
+    }
+    
+    #floating-toc a:hover {
+      background: #2a2a2a;
+      color: #99ccff;
+    }
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    #floating-toc {
+      width: 90%;
+      right: 5%;
+      left: 5%;
+      top: 80px;
+    }
+    
+    #toc-toggle {
+      right: 10px;
+      top: 40px;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  function toggleFloatingTOC() {
+    var toc = document.getElementById('floating-toc');
+    if (toc.style.display === 'none' || toc.style.display === '') {
+      toc.style.display = 'block';
+    } else {
+      toc.style.display = 'none';
+    }
+  }
+  
+  // Close TOC when clicking outside
+  document.addEventListener('click', function(event) {
+    var toc = document.getElementById('floating-toc');
+    var toggle = document.getElementById('toc-toggle');
+    
+    if (toc && toggle && 
+        !toc.contains(event.target) && 
+        !toggle.contains(event.target) && 
+        toc.style.display === 'block') {
+      toc.style.display = 'none';
+    }
+  });
+  
+  // Close TOC when clicking on a link
+  document.getElementById('floating-toc').addEventListener('click', function(event) {
+    if (event.target.tagName === 'A') {
+      setTimeout(function() {
+        document.getElementById('floating-toc').style.display = 'none';
+      }, 300);
+    }
+  });
+</script>
+
+
     <strong><span class="hljs-string"><span class="hljs-string">'1. Collections'</span></span></strong>: [<a href="#list">List</a>, <a href="#dictionary">Dictionary</a>, <a href="#set">Set</a>, <a href="#tuple">Tuple</a>, <a href="#range">Range</a>, <a href="#enumerate">Enumerate</a>, <a href="#iterator">Iterator</a>, <a href="#generator">Generator</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'2. Types'</span></span></strong>:       [<a href="#type">Type</a>, <a href="#string">String</a>, <a href="#regex">Regular_Exp</a>, <a href="#format">Format</a>, <a href="#numbers">Numbers</a>, <a href="#combinatorics">Combinatorics</a>, <a href="#datetime">Datetime</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],
