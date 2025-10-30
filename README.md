@@ -65,13 +65,13 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 * **This text uses the term collection instead of iterable. For rationale see [Collection](#collection).**
 
 ```python
-<int> = len(<list>)             # Returns number of items. Also works on dict and set.
-<int> = <list>.count(<el>)      # Number of occurrences. Also `if <el> in <coll>: ...`.
-<int> = <list>.index(<el>)      # Returns index of the first occ. or raises ValueError.
-<el>  = <list>.pop()            # Removes and returns item from the end. Accepts index.
-<list>.insert(<int>, <el>)      # Inserts item at the index and shifts remaining items.
-<list>.remove(<el>)             # Removes first occurrence of item. Raises ValueError.
-<list>.clear()                  # Removes all items. Also works on dictionary and set.
+<int> = len(<list/dict/set/…>)  # Returns number of items. Doesn't accept iterators.
+<int> = <list>.count(<el>)      # Counts occurrences. Also `if <el> in <coll>: ...`.
+<int> = <list>.index(<el>)      # Returns index of first occ. or raises ValueError.
+<el>  = <list>.pop()            # Removes item from the end (or at index if passed).
+<list>.insert(<int>, <el>)      # Inserts item at index and shifts remaining items.
+<list>.remove(<el>)             # Removes the first occurrence or raises ValueError.
+<list>.clear()                  # Removes all items. Also provided by dict and set.
 ```
 
 
@@ -399,7 +399,7 @@ import re
 Format
 ------
 ```perl
-<str> = f'{<el_1>}, {<el_2>}'            # Curly braces can also contain expressions.
+<str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
 <str> = '{}, {}'.format(<el_1>, <el_2>)  # Same as '{0}, {a}'.format(<el_1>, a=<el_2>).
 <str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
 ```
@@ -420,8 +420,8 @@ Format
 {<el>:.<10}                              # '<el>......'
 {<el>:0}                                 # '<el>'
 ```
-* **Objects are rendered by calling the `'format(<el>, "<options>")'` function.**
-* **Options inside curly braces can be generated dynamically: `f'{<el>:{<str/int>}[…]}'`.**
+* **Objects are rendered by calling the format() function, e.g. `'format(<el>, "<10")'`.**
+* **Options can be generated dynamically via nested braces: `f'{<el>:{<str/int>}[…]}'`.**
 * **Adding `'='` to the expression prepends it to the output: `f'{1+1=}'` returns `'1+1=2'`.**
 * **Adding `'!r'` to the expression converts object to string by calling its [repr()](#class) method.**
 
@@ -501,7 +501,7 @@ Numbers
 <Fraction> = fractions.Fraction(<int>, <int>)  # E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.
 <Decimal>  = decimal.Decimal(<str/int/tuple>)  # E.g. `Decimal((1, (2, 3), 4)) == -230_000`.
 ```
-* **`'int(<str>)'` and `'float(<str>)'` raise ValueError if passed string is malformed.**
+* **`'int(<str>)'` and `'float(<str>)'` raise ValueError exception if string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
 * **Floats can be compared with: `'math.isclose(<float>, <float>, rel_tol=1e-09)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
@@ -511,7 +511,7 @@ Numbers
 ```python
 <num> = pow(<num>, <num>)                      # E.g. `pow(2, 3) == 2 ** 3 == 8`.
 <num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
-<num> = round(<num> [, ±ndigits])              # E.g. `round(123, -1) == 120`.
+<num> = round(<num> [, ±ndigits])              # E.g. `round(1234, -2) == 1200`.
 <num> = min(<collection>)                      # Also max(<num>, <num> [, ...]).
 <num> = sum(<collection>)                      # Also math.prod(<collection>).
 ```

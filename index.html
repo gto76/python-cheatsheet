@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>October 29, 2025</aside>
+    <aside>October 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -138,13 +138,13 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 <li><strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong></li>
 <li><strong>This text uses the term collection instead of iterable. For rationale see <a href="#collection">Collection</a>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list&gt;)             <span class="hljs-comment"># Returns number of items. Also works on dict and set.</span>
-&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Number of occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
-&lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of the first occ. or raises ValueError.</span>
-&lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes and returns item from the end. Accepts index.</span>
-&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at the index and shifts remaining items.</span>
-&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes first occurrence of item. Raises ValueError.</span>
-&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all items. Also works on dictionary and set.</span>
+<pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list/dict/set/…&gt;)  <span class="hljs-comment"># Returns number of items. Doesn't accept iterators.</span>
+&lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Counts occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
+&lt;int&gt; = &lt;list&gt;.index(&lt;el&gt;)      <span class="hljs-comment"># Returns index of first occ. or raises ValueError.</span>
+&lt;el&gt;  = &lt;list&gt;.pop()            <span class="hljs-comment"># Removes item from the end (or at index if passed).</span>
+&lt;list&gt;.insert(&lt;int&gt;, &lt;el&gt;)      <span class="hljs-comment"># Inserts item at index and shifts remaining items.</span>
+&lt;list&gt;.remove(&lt;el&gt;)             <span class="hljs-comment"># Removes the first occurrence or raises ValueError.</span>
+&lt;list&gt;.clear()                  <span class="hljs-comment"># Removes all items. Also provided by dict and set.</span>
 </code></pre>
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or assign the value.</span>
 </code></pre></div>
@@ -373,7 +373,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>By default, decimal characters and alphanumerics from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> is used. It restricts special sequence matches to the first 128 Unicode characters and also prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'\x1c'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1d'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1e'</span></code> and <code class="python hljs"><span class="hljs-string">'\x1f'</span></code> (non-printable characters that divide text into files, tables, rows and fields, respectively).</strong></li>
 <li><strong>Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).</strong></li>
 </ul>
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly braces can also contain expressions.</span>
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;el_1&gt;}</span>, <span class="hljs-subst">{&lt;el_2&gt;}</span>'</span>            <span class="hljs-comment"># Curly brackets can also contain expressions.</span>
 &lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;el_1&gt;, &lt;el_2&gt;)  <span class="hljs-comment"># Same as '{0}, {a}'.format(&lt;el_1&gt;, a=&lt;el_2&gt;).</span>
 &lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;el_1&gt;, &lt;el_2&gt;)      <span class="hljs-comment"># Redundant and inferior C-style formatting.</span>
 </code></pre></div>
@@ -392,8 +392,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Objects are rendered by calling the <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, "&lt;options&gt;")'</span></code> function.</strong></li>
-<li><strong>Options inside curly braces can be generated dynamically: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
+<li><strong>Objects are rendered by calling the format() function, e.g. <code class="python hljs"><span class="hljs-string">'format(&lt;el&gt;, "&lt;10")'</span></code>.</strong></li>
+<li><strong>Options can be generated dynamically via nested braces: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{&lt;el&gt;:{&lt;str/int&gt;}</span>[…]}'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> to the expression prepends it to the output: <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{<span class="hljs-number">1</span>+<span class="hljs-number">1</span>=}</span>'</span></code> returns <code class="python hljs"><span class="hljs-string">'1+1=2'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> to the expression converts object to string by calling its <a href="#class">repr()</a> method.</strong></li>
 </ul>
@@ -462,7 +462,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError if passed string is malformed.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError exception if string is malformed.</strong></li>
 <li><strong>Decimal objects store numbers exactly, unlike most floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 != 3.3'</span></code>.</strong></li>
 <li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;, rel_tol=1e-09)'</span></code>.</strong></li>
 <li><strong>Precision of decimal operations is set with: <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
@@ -470,7 +470,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(2, 3) == 2 ** 3 == 8`.</span>
 &lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
-&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(123, -1) == 120`.</span>
+&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(1234, -2) == 1200`.</span>
 &lt;num&gt; = min(&lt;collection&gt;)                      <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
 &lt;num&gt; = sum(&lt;collection&gt;)                      <span class="hljs-comment"># Also math.prod(&lt;collection&gt;).</span>
 </code></pre></div>
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 29, 2025</aside>
+    <aside>October 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
