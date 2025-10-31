@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>October 30, 2025</aside>
+    <aside>October 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -454,11 +454,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'. Hexadecimal with upper-case letters.</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># Whole number of any size. Truncates floats.</span>
-&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># 64-bit decimal number. Also &lt;float&gt;e±&lt;int&gt;.</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># A complex number. Also `&lt;float&gt; ± &lt;float&gt;j`.</span>
-&lt;Fraction&gt; = fractions.Fraction(&lt;int&gt;, &lt;int&gt;)  <span class="hljs-comment"># E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.</span>
-&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># E.g. `Decimal((1, (2, 3), 4)) == -230_000`.</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Floats get truncated.</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># A 64-bit decimal. Also &lt;float&gt;e±&lt;int&gt;.</span>
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also &lt;float&gt;±&lt;float&gt;j.</span>
+&lt;Fraction&gt; = fractions.Fraction(&lt;int&gt;, &lt;int&gt;)  <span class="hljs-comment"># `Fraction(1, 2) / 3 == Fraction(1, 6)`.</span>
+&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># `Decimal((1, (2, 3), 4)) == -230_000`.</span>
 </code></pre></div>
 
 <ul>
@@ -470,30 +470,30 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(2, 3) == 2 ** 3 == 8`.</span>
 &lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
-&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(1234, -2) == 1200`.</span>
-&lt;num&gt; = min(&lt;collection&gt;)                      <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
-&lt;num&gt; = sum(&lt;collection&gt;)                      <span class="hljs-comment"># Also math.prod(&lt;collection&gt;).</span>
+&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(12345, -1) == 12340`.</span>
+&lt;num&gt; = min(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
+&lt;num&gt; = sum(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also math.prod(&lt;coll_of_nums&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># They convert floats into integers.</span>
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># Funcs that convert floats to ints.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf * 0` and `nan + 1` return nan.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` will raise ValueError.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: asin, acos, degrees, radians.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Log accepts base as second argument.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` raises ValueError excep.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, etc.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Base can be passed via second arg.</span>
 </code></pre></div>
 
-<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, mode      <span class="hljs-comment"># Mode returns the most common item.</span>
-<span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> variance, stdev         <span class="hljs-comment"># Also: pvariance, pstdev, quantiles.</span>
+<div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, mode      <span class="hljs-comment"># Mode returns most common element.</span>
+<span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> variance, stdev         <span class="hljs-comment"># Also `cuts = quantiles(data, n)`.</span>
 </code></pre></div>
 
 <div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, uniform    <span class="hljs-comment"># Also: gauss, choice, shuffle, seed.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Select a random float from [0, 1).</span>
-&lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Select an int/float from [a, b].</span>
+<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Selects a random float from [0, 1).</span>
+&lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Selects an int/float from [a, b].</span>
 &lt;float&gt; = gauss(mean, stdev)                   <span class="hljs-comment"># Also triangular(low, high, mode).</span>
 &lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Keeps it intact. Also sample(p, n).</span>
-shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works on all mutable sequences.</span>
+shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works with all mutable sequences.</span>
 </code></pre>
 <div><h3 id="hexadecimalnumbers">Hexadecimal Numbers</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>
 &lt;int&gt; = int(<span class="hljs-string">'±&lt;hex&gt;'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int('±0x&lt;hex&gt;/±0b&lt;bin&gt;', 0).</span>
@@ -504,7 +504,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 &lt;int&gt; = &lt;int&gt; | &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 | 0b1010 == 0b1110`.</span>
 &lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 ^ 0b1010 == 0b0110`.</span>
 &lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># E.g. `0b1111 &lt;&lt; 4 == 0b11110000`.</span>
-&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~0b1 == -0b10 == -(0b1+1)`.</span>
+&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~0b1 == -(0b1+1) == -0b10`.</span>
 </code></pre></div>
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 30, 2025</aside>
+    <aside>October 31, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

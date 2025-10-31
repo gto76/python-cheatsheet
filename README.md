@@ -495,11 +495,11 @@ Format
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)             # Whole number of any size. Truncates floats.
-<float>    = float(<int/str/bool>)             # 64-bit decimal number. Also <float>e±<int>.
-<complex>  = complex(real=0, imag=0)           # A complex number. Also `<float> ± <float>j`.
-<Fraction> = fractions.Fraction(<int>, <int>)  # E.g. `Fraction(1, 2) / 3 == Fraction(1, 6)`.
-<Decimal>  = decimal.Decimal(<str/int/tuple>)  # E.g. `Decimal((1, (2, 3), 4)) == -230_000`.
+<int>      = int(<float/str/bool>)             # A whole number. Floats get truncated.
+<float>    = float(<int/str/bool>)             # A 64-bit decimal. Also <float>e±<int>.
+<complex>  = complex(real=0, imag=0)           # Complex number. Also <float>±<float>j.
+<Fraction> = fractions.Fraction(<int>, <int>)  # `Fraction(1, 2) / 3 == Fraction(1, 6)`.
+<Decimal>  = decimal.Decimal(<str/int/tuple>)  # `Decimal((1, (2, 3), 4)) == -230_000`.
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError exception if string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
@@ -511,24 +511,24 @@ Numbers
 ```python
 <num> = pow(<num>, <num>)                      # E.g. `pow(2, 3) == 2 ** 3 == 8`.
 <num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
-<num> = round(<num> [, ±ndigits])              # E.g. `round(1234, -2) == 1200`.
-<num> = min(<collection>)                      # Also max(<num>, <num> [, ...]).
-<num> = sum(<collection>)                      # Also math.prod(<collection>).
+<num> = round(<num> [, ±ndigits])              # E.g. `round(12345, -1) == 12340`.
+<num> = min(<coll_of_nums>)                    # Also max(<num>, <num> [, ...]).
+<num> = sum(<coll_of_nums>)                    # Also math.prod(<coll_of_nums>).
 ```
 
 ### Math
 ```python
-from math import floor, ceil, trunc            # They convert floats into integers.
+from math import floor, ceil, trunc            # Funcs that convert floats to ints.
 from math import pi, inf, nan, isnan           # `inf * 0` and `nan + 1` return nan.
-from math import sqrt, factorial               # `sqrt(-1)` will raise ValueError.
-from math import sin, cos, tan                 # Also: asin, acos, degrees, radians.
-from math import log, log10, log2              # Log accepts base as second argument.
+from math import sqrt, factorial               # `sqrt(-1)` raises ValueError excep.
+from math import sin, cos, tan                 # Also: degrees, radians, asin, etc.
+from math import log, log10, log2              # Base can be passed via second arg.
 ```
 
 ### Statistics
 ```python
-from statistics import mean, median, mode      # Mode returns the most common item.
-from statistics import variance, stdev         # Also: pvariance, pstdev, quantiles.
+from statistics import mean, median, mode      # Mode returns most common element.
+from statistics import variance, stdev         # Also `cuts = quantiles(data, n)`.
 ```
 
 ### Random
@@ -537,11 +537,11 @@ from random import random, randint, uniform    # Also: gauss, choice, shuffle, s
 ```
 
 ```python
-<float> = random()                             # Select a random float from [0, 1).
-<num>   = randint/uniform(a, b)                # Select an int/float from [a, b].
+<float> = random()                             # Selects a random float from [0, 1).
+<num>   = randint/uniform(a, b)                # Selects an int/float from [a, b].
 <float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
 <el>    = choice(<sequence>)                   # Keeps it intact. Also sample(p, n).
-shuffle(<list>)                                # Works on all mutable sequences.
+shuffle(<list>)                                # Works with all mutable sequences.
 ```
 
 ### Hexadecimal Numbers
@@ -557,7 +557,7 @@ shuffle(<list>)                                # Works on all mutable sequences.
 <int> = <int> | <int>                          # E.g. `0b1100 | 0b1010 == 0b1110`.
 <int> = <int> ^ <int>                          # E.g. `0b1100 ^ 0b1010 == 0b0110`.
 <int> = <int> << n_bits                        # E.g. `0b1111 << 4 == 0b11110000`.
-<int> = ~<int>                                 # E.g. `~0b1 == -0b10 == -(0b1+1)`.
+<int> = ~<int>                                 # E.g. `~0b1 == -(0b1+1) == -0b10`.
 ```
 
 
