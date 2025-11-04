@@ -14,8 +14,9 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
 **&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Operator`](#operator)**__,__ **[`Match_Stmt`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Threading`](#threading)**__,__ **[`Coroutines`](#coroutines)**__.__  
-**&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Console_App`](#console-app)**__,__ **[`GUI`](#gui-app)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web-app)**__,__ **[`Profile`](#profiling)**__.__  
-**&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
+**&nbsp;&nbsp;&nbsp;** **7. Modern:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Union_Type`](#union-type-operator)**__,__ **[`Walrus`](#walrus-operator)**__,__ **[`Except_Groups`](#exception-groups)**__,__ **[`TOML`](#toml-support)**__,__ **[`Context_Mgr`](#context-managers)**__,__ **[`Task_Groups`](#task-groups)**__,__ **[`Type_Params`](#type-parameter-syntax)**__.__  
+**&nbsp;&nbsp;&nbsp;** **8. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Console_App`](#console-app)**__,__ **[`GUI`](#gui-app)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web-app)**__,__ **[`Profile`](#profiling)**__.__  
+**&nbsp;&nbsp;&nbsp;** **9. Multimedia:** **&nbsp;&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
 
 
 Main
@@ -2384,6 +2385,277 @@ if __name__ == '__main__':
     curses.wrapper(main)
 ```
 <br>
+
+
+Modern Python Features
+======================
+**Features introduced in Python 3.10, 3.11, and 3.12.**
+
+
+Union Type Operator
+-------------------
+**Modern syntax for type hints using the `|` operator (Python 3.10+).**
+```python
+def process(value: int | float | None) -> str | None:  # Instead of Union[int, float, None]
+    if value is None:
+        return None
+    return str(value)
+```
+
+```python
+from typing import TypeAlias
+
+Number: TypeAlias = int | float                        # Type alias with union operator.
+Result: TypeAlias = dict[str, Number] | list[Number]   # Complex type aliases.
+```
+
+```python
+<type> = int | str | None                              # Can be used in isinstance() checks.
+if isinstance(value, int | str):                       # Checks if value is int or str.
+    ...
+```
+
+
+Walrus Operator
+---------------
+**Assignment expression operator `:=` assigns and returns a value (Python 3.8+).**
+```python
+if (n := len(data)) > 10:                              # Assigns len(data) to n and checks it.
+    print(f'List is too long ({n} elements)')
+```
+
+```python
+while (line := file.readline()) != '':                 # Reads and checks in one expression.
+    process(line)
+```
+
+```python
+[y for x in data if (y := transform(x)) is not None]   # Avoids calling transform() twice.
+```
+
+```python
+if (match := re.search(pattern, text)):                # Assigns match object if found.
+    print(match.group(1))
+```
+
+
+Exception Groups
+----------------
+**Mechanism for raising and handling multiple exceptions simultaneously (Python 3.11+).**
+```python
+try:
+    raise ExceptionGroup('Multiple errors', [
+        ValueError('Invalid value'),
+        TypeError('Wrong type'),
+        KeyError('Missing key')
+    ])
+except* ValueError as e:                               # Catches only ValueError from the group.
+    print(f'Value errors: {e.exceptions}')
+except* TypeError as e:                                # Catches only TypeError from the group.
+    print(f'Type errors: {e.exceptions}')
+```
+
+```python
+errors = []
+for item in items:
+    try:
+        process(item)
+    except Exception as e:
+        errors.append(e)
+if errors:
+    raise ExceptionGroup('Processing failed', errors)  # Raises all collected errors at once.
+```
+
+* **Use `except*` instead of `except` to handle exception groups. Each `except*` clause catches matching exceptions from the group.**
+* **An `ExceptionGroup` can contain other `ExceptionGroup` instances, creating nested error hierarchies.**
+
+
+TOML Support
+------------
+**Built-in support for TOML configuration files (Python 3.11+).**
+```python
+import tomllib                                         # Read-only TOML parser in stdlib.
+
+with open('config.toml', 'rb') as file:                # Must open in binary mode.
+    config = tomllib.load(file)
+```
+
+```python
+toml_string = '''
+title = "My Application"
+
+[database]
+server = "localhost"
+port = 5432
+enabled = true
+'''
+
+config = tomllib.loads(toml_string)                    # Parse TOML from string.
+print(config['database']['server'])                    # 'localhost'
+```
+
+* **For writing TOML files, use the third-party `tomli-w` or `tomlkit` packages.**
+* **TOML is commonly used in `pyproject.toml` for Python project configuration.**
+
+
+Context Managers
+----------------
+**Objects that define `__enter__()` and `__exit__()` methods for resource management.**
+```python
+with open('file.txt') as file:                         # File is automatically closed.
+    content = file.read()
+```
+
+```python
+with lock:                                             # Lock is acquired and released.
+    critical_section()
+```
+
+### Multiple Context Managers
+```python
+with open('in.txt') as infile, open('out.txt', 'w') as outfile:
+    outfile.write(infile.read())
+```
+
+```python
+with (                                                 # Parenthesized syntax (Python 3.10+).
+    open('file1.txt') as f1,
+    open('file2.txt') as f2,
+    open('file3.txt') as f3
+):
+    process(f1, f2, f3)
+```
+
+### Creating Context Managers
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def tag(name):
+    print(f'<{name}>')                                 # Runs on entry.
+    yield                                              # Control returns to with block.
+    print(f'</{name}>')                                # Runs on exit.
+
+with tag('h1'):
+    print('Title')
+# Output: <h1>\nTitle\n</h1>
+```
+
+```python
+class DatabaseConnection:
+    def __enter__(self):
+        self.conn = create_connection()
+        return self.conn
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.conn.close()
+        return False                                   # Propagates exceptions (True suppresses).
+
+with DatabaseConnection() as conn:
+    conn.execute('SELECT * FROM users')
+```
+
+### Async Context Managers
+```python
+class AsyncResource:
+    async def __aenter__(self):
+        self.resource = await acquire_resource()
+        return self.resource
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.resource.close()
+        return False
+
+async with AsyncResource() as resource:
+    await resource.process()
+```
+
+
+Task Groups
+-----------
+**Simplified async task management with automatic cleanup (Python 3.11+).**
+```python
+import asyncio
+
+async def fetch_data(url):
+    await asyncio.sleep(1)
+    return f'Data from {url}'
+
+async def main():
+    async with asyncio.TaskGroup() as tg:             # All tasks are awaited automatically.
+        task1 = tg.create_task(fetch_data('url1'))
+        task2 = tg.create_task(fetch_data('url2'))
+        task3 = tg.create_task(fetch_data('url3'))
+    
+    # All tasks are complete here
+    print(task1.result(), task2.result(), task3.result())
+```
+
+* **If any task raises an exception, all other tasks are cancelled and exceptions are collected into an `ExceptionGroup`.**
+* **TaskGroup ensures all tasks are properly awaited and cleaned up, even if errors occur.**
+
+
+Type Parameter Syntax
+---------------------
+**Simplified syntax for generic classes and functions (Python 3.12+).**
+```python
+def first[T](items: list[T]) -> T:                    # Generic function with type parameter.
+    return items[0]
+```
+
+```python
+class Stack[T]:                                        # Generic class with type parameter.
+    def __init__(self):
+        self._items: list[T] = []
+    
+    def push(self, item: T) -> None:
+        self._items.append(item)
+    
+    def pop(self) -> T:
+        return self._items.pop()
+```
+
+```python
+class Pair[S, T]:                                      # Multiple type parameters.
+    def __init__(self, first: S, second: T):
+        self.first = first
+        self.second = second
+```
+
+* **This is equivalent to using `typing.Generic` but with cleaner syntax.**
+* **Type parameters are automatically available within the class or function scope.**
+
+
+Improved Error Messages
+-----------------------
+**Python 3.10+ provides more detailed and helpful error messages.**
+
+```python
+# Before Python 3.10:
+# TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+# Python 3.10+:
+# TypeError: unsupported operand type(s) for +: 'int' and 'str'
+#   result = 1 + '2'
+#            ~~^~~~~
+```
+
+```python
+# Improved AttributeError suggestions:
+# AttributeError: 'dict' object has no attribute 'appen'. Did you mean: 'append'?
+```
+
+```python
+# Better SyntaxError messages with precise location:
+# SyntaxError: invalid syntax. Perhaps you forgot a comma?
+#   data = [
+#       'item1'
+#       'item2'  # Missing comma highlighted
+#   ]
+```
+
+* **Error messages now include visual indicators (^) pointing to the exact problem location.**
+* **Python suggests corrections for common typos in attribute and name errors.**
 
 
 Libraries
