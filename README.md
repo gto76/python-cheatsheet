@@ -29,7 +29,7 @@ if __name__ == '__main__':      # Skips indented lines of code if file was impor
 List
 ----
 ```python
-<list> = [<el_1>, <el_2>, ...]  # Creates a new list object. Also list(<collection>).
+<list> = [<el_1>, <el_2>, ...]  # Creates new list object. E.g. `list_a = [1, 2, 3]`.
 ```
 
 ```python
@@ -201,13 +201,15 @@ Iterator
 **Potentially endless stream of elements.**
 
 ```python
-<iter> = iter(<collection>)                # Calling iter(<iter>) returns unmodified iterator.
-<iter> = iter(<function>, to_exclusive)    # A sequence of return values until 'to_exclusive'.
-<el>   = next(<iter> [, default])          # Raises StopIteration or returns 'default' on end.
+<iter> = iter(<collection>)                # Object that iterates over the collection's items.
+<iter> = iter(<function>, to_exc)          # Calls passed function until it returns 'to_exc'.
+<iter> = (<expr> for <name> in <coll>)     # Lazy comprehension. E.g. (i+1 for i in range(3)).
+<el>   = next(<iter>)                      # Returns next element. Raises StopIteration on end.
 <list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
 ```
+* **For loops call `'iter(<collection>)'` at the start and `'next(<iter>)'` on each pass.**
+* **Calling `'iter(<iter>)'` returns unmodified iterator. For details see [Iterator](#iterator-1) duck type.**
 
-### Itertools
 ```python
 import itertools as it
 ```
@@ -221,11 +223,7 @@ import itertools as it
 ```python
 <iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (only figuratively).
 <iter> = it.chain.from_iterable(<coll>)    # Empties collections inside a collection in order.
-```
-
-```python
-<iter> = it.islice(<coll>, stop)           # Only returns (i.e. yields) first 'stop' elements.
-<iter> = it.islice(<coll>, start, stop)    # Also accepts `+step`. Start and stop can be None.
+<iter> = it.islice(<coll>, [start,] stop)  # Also accepts `+step`. Start and stop can be None.
 ```
 
 
@@ -619,9 +617,9 @@ import zoneinfo, dateutil.tz
 
 ### Timezones
 ```python
-<tzinfo> = timezone.utc                     # Coordinated universal time (UK without DST).
+<tzinfo> = timezone.utc                     # Coordinated universal time. London without DST.
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from universal time.
-<tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from UTC.
+<tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from the UTC.
 <tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
@@ -631,9 +629,9 @@ import zoneinfo, dateutil.tz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from ISO string. Raises ValueError.
-<DT>     = DT.strptime(<str>, '<format>')   # Datetime from custom string. See Format.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D/DT from days since the Gregorian NYE 1.
+<D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from an ISO string. Raises ValueError.
+<DT>     = DT.strptime(<str>, '<format>')   # Naive or aware datetime from a custom string.
+<D/DTn>  = D/DT.fromordinal(<int>)          # D or DT from days since the Gregorian NYE 1.
 <DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since the Epoch.
 <DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since the Epoch.
 ```
@@ -643,7 +641,7 @@ import zoneinfo, dateutil.tz
 ### Decode
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds…'`.
-<str>    = <D/T/DT>.strftime('<format>')    # Custom string representation of the object.
+<str>    = <D/T/DT>.strftime('<format>')    # Returns custom string representation of object.
 <int>    = <D/DT>.toordinal()               # Days since NYE 1. Ignores DT's time and zone.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.

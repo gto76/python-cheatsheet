@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>October 31, 2025</aside>
+    <aside>November 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -111,7 +111,7 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
     main()                      <span class="hljs-comment"># Executes user-defined `def main(): ...` function.</span>
 </code></pre></div>
 
-<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates a new list object. Also list(&lt;collection&gt;).</span>
+<div><h2 id="list"><a href="#list" name="list">#</a>List</h2><pre><code class="python language-python hljs">&lt;list&gt; = [&lt;el_1&gt;, &lt;el_2&gt;, ...]  <span class="hljs-comment"># Creates new list object. E.g. `list_a = [1, 2, 3]`.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs">&lt;el&gt;   = &lt;list&gt;[index]          <span class="hljs-comment"># First index is 0, last -1. Also `&lt;list&gt;[i] = &lt;el&gt;`.</span>
@@ -227,25 +227,27 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Calling iter(&lt;iter&gt;) returns unmodified iterator.</span>
-&lt;iter&gt; = iter(&lt;function&gt;, to_exclusive)    <span class="hljs-comment"># A sequence of return values until 'to_exclusive'.</span>
-&lt;el&gt;   = next(&lt;iter&gt; [, default])          <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Object that iterates over the collection's items.</span>
+&lt;iter&gt; = iter(&lt;function&gt;, to_exc)          <span class="hljs-comment"># Calls passed function until it returns 'to_exc'.</span>
+&lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)     <span class="hljs-comment"># Lazy comprehension. E.g. (i+1 for i in range(3)).</span>
+&lt;el&gt;   = next(&lt;iter&gt;)                      <span class="hljs-comment"># Returns next element. Raises StopIteration on end.</span>
 &lt;list&gt; = list(&lt;iter&gt;)                      <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
 </code></pre></div>
 
 
-<div><h3 id="itertools">Itertools</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
-</code></pre></div>
-
+<ul>
+<li><strong>For loops call <code class="python hljs"><span class="hljs-string">'iter(&lt;collection&gt;)'</span></code> at the start and <code class="python hljs"><span class="hljs-string">'next(&lt;iter&gt;)'</span></code> on each pass.</strong></li>
+<li><strong>Calling <code class="python hljs"><span class="hljs-string">'iter(&lt;iter&gt;)'</span></code> returns unmodified iterator. For details see <a href="#iterator-1">Iterator</a> duck type.</strong></li>
+</ul>
+<pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
+</code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)         <span class="hljs-comment"># Returns updated value endlessly. Accepts floats.</span>
 &lt;iter&gt; = it.repeat(&lt;el&gt; [, times])         <span class="hljs-comment"># Returns passed element endlessly or 'times' times.</span>
 &lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the passed sequence of elements endlessly.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (only figuratively).</span>
 &lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Empties collections inside a collection in order.</span>
-</code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.islice(&lt;coll&gt;, stop)           <span class="hljs-comment"># Only returns (i.e. yields) first 'stop' elements.</span>
-&lt;iter&gt; = it.islice(&lt;coll&gt;, start, stop)    <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
+&lt;iter&gt; = it.islice(&lt;coll&gt;, [start,] stop)  <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
@@ -549,9 +551,9 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <ul>
 <li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
 </ul>
-<div><h3 id="timezones">Timezones</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># Coordinated universal time (UK without DST).</span>
+<div><h3 id="timezones">Timezones</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># Coordinated universal time. London without DST.</span>
 &lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from universal time.</span>
-&lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from UTC.</span>
+&lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from the UTC.</span>
 &lt;tzinfo&gt; = zoneinfo.ZoneInfo(<span class="hljs-string">'&lt;iana_key&gt;'</span>)  <span class="hljs-comment"># 'Continent/City_Name' zone with dynamic offset.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone([&lt;tzinfo&gt;])      <span class="hljs-comment"># Converts DT to the passed or local fixed zone.</span>
 &lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Changes object's timezone without conversion.</span>
@@ -561,9 +563,9 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong>Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
 <li><strong>To get ZoneInfo() to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
-<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from ISO string. Raises ValueError.</span>
-&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Datetime from custom string. See Format.</span>
-&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D/DT from days since the Gregorian NYE 1.</span>
+<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from an ISO string. Raises ValueError.</span>
+&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Naive or aware datetime from a custom string.</span>
+&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D or DT from days since the Gregorian NYE 1.</span>
 &lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local naive DT from seconds since the Epoch.</span>
 &lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># Aware datetime from seconds since the Epoch.</span>
 </code></pre></div>
@@ -573,7 +575,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds…'`.</span>
-&lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Custom string representation of the object.</span>
+&lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Returns custom string representation of object.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1. Ignores DT's time and zone.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from aware datetime.</span>
@@ -2934,7 +2936,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>October 31, 2025</aside>
+    <aside>November 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
