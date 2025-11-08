@@ -1129,7 +1129,7 @@ class MyHashable:
 ### Sortable
 * **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by <, >, <=, >=) and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
-* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.**
+* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then re&shy;turned. The shorter sequence is considered smaller in case of all values being equal.**
 * **To sort collection of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
 
 ```python
@@ -1536,7 +1536,7 @@ arguments    = sys.argv[1:]
 
 ### Argument Parser
 ```python
-from argparse import ArgumentParser, FileType
+from argparse import ArgumentParser
 p = ArgumentParser(description=<str>)                             # Returns a parser object.
 p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaults to False).
 p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
@@ -1549,7 +1549,6 @@ args  = p.parse_args()                                            # Exits on par
 
 * **Use `'help=<str>'` to set argument description that will be displayed in help message.**
 * **Use `'default=<obj>'` to override None as option's or optional argument's default value.**
-* **Use `'type=FileType(<mode>)'` for files. It accepts 'encoding', but 'newline' is None.**
 
 
 Open
@@ -1561,21 +1560,22 @@ Open
 ```
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
-* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.**
+* **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing `'newline="\n"'` breaks input only on '\n'.**
+* **`'newline="\r\n"'` converts every '\n' to '\r\n' on write and breaks input on every '\r\n'.**
 
 ### Modes
-* **`'r'`  - Read. Used by default.**
-* **`'w'`  - Write. Deletes existing contents.**
-* **`'x'`  - Write or fail if the file already exists.**
+* **`'r'`  - Read text from the file. Is used by default.**
+* **`'w'`  - Write to the file. Deletes existing contents.**
+* **`'x'`  - Write or raise FileExistsError if file exists.**
 * **`'a'`  - Append. Creates new file if it doesn't exist.**
 * **`'w+'` - Read and write. Deletes existing contents.**
-* **`'r+'` - Read and write from the start.**
-* **`'a+'` - Read and write from the end.**
-* **`'b'`  - Binary mode (`'rb'`, `'wb'`, `'xb'`, …).**
+* **`'r+'` - Read and write from the start of the file.**
+* **`'a+'` - Read and write from the end of the file.**
+* **`'rb'` - Read bytes from the file. Also `'wb'`, etc.**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
-* **`'FileExistsError'` can be raised when writing with `'x'`.**
+* **`'FileExistsError'` exception can be raised when writing with `'x'`.**
 * **`'IsADirectoryError'` and `'PermissionError'` can be raised by any.**
 * **`'OSError'` is the parent class of all listed exceptions.**
 

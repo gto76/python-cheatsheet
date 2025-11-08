@@ -965,7 +965,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <div><h3 id="sortable">Sortable</h3><ul>
 <li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by &lt;, &gt;, &lt;=, &gt;=) and the rest will be automatically generated.</strong></li>
 <li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
-<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then returned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
+<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then re­turned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
 <li><strong>To sort collection of strings in proper alphabetical order pass <code class="python hljs"><span class="hljs-string">'key=locale.strxfrm'</span></code> to sorted() after running <code class="python hljs"><span class="hljs-string">'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
@@ -1316,7 +1316,7 @@ scripts_path = sys.argv[<span class="hljs-number">0</span>]
 arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
-<div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser, FileType
+<div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser
 p = ArgumentParser(description=&lt;str&gt;)                             <span class="hljs-comment"># Returns a parser object.</span>
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
 p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
@@ -1330,7 +1330,6 @@ args  = p.parse_args()                                            <span class="h
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;obj&gt;'</span></code> to override None as option's or optional argument's default value.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'type=FileType(&lt;mode&gt;)'</span></code> for files. It accepts 'encoding', but 'newline' is None.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens a file and returns the corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1339,20 +1338,21 @@ args  = p.parse_args()                                            <span class="h
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> until it becomes the default (Python 3.15).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() and readlines() on every '\n', '\r' and '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing <code class="python hljs"><span class="hljs-string">'newline="\n"'</span></code> breaks input only on '\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> converts every '\n' to '\r\n' on write and breaks input on every '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read. Used by default.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'w'</span></code>  - Write. Deletes existing contents.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code>  - Write or fail if the file already exists.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read text from the file. Is used by default.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'w'</span></code>  - Write to the file. Deletes existing contents.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code>  - Write or raise FileExistsError if file exists.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code>  - Append. Creates new file if it doesn't exist.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write. Deletes existing contents.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code>  - Binary mode (<code class="python hljs"><span class="hljs-string">'rb'</span></code>, <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, …).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start of the file.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end of the file.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'rb'</span></code> - Read bytes from the file. Also <code class="python hljs"><span class="hljs-string">'wb'</span></code>, etc.</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
 </ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the start of file.</span>
