@@ -1631,13 +1631,13 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = os.path.basename(<path>)   # Returns path's final component, i.e. file/dir.
-<str>  = os.path.dirname(<path>)    # Returns path with its final component removed.
+<str>  = os.path.basename(<path>)   # Returns final component (filename or dirname).
+<str>  = os.path.dirname(<path>)    # Returns the path without its final component.
 <tup.> = os.path.splitext(<path>)   # Splits on last period of the final component.
 ```
 
 ```python
-<list> = os.listdir(path='.')       # Returns all filenames located at the path.
+<list> = os.listdir(path='.')       # Returns all file/dirnames located at the path.
 <list> = glob.glob('<pattern>')     # Returns paths matching the wildcard pattern.
 ```
 
@@ -1648,8 +1648,8 @@ from pathlib import Path
 ```
 
 ```python
-<stat> = os.stat(<path>)            # File's status. Also <Path/DirEntry>.stat().
-<num>  = <stat>.st_mtime/st_size/…  # Returns modification time, size in bytes, etc.
+<stat> = os.stat(<path>)            # A status object. Also <Path/DirEntry>.stat().
+<num>  = <stat>.st_size/st_mtime/…  # Returns size in bytes, modification time, etc.
 ```
 
 ### DirEntry
@@ -1672,16 +1672,16 @@ from pathlib import Path
 ```python
 <Path> = Path()                     # Returns current working dir. Also Path('.').
 <Path> = Path.cwd()                 # Returns absolute CWD. Also Path().resolve().
-<Path> = Path.home()                # Returns user's home directory (absolute).
+<Path> = Path.home()                # Returns the user's absolute home directory.
 <Path> = Path(__file__).resolve()   # Returns module's path if CWD wasn't changed.
 ```
 
 ```python
-<Path> = <Path>.parent              # Returns Path without the final component.
-<str>  = <Path>.name                # Returns path's final component as a string.
-<str>  = <Path>.suffix              # Returns name's last extension, e.g. '.gz'.
-<str>  = <Path>.stem                # Returns name without the last extension.
-<tup.> = <Path>.parts               # Returns all path's components as strings.
+<Path> = <Path>.parent              # Returns the path without its final component.
+<str>  = <Path>.name                # Returns final component (filename or dirname).
+<str>  = <Path>.suffix              # Returns the name's last extension, e.g. '.gz'.
+<str>  = <Path>.stem                # Returns the name without its last extension.
+<tup.> = <Path>.parts               # Returns a tuple of all components as strings.
 ```
 
 ```python
@@ -1708,9 +1708,9 @@ os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False
 ```
 
 ```python
-shutil.copy(from, to)            # Copies the file. 'to' can exist or be a dir.
+shutil.copy(from, to)            # Copies the file ('to' can exist or be a dir).
 shutil.copy2(from, to)           # Also copies creation and modification time.
-shutil.copytree(from, to)        # Copies the directory. 'to' must not exist.
+shutil.copytree(from, to)        # Copies the directory ('to' must not exist).
 ```
 
 ```python
@@ -1720,7 +1720,7 @@ shutil.move(from, to)            # Rename() that moves into 'to' if it's a dir.
 ```
 
 ```python
-os.remove(<path>)                # Deletes the file. Or `pip3 install send2trash`.
+os.remove(<path>)                # Deletes file. Also `$ pip3 install send2trash`.
 os.rmdir(<path>)                 # Deletes the empty directory or raises OSError.
 shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
@@ -1729,9 +1729,9 @@ shutil.rmtree(<path>)            # Deletes the directory and all of its contents
 
 ### Shell Commands
 ```python
-<pipe> = os.popen('<commands>')  # Executes commands in sh/cmd. Returns combined stdout.
-<str>  = <pipe>.read(size=-1)    # Reads 'size' chars or until EOF. Also readline/s().
-<int>  = <pipe>.close()          # Returns None if last command exited with returncode 0.
+<pipe> = os.popen('<commands>')  # Executes commands in sh/cmd. Also os.system().
+<str>  = <pipe>.read(size=-1)    # Returns a combined stdout. Also readline/s().
+<int>  = <pipe>.close()          # Returns None if last command exited with 0.
 ```
 
 #### Sends "1 + 1" to the basic calculator and captures its output:
@@ -1958,7 +1958,7 @@ Bytes
 ```python
 <bytes> = bytes(<coll_of_ints>)          # Integers must be in range from 0 to 255.
 <bytes> = bytes(<str>, 'utf-8')          # Encodes the string. Also <str>.encode().
-<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
+<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespace.
 <bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
 ```
 

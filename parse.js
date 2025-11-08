@@ -90,9 +90,9 @@ const CONSTRUCTOR_OVERLOADING =
   '        self.a = a\n';
 
 const SHUTIL_COPY =
-  'shutil.copy(from, to)            <span class="hljs-comment"># Copies the file. \'to\' can exist or be a dir.</span>\n' +
+  'shutil.copy(from, to)            <span class="hljs-comment"># Copies the file (\'to\' can exist or be a dir).</span>\n' +
   'shutil.copy2(from, to)           <span class="hljs-comment"># Also copies creation and modification time.</span>\n' +
-  'shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory. \'to\' must not exist.</span>\n';
+  'shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory (\'to\' must not exist).</span>\n';
 
 const OS_RENAME =
   'os.rename(from, to)              <span class="hljs-comment"># Renames or moves the file or directory \'from\'.</span>\n' +
