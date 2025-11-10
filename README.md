@@ -360,7 +360,7 @@ Regex
 
 ```python
 import re
-<str>   = re.sub(r'<regex>', new, text, count=0)  # Substitutes every occurrence with 'new'.
+<str>   = re.sub(r'<regex>', new, text, count=0)  # Substitutes occurrences with string 'new'.
 <list>  = re.findall(r'<regex>', text)            # Returns every occurrence of the pattern.
 <list>  = re.split(r'<regex>', text, maxsplit=0)  # Add brackets around regex to keep matches.
 <Match> = re.search(r'<regex>', text)             # Returns first occ. of the pattern or None.
@@ -373,7 +373,7 @@ import re
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions that are listed above.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'` (besides all other chars).**
-* **`'re.compile(<regex>)'` returns a Pattern object with methods sub(), findall(), etc.**
+* **`'re.compile("<regex>")'` returns a Pattern object with methods sub(), findall(), etc.**
 
 ### Match Object
 ```python
@@ -484,9 +484,9 @@ Format
 
 ### Ints
 ```python
-{90:c}                                   # 'Z'. Returns Unicode character with value 90.
-{90:b}                                   # '1011010'. Binary representation of the int.
-{90:X}                                   # '5A'. Hexadecimal with upper-case letters.
+{90:c}                                   # Converts 90 to Unicode character 'Z'.
+{90:b}                                   # Converts 90 to binary number '1011010'.
+{90:X}                                   # Converts 90 to hexadecimal number '5A'.
 ```
 
 
@@ -509,7 +509,7 @@ Numbers
 ```python
 <num> = pow(<num>, <num>)                      # E.g. `pow(2, 3) == 2 ** 3 == 8`.
 <num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
-<num> = round(<num> [, ±ndigits])              # E.g. `round(12345, -1) == 12340`.
+<num> = round(<num> [, ±ndigits])              # E.g. `round(123.45, -1) == 120`.
 <num> = min(<coll_of_nums>)                    # Also max(<num>, <num> [, ...]).
 <num> = sum(<coll_of_nums>)                    # Also math.prod(<coll_of_nums>).
 ```
@@ -518,8 +518,8 @@ Numbers
 ```python
 from math import floor, ceil, trunc            # Funcs that convert floats to ints.
 from math import pi, inf, nan, isnan           # `inf * 0` and `nan + 1` return nan.
-from math import sqrt, factorial               # `sqrt(-1)` raises ValueError excep.
-from math import sin, cos, tan                 # Also: degrees, radians, asin, etc.
+from math import sqrt, factorial               # `sqrt(-1)` raises ValueError excp.
+from math import sin, cos, tan                 # Also: degrees, radians, asin, acos.
 from math import log, log10, log2              # Base can be passed via second arg.
 ```
 
@@ -640,7 +640,7 @@ import zoneinfo, dateutil.tz
 
 ### Decode
 ```python
-<str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds…'`.
+<str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Returns custom string representation of object.
 <int>    = <D/DT>.toordinal()               # Days since NYE 1. Ignores DT's time and zone.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
@@ -748,9 +748,9 @@ Inline
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # Returns [1, 2, ..., 10].
+<list> = [i+1 for i in range(10)]                   # Returns [1, 2, 3, 4, ..., 10].
 <iter> = (i for i in range(10) if i > 5)            # Returns iter([6, 7, 8, 9]).
-<set>  = {i+5 for i in range(10)}                   # Returns {5, 6, ..., 14}.
+<set>  = {i+5 for i in range(10)}                   # Returns {5, 6, 7, 8, ..., 14}.
 <dict> = {i: i*2 for i in range(10)}                # Returns {0: 0, 1: 2, ..., 9: 18}.
 ```
 
@@ -788,13 +788,13 @@ from functools import reduce
 
 ### And, Or
 ```python
-<obj> = <exp> and <exp> [and ...]                   # Returns first false or last object.
-<obj> = <exp> or <exp> [or ...]                     # Returns first true or last object.
+<obj> = <exp> and <exp> [and ...]                   # Returns first false or last obj.
+<obj> = <exp> or <exp> [or ...]                     # Returns first true or last obj.
 ```
 
 ### Walrus Operator
 ```python
->>> [i for ch in '0123' if (i := int(ch)) > 0]      # Assigns to variable mid-sentence.
+>>> [i for ch in '0123' if (i := int(ch)) > 0]      # Assigns to var in mid-sentence.
 [1, 2, 3]
 ```
 
@@ -805,11 +805,11 @@ Point = namedtuple('Point', 'x y')                  # Creates tuple's subclass.
 point = Point(0, 0)                                 # Returns its instance.
 
 from enum import Enum
-Direction = Enum('Direction', 'N E S W')            # Creates Enum's subclass.
+Direction = Enum('Direction', 'N E S W')            # Creates an enumeration.
 direction = Direction.N                             # Returns its member.
 
 from dataclasses import make_dataclass
-Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a class.
+Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a normal class.
 player = Player(point, direction)                   # Returns its instance.
 ```
 
@@ -1329,25 +1329,25 @@ from enum import Enum, auto
 
 ```python
 class <enum_name>(Enum):
-    <member_name> = auto()              # Increment of the last numeric value or 1.
-    <member_name> = <value>             # Values don't have to be hashable or unique.
-    <member_name> = <el_1>, <el_2>      # Values can be collections. This is a tuple.
+    <member_name> = auto()              # An increment of last numeric value or 1.
+    <member_name> = <value>             # Values don't have to be hashable/unique.
+    <member_name> = <el_1>, <el_2>      # Value can be a collection, e.g. tuple.
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
 
 ```python
-<member> = <enum>.<member_name>         # Returns a member. Raises AttributeError.
-<member> = <enum>['<member_name>']      # Returns a member. Raises KeyError.
-<member> = <enum>(<value>)              # Returns a member. Raises ValueError.
-<str>    = <member>.name                # Returns the member's name.
-<obj>    = <member>.value               # Returns the member's value.
+<member> = <enum>.<member_name>         # Accesses a member via enum's attribute.
+<member> = <enum>['<member_name>']      # Returns the member or raises KeyError.
+<member> = <enum>(<value>)              # Returns the member or raises ValueError.
+<str>    = <member>.name                # Returns the member's name as a string.
+<obj>    = <member>.value               # Value can't be a user-defined function.
 ```
 
 ```python
-<list>   = list(<enum>)                 # Returns a list of enum's members.
-<list>   = <enum>._member_names_        # Returns a list of member names.
-<list>   = [m.value for m in <enum>]    # Returns a list of member values.
+<list>   = list(<enum>)                 # Returns a list of the enum's members.
+<list>   = <enum>._member_names_        # Returns a list of the member names.
+<list>   = [m.value for m in <enum>]    # Returns a list of the member values.
 ```
 
 ```python
@@ -1561,10 +1561,10 @@ Open
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing `'newline="\n"'` breaks input only on '\n'.**
-* **`'newline="\r\n"'` converts every '\n' to '\r\n' on write and breaks input on every '\r\n'.**
+* **`'newline="\r\n"'` converts every '\n' to '\r\n' on write and breaks input only on '\r\n'.**
 
 ### Modes
-* **`'r'`  - Read text from the file. Is used by default.**
+* **`'r'`  - Read text from the file (the default option).**
 * **`'w'`  - Write to the file. Deletes existing contents.**
 * **`'x'`  - Write or raise FileExistsError if file exists.**
 * **`'a'`  - Append. Creates new file if it doesn't exist.**

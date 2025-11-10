@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 8, 2025</aside>
+    <aside>November 10, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -342,7 +342,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;bool&gt; = &lt;str&gt;.isspace()                     <span class="hljs-comment"># Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].</span>
 </code></pre>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
-&lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes every occurrence with 'new'.</span>
+&lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes occurrences with string 'new'.</span>
 &lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns every occurrence of the pattern.</span>
 &lt;list&gt;  = re.split(<span class="hljs-string">r'&lt;regex&gt;'</span>, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Add brackets around regex to keep matches.</span>
 &lt;Match&gt; = re.search(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)             <span class="hljs-comment"># Returns first occ. of the pattern or None.</span>
@@ -357,7 +357,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.IGNORECASE'</span></code> can be used with all functions that are listed above.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.MULTILINE'</span></code> makes <code class="python hljs"><span class="hljs-string">'^'</span></code> and <code class="python hljs"><span class="hljs-string">'$'</span></code> match the start/end of each line.</strong></li>
 <li><strong>Argument <code class="python hljs"><span class="hljs-string">'flags=re.DOTALL'</span></code> makes <code class="python hljs"><span class="hljs-string">'.'</span></code> also accept the <code class="python hljs"><span class="hljs-string">'\n'</span></code> (besides all other chars).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'re.compile(&lt;regex&gt;)'</span></code> returns a Pattern object with methods sub(), findall(), etc.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'re.compile("&lt;regex&gt;")'</span></code> returns a Pattern object with methods sub(), findall(), etc.</strong></li>
 </ul>
 <div><h3 id="matchobject">Match Object</h3><pre><code class="python language-python hljs">&lt;str&gt;   = &lt;Match&gt;.group()                         <span class="hljs-comment"># Returns the whole match. Also group(0).</span>
 &lt;str&gt;   = &lt;Match&gt;.group(<span class="hljs-number">1</span>)                        <span class="hljs-comment"># Returns part inside the first brackets.</span>
@@ -451,9 +451,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> a <code class="python hljs"><span class="hljs-string">'6'</span></code> and <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># 'Z'. Returns Unicode character with value 90.</span>
-{<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># '1011010'. Binary representation of the int.</span>
-{<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># '5A'. Hexadecimal with upper-case letters.</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
+{<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
+{<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># Converts 90 to hexadecimal number '5A'.</span>
 </code></pre></div>
 
 <div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Floats get truncated.</span>
@@ -472,15 +472,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(2, 3) == 2 ** 3 == 8`.</span>
 &lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
-&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(12345, -1) == 12340`.</span>
+&lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(123.45, -1) == 120`.</span>
 &lt;num&gt; = min(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
 &lt;num&gt; = sum(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also math.prod(&lt;coll_of_nums&gt;).</span>
 </code></pre></div>
 
 <div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># Funcs that convert floats to ints.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf * 0` and `nan + 1` return nan.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` raises ValueError excep.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, etc.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` raises ValueError excp.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, acos.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Base can be passed via second arg.</span>
 </code></pre></div>
 
@@ -574,7 +574,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong>ISO strings come in following forms: <code class="python hljs"><span class="hljs-string">'YYYY-MM-DD'</span></code>, <code class="python hljs"><span class="hljs-string">'HH:MM:SS.mmmuuu[±HH:MM]'</span></code>, or both separated by an arbitrary character. All parts following the hours are optional.</strong></li>
 <li><strong>Python uses the Unix Epoch: <code class="python hljs"><span class="hljs-string">'1970-01-01 00:00 UTC'</span></code>, <code class="python hljs"><span class="hljs-string">'1970-01-01 01:00 CET'</span></code>, …</strong></li>
 </ul>
-<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds…'`.</span>
+<div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Returns custom string representation of object.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1. Ignores DT's time and zone.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
@@ -653,9 +653,9 @@ func(*args, **kwargs)
 </code></pre></div></div>
 
 
-<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Returns [1, 2, ..., 10].</span>
+<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Returns [1, 2, 3, 4, ..., 10].</span>
 &lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)            <span class="hljs-comment"># Returns iter([6, 7, 8, 9]).</span>
-&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Returns {5, 6, ..., 14}.</span>
+&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Returns {5, 6, 7, 8, ..., 14}.</span>
 &lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># Returns {0: 0, 1: 2, ..., 9: 18}.</span>
 </code></pre></div>
 
@@ -679,11 +679,11 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
-<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last object.</span>
-&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last object.</span>
+<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last obj.</span>
+&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                     <span class="hljs-comment"># Returns first true or last obj.</span>
 </code></pre></div>
 
-<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(ch)) &gt; <span class="hljs-number">0</span>]      <span class="hljs-comment"># Assigns to variable mid-sentence.</span>
+<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(ch)) &gt; <span class="hljs-number">0</span>]      <span class="hljs-comment"># Assigns to var in mid-sentence.</span>
 [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre></div>
 
@@ -692,11 +692,11 @@ Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-s
 point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                 <span class="hljs-comment"># Returns its instance.</span>
 
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates Enum's subclass.</span>
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)            <span class="hljs-comment"># Creates an enumeration.</span>
 direction = Direction.N                             <span class="hljs-comment"># Returns its member.</span>
 
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a class.</span>
+Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])   <span class="hljs-comment"># Creates a normal class.</span>
 player = Player(point, direction)                   <span class="hljs-comment"># Returns its instance.</span>
 </code></pre></div>
 
@@ -1150,23 +1150,23 @@ Hello World!
 
 
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
-    &lt;member_name&gt; = auto()              <span class="hljs-comment"># Increment of the last numeric value or 1.</span>
-    &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable or unique.</span>
-    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Values can be collections. This is a tuple.</span>
+    &lt;member_name&gt; = auto()              <span class="hljs-comment"># An increment of last numeric value or 1.</span>
+    &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable/unique.</span>
+    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Value can be a collection, e.g. tuple.</span>
 </code></pre>
 <ul>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
 <li><strong>Accessing a member named after a reserved keyword causes SyntaxError.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Returns a member. Raises AttributeError.</span>
-&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns a member. Raises KeyError.</span>
-&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)              <span class="hljs-comment"># Returns a member. Raises ValueError.</span>
-&lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns the member's name.</span>
-&lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Returns the member's value.</span>
+<pre><code class="python language-python hljs">&lt;member&gt; = &lt;enum&gt;.&lt;member_name&gt;         <span class="hljs-comment"># Accesses a member via enum's attribute.</span>
+&lt;member&gt; = &lt;enum&gt;[<span class="hljs-string">'&lt;member_name&gt;'</span>]      <span class="hljs-comment"># Returns the member or raises KeyError.</span>
+&lt;member&gt; = &lt;enum&gt;(&lt;value&gt;)              <span class="hljs-comment"># Returns the member or raises ValueError.</span>
+&lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns the member's name as a string.</span>
+&lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Value can't be a user-defined function.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns a list of enum's members.</span>
-&lt;list&gt;   = &lt;enum&gt;._member_names_        <span class="hljs-comment"># Returns a list of member names.</span>
-&lt;list&gt;   = [m.value <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns a list of member values.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns a list of the enum's members.</span>
+&lt;list&gt;   = &lt;enum&gt;._member_names_        <span class="hljs-comment"># Returns a list of the member names.</span>
+&lt;list&gt;   = [m.value <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns a list of the member values.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;enum&gt;   = type(&lt;member&gt;)               <span class="hljs-comment"># Returns an enum. Also &lt;memb&gt;.__class__.</span>
 &lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Returns an endless iterator of members.</span>
@@ -1339,10 +1339,10 @@ args  = p.parse_args()                                            <span class="h
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> until it becomes the default (Python 3.15).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing <code class="python hljs"><span class="hljs-string">'newline="\n"'</span></code> breaks input only on '\n'.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> converts every '\n' to '\r\n' on write and breaks input on every '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> converts every '\n' to '\r\n' on write and breaks input only on '\r\n'.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read text from the file. Is used by default.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read text from the file (the default option).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'w'</span></code>  - Write to the file. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'x'</span></code>  - Write or raise FileExistsError if file exists.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a'</span></code>  - Append. Creates new file if it doesn't exist.</strong></li>
@@ -2936,7 +2936,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 8, 2025</aside>
+    <aside>November 10, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
