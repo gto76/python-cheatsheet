@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 10, 2025</aside>
+    <aside>November 13, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -478,9 +478,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 <div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># Funcs that convert floats to ints.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf * 0` and `nan + 1` return nan.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf*0` and `nan+1` are both nan.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` raises ValueError excp.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, acos.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, etc.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Base can be passed via second arg.</span>
 </code></pre></div>
 
@@ -488,16 +488,16 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> variance, stdev         <span class="hljs-comment"># Also `cuts = quantiles(data, n)`.</span>
 </code></pre></div>
 
-<div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, uniform    <span class="hljs-comment"># Also: gauss, choice, shuffle, seed.</span>
+<div><h3 id="random">Random</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> random, randint, uniform    <span class="hljs-comment"># Also: gauss, choice, shuffle, etc.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Selects a random float from [0, 1).</span>
+<pre><code class="python language-python hljs">&lt;float&gt; = random()                             <span class="hljs-comment"># Selects random float from [0, 1).</span>
 &lt;num&gt;   = randint/uniform(a, b)                <span class="hljs-comment"># Selects an int/float from [a, b].</span>
 &lt;float&gt; = gauss(mean, stdev)                   <span class="hljs-comment"># Also triangular(low, high, mode).</span>
-&lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Keeps it intact. Also sample(p, n).</span>
+&lt;el&gt;    = choice(&lt;sequence&gt;)                   <span class="hljs-comment"># Doesn't modify. Also sample(p, n).</span>
 shuffle(&lt;list&gt;)                                <span class="hljs-comment"># Works with all mutable sequences.</span>
 </code></pre>
-<div><h3 id="hexadecimalnumbers">Hexadecimal Numbers</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>
+<div><h3 id="hexadecimalnumbers">Hexadecimal Numbers</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFf == 255`. Also 0b&lt;bin&gt;.</span>
 &lt;int&gt; = int(<span class="hljs-string">'±&lt;hex&gt;'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int('±0x&lt;hex&gt;/±0b&lt;bin&gt;', 0).</span>
 &lt;str&gt; = hex(&lt;int&gt;)                             <span class="hljs-comment"># Returns '[-]0x&lt;hex&gt;'. Also bin().</span>
 </code></pre></div>
@@ -676,7 +676,7 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) != True`.</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
 <div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last obj.</span>
@@ -760,7 +760,7 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 </code></pre></div>
 
 
-<div><h3 id="debuggerexample">Debugger Example</h3><p><strong>Decorator that prints function's name every time the function is called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
+<div><h3 id="debuggerexample">Debugger Example</h3><p><strong>Decorator that prints function's name every time <em>that</em> function is called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span><span class="hljs-params">(func)</span>:</span>
 <span class="hljs-meta">    @wraps(func)</span>
@@ -776,18 +776,19 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 
 
 <ul>
-<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out). Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
+<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
 </ul>
 <div><h3 id="cache">Cache</h3><p><strong>Decorator that caches function's return values. All function's arguments must be hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache
 
 <span class="hljs-meta">@cache</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(n)</span>:</span>
-    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fib(n-<span class="hljs-number">2</span>) + fib(n-<span class="hljs-number">1</span>)</code></pre></div>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fibonacci</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">return</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> fibonacci(n<span class="hljs-number">-2</span>) + fibonacci(n<span class="hljs-number">-1</span>)
+</code></pre></div>
 
 
 <ul>
 <li><strong>Potential problem with cache is that it can grow indefinitely. To clear stored values run <code class="python hljs"><span class="hljs-string">'&lt;func&gt;.cache_clear()'</span></code>, or use <code class="python hljs"><span class="hljs-string">'@lru_cache(maxsize=&lt;int&gt;)'</span></code> decorator instead.</strong></li>
-<li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase it run <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
+<li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase the limit run <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
@@ -834,16 +835,16 @@ player = Player(point, direction)                   <span class="hljs-comment">#
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
 <li><strong>Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().</strong></li>
 </ul>
-<div><h4 id="expressionsthatcallthestrmethod">Expressions that call the str() method:</h4><pre><code class="python language-python hljs">print(&lt;obj&gt;)
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>'</span>
-logging.warning(&lt;obj&gt;)
-csv.writer(&lt;file&gt;).writerow([&lt;obj&gt;])
+<div><h4 id="expressionsthatcallobjectsstrspecialmethod">Expressions that call object's str() special method:</h4><pre><code class="python language-python hljs">print(obj)
+<span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
+logging.warning(obj)
+csv.writer(&lt;file&gt;).writerow([obj])
 </code></pre></div>
 
-<div><h4 id="expressionsthatcallthereprmethod">Expressions that call the repr() method:</h4><pre><code class="python language-python hljs">print/str/repr([&lt;obj&gt;])
-print/str/repr({&lt;obj&gt;: &lt;obj&gt;})
-<span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;!r}</span>'</span>
-Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(&lt;obj&gt;))
+<div><h4 id="expressionsthatcallobjectsreprspecialmethod">Expressions that call object's repr() special method:</h4><pre><code class="python language-python hljs">print/str/repr([obj])
+print/str/repr({obj: obj})
+<span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
+Z = make_dataclass(<span class="hljs-string">'Z'</span>, [<span class="hljs-string">'a'</span>]); print/str/repr(Z(obj))
 </code></pre></div>
 
 <div><h3 id="subclass">Subclass</h3><ul>
@@ -2936,7 +2937,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 10, 2025</aside>
+    <aside>November 13, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

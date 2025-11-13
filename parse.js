@@ -43,7 +43,7 @@ const TOC =
   '</code></pre>\n';
 
 const BIN_HEX =
-  '&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFF == 255`. Also 0b&lt;bin&gt;.</span>\n' +
+  '&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                                <span class="hljs-comment"># E.g. `0xFf == 255`. Also 0b&lt;bin&gt;.</span>\n' +
   '&lt;int&gt; = int(<span class="hljs-string">\'±&lt;hex&gt;\'</span>, <span class="hljs-number">16</span>)                      <span class="hljs-comment"># Also int(\'±0x&lt;hex&gt;/±0b&lt;bin&gt;\', 0).</span>\n' +
   '&lt;str&gt; = hex(&lt;int&gt;)                             <span class="hljs-comment"># Returns \'[-]0x&lt;hex&gt;\'. Also bin().</span>\n';
 
@@ -79,10 +79,10 @@ const PARAMETRIZED_DECORATOR =
   '    <span class="hljs-keyword">return</span> x + y\n';
 
 const REPR_USE_CASES =
-  'print/str/repr([&lt;obj&gt;])\n' +
-  'print/str/repr({&lt;obj&gt;: &lt;obj&gt;})\n' +
-  '<span class="hljs-string">f\'<span class="hljs-subst">{&lt;obj&gt;!r}</span>\'</span>\n' +
-  'Z = make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(&lt;obj&gt;))\n';
+  'print/str/repr([obj])\n' +
+  'print/str/repr({obj: obj})\n' +
+  '<span class="hljs-string">f\'<span class="hljs-subst">{obj!r}</span>\'</span>\n' +
+  'Z = make_dataclass(<span class="hljs-string">\'Z\'</span>, [<span class="hljs-string">\'a\'</span>]); print/str/repr(Z(obj))\n';
 
 const CONSTRUCTOR_OVERLOADING =
   '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
@@ -926,7 +926,7 @@ function fixHighlights() {
   $(`code:contains( + fib(n)`).html(CACHE);
   $(`code:contains(>>> def add)`).html(SPLAT);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
-  $(`code:contains(print/str/repr([<obj>]))`).html(REPR_USE_CASES);
+  $(`code:contains(print/str/repr([obj]))`).html(REPR_USE_CASES);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
   $(`code:contains(\'<n>s\')`).html(STRUCT_FORMAT);

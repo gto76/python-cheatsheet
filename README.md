@@ -517,9 +517,9 @@ Numbers
 ### Math
 ```python
 from math import floor, ceil, trunc            # Funcs that convert floats to ints.
-from math import pi, inf, nan, isnan           # `inf * 0` and `nan + 1` return nan.
+from math import pi, inf, nan, isnan           # `inf*0` and `nan+1` are both nan.
 from math import sqrt, factorial               # `sqrt(-1)` raises ValueError excp.
-from math import sin, cos, tan                 # Also: degrees, radians, asin, acos.
+from math import sin, cos, tan                 # Also: degrees, radians, asin, etc.
 from math import log, log10, log2              # Base can be passed via second arg.
 ```
 
@@ -531,20 +531,20 @@ from statistics import variance, stdev         # Also `cuts = quantiles(data, n)
 
 ### Random
 ```python
-from random import random, randint, uniform    # Also: gauss, choice, shuffle, seed.
+from random import random, randint, uniform    # Also: gauss, choice, shuffle, etc.
 ```
 
 ```python
-<float> = random()                             # Selects a random float from [0, 1).
+<float> = random()                             # Selects random float from [0, 1).
 <num>   = randint/uniform(a, b)                # Selects an int/float from [a, b].
 <float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
-<el>    = choice(<sequence>)                   # Keeps it intact. Also sample(p, n).
+<el>    = choice(<sequence>)                   # Doesn't modify. Also sample(p, n).
 shuffle(<list>)                                # Works with all mutable sequences.
 ```
 
 ### Hexadecimal Numbers
 ```python
-<int> = 0x<hex>                                # E.g. `0xFF == 255`. Also 0b<bin>.
+<int> = 0x<hex>                                # E.g. `0xFf == 255`. Also 0b<bin>.
 <int> = int('±<hex>', 16)                      # Also int('±0x<hex>/±0b<bin>', 0).
 <str> = hex(<int>)                             # Returns '[-]0x<hex>'. Also bin().
 ```
@@ -782,7 +782,7 @@ from functools import reduce
 ```
 
 ```python
->>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
+>>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) != True`.
 ['zero', 1, 2, 3]
 ```
 
@@ -894,7 +894,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**Decorator that prints function's name every time the function is called.**
+**Decorator that prints function's name every time _that_ function is called.**
 
 ```python
 from functools import wraps
@@ -910,7 +910,7 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is wrapping (out). Without it, `'add.__name__'` would return `'out'`.**
+* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, `'add.__name__'` would return `'out'`.**
 
 ### Cache
 **Decorator that caches function's return values. All function's arguments must be hashable.**
@@ -919,11 +919,11 @@ def add(x, y):
 from functools import cache
 
 @cache
-def fib(n):
-    return n if n < 2 else fib(n-2) + fib(n-1)
+def fibonacci(n):
+    return n if n < 2 else fibonacci(n-2) + fibonacci(n-1)
 ```
 * **Potential problem with cache is that it can grow indefinitely. To clear stored values run `'<func>.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
-* **CPython interpreter limits recursion depth to 3000 by default. To increase it run `'sys.setrecursionlimit(<int>)'`.**
+* **CPython interpreter limits recursion depth to 3000 by default. To increase the limit run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
 **A decorator that accepts arguments and returns a normal decorator that accepts a function.**
@@ -975,20 +975,20 @@ class MyClass:
 * **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
 * **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
 
-#### Expressions that call the str() method:
+#### Expressions that call object's str() special method:
 ```python
-print(<obj>)
-f'{<obj>}'
-logging.warning(<obj>)
-csv.writer(<file>).writerow([<obj>])
+print(obj)
+f'{obj}'
+logging.warning(obj)
+csv.writer(<file>).writerow([obj])
 ```
 
-#### Expressions that call the repr() method:
+#### Expressions that call object's repr() special method:
 ```python
-print/str/repr([<obj>])
-print/str/repr({<obj>: <obj>})
-f'{<obj>!r}'
-Z = make_dataclass('Z', ['a']); print/str/repr(Z(<obj>))
+print/str/repr([obj])
+print/str/repr({obj: obj})
+f'{obj!r}'
+Z = make_dataclass('Z', ['a']); print/str/repr(Z(obj))
 ```
 
 ### Subclass
