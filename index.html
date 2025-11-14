@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 13, 2025</aside>
+    <aside>November 14, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -248,6 +248,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (only figuratively).</span>
 &lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Empties collections inside a collection in order.</span>
 &lt;iter&gt; = it.islice(&lt;coll&gt;, [start,] stop)  <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
+&lt;iter&gt; = it.product(&lt;coll&gt;, ...)           <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
@@ -533,7 +534,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 </code></pre></div>
 
 
-<pre><code class="python language-python apache hljs">&lt;D&gt;  = date(year, month, day)               <span class="hljs-comment"># Only accepts valid dates from 1 to 9999 AD.</span>
+<pre><code class="python language-python apache hljs">&lt;D&gt;  = date(year, month, day)               <span class="hljs-comment"># Accepts valid dates between AD 1 and AD 9999.</span>
 &lt;T&gt;  = time(hour=<span class="hljs-number">0</span>, minute=<span class="hljs-number">0</span>, second=<span class="hljs-number">0</span>)     <span class="hljs-comment"># Also: `microsecond=0, tzinfo=None, fold=0`.</span>
 &lt;DT&gt; = datetime(year, month, day, hour=<span class="hljs-number">0</span>)   <span class="hljs-comment"># Also: `minute=0, second=0, microsecond=0, …`.</span>
 &lt;TD&gt; = timedelta(weeks=<span class="hljs-number">0</span>, days=<span class="hljs-number">0</span>, hours=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Also: `minutes=0, seconds=0, microseconds=0`.</span>
@@ -556,7 +557,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 &lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from the UTC.</span>
 &lt;tzinfo&gt; = zoneinfo.ZoneInfo(<span class="hljs-string">'&lt;iana_key&gt;'</span>)  <span class="hljs-comment"># 'Continent/City_Name' zone with dynamic offset.</span>
 &lt;DTa&gt;    = &lt;DT&gt;.astimezone([&lt;tzinfo&gt;])      <span class="hljs-comment"># Converts DT to the passed or local fixed zone.</span>
-&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Changes object's timezone without conversion.</span>
+&lt;Ta/DTa&gt; = &lt;T/DT&gt;.replace(tzinfo=&lt;tzinfo&gt;)  <span class="hljs-comment"># Changes the timezone object without conversion.</span>
 </code></pre></div>
 
 <ul>
@@ -576,7 +577,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 </ul>
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Returns custom string representation of object.</span>
-&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1. Ignores DT's time and zone.</span>
+&lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1, ignoring DT's time and zone.</span>
 &lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from local naive DT.</span>
 &lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the Epoch, from aware datetime.</span>
 </code></pre></div>
@@ -590,13 +591,13 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong><code class="python hljs"><span class="hljs-string">'%z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'±HH[:]MM'</span></code> and returns <code class="python hljs"><span class="hljs-string">'±HHMM'</span></code> or empty string if object is naive.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'%Z'</span></code> accepts <code class="python hljs"><span class="hljs-string">'UTC/GMT'</span></code> and local timezone's code and returns timezone's name, <code class="python hljs"><span class="hljs-string">'UTC[±HH:MM]'</span></code> if timezone is nameless, or an empty string if object is naive.</strong></li>
 </ul>
-<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also ==.</span>
+<div><h3 id="arithmetics">Arithmetics</h3><pre><code class="python language-python apache hljs">&lt;bool&gt;   = &lt;D/T/DTn&gt; &gt; &lt;D/T/DTn&gt;            <span class="hljs-comment"># Ignores time jumps (fold attribute). Also `==`.</span>
 &lt;bool&gt;   = &lt;DTa&gt;     &gt; &lt;DTa&gt;                <span class="hljs-comment"># Ignores time jumps if they share tzinfo object.</span>
 &lt;TD&gt;     = &lt;D/DTn&gt;   - &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
 &lt;TD&gt;     = &lt;DTa&gt;     - &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share the tzinfo object.</span>
-&lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into missing hour.</span>
-&lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`.</span>
-&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Also `(&lt;int&gt;, &lt;TD&gt;) = divmod(&lt;TD&gt;, &lt;TD&gt;)`.</span>
+&lt;D/DT&gt;   = &lt;D/DT&gt;    ± &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into a missing hour.</span>
+&lt;TD&gt;     = &lt;TD&gt;      * &lt;float&gt;              <span class="hljs-comment"># Also `&lt;TD&gt; = &lt;TD&gt; ± &lt;TD&gt;`, `&lt;TD&gt; = abs(&lt;TD&gt;)`.</span>
+&lt;float&gt;  = &lt;TD&gt;      / &lt;TD&gt;                 <span class="hljs-comment"># Calling divmod(&lt;TD&gt;, &lt;TD&gt;) returns int and TD.</span>
 </code></pre></div>
 
 <div><h2 id="function"><a href="#function" name="function">#</a>Function</h2><p><strong>Independent block of code that returns a value when called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> &lt;<span class="hljs-title">func_name</span>&gt;<span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                  <span class="hljs-comment"># E.g. `def func(x, y): ...`.</span>
@@ -676,7 +677,7 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) != True`.</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
 <div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last obj.</span>
@@ -2937,7 +2938,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 13, 2025</aside>
+    <aside>November 14, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

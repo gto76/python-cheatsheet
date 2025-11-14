@@ -224,6 +224,7 @@ import itertools as it
 <iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (only figuratively).
 <iter> = it.chain.from_iterable(<coll>)    # Empties collections inside a collection in order.
 <iter> = it.islice(<coll>, [start,] stop)  # Also accepts `+step`. Start and stop can be None.
+<iter> = it.product(<coll>, ...)           # Same as `((a, b) for a in arg_1 for b in arg_2)`.
 ```
 
 
@@ -598,7 +599,7 @@ import zoneinfo, dateutil.tz
 ```
 
 ```python
-<D>  = date(year, month, day)               # Only accepts valid dates from 1 to 9999 AD.
+<D>  = date(year, month, day)               # Accepts valid dates between AD 1 and AD 9999.
 <T>  = time(hour=0, minute=0, second=0)     # Also: `microsecond=0, tzinfo=None, fold=0`.
 <DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
 <TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microseconds=0`.
@@ -622,7 +623,7 @@ import zoneinfo, dateutil.tz
 <tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from the UTC.
 <tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
-<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes object's timezone without conversion.
+<Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes the timezone object without conversion.
 ```
 * **Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
 * **To get ZoneInfo() to work on Windows run `'> pip3 install tzdata'`.**
@@ -642,7 +643,7 @@ import zoneinfo, dateutil.tz
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Returns custom string representation of object.
-<int>    = <D/DT>.toordinal()               # Days since NYE 1. Ignores DT's time and zone.
+<int>    = <D/DT>.toordinal()               # Days since NYE 1, ignoring DT's time and zone.
 <float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
 <float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
 ```
@@ -658,13 +659,13 @@ import zoneinfo, dateutil.tz
 
 ### Arithmetics
 ```python
-<bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also ==.
+<bool>   = <D/T/DTn> > <D/T/DTn>            # Ignores time jumps (fold attribute). Also `==`.
 <bool>   = <DTa>     > <DTa>                # Ignores time jumps if they share tzinfo object.
 <TD>     = <D/DTn>   - <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
 <TD>     = <DTa>     - <DTa>                # Ignores jumps if they share the tzinfo object.
-<D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into missing hour.
-<TD>     = <TD>      * <float>              # Also `<TD> = abs(<TD>)`, `<TD> = <TD> ± <TD>`.
-<float>  = <TD>      / <TD>                 # Also `(<int>, <TD>) = divmod(<TD>, <TD>)`.
+<D/DT>   = <D/DT>    ± <TD>                 # Returned datetime can fall into a missing hour.
+<TD>     = <TD>      * <float>              # Also `<TD> = <TD> ± <TD>`, `<TD> = abs(<TD>)`.
+<float>  = <TD>      / <TD>                 # Calling divmod(<TD>, <TD>) returns int and TD.
 ```
 
 
@@ -782,7 +783,7 @@ from functools import reduce
 ```
 
 ```python
->>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) != True`.
+>>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
 ['zero', 1, 2, 3]
 ```
 
