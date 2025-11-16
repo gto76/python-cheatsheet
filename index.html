@@ -990,7 +990,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <div><h3 id="iterator-1">Iterator</h3><ul>
 <li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
 <li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
-<li><strong>Iter() should return an iterator of remaining items, i.e. 'self'.</strong></li>
+<li><strong>Iter() should return unmodified iterator, i.e. the 'self' argument.</strong></li>
 <li><strong>Any object that has iter() method can be used in a for loop.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1216,7 +1216,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 </code></pre></div>
 
 <ul>
-<li><strong>Also catches subclasses, e.g. <code class="python hljs"><span class="hljs-string">'IndexError'</span></code> is caught by <code class="python hljs"><span class="hljs-string">'except LookupError:'</span></code>.</strong></li>
+<li><strong>It also catches subclasses, e.g. <code class="python hljs"><span class="hljs-string">'ArithmeticError'</span></code> is caught by <code class="python hljs"><span class="hljs-string">'except Exception:'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to standard error stream.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (that is, its arguments).</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see <a href="#logging">Logging</a>.</strong></li>
@@ -1295,7 +1295,7 @@ sys.exit(&lt;obj&gt;)                <span class="hljs-comment"># Prints to stde
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> for messages about errors so they can be processed separately.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> or <code class="python hljs"><span class="hljs-string">'sys.stderr.write(&lt;str&gt;)'</span></code> for messages about errors.</strong></li>
 <li><strong>Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> is used, or program exits.</strong></li>
 </ul>
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint

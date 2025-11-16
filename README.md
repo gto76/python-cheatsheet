@@ -1154,7 +1154,7 @@ class MySortable:
 ### Iterator
 * **Any object that has methods next() and iter() is an iterator.**
 * **Next() should return next item or raise StopIteration exception.**
-* **Iter() should return an iterator of remaining items, i.e. 'self'.**
+* **Iter() should return unmodified iterator, i.e. the 'self' argument.**
 * **Any object that has iter() method can be used in a for loop.**
 ```python
 class Counter:
@@ -1407,7 +1407,7 @@ except <exception> as <name>: ...
 except (<exception>, [...]): ...
 except (<exception>, [...]) as <name>: ...
 ```
-* **Also catches subclasses, e.g. `'IndexError'` is caught by `'except LookupError:'`.**
+* **It also catches subclasses, e.g. `'ArithmeticError'` is caught by `'except Exception:'`.**
 * **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
 * **Use `'print(<name>)'` to print just the cause of the exception (that is, its arguments).**
 * **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see [Logging](#logging).**
@@ -1506,7 +1506,7 @@ Print
 ```python
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
-* **Use `'file=sys.stderr'` for messages about errors so they can be processed separately.**
+* **Use `'file=sys.stderr'` or `'sys.stderr.write(<str>)'` for messages about errors.**
 * **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or program exits.**
 
 ### Pretty Print
