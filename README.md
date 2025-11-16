@@ -175,7 +175,7 @@ Point(x=1, y=2)
 
 Range
 -----
-**Immutable and hashable sequence of integers.**
+**A sequence of evenly spaced integers.**
 ```python
 <range> = range(stop)                # I.e. range(to_exclusive). Integers from 0 to `stop-1`.
 <range> = range(start, stop)         # I.e. range(from_inc, to_exc). From start to `stop-1`.
@@ -201,9 +201,9 @@ Iterator
 **Potentially endless stream of elements.**
 
 ```python
-<iter> = iter(<collection>)                # Object that iterates over the collection's items.
-<iter> = iter(<function>, to_exc)          # Calls passed function until it returns 'to_exc'.
-<iter> = (<expr> for <name> in <coll>)     # Lazy comprehension. E.g. (i+1 for i in range(3)).
+<iter> = iter(<collection>)                # Iterator that returns coll's elements one by one.
+<iter> = iter(<func>, to_exc)              # Calls `<func>()` until it returns 'to_exc' value.
+<iter> = (<expr> for <name> in <coll>)     # E.g. `(i+1 for i in range(3))`. Evaluates lazily.
 <el>   = next(<iter>)                      # Returns next element. Raises StopIteration on end.
 <list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
 ```
@@ -677,9 +677,10 @@ def <func_name>(<nondefault_args>): ...                  # E.g. `def func(x, y):
 def <func_name>(<default_args>): ...                     # E.g. `def func(x=0, y=0): ...`.
 def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `def func(x, y=0): ...`.
 ```
-* **Function returns None if it doesn't encounter `'return <obj/exp>'` statement.**
-* **Run `'global <var_name>'` inside the function before assigning to global variable.**
-* **Default values are evaluated when function is first encountered in the scope. Any mutation of a mutable default value will persist between invocations!**
+* **Function returns None if it doesn't encounter the `'return <object/expr>'` statement.**
+* **Run `'global <var_name>'` inside the function before assigning to the global variable.**
+* **Value of a default argument is evaluated when function is first encountered in the scope.**
+* **Any mutation of a default argument value will persist between function invocations!**
 
 ### Function Call
 
@@ -749,10 +750,10 @@ Inline
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # Returns [1, 2, 3, 4, ..., 10].
-<iter> = (i for i in range(10) if i > 5)            # Returns iter([6, 7, 8, 9]).
-<set>  = {i+5 for i in range(10)}                   # Returns {5, 6, 7, 8, ..., 14}.
-<dict> = {i: i*2 for i in range(10)}                # Returns {0: 0, 1: 2, ..., 9: 18}.
+<list> = [i+1 for i in range(10)]                   # Returns `[1, 2, 3, 4, ..., 10]`.
+<iter> = (i for i in range(10) if i > 5)            # Returns `iter([6, 7, 8, 9])`.
+<set>  = {i+5 for i in range(10)}                   # Returns `{5, 6, 7, 8, ..., 14}`.
+<dict> = {i: i*2 for i in range(1, 10)}             # Returns `{1: 2, 2: 4, ..., 9: 18}`.
 ```
 
 ```python
@@ -766,8 +767,8 @@ from functools import reduce
 ```
 
 ```python
-<iter> = map(lambda x: x + 1, range(10))            # Returns iter([1, 2, ..., 10]).
-<iter> = filter(lambda x: x > 5, range(10))         # Returns iter([6, 7, 8, 9]).
+<iter> = map(lambda x: x + 1, range(10))            # Returns `iter([1, 2, ..., 10])`.
+<iter> = filter(lambda x: x > 5, range(10))         # Returns `iter([6, 7, 8, 9])`.
 <obj>  = reduce(lambda out, x: out + x, range(10))  # Returns 45. Accepts 'initial'.
 ```
 
@@ -783,7 +784,7 @@ from functools import reduce
 ```
 
 ```python
->>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`
+>>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`.
 ['zero', 1, 2, 3]
 ```
 
@@ -2543,7 +2544,7 @@ import flask as fl
 
 ```python
 app = fl.Flask(__name__)                   # Returns the app object. Put at the top.
-app.run(host=None, port=None, debug=None)  # Or: $ flask --app FILE run [--ARG[=VAL]]…
+app.run(host=None, port=None, debug=None)  # Same as `$ flask --app FILE run --ARG=VAL`.
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**

@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 14, 2025</aside>
+    <aside>November 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -214,7 +214,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre></div>
 
 
-<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>Immutable and hashable sequence of integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                <span class="hljs-comment"># I.e. range(to_exclusive). Integers from 0 to `stop-1`.</span>
+<div><h2 id="range"><a href="#range" name="range">#</a>Range</h2><p><strong>A sequence of evenly spaced integers.</strong></p><pre><code class="python language-python hljs">&lt;range&gt; = range(stop)                <span class="hljs-comment"># I.e. range(to_exclusive). Integers from 0 to `stop-1`.</span>
 &lt;range&gt; = range(start, stop)         <span class="hljs-comment"># I.e. range(from_inc, to_exc). From start to `stop-1`.</span>
 &lt;range&gt; = range(start, stop, ±step)  <span class="hljs-comment"># I.e. range(from_inclusive, to_exclusive, ±step_size).</span>
 </code></pre></div>
@@ -227,9 +227,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Object that iterates over the collection's items.</span>
-&lt;iter&gt; = iter(&lt;function&gt;, to_exc)          <span class="hljs-comment"># Calls passed function until it returns 'to_exc'.</span>
-&lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)     <span class="hljs-comment"># Lazy comprehension. E.g. (i+1 for i in range(3)).</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Iterator that returns coll's elements one by one.</span>
+&lt;iter&gt; = iter(&lt;func&gt;, to_exc)              <span class="hljs-comment"># Calls `&lt;func&gt;()` until it returns 'to_exc' value.</span>
+&lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)     <span class="hljs-comment"># E.g. `(i+1 for i in range(3))`. Evaluates lazily.</span>
 &lt;el&gt;   = next(&lt;iter&gt;)                      <span class="hljs-comment"># Returns next element. Raises StopIteration on end.</span>
 &lt;list&gt; = list(&lt;iter&gt;)                      <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
 </code></pre></div>
@@ -607,9 +607,10 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 
 
 <ul>
-<li><strong>Function returns None if it doesn't encounter <code class="python hljs"><span class="hljs-string">'return &lt;obj/exp&gt;'</span></code> statement.</strong></li>
-<li><strong>Run <code class="python hljs"><span class="hljs-string">'global &lt;var_name&gt;'</span></code> inside the function before assigning to global variable.</strong></li>
-<li><strong>Default values are evaluated when function is first encountered in the scope. Any mutation of a mutable default value will persist between invocations!</strong></li>
+<li><strong>Function returns None if it doesn't encounter the <code class="python hljs"><span class="hljs-string">'return &lt;object/expr&gt;'</span></code> statement.</strong></li>
+<li><strong>Run <code class="python hljs"><span class="hljs-string">'global &lt;var_name&gt;'</span></code> inside the function before assigning to the global variable.</strong></li>
+<li><strong>Value of a default argument is evaluated when function is first encountered in the scope.</strong></li>
+<li><strong>Any mutation of a default argument value will persist between function invocations!</strong></li>
 </ul>
 <div><h3 id="functioncall">Function Call</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;function&gt;(&lt;positional_args&gt;)                    <span class="hljs-comment"># E.g. `func(0, 0)`.</span>
 &lt;obj&gt; = &lt;function&gt;(&lt;keyword_args&gt;)                       <span class="hljs-comment"># E.g. `func(x=0, y=0)`.</span>
@@ -654,10 +655,10 @@ func(*args, **kwargs)
 </code></pre></div></div>
 
 
-<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Returns [1, 2, 3, 4, ..., 10].</span>
-&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)            <span class="hljs-comment"># Returns iter([6, 7, 8, 9]).</span>
-&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Returns {5, 6, 7, 8, ..., 14}.</span>
-&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                <span class="hljs-comment"># Returns {0: 0, 1: 2, ..., 9: 18}.</span>
+<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]                   <span class="hljs-comment"># Returns `[1, 2, 3, 4, ..., 10]`.</span>
+&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)            <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
+&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}                   <span class="hljs-comment"># Returns `{5, 6, 7, 8, ..., 14}`.</span>
+&lt;dict&gt; = {i: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)}             <span class="hljs-comment"># Returns `{1: 2, 2: 4, ..., 9: 18}`.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]             <span class="hljs-comment"># Inner loop is on the right side.</span>
@@ -666,8 +667,8 @@ func(*args, **kwargs)
 <div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Returns iter([1, 2, ..., 10]).</span>
-&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Returns iter([6, 7, 8, 9]).</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">10</span>))            <span class="hljs-comment"># Returns `iter([1, 2, ..., 10])`.</span>
+&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))         <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
 &lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">10</span>))  <span class="hljs-comment"># Returns 45. Accepts 'initial'.</span>
 </code></pre>
 <div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                          <span class="hljs-comment"># Is `bool(&lt;el&gt;)` True for any el?</span>
@@ -677,7 +678,7 @@ func(*args, **kwargs)
 <div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;             <span class="hljs-comment"># Only one expression is evaluated.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]      <span class="hljs-comment"># `any([0, '', [], None]) == False`.</span>
 [<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre>
 <div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                   <span class="hljs-comment"># Returns first false or last obj.</span>
@@ -2097,7 +2098,7 @@ print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</sp
 
 
 <pre><code class="python language-python hljs">app = fl.Flask(__name__)                   <span class="hljs-comment"># Returns the app object. Put at the top.</span>
-app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Or: $ flask --app FILE run [--ARG[=VAL]]…</span>
+app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Same as `$ flask --app FILE run --ARG=VAL`.</span>
 </code></pre>
 <ul>
 <li><strong>Starts the app at <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>. Use <code class="python hljs"><span class="hljs-string">'host="0.0.0.0"'</span></code> to run externally.</strong></li>
@@ -2938,7 +2939,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 14, 2025</aside>
+    <aside>November 16, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

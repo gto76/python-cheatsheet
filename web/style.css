@@ -282,6 +282,10 @@ ul {
   font-weight: normal;
 }
 
+@font-face {font-family: "PT Serif";
+  src: url("fonts\\EJRSQgYoZZY2vCFuvAnt66qSVys.woff2") format("woff2");
+  font-weight: bold;
+}
 
 .join,
 .link,
