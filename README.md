@@ -2275,7 +2275,7 @@ with <lock>:                                   # Enters the block by calling met
 ```python
 <Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
 <Event>     = Event()                          # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(<int>)                   # Wait() blocks until it's called integer times.
+<Barrier>   = Barrier(<int>)                   # Wait() blocks until it is called int times.
 ```
 
 ### Queue
@@ -2625,11 +2625,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ### Call and Flame Graphs
 ```bash
 $ apt/brew install graphviz && pip3 install gprof2dot snakeviz  # Or download installer.
-$ tail --lines=+2 test.py > test.py                             # Removes first line.
-$ python3 -m cProfile -o test.prof test.py                      # Runs built-in profiler.
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  # Generates call graph.
-$ xdg-open/open test.png                                        # Displays call graph.
-$ snakeviz test.prof                                            # Displays flame graph.
+$ tail --lines=+2 test.py > test.py                             # Removes the first line.
+$ python3 -m cProfile -o test.prof test.py                      # Runs a tracing profiler.
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  # Generates a call graph.
+$ xdg-open/open test.png                                        # Displays the call graph.
+$ snakeviz test.prof                                            # Displays a flame graph.
 ```
 
 ### Sampling and Memory Profilers
@@ -2761,29 +2761,29 @@ from PIL import Image
 ```
 
 ```python
-<Image> = Image.new('<mode>', (width, height))  # Creates new image. Also `color=<int/tuple>`.
-<Image> = Image.open(<path>)                    # Identifies format based on file's contents.
-<Image> = <Image>.convert('<mode>')             # Converts image to the new mode (see Modes).
-<Image>.save(<path>)                            # Accepts `quality=<int>` if extension is jpg.
-<Image>.show()                                  # Displays image in default preview app.
+<Image> = Image.new('RGB', (width, height))   # Creates an image. Also `color=<tuple_of_ints>`.
+<Image> = Image.open(<path>)                  # Identifies format based on the file's contents.
+<Image> = <Image>.convert('<mode>')           # Converts the image to the new mode (see Modes).
+<Image>.save(<path>)                          # Also `quality=<int>` if extension is jpg/jpeg.
+<Image>.show()                                # Displays image in system's default preview app.
 ```
 
 ```python
-<int/tup> = <Image>.getpixel((x, y))            # Returns pixel's value (its color).
-<ImgCore> = <Image>.getdata()                   # Returns a flattened view of pixel values.
-<Image>.putpixel((x, y), <int/tuple>)           # Updates pixel's value. Clips passed int/s.
-<Image>.putdata(<list/ImgCore>)                 # Updates pixels with a copy of the sequence.
-<Image>.paste(<Image>, (x, y))                  # Draws passed image at the specified location.
+<int/tup> = <Image>.getpixel((x, y))          # Returns the pixel's value, that is, its color.
+<ImgCore> = <Image>.getdata()                 # Returns a flattened view of the pixel values.
+<Image>.putpixel((x, y), <int/tuple>)         # Updates pixel's value. Clips passed integer/s.
+<Image>.putdata(<list/ImgCore>)               # Updates pixels with a copy of passed sequence.
+<Image>.paste(<Image>, (x, y))                # Draws passed image at the specified location.
 ```
 
 ```python
-<Image> = <Image>.filter(<Filter>)              # Use ImageFilter.<name>(<args>) for Filter.
-<Image> = <Enhance>.enhance(<float>)            # Use ImageEnhance.<name>(<Image>) for Enhance.
+<Image> = <Image>.filter(<Filter>)            # E.g. `<Image>.filter(ImageFilter.FIND_EDGES)`.
+<Image> = <Enhance>.enhance(<float>)          # E.g. `ImageEnhance.Color(<Image>).enhance(2)`.
 ```
 
 ```python
-<array> = np.array(<Image>)                     # Creates a 2d/3d NumPy array from the image.
-<Image> = Image.fromarray(np.uint8(<array>))    # Use <array>.clip(0, 255) to clip the values.
+<array> = np.array(<Image>)                   # Creates a 2d or 3d NumPy array from the image.
+<Image> = Image.fromarray(np.uint8(<array>))  # Use `<array>.clip(0, 255)` to clip the values.
 ```
 
 ### Modes
@@ -2816,19 +2816,19 @@ img.show()
 ### Image Draw
 ```python
 from PIL import ImageDraw
-<Draw> = ImageDraw.Draw(<Image>)                # Object for adding 2D graphics to the image.
-<Draw>.point((x, y))                            # Draws a point. Also `fill=<int/tuple/str>`.
-<Draw>.line((x1, y1, x2, y2 [, ...]))           # For anti-aliasing use <Image>.resize((w, h)).
-<Draw>.arc((x1, y1, x2, y2), deg1, deg2)        # Draws in clockwise dir. Also pieslice().
-<Draw>.rectangle((x1, y1, x2, y2))              # Also rounded_rectangle(), regular_polygon().
-<Draw>.polygon((x1, y1, x2, y2, ...))           # Last point gets connected to the first one.
-<Draw>.ellipse((x1, y1, x2, y2))                # To rotate use <Image>.rotate(anticlock_deg).
-<Draw>.text((x, y), <str>, font=<Font>)         # `<Font> = ImageFont.truetype(<path>, size)`.
+<Draw> = ImageDraw.Draw(<Image>)              # An object for adding 2D graphics to the image.
+<Draw>.point((x, y))                          # Draws a point. Accepts `fill=<int/tuple/str>`.
+<Draw>.line((x1, y1, x2, y2 [, ...]))         # For anti-aliasing use <Image>.resize((w, h)).
+<Draw>.arc((x1, y1, x2, y2), deg1, deg2)      # Draws ellipse's arc in a clockwise direction.
+<Draw>.rectangle((x1, y1, x2, y2))            # Also rounded_rectangle() and regular_polygon().
+<Draw>.polygon((x1, y1, x2, y2, ...))         # The last point gets connected to the first one.
+<Draw>.ellipse((x1, y1, x2, y2))              # To rotate it use <Image>.rotate(anticlock_deg).
+<Draw>.text((x, y), <str>)                    # Also `font=ImageFont.truetype(<path>, size)`.
 ```
-* **Use `'fill=<color>'` to set the primary color.**
-* **Use `'width=<int>'` to set the width of lines or contours.**
-* **Use `'outline=<color>'` to set the color of the contours.**
-* **Color can be an int, tuple, `'#rrggbb[aa]'` string or a color name.**
+* **Pass `'fill=<color>'` to set the figure's primary color.**
+* **Pass `'width=<int>'` to set the width of lines or contours.**
+* **Pass `'outline=<color>'` to set the color of the contours.**
+* **Color can be an int, tuple, `'#rrggbb[aa]'` or a color name.**
 
 
 Animation
@@ -2859,21 +2859,21 @@ import wave
 ```
 
 ```python
-<Wave>  = wave.open('<path>')         # Opens the WAV file for reading.
+<Wave>  = wave.open('<path>')         # Opens specified WAV file for reading.
 <int>   = <Wave>.getframerate()       # Returns number of frames per second.
 <int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
 <int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
 <tuple> = <Wave>.getparams()          # Returns namedtuple of all parameters.
-<bytes> = <Wave>.readframes(nframes)  # Returns all frames if -1 is passed.
+<bytes> = <Wave>.readframes(nframes)  # Returns all frames if `-1` is passed.
 ```
 
 ```python
 <Wave> = wave.open('<path>', 'wb')    # Creates/truncates a file for writing.
-<Wave>.setframerate(<int>)            # Pass 44100 for CD, 48000 for video.
-<Wave>.setnchannels(<int>)            # Pass 1 for mono, 2 for stereo.
-<Wave>.setsampwidth(<int>)            # Pass 2 for CD, 3 for hi-res sound.
-<Wave>.setparams(<tuple>)             # Tuple must contain all parameters.
-<Wave>.writeframes(<bytes>)           # Appends frames to the file.
+<Wave>.setframerate(<int>)            # Pass 44100, or 48000 for video track.
+<Wave>.setnchannels(<int>)            # Pass 1 for mono, 2 for stereo signal.
+<Wave>.setsampwidth(<int>)            # Pass 2 for CD, 3 for hi-res quality.
+<Wave>.setparams(<tuple>)             # Passed tuple must contain all params.
+<Wave>.writeframes(<bytes>)           # Appends passed frames to audio file.
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**

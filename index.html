@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 16, 2025</aside>
+    <aside>November 17, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1880,7 +1880,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 <div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
 &lt;Event&gt;     = Event()                          <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                   <span class="hljs-comment"># Wait() blocks until it's called integer times.</span>
+&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                   <span class="hljs-comment"># Wait() blocks until it is called int times.</span>
 </code></pre></div>
 
 <div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)               <span class="hljs-comment"># A first-in-first-out queue. It's thread safe.</span>
@@ -2163,11 +2163,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 </code></pre></div>
 
 <div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or download installer.</span>
-$ tail --lines=+2 test.py &gt; test.py                             <span class="hljs-comment"># Removes first line.</span>
-$ python3 -m cProfile -o test.prof test.py                      <span class="hljs-comment"># Runs built-in profiler.</span>
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  <span class="hljs-comment"># Generates call graph.</span>
-$ xdg-open/open test.png                                        <span class="hljs-comment"># Displays call graph.</span>
-$ snakeviz test.prof                                            <span class="hljs-comment"># Displays flame graph.</span>
+$ tail --lines=+2 test.py &gt; test.py                             <span class="hljs-comment"># Removes the first line.</span>
+$ python3 -m cProfile -o test.prof test.py                      <span class="hljs-comment"># Runs a tracing profiler.</span>
+$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  <span class="hljs-comment"># Generates a call graph.</span>
+$ xdg-open/open test.png                                        <span class="hljs-comment"># Displays the call graph.</span>
+$ snakeviz test.prof                                            <span class="hljs-comment"># Displays a flame graph.</span>
 </code></pre></div>
 
 <div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━┯━━━━━━┓
@@ -2268,23 +2268,23 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'&lt;mode&gt;'</span>, (width, height))  <span class="hljs-comment"># Creates new image. Also `color=&lt;int/tuple&gt;`.</span>
-&lt;Image&gt; = Image.open(&lt;path&gt;)                    <span class="hljs-comment"># Identifies format based on file's contents.</span>
-&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)             <span class="hljs-comment"># Converts image to the new mode (see Modes).</span>
-&lt;Image&gt;.save(&lt;path&gt;)                            <span class="hljs-comment"># Accepts `quality=&lt;int&gt;` if extension is jpg.</span>
-&lt;Image&gt;.show()                                  <span class="hljs-comment"># Displays image in default preview app.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = Image.new(<span class="hljs-string">'RGB'</span>, (width, height))   <span class="hljs-comment"># Creates an image. Also `color=&lt;tuple_of_ints&gt;`.</span>
+&lt;Image&gt; = Image.open(&lt;path&gt;)                  <span class="hljs-comment"># Identifies format based on the file's contents.</span>
+&lt;Image&gt; = &lt;Image&gt;.convert(<span class="hljs-string">'&lt;mode&gt;'</span>)           <span class="hljs-comment"># Converts the image to the new mode (see Modes).</span>
+&lt;Image&gt;.save(&lt;path&gt;)                          <span class="hljs-comment"># Also `quality=&lt;int&gt;` if extension is jpg/jpeg.</span>
+&lt;Image&gt;.show()                                <span class="hljs-comment"># Displays image in system's default preview app.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))            <span class="hljs-comment"># Returns pixel's value (its color).</span>
-&lt;ImgCore&gt; = &lt;Image&gt;.getdata()                   <span class="hljs-comment"># Returns a flattened view of pixel values.</span>
-&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)           <span class="hljs-comment"># Updates pixel's value. Clips passed int/s.</span>
-&lt;Image&gt;.putdata(&lt;list/ImgCore&gt;)                 <span class="hljs-comment"># Updates pixels with a copy of the sequence.</span>
-&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                  <span class="hljs-comment"># Draws passed image at the specified location.</span>
+<pre><code class="python language-python hljs">&lt;int/tup&gt; = &lt;Image&gt;.getpixel((x, y))          <span class="hljs-comment"># Returns the pixel's value, that is, its color.</span>
+&lt;ImgCore&gt; = &lt;Image&gt;.getdata()                 <span class="hljs-comment"># Returns a flattened view of the pixel values.</span>
+&lt;Image&gt;.putpixel((x, y), &lt;int/tuple&gt;)         <span class="hljs-comment"># Updates pixel's value. Clips passed integer/s.</span>
+&lt;Image&gt;.putdata(&lt;list/ImgCore&gt;)               <span class="hljs-comment"># Updates pixels with a copy of passed sequence.</span>
+&lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                <span class="hljs-comment"># Draws passed image at the specified location.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)              <span class="hljs-comment"># Use ImageFilter.&lt;name&gt;(&lt;args&gt;) for Filter.</span>
-&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)            <span class="hljs-comment"># Use ImageEnhance.&lt;name&gt;(&lt;Image&gt;) for Enhance.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)            <span class="hljs-comment"># E.g. `&lt;Image&gt;.filter(ImageFilter.FIND_EDGES)`.</span>
+&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)          <span class="hljs-comment"># E.g. `ImageEnhance.Color(&lt;Image&gt;).enhance(2)`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                     <span class="hljs-comment"># Creates a 2d/3d NumPy array from the image.</span>
-&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))    <span class="hljs-comment"># Use &lt;array&gt;.clip(0, 255) to clip the values.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                   <span class="hljs-comment"># Creates a 2d or 3d NumPy array from the image.</span>
+&lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))  <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an integer between 0 and 255.</strong></li>
@@ -2310,21 +2310,21 @@ img.show()
 </code></pre></div>
 
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
-&lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)                <span class="hljs-comment"># Object for adding 2D graphics to the image.</span>
-&lt;Draw&gt;.point((x, y))                            <span class="hljs-comment"># Draws a point. Also `fill=&lt;int/tuple/str&gt;`.</span>
-&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))           <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
-&lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)        <span class="hljs-comment"># Draws in clockwise dir. Also pieslice().</span>
-&lt;Draw&gt;.rectangle((x1, y1, x2, y2))              <span class="hljs-comment"># Also rounded_rectangle(), regular_polygon().</span>
-&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))           <span class="hljs-comment"># Last point gets connected to the first one.</span>
-&lt;Draw&gt;.ellipse((x1, y1, x2, y2))                <span class="hljs-comment"># To rotate use &lt;Image&gt;.rotate(anticlock_deg).</span>
-&lt;Draw&gt;.text((x, y), &lt;str&gt;, font=&lt;Font&gt;)         <span class="hljs-comment"># `&lt;Font&gt; = ImageFont.truetype(&lt;path&gt;, size)`.</span>
+&lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)              <span class="hljs-comment"># An object for adding 2D graphics to the image.</span>
+&lt;Draw&gt;.point((x, y))                          <span class="hljs-comment"># Draws a point. Accepts `fill=&lt;int/tuple/str&gt;`.</span>
+&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))         <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
+&lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)      <span class="hljs-comment"># Draws ellipse's arc in a clockwise direction.</span>
+&lt;Draw&gt;.rectangle((x1, y1, x2, y2))            <span class="hljs-comment"># Also rounded_rectangle() and regular_polygon().</span>
+&lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))         <span class="hljs-comment"># The last point gets connected to the first one.</span>
+&lt;Draw&gt;.ellipse((x1, y1, x2, y2))              <span class="hljs-comment"># To rotate it use &lt;Image&gt;.rotate(anticlock_deg).</span>
+&lt;Draw&gt;.text((x, y), &lt;str&gt;)                    <span class="hljs-comment"># Also `font=ImageFont.truetype(&lt;path&gt;, size)`.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the primary color.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
-<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> string or a color name.</strong></li>
+<li><strong>Pass <code class="python hljs"><span class="hljs-string">'fill=&lt;color&gt;'</span></code> to set the figure's primary color.</strong></li>
+<li><strong>Pass <code class="python hljs"><span class="hljs-string">'width=&lt;int&gt;'</span></code> to set the width of lines or contours.</strong></li>
+<li><strong>Pass <code class="python hljs"><span class="hljs-string">'outline=&lt;color&gt;'</span></code> to set the color of the contours.</strong></li>
+<li><strong>Color can be an int, tuple, <code class="python hljs"><span class="hljs-string">'#rrggbb[aa]'</span></code> or a color name.</strong></li>
 </ul>
 <div><h2 id="animation"><a href="#animation" name="animation">#</a>Animation</h2><div><h4 id="createsagifofabouncingball">Creates a GIF of a bouncing ball:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install imageio</span>
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
@@ -2346,19 +2346,19 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h2 id="audio"><a href="#audio" name="audio">#</a>Audio</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> wave
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># Opens the WAV file for reading.</span>
+<pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>)         <span class="hljs-comment"># Opens specified WAV file for reading.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getframerate()       <span class="hljs-comment"># Returns number of frames per second.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()       <span class="hljs-comment"># Returns number of samples per frame.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getsampwidth()       <span class="hljs-comment"># Returns number of bytes per sample.</span>
 &lt;tuple&gt; = &lt;Wave&gt;.getparams()          <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
-&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns all frames if -1 is passed.</span>
+&lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)  <span class="hljs-comment"># Returns all frames if `-1` is passed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Wave&gt; = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>, <span class="hljs-string">'wb'</span>)    <span class="hljs-comment"># Creates/truncates a file for writing.</span>
-&lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100 for CD, 48000 for video.</span>
-&lt;Wave&gt;.setnchannels(&lt;int&gt;)            <span class="hljs-comment"># Pass 1 for mono, 2 for stereo.</span>
-&lt;Wave&gt;.setsampwidth(&lt;int&gt;)            <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res sound.</span>
-&lt;Wave&gt;.setparams(&lt;tuple&gt;)             <span class="hljs-comment"># Tuple must contain all parameters.</span>
-&lt;Wave&gt;.writeframes(&lt;bytes&gt;)           <span class="hljs-comment"># Appends frames to the file.</span>
+&lt;Wave&gt;.setframerate(&lt;int&gt;)            <span class="hljs-comment"># Pass 44100, or 48000 for video track.</span>
+&lt;Wave&gt;.setnchannels(&lt;int&gt;)            <span class="hljs-comment"># Pass 1 for mono, 2 for stereo signal.</span>
+&lt;Wave&gt;.setsampwidth(&lt;int&gt;)            <span class="hljs-comment"># Pass 2 for CD, 3 for hi-res quality.</span>
+&lt;Wave&gt;.setparams(&lt;tuple&gt;)             <span class="hljs-comment"># Passed tuple must contain all params.</span>
+&lt;Wave&gt;.writeframes(&lt;bytes&gt;)           <span class="hljs-comment"># Appends passed frames to audio file.</span>
 </code></pre>
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
@@ -2939,7 +2939,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 16, 2025</aside>
+    <aside>November 17, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
