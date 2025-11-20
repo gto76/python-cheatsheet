@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 17, 2025</aside>
+    <aside>November 20, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -2031,8 +2031,8 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 </code></pre></div></div>
 
 
-<div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="runsadesktopappforconvertingweightsfrommetricunitsintopounds">Runs a desktop app for converting weights from metric units into pounds:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install PySimpleGUI</span>
-<span class="hljs-keyword">import</span> PySimpleGUI <span class="hljs-keyword">as</span> sg
+<div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="runsadesktopappforconvertingweightsfrommetricunitsintopounds">Runs a desktop app for converting weights from metric units into pounds:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install FreeSimpleGUI</span>
+<span class="hljs-keyword">import</span> FreeSimpleGUI <span class="hljs-keyword">as</span> sg
 
 text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
 dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
@@ -2185,40 +2185,40 @@ $ snakeviz test.prof                                            <span class="hlj
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists/…&gt;)              <span class="hljs-comment"># Returns a 1d/2d/… NumPy array.</span>
-&lt;array&gt; = np.zeros/ones/empty(&lt;shape&gt;)                  <span class="hljs-comment"># Also np.full(&lt;shape&gt;, &lt;el&gt;).</span>
-&lt;array&gt; = np.arange(from_inc, to_exc, ±step)            <span class="hljs-comment"># Also np.linspace(start, stop, len).</span>
-&lt;array&gt; = np.random.randint(from_inc, to_exc, &lt;shape&gt;)  <span class="hljs-comment"># Also np.random.random(&lt;shape&gt;).</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists/…&gt;)            <span class="hljs-comment"># NumPy array of one or more dimensions.</span>
+&lt;array&gt; = np.zeros/ones/empty(shape)                  <span class="hljs-comment"># Pass a tuple of ints (dimension sizes).</span>
+&lt;array&gt; = np.arange(from_inc, to_exc, ±step)          <span class="hljs-comment"># Also np.linspace(start, stop, length).</span>
+&lt;array&gt; = np.random.randint(from_inc, to_exc, shape)  <span class="hljs-comment"># Also random.uniform(low, high, shape).</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;view&gt;  = &lt;array&gt;.reshape(&lt;shape&gt;)                      <span class="hljs-comment"># Also `&lt;array&gt;.shape = &lt;shape&gt;`.</span>
-&lt;array&gt; = &lt;array&gt;.flatten()                             <span class="hljs-comment"># Also `&lt;view&gt; = &lt;array&gt;.ravel()`.</span>
-&lt;view&gt;  = &lt;array&gt;.transpose()                           <span class="hljs-comment"># Flips the table over its diagonal.</span>
+<pre><code class="python language-python hljs">&lt;view&gt;  = &lt;array&gt;.reshape(shape)                      <span class="hljs-comment"># Also `&lt;array&gt;.shape = (&lt;int&gt;, [...])`.</span>
+&lt;array&gt; = &lt;array&gt;.flatten()                           <span class="hljs-comment"># Returns 1d copy. Also &lt;array&gt;.ravel().</span>
+&lt;view&gt;  = &lt;array&gt;.transpose()                         <span class="hljs-comment"># Flips the table over its main diagonal.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.copy/abs/sqrt/log/int64(&lt;array&gt;)           <span class="hljs-comment"># Returns new array of the same shape.</span>
-&lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all(axis)         <span class="hljs-comment"># Aggregates specified dimension.</span>
-&lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)    <span class="hljs-comment"># Func can return a scalar or array.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.copy/abs/sqrt/log/int64(&lt;array&gt;)         <span class="hljs-comment"># Returns a new array of the same shape.</span>
+&lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all(axis)       <span class="hljs-comment"># Aggregates dimension with passed index.</span>
+&lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)  <span class="hljs-comment"># Func can return a scalar or an array.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.concatenate(&lt;list_of_arrays&gt;, axis=<span class="hljs-number">0</span>)      <span class="hljs-comment"># Links arrays along first axis (rows).</span>
-&lt;array&gt; = np.vstack/column_stack(&lt;list_of_arrays&gt;)      <span class="hljs-comment"># Treats 1d arrays as rows or columns.</span>
-&lt;array&gt; = np.tile/repeat(&lt;array&gt;, &lt;int/list&gt; [, axis])  <span class="hljs-comment"># Tiles array or repeats its elements.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.concatenate(&lt;list_of_arrays&gt;, axis=<span class="hljs-number">0</span>)    <span class="hljs-comment"># Links arrays along first axis (rows).</span>
+&lt;array&gt; = np.vstack/column_stack(&lt;list_of_arrays&gt;)    <span class="hljs-comment"># A 1d array is treated as a row/column.</span>
+&lt;array&gt; = np.tile/repeat(&lt;array&gt;, &lt;int/s&gt; [, axis])   <span class="hljs-comment"># Tiles the array or repeats elements.</span>
 </code></pre>
 <ul>
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
 <li><strong>Axis is an index of a dimension. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
 </ul>
-<div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d&gt;[row_index, col_index]                 <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;int&gt;]</span>
-&lt;1d_view&gt;  = &lt;2d&gt;[row_index]                            <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;slice&gt;]</span>
-&lt;1d_view&gt;  = &lt;2d&gt;[:, col_index]                         <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;int&gt;]</span>
-&lt;2d_view&gt;  = &lt;2d&gt;[from:to_row_i, from:to_col_i]         <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;slice&gt;]</span>
+<div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d&gt;[row_index, col_index]               <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;int&gt;]`.</span>
+&lt;1d_view&gt;  = &lt;2d&gt;[row_index]                          <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;slice&gt;]`.</span>
+&lt;1d_view&gt;  = &lt;2d&gt;[:, col_index]                       <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;int&gt;]`.</span>
+&lt;2d_view&gt;  = &lt;2d&gt;[from:to_row_i, from:to_col_i]       <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;slice&gt;]`.</span>
 </code></pre></div>
 
-<pre><code class="bash hljs">&lt;1d_array&gt; = &lt;2d&gt;[row_indices, col_indices]             <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int/1d&gt;, &lt;1d&gt;, &lt;1d&gt;]</span>
-&lt;2d_array&gt; = &lt;2d&gt;[row_indices]                          <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int/1d&gt;, &lt;1d&gt;, &lt;slice&gt;]</span>
-&lt;2d_array&gt; = &lt;2d&gt;[:, col_indices]                       <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int/1d&gt;, &lt;slice&gt;, &lt;1d&gt;]</span>
-&lt;2d_array&gt; = &lt;2d&gt;[np.ix_(row_indices, col_indices)]     <span class="hljs-comment"># Or: &lt;3d&gt;[&lt;int/1d/2d&gt;, &lt;2d&gt;, &lt;2d&gt;]</span>
+<pre><code class="bash hljs">&lt;1d_array&gt; = &lt;2d&gt;[row_indices, col_indices]           <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int/1d&gt;, &lt;1d&gt;, &lt;1d&gt;]`.</span>
+&lt;2d_array&gt; = &lt;2d&gt;[row_indices]                        <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int/1d&gt;, &lt;1d&gt;, &lt;slice&gt;]`.</span>
+&lt;2d_array&gt; = &lt;2d&gt;[:, col_indices]                     <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int/1d&gt;, &lt;slice&gt;, &lt;1d&gt;]`.</span>
+&lt;2d_array&gt; = &lt;2d&gt;[np.ix_(row_indices, col_indices)]   <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int/1d/2d&gt;, &lt;2d&gt;, &lt;2d&gt;]`.</span>
 </code></pre>
-<pre><code class="bash hljs">&lt;2d_bools&gt; = &lt;2d&gt; &gt; &lt;el/1d/2d&gt;                          <span class="hljs-comment"># 1d object must have size of a row.</span>
-&lt;1/2d_arr&gt; = &lt;2d&gt;[&lt;2d/1d_bools&gt;]                        <span class="hljs-comment"># 1d_bools must have size of a column.</span>
+<pre><code class="bash hljs">&lt;2d_bools&gt; = &lt;2d&gt; &gt; &lt;el/1d/2d&gt;                        <span class="hljs-comment"># A 1d object must be a size of a row.</span>
+&lt;1/2d_arr&gt; = &lt;2d&gt;[&lt;2d/1d_bools&gt;]                      <span class="hljs-comment"># A 1d object must be a size of a col.</span>
 </code></pre>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">':'</span></code> returns a slice of all dimension's indices. Omitted dimensions default to <code class="python hljs"><span class="hljs-string">':'</span></code>.</strong></li>
@@ -2226,20 +2226,20 @@ $ snakeviz test.prof                                            <span class="hlj
 <li><strong><code class="python hljs"><span class="hljs-string">'ix_([1, 2], [3, 4])'</span></code> returns <code class="python hljs"><span class="hljs-string">'[[1], [2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4]]'</span></code>. Due to broadcasting rules, this is the same as using <code class="python hljs"><span class="hljs-string">'[[1, 1], [2, 2]]'</span></code> and <code class="python hljs"><span class="hljs-string">'[[3, 4], [3, 4]]'</span></code>.</strong></li>
 <li><strong>Any value that is broadcastable to the indexed shape can be assigned to the selection.</strong></li>
 </ul>
-<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = np.array([<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>])                     <span class="hljs-comment"># `left.shape  == (3,)`</span>
-right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])                 <span class="hljs-comment"># `right.shape == (3, 1)`</span>
+<div><h3 id="broadcasting">Broadcasting</h3><p><strong>A set of rules by which NumPy functions operate on arrays of different shapes.</strong></p><pre><code class="python language-python hljs">left  = np.array([<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>])                   <span class="hljs-comment"># I.e. `left.shape  == (3,)`.</span>
+right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])               <span class="hljs-comment"># I.e. `right.shape == (3, 1)`.</span>
 </code></pre></div>
 
 
-<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])                   <span class="hljs-comment"># `left.shape  == (1, 3)`</span>
-right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])                 <span class="hljs-comment"># `right.shape == (3, 1)`</span>
+<div><h4 id="1ifarrayshapesdifferinlengthleftpadtheshortershapewithones">1. If array shapes differ in length, left-pad the shorter shape with ones:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])                 <span class="hljs-comment"># I.e. `left.shape  == (1, 3)`.</span>
+right = np.array([[<span class="hljs-number">0.1</span>], [<span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>]])               <span class="hljs-comment"># I.e. `right.shape == (3, 1)`.</span>
 </code></pre></div>
 
-<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                    <span class="hljs-comment"># `left.shape  == (3, 3)`</span>
+<div><h4 id="2ifanydimensionsdifferinsizeexpandtheonesthathavesize1byduplicatingtheirelements">2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:</h4><pre><code class="python language-python hljs">left  = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],                  <span class="hljs-comment"># I.e. `left.shape  == (3, 3)`.</span>
                   [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>],
                   [<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.8</span>]])
 
-right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                    <span class="hljs-comment"># `right.shape == (3, 3)`</span>
+right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>,  <span class="hljs-number">0.1</span>],                  <span class="hljs-comment"># I.e. `right.shape == (3, 3)`.</span>
                   [<span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>,  <span class="hljs-number">0.6</span>],
                   [<span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>,  <span class="hljs-number">0.8</span>]])
 </code></pre></div>
@@ -2939,7 +2939,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 17, 2025</aside>
+    <aside>November 20, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

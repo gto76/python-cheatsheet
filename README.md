@@ -2463,8 +2463,8 @@ GUI App
 #### Runs a desktop app for converting weights from metric units into pounds:
 
 ```python
-# $ pip3 install PySimpleGUI
-import PySimpleGUI as sg
+# $ pip3 install FreeSimpleGUI
+import FreeSimpleGUI as sg
 
 text_box = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
 dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
@@ -2655,50 +2655,50 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list/list_of_lists/…>)              # Returns a 1d/2d/… NumPy array.
-<array> = np.zeros/ones/empty(<shape>)                  # Also np.full(<shape>, <el>).
-<array> = np.arange(from_inc, to_exc, ±step)            # Also np.linspace(start, stop, len).
-<array> = np.random.randint(from_inc, to_exc, <shape>)  # Also np.random.random(<shape>).
+<array> = np.array(<list/list_of_lists/…>)            # NumPy array of one or more dimensions.
+<array> = np.zeros/ones/empty(shape)                  # Pass a tuple of ints (dimension sizes).
+<array> = np.arange(from_inc, to_exc, ±step)          # Also np.linspace(start, stop, length).
+<array> = np.random.randint(from_inc, to_exc, shape)  # Also random.uniform(low, high, shape).
 ```
 
 ```python
-<view>  = <array>.reshape(<shape>)                      # Also `<array>.shape = <shape>`.
-<array> = <array>.flatten()                             # Also `<view> = <array>.ravel()`.
-<view>  = <array>.transpose()                           # Flips the table over its diagonal.
+<view>  = <array>.reshape(shape)                      # Also `<array>.shape = (<int>, [...])`.
+<array> = <array>.flatten()                           # Returns 1d copy. Also <array>.ravel().
+<view>  = <array>.transpose()                         # Flips the table over its main diagonal.
 ```
 
 ```python
-<array> = np.copy/abs/sqrt/log/int64(<array>)           # Returns new array of the same shape.
-<array> = <array>.sum/max/mean/argmax/all(axis)         # Aggregates specified dimension.
-<array> = np.apply_along_axis(<func>, axis, <array>)    # Func can return a scalar or array.
+<array> = np.copy/abs/sqrt/log/int64(<array>)         # Returns a new array of the same shape.
+<array> = <array>.sum/max/mean/argmax/all(axis)       # Aggregates dimension with passed index.
+<array> = np.apply_along_axis(<func>, axis, <array>)  # Func can return a scalar or an array.
 ```
 
 ```python
-<array> = np.concatenate(<list_of_arrays>, axis=0)      # Links arrays along first axis (rows).
-<array> = np.vstack/column_stack(<list_of_arrays>)      # Treats 1d arrays as rows or columns.
-<array> = np.tile/repeat(<array>, <int/list> [, axis])  # Tiles array or repeats its elements.
+<array> = np.concatenate(<list_of_arrays>, axis=0)    # Links arrays along first axis (rows).
+<array> = np.vstack/column_stack(<list_of_arrays>)    # A 1d array is treated as a row/column.
+<array> = np.tile/repeat(<array>, <int/s> [, axis])   # Tiles the array or repeats elements.
 ```
 * **Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).**
 * **Axis is an index of a dimension. Leftmost dimension has index 0. Summing the RGB image along axis 2 will return a greyscale image with shape (50, 100).**
 
 ### Indexing
 ```perl
-<el>       = <2d>[row_index, col_index]                 # Or: <3d>[<int>, <int>, <int>]
-<1d_view>  = <2d>[row_index]                            # Or: <3d>[<int>, <int>, <slice>]
-<1d_view>  = <2d>[:, col_index]                         # Or: <3d>[<int>, <slice>, <int>]
-<2d_view>  = <2d>[from:to_row_i, from:to_col_i]         # Or: <3d>[<int>, <slice>, <slice>]
+<el>       = <2d>[row_index, col_index]               # Also `<3d>[<int>, <int>, <int>]`.
+<1d_view>  = <2d>[row_index]                          # Also `<3d>[<int>, <int>, <slice>]`.
+<1d_view>  = <2d>[:, col_index]                       # Also `<3d>[<int>, <slice>, <int>]`.
+<2d_view>  = <2d>[from:to_row_i, from:to_col_i]       # Also `<3d>[<int>, <slice>, <slice>]`.
 ```
 
 ```perl
-<1d_array> = <2d>[row_indices, col_indices]             # Or: <3d>[<int/1d>, <1d>, <1d>]
-<2d_array> = <2d>[row_indices]                          # Or: <3d>[<int/1d>, <1d>, <slice>]
-<2d_array> = <2d>[:, col_indices]                       # Or: <3d>[<int/1d>, <slice>, <1d>]
-<2d_array> = <2d>[np.ix_(row_indices, col_indices)]     # Or: <3d>[<int/1d/2d>, <2d>, <2d>]
+<1d_array> = <2d>[row_indices, col_indices]           # Also `<3d>[<int/1d>, <1d>, <1d>]`.
+<2d_array> = <2d>[row_indices]                        # Also `<3d>[<int/1d>, <1d>, <slice>]`.
+<2d_array> = <2d>[:, col_indices]                     # Also `<3d>[<int/1d>, <slice>, <1d>]`.
+<2d_array> = <2d>[np.ix_(row_indices, col_indices)]   # Also `<3d>[<int/1d/2d>, <2d>, <2d>]`.
 ```
 
 ```perl
-<2d_bools> = <2d> > <el/1d/2d>                          # 1d object must have size of a row.
-<1/2d_arr> = <2d>[<2d/1d_bools>]                        # 1d_bools must have size of a column.
+<2d_bools> = <2d> > <el/1d/2d>                        # A 1d object must be a size of a row.
+<1/2d_arr> = <2d>[<2d/1d_bools>]                      # A 1d object must be a size of a col.
 ```
 * **`':'` returns a slice of all dimension's indices. Omitted dimensions default to `':'`.**
 * **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of two indices is passed!**
@@ -2708,23 +2708,23 @@ import numpy as np
 ### Broadcasting
 **A set of rules by which NumPy functions operate on arrays of different shapes.**
 ```python
-left  = np.array([0.1,  0.6,  0.8])                     # `left.shape  == (3,)`
-right = np.array([[0.1], [0.6], [0.8]])                 # `right.shape == (3, 1)`
+left  = np.array([0.1,  0.6,  0.8])                   # I.e. `left.shape  == (3,)`.
+right = np.array([[0.1], [0.6], [0.8]])               # I.e. `right.shape == (3, 1)`.
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = np.array([[0.1,  0.6,  0.8]])                   # `left.shape  == (1, 3)`
-right = np.array([[0.1], [0.6], [0.8]])                 # `right.shape == (3, 1)`
+left  = np.array([[0.1,  0.6,  0.8]])                 # I.e. `left.shape  == (1, 3)`.
+right = np.array([[0.1], [0.6], [0.8]])               # I.e. `right.shape == (3, 1)`.
 ```
 
 #### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
 ```python
-left  = np.array([[0.1,  0.6,  0.8],                    # `left.shape  == (3, 3)`
+left  = np.array([[0.1,  0.6,  0.8],                  # I.e. `left.shape  == (3, 3)`.
                   [0.1,  0.6,  0.8],
                   [0.1,  0.6,  0.8]])
 
-right = np.array([[0.1,  0.1,  0.1],                    # `right.shape == (3, 3)`
+right = np.array([[0.1,  0.1,  0.1],                  # I.e. `right.shape == (3, 3)`.
                   [0.6,  0.6,  0.6],
                   [0.8,  0.8,  0.8]])
 ```
