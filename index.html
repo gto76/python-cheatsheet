@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 20, 2025</aside>
+    <aside>November 29, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -136,7 +136,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 <ul>
 <li><strong>For details about sort(), sorted(), min() and max() see <a href="#sortable">Sortable</a>.</strong></li>
 <li><strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong></li>
-<li><strong>This text uses the term collection instead of iterable. For rationale see <a href="#collection">Collection</a>.</strong></li>
+<li><strong>This text uses the term collection instead of <a href="#abstractbaseclasses">iterable</a>. For rationale see <a href="#collection">Collection</a>.</strong></li>
 </ul>
 <pre><code class="python language-python hljs">&lt;int&gt; = len(&lt;list/dict/set/…&gt;)  <span class="hljs-comment"># Returns number of items. Doesn't accept iterators.</span>
 &lt;int&gt; = &lt;list&gt;.count(&lt;el&gt;)      <span class="hljs-comment"># Counts occurrences. Also `if &lt;el&gt; in &lt;coll&gt;: ...`.</span>
@@ -156,11 +156,11 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 <pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns argument default if key is missing.</span>
 value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes default if key is missing.</span>
 &lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Dict with automatic default value `&lt;type&gt;()`.</span>
-&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Dictionary with automatic default value 1.</span>
+&lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Dictionary with automatic default value `1`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt; = dict(&lt;collection&gt;)                     <span class="hljs-comment"># Creates a dict from coll. of key-value pairs.</span>
-&lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates a dictionary from two collections.</span>
-&lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Creates a dictionary from collection of keys.</span>
+&lt;dict&gt; = dict(zip(keys, values))                <span class="hljs-comment"># Creates key-value pairs from two collections.</span>
+&lt;dict&gt; = dict.fromkeys(keys [, value])          <span class="hljs-comment"># Items get value None if only keys are passed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;dict&gt;.update(&lt;dict&gt;)                           <span class="hljs-comment"># Adds items. Replaces ones with matching keys.</span>
 value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"># Removes item or raises KeyError if missing.</span>
@@ -227,7 +227,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Iterator that returns coll's elements one by one.</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Iterator that returns passed elements one by one.</span>
 &lt;iter&gt; = iter(&lt;func&gt;, to_exc)              <span class="hljs-comment"># Calls `&lt;func&gt;()` until it returns 'to_exc' value.</span>
 &lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)     <span class="hljs-comment"># E.g. `(i+1 for i in range(3))`. Evaluates lazily.</span>
 &lt;el&gt;   = next(&lt;iter&gt;)                      <span class="hljs-comment"># Returns next element. Raises StopIteration on end.</span>
@@ -245,8 +245,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;iter&gt; = it.repeat(&lt;el&gt; [, times])         <span class="hljs-comment"># Returns passed element endlessly or 'times' times.</span>
 &lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the passed sequence of elements endlessly.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Empties collections in order (only figuratively).</span>
-&lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Empties collections inside a collection in order.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Iterates over each collection. Accepts iterators.</span>
+&lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Accepts collection (i.e. iterable) of collections.</span>
 &lt;iter&gt; = it.islice(&lt;coll&gt;, [start,] stop)  <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
 &lt;iter&gt; = it.product(&lt;coll&gt;, ...)           <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
 </code></pre>
@@ -321,7 +321,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = &lt;sub_str&gt; <span class="hljs-keyword">in</span> &lt;str&gt;                  <span class="hljs-comment"># Returns True if string contains the substring.</span>
 &lt;bool&gt; = &lt;str&gt;.startswith(&lt;sub_str&gt;)         <span class="hljs-comment"># Pass tuple of strings to give multiple options.</span>
-&lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or -1.</span>
+&lt;int&gt;  = &lt;str&gt;.find(&lt;sub_str&gt;)               <span class="hljs-comment"># Returns start index of the first match or `-1`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = &lt;str&gt;.lower()                       <span class="hljs-comment"># Lowers the case. Also upper/capitalize/title().</span>
 &lt;str&gt;  = &lt;str&gt;.casefold()                    <span class="hljs-comment"># Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.</span>
@@ -344,7 +344,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <div><h2 id="regex"><a href="#regex" name="regex">#</a>Regex</h2><p><strong>Functions for regular expression matching.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> re
 &lt;str&gt;   = re.sub(<span class="hljs-string">r'&lt;regex&gt;'</span>, new, text, count=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Substitutes occurrences with string 'new'.</span>
-&lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns every occurrence of the pattern.</span>
+&lt;list&gt;  = re.findall(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)            <span class="hljs-comment"># Returns all occurrences as string objects.</span>
 &lt;list&gt;  = re.split(<span class="hljs-string">r'&lt;regex&gt;'</span>, text, maxsplit=<span class="hljs-number">0</span>)  <span class="hljs-comment"># Add brackets around regex to keep matches.</span>
 &lt;Match&gt; = re.search(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)             <span class="hljs-comment"># Returns first occ. of the pattern or None.</span>
 &lt;Match&gt; = re.match(<span class="hljs-string">r'&lt;regex&gt;'</span>, text)              <span class="hljs-comment"># Only searches at the start of the 'text'.</span>
@@ -2363,7 +2363,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <ul>
 <li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
 <li><strong>In a stereo signal, the first sample of a frame belongs to the left channel.</strong></li>
-<li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.</strong></li>
+<li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the desired displacement of a speaker membrane at a given moment.</strong></li>
 <li><strong>If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━┓
@@ -2939,7 +2939,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 20, 2025</aside>
+    <aside>November 29, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

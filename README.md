@@ -62,7 +62,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
 * **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
 * **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
-* **This text uses the term collection instead of iterable. For rationale see [Collection](#collection).**
+* **This text uses the term collection instead of [iterable](#abstractbaseclasses). For rationale see [Collection](#collection).**
 
 ```python
 <int> = len(<list/dict/set/…>)  # Returns number of items. Doesn't accept iterators.
@@ -91,13 +91,13 @@ Dictionary
 value  = <dict>.get(key, default=None)          # Returns argument default if key is missing.
 value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
 <dict> = collections.defaultdict(<type>)        # Dict with automatic default value `<type>()`.
-<dict> = collections.defaultdict(lambda: 1)     # Dictionary with automatic default value 1.
+<dict> = collections.defaultdict(lambda: 1)     # Dictionary with automatic default value `1`.
 ```
 
 ```python
 <dict> = dict(<collection>)                     # Creates a dict from coll. of key-value pairs.
-<dict> = dict(zip(keys, values))                # Creates a dictionary from two collections.
-<dict> = dict.fromkeys(keys [, value])          # Creates a dictionary from collection of keys.
+<dict> = dict(zip(keys, values))                # Creates key-value pairs from two collections.
+<dict> = dict.fromkeys(keys [, value])          # Items get value None if only keys are passed.
 ```
 
 ```python
@@ -201,7 +201,7 @@ Iterator
 **Potentially endless stream of elements.**
 
 ```python
-<iter> = iter(<collection>)                # Iterator that returns coll's elements one by one.
+<iter> = iter(<collection>)                # Iterator that returns passed elements one by one.
 <iter> = iter(<func>, to_exc)              # Calls `<func>()` until it returns 'to_exc' value.
 <iter> = (<expr> for <name> in <coll>)     # E.g. `(i+1 for i in range(3))`. Evaluates lazily.
 <el>   = next(<iter>)                      # Returns next element. Raises StopIteration on end.
@@ -221,8 +221,8 @@ import itertools as it
 ```
 
 ```python
-<iter> = it.chain(<coll>, <coll> [, ...])  # Empties collections in order (only figuratively).
-<iter> = it.chain.from_iterable(<coll>)    # Empties collections inside a collection in order.
+<iter> = it.chain(<coll>, <coll> [, ...])  # Iterates over each collection. Accepts iterators.
+<iter> = it.chain.from_iterable(<coll>)    # Accepts collection (i.e. iterable) of collections.
 <iter> = it.islice(<coll>, [start,] stop)  # Also accepts `+step`. Start and stop can be None.
 <iter> = it.product(<coll>, ...)           # Same as `((a, b) for a in arg_1 for b in arg_2)`.
 ```
@@ -328,7 +328,7 @@ String
 ```python
 <bool> = <sub_str> in <str>                  # Returns True if string contains the substring.
 <bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings to give multiple options.
-<int>  = <str>.find(<sub_str>)               # Returns start index of the first match or -1.
+<int>  = <str>.find(<sub_str>)               # Returns start index of the first match or `-1`.
 ```
 
 ```python
@@ -362,7 +362,7 @@ Regex
 ```python
 import re
 <str>   = re.sub(r'<regex>', new, text, count=0)  # Substitutes occurrences with string 'new'.
-<list>  = re.findall(r'<regex>', text)            # Returns every occurrence of the pattern.
+<list>  = re.findall(r'<regex>', text)            # Returns all occurrences as string objects.
 <list>  = re.split(r'<regex>', text, maxsplit=0)  # Add brackets around regex to keep matches.
 <Match> = re.search(r'<regex>', text)             # Returns first occ. of the pattern or None.
 <Match> = re.match(r'<regex>', text)              # Only searches at the start of the 'text'.
@@ -2877,7 +2877,7 @@ import wave
 ```
 * **Bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In a stereo signal, the first sample of a frame belongs to the left channel.**
-* **Each sample consists of one or more bytes that, when converted to an integer, indicate the displacement of a speaker membrane at a given moment.**
+* **Each sample consists of one or more bytes that, when converted to an integer, indicate the desired displacement of a speaker membrane at a given moment.**
 * **If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
