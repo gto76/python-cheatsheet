@@ -207,11 +207,13 @@ const PROGRESS_BAR =
 const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">\'my_module\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>handler = log.FileHandler(<span class="hljs-string">\'test.log\'</span>, encoding=<span class="hljs-string">\'utf-8\'</span>)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(log.Formatter(<span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>))\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>format_str = <span class="hljs-string">\'%(asctime)s %(levelname)s:%(name)s:%(message)s\'</span>\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(log.Formatter(format_str))\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">\'DEBUG\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>log.basicConfig()\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>log.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler = log.root.handlers[<span class="hljs-number">0</span>]\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler.setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
   'CRITICAL:my_module:Running out of disk space.\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +

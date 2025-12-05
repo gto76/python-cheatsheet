@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>November 29, 2025</aside>
+    <aside>December 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1629,7 +1629,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 ┃ oracle+oracledb │ oracledb     │ www.pypi.org/project/oracledb    ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII chars and [\x00-\xff].</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII chars and [\x00-\xff].</span>
 &lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns an integer in range from 0 to 255.</span>
 &lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has one element.</span>
 &lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
@@ -1712,7 +1712,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/array&gt;)       <span class="hljs-comment"># Returns mutable memoryview if array is passed.</span>
 &lt;obj&gt;   = &lt;mview&gt;[index]                  <span class="hljs-comment"># Returns an int/float. Bytes if format is 'c'.</span>
-&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                <span class="hljs-comment"># Returns memoryview with rearranged elements.</span>
+&lt;mview&gt; = &lt;mview&gt;[&lt;slice&gt;]                <span class="hljs-comment"># Returns a memoryview with rearranged elements.</span>
 &lt;mview&gt; = &lt;mview&gt;.cast(<span class="hljs-string">'&lt;typecode&gt;'</span>)      <span class="hljs-comment"># Only works between B/b/c and the other types.</span>
 &lt;mview&gt;.release()                         <span class="hljs-comment"># Releases the memory buffer of the base object.</span>
 </code></pre></div>
@@ -1731,11 +1731,11 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)     <span class="hljs-comment"># Use `maxlen=&lt;int&gt;` to set size limit.</span>
-&lt;deque&gt;.appendleft(&lt;el&gt;)          <span class="hljs-comment"># Opposite element is dropped if full.</span>
-&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Prepends reversed coll. to the deque.</span>
-&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Last element becomes the first one.</span>
-&lt;el&gt; = &lt;deque&gt;.popleft()          <span class="hljs-comment"># Raises IndexError if deque is empty.</span>
+<pre><code class="python language-python hljs">&lt;deque&gt; = deque(&lt;collection&gt;)     <span class="hljs-comment"># Pass `maxlen=&lt;int&gt;` to set the size limit.</span>
+&lt;deque&gt;.appendleft(&lt;el&gt;)          <span class="hljs-comment"># Drops last element if maxlen is exceeded.</span>
+&lt;deque&gt;.extendleft(&lt;collection&gt;)  <span class="hljs-comment"># Prepends reversed collection to the deque.</span>
+&lt;deque&gt;.rotate(n=<span class="hljs-number">1</span>)               <span class="hljs-comment"># Moves last element to the start of deque.</span>
+&lt;el&gt; = &lt;deque&gt;.popleft()          <span class="hljs-comment"># Removes and returns deque's first element.</span>
 </code></pre>
 <div><h2 id="operator"><a href="#operator" name="operator">#</a>Operator</h2><p><strong>Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in first, third and fifth line are also ordered by precedence within a group.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> operator <span class="hljs-keyword">as</span> op
 </code></pre></div>
@@ -1796,64 +1796,63 @@ README.md is a readme file that belongs to user gto.
 <div><h2 id="logging"><a href="#logging" name="logging">#</a>Logging</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> logging <span class="hljs-keyword">as</span> log
 </code></pre></div>
 
-<pre><code class="python language-python hljs">log.basicConfig(filename=&lt;path&gt;, level=<span class="hljs-string">'DEBUG'</span>)   <span class="hljs-comment"># Configures the root logger (see Setup).</span>
-log.debug/info/warning/error/critical(&lt;str&gt;)      <span class="hljs-comment"># Sends passed message to the root logger.</span>
-&lt;Logger&gt; = log.getLogger(__name__)                <span class="hljs-comment"># Returns a logger named after the module.</span>
-&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                           <span class="hljs-comment"># Sends the message. Same levels as above.</span>
-&lt;Logger&gt;.exception(&lt;str&gt;)                         <span class="hljs-comment"># Error() that appends caught exception.</span>
+<pre><code class="python language-python hljs">log.basicConfig(filename=&lt;path&gt;, level=<span class="hljs-string">'WARNING'</span>)  <span class="hljs-comment"># Configures the root logger (see Setup).</span>
+log.debug/info/warning/error/critical(&lt;str&gt;)       <span class="hljs-comment"># Sends passed message to the root logger.</span>
+&lt;Logger&gt; = log.getLogger(__name__)                 <span class="hljs-comment"># Returns a logger named after the module.</span>
+&lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                            <span class="hljs-comment"># Sends the message. Same levels as above.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                          <span class="hljs-comment"># Error() that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">log.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                <span class="hljs-comment"># Prints to stderr or appends to file.</span>
-    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,  <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
-    level=log.WARNING,                            <span class="hljs-comment"># Drops messages with a lower priority.</span>
-    handlers=[log.StreamHandler(sys.stderr)]      <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
+    filename=<span class="hljs-keyword">None</span>,                                 <span class="hljs-comment"># Logs to stderr when filename is None.</span>
+    filemode=<span class="hljs-string">'a'</span>,                                  <span class="hljs-comment"># Pass 'w' to overwrite existing file.</span>
+    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,   <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
+    level=log.WARNING,                             <span class="hljs-comment"># Drops messages with a lower priority.</span>
+    handlers=[log.StreamHandler(sys.stderr)]       <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
 )
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)           <span class="hljs-comment"># Formats messages according to format.</span>
-&lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)     <span class="hljs-comment"># Appends to file. Also `encoding=None`.</span>
-&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)               <span class="hljs-comment"># Only outputs bare messages by default.</span>
-&lt;Handler&gt;.setLevel(&lt;int/str&gt;)                     <span class="hljs-comment"># Prints/saves every message by default.</span>
-&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                    <span class="hljs-comment"># Logger can have more than one handler.</span>
-&lt;Logger&gt;.setLevel(&lt;int/str&gt;)                      <span class="hljs-comment"># What's sent to its/ancestors' handlers.</span>
-&lt;Logger&gt;.propagate = &lt;bool&gt;                       <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
+<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)            <span class="hljs-comment"># Formats messages according to format.</span>
+&lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)      <span class="hljs-comment"># Appends to file. Also `encoding=None`.</span>
+&lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)                <span class="hljs-comment"># Only outputs bare messages by default.</span>
+&lt;Handler&gt;.setLevel(&lt;str/int&gt;)                      <span class="hljs-comment"># Prints/saves every message by default.</span>
+&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                     <span class="hljs-comment"># Logger can have more than one handler.</span>
+&lt;Logger&gt;.setLevel(&lt;str/int&gt;)                       <span class="hljs-comment"># What's sent to its/ancestors' handlers.</span>
+&lt;Logger&gt;.propagate = &lt;bool&gt;                        <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
 </code></pre>
 <ul>
-<li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent&gt;.&lt;name&gt;'</span></code>.</strong></li>
-<li><strong>If logger doesn't have a set level, it inherits it from the first ancestor that does.</strong></li>
-<li><strong>Formatter also accepts: pathname, filename, funcName, lineno, thread and process.</strong></li>
-<li><strong>RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.</strong></li>
+<li><strong>Parent logger can be specified by naming the child logger <code class="python hljs"><span class="hljs-string">'&lt;parent_name&gt;.&lt;name&gt;'</span></code>.</strong></li>
+<li><strong>Logger will inherit the level from its parent if you don't set it via the setLevel() method.</strong></li>
+<li><strong>Format string can contain: pathname, filename, funcName, lineno, thread and process.</strong></li>
+<li><strong>RotatingFileHandler rotates files according to 'maxBytes' and 'backupCount' arguments.</strong></li>
 <li><strong>An object with <code class="python hljs"><span class="hljs-string">'filter(&lt;LogRecord&gt;)'</span></code> method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.</strong></li>
+<li><strong>Logging messages generated by libraries are passed to the root's handlers. Level of the library's logger can be set with <code class="python hljs"><span class="hljs-string">'log.getLogger("&lt;library&gt;").setLevel(&lt;str&gt;)'</span></code>.</strong></li>
 </ul>
 <div><h4 id="createsaloggerthatwritesallmessagestoafileandsendsthemtotherootshandlerthatprintswarningsorhigher">Creates a logger that writes all messages to a file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = log.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(log.Formatter(<span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>))
+<span class="hljs-meta">&gt;&gt;&gt; </span>format_str = <span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(log.Formatter(format_str))
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">'DEBUG'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>log.basicConfig()
-<span class="hljs-meta">&gt;&gt;&gt; </span>log.root.handlers[<span class="hljs-number">0</span>].setLevel(<span class="hljs-string">'WARNING'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler = log.root.handlers[<span class="hljs-number">0</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler.setLevel(<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Running out of disk space.'</span>)
 CRITICAL:my_module:Running out of disk space.
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">'test.log'</span>).read())
 2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
 </code></pre></div>
 
-<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                      <span class="hljs-comment"># Local names of variables, functions, classes and modules.</span>
-&lt;dict&gt; = vars()                     <span class="hljs-comment"># Dict of local names and their objects. Same as locals().</span>
-&lt;dict&gt; = globals()                  <span class="hljs-comment"># Dict of global names and their objects, e.g. __builtin__.</span>
+<div><h2 id="introspection"><a href="#introspection" name="introspection">#</a>Introspection</h2><pre><code class="python language-python hljs">&lt;list&gt; = dir()                     <span class="hljs-comment"># Local names of objects (including functions and classes).</span>
+&lt;dict&gt; = vars()                    <span class="hljs-comment"># Dict of local names and their objects. Same as locals().</span>
+&lt;dict&gt; = globals()                 <span class="hljs-comment"># Dict of global names and their objects, e.g. __builtin__.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                 <span class="hljs-comment"># Returns names of object's attributes (including methods).</span>
-&lt;dict&gt; = vars(&lt;obj&gt;)                <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
-&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Checks if object possesses attribute of the passed name.</span>
-value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)   <span class="hljs-comment"># Returns the object's attribute or raises AttributeError.</span>
-setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)     <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
-delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
-</code></pre>
-<pre><code class="python language-python hljs">&lt;Sig&gt;  = inspect.signature(&lt;func&gt;)  <span class="hljs-comment"># Returns Signature object of the passed function or class.</span>
-&lt;dict&gt; = &lt;Sig&gt;.parameters           <span class="hljs-comment"># Returns dict of Parameters. Also &lt;Sig&gt;.return_annotation.</span>
-&lt;memb&gt; = &lt;Param&gt;.kind               <span class="hljs-comment"># Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).</span>
-&lt;type&gt; = &lt;Param&gt;.annotation         <span class="hljs-comment"># Returns Parameter.empty if missing. Also &lt;Param&gt;.default.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = dir(&lt;obj&gt;)                <span class="hljs-comment"># Returns names of object's attributes (including methods).</span>
+&lt;dict&gt; = vars(&lt;obj&gt;)               <span class="hljs-comment"># Returns dict of writable attributes. Also &lt;obj&gt;.__dict__.</span>
+&lt;bool&gt; = hasattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)  <span class="hljs-comment"># Checks if object possesses attribute of the passed name.</span>
+value  = getattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)  <span class="hljs-comment"># Returns the object's attribute or raises AttributeError.</span>
+setattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>, value)    <span class="hljs-comment"># Sets attribute. Only works on objects with __dict__ attr.</span>
+delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           <span class="hljs-comment"># Deletes attribute from __dict__. Also `del &lt;obj&gt;.&lt;name&gt;`.</span>
 </code></pre>
 <div><h2 id="threading"><a href="#threading" name="threading">#</a>Threading</h2><p><strong>CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, Lock, RLock, Semaphore, Event, Barrier
 <span class="hljs-keyword">from</span> concurrent.futures <span class="hljs-keyword">import</span> ThreadPoolExecutor, as_completed
@@ -2061,7 +2060,7 @@ get = <span class="hljs-keyword">lambda</span> url: requests.get(url, headers={<
 response = get(<span class="hljs-string">'https://en.wikipedia.org/wiki/Python_(programming_language)'</span>)
 document = bs4.BeautifulSoup(response.text, <span class="hljs-string">'html.parser'</span>)
 table = document.find(<span class="hljs-string">'table'</span>, class_=<span class="hljs-string">'infobox vevent'</span>)
-python_url = table.find(<span class="hljs-string">'th'</span>, text=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
+python_url = table.find(<span class="hljs-string">'th'</span>, string=<span class="hljs-string">'Website'</span>).next_sibling.a[<span class="hljs-string">'href'</span>]
 logo_url = table.find(<span class="hljs-string">'img'</span>)[<span class="hljs-string">'src'</span>]
 filename = os.path.basename(logo_url)
 <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
@@ -2939,7 +2938,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>November 29, 2025</aside>
+    <aside>December 5, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

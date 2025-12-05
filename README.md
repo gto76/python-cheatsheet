@@ -1947,7 +1947,7 @@ with <conn>.begin(): ...                       # Exits the block with a commit o
 
 Bytes
 -----
-**A bytes object is an immutable sequence of single bytes. Mutable version is called bytearray.**
+**Immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
 <bytes> = b'<str>'                       # Only accepts ASCII chars and [\x00-\xff].
@@ -2056,7 +2056,7 @@ Memory View
 ```python
 <mview> = memoryview(<bytes/array>)       # Returns mutable memoryview if array is passed.
 <obj>   = <mview>[index]                  # Returns an int/float. Bytes if format is 'c'.
-<mview> = <mview>[<slice>]                # Returns memoryview with rearranged elements.
+<mview> = <mview>[<slice>]                # Returns a memoryview with rearranged elements.
 <mview> = <mview>.cast('<typecode>')      # Only works between B/b/c and the other types.
 <mview>.release()                         # Releases the memory buffer of the base object.
 ```
@@ -2084,11 +2084,11 @@ from collections import deque
 ```
 
 ```python
-<deque> = deque(<collection>)     # Use `maxlen=<int>` to set size limit.
-<deque>.appendleft(<el>)          # Opposite element is dropped if full.
-<deque>.extendleft(<collection>)  # Prepends reversed coll. to the deque.
-<deque>.rotate(n=1)               # Last element becomes the first one.
-<el> = <deque>.popleft()          # Raises IndexError if deque is empty.
+<deque> = deque(<collection>)     # Pass `maxlen=<int>` to set the size limit.
+<deque>.appendleft(<el>)          # Drops last element if maxlen is exceeded.
+<deque>.extendleft(<collection>)  # Prepends reversed collection to the deque.
+<deque>.rotate(n=1)               # Moves last element to the start of deque.
+<el> = <deque>.popleft()          # Removes and returns deque's first element.
 ```
 
 
@@ -2168,47 +2168,51 @@ import logging as log
 ```
 
 ```python
-log.basicConfig(filename=<path>, level='DEBUG')   # Configures the root logger (see Setup).
-log.debug/info/warning/error/critical(<str>)      # Sends passed message to the root logger.
-<Logger> = log.getLogger(__name__)                # Returns a logger named after the module.
-<Logger>.<level>(<str>)                           # Sends the message. Same levels as above.
-<Logger>.exception(<str>)                         # Error() that appends caught exception.
+log.basicConfig(filename=<path>, level='WARNING')  # Configures the root logger (see Setup).
+log.debug/info/warning/error/critical(<str>)       # Sends passed message to the root logger.
+<Logger> = log.getLogger(__name__)                 # Returns a logger named after the module.
+<Logger>.<level>(<str>)                            # Sends the message. Same levels as above.
+<Logger>.exception(<str>)                          # Error() that appends caught exception.
 ```
 
 ### Setup
 ```python
 log.basicConfig(
-    filename=None,                                # Prints to stderr or appends to file.
-    format='%(levelname)s:%(name)s:%(message)s',  # Add '%(asctime)s' for local datetime.
-    level=log.WARNING,                            # Drops messages with a lower priority.
-    handlers=[log.StreamHandler(sys.stderr)]      # Uses FileHandler if filename is set.
+    filename=None,                                 # Logs to stderr when filename is None.
+    filemode='a',                                  # Pass 'w' to overwrite existing file.
+    format='%(levelname)s:%(name)s:%(message)s',   # Add '%(asctime)s' for local datetime.
+    level=log.WARNING,                             # Drops messages with a lower priority.
+    handlers=[log.StreamHandler(sys.stderr)]       # Uses FileHandler if filename is set.
 )
 ```
 
 ```python
-<Formatter> = log.Formatter('<format>')           # Formats messages according to format.
-<Handler> = log.FileHandler(<path>, mode='a')     # Appends to file. Also `encoding=None`.
-<Handler>.setFormatter(<Formatter>)               # Only outputs bare messages by default.
-<Handler>.setLevel(<int/str>)                     # Prints/saves every message by default.
-<Logger>.addHandler(<Handler>)                    # Logger can have more than one handler.
-<Logger>.setLevel(<int/str>)                      # What's sent to its/ancestors' handlers.
-<Logger>.propagate = <bool>                       # Cuts off ancestors' handlers if False.
+<Formatter> = log.Formatter('<format>')            # Formats messages according to format.
+<Handler> = log.FileHandler(<path>, mode='a')      # Appends to file. Also `encoding=None`.
+<Handler>.setFormatter(<Formatter>)                # Only outputs bare messages by default.
+<Handler>.setLevel(<str/int>)                      # Prints/saves every message by default.
+<Logger>.addHandler(<Handler>)                     # Logger can have more than one handler.
+<Logger>.setLevel(<str/int>)                       # What's sent to its/ancestors' handlers.
+<Logger>.propagate = <bool>                        # Cuts off ancestors' handlers if False.
 ```
-* **Parent logger can be specified by naming the child logger `'<parent>.<name>'`.**
-* **If logger doesn't have a set level, it inherits it from the first ancestor that does.**
-* **Formatter also accepts: pathname, filename, funcName, lineno, thread and process.**
-* **RotatingFileHandler creates and deletes files based on 'maxBytes', 'backupCount' args.**
+* **Parent logger can be specified by naming the child logger `'<parent_name>.<name>'`.**
+* **Logger will inherit the level from its parent if you don't set it via the setLevel() method.**
+* **Format string can contain: pathname, filename, funcName, lineno, thread and process.**
+* **RotatingFileHandler rotates files according to 'maxBytes' and 'backupCount' arguments.**
 * **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
+* **Logging messages generated by libraries are passed to the root's handlers. Level of the library's logger can be set with `'log.getLogger("<library>").setLevel(<str>)'`.**
 
 #### Creates a logger that writes all messages to a file and sends them to the root's handler that prints warnings or higher:
 ```python
 >>> logger = log.getLogger('my_module')
 >>> handler = log.FileHandler('test.log', encoding='utf-8')
->>> handler.setFormatter(log.Formatter('%(asctime)s %(levelname)s:%(name)s:%(message)s'))
+>>> format_str = '%(asctime)s %(levelname)s:%(name)s:%(message)s'
+>>> handler.setFormatter(log.Formatter(format_str))
 >>> logger.addHandler(handler)
 >>> logger.setLevel('DEBUG')
 >>> log.basicConfig()
->>> log.root.handlers[0].setLevel('WARNING')
+>>> roots_handler = log.root.handlers[0]
+>>> roots_handler.setLevel('WARNING')
 >>> logger.critical('Running out of disk space.')
 CRITICAL:my_module:Running out of disk space.
 >>> print(open('test.log').read())
@@ -2219,25 +2223,18 @@ CRITICAL:my_module:Running out of disk space.
 Introspection
 -------------
 ```python
-<list> = dir()                      # Local names of variables, functions, classes and modules.
-<dict> = vars()                     # Dict of local names and their objects. Same as locals().
-<dict> = globals()                  # Dict of global names and their objects, e.g. __builtin__.
+<list> = dir()                     # Local names of objects (including functions and classes).
+<dict> = vars()                    # Dict of local names and their objects. Same as locals().
+<dict> = globals()                 # Dict of global names and their objects, e.g. __builtin__.
 ```
 
 ```python
-<list> = dir(<obj>)                 # Returns names of object's attributes (including methods).
-<dict> = vars(<obj>)                # Returns dict of writable attributes. Also <obj>.__dict__.
-<bool> = hasattr(<obj>, '<name>')   # Checks if object possesses attribute of the passed name.
-value  = getattr(<obj>, '<name>')   # Returns the object's attribute or raises AttributeError.
-setattr(<obj>, '<name>', value)     # Sets attribute. Only works on objects with __dict__ attr.
-delattr(<obj>, '<name>')            # Deletes attribute from __dict__. Also `del <obj>.<name>`.
-```
-
-```python
-<Sig>  = inspect.signature(<func>)  # Returns Signature object of the passed function or class.
-<dict> = <Sig>.parameters           # Returns dict of Parameters. Also <Sig>.return_annotation.
-<memb> = <Param>.kind               # Returns ParameterKind member (Parameter.KEYWORD_ONLY, …).
-<type> = <Param>.annotation         # Returns Parameter.empty if missing. Also <Param>.default.
+<list> = dir(<obj>)                # Returns names of object's attributes (including methods).
+<dict> = vars(<obj>)               # Returns dict of writable attributes. Also <obj>.__dict__.
+<bool> = hasattr(<obj>, '<name>')  # Checks if object possesses attribute of the passed name.
+value  = getattr(<obj>, '<name>')  # Returns the object's attribute or raises AttributeError.
+setattr(<obj>, '<name>', value)    # Sets attribute. Only works on objects with __dict__ attr.
+delattr(<obj>, '<name>')           # Deletes attribute from __dict__. Also `del <obj>.<name>`.
 ```
 
 
@@ -2497,7 +2494,7 @@ get = lambda url: requests.get(url, headers={'User-Agent': 'cpc-bot'})
 response = get('https://en.wikipedia.org/wiki/Python_(programming_language)')
 document = bs4.BeautifulSoup(response.text, 'html.parser')
 table = document.find('table', class_='infobox vevent')
-python_url = table.find('th', text='Website').next_sibling.a['href']
+python_url = table.find('th', string='Website').next_sibling.a['href']
 logo_url = table.find('img')['src']
 filename = os.path.basename(logo_url)
 with open(filename, 'wb') as file:
