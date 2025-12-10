@@ -829,12 +829,12 @@ import <package>.<module>      # Imports a built-in or '<package>/<module>.py'.
 * **On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in the `'<package>/__init__.py'` script.**
 * **Directory of the file that is passed to python command serves as a root of local imports.**
-* **For relative imports use `'from .[…][<pkg/module>[.…]] import <obj>'`.**
+* **Use relative imports, i.e. `'from .[…][<pkg/mod>[.…]] import <obj>'`, if project has scattered entry points. Another option is to install the whole project by moving its code into 'src' dir, adding ['pyproject.toml'](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#basic-information) to its root, and running `'$ pip3 install -e .'`.**
 
 
 Closure
 -------
-**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function.**
+**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function (any value that is referenced from within multiple nested functions gets shared).**
 
 ```python
 def get_multiplier(a):
@@ -848,7 +848,6 @@ def get_multiplier(a):
 >>> multiply_by_3(10)
 30
 ```
-* **Any value that is referenced from within multiple nested functions gets shared.**
 
 ### Partial
 ```python
@@ -1318,7 +1317,7 @@ class MyAbcSequence(abc.Sequence):
 +------------+------------+------------+------------+--------------+
 ```
 * **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() will work with any code expecting an iterable.**
-* **MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also extendable. Use `'<abc>.__abstractmethods__'` to get names of required methods.**
+* **MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also ex&shy;tendable. Use `'<abc>.__abstractmethods__'` to get names of required methods.**
 
 
 Enum
