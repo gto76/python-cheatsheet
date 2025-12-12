@@ -1884,15 +1884,15 @@ import sqlite3
 
 ### Read
 ```python
-<cursor> = <conn>.execute('<query>')           # Can raise a subclass of the sqlite3.Error.
+<cursor> = <conn>.execute('<query>')           # Can raise a subclass of the `sqlite3.Error`.
 <tuple>  = <cursor>.fetchone()                 # Returns the next row. Also next(<cursor>).
 <list>   = <cursor>.fetchall()                 # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<conn>.execute('<query>')                      # Can raise a subclass of the sqlite3.Error.
-<conn>.commit()                                # Saves all changes since the last commit.
+<conn>.execute('<query>')                      # Can raise a subclass of the `sqlite3.Error`.
+<conn>.commit()                                # Saves all the changes since the last commit.
 <conn>.rollback()                              # Discards all changes since the last commit.
 ```
 
@@ -1904,7 +1904,7 @@ with <conn>:                                   # Exits the block with commit() o
 
 ### Placeholders
 ```python
-<conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with an item.
+<conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with its item.
 <conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
 <conn>.executemany('<query>', <coll_of_coll>)  # Executes the query once for each collection.
 ```
@@ -1922,7 +1922,7 @@ with <conn>:                                   # Exits the block with commit() o
 ```
 
 ### SQLAlchemy
-**Library for interacting with various DB systems via SQL, method chaining, or ORM.**
+**Library for interacting with various DB systems via SQL, [method chaining](https://docs.sqlalchemy.org/en/latest/tutorial/data_select.html#the-select-sql-expression-construct) or [ORM](https://docs.sqlalchemy.org/en/latest/orm/quickstart.html#simple-select).**
 ```python
 # $ pip3 install sqlalchemy
 from sqlalchemy import create_engine, text
@@ -1946,30 +1946,31 @@ with <conn>.begin(): ...                       # Exits the block with a commit o
 
 Bytes
 -----
-**Immutable sequence of single bytes. Mutable version is called bytearray.**
+**An immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                       # Only accepts ASCII chars and [\x00-\xff].
-<int>   = <bytes>[index]                 # Returns an integer in range from 0 to 255.
-<bytes> = <bytes>[<slice>]               # Returns bytes even if it has one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
+<bytes> = b'<str>'                        # Accepts ASCII characters and \x00 to \xff.
+<int>   = <bytes>[index]                  # Returns the byte as int between 0 and 255.
+<bytes> = <bytes>[<slice>]                # Returns bytes even if it has one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)   # Joins elements using bytes as a separator.
 ```
 
 ### Encode
 ```python
-<bytes> = bytes(<coll_of_ints>)          # Integers must be in range from 0 to 255.
-<bytes> = bytes(<str>, 'utf-8')          # Encodes the string. Also <str>.encode().
-<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespace.
-<bytes> = <int>.to_bytes(n_bytes, …)     # `byteorder='big/little', signed=False`.
+<bytes> = bytes(<coll_of_ints>)           # Passed integers must be between 0 and 255.
+<bytes> = bytes(<str>, 'utf-8')           # Encodes the string. Same as <str>.encode().
+<bytes> = bytes.fromhex('<hex>')          # Hex pairs can be separated by whitespaces.
+<bytes> = <int>.to_bytes(n_bytes, 'big')  # Accepts `byteorder='little', signed=True`.
 ```
 
 ### Decode
 ```python
-<list>  = list(<bytes>)                  # Returns integers in range from 0 to 255.
-<str>   = str(<bytes>, 'utf-8')          # Returns a string. Also <bytes>.decode().
-<str>   = <bytes>.hex()                  # Returns hex pairs. Accepts `sep=<str>`.
-<int>   = int.from_bytes(<bytes>, …)     # `byteorder='big/little', signed=False`.
+<list>  = list(<bytes>)                   # Returns a list of ints between 0 and 255.
+<str>   = str(<bytes>, 'utf-8')           # Returns a string. Same as <bytes>.decode().
+<str>   = <bytes>.hex()                   # Returns hex pairs separated by `sep=<str>`.
+<int>   = int.from_bytes(<bytes>, 'big')  # Accepts `byteorder='little', signed=True`.
 ```
+
 
 ### Read Bytes from File
 ```python
@@ -2142,7 +2143,7 @@ match <object/expression>:
 <mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict if it has matching items.
 <class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object that has matching attrbs.
 ```
-* **Sequence pattern can also be written as a tuple, either with or without the brackets.**
+* **The sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
 * **Sequence pattern must match all items of the collection, while mapping pattern does not.**
 * **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` is matched by the `'case 1|2, 2|3 as x if x == 2:'` block.**
@@ -2562,7 +2563,7 @@ def serve_html(sport):
 * **`'fl.render_template(filename, <kwargs>)'` renders a file located in 'templates' dir.**
 * **`'fl.abort(<int>)'` returns error code and `'return fl.redirect(<url>)'` redirects.**
 * **`'fl.request.args[<str>]'` returns parameter from query string (URL part right of '?').**
-* **`'fl.session[<str>] = <obj>'` stores session data. It requires secret key to be set at the startup with `'app.secret_key = <str>'`.**
+* **`'fl.session[<str>] = <obj>'` stores session data and `'fl.session.clear()'` clears it. A session cookie key needs to be set at the startup with `'app.secret_key = <str>'`.**
 
 ### Serving JSON
 ```python
@@ -2783,7 +2784,7 @@ from PIL import Image
 ```
 
 ### Modes
-* **`'L'` - Lightness (greyscale image). Each pixel is an integer between 0 and 255.**
+* **`'L'` - Lightness (greyscale image). Each pixel is stored as an int between 0 and 255.**
 * **`'RGB'` - Red, green, blue (true color image). Each pixel is a tuple of three integers.**
 * **`'RGBA'` - RGB with alpha. Low alpha (i.e. fourth int) makes pixel more transparent.**
 * **`'HSV'` - Hue, saturation, value. Three ints representing color in HSV color space.**

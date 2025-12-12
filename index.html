@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>December 10, 2025</aside>
+    <aside>December 12, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1577,13 +1577,13 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of the sqlite3.Error.</span>
+<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
 &lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                 <span class="hljs-comment"># Returns the next row. Also next(&lt;cursor&gt;).</span>
 &lt;list&gt;   = &lt;cursor&gt;.fetchall()                 <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of the sqlite3.Error.</span>
-&lt;conn&gt;.commit()                                <span class="hljs-comment"># Saves all changes since the last commit.</span>
+<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
+&lt;conn&gt;.commit()                                <span class="hljs-comment"># Saves all the changes since the last commit.</span>
 &lt;conn&gt;.rollback()                              <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
 
@@ -1591,7 +1591,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
     &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with an item.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with its item.</span>
 &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a matching value.</span>
 &lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Executes the query once for each collection.</span>
 </code></pre></div>
@@ -1608,7 +1608,7 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 </code></pre></div>
 
 
-<div><h3 id="sqlalchemy">SQLAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, method chaining, or ORM.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
+<div><h3 id="sqlalchemy">SQLAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, <a href="https://docs.sqlalchemy.org/en/latest/tutorial/data_select.html#the-select-sql-expression-construct">method chaining</a> or <a href="https://docs.sqlalchemy.org/en/latest/orm/quickstart.html#simple-select">ORM</a>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
 &lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
 &lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
@@ -1626,23 +1626,23 @@ CompletedProcess(args=[<span class="hljs-string">'bc'</span>, <span class="hljs-
 ┃ oracle+oracledb │ oracledb     │ www.pypi.org/project/oracledb    ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>Immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Only accepts ASCII chars and [\x00-\xff].</span>
-&lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns an integer in range from 0 to 255.</span>
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>An immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                        <span class="hljs-comment"># Accepts ASCII characters and \x00 to \xff.</span>
+&lt;int&gt;   = &lt;bytes&gt;[index]                  <span class="hljs-comment"># Returns the byte as int between 0 and 255.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]                <span class="hljs-comment"># Returns bytes even if it has one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)   <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Integers must be in range from 0 to 255.</span>
-&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Encodes the string. Also &lt;str&gt;.encode().</span>
-&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)         <span class="hljs-comment"># Hex pairs can be separated by whitespace.</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)           <span class="hljs-comment"># Passed integers must be between 0 and 255.</span>
+&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Encodes the string. Same as &lt;str&gt;.encode().</span>
+&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)          <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, <span class="hljs-string">'big'</span>)  <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns integers in range from 0 to 255.</span>
-&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Returns a string. Also &lt;bytes&gt;.decode().</span>
-&lt;str&gt;   = &lt;bytes&gt;.hex()                  <span class="hljs-comment"># Returns hex pairs. Accepts `sep=&lt;str&gt;`.</span>
-&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, …)     <span class="hljs-comment"># `byteorder='big/little', signed=False`.</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                   <span class="hljs-comment"># Returns a list of ints between 0 and 255.</span>
+&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Returns a string. Same as &lt;bytes&gt;.decode().</span>
+&lt;str&gt;   = &lt;bytes&gt;.hex()                   <span class="hljs-comment"># Returns hex pairs separated by `sep=&lt;str&gt;`.</span>
+&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, <span class="hljs-string">'big'</span>)  <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
 </code></pre></div>
 
 <div><h3 id="readbytesfromfile">Read Bytes from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_bytes</span><span class="hljs-params">(filename)</span>:</span>
@@ -1775,7 +1775,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 </code></pre></div>
 
 <ul>
-<li><strong>Sequence pattern can also be written as a tuple, either with or without the brackets.</strong></li>
+<li><strong>The sequence pattern can also be written as a tuple, either with or without the brackets.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'*&lt;name&gt;'</span></code> and <code class="python hljs"><span class="hljs-string">'**&lt;name&gt;'</span></code> in sequence/mapping patterns to bind remaining items.</strong></li>
 <li><strong>Sequence pattern must match all items of the collection, while mapping pattern does not.</strong></li>
 <li><strong>Patterns can be surrounded with brackets to override their precedence: <code class="python hljs"><span class="hljs-string">'|'</span></code> &gt; <code class="python hljs"><span class="hljs-string">'as'</span></code> &gt; <code class="python hljs"><span class="hljs-string">','</span></code>. For example, <code class="python hljs"><span class="hljs-string">'[1, 2]'</span></code> is matched by the <code class="python hljs"><span class="hljs-string">'case 1|2, 2|3 as x if x == 2:'</span></code> block.</strong></li>
@@ -2115,7 +2115,7 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.render_template(filename, &lt;kwargs&gt;)'</span></code> renders a file located in 'templates' dir.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.abort(&lt;int&gt;)'</span></code> returns error code and <code class="python hljs"><span class="hljs-string">'return fl.redirect(&lt;url&gt;)'</span></code> redirects.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fl.request.args[&lt;str&gt;]'</span></code> returns parameter from query string (URL part right of '?').</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'fl.session[&lt;str&gt;] = &lt;obj&gt;'</span></code> stores session data. It requires secret key to be set at the startup with <code class="python hljs"><span class="hljs-string">'app.secret_key = &lt;str&gt;'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'fl.session[&lt;str&gt;] = &lt;obj&gt;'</span></code> stores session data and <code class="python hljs"><span class="hljs-string">'fl.session.clear()'</span></code> clears it. A session cookie key needs to be set at the startup with <code class="python hljs"><span class="hljs-string">'app.secret_key = &lt;str&gt;'</span></code>.</strong></li>
 </ul>
 <div><h3 id="servingjson">Serving JSON</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.post('/&lt;sport&gt;/odds')</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">serve_json</span><span class="hljs-params">(sport)</span>:</span>
@@ -2283,7 +2283,7 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))  <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is an integer between 0 and 255.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'L'</span></code> - Lightness (greyscale image). Each pixel is stored as an int between 0 and 255.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGB'</span></code> - Red, green, blue (true color image). Each pixel is a tuple of three integers.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'RGBA'</span></code> - RGB with alpha. Low alpha (i.e. fourth int) makes pixel more transparent.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'HSV'</span></code> - Hue, saturation, value. Three ints representing color in HSV color space.</strong></li>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>December 10, 2025</aside>
+    <aside>December 12, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
