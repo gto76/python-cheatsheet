@@ -215,7 +215,7 @@ import itertools as it
 ```
 
 ```python
-<iter> = it.count(start=0, step=1)         # Returns updated value endlessly. Accepts floats.
+<iter> = it.count(start=0, step=1)         # Returns updated 'start' endlessly. Accepts floats.
 <iter> = it.repeat(<el> [, times])         # Returns passed element endlessly or 'times' times.
 <iter> = it.cycle(<collection>)            # Repeats the passed sequence of elements endlessly.
 ```
@@ -744,20 +744,20 @@ Inline
 ------
 ### Lambda
 ```python
-<func> = lambda: <return_value>                     # A single statement function.
-<func> = lambda <arg_1>, <arg_2>: <return_value>    # Also allows default arguments.
+<func> = lambda: <return_value>                    # A single statement function.
+<func> = lambda <arg_1>, <arg_2>: <return_value>   # Also allows default arguments.
 ```
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(10)]                   # Returns `[1, 2, 3, 4, ..., 10]`.
-<iter> = (i for i in range(10) if i > 5)            # Returns `iter([6, 7, 8, 9])`.
-<set>  = {i+5 for i in range(10)}                   # Returns `{5, 6, 7, 8, ..., 14}`.
-<dict> = {i: i*2 for i in range(1, 10)}             # Returns `{1: 2, 2: 4, ..., 9: 18}`.
+<list> = [i+1 for i in range(5)]                   # Returns `[1, 2, 3, 4, 5]`.
+<iter> = (i for i in range(10) if i > 5)           # Returns `iter([6, 7, 8, 9])`.
+<set>  = {i+5 for i in range(5)}                   # Returns `{5, 6, 7, 8, 9}`.
+<dict> = {i: i**2 for i in range(1, 4)}            # Returns `{1: 1, 2: 4, 3: 9}`.
 ```
 
 ```python
->>> [l+r for l in 'abc' for r in 'abc']             # Inner loop is on the right side.
+>>> [l+r for l in 'abc' for r in 'abc']            # Inner loop is on right side.
 ['aa', 'ab', 'ac', ..., 'cc']
 ```
 
@@ -767,52 +767,52 @@ from functools import reduce
 ```
 
 ```python
-<iter> = map(lambda x: x + 1, range(10))            # Returns `iter([1, 2, ..., 10])`.
-<iter> = filter(lambda x: x > 5, range(10))         # Returns `iter([6, 7, 8, 9])`.
-<obj>  = reduce(lambda out, x: out + x, range(10))  # Returns 45. Accepts 'initial'.
+<iter> = map(lambda x: x + 1, range(5))            # Returns `iter([1, 2, 3, 4, 5])`.
+<iter> = filter(lambda x: x > 5, range(10))        # Returns `iter([6, 7, 8, 9])`.
+<obj>  = reduce(lambda out, x: out + x, range(5))  # Returns 10. Accepts 'initial'.
 ```
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                          # Is `bool(<el>)` True for any el?
-<bool> = all(<collection>)                          # True for all? Also True if empty.
+<bool> = any(<collection>)                         # Is bool(<el>) True for any el?
+<bool> = all(<collection>)                         # Is it true for all (or empty)?
 ```
 
 ### Conditional Expression
 ```python
-<obj> = <exp> if <condition> else <exp>             # Only one expression is evaluated.
+<obj> = <exp> if <condition> else <exp>            # Evaluates only one expression.
 ```
 
 ```python
->>> [i if i else 'zero' for i in (0, 1, 2, 3)]      # `any([0, '', [], None]) == False`.
+>>> [i if i else 'zero' for i in (0, 1, 2, 3)]     # `any(['', [], None])` is False.
 ['zero', 1, 2, 3]
 ```
 
 ### And, Or
 ```python
-<obj> = <exp> and <exp> [and ...]                   # Returns first false or last obj.
-<obj> = <exp> or <exp> [or ...]                     # Returns first true or last obj.
+<obj> = <exp> and <exp> [and ...]                  # Returns first false or last obj.
+<obj> = <exp> or <exp> [or ...]                    # Returns first true or last obj.
 ```
 
 ### Walrus Operator
 ```python
->>> [i for ch in '0123' if (i := int(ch)) > 0]      # Assigns to var in mid-sentence.
+>>> [i for ch in '0123' if (i := int(ch)) > 0]     # Assigns to var in mid-sentence.
 [1, 2, 3]
 ```
 
 ### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')                  # Creates tuple's subclass.
-point = Point(0, 0)                                 # Returns its instance.
+Point = namedtuple('Point', 'x y')                 # Creates tuple's subclass.
+point = Point(0, 0)                                # Returns its instance.
 
 from enum import Enum
-Direction = Enum('Direction', 'N E S W')            # Creates an enumeration.
-direction = Direction.N                             # Returns its member.
+Direction = Enum('Direction', 'N E S W')           # Creates an enumeration.
+direction = Direction.N                            # Returns its member.
 
 from dataclasses import make_dataclass
-Player = make_dataclass('Player', ['loc', 'dir'])   # Creates a normal class.
-player = Player(point, direction)                   # Returns its instance.
+Player = make_dataclass('Player', ['loc', 'dir'])  # Creates a normal class.
+player = Player(point, direction)                  # Returns its instance.
 ```
 
 
@@ -978,18 +978,18 @@ class MyClass:
 
 #### Expressions that call object's str() special method:
 ```python
-print(obj)
 f'{obj}'
+print(obj)
 logging.warning(obj)
-csv.writer(<file>).writerow([obj])
+<csv_writer>.writerow([obj])
 ```
 
 #### Expressions that call object's repr() special method:
 ```python
+f'{obj!r}'
 print/str/repr([obj])
 print/str/repr({obj: obj})
-f'{obj!r}'
-Z = make_dataclass('Z', ['a']); print/str/repr(Z(obj))
+print/str/repr(<dataclass>(obj))
 ```
 
 ### Subclass
@@ -1289,7 +1289,7 @@ class MySequence:
 ### ABC Sequence
 * **It's a richer interface than the basic sequence that also requires just getitem() and len().**
 * **Extending it generates iter(), contains(), reversed(), index() and count() special methods.**
-* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, since they are registered as Sequence's virtual subclasses.**
+* **Unlike `'abc.Iterable'` and `'abc.Collection'`, it is not a duck type. That is why exp. `'issubclass(MySequence, abc.Sequence)'` would return False even if MySequence had all the methods defined. It however recognizes list, tuple, range, str, bytes, bytearray, array, memoryview and deque, since they are registered as Sequence's virtual subclasses.**
 ```python
 from collections import abc
 
@@ -1544,7 +1544,7 @@ p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defa
 p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
 p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
 p.add_argument('<name>', type=<type>, nargs='?')                  # Optional argument. Also *.
-args  = p.parse_args()                                            # Exits on parsing error.
+args  = p.parse_args()                                            # Exits on a parsing error.
 <obj> = args.<name>                                               # Returns `<type>(<arg>)`.
 ```
 
@@ -1682,7 +1682,7 @@ from pathlib import Path
 <str>  = <Path>.name                # Returns final component (filename or dirname).
 <str>  = <Path>.suffix              # Returns the name's last extension, e.g. '.gz'.
 <str>  = <Path>.stem                # Returns the name without its last extension.
-<tup.> = <Path>.parts               # Returns a tuple of all components as strings.
+<tup.> = <Path>.parts               # Starts with '/' or 'C:\' if path is absolute.
 ```
 
 ```python
@@ -1699,7 +1699,7 @@ from pathlib import Path
 OS Commands
 -----------
 ```python
-import os, shutil, subprocess
+import os, shutil
 ```
 
 ```python
@@ -1711,13 +1711,13 @@ os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False
 ```python
 shutil.copy(from, to)            # Copies the file ('to' can exist or be a dir).
 shutil.copy2(from, to)           # Also copies creation and modification time.
-shutil.copytree(from, to)        # Copies the directory ('to' must not exist).
+shutil.copytree(from, to)        # Copies the directory ('to' should not exist).
 ```
 
 ```python
 os.rename(from, to)              # Renames or moves the file or directory 'from'.
 os.replace(from, to)             # Same, but overwrites file 'to' even on Windows.
-shutil.move(from, to)            # Rename() that moves into 'to' if it's a dir.
+shutil.move(from, to)            # Rename() that moves into 'to' if it is a dir.
 ```
 
 ```python
@@ -1725,14 +1725,22 @@ os.remove(<path>)                # Deletes file. Also `$ pip3 install send2trash
 os.rmdir(<path>)                 # Deletes the empty directory or raises OSError.
 shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
-* **Paths can be either strings, Path objects, or DirEntry objects.**
+* **Provided paths can be either strings, Path objects, or DirEntry objects.**
 * **Functions report OS related errors by raising OSError or one of its [subclasses](#exceptions-1).**
 
-### Shell Commands
+
+Shell Commands
+--------------
 ```python
-<pipe> = os.popen('<commands>')  # Executes commands in sh/cmd. Also os.system().
-<str>  = <pipe>.read(size=-1)    # Returns a combined stdout. Also readline/s().
-<int>  = <pipe>.close()          # Returns None if last command exited with 0.
+import os, subprocess, shlex
+```
+
+```python
+<int>  = os.system('<commands>')      # Runs commands in sh/cmd shell. Prints results.
+<proc> = subprocess.run('<command>')  # For arguments see examples. Prints by default.
+<pipe> = os.popen('<commands>')       # Prints only stderr. Soft deprecated since 3.14.
+<str>  = <pipe>.read(size=-1)         # Returns combined stdout. Provides readline/s().
+<int>  = <pipe>.close()               # Returns None if last command had returncode 0.
 ```
 
 #### Sends "1 + 1" to the basic calculator and captures its output:
@@ -1743,19 +1751,16 @@ CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 
 #### Sends test.in to the basic calculator running in standard mode and saves its output to test.out:
 ```python
->>> from shlex import split
->>> os.popen('echo 1 + 1 > test.in')
->>> subprocess.run(split('bc -s'), stdin=open('test.in'), stdout=open('test.out', 'w'))
-CompletedProcess(args=['bc', '-s'], returncode=0)
->>> open('test.out').read()
-'2\n'
+>>> if os.system('echo 1 + 1 > test.in') == 0:
+...     with open('test.in') as file_in, open('test.out', 'w') as file_out:
+...         subprocess.run(shlex.split('bc -s'), stdin=file_in, stdout=file_out)
+...     print(open('test.out').read())
+2
 ```
 
 
 JSON
 ----
-**Text file format for storing collections of strings and numbers.**
-
 ```python
 import json
 <str>  = json.dumps(<list/dict>)  # Converts collection to JSON string.
@@ -1779,8 +1784,6 @@ def write_to_json_file(filename, collection):
 
 Pickle
 ------
-**Binary file format for storing Python objects.**
-
 ```python
 import pickle
 <bytes>  = pickle.dumps(<object>)  # Converts object to bytes object.
