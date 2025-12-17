@@ -350,7 +350,7 @@ String
 <bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal(). Also [፩-፱].
 <bool> = <str>.isnumeric()                   # Checks for [¼½¾…] and isdigit(). Also [零〇一…].
 <bool> = <str>.isalnum()                     # Checks for [ABC…] and isnumeric(). Also [ªµº…].
-<bool> = <str>.isprintable()                 # Checks for [ !"#$…] and isalnum(). Also emojis.
+<bool> = <str>.isprintable()                 # Checks for [ !"#…], basic emojis and isalnum().
 <bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].
 ```
 
@@ -369,8 +369,8 @@ import re
 <iter>  = re.finditer(r'<regex>', text)           # Returns all occurrences as Match objects.
 ```
 
-* **Raw string literals do not interpret escape sequences, thus enabling us to use regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).**
-* **Argument 'new' of re.sub() can be a function that accepts Match object and returns a str.**
+* **Raw string literals do not interpret escape sequences, thus enabling us to use the regex-specific escape sequences that cause SyntaxWarning in normal string literals (since 3.12).**
+* **Argument 'new' of re.sub() can be a function that accepts Match obj. and returns a string.**
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions that are listed above.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'` (besides all other chars).**
@@ -504,7 +504,7 @@ Numbers
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
 * **Floats can be compared with: `'math.isclose(<float>, <float>, rel_tol=1e-09)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
-* **Bools can be used anywhere ints can, because bool is a subclass of int: `'True + 1 == 2'`.**
+* **Bools can be used anywhere ints can, since bool is a subclass of int: `'True + 1 == 2'`.**
 
 ### Built-in Functions
 ```python
@@ -633,19 +633,19 @@ import zoneinfo, dateutil.tz
 <D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from an ISO string. Raises ValueError.
 <DT>     = DT.strptime(<str>, '<format>')   # Naive or aware datetime from a custom string.
 <D/DTn>  = D/DT.fromordinal(<int>)          # D or DT from days since the Gregorian NYE 1.
-<DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since the Epoch.
-<DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since the Epoch.
+<DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since Unix epoch.
+<DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since Unix epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following the hours are optional.**
-* **Python uses the Unix Epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
+* **Python uses the Unix epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
 
 ### Decode
 ```python
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Returns custom string representation of object.
 <int>    = <D/DT>.toordinal()               # Days since NYE 1, ignoring DT's time and zone.
-<float>  = <DTn>.timestamp()                # Seconds since the Epoch, from local naive DT.
-<float>  = <DTa>.timestamp()                # Seconds since the Epoch, from aware datetime.
+<float>  = <DTn>.timestamp()                # Seconds since Unix epoch, from local naive DT.
+<float>  = <DTa>.timestamp()                # Seconds since Unix epoch, from aware datetime.
 ```
 
 ### Format
@@ -834,7 +834,7 @@ import <package>.<module>      # Imports a built-in or '<package>/<module>.py'.
 
 Closure
 -------
-**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function (any value that is referenced from within multiple nested functions gets shared).**
+**We have/get a closure in Python when a nested function references a value of its enclosing function and then the enclosing function returns its nested function (any value that is ref&shy;erenced from within multiple nested functions gets shared).**
 
 ```python
 def get_multiplier(a):
@@ -1131,7 +1131,7 @@ class MyHashable:
 * **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by <, >, <=, >=) and the rest will be automatically generated.**
 * **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
 * **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then re&shy;turned. The shorter sequence is considered smaller in case of all values being equal.**
-* **To sort collection of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
+* **To sort a coll. of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
 
 ```python
 from functools import total_ordering
@@ -1283,7 +1283,7 @@ class MySequence:
 ```
 
 #### Discrepancies between glossary definitions and abstract base classes:
-* **Python's glossary defines iterable as any object with special methods iter() and/or getitem() and sequence as any object with getitem() and len(). It doesn't define collection.**
+* **Python's glossary defines iterable as any object with special method iter() or getitem(), and sequence as any object with getitem() and len(). It does not define collection.**
 * **Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence
@@ -1743,13 +1743,13 @@ import os, subprocess, shlex
 <int>  = <pipe>.close()               # Returns None if last command had returncode 0.
 ```
 
-#### Sends "1 + 1" to the basic calculator and captures its output:
+#### Sends "1 + 1" to the basic calculator and captures its stdout and stderr streams:
 ```python
 >>> subprocess.run('bc', input='1 + 1\n', capture_output=True, text=True)
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends test.in to the basic calculator running in standard mode and saves its output to test.out:
+#### Sends test.in to the bc running in standard mode and saves its stdout to test.out:
 ```python
 >>> if os.system('echo 1 + 1 > test.in') == 0:
 ...     with open('test.in') as file_in, open('test.out', 'w') as file_out:
@@ -1998,8 +1998,8 @@ Struct
 ```python
 from struct import pack, unpack
 
-<bytes> = pack('<format>', <el_1> [, ...])  # Packs numbers according to format string.
-<tuple> = unpack('<format>', <bytes>)       # Use iter_unpack() to get iter of tuples.
+<bytes> = pack('<format>', <el_1> [, ...])  # Packs numbers according to format.
+<tuple> = unpack('<format>', <bytes>)       # Use `iter_unpack()` to get tuples.
 ```
 
 ```python
@@ -2019,7 +2019,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
 * **`'<n>s'` - A bytes object with n elements (not effected by byte order).**
 
-#### Integer types. Use a capital letter for unsigned type. Minimum and standard sizes are in brackets:
+#### Integer types. Use capital letter for unsigned type. Minimum/standard sizes are in brackets:
 * **`'b'` - char (1/1)**
 * **`'h'` - short (2/2)**
 * **`'i'` - int (2/4)**
@@ -2033,7 +2033,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of a predefined type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the sys&shy;tem,&nbsp;however bytes of each element can be reversed (by calling the byteswap() method).**
+**List that can only hold numbers of chosen C type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array

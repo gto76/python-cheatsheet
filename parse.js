@@ -970,8 +970,8 @@ function fixPageBreaksFile() {
 function fixPageBreaksStruct() {
   const formatDiv = $('#floatingpointtypesstructalwaysusesstandardsizes').parent().parent().parent().parent()
   move(formatDiv, 'floatingpointtypesstructalwaysusesstandardsizes')
-  move(formatDiv, 'integertypesuseacapitalletterforunsignedtypeminimumandstandardsizesareinbrackets')
-  move(formatDiv, 'forstandardsizesstartformatstringwith')
+  move(formatDiv, 'integertypesusecapitalletterforunsignedtypeminimumstandardsizesareinbrackets')
+  move(formatDiv, 'forstandardtypesizesandmanualalignmentpaddingstartformatstringwith')
 }
 
 function move(anchor_el, el_id) {
