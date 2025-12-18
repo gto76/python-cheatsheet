@@ -243,9 +243,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)         <span class="hljs-comment"># Returns updated 'start' endlessly. Accepts floats.</span>
 &lt;iter&gt; = it.repeat(&lt;el&gt; [, times])         <span class="hljs-comment"># Returns passed element endlessly or 'times' times.</span>
-&lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the passed sequence of elements endlessly.</span>
+&lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the sequence endlessly. Accepts iterators.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Iterates over each collection. Accepts iterators.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Returns each element of each collection in order.</span>
 &lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Accepts collection (i.e. iterable) of collections.</span>
 &lt;iter&gt; = it.islice(&lt;coll&gt;, [start,] stop)  <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
 &lt;iter&gt; = it.product(&lt;coll&gt;, ...)           <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
@@ -449,8 +449,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'{&lt;num&gt;:g}'</span></code> is <code class="python hljs"><span class="hljs-string">'{&lt;float&gt;:.6}'</span></code> that strips <code class="python hljs"><span class="hljs-string">'.0'</span></code> and has exponent starting at <code class="python hljs"><span class="hljs-string">'1e+06'</span></code>.</strong></li>
-<li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> becomes a <code class="python hljs"><span class="hljs-string">'6'</span></code>, while <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
-<li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
+<li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> becomes a <code class="python hljs"><span class="hljs-string">'6'</span></code>, while <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>. This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
 <div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
 {<span class="hljs-number">90</span>:b}                                   <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
@@ -738,7 +737,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <ul>
 <li><strong>Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (<code class="python hljs"><span class="hljs-string">'collections.defaultdict(&lt;func&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;func&gt;, to_exc)'</span></code> and <code class="python hljs"><span class="hljs-string">'dataclasses.field(default_factory=&lt;func&gt;)'</span></code>).</strong></li>
 </ul>
-<div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope, it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
+<div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope (i.e., body of a function), it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
     i = <span class="hljs-number">0</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">()</span>:</span>
         <span class="hljs-keyword">nonlocal</span> i
