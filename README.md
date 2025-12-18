@@ -863,7 +863,7 @@ from functools import partial
 * **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (`'collections.defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and `'dataclasses.field(default_factory=<func>)'`).**
 
 ### Non-Local
-**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is regarded as a local variable, unless it is declared as a 'global' or a 'nonlocal'.**
+**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable, unless it is declared as a 'global' or a 'nonlocal' before its first usage.**
 
 ```python
 def get_counter():
