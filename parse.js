@@ -427,16 +427,17 @@ const DIAGRAM_5_A =
   "+--------------+----------------+----------------+----------------+----------------+\n";
 
 const DIAGRAM_55_A =
-  "+---------------------------+--------------+--------------+----------------+\n";
+  "+---------------------------+----------------+--------------+--------------+\n";
 
 const DIAGRAM_55_B =
-  '┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n' +
-  '┃                           │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) ┃\n' +
-  '┠───────────────────────────┼──────────────┼──────────────┼────────────────┨\n' +
-  '┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │      ✓       │      ✓       │       ✓        ┃\n' +
-  '┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │              │      ✓       │       ✓        ┃\n' +
-  '┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │              │              │       ✓        ┃\n' +
-  '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n';
+  '┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓\n' +
+  '┃                           │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  ┃\n' +
+  '┠───────────────────────────┼────────────────┼──────────────┼──────────────┨\n' +
+  '┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │       ✓        │      ✓       │      ✓       ┃\n' +
+  '┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │       ✓        │      ✓       │              ┃\n' +
+  '┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │       ✓        │              │              ┃\n' +
+  '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛\n';
+
 
 const DIAGRAM_6_A =
   '+------------+------------+------------+------------+--------------+\n' +

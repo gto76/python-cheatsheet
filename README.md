@@ -254,8 +254,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type> = type(<el>)                # Returns object's type. Same as `<el>.__class__`.
-<bool> = isinstance(<el>, <type>)  # Same result as `issubclass(type(<el>), <type>)`.
+<type> = type(<obj>)                # Returns object's type. Same as `<obj>.__class__`.
+<bool> = isinstance(<obj>, <type>)  # Same result as `issubclass(type(<obj>), <type>)`.
 ```
 
 ```python
@@ -479,8 +479,8 @@ Format
 | 56.789       |    '5.7e+01'   |     '56.79'    |   '5.68e+01'   |   '5678.90%'   |
 +--------------+----------------+----------------+----------------+----------------+
 ```
-* **`'{<float>:g}'` is `'{<float>:.6}'` with stripped zeros, exponent starting at `'1e+06'`.**
-* **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes `'{6.5:.0f}'` a `'6'` and `'{7.5:.0f}'` an `'8'`.**
+* **`'{<num>:g}'` is `'{<float>:.6}'` that strips `'.0'` and has exponent starting at `'1e+06'`.**
+* **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence `'{6.5:.0f}'` becomes a `'6'`, while `'{7.5:.0f}'` an `'8'`.**
 * **This rule only effects numbers that can be represented exactly by a float (`.5`, `.25`, …).**
 
 ### Ints
@@ -630,11 +630,11 @@ import zoneinfo, dateutil.tz
 
 ### Encode
 ```python
-<D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from an ISO string. Raises ValueError.
-<DT>     = DT.strptime(<str>, '<format>')   # Naive or aware datetime from a custom string.
-<D/DTn>  = D/DT.fromordinal(<int>)          # D or DT from days since the Gregorian NYE 1.
-<DTn>    = DT.fromtimestamp(<float>)        # Local naive DT from seconds since Unix epoch.
-<DTa>    = DT.fromtimestamp(<float>, <tz>)  # Aware datetime from seconds since Unix epoch.
+<D/T/DT> = D/T/DT.fromisoformat(<str>)      # Object from the ISO string. Raises ValueError.
+<DT>     = DT.strptime(<str>, '<format>')   # Naive or aware datetime from the custom string.
+<D/DTn>  = D/DT.fromordinal(<int>)          # Date or DT from days since the Gregorian NYE 1.
+<DTn>    = DT.fromtimestamp(<float>)        # A local naive DT from seconds since the epoch.
+<DTa>    = DT.fromtimestamp(<float>, <tz>)  # An aware datetime from seconds since the epoch.
 ```
 * **ISO strings come in following forms: `'YYYY-MM-DD'`, `'HH:MM:SS.mmmuuu[±HH:MM]'`, or both separated by an arbitrary character. All parts following the hours are optional.**
 * **Python uses the Unix epoch: `'1970-01-01 00:00 UTC'`, `'1970-01-01 01:00 CET'`, ...**
@@ -644,8 +644,8 @@ import zoneinfo, dateutil.tz
 <str>    = <D/T/DT>.isoformat(sep='T')      # Also `timespec='auto/hours/minutes/seconds/…'`.
 <str>    = <D/T/DT>.strftime('<format>')    # Returns custom string representation of object.
 <int>    = <D/DT>.toordinal()               # Days since NYE 1, ignoring DT's time and zone.
-<float>  = <DTn>.timestamp()                # Seconds since Unix epoch, from local naive DT.
-<float>  = <DTa>.timestamp()                # Seconds since Unix epoch, from aware datetime.
+<float>  = <DTn>.timestamp()                # Seconds since the epoch from a local naive DT.
+<float>  = <DTa>.timestamp()                # Seconds since the epoch from an aware datetime.
 ```
 
 ### Format
@@ -718,13 +718,13 @@ def add(*a):
 
 #### Allowed compositions of arguments and the ways they can be called:
 ```text
-+---------------------------+--------------+--------------+----------------+
-|                           |  func(1, 2)  | func(1, y=2) | func(x=1, y=2) |
-+---------------------------+--------------+--------------+----------------+
-| func(x, *args, **kwargs): |     yes      |     yes      |      yes       |
-| func(*args, y, **kwargs): |              |     yes      |      yes       |
-| func(*, x, **kwargs):     |              |              |      yes       |
-+---------------------------+--------------+--------------+----------------+
++---------------------------+----------------+--------------+--------------+
+|                           | func(x=1, y=2) | func(1, y=2) |  func(1, 2)  |
++---------------------------+----------------+--------------+--------------+
+| func(x, *args, **kwargs): |      yes       |     yes      |     yes      |
+| func(*args, y, **kwargs): |      yes       |     yes      |              |
+| func(*, x, **kwargs):     |      yes       |              |              |
++---------------------------+----------------+--------------+--------------+
 ```
 
 ### Other Uses
@@ -825,8 +825,7 @@ import <module>                # Imports a built-in or '<module>.py'.
 import <package>               # Imports a built-in or '<package>/__init__.py'.
 import <package>.<module>      # Imports a built-in or '<package>/<module>.py'.
 ```
-* **Package is a collection of modules, but it can also define its own functions, classes, etc.**
-* **On a filesystem this corresponds to a directory of Python files with an optional init script.**
+* **Package is a collection of modules, but it can also define its own functions, classes, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in the `'<package>/__init__.py'` script.**
 * **Directory of the file that is passed to python command serves as a root of local imports.**
 * **Use relative imports, i.e. `'from .[…][<pkg/mod>[.…]] import <obj>'`, if project has scattered entry points. Another option is to install the whole project by moving its code into 'src' dir, adding ['pyproject.toml'](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#basic-information) to its root, and running `'$ pip3 install -e .'`.**

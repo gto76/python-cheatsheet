@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>December 17, 2025</aside>
+    <aside>December 18, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -268,8 +268,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Everything in Python is an object.</strong></li>
 <li><strong>Every object has a certain type.</strong></li>
 <li><strong>Type and class are synonymous.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;el&gt;)                <span class="hljs-comment"># Returns object's type. Same as `&lt;el&gt;.__class__`.</span>
-&lt;bool&gt; = isinstance(&lt;el&gt;, &lt;type&gt;)  <span class="hljs-comment"># Same result as `issubclass(type(&lt;el&gt;), &lt;type&gt;)`.</span>
+</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;obj&gt;)                <span class="hljs-comment"># Returns object's type. Same as `&lt;obj&gt;.__class__`.</span>
+&lt;bool&gt; = isinstance(&lt;obj&gt;, &lt;type&gt;)  <span class="hljs-comment"># Same result as `issubclass(type(&lt;obj&gt;), &lt;type&gt;)`.</span>
 </code></pre></div>
 
 
@@ -448,8 +448,8 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'{&lt;float&gt;:g}'</span></code> is <code class="python hljs"><span class="hljs-string">'{&lt;float&gt;:.6}'</span></code> with stripped zeros, exponent starting at <code class="python hljs"><span class="hljs-string">'1e+06'</span></code>.</strong></li>
-<li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. That makes <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> a <code class="python hljs"><span class="hljs-string">'6'</span></code> and <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'{&lt;num&gt;:g}'</span></code> is <code class="python hljs"><span class="hljs-string">'{&lt;float&gt;:.6}'</span></code> that strips <code class="python hljs"><span class="hljs-string">'.0'</span></code> and has exponent starting at <code class="python hljs"><span class="hljs-string">'1e+06'</span></code>.</strong></li>
+<li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> becomes a <code class="python hljs"><span class="hljs-string">'6'</span></code>, while <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>This rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
 <div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                   <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
@@ -564,11 +564,11 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <li><strong>Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
 <li><strong>To get ZoneInfo() to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
-<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from an ISO string. Raises ValueError.</span>
-&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Naive or aware datetime from a custom string.</span>
-&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># D or DT from days since the Gregorian NYE 1.</span>
-&lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># Local naive DT from seconds since Unix epoch.</span>
-&lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># Aware datetime from seconds since Unix epoch.</span>
+<div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from the ISO string. Raises ValueError.</span>
+&lt;DT&gt;     = DT.strptime(&lt;str&gt;, <span class="hljs-string">'&lt;format&gt;'</span>)   <span class="hljs-comment"># Naive or aware datetime from the custom string.</span>
+&lt;D/DTn&gt;  = D/DT.fromordinal(&lt;int&gt;)          <span class="hljs-comment"># Date or DT from days since the Gregorian NYE 1.</span>
+&lt;DTn&gt;    = DT.fromtimestamp(&lt;float&gt;)        <span class="hljs-comment"># A local naive DT from seconds since the epoch.</span>
+&lt;DTa&gt;    = DT.fromtimestamp(&lt;float&gt;, &lt;tz&gt;)  <span class="hljs-comment"># An aware datetime from seconds since the epoch.</span>
 </code></pre></div>
 
 <ul>
@@ -578,8 +578,8 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <div><h3 id="decode">Decode</h3><pre><code class="python language-python hljs">&lt;str&gt;    = &lt;D/T/DT&gt;.isoformat(sep=<span class="hljs-string">'T'</span>)      <span class="hljs-comment"># Also `timespec='auto/hours/minutes/seconds/…'`.</span>
 &lt;str&gt;    = &lt;D/T/DT&gt;.strftime(<span class="hljs-string">'&lt;format&gt;'</span>)    <span class="hljs-comment"># Returns custom string representation of object.</span>
 &lt;int&gt;    = &lt;D/DT&gt;.toordinal()               <span class="hljs-comment"># Days since NYE 1, ignoring DT's time and zone.</span>
-&lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since Unix epoch, from local naive DT.</span>
-&lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since Unix epoch, from aware datetime.</span>
+&lt;float&gt;  = &lt;DTn&gt;.timestamp()                <span class="hljs-comment"># Seconds since the epoch from a local naive DT.</span>
+&lt;float&gt;  = &lt;DTa&gt;.timestamp()                <span class="hljs-comment"># Seconds since the epoch from an aware datetime.</span>
 </code></pre></div>
 
 <div><h3 id="format-1">Format</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>dt = datetime.strptime(<span class="hljs-string">'2025-08-14 23:39:00.00 +0200'</span>, <span class="hljs-string">'%Y-%m-%d %H:%M:%S.%f %z'</span>)
@@ -633,13 +633,13 @@ func(*args, **kwargs)
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-number">6</span>
 </code></pre>
-<div><h4 id="allowedcompositionsofargumentsandthewaystheycanbecalled">Allowed compositions of arguments and the ways they can be called:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓
-┃                           │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) ┃
-┠───────────────────────────┼──────────────┼──────────────┼────────────────┨
-┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │      ✓       │      ✓       │       ✓        ┃
-┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │              │      ✓       │       ✓        ┃
-┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │              │              │       ✓        ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛
+<div><h4 id="allowedcompositionsofargumentsandthewaystheycanbecalled">Allowed compositions of arguments and the ways they can be called:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃                           │ func(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │ func(<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>) │  func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  ┃
+┠───────────────────────────┼────────────────┼──────────────┼──────────────┨
+┃ <span class="hljs-title">func</span>(x, *args, **kwargs): │       ✓        │      ✓       │      ✓       ┃
+┃ <span class="hljs-title">func</span>(*args, y, **kwargs): │       ✓        │      ✓       │              ┃
+┃ <span class="hljs-title">func</span>(*, x, **kwargs):     │       ✓        │              │              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 </code></pre></div>
 
 <div><h3 id="otheruses">Other Uses</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;collection&gt; [, ...]]  <span class="hljs-comment"># Or: list(&lt;coll&gt;) [+ ...]</span>
@@ -709,8 +709,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 
 
 <ul>
-<li><strong>Package is a collection of modules, but it can also define its own functions, classes, etc.</strong></li>
-<li><strong>On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
+<li><strong>Package is a collection of modules, but it can also define its own functions, classes, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.</strong></li>
 <li><strong>Running <code class="python hljs"><span class="hljs-string">'import &lt;package&gt;'</span></code> does not automatically provide access to the package's modules unless they are explicitly imported in the <code class="python hljs"><span class="hljs-string">'&lt;package&gt;/__init__.py'</span></code> script.</strong></li>
 <li><strong>Directory of the file that is passed to python command serves as a root of local imports.</strong></li>
 <li><strong>Use relative imports, i.e. <code class="python hljs"><span class="hljs-string">'from .[…][&lt;pkg/mod&gt;[.…]] import &lt;obj&gt;'</span></code>, if project has scattered entry points. Another option is to install the whole project by moving its code into 'src' dir, adding <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#basic-information">'pyproject.toml'</a> to its root, and running <code class="python hljs"><span class="hljs-string">'$ pip3 install -e .'</span></code>.</strong></li>
@@ -2936,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>December 17, 2025</aside>
+    <aside>December 18, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
