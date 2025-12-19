@@ -60,9 +60,9 @@ sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
-* **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
-* **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
-* **This text uses the term collection instead of [iterable](#abstractbaseclasses). For rationale see [Collection](#collection).**
+* **For details about functions sort(), sorted(), min() and max() see duck type [sortable](#sortable).**
+* **Listed [lambda expressions](#lambda) can be replaced by the [operator's](#operator) itemgetter() function.**
+* **This text uses the term collection instead of [iterable](#abstractbaseclasses). For rationale see [duck types](#collection).**
 
 ```python
 <int> = len(<list/dict/set/…>)  # Returns number of items. Doesn't accept iterators.
@@ -144,7 +144,7 @@ Set
 ```
 
 ### Frozen Set
-* **Is immutable and hashable.**
+* **Frozenset is immutable and hashable version of the normal set.**
 * **That means it can be used as a key in a dictionary or as an item in a set.**
 ```python
 <frozenset> = frozenset(<collection>)
@@ -269,7 +269,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType, ModuleTyp
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods the class has implemented. For instance, Iterable ABC looks for method iter(), while Collection ABC looks for iter(), contains() and len().**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods _that_ class has implemented. For instance, Iterable ABC looks for method iter(), while Collection ABC looks for iter(), contains() and len().**
 
 ```python
 >>> from collections.abc import Iterable, Collection, Sequence
@@ -1817,10 +1817,10 @@ import csv
 <list>   = next(<reader>)                       # Returns next row as a list of strings.
 <list>   = list(<reader>)                       # Returns a list of all remaining rows.
 ```
-* **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about newline argument see [Open](#open).**
-* **To print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
-* **For XML and binary Excel files (extensions xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
-* **Reader accepts any iterator (or collection) of strings, not just text files.**
+* **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about the _newline_ argument see [Open](#open).**
+* **To nicely print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
+* **For XML and binary Excel files (with extensions xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
+* **Reader can process any iterator (or collection) of strings, not just text files.**
 
 ### Write
 ```python
@@ -1833,12 +1833,12 @@ import csv
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
 
 ### Parameters
-* **`'dialect'` - Master parameter that sets the default values. String or a 'csv.Dialect' object.**
+* **`'dialect'` - Master parameter that sets the default values. String or a _csv.Dialect_ object.**
 * **`'delimiter'` - A one-character string that separates fields (comma, tab, semicolon, etc.).**
 * **`'lineterminator'` - Sets how writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
 * **`'quotechar'` - Character for quoting fields containing delimiters, quotechars, '\n' or '\r'.**
-* **`'escapechar'` - Character for escaping quotechars (not needed if doublequote is True).**
-* **`'doublequote'` - Whether quotechars inside fields are/get doubled instead of escaped.**
+* **`'escapechar'` - Character for escaping quotechars (can be None if doublequote is True).**
+* **`'doublequote'` - Whether quotechars inside fields are/get doubled (instead of escaped).**
 * **`'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.**
 * **`'skipinitialspace'` - Is space character at the start of the field stripped by the reader.**
 
@@ -2031,7 +2031,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers of chosen C type. Available types and their minimum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling the byteswap() method).**
+**List that can only hold numbers that fit into the chosen C type. Available types and their min&shy;imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array
@@ -2095,7 +2095,7 @@ from collections import deque
 
 Operator
 --------
-**Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in first, third and fifth line are also ordered by precedence within a group.**
+**Module of functions that provide the functionality of operators. Functions are grouped by operator precedence, from least to most binding. Functions and operators in first, third and fifth line are also ordered by precedence within a line.**
 ```python
 import operator as op
 ```
@@ -2253,7 +2253,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 <Thread>.start()                               # Starts the thread. Also <Thread>.is_alive().
 <Thread>.join()                                # Waits until the thread has finished executing.
 ```
-* **Use `'kwargs=<dict>'` to pass keyword arguments to the function.**
+* **Use `'kwargs=<dict>'` to pass keyword arguments to the function (i.e. thread).**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
 
 ### Lock
@@ -2299,9 +2299,9 @@ with <lock>:                                   # Enters the block by calling met
 <bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
-* **Map() and as\_completed() also accept 'timeout'. It causes futures.TimeoutError when next() is called/blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
-* **Exceptions that happen inside threads are raised when map iterator's next() or Future's result() are called. Future's exception() method returns an exception object or None.**
-* **ProcessPoolExecutor provides true parallelism but: everything sent to/from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' parameters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
+* **Map() and as\_completed() also accept 'timeout' arg. It causes _futures.TimeoutError_ when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
+* **Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.**
+* **ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' param&shy;eters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
 
 
 Coroutines
