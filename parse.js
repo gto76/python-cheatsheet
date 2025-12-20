@@ -804,11 +804,18 @@ function main() {
 
 function getMd() {
   var readme = readFile('README.md');
-  var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
-  var readme = readme.replace("#semaphore-event-barrier", "#semaphoreeventbarrier");
-  var readme = readme.replace("#dataframe-plot-encode-decode", "#dataframeplotencodedecode");
+  var readme = removeHyphensFromLinks(readme);
   const converter = new showdown.Converter();
   return converter.makeHtml(readme);
+}
+
+function removeHyphensFromLinks(md) {
+  return md.replace(/\(#([^)]+)\)/g, (_, anchor) => {
+    const match = anchor.match(/^(.*?)(-\d+)?$/);
+    const main = match[1].replace(/-/g, "");
+    const suffix = match[2] ?? "";
+    return `(#${main}${suffix})`;
+  });
 }
 
 function initDom(html) {

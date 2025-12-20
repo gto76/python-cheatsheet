@@ -62,7 +62,7 @@ flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
 * **For details about functions sort(), sorted(), min() and max() see duck type [sortable](#sortable).**
 * **Listed [lambda expressions](#lambda) can be replaced by the [operator's](#operator) itemgetter() function.**
-* **This text uses the term collection instead of [iterable](#abstractbaseclasses). For rationale see [duck types](#collection).**
+* **This text uses the term collection instead of [iterable](#abstract-base-classes). For rationale see [duck types](#collection).**
 
 ```python
 <int> = len(<list/dict/set/…>)  # Returns number of items. Doesn't accept iterators.
@@ -1819,7 +1819,7 @@ import csv
 ```
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about the _newline_ argument see [Open](#open).**
 * **To nicely print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
-* **For XML and binary Excel files (with extensions xlsx, xlsm and xlsb) use [Pandas](#fileformats) library.**
+* **For XML and binary Excel files (with extensions xlsx, xlsm and xlsb) use [Pandas](#file-formats) library.**
 * **Reader can process any iterator (or collection) of strings, not just text files.**
 
 ### Write
