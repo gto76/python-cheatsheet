@@ -541,7 +541,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 <ul>
 <li><strong>Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'fold=1'</span></code> means the second pass in case of time jumping back (usually for one hour).</strong></li>
-<li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of all seconds.</strong></li>
+<li><strong>Timedelta normalizes arguments to ±days, seconds (&lt; 86 400) and microseconds (&lt; 1M). Its str() method returns <code class="python hljs"><span class="hljs-string">'[±D, ]H:MM:SS[.…]'</span></code> and total_seconds() a float of seconds.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'&lt;D/DT&gt;.weekday()'</span></code> to get the day of the week as an integer, with Monday being 0.</strong></li>
 </ul>
 <div><h3 id="now">Now</h3><pre><code class="python language-python hljs">&lt;D/DTn&gt; = D/DT.today()                      <span class="hljs-comment"># Current local date or naive DT. Also DT.now().</span>
@@ -864,9 +864,9 @@ print/str/repr(&lt;dataclass&gt;(obj))
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>people = {Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)}
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>people = [Person(<span class="hljs-string">'Bob'</span>), Employee(<span class="hljs-string">'Ann'</span>, <span class="hljs-number">0</span>)]
 <span class="hljs-meta">&gt;&gt;&gt; </span>sorted(people)
-[Person(<span class="hljs-string">'Ann'</span>), Employee(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">0</span>)]
+[Employee(<span class="hljs-string">'Ann'</span>, <span class="hljs-number">0</span>), Person(<span class="hljs-string">'Bob'</span>)]
 </code></pre>
 <div><h3 id="typeannotations">Type Annotations</h3><ul>
 <li><strong>They add type hints to variables, arguments and functions (<code class="python hljs"><span class="hljs-string">'def f() -&gt; &lt;type&gt;:'</span></code>).</strong></li>
@@ -891,14 +891,15 @@ print/str/repr(&lt;dataclass&gt;(obj))
 
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and 'frozen' must be True.</strong></li>
+<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and arg. 'frozen' must be True.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument accepts any <a href="#callable">callable</a> object.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
-<pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
+<div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
 P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
 P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float, <span class="hljs-number">0</span>), (<span class="hljs-string">'y'</span>, float, <span class="hljs-number">0</span>)])
-</code></pre>
+</code></pre></div>
+
 <div><h3 id="property">Property</h3><p><strong>Pythonic way of implementing getters and setters.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
 <span class="hljs-meta">    @property</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
@@ -917,8 +918,6 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 </code></pre>
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
     __slots__ = [<span class="hljs-string">'a'</span>]
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
-        self.a = <span class="hljs-number">1</span>
 </code></pre></div>
 
 
@@ -1170,7 +1169,7 @@ Hello World!
 &lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Returns an endless iterator of members.</span>
 &lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Randomly selects one of the members.</span>
 </code></pre>
-<div><h3 id="inline-1">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
+<div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, {<span class="hljs-string">'FORK'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'KNIFE'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'SPOON'</span>: <span class="hljs-number">3</span>})
 </code></pre></div>

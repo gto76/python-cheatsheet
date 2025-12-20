@@ -605,7 +605,7 @@ import zoneinfo, dateutil.tz
 ```
 * **Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!**
 * **`'fold=1'` means the second pass in case of time jumping back (usually for one hour).**
-* **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M). Its str() method returns `'[±D, ]H:MM:SS[.…]'` and total_seconds() a float of all seconds.**
+* **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M). Its str() method returns `'[±D, ]H:MM:SS[.…]'` and total_seconds() a float of seconds.**
 * **Use `'<D/DT>.weekday()'` to get the day of the week as an integer, with Monday being 0.**
 
 ### Now
@@ -1012,9 +1012,9 @@ class Employee(Person):
 ```
 
 ```python
->>> people = {Person('Ann'), Employee('Bob', 0)}
+>>> people = [Person('Bob'), Employee('Ann', 0)]
 >>> sorted(people)
-[Person('Ann'), Employee('Bob', 0)]
+[Employee('Ann', 0), Person('Bob')]
 ```
 
 ### Type Annotations
@@ -1040,10 +1040,11 @@ class <class_name>:
     <attr_name>: list/dict/set = field(default_factory=list/dict/set)
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be [hashable](#hashable), all attributes must be hashable and 'frozen' must be True.**
+* **For object to be [hashable](#hashable), all attributes must be hashable and arg. 'frozen' must be True.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
+#### Inline:
 ```python
 P = make_dataclass('P', ['x', 'y'])
 P = make_dataclass('P', [('x', float), ('y', float)])
@@ -1076,8 +1077,6 @@ class Person:
 ```python
 class MyClassWithSlots:
     __slots__ = ['a']
-    def __init__(self):
-        self.a = 1
 ```
 
 ### Copy
