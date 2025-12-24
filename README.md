@@ -60,8 +60,8 @@ sorted_by_second = sorted(<collection>, key=lambda el: el[1])
 sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
-* **For details about functions sort(), sorted(), min() and max() see duck type [sortable](#sortable).**
-* **Listed [lambda expressions](#lambda) can be replaced by the [operator's](#operator) itemgetter() function.**
+* **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
+* **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
 * **This text uses the term collection instead of [iterable](#abstract-base-classes). For rationale see [duck types](#collection).**
 
 ```python
@@ -204,7 +204,7 @@ Iterator
 <iter> = iter(<collection>)                # Iterator that returns passed elements one by one.
 <iter> = iter(<func>, to_exc)              # Calls `<func>()` until it returns 'to_exc' value.
 <iter> = (<expr> for <name> in <coll>)     # E.g. `(i+1 for i in range(3))`. Evaluates lazily.
-<el>   = next(<iter>)                      # Returns next element. Raises StopIteration on end.
+<el>   = next(<iter> [, default])          # Raises StopIteration or returns 'default' on end.
 <list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
 ```
 * **For loops call `'iter(<collection>)'` at the start and `'next(<iter>)'` on each pass.**
@@ -374,7 +374,7 @@ import re
 * **Argument `'flags=re.IGNORECASE'` can be used with all functions that are listed above.**
 * **Argument `'flags=re.MULTILINE'` makes `'^'` and `'$'` match the start/end of each line.**
 * **Argument `'flags=re.DOTALL'` makes `'.'` also accept the `'\n'` (besides all other chars).**
-* **`'re.compile("<regex>")'` returns a Pattern object with methods sub(), findall(), etc.**
+* **`'re.compile(r"<regex>")'` returns a Pattern object with methods sub(), findall(), etc.**
 
 ### Match Object
 ```python
@@ -382,7 +382,7 @@ import re
 <str>   = <Match>.group(1)                        # Returns part inside the first brackets.
 <tuple> = <Match>.groups()                        # Returns all bracketed parts as strings.
 <int>   = <Match>.start()                         # Returns start index of the whole match.
-<int>   = <Match>.end()                           # Returns a match's exclusive end index.
+<int>   = <Match>.end()                           # Returns the match's end index plus one.
 ```
 
 ### Special Sequences
@@ -392,7 +392,7 @@ import re
 '\s' == '[ \t\n\r\f\v]'                           # Also [\x1c-\x1f…]. Matches whitespace.
 ```
 * **By default, decimal characters and alphanumerics from all alphabets are matched unless `'flags=re.ASCII'` is used. It restricts special sequence matches to the first 128 Unicode characters and also prevents `'\s'` from accepting `'\x1c'`, `'\x1d'`, `'\x1e'` and `'\x1f'` (non-printable characters that divide text into files, tables, rows and fields, respectively).**
-* **Use a capital letter for negation (all non-ASCII characters will be matched when used in combination with ASCII flag).**
+* **Use a capital letter, i.e. `'\D'`, `'\W'` or `'\S'`, for negation. All non-ASCII characters are matched if ASCII flag is used in conjunction with a capital letter.**
 
 
 Format
@@ -419,10 +419,10 @@ Format
 {<el>:.<10}                              # '<el>......'
 {<el>:0}                                 # '<el>'
 ```
-* **Objects are rendered by calling the format() function, e.g. `'format(<el>, "<10")'`.**
+* **Objects are converted to strings with format() function, e.g. `'format(<el>, "<10")'`.**
 * **Options can be generated dynamically via nested braces: `f'{<el>:{<str/int>}[…]}'`.**
-* **Adding `'='` to the expression prepends it to the output: `f'{1+1=}'` returns `'1+1=2'`.**
-* **Adding `'!r'` to the expression converts object to string by calling its [repr()](#class) method.**
+* **Adding `'='` to the expression prepends it to its result, e.g. `f'{1+1=}'` returns `'1+1=2'`.**
+* **Adding `'!r'` to the expression first calls result's [repr()](#class) method and only then format().**
 
 ### Strings
 ```python
@@ -606,7 +606,7 @@ import zoneinfo, dateutil.tz
 * **Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!**
 * **`'fold=1'` means the second pass in case of time jumping back (usually for one hour).**
 * **Timedelta normalizes arguments to ±days, seconds (< 86 400) and microseconds (< 1M). Its str() method returns `'[±D, ]H:MM:SS[.…]'` and total_seconds() a float of seconds.**
-* **Use `'<D/DT>.weekday()'` to get the day of the week as an int, with Monday being 0.**
+* **Use `'<D/DT>.weekday()'` to get the day of the week as an int (with Monday being 0).**
 
 ### Now
 ```python
@@ -774,7 +774,7 @@ from functools import reduce
 ### Any, All
 ```python
 <bool> = any(<collection>)                         # Is bool(<el>) True for any el?
-<bool> = all(<collection>)                         # Is it true for all (or empty)?
+<bool> = all(<collection>)                         # Is it True for all (or empty)?
 ```
 
 ### Conditional Expression
