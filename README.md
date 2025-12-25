@@ -728,10 +728,10 @@ def add(*a):
 
 ### Other Uses
 ```python
-<list>  = [*<collection> [, ...]]  # Or: list(<coll>) [+ ...]
-<tuple> = (*<collection>, [...])   # Or: tuple(<coll>) [+ ...]
-<set>   = {*<collection> [, ...]}  # Or: set(<coll>) [| ...]
-<dict>  = {**<dict> [, ...]}       # Or: <dict> | ...
+<list>  = [*<collection> [, ...]]  # Same as `list(<coll>) [+ ...]`.
+<tuple> = (*<collection>, [...])   # Same as `tuple(<coll>) [+ ...]`.
+<set>   = {*<collection> [, ...]}  # Same as `set(<coll>) [| ...]`.
+<dict>  = {**<dict> [, ...]}       # Last dict has priority. Also |.
 ```
 
 ```python
@@ -863,7 +863,7 @@ from functools import partial
 * **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (`'collections.defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and `'dataclasses.field(default_factory=<func>)'`).**
 
 ### Non-Local
-**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable, unless it is declared as a 'global' or a 'nonlocal' before its first usage.**
+**If a variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable unless it is declared `'global'` or `'nonlocal'` before its first usage.**
 
 ```python
 def get_counter():
@@ -972,7 +972,7 @@ class MyClass:
 ```
 * **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
 * **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
-* **Return value of str() special method should be readable and of repr() unambiguous. If only repr() is defined, it will also be used for str().**
+* **Return value of str() special method should be readable and of repr() unambiguous. If&nbsp;only repr() is defined, it will also be used for str().**
 
 #### Expressions that call object's str() special method:
 ```python
@@ -991,7 +991,7 @@ print/str/repr(<dataclass>(obj))
 ```
 
 ### Subclass
-* **Inheritance is a mechanism that enables a class to extend some other class (that is, subclass to extend its parent), and by doing so inherit all of its methods and attributes.**
+* **Inheritance is a mechanism that enables a class to extend some other class (i.e., a sub&shy;class to extend its parent), and by doing so inherit all of its methods and attributes.**
 * **Subclass can then add its own methods and attributes or override inherited ones by reusing their names.**
 
 ```python
