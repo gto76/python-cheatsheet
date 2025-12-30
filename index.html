@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>December 25, 2025</aside>
+    <aside>December 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -832,16 +832,16 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
 <li><strong>Return value of str() special method should be readable and of repr() unambiguous. If&nbsp;only repr() is defined, it will also be used for str().</strong></li>
 </ul>
-<div><h4 id="expressionsthatcallobjectsstrspecialmethod">Expressions that call object's str() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
+<div><h4 id="expressionsthatcallstrspecialmethod">Expressions that call str() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
 print(obj)
 logging.warning(obj)
 &lt;csv_writer&gt;.writerow([obj])
 </code></pre></div>
 
-<div><h4 id="expressionsthatcallobjectsreprspecialmethod">Expressions that call object's repr() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
+<div><h4 id="expressionsthatcallreprspecialmethod">Expressions that call repr() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
 print/str/repr([obj])
 print/str/repr({obj: obj})
-print/str/repr(&lt;dataclass&gt;(obj))
+print/str/repr(MyDataClass(obj))
 </code></pre></div>
 
 <div><h3 id="subclass">Subclass</h3><ul>
@@ -891,8 +891,8 @@ print/str/repr(&lt;dataclass&gt;(obj))
 
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
-<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and arg. 'frozen' must be True.</strong></li>
-<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is shared among all instances. Its 'default_factory' argument accepts any <a href="#callable">callable</a> object.</strong></li>
+<li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and <code class="python hljs"><span class="hljs-string">'frozen'</span></code> must be <code class="python hljs"><span class="hljs-string">'True'</span></code>.</strong></li>
+<li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is&nbsp;shared among all instances. Its 'default_factory' argument accepts any <a href="#callable">callable</a> object.</strong></li>
 <li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
@@ -928,7 +928,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <div><h2 id="ducktypes"><a href="#ducktypes" name="ducktypes">#</a>Duck Types</h2><p><strong>A duck type is an implicit type that prescribes a set of special methods. Any object that has those methods defined is considered a member of that duck type.</strong></p><div><h3 id="comparable">Comparable</h3><ul>
 <li><strong>If eq() method is not overridden, it returns <code class="python hljs"><span class="hljs-string">'id(self) == id(other)'</span></code>, which is the same as <code class="python hljs"><span class="hljs-string">'self is other'</span></code>. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).</strong></li>
 <li><strong>Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. Result is False if both return NotImplemented.</strong></li>
-<li><strong>Ne() automatically works on any object that has eq() defined.</strong></li>
+<li><strong>Method ne() (called by <code class="python hljs"><span class="hljs-string">'!='</span></code>) automatically works on any object that has eq() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComparable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -943,7 +943,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 <div><h3 id="hashable">Hashable</h3><ul>
 <li><strong>Hashable object needs both hash() and eq() methods and its hash value must not change.</strong></li>
-<li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do. That is why Python automatically makes classes unhashable if you only implement eq().</strong></li>
+<li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self._a = a
@@ -1005,7 +1005,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator, etc.</strong></li>
 <li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
 <li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehensions">generator expressions</a>.</strong></li>
-<li><strong>File objects returned by the <a href="#open">open()</a> function, etc.</strong></li>
+<li><strong>File objects returned by the <a href="#open">open()</a> function, <a href="#sqlite">SQLite</a> cursor objects, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method that is executed when they are called.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable. You can also call the object and check if it raised TypeError.</strong></li>
@@ -1314,19 +1314,19 @@ arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
 <div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser
-p = ArgumentParser(description=&lt;str&gt;)                             <span class="hljs-comment"># Returns a parser object.</span>
-p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
-p.add_argument(<span class="hljs-string">'-&lt;short_name&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)                    <span class="hljs-comment"># Mandatory first argument.</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)                  <span class="hljs-comment"># Mandatory remaining args.</span>
-p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'?'</span>)                  <span class="hljs-comment"># Optional argument. Also *.</span>
-args  = p.parse_args()                                            <span class="hljs-comment"># Exits on a parsing error.</span>
-&lt;obj&gt; = args.&lt;name&gt;                                               <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
+p = ArgumentParser(description=&lt;str&gt;)                       <span class="hljs-comment"># Also accepts 'usage' arg.</span>
+p.add_argument(<span class="hljs-string">'-&lt;char&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
+p.add_argument(<span class="hljs-string">'-&lt;char&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)              <span class="hljs-comment"># Mandatory first argument.</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'+'</span>)            <span class="hljs-comment"># Mandatory remaining args.</span>
+p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-string">'?'</span>)            <span class="hljs-comment"># Optional argument. Also *.</span>
+args  = p.parse_args()                                      <span class="hljs-comment"># Exits on a parsing error.</span>
+&lt;obj&gt; = args.&lt;name&gt;                                         <span class="hljs-comment"># Returns `&lt;type&gt;(&lt;arg&gt;)`.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that will be displayed in help message.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;obj&gt;'</span></code> to override None as option's or optional argument's default value.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'help=&lt;str&gt;'</span></code> to set argument description that is used by <code class="python hljs"><span class="hljs-string">'-h'</span></code>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'default=&lt;obj&gt;'</span></code> to set option's or argument's default value.</strong></li>
 </ul>
 <div><h2 id="open"><a href="#open" name="open">#</a>Open</h2><p><strong>Opens a file and returns the corresponding file object.</strong></p><pre><code class="python language-python hljs">&lt;file&gt; = open(&lt;path&gt;, mode=<span class="hljs-string">'r'</span>, encoding=<span class="hljs-keyword">None</span>, newline=<span class="hljs-keyword">None</span>)
 </code></pre></div>
@@ -1350,7 +1350,7 @@ args  = p.parse_args()                                            <span class="h
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code> and <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code>, <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
 </ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the start of file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
@@ -1365,11 +1365,11 @@ args  = p.parse_args()                                            <span class="h
 <pre><code class="python language-python hljs">&lt;str/bytes&gt; = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)  <span class="hljs-comment"># Reads 'size' chars/bytes or until the EOF.</span>
 &lt;str/bytes&gt; = &lt;file&gt;.readline()     <span class="hljs-comment"># Returns a line or empty string/bytes on EOF.</span>
 &lt;list&gt;      = &lt;file&gt;.readlines()    <span class="hljs-comment"># Returns remaining lines. Also list(&lt;file&gt;).</span>
-&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using a read-ahead buffer.</span>
+&lt;str/bytes&gt; = next(&lt;file&gt;)          <span class="hljs-comment"># Returns a line using the read-ahead buffer.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes a str or bytes object to write buffer.</span>
+<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes str or bytes object to write buffer.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
-&lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buffer. Runs every 4096/8192 B.</span>
+&lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buff. Runs every 4096/8192 B.</span>
 &lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing write buffer.</span>
 </code></pre>
 <ul>
@@ -1624,23 +1624,23 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 ┃ oracle+oracledb │ oracledb     │ www.pypi.org/project/oracledb    ┃
 ┗━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>An immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                        <span class="hljs-comment"># Accepts ASCII characters and \x00 to \xff.</span>
-&lt;int&gt;   = &lt;bytes&gt;[index]                  <span class="hljs-comment"># Returns the byte as int between 0 and 255.</span>
-&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]                <span class="hljs-comment"># Returns bytes even if it has one element.</span>
-&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)   <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
+<div><h2 id="bytes"><a href="#bytes" name="bytes">#</a>Bytes</h2><p><strong>An immutable sequence of single bytes. Mutable version is called bytearray.</strong></p><pre><code class="python language-python hljs">&lt;bytes&gt; = <span class="hljs-string">b'&lt;str&gt;'</span>                       <span class="hljs-comment"># Accepts ASCII characters and \x00 to \xff.</span>
+&lt;int&gt;   = &lt;bytes&gt;[index]                 <span class="hljs-comment"># Returns the byte as int between 0 and 255.</span>
+&lt;bytes&gt; = &lt;bytes&gt;[&lt;slice&gt;]               <span class="hljs-comment"># Returns bytes even if it has one element.</span>
+&lt;bytes&gt; = &lt;bytes&gt;.join(&lt;coll_of_bytes&gt;)  <span class="hljs-comment"># Joins elements using bytes as a separator.</span>
 </code></pre></div>
 
 
-<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)           <span class="hljs-comment"># Passed integers must be between 0 and 255.</span>
-&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Encodes the string. Same as &lt;str&gt;.encode().</span>
-&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)          <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
-&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes, <span class="hljs-string">'big'</span>)  <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
+<div><h3 id="encode-1">Encode</h3><pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;coll_of_ints&gt;)          <span class="hljs-comment"># Passed integers must be between 0 and 255.</span>
+&lt;bytes&gt; = bytes(&lt;str&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Encodes the string. Same as &lt;str&gt;.encode().</span>
+&lt;bytes&gt; = bytes.fromhex(<span class="hljs-string">'&lt;hex&gt;'</span>)         <span class="hljs-comment"># Hex pairs can be separated by whitespaces.</span>
+&lt;bytes&gt; = &lt;int&gt;.to_bytes(n_bytes)        <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
 </code></pre></div>
 
-<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                   <span class="hljs-comment"># Returns a list of ints between 0 and 255.</span>
-&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Returns a string. Same as &lt;bytes&gt;.decode().</span>
-&lt;str&gt;   = &lt;bytes&gt;.hex()                   <span class="hljs-comment"># Returns hex pairs separated by `sep=&lt;str&gt;`.</span>
-&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;, <span class="hljs-string">'big'</span>)  <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
+<div><h3 id="decode-1">Decode</h3><pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;bytes&gt;)                  <span class="hljs-comment"># Returns a list of ints between 0 and 255.</span>
+&lt;str&gt;   = str(&lt;bytes&gt;, <span class="hljs-string">'utf-8'</span>)          <span class="hljs-comment"># Returns a string. Same as &lt;bytes&gt;.decode().</span>
+&lt;str&gt;   = &lt;bytes&gt;.hex()                  <span class="hljs-comment"># Returns hex pairs separated by `sep=&lt;str&gt;`.</span>
+&lt;int&gt;   = int.from_bytes(&lt;bytes&gt;)        <span class="hljs-comment"># Accepts `byteorder='little', signed=True`.</span>
 </code></pre></div>
 
 <div><h3 id="readbytesfromfile">Read Bytes from File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_bytes</span><span class="hljs-params">(filename)</span>:</span>
@@ -2156,12 +2156,12 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1        534.1    534.1     67.8      b = set(range(10000))
 </code></pre></div>
 
-<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt/brew install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or download installer.</span>
-$ tail --lines=+2 test.py &gt; test.py                             <span class="hljs-comment"># Removes the first line.</span>
-$ python3 -m cProfile -o test.prof test.py                      <span class="hljs-comment"># Runs a tracing profiler.</span>
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  <span class="hljs-comment"># Generates a call graph.</span>
-$ xdg-open/open test.png                                        <span class="hljs-comment"># Displays the call graph.</span>
-$ snakeviz test.prof                                            <span class="hljs-comment"># Displays a flame graph.</span>
+<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or install graphviz.exe.</span>
+$ tail --lines=+2 test.py &gt; test.py                        <span class="hljs-comment"># Removes the first line.</span>
+$ python3 -m cProfile -o test.prof test.py                 <span class="hljs-comment"># Runs a tracing profiler.</span>
+$ gprof2dot -f pstats test.prof | dot -T png -o test.png   <span class="hljs-comment"># Generates a call graph.</span>
+$ xdg-open test.png                                        <span class="hljs-comment"># Displays the call graph.</span>
+$ snakeviz test.prof                                       <span class="hljs-comment"># Displays a flame graph.</span>
 </code></pre></div>
 
 <div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━┯━━━━━━┓
@@ -2933,7 +2933,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>December 25, 2025</aside>
+    <aside>December 30, 2025</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

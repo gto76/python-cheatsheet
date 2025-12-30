@@ -974,7 +974,7 @@ class MyClass:
 * **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
 * **Return value of str() special method should be readable and of repr() unambiguous. If&nbsp;only repr() is defined, it will also be used for str().**
 
-#### Expressions that call object's str() special method:
+#### Expressions that call str() special method:
 ```python
 f'{obj}'
 print(obj)
@@ -982,12 +982,12 @@ logging.warning(obj)
 <csv_writer>.writerow([obj])
 ```
 
-#### Expressions that call object's repr() special method:
+#### Expressions that call repr() special method:
 ```python
 f'{obj!r}'
 print/str/repr([obj])
 print/str/repr({obj: obj})
-print/str/repr(<dataclass>(obj))
+print/str/repr(MyDataClass(obj))
 ```
 
 ### Subclass
@@ -1040,8 +1040,8 @@ class <class_name>:
     <attr_name>: list/dict/set = field(default_factory=list/dict/set)
 ```
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
-* **For object to be [hashable](#hashable), all attributes must be hashable and arg. 'frozen' must be True.**
-* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
+* **For object to be [hashable](#hashable), all attributes must be hashable and `'frozen'` must be `'True'`.**
+* **Function field() is needed because `'<attr_name>: list = []'` would make a list that is&nbsp;shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
 * **For attributes of arbitrary type use `'typing.Any'`.**
 
 #### Inline:
@@ -1093,7 +1093,7 @@ Duck Types
 ### Comparable
 * **If eq() method is not overridden, it returns `'id(self) == id(other)'`, which is the same as `'self is other'`. That means all user-defined objects compare not equal by default (because id() returns object's memory address that is guaranteed to be unique).**
 * **Only the left side object has eq() method called, unless it returns NotImplemented, in which case the right object is consulted. Result is False if both return NotImplemented.**
-* **Ne() automatically works on any object that has eq() defined.**
+* **Method ne() (called by `'!='`) automatically works on any object that has eq() defined.**
 
 ```python
 class MyComparable:
@@ -1107,7 +1107,7 @@ class MyComparable:
 
 ### Hashable
 * **Hashable object needs both hash() and eq() methods and its hash value must not change.**
-* **Hashable objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do. That is why Python automatically makes classes unhashable if you only implement eq().**
+* **Hashable objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.**
 
 ```python
 class MyHashable:
@@ -1173,7 +1173,7 @@ class Counter:
 * **Sequence iterators returned by the [iter()](#iterator) function, such as list\_iterator, etc.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
 * **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
-* **File objects returned by the [open()](#open) function, etc.**
+* **File objects returned by the [open()](#open) function, [SQLite](#sqlite) cursor objects, etc.**
 
 ### Callable
 * **All functions and classes have a call() method that is executed when they are called.**
@@ -1535,18 +1535,17 @@ arguments    = sys.argv[1:]
 ### Argument Parser
 ```python
 from argparse import ArgumentParser
-p = ArgumentParser(description=<str>)                             # Returns a parser object.
-p.add_argument('-<short_name>', '--<name>', action='store_true')  # Flag (defaults to False).
-p.add_argument('-<short_name>', '--<name>', type=<type>)          # Option (defaults to None).
-p.add_argument('<name>', type=<type>, nargs=1)                    # Mandatory first argument.
-p.add_argument('<name>', type=<type>, nargs='+')                  # Mandatory remaining args.
-p.add_argument('<name>', type=<type>, nargs='?')                  # Optional argument. Also *.
-args  = p.parse_args()                                            # Exits on a parsing error.
-<obj> = args.<name>                                               # Returns `<type>(<arg>)`.
+p = ArgumentParser(description=<str>)                       # Also accepts 'usage' arg.
+p.add_argument('-<char>', '--<name>', action='store_true')  # Flag (defaults to False).
+p.add_argument('-<char>', '--<name>', type=<type>)          # Option (defaults to None).
+p.add_argument('<name>', type=<type>, nargs=1)              # Mandatory first argument.
+p.add_argument('<name>', type=<type>, nargs='+')            # Mandatory remaining args.
+p.add_argument('<name>', type=<type>, nargs='?')            # Optional argument. Also *.
+args  = p.parse_args()                                      # Exits on a parsing error.
+<obj> = args.<name>                                         # Returns `<type>(<arg>)`.
 ```
-
-* **Use `'help=<str>'` to set argument description that will be displayed in help message.**
-* **Use `'default=<obj>'` to override None as option's or optional argument's default value.**
+* **Use `'help=<str>'` to set argument description that is used by `'-h'`.**
+* **Use `'default=<obj>'` to set option's or argument's default value.**
 
 
 Open
@@ -1574,7 +1573,7 @@ Open
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
 * **`'FileExistsError'` exception can be raised when writing with `'x'`.**
-* **`'IsADirectoryError'` and `'PermissionError'` can be raised by any.**
+* **`'IsADirectoryError'`, `'PermissionError'` can be raised by any.**
 * **`'OSError'` is the parent class of all listed exceptions.**
 
 ### File Object
@@ -1589,13 +1588,13 @@ Open
 <str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until the EOF.
 <str/bytes> = <file>.readline()     # Returns a line or empty string/bytes on EOF.
 <list>      = <file>.readlines()    # Returns remaining lines. Also list(<file>).
-<str/bytes> = next(<file>)          # Returns a line using a read-ahead buffer.
+<str/bytes> = next(<file>)          # Returns a line using the read-ahead buffer.
 ```
 
 ```python
-<file>.write(<str/bytes>)           # Writes a str or bytes object to write buffer.
+<file>.write(<str/bytes>)           # Writes str or bytes object to write buffer.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
-<file>.flush()                      # Flushes write buffer. Runs every 4096/8192 B.
+<file>.flush()                      # Flushes write buff. Runs every 4096/8192 B.
 <file>.close()                      # Closes the file after flushing write buffer.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
@@ -1949,26 +1948,26 @@ Bytes
 **An immutable sequence of single bytes. Mutable version is called bytearray.**
 
 ```python
-<bytes> = b'<str>'                        # Accepts ASCII characters and \x00 to \xff.
-<int>   = <bytes>[index]                  # Returns the byte as int between 0 and 255.
-<bytes> = <bytes>[<slice>]                # Returns bytes even if it has one element.
-<bytes> = <bytes>.join(<coll_of_bytes>)   # Joins elements using bytes as a separator.
+<bytes> = b'<str>'                       # Accepts ASCII characters and \x00 to \xff.
+<int>   = <bytes>[index]                 # Returns the byte as int between 0 and 255.
+<bytes> = <bytes>[<slice>]               # Returns bytes even if it has one element.
+<bytes> = <bytes>.join(<coll_of_bytes>)  # Joins elements using bytes as a separator.
 ```
 
 ### Encode
 ```python
-<bytes> = bytes(<coll_of_ints>)           # Passed integers must be between 0 and 255.
-<bytes> = bytes(<str>, 'utf-8')           # Encodes the string. Same as <str>.encode().
-<bytes> = bytes.fromhex('<hex>')          # Hex pairs can be separated by whitespaces.
-<bytes> = <int>.to_bytes(n_bytes, 'big')  # Accepts `byteorder='little', signed=True`.
+<bytes> = bytes(<coll_of_ints>)          # Passed integers must be between 0 and 255.
+<bytes> = bytes(<str>, 'utf-8')          # Encodes the string. Same as <str>.encode().
+<bytes> = bytes.fromhex('<hex>')         # Hex pairs can be separated by whitespaces.
+<bytes> = <int>.to_bytes(n_bytes)        # Accepts `byteorder='little', signed=True`.
 ```
 
 ### Decode
 ```python
-<list>  = list(<bytes>)                   # Returns a list of ints between 0 and 255.
-<str>   = str(<bytes>, 'utf-8')           # Returns a string. Same as <bytes>.decode().
-<str>   = <bytes>.hex()                   # Returns hex pairs separated by `sep=<str>`.
-<int>   = int.from_bytes(<bytes>, 'big')  # Accepts `byteorder='little', signed=True`.
+<list>  = list(<bytes>)                  # Returns a list of ints between 0 and 255.
+<str>   = str(<bytes>, 'utf-8')          # Returns a string. Same as <bytes>.decode().
+<str>   = <bytes>.hex()                  # Returns hex pairs separated by `sep=<str>`.
+<int>   = int.from_bytes(<bytes>)        # Accepts `byteorder='little', signed=True`.
 ```
 
 
@@ -2621,12 +2620,12 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 
 ### Call and Flame Graphs
 ```bash
-$ apt/brew install graphviz && pip3 install gprof2dot snakeviz  # Or download installer.
-$ tail --lines=+2 test.py > test.py                             # Removes the first line.
-$ python3 -m cProfile -o test.prof test.py                      # Runs a tracing profiler.
-$ gprof2dot --format=pstats test.prof | dot -T png -o test.png  # Generates a call graph.
-$ xdg-open/open test.png                                        # Displays the call graph.
-$ snakeviz test.prof                                            # Displays a flame graph.
+$ apt install graphviz && pip3 install gprof2dot snakeviz  # Or install graphviz.exe.
+$ tail --lines=+2 test.py > test.py                        # Removes the first line.
+$ python3 -m cProfile -o test.prof test.py                 # Runs a tracing profiler.
+$ gprof2dot -f pstats test.prof | dot -T png -o test.png   # Generates a call graph.
+$ xdg-open test.png                                        # Displays the call graph.
+$ snakeviz test.prof                                       # Displays a flame graph.
 ```
 
 ### Sampling and Memory Profilers

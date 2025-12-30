@@ -82,7 +82,7 @@ const REPR_USE_CASES =
   '<span class="hljs-string">f\'<span class="hljs-subst">{obj!r}</span>\'</span>\n' +
   'print/str/repr([obj])\n' +
   'print/str/repr({obj: obj})\n' +
-  'print/str/repr(&lt;dataclass&gt;(obj))\n';
+  'print/str/repr(MyDataClass(obj))\n';
 
 const CONSTRUCTOR_OVERLOADING =
   '<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">name</span>&gt;:</span>\n' +
