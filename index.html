@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>December 30, 2025</aside>
+    <aside>January 1, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -456,11 +456,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 {<span class="hljs-number">90</span>:X}                                   <span class="hljs-comment"># Converts 90 to hexadecimal number '5A'.</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Floats get truncated.</span>
-&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># A 64-bit decimal. Also &lt;float&gt;e±&lt;int&gt;.</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also &lt;float&gt;±&lt;float&gt;j.</span>
-&lt;Fraction&gt; = fractions.Fraction(&lt;int&gt;, &lt;int&gt;)  <span class="hljs-comment"># `Fraction(1, 2) / 3 == Fraction(1, 6)`.</span>
-&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># `Decimal((1, (2, 3), 4)) == -230_000`.</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Truncates floats.</span>
+&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># 64-bit decimal. Also &lt;fl&gt;e±&lt;int&gt;.</span>
+&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also &lt;fl&gt; ± &lt;fl&gt;j.</span>
+&lt;Fraction&gt; = fractions.Fraction(numer, denom)  <span class="hljs-comment"># `&lt;Fraction&gt; = &lt;Fraction&gt; / &lt;int&gt;`.</span>
+&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># `Decimal((1, (2,), 3)) == -2000`.</span>
 </code></pre></div>
 
 <ul>
@@ -470,18 +470,18 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Precision of decimal operations is set with: <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
 <li><strong>Bools can be used anywhere ints can, since bool is a subclass of int: <code class="python hljs"><span class="hljs-string">'True + 1 == 2'</span></code>.</strong></li>
 </ul>
-<div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(2, 3) == 2 ** 3 == 8`.</span>
+<div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(3, 4) == 3 ** 4 == 81`.</span>
 &lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
 &lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(123.45, -1) == 120`.</span>
-&lt;num&gt; = min(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also max(&lt;num&gt;, &lt;num&gt; [, ...]).</span>
-&lt;num&gt; = sum(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also math.prod(&lt;coll_of_nums&gt;).</span>
+&lt;num&gt; = min(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also `max(&lt;num&gt;, &lt;num&gt; [, ...])`.</span>
+&lt;num&gt; = sum(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also `math.prod(&lt;coll_of_nums&gt;)`.</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># Funcs that convert floats to ints.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf*0` and `nan+1` are both nan.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` raises ValueError excp.</span>
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, ceil, trunc            <span class="hljs-comment"># Funcs that convert float into int.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, inf, nan, isnan           <span class="hljs-comment"># `inf*0` and `nan+1` return `nan`.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sqrt, factorial               <span class="hljs-comment"># `sqrt(-1)` will raise ValueError.</span>
 <span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, cos, tan                 <span class="hljs-comment"># Also: degrees, radians, asin, etc.</span>
-<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Base can be passed via second arg.</span>
+<span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log, log10, log2              <span class="hljs-comment"># Log() can accept 'base' argument.</span>
 </code></pre></div>
 
 <div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> statistics <span class="hljs-keyword">import</span> mean, median, mode      <span class="hljs-comment"># Mode returns most common element.</span>
@@ -1251,8 +1251,8 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError, TimeoutError (see #Open).</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError and ConnectionAbortedError.</span>
-      ├── RuntimeError            <span class="hljs-comment"># Is raised by errors that don't fit into other categories.</span>
-      │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by unfinished code.</span>
+      ├── RuntimeError            <span class="hljs-comment"># Is raised by errors that do not fit into other categories.</span>
+      │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by an unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
       ├── StopIteration           <span class="hljs-comment"># Raised when exhausted (empty) iterator is passed to next().</span>
       ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
@@ -1314,7 +1314,7 @@ arguments    = sys.argv[<span class="hljs-number">1</span>:]
 </code></pre></div>
 
 <div><h3 id="argumentparser">Argument Parser</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser
-p = ArgumentParser(description=&lt;str&gt;)                       <span class="hljs-comment"># Also accepts 'usage' arg.</span>
+p = ArgumentParser(description=&lt;str&gt;)                       <span class="hljs-comment"># Also accepts 'usage' str.</span>
 p.add_argument(<span class="hljs-string">'-&lt;char&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, action=<span class="hljs-string">'store_true'</span>)  <span class="hljs-comment"># Flag (defaults to False).</span>
 p.add_argument(<span class="hljs-string">'-&lt;char&gt;'</span>, <span class="hljs-string">'--&lt;name&gt;'</span>, type=&lt;type&gt;)          <span class="hljs-comment"># Option (defaults to None).</span>
 p.add_argument(<span class="hljs-string">'&lt;name&gt;'</span>, type=&lt;type&gt;, nargs=<span class="hljs-number">1</span>)              <span class="hljs-comment"># Mandatory first argument.</span>
@@ -1389,27 +1389,27 @@ args  = p.parse_args()                                      <span class="hljs-co
 <span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns working dir. Starts as shell's $PWD.</span>
-&lt;str&gt;  = os.path.join(&lt;path&gt;, ...)  <span class="hljs-comment"># Uses os.sep to join strings or Path objects.</span>
-&lt;str&gt;  = os.path.realpath(&lt;path&gt;)   <span class="hljs-comment"># Resolves symlinks and calls path.abspath().</span>
+<pre><code class="python language-python hljs">&lt;str&gt;  = os.getcwd()                <span class="hljs-comment"># Returns working dir. Starts as shell's `$PWD`.</span>
+&lt;str&gt;  = os.path.join(&lt;path&gt;, ...)  <span class="hljs-comment"># Uses `os.sep` to join strings or Path objects.</span>
+&lt;str&gt;  = os.path.realpath(&lt;path&gt;)   <span class="hljs-comment"># Resolves symlinks and calls os.path.abspath().</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = os.path.basename(&lt;path&gt;)   <span class="hljs-comment"># Returns final component (filename or dirname).</span>
 &lt;str&gt;  = os.path.dirname(&lt;path&gt;)    <span class="hljs-comment"># Returns the path without its final component.</span>
 &lt;tup.&gt; = os.path.splitext(&lt;path&gt;)   <span class="hljs-comment"># Splits on last period of the final component.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns all file/dirnames located at the path.</span>
+<pre><code class="python language-python hljs">&lt;list&gt; = os.listdir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns all file/dir names located at 'path'.</span>
 &lt;list&gt; = glob.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)     <span class="hljs-comment"># Returns paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;bool&gt; = os.path.exists(&lt;path&gt;)     <span class="hljs-comment"># Checks if path exists. Also &lt;Path&gt;.exists().</span>
-&lt;bool&gt; = os.path.isfile(&lt;path&gt;)     <span class="hljs-comment"># Also &lt;Path&gt;.is_file() and &lt;DirEntry&gt;.is_file().</span>
+&lt;bool&gt; = os.path.isfile(&lt;path&gt;)     <span class="hljs-comment"># Also &lt;Path&gt;.is_file(), &lt;DirEntry&gt;.is_file().</span>
 &lt;bool&gt; = os.path.isdir(&lt;path&gt;)      <span class="hljs-comment"># Also &lt;Path&gt;.is_dir() and &lt;DirEntry&gt;.is_dir().</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;stat&gt; = os.stat(&lt;path&gt;)            <span class="hljs-comment"># A status object. Also &lt;Path/DirEntry&gt;.stat().</span>
-&lt;num&gt;  = &lt;stat&gt;.st_size/st_mtime/…  <span class="hljs-comment"># Returns size in bytes, modification time, etc.</span>
+&lt;num&gt;  = &lt;stat&gt;.st_size/st_mtime/…  <span class="hljs-comment"># Returns size in bytes, modification time, ...</span>
 </code></pre>
 <div><h3 id="direntry">DirEntry</h3><p><strong>Unlike listdir(), scandir() returns DirEntry objects that cache isfile, isdir, and on Windows also stat information, thus significantly increasing the performance of code that requires it.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = os.scandir(path=<span class="hljs-string">'.'</span>)       <span class="hljs-comment"># Returns DirEntry objects located at the path.</span>
 &lt;str&gt;  = &lt;DirEntry&gt;.path            <span class="hljs-comment"># Is absolute if 'path' argument was absolute.</span>
-&lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns path's final component as a string.</span>
+&lt;str&gt;  = &lt;DirEntry&gt;.name            <span class="hljs-comment"># Returns the path's final component as string.</span>
 &lt;file&gt; = open(&lt;DirEntry&gt;)           <span class="hljs-comment"># Opens the file and returns its file object.</span>
 </code></pre></div>
 
@@ -1434,7 +1434,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 &lt;iter&gt; = &lt;Path&gt;.glob(<span class="hljs-string">'&lt;pattern&gt;'</span>)   <span class="hljs-comment"># Returns Paths matching the wildcard pattern.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;str&gt;  = str(&lt;Path&gt;)                <span class="hljs-comment"># Returns path as string. Also &lt;Path&gt;.as_uri().</span>
-&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read_text/write_bytes(&lt;args&gt;).</span>
+&lt;file&gt; = open(&lt;Path&gt;)               <span class="hljs-comment"># Also &lt;Path&gt;.read_text/write_bytes/…(&lt;args&gt;).</span>
 </code></pre>
 <div><h2 id="oscommands"><a href="#oscommands" name="oscommands">#</a>OS Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, shutil
 </code></pre></div>
@@ -1595,8 +1595,8 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 </code></pre></div>
 
 <ul>
-<li><strong>Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).</strong></li>
-<li><strong>SQLite does not restrict columns to any type unless table is declared as strict.</strong></li>
+<li><strong>Accepts strings, ints, floats, bytes, None objects and bools (stored as 1 or 0).</strong></li>
+<li><strong>Columns are not restricted to any type unless table is declared as strict.</strong></li>
 </ul>
 <div><h3 id="example-1">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>conn.execute(<span class="hljs-string">'CREATE TABLE person (name TEXT, height INTEGER) STRICT'</span>)
@@ -1702,8 +1702,8 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)    <span class="hljs-comment"># Treats passed array as a sequence of numbers.</span>
 &lt;array&gt;.fromfile(&lt;file&gt;, n_items)         <span class="hljs-comment"># Appends file contents to the array's memory.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                  <span class="hljs-comment"># Returns a copy of array's memory as bytes.</span>
-&lt;file&gt;.write(&lt;array&gt;)                     <span class="hljs-comment"># Appends array's memory to the binary file.</span>
+<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                  <span class="hljs-comment"># Returns the copy of array's memory as bytes.</span>
+&lt;file&gt;.write(&lt;array&gt;)                     <span class="hljs-comment"># Appends the array's memory to a binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/array&gt;)       <span class="hljs-comment"># Returns mutable memoryview if array is passed.</span>
 &lt;obj&gt;   = &lt;mview&gt;[index]                  <span class="hljs-comment"># Returns an int/float. Bytes if format is 'c'.</span>
@@ -1798,19 +1798,19 @@ log.debug/info/warning/error/critical(&lt;str&gt;)       <span class="hljs-comme
 &lt;Logger&gt;.exception(&lt;str&gt;)                          <span class="hljs-comment"># Error() that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">log.basicConfig(
-    filename=<span class="hljs-keyword">None</span>,                                 <span class="hljs-comment"># Logs to stderr when filename is None.</span>
-    filemode=<span class="hljs-string">'a'</span>,                                  <span class="hljs-comment"># Pass 'w' to overwrite existing file.</span>
-    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,   <span class="hljs-comment"># Add '%(asctime)s' for local datetime.</span>
-    level=log.WARNING,                             <span class="hljs-comment"># Drops messages with a lower priority.</span>
-    handlers=[log.StreamHandler(sys.stderr)]       <span class="hljs-comment"># Uses FileHandler if filename is set.</span>
+    filename=<span class="hljs-keyword">None</span>,                                 <span class="hljs-comment"># Prints to stderr when filename is None.</span>
+    filemode=<span class="hljs-string">'a'</span>,                                  <span class="hljs-comment"># Use mode 'w' to overwrite existing file.</span>
+    format=<span class="hljs-string">'%(levelname)s:%(name)s:%(message)s'</span>,   <span class="hljs-comment"># Using '%(asctime)s' adds local datetime.</span>
+    level=log.WARNING,                             <span class="hljs-comment"># Drops messages that have lower priority.</span>
+    handlers=[log.StreamHandler(sys.stderr)]       <span class="hljs-comment"># Uses FileHandler when 'filename' is set.</span>
 )
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)            <span class="hljs-comment"># Formats messages according to format.</span>
+<pre><code class="python language-python hljs">&lt;Formatter&gt; = log.Formatter(<span class="hljs-string">'&lt;format&gt;'</span>)            <span class="hljs-comment"># Formats messages using the format str.</span>
 &lt;Handler&gt; = log.FileHandler(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>)      <span class="hljs-comment"># Appends to file. Also `encoding=None`.</span>
 &lt;Handler&gt;.setFormatter(&lt;Formatter&gt;)                <span class="hljs-comment"># Only outputs bare messages by default.</span>
 &lt;Handler&gt;.setLevel(&lt;str/int&gt;)                      <span class="hljs-comment"># Prints/saves every message by default.</span>
-&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                     <span class="hljs-comment"># Logger can have more than one handler.</span>
+&lt;Logger&gt;.addHandler(&lt;Handler&gt;)                     <span class="hljs-comment"># Loggers can have more than one handler.</span>
 &lt;Logger&gt;.setLevel(&lt;str/int&gt;)                       <span class="hljs-comment"># What's sent to its/ancestors' handlers.</span>
 &lt;Logger&gt;.propagate = &lt;bool&gt;                        <span class="hljs-comment"># Cuts off ancestors' handlers if False.</span>
 </code></pre>
@@ -2933,7 +2933,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>December 30, 2025</aside>
+    <aside>January 1, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

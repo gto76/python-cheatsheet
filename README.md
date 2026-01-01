@@ -493,11 +493,11 @@ Format
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)             # A whole number. Floats get truncated.
-<float>    = float(<int/str/bool>)             # A 64-bit decimal. Also <float>e±<int>.
-<complex>  = complex(real=0, imag=0)           # Complex number. Also <float>±<float>j.
-<Fraction> = fractions.Fraction(<int>, <int>)  # `Fraction(1, 2) / 3 == Fraction(1, 6)`.
-<Decimal>  = decimal.Decimal(<str/int/tuple>)  # `Decimal((1, (2, 3), 4)) == -230_000`.
+<int>      = int(<float/str/bool>)             # A whole number. Truncates floats.
+<float>    = float(<int/str/bool>)             # 64-bit decimal. Also <fl>e±<int>.
+<complex>  = complex(real=0, imag=0)           # Complex number. Also <fl> ± <fl>j.
+<Fraction> = fractions.Fraction(numer, denom)  # `<Fraction> = <Fraction> / <int>`.
+<Decimal>  = decimal.Decimal(<str/int/tuple>)  # `Decimal((1, (2,), 3)) == -2000`.
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError exception if string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
@@ -507,20 +507,20 @@ Numbers
 
 ### Built-in Functions
 ```python
-<num> = pow(<num>, <num>)                      # E.g. `pow(2, 3) == 2 ** 3 == 8`.
+<num> = pow(<num>, <num>)                      # E.g. `pow(3, 4) == 3 ** 4 == 81`.
 <num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
 <num> = round(<num> [, ±ndigits])              # E.g. `round(123.45, -1) == 120`.
-<num> = min(<coll_of_nums>)                    # Also max(<num>, <num> [, ...]).
-<num> = sum(<coll_of_nums>)                    # Also math.prod(<coll_of_nums>).
+<num> = min(<coll_of_nums>)                    # Also `max(<num>, <num> [, ...])`.
+<num> = sum(<coll_of_nums>)                    # Also `math.prod(<coll_of_nums>)`.
 ```
 
 ### Math
 ```python
-from math import floor, ceil, trunc            # Funcs that convert floats to ints.
-from math import pi, inf, nan, isnan           # `inf*0` and `nan+1` are both nan.
-from math import sqrt, factorial               # `sqrt(-1)` raises ValueError excp.
+from math import floor, ceil, trunc            # Funcs that convert float into int.
+from math import pi, inf, nan, isnan           # `inf*0` and `nan+1` return `nan`.
+from math import sqrt, factorial               # `sqrt(-1)` will raise ValueError.
 from math import sin, cos, tan                 # Also: degrees, radians, asin, etc.
-from math import log, log10, log2              # Base can be passed via second arg.
+from math import log, log10, log2              # Log() can accept 'base' argument.
 ```
 
 ### Statistics
@@ -1452,8 +1452,8 @@ BaseException
       |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
       +-- OSError                 # Errors such as FileExistsError, TimeoutError (see #Open).
       |    +-- ConnectionError    # Errors such as BrokenPipeError and ConnectionAbortedError.
-      +-- RuntimeError            # Is raised by errors that don't fit into other categories.
-      |    +-- NotImplementedEr…  # Can be raised by abstract methods or by unfinished code.
+      +-- RuntimeError            # Is raised by errors that do not fit into other categories.
+      |    +-- NotImplementedEr…  # Can be raised by abstract methods or by an unfinished code.
       |    +-- RecursionError     # Raised if max recursion depth is exceeded (3k by default).
       +-- StopIteration           # Raised when exhausted (empty) iterator is passed to next().
       +-- TypeError               # When an argument of the wrong type is passed to function.
@@ -1535,7 +1535,7 @@ arguments    = sys.argv[1:]
 ### Argument Parser
 ```python
 from argparse import ArgumentParser
-p = ArgumentParser(description=<str>)                       # Also accepts 'usage' arg.
+p = ArgumentParser(description=<str>)                       # Also accepts 'usage' str.
 p.add_argument('-<char>', '--<name>', action='store_true')  # Flag (defaults to False).
 p.add_argument('-<char>', '--<name>', type=<type>)          # Option (defaults to None).
 p.add_argument('<name>', type=<type>, nargs=1)              # Mandatory first argument.
@@ -1622,9 +1622,9 @@ from pathlib import Path
 ```
 
 ```python
-<str>  = os.getcwd()                # Returns working dir. Starts as shell's $PWD.
-<str>  = os.path.join(<path>, ...)  # Uses os.sep to join strings or Path objects.
-<str>  = os.path.realpath(<path>)   # Resolves symlinks and calls path.abspath().
+<str>  = os.getcwd()                # Returns working dir. Starts as shell's `$PWD`.
+<str>  = os.path.join(<path>, ...)  # Uses `os.sep` to join strings or Path objects.
+<str>  = os.path.realpath(<path>)   # Resolves symlinks and calls os.path.abspath().
 ```
 
 ```python
@@ -1634,19 +1634,19 @@ from pathlib import Path
 ```
 
 ```python
-<list> = os.listdir(path='.')       # Returns all file/dirnames located at the path.
+<list> = os.listdir(path='.')       # Returns all file/dir names located at 'path'.
 <list> = glob.glob('<pattern>')     # Returns paths matching the wildcard pattern.
 ```
 
 ```python
 <bool> = os.path.exists(<path>)     # Checks if path exists. Also <Path>.exists().
-<bool> = os.path.isfile(<path>)     # Also <Path>.is_file() and <DirEntry>.is_file().
+<bool> = os.path.isfile(<path>)     # Also <Path>.is_file(), <DirEntry>.is_file().
 <bool> = os.path.isdir(<path>)      # Also <Path>.is_dir() and <DirEntry>.is_dir().
 ```
 
 ```python
 <stat> = os.stat(<path>)            # A status object. Also <Path/DirEntry>.stat().
-<num>  = <stat>.st_size/st_mtime/…  # Returns size in bytes, modification time, etc.
+<num>  = <stat>.st_size/st_mtime/…  # Returns size in bytes, modification time, ...
 ```
 
 ### DirEntry
@@ -1655,7 +1655,7 @@ from pathlib import Path
 ```python
 <iter> = os.scandir(path='.')       # Returns DirEntry objects located at the path.
 <str>  = <DirEntry>.path            # Is absolute if 'path' argument was absolute.
-<str>  = <DirEntry>.name            # Returns path's final component as a string.
+<str>  = <DirEntry>.name            # Returns the path's final component as string.
 <file> = open(<DirEntry>)           # Opens the file and returns its file object.
 ```
 
@@ -1688,7 +1688,7 @@ from pathlib import Path
 
 ```python
 <str>  = str(<Path>)                # Returns path as string. Also <Path>.as_uri().
-<file> = open(<Path>)               # Also <Path>.read_text/write_bytes(<args>).
+<file> = open(<Path>)               # Also <Path>.read_text/write_bytes/…(<args>).
 ```
 
 
@@ -1907,8 +1907,8 @@ with <conn>:                                   # Exits the block with commit() o
 <conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
 <conn>.executemany('<query>', <coll_of_coll>)  # Executes the query once for each collection.
 ```
-* **Passed values can be of type str, int, float, bytes, None, or bool (stored as 1 or 0).**
-* **SQLite does not restrict columns to any type unless table is declared as strict.**
+* **Accepts strings, ints, floats, bytes, None objects and bools (stored as 1 or 0).**
+* **Columns are not restricted to any type unless table is declared as strict.**
 
 ### Example
 **Values are not actually saved in this example because `'conn.commit()'` is omitted!**
@@ -2043,8 +2043,8 @@ from array import array
 ```
 
 ```python
-<bytes> = bytes(<array>)                  # Returns a copy of array's memory as bytes.
-<file>.write(<array>)                     # Appends array's memory to the binary file.
+<bytes> = bytes(<array>)                  # Returns the copy of array's memory as bytes.
+<file>.write(<array>)                     # Appends the array's memory to a binary file.
 ```
 
 
@@ -2177,20 +2177,20 @@ log.debug/info/warning/error/critical(<str>)       # Sends passed message to the
 ### Setup
 ```python
 log.basicConfig(
-    filename=None,                                 # Logs to stderr when filename is None.
-    filemode='a',                                  # Pass 'w' to overwrite existing file.
-    format='%(levelname)s:%(name)s:%(message)s',   # Add '%(asctime)s' for local datetime.
-    level=log.WARNING,                             # Drops messages with a lower priority.
-    handlers=[log.StreamHandler(sys.stderr)]       # Uses FileHandler if filename is set.
+    filename=None,                                 # Prints to stderr when filename is None.
+    filemode='a',                                  # Use mode 'w' to overwrite existing file.
+    format='%(levelname)s:%(name)s:%(message)s',   # Using '%(asctime)s' adds local datetime.
+    level=log.WARNING,                             # Drops messages that have lower priority.
+    handlers=[log.StreamHandler(sys.stderr)]       # Uses FileHandler when 'filename' is set.
 )
 ```
 
 ```python
-<Formatter> = log.Formatter('<format>')            # Formats messages according to format.
+<Formatter> = log.Formatter('<format>')            # Formats messages using the format str.
 <Handler> = log.FileHandler(<path>, mode='a')      # Appends to file. Also `encoding=None`.
 <Handler>.setFormatter(<Formatter>)                # Only outputs bare messages by default.
 <Handler>.setLevel(<str/int>)                      # Prints/saves every message by default.
-<Logger>.addHandler(<Handler>)                     # Logger can have more than one handler.
+<Logger>.addHandler(<Handler>)                     # Loggers can have more than one handler.
 <Logger>.setLevel(<str/int>)                       # What's sent to its/ancestors' handlers.
 <Logger>.propagate = <bool>                        # Cuts off ancestors' handlers if False.
 ```
