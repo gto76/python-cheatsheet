@@ -463,20 +463,20 @@ const DIAGRAM_7_A =
 
 const DIAGRAM_7_B =
   "BaseException\n" +
-  " ├── SystemExit                   <span class='hljs-comment'># Raised by the sys.exit() function (see #Exit for details).</span>\n" +
-  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key (control-c).</span>\n" +
+  " ├── SystemExit                   <span class='hljs-comment'># Raised when `sys.exit()` is called. See #Exit for details.</span>\n" +
+  " ├── KeyboardInterrupt            <span class='hljs-comment'># Raised when the user hits the interrupt key, i.e. `ctrl-c`.</span>\n" +
   " └── Exception                    <span class='hljs-comment'># User-defined exceptions should be derived from this class.</span>\n" +
   "      ├── ArithmeticError         <span class='hljs-comment'># Base class for arithmetic errors such as ZeroDivisionError.</span>\n" +
   "      ├── AssertionError          <span class='hljs-comment'># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>\n" +
   "      ├── AttributeError          <span class='hljs-comment'># Raised when object doesn't have requested attribute/method.</span>\n" +
-  "      ├── EOFError                <span class='hljs-comment'># Is raised by input() when it hits an end-of-file condition.</span>\n" +
+  "      ├── EOFError                <span class='hljs-comment'># Raised by `input()` when it hits an end-of-file condition.</span>\n" +
   "      ├── LookupError             <span class='hljs-comment'># Base class for errors when a collection can't find an item.</span>\n" +
   "      │    ├── IndexError         <span class='hljs-comment'># Raised when index of a sequence (list/str) is out of range.</span>\n" +
   "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key or a set element is missing.</span>\n" +
   "      ├── MemoryError             <span class='hljs-comment'># Out of memory. May be too late to start deleting variables.</span>\n" +
   "      ├── NameError               <span class='hljs-comment'># Raised when nonexistent name (variable/func/class) is used.</span>\n" +
-  "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when local name is used before it's being defined.</span>\n" +
-  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError, TimeoutError (see #Open).</span>\n" +
+  "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when local name is used before it is being defined.</span>\n" +
+  "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError and TimeoutError. See #Open.</span>\n" +
   "      │    └── ConnectionError    <span class='hljs-comment'># Errors such as BrokenPipeError and ConnectionAbortedError.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Is raised by errors that do not fit into other categories.</span>\n" +
   "      │    ├── NotImplementedEr…  <span class='hljs-comment'># Can be raised by abstract methods or by an unfinished code.</span>\n" +

@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>January 1, 2026</aside>
+    <aside>January 3, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1149,7 +1149,7 @@ Hello World!
 <pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
     &lt;member_name&gt; = auto()              <span class="hljs-comment"># An increment of last numeric value or 1.</span>
     &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable/unique.</span>
-    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Value can be a collection, e.g. tuple.</span>
+    &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Value can be a collection, e.g. a tuple.</span>
 </code></pre>
 <ul>
 <li><strong>Methods receive the member they were called on as the 'self' argument.</strong></li>
@@ -1161,13 +1161,13 @@ Hello World!
 &lt;str&gt;    = &lt;member&gt;.name                <span class="hljs-comment"># Returns the member's name as a string.</span>
 &lt;obj&gt;    = &lt;member&gt;.value               <span class="hljs-comment"># Value can't be a user-defined function.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns a list of the enum's members.</span>
-&lt;list&gt;   = &lt;enum&gt;._member_names_        <span class="hljs-comment"># Returns a list of the member names.</span>
-&lt;list&gt;   = [m.value <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns a list of the member values.</span>
+<pre><code class="python language-python hljs">&lt;list&gt;   = list(&lt;enum&gt;)                 <span class="hljs-comment"># Returns list of all the enum's members.</span>
+&lt;list&gt;   = &lt;enum&gt;._member_names_        <span class="hljs-comment"># Returns a list containing member names.</span>
+&lt;list&gt;   = [m.value <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> &lt;enum&gt;]    <span class="hljs-comment"># Returns a list containing member values.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;enum&gt;   = type(&lt;member&gt;)               <span class="hljs-comment"># Returns an enum. Also &lt;memb&gt;.__class__.</span>
 &lt;iter&gt;   = itertools.cycle(&lt;enum&gt;)      <span class="hljs-comment"># Returns an endless iterator of members.</span>
-&lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Randomly selects one of the members.</span>
+&lt;member&gt; = random.choice(list(&lt;enum&gt;))  <span class="hljs-comment"># Randomly selects one of enum's members.</span>
 </code></pre>
 <div><h3 id="inline-2">Inline</h3><pre><code class="python language-python hljs">Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, <span class="hljs-string">'FORK KNIFE SPOON'</span>)
 Cutlery = Enum(<span class="hljs-string">'Cutlery'</span>, [<span class="hljs-string">'FORK'</span>, <span class="hljs-string">'KNIFE'</span>, <span class="hljs-string">'SPOON'</span>])
@@ -1236,20 +1236,20 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 </code></pre></div>
 
 <div><h3 id="builtinexceptions">Built-in Exceptions</h3><pre><code class="text language-text">BaseException
- ├── SystemExit                   <span class="hljs-comment"># Raised by the sys.exit() function (see #Exit for details).</span>
- ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key (control-c).</span>
+ ├── SystemExit                   <span class="hljs-comment"># Raised when `sys.exit()` is called. See #Exit for details.</span>
+ ├── KeyboardInterrupt            <span class="hljs-comment"># Raised when the user hits the interrupt key, i.e. `ctrl-c`.</span>
  └── Exception                    <span class="hljs-comment"># User-defined exceptions should be derived from this class.</span>
       ├── ArithmeticError         <span class="hljs-comment"># Base class for arithmetic errors such as ZeroDivisionError.</span>
       ├── AssertionError          <span class="hljs-comment"># Raised by `assert &lt;exp&gt;` if expression returns false value.</span>
       ├── AttributeError          <span class="hljs-comment"># Raised when object doesn't have requested attribute/method.</span>
-      ├── EOFError                <span class="hljs-comment"># Is raised by input() when it hits an end-of-file condition.</span>
+      ├── EOFError                <span class="hljs-comment"># Raised by `input()` when it hits an end-of-file condition.</span>
       ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when index of a sequence (list/str) is out of range.</span>
       │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or a set element is missing.</span>
       ├── MemoryError             <span class="hljs-comment"># Out of memory. May be too late to start deleting variables.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
-      │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it's being defined.</span>
-      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError, TimeoutError (see #Open).</span>
+      │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it is being defined.</span>
+      ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError and TimeoutError. See #Open.</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError and ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Is raised by errors that do not fit into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by an unfinished code.</span>
@@ -2355,9 +2355,9 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 &lt;Wave&gt;.writeframes(&lt;bytes&gt;)           <span class="hljs-comment"># Appends passed frames to audio file.</span>
 </code></pre>
 <ul>
-<li><strong>Bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
-<li><strong>In a stereo signal, the first sample of a frame belongs to the left channel.</strong></li>
-<li><strong>Each sample consists of one or more bytes that, when converted to an integer, indicate the desired displacement of a speaker membrane at a given moment.</strong></li>
+<li><strong>The bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
+<li><strong>In stereo signal, first sample of a frame belongs to the left channel (second to the right).</strong></li>
+<li><strong>Each sample consists of one or more bytes (depending on sample width) that, when con­verted to an integer, indicate the displacement of a speaker membrane at that moment.</strong></li>
 <li><strong>If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━┓
@@ -2933,7 +2933,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>January 1, 2026</aside>
+    <aside>January 3, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

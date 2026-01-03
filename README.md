@@ -1329,7 +1329,7 @@ from enum import Enum, auto
 class <enum_name>(Enum):
     <member_name> = auto()              # An increment of last numeric value or 1.
     <member_name> = <value>             # Values don't have to be hashable/unique.
-    <member_name> = <el_1>, <el_2>      # Value can be a collection, e.g. tuple.
+    <member_name> = <el_1>, <el_2>      # Value can be a collection, e.g. a tuple.
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword causes SyntaxError.**
@@ -1343,15 +1343,15 @@ class <enum_name>(Enum):
 ```
 
 ```python
-<list>   = list(<enum>)                 # Returns a list of the enum's members.
-<list>   = <enum>._member_names_        # Returns a list of the member names.
-<list>   = [m.value for m in <enum>]    # Returns a list of the member values.
+<list>   = list(<enum>)                 # Returns list of all the enum's members.
+<list>   = <enum>._member_names_        # Returns a list containing member names.
+<list>   = [m.value for m in <enum>]    # Returns a list containing member values.
 ```
 
 ```python
 <enum>   = type(<member>)               # Returns an enum. Also <memb>.__class__.
 <iter>   = itertools.cycle(<enum>)      # Returns an endless iterator of members.
-<member> = random.choice(list(<enum>))  # Randomly selects one of the members.
+<member> = random.choice(list(<enum>))  # Randomly selects one of enum's members.
 ```
 
 ### Inline
@@ -1437,20 +1437,20 @@ error_msg = ''.join(traceback.format_exception(*sys.exc_info()))
 ### Built-in Exceptions
 ```text
 BaseException
- +-- SystemExit                   # Raised by the sys.exit() function (see #Exit for details).
- +-- KeyboardInterrupt            # Raised when the user hits the interrupt key (control-c).
+ +-- SystemExit                   # Raised when `sys.exit()` is called. See #Exit for details.
+ +-- KeyboardInterrupt            # Raised when the user hits the interrupt key, i.e. `ctrl-c`.
  +-- Exception                    # User-defined exceptions should be derived from this class.
       +-- ArithmeticError         # Base class for arithmetic errors such as ZeroDivisionError.
       +-- AssertionError          # Raised by `assert <exp>` if expression returns false value.
       +-- AttributeError          # Raised when object doesn't have requested attribute/method.
-      +-- EOFError                # Is raised by input() when it hits an end-of-file condition.
+      +-- EOFError                # Raised by `input()` when it hits an end-of-file condition.
       +-- LookupError             # Base class for errors when a collection can't find an item.
       |    +-- IndexError         # Raised when index of a sequence (list/str) is out of range.
       |    +-- KeyError           # Raised when a dictionary key or a set element is missing.
       +-- MemoryError             # Out of memory. May be too late to start deleting variables.
       +-- NameError               # Raised when nonexistent name (variable/func/class) is used.
-      |    +-- UnboundLocalError  # Raised when local name is used before it's being defined.
-      +-- OSError                 # Errors such as FileExistsError, TimeoutError (see #Open).
+      |    +-- UnboundLocalError  # Raised when local name is used before it is being defined.
+      +-- OSError                 # Errors such as FileExistsError and TimeoutError. See #Open.
       |    +-- ConnectionError    # Errors such as BrokenPipeError and ConnectionAbortedError.
       +-- RuntimeError            # Is raised by errors that do not fit into other categories.
       |    +-- NotImplementedEr…  # Can be raised by abstract methods or by an unfinished code.
@@ -2871,9 +2871,9 @@ import wave
 <Wave>.setparams(<tuple>)             # Passed tuple must contain all params.
 <Wave>.writeframes(<bytes>)           # Appends passed frames to audio file.
 ```
-* **Bytes object contains a sequence of frames, each consisting of one or more samples.**
-* **In a stereo signal, the first sample of a frame belongs to the left channel.**
-* **Each sample consists of one or more bytes that, when converted to an integer, indicate the desired displacement of a speaker membrane at a given moment.**
+* **The bytes object contains a sequence of frames, each consisting of one or more samples.**
+* **In stereo signal, first sample of a frame belongs to the left channel (second to the right).**
+* **Each sample consists of one or more bytes (depending on sample width) that, when con&shy;verted to an integer, indicate the displacement of a speaker membrane at that moment.**
 * **If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
