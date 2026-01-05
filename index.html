@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>January 3, 2026</aside>
+    <aside>January 5, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1472,7 +1472,7 @@ shutil.rmtree(&lt;path&gt;)            <span class="hljs-comment"># Deletes the 
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
 </code></pre></div>
 
-<div><h4 id="sendstestintothebcrunninginstandardmodeandsavesitsstdouttotestout">Sends test.in to the bc running in standard mode and saves its stdout to test.out:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">if</span> os.system(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>) == <span class="hljs-number">0</span>:
+<div><h4 id="sendstestintothebcrunninginstandardmodeandsavesitsstdouttotestout">Sends test.in to the 'bc' running in standard mode and saves its stdout to test.out:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">if</span> os.system(<span class="hljs-string">'echo 1 + 1 &gt; test.in'</span>) == <span class="hljs-number">0</span>:
 <span class="hljs-meta">... </span>    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'test.in'</span>) <span class="hljs-keyword">as</span> file_in, open(<span class="hljs-string">'test.out'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> file_out:
 <span class="hljs-meta">... </span>        subprocess.run(shlex.split(<span class="hljs-string">'bc -s'</span>), stdin=file_in, stdout=file_out)
 <span class="hljs-meta">... </span>    print(open(<span class="hljs-string">'test.out'</span>).read())
@@ -1693,7 +1693,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 
 
 
-<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only hold numbers that fit into the chosen C type. Available types and their min­imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how­ever bytes of each element can be reversed (by calling the byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
+<div><h2 id="array"><a href="#array" name="array">#</a>Array</h2><p><strong>List that can only contain numbers that fit into the chosen C type. Available types and their min­imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how­ever bytes of each element can be reversed (by calling byteswap() method).</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> array <span class="hljs-keyword">import</span> array
 </code></pre></div>
 
 
@@ -1854,13 +1854,13 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </code></pre></div>
 
 
-<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;collection&gt;` to set the arguments.</span>
-&lt;Thread&gt;.start()                               <span class="hljs-comment"># Starts the thread. Also &lt;Thread&gt;.is_alive().</span>
-&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits until the thread has finished executing.</span>
+<div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;coll&gt;` to set function's arguments.</span>
+&lt;Thread&gt;.start()                               <span class="hljs-comment"># Runs func. in the background. Also is_alive().</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits until the func. has finished executing.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function (i.e. thread).</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'kwargs=&lt;dict&gt;'</span></code> to pass keyword arguments to the function, i.e. thread.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'daemon=True'</span></code>, or the program won't be able to exit while the thread is alive.</strong></li>
 </ul>
 <div><h3 id="lock">Lock</h3><pre><code class="python language-python hljs">&lt;lock&gt; = Lock/RLock()                          <span class="hljs-comment"># RLock can only be released by acquirer thread.</span>
@@ -1898,7 +1898,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 <ul>
 <li><strong>Map() and as_completed() also accept 'timeout' arg. It causes <em>futures.TimeoutError</em> when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As_completed() fails if next() is called too late, even if all threads are done.</strong></li>
 <li><strong>Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.</strong></li>
-<li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' param­eters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": ...'</span></code>.</strong></li>
+<li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' param­eters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": …'</span></code>.</strong></li>
 </ul>
 <div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.</strong></li>
@@ -2157,7 +2157,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 </code></pre></div>
 
 <div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or install graphviz.exe.</span>
-$ tail --lines=+2 test.py &gt; test.py                        <span class="hljs-comment"># Removes the first line.</span>
+$ tail -n +2 test.py &gt; test.tmp &amp;&amp; mv test.tmp test.py     <span class="hljs-comment"># Removes the first line.</span>
 $ python3 -m cProfile -o test.prof test.py                 <span class="hljs-comment"># Runs a tracing profiler.</span>
 $ gprof2dot -f pstats test.prof | dot -T png -o test.png   <span class="hljs-comment"># Generates a call graph.</span>
 $ xdg-open test.png                                        <span class="hljs-comment"># Displays the call graph.</span>
@@ -2306,12 +2306,12 @@ img.show()
 <div><h3 id="imagedraw">Image Draw</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw
 &lt;Draw&gt; = ImageDraw.Draw(&lt;Image&gt;)              <span class="hljs-comment"># An object for adding 2D graphics to the image.</span>
 &lt;Draw&gt;.point((x, y))                          <span class="hljs-comment"># Draws a point. Accepts `fill=&lt;int/tuple/str&gt;`.</span>
-&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))         <span class="hljs-comment"># For anti-aliasing use &lt;Image&gt;.resize((w, h)).</span>
-&lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)      <span class="hljs-comment"># Draws ellipse's arc in a clockwise direction.</span>
+&lt;Draw&gt;.line((x1, y1, x2, y2 [, ...]))         <span class="hljs-comment"># To get anti-aliasing use &lt;Img&gt;.resize((w, h)).</span>
+&lt;Draw&gt;.arc((x1, y1, x2, y2), deg1, deg2)      <span class="hljs-comment"># Draws arc of an ellipse in clockwise direction.</span>
 &lt;Draw&gt;.rectangle((x1, y1, x2, y2))            <span class="hljs-comment"># Also rounded_rectangle() and regular_polygon().</span>
 &lt;Draw&gt;.polygon((x1, y1, x2, y2, ...))         <span class="hljs-comment"># The last point gets connected to the first one.</span>
 &lt;Draw&gt;.ellipse((x1, y1, x2, y2))              <span class="hljs-comment"># To rotate it use &lt;Image&gt;.rotate(anticlock_deg).</span>
-&lt;Draw&gt;.text((x, y), &lt;str&gt;)                    <span class="hljs-comment"># Also `font=ImageFont.truetype(&lt;path&gt;, size)`.</span>
+&lt;Draw&gt;.text((x, y), &lt;str&gt;)                    <span class="hljs-comment"># Accepts `font=ImageFont.truetype(path, size)`.</span>
 </code></pre></div>
 
 <ul>
@@ -2933,7 +2933,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>January 3, 2026</aside>
+    <aside>January 5, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -1745,7 +1745,7 @@ import os, subprocess, shlex
 CompletedProcess(args='bc', returncode=0, stdout='2\n', stderr='')
 ```
 
-#### Sends test.in to the bc running in standard mode and saves its stdout to test.out:
+#### Sends test.in to the 'bc' running in standard mode and saves its stdout to test.out:
 ```python
 >>> if os.system('echo 1 + 1 > test.in') == 0:
 ...     with open('test.in') as file_in, open('test.out', 'w') as file_out:
@@ -2029,7 +2029,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only hold numbers that fit into the chosen C type. Available types and their min&shy;imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling the byteswap() method).**
+**List that can only contain numbers that fit into the chosen C type. Available types and their min&shy;imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling byteswap() method).**
 
 ```python
 from array import array
@@ -2247,11 +2247,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)           # Use `args=<collection>` to set the arguments.
-<Thread>.start()                               # Starts the thread. Also <Thread>.is_alive().
-<Thread>.join()                                # Waits until the thread has finished executing.
+<Thread> = Thread(target=<function>)           # Use `args=<coll>` to set function's arguments.
+<Thread>.start()                               # Runs func. in the background. Also is_alive().
+<Thread>.join()                                # Waits until the func. has finished executing.
 ```
-* **Use `'kwargs=<dict>'` to pass keyword arguments to the function (i.e. thread).**
+* **Use `'kwargs=<dict>'` to pass keyword arguments to the function, i.e. thread.**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
 
 ### Lock
@@ -2299,7 +2299,7 @@ with <lock>:                                   # Enters the block by calling met
 ```
 * **Map() and as\_completed() also accept 'timeout' arg. It causes _futures.TimeoutError_ when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
 * **Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.**
-* **ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' param&shy;eters, and executor should only be reachable via `'if __name__ == "__main__": ...'`.**
+* **ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' param&shy;eters, and executor should only be reachable via `'if __name__ == "__main__": …'`.**
 
 
 Coroutines
@@ -2621,7 +2621,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ### Call and Flame Graphs
 ```bash
 $ apt install graphviz && pip3 install gprof2dot snakeviz  # Or install graphviz.exe.
-$ tail --lines=+2 test.py > test.py                        # Removes the first line.
+$ tail -n +2 test.py > test.tmp && mv test.tmp test.py     # Removes the first line.
 $ python3 -m cProfile -o test.prof test.py                 # Runs a tracing profiler.
 $ gprof2dot -f pstats test.prof | dot -T png -o test.png   # Generates a call graph.
 $ xdg-open test.png                                        # Displays the call graph.
@@ -2814,12 +2814,12 @@ img.show()
 from PIL import ImageDraw
 <Draw> = ImageDraw.Draw(<Image>)              # An object for adding 2D graphics to the image.
 <Draw>.point((x, y))                          # Draws a point. Accepts `fill=<int/tuple/str>`.
-<Draw>.line((x1, y1, x2, y2 [, ...]))         # For anti-aliasing use <Image>.resize((w, h)).
-<Draw>.arc((x1, y1, x2, y2), deg1, deg2)      # Draws ellipse's arc in a clockwise direction.
+<Draw>.line((x1, y1, x2, y2 [, ...]))         # To get anti-aliasing use <Img>.resize((w, h)).
+<Draw>.arc((x1, y1, x2, y2), deg1, deg2)      # Draws arc of an ellipse in clockwise direction.
 <Draw>.rectangle((x1, y1, x2, y2))            # Also rounded_rectangle() and regular_polygon().
 <Draw>.polygon((x1, y1, x2, y2, ...))         # The last point gets connected to the first one.
 <Draw>.ellipse((x1, y1, x2, y2))              # To rotate it use <Image>.rotate(anticlock_deg).
-<Draw>.text((x, y), <str>)                    # Also `font=ImageFont.truetype(<path>, size)`.
+<Draw>.text((x, y), <str>)                    # Accepts `font=ImageFont.truetype(path, size)`.
 ```
 * **Pass `'fill=<color>'` to set the figure's primary color.**
 * **Pass `'width=<int>'` to set the width of lines or contours.**
