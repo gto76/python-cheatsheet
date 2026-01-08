@@ -2651,7 +2651,7 @@ import numpy as np
 ```
 
 ```python
-<array> = np.array(<list/list_of_lists/…>)            # NumPy array of one or more dimensions.
+<array> = np.array(<list/list_of_lists/…> [, dtype])  # NumPy array of one or more dimensions.
 <array> = np.zeros/ones/empty(shape)                  # Pass a tuple of ints (dimension sizes).
 <array> = np.arange(from_inc, to_exc, ±step)          # Also np.linspace(start, stop, length).
 <array> = np.random.randint(from_inc, to_exc, shape)  # Also random.uniform(low, high, shape).
@@ -2666,7 +2666,7 @@ import numpy as np
 ```python
 <array> = np.copy/abs/sqrt/log/int64(<array>)         # Returns a new array of the same shape.
 <array> = <array>.sum/max/mean/argmax/all(axis)       # Aggregates dimension with passed index.
-<array> = np.apply_along_axis(<func>, axis, <array>)  # Func can return a scalar or an array.
+<array> = np.apply_along_axis(<func>, axis, <array>)  # Func. can return a scalar or an array.
 ```
 
 ```python
@@ -2892,24 +2892,23 @@ import wave
 def read_wav_file(filename):
     def get_int(bytes_obj):
         an_int = int.from_bytes(bytes_obj, 'little', signed=(p.sampwidth != 1))
-        return an_int - 128 * (p.sampwidth == 1)
+        return an_int - (128 * (p.sampwidth == 1))
     with wave.open(filename) as file:
         p = file.getparams()
         frames = file.readframes(-1)
-    bytes_samples = (frames[i : i + p.sampwidth] for i in range(0, len(frames), p.sampwidth))
-    return [get_int(b) / pow(2, (p.sampwidth * 8) - 1) for b in bytes_samples], p
+    samples_b = (frames[i : i + p.sampwidth] for i in range(0, len(frames), p.sampwidth))
+    return [get_int(b) / pow(2, (p.sampwidth * 8) - 1) for b in samples_b], p
 ```
 
 ### Write Float Samples to WAV File
 ```python
-def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, framerate=44100):
+def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, fs=44100):
     def get_bytes(a_float):
-        a_float = max(-1, min(1 - 2e-16, a_float))
-        a_float += (p.sampwidth == 1)
+        a_float = max(-1, min(1 - 2e-16, a_float)) + (p.sampwidth == 1)
         a_float *= pow(2, (p.sampwidth * 8) - 1)
         return int(a_float).to_bytes(p.sampwidth, 'little', signed=(p.sampwidth != 1))
     if p is None:
-        p = wave._wave_params(nchannels, sampwidth, framerate, 0, 'NONE', 'not compressed')
+        p = wave._wave_params(nchannels, sampwidth, fs, 0, 'NONE', 'not compressed')
     with wave.open(filename, 'wb') as file:
         file.setparams(p)
         file.writeframes(b''.join(get_bytes(f) for f in samples_f))
@@ -2918,35 +2917,36 @@ def write_to_wav_file(filename, samples_f, p=None, nchannels=1, sampwidth=2, fra
 ### Examples
 #### Saves a 440 Hz sine wave to a mono WAV file:
 ```python
-from math import pi, sin
-samples_f = (sin(i * 2 * pi * 440 / 44100) for i in range(100_000))
-write_to_wav_file('test.wav', samples_f)
+from math import sin, pi
+get_sin = lambda i: sin(i * 2 * pi * 440 / 44100) * 0.2
+write_to_wav_file('test.wav', (get_sin(i) for i in range(100_000)))
 ```
 
 #### Adds noise to the WAV file:
 ```python
 from random import uniform
 samples_f, params = read_wav_file('test.wav')
-samples_f = (f + uniform(-0.05, 0.05) for f in samples_f)
+samples_f = (f + uniform(-0.02, 0.02) for f in samples_f)
 write_to_wav_file('test.wav', samples_f, p=params)
 ```
 
-#### Plays the WAV file:
+### Audio Player
 ```python
-# $ pip3 install simpleaudio
-from simpleaudio import play_buffer
-with wave.open('test.wav') as file:
-    frames, p = file.readframes(-1), file.getparams()
-    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
+# $ pip3 install nava
+from nava import play
+play('test.wav')
 ```
 
 ### Text to Speech
 ```python
-# $ pip3 install pyttsx3
-import pyttsx3
-engine = pyttsx3.init()
-engine.say('Sally sells seashells by the seashore.')
-engine.runAndWait()
+# $ pip3 install piper-tts sounddevice
+import os, piper, sounddevice
+os.system('python3 -m piper.download_voices en_US-lessac-high')
+voice = piper.PiperVoice.load('en_US-lessac-high.onnx')
+for sentence in voice.synthesize('Sally sells seashells by the seashore.'):
+    sounddevice.wait()
+    sounddevice.play(sentence.audio_float_array, sentence.sample_rate)
+sounddevice.wait()
 ```
 
 
@@ -2954,19 +2954,19 @@ Synthesizer
 -----------
 #### Plays Popcorn by Gershon Kingsley:
 ```python
-# $ pip3 install simpleaudio
-import itertools as it, math, array, simpleaudio
+# $ pip3 install numpy sounddevice
+import itertools as it, math, numpy as np, sounddevice
 
-def play_notes(notes, bpm=132, f=44100):
-    get_pause   = lambda n_beats: it.repeat(0, int(n_beats * 60/bpm * f))
-    sin_f       = lambda i, hz: math.sin(i * 2 * math.pi * hz / f)
-    get_wave    = lambda hz, n_beats: (sin_f(i, hz) for i in range(int(n_beats * 60/bpm * f)))
-    get_hz      = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
-    get_nbeats  = lambda note: 1/2 if '♩' in note else 1/4 if '♪' in note else 1
-    get_samples = lambda n: get_wave(get_hz(n), get_nbeats(n)) if n else get_pause(1/4)
-    samples_f   = it.chain.from_iterable(get_samples(n) for n in notes.split(','))
-    samples_i   = array.array('h', (int(fl * 5000) for fl in samples_f))
-    simpleaudio.play_buffer(samples_i, 1, 2, f).wait_done()
+def play_notes(notes, bpm=132, fs=44100, volume=0.1):
+    beat_len  = 60/bpm * fs
+    get_pause = lambda n_beats: it.repeat(0, int(n_beats * beat_len))
+    get_sinus = lambda i, hz: math.sin(i * 2 * math.pi * hz / fs) * volume
+    get_wave  = lambda hz, n_beats: (get_sinus(i, hz) for i in range(int(n_beats * beat_len)))
+    get_herz  = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
+    get_beats = lambda note: 1/2 if '♩' in note else 1/4 if '♪' in note else 1
+    get_samps = lambda n: get_wave(get_herz(n), get_beats(n)) if n else get_pause(1/4)
+    samples_f = it.chain(get_pause(1/2), *(get_samps(n) for n in notes.split(',')))
+    sounddevice.play(np.fromiter(samples_f, np.float32), fs, blocking=True)
 
 play_notes('83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,'
            '83♩,85♪,,86♪,,85♪,,86♪,,83♪,,85♩,83♪,,85♪,,81♪,,83♪,,81♪,,83♪,,79♪,,83♪,,,,')
@@ -3056,9 +3056,9 @@ rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, po
 import collections, dataclasses, enum, io, itertools as it, pygame as pg, urllib.request
 from random import randint
 
-P = collections.namedtuple('P', 'x y')          # Position
-D = enum.Enum('D', 'n e s w')                   # Direction
-W, H, MAX_S = 50, 50, P(5, 10)                  # Width, Height, Max speed
+P = collections.namedtuple('P', 'x y')          # Position (x and y coordinates).
+D = enum.Enum('D', 'n e s w')                   # Direction (north, east, etc.).
+W, H, MAX_S = 50, 50, P(5, 10)                  # Width, height, maximum speed.
 
 def main():
     def get_screen():
@@ -3089,6 +3089,7 @@ def run(screen, images, mario, tiles):
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles)
+    pg.quit()
 
 def update_speed(mario, tiles, pressed):
     x, y = mario.spd
@@ -3102,8 +3103,7 @@ def update_position(mario, tiles):
     n_steps = max(abs(s) for s in mario.spd)
     for _ in range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
-        mario.rect.topleft = x, y
+        mario.rect.topleft = x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
 
 def get_boundaries(rect, tiles):
     deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
@@ -3119,9 +3119,9 @@ def draw(screen, images, mario, tiles):
     is_airborne = D.s not in get_boundaries(mario.rect, tiles)
     image_index = 4 if is_airborne else next(mario.frame_cycle) if mario.spd.x else 6
     screen.blit(images[image_index + (mario.facing_left * 9)], mario.rect)
-    for t in tiles:
-        is_border = t.x in [0, (W-1)*16] or t.y in [0, (H-1)*16]
-        screen.blit(images[18 if is_border else 19], t)
+    for tile in tiles:
+        is_border = tile.x in [0, (W-1)*16] or tile.y in [0, (H-1)*16]
+        screen.blit(images[18 if is_border else 19], tile)
     pg.display.flip()
 
 if __name__ == '__main__':

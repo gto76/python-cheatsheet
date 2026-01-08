@@ -2179,7 +2179,7 @@ $ snakeviz test.prof                                       <span class="hljs-com
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists/…&gt;)            <span class="hljs-comment"># NumPy array of one or more dimensions.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;list/list_of_lists/…&gt; [, dtype])  <span class="hljs-comment"># NumPy array of one or more dimensions.</span>
 &lt;array&gt; = np.zeros/ones/empty(shape)                  <span class="hljs-comment"># Pass a tuple of ints (dimension sizes).</span>
 &lt;array&gt; = np.arange(from_inc, to_exc, ±step)          <span class="hljs-comment"># Also np.linspace(start, stop, length).</span>
 &lt;array&gt; = np.random.randint(from_inc, to_exc, shape)  <span class="hljs-comment"># Also random.uniform(low, high, shape).</span>
@@ -2190,7 +2190,7 @@ $ snakeviz test.prof                                       <span class="hljs-com
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.copy/abs/sqrt/log/int64(&lt;array&gt;)         <span class="hljs-comment"># Returns a new array of the same shape.</span>
 &lt;array&gt; = &lt;array&gt;.sum/max/mean/argmax/all(axis)       <span class="hljs-comment"># Aggregates dimension with passed index.</span>
-&lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)  <span class="hljs-comment"># Func can return a scalar or an array.</span>
+&lt;array&gt; = np.apply_along_axis(&lt;func&gt;, axis, &lt;array&gt;)  <span class="hljs-comment"># Func. can return a scalar or an array.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.concatenate(&lt;list_of_arrays&gt;, axis=<span class="hljs-number">0</span>)    <span class="hljs-comment"># Links arrays along first axis (rows).</span>
 &lt;array&gt; = np.vstack/column_stack(&lt;list_of_arrays&gt;)    <span class="hljs-comment"># A 1d array is treated as a row/column.</span>
@@ -2372,66 +2372,66 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <div><h3 id="readfloatsamplesfromwavfile">Read Float Samples from WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_wav_file</span><span class="hljs-params">(filename)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_int</span><span class="hljs-params">(bytes_obj)</span>:</span>
         an_int = int.from_bytes(bytes_obj, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
-        <span class="hljs-keyword">return</span> an_int - <span class="hljs-number">128</span> * (p.sampwidth == <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> an_int - (<span class="hljs-number">128</span> * (p.sampwidth == <span class="hljs-number">1</span>))
     <span class="hljs-keyword">with</span> wave.open(filename) <span class="hljs-keyword">as</span> file:
         p = file.getparams()
         frames = file.readframes(<span class="hljs-number">-1</span>)
-    bytes_samples = (frames[i : i + p.sampwidth] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), p.sampwidth))
-    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> bytes_samples], p
+    samples_b = (frames[i : i + p.sampwidth] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(frames), p.sampwidth))
+    <span class="hljs-keyword">return</span> [get_int(b) / pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> samples_b], p
 </code></pre></div>
 
-<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, framerate=<span class="hljs-number">44100</span>)</span>:</span>
+<div><h3 id="writefloatsamplestowavfile">Write Float Samples to WAV File</h3><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, fs=<span class="hljs-number">44100</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_bytes</span><span class="hljs-params">(a_float)</span>:</span>
-        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float))
-        a_float += (p.sampwidth == <span class="hljs-number">1</span>)
+        a_float = max(<span class="hljs-number">-1</span>, min(<span class="hljs-number">1</span> - <span class="hljs-number">2e-16</span>, a_float)) + (p.sampwidth == <span class="hljs-number">1</span>)
         a_float *= pow(<span class="hljs-number">2</span>, (p.sampwidth * <span class="hljs-number">8</span>) - <span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> int(a_float).to_bytes(p.sampwidth, <span class="hljs-string">'little'</span>, signed=(p.sampwidth != <span class="hljs-number">1</span>))
     <span class="hljs-keyword">if</span> p <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
-        p = wave._wave_params(nchannels, sampwidth, framerate, <span class="hljs-number">0</span>, <span class="hljs-string">'NONE'</span>, <span class="hljs-string">'not compressed'</span>)
+        p = wave._wave_params(nchannels, sampwidth, fs, <span class="hljs-number">0</span>, <span class="hljs-string">'NONE'</span>, <span class="hljs-string">'not compressed'</span>)
     <span class="hljs-keyword">with</span> wave.open(filename, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> file:
         file.setparams(p)
         file.writeframes(<span class="hljs-string">b''</span>.join(get_bytes(f) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f))
 </code></pre></div>
 
-<div><h3 id="examples-1">Examples</h3><div><h4 id="savesa440hzsinewavetoamonowavfile">Saves a 440 Hz sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi, sin
-samples_f = (sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100_000</span>))
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f)
+<div><h3 id="examples-1">Examples</h3><div><h4 id="savesa440hzsinewavetoamonowavfile">Saves a 440 Hz sine wave to a mono WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> sin, pi
+get_sin = <span class="hljs-keyword">lambda</span> i: sin(i * <span class="hljs-number">2</span> * pi * <span class="hljs-number">440</span> / <span class="hljs-number">44100</span>) * <span class="hljs-number">0.2</span>
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, (get_sin(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100_000</span>)))
 </code></pre></div></div>
 
 
 <div><h4 id="addsnoisetothewavfile">Adds noise to the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> uniform
 samples_f, params = read_wav_file(<span class="hljs-string">'test.wav'</span>)
-samples_f = (f + uniform(<span class="hljs-number">-0.05</span>, <span class="hljs-number">0.05</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
+samples_f = (f + uniform(<span class="hljs-number">-0.02</span>, <span class="hljs-number">0.02</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
 write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, p=params)
 </code></pre></div>
 
-<div><h4 id="playsthewavfile">Plays the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">from</span> simpleaudio <span class="hljs-keyword">import</span> play_buffer
-<span class="hljs-keyword">with</span> wave.open(<span class="hljs-string">'test.wav'</span>) <span class="hljs-keyword">as</span> file:
-    frames, p = file.readframes(<span class="hljs-number">-1</span>), file.getparams()
-    play_buffer(frames, p.nchannels, p.sampwidth, p.framerate).wait_done()
+<div><h3 id="audioplayer">Audio Player</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install nava</span>
+<span class="hljs-keyword">from</span> nava <span class="hljs-keyword">import</span> play
+play(<span class="hljs-string">'test.wav'</span>)
 </code></pre></div>
 
-<div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install pyttsx3</span>
-<span class="hljs-keyword">import</span> pyttsx3
-engine = pyttsx3.init()
-engine.say(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>)
-engine.runAndWait()
+<div><h3 id="texttospeech">Text to Speech</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install piper-tts sounddevice</span>
+<span class="hljs-keyword">import</span> os, piper, sounddevice
+os.system(<span class="hljs-string">'python3 -m piper.download_voices en_US-lessac-high'</span>)
+voice = piper.PiperVoice.load(<span class="hljs-string">'en_US-lessac-high.onnx'</span>)
+<span class="hljs-keyword">for</span> sentence <span class="hljs-keyword">in</span> voice.synthesize(<span class="hljs-string">'Sally sells seashells by the seashore.'</span>):
+    sounddevice.wait()
+    sounddevice.play(sentence.audio_float_array, sentence.sample_rate)
+sounddevice.wait()
 </code></pre></div>
 
-<div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install simpleaudio</span>
-<span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it, math, array, simpleaudio
+<div><h2 id="synthesizer"><a href="#synthesizer" name="synthesizer">#</a>Synthesizer</h2><div><h4 id="playspopcornbygershonkingsley">Plays Popcorn by Gershon Kingsley:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install numpy sounddevice</span>
+<span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it, math, numpy <span class="hljs-keyword">as</span> np, sounddevice
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">play_notes</span><span class="hljs-params">(notes, bpm=<span class="hljs-number">132</span>, f=<span class="hljs-number">44100</span>)</span>:</span>
-    get_pause   = <span class="hljs-keyword">lambda</span> n_beats: it.repeat(<span class="hljs-number">0</span>, int(n_beats * <span class="hljs-number">60</span>/bpm * f))
-    sin_f       = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / f)
-    get_wave    = <span class="hljs-keyword">lambda</span> hz, n_beats: (sin_f(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(n_beats * <span class="hljs-number">60</span>/bpm * f)))
-    get_hz      = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
-    get_nbeats  = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
-    get_samples = <span class="hljs-keyword">lambda</span> n: get_wave(get_hz(n), get_nbeats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
-    samples_f   = it.chain.from_iterable(get_samples(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> notes.split(<span class="hljs-string">','</span>))
-    samples_i   = array.array(<span class="hljs-string">'h'</span>, (int(fl * <span class="hljs-number">5000</span>) <span class="hljs-keyword">for</span> fl <span class="hljs-keyword">in</span> samples_f))
-    simpleaudio.play_buffer(samples_i, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, f).wait_done()
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">play_notes</span><span class="hljs-params">(notes, bpm=<span class="hljs-number">132</span>, fs=<span class="hljs-number">44100</span>, volume=<span class="hljs-number">0.1</span>)</span>:</span>
+    beat_len  = <span class="hljs-number">60</span>/bpm * fs
+    get_pause = <span class="hljs-keyword">lambda</span> n_beats: it.repeat(<span class="hljs-number">0</span>, int(n_beats * beat_len))
+    get_sinus = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / fs) * volume
+    get_wave  = <span class="hljs-keyword">lambda</span> hz, n_beats: (get_sinus(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(n_beats * beat_len)))
+    get_herz  = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
+    get_beats = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
+    get_samps = <span class="hljs-keyword">lambda</span> n: get_wave(get_herz(n), get_beats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
+    samples_f = it.chain(get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">2</span>), *(get_samps(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> notes.split(<span class="hljs-string">','</span>)))
+    sounddevice.play(np.fromiter(samples_f, np.float32), fs, blocking=<span class="hljs-keyword">True</span>)
 
 play_notes(<span class="hljs-string">'83♩,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,83♪,,81♪,,83♪,,78♪,,74♪,,78♪,,71♪,,,,'</span>
            <span class="hljs-string">'83♩,85♪,,86♪,,85♪,,86♪,,83♪,,85♩,83♪,,85♪,,81♪,,83♪,,81♪,,83♪,,79♪,,83♪,,,,'</span>)
@@ -2500,9 +2500,9 @@ rect(&lt;Surf&gt;, color, &lt;Rect&gt;, width=<span class="hljs-number">0</span>
 <div><h3 id="basicmariobrothersexample">Basic Mario Brothers Example</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> collections, dataclasses, enum, io, itertools <span class="hljs-keyword">as</span> it, pygame <span class="hljs-keyword">as</span> pg, urllib.request
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randint
 
-P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position</span>
-D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                   <span class="hljs-comment"># Direction</span>
-W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)                  <span class="hljs-comment"># Width, Height, Max speed</span>
+P = collections.namedtuple(<span class="hljs-string">'P'</span>, <span class="hljs-string">'x y'</span>)          <span class="hljs-comment"># Position (x and y coordinates).</span>
+D = enum.Enum(<span class="hljs-string">'D'</span>, <span class="hljs-string">'n e s w'</span>)                   <span class="hljs-comment"># Direction (north, east, etc.).</span>
+W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, P(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)                  <span class="hljs-comment"># Width, height, maximum speed.</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen</span><span class="hljs-params">()</span>:</span>
@@ -2533,6 +2533,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
         update_speed(mario, tiles, pressed)
         update_position(mario, tiles)
         draw(screen, images, mario, tiles)
+    pg.quit()
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_speed</span><span class="hljs-params">(mario, tiles, pressed)</span>:</span>
     x, y = mario.spd
@@ -2546,8 +2547,7 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     n_steps = max(abs(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> mario.spd)
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(n_steps):
         mario.spd = stop_on_collision(mario.spd, get_boundaries(mario.rect, tiles))
-        x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
-        mario.rect.topleft = x, y
+        mario.rect.topleft = x, y = x + (mario.spd.x / n_steps), y + (mario.spd.y / n_steps)
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_boundaries</span><span class="hljs-params">(rect, tiles)</span>:</span>
     deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
@@ -2563,9 +2563,9 @@ W, H, MAX_S = <span class="hljs-number">50</span>, <span class="hljs-number">50<
     is_airborne = D.s <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> get_boundaries(mario.rect, tiles)
     image_index = <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> is_airborne <span class="hljs-keyword">else</span> next(mario.frame_cycle) <span class="hljs-keyword">if</span> mario.spd.x <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
     screen.blit(images[image_index + (mario.facing_left * <span class="hljs-number">9</span>)], mario.rect)
-    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> tiles:
-        is_border = t.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> t.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]
-        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> is_border <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], t)
+    <span class="hljs-keyword">for</span> tile <span class="hljs-keyword">in</span> tiles:
+        is_border = tile.x <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (W-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> tile.y <span class="hljs-keyword">in</span> [<span class="hljs-number">0</span>, (H-<span class="hljs-number">1</span>)*<span class="hljs-number">16</span>]
+        screen.blit(images[<span class="hljs-number">18</span> <span class="hljs-keyword">if</span> is_border <span class="hljs-keyword">else</span> <span class="hljs-number">19</span>], tile)
     pg.display.flip()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
