@@ -398,9 +398,9 @@ import re
 Format
 ------
 ```perl
-<str> = f'{<el_1>}, {<el_2>}'            # Curly brackets can also contain expressions.
-<str> = '{}, {}'.format(<el_1>, <el_2>)  # Same as '{0}, {a}'.format(<el_1>, a=<el_2>).
-<str> = '%s, %s' % (<el_1>, <el_2>)      # Redundant and inferior C-style formatting.
+<str> = f'{<obj>}, {<obj>}'            # Curly brackets can contain any expression.
+<str> = '{}, {}'.format(<obj>, <obj>)  # Same as '{0}, {a}'.format(<obj>, a=<obj>).
+<str> = '%s, %s' % (<obj>, <obj>)      # Redundant and inferior C-style formatting.
 ```
 
 ### Example
@@ -413,42 +413,42 @@ Format
 
 ### General Options
 ```python
-{<el>:<10}                               # '<el>      '
-{<el>:^10}                               # '   <el>   '
-{<el>:>10}                               # '      <el>'
-{<el>:.<10}                              # '<el>......'
-{<el>:0}                                 # '<el>'
+{<obj>:<10}                            # '<obj>     '
+{<obj>:^10}                            # '  <obj>   '
+{<obj>:>10}                            # '     <obj>'
+{<obj>:.<10}                           # '<obj>.....'
+{<obj>:0}                              # '<obj>'
 ```
-* **Objects are converted to strings with format() function, e.g. `'format(<el>, "<10")'`.**
-* **Options can be generated dynamically via nested braces: `f'{<el>:{<str/int>}[…]}'`.**
+* **Objects are converted to strings with format() function, e.g. `'format(<obj>, "<10")'`.**
+* **Options can be generated dynamically via nested braces: `f'{<obj>:{<str/int>}[…]}'`.**
 * **Adding `'='` to the expression prepends it to its result, e.g. `f'{1+1=}'` returns `'1+1=2'`.**
 * **Adding `'!r'` to the expression first calls result's [repr()](#class) method and only then format().**
 
 ### Strings
 ```python
-{'abcde':10}                             # 'abcde     '
-{'abcde':10.3}                           # 'abc       '
-{'abcde':.3}                             # 'abc'
-{'abcde'!r:10}                           # "'abcde'   "
+{'abcde':10}                           # 'abcde     '
+{'abcde':10.3}                         # 'abc       '
+{'abcde':.3}                           # 'abc'
+{'abcde'!r:10}                         # "'abcde'   "
 ```
 
 ### Numbers
 ```python
-{123456:10}                              # '    123456'
-{123456:10,}                             # '   123,456'
-{123456:10_}                             # '   123_456'
-{123456:+10}                             # '   +123456'
-{123456:=+10}                            # '+   123456'
-{123456: }                               # ' 123456'
-{-123456: }                              # '-123456'
+{123456:10}                            # '    123456'
+{123456:10,}                           # '   123,456'
+{123456:10_}                           # '   123_456'
+{123456:+10}                           # '   +123456'
+{123456:=+10}                          # '+   123456'
+{123456: }                             # ' 123456'
+{-123456: }                            # '-123456'
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                           # '      1.23'
-{1.23456:10.3f}                          # '     1.235'
-{1.23456:10.3e}                          # ' 1.235e+00'
-{1.23456:10.3%}                          # '  123.456%'
+{1.23456:10.3}                         # '      1.23'
+{1.23456:10.3f}                        # '     1.235'
+{1.23456:10.3e}                        # ' 1.235e+00'
+{1.23456:10.3%}                        # '  123.456%'
 ```
 
 #### Comparison of presentation types:
@@ -484,9 +484,9 @@ Format
 
 ### Ints
 ```python
-{90:c}                                   # Converts 90 to Unicode character 'Z'.
-{90:b}                                   # Converts 90 to binary number '1011010'.
-{90:X}                                   # Converts 90 to hexadecimal number '5A'.
+{90:c}                                 # Converts 90 to Unicode character 'Z'.
+{90:b}                                 # Converts 90 to binary number '1011010'.
+{90:X}                                 # Converts 90 to hexadecimal number '5A'.
 ```
 
 
@@ -863,7 +863,7 @@ from functools import partial
 * **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (`'collections.defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and `'dataclasses.field(default_factory=<func>)'`).**
 
 ### Non-Local
-**If a variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable unless it is declared `'global'` or `'nonlocal'` before its first usage.**
+**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable unless it is declared `'global'` or `'nonlocal'` before its first usage.**
 
 ```python
 def get_counter():
@@ -1343,7 +1343,7 @@ class <enum_name>(Enum):
 ```
 
 ```python
-<list>   = list(<enum>)                 # Returns list of all the enum's members.
+<list>   = list(<enum>)                 # Returns a list containing every member.
 <list>   = <enum>._member_names_        # Returns a list containing member names.
 <list>   = [m.value for m in <enum>]    # Returns a list containing member values.
 ```
@@ -2287,14 +2287,14 @@ with <lock>:                                   # Enters the block by calling met
 ```python
 <Exec> = ThreadPoolExecutor(max_workers=None)  # Also `with ThreadPoolExecutor() as <name>: …`.
 <iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and returns its Future obj.
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and queues it for execution.
 <Exec>.shutdown()                              # Waits for all the threads to finish executing.
 ```
 
 ```python
 <bool> = <Future>.done()                       # Checks if the thread has finished executing.
 <obj>  = <Future>.result(timeout=None)         # Raises TimeoutError after 'timeout' seconds.
-<bool> = <Future>.cancel()                     # Cancels or returns False if running/finished.
+<bool> = <Future>.cancel()                     # Just returns False if it is running/finished.
 <iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
 ```
 * **Map() and as\_completed() also accept 'timeout' arg. It causes _futures.TimeoutError_ when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
@@ -2402,7 +2402,7 @@ Plot
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
 
-plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Also plt.plot(y_data).
+plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Accepts plt.plot(y_data).
 plt.legend()                                          # Adds a legend of labels.
 plt.title/xlabel/ylabel(<str>)                        # Adds title or axis label.
 plt.show()                                            # Also plt.savefig(<path>).
