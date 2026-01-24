@@ -101,9 +101,9 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 ```
 
 ```python
-<dict>.update(<dict>)                           # Adds items. Replaces ones with matching keys.
-value = <dict>.pop(key)                         # Removes item or raises KeyError if missing.
-{k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
+<dict>.update(<dict>)                           # Adds items to dict. Passed dict has priority.
+value = <dict>.pop(key)                         # Removes item or raises KeyError when missing.
+{k for k, v in <dict>.items() if v == 123}      # Returns a set of keys whose value equals 123.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dict of items with specified keys.
 ```
 
@@ -120,27 +120,27 @@ value = <dict>.pop(key)                         # Removes item or raises KeyErro
 Set
 ---
 ```python
-<set> = {<el_1>, <el_2>, ...}                # Coll. of unique items. Also set(), set(<coll>).
+<set> = {<el_1>, <el_2>, ...}           # Coll. of unique items. Also set(), set(<coll>).
 ```
 
 ```python
-<set>.add(<el>)                              # Adds item to the set. Same as `<set> |= {<el>}`.
-<set>.update(<collection> [, ...])           # Adds items to the set. Same as `<set> |= <set>`.
+<set>.add(<el>)                         # Adds item to the set. Same as `<set> |= {<el>}`.
+<set>.update(<collection> [, ...])      # Adds items to the set. Same as `<set> |= <set>`.
 ```
 
 ```python
-<set>  = <set>.union(<coll>)                 # Returns a set of all items. Also <set> | <set>.
-<set>  = <set>.intersection(<coll>)          # Returns all shared items. Also <set> & <set>.
-<set>  = <set>.difference(<coll>)            # Returns set's unique items. Also <set> - <set>.
-<set>  = <set>.symmetric_difference(<coll>)  # Returns non-shared items. Also <set> ^ <set>.
-<bool> = <set>.issuperset(<coll>)            # Returns False if collection has unique items.
-<bool> = <set>.issubset(<coll>)              # Is collection a superset? Also <set> <= <set>.
+<set>  = <set>.union(<coll>)            # Returns a set of all items. Also <set> | <set>.
+<set>  = <set>.intersection(<coll>)     # Returns all shared items. Also <set> & <set>.
+<set>  = <set>.difference(<coll>)       # Returns set's unique items. Also <set> - <set>.
+<set>  = <set>.symmetric_diff…(<coll>)  # Returns non-shared items. Also <set> ^ <set>.
+<bool> = <set>.issuperset(<coll>)       # Returns False if collection has unique items.
+<bool> = <set>.issubset(<coll>)         # Is collection a superset? Also <set> <= <set>.
 ```
 
 ```python
-<el> = <set>.pop()                           # Removes and returns an item or raises KeyError.
-<set>.remove(<el>)                           # Removes the item or raises KeyError if missing.
-<set>.discard(<el>)                          # Same as remove() but it doesn't raise an error.
+<el> = <set>.pop()                      # Removes and returns an item or raises KeyError.
+<set>.remove(<el>)                      # Removes the item or raises KeyError if missing.
+<set>.discard(<el>)                     # Same as remove() but it doesn't raise an error.
 ```
 
 ### Frozen Set
@@ -413,11 +413,11 @@ Format
 
 ### General Options
 ```python
-{<obj>:<10}                            # '<obj>     '
-{<obj>:^10}                            # '  <obj>   '
-{<obj>:>10}                            # '     <obj>'
-{<obj>:.<10}                           # '<obj>.....'
-{<obj>:0}                              # '<obj>'
+{<obj>:<10}                            # '<obj>     '.
+{<obj>:^10}                            # '  <obj>   '.
+{<obj>:>10}                            # '     <obj>'.
+{<obj>:.<10}                           # '<obj>.....'.
+{<obj>:0}                              # '<obj>'.
 ```
 * **Objects are converted to strings with format() function, e.g. `'format(<obj>, "<10")'`.**
 * **Options can be generated dynamically via nested braces: `f'{<obj>:{<str/int>}[…]}'`.**
@@ -426,29 +426,29 @@ Format
 
 ### Strings
 ```python
-{'abcde':10}                           # 'abcde     '
-{'abcde':10.3}                         # 'abc       '
-{'abcde':.3}                           # 'abc'
-{'abcde'!r:10}                         # "'abcde'   "
+{'abcde':10}                           # 'abcde     '.
+{'abcde':10.3}                         # 'abc       '.
+{'abcde':.3}                           # 'abc'.
+{'abcde'!r:10}                         # "'abcde'   ".
 ```
 
 ### Numbers
 ```python
-{123456:10}                            # '    123456'
-{123456:10,}                           # '   123,456'
-{123456:10_}                           # '   123_456'
-{123456:+10}                           # '   +123456'
-{123456:=+10}                          # '+   123456'
-{123456: }                             # ' 123456'
-{-123456: }                            # '-123456'
+{123456:10}                            # '    123456'.
+{123456:10,}                           # '   123,456'.
+{123456:10_}                           # '   123_456'.
+{123456:+10}                           # '   +123456'.
+{123456:=+10}                          # '+   123456'.
+{123456: }                             # ' 123456'.
+{-123456: }                            # '-123456'.
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                         # '      1.23'
-{1.23456:10.3f}                        # '     1.235'
-{1.23456:10.3e}                        # ' 1.235e+00'
-{1.23456:10.3%}                        # '  123.456%'
+{1.23456:10.3}                         # '      1.23'.
+{1.23456:10.3f}                        # '     1.235'.
+{1.23456:10.3e}                        # ' 1.235e+00'.
+{1.23456:10.3%}                        # '  123.456%'.
 ```
 
 #### Comparison of presentation types:
@@ -480,7 +480,8 @@ Format
 +--------------+----------------+----------------+----------------+----------------+
 ```
 * **`'{<num>:g}'` is `'{<float>:.6}'` that strips `'.0'` and has exponent starting at `'1e+06'`.**
-* **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence `'{6.5:.0f}'` becomes a `'6'`, while `'{7.5:.0f}'` an `'8'`. This rule only effects numbers that can be represented exactly by a float (`.5`, `.25`, …).**
+* **When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence `'{6.5:.0f}'` becomes a `'6'`, while `'{7.5:.0f}'` an `'8'`.**
+* **The last rule only effects numbers that can be represented exactly by a float (`.5`, `.25`, …).**
 
 ### Ints
 ```python
@@ -598,10 +599,10 @@ import zoneinfo, dateutil.tz
 ```
 
 ```python
-<D>  = date(year, month, day)               # Accepts valid dates between AD 1 and AD 9999.
-<T>  = time(hour=0, minute=0, second=0)     # Also: `microsecond=0, tzinfo=None, fold=0`.
-<DT> = datetime(year, month, day, hour=0)   # Also: `minute=0, second=0, microsecond=0, …`.
-<TD> = timedelta(weeks=0, days=0, hours=0)  # Also: `minutes=0, seconds=0, microseconds=0`.
+<D>  = date(year, month, day)               # Only accepts valid dates between AD 1 and 9999.
+<T>  = time(hour=0, minute=0, second=0)     # Accepts `microsecond=0, tzinfo=None, fold=0`.
+<DT> = datetime(year, month, day, hour=0)   # Accepts `minute=0, second=0, microsecond=0, …`.
+<TD> = timedelta(weeks=0, days=0, hours=0)  # Accepts `minutes=0, seconds=0, microseconds=0`.
 ```
 * **Times and datetimes that have defined timezone are called aware and ones that don't, naive. If time or datetime object is naive, it is presumed to be in the system's timezone!**
 * **`'fold=1'` means the second pass in case of time jumping back (usually for one hour).**
@@ -671,10 +672,11 @@ import zoneinfo, dateutil.tz
 Function
 --------
 **Independent block of code that returns a value when called.**
+
 ```python
-def <func_name>(<nondefault_args>): ...                  # E.g. `def func(x, y): ...`.
-def <func_name>(<default_args>): ...                     # E.g. `def func(x=0, y=0): ...`.
-def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `def func(x, y=0): ...`.
+def <func_name>(<nondefault_args>): ...                  # E.g. `func(x, y):`.
+def <func_name>(<default_args>): ...                     # E.g. `func(x=0, y=0):`.
+def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `func(x, y=0):`.
 ```
 * **Function returns None if it doesn't encounter the `'return <object/expr>'` statement.**
 * **Run `'global <var_name>'` inside the function before assigning to the global variable.**
@@ -820,13 +822,14 @@ Imports
 **Mechanism that makes code in one file available to another file.**
 
 ```python
-import <module>                # Imports a built-in or '<module>.py'.
-import <package>               # Imports a built-in or '<package>/__init__.py'.
-import <package>.<module>      # Imports a built-in or '<package>/<module>.py'.
+import <module>                      # Imports a built-in module or the '<module>.py'.
+import <package>                     # A built-in package or '<package>/__init__.py'.
+import <package>.<module>            # A package's module or '<package>/<module>.py'.
+from <pkg/mod>[.…] import <obj>      # Imports a module, function, variable or class.
 ```
-* **Package is a collection of modules, but it can also define its own functions, classes, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.**
-* **Running `'import <package>'` does not automatically provide access to the package's modules unless they are explicitly imported in the `'<package>/__init__.py'` script.**
-* **Directory of the file that is passed to python command serves as a root of local imports.**
+* **Package is a collection of modules, but it can also define its own functions, variables, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.**
+* **`'import <package>'` only exposes modules that are imported inside `'__init__.py'`.**
+* **Directory of the file that is passed to python command serves as the root of local imports.**
 * **Use relative imports, i.e. `'from .[…][<pkg/mod>[.…]] import <obj>'`, if project has scattered entry points. Another option is to install the whole project by moving its code into 'src' dir, adding ['pyproject.toml'](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#basic-information) to its root, and running `'$ pip3 install -e .'`.**
 
 
@@ -1699,7 +1702,7 @@ import os, shutil
 ```
 
 ```python
-os.chdir(<path>)                 # Changes the current working directory (CWD).
+os.chdir(<path>)                 # Changes the current working directory (or CWD).
 os.mkdir(<path>, mode=0o777)     # Creates a directory. Permissions are in octal.
 os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False`.
 ```
@@ -2099,14 +2102,14 @@ import operator as op
 ```
 
 ```python
-<bool> = op.not_(<obj>)                                        # or, and, not (or/and missing)
-<bool> = op.eq/ne/lt/ge/is_/is_not/contains(<obj>, <obj>)      # ==, !=, <, >=, is, is not, in
-<obj>  = op.or_/xor/and_(<int/set>, <int/set>)                 # |, ^, & (sorted by precedence)
-<int>  = op.lshift/rshift(<int>, <int>)                        # <<, >> (i.e. <int> << n_bits)
-<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)     # +, -, *, /, //, % (two groups)
-<num>  = op.neg/invert(<num>)                                  # -, ~ (negate and bitwise not)
-<num>  = op.pow(<num>, <num>)                                  # ** (pow() accepts 3 arguments)
-<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, ...])  # [index/key], .name, .name([…])
+<bool> = op.not_(<obj>)                                      # or, and, not (or/and missing).
+<bool> = op.eq/ne/lt/ge/is_/is_not/contains(<obj>, <obj>)    # ==, !=, <, >=, is, is not, in.
+<obj>  = op.or_/xor/and_(<int/set>, <int/set>)               # |, ^, & (sorted by precedence).
+<int>  = op.lshift/rshift(<int>, <int>)                      # <<, >> (i.e. <int> << n_bits).
+<obj>  = op.add/sub/mul/truediv/floordiv/mod(<obj>, <obj>)   # +, -, *, /, //, % (two groups).
+<num>  = op.neg/invert(<num>)                                # -, ~ (negate and bitwise not).
+<num>  = op.pow(<num>, <num>)                                # ** (pow() accepts 3 arguments).
+<func> = op.itemgetter/attrgetter/methodcaller(<obj> [, …])  # [index/key], .name, .name([…]).
 ```
 
 ```python
@@ -2201,7 +2204,7 @@ log.basicConfig(
 * **An object with `'filter(<LogRecord>)'` method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.**
 * **Logging messages generated by libraries are passed to the root's handlers. Level of the library's logger can be set with `'log.getLogger("<library>").setLevel(<str>)'`.**
 
-#### Creates a logger that writes all messages to a file and sends them to the root's handler that prints warnings or higher:
+#### Logger that writes messages to file and sends them to the root's handler that prints warnings or higher:
 ```python
 >>> logger = log.getLogger('my_module')
 >>> handler = log.FileHandler('test.log', encoding='utf-8')
@@ -2212,10 +2215,10 @@ log.basicConfig(
 >>> log.basicConfig()
 >>> roots_handler = log.root.handlers[0]
 >>> roots_handler.setLevel('WARNING')
->>> logger.critical('Running out of disk space.')
-CRITICAL:my_module:Running out of disk space.
+>>> logger.critical('Missing config file.')
+CRITICAL:my_module:Missing config file.
 >>> print(open('test.log').read())
-2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.
+2023-02-07 23:21:01,430 CRITICAL:my_module:Missing config file.
 ```
 
 
@@ -2402,11 +2405,11 @@ Plot
 # $ pip3 install matplotlib
 import matplotlib.pyplot as plt
 
-plt.plot/bar/scatter(x_data, y_data [, label=<str>])  # Accepts plt.plot(y_data).
-plt.legend()                                          # Adds a legend of labels.
-plt.title/xlabel/ylabel(<str>)                        # Adds title or axis label.
-plt.show()                                            # Also plt.savefig(<path>).
-plt.clf()                                             # Clears the plot (figure).
+plt.plot/bar/scatter(x_data, y_data, label=None)  # Accepts plt.plot(y_data).
+plt.legend()                                      # Adds a legend of labels.
+plt.title/xlabel/ylabel(<str>)                    # Adds title or axis label.
+plt.show()                                        # Also plt.savefig(<path>).
+plt.clf()                                         # Clears the plot (figure).
 ```
 
 
@@ -2855,21 +2858,21 @@ import wave
 ```
 
 ```python
-<Wave>  = wave.open('<path>')         # Opens specified WAV file for reading.
-<int>   = <Wave>.getframerate()       # Returns number of frames per second.
-<int>   = <Wave>.getnchannels()       # Returns number of samples per frame.
-<int>   = <Wave>.getsampwidth()       # Returns number of bytes per sample.
-<tuple> = <Wave>.getparams()          # Returns namedtuple of all parameters.
-<bytes> = <Wave>.readframes(nframes)  # Returns all frames if `-1` is passed.
+<Wave>  = wave.open('<path>')               # Opens specified WAV file for reading.
+<int>   = <Wave>.getframerate()             # Returns number of frames per second.
+<int>   = <Wave>.getnchannels()             # Returns number of samples per frame.
+<int>   = <Wave>.getsampwidth()             # Returns number of bytes per sample.
+<tuple> = <Wave>.getparams()                # Returns namedtuple of all parameters.
+<bytes> = <Wave>.readframes(nframes)        # Returns all frames if `-1` is passed.
 ```
 
 ```python
-<Wave> = wave.open('<path>', 'wb')    # Creates/truncates a file for writing.
-<Wave>.setframerate(<int>)            # Pass 44100, or 48000 for video track.
-<Wave>.setnchannels(<int>)            # Pass 1 for mono, 2 for stereo signal.
-<Wave>.setsampwidth(<int>)            # Pass 2 for CD, 3 for hi-res quality.
-<Wave>.setparams(<tuple>)             # Passed tuple must contain all params.
-<Wave>.writeframes(<bytes>)           # Appends passed frames to audio file.
+<Wave> = wave.open('<path>', 'wb')          # Creates/truncates a file for writing.
+<Wave>.setframerate(<int>)                  # Pass 44100, or 48000 for video track.
+<Wave>.setnchannels(<int>)                  # Pass 1 for mono, 2 for stereo signal.
+<Wave>.setsampwidth(<int>)                  # Pass 2 for CD, 3 for hi-res quality.
+<Wave>.setparams(<tuple>)                   # Passed tuple must contain all params.
+<Wave>.writeframes(<bytes>)                 # Appends passed frames to audio file.
 ```
 * **The bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In stereo signal, first sample of a frame belongs to the left channel (second to the right).**

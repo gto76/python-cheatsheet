@@ -214,10 +214,10 @@ const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>log.basicConfig()\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler = log.root.handlers[<span class="hljs-number">0</span>]\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler.setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Running out of disk space.\'</span>)\n' +
-  'CRITICAL:my_module:Running out of disk space.\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Missing config file.\'</span>)\n' +
+  'CRITICAL:my_module:Missing config file.\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +
-  '2023-02-07 23:21:01,430 CRITICAL:my_module:Running out of disk space.\n';
+  '2023-02-07 23:21:01,430 CRITICAL:my_module:Missing config file.\n';
 
 const AUDIO_1 =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_to_wav_file</span><span class="hljs-params">(filename, samples_f, p=<span class="hljs-keyword">None</span>, nchannels=<span class="hljs-number">1</span>, sampwidth=<span class="hljs-number">2</span>, fs=<span class="hljs-number">44100</span>)</span>:</span>\n' +
