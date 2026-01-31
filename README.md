@@ -502,14 +502,14 @@ Numbers
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError exception if string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
-* **Floats can be compared with: `'math.isclose(<float>, <float>, rel_tol=1e-09)'`.**
+* **Floats can be compared with: `'math.isclose(<float>, <float>, rel_tol=1e-9)'`.**
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 * **Bools can be used anywhere ints can, since bool is a subclass of int: `'True + 1 == 2'`.**
 
 ### Built-in Functions
 ```python
 <num> = pow(<num>, <num>)                      # E.g. `pow(3, 4) == 3 ** 4 == 81`.
-<num> = abs(<num>)                             # E.g. `abs(complex(3, 4)) == 5`.
+<num> = abs(<num>)                             # E.g. `abs(-50) == abs(50) == 50`.
 <num> = round(<num> [, ±ndigits])              # E.g. `round(123.45, -1) == 120`.
 <num> = min(<coll_of_nums>)                    # Also `max(<num>, <num> [, ...])`.
 <num> = sum(<coll_of_nums>)                    # Also `math.prod(<coll_of_nums>)`.
@@ -1561,7 +1561,7 @@ Open
 * **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
 * **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing `'newline="\n"'` breaks input only on '\n'.**
-* **`'newline="\r\n"'` converts every '\n' to '\r\n' on write and breaks input only on '\r\n'.**
+* **`'newline="\r\n"'` breaks input only on '\r\n' and converts every '\n' to '\r\n' on write.**
 
 ### Modes
 * **`'r'`  - Read text from the file (the default option).**
@@ -2776,8 +2776,8 @@ from PIL import Image
 ```
 
 ```python
-<Image> = <Image>.filter(<Filter>)            # E.g. `<Image>.filter(ImageFilter.FIND_EDGES)`.
-<Image> = <Enhance>.enhance(<float>)          # E.g. `ImageEnhance.Color(<Image>).enhance(2)`.
+<Image> = <Image>.filter(<Filter>)            # Accepts ImageFilter.BLUR/SHARPEN/FIND_EDGES/….
+<Image> = <Enhance>.enhance(<float>)          # E.g. `ImageEnhance.Contrast/Color/…(<Image>)`.
 ```
 
 ```python

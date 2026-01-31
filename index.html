@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>January 25, 2026</aside>
+    <aside>January 31, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -467,12 +467,12 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'int(&lt;str&gt;)'</span></code> and <code class="python hljs"><span class="hljs-string">'float(&lt;str&gt;)'</span></code> raise ValueError exception if string is malformed.</strong></li>
 <li><strong>Decimal objects store numbers exactly, unlike most floats where <code class="python hljs"><span class="hljs-string">'1.1 + 2.2 != 3.3'</span></code>.</strong></li>
-<li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;, rel_tol=1e-09)'</span></code>.</strong></li>
+<li><strong>Floats can be compared with: <code class="python hljs"><span class="hljs-string">'math.isclose(&lt;float&gt;, &lt;float&gt;, rel_tol=1e-9)'</span></code>.</strong></li>
 <li><strong>Precision of decimal operations is set with: <code class="python hljs"><span class="hljs-string">'decimal.getcontext().prec = &lt;int&gt;'</span></code>.</strong></li>
 <li><strong>Bools can be used anywhere ints can, since bool is a subclass of int: <code class="python hljs"><span class="hljs-string">'True + 1 == 2'</span></code>.</strong></li>
 </ul>
 <div><h3 id="builtinfunctions">Built-in Functions</h3><pre><code class="python language-python hljs">&lt;num&gt; = pow(&lt;num&gt;, &lt;num&gt;)                      <span class="hljs-comment"># E.g. `pow(3, 4) == 3 ** 4 == 81`.</span>
-&lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(complex(3, 4)) == 5`.</span>
+&lt;num&gt; = abs(&lt;num&gt;)                             <span class="hljs-comment"># E.g. `abs(-50) == abs(50) == 50`.</span>
 &lt;num&gt; = round(&lt;num&gt; [, ±ndigits])              <span class="hljs-comment"># E.g. `round(123.45, -1) == 120`.</span>
 &lt;num&gt; = min(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also `max(&lt;num&gt;, &lt;num&gt; [, ...])`.</span>
 &lt;num&gt; = sum(&lt;coll_of_nums&gt;)                    <span class="hljs-comment"># Also `math.prod(&lt;coll_of_nums&gt;)`.</span>
@@ -1338,7 +1338,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> until it becomes the default (Python 3.15).</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing <code class="python hljs"><span class="hljs-string">'newline="\n"'</span></code> breaks input only on '\n'.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> converts every '\n' to '\r\n' on write and breaks input only on '\r\n'.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> breaks input only on '\r\n' and converts every '\n' to '\r\n' on write.</strong></li>
 </ul>
 <div><h3 id="modes">Modes</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'r'</span></code>  - Read text from the file (the default option).</strong></li>
@@ -2276,8 +2276,8 @@ right = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-numb
 &lt;Image&gt;.putdata(&lt;list/ImgCore&gt;)               <span class="hljs-comment"># Updates pixels with a copy of passed sequence.</span>
 &lt;Image&gt;.paste(&lt;Image&gt;, (x, y))                <span class="hljs-comment"># Draws passed image at the specified location.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)            <span class="hljs-comment"># E.g. `&lt;Image&gt;.filter(ImageFilter.FIND_EDGES)`.</span>
-&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)          <span class="hljs-comment"># E.g. `ImageEnhance.Color(&lt;Image&gt;).enhance(2)`.</span>
+<pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)            <span class="hljs-comment"># Accepts ImageFilter.BLUR/SHARPEN/FIND_EDGES/….</span>
+&lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)          <span class="hljs-comment"># E.g. `ImageEnhance.Contrast/Color/…(&lt;Image&gt;)`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                   <span class="hljs-comment"># Creates a 2d or 3d NumPy array from the image.</span>
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))  <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip the values.</span>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>January 25, 2026</aside>
+    <aside>January 31, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
