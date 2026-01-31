@@ -191,7 +191,7 @@ Range
 Enumerate
 ---------
 ```python
-for i, el in enumerate(<coll>, start=0):   # Returns next element and its index on each pass.
+for i, el in enumerate(<coll>, start=0):  # Returns next element and its index on each pass.
     ...
 ```
 
@@ -201,11 +201,11 @@ Iterator
 **Potentially endless stream of elements.**
 
 ```python
-<iter> = iter(<collection>)                # Iterator that returns passed elements one by one.
-<iter> = iter(<func>, to_exc)              # Calls `<func>()` until it returns 'to_exc' value.
-<iter> = (<expr> for <name> in <coll>)     # E.g. `(i+1 for i in range(3))`. Evaluates lazily.
-<el>   = next(<iter> [, default])          # Raises StopIteration or returns 'default' on end.
-<list> = list(<iter>)                      # Returns a list of iterator's remaining elements.
+<iter> = iter(<collection>)              # Iterator that returns passed elements one by one.
+<iter> = iter(<func>, to_exc)            # Calls `<func>()` until it receives 'to_exc' value.
+<iter> = (<expr> for <name> in <coll>)   # E.g. `(i+1 for i in range(3))`. Evaluates lazily.
+<el>   = next(<iter> [, default])        # Raises StopIteration or returns 'default' on end.
+<list> = list(<iter>)                    # Returns a list of iterator's remaining elements.
 ```
 * **For loops call `'iter(<collection>)'` at the start and `'next(<iter>)'` on each pass.**
 * **Calling `'iter(<iter>)'` returns unmodified iterator. For details see [Iterator](#iterator-1) duck type.**
@@ -215,16 +215,16 @@ import itertools as it
 ```
 
 ```python
-<iter> = it.count(start=0, step=1)         # Returns updated 'start' endlessly. Accepts floats.
-<iter> = it.repeat(<el> [, times])         # Returns passed element endlessly or 'times' times.
-<iter> = it.cycle(<collection>)            # Repeats the sequence endlessly. Accepts iterators.
+<iter> = it.count(start=0, step=1)       # Returns updated 'start' endlessly. Accepts floats.
+<iter> = it.repeat(<obj> [, times])      # Returns passed element endlessly or 'times' times.
+<iter> = it.cycle(<collection>)          # Repeats the sequence endlessly. Accepts iterators.
 ```
 
 ```python
-<iter> = it.chain(<coll>, <coll> [, ...])  # Returns each element of each collection in order.
-<iter> = it.chain.from_iterable(<coll>)    # Accepts collection (i.e. iterable) of collections.
-<iter> = it.islice(<coll>, [start,] stop)  # Also accepts `+step`. Start and stop can be None.
-<iter> = it.product(<coll>, ...)           # Same as `((a, b) for a in arg_1 for b in arg_2)`.
+<iter> = it.chain(<coll>, <coll>, ...)   # Returns each element of each collection in order.
+<iter> = it.chain.from_iterable(<coll>)  # Accepts collection (i.e. iterable) of collections.
+<iter> = it.islice(<coll>, stop)         # Also accepts 'start' and 'step'. Args can be None.
+<iter> = it.product(<coll>, ...)         # Same as `((a, b) for a in arg_1 for b in arg_2)`.
 ```
 
 

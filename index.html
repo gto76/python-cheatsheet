@@ -223,15 +223,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>)]
 [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
 </code></pre>
-<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;coll&gt;, start=<span class="hljs-number">0</span>):   <span class="hljs-comment"># Returns next element and its index on each pass.</span>
+<div><h2 id="enumerate"><a href="#enumerate" name="enumerate">#</a>Enumerate</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">for</span> i, el <span class="hljs-keyword">in</span> enumerate(&lt;coll&gt;, start=<span class="hljs-number">0</span>):  <span class="hljs-comment"># Returns next element and its index on each pass.</span>
     ...
 </code></pre></div>
 
-<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)                <span class="hljs-comment"># Iterator that returns passed elements one by one.</span>
-&lt;iter&gt; = iter(&lt;func&gt;, to_exc)              <span class="hljs-comment"># Calls `&lt;func&gt;()` until it returns 'to_exc' value.</span>
-&lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)     <span class="hljs-comment"># E.g. `(i+1 for i in range(3))`. Evaluates lazily.</span>
-&lt;el&gt;   = next(&lt;iter&gt; [, default])          <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
-&lt;list&gt; = list(&lt;iter&gt;)                      <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
+<div><h2 id="iterator"><a href="#iterator" name="iterator">#</a>Iterator</h2><p><strong>Potentially endless stream of elements.</strong></p><pre><code class="python language-python hljs">&lt;iter&gt; = iter(&lt;collection&gt;)              <span class="hljs-comment"># Iterator that returns passed elements one by one.</span>
+&lt;iter&gt; = iter(&lt;func&gt;, to_exc)            <span class="hljs-comment"># Calls `&lt;func&gt;()` until it receives 'to_exc' value.</span>
+&lt;iter&gt; = (&lt;expr&gt; <span class="hljs-keyword">for</span> &lt;name&gt; <span class="hljs-keyword">in</span> &lt;coll&gt;)   <span class="hljs-comment"># E.g. `(i+1 for i in range(3))`. Evaluates lazily.</span>
+&lt;el&gt;   = next(&lt;iter&gt; [, default])        <span class="hljs-comment"># Raises StopIteration or returns 'default' on end.</span>
+&lt;list&gt; = list(&lt;iter&gt;)                    <span class="hljs-comment"># Returns a list of iterator's remaining elements.</span>
 </code></pre></div>
 
 
@@ -241,14 +241,14 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 </ul>
 <pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)         <span class="hljs-comment"># Returns updated 'start' endlessly. Accepts floats.</span>
-&lt;iter&gt; = it.repeat(&lt;el&gt; [, times])         <span class="hljs-comment"># Returns passed element endlessly or 'times' times.</span>
-&lt;iter&gt; = it.cycle(&lt;collection&gt;)            <span class="hljs-comment"># Repeats the sequence endlessly. Accepts iterators.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = it.count(start=<span class="hljs-number">0</span>, step=<span class="hljs-number">1</span>)       <span class="hljs-comment"># Returns updated 'start' endlessly. Accepts floats.</span>
+&lt;iter&gt; = it.repeat(&lt;obj&gt; [, times])      <span class="hljs-comment"># Returns passed element endlessly or 'times' times.</span>
+&lt;iter&gt; = it.cycle(&lt;collection&gt;)          <span class="hljs-comment"># Repeats the sequence endlessly. Accepts iterators.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt; [, ...])  <span class="hljs-comment"># Returns each element of each collection in order.</span>
-&lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)    <span class="hljs-comment"># Accepts collection (i.e. iterable) of collections.</span>
-&lt;iter&gt; = it.islice(&lt;coll&gt;, [start,] stop)  <span class="hljs-comment"># Also accepts `+step`. Start and stop can be None.</span>
-&lt;iter&gt; = it.product(&lt;coll&gt;, ...)           <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt;, ...)   <span class="hljs-comment"># Returns each element of each collection in order.</span>
+&lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)  <span class="hljs-comment"># Accepts collection (i.e. iterable) of collections.</span>
+&lt;iter&gt; = it.islice(&lt;coll&gt;, stop)         <span class="hljs-comment"># Also accepts 'start' and 'step'. Args can be None.</span>
+&lt;iter&gt; = it.product(&lt;coll&gt;, ...)         <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
