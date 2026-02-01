@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>January 31, 2026</aside>
+    <aside>February 1, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1353,7 +1353,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code>, <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'OSError'</span></code> is the parent class of all listed exceptions.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'except OSError [as &lt;name&gt;]: …'</span></code> catches all listed exceptions.</strong></li>
 </ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the start of file.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
 &lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves current position to the end of file.</span>
@@ -1459,7 +1459,7 @@ shutil.rmtree(&lt;path&gt;)            <span class="hljs-comment"># Deletes the 
 </code></pre>
 <ul>
 <li><strong>Provided paths can be either strings, Path objects, or DirEntry objects.</strong></li>
-<li><strong>Functions report OS related errors by raising OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
+<li><strong>Functions report errors by raising OSError or one of its <a href="#exceptions-1">subclasses</a>.</strong></li>
 </ul>
 <div><h2 id="shellcommands"><a href="#shellcommands" name="shellcommands">#</a>Shell Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, subprocess, shlex
 </code></pre></div>
@@ -1917,7 +1917,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 </code></pre>
 <pre><code class="python language-python hljs">&lt;coro&gt; = aio.gather(&lt;coro/task&gt;, ...)      <span class="hljs-comment"># Schedules coros. Returns list of results on await.</span>
 &lt;coro&gt; = aio.wait(&lt;tasks&gt;, return_when=…)  <span class="hljs-comment"># `'ALL/FIRST_COMPLETED'`. Returns (done, pending).</span>
-&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Iter of coros. Each returns next result on await.</span>
+&lt;iter&gt; = aio.as_completed(&lt;coros/tasks&gt;)   <span class="hljs-comment"># Calling `await next(&lt;iter&gt;)` returns next result.</span>
 </code></pre>
 <div><h4 id="runsaterminalgamewhereyoucontrolanasteriskthatmustavoidnumbers">Runs a terminal game where you control an asterisk that must avoid numbers:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random
 
@@ -2401,9 +2401,9 @@ write_to_wav_file(<span class="hljs-string">'test.wav'</span>, (get_sin(i) <span
 
 
 <div><h4 id="addsnoisetothewavfile">Adds noise to the WAV file:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> uniform
-samples_f, params = read_wav_file(<span class="hljs-string">'test.wav'</span>)
+samples_f, prms = read_wav_file(<span class="hljs-string">'test.wav'</span>)
 samples_f = (f + uniform(<span class="hljs-number">-0.02</span>, <span class="hljs-number">0.02</span>) <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> samples_f)
-write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, p=params)
+write_to_wav_file(<span class="hljs-string">'test.wav'</span>, samples_f, p=prms)
 </code></pre></div>
 
 <div><h3 id="audioplayer">Audio Player</h3><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install nava</span>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>January 31, 2026</aside>
+    <aside>February 1, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -1577,7 +1577,7 @@ Open
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
 * **`'FileExistsError'` exception can be raised when writing with `'x'`.**
 * **`'IsADirectoryError'`, `'PermissionError'` can be raised by any.**
-* **`'OSError'` is the parent class of all listed exceptions.**
+* **`'except OSError [as <name>]: …'` catches all listed exceptions.**
 
 ### File Object
 ```python
@@ -1725,7 +1725,7 @@ os.rmdir(<path>)                 # Deletes the empty directory or raises OSError
 shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
 * **Provided paths can be either strings, Path objects, or DirEntry objects.**
-* **Functions report OS related errors by raising OSError or one of its [subclasses](#exceptions-1).**
+* **Functions report errors by raising OSError or one of its [subclasses](#exceptions-1).**
 
 
 Shell Commands
@@ -2325,7 +2325,7 @@ import asyncio as aio
 ```python
 <coro> = aio.gather(<coro/task>, ...)      # Schedules coros. Returns list of results on await.
 <coro> = aio.wait(<tasks>, return_when=…)  # `'ALL/FIRST_COMPLETED'`. Returns (done, pending).
-<iter> = aio.as_completed(<coros/tasks>)   # Iter of coros. Each returns next result on await.
+<iter> = aio.as_completed(<coros/tasks>)   # Calling `await next(<iter>)` returns next result.
 ```
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
@@ -2928,9 +2928,9 @@ write_to_wav_file('test.wav', (get_sin(i) for i in range(100_000)))
 #### Adds noise to the WAV file:
 ```python
 from random import uniform
-samples_f, params = read_wav_file('test.wav')
+samples_f, prms = read_wav_file('test.wav')
 samples_f = (f + uniform(-0.02, 0.02) for f in samples_f)
-write_to_wav_file('test.wav', samples_f, p=params)
+write_to_wav_file('test.wav', samples_f, p=prms)
 ```
 
 ### Audio Player
