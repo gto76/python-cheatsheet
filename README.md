@@ -625,7 +625,7 @@ import zoneinfo, dateutil.tz
 <DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes the timezone object without conversion.
 ```
-* **Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
+* **Timezones returned by tzlocal(), ZoneInfo(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
 * **To get ZoneInfo() to work on Windows run `'> pip3 install tzdata'`.**
 
 ### Encode
@@ -1199,7 +1199,7 @@ class Counter:
 
 ### Context Manager
 * **With statements only work on objects that have enter() and exit() special methods.**
-* **Enter() should lock the resources and optionally return an object (file, lock, etc.).**
+* **Enter() should lock the resources and optionally return an object (file, socket, etc.).**
 * **Exit() should release the resources (for example close a file, release a lock, etc.).**
 * **Any exception that happens inside the with block is passed to the exit() method.**
 * **The exit() method can suppress the exception by returning a true value.**
@@ -1997,14 +1997,14 @@ Struct
 ```python
 from struct import pack, unpack
 
-<bytes> = pack('<format>', <el_1> [, ...])  # Packs numbers according to format.
-<tuple> = unpack('<format>', <bytes>)       # Use `iter_unpack()` to get tuples.
+<bytes> = pack('<format>', <num_1>, ...)  # Packs numbers according to format.
+<tuple> = unpack('<format>', <bytes>)     # Use `iter_unpack()` to get tuples.
 ```
 
 ```python
 >>> pack('>hhl', 1, 2, 3)
 b'\x00\x01\x00\x02\x00\x00\x00\x03'
->>> unpack('>hhl', b'\x00\x01\x00\x02\x00\x00\x00\x03')
+>>> unpack('bhh', b'\x01\x00\x02\x00\x03\x00')
 (1, 2, 3)
 ```
 

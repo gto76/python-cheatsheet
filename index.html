@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 1, 2026</aside>
+    <aside>February 2, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -561,7 +561,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 </code></pre></div>
 
 <ul>
-<li><strong>Timezones returned by tzlocal(), ZoneInfo() and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
+<li><strong>Timezones returned by tzlocal(), ZoneInfo(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.</strong></li>
 <li><strong>To get ZoneInfo() to work on Windows run <code class="python hljs"><span class="hljs-string">'&gt; pip3 install tzdata'</span></code>.</strong></li>
 </ul>
 <div><h3 id="encode">Encode</h3><pre><code class="python language-python apache hljs">&lt;D/T/DT&gt; = D/T/DT.fromisoformat(&lt;str&gt;)      <span class="hljs-comment"># Object from the ISO string. Raises ValueError.</span>
@@ -1029,7 +1029,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 </code></pre>
 <div><h3 id="contextmanager">Context Manager</h3><ul>
 <li><strong>With statements only work on objects that have enter() and exit() special methods.</strong></li>
-<li><strong>Enter() should lock the resources and optionally return an object (file, lock, etc.).</strong></li>
+<li><strong>Enter() should lock the resources and optionally return an object (file, socket, etc.).</strong></li>
 <li><strong>Exit() should release the resources (for example close a file, release a lock, etc.).</strong></li>
 <li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
 <li><strong>The exit() method can suppress the exception by returning a true value.</strong></li>
@@ -1660,14 +1660,14 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 <li><strong>System’s type sizes, byte order, and alignment rules are used by default.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> struct <span class="hljs-keyword">import</span> pack, unpack
 
-&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;el_1&gt; [, ...])  <span class="hljs-comment"># Packs numbers according to format.</span>
-&lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)       <span class="hljs-comment"># Use `iter_unpack()` to get tuples.</span>
+&lt;bytes&gt; = pack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;num_1&gt;, ...)  <span class="hljs-comment"># Packs numbers according to format.</span>
+&lt;tuple&gt; = unpack(<span class="hljs-string">'&lt;format&gt;'</span>, &lt;bytes&gt;)     <span class="hljs-comment"># Use `iter_unpack()` to get tuples.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>pack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>unpack(<span class="hljs-string">'&gt;hhl'</span>, <span class="hljs-string">b'\x00\x01\x00\x02\x00\x00\x00\x03'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>unpack(<span class="hljs-string">'bhh'</span>, <span class="hljs-string">b'\x01\x00\x02\x00\x03\x00'</span>)
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <h3 id="format-2">Format</h3><div><h4 id="forstandardtypesizesandmanualalignmentpaddingstartformatstringwith">For standard type sizes and manual alignment (padding) start format string with:</h4><ul>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 1, 2026</aside>
+    <aside>February 2, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
