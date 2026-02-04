@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 2, 2026</aside>
+    <aside>February 4, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -705,7 +705,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one file available to another file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;                      <span class="hljs-comment"># Imports a built-in module or the '&lt;module&gt;.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;                     <span class="hljs-comment"># A built-in package or '&lt;package&gt;/__init__.py'.</span>
 <span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;            <span class="hljs-comment"># A package's module or '&lt;package&gt;/&lt;module&gt;.py'.</span>
-<span class="hljs-keyword">from</span> &lt;pkg/mod&gt;[.…] <span class="hljs-keyword">import</span> &lt;obj&gt;      <span class="hljs-comment"># Imports a module, function, variable or class.</span>
+<span class="hljs-keyword">from</span> &lt;pkg/mod&gt;[.…] <span class="hljs-keyword">import</span> &lt;obj&gt;      <span class="hljs-comment"># Imports a module, function, class or variable.</span>
 </code></pre></div>
 
 
@@ -944,7 +944,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 
 <div><h3 id="hashable">Hashable</h3><ul>
-<li><strong>Hashable object needs both hash() and eq() methods and its hash value must not change.</strong></li>
+<li><strong>Hashable object needs hash() and eq() methods and its hash value should not change.</strong></li>
 <li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -963,9 +963,9 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 <div><h3 id="sortable">Sortable</h3><ul>
 <li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by &lt;, &gt;, &lt;=, &gt;=) and the rest will be automatically generated.</strong></li>
-<li><strong>Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.</strong></li>
-<li><strong>When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then re­turned. The shorter sequence is considered smaller in case of all values being equal.</strong></li>
-<li><strong>To sort a coll. of strings in proper alphabetical order pass <code class="python hljs"><span class="hljs-string">'key=locale.strxfrm'</span></code> to sorted() after running <code class="python hljs"><span class="hljs-string">'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'</span></code>.</strong></li>
+<li><strong>Built-in functions sorted() and min() only require lt() method, while max() only requires gt(). However, it's best to define them all so that confusion doesn't arise in other contexts.</strong></li>
+<li><strong>When two lists, strings, or data classes are compared, their values get compared one by one until a pair of unequal values is found. The comparison of this two values is then re­turned. The shorter sequence is considered smaller in case of all their values being equal.</strong></li>
+<li><strong>To sort collection of strings in proper alphabetical order pass <code class="python hljs"><span class="hljs-string">'key=locale.strxfrm'</span></code> to sorted() after running <code class="python hljs"><span class="hljs-string">'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> total_ordering
 
 <span class="hljs-meta">@total_ordering</span>
@@ -1010,8 +1010,8 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>File objects returned by the <a href="#open">open()</a> function, <a href="#sqlite">SQLite</a> cursor objects, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method that is executed when they are called.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to check if object is callable. You can also call the object and check if it raised TypeError.</strong></li>
-<li><strong>When this cheatsheet uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to&nbsp;check if object is callable. You can also call the object and see if it raised TypeError.</strong></li>
+<li><strong>When this text uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it actually means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.i = <span class="hljs-number">0</span>
@@ -1030,9 +1030,8 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <div><h3 id="contextmanager">Context Manager</h3><ul>
 <li><strong>With statements only work on objects that have enter() and exit() special methods.</strong></li>
 <li><strong>Enter() should lock the resources and optionally return an object (file, socket, etc.).</strong></li>
-<li><strong>Exit() should release the resources (for example close a file, release a lock, etc.).</strong></li>
-<li><strong>Any exception that happens inside the with block is passed to the exit() method.</strong></li>
-<li><strong>The exit() method can suppress the exception by returning a true value.</strong></li>
+<li><strong>Exit() should release the resources (for example close the file, release the lock, etc.).</strong></li>
+<li><strong>Any exception that happens inside the with block is passed to exit() method. Exit() method can then suppress that exception by returning a true value (None is false).</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
@@ -1141,7 +1140,7 @@ Hello World!
 </code></pre></div>
 
 <ul>
-<li><strong>Method iter() is required for <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, abc.Iterable)'</span></code> to return True, however any object with getitem() will work with any code expecting an iterable.</strong></li>
+<li><strong>Method iter() is required for <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, abc.Iterable)'</span></code> to return True, however any object with getitem() method works with any code expecting an iterable.</strong></li>
 <li><strong>MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also ex­tendable. Use <code class="python hljs"><span class="hljs-string">'&lt;abc&gt;.__abstractmethods__'</span></code> to get names of required methods.</strong></li>
 </ul>
 <div><h2 id="enum"><a href="#enum" name="enum">#</a>Enum</h2><p><strong>Class of named constants called members.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum, auto
@@ -1203,7 +1202,7 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'else'</span></code> block will only be executed if <code class="python hljs"><span class="hljs-string">'try'</span></code> block had no exceptions.</strong></li>
 <li><strong>Code inside the <code class="python hljs"><span class="hljs-string">'finally'</span></code> block will always be executed (unless a signal is received).</strong></li>
 <li><strong>All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only the function block delimits scope).</strong></li>
-<li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, handler_function)'</span></code>.</strong></li>
+<li><strong>To catch signals use <code class="python hljs"><span class="hljs-string">'signal.signal(signal_number, my_handler_function)'</span></code>.</strong></li>
 </ul>
 <div><h3 id="catchingexceptions">Catching Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">except</span> &lt;exception&gt;: ...
 <span class="hljs-keyword">except</span> &lt;exception&gt; <span class="hljs-keyword">as</span> &lt;name&gt;: ...
@@ -1214,8 +1213,8 @@ LogicOp = Enum(<span class="hljs-string">'LogicOp'</span>, {<span class="hljs-st
 <ul>
 <li><strong>It also catches subclasses, e.g. <code class="python hljs"><span class="hljs-string">'ArithmeticError'</span></code> is caught by <code class="python hljs"><span class="hljs-string">'except Exception:'</span></code>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'traceback.print_exc()'</span></code> to print the full error message to standard error stream.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (that is, its arguments).</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see <a href="#logging">Logging</a>.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'print(&lt;name&gt;)'</span></code> to print just the cause of the exception (its arguments) to stdout.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'logging.exception(&lt;str&gt;)'</span></code> to log the passed message, followed by the full error message of the caught exception. For details about how to set up the logger see <a href="#logging">Logging</a>.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'sys.exc_info()'</span></code> to get exception type, object, and traceback of caught exception.</strong></li>
 </ul>
 <div><h3 id="raisingexceptions">Raising Exceptions</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> &lt;exception&gt;
@@ -2935,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 2, 2026</aside>
+    <aside>February 4, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

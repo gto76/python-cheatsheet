@@ -825,7 +825,7 @@ Imports
 import <module>                      # Imports a built-in module or the '<module>.py'.
 import <package>                     # A built-in package or '<package>/__init__.py'.
 import <package>.<module>            # A package's module or '<package>/<module>.py'.
-from <pkg/mod>[.…] import <obj>      # Imports a module, function, variable or class.
+from <pkg/mod>[.…] import <obj>      # Imports a module, function, class or variable.
 ```
 * **Package is a collection of modules, but it can also define its own functions, variables, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **`'import <package>'` only exposes modules that are imported inside `'__init__.py'`.**
@@ -1109,7 +1109,7 @@ class MyComparable:
 ```
 
 ### Hashable
-* **Hashable object needs both hash() and eq() methods and its hash value must not change.**
+* **Hashable object needs hash() and eq() methods and its hash value should not change.**
 * **Hashable objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.**
 
 ```python
@@ -1129,9 +1129,9 @@ class MyHashable:
 
 ### Sortable
 * **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by <, >, <=, >=) and the rest will be automatically generated.**
-* **Functions sorted() and min() only require lt() method, while max() only requires gt(). However, it is best to define them all so that confusion doesn't arise in other contexts.**
-* **When two lists, strings or dataclasses are compared, their values get compared in order until a pair of unequal values is found. The comparison of this two values is then re&shy;turned. The shorter sequence is considered smaller in case of all values being equal.**
-* **To sort a coll. of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
+* **Built-in functions sorted() and min() only require lt() method, while max() only requires gt(). However, it's best to define them all so that confusion doesn't arise in other contexts.**
+* **When two lists, strings, or data classes are compared, their values get compared one by one until a pair of unequal values is found. The comparison of this two values is then re&shy;turned. The shorter sequence is considered smaller in case of all their values being equal.**
+* **To sort collection of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
 
 ```python
 from functools import total_ordering
@@ -1180,8 +1180,8 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method that is executed when they are called.**
-* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to check if object is callable. You can also call the object and check if it raised TypeError.**
-* **When this cheatsheet uses `'<function>'` as an argument, it means `'<callable>'`.**
+* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to&nbsp;check if object is callable. You can also call the object and see if it raised TypeError.**
+* **When this text uses `'<function>'` as an argument, it actually means `'<callable>'`.**
 ```python
 class Counter:
     def __init__(self):
@@ -1200,9 +1200,8 @@ class Counter:
 ### Context Manager
 * **With statements only work on objects that have enter() and exit() special methods.**
 * **Enter() should lock the resources and optionally return an object (file, socket, etc.).**
-* **Exit() should release the resources (for example close a file, release a lock, etc.).**
-* **Any exception that happens inside the with block is passed to the exit() method.**
-* **The exit() method can suppress the exception by returning a true value.**
+* **Exit() should release the resources (for example close the file, release the lock, etc.).**
+* **Any exception that happens inside the with block is passed to exit() method. Exit() method can then suppress that exception by returning a true value (None is false).**
 ```python
 class MyOpen:
     def __init__(self, filename):
@@ -1316,7 +1315,7 @@ class MyAbcSequence(abc.Sequence):
 | count()    |            |            |            |     Yes      |
 +------------+------------+------------+------------+--------------+
 ```
-* **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() will work with any code expecting an iterable.**
+* **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() method works with any code expecting an iterable.**
 * **MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also ex&shy;tendable. Use `'<abc>.__abstractmethods__'` to get names of required methods.**
 
 
@@ -1397,7 +1396,7 @@ finally:
 * **Code inside the `'else'` block will only be executed if `'try'` block had no exceptions.**
 * **Code inside the `'finally'` block will always be executed (unless a signal is received).**
 * **All variables that are initialized in executed blocks are also visible in all subsequent blocks, as well as outside the try statement (only the function block delimits scope).**
-* **To catch signals use `'signal.signal(signal_number, handler_function)'`.**
+* **To catch signals use `'signal.signal(signal_number, my_handler_function)'`.**
 
 ### Catching Exceptions
 ```python
@@ -1408,8 +1407,8 @@ except (<exception>, [...]) as <name>: ...
 ```
 * **It also catches subclasses, e.g. `'ArithmeticError'` is caught by `'except Exception:'`.**
 * **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
-* **Use `'print(<name>)'` to print just the cause of the exception (that is, its arguments).**
-* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about setting up the logger see [Logging](#logging).**
+* **Use `'print(<name>)'` to print just the cause of the exception (its arguments) to stdout.**
+* **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about how to set up the logger see [Logging](#logging).**
 * **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
 
 ### Raising Exceptions
