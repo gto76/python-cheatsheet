@@ -471,18 +471,18 @@ const DIAGRAM_7_B =
   "      ├── EOFError                <span class='hljs-comment'># Raised by `input()` when it hits an end-of-file condition.</span>\n" +
   "      ├── LookupError             <span class='hljs-comment'># Base class for errors when a collection can't find an item.</span>\n" +
   "      │    ├── IndexError         <span class='hljs-comment'># Raised when index of a sequence (list/str) is out of range.</span>\n" +
-  "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary key or a set element is missing.</span>\n" +
+  "      │    └── KeyError           <span class='hljs-comment'># Raised when a dictionary's key or a set element is missing.</span>\n" +
   "      ├── MemoryError             <span class='hljs-comment'># Out of memory. May be too late to start deleting variables.</span>\n" +
   "      ├── NameError               <span class='hljs-comment'># Raised when nonexistent name (variable/func/class) is used.</span>\n" +
-  "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when local name is used before it is being defined.</span>\n" +
+  "      │    └── UnboundLocalError  <span class='hljs-comment'># Raised when a local name is used before it's being defined.</span>\n" +
   "      ├── OSError                 <span class='hljs-comment'># Errors such as FileExistsError and TimeoutError. See #Open.</span>\n" +
   "      │    └── ConnectionError    <span class='hljs-comment'># Errors such as BrokenPipeError and ConnectionAbortedError.</span>\n" +
   "      ├── RuntimeError            <span class='hljs-comment'># Is raised by errors that do not fit into other categories.</span>\n" +
   "      │    ├── NotImplementedEr…  <span class='hljs-comment'># Can be raised by abstract methods or by an unfinished code.</span>\n" +
   "      │    └── RecursionError     <span class='hljs-comment'># Raised if max recursion depth is exceeded (3k by default).</span>\n" +
   "      ├── StopIteration           <span class='hljs-comment'># Raised when exhausted (empty) iterator is passed to next().</span>\n" +
-  "      ├── TypeError               <span class='hljs-comment'># When an argument of the wrong type is passed to function.</span>\n" +
-  "      └── ValueError              <span class='hljs-comment'># When argument has the right type but inappropriate value.</span>\n";
+  "      ├── TypeError               <span class='hljs-comment'># Raised when argument of wrong type is passed to a function.</span>\n" +
+  "      └── ValueError              <span class='hljs-comment'># Raised when it has the right type but inappropriate value.</span>\n";
 
 const DIAGRAM_8_A =
   '+-----------+------------+------------+------------+\n' +

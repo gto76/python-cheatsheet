@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 4, 2026</aside>
+    <aside>February 6, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -168,10 +168,10 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 {k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> &lt;dict&gt;.items() <span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> keys}  <span class="hljs-comment"># Returns a dict of items with specified keys.</span>
 </code></pre>
 <div><h3 id="counter">Counter</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
-<span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter([<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>, <span class="hljs-string">'red'</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>counter[<span class="hljs-string">'yellow'</span>] += <span class="hljs-number">1</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>counter = Counter([<span class="hljs-string">'blue'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'red'</span>])
+<span class="hljs-meta">&gt;&gt;&gt; </span>counter[<span class="hljs-string">'yellow'</span>] += <span class="hljs-number">3</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(counter.most_common())
-[(<span class="hljs-string">'blue'</span>, <span class="hljs-number">3</span>), (<span class="hljs-string">'red'</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">'yellow'</span>, <span class="hljs-number">1</span>)]
+[(<span class="hljs-string">'yellow'</span>, <span class="hljs-number">3</span>), (<span class="hljs-string">'blue'</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">'red'</span>, <span class="hljs-number">1</span>)]
 </code></pre></div>
 
 <div><h2 id="set"><a href="#set" name="set">#</a>Set</h2><pre><code class="python language-python hljs">&lt;set&gt; = {&lt;el_1&gt;, &lt;el_2&gt;, ...}           <span class="hljs-comment"># Coll. of unique items. Also set(), set(&lt;coll&gt;).</span>
@@ -1031,7 +1031,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>With statements only work on objects that have enter() and exit() special methods.</strong></li>
 <li><strong>Enter() should lock the resources and optionally return an object (file, socket, etc.).</strong></li>
 <li><strong>Exit() should release the resources (for example close the file, release the lock, etc.).</strong></li>
-<li><strong>Any exception that happens inside the with block is passed to exit() method. Exit() method can then suppress that exception by returning a true value (None is false).</strong></li>
+<li><strong>Any exception that happens inside the with block is passed to exit() method. Exit() can&nbsp;then suppress the exception by returning a true value (not None, False, 0, etc.).</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOpen</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filename)</span>:</span>
         self.filename = filename
@@ -1246,18 +1246,18 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
       ├── EOFError                <span class="hljs-comment"># Raised by `input()` when it hits an end-of-file condition.</span>
       ├── LookupError             <span class="hljs-comment"># Base class for errors when a collection can't find an item.</span>
       │    ├── IndexError         <span class="hljs-comment"># Raised when index of a sequence (list/str) is out of range.</span>
-      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary key or a set element is missing.</span>
+      │    └── KeyError           <span class="hljs-comment"># Raised when a dictionary's key or a set element is missing.</span>
       ├── MemoryError             <span class="hljs-comment"># Out of memory. May be too late to start deleting variables.</span>
       ├── NameError               <span class="hljs-comment"># Raised when nonexistent name (variable/func/class) is used.</span>
-      │    └── UnboundLocalError  <span class="hljs-comment"># Raised when local name is used before it is being defined.</span>
+      │    └── UnboundLocalError  <span class="hljs-comment"># Raised when a local name is used before it's being defined.</span>
       ├── OSError                 <span class="hljs-comment"># Errors such as FileExistsError and TimeoutError. See #Open.</span>
       │    └── ConnectionError    <span class="hljs-comment"># Errors such as BrokenPipeError and ConnectionAbortedError.</span>
       ├── RuntimeError            <span class="hljs-comment"># Is raised by errors that do not fit into other categories.</span>
       │    ├── NotImplementedEr…  <span class="hljs-comment"># Can be raised by abstract methods or by an unfinished code.</span>
       │    └── RecursionError     <span class="hljs-comment"># Raised if max recursion depth is exceeded (3k by default).</span>
       ├── StopIteration           <span class="hljs-comment"># Raised when exhausted (empty) iterator is passed to next().</span>
-      ├── TypeError               <span class="hljs-comment"># When an argument of the wrong type is passed to function.</span>
-      └── ValueError              <span class="hljs-comment"># When argument has the right type but inappropriate value.</span>
+      ├── TypeError               <span class="hljs-comment"># Raised when argument of wrong type is passed to a function.</span>
+      └── ValueError              <span class="hljs-comment"># Raised when it has the right type but inappropriate value.</span>
 </code></pre></div>
 
 <div><h4 id="collectionsandtheirexceptions">Collections and their exceptions:</h4><pre><code class="text language-text">┏━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┓
@@ -1270,7 +1270,7 @@ error_msg = <span class="hljs-string">''</span>.join(traceback.format_exception(
 ┗━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┛
 </code></pre></div>
 
-<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Passed argument is of the wrong type!'</span>)
+<div><h4 id="usefulbuiltinexceptions">Useful built-in exceptions:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">'Function received argument of the wrong type!'</span>)
 <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'Argument has the right type but its value is off!'</span>)
 <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">'I am too lazy to define my own exception!'</span>)
 </code></pre></div>
@@ -1823,7 +1823,7 @@ log.debug/info/warning/error/critical(&lt;str&gt;)       <span class="hljs-comme
 <li><strong>An object with <code class="python hljs"><span class="hljs-string">'filter(&lt;LogRecord&gt;)'</span></code> method (or the method itself) can be added to loggers and handlers via addFilter(). Message is dropped if filter() returns a false value.</strong></li>
 <li><strong>Logging messages generated by libraries are passed to the root's handlers. Level of the library's logger can be set with <code class="python hljs"><span class="hljs-string">'log.getLogger("&lt;library&gt;").setLevel(&lt;str&gt;)'</span></code>.</strong></li>
 </ul>
-<div><h4 id="loggerthatwritesmessagestofileandsendsthemtotherootshandlerthatprintswarningsorhigher">Logger that writes messages to file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
+<div><h4 id="loggerthatwritesmessagestoafileandsendsthemtotherootshandlerthatprintswarningsorhigher">Logger that writes messages to a file and sends them to the root's handler that prints warnings or higher:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>logger = log.getLogger(<span class="hljs-string">'my_module'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler = log.FileHandler(<span class="hljs-string">'test.log'</span>, encoding=<span class="hljs-string">'utf-8'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>format_str = <span class="hljs-string">'%(asctime)s %(levelname)s:%(name)s:%(message)s'</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>handler.setFormatter(log.Formatter(format_str))
@@ -2031,8 +2031,8 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 
 text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
 dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
-label    = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'OUTPUT'</span>)
-window   = sg.Window(<span class="hljs-string">'Weight Converter'</span>, [[text_box, dropdown], [label], [sg.Button(<span class="hljs-string">'Close'</span>)]])
+label = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'OUTPUT'</span>)
+window = sg.Window(<span class="hljs-string">'GUI App'</span>, [[text_box, dropdown], [label], [sg.Button(<span class="hljs-string">'Close'</span>)]])
 
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
     event, values = window.read()
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 4, 2026</aside>
+    <aside>February 6, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
