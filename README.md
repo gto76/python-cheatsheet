@@ -896,7 +896,7 @@ def function_that_gets_passed_to_decorator():
 ```
 
 ### Debugger Example
-**Decorator that prints function's name every time _that_ function is called.**
+**Decorator that prints function's name every time that function is called.**
 
 ```python
 from functools import wraps
@@ -912,10 +912,10 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, `'add.__name__'` would return `'out'`.**
+* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, `'add.__name__'` would return string `'out'`.**
 
 ### Cache
-**Decorator that caches function's return values. All function's arguments must be hashable.**
+**Decorator that stores return values. All arguments must be hashable.**
 
 ```python
 from functools import cache
@@ -928,7 +928,7 @@ def fibonacci(n):
 * **CPython interpreter limits recursion depth to 3000 by default. To increase the limit run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
-**A decorator that accepts arguments and returns a normal decorator that accepts a function.**
+**Decorator that accepts arguments and returns a normal decorator.**
 ```python
 from functools import wraps
 
@@ -994,7 +994,7 @@ print/str/repr(MyDataClass(obj))
 ```
 
 ### Subclass
-* **Inheritance is a mechanism that enables a class to extend some other class (i.e., a sub&shy;class to extend its parent), and by doing so inherit all of its methods and attributes.**
+* **Inheritance is a mechanism that enables a class to extend some other class (i.e. sub&shy;class&nbsp;to extend its parent), and by doing so inherit all of its methods and attributes.**
 * **Subclass can then add its own methods and attributes or override inherited ones by reusing their names.**
 
 ```python
@@ -1109,7 +1109,7 @@ class MyComparable:
 ```
 
 ### Hashable
-* **Hashable object needs hash() and eq() methods and its hash value should not change.**
+* **Hashable object needs hash() and eq() methods and its hash value must never change.**
 * **Hashable objects that compare equal must have the same hash value, meaning default hash() that returns `'id(self)'` will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.**
 
 ```python
@@ -1128,7 +1128,7 @@ class MyHashable:
 ```
 
 ### Sortable
-* **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by <, >, <=, >=) and the rest will be automatically generated.**
+* **With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (called by <, >, <=, >=) and the rest will be automatically generated.**
 * **Built-in functions sorted() and min() only require lt() method, while max() only requires gt(). However, it's best to define them all so that confusion doesn't arise in other contexts.**
 * **When two lists, strings, or data classes are compared, their values get compared one by one until a pair of unequal values is found. The comparison of this two values is then re&shy;turned. The shorter sequence is considered smaller in case of all their values being equal.**
 * **To sort collection of strings in proper alphabetical order pass `'key=locale.strxfrm'` to sorted() after running `'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'`.**
@@ -2173,7 +2173,7 @@ log.basicConfig(filename=<path>, level='WARNING')  # Configures the root logger 
 log.debug/info/warning/error/critical(<str>)       # Sends passed message to the root logger.
 <Logger> = log.getLogger(__name__)                 # Returns a logger named after the module.
 <Logger>.<level>(<str>)                            # Sends the message. Same levels as above.
-<Logger>.exception(<str>)                          # Error() that appends caught exception.
+<Logger>.exception(<str>)                          # `error()` that appends caught exception.
 ```
 
 ### Setup

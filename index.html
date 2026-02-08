@@ -759,7 +759,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 </code></pre></div>
 
 
-<div><h3 id="debuggerexample">Debugger Example</h3><p><strong>Decorator that prints function's name every time <em>that</em> function is called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
+<div><h3 id="debuggerexample">Debugger Example</h3><p><strong>Decorator that prints function's name every time that function is called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span><span class="hljs-params">(func)</span>:</span>
 <span class="hljs-meta">    @wraps(func)</span>
@@ -775,9 +775,9 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 
 
 <ul>
-<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
+<li><strong>Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, <code class="python hljs"><span class="hljs-string">'add.__name__'</span></code> would return string <code class="python hljs"><span class="hljs-string">'out'</span></code>.</strong></li>
 </ul>
-<div><h3 id="cache">Cache</h3><p><strong>Decorator that caches function's return values. All function's arguments must be hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache
+<div><h3 id="cache">Cache</h3><p><strong>Decorator that stores return values. All arguments must be hashable.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> cache
 
 <span class="hljs-meta">@cache</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fibonacci</span><span class="hljs-params">(n)</span>:</span>
@@ -789,7 +789,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <li><strong>Potential problem with cache is that it can grow indefinitely. To clear stored values run <code class="python hljs"><span class="hljs-string">'&lt;func&gt;.cache_clear()'</span></code>, or use <code class="python hljs"><span class="hljs-string">'@lru_cache(maxsize=&lt;int&gt;)'</span></code> decorator instead.</strong></li>
 <li><strong>CPython interpreter limits recursion depth to 3000 by default. To increase the limit run <code class="python hljs"><span class="hljs-string">'sys.setrecursionlimit(&lt;int&gt;)'</span></code>.</strong></li>
 </ul>
-<div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>A decorator that accepts arguments and returns a normal decorator that accepts a function.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
+<div><h3 id="parametrizeddecorator">Parametrized Decorator</h3><p><strong>Decorator that accepts arguments and returns a normal decorator.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> wraps
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span><span class="hljs-params">(print_result=<span class="hljs-keyword">False</span>)</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decorator</span><span class="hljs-params">(func)</span>:</span>
@@ -847,7 +847,7 @@ print/str/repr(MyDataClass(obj))
 </code></pre></div>
 
 <div><h3 id="subclass">Subclass</h3><ul>
-<li><strong>Inheritance is a mechanism that enables a class to extend some other class (i.e., a sub­class to extend its parent), and by doing so inherit all of its methods and attributes.</strong></li>
+<li><strong>Inheritance is a mechanism that enables a class to extend some other class (i.e. sub­class&nbsp;to extend its parent), and by doing so inherit all of its methods and attributes.</strong></li>
 <li><strong>Subclass can then add its own methods and attributes or override inherited ones by reusing their names.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, name)</span>:</span>
@@ -944,7 +944,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 
 <div><h3 id="hashable">Hashable</h3><ul>
-<li><strong>Hashable object needs hash() and eq() methods and its hash value should not change.</strong></li>
+<li><strong>Hashable object needs hash() and eq() methods and its hash value must never change.</strong></li>
 <li><strong>Hashable objects that compare equal must have the same hash value, meaning default hash() that returns <code class="python hljs"><span class="hljs-string">'id(self)'</span></code> will not do. That is why Python automatically makes classes unhashable if you only implement the eq() method.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHashable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -962,7 +962,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 
 <div><h3 id="sortable">Sortable</h3><ul>
-<li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (used by &lt;, &gt;, &lt;=, &gt;=) and the rest will be automatically generated.</strong></li>
+<li><strong>With 'total_ordering' decorator, you only need to provide eq() and one of lt(), gt(), le() or ge() special methods (called by &lt;, &gt;, &lt;=, &gt;=) and the rest will be automatically generated.</strong></li>
 <li><strong>Built-in functions sorted() and min() only require lt() method, while max() only requires gt(). However, it's best to define them all so that confusion doesn't arise in other contexts.</strong></li>
 <li><strong>When two lists, strings, or data classes are compared, their values get compared one by one until a pair of unequal values is found. The comparison of this two values is then re­turned. The shorter sequence is considered smaller in case of all their values being equal.</strong></li>
 <li><strong>To sort collection of strings in proper alphabetical order pass <code class="python hljs"><span class="hljs-string">'key=locale.strxfrm'</span></code> to sorted() after running <code class="python hljs"><span class="hljs-string">'locale.setlocale(locale.LC_COLLATE, "en_US.UTF-8")'</span></code>.</strong></li>
@@ -1796,7 +1796,7 @@ README.md is a readme file that belongs to user gto.
 log.debug/info/warning/error/critical(&lt;str&gt;)       <span class="hljs-comment"># Sends passed message to the root logger.</span>
 &lt;Logger&gt; = log.getLogger(__name__)                 <span class="hljs-comment"># Returns a logger named after the module.</span>
 &lt;Logger&gt;.&lt;level&gt;(&lt;str&gt;)                            <span class="hljs-comment"># Sends the message. Same levels as above.</span>
-&lt;Logger&gt;.exception(&lt;str&gt;)                          <span class="hljs-comment"># Error() that appends caught exception.</span>
+&lt;Logger&gt;.exception(&lt;str&gt;)                          <span class="hljs-comment"># `error()` that appends caught exception.</span>
 </code></pre>
 <div><h3 id="setup">Setup</h3><pre><code class="python language-python hljs">log.basicConfig(
     filename=<span class="hljs-keyword">None</span>,                                 <span class="hljs-comment"># Prints to stderr when filename is None.</span>
