@@ -224,7 +224,7 @@ import itertools as it
 <iter> = it.chain(<coll>, <coll>, ...)   # Returns each element of each collection in order.
 <iter> = it.chain.from_iterable(<coll>)  # Accepts collection (i.e. iterable) of collections.
 <iter> = it.islice(<coll>, stop)         # Also accepts 'start' and 'step'. Args can be None.
-<iter> = it.product(<coll>, ...)         # Same as `((a, b) for a in arg_1 for b in arg_2)`.
+<iter> = it.product(<coll>, <coll>)      # Same as `((a, b) for a in arg_1 for b in arg_2)`.
 ```
 
 
@@ -1557,8 +1557,8 @@ Open
 ```python
 <file> = open(<path>, mode='r', encoding=None, newline=None)
 ```
-* **`'encoding=None'` means that the default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
-* **`'newline=None'` means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.**
+* **`'encoding=None'` means that a default encoding is used, which is platform dependent. Best practice is to use `'encoding="utf-8"'` until it becomes the default (Python 3.15).**
+* **`'newline=None'` means that all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default separator.**
 * **`'newline=""'` means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing `'newline="\n"'` breaks input only on '\n'.**
 * **`'newline="\r\n"'` breaks input only on '\r\n' and converts every '\n' to '\r\n' on write.**
 
@@ -1580,7 +1580,7 @@ Open
 
 ### File Object
 ```python
-<file>.seek(0)                      # Moves current position to the start of file.
+<file>.seek(0)                      # Moves current position to the file's start.
 <file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
 <file>.seek(0, 2)                   # Moves current position to the end of file.
 <bin_file>.seek(±offset, origin)    # Origin: 0 start, 1 current position, 2 end.
@@ -1597,7 +1597,7 @@ Open
 <file>.write(<str/bytes>)           # Writes str or bytes object to write buffer.
 <file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
 <file>.flush()                      # Flushes write buff. Runs every 4096/8192 B.
-<file>.close()                      # Closes the file after flushing write buffer.
+<file>.close()                      # Closes a file after flushing write buffer.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
 
@@ -1720,7 +1720,7 @@ shutil.move(from, to)            # Rename() that moves into 'to' if it is a dir.
 
 ```python
 os.remove(<path>)                # Deletes file. Also `$ pip3 install send2trash`.
-os.rmdir(<path>)                 # Deletes the empty directory or raises OSError.
+os.rmdir(<path>)                 # Deletes empty dir. Raises OSError if it's not.
 shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
 * **Provided paths can be either strings, Path objects, or DirEntry objects.**
@@ -1820,7 +1820,7 @@ import csv
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about the _newline_ argument see [Open](#open).**
 * **To nicely print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
 * **For XML and binary Excel files (with extensions xlsx, xlsm and xlsb) use [Pandas](#file-formats) library.**
-* **Reader can process any iterator (or collection) of strings, not just text files.**
+* **Reader can consume any iterator (or collection) of strings, not just text files.**
 
 ### Write
 ```python
@@ -2045,7 +2045,7 @@ from array import array
 ```
 
 ```python
-<bytes> = bytes(<array>)                  # Returns the copy of array's memory as bytes.
+<bytes> = bytes(<array>)                  # Returns copy of the memory as a bytes object.
 <file>.write(<array>)                     # Appends the array's memory to a binary file.
 ```
 
@@ -2072,7 +2072,7 @@ Memory View
 ```python
 <list>  = list(<mview>)                   # Returns list of ints, floats or bytes objects.
 <str>   = str(<mview>, 'utf-8')           # Treats passed memoryview as `bytes(<mview>)`.
-<str>   = <mview>.hex()                   # Returns hexadecimal pairs. Also `sep=<str>`.
+<str>   = <mview>.hex()                   # Returns hex pairs separated with `sep=<str>`.
 ```
 
 
@@ -2525,7 +2525,7 @@ from selenium import webdriver
 <xpath>     = //<element>[/ or // <element>]    # E.g. …/child, …//descendant, …/../sibling.
 <xpath>     = //<element>/following::<element>  # Next element. Also preceding::, parent::.
 <element>   = <tag><conditions><index>          # Tag accepts */a/…. Use [1/2/…] for index.
-<condition> = [<sub_cond> [and/or <sub_cond>]]  # Use not(<sub_cond>) to negate condition.
+<condition> = [<sub_cond> [and/or <sub_cond>]]  # Use `not(<sub_cond>)` to negate condition.
 <sub_cond>  = @<attr>[="<val>"]                 # `text()=` and `.=` match (complete) text.
 <sub_cond>  = contains(@<attr>, "<val>")        # Is <val> a substring of attribute's value?
 <sub_cond>  = [//]<element>                     # Has matching child? Descendant if //<el>.
@@ -2545,7 +2545,7 @@ app = fl.Flask(__name__)                   # Returns the app object. Put at the 
 app.run(host=None, port=None, debug=None)  # Same as `$ flask --app FILE run --ARG=VAL`.
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
-* **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) for better security.**
+* **Install a WSGI server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) to get better security.**
 * **Debug mode restarts the app whenever script changes and displays errors in the browser.**
 
 ### Serving Files
@@ -2964,9 +2964,9 @@ def play_notes(notes, bpm=132, fs=44100, volume=0.1):
     get_pause = lambda n_beats: it.repeat(0, int(n_beats * beat_len))
     get_sinus = lambda i, hz: math.sin(i * 2 * math.pi * hz / fs) * volume
     get_wave  = lambda hz, n_beats: (get_sinus(i, hz) for i in range(int(n_beats * beat_len)))
-    get_herz  = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
+    get_hertz = lambda note: 440 * 2 ** ((int(note[:2]) - 69) / 12)
     get_beats = lambda note: 1/2 if '♩' in note else 1/4 if '♪' in note else 1
-    get_samps = lambda n: get_wave(get_herz(n), get_beats(n)) if n else get_pause(1/4)
+    get_samps = lambda n: get_wave(get_hertz(n), get_beats(n)) if n else get_pause(1/4)
     samples_f = it.chain(get_pause(1/2), *(get_samps(n) for n in notes.split(',')))
     sounddevice.play(np.fromiter(samples_f, np.float32), fs, blocking=True)
 

@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 6, 2026</aside>
+    <aside>February 8, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -248,7 +248,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <pre><code class="python language-python hljs">&lt;iter&gt; = it.chain(&lt;coll&gt;, &lt;coll&gt;, ...)   <span class="hljs-comment"># Returns each element of each collection in order.</span>
 &lt;iter&gt; = it.chain.from_iterable(&lt;coll&gt;)  <span class="hljs-comment"># Accepts collection (i.e. iterable) of collections.</span>
 &lt;iter&gt; = it.islice(&lt;coll&gt;, stop)         <span class="hljs-comment"># Also accepts 'start' and 'step'. Args can be None.</span>
-&lt;iter&gt; = it.product(&lt;coll&gt;, ...)         <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
+&lt;iter&gt; = it.product(&lt;coll&gt;, &lt;coll&gt;)      <span class="hljs-comment"># Same as `((a, b) for a in arg_1 for b in arg_2)`.</span>
 </code></pre>
 <div><h2 id="generator"><a href="#generator" name="generator">#</a>Generator</h2><ul>
 <li><strong>Any function that contains a yield statement returns a generator.</strong></li>
@@ -1334,8 +1334,8 @@ args  = p.parse_args()                                      <span class="hljs-co
 
 
 <ul>
-<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that the default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> until it becomes the default (Python 3.15).</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to system's default line separator.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'encoding=None'</span></code> means that a default encoding is used, which is platform dependent. Best practice is to use <code class="python hljs"><span class="hljs-string">'encoding="utf-8"'</span></code> until it becomes the default (Python 3.15).</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'newline=None'</span></code> means that all different end of line combinations are converted to '\n' on read, while on write all '\n' characters are converted to the system's default separator.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline=""'</span></code> means no conversions take place, but input is still broken into chunks by readline() on every '\n', '\r' and '\r\n'. Passing <code class="python hljs"><span class="hljs-string">'newline="\n"'</span></code> breaks input only on '\n'.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'newline="\r\n"'</span></code> breaks input only on '\r\n' and converts every '\n' to '\r\n' on write.</strong></li>
 </ul>
@@ -1353,7 +1353,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code>, <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'except OSError [as &lt;name&gt;]: …'</span></code> catches all listed exceptions.</strong></li>
-</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the start of file.</span>
+</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                      <span class="hljs-comment"># Moves current position to the file's start.</span>
 &lt;file&gt;.seek(offset)                 <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
 &lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                   <span class="hljs-comment"># Moves current position to the end of file.</span>
 &lt;bin_file&gt;.seek(±offset, origin)    <span class="hljs-comment"># Origin: 0 start, 1 current position, 2 end.</span>
@@ -1371,7 +1371,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;str/bytes&gt;)           <span class="hljs-comment"># Writes str or bytes object to write buffer.</span>
 &lt;file&gt;.writelines(&lt;collection&gt;)     <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
 &lt;file&gt;.flush()                      <span class="hljs-comment"># Flushes write buff. Runs every 4096/8192 B.</span>
-&lt;file&gt;.close()                      <span class="hljs-comment"># Closes the file after flushing write buffer.</span>
+&lt;file&gt;.close()                      <span class="hljs-comment"># Closes a file after flushing write buffer.</span>
 </code></pre>
 <ul>
 <li><strong>Methods do not add or strip trailing newlines, not even writelines().</strong></li>
@@ -1453,7 +1453,7 @@ os.replace(from, to)             <span class="hljs-comment"># Same, but overwrit
 shutil.move(from, to)            <span class="hljs-comment"># Rename() that moves into 'to' if it is a dir.</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.remove(&lt;path&gt;)                <span class="hljs-comment"># Deletes file. Also `$ pip3 install send2trash`.</span>
-os.rmdir(&lt;path&gt;)                 <span class="hljs-comment"># Deletes the empty directory or raises OSError.</span>
+os.rmdir(&lt;path&gt;)                 <span class="hljs-comment"># Deletes empty dir. Raises OSError if it's not.</span>
 shutil.rmtree(&lt;path&gt;)            <span class="hljs-comment"># Deletes the directory and all of its contents.</span>
 </code></pre>
 <ul>
@@ -1523,7 +1523,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 <li><strong>Without the <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'! For details about the <em>newline</em> argument see <a href="#open">Open</a>.</strong></li>
 <li><strong>To nicely print the spreadsheet to the console use either <a href="#table">Tabulate</a> or PrettyTable library.</strong></li>
 <li><strong>For XML and binary Excel files (with extensions xlsx, xlsm and xlsb) use <a href="#fileformats">Pandas</a> library.</strong></li>
-<li><strong>Reader can process any iterator (or collection) of strings, not just text files.</strong></li>
+<li><strong>Reader can consume any iterator (or collection) of strings, not just text files.</strong></li>
 </ul>
 <div><h3 id="write">Write</h3><pre><code class="python language-python hljs">&lt;file&gt;   = open(&lt;path&gt;, mode=<span class="hljs-string">'a'</span>, newline=<span class="hljs-string">''</span>)   <span class="hljs-comment"># Opens the CSV (text) file for writing.</span>
 &lt;writer&gt; = csv.writer(&lt;file&gt;, dialect=<span class="hljs-string">'excel'</span>)  <span class="hljs-comment"># Also `delimiter=','`. See Parameters.</span>
@@ -1703,7 +1703,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 &lt;array&gt; = array(<span class="hljs-string">'&lt;typecode&gt;'</span>, &lt;array&gt;)    <span class="hljs-comment"># Treats passed array as a sequence of numbers.</span>
 &lt;array&gt;.fromfile(&lt;file&gt;, n_items)         <span class="hljs-comment"># Appends file contents to the array's memory.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                  <span class="hljs-comment"># Returns the copy of array's memory as bytes.</span>
+<pre><code class="python language-python hljs">&lt;bytes&gt; = bytes(&lt;array&gt;)                  <span class="hljs-comment"># Returns copy of the memory as a bytes object.</span>
 &lt;file&gt;.write(&lt;array&gt;)                     <span class="hljs-comment"># Appends the array's memory to a binary file.</span>
 </code></pre>
 <div><h2 id="memoryview"><a href="#memoryview" name="memoryview">#</a>Memory View</h2><p><strong>A sequence object that points to the memory of another bytes-like object. Each element can reference a single or multiple consecutive bytes, depending on format. Order and number of elements can be changed with slicing.</strong></p><pre><code class="python language-python hljs">&lt;mview&gt; = memoryview(&lt;bytes/array&gt;)       <span class="hljs-comment"># Returns mutable memoryview if array is passed.</span>
@@ -1721,7 +1721,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 </code></pre>
 <pre><code class="python language-python hljs">&lt;list&gt;  = list(&lt;mview&gt;)                   <span class="hljs-comment"># Returns list of ints, floats or bytes objects.</span>
 &lt;str&gt;   = str(&lt;mview&gt;, <span class="hljs-string">'utf-8'</span>)           <span class="hljs-comment"># Treats passed memoryview as `bytes(&lt;mview&gt;)`.</span>
-&lt;str&gt;   = &lt;mview&gt;.hex()                   <span class="hljs-comment"># Returns hexadecimal pairs. Also `sep=&lt;str&gt;`.</span>
+&lt;str&gt;   = &lt;mview&gt;.hex()                   <span class="hljs-comment"># Returns hex pairs separated with `sep=&lt;str&gt;`.</span>
 </code></pre>
 <div><h2 id="deque"><a href="#deque" name="deque">#</a>Deque</h2><p><strong>List with efficient appends and pops from either side.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
 </code></pre></div>
@@ -2081,7 +2081,7 @@ print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</sp
 <div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x("&lt;xpath&gt;")'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]    <span class="hljs-comment"># E.g. …/child, …//descendant, …/../sibling.</span>
 &lt;xpath&gt;     = //&lt;element&gt;/following::&lt;element&gt;  <span class="hljs-comment"># Next element. Also preceding::, parent::.</span>
 &lt;element&gt;   = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;          <span class="hljs-comment"># Tag accepts */a/…. Use [1/2/…] for index.</span>
-&lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]  <span class="hljs-comment"># Use not(&lt;sub_cond&gt;) to negate condition.</span>
+&lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]  <span class="hljs-comment"># Use `not(&lt;sub_cond&gt;)` to negate condition.</span>
 &lt;sub_cond&gt;  = @&lt;attr&gt;[=<span class="hljs-string">"&lt;val&gt;"</span>]                 <span class="hljs-comment"># `text()=` and `.=` match (complete) text.</span>
 &lt;sub_cond&gt;  = contains(@&lt;attr&gt;, <span class="hljs-string">"&lt;val&gt;"</span>)        <span class="hljs-comment"># Is &lt;val&gt; a substring of attribute's value?</span>
 &lt;sub_cond&gt;  = [//]&lt;element&gt;                     <span class="hljs-comment"># Has matching child? Descendant if //&lt;el&gt;.</span>
@@ -2097,7 +2097,7 @@ app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyw
 </code></pre>
 <ul>
 <li><strong>Starts the app at <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>. Use <code class="python hljs"><span class="hljs-string">'host="0.0.0.0"'</span></code> to run externally.</strong></li>
-<li><strong>Install a WSGI server like <a href="https://flask.palletsprojects.com/en/latest/deploying/waitress/">Waitress</a> and a HTTP server such as <a href="https://flask.palletsprojects.com/en/latest/deploying/nginx/">Nginx</a> for better security.</strong></li>
+<li><strong>Install a WSGI server like <a href="https://flask.palletsprojects.com/en/latest/deploying/waitress/">Waitress</a> and a HTTP server such as <a href="https://flask.palletsprojects.com/en/latest/deploying/nginx/">Nginx</a> to get better security.</strong></li>
 <li><strong>Debug mode restarts the app whenever script changes and displays errors in the browser.</strong></li>
 </ul>
 <div><h3 id="servingfiles">Serving Files</h3><pre><code class="python language-python hljs"><span class="hljs-meta">@app.route('/img/&lt;path:filename&gt;')</span>
@@ -2428,9 +2428,9 @@ sounddevice.wait()
     get_pause = <span class="hljs-keyword">lambda</span> n_beats: it.repeat(<span class="hljs-number">0</span>, int(n_beats * beat_len))
     get_sinus = <span class="hljs-keyword">lambda</span> i, hz: math.sin(i * <span class="hljs-number">2</span> * math.pi * hz / fs) * volume
     get_wave  = <span class="hljs-keyword">lambda</span> hz, n_beats: (get_sinus(i, hz) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(int(n_beats * beat_len)))
-    get_herz  = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
+    get_hertz = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">440</span> * <span class="hljs-number">2</span> ** ((int(note[:<span class="hljs-number">2</span>]) - <span class="hljs-number">69</span>) / <span class="hljs-number">12</span>)
     get_beats = <span class="hljs-keyword">lambda</span> note: <span class="hljs-number">1</span>/<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♩'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>/<span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-string">'♪'</span> <span class="hljs-keyword">in</span> note <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
-    get_samps = <span class="hljs-keyword">lambda</span> n: get_wave(get_herz(n), get_beats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
+    get_samps = <span class="hljs-keyword">lambda</span> n: get_wave(get_hertz(n), get_beats(n)) <span class="hljs-keyword">if</span> n <span class="hljs-keyword">else</span> get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">4</span>)
     samples_f = it.chain(get_pause(<span class="hljs-number">1</span>/<span class="hljs-number">2</span>), *(get_samps(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> notes.split(<span class="hljs-string">','</span>)))
     sounddevice.play(np.fromiter(samples_f, np.float32), fs, blocking=<span class="hljs-keyword">True</span>)
 
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 6, 2026</aside>
+    <aside>February 8, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
