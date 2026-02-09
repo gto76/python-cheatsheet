@@ -1879,37 +1879,37 @@ SQLite
 
 ```python
 import sqlite3
-<conn> = sqlite3.connect(<path>)               # Opens existing or new file. Also ':memory:'.
-<conn>.close()                                 # Closes connection. Discards uncommitted data.
+<conn> = sqlite3.connect(<path>)             # Opens existing or new file. Also ':memory:'.
+<conn>.close()                               # Closes connection. Discards uncommitted data.
 ```
 
 ### Read
 ```python
-<cursor> = <conn>.execute('<query>')           # Can raise a subclass of the `sqlite3.Error`.
-<tuple>  = <cursor>.fetchone()                 # Returns the next row. Also next(<cursor>).
-<list>   = <cursor>.fetchall()                 # Returns remaining rows. Also list(<cursor>).
+<cursor> = <conn>.execute('SELECT …')        # Can raise a subclass of the `sqlite3.Error`.
+<tuple>  = <cursor>.fetchone()               # Returns the next row. Also next(<cursor>).
+<list>   = <cursor>.fetchall()               # Returns remaining rows. Also list(<cursor>).
 ```
 
 ### Write
 ```python
-<conn>.execute('<query>')                      # Can raise a subclass of the `sqlite3.Error`.
-<conn>.commit()                                # Saves all the changes since the last commit.
-<conn>.rollback()                              # Discards all changes since the last commit.
+<conn>.execute('INSERT …')                   # Can raise a subclass of the `sqlite3.Error`.
+<conn>.commit()                              # Saves all the changes since the last commit.
+<conn>.rollback()                            # Discards all changes since the last commit.
 ```
 
 #### Or:
 ```python
-with <conn>:                                   # Exits the block with commit() or rollback(),
-    <conn>.execute('<query>')                  # depending on whether any exception occurred.
+with <conn>:                                 # Exits the block with commit() or rollback(),
+    <conn>.execute('INSERT …')               # depending on whether any exception occurred.
 ```
 
 ### Placeholders
 ```python
-<conn>.execute('<query>', <list/tuple>)        # Replaces every question mark with its item.
-<conn>.execute('<query>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
-<conn>.executemany('<query>', <coll_of_coll>)  # Executes the query once for each collection.
+<conn>.execute('<sql>', <list/tuple>)        # Replaces every question mark with its item.
+<conn>.execute('<sql>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
+<conn>.executemany('<sql>', <coll_of_coll>)  # Executes statement once for each collection.
 ```
-* **Accepts strings, ints, floats, bytes, None objects and bools (stored as 1 or 0).**
+* **Accepts strings, ints, floats, bytes, None objects, and bools (stored as 1 or 0).**
 * **Columns are not restricted to any type unless table is declared as strict.**
 
 ### Example
@@ -1927,10 +1927,10 @@ with <conn>:                                   # Exits the block with commit() o
 ```python
 # $ pip3 install sqlalchemy
 from sqlalchemy import create_engine, text
-<engine> = create_engine('<url>')              # Url: 'dialect://user:password@host/dbname'.
-<conn>   = <engine>.connect()                  # Creates a connection. Also <conn>.close().
-<cursor> = <conn>.execute(text('<query>'), …)  # `<dict>`. Replaces every :<key> with value.
-with <conn>.begin(): ...                       # Exits the block with a commit or rollback.
+<engine> = create_engine('<url>')            # Url: 'dialect://user:password@host/dbname'.
+<conn>   = <engine>.connect()                # Creates a connection. Also <conn>.close().
+<cursor> = <conn>.execute(text('<sql>'))     # Pass a dict to replace :<key> placeholders.
+with <conn>.begin(): ...                     # Exits the block with a commit or rollback.
 ```
 
 ```text

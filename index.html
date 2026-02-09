@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 9, 2026</aside>
+    <aside>February 10, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1571,32 +1571,32 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 </code></pre></div>
 
 <div><h2 id="sqlite"><a href="#sqlite" name="sqlite">#</a>SQLite</h2><p><strong>A server-less database engine that stores each database into its own file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sqlite3
-&lt;conn&gt; = sqlite3.connect(&lt;path&gt;)               <span class="hljs-comment"># Opens existing or new file. Also ':memory:'.</span>
-&lt;conn&gt;.close()                                 <span class="hljs-comment"># Closes connection. Discards uncommitted data.</span>
+&lt;conn&gt; = sqlite3.connect(&lt;path&gt;)             <span class="hljs-comment"># Opens existing or new file. Also ':memory:'.</span>
+&lt;conn&gt;.close()                               <span class="hljs-comment"># Closes connection. Discards uncommitted data.</span>
 </code></pre></div>
 
 
-<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)           <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
-&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()                 <span class="hljs-comment"># Returns the next row. Also next(&lt;cursor&gt;).</span>
-&lt;list&gt;   = &lt;cursor&gt;.fetchall()                 <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
+<div><h3 id="read">Read</h3><pre><code class="python language-python hljs">&lt;cursor&gt; = &lt;conn&gt;.execute(<span class="hljs-string">'SELECT …'</span>)        <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
+&lt;tuple&gt;  = &lt;cursor&gt;.fetchone()               <span class="hljs-comment"># Returns the next row. Also next(&lt;cursor&gt;).</span>
+&lt;list&gt;   = &lt;cursor&gt;.fetchall()               <span class="hljs-comment"># Returns remaining rows. Also list(&lt;cursor&gt;).</span>
 </code></pre></div>
 
-<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                      <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
-&lt;conn&gt;.commit()                                <span class="hljs-comment"># Saves all the changes since the last commit.</span>
-&lt;conn&gt;.rollback()                              <span class="hljs-comment"># Discards all changes since the last commit.</span>
+<div><h3 id="write-1">Write</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'INSERT …'</span>)                   <span class="hljs-comment"># Can raise a subclass of the `sqlite3.Error`.</span>
+&lt;conn&gt;.commit()                              <span class="hljs-comment"># Saves all the changes since the last commit.</span>
+&lt;conn&gt;.rollback()                            <span class="hljs-comment"># Discards all changes since the last commit.</span>
 </code></pre></div>
 
-<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                   <span class="hljs-comment"># Exits the block with commit() or rollback(),</span>
-    &lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>)                  <span class="hljs-comment"># depending on whether any exception occurred.</span>
+<div><h4 id="or">Or:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">with</span> &lt;conn&gt;:                                 <span class="hljs-comment"># Exits the block with commit() or rollback(),</span>
+    &lt;conn&gt;.execute(<span class="hljs-string">'INSERT …'</span>)               <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with its item.</span>
-&lt;conn&gt;.execute(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a matching value.</span>
-&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;query&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Executes the query once for each collection.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;conn&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with its item.</span>
+&lt;conn&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a matching value.</span>
+&lt;conn&gt;.executemany(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Executes statement once for each collection.</span>
 </code></pre></div>
 
 <ul>
-<li><strong>Accepts strings, ints, floats, bytes, None objects and bools (stored as 1 or 0).</strong></li>
+<li><strong>Accepts strings, ints, floats, bytes, None objects, and bools (stored as 1 or 0).</strong></li>
 <li><strong>Columns are not restricted to any type unless table is declared as strict.</strong></li>
 </ul>
 <div><h3 id="example-1">Example</h3><p><strong>Values are not actually saved in this example because <code class="python hljs"><span class="hljs-string">'conn.commit()'</span></code> is omitted!</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>conn = sqlite3.connect(<span class="hljs-string">'test.db'</span>)
@@ -1609,10 +1609,10 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 
 <div><h3 id="sqlalchemy">SQLAlchemy</h3><p><strong>Library for interacting with various DB systems via SQL, <a href="https://docs.sqlalchemy.org/en/latest/tutorial/data_select.html#the-select-sql-expression-construct">method chaining</a> or <a href="https://docs.sqlalchemy.org/en/latest/orm/quickstart.html#simple-select">ORM</a>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install sqlalchemy</span>
 <span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> create_engine, text
-&lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)              <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
-&lt;conn&gt;   = &lt;engine&gt;.connect()                  <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
-&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;query&gt;'</span>), …)  <span class="hljs-comment"># `&lt;dict&gt;`. Replaces every :&lt;key&gt; with value.</span>
-<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                       <span class="hljs-comment"># Exits the block with a commit or rollback.</span>
+&lt;engine&gt; = create_engine(<span class="hljs-string">'&lt;url&gt;'</span>)            <span class="hljs-comment"># Url: 'dialect://user:password@host/dbname'.</span>
+&lt;conn&gt;   = &lt;engine&gt;.connect()                <span class="hljs-comment"># Creates a connection. Also &lt;conn&gt;.close().</span>
+&lt;cursor&gt; = &lt;conn&gt;.execute(text(<span class="hljs-string">'&lt;sql&gt;'</span>))     <span class="hljs-comment"># Pass a dict to replace :&lt;key&gt; placeholders.</span>
+<span class="hljs-keyword">with</span> &lt;conn&gt;.begin(): ...                     <span class="hljs-comment"># Exits the block with a commit or rollback.</span>
 </code></pre></div>
 
 
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 9, 2026</aside>
+    <aside>February 10, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
