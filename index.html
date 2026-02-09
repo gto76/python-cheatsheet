@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 8, 2026</aside>
+    <aside>February 9, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -895,7 +895,7 @@ print/str/repr(MyDataClass(obj))
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and <code class="python hljs"><span class="hljs-string">'frozen'</span></code> must be <code class="python hljs"><span class="hljs-string">'True'</span></code>.</strong></li>
 <li><strong>Function field() is needed because <code class="python hljs"><span class="hljs-string">'&lt;attr_name&gt;: list = []'</span></code> would make a list that is&nbsp;shared among all instances. Its 'default_factory' argument accepts any <a href="#callable">callable</a> object.</strong></li>
-<li><strong>For attributes of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
+<li><strong>For attributes/arguments of arbitrary type use <code class="python hljs"><span class="hljs-string">'typing.Any'</span></code>.</strong></li>
 </ul>
 <div><h4 id="inline-1">Inline:</h4><pre><code class="python language-python hljs">P = make_dataclass(<span class="hljs-string">'P'</span>, [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>])
 P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-string">'x'</span>, float), (<span class="hljs-string">'y'</span>, float)])
@@ -918,8 +918,8 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <span class="hljs-meta">&gt;&gt;&gt; </span>person.name
 <span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
-<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to attributes listed in 'slots'.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassWithSlots</span>:</span>
-    __slots__ = [<span class="hljs-string">'a'</span>]
+<div><h3 id="slots">Slots</h3><p><strong>Mechanism that restricts objects to listed attributes.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>:</span>
+    __slots__ = [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]
 </code></pre></div>
 
 
@@ -1347,7 +1347,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start of the file.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end of the file.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'rb'</span></code> - Read bytes from the file. Also <code class="python hljs"><span class="hljs-string">'wb'</span></code>, etc.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'rb'</span></code> - Reads bytes. Also <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, <code class="python hljs"><span class="hljs-string">'ab'</span></code>, etc.</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 8, 2026</aside>
+    <aside>February 9, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

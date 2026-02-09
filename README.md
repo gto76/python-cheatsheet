@@ -1045,7 +1045,7 @@ class <class_name>:
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be [hashable](#hashable), all attributes must be hashable and `'frozen'` must be `'True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is&nbsp;shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
-* **For attributes of arbitrary type use `'typing.Any'`.**
+* **For attributes/arguments of arbitrary type use `'typing.Any'`.**
 
 #### Inline:
 ```python
@@ -1075,11 +1075,11 @@ class Person:
 ```
 
 ### Slots
-**Mechanism that restricts objects to attributes listed in 'slots'.**
+**Mechanism that restricts objects to listed attributes.**
 
 ```python
-class MyClassWithSlots:
-    __slots__ = ['a']
+class Point:
+    __slots__ = ['x', 'y']
 ```
 
 ### Copy
@@ -1570,7 +1570,7 @@ Open
 * **`'w+'` - Read and write. Deletes existing contents.**
 * **`'r+'` - Read and write from the start of the file.**
 * **`'a+'` - Read and write from the end of the file.**
-* **`'rb'` - Read bytes from the file. Also `'wb'`, etc.**
+* **`'rb'` - Reads bytes. Also `'wb'`, `'xb'`, `'ab'`, etc.**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
