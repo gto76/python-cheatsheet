@@ -1226,7 +1226,7 @@ Iterable Duck Types
 -------------------
 ### Iterable
 * **Only required method is iter(). It should return an iterator of object's items.**
-* **Contains() automatically works on any object that has iter() defined.**
+* **Method contains() automatically works on any object that has iter() defined.**
 ```python
 class MyIterable:
     def __init__(self, a):
@@ -1246,9 +1246,8 @@ True
 ```
 
 ### Collection
-* **Only required methods are iter() and len(). Len() should return the number of items.**
-* **This cheatsheet actually means `'<iterable>'` when it uses the `'<collection>'`.**
-* **I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.**
+* **Only required methods are iter() and len(). Len() should return the length of collection.**
+* **This text refers to all iterable objects as collections, which is technically incorrect. The term _iterable_ was avoided because it sounds scarier and more vague than _collection_. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it actually does, since iterators are the only built-in objects that are&nbsp;iterable but are not collections.**
 ```python
 class MyCollection:
     def __init__(self, a):
@@ -1262,8 +1261,8 @@ class MyCollection:
 ```
 
 ### Sequence
-* **Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (it may also support negative indices and/or slices).**
-* **Iter() and contains() automatically work on any object that has getitem() defined.**
+* **Only required methods are getitem() and len(). Getitem() should return an item at the passed index or raise IndexError (it may also support negative indices and/or slices).**
+* **Iter() and contains() automatically work on any object with defined getitem() method.**
 * **Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.**
 ```python
 class MySequence:
@@ -1282,7 +1281,7 @@ class MySequence:
 ```
 
 #### Discrepancies between glossary definitions and abstract base classes:
-* **Python's glossary defines iterable as any object with special method iter() or getitem(), and sequence as any object with getitem() and len(). It does not define collection.**
+* **Python's glossary defines iterable as any object with special methods iter() or getitem(), and sequence as any object with getitem() and len(). It doesn't define the term _collection_.**
 * **Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().**
 
 ### ABC Sequence

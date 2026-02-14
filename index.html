@@ -1051,7 +1051,7 @@ Hello World!
 </code></pre>
 <div><h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2><div><h3 id="iterable">Iterable</h3><ul>
 <li><strong>Only required method is iter(). It should return an iterator of object's items.</strong></li>
-<li><strong>Contains() automatically works on any object that has iter() defined.</strong></li>
+<li><strong>Method contains() automatically works on any object that has iter() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1070,9 +1070,8 @@ Hello World!
 <span class="hljs-keyword">True</span>
 </code></pre>
 <div><h3 id="collection">Collection</h3><ul>
-<li><strong>Only required methods are iter() and len(). Len() should return the number of items.</strong></li>
-<li><strong>This cheatsheet actually means <code class="python hljs"><span class="hljs-string">'&lt;iterable&gt;'</span></code> when it uses the <code class="python hljs"><span class="hljs-string">'&lt;collection&gt;'</span></code>.</strong></li>
-<li><strong>I chose not to use the name 'iterable' because it sounds scarier and more vague than 'collection'. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it does, since iterators are the only built-in objects that are iterable but are not collections.</strong></li>
+<li><strong>Only required methods are iter() and len(). Len() should return the length of collection.</strong></li>
+<li><strong>This text refers to all iterable objects as collections, which is technically incorrect. The term <em>iterable</em> was avoided because it sounds scarier and more vague than <em>collection</em>. The main drawback of this decision is that the reader could think a certain function doesn't accept iterators when it actually does, since iterators are the only built-in objects that are&nbsp;iterable but are not collections.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCollection</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1086,8 +1085,8 @@ Hello World!
 
 
 <div><h3 id="sequence">Sequence</h3><ul>
-<li><strong>Only required methods are getitem() and len(). Getitem() should return the item at the passed index or raise IndexError (it may also support negative indices and/or slices).</strong></li>
-<li><strong>Iter() and contains() automatically work on any object that has getitem() defined.</strong></li>
+<li><strong>Only required methods are getitem() and len(). Getitem() should return an item at the passed index or raise IndexError (it may also support negative indices and/or slices).</strong></li>
+<li><strong>Iter() and contains() automatically work on any object with defined getitem() method.</strong></li>
 <li><strong>Reversed() automatically works on any object that has getitem() and len() defined. It returns reversed iterator of object's items.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySequence</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -1106,7 +1105,7 @@ Hello World!
 
 
 <div><h4 id="discrepanciesbetweenglossarydefinitionsandabstractbaseclasses">Discrepancies between glossary definitions and abstract base classes:</h4><ul>
-<li><strong>Python's glossary defines iterable as any object with special method iter() or getitem(), and sequence as any object with getitem() and len(). It does not define collection.</strong></li>
+<li><strong>Python's glossary defines iterable as any object with special methods iter() or getitem(), and sequence as any object with getitem() and len(). It doesn't define the term <em>collection</em>.</strong></li>
 <li><strong>Passing ABC Iterable to isinstance() or issubclass() only checks whether object/class has special method iter(), while ABC Collection checks for iter(), contains() and len().</strong></li>
 </ul></div>
 
