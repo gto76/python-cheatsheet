@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>February 10, 2026</aside>
+    <aside>February 14, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -739,7 +739,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <ul>
 <li><strong>Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (<code class="python hljs"><span class="hljs-string">'collections.defaultdict(&lt;func&gt;)'</span></code>, <code class="python hljs"><span class="hljs-string">'iter(&lt;func&gt;, to_exc)'</span></code> and <code class="python hljs"><span class="hljs-string">'dataclasses.field(default_factory=&lt;func&gt;)'</span></code>).</strong></li>
 </ul>
-<div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable unless it is declared <code class="python hljs"><span class="hljs-string">'global'</span></code> or <code class="python hljs"><span class="hljs-string">'nonlocal'</span></code> before its first usage.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
+<div><h3 id="nonlocal">Non-Local</h3><p><strong>If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as&nbsp;a local variable unless it is declared <code class="python hljs"><span class="hljs-string">'global'</span></code> or <code class="python hljs"><span class="hljs-string">'nonlocal'</span></code> before its first usage.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_counter</span><span class="hljs-params">()</span>:</span>
     i = <span class="hljs-number">0</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">()</span>:</span>
         <span class="hljs-keyword">nonlocal</span> i
@@ -1291,7 +1291,7 @@ sys.exit(&lt;obj&gt;)                <span class="hljs-comment"># Prints to stde
 
 <ul>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'file=sys.stderr'</span></code> or <code class="python hljs"><span class="hljs-string">'sys.stderr.write(&lt;str&gt;)'</span></code> for messages about errors.</strong></li>
-<li><strong>Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> is used, or program exits.</strong></li>
+<li><strong>Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, <code class="python hljs"><span class="hljs-string">'flush=True'</span></code> is used, or the program exits.</strong></li>
 </ul>
 <div><h3 id="prettyprint">Pretty Print</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
 pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<span class="hljs-keyword">None</span>, compact=<span class="hljs-keyword">False</span>, sort_dicts=<span class="hljs-keyword">True</span>)
@@ -1299,7 +1299,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 
 <ul>
 <li><strong>Each item is printed on its own line if collection exceeds 'width' characters.</strong></li>
-<li><strong>Nested collections that are 'depth' levels deep get printed as '…'.</strong></li>
+<li><strong>Nested collections that are <code class="python hljs"><span class="hljs-string">'depth=&lt;int&gt;'</span></code> levels deep get printed as <code class="python hljs"><span class="hljs-string">'...'</span></code>.</strong></li>
 </ul>
 <div><h2 id="input"><a href="#input" name="input">#</a>Input</h2><pre><code class="python language-python hljs">&lt;str&gt; = input()
 </code></pre></div>
@@ -1307,7 +1307,7 @@ pprint(&lt;collection&gt;, width=<span class="hljs-number">80</span>, depth=<spa
 <ul>
 <li><strong>Reads a line from the user input or pipe if present (trailing newline gets stripped).</strong></li>
 <li><strong>If argument is passed, it gets printed to the standard output before input is read.</strong></li>
-<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or if stream is already exhausted.</strong></li>
+<li><strong>EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or stream is already exhausted.</strong></li>
 </ul>
 <div><h2 id="commandlinearguments"><a href="#commandlinearguments" name="commandlinearguments">#</a>Command Line Arguments</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> sys
 scripts_path = sys.argv[<span class="hljs-number">0</span>]
@@ -1347,7 +1347,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 <li><strong><code class="python hljs"><span class="hljs-string">'w+'</span></code> - Read and write. Deletes existing contents.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'r+'</span></code> - Read and write from the start of the file.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'a+'</span></code> - Read and write from the end of the file.</strong></li>
-<li><strong><code class="python hljs"><span class="hljs-string">'rb'</span></code> - Reads bytes. Also <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, <code class="python hljs"><span class="hljs-string">'ab'</span></code>, etc.</strong></li>
+<li><strong><code class="python hljs"><span class="hljs-string">'rb'</span></code> - Read bytes objects. Also <code class="python hljs"><span class="hljs-string">'wb'</span></code>, <code class="python hljs"><span class="hljs-string">'xb'</span></code>, etc.</strong></li>
 </ul><div><h3 id="exceptions-1">Exceptions</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileNotFoundError'</span></code> can be raised when reading with <code class="python hljs"><span class="hljs-string">'r'</span></code> or <code class="python hljs"><span class="hljs-string">'r+'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
@@ -1770,7 +1770,7 @@ first_element    = op.methodcaller(<span class="hljs-string">'pop'</span>, <span
 &lt;or_pattern&gt;    = &lt;pattern&gt; | &lt;pattern&gt; [| ...]    <span class="hljs-comment"># Matches if any of listed patterns match.</span>
 &lt;sequence_patt&gt; = [&lt;pattern&gt;, ...]                 <span class="hljs-comment"># Matches a sequence. All items must match.</span>
 &lt;mapping_patt&gt;  = {&lt;value_pattern&gt;: &lt;patt&gt;, ...}   <span class="hljs-comment"># Matches a dict if it has matching items.</span>
-&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object that has matching attrbs.</span>
+&lt;class_pattern&gt; = &lt;type&gt;(&lt;attr_name&gt;=&lt;patt&gt;, ...)  <span class="hljs-comment"># Matches object with matching attributes.</span>
 </code></pre></div>
 
 <ul>
@@ -1856,8 +1856,8 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 
 
 <div><h3 id="thread">Thread</h3><pre><code class="python language-python hljs">&lt;Thread&gt; = Thread(target=&lt;function&gt;)           <span class="hljs-comment"># Use `args=&lt;coll&gt;` to set function's arguments.</span>
-&lt;Thread&gt;.start()                               <span class="hljs-comment"># Runs func. in the background. Also is_alive().</span>
-&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits until the func. has finished executing.</span>
+&lt;Thread&gt;.start()                               <span class="hljs-comment"># Runs function in background. Also is_alive().</span>
+&lt;Thread&gt;.join()                                <span class="hljs-comment"># Waits until the function finishes executing.</span>
 </code></pre></div>
 
 <ul>
@@ -1931,7 +1931,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>
     moves = asyncio.Queue()
-    state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)} | {id_: P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)}
+    state = {<span class="hljs-string">'*'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)} | dict.fromkeys(range(<span class="hljs-number">10</span>), P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>))
     ai    = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]
     mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]
     tasks = [asyncio.create_task(coro) <span class="hljs-keyword">for</span> coro <span class="hljs-keyword">in</span> ai + mvc]
@@ -2087,7 +2087,7 @@ print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</sp
 &lt;sub_cond&gt;  = [//]&lt;element&gt;                     <span class="hljs-comment"># Has matching child? Descendant if //&lt;el&gt;.</span>
 </code></pre></div>
 
-<div><h2 id="webapp"><a href="#webapp" name="webapp">#</a>Web App</h2><p><strong>Flask is a micro web framework/server. If you just want to open a html file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install flask</span>
+<div><h2 id="webapp"><a href="#webapp" name="webapp">#</a>Web App</h2><p><strong>Flask is a micro web framework that also includes a simple server. If you just want to open a html file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install flask</span>
 <span class="hljs-keyword">import</span> flask <span class="hljs-keyword">as</span> fl
 </code></pre></div>
 
@@ -2934,7 +2934,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>February 10, 2026</aside>
+    <aside>February 14, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

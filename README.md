@@ -866,7 +866,7 @@ from functools import partial
 * **Partial is also useful in cases when a function needs to be passed as an argument because it enables us to set its arguments beforehand (`'collections.defaultdict(<func>)'`, `'iter(<func>, to_exc)'` and `'dataclasses.field(default_factory=<func>)'`).**
 
 ### Non-Local
-**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as a local variable unless it is declared `'global'` or `'nonlocal'` before its first usage.**
+**If variable is being assigned to anywhere in the scope (i.e., body of a function), it is treated as&nbsp;a local variable unless it is declared `'global'` or `'nonlocal'` before its first usage.**
 
 ```python
 def get_counter():
@@ -1505,7 +1505,7 @@ Print
 print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 * **Use `'file=sys.stderr'` or `'sys.stderr.write(<str>)'` for messages about errors.**
-* **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or program exits.**
+* **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or the program exits.**
 
 ### Pretty Print
 ```python
@@ -1513,7 +1513,7 @@ from pprint import pprint
 pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
 ```
 * **Each item is printed on its own line if collection exceeds 'width' characters.**
-* **Nested collections that are 'depth' levels deep get printed as '...'.**
+* **Nested collections that are `'depth=<int>'` levels deep get printed as `'...'`.**
 
 
 Input
@@ -1523,7 +1523,7 @@ Input
 ```
 * **Reads a line from the user input or pipe if present (trailing newline gets stripped).**
 * **If argument is passed, it gets printed to the standard output before input is read.**
-* **EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or if stream is already exhausted.**
+* **EOFError is raised if user hits EOF (ctrl-d/ctrl-z⏎) or stream is already exhausted.**
 
 
 Command Line Arguments
@@ -1570,7 +1570,7 @@ Open
 * **`'w+'` - Read and write. Deletes existing contents.**
 * **`'r+'` - Read and write from the start of the file.**
 * **`'a+'` - Read and write from the end of the file.**
-* **`'rb'` - Reads bytes. Also `'wb'`, `'xb'`, `'ab'`, etc.**
+* **`'rb'` - Read bytes objects. Also `'wb'`, `'xb'`, etc.**
 
 ### Exceptions
 * **`'FileNotFoundError'` can be raised when reading with `'r'` or `'r+'`.**
@@ -2142,7 +2142,7 @@ match <object/expression>:
 <or_pattern>    = <pattern> | <pattern> [| ...]    # Matches if any of listed patterns match.
 <sequence_patt> = [<pattern>, ...]                 # Matches a sequence. All items must match.
 <mapping_patt>  = {<value_pattern>: <patt>, ...}   # Matches a dict if it has matching items.
-<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object that has matching attrbs.
+<class_pattern> = <type>(<attr_name>=<patt>, ...)  # Matches object with matching attributes.
 ```
 * **The sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
@@ -2250,8 +2250,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ### Thread
 ```python
 <Thread> = Thread(target=<function>)           # Use `args=<coll>` to set function's arguments.
-<Thread>.start()                               # Runs func. in the background. Also is_alive().
-<Thread>.join()                                # Waits until the func. has finished executing.
+<Thread>.start()                               # Runs function in background. Also is_alive().
+<Thread>.join()                                # Waits until the function finishes executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function, i.e. thread.**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
@@ -2342,7 +2342,7 @@ def main(screen):
 
 async def main_coroutine(screen):
     moves = asyncio.Queue()
-    state = {'*': P(0, 0)} | {id_: P(W//2, H//2) for id_ in range(10)}
+    state = {'*': P(0, 0)} | dict.fromkeys(range(10), P(W//2, H//2))
     ai    = [random_controller(id_, moves) for id_ in range(10)]
     mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]
     tasks = [asyncio.create_task(coro) for coro in ai + mvc]
@@ -2534,7 +2534,7 @@ from selenium import webdriver
 
 Web App
 -------
-**Flask is a micro web framework/server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
+**Flask is a micro web framework that also includes a simple server. If you just want to open a html file in a web browser use `'webbrowser.open(<path>)'` instead.**
 ```python
 # $ pip3 install flask
 import flask as fl
