@@ -1707,7 +1707,7 @@ os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False
 
 ```python
 shutil.copy(from, to)            # Copies the file ('to' can exist or be a dir).
-shutil.copy2(from, to)           # Also copies creation and modification times.
+shutil.copy2(from, to)           # Also copies the creation and modification time.
 shutil.copytree(from, to)        # Copies the directory ('to' should not exist).
 ```
 
@@ -1722,7 +1722,7 @@ os.remove(<path>)                # Deletes file. Also `$ pip3 install send2trash
 os.rmdir(<path>)                 # Deletes empty dir. Raises OSError if it's not.
 shutil.rmtree(<path>)            # Deletes the directory and all of its contents.
 ```
-* **Provided paths can be either strings, Path objects, or DirEntry objects.**
+* **Passed paths can be either strings, Path objects, or DirEntry objects.**
 * **Functions report errors by raising OSError or one of its [subclasses](#exceptions-1).**
 
 
@@ -1811,10 +1811,10 @@ import csv
 ```
 
 ```python
-<file>   = open(<path>, newline='')              # Opens the text file for reading.
-<reader> = csv.reader(<file>, dialect='excel')   # Also `delimiter=','`. See Params.
-<list>   = next(<reader>)                        # Returns a row as list of strings.
-<list>   = list(<reader>)                        # Returns a list of remaining rows.
+<file>   = open(<path>, newline='')               # Opens the text file for reading.
+<reader> = csv.reader(<file>, dialect='excel')    # Also `delimiter=','`. See Params.
+<list>   = next(<reader>)                         # Returns a row as list of strings.
+<list>   = list(<reader>)                         # Returns a list of remaining rows.
 ```
 * **Without the `'newline=""'` argument, every '\r\n' sequence that is embedded inside a quoted field will get converted to '\n'. For details about the newline argument see [Open](#open).**
 * **To nicely print the spreadsheet to the console use either [Tabulate](#table) or PrettyTable library.**
@@ -1823,10 +1823,10 @@ import csv
 
 ### Write
 ```python
-<file>   = open(<path>, mode='a', newline='')    # Opens the text file for writing.
-<writer> = csv.writer(<file>, dialect='excel')   # Also `delimiter=','`. See Params.
-<writer>.writerow(<collection>)                  # Encodes objects using str(<obj>).
-<writer>.writerows(<coll_of_coll>)               # Appends rows to the opened file.
+<file>   = open(<path>, mode='a', newline='')     # Opens the text file for writing.
+<writer> = csv.writer(<file>, dialect='excel')    # Also `delimiter=','`. See Params.
+<writer>.writerow(<collection>)                   # Encodes objects using str(<obj>).
+<writer>.writerows(<coll_of_coll>)                # Appends rows to the opened file.
 ```
 * **If file is opened without the `'newline=""'` argument, '\r' will be added in front of every '\n' on platforms that use '\r\n' line endings. I.e., newlines may get doubled on Windows.**
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
@@ -2248,55 +2248,55 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)           # Use `args=<coll>` to set function's arguments.
-<Thread>.start()                               # Runs function in background. Also is_alive().
-<Thread>.join()                                # Waits until the function finishes executing.
+<Thread> = Thread(target=<function>)          # Use `args=<coll>` to set function's arguments.
+<Thread>.start()                              # Runs function in background. Also is_alive().
+<Thread>.join()                               # Waits until the function finishes executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function, i.e. thread.**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-<lock> = Lock/RLock()                          # RLock can only be released by acquirer thread.
-<lock>.acquire()                               # Blocks (waits) until lock becomes available.
-<lock>.release()                               # Releases the lock so it can be acquired again.
+<lock> = Lock/RLock()                         # RLock can only be released by acquirer thread.
+<lock>.acquire()                              # Blocks (waits) until lock becomes available.
+<lock>.release()                              # Releases the lock so it can be acquired again.
 ```
 
 #### Or:
 ```python
-with <lock>:                                   # Enters the block by calling method acquire().
-    ...                                        # Exits it by calling release(), even on error.
+with <lock>:                                  # Enters the block by calling method acquire().
+    ...                                       # Exits it by calling release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)               # Lock that can be acquired by 'value' threads.
-<Event>     = Event()                          # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(<int>)                   # `wait()` blocks until it's called int times.
+<Semaphore> = Semaphore(value=1)              # Lock that can be acquired by 'value' threads.
+<Event>     = Event()                         # Method wait() blocks until set() is called.
+<Barrier>   = Barrier(<int>)                  # `wait()` blocks until it's called int times.
 ```
 
 ### Queue
 ```python
-<Queue> = queue.Queue(maxsize=0)               # A first-in-first-out queue. It's thread safe.
-<Queue>.put(<obj>)                             # The call blocks until queue stops being full.
-<Queue>.put_nowait(<obj>)                      # Raises queue.Full exception if queue is full.
-<obj> = <Queue>.get()                          # The call blocks until queue stops being empty.
-<obj> = <Queue>.get_nowait()                   # Raises queue.Empty exception if it is empty.
+<Queue> = queue.Queue(maxsize=0)              # A first-in-first-out queue. It's thread safe.
+<Queue>.put(<obj>)                            # The call blocks until queue stops being full.
+<Queue>.put_nowait(<obj>)                     # Raises queue.Full exception if queue is full.
+<obj> = <Queue>.get()                         # The call blocks until queue stops being empty.
+<obj> = <Queue>.get_nowait()                  # Raises queue.Empty exception if it is empty.
 ```
 
 ### Thread Pool Executor
 ```python
-<Exec> = ThreadPoolExecutor(max_workers=None)  # Also `with ThreadPoolExecutor() as <name>: …`.
-<iter> = <Exec>.map(<func>, <args_1>, ...)     # Multithreaded and non-lazy map(). Keeps order.
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)   # Creates a thread and queues it for execution.
-<Exec>.shutdown()                              # Waits for all the threads to finish executing.
+<Exec> = ThreadPoolExec…(max_workers=None)    # Also `with ThreadPoolExecutor() as <name>: …`.
+<iter> = <Exec>.map(<func>, <args_1>, ...)    # Multithreaded and non-lazy map(). Keeps order.
+<Futr> = <Exec>.submit(<func>, <arg_1>, ...)  # Creates a thread and queues it for execution.
+<Exec>.shutdown()                             # Waits for all the threads to finish executing.
 ```
 
 ```python
-<bool> = <Future>.done()                       # Checks if the thread has finished executing.
-<obj>  = <Future>.result(timeout=None)         # Raises TimeoutError after 'timeout' seconds.
-<bool> = <Future>.cancel()                     # Just returns False if it is running/finished.
-<iter> = as_completed(<coll_of_Futures>)       # `next(<iter>)` returns next completed Future.
+<bool> = <Future>.done()                      # Checks if the thread has finished executing.
+<obj>  = <Future>.result(timeout=None)        # Raises TimeoutError after 'timeout' seconds.
+<bool> = <Future>.cancel()                    # Just returns False if it is running/finished.
+<iter> = as_completed(<coll_of_Futures>)      # `next(<iter>)` returns next completed Future.
 ```
 * **Map() and as\_completed() also accept 'timeout' arg. It causes _futures.TimeoutError_ when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
 * **Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.**
@@ -2515,7 +2515,7 @@ from selenium import webdriver
 <Drv>.get('<url>')                              # Blocks until browser fires the load event.
 <str> = <Drv>.page_source                       # Returns HTML of the page's current state.
 <El>  = <Drv/El>.find_element('xpath', <str>)   # Accepts '//<tag>[@<attr_name>="<val>"]…'.
-<str> = <El>.get_attribute('<name>')            # Returns attribute or property if exists.
+<str> = <El>.get_attribute('<name>')            # Returns attribute or a property if exists.
 <El>.click/clear()                              # Also <El>.text and <El>.send_keys(<str>).
 ```
 
@@ -2698,33 +2698,33 @@ import numpy as np
 <1/2d_arr> = <2d>[<2d/1d_bools>]                      # A 1d object must be a size of a col.
 ```
 * **`':'` returns a slice of all dimension's indices. If dimension is omitted, it defaults to `':'`.**
-* **Indexing with two slices (line 4) is identical to indexing with a slice and 1d array (line 7).**
+* **Passing two slices (line 4) works the same as when a slice and 1d array are passed (line 7).**
 * **Python converts `'obj[i, j]'` to `'obj[(i, j)]'`. This makes `'<2d>[row_i, col_i]'` and `'<2d>[row_indices]'` indistinguishable to NumPy if tuple of two indices is passed.**
 * **`'ix_([1, 2], [3, 4])'` returns `'[[1], [2]]'` and `'[[3, 4]]'`. Due to broadcasting rules, this is the same as indexing via `'[[1, 1], [2, 2]]'` and `'[[3, 4], [3, 4]]'`.**
 * **Any value that is broadcastable to the indexed shape can be assigned to the selection.**
 
 ### Broadcasting
-**A set of rules by which NumPy functions operate on arrays of different shapes.**
+**Array reshaping procedure used by arithmetic operations, etc.**
 ```python
-left  = np.array([0.1,  0.6,  0.8])                   # I.e. `left.shape  == (3,)`.
-right = np.array([[0.1], [0.6], [0.8]])               # I.e. `right.shape == (3, 1)`.
+array_a = np.array([0.1,  0.6,  0.8])                 # I.e. `array_a.shape == (3,)`.
+array_b = np.array([[0.1], [0.6], [0.8]])             # I.e. `array_b.shape == (3, 1)`.
 ```
 
 #### 1. If array shapes differ in length, left-pad the shorter shape with ones:
 ```python
-left  = np.array([[0.1,  0.6,  0.8]])                 # I.e. `left.shape  == (1, 3)`.
-right = np.array([[0.1], [0.6], [0.8]])               # I.e. `right.shape == (3, 1)`.
+array_a = np.array([[0.1,  0.6,  0.8]])               # I.e. `array_a.shape == (1, 3)`.
+array_b = np.array([[0.1], [0.6], [0.8]])             # I.e. `array_b.shape == (3, 1)`.
 ```
 
-#### 2. If any dimensions differ in size, expand the ones that have size 1 by duplicating their elements:
+#### 2. Expand dimensions with size 1 by duplicating their elements/arrays:
 ```python
-left  = np.array([[0.1,  0.6,  0.8],                  # I.e. `left.shape  == (3, 3)`.
-                  [0.1,  0.6,  0.8],
-                  [0.1,  0.6,  0.8]])
+array_a = np.array([[0.1,  0.6,  0.8],                # I.e. `array_a.shape == (3, 3)`.
+                    [0.1,  0.6,  0.8],
+                    [0.1,  0.6,  0.8]])
 
-right = np.array([[0.1,  0.1,  0.1],                  # I.e. `right.shape == (3, 3)`.
-                  [0.6,  0.6,  0.6],
-                  [0.8,  0.8,  0.8]])
+array_b = np.array([[0.1,  0.1,  0.1],                # I.e. `array_b.shape == (3, 3)`.
+                    [0.6,  0.6,  0.6],
+                    [0.8,  0.8,  0.8]])
 ```
 
 ### Example
@@ -2823,10 +2823,10 @@ from PIL import ImageDraw
 <Draw>.ellipse((x1, y1, x2, y2))              # To rotate it use <Image>.rotate(anticlock_deg).
 <Draw>.text((x, y), <str>)                    # Accepts `font=ImageFont.truetype(path, size)`.
 ```
-* **Pass `'fill=<color>'` to set the figure's primary color.**
+* **Pass `'fill=<color>'` to set primary color of the figure.**
 * **Pass `'width=<int>'` to set the width of lines or contours.**
 * **Pass `'outline=<color>'` to set the color of the contours.**
-* **Color can be an int, tuple, `'#rrggbb[aa]'` or a color name.**
+* **Color can be an int, tuple, `'#rrggbb[aa]'` or color name.**
 
 
 Animation

@@ -91,7 +91,7 @@ const CONSTRUCTOR_OVERLOADING =
 
 const SHUTIL_COPY =
   'shutil.copy(from, to)            <span class="hljs-comment"># Copies the file (\'to\' can exist or be a dir).</span>\n' +
-  'shutil.copy2(from, to)           <span class="hljs-comment"># Also copies creation and modification times.</span>\n' +
+  'shutil.copy2(from, to)           <span class="hljs-comment"># Also copies the creation and modification time.</span>\n' +
   'shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory (\'to\' should not exist).</span>\n';
 
 const OS_RENAME =
