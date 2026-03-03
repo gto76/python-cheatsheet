@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 2, 2026</aside>
+    <aside>March 3, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -268,15 +268,15 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Everything in Python is an object.</strong></li>
 <li><strong>Every object has a certain type.</strong></li>
 <li><strong>Type and class are synonymous.</strong></li>
-</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;obj&gt;)                <span class="hljs-comment"># Returns object's type. Same as `&lt;obj&gt;.__class__`.</span>
-&lt;bool&gt; = isinstance(&lt;obj&gt;, &lt;type&gt;)  <span class="hljs-comment"># Same result as `issubclass(type(&lt;obj&gt;), &lt;type&gt;)`.</span>
+</ul><pre><code class="python language-python hljs">&lt;type&gt; = type(&lt;obj&gt;)                  <span class="hljs-comment"># Object's type. Same as `&lt;obj&gt;.__class__`.</span>
+&lt;bool&gt; = isinstance(&lt;obj&gt;, &lt;type&gt;)    <span class="hljs-comment"># Same as `issubclass(type(&lt;obj&gt;), &lt;type&gt;)`.</span>
 </code></pre></div>
 
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>type(<span class="hljs-string">'a'</span>), <span class="hljs-string">'a'</span>.__class__, str
 (&lt;<span class="hljs-class"><span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;, &lt;<span class="hljs-title">class</span> '<span class="hljs-title">str</span>'&gt;)
 </span></code></pre>
-<div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType, ModuleType
+<div><h4 id="sometypesdonothavebuiltinnamessotheymustbeimported">Some types do not have built-in names, so they must be imported:</h4><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> types <span class="hljs-keyword">import</span> FunctionType, MethodType, LambdaType, GeneratorType
 </code></pre></div>
 
 <div><h3 id="abstractbaseclasses">Abstract Base Classes</h3><p><strong>Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. An ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods that class has implemented. For instance, Iterable ABC looks for method iter(), while Collection ABC looks for iter(), contains() and len().</strong></p><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable, Collection, Sequence
@@ -830,17 +830,18 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 (<span class="hljs-number">1</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'MyClass(1)'</span>)
 </code></pre>
 <ul>
-<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for&nbsp;example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
-<li><strong>Methods decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' argument.</strong></li>
-<li><strong>Return value of str() special method should be readable and of repr() unambiguous. If&nbsp;only repr() is defined, it will also be used for str().</strong></li>
+<li><strong>Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand. For&nbsp;example, <code class="python hljs"><span class="hljs-string">'print(a)'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__str__()'</span></code> and <code class="python hljs"><span class="hljs-string">'a + b'</span></code> calls <code class="python hljs"><span class="hljs-string">'a.__add__(b)'</span></code>.</strong></li>
+<li><strong>Methods that are decorated with <code class="python hljs"><span class="hljs-string">'@staticmethod'</span></code> receive neither 'self' nor 'cls' arg.</strong></li>
+<li><strong>Return value of str() special method should be readable and of repr() unambiguous.</strong></li>
+<li><strong>All calls to str() special method are dispatched to repr() when only repr() is provided.</strong></li>
 </ul>
-<div><h4 id="expressionsthatcallstrspecialmethod">Expressions that call str() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
+<div><h4 id="expressionsthatcallthestrspecialmethod">Expressions that call the str() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
 print(obj)
 logging.warning(obj)
 &lt;csv_writer&gt;.writerow([obj])
 </code></pre></div>
 
-<div><h4 id="expressionsthatcallreprspecialmethod">Expressions that call repr() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
+<div><h4 id="expressionsthatcallthereprspecialmethod">Expressions that call the repr() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
 print/str/repr([obj])
 print/str/repr({obj: obj})
 print/str/repr(MyDataClass(obj))
@@ -1415,7 +1416,7 @@ args  = p.parse_args()                                      <span class="hljs-co
 
 
 <div><h3 id="pathobject">Path Object</h3><pre><code class="python language-python hljs">&lt;Path&gt; = Path(&lt;path&gt; [, ...])       <span class="hljs-comment"># Accepts strings, Paths, and DirEntry objects.</span>
-&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second path must be a Path object.</span>
+&lt;Path&gt; = &lt;path&gt; / &lt;path&gt; [/ ...]    <span class="hljs-comment"># First or second object must be a Path object.</span>
 &lt;Path&gt; = &lt;Path&gt;.resolve()           <span class="hljs-comment"># Returns absolute path with resolved symlinks.</span>
 </code></pre></div>
 
@@ -2934,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>March 2, 2026</aside>
+    <aside>March 3, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

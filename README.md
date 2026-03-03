@@ -254,8 +254,8 @@ Type
 * **Type and class are synonymous.**
 
 ```python
-<type> = type(<obj>)                # Returns object's type. Same as `<obj>.__class__`.
-<bool> = isinstance(<obj>, <type>)  # Same result as `issubclass(type(<obj>), <type>)`.
+<type> = type(<obj>)                  # Object's type. Same as `<obj>.__class__`.
+<bool> = isinstance(<obj>, <type>)    # Same as `issubclass(type(<obj>), <type>)`.
 ```
 
 ```python
@@ -265,7 +265,7 @@ Type
 
 #### Some types do not have built-in names, so they must be imported:
 ```python
-from types import FunctionType, MethodType, LambdaType, GeneratorType, ModuleType
+from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
@@ -973,11 +973,12 @@ class MyClass:
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
-* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand, for&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
-* **Methods decorated with `'@staticmethod'` receive neither 'self' nor 'cls' argument.**
-* **Return value of str() special method should be readable and of repr() unambiguous. If&nbsp;only repr() is defined, it will also be used for str().**
+* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand. For&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Methods that are decorated with `'@staticmethod'` receive neither 'self' nor 'cls' arg.**
+* **Return value of str() special method should be readable and of repr() unambiguous.**
+* **All calls to str() special method are dispatched to repr() when only repr() is provided.**
 
-#### Expressions that call str() special method:
+#### Expressions that call the str() special method:
 ```python
 f'{obj}'
 print(obj)
@@ -985,7 +986,7 @@ logging.warning(obj)
 <csv_writer>.writerow([obj])
 ```
 
-#### Expressions that call repr() special method:
+#### Expressions that call the repr() special method:
 ```python
 f'{obj!r}'
 print/str/repr([obj])
@@ -1663,7 +1664,7 @@ from pathlib import Path
 ### Path Object
 ```python
 <Path> = Path(<path> [, ...])       # Accepts strings, Paths, and DirEntry objects.
-<Path> = <path> / <path> [/ ...]    # First or second path must be a Path object.
+<Path> = <path> / <path> [/ ...]    # First or second object must be a Path object.
 <Path> = <Path>.resolve()           # Returns absolute path with resolved symlinks.
 ```
 
