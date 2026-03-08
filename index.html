@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 3, 2026</aside>
+    <aside>March 8, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -97,7 +97,7 @@ const browser_prefers_dark = window.matchMedia('(prefers-color-scheme: dark)').m
     <strong><span class="hljs-string"><span class="hljs-string">'3. Syntax'</span></span></strong>:      [<a href="#function">Function</a>, <a href="#inline">Inline</a>, <a href="#imports">Import</a>, <a href="#decorator">Decorator</a>, <a href="#class">Class</a>, <a href="#ducktypes">Duck_Type</a>, <a href="#enum">Enum</a>, <a href="#exceptions">Except</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'4. System'</span></span></strong>:      [<a href="#exit">Exit</a>, <a href="#print">Print</a>, <a href="#input">Input</a>, <a href="#commandlinearguments">Command_Line_Arguments</a>, <a href="#open">Open</a>, <a href="#paths">Path</a>, <a href="#oscommands">OS_Commands</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'5. Data'</span></span></strong>:        [<a href="#json">JSON</a>, <a href="#pickle">Pickle</a>, <a href="#csv">CSV</a>, <a href="#sqlite">SQLite</a>, <a href="#bytes">Bytes</a>, <a href="#struct">Struct</a>, <a href="#array">Array</a>, <a href="#memoryview">Memory_View</a>, <a href="#deque">Deque</a>],
-    <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Statement</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threads</a>, <a href="#coroutines">Asyncio</a>],
+    <strong><span class="hljs-string"><span class="hljs-string">'6. Advanced'</span></span></strong>:    [<a href="#operator">Operator</a>, <a href="#matchstatement">Match_Statement</a>, <a href="#logging">Logging</a>, <a href="#introspection">Introspection</a>, <a href="#threading">Threads</a>, <a href="#asyncio">Asyncio</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'7. Libraries'</span></span></strong>:   [<a href="#progressbar">Progress_Bar</a>, <a href="#plot">Plot</a>, <a href="#table">Table</a>, <a href="#consoleapp">Console_App</a>, <a href="#guiapp">GUI</a>, <a href="#scraping">Scraping</a>, <a href="#webapp">Web</a>, <a href="#profiling">Profile</a>],
     <strong><span class="hljs-string"><span class="hljs-string">'8. Multimedia'</span></span></strong>:  [<a href="#numpy">NumPy</a>, <a href="#image">Image</a>, <a href="#animation">Animation</a>, <a href="#audio">Audio</a>, <a href="#synthesizer">Synthesizer</a>, <a href="#pygame">Pygame</a>, <a href="#pandas">Pandas</a>, <a href="#plotly">Plotly</a>]
 }
@@ -149,12 +149,12 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 <div><h2 id="dictionary"><a href="#dictionary" name="dictionary">#</a>Dictionary</h2><pre><code class="python language-python hljs">&lt;dict&gt; = {key_1: val_1, key_2: val_2, ...}      <span class="hljs-comment"># Use `&lt;dict&gt;[key]` to get or assign the value.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;view&gt; = &lt;dict&gt;.keys()                          <span class="hljs-comment"># A collection of keys that reflects changes.</span>
+<pre><code class="python language-python hljs">&lt;view&gt; = &lt;dict&gt;.keys()                          <span class="hljs-comment"># A collection of keys reflecting all changes.</span>
 &lt;view&gt; = &lt;dict&gt;.values()                        <span class="hljs-comment"># A collection of values that reflects changes.</span>
-&lt;view&gt; = &lt;dict&gt;.items()                         <span class="hljs-comment"># Coll. of key-value tuples that reflects chgs.</span>
+&lt;view&gt; = &lt;dict&gt;.items()                         <span class="hljs-comment"># Coll. of tuples. Each contains key and value.</span>
 </code></pre>
-<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns argument default if key is missing.</span>
-value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes default if key is missing.</span>
+<pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns 'default' argument if key is missing.</span>
+value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes 'default' if key is amiss.</span>
 &lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Dict with automatic default value `&lt;type&gt;()`.</span>
 &lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Dictionary with automatic default value `1`.</span>
 </code></pre>
@@ -181,13 +181,13 @@ value = &lt;dict&gt;.pop(key)                         <span class="hljs-comment"
 &lt;set&gt;.update(&lt;collection&gt; [, ...])      <span class="hljs-comment"># Adds items to the set. Same as `&lt;set&gt; |= &lt;set&gt;`.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;set&gt;  = &lt;set&gt;.union(&lt;coll&gt;)            <span class="hljs-comment"># Returns a set of all items. Also &lt;set&gt; | &lt;set&gt;.</span>
-&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll&gt;)     <span class="hljs-comment"># Returns all shared items. Also &lt;set&gt; &amp; &lt;set&gt;.</span>
+&lt;set&gt;  = &lt;set&gt;.intersection(&lt;coll&gt;)     <span class="hljs-comment"># Returns every shared item. Also &lt;set&gt; &amp; &lt;set&gt;.</span>
 &lt;set&gt;  = &lt;set&gt;.difference(&lt;coll&gt;)       <span class="hljs-comment"># Returns set's unique items. Also &lt;set&gt; - &lt;set&gt;.</span>
-&lt;set&gt;  = &lt;set&gt;.symmetric_diff…(&lt;coll&gt;)  <span class="hljs-comment"># Returns non-shared items. Also &lt;set&gt; ^ &lt;set&gt;.</span>
-&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll&gt;)       <span class="hljs-comment"># Returns False if collection has unique items.</span>
+&lt;set&gt;  = &lt;set&gt;.symmetric_diff…(&lt;coll&gt;)  <span class="hljs-comment"># Returns all nonshared items. Also &lt;set&gt; ^ &lt;set&gt;.</span>
+&lt;bool&gt; = &lt;set&gt;.issuperset(&lt;coll&gt;)       <span class="hljs-comment"># Returns False when collection has unique items.</span>
 &lt;bool&gt; = &lt;set&gt;.issubset(&lt;coll&gt;)         <span class="hljs-comment"># Is collection a superset? Also &lt;set&gt; &lt;= &lt;set&gt;.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                      <span class="hljs-comment"># Removes and returns an item or raises KeyError.</span>
+<pre><code class="python language-python hljs">&lt;el&gt; = &lt;set&gt;.pop()                      <span class="hljs-comment"># Removes one of items. Raises KeyError if empty.</span>
 &lt;set&gt;.remove(&lt;el&gt;)                      <span class="hljs-comment"># Removes the item or raises KeyError if missing.</span>
 &lt;set&gt;.discard(&lt;el&gt;)                     <span class="hljs-comment"># Same as remove() but it doesn't raise an error.</span>
 </code></pre>
@@ -1426,8 +1426,8 @@ args  = p.parse_args()                                      <span class="hljs-co
 &lt;Path&gt; = Path(__file__).resolve()   <span class="hljs-comment"># Returns module's path if CWD wasn't changed.</span>
 </code></pre>
 <pre><code class="python language-python hljs">&lt;Path&gt; = &lt;Path&gt;.parent              <span class="hljs-comment"># Returns the path without its final component.</span>
-&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component (filename or dirname).</span>
-&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns the name's last extension, e.g. '.gz'.</span>
+&lt;str&gt;  = &lt;Path&gt;.name                <span class="hljs-comment"># Returns final component (i.e. file/dirname).</span>
+&lt;str&gt;  = &lt;Path&gt;.suffix              <span class="hljs-comment"># Returns the name's last extension with a dot.</span>
 &lt;str&gt;  = &lt;Path&gt;.stem                <span class="hljs-comment"># Returns the name without its last extension.</span>
 &lt;tup.&gt; = &lt;Path&gt;.parts               <span class="hljs-comment"># Starts with '/' or 'C:\' if path is absolute.</span>
 </code></pre>
@@ -1901,7 +1901,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 <li><strong>Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.</strong></li>
 <li><strong>ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be <a href="#pickle">pickable</a>, queues must be sent using executor's 'initargs' and 'initializer' param­eters, and executor should only be reachable via <code class="python hljs"><span class="hljs-string">'if __name__ == "__main__": …'</span></code>.</strong></li>
 </ul>
-<div><h2 id="coroutines"><a href="#coroutines" name="coroutines">#</a>Coroutines</h2><ul>
+<div><h2 id="asyncio"><a href="#asyncio" name="asyncio">#</a>Asyncio</h2><ul>
 <li><strong>Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.</strong></li>
 <li><strong>Coroutine definition starts with <code class="python hljs"><span class="hljs-string">'async'</span></code> keyword and its call with <code class="python hljs"><span class="hljs-string">'await'</span></code> keyword.</strong></li>
 <li><strong>Use <code class="python hljs"><span class="hljs-string">'asyncio.run(&lt;coroutine&gt;)'</span></code> to start the first/main coroutine.</strong></li>
@@ -2092,8 +2092,8 @@ print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</sp
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">app = fl.Flask(__name__)                   <span class="hljs-comment"># Returns application object. Put at the top.</span>
-app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Same as `$ flask --app FILE run --ARG=VAL`.</span>
+<pre><code class="python language-python hljs">app = fl.Flask(__name__)                   <span class="hljs-comment"># Returns application obj. Put at the top.</span>
+app.run(host=<span class="hljs-keyword">None</span>, port=<span class="hljs-keyword">None</span>, debug=<span class="hljs-keyword">None</span>)  <span class="hljs-comment"># Also `$ flask --app FILE run --ARG=VAL`.</span>
 </code></pre>
 <ul>
 <li><strong>Starts the app at <code class="python hljs"><span class="hljs-string">'http://localhost:5000'</span></code>. Use <code class="python hljs"><span class="hljs-string">'host="0.0.0.0"'</span></code> to run externally.</strong></li>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>March 3, 2026</aside>
+    <aside>March 8, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

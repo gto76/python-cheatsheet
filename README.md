@@ -13,7 +13,7 @@ Contents
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Function`](#function)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Type`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Except`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Operator`](#operator)**__,__ **[`Match_Statement`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Threads`](#threading)**__,__ **[`Asyncio`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Operator`](#operator)**__,__ **[`Match_Statement`](#match-statement)**__,__ **[`Logging`](#logging)**__,__ **[`Introspection`](#introspection)**__,__ **[`Threads`](#threading)**__,__ **[`Asyncio`](#asyncio)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Console_App`](#console-app)**__,__ **[`GUI`](#gui-app)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web-app)**__,__ **[`Profile`](#profiling)**__.__  
 **&nbsp;&nbsp;&nbsp;** **8. Multimedia:** **&nbsp;**  **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Animation`](#animation)**__,__ **[`Audio`](#audio)**__,__ **[`Synthesizer`](#synthesizer)**__,__ **[`Pygame`](#pygame)**__,__ **[`Pandas`](#pandas)**__,__ **[`Plotly`](#plotly)**__.__
 
@@ -82,14 +82,14 @@ Dictionary
 ```
 
 ```python
-<view> = <dict>.keys()                          # A collection of keys that reflects changes.
+<view> = <dict>.keys()                          # A collection of keys reflecting all changes.
 <view> = <dict>.values()                        # A collection of values that reflects changes.
-<view> = <dict>.items()                         # Coll. of key-value tuples that reflects chgs.
+<view> = <dict>.items()                         # Coll. of tuples. Each contains key and value.
 ```
 
 ```python
-value  = <dict>.get(key, default=None)          # Returns argument default if key is missing.
-value  = <dict>.setdefault(key, default=None)   # Returns and writes default if key is missing.
+value  = <dict>.get(key, default=None)          # Returns 'default' argument if key is missing.
+value  = <dict>.setdefault(key, default=None)   # Returns and writes 'default' if key is amiss.
 <dict> = collections.defaultdict(<type>)        # Dict with automatic default value `<type>()`.
 <dict> = collections.defaultdict(lambda: 1)     # Dictionary with automatic default value `1`.
 ```
@@ -130,15 +130,15 @@ Set
 
 ```python
 <set>  = <set>.union(<coll>)            # Returns a set of all items. Also <set> | <set>.
-<set>  = <set>.intersection(<coll>)     # Returns all shared items. Also <set> & <set>.
+<set>  = <set>.intersection(<coll>)     # Returns every shared item. Also <set> & <set>.
 <set>  = <set>.difference(<coll>)       # Returns set's unique items. Also <set> - <set>.
-<set>  = <set>.symmetric_diff…(<coll>)  # Returns non-shared items. Also <set> ^ <set>.
-<bool> = <set>.issuperset(<coll>)       # Returns False if collection has unique items.
+<set>  = <set>.symmetric_diff…(<coll>)  # Returns all nonshared items. Also <set> ^ <set>.
+<bool> = <set>.issuperset(<coll>)       # Returns False when collection has unique items.
 <bool> = <set>.issubset(<coll>)         # Is collection a superset? Also <set> <= <set>.
 ```
 
 ```python
-<el> = <set>.pop()                      # Removes and returns an item or raises KeyError.
+<el> = <set>.pop()                      # Removes one of items. Raises KeyError if empty.
 <set>.remove(<el>)                      # Removes the item or raises KeyError if missing.
 <set>.discard(<el>)                     # Same as remove() but it doesn't raise an error.
 ```
@@ -1677,8 +1677,8 @@ from pathlib import Path
 
 ```python
 <Path> = <Path>.parent              # Returns the path without its final component.
-<str>  = <Path>.name                # Returns final component (filename or dirname).
-<str>  = <Path>.suffix              # Returns the name's last extension, e.g. '.gz'.
+<str>  = <Path>.name                # Returns final component (i.e. file/dirname).
+<str>  = <Path>.suffix              # Returns the name's last extension with a dot.
 <str>  = <Path>.stem                # Returns the name without its last extension.
 <tup.> = <Path>.parts               # Starts with '/' or 'C:\' if path is absolute.
 ```
@@ -2304,8 +2304,8 @@ with <lock>:                                  # Enters the block by calling meth
 * **ProcessPoolExecutor provides true parallelism but: everything sent to and from workers must be [pickable](#pickle), queues must be sent using executor's 'initargs' and 'initializer' param&shy;eters, and executor should only be reachable via `'if __name__ == "__main__": …'`.**
 
 
-Coroutines
-----------
+Asyncio
+-------
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.**
 * **Coroutine definition starts with `'async'` keyword and its call with `'await'` keyword.**
 * **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
@@ -2541,8 +2541,8 @@ import flask as fl
 ```
 
 ```python
-app = fl.Flask(__name__)                   # Returns application object. Put at the top.
-app.run(host=None, port=None, debug=None)  # Same as `$ flask --app FILE run --ARG=VAL`.
+app = fl.Flask(__name__)                   # Returns application obj. Put at the top.
+app.run(host=None, port=None, debug=None)  # Also `$ flask --app FILE run --ARG=VAL`.
 ```
 * **Starts the app at `'http://localhost:5000'`. Use `'host="0.0.0.0"'` to run externally.**
 * **Install a [WSGI](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) server like [Waitress](https://flask.palletsprojects.com/en/latest/deploying/waitress/) and a HTTP server such as [Nginx](https://flask.palletsprojects.com/en/latest/deploying/nginx/) to get better security.**
