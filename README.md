@@ -56,8 +56,8 @@ List
 
 ```python
 elementwise_sum  = [sum(pair) for pair in zip(list_a, list_b)]
-sorted_by_second = sorted(<collection>, key=lambda el: el[1])
-sorted_by_both   = sorted(<collection>, key=lambda el: (el[1], el[0]))
+sorted_by_second = sorted(<coll>, key=lambda pair: pair[1])
+sorted_by_both   = sorted(<coll>, key=lambda p: (p[1], p[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
 * **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
@@ -2017,7 +2017,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
 * **`'<n>s'` - A bytes object with n elements (not effected by byte order).**
 
-#### Integer types. Use capital letter for unsigned type. Minimum/standard sizes are in brackets:
+#### Integers. Use capital letter for unsigned type. Minimum/standard sizes are in brackets:
 * **`'b'` - char (1/1)**
 * **`'h'` - short (2/2)**
 * **`'i'` - int (2/4)**
@@ -2031,7 +2031,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 
 Array
 -----
-**List that can only contain numbers that fit into the chosen C type. Available types and their min&shy;imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling byteswap() method).**
+**List that can only hold numbers that fit into the passed C type. Available types and their min&shy;imum sizes in bytes are listed above. Type sizes and byte order are always determined by the system, how&shy;ever bytes of each element can be reversed (by calling the byteswap() method).**
 
 ```python
 from array import array
@@ -2118,6 +2118,7 @@ sorted_by_both   = sorted(<coll>, key=op.itemgetter(1, 0))
 first_element    = op.methodcaller('pop', 0)(<list>)
 ```
 * **Most operators call the object's special method that is named after them (second object is passed as an argument), while logical operators call their own code that relies on bool().**
+* **`'and/or'` can't be emulated by a function because they might not evaluate all operands.**
 * **Comparisons can be chained: `'x < y < z'` gets converted to `'(x < y) and (y < z)'`.**
 
 
@@ -2146,7 +2147,6 @@ match <object/expression>:
 ```
 * **The sequence pattern can also be written as a tuple, either with or without the brackets.**
 * **Use `'*<name>'` and `'**<name>'` in sequence/mapping patterns to bind remaining items.**
-* **Sequence pattern must match all items of the collection, while mapping pattern does not.**
 * **Patterns can be surrounded with brackets to override their precedence: `'|'` > `'as'` > `','`. For example, `'[1, 2]'` is matched by expression `'case 1|2, 2|3 as y if y == 2:'`.**
 * **All names that are bound in the matching case, as well as variables initialized in its body, are visible after the match statement (only function block delimits scope).**
 
@@ -2308,7 +2308,7 @@ Asyncio
 -------
 * **Coroutines have a lot in common with threads, but unlike threads, they only give up control when they call another coroutine and they don’t consume as much memory.**
 * **Coroutine definition starts with `'async'` keyword and its call with `'await'` keyword.**
-* **Use `'asyncio.run(<coroutine>)'` to start the first/main coroutine.**
+* **Execute `'asyncio.run(<coroutine>)'` to start running the first/main coroutine.**
 
 ```python
 import asyncio as aio
@@ -3037,7 +3037,7 @@ from pygame.transform import scale, rotate      # Also flip, smoothscale, scale_
 ```
 
 ```python
-from pygame.draw import line, arc, rect         # Also ellipse, polygon, circle, aaline, lines.
+from pygame.draw import line, arc, rect         # Also ellipse, circle, polygon, lines, aaline.
 line(<Surf>, color, (x1, y1), (x2, y2))         # Draws line to surface. Accepts `width=<int>`.
 arc(<Surf>, color, <Rect>, from_rad, to_rad)    # Also ellipse(<Surf>, color, <Rect>, width=0).
 rect(<Surf>, color, <Rect>, width=0)            # Also polygon(<Surf>, color, points, width=0).
