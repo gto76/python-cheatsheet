@@ -269,7 +269,7 @@ from types import FunctionType, MethodType, LambdaType, GeneratorType
 ```
 
 ### Abstract Base Classes
-**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as subclasses of the ABC, although they are really not. An ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods that class has implemented. For instance, Iterable ABC looks for method iter(), while Collection ABC looks for iter(), contains() and len().**
+**Each abstract base class specifies a set of virtual subclasses. These classes are then recognized by isinstance() and issubclass() as [subclasses](#subclass) of the ABC, although they are really not. An ABC can also manually decide whether or not a specific class is its virtual subclass, usually based on which methods that class has implemented. For instance, Iterable ABC looks for method iter(), while Collection ABC looks for iter(), contains() and len().**
 
 ```python
 >>> from collections.abc import Iterable, Collection, Sequence
@@ -650,8 +650,8 @@ import zoneinfo, dateutil.tz
 
 ### Format
 ```python
->>> dt = datetime.strptime('2025-08-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
->>> dt.strftime("%dth of %B '%y (%a), %I:%M %p %Z")
+>>> dta = datetime.strptime('2025-08-14 23:39:00.00 +0200', '%Y-%m-%d %H:%M:%S.%f %z')
+>>> dta.strftime("%dth of %B '%y (%a), %I:%M %p %Z")
 "14th of August '25 (Thu), 11:39 PM UTC+02:00"
 ```
 * **`'%z'` accepts `'±HH[:]MM'` and returns `'±HHMM'` or empty string if object is naive.**
@@ -925,7 +925,7 @@ def fibonacci(n):
     return n if n < 2 else fibonacci(n-2) + fibonacci(n-1)
 ```
 * **Potential problem with cache is that it can grow indefinitely. To clear stored values run `'<func>.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
-* **CPython interpreter limits recursion depth to 3000 by default. To increase the limit run `'sys.setrecursionlimit(<int>)'`.**
+* **CPython interpreter limits recursion depth to 3000 by default. To increase this limit run `'sys.setrecursionlimit(<int>)'`.**
 
 ### Parametrized Decorator
 **Decorator that accepts arguments and returns a normal decorator.**
@@ -1202,7 +1202,7 @@ class Counter:
 * **With statements only work on objects that have enter() and exit() special methods.**
 * **Enter() should lock the resources and optionally return an object (file, socket, etc.).**
 * **Exit() should release the resources (for example close the file, release the lock, etc.).**
-* **Any exception that happens inside the with block is passed to exit() method. Exit() can&nbsp;then suppress the exception by returning a true value (not None, False, 0, etc.).**
+* **Any exception that happens inside the with block is passed to exit() method. Exit() can&nbsp;then suppress this exception by returning a true value (not None, False, 0, etc.).**
 ```python
 class MyOpen:
     def __init__(self, filename):
@@ -1409,7 +1409,7 @@ except (<exception>, [...]) as <name>: ...
 * **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments) to stdout.**
 * **Use `'logging.exception(<str>)'` to log the passed message, followed by the full error message of the caught exception. For details about how to set up the logger see [Logging](#logging).**
-* **Use `'sys.exc_info()'` to get exception type, object, and traceback of caught exception.**
+* **`'sys.exc_info()'` returns type, object and traceback of the caught exception as a tuple.**
 
 ### Raising Exceptions
 ```python
