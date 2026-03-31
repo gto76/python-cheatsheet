@@ -60,7 +60,7 @@ sorted_by_second = sorted(<coll>, key=lambda pair: pair[1])
 sorted_by_both   = sorted(<coll>, key=lambda p: (p[1], p[0]))
 flatter_list     = list(itertools.chain.from_iterable(<list>))
 ```
-* **For details about sort(), sorted(), min() and max() see [Sortable](#sortable).**
+* **For details about sort(), sorted(), max() and min() see [Sortable](#sortable).**
 * **Module [operator](#operator) has function itemgetter() that can replace listed [lambdas](#lambda).**
 * **This text uses the term collection instead of [iterable](#abstract-base-classes). For rationale see [duck types](#iterable-duck-types).**
 
@@ -556,7 +556,7 @@ shuffle(<list>)                                # Works with all mutable sequence
 <int> = <int> | <int>                          # E.g. `0b1100 | 0b1010 == 0b1110`.
 <int> = <int> ^ <int>                          # E.g. `0b1100 ^ 0b1010 == 0b0110`.
 <int> = <int> << n_bits                        # E.g. `0b1111 << 4 == 0b11110000`.
-<int> = ~<int>                                 # E.g. `~0b1 == -(0b1+1) == -0b10`.
+<int> = ~<int>                                 # E.g. `~100 == -(100+1) == -101`.
 ```
 
 
@@ -745,20 +745,20 @@ Inline
 ------
 ### Lambda
 ```python
-<func> = lambda: <return_value>                    # A single statement function.
-<func> = lambda <arg_1>, <arg_2>: <return_value>   # Also allows default arguments.
+<func> = lambda: <return_value>                   # A single statement function.
+<func> = lambda <arg_1> [, ...]: <return_value>   # Also allows default arguments.
 ```
 
 ### Comprehensions
 ```python
-<list> = [i+1 for i in range(5)]                   # Returns `[1, 2, 3, 4, 5]`.
-<iter> = (i for i in range(10) if i > 5)           # Returns `iter([6, 7, 8, 9])`.
-<set>  = {i+5 for i in range(5)}                   # Returns `{5, 6, 7, 8, 9}`.
-<dict> = {i: i**2 for i in range(1, 4)}            # Returns `{1: 1, 2: 4, 3: 9}`.
+<list> = [i+1 for i in range(5)]                  # Returns `[1, 2, 3, 4, 5]`.
+<iter> = (i for i in range(10) if i > 5)          # Returns `iter([6, 7, 8, 9])`.
+<set>  = {i+5 for i in range(5)}                  # Returns `{5, 6, 7, 8, 9}`.
+<dict> = {i: i**2 for i in range(1, 4)}           # Returns `{1: 1, 2: 4, 3: 9}`.
 ```
 
 ```python
->>> [l+r for l in 'abc' for r in 'abc']            # Inner loop is on right side.
+>>> [l+r for l in 'abc' for r in 'abc']           # Inner loop is on right side.
 ['aa', 'ab', 'ac', ..., 'cc']
 ```
 
@@ -768,52 +768,52 @@ from functools import reduce
 ```
 
 ```python
-<iter> = map(lambda x: x + 1, range(5))            # Returns `iter([1, 2, 3, 4, 5])`.
-<iter> = filter(lambda x: x > 5, range(10))        # Returns `iter([6, 7, 8, 9])`.
-<obj>  = reduce(lambda out, x: out + x, range(5))  # Returns 10. Accepts 'initial'.
+<iter> = map(lambda x: x + 1, range(5))           # Returns `iter([1, 2, 3, 4, 5])`.
+<iter> = filter(lambda x: x > 5, range(10))       # Returns `iter([6, 7, 8, 9])`.
+<obj>  = reduce(lambda out, x: out+x, range(5))   # Returns 10. Accepts 'initial'.
 ```
 
 ### Any, All
 ```python
-<bool> = any(<collection>)                         # Is bool(<el>) True for any el?
-<bool> = all(<collection>)                         # Is it True for all (or empty)?
+<bool> = any(<collection>)                        # Is bool(<el>) True for any el?
+<bool> = all(<collection>)                        # Is it True for all (or empty)?
 ```
 
 ### Conditional Expression
 ```python
-<obj> = <exp> if <condition> else <exp>            # Evaluates only one expression.
+<obj> = <exp> if <condition> else <exp>           # Evaluates only one expression.
 ```
 
 ```python
->>> [i if i else 'zero' for i in (0, 1, 2, 3)]     # `any(['', [], None])` is False.
-['zero', 1, 2, 3]
+>>> [i if i else 'zero' for i in (0, 1, 2)]       # `any(['', [], None])` is False.
+['zero', 1, 2]
 ```
 
 ### And, Or
 ```python
-<obj> = <exp> and <exp> [and ...]                  # Returns first false or last obj.
-<obj> = <exp> or <exp> [or ...]                    # Returns first true or last obj.
+<obj> = <exp> and <exp> [and ...]                 # Returns first false or last obj.
+<obj> = <exp> or <exp> [or ...]                   # Returns first true or last obj.
 ```
 
 ### Walrus Operator
 ```python
->>> [i for ch in '0123' if (i := int(ch)) > 0]     # Assigns to var in mid-sentence.
+>>> [i for ch in '0123' if (i := int(ch)) > 0]    # Assigns to var in mid-sentence.
 [1, 2, 3]
 ```
 
 ### Named Tuple, Enum, Dataclass
 ```python
 from collections import namedtuple
-Point = namedtuple('Point', 'x y')                 # Creates tuple's subclass.
-point = Point(0, 0)                                # Returns its instance.
+Point = namedtuple('Point', 'x y')                # Creates tuple's subclass.
+point = Point(0, 0)                               # Returns its instance.
 
 from enum import Enum
-Direction = Enum('Direction', 'N E S W')           # Creates an enumeration.
-direction = Direction.N                            # Returns its member.
+Direction = Enum('Direction', 'N E S W')          # Creates an enumeration.
+direction = Direction.N                           # Returns its member.
 
 from dataclasses import make_dataclass
-Player = make_dataclass('Player', ['loc', 'dir'])  # Creates a normal class.
-player = Player(point, direction)                  # Returns its instance.
+Player = make_dataclass('Player', ['p', 'd'])     # Creates a normal class.
+player = Player(point, direction)                 # Returns its instance.
 ```
 
 
@@ -822,10 +822,10 @@ Imports
 **Mechanism that makes code in one file available to another file.**
 
 ```python
-import <module>                      # Imports a built-in module or the '<module>.py'.
-import <package>                     # A built-in package or '<package>/__init__.py'.
-import <package>.<module>            # A package's module or '<package>/<module>.py'.
-from <pkg/mod>[.…] import <obj>      # Imports a module, function, class or variable.
+import <module>                       # Imports a built-in module or './<module>.py'.
+import <package>                      # Built-in package or './<package>/__init__.py'.
+import <package>.<module>             # Package's module or './<package>/<module>.py'.
+from <pkg/mod>[.…] import <obj>       # Imports module, function, class or variable.
 ```
 * **Package is a collection of modules, but it can also define its own functions, variables, etc. On a filesystem this corresponds to a directory of Python files with an optional init script.**
 * **`'import <package>'` only exposes modules that are imported inside `'__init__.py'`.**
@@ -983,7 +983,7 @@ class MyClass:
 f'{obj}'
 print(obj)
 logging.warning(obj)
-<csv_writer>.writerow([obj])
+<csv_writer>.writerow([obj, …])
 ```
 
 #### Expressions that call the repr() special method:
@@ -1181,7 +1181,7 @@ class Counter:
 
 ### Callable
 * **All functions and classes have a call() method that is executed when they are called.**
-* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to&nbsp;check if object is callable. You can also call the object and see if it raised TypeError.**
+* **Use `'callable(<obj>)'` or `'isinstance(<obj>, collections.abc.Callable)'` to&nbsp;check if object is callable and `'inspect.signature(<obj>)'` for info about args.**
 * **When this text uses `'<function>'` as an argument, it actually means `'<callable>'`.**
 ```python
 class Counter:
@@ -1707,9 +1707,9 @@ os.makedirs(<path>, mode=0o777)  # Creates all path's dirs. Also `exist_ok=False
 ```
 
 ```python
-shutil.copy(from, to)            # Copies the file ('to' can exist or be a dir).
+shutil.copy(from, to)            # Copies file (arg. 'to' can exist or be a dir).
 shutil.copy2(from, to)           # Also copies the creation and modification time.
-shutil.copytree(from, to)        # Copies the directory ('to' should not exist).
+shutil.copytree(from, to)        # Copies directory (arg. 'to' should not exist).
 ```
 
 ```python

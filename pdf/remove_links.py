@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 MATCHES = {
-    '<strong>For details about sort(), sorted(), min() and max() see <a href="#sortable">Sortable</a>.</strong>': '<strong>For details about functions sort(), sorted(), max() and min() see duck type sortable (p. 16).</strong>',
+    '<strong>For details about sort(), sorted(), max() and min() see <a href="#sortable">Sortable</a>.</strong>': '<strong>For details about functions sort(), sorted(), max() and min() see duck type sortable (p. 16).</strong>',
     '<strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong>': '<strong>Listed lambda expressions can be replaced by the operator\'s itemgetter() function (p. 31).</strong>',
     '<strong>This text uses the term collection instead of <a href="#abstractbaseclasses">iterable</a>. For rationale see <a href="#iterableducktypes">duck types</a>.</strong>': '<strong>This text uses the term <em>collection</em> instead of <em>iterable</em>. For rationale see duck types (p. 18).</strong>',
     '<strong>Calling <code class="python hljs"><span class="hljs-string">\'iter(&lt;iter&gt;)\'</span></code> returns unmodified iterator. For details see <a href="#iterator-1">Iterator</a> duck type.</strong>': '<strong>Calling <code class="python hljs"><span class="hljs-string">\'iter(&lt;iter&gt;)\'</span></code> returns unmodified iterator. For details see duck types (p. 17).</strong>',

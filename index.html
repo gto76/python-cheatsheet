@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 19, 2026</aside>
+    <aside>March 31, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -134,7 +134,7 @@ sorted_by_both   = sorted(&lt;coll&gt;, key=<span class="hljs-keyword">lambda</s
 flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 </code></pre>
 <ul>
-<li><strong>For details about sort(), sorted(), min() and max() see <a href="#sortable">Sortable</a>.</strong></li>
+<li><strong>For details about sort(), sorted(), max() and min() see <a href="#sortable">Sortable</a>.</strong></li>
 <li><strong>Module <a href="#operator">operator</a> has function itemgetter() that can replace listed <a href="#lambda">lambdas</a>.</strong></li>
 <li><strong>This text uses the term collection instead of <a href="#abstractbaseclasses">iterable</a>. For rationale see <a href="#iterableducktypes">duck types</a>.</strong></li>
 </ul>
@@ -507,7 +507,7 @@ shuffle(&lt;list&gt;)                                <span class="hljs-comment">
 &lt;int&gt; = &lt;int&gt; | &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 | 0b1010 == 0b1110`.</span>
 &lt;int&gt; = &lt;int&gt; ^ &lt;int&gt;                          <span class="hljs-comment"># E.g. `0b1100 ^ 0b1010 == 0b0110`.</span>
 &lt;int&gt; = &lt;int&gt; &lt;&lt; n_bits                        <span class="hljs-comment"># E.g. `0b1111 &lt;&lt; 4 == 0b11110000`.</span>
-&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~0b1 == -(0b1+1) == -0b10`.</span>
+&lt;int&gt; = ~&lt;int&gt;                                 <span class="hljs-comment"># E.g. `~100 == -(100+1) == -101`.</span>
 </code></pre></div>
 
 <div><h2 id="combinatorics"><a href="#combinatorics" name="combinatorics">#</a>Combinatorics</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> itertools <span class="hljs-keyword">as</span> it
@@ -650,62 +650,62 @@ func(*args, **kwargs)
 
 <pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;   <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre>
-<div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                    <span class="hljs-comment"># A single statement function.</span>
-&lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt;, &lt;arg_2&gt;: &lt;return_value&gt;   <span class="hljs-comment"># Also allows default arguments.</span>
+<div><h2 id="inline"><a href="#inline" name="inline">#</a>Inline</h2><div><h3 id="lambda">Lambda</h3><pre><code class="python language-python hljs">&lt;func&gt; = <span class="hljs-keyword">lambda</span>: &lt;return_value&gt;                   <span class="hljs-comment"># A single statement function.</span>
+&lt;func&gt; = <span class="hljs-keyword">lambda</span> &lt;arg_1&gt; [, ...]: &lt;return_value&gt;   <span class="hljs-comment"># Also allows default arguments.</span>
 </code></pre></div></div>
 
 
-<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">5</span>)]                   <span class="hljs-comment"># Returns `[1, 2, 3, 4, 5]`.</span>
-&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)           <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
-&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">5</span>)}                   <span class="hljs-comment"># Returns `{5, 6, 7, 8, 9}`.</span>
-&lt;dict&gt; = {i: i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>)}            <span class="hljs-comment"># Returns `{1: 1, 2: 4, 3: 9}`.</span>
+<div><h3 id="comprehensions">Comprehensions</h3><pre><code class="python language-python hljs">&lt;list&gt; = [i+<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">5</span>)]                  <span class="hljs-comment"># Returns `[1, 2, 3, 4, 5]`.</span>
+&lt;iter&gt; = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">5</span>)          <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
+&lt;set&gt;  = {i+<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">5</span>)}                  <span class="hljs-comment"># Returns `{5, 6, 7, 8, 9}`.</span>
+&lt;dict&gt; = {i: i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>)}           <span class="hljs-comment"># Returns `{1: 1, 2: 4, 3: 9}`.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]            <span class="hljs-comment"># Inner loop is on right side.</span>
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[l+r <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-string">'abc'</span>]           <span class="hljs-comment"># Inner loop is on right side.</span>
 [<span class="hljs-string">'aa'</span>, <span class="hljs-string">'ab'</span>, <span class="hljs-string">'ac'</span>, ..., <span class="hljs-string">'cc'</span>]
 </code></pre>
 <div><h3 id="mapfilterreduce">Map, Filter, Reduce</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">5</span>))            <span class="hljs-comment"># Returns `iter([1, 2, 3, 4, 5])`.</span>
-&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))        <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
-&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out + x, range(<span class="hljs-number">5</span>))  <span class="hljs-comment"># Returns 10. Accepts 'initial'.</span>
+<pre><code class="python language-python hljs">&lt;iter&gt; = map(<span class="hljs-keyword">lambda</span> x: x + <span class="hljs-number">1</span>, range(<span class="hljs-number">5</span>))           <span class="hljs-comment"># Returns `iter([1, 2, 3, 4, 5])`.</span>
+&lt;iter&gt; = filter(<span class="hljs-keyword">lambda</span> x: x &gt; <span class="hljs-number">5</span>, range(<span class="hljs-number">10</span>))       <span class="hljs-comment"># Returns `iter([6, 7, 8, 9])`.</span>
+&lt;obj&gt;  = reduce(<span class="hljs-keyword">lambda</span> out, x: out+x, range(<span class="hljs-number">5</span>))   <span class="hljs-comment"># Returns 10. Accepts 'initial'.</span>
 </code></pre>
-<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                         <span class="hljs-comment"># Is bool(&lt;el&gt;) True for any el?</span>
-&lt;bool&gt; = all(&lt;collection&gt;)                         <span class="hljs-comment"># Is it True for all (or empty)?</span>
+<div><h3 id="anyall">Any, All</h3><pre><code class="python language-python hljs">&lt;bool&gt; = any(&lt;collection&gt;)                        <span class="hljs-comment"># Is bool(&lt;el&gt;) True for any el?</span>
+&lt;bool&gt; = all(&lt;collection&gt;)                        <span class="hljs-comment"># Is it True for all (or empty)?</span>
 </code></pre></div>
 
-<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;            <span class="hljs-comment"># Evaluates only one expression.</span>
+<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;           <span class="hljs-comment"># Evaluates only one expression.</span>
 </code></pre></div>
 
-<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)]     <span class="hljs-comment"># `any(['', [], None])` is False.</span>
-[<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)]       <span class="hljs-comment"># `any(['', [], None])` is False.</span>
+[<span class="hljs-string">'zero'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
 </code></pre>
-<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                  <span class="hljs-comment"># Returns first false or last obj.</span>
-&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                    <span class="hljs-comment"># Returns first true or last obj.</span>
+<div><h3 id="andor">And, Or</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">and</span> &lt;exp&gt; [<span class="hljs-keyword">and</span> ...]                 <span class="hljs-comment"># Returns first false or last obj.</span>
+&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">or</span> &lt;exp&gt; [<span class="hljs-keyword">or</span> ...]                   <span class="hljs-comment"># Returns first true or last obj.</span>
 </code></pre></div>
 
-<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(ch)) &gt; <span class="hljs-number">0</span>]     <span class="hljs-comment"># Assigns to var in mid-sentence.</span>
+<div><h3 id="walrusoperator">Walrus Operator</h3><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'0123'</span> <span class="hljs-keyword">if</span> (i := int(ch)) &gt; <span class="hljs-number">0</span>]    <span class="hljs-comment"># Assigns to var in mid-sentence.</span>
 [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
 </code></pre></div>
 
 <div><h3 id="namedtupleenumdataclass">Named Tuple, Enum, Dataclass</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> namedtuple
-Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                 <span class="hljs-comment"># Creates tuple's subclass.</span>
-point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                                <span class="hljs-comment"># Returns its instance.</span>
+Point = namedtuple(<span class="hljs-string">'Point'</span>, <span class="hljs-string">'x y'</span>)                <span class="hljs-comment"># Creates tuple's subclass.</span>
+point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)                               <span class="hljs-comment"># Returns its instance.</span>
 
 <span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
-Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)           <span class="hljs-comment"># Creates an enumeration.</span>
-direction = Direction.N                            <span class="hljs-comment"># Returns its member.</span>
+Direction = Enum(<span class="hljs-string">'Direction'</span>, <span class="hljs-string">'N E S W'</span>)          <span class="hljs-comment"># Creates an enumeration.</span>
+direction = Direction.N                           <span class="hljs-comment"># Returns its member.</span>
 
 <span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> make_dataclass
-Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'loc'</span>, <span class="hljs-string">'dir'</span>])  <span class="hljs-comment"># Creates a normal class.</span>
-player = Player(point, direction)                  <span class="hljs-comment"># Returns its instance.</span>
+Player = make_dataclass(<span class="hljs-string">'Player'</span>, [<span class="hljs-string">'p'</span>, <span class="hljs-string">'d'</span>])     <span class="hljs-comment"># Creates a normal class.</span>
+player = Player(point, direction)                 <span class="hljs-comment"># Returns its instance.</span>
 </code></pre></div>
 
-<div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one file available to another file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;                      <span class="hljs-comment"># Imports a built-in module or the '&lt;module&gt;.py'.</span>
-<span class="hljs-keyword">import</span> &lt;package&gt;                     <span class="hljs-comment"># A built-in package or '&lt;package&gt;/__init__.py'.</span>
-<span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;            <span class="hljs-comment"># A package's module or '&lt;package&gt;/&lt;module&gt;.py'.</span>
-<span class="hljs-keyword">from</span> &lt;pkg/mod&gt;[.…] <span class="hljs-keyword">import</span> &lt;obj&gt;      <span class="hljs-comment"># Imports a module, function, class or variable.</span>
+<div><h2 id="imports"><a href="#imports" name="imports">#</a>Imports</h2><p><strong>Mechanism that makes code in one file available to another file.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> &lt;module&gt;                       <span class="hljs-comment"># Imports a built-in module or './&lt;module&gt;.py'.</span>
+<span class="hljs-keyword">import</span> &lt;package&gt;                      <span class="hljs-comment"># Built-in package or './&lt;package&gt;/__init__.py'.</span>
+<span class="hljs-keyword">import</span> &lt;package&gt;.&lt;module&gt;             <span class="hljs-comment"># Package's module or './&lt;package&gt;/&lt;module&gt;.py'.</span>
+<span class="hljs-keyword">from</span> &lt;pkg/mod&gt;[.…] <span class="hljs-keyword">import</span> &lt;obj&gt;       <span class="hljs-comment"># Imports module, function, class or variable.</span>
 </code></pre></div>
 
 
@@ -838,7 +838,7 @@ player = Player(point, direction)                  <span class="hljs-comment"># 
 <div><h4 id="expressionsthatcallthestrspecialmethod">Expressions that call the str() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj}</span>'</span>
 print(obj)
 logging.warning(obj)
-&lt;csv_writer&gt;.writerow([obj])
+&lt;csv_writer&gt;.writerow([obj, …])
 </code></pre></div>
 
 <div><h4 id="expressionsthatcallthereprspecialmethod">Expressions that call the repr() special method:</h4><pre><code class="python language-python hljs"><span class="hljs-string">f'<span class="hljs-subst">{obj!r}</span>'</span>
@@ -1011,7 +1011,7 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 <li><strong>File objects returned by the <a href="#open">open()</a> function, <a href="#sqlite">SQLite</a> cursor objects, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method that is executed when they are called.</strong></li>
-<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to&nbsp;check if object is callable. You can also call the object and see if it raised TypeError.</strong></li>
+<li><strong>Use <code class="python hljs"><span class="hljs-string">'callable(&lt;obj&gt;)'</span></code> or <code class="python hljs"><span class="hljs-string">'isinstance(&lt;obj&gt;, collections.abc.Callable)'</span></code> to&nbsp;check if object is callable and <code class="python hljs"><span class="hljs-string">'inspect.signature(&lt;obj&gt;)'</span></code> for info about args.</strong></li>
 <li><strong>When this text uses <code class="python hljs"><span class="hljs-string">'&lt;function&gt;'</span></code> as an argument, it actually means <code class="python hljs"><span class="hljs-string">'&lt;callable&gt;'</span></code>.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
@@ -1444,9 +1444,9 @@ args  = p.parse_args()                                      <span class="hljs-co
 os.mkdir(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)     <span class="hljs-comment"># Creates a directory. Permissions are in octal.</span>
 os.makedirs(&lt;path&gt;, mode=<span class="hljs-number">0o777</span>)  <span class="hljs-comment"># Creates all path's dirs. Also `exist_ok=False`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">shutil.copy(from, to)            <span class="hljs-comment"># Copies the file ('to' can exist or be a dir).</span>
+<pre><code class="python language-python hljs">shutil.copy(from, to)            <span class="hljs-comment"># Copies file (arg. 'to' can exist or be a dir).</span>
 shutil.copy2(from, to)           <span class="hljs-comment"># Also copies the creation and modification time.</span>
-shutil.copytree(from, to)        <span class="hljs-comment"># Copies the directory ('to' should not exist).</span>
+shutil.copytree(from, to)        <span class="hljs-comment"># Copies directory (arg. 'to' should not exist).</span>
 </code></pre>
 <pre><code class="python language-python hljs">os.rename(from, to)              <span class="hljs-comment"># Renames or moves the file or directory 'from'.</span>
 os.replace(from, to)             <span class="hljs-comment"># Same, but overwrites file 'to' even on Windows.</span>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>March 19, 2026</aside>
+    <aside>March 31, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
