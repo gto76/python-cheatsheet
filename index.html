@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>March 31, 2026</aside>
+    <aside>April 4, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -154,7 +154,7 @@ flatter_list     = list(itertools.chain.from_iterable(&lt;list&gt;))
 &lt;view&gt; = &lt;dict&gt;.items()                         <span class="hljs-comment"># Coll. of tuples. Each contains key and value.</span>
 </code></pre>
 <pre><code class="python language-python hljs">value  = &lt;dict&gt;.get(key, default=<span class="hljs-keyword">None</span>)          <span class="hljs-comment"># Returns 'default' argument if key is missing.</span>
-value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns and writes 'default' if key is amiss.</span>
+value  = &lt;dict&gt;.setdefault(key, default=<span class="hljs-keyword">None</span>)   <span class="hljs-comment"># Returns/writes 'default' when key is missing.</span>
 &lt;dict&gt; = collections.defaultdict(&lt;type&gt;)        <span class="hljs-comment"># Dict with automatic default value `&lt;type&gt;()`.</span>
 &lt;dict&gt; = collections.defaultdict(<span class="hljs-keyword">lambda</span>: <span class="hljs-number">1</span>)     <span class="hljs-comment"># Dictionary with automatic default value `1`.</span>
 </code></pre>
@@ -885,7 +885,7 @@ print/str/repr(MyDataClass(obj))
 <div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that uses class variables to generate init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field, make_dataclass
 
 <span class="hljs-meta">@dataclass(order=False, frozen=False)</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">class_name</span>&gt;:</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
     &lt;attr_name&gt;: &lt;type&gt;
     &lt;attr_name&gt;: &lt;type&gt; = &lt;default_value&gt;
     &lt;attr_name&gt;: list/dict/set = field(default_factory=list/dict/set)
@@ -1590,8 +1590,8 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
     &lt;con&gt;.execute(<span class="hljs-string">'INSERT …'</span>)               <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;con&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every question mark with its item.</span>
-&lt;con&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every :&lt;key&gt; with a matching value.</span>
+<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;con&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;list/tuple&gt;)        <span class="hljs-comment"># Replaces every '?' with corresponding item.</span>
+&lt;con&gt;.execute(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;dict/namedtuple&gt;)   <span class="hljs-comment"># Replaces every ':&lt;key&gt;' with matching value.</span>
 &lt;con&gt;.executemany(<span class="hljs-string">'&lt;sql&gt;'</span>, &lt;coll_of_coll&gt;)  <span class="hljs-comment"># Executes statement once for each collection.</span>
 </code></pre></div>
 
@@ -1676,13 +1676,13 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 </ul><div><h4 id="besidesnumberspackandunpackalsosupportbytesobjectsasapartofthesequence">Besides numbers, pack() and unpack() also support bytes objects as a part of the sequence:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'c'</span></code> - A bytes object with a single element. For pad byte use <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="apache hljs"><span class="hljs-section">'&lt;n&gt;s'</span><span class="hljs-attribute"></span></code> - A bytes object with n elements (not effected by byte order).</strong></li>
-</ul></div></div><div><div><h4 id="integersusecapitalletterforunsignedtypeminimumstandardsizesareinbrackets">Integers. Use capital letter for unsigned type. Minimum/standard sizes are in brackets:</h4><ul>
+</ul><div><h4 id="integersusecapitalletterforunsignedtypeminimumandstandardsizesareinbrackets">Integers. Use capital letter for unsigned type. Minimum and standard sizes are in brackets:</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'b'</span></code> - char (1/1)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'h'</span></code> - short (2/2)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'i'</span></code> - int (2/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'l'</span></code> - long (4/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'q'</span></code> - long long (8/8)</strong></li>
-</ul></div><div><h4 id="floatingpointtypesstructalwaysusesstandardsizes">Floating point types (struct always uses standard sizes):</h4><ul>
+</ul></div></div></div><div><div><h4 id="floatingpointtypesstructalwaysusesstandardsizes">Floating point types (struct always uses standard sizes):</h4><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'f'</span></code> - float (4/4)</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'d'</span></code> - double (8/8)</strong></li>
 </ul></div></div>
@@ -1873,9 +1873,9 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
     ...                                       <span class="hljs-comment"># Exits it by calling release(), even on error.</span>
 </code></pre></div>
 
-<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphore&gt; = Semaphore(value=<span class="hljs-number">1</span>)              <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
-&lt;Event&gt;     = Event()                         <span class="hljs-comment"># Method wait() blocks until set() is called.</span>
-&lt;Barrier&gt;   = Barrier(&lt;int&gt;)                  <span class="hljs-comment"># `wait()` blocks until it's called int times.</span>
+<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphr&gt; = Semaphore(value=<span class="hljs-number">1</span>)                <span class="hljs-comment"># Lock that can be acquired by 'value' threads.</span>
+&lt;Event&gt;   = Event()                           <span class="hljs-comment"># `&lt;Event&gt;.wait()` blocks until set() is called.</span>
+&lt;Barrier&gt; = Barrier(parties)                  <span class="hljs-comment"># Wait() blocks until it's called parties times.</span>
 </code></pre></div>
 
 <div><h3 id="queue">Queue</h3><pre><code class="python language-python hljs">&lt;Queue&gt; = queue.Queue(maxsize=<span class="hljs-number">0</span>)              <span class="hljs-comment"># A first-in-first-out queue. It's thread safe.</span>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>March 31, 2026</aside>
+    <aside>April 4, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -89,7 +89,7 @@ Dictionary
 
 ```python
 value  = <dict>.get(key, default=None)          # Returns 'default' argument if key is missing.
-value  = <dict>.setdefault(key, default=None)   # Returns and writes 'default' if key is amiss.
+value  = <dict>.setdefault(key, default=None)   # Returns/writes 'default' when key is missing.
 <dict> = collections.defaultdict(<type>)        # Dict with automatic default value `<type>()`.
 <dict> = collections.defaultdict(lambda: 1)     # Dictionary with automatic default value `1`.
 ```
@@ -1038,7 +1038,7 @@ from collections import abc
 from dataclasses import dataclass, field, make_dataclass
 
 @dataclass(order=False, frozen=False)
-class <class_name>:
+class MyClass:
     <attr_name>: <type>
     <attr_name>: <type> = <default_value>
     <attr_name>: list/dict/set = field(default_factory=list/dict/set)
@@ -1905,8 +1905,8 @@ with <con>:                                 # Exits the block with commit() or r
 
 ### Placeholders
 ```python
-<con>.execute('<sql>', <list/tuple>)        # Replaces every question mark with its item.
-<con>.execute('<sql>', <dict/namedtuple>)   # Replaces every :<key> with a matching value.
+<con>.execute('<sql>', <list/tuple>)        # Replaces every '?' with corresponding item.
+<con>.execute('<sql>', <dict/namedtuple>)   # Replaces every ':<key>' with matching value.
 <con>.executemany('<sql>', <coll_of_coll>)  # Executes statement once for each collection.
 ```
 * **Accepts strings, ints, floats, bytes, None objects, and bools (stored as 1 or 0).**
@@ -2017,7 +2017,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
 * **`'<n>s'` - A bytes object with n elements (not effected by byte order).**
 
-#### Integers. Use capital letter for unsigned type. Minimum/standard sizes are in brackets:
+#### Integers. Use capital letter for unsigned type. Minimum and standard sizes are in brackets:
 * **`'b'` - char (1/1)**
 * **`'h'` - short (2/2)**
 * **`'i'` - int (2/4)**
@@ -2271,9 +2271,9 @@ with <lock>:                                  # Enters the block by calling meth
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphore> = Semaphore(value=1)              # Lock that can be acquired by 'value' threads.
-<Event>     = Event()                         # Method wait() blocks until set() is called.
-<Barrier>   = Barrier(<int>)                  # `wait()` blocks until it's called int times.
+<Semaphr> = Semaphore(value=1)                # Lock that can be acquired by 'value' threads.
+<Event>   = Event()                           # `<Event>.wait()` blocks until set() is called.
+<Barrier> = Barrier(parties)                  # Wait() blocks until it's called parties times.
 ```
 
 ### Queue
