@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>April 4, 2026</aside>
+    <aside>April 9, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -1051,8 +1051,8 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 Hello World!
 </code></pre>
 <div><h2 id="iterableducktypes"><a href="#iterableducktypes" name="iterableducktypes">#</a>Iterable Duck Types</h2><div><h3 id="iterable">Iterable</h3><ul>
-<li><strong>Only required method is iter(). It should return an iterator of object's items.</strong></li>
-<li><strong>Method contains() automatically works on any object that has iter() defined.</strong></li>
+<li><strong>Only required special method is iter(). It should return an iterator of object's items.</strong></li>
+<li><strong>Special method contains() automatically works on any object that has iter() defined.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyIterable</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
         self.a = a
@@ -1147,7 +1147,7 @@ Hello World!
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> &lt;<span class="hljs-title">enum_name</span>&gt;<span class="hljs-params">(Enum)</span>:</span>
+<pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyEnum</span><span class="hljs-params">(Enum)</span>:</span>
     &lt;member_name&gt; = auto()              <span class="hljs-comment"># An increment of last numeric value or 1.</span>
     &lt;member_name&gt; = &lt;value&gt;             <span class="hljs-comment"># Values don't have to be hashable/unique.</span>
     &lt;member_name&gt; = &lt;el_1&gt;, &lt;el_2&gt;      <span class="hljs-comment"># Value can be a collection, e.g. a tuple.</span>
@@ -1830,8 +1830,8 @@ log.debug/info/warning/error/critical(&lt;str&gt;)       <span class="hljs-comme
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">'DEBUG'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>log.basicConfig()
-<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler = log.root.handlers[<span class="hljs-number">0</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler.setLevel(<span class="hljs-string">'WARNING'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>stream_handler = log.root.handlers[<span class="hljs-number">0</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>stream_handler.setLevel(<span class="hljs-string">'WARNING'</span>)
 <span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">'Missing config file.'</span>)
 CRITICAL:my_module:Missing config file.
 <span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">'test.log'</span>).read())
@@ -1953,17 +1953,17 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>
     <span class="hljs-keyword">while</span> state[<span class="hljs-string">'*'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (state[id_] <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)):
         id_, d = <span class="hljs-keyword">await</span> moves.get()
-        deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}
-        state[id_] = P((state[id_].x + deltas[d].x) % W, (state[id_].y + deltas[d].y) % H)
+        dx, dy = (d == D.e) - (d == D.w), (d == D.s) - (d == D.n)
+        state[id_] = P((state[id_].x + dx) % W, (state[id_].y + dy) % H)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, screen)</span>:</span>
-    offset = P(curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>)
+    x, y = curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
         screen.erase()
-        curses.textpad.rectangle(screen, offset.y-<span class="hljs-number">1</span>, offset.x-<span class="hljs-number">1</span>, offset.y+H, offset.x+W)
+        curses.textpad.rectangle(screen, y-<span class="hljs-number">1</span>, x-<span class="hljs-number">1</span>, y+H, x+W)
         <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():
-            screen.addstr(offset.y + (p.y - state[<span class="hljs-string">'*'</span>].y + H//<span class="hljs-number">2</span>) % H,
-                          offset.x + (p.x - state[<span class="hljs-string">'*'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))
+            screen.addstr(y + (p.y - state[<span class="hljs-string">'*'</span>].y + H//<span class="hljs-number">2</span>) % H,
+                          x + (p.x - state[<span class="hljs-string">'*'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))
         screen.refresh()
         <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)
 
@@ -2031,7 +2031,7 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 
 text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
 dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
-label = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'OUTPUT'</span>)
+label = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'LABEL'</span>)
 window = sg.Window(<span class="hljs-string">'GUI App'</span>, [[text_box, dropdown], [label], [sg.Button(<span class="hljs-string">'Close'</span>)]])
 
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
@@ -2044,7 +2044,7 @@ window = sg.Window(<span class="hljs-string">'GUI App'</span>, [[text_box, dropd
         <span class="hljs-keyword">continue</span>
     unit = values[<span class="hljs-string">'UNIT'</span>]
     lbs = quantity * {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}[unit] / <span class="hljs-number">0.45359237</span>
-    window[<span class="hljs-string">'OUTPUT'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
+    window[<span class="hljs-string">'LABEL'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
 window.close()
 </code></pre></div></div>
 
@@ -2070,21 +2070,21 @@ print(<span class="hljs-string">f'URL: <span class="hljs-subst">{python_url}</sp
 </code></pre></div>
 
 
-<pre><code class="python language-python hljs">&lt;Drv&gt; = webdriver.Chrome/Firefox/Safari/Edge()  <span class="hljs-comment"># Opens the browser. Also &lt;Driver&gt;.quit().</span>
-&lt;Drv&gt;.implicitly_wait(seconds)                  <span class="hljs-comment"># Sets timeout for find_element/s() methods.</span>
-&lt;Drv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                              <span class="hljs-comment"># Blocks until browser fires the load event.</span>
-&lt;str&gt; = &lt;Drv&gt;.page_source                       <span class="hljs-comment"># Returns HTML of the page's current state.</span>
-&lt;El&gt;  = &lt;Drv/El&gt;.find_element(<span class="hljs-string">'xpath'</span>, &lt;str&gt;)   <span class="hljs-comment"># Accepts '//&lt;tag&gt;[@&lt;attr_name&gt;="&lt;val&gt;"]…'.</span>
-&lt;str&gt; = &lt;El&gt;.get_attribute(<span class="hljs-string">'&lt;name&gt;'</span>)            <span class="hljs-comment"># Returns attribute or a property if exists.</span>
-&lt;El&gt;.click/clear()                              <span class="hljs-comment"># Also &lt;El&gt;.text and &lt;El&gt;.send_keys(&lt;str&gt;).</span>
+<pre><code class="python language-python hljs">&lt;Drv&gt; = webdriver.Chrome/Firefox/Safari()      <span class="hljs-comment"># Opens the browser. Also `&lt;Driver&gt;.quit()`.</span>
+&lt;Drv&gt;.implicitly_wait(seconds)                 <span class="hljs-comment"># Sets timeout for find_element/s() methods.</span>
+&lt;Drv&gt;.get(<span class="hljs-string">'&lt;url&gt;'</span>)                             <span class="hljs-comment"># Blocks until browser fires the load event.</span>
+&lt;str&gt; = &lt;Drv&gt;.page_source                      <span class="hljs-comment"># Returns HTML of the page's current state.</span>
+&lt;El&gt;  = &lt;Drv/El&gt;.find_element(<span class="hljs-string">'xpath'</span>, &lt;str&gt;)  <span class="hljs-comment"># Accepts '//&lt;tag&gt;[@&lt;attr_name&gt;="&lt;val&gt;"]…'.</span>
+&lt;str&gt; = &lt;El&gt;.get_attribute(<span class="hljs-string">'&lt;name&gt;'</span>)           <span class="hljs-comment"># Returns attribute or a property if exists.</span>
+&lt;El&gt;.click/clear()                             <span class="hljs-comment"># Also &lt;El&gt;.text and &lt;El&gt;.send_keys(&lt;str&gt;).</span>
 </code></pre>
-<div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x("&lt;xpath&gt;")'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;     = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]    <span class="hljs-comment"># E.g. …/child, …//descendant, …/../sibling.</span>
-&lt;xpath&gt;     = //&lt;element&gt;/following::&lt;element&gt;  <span class="hljs-comment"># Next element. Also preceding::, parent::.</span>
-&lt;element&gt;   = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;          <span class="hljs-comment"># Tag accepts */a/…. Use [1/2/…] for index.</span>
-&lt;condition&gt; = [&lt;sub_cond&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_cond&gt;]]  <span class="hljs-comment"># Use `not(&lt;sub_cond&gt;)` to negate condition.</span>
-&lt;sub_cond&gt;  = @&lt;attr&gt;[=<span class="hljs-string">"&lt;val&gt;"</span>]                 <span class="hljs-comment"># `text()=` and `.=` match (complete) text.</span>
-&lt;sub_cond&gt;  = contains(@&lt;attr&gt;, <span class="hljs-string">"&lt;val&gt;"</span>)        <span class="hljs-comment"># Is &lt;val&gt; a substring of attribute's value?</span>
-&lt;sub_cond&gt;  = [//]&lt;element&gt;                     <span class="hljs-comment"># Has matching child? Descendant if //&lt;el&gt;.</span>
+<div><h4 id="xpathalsoavailableinlxmlscrapyandbrowsersconsoleviadxxpath">XPath — also available in lxml, Scrapy, and browser's console via <code class="python hljs"><span class="hljs-string">'$x("&lt;xpath&gt;")'</span></code>:</h4><pre><code class="python language-python hljs">&lt;xpath&gt;   = //&lt;element&gt;[/ <span class="hljs-keyword">or</span> // &lt;element&gt;]     <span class="hljs-comment"># E.g. …/child, …//descendant, …/../sibling.</span>
+&lt;xpath&gt;   = //&lt;el&gt;/following[-sibling]::&lt;el&gt;   <span class="hljs-comment"># Searches under first element. Also parent.</span>
+&lt;element&gt; = &lt;tag&gt;&lt;conditions&gt;&lt;index&gt;           <span class="hljs-comment"># Tag accepts */a/…. Use [1/2/…] for index.</span>
+&lt;condit.&gt; = [&lt;sub_con&gt; [<span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> &lt;sub_con&gt;]]     <span class="hljs-comment"># Use not(&lt;sub_con&gt;) to negate subcondition.</span>
+&lt;sub_con&gt; = @&lt;attr&gt;[=<span class="hljs-string">"&lt;val&gt;"</span>]                  <span class="hljs-comment"># `text()=` and `.=` match (complete) text.</span>
+&lt;sub_con&gt; = contains(@&lt;attr&gt;, <span class="hljs-string">"&lt;val&gt;"</span>)         <span class="hljs-comment"># Is &lt;val&gt; a substring of attribute's value?</span>
+&lt;sub_con&gt; = &lt;element&gt;                          <span class="hljs-comment"># Has matching child? Descendant if //&lt;el&gt;.</span>
 </code></pre></div>
 
 <div><h2 id="webapp"><a href="#webapp" name="webapp">#</a>Web App</h2><p><strong>Flask is a micro web framework that also includes a simple WSGI/HTTP server. If you just want to open a HTML file in a web browser use <code class="python hljs"><span class="hljs-string">'webbrowser.open(&lt;path&gt;)'</span></code> instead.</strong></p><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install flask</span>
@@ -2201,7 +2201,7 @@ $ snakeviz test.prof                                       <span class="hljs-com
 <li><strong>Shape is a tuple of dimension sizes. A 100x50 RGB image has shape (50, 100, 3).</strong></li>
 <li><strong>Axis is an index of a dimension. Leftmost dimension has index 0. Summing the RGB&nbsp;image along axis 2 will return a greyscale image with shape (50, 100).</strong></li>
 </ul>
-<div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;el&gt;       = &lt;2d&gt;[row_index, col_index]               <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;int&gt;]`.</span>
+<div><h3 id="indexing">Indexing</h3><pre><code class="bash hljs">&lt;element&gt;  = &lt;2d&gt;[row_index, col_index]               <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;int&gt;]`.</span>
 &lt;1d_view&gt;  = &lt;2d&gt;[row_index]                          <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;int&gt;, &lt;slice&gt;]`.</span>
 &lt;1d_view&gt;  = &lt;2d&gt;[:, col_index]                       <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;int&gt;]`.</span>
 &lt;2d_view&gt;  = &lt;2d&gt;[from:to_row_i, from:to_col_i]       <span class="hljs-comment"># Also `&lt;3d&gt;[&lt;int&gt;, &lt;slice&gt;, &lt;slice&gt;]`.</span>
@@ -2279,7 +2279,7 @@ array_b = np.array([[<span class="hljs-number">0.1</span>,  <span class="hljs-nu
 <pre><code class="python language-python hljs">&lt;Image&gt; = &lt;Image&gt;.filter(&lt;Filter&gt;)            <span class="hljs-comment"># Accepts ImageFilter.BLUR/SHARPEN/FIND_EDGES/….</span>
 &lt;Image&gt; = &lt;Enhance&gt;.enhance(&lt;float&gt;)          <span class="hljs-comment"># E.g. `ImageEnhance.Contrast/Color/…(&lt;Image&gt;)`.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;array&gt; = np.array(&lt;Image&gt;)                   <span class="hljs-comment"># Creates a 2d or 3d NumPy array from the image.</span>
+<pre><code class="python language-python hljs">&lt;array&gt; = numpy.array(&lt;Image&gt;)                <span class="hljs-comment"># Creates a 2d or 3d NumPy array from the image.</span>
 &lt;Image&gt; = Image.fromarray(np.uint8(&lt;array&gt;))  <span class="hljs-comment"># Use `&lt;array&gt;.clip(0, 255)` to clip the values.</span>
 </code></pre>
 <div><h3 id="modes-1">Modes</h3><ul>
@@ -2332,7 +2332,7 @@ frames = []
     y = sum(range(velocity))
     frame = Image.new(<span class="hljs-string">'L'</span>, (WIDTH, HEIGHT))
     draw = ImageDraw.Draw(frame)
-    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+R*<span class="hljs-number">2</span>), fill=<span class="hljs-string">'white'</span>)
+    draw.ellipse((WIDTH/<span class="hljs-number">2</span>-R, y, WIDTH/<span class="hljs-number">2</span>+R, y+<span class="hljs-number">2</span>*R), fill=<span class="hljs-string">'white'</span>)
     frames.append(frame)
 frames += reversed(frames[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>])
 imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<span class="hljs-number">0.03</span>)
@@ -2345,7 +2345,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <pre><code class="python language-python hljs">&lt;Wave&gt;  = wave.open(<span class="hljs-string">'&lt;path&gt;'</span>)               <span class="hljs-comment"># Opens specified WAV file for reading.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getframerate()             <span class="hljs-comment"># Returns number of frames per second.</span>
 &lt;int&gt;   = &lt;Wave&gt;.getnchannels()             <span class="hljs-comment"># Returns number of samples per frame.</span>
-&lt;int&gt;   = &lt;Wave&gt;.getsampwidth()             <span class="hljs-comment"># Returns number of bytes per sample.</span>
+&lt;int&gt;   = &lt;Wave&gt;.getsampwidth()             <span class="hljs-comment"># Returns how many bytes are in sample.</span>
 &lt;tuple&gt; = &lt;Wave&gt;.getparams()                <span class="hljs-comment"># Returns namedtuple of all parameters.</span>
 &lt;bytes&gt; = &lt;Wave&gt;.readframes(nframes)        <span class="hljs-comment"># Returns all frames if `-1` is passed.</span>
 </code></pre>
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>April 4, 2026</aside>
+    <aside>April 9, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -153,17 +153,17 @@ const COROUTINES =
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> state[<span class="hljs-string">\'*\'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (state[id_] <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)):\n' +
   '        id_, d = <span class="hljs-keyword">await</span> moves.get()\n' +
-  '        deltas = {D.n: P(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>), D.e: P(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>), D.s: P(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>), D.w: P(<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>)}\n' +
-  '        state[id_] = P((state[id_].x + deltas[d].x) % W, (state[id_].y + deltas[d].y) % H)\n' +
+  '        dx, dy = (d == D.e) - (d == D.w), (d == D.s) - (d == D.n)\n' +
+  '        state[id_] = P((state[id_].x + dx) % W, (state[id_].y + dy) % H)\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, screen)</span>:</span>\n' +
-  '    offset = P(curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>)\n' +
+  '    x, y = curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
   '        screen.erase()\n' +
-  '        curses.textpad.rectangle(screen, offset.y-<span class="hljs-number">1</span>, offset.x-<span class="hljs-number">1</span>, offset.y+H, offset.x+W)\n' +
+  '        curses.textpad.rectangle(screen, y-<span class="hljs-number">1</span>, x-<span class="hljs-number">1</span>, y+H, x+W)\n' +
   '        <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():\n' +
-  '            screen.addstr(offset.y + (p.y - state[<span class="hljs-string">\'*\'</span>].y + H//<span class="hljs-number">2</span>) % H,\n' +
-  '                          offset.x + (p.x - state[<span class="hljs-string">\'*\'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))\n' +
+  '            screen.addstr(y + (p.y - state[<span class="hljs-string">\'*\'</span>].y + H//<span class="hljs-number">2</span>) % H,\n' +
+  '                          x + (p.x - state[<span class="hljs-string">\'*\'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))\n' +
   '        screen.refresh()\n' +
   '        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)\n' +
   '\n' +
@@ -212,8 +212,8 @@ const LOGGING_EXAMPLE =
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.addHandler(handler)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.setLevel(<span class="hljs-string">\'DEBUG\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>log.basicConfig()\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler = log.root.handlers[<span class="hljs-number">0</span>]\n' +
-  '<span class="hljs-meta">&gt;&gt;&gt; </span>roots_handler.setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>stream_handler = log.root.handlers[<span class="hljs-number">0</span>]\n' +
+  '<span class="hljs-meta">&gt;&gt;&gt; </span>stream_handler.setLevel(<span class="hljs-string">\'WARNING\'</span>)\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>logger.critical(<span class="hljs-string">\'Missing config file.\'</span>)\n' +
   'CRITICAL:my_module:Missing config file.\n' +
   '<span class="hljs-meta">&gt;&gt;&gt; </span>print(open(<span class="hljs-string">\'test.log\'</span>).read())\n' +
@@ -913,7 +913,7 @@ function highlightCode() {
 function changeCodeLanguages() {
   setApaches(['<D>', '<T>', '<DT>', '<TD>', '<a>', '<n>']);
   $('code').not('.python').not('.text').not('.bash').not('.apache').addClass('python');
-  $('code:contains(<el>       = <2d>[row_index, col_index])').removeClass().addClass('bash');
+  $('code:contains(<element>  = <2d>[row_index, col_index])').removeClass().addClass('bash');
   $('code:contains(<1d_array> = <2d>[row_indices, col_indices])').removeClass().addClass('bash');
   $('code:contains(<2d_bools> = <2d> > <el/1d/2d>)').removeClass().addClass('bash');
   $('code.perl').removeClass().addClass('python');

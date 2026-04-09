@@ -1226,8 +1226,8 @@ Hello World!
 Iterable Duck Types
 -------------------
 ### Iterable
-* **Only required method is iter(). It should return an iterator of object's items.**
-* **Method contains() automatically works on any object that has iter() defined.**
+* **Only required special method is iter(). It should return an iterator of object's items.**
+* **Special method contains() automatically works on any object that has iter() defined.**
 ```python
 class MyIterable:
     def __init__(self, a):
@@ -1328,7 +1328,7 @@ from enum import Enum, auto
 ```
 
 ```python
-class <enum_name>(Enum):
+class MyEnum(Enum):
     <member_name> = auto()              # An increment of last numeric value or 1.
     <member_name> = <value>             # Values don't have to be hashable/unique.
     <member_name> = <el_1>, <el_2>      # Value can be a collection, e.g. a tuple.
@@ -2212,8 +2212,8 @@ log.basicConfig(
 >>> logger.addHandler(handler)
 >>> logger.setLevel('DEBUG')
 >>> log.basicConfig()
->>> roots_handler = log.root.handlers[0]
->>> roots_handler.setLevel('WARNING')
+>>> stream_handler = log.root.handlers[0]
+>>> stream_handler.setLevel('WARNING')
 >>> logger.critical('Missing config file.')
 CRITICAL:my_module:Missing config file.
 >>> print(open('test.log').read())
@@ -2364,17 +2364,17 @@ async def controller(screen, moves):
 async def model(moves, state):
     while state['*'] not in (state[id_] for id_ in range(10)):
         id_, d = await moves.get()
-        deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
-        state[id_] = P((state[id_].x + deltas[d].x) % W, (state[id_].y + deltas[d].y) % H)
+        dx, dy = (d == D.e) - (d == D.w), (d == D.s) - (d == D.n)
+        state[id_] = P((state[id_].x + dx) % W, (state[id_].y + dy) % H)
 
 async def view(state, screen):
-    offset = P(curses.COLS//2 - W//2, curses.LINES//2 - H//2)
+    x, y = curses.COLS//2 - W//2, curses.LINES//2 - H//2
     while True:
         screen.erase()
-        curses.textpad.rectangle(screen, offset.y-1, offset.x-1, offset.y+H, offset.x+W)
+        curses.textpad.rectangle(screen, y-1, x-1, y+H, x+W)
         for id_, p in state.items():
-            screen.addstr(offset.y + (p.y - state['*'].y + H//2) % H,
-                          offset.x + (p.x - state['*'].x + W//2) % W, str(id_))
+            screen.addstr(y + (p.y - state['*'].y + H//2) % H,
+                          x + (p.x - state['*'].x + W//2) % W, str(id_))
         screen.refresh()
         await asyncio.sleep(0.005)
 
@@ -2466,7 +2466,7 @@ import FreeSimpleGUI as sg
 
 text_box = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
 dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
-label = sg.Text('100 kg is 220.462 lbs.', key='OUTPUT')
+label = sg.Text('100 kg is 220.462 lbs.', key='LABEL')
 window = sg.Window('GUI App', [[text_box, dropdown], [label], [sg.Button('Close')]])
 
 while True:
@@ -2479,7 +2479,7 @@ while True:
         continue
     unit = values['UNIT']
     lbs = quantity * {'g': 0.001, 'kg': 1, 't': 1000}[unit] / 0.45359237
-    window['OUTPUT'].update(value=f'{quantity} {unit} is {lbs:g} lbs.')
+    window['LABEL'].update(value=f'{quantity} {unit} is {lbs:g} lbs.')
 window.close()
 ```
 
@@ -2511,24 +2511,24 @@ from selenium import webdriver
 ```
 
 ```python
-<Drv> = webdriver.Chrome/Firefox/Safari/Edge()  # Opens the browser. Also <Driver>.quit().
-<Drv>.implicitly_wait(seconds)                  # Sets timeout for find_element/s() methods.
-<Drv>.get('<url>')                              # Blocks until browser fires the load event.
-<str> = <Drv>.page_source                       # Returns HTML of the page's current state.
-<El>  = <Drv/El>.find_element('xpath', <str>)   # Accepts '//<tag>[@<attr_name>="<val>"]…'.
-<str> = <El>.get_attribute('<name>')            # Returns attribute or a property if exists.
-<El>.click/clear()                              # Also <El>.text and <El>.send_keys(<str>).
+<Drv> = webdriver.Chrome/Firefox/Safari()      # Opens the browser. Also `<Driver>.quit()`.
+<Drv>.implicitly_wait(seconds)                 # Sets timeout for find_element/s() methods.
+<Drv>.get('<url>')                             # Blocks until browser fires the load event.
+<str> = <Drv>.page_source                      # Returns HTML of the page's current state.
+<El>  = <Drv/El>.find_element('xpath', <str>)  # Accepts '//<tag>[@<attr_name>="<val>"]…'.
+<str> = <El>.get_attribute('<name>')           # Returns attribute or a property if exists.
+<El>.click/clear()                             # Also <El>.text and <El>.send_keys(<str>).
 ```
 
 #### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
 ```python
-<xpath>     = //<element>[/ or // <element>]    # E.g. …/child, …//descendant, …/../sibling.
-<xpath>     = //<element>/following::<element>  # Next element. Also preceding::, parent::.
-<element>   = <tag><conditions><index>          # Tag accepts */a/…. Use [1/2/…] for index.
-<condition> = [<sub_cond> [and/or <sub_cond>]]  # Use `not(<sub_cond>)` to negate condition.
-<sub_cond>  = @<attr>[="<val>"]                 # `text()=` and `.=` match (complete) text.
-<sub_cond>  = contains(@<attr>, "<val>")        # Is <val> a substring of attribute's value?
-<sub_cond>  = [//]<element>                     # Has matching child? Descendant if //<el>.
+<xpath>   = //<element>[/ or // <element>]     # E.g. …/child, …//descendant, …/../sibling.
+<xpath>   = //<el>/following[-sibling]::<el>   # Searches under first element. Also parent.
+<element> = <tag><conditions><index>           # Tag accepts */a/…. Use [1/2/…] for index.
+<condit.> = [<sub_con> [and/or <sub_con>]]     # Use not(<sub_con>) to negate subcondition.
+<sub_con> = @<attr>[="<val>"]                  # `text()=` and `.=` match (complete) text.
+<sub_con> = contains(@<attr>, "<val>")         # Is <val> a substring of attribute's value?
+<sub_con> = <element>                          # Has matching child? Descendant if //<el>.
 ```
 
 
@@ -2681,7 +2681,7 @@ import numpy as np
 
 ### Indexing
 ```perl
-<el>       = <2d>[row_index, col_index]               # Also `<3d>[<int>, <int>, <int>]`.
+<element>  = <2d>[row_index, col_index]               # Also `<3d>[<int>, <int>, <int>]`.
 <1d_view>  = <2d>[row_index]                          # Also `<3d>[<int>, <int>, <slice>]`.
 <1d_view>  = <2d>[:, col_index]                       # Also `<3d>[<int>, <slice>, <int>]`.
 <2d_view>  = <2d>[from:to_row_i, from:to_col_i]       # Also `<3d>[<int>, <slice>, <slice>]`.
@@ -2781,7 +2781,7 @@ from PIL import Image
 ```
 
 ```python
-<array> = np.array(<Image>)                   # Creates a 2d or 3d NumPy array from the image.
+<array> = numpy.array(<Image>)                # Creates a 2d or 3d NumPy array from the image.
 <Image> = Image.fromarray(np.uint8(<array>))  # Use `<array>.clip(0, 255)` to clip the values.
 ```
 
@@ -2844,7 +2844,7 @@ for velocity in range(1, 16):
     y = sum(range(velocity))
     frame = Image.new('L', (WIDTH, HEIGHT))
     draw = ImageDraw.Draw(frame)
-    draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+R*2), fill='white')
+    draw.ellipse((WIDTH/2-R, y, WIDTH/2+R, y+2*R), fill='white')
     frames.append(frame)
 frames += reversed(frames[1:-1])
 imageio.mimsave('test.gif', frames, duration=0.03)
@@ -2861,7 +2861,7 @@ import wave
 <Wave>  = wave.open('<path>')               # Opens specified WAV file for reading.
 <int>   = <Wave>.getframerate()             # Returns number of frames per second.
 <int>   = <Wave>.getnchannels()             # Returns number of samples per frame.
-<int>   = <Wave>.getsampwidth()             # Returns number of bytes per sample.
+<int>   = <Wave>.getsampwidth()             # Returns how many bytes are in sample.
 <tuple> = <Wave>.getparams()                # Returns namedtuple of all parameters.
 <bytes> = <Wave>.readframes(nframes)        # Returns all frames if `-1` is passed.
 ```
