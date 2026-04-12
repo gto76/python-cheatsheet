@@ -56,7 +56,7 @@
 
 <body>
   <header>
-    <aside>April 9, 2026</aside>
+    <aside>April 12, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -452,13 +452,13 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> becomes a <code class="python hljs"><span class="hljs-string">'6'</span></code>, while <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>The last rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:c}                                 <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
-{<span class="hljs-number">90</span>:b}                                 <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
-{<span class="hljs-number">90</span>:X}                                 <span class="hljs-comment"># Converts 90 to hexadecimal number '5A'.</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:b}                                 <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
+{<span class="hljs-number">90</span>:x}                                 <span class="hljs-comment"># Converts 90 to hexadecimal number '5a'.</span>
+{<span class="hljs-number">90</span>:c}                                 <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;int&gt;      = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Truncates floats.</span>
-&lt;float&gt;    = float(&lt;int/str/bool&gt;)             <span class="hljs-comment"># 64-bit decimal. Also &lt;fl&gt;e±&lt;int&gt;.</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;integer&gt;  = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Truncates floats.</span>
+&lt;float&gt;    = float(&lt;integer/str/bool&gt;)         <span class="hljs-comment"># 64-bit decimal. Also &lt;fl&gt;e±&lt;int&gt;.</span>
 &lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also &lt;fl&gt; ± &lt;fl&gt;j.</span>
 &lt;Fraction&gt; = fractions.Fraction(numer, denom)  <span class="hljs-comment"># `&lt;Fraction&gt; = &lt;Fraction&gt; / &lt;int&gt;`.</span>
 &lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tuple&gt;)  <span class="hljs-comment"># `Decimal((1, (2,), 3)) == -2000`.</span>
@@ -985,10 +985,10 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 
 
 <div><h3 id="iterator-1">Iterator</h3><ul>
-<li><strong>Any object that has methods next() and iter() is an iterator.</strong></li>
-<li><strong>Next() should return next item or raise StopIteration exception.</strong></li>
-<li><strong>Iter() should return unmodified iterator, i.e. the 'self' argument.</strong></li>
-<li><strong>Any object that has iter() method can be used in a for loop.</strong></li>
+<li><strong>Any object that has special methods next() and iter() is an iterator.</strong></li>
+<li><strong>Next() should return the next item or raise StopIteration exception.</strong></li>
+<li><strong>Iter() should return an unmodified iterator, i.e. the 'self' argument.</strong></li>
+<li><strong>Any object that has iter() special method can be used in a for loop.</strong></li>
 </ul><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
         self.i = <span class="hljs-number">0</span>
@@ -1005,9 +1005,9 @@ P = make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-str
 (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
 </code></pre>
 <div><h4 id="pythonhasmanydifferentiteratorobjects">Python has many different iterator objects:</h4><ul>
-<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as list_iterator, etc.</strong></li>
+<li><strong>Sequence iterators returned by the <a href="#iterator">iter()</a> function, such as 'list_iterator'.</strong></li>
 <li><strong>Objects returned by the <a href="#itertools">itertools</a> module, such as count, repeat and cycle.</strong></li>
-<li><strong>Generators returned by the <a href="#generator">generator functions</a> and <a href="#comprehensions">generator expressions</a>.</strong></li>
+<li><strong>Generator objects returned by the generator <a href="#generator">functions</a> and <a href="#comprehensions">expressions</a>.</strong></li>
 <li><strong>File objects returned by the <a href="#open">open()</a> function, <a href="#sqlite">SQLite</a> cursor objects, etc.</strong></li>
 </ul><div><h3 id="callable">Callable</h3><ul>
 <li><strong>All functions and classes have a call() method that is executed when they are called.</strong></li>
@@ -2029,13 +2029,13 @@ print(tabulate.tabulate(rows, headers=<span class="hljs-string">'firstrow'</span
 <div><h2 id="guiapp"><a href="#guiapp" name="guiapp">#</a>GUI App</h2><div><h4 id="runsadesktopappforconvertingweightsfrommetricunitsintopounds">Runs a desktop app for converting weights from metric units into pounds:</h4><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install FreeSimpleGUI</span>
 <span class="hljs-keyword">import</span> FreeSimpleGUI <span class="hljs-keyword">as</span> sg
 
-text_box = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
-dropdown = sg.InputCombo([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
-label = sg.Text(<span class="hljs-string">'100 kg is 220.462 lbs.'</span>, key=<span class="hljs-string">'LABEL'</span>)
-window = sg.Window(<span class="hljs-string">'GUI App'</span>, [[text_box, dropdown], [label], [sg.Button(<span class="hljs-string">'Close'</span>)]])
+field = sg.Input(default_text=<span class="hljs-string">'100'</span>, enable_events=<span class="hljs-keyword">True</span>, key=<span class="hljs-string">'QUANTITY'</span>)
+menu = sg.Drop([<span class="hljs-string">'g'</span>, <span class="hljs-string">'kg'</span>, <span class="hljs-string">'t'</span>], <span class="hljs-string">'kg'</span>, readonly=<span class="hljs-keyword">True</span>, enable_events=<span class="hljs-keyword">True</span>, k=<span class="hljs-string">'UNIT'</span>)
+text = sg.Text(<span class="hljs-string">'is 220.462 lbs.'</span>, key=<span class="hljs-string">'TEXT'</span>)
+win = sg.Window(<span class="hljs-string">'GUI App'</span>, [[field, menu], [text], [sg.Button(<span class="hljs-string">'Close'</span>)]])
 
 <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-    event, values = window.read()
+    event, values = win.read()
     <span class="hljs-keyword">if</span> event <span class="hljs-keyword">in</span> [sg.WIN_CLOSED, <span class="hljs-string">'Close'</span>]:
         <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">try</span>:
@@ -2044,8 +2044,8 @@ window = sg.Window(<span class="hljs-string">'GUI App'</span>, [[text_box, dropd
         <span class="hljs-keyword">continue</span>
     unit = values[<span class="hljs-string">'UNIT'</span>]
     lbs = quantity * {<span class="hljs-string">'g'</span>: <span class="hljs-number">0.001</span>, <span class="hljs-string">'kg'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'t'</span>: <span class="hljs-number">1000</span>}[unit] / <span class="hljs-number">0.45359237</span>
-    window[<span class="hljs-string">'LABEL'</span>].update(value=<span class="hljs-string">f'<span class="hljs-subst">{quantity}</span> <span class="hljs-subst">{unit}</span> is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
-window.close()
+    win[<span class="hljs-string">'TEXT'</span>].update(value=<span class="hljs-string">f'is <span class="hljs-subst">{lbs:g}</span> lbs.'</span>)
+win.close()
 </code></pre></div></div>
 
 
@@ -2360,7 +2360,7 @@ imageio.mimsave(<span class="hljs-string">'test.gif'</span>, frames, duration=<s
 <li><strong>The bytes object contains a sequence of frames, each consisting of one or more samples.</strong></li>
 <li><strong>In stereo signal, first sample of a frame belongs to the left channel (second to the right).</strong></li>
 <li><strong>Each sample consists of one or more bytes (depending on sample width) that, when con­verted to an integer, indicate the displacement of a speaker membrane at that moment.</strong></li>
-<li><strong>If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.</strong></li>
+<li><strong>If sample width is one byte, then the integer should be encoded unsigned. For all other sizes the integer should be encoded signed with little-endian byte order.</strong></li>
 </ul>
 <div><h3 id="samplevalues">Sample Values</h3><pre><code class="python hljs">┏━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━━┓
 ┃ sampwidth │    min    │ zero │    max    ┃
@@ -2935,7 +2935,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the acti
  
 
   <footer>
-    <aside>April 9, 2026</aside>
+    <aside>April 12, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -485,17 +485,17 @@ Format
 
 ### Ints
 ```python
-{90:c}                                 # Converts 90 to Unicode character 'Z'.
 {90:b}                                 # Converts 90 to binary number '1011010'.
-{90:X}                                 # Converts 90 to hexadecimal number '5A'.
+{90:x}                                 # Converts 90 to hexadecimal number '5a'.
+{90:c}                                 # Converts 90 to Unicode character 'Z'.
 ```
 
 
 Numbers
 -------
 ```python
-<int>      = int(<float/str/bool>)             # A whole number. Truncates floats.
-<float>    = float(<int/str/bool>)             # 64-bit decimal. Also <fl>e±<int>.
+<integer>  = int(<float/str/bool>)             # A whole number. Truncates floats.
+<float>    = float(<integer/str/bool>)         # 64-bit decimal. Also <fl>e±<int>.
 <complex>  = complex(real=0, imag=0)           # Complex number. Also <fl> ± <fl>j.
 <Fraction> = fractions.Fraction(numer, denom)  # `<Fraction> = <Fraction> / <int>`.
 <Decimal>  = decimal.Decimal(<str/int/tuple>)  # `Decimal((1, (2,), 3)) == -2000`.
@@ -1152,10 +1152,10 @@ class MySortable:
 ```
 
 ### Iterator
-* **Any object that has methods next() and iter() is an iterator.**
-* **Next() should return next item or raise StopIteration exception.**
-* **Iter() should return unmodified iterator, i.e. the 'self' argument.**
-* **Any object that has iter() method can be used in a for loop.**
+* **Any object that has special methods next() and iter() is an iterator.**
+* **Next() should return the next item or raise StopIteration exception.**
+* **Iter() should return an unmodified iterator, i.e. the 'self' argument.**
+* **Any object that has iter() special method can be used in a for loop.**
 ```python
 class Counter:
     def __init__(self):
@@ -1174,9 +1174,9 @@ class Counter:
 ```
 
 #### Python has many different iterator objects:
-* **Sequence iterators returned by the [iter()](#iterator) function, such as list\_iterator, etc.**
+* **Sequence iterators returned by the [iter()](#iterator) function, such as 'list\_iterator'.**
 * **Objects returned by the [itertools](#itertools) module, such as count, repeat and cycle.**
-* **Generators returned by the [generator functions](#generator) and [generator expressions](#comprehensions).**
+* **Generator objects returned by the generator [functions](#generator) and [expressions](#comprehensions).**
 * **File objects returned by the [open()](#open) function, [SQLite](#sqlite) cursor objects, etc.**
 
 ### Callable
@@ -2464,13 +2464,13 @@ GUI App
 # $ pip3 install FreeSimpleGUI
 import FreeSimpleGUI as sg
 
-text_box = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
-dropdown = sg.InputCombo(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
-label = sg.Text('100 kg is 220.462 lbs.', key='LABEL')
-window = sg.Window('GUI App', [[text_box, dropdown], [label], [sg.Button('Close')]])
+field = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
+menu = sg.Drop(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
+text = sg.Text('is 220.462 lbs.', key='TEXT')
+win = sg.Window('GUI App', [[field, menu], [text], [sg.Button('Close')]])
 
 while True:
-    event, values = window.read()
+    event, values = win.read()
     if event in [sg.WIN_CLOSED, 'Close']:
         break
     try:
@@ -2479,8 +2479,8 @@ while True:
         continue
     unit = values['UNIT']
     lbs = quantity * {'g': 0.001, 'kg': 1, 't': 1000}[unit] / 0.45359237
-    window['LABEL'].update(value=f'{quantity} {unit} is {lbs:g} lbs.')
-window.close()
+    win['TEXT'].update(value=f'is {lbs:g} lbs.')
+win.close()
 ```
 
 
@@ -2877,7 +2877,7 @@ import wave
 * **The bytes object contains a sequence of frames, each consisting of one or more samples.**
 * **In stereo signal, first sample of a frame belongs to the left channel (second to the right).**
 * **Each sample consists of one or more bytes (depending on sample width) that, when con&shy;verted to an integer, indicate the displacement of a speaker membrane at that moment.**
-* **If sample width is one byte, then the integer should be encoded unsigned. For all other sizes, the integer should be encoded signed with little-endian byte order.**
+* **If sample width is one byte, then the integer should be encoded unsigned. For all other sizes the integer should be encoded signed with little-endian byte order.**
 
 ### Sample Values
 ```text
