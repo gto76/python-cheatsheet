@@ -2243,61 +2243,61 @@ Threading
 ---------
 **CPython interpreter can only run a single thread at a time. Using multiple threads won't result in a faster execution, unless at least one of the threads contains an I/O operation.**
 ```python
-from threading import Thread, Lock, RLock, Semaphore, Event, Barrier
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading as thr, queue as q
+import concurrent.futures as cf
 ```
 
 ### Thread
 ```python
-<Thread> = Thread(target=<function>)          # Use `args=<coll>` to set function's arguments.
-<Thread>.start()                              # Runs function in background. Also is_alive().
-<Thread>.join()                               # Waits until the function finishes executing.
+<Thread> = thr.Thread(target=<func>)        # Use `args=<coll>` to set function's arguments.
+<Thread>.start()                            # Runs function in background. Also is_alive().
+<Thread>.join()                             # Waits until the function finishes executing.
 ```
 * **Use `'kwargs=<dict>'` to pass keyword arguments to the function, i.e. thread.**
 * **Use `'daemon=True'`, or the program won't be able to exit while the thread is alive.**
 
 ### Lock
 ```python
-<lock> = Lock/RLock()                         # RLock can only be released by acquirer thread.
-<lock>.acquire()                              # Blocks (waits) until lock becomes available.
-<lock>.release()                              # Releases the lock so it can be acquired again.
+<lock> = thr.Lock/RLock()                   # RLock can only be released by acquirer thread.
+<lock>.acquire()                            # Blocks (waits) until lock becomes available.
+<lock>.release()                            # Releases the lock so it can be acquired again.
 ```
 
 #### Or:
 ```python
-with <lock>:                                  # Enters the block by calling method acquire().
-    ...                                       # Exits it by calling release(), even on error.
+with <lock>:                                # Enters the block by calling method acquire().
+    ...                                     # Exits it by calling release(), even on error.
 ```
 
 ### Semaphore, Event, Barrier
 ```python
-<Semaphr> = Semaphore(value=1)                # Lock that can be acquired by 'value' threads.
-<Event>   = Event()                           # `<Event>.wait()` blocks until set() is called.
-<Barrier> = Barrier(parties)                  # Wait() blocks until it's called parties times.
+<Semaphr> = thr.Semaphore(value=1)          # Lock that can be acquired by 'value' threads.
+<Event>   = thr.Event()                     # `<Event>.wait()` blocks until set() is called.
+<Barrier> = thr.Barrier(parties)            # Wait() blocks until it's called parties times.
 ```
 
 ### Queue
 ```python
-<Queue> = queue.Queue(maxsize=0)              # A first-in-first-out queue. It's thread safe.
-<Queue>.put(<obj>)                            # The call blocks until queue stops being full.
-<Queue>.put_nowait(<obj>)                     # Raises queue.Full exception if queue is full.
-<obj> = <Queue>.get()                         # The call blocks until queue stops being empty.
-<obj> = <Queue>.get_nowait()                  # Raises queue.Empty exception if it is empty.
+<Queue> = q.Queue(maxsize=0)                # A first-in-first-out queue. It's thread safe.
+<Queue>.put(<obj>)                          # The call blocks until queue stops being full.
+<Queue>.put_nowait(<obj>)                   # Raises the q.Full exception if queue is full.
+<obj> = <Queue>.get()                       # The call blocks until queue stops being empty.
+<obj> = <Queue>.get_nowait()                # Raises the q.Empty exception if it is empty.
 ```
 
 ### Thread Pool Executor
 ```python
-<Exec> = ThreadPoolExec…(max_workers=None)    # Also `with ThreadPoolExecutor() as <name>: …`.
-<iter> = <Exec>.map(<func>, <args_1>, ...)    # Multithreaded and non-lazy map(). Keeps order.
-<Futr> = <Exec>.submit(<func>, <arg_1>, ...)  # Creates a thread and queues it for execution.
-<Exec>.shutdown()                             # Waits for all the threads to finish executing.
+<Exec> = cf.ThreadPoolExec…([max_workers])  # Also `with ThreadPoolExecutor() as <name>: …`.
+<iter> = <Exec>.map(<func>, <args_1>, …)    # Multithreaded and non-lazy map(). Keeps order.
+<Futr> = <Exec>.submit(<func>, <arg_1>, …)  # Creates a thread and queues it for execution.
+<Exec>.shutdown()                           # Waits for all the threads to finish executing.
 ```
 
 ```python
-<bool> = <Future>.done()                      # Checks if the thread has finished executing.
-<obj>  = <Future>.result(timeout=None)        # Raises TimeoutError after 'timeout' seconds.
-<bool> = <Future>.cancel()                    # Just returns False if it is running/finished.
-<iter> = as_completed(<coll_of_Futures>)      # `next(<iter>)` returns next completed Future.
+<bool> = <Future>.done()                    # Checks if the thread has finished executing.
+<obj>  = <Future>.result(timeout=None)      # Raises TimeoutError after 'timeout' seconds.
+<bool> = <Future>.cancel()                  # Just returns False if it is running/finished.
+<iter> = cf.as_completed(<coll_of_Futrs>)   # `next(<iter>)` returns next completed Future.
 ```
 * **Map() and as\_completed() also accept 'timeout' arg. It causes _futures.TimeoutError_ when next() is called or blocking. Map() times from original call and as_completed() from first call to next(). As\_completed() fails if next() is called too late, even if all threads are done.**
 * **Exceptions that happen inside threads are raised when map's next() or Future's result() method is called. Future's exception() method returns caught exception object or None.**
@@ -2329,7 +2329,7 @@ import asyncio as aio
 
 #### Runs a terminal game where you control an asterisk that must avoid numbers:
 ```python
-import asyncio, collections, curses, curses.textpad, enum, random
+import asyncio as aio, collections, curses, curses.textpad, enum, random
 
 P = collections.namedtuple('P', 'x y')     # Position (x and y coordinates).
 D = enum.Enum('D', 'n e s w')              # Direction (north, east, etc.).
@@ -2338,28 +2338,28 @@ W, H = 15, 7                               # Width and height of the field.
 def main(screen):
     curses.curs_set(0)                     # Makes the cursor invisible.
     screen.nodelay(True)                   # Makes getch() non-blocking.
-    asyncio.run(main_coroutine(screen))    # Starts running asyncio code.
+    aio.run(main_coroutine(screen))        # Starts running asyncio code.
 
-async def main_coroutine(screen):
-    moves = asyncio.Queue()
+async def main_coroutine(scr):
+    moves = aio.Queue()
     state = {'*': P(0, 0)} | dict.fromkeys(range(10), P(W//2, H//2))
-    ai    = [random_controller(id_, moves) for id_ in range(10)]
-    mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]
-    tasks = [asyncio.create_task(coro) for coro in ai + mvc]
-    await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+    ai = [random_controller(id_, moves) for id_ in range(10)]
+    mvc = [controller(scr, moves), model(moves, state), view(state, scr)]
+    tasks = [aio.create_task(coro) for coro in ai + mvc]
+    await aio.wait(tasks, return_when=aio.FIRST_COMPLETED)
 
 async def random_controller(id_, moves):
     while True:
         d = random.choice(list(D))
         moves.put_nowait((id_, d))
-        await asyncio.sleep(random.triangular(0.01, 0.65))
+        await aio.sleep(random.triangular(0.01, 0.65))
 
-async def controller(screen, moves):
+async def controller(scr, moves):
     while True:
         key_mappings = {258: D.s, 259: D.n, 260: D.w, 261: D.e}
-        if d := key_mappings.get(screen.getch()):
+        if d := key_mappings.get(scr.getch()):
             moves.put_nowait(('*', d))
-        await asyncio.sleep(0.005)
+        await aio.sleep(0.005)
 
 async def model(moves, state):
     while state['*'] not in (state[id_] for id_ in range(10)):
@@ -2367,16 +2367,16 @@ async def model(moves, state):
         dx, dy = (d == D.e) - (d == D.w), (d == D.s) - (d == D.n)
         state[id_] = P((state[id_].x + dx) % W, (state[id_].y + dy) % H)
 
-async def view(state, screen):
-    x, y = curses.COLS//2 - W//2, curses.LINES//2 - H//2
+async def view(state, scr):
+    y, x = curses.LINES//2 - H//2, curses.COLS//2 - W//2
     while True:
-        screen.erase()
-        curses.textpad.rectangle(screen, y-1, x-1, y+H, x+W)
+        scr.erase()
+        curses.textpad.rectangle(scr, y-1, x-1, y+H, x+W)
         for id_, p in state.items():
-            screen.addstr(y + (p.y - state['*'].y + H//2) % H,
-                          x + (p.x - state['*'].x + W//2) % W, str(id_))
-        screen.refresh()
-        await asyncio.sleep(0.005)
+            dy, dx = p.y - state['*'].y + H//2, p.x - state['*'].x + W//2
+            scr.addstr(y + (dy % H), x + (dx % W), str(id_))
+        scr.refresh()
+        await aio.sleep(0.005)
 
 if __name__ == '__main__':
     curses.wrapper(main)

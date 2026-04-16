@@ -118,7 +118,7 @@ const MATCH_EXAMPLE =
   'README.md is a readme file that belongs to user ken.\n';
 
 const COROUTINES =
-  '<span class="hljs-keyword">import</span> asyncio, collections, curses, curses.textpad, enum, random\n' +
+  '<span class="hljs-keyword">import</span> asyncio <span class="hljs-keyword">as</span> aio, collections, curses, curses.textpad, enum, random\n' +
   '\n' +
   'P = collections.namedtuple(<span class="hljs-string">\'P\'</span>, <span class="hljs-string">\'x y\'</span>)     <span class="hljs-comment"># Position (x and y coordinates).</span>\n' +
   'D = enum.Enum(<span class="hljs-string">\'D\'</span>, <span class="hljs-string">\'n e s w\'</span>)              <span class="hljs-comment"># Direction (north, east, etc.).</span>\n' +
@@ -127,28 +127,28 @@ const COROUTINES =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(screen)</span>:</span>\n' +
   '    curses.curs_set(<span class="hljs-number">0</span>)                     <span class="hljs-comment"># Makes the cursor invisible.</span>\n' +
   '    screen.nodelay(<span class="hljs-keyword">True</span>)                   <span class="hljs-comment"># Makes getch() non-blocking.</span>\n' +
-  '    asyncio.run(main_coroutine(screen))    <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
+  '    aio.run(main_coroutine(screen))        <span class="hljs-comment"># Starts running asyncio code.</span>\n' +
   '\n' +
-  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(screen)</span>:</span>\n' +
-  '    moves = asyncio.Queue()\n' +
+  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main_coroutine</span><span class="hljs-params">(scr)</span>:</span>\n' +
+  '    moves = aio.Queue()\n' +
   '    state = {<span class="hljs-string">\'*\'</span>: P(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)} | dict.fromkeys(range(<span class="hljs-number">10</span>), P(W//<span class="hljs-number">2</span>, H//<span class="hljs-number">2</span>))\n' +
-  '    ai    = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]\n' +
-  '    mvc   = [controller(screen, moves), model(moves, state), view(state, screen)]\n' +
-  '    tasks = [asyncio.create_task(coro) <span class="hljs-keyword">for</span> coro <span class="hljs-keyword">in</span> ai + mvc]\n' +
-  '    <span class="hljs-keyword">await</span> asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)\n' +
+  '    ai = [random_controller(id_, moves) <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]\n' +
+  '    mvc = [controller(scr, moves), model(moves, state), view(state, scr)]\n' +
+  '    tasks = [aio.create_task(coro) <span class="hljs-keyword">for</span> coro <span class="hljs-keyword">in</span> ai + mvc]\n' +
+  '    <span class="hljs-keyword">await</span> aio.wait(tasks, return_when=aio.FIRST_COMPLETED)\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_controller</span><span class="hljs-params">(id_, moves)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
   '        d = random.choice(list(D))\n' +
   '        moves.put_nowait((id_, d))\n' +
-  '        <span class="hljs-keyword">await</span> asyncio.sleep(random.triangular(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.65</span>))\n' +
+  '        <span class="hljs-keyword">await</span> aio.sleep(random.triangular(<span class="hljs-number">0.01</span>, <span class="hljs-number">0.65</span>))\n' +
   '\n' +
-  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">controller</span><span class="hljs-params">(screen, moves)</span>:</span>\n' +
+  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">controller</span><span class="hljs-params">(scr, moves)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
   '        key_mappings = {<span class="hljs-number">258</span>: D.s, <span class="hljs-number">259</span>: D.n, <span class="hljs-number">260</span>: D.w, <span class="hljs-number">261</span>: D.e}\n' +
-  '        <span class="hljs-keyword">if</span> d := key_mappings.get(screen.getch()):\n' +
+  '        <span class="hljs-keyword">if</span> d := key_mappings.get(scr.getch()):\n' +
   '            moves.put_nowait((<span class="hljs-string">\'*\'</span>, d))\n' +
-  '        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)\n' +
+  '        <span class="hljs-keyword">await</span> aio.sleep(<span class="hljs-number">0.005</span>)\n' +
   '\n' +
   '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">model</span><span class="hljs-params">(moves, state)</span>:</span>\n' +
   '    <span class="hljs-keyword">while</span> state[<span class="hljs-string">\'*\'</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (state[id_] <span class="hljs-keyword">for</span> id_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)):\n' +
@@ -156,16 +156,16 @@ const COROUTINES =
   '        dx, dy = (d == D.e) - (d == D.w), (d == D.s) - (d == D.n)\n' +
   '        state[id_] = P((state[id_].x + dx) % W, (state[id_].y + dy) % H)\n' +
   '\n' +
-  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, screen)</span>:</span>\n' +
-  '    x, y = curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>, curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>\n' +
+  '<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">view</span><span class="hljs-params">(state, scr)</span>:</span>\n' +
+  '    y, x = curses.LINES//<span class="hljs-number">2</span> - H//<span class="hljs-number">2</span>, curses.COLS//<span class="hljs-number">2</span> - W//<span class="hljs-number">2</span>\n' +
   '    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:\n' +
-  '        screen.erase()\n' +
-  '        curses.textpad.rectangle(screen, y-<span class="hljs-number">1</span>, x-<span class="hljs-number">1</span>, y+H, x+W)\n' +
+  '        scr.erase()\n' +
+  '        curses.textpad.rectangle(scr, y-<span class="hljs-number">1</span>, x-<span class="hljs-number">1</span>, y+H, x+W)\n' +
   '        <span class="hljs-keyword">for</span> id_, p <span class="hljs-keyword">in</span> state.items():\n' +
-  '            screen.addstr(y + (p.y - state[<span class="hljs-string">\'*\'</span>].y + H//<span class="hljs-number">2</span>) % H,\n' +
-  '                          x + (p.x - state[<span class="hljs-string">\'*\'</span>].x + W//<span class="hljs-number">2</span>) % W, str(id_))\n' +
-  '        screen.refresh()\n' +
-  '        <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0.005</span>)\n' +
+  '            dy, dx = p.y - state[<span class="hljs-string">\'*\'</span>].y + H//<span class="hljs-number">2</span>, p.x - state[<span class="hljs-string">\'*\'</span>].x + W//<span class="hljs-number">2</span>\n' +
+  '            scr.addstr(y + (dy % H), x + (dx % W), str(id_))\n' +
+  '        scr.refresh()\n' +
+  '        <span class="hljs-keyword">await</span> aio.sleep(<span class="hljs-number">0.005</span>)\n' +
   '\n' +
   '<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">\'__main__\'</span>:\n' +
   '    curses.wrapper(main)\n';
@@ -942,7 +942,7 @@ function fixHighlights() {
   $(`code:contains(match <object/expression>:)`).html(MATCH);
   $(`code:contains(>>> match Path)`).html(MATCH_EXAMPLE);
   $(`code:contains(>>> log.basicConfig()`).html(LOGGING_EXAMPLE);
-  $(`code:contains(import asyncio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
+  $(`code:contains(import asyncio as aio, collections, curses, curses.textpad, enum, random)`).html(COROUTINES);
   $(`code:contains(pip3 install tqdm)`).html(PROGRESS_BAR);
   $(`code:contains(import curses, os)`).html(CURSES);
   $(`code:contains(a_float = max()`).html(AUDIO_1);
