@@ -310,48 +310,48 @@ String
 ------
 **Immutable sequence of characters.**
 ```python
-<str>  = 'abc'                               # Also "abc". Interprets \n, \t, \x00-\xff, etc.
+<str>  = 'abc'                              # Also "abc". Interprets \n, \t, \x00-\xff, etc.
 ```
 
 ```python
-<str>  = <str>.strip()                       # Strips all whitespace characters from both ends.
-<str>  = <str>.strip('<chars>')              # Strips passed characters. Also lstrip/rstrip().
+<str>  = <str>.strip()                      # Strips all whitespace characters from both ends.
+<str>  = <str>.strip('<chars>')             # Strips passed characters. Also lstrip/rstrip().
 ```
 
 ```python
-<list> = <str>.split()                       # Splits it on one or more whitespace characters.
-<list> = <str>.split(sep=None, maxsplit=-1)  # Splits on 'sep' string at most 'maxsplit' times.
-<list> = <str>.splitlines(keepends=False)    # On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.
-<str>  = <str>.join(<coll_of_strings>)       # Joins items by using the string as a separator.
+<list> = <str>.split()                      # Splits it on one or more whitespace characters.
+<list> = <str>.split(<str>, maxsplit=-1)    # Splits on passed string at most maxsplit times.
+<list> = <str>.splitlines(keepends=False)   # On [\n\r\f\v\x1c-\x1e\x85\u2028\u2029] and \r\n.
+<str>  = <str>.join(<coll_of_strings>)      # Joins items by using the string as a separator.
 ```
 
 ```python
-<bool> = <sub_str> in <str>                  # Returns True if string contains the substring.
-<bool> = <str>.startswith(<sub_str>)         # Pass tuple of strings to give multiple options.
-<int>  = <str>.find(<sub_str>)               # Returns start index of the first match or `-1`.
+<bool> = <sub_str> in <str>                 # Returns True if string contains the substring.
+<bool> = <str>.startswith(<sub_str>)        # Pass tuple of strings to give multiple options.
+<int>  = <str>.find(<sub_str>)              # Returns start index of the first match or `-1`.
 ```
 
 ```python
-<str>  = <str>.lower()                       # Lowers the case. Also upper/capitalize/title().
-<str>  = <str>.casefold()                    # Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.
-<str>  = <str>.replace(old, new [, count])   # Replaces 'old' with 'new' at most 'count' times.
-<str>  = <str>.translate(table)              # Use `str.maketrans(<dict>)` to generate table.
+<str>  = <str>.lower()                      # Lowers the case. Also upper/capitalize/title().
+<str>  = <str>.casefold()                   # Lower() that converts ẞ/ß to ss, Σ/ς to σ, etc.
+<str>  = <str>.replace(old, new [, count])  # Replaces 'old' with 'new' at most 'count' times.
+<str>  = <str>.translate(table)             # Use `str.maketrans(<dict_of_chars>)` for table.
 ```
 
 ```python
-<str>  = chr(<int>)                          # Converts passed integer into Unicode character.
-<int>  = ord(<str>)                          # Converts passed Unicode character into integer.
+<str>  = chr(<int>)                         # Converts passed integer into Unicode character.
+<int>  = ord(<str>)                         # Converts passed Unicode character into integer.
 ```
 * **Use `'unicodedata.normalize("NFC", <str>)'` on strings like `'Motörhead'` before comparing them to other strings, because `'ö'` can be stored as one or two characters.**
 * **`'NFC'` converts such characters to a single character, while `'NFD'` converts them to two.**
 
 ```python
-<bool> = <str>.isdecimal()                   # Checks all chars for [0-9]. Also [०-९], [٠-٩].
-<bool> = <str>.isdigit()                     # Checks for [²³¹…] and isdecimal(). Also [፩-፱].
-<bool> = <str>.isnumeric()                   # Checks for [¼½¾…] and isdigit(). Also [零〇一…].
-<bool> = <str>.isalnum()                     # Checks for [ABC…] and isnumeric(). Also [ªµº…].
-<bool> = <str>.isprintable()                 # Checks for [ !"#…], basic emojis and isalnum().
-<bool> = <str>.isspace()                     # Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].
+<bool> = <str>.isdecimal()                  # Checks all chars for [0-9]. Also [०-९], [٠-٩].
+<bool> = <str>.isdigit()                    # Checks for [²³¹…] and isdecimal(). Also [፩-፱].
+<bool> = <str>.isnumeric()                  # Checks for [¼½¾…] and isdigit(). Also [零〇一…].
+<bool> = <str>.isalnum()                    # Checks for [ABC…] and isnumeric(). Also [ªµº…].
+<bool> = <str>.isprintable()                # Checks for [ !"#…], basic emojis and isalnum().
+<bool> = <str>.isspace()                    # Checks for [ \t\n\r\f\v\x1c\x1d\x1e\x1f\x85…].
 ```
 
 
@@ -539,7 +539,7 @@ from random import random, randint, uniform    # Also: gauss, choice, shuffle, e
 <float> = random()                             # Selects random float from [0, 1).
 <num>   = randint/uniform(a, b)                # Selects an int/float from [a, b].
 <float> = gauss(mean, stdev)                   # Also triangular(low, high, mode).
-<el>    = choice(<sequence>)                   # Doesn't modify. Also sample(p, n).
+<el>    = choice(<sequence>)                   # Doesn't mutate. Also sample(p, n).
 shuffle(<list>)                                # Works with all mutable sequences.
 ```
 
@@ -622,7 +622,7 @@ import zoneinfo, dateutil.tz
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from universal time.
 <tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from the UTC.
 <tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
-<DTa>    = <DT>.astimezone([<tzinfo>])      # Converts DT to the passed or local fixed zone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Converts DT to the passed, or local fixed zone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes the timezone object without conversion.
 ```
 * **Timezones returned by tzlocal(), ZoneInfo(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
@@ -674,9 +674,9 @@ Function
 **Independent block of code that returns a value when called.**
 
 ```python
-def <func_name>(<nondefault_args>): ...                  # E.g. `func(x, y):`.
-def <func_name>(<default_args>): ...                     # E.g. `func(x=0, y=0):`.
-def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `func(x, y=0):`.
+def my_function(<nondefault_args>): ...                  # E.g. `my_func(x, y):`.
+def my_function(<default_args>): ...                     # E.g. `my_func(x=0, y=0):`.
+def my_function(<nondefault_args>, <default_args>): ...  # E.g. `my_func(x, y=0):`.
 ```
 * **Function returns None if it doesn't encounter the `'return <object/expr>'` statement.**
 * **Run `'global <var_name>'` inside the function before assigning to the global variable.**
@@ -686,9 +686,9 @@ def <func_name>(<nondefault_args>, <default_args>): ...  # E.g. `func(x, y=0):`.
 ### Function Call
 
 ```python
-<obj> = <function>(<positional_args>)                    # E.g. `func(0, 0)`.
-<obj> = <function>(<keyword_args>)                       # E.g. `func(x=0, y=0)`.
-<obj> = <function>(<positional_args>, <keyword_args>)    # E.g. `func(0, y=0)`.
+<obj> = <function>(<positional_args>)                    # E.g. `my_func(0, 0)`.
+<obj> = <function>(<keyword_args>)                       # E.g. `my_func(x=0, y=0)`.
+<obj> = <function>(<positional_args>, <keyword_args>)    # E.g. `my_func(0, y=0)`.
 ```
 
 
@@ -1046,13 +1046,13 @@ class MyClass:
 * **Objects can be made [sortable](#sortable) with `'order=True'` and immutable with `'frozen=True'`.**
 * **For object to be [hashable](#hashable), all attributes must be hashable and `'frozen'` must be `'True'`.**
 * **Function field() is needed because `'<attr_name>: list = []'` would make a list that is&nbsp;shared among all instances. Its 'default_factory' argument accepts any [callable](#callable) object.**
-* **For attributes/arguments of arbitrary type use `'typing.Any'`.**
+* **For attributes and arguments of arbitrary type use `'<attr_name>: typing.Any'`.**
 
 #### Inline:
 ```python
-P = make_dataclass('P', ['x', 'y'])
-P = make_dataclass('P', [('x', float), ('y', float)])
-P = make_dataclass('P', [('x', float, 0), ('y', float, 0)])
+Point = make_dataclass('Point', ['x', 'y'])
+Point = make_dataclass('Point', [('x', float), ('y', float)])
+Point = make_dataclass('Point', [('x', float, 0), ('y', float, 0)])
 ```
 
 ### Property
@@ -2259,7 +2259,7 @@ import concurrent.futures as cf
 ### Lock
 ```python
 <lock> = thr.Lock/RLock()                   # RLock can only be released by acquirer thread.
-<lock>.acquire()                            # Blocks (waits) until lock becomes available.
+<lock>.acquire()                            # Waits/blocks until the lock becomes available.
 <lock>.release()                            # Releases the lock so it can be acquired again.
 ```
 
@@ -2287,7 +2287,7 @@ with <lock>:                                # Enters the block by calling method
 
 ### Thread Pool Executor
 ```python
-<Exec> = cf.ThreadPoolExec…([max_workers])  # Also `with ThreadPoolExecutor() as <name>: …`.
+<Exec> = cf.ThreadPoolExec…(max_workers)    # Or use `with ThreadPoolExecutor() as <name>:`.
 <iter> = <Exec>.map(<func>, <args_1>, …)    # Multithreaded and non-lazy map(). Keeps order.
 <Futr> = <Exec>.submit(<func>, <arg_1>, …)  # Creates a thread and queues it for execution.
 <Exec>.shutdown()                           # Waits for all the threads to finish executing.
@@ -2466,7 +2466,7 @@ import FreeSimpleGUI as sg
 
 field = sg.Input(default_text='100', enable_events=True, key='QUANTITY')
 menu = sg.Drop(['g', 'kg', 't'], 'kg', readonly=True, enable_events=True, k='UNIT')
-text = sg.Text('is 220.462 lbs.', key='TEXT')
+text = sg.Text('is 220.462 lbs.', key='RESULT')
 win = sg.Window('GUI App', [[field, menu], [text], [sg.Button('Close')]])
 
 while True:
@@ -2479,7 +2479,7 @@ while True:
         continue
     unit = values['UNIT']
     lbs = quantity * {'g': 0.001, 'kg': 1, 't': 1000}[unit] / 0.45359237
-    win['TEXT'].update(value=f'is {lbs:g} lbs.')
+    win['RESULT'].update(value=f'is {lbs:g} lbs.')
 win.close()
 ```
 
@@ -2523,7 +2523,7 @@ from selenium import webdriver
 #### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
 ```python
 <xpath>   = //<element>[/ or // <element>]     # E.g. …/child, …//descendant, …/../sibling.
-<xpath>   = //<el>/following[-sibling]::<el>   # Searches under first element. Also parent.
+<xpath>   = //<el>/following-sibling::<el>     # Searches under first element. Also parent.
 <element> = <tag><conditions><index>           # Tag accepts */a/…. Use [1/2/…] for index.
 <condit.> = [<sub_con> [and/or <sub_con>]]     # Use not(<sub_con>) to negate subcondition.
 <sub_con> = @<attr>[="<val>"]                  # `text()=` and `.=` match (complete) text.
