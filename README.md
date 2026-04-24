@@ -590,11 +590,11 @@ import itertools as it
 
 Datetime
 --------
-**Provides 'date', 'time', 'datetime' and 'timedelta' classes. All are immutable and hashable.**
+**Module that provides date, time, and datetime objects.**
 
 ```python
 # $ pip3 install python-dateutil
-from datetime import date, time, datetime, timedelta, timezone
+from datetime import *
 import zoneinfo, dateutil.tz
 ```
 
@@ -622,7 +622,7 @@ import zoneinfo, dateutil.tz
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from universal time.
 <tzinfo> = dateutil.tz.tzlocal()            # Local timezone with dynamic offset from the UTC.
 <tzinfo> = zoneinfo.ZoneInfo('<iana_key>')  # 'Continent/City_Name' zone with dynamic offset.
-<DTa>    = <DT>.astimezone(<tzinfo>)        # Converts DT to the passed, or local fixed zone.
+<DTa>    = <DT>.astimezone(<tzinfo>)        # Converts to the passed or local fixed timezone.
 <Ta/DTa> = <T/DT>.replace(tzinfo=<tzinfo>)  # Changes the timezone object without conversion.
 ```
 * **Timezones returned by tzlocal(), ZoneInfo(), and implicit local timezone of naive objects have offsets that vary through time due to DST and historical changes of the base offset.**
@@ -973,17 +973,17 @@ class MyClass:
 >>> obj.a, str(obj), repr(obj)
 (1, '1', 'MyClass(1)')
 ```
-* **Methods whose names start and end with two underscores are called special methods. They are executed when object is passed to a built-in function or used as an operand. For&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **Methods whose names start and end with two underscores are called special methods.**
+* **They are executed when object is passed to a built-in function or used as an operand. For&nbsp;example, `'print(a)'` calls `'a.__str__()'` and `'a + b'` calls `'a.__add__(b)'`.**
+* **See module [operator](#operator) to get names of all special methods that are called by operators.**
 * **Methods that are decorated with `'@staticmethod'` receive neither 'self' nor 'cls' arg.**
-* **Return value of str() special method should be readable and of repr() unambiguous.**
-* **All calls to str() special method are dispatched to repr() when only repr() is provided.**
+* **Return value of str() special method should be readable and of repr() unambiguous.<br>All calls to str() special method are dispatched to repr() when only repr() is provided.**
 
 #### Expressions that call the str() special method:
 ```python
 f'{obj}'
 print(obj)
-logging.warning(obj)
-<csv_writer>.writerow([obj, …])
+<csv_writer>.writerow([obj])
 ```
 
 #### Expressions that call the repr() special method:
@@ -2520,10 +2520,10 @@ from selenium import webdriver
 <El>.click/clear()                             # Also <El>.text and <El>.send_keys(<str>).
 ```
 
-#### XPath — also available in lxml, Scrapy, and browser's console via `'$x("<xpath>")'`:
+#### XPath — available in browser's console via `'$x("<xpath>")'`:
 ```python
 <xpath>   = //<element>[/ or // <element>]     # E.g. …/child, …//descendant, …/../sibling.
-<xpath>   = //<el>/following-sibling::<el>     # Searches under first element. Also parent.
+<xpath>   = //<el>/following-sibling::<el>     # Looks under first element. Also parent::.
 <element> = <tag><conditions><index>           # Tag accepts */a/…. Use [1/2/…] for index.
 <condit.> = [<sub_con> [and/or <sub_con>]]     # Use not(<sub_con>) to negate subcondition.
 <sub_con> = @<attr>[="<val>"]                  # `text()=` and `.=` match (complete) text.

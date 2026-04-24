@@ -78,6 +78,11 @@ const PARAMETRIZED_DECORATOR =
   '<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(x, y)</span>:</span>\n' +
   '    <span class="hljs-keyword">return</span> x + y\n';
 
+const STR_USE_CASES =
+  '<span class="hljs-string">f\'<span class="hljs-subst">{obj}</span>\'</span>\n' +
+  'print(obj)\n' +
+  '&lt;csv_writer&gt;.writerow([obj])\n';
+
 const REPR_USE_CASES =
   '<span class="hljs-string">f\'<span class="hljs-subst">{obj!r}</span>\'</span>\n' +
   'print/str/repr([obj])\n' +
@@ -935,6 +940,7 @@ function fixHighlights() {
   $(`code:contains( + fib(n)`).html(CACHE);
   $(`code:contains(>>> def add)`).html(SPLAT);
   $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
+  $(`code:contains(print/str(obj))`).html(STR_USE_CASES);
   $(`code:contains(print/str/repr([obj]))`).html(REPR_USE_CASES);
   $(`code:contains(shutil.copy)`).html(SHUTIL_COPY);
   $(`code:contains(os.rename)`).html(OS_RENAME);
