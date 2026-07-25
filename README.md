@@ -397,7 +397,7 @@ import re
 
 Format
 ------
-**String formatting methods.**
+**String formatting mechanisms.**
 ```perl
 <str> = f'{<obj>}, {<obj>}'            # Braces can also contain expressions.
 <str> = '{}, {}'.format(<obj>, <obj>)  # Or '{0}, {a}'.format(<obj>, a=<obj>).
@@ -412,7 +412,7 @@ Format
 'Jean-Luc is 1.87 meters tall.'
 ```
 
-### General Options
+### Options
 ```python
 {<obj>:<10}                            # '<obj>     '.
 {<obj>:^10}                            # '  <obj>   '.
@@ -505,7 +505,7 @@ Numbers
 * **Precision of decimal operations is set with: `'decimal.getcontext().prec = <int>'`.**
 * **Bools can be used anywhere ints can, since bool is a subclass of int: `'True + 1 == 2'`.**
 
-### Built-in Functions
+### Built-in
 ```python
 <num> = abs(<num>)                            # E.g. `abs(-50) == abs(50) == 50`.
 <num> = pow(<num>, <num>)                     # E.g. `pow(3, 4) == 3 ** 4 == 81`.
@@ -541,14 +541,14 @@ import random as rd
 rd.shuffle(<list>)                            # Works with all mutable sequences.
 ```
 
-### Hexadecimal Numbers
+### Hexadecimal
 ```python
 <int> = 0x<hex>                               # E.g. `0xFf == 255`. Also 0b<bin>.
 <int> = int('±<hex>', 16)                     # Also int('±0x<hex>/±0b<bin>', 0).
 <str> = hex(<int>)                            # Returns '[-]0x<hex>'. Also bin().
 ```
 
-### Bitwise Operators
+### Bitwise
 ```python
 <int> = <int> & <int>                         # E.g. `0b1100 & 0b1010 == 0b1000`.
 <int> = <int> | <int>                         # E.g. `0b1100 | 0b1010 == 0b1110`.
@@ -889,12 +889,12 @@ Decorator
 
 ```python
 @decorator_name
-def function_that_is_passed_to_dec():
+def func_that_is_passed_to_dec():
     ...
 ```
 
-### Debugger Example
-**Decorator that prints function's name every time that function is called.**
+### Debugger
+**Prints function's name every time function is called. It uses `'@wraps'` decorator to move the&nbsp;metadata from func() into out(). Without it, `'add.__name__'` would return `'out'`.**
 
 ```python
 from functools import wraps
@@ -910,23 +910,22 @@ def debug(func):
 def add(x, y):
     return x + y
 ```
-* **Wraps is a helper decorator that copies the metadata of the passed function (func) to the function it is decorating (out). Without it, `'add.__name__'` would return string `'out'`.**
 
 ### Cache
-**Decorator that stores return values. All arguments must be hashable.**
+**Stores function's return values and reuses them later. To clear stored return values run `'<func>.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
 
 ```python
 from functools import cache
 
 @cache
-def fib(n):
-    return n if n < 2 else fib(n-2) + fib(n-1)
+def fibonacci(n):
+    return n if n < 2 else fibonacci(n-2) + fibonacci(n-1)
 ```
-* **Potential problem with cache is that it can grow indefinitely. To clear stored values run `'<func>.cache_clear()'`, or use `'@lru_cache(maxsize=<int>)'` decorator instead.**
-* **CPython interpreter limits recursion depth to 3000 by default. To increase this limit run `'sys.setrecursionlimit(<int>)'`.**
+* **CPython interpreter limits recursion depth to 3000 by default.**
+* **To increase this limit run `'sys.setrecursionlimit(<int>)'`.**
 
-### Parametrized Decorator
-**Decorator that accepts arguments and returns a normal decorator.**
+### Debug with Args
+**Decorator that prints function's name and optionally also it's result.**
 ```python
 from functools import wraps
 
@@ -935,7 +934,9 @@ def debug(print_result=False):
         @wraps(func)
         def out(*args, **kwargs):
             res = func(*args, **kwargs)
-            print(func.__name__, res if print_result else '')
+            print(func.__name__)
+            if print_result:
+                print(res)
             return res
         return out
     return decorator
@@ -944,7 +945,7 @@ def debug(print_result=False):
 def add(x, y):
     return x + y
 ```
-* **Using only `'@debug'` to decorate the add() function would not work here, because debug would then receive the add() function as a 'print_result' argument. Decorators can how&shy;ever manually check if the argument they received is a function and act accordingly.**
+* **Using `'@debug'` without arguments can't work here because add() is then passed via&nbsp;'print_result' argument. To fix this issue use `'def debug(fn=None, *, ...)'` in&nbsp;def&nbsp;and `'return decorator(fn) if fn else decorator'` as the last line.**
 
 
 Class
@@ -1301,17 +1302,17 @@ class MyAbcSequence(abc.Sequence):
 
 #### Required and automatically available methods:
 ```text
-+--------------+------------+--------------+------------+--------------+
-|              |  Iterable  |  Collection  |  Sequence  | abc.Sequence |
-+--------------+------------+--------------+------------+--------------+
-| __iter__     |    REQ     |     REQ      |    Yes     |     Yes      |
-| __contains__ |    Yes     |     Yes      |    Yes     |     Yes      |
-| __len__      |            |     REQ      |    REQ     |     REQ      |
-| __getitem__  |            |              |    REQ     |     REQ      |
-| __reversed__ |            |              |    Yes     |     Yes      |
-| index        |            |              |            |     Yes      |
-| count        |            |              |            |     Yes      |
-+--------------+------------+--------------+------------+--------------+
++--------------+------------+------------+------------+--------------+
+|              |  Iterable  | Collection |  Sequence  | abc.Sequence |
++--------------+------------+------------+------------+--------------+
+| __iter__     |    REQ     |    REQ     |    Yes     |     Yes      |
+| __contains__ |    Yes     |    Yes     |    Yes     |     Yes      |
+| __len__      |            |    REQ     |    REQ     |     REQ      |
+| __getitem__  |            |            |    REQ     |     REQ      |
+| __reversed__ |            |            |    Yes     |     Yes      |
+| index        |            |            |            |     Yes      |
+| count        |            |            |            |     Yes      |
++--------------+------------+------------+------------+--------------+
 ```
 * **Method iter() is required for `'isinstance(<obj>, abc.Iterable)'` to return True, however any object with getitem() method works with any code expecting an iterable.**
 * **MutableSequence, Set, MutableSet, Mapping and MutableMapping ABCs are also ex&shy;tendable. Use `'<abc>.__abstractmethods__'` to get names of required methods.**
@@ -1327,31 +1328,31 @@ from enum import Enum, auto
 
 ```python
 class MyEnum(Enum):
-    <member_name> = auto()              # An increment of last numeric value or 1.
-    <member_name> = <value>             # Values don't have to be hashable/unique.
-    <member_name> = <el_1>, <el_2>      # Value can be a collection, e.g. a tuple.
+    <member_name> = auto()             # An increment of last numeric value or 1.
+    <member_name> = <value>            # Values don't have to be hashable/unique.
+    <member_name> = <el>, <el>, ...    # Value can be a collection, e.g. a tuple.
 ```
 * **Methods receive the member they were called on as the 'self' argument.**
 * **Accessing a member named after a reserved keyword raises SyntaxError.**
 
 ```python
-<member> = <enum>.<member_name>         # Accesses a member via enum's attribute.
-<member> = <enum>['<member_name>']      # Returns the member or raises KeyError.
-<member> = <enum>(<value>)              # Returns the member or raises ValueError.
-<str>    = <member>.name                # Returns the member's name as a string.
-<obj>    = <member>.value               # Value can't be a user-defined function.
+<memb> = <enum>.<member_name>          # Accesses a member via enum's attribute.
+<memb> = <enum>['<member_name>']       # Returns the member or raises KeyError.
+<memb> = <enum>(<value>)               # Returns the member or raises ValueError.
+<str>  = <member>.name                 # Returns the member's name as a string.
+<obj>  = <member>.value                # Value can't be a user-defined function.
 ```
 
 ```python
-<list>   = list(<enum>)                 # Returns a list containing every member.
-<list>   = <enum>._member_names_        # Returns a list containing member names.
-<list>   = [m.value for m in <enum>]    # Returns a list containing member values.
+<list> = list(<enum>)                  # Returns a list containing every member.
+<list> = <enum>._member_names_         # Returns a list containing member names.
+<list> = [m.value for m in <enum>]     # Returns a list containing member values.
 ```
 
 ```python
-<enum>   = type(<member>)               # Returns an enum. Also <memb>.__class__.
-<iter>   = itertools.cycle(<enum>)      # Returns an endless iterator of members.
-<member> = random.choice(list(<enum>))  # Randomly selects one of enum's members.
+<enum> = type(<member>)                # Returns an enum. Also <memb>.__class__.
+<iter> = itertools.cycle(<enum>)       # Returns an endless iterator of members.
+<memb> = random.choice(list(<enum>))   # Randomly selects one of enum's members.
 ```
 
 ### Inline
@@ -1379,7 +1380,7 @@ except <exception>:
     <code>
 ```
 
-### Complex Example
+### Full Try Statement
 ```python
 try:
     <code_1>
@@ -1403,7 +1404,7 @@ except <exception>: ...
 except <exception> as <name>: ...
 except (<exception>, ...) [as <name>]: ...
 ```
-* **It also catches subclasses, e.g. `'ArithmeticError'` is caught by `'except Exception:'`.**
+* **Except clause catches all subclasses, e.g. `'OSError'` is caught by `'except Exception:'`.**
 * **Use `'traceback.print_exc()'` to print the full error message to standard error stream.**
 * **Use `'print(<name>)'` to print just the cause of the exception (its arguments) to stdout.**
 * **Use `'logging.exception(<str>)'` to log the passed message followed by the full error message of the caught exception. For details about how to set up the logger see [Logging](#logging).**
@@ -1500,7 +1501,7 @@ sys.exit(<obj>)                # Prints to stderr and exits with 1.
 Print
 -----
 ```python
-print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+print(<obj>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ```
 * **Use `'file=sys.stderr'` or `'sys.stderr.write(<str>)'` for messages about errors.**
 * **Stdout and stderr streams hold output in a buffer until they receive a string containing '\n' or '\r', buffer reaches 4096 characters, `'flush=True'` is used, or the program exits.**
@@ -1508,7 +1509,7 @@ print(<el_1>, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
 ### Pretty Print
 ```python
 from pprint import pprint
-pprint(<collection>, width=80, depth=None, compact=False, sort_dicts=True)
+pprint(<collection>, width=80, depth=None, compact=False)
 ```
 * **Each item is printed on its own line if collection exceeds 'width' characters.**
 * **Nested collections that are `'depth=<int>'` levels deep get printed as `'...'`.**
@@ -1578,24 +1579,24 @@ Open
 
 ### File Object
 ```python
-<file>.seek(0)                      # Moves current position to the file's start.
-<file>.seek(offset)                 # Moves 'offset' chars/bytes from the start.
-<file>.seek(0, 2)                   # Moves current position to the end of file.
-<bin_file>.seek(±offset, origin)    # Origin: 0 start, 1 current position, 2 end.
+<file>.seek(0)                  # Moves current position to the file's start.
+<file>.seek(offset)             # Moves 'offset' chars/bytes from the start.
+<file>.seek(0, 2)               # Moves current position to the end of file.
+<b_file>.seek(±offset, origin)  # Origin: 0 start, 1 current position, 2 end.
 ```
 
 ```python
-<str/bytes> = <file>.read(size=-1)  # Reads 'size' chars/bytes or until the EOF.
-<str/bytes> = <file>.readline()     # Returns a line or empty string/bytes on EOF.
-<list>      = <file>.readlines()    # Returns remaining lines. Also list(<file>).
-<str/bytes> = next(<file>)          # Returns a line using the read-ahead buffer.
+<obj>  = <file>.read(size=-1)   # Reads 'size' chars/bytes or until the EOF.
+<obj>  = <file>.readline()      # Returns a line or empty string/bytes on EOF.
+<list> = <file>.readlines()     # Returns remaining lines. Also list(<file>).
+<obj>  = next(<file>)           # Returns a line using the read-ahead buffer.
 ```
 
 ```python
-<file>.write(<str/bytes>)           # Writes str or bytes object to write buffer.
-<file>.writelines(<collection>)     # Writes a coll. of strings or bytes objects.
-<file>.flush()                      # Flushes write buff. Runs every 4096/8192 B.
-<file>.close()                      # Closes a file after flushing write buffer.
+<file>.write(<obj>)             # Writes str or bytes object to write buffer.
+<file>.writelines(<coll>)       # Writes a coll. of strings or bytes objects.
+<file>.flush()                  # Flushes write buff. Runs every 4096/8192 B.
+<file>.close()                  # Closes a file after flushing write buffer.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
 
@@ -1950,12 +1951,12 @@ Bytes
 <bytes> = b'<str>'                   # Accepts ASCII characters and \x00 to \xff.
 <int>   = <bytes>[index]             # Returns the byte as int between 0 and 255.
 <bytes> = <bytes>[<slice>]           # Returns bytes even if it has one element.
-<bytes> = <bytes>.join(<coll_of_b>)  # Joins elements using bytes as a separator.
+<bytes> = <bytes>.join(<coll>)       # Joins bytes objects using bytes as a sep.
 ```
 
 ### Encode
 ```python
-<bytes> = bytes(<coll_of_ints>)      # Passed integers must be between 0 and 255.
+<bytes> = bytes(<ints>)              # Accepts coll of integers between 0 and 255.
 <bytes> = bytes(<str>, 'utf-8')      # Encodes the string. Same as <str>.encode().
 <bytes> = bytes.fromhex('<hex>')     # Hex pairs can be separated by whitespaces.
 <bytes> = <int>.to_bytes(n_bytes)    # Accepts `byteorder='little', signed=True`.
@@ -1993,8 +1994,8 @@ Struct
 ```python
 from struct import pack, unpack
 
-<bytes> = pack('<format>', <num_1>, ...)  # Packs numbers according to format.
-<tuple> = unpack('<format>', <bytes>)     # Use `iter_unpack()` to get tuples.
+<bytes> = pack('<format>', <num>, ...)  # Packs numbers according to format.
+<tuple> = unpack('<format>', <bytes>)   # Use `iter_unpack()` to get tuples.
 ```
 
 ```python
@@ -2010,7 +2011,7 @@ b'\x00\x01\x00\x02\x00\x00\x00\x03'
 * **`'<'` - Little-endian (i.e. least significant byte first).**
 * **`'>'` - Big-endian (also `'!'`).**
 
-#### Besides numbers, pack() and unpack() also support bytes objects as a part of the sequence:
+#### Besides numbers, pack() and unpack() also support bytes objects as part of the sequence:
 * **`'c'` - A bytes object with a single element. For pad byte use `'x'`.**
 * **`'<n>s'` - A bytes object with n elements (not effected by byte order).**
 
@@ -2061,7 +2062,7 @@ Memory View
 
 ```python
 <bytes> = bytes(<mview>)             # Returns a new bytes object. Also bytearray().
-<bytes> = <bytes>.join(<mviews>)     # Joins memoryviews using bytes as a separator.
+<bytes> = <bytes>.join(<coll>)       # Joins memoryviews using bytes as a separator.
 <array> = array('<ctype>', <mview>)  # Treats passed mview as a sequence of numbers.
 <file>.write(<mview>)                # Appends `bytes(<mview>)` to the binary file.
 ```
@@ -3334,11 +3335,11 @@ c  6  7
 
 ### Multi-Index
 ```python
-<DF> = <DF>.loc[row_key_1]                     # Or: <DF>.xs(row_key_1)
-<DF> = <DF>.loc[:, (slice(None), col_key_2)]   # Or: <DF>.xs(col_key_2, axis=1, level=1)
-<DF> = <DF>.set_index(col_keys)                # Creates index from cols. Also `append=False`.
-<DF> = <DF>.pivot_table(index=col_key/s)       # `columns=key/s, values=key/s, aggfunc='mean'`.
-<S>  = <DF>.stack/unstack(level=-1)            # Combines col keys with row keys or vice versa.
+<DF> = <DF>.loc[row_key_1]                     # Also <DF>.loc[(slice(None), row_key_2), :].
+<DF> = <DF>.loc[:, col_key_1]                  # Same as <DF>.xs(col_key_1, axis=1, level=0).
+<DF> = <DF>.set_index(col_key/s)               # Moves column/s to index. Also `append=True`.
+<DF> = <DF>.pivot_table(index=col_key/s)       # `columns=key/s, values=k/s, aggfunc='mean'`.
+<S>  = <DF>.stack/unstack(level=-1)            # Combines col. keys with index or vice versa.
 ```
 
 ### File Formats
@@ -3364,7 +3365,7 @@ c  6  7
 **Object that groups together rows of a dataframe based on the value of the passed column.**
 
 ```python
-<GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed column.
+<GB> = <DF>.groupby(col_key/s)                 # Splits DF into groups based on passed col.
 <DF> = <GB>.apply/filter(<func>)               # Filter drops a group if func returns False.
 <DF> = <GB>.get_group(<el>)                    # Selects a group by grouping column's value.
 <S>  = <GB>.size()                             # S of group sizes. Same keys as get_group().
@@ -3397,9 +3398,9 @@ z
 **Object for rolling window calculations.**
 
 ```python
-<RS/RDF/RGB> = <S/DF/GB>.rolling(win_size)     # Also: `min_periods=None, center=False`.
-<RS/RDF/RGB> = <RDF/RGB>[col_key/s]            # Or: <RDF/RGB>.<col_key>
-<S/DF>       = <R>.mean/sum/max()              # Or: <R>.apply/agg(<agg_func/str>)
+<RS/RDF/RGB> = <S/DF/GB>.rolling(win_size)     # Also `min_periods=None, center=False`.
+<RS/RDF/RGB> = <RDF/RGB>[col_key/s]            # Also <RDF/RGB>.<col_key> if key is str.
+<S/DF>       = <R>.mean/sum/max()              # Or: <R>.apply/agg(lambda <S>: <el>)
 ```
 
 
@@ -3480,12 +3481,12 @@ def get_ticker(driver, name, symbol):
     return s.rename(name)
 
 def wrangle_data(covid, bitcoin, gold, dow):
-    df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates table by joining columns on dates.
-    df = df.sort_index().interpolate()            # Sorts rows by date and interpolates NaN-s.
-    df = df.loc['2020-02-23':'2021-12-20']        # Keeps rows between specified dates.
-    df = (df / df.iloc[0]) * 100                  # Calculates percentages relative to day 1.
-    df = df.join(covid)                           # Adds column with covid cases.
-    return df.sort_values(df.index[-1], axis=1)   # Sorts columns by last day's value.
+    df = pd.concat([bitcoin, gold, dow], axis=1)  # Creates DF by joining columns on dates.
+    df = df.sort_index().interpolate()            # Sorts rows by date, interpolates NaN-s.
+    df = df.loc['2020-02-23':'2021-12-20']        # Keeps rows between the specified dates.
+    df = (df / df.iloc[0]) * 100                  # Divides all cells by first day's value.
+    df = df.join(covid)                           # Adds column that contains covid cases.
+    return df.sort_values(df.index[-1], axis=1)   # Sorts columns by the last day's value.
 
 def display_data(df):
     figure = go.Figure()
@@ -3542,11 +3543,11 @@ cdef class <class_name>:                             # Also `cdef struct <struct
 **System for installing libraries directly into project's directory.**
 
 ```perl
-$ python3 -m venv NAME         # Creates virtual environment in current directory.
+$ python3 -m venv NAME         # Creates virtual environment in the current directory.
 $ source NAME/bin/activate     # Activates it. On Windows run `NAME\Scripts\activate`.
-$ pip3 install LIBRARY         # Installs the library into the active environment.
+$ pip3 install LIBRARY         # Installs the library into active virtual environment.
 $ python3 FILE                 # Runs the script in active environment. Also `./FILE`.
-$ deactivate                   # Deactivates the active virtual environment.
+$ deactivate                   # Deactivates the currently active virtual environment.
 ```
 
 ### Basic Script Template

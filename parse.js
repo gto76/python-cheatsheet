@@ -453,21 +453,21 @@ const DIAGRAM_55_B =
 
 
 const DIAGRAM_6_A =
-  '+--------------+------------+--------------+------------+--------------+\n' +
-  '|              |  Iterable  |  Collection  |  Sequence  | abc.Sequence |\n' +
-  '+--------------+------------+--------------+------------+--------------+\n';
+  '+--------------+------------+------------+------------+--------------+\n' +
+  '|              |  Iterable  | Collection |  Sequence  | abc.Sequence |\n' +
+  '+--------------+------------+------------+------------+--------------+\n';
 
-const DIAGRAM_6_B = `┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
-┃              │  Iterable  │  Collection  │  Sequence  │ abc.Sequence ┃
-┠──────────────┼────────────┼──────────────┼────────────┼──────────────┨
-┃ __iter__     │     !      │      !       │     ✓      │      ✓       ┃
-┃ __contains__ │     ✓      │      ✓       │     ✓      │      ✓       ┃
-┃ __len__      │            │      !       │     !      │      !       ┃
-┃ __getitem__  │            │              │     !      │      !       ┃
-┃ __reversed__ │            │              │     ✓      │      ✓       ┃
-┃ index        │            │              │            │      ✓       ┃
-┃ count        │            │              │            │      ✓       ┃
-┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
+const DIAGRAM_6_B = `┏━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━┓
+┃              │  Iterable  │ Collection │  Sequence  │ abc.Sequence ┃
+┠──────────────┼────────────┼────────────┼────────────┼──────────────┨
+┃ __iter__     │     !      │     !      │     ✓      │      ✓       ┃
+┃ __contains__ │     ✓      │     ✓      │     ✓      │      ✓       ┃
+┃ __len__      │            │     !      │     !      │      !       ┃
+┃ __getitem__  │            │            │     !      │      !       ┃
+┃ __reversed__ │            │            │     ✓      │      ✓       ┃
+┃ index        │            │            │            │      ✓       ┃
+┃ count        │            │            │            │      ✓       ┃
+┗━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━┛
 `;
 
 const DIAGRAM_7_A =
@@ -956,8 +956,8 @@ function fixClasses() {
 function fixHighlights() {
   $(`code:contains(<int> = 0x<hex>)`).html(BIN_HEX);
   $(`code:contains(>>> def add)`).html(SPLAT);
-  $(`code:contains(return n if n < 2)`).html(CACHE);
-  $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
+  // $(`code:contains(return n if n < 2)`).html(CACHE);
+  // $(`code:contains(@debug(print_result=True))`).html(PARAMETRIZED_DECORATOR);
   $(`code:contains(print(obj))`).html(STR_USE_CASES);
   $(`code:contains(print/str/repr([obj]))`).html(REPR_USE_CASES);
   $(`code:contains(sh.copy)`).html(SHUTIL_COPY);
