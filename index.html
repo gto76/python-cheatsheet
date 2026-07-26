@@ -55,8 +55,9 @@
 </head>
 
 <body style="margin-top: 17.1px">
+  <div class="pagebreak"></div>
   <header>
-    <aside>July 25, 2026</aside>
+    <aside>July 26, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -376,9 +377,9 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>By default, decimal characters and alphanumerics from all alphabets are matched unless <code class="python hljs"><span class="hljs-string">'flags=re.ASCII'</span></code> is used. It restricts special sequence matches to the first 128 Unicode characters and also prevents <code class="python hljs"><span class="hljs-string">'\s'</span></code> from accepting <code class="python hljs"><span class="hljs-string">'\x1c'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1d'</span></code>, <code class="python hljs"><span class="hljs-string">'\x1e'</span></code> and <code class="python hljs"><span class="hljs-string">'\x1f'</span></code> (non-printable characters that divide text into files, tables, rows and fields, respectively).</strong></li>
 <li><strong>Use a capital letter, i.e. <code class="python hljs"><span class="hljs-string">'\D'</span></code>, <code class="python hljs"><span class="hljs-string">'\W'</span></code> or <code class="python hljs"><span class="hljs-string">'\S'</span></code>, for negation. All non-ASCII characters are matched if ASCII flag is used in conjunction with a capital letter.</strong></li>
 </ul>
-<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><p><strong>String formatting mechanisms.</strong></p><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>, <span class="hljs-subst">{&lt;obj&gt;}</span>'</span>            <span class="hljs-comment"># Braces can also contain expressions.</span>
-&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;obj&gt;, &lt;obj&gt;)  <span class="hljs-comment"># Or '{0}, {a}'.format(&lt;obj&gt;, a=&lt;obj&gt;).</span>
-&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;obj&gt;, &lt;obj&gt;)      <span class="hljs-comment"># Old and redundant formatting method.</span>
+<div><h2 id="format"><a href="#format" name="format">#</a>Format</h2><p><strong>String formatting mechanisms.</strong></p><pre><code class="python hljs">&lt;str&gt; = <span class="hljs-string">f'<span class="hljs-subst">{&lt;obj&gt;}</span>, <span class="hljs-subst">{&lt;obj&gt;}</span>'</span>             <span class="hljs-comment"># Braces can also contain expressions.</span>
+&lt;str&gt; = <span class="hljs-string">'{}, {}'</span>.format(&lt;obj&gt;, &lt;obj&gt;)   <span class="hljs-comment"># Or '{0}, {a}'.format(&lt;obj&gt;, a=&lt;obj&gt;).</span>
+&lt;str&gt; = <span class="hljs-string">'%s, %s'</span> % (&lt;obj&gt;, &lt;obj&gt;)       <span class="hljs-comment"># Old and redundant formatting method.</span>
 </code></pre></div>
 
 
@@ -388,11 +389,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <span class="hljs-string">'Jean-Luc is 1.87 meters tall.'</span>
 </code></pre></div>
 
-<div><h3 id="options">Options</h3><pre><code class="python language-python hljs">{&lt;obj&gt;:&lt;<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '&lt;obj&gt;     '.</span>
-{&lt;obj&gt;:^<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '  &lt;obj&gt;   '.</span>
-{&lt;obj&gt;:&gt;<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '     &lt;obj&gt;'.</span>
-{&lt;obj&gt;:.&lt;<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '&lt;obj&gt;.....'.</span>
-{&lt;obj&gt;:<span class="hljs-number">0</span>}                              <span class="hljs-comment"># '&lt;obj&gt;'.</span>
+<div><h3 id="options">Options</h3><pre><code class="python language-python hljs">{&lt;obj&gt;:&lt;<span class="hljs-number">10</span>}                             <span class="hljs-comment"># '&lt;obj&gt;     '.</span>
+{&lt;obj&gt;:^<span class="hljs-number">10</span>}                             <span class="hljs-comment"># '  &lt;obj&gt;   '.</span>
+{&lt;obj&gt;:&gt;<span class="hljs-number">10</span>}                             <span class="hljs-comment"># '     &lt;obj&gt;'.</span>
+{&lt;obj&gt;:.&lt;<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '&lt;obj&gt;.....'.</span>
+{&lt;obj&gt;:<span class="hljs-number">0</span>}                               <span class="hljs-comment"># '&lt;obj&gt;'.</span>
 </code></pre></div>
 
 <ul>
@@ -401,23 +402,23 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'='</span></code> to the expression prepends it to its result, e.g. <code class="python hljs"><span class="hljs-string">f'<span class="hljs-subst">{<span class="hljs-number">1</span>+<span class="hljs-number">1</span>=}</span>'</span></code> returns <code class="python hljs"><span class="hljs-string">'1+1=2'</span></code>.</strong></li>
 <li><strong>Adding <code class="python hljs"><span class="hljs-string">'!r'</span></code> to the expression first calls result's <a href="#class">repr()</a> method and only then format().</strong></li>
 </ul>
-<div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                           <span class="hljs-comment"># 'abcde     '.</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                         <span class="hljs-comment"># 'abc       '.</span>
-{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                           <span class="hljs-comment"># 'abc'.</span>
-{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                         <span class="hljs-comment"># "'abcde'   ".</span>
+<div><h3 id="strings">Strings</h3><pre><code class="python language-python hljs">{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10</span>}                            <span class="hljs-comment"># 'abcde     '.</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">10.3</span>}                          <span class="hljs-comment"># 'abc       '.</span>
+{<span class="hljs-string">'abcde'</span>:<span class="hljs-number">.3</span>}                            <span class="hljs-comment"># 'abc'.</span>
+{<span class="hljs-string">'abcde'</span>!r:<span class="hljs-number">10</span>}                          <span class="hljs-comment"># "'abcde'   ".</span>
 </code></pre></div>
 
-<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '    123456'.</span>
-{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                           <span class="hljs-comment"># '   123,456'.</span>
-{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                           <span class="hljs-comment"># '   123_456'.</span>
-{<span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '   +123456'.</span>
-{<span class="hljs-number">123456</span>:=+<span class="hljs-number">10</span>}                          <span class="hljs-comment"># '+   123456'.</span>
+<div><h3 id="numbers-1">Numbers</h3><pre><code class="python language-python hljs">{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>}                             <span class="hljs-comment"># '    123456'.</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>,}                            <span class="hljs-comment"># '   123,456'.</span>
+{<span class="hljs-number">123456</span>:<span class="hljs-number">10</span>_}                            <span class="hljs-comment"># '   123_456'.</span>
+{<span class="hljs-number">123456</span>:+<span class="hljs-number">10</span>}                            <span class="hljs-comment"># '   +123456'.</span>
+{<span class="hljs-number">123456</span>:=+<span class="hljs-number">10</span>}                           <span class="hljs-comment"># '+   123456'.</span>
 </code></pre></div>
 
-<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                         <span class="hljs-comment"># '      1.23'.</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}                        <span class="hljs-comment"># '     1.235'.</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}                        <span class="hljs-comment"># ' 1.235e+00'.</span>
-{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                        <span class="hljs-comment"># '  123.456%'.</span>
+<div><h3 id="floats">Floats</h3><pre><code class="python language-python hljs">{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>}                          <span class="hljs-comment"># '      1.23'.</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>f}                         <span class="hljs-comment"># '     1.235'.</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>e}                         <span class="hljs-comment"># ' 1.235e+00'.</span>
+{<span class="hljs-number">1.23456</span>:<span class="hljs-number">10.3</span>%}                         <span class="hljs-comment"># '  123.456%'.</span>
 </code></pre></div>
 
 <div><h4 id="comparisonofpresentationtypes">Comparison of presentation types:</h4><pre><code class="text language-text">┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┓
@@ -451,16 +452,16 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 <li><strong>When both rounding up and rounding down are possible, the one that returns result with even last digit is chosen. Hence <code class="python hljs"><span class="hljs-string">'{6.5:.0f}'</span></code> becomes a <code class="python hljs"><span class="hljs-string">'6'</span></code>, while <code class="python hljs"><span class="hljs-string">'{7.5:.0f}'</span></code> an <code class="python hljs"><span class="hljs-string">'8'</span></code>.</strong></li>
 <li><strong>The last rule only effects numbers that can be represented exactly by a float (<code class="python hljs"><span class="hljs-number">.5</span></code>, <code class="python hljs"><span class="hljs-number">.25</span></code>, …).</strong></li>
 </ul>
-<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:x}                                 <span class="hljs-comment"># Converts 90 to hexadecimal number '5a'.</span>
-{<span class="hljs-number">90</span>:b}                                 <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
-{<span class="hljs-number">90</span>:c}                                 <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
+<div><h3 id="ints">Ints</h3><pre><code class="python language-python hljs">{<span class="hljs-number">90</span>:x}                                  <span class="hljs-comment"># Converts 90 to hexadecimal number '5a'.</span>
+{<span class="hljs-number">90</span>:b}                                  <span class="hljs-comment"># Converts 90 to binary number '1011010'.</span>
+{<span class="hljs-number">90</span>:c}                                  <span class="hljs-comment"># Converts 90 to Unicode character 'Z'.</span>
 </code></pre></div>
 
-<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;integer&gt;  = int(&lt;float/str/bool&gt;)            <span class="hljs-comment"># A whole number. Truncates floats.</span>
-&lt;float&gt;    = float(&lt;integer/str/bool&gt;)        <span class="hljs-comment"># 8-byte decimal. Also &lt;fl&gt;e±&lt;int&gt;.</span>
-&lt;complex&gt;  = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)          <span class="hljs-comment"># Complex number. Also &lt;fl&gt; ± &lt;fl&gt;j.</span>
-&lt;Fraction&gt; = fractions.Fraction(numr, denom)  <span class="hljs-comment"># `&lt;Fraction&gt; = &lt;Fraction&gt; / &lt;int&gt;`.</span>
-&lt;Decimal&gt;  = decimal.Decimal(&lt;str/int/tup&gt;)   <span class="hljs-comment"># `Decimal((1, (2,), 3)) == -2000`.</span>
+<div><h2 id="numbers"><a href="#numbers" name="numbers">#</a>Numbers</h2><pre><code class="python language-python hljs">&lt;integer&gt; = int(&lt;float/str/bool&gt;)             <span class="hljs-comment"># A whole number. Truncates floats.</span>
+&lt;float&gt;   = float(&lt;integer/str/bool&gt;)         <span class="hljs-comment"># 8-byte decimal. Also &lt;fl&gt;e±&lt;int&gt;.</span>
+&lt;complex&gt; = complex(real=<span class="hljs-number">0</span>, imag=<span class="hljs-number">0</span>)           <span class="hljs-comment"># Complex number. Also &lt;fl&gt; ± &lt;fl&gt;j.</span>
+&lt;Fract&gt;   = fractions.Fraction(numr, denom)   <span class="hljs-comment"># `&lt;Fraction&gt; = &lt;Fraction&gt; / &lt;int&gt;`.</span>
+&lt;Decimal&gt; = decimal.Decimal(&lt;str/int/tup&gt;)    <span class="hljs-comment"># `Decimal((1, (2,), 3)) == -2000`.</span>
 </code></pre></div>
 
 <ul>
@@ -498,7 +499,7 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 rd.shuffle(&lt;list&gt;)                            <span class="hljs-comment"># Works with all mutable sequences.</span>
 </code></pre></div>
 
-<div><h3 id="hexadecimal">Hexadecimal</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                               <span class="hljs-comment"># E.g. `0xFf == 255`. Also 0b&lt;bin&gt;.</span>
+<div><h3 id="hexbin">Hex, Bin</h3><pre><code class="python language-python hljs">&lt;int&gt; = <span class="hljs-number">0x</span>&lt;hex&gt;                               <span class="hljs-comment"># E.g. `0xFf == 255`. Also 0b&lt;bin&gt;.</span>
 &lt;int&gt; = int(<span class="hljs-string">'±&lt;hex&gt;'</span>, <span class="hljs-number">16</span>)                     <span class="hljs-comment"># Also int('±0x&lt;hex&gt;/±0b&lt;bin&gt;', 0).</span>
 &lt;str&gt; = hex(&lt;int&gt;)                            <span class="hljs-comment"># Returns '[-]0x&lt;hex&gt;'. Also bin().</span>
 </code></pre></div>
@@ -552,7 +553,7 @@ rd.shuffle(&lt;list&gt;)                            <span class="hljs-comment">#
 <ul>
 <li><strong>To extract time use <code class="python hljs"><span class="hljs-string">'&lt;DTn&gt;.time()'</span></code>, <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.time()'</span></code> or <code class="python hljs"><span class="hljs-string">'&lt;DTa&gt;.timetz()'</span></code>.</strong></li>
 </ul>
-<div><h3 id="timezones">Timezones</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># Coordinated universal time. London without DST.</span>
+<div><h3 id="timezone">Timezone</h3><pre><code class="python language-python apache hljs">&lt;tzinfo&gt; = timezone.utc                     <span class="hljs-comment"># Coordinated universal time. London without DST.</span>
 &lt;tzinfo&gt; = timezone(&lt;timedelta&gt;)            <span class="hljs-comment"># Timezone with fixed offset from universal time.</span>
 &lt;tzinfo&gt; = dateutil.tz.tzlocal()            <span class="hljs-comment"># Local timezone with dynamic offset from the UTC.</span>
 &lt;tzinfo&gt; = zoneinfo.ZoneInfo(<span class="hljs-string">'&lt;iana_key&gt;'</span>)  <span class="hljs-comment"># 'Continent/City_Name' zone with dynamic offset.</span>
@@ -596,8 +597,7 @@ rd.shuffle(&lt;list&gt;)                            <span class="hljs-comment">#
 &lt;TD&gt;    =  &lt;D/DTn&gt;  -  &lt;D/DTn&gt;              <span class="hljs-comment"># Ignores jumps. Convert to UTC for actual delta.</span>
 &lt;TD&gt;    =  &lt;DTa&gt;    -  &lt;DTa&gt;                <span class="hljs-comment"># Ignores jumps if they share the tzinfo object.</span>
 &lt;D/DT&gt;  =  &lt;D/DT&gt;   ±  &lt;TD&gt;                 <span class="hljs-comment"># Returned datetime can fall into a missing hour.</span>
-&lt;TD&gt;    =  &lt;TD&gt;     ±  &lt;TD&gt;                 <span class="hljs-comment"># Also `&lt;TD&gt; = &lt;TD&gt; * &lt;num&gt;`, `&lt;TD&gt; = abs(&lt;TD&gt;)`.</span>
-&lt;num&gt;   =  &lt;TD&gt;     /  &lt;TD&gt;                 <span class="hljs-comment"># Calling divmod(&lt;TD&gt;, &lt;TD&gt;) returns int and TD.</span>
+&lt;TD&gt;    =  &lt;TD&gt;     ±  &lt;TD&gt;                 <span class="hljs-comment"># Also `&lt;TD&gt; = abs(&lt;TD&gt;)`, `&lt;num&gt; = &lt;TD&gt; / &lt;TD&gt;`.</span>
 </code></pre></div>
 
 <div><h2 id="function"><a href="#function" name="function">#</a>Function</h2><p><strong>Independent block of code that returns a value when called.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_func</span><span class="hljs-params">(&lt;nondefault_args&gt;)</span>:</span> ...                   <span class="hljs-comment"># E.g. `my_func(x, y):`.</span>
@@ -625,7 +625,7 @@ func(*args, **kwargs)
 <div><h4 id="isthesameas">Is the same as:</h4><pre><code class="python language-python hljs">func(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, z=<span class="hljs-number">3</span>)
 </code></pre></div>
 
-<div><h3 id="insidefunctiondefinition">Inside Function Definition</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*args)</span>:</span>
+<div><h3 id="insidefunctiondef">Inside Function Def</h3><p><strong>Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.</strong></p><pre><code class="python language-python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(*args)</span>:</span>
     <span class="hljs-keyword">return</span> sum(args)
 </code></pre></div>
 
@@ -644,7 +644,7 @@ func(*args, **kwargs)
 <div><h3 id="collectionunpacking">Collection Unpacking</h3><pre><code class="python language-python hljs">head, *body, tail = &lt;collection&gt;    <span class="hljs-comment"># Head or tail can be omitted.</span>
 </code></pre></div>
 
-<div><h3 id="insidecollectionliterals">Inside Collection Literals</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;coll&gt; [, ...]]         <span class="hljs-comment"># Same as `list(&lt;coll&gt;) [+ ...]`.</span>
+<div><h3 id="insidecollliterals">Inside Coll Literals</h3><pre><code class="python language-python hljs">&lt;list&gt;  = [*&lt;coll&gt; [, ...]]         <span class="hljs-comment"># Same as `list(&lt;coll&gt;) [+ ...]`.</span>
 &lt;tuple&gt; = (*&lt;coll&gt;, [...])          <span class="hljs-comment"># Same as `tuple(&lt;coll&gt;) [+ ...]`.</span>
 &lt;set&gt;   = {*&lt;coll&gt; [, ...]}         <span class="hljs-comment"># Same as `set(&lt;coll&gt;) [| ...]`.</span>
 &lt;dict&gt;  = {**&lt;dict&gt; [, ...]}        <span class="hljs-comment"># Last dict has priority. Also |.</span>
@@ -675,7 +675,7 @@ func(*args, **kwargs)
 &lt;bool&gt; = all(&lt;collection&gt;)                        <span class="hljs-comment"># Is it True for all (or empty)?</span>
 </code></pre></div>
 
-<div><h3 id="conditionalexpression">Conditional Expression</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;           <span class="hljs-comment"># Evaluates only one expression.</span>
+<div><h3 id="conditionalexp">Conditional Exp</h3><pre><code class="python language-python hljs">&lt;obj&gt; = &lt;exp&gt; <span class="hljs-keyword">if</span> &lt;condition&gt; <span class="hljs-keyword">else</span> &lt;exp&gt;           <span class="hljs-comment"># Evaluates only one expression.</span>
 </code></pre></div>
 
 <pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">if</span> i <span class="hljs-keyword">else</span> <span class="hljs-string">'zero'</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)]       <span class="hljs-comment"># `any(['', [], None])` is False.</span>
@@ -789,8 +789,8 @@ player = Player(point, direction)                 <span class="hljs-comment"># R
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decorator</span><span class="hljs-params">(func)</span>:</span>
 <span class="hljs-meta">        @wraps(func)</span>
         <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">out</span><span class="hljs-params">(*args, **kwargs)</span>:</span>
-            res = func(*args, **kwargs)
             print(func.__name__)
+            res = func(*args, **kwargs)
             <span class="hljs-keyword">if</span> print_result:
                 print(res)
             <span class="hljs-keyword">return</span> res
@@ -804,7 +804,7 @@ player = Player(point, direction)                 <span class="hljs-comment"># R
 
 
 <ul>
-<li><strong>Using <code class="python hljs"><span class="hljs-string">'@debug'</span></code> without arguments can't work here because add() is then passed via&nbsp;'print_result' argument. To fix this issue use <code class="python hljs"><span class="hljs-string">'def debug(fn=None, *, ...)'</span></code> in&nbsp;def&nbsp;and <code class="python hljs"><span class="hljs-string">'return decorator(fn) if fn else decorator'</span></code> as the last line.</strong></li>
+<li><strong>Using <code class="python hljs"><span class="hljs-string">'@debug'</span></code> without arguments won't work here because add() is then passed via&nbsp;'print_result' argument. To fix this issue use <code class="python hljs"><span class="hljs-string">'def debug(fn=None, *, ...)'</span></code> in&nbsp;def&nbsp;and <code class="python hljs"><span class="hljs-string">'return decorator(fn) if fn else decorator'</span></code> as the last line.</strong></li>
 </ul>
 <div><h2 id="class"><a href="#class" name="class">#</a>Class</h2><p><strong>A template for creating user-defined objects.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, a)</span>:</span>
@@ -867,10 +867,7 @@ str/repr/print(MyDataClass(obj))
 <span class="hljs-meta">&gt;&gt;&gt; </span>sorted(people)
 [Employee(<span class="hljs-string">'Ann'</span>, <span class="hljs-number">0</span>), Person(<span class="hljs-string">'Bob'</span>)]
 </code></pre>
-<div><h3 id="typeannotations">Type Annotations</h3><ul>
-<li><strong>They add type hints to variables, arguments and functions. E.g., <code class="python hljs"><span class="hljs-string">'def f() -&gt; int: …'</span></code>.</strong></li>
-<li><strong>Hints are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a>, data validation libraries such as <a href="https://pypi.org/project/pydantic/">Pydantic</a> and lately also by <a href="https://pypi.org/project/Cython/">Cython</a> compiler. However, they are not enforced by CPython interpreter.</strong></li>
-</ul><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
+<div><h3 id="typehints">Type Hints</h3><p><strong>They are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a> and <a href="https://pypi.org/project/pydantic/">Pydantic</a>, however they are not enforced by CPython interpreter. To annotate a function use <code class="python hljs"><span class="hljs-string">'def f(a: int = 0) -&gt; int: ...'</span></code>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
 
 &lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
 &lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
@@ -1966,7 +1963,6 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
     curses.wrapper(main)
 </code></pre></div>
 
-<p><br></p>
 <div><h1 id="libraries" style="font-size: 64px;">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> tqdm, time
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm.tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">'Processing'</span>):
@@ -2930,7 +2926,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the curr
  
 
   <footer>
-    <aside>July 25, 2026</aside>
+    <aside>July 26, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 

@@ -399,9 +399,9 @@ Format
 ------
 **String formatting mechanisms.**
 ```perl
-<str> = f'{<obj>}, {<obj>}'            # Braces can also contain expressions.
-<str> = '{}, {}'.format(<obj>, <obj>)  # Or '{0}, {a}'.format(<obj>, a=<obj>).
-<str> = '%s, %s' % (<obj>, <obj>)      # Old and redundant formatting method.
+<str> = f'{<obj>}, {<obj>}'             # Braces can also contain expressions.
+<str> = '{}, {}'.format(<obj>, <obj>)   # Or '{0}, {a}'.format(<obj>, a=<obj>).
+<str> = '%s, %s' % (<obj>, <obj>)       # Old and redundant formatting method.
 ```
 
 ### Example
@@ -414,11 +414,11 @@ Format
 
 ### Options
 ```python
-{<obj>:<10}                            # '<obj>     '.
-{<obj>:^10}                            # '  <obj>   '.
-{<obj>:>10}                            # '     <obj>'.
-{<obj>:.<10}                           # '<obj>.....'.
-{<obj>:0}                              # '<obj>'.
+{<obj>:<10}                             # '<obj>     '.
+{<obj>:^10}                             # '  <obj>   '.
+{<obj>:>10}                             # '     <obj>'.
+{<obj>:.<10}                            # '<obj>.....'.
+{<obj>:0}                               # '<obj>'.
 ```
 * **Objects are converted to strings with format() function, e.g. `'format(<obj>, "<10")'`.**
 * **Options can be generated dynamically via nested braces: `f'{<obj>:{<str/int>}[…]}'`.**
@@ -427,27 +427,27 @@ Format
 
 ### Strings
 ```python
-{'abcde':10}                           # 'abcde     '.
-{'abcde':10.3}                         # 'abc       '.
-{'abcde':.3}                           # 'abc'.
-{'abcde'!r:10}                         # "'abcde'   ".
+{'abcde':10}                            # 'abcde     '.
+{'abcde':10.3}                          # 'abc       '.
+{'abcde':.3}                            # 'abc'.
+{'abcde'!r:10}                          # "'abcde'   ".
 ```
 
 ### Numbers
 ```python
-{123456:10}                            # '    123456'.
-{123456:10,}                           # '   123,456'.
-{123456:10_}                           # '   123_456'.
-{123456:+10}                           # '   +123456'.
-{123456:=+10}                          # '+   123456'.
+{123456:10}                             # '    123456'.
+{123456:10,}                            # '   123,456'.
+{123456:10_}                            # '   123_456'.
+{123456:+10}                            # '   +123456'.
+{123456:=+10}                           # '+   123456'.
 ```
 
 ### Floats
 ```python
-{1.23456:10.3}                         # '      1.23'.
-{1.23456:10.3f}                        # '     1.235'.
-{1.23456:10.3e}                        # ' 1.235e+00'.
-{1.23456:10.3%}                        # '  123.456%'.
+{1.23456:10.3}                          # '      1.23'.
+{1.23456:10.3f}                         # '     1.235'.
+{1.23456:10.3e}                         # ' 1.235e+00'.
+{1.23456:10.3%}                         # '  123.456%'.
 ```
 
 #### Comparison of presentation types:
@@ -484,20 +484,20 @@ Format
 
 ### Ints
 ```python
-{90:x}                                 # Converts 90 to hexadecimal number '5a'.
-{90:b}                                 # Converts 90 to binary number '1011010'.
-{90:c}                                 # Converts 90 to Unicode character 'Z'.
+{90:x}                                  # Converts 90 to hexadecimal number '5a'.
+{90:b}                                  # Converts 90 to binary number '1011010'.
+{90:c}                                  # Converts 90 to Unicode character 'Z'.
 ```
 
 
 Numbers
 -------
 ```python
-<integer>  = int(<float/str/bool>)            # A whole number. Truncates floats.
-<float>    = float(<integer/str/bool>)        # 8-byte decimal. Also <fl>e±<int>.
-<complex>  = complex(real=0, imag=0)          # Complex number. Also <fl> ± <fl>j.
-<Fraction> = fractions.Fraction(numr, denom)  # `<Fraction> = <Fraction> / <int>`.
-<Decimal>  = decimal.Decimal(<str/int/tup>)   # `Decimal((1, (2,), 3)) == -2000`.
+<integer> = int(<float/str/bool>)             # A whole number. Truncates floats.
+<float>   = float(<integer/str/bool>)         # 8-byte decimal. Also <fl>e±<int>.
+<complex> = complex(real=0, imag=0)           # Complex number. Also <fl> ± <fl>j.
+<Fract>   = fractions.Fraction(numr, denom)   # `<Fraction> = <Fraction> / <int>`.
+<Decimal> = decimal.Decimal(<str/int/tup>)    # `Decimal((1, (2,), 3)) == -2000`.
 ```
 * **`'int(<str>)'` and `'float(<str>)'` raise ValueError exception if string is malformed.**
 * **Decimal objects store numbers exactly, unlike most floats where `'1.1 + 2.2 != 3.3'`.**
@@ -541,7 +541,7 @@ import random as rd
 rd.shuffle(<list>)                            # Works with all mutable sequences.
 ```
 
-### Hexadecimal
+### Hex, Bin
 ```python
 <int> = 0x<hex>                               # E.g. `0xFf == 255`. Also 0b<bin>.
 <int> = int('±<hex>', 16)                     # Also int('±0x<hex>/±0b<bin>', 0).
@@ -614,7 +614,7 @@ import zoneinfo, dateutil.tz
 ```
 * **To extract time use `'<DTn>.time()'`, `'<DTa>.time()'` or `'<DTa>.timetz()'`.**
 
-### Timezones
+### Timezone
 ```python
 <tzinfo> = timezone.utc                     # Coordinated universal time. London without DST.
 <tzinfo> = timezone(<timedelta>)            # Timezone with fixed offset from universal time.
@@ -662,8 +662,7 @@ import zoneinfo, dateutil.tz
 <TD>    =  <D/DTn>  -  <D/DTn>              # Ignores jumps. Convert to UTC for actual delta.
 <TD>    =  <DTa>    -  <DTa>                # Ignores jumps if they share the tzinfo object.
 <D/DT>  =  <D/DT>   ±  <TD>                 # Returned datetime can fall into a missing hour.
-<TD>    =  <TD>     ±  <TD>                 # Also `<TD> = <TD> * <num>`, `<TD> = abs(<TD>)`.
-<num>   =  <TD>     /  <TD>                 # Calling divmod(<TD>, <TD>) returns int and TD.
+<TD>    =  <TD>     ±  <TD>                 # Also `<TD> = abs(<TD>)`, `<num> = <TD> / <TD>`.
 ```
 
 
@@ -703,7 +702,7 @@ func(*args, **kwargs)
 func(1, 2, z=3)
 ```
 
-### Inside Function Definition
+### Inside Function Def
 **Splat combines zero or more positional arguments into a tuple, while splatty-splat combines zero or more keyword arguments into a dictionary.**
 ```python
 def add(*args):
@@ -730,7 +729,7 @@ def add(*args):
 head, *body, tail = <collection>    # Head or tail can be omitted.
 ```
 
-### Inside Collection Literals
+### Inside Coll Literals
 ```python
 <list>  = [*<coll> [, ...]]         # Same as `list(<coll>) [+ ...]`.
 <tuple> = (*<coll>, [...])          # Same as `tuple(<coll>) [+ ...]`.
@@ -777,7 +776,7 @@ from functools import reduce
 <bool> = all(<collection>)                        # Is it True for all (or empty)?
 ```
 
-### Conditional Expression
+### Conditional Exp
 ```python
 <obj> = <exp> if <condition> else <exp>           # Evaluates only one expression.
 ```
@@ -933,8 +932,8 @@ def debug(print_result=False):
     def decorator(func):
         @wraps(func)
         def out(*args, **kwargs):
-            res = func(*args, **kwargs)
             print(func.__name__)
+            res = func(*args, **kwargs)
             if print_result:
                 print(res)
             return res
@@ -945,7 +944,7 @@ def debug(print_result=False):
 def add(x, y):
     return x + y
 ```
-* **Using `'@debug'` without arguments can't work here because add() is then passed via&nbsp;'print_result' argument. To fix this issue use `'def debug(fn=None, *, ...)'` in&nbsp;def&nbsp;and `'return decorator(fn) if fn else decorator'` as the last line.**
+* **Using `'@debug'` without arguments won't work here because add() is then passed via&nbsp;'print_result' argument. To fix this issue use `'def debug(fn=None, *, ...)'` in&nbsp;def&nbsp;and `'return decorator(fn) if fn else decorator'` as the last line.**
 
 
 Class
@@ -1020,9 +1019,8 @@ class Employee(Person):
 [Employee('Ann', 0), Person('Bob')]
 ```
 
-### Type Annotations
-* **They add type hints to variables, arguments and functions. E.g., `'def f() -> int: …'`.**
-* **Hints are used by type checkers like [mypy](https://pypi.org/project/mypy/), data validation libraries such as [Pydantic](https://pypi.org/project/pydantic/) and lately also by [Cython](https://pypi.org/project/Cython/) compiler. However, they are not enforced by CPython interpreter.**
+### Type Hints
+**They are used by type checkers like [mypy](https://pypi.org/project/mypy/) and [Pydantic](https://pypi.org/project/pydantic/), however they are not enforced by CPython interpreter. To annotate a function use `'def f(a: int = 0) -> int: ...'`.**
 ```python
 from collections import abc
 
@@ -2380,7 +2378,6 @@ async def view(state, scr):
 if __name__ == '__main__':
     curses.wrapper(main)
 ```
-<br>
 
 
 Libraries
