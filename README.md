@@ -224,8 +224,7 @@ import itertools as it
 <iter> = it.islice(<coll>, stop)         # Also accepts 'start' and 'step'. Args can be None.
 <iter> = it.product(<coll>, <coll>)      # Same as `((a, b) for a in arg_1 for b in arg_2)`.
 ```
-* **For loops call `'iter(<collection>)'` at the start and `'next(<iter>)'` on each pass.**
-* **Calling `'iter(<iter>)'` returns unmodified iterator. For details see [Iterator](#iterator-1) duck type.**
+* **For loops call `'iter(<coll/iter>)'`, latter returning unmodified iterator.**
 
 
 Generator
@@ -2457,7 +2456,7 @@ if __name__ == '__main__':
 
 GUI App
 -------
-#### Runs a desktop app for converting weights from metric units into pounds:
+#### Runs a desktop app for converting metric weights into pounds:
 
 ```python
 # $ pip3 install FreeSimpleGUI
