@@ -1733,11 +1733,11 @@ import os, subprocess as sp
 ```
 
 ```python
-<int>  = os.system('<commands>')  # Runs commands in sh/cmd shell. Prints results.
-<proc> = sp.run(<str/list>)       # For parameters see examples. Prints by default.
-<pipe> = os.popen('<commands>')   # Prints only stderr. Soft deprecated since 3.14.
-<str>  = <pipe>.read(size=-1)     # Returns combined stdout. Provides readline/s().
-<int>  = <pipe>.close()           # Returns None if last command had returncode 0.
+<int>  = os.system('<cmds>')    # Runs commands in sh/cmd shell. Prints results.
+<proc> = sp.run(<str/list>)     # For parameters see examples. Prints by default.
+<pipe> = os.popen('<cmds>')     # Prints only stderr. Soft deprecated since 3.14.
+<str>  = <pipe>.read()          # Returns combined stdout. Provides readline/s().
+<int>  = <pipe>.close()         # Returns None if last command had returncode 0.
 ```
 
 #### Sends "1+1" to the basic calculator and captures its stdout and stderr streams:
@@ -2268,7 +2268,7 @@ with <lock>:                            # Enters the block by calling method acq
     ...                                 # Exits it by calling release(), even on error.
 ```
 
-### Semaphore, Event, Barrier
+### Sync Objects
 ```python
 <Semaphr> = th.Semaphore(value=1)       # A lock that can be acquired by value threads.
 <Event>   = th.Event()                  # `<Event>.wait()` blocks until set() is called.
@@ -2284,7 +2284,7 @@ with <lock>:                            # Enters the block by calling method acq
 <obj> = <Queue>.get_nowait()            # Raises the qu.Empty exception if it is empty.
 ```
 
-### Executor, Future
+### Thread Executor
 ```python
 <Exec> = cf.ThreadPoolExecutor()        # Or use `with ThreadPoolExecutor() as <name>:`.
 <iter> = <Exec>.map(<fn>, <args>, …)    # Multithreaded and non-lazy map(). Keeps order.
@@ -3001,7 +3001,7 @@ pg.quit()
 ```
 
 ### Rect
-**Object for storing rectangular coordinates.**
+**Stores top-left corner, width and height.**
 ```python
 <Rect> = pg.Rect(x, y, width, height)        # Creates Rect object. Truncates passed floats.
 <int>  = <Rect>.x/y/centerx/centery          # Also `top`, `right`, etc. Allows assignments.
@@ -3017,7 +3017,7 @@ pg.quit()
 ```
 
 ### Surface
-**Object for representing images.**
+**An image or main window's surface.**
 
 ```python
 <Surf> = pg.Surface((w, h))                  # New RGB surface. RGBA if `flags=pg.SRCALPHA`.

@@ -1456,11 +1456,11 @@ sh.rmtree(&lt;path&gt;)              <span class="hljs-comment"># Deletes the di
 <div><h2 id="shellcommands"><a href="#shellcommands" name="shellcommands">#</a>Shell Commands</h2><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> os, subprocess <span class="hljs-keyword">as</span> sp
 </code></pre></div>
 
-<pre><code class="python language-python hljs">&lt;int&gt;  = os.system(<span class="hljs-string">'&lt;commands&gt;'</span>)  <span class="hljs-comment"># Runs commands in sh/cmd shell. Prints results.</span>
-&lt;proc&gt; = sp.run(&lt;str/list&gt;)       <span class="hljs-comment"># For parameters see examples. Prints by default.</span>
-&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;commands&gt;'</span>)   <span class="hljs-comment"># Prints only stderr. Soft deprecated since 3.14.</span>
-&lt;str&gt;  = &lt;pipe&gt;.read(size=<span class="hljs-number">-1</span>)     <span class="hljs-comment"># Returns combined stdout. Provides readline/s().</span>
-&lt;int&gt;  = &lt;pipe&gt;.close()           <span class="hljs-comment"># Returns None if last command had returncode 0.</span>
+<pre><code class="python language-python hljs">&lt;int&gt;  = os.system(<span class="hljs-string">'&lt;cmds&gt;'</span>)    <span class="hljs-comment"># Runs commands in sh/cmd shell. Prints results.</span>
+&lt;proc&gt; = sp.run(&lt;str/list&gt;)     <span class="hljs-comment"># For parameters see examples. Prints by default.</span>
+&lt;pipe&gt; = os.popen(<span class="hljs-string">'&lt;cmds&gt;'</span>)     <span class="hljs-comment"># Prints only stderr. Soft deprecated since 3.14.</span>
+&lt;str&gt;  = &lt;pipe&gt;.read()          <span class="hljs-comment"># Returns combined stdout. Provides readline/s().</span>
+&lt;int&gt;  = &lt;pipe&gt;.close()         <span class="hljs-comment"># Returns None if last command had returncode 0.</span>
 </code></pre>
 <div><h4 id="sends11tothebasiccalculatorandcapturesitsstdoutandstderrstreams">Sends "1+1" to the basic calculator and captures its stdout and stderr streams:</h4><pre><code class="python language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>sp.run(<span class="hljs-string">'bc'</span>, input=<span class="hljs-string">'1+1\n'</span>, capture_output=<span class="hljs-keyword">True</span>, text=<span class="hljs-keyword">True</span>)
 CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span class="hljs-number">0</span>, stdout=<span class="hljs-string">'2\n'</span>, stderr=<span class="hljs-string">''</span>)
@@ -1865,7 +1865,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
     ...                                 <span class="hljs-comment"># Exits it by calling release(), even on error.</span>
 </code></pre></div>
 
-<div><h3 id="semaphoreeventbarrier">Semaphore, Event, Barrier</h3><pre><code class="python language-python hljs">&lt;Semaphr&gt; = th.Semaphore(value=<span class="hljs-number">1</span>)       <span class="hljs-comment"># A lock that can be acquired by value threads.</span>
+<div><h3 id="syncobjects">Sync Objects</h3><pre><code class="python language-python hljs">&lt;Semaphr&gt; = th.Semaphore(value=<span class="hljs-number">1</span>)       <span class="hljs-comment"># A lock that can be acquired by value threads.</span>
 &lt;Event&gt;   = th.Event()                  <span class="hljs-comment"># `&lt;Event&gt;.wait()` blocks until set() is called.</span>
 &lt;Barrier&gt; = th.Barrier(parties)         <span class="hljs-comment"># Wait() blocks until it's called parties times.</span>
 </code></pre></div>
@@ -1877,7 +1877,7 @@ delattr(&lt;obj&gt;, <span class="hljs-string">'&lt;name&gt;'</span>)           
 &lt;obj&gt; = &lt;Queue&gt;.get_nowait()            <span class="hljs-comment"># Raises the qu.Empty exception if it is empty.</span>
 </code></pre></div>
 
-<div><h3 id="executorfuture">Executor, Future</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = cf.ThreadPoolExecutor()        <span class="hljs-comment"># Or use `with ThreadPoolExecutor() as &lt;name&gt;:`.</span>
+<div><h3 id="threadexecutor">Thread Executor</h3><pre><code class="python language-python hljs">&lt;Exec&gt; = cf.ThreadPoolExecutor()        <span class="hljs-comment"># Or use `with ThreadPoolExecutor() as &lt;name&gt;:`.</span>
 &lt;iter&gt; = &lt;Exec&gt;.map(&lt;fn&gt;, &lt;args&gt;, …)    <span class="hljs-comment"># Multithreaded and non-lazy map(). Keeps order.</span>
 &lt;Futr&gt; = &lt;Exec&gt;.submit(&lt;fn&gt;, &lt;arg&gt;, …)  <span class="hljs-comment"># Queues function for execution. Returns Future.</span>
 &lt;Exec&gt;.shutdown()                       <span class="hljs-comment"># Waits until all submitted tasks are completed.</span>
@@ -2451,7 +2451,7 @@ pg.quit()
 </code></pre></div></div>
 
 
-<div><h3 id="rect">Rect</h3><p><strong>Object for storing rectangular coordinates.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)        <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
+<div><h3 id="rect">Rect</h3><p><strong>Stores top-left corner, width and height.</strong></p><pre><code class="python language-python hljs">&lt;Rect&gt; = pg.Rect(x, y, width, height)        <span class="hljs-comment"># Creates Rect object. Truncates passed floats.</span>
 &lt;int&gt;  = &lt;Rect&gt;.x/y/centerx/centery          <span class="hljs-comment"># Also `top`, `right`, etc. Allows assignments.</span>
 &lt;tup.&gt; = &lt;Rect&gt;.topleft/center               <span class="hljs-comment"># Also `topright/bottomright/bottomleft/size`.</span>
 &lt;Rect&gt; = &lt;Rect&gt;.move((dx, dy))               <span class="hljs-comment"># Use move_ip() to move the rectangle in-place.</span>
@@ -2463,7 +2463,7 @@ pg.quit()
 &lt;int&gt;  = &lt;Rect&gt;.collidelist(&lt;Rects&gt;)         <span class="hljs-comment"># Returns index of first colliding Rect or -1.</span>
 &lt;list&gt; = &lt;Rect&gt;.collidelistall(&lt;Rects&gt;)      <span class="hljs-comment"># Returns indices of all colliding rectangles.</span>
 </code></pre>
-<div><h3 id="surface">Surface</h3><p><strong>Object for representing images.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.Surface((w, h))                  <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
+<div><h3 id="surface">Surface</h3><p><strong>An image or main window's surface.</strong></p><pre><code class="python language-python hljs">&lt;Surf&gt; = pg.Surface((w, h))                  <span class="hljs-comment"># New RGB surface. RGBA if `flags=pg.SRCALPHA`.</span>
 &lt;Surf&gt; = pg.display.set_mode((w, h))         <span class="hljs-comment"># Opens new window and returns surface object.</span>
 &lt;Surf&gt; = pg.image.load(&lt;path/file&gt;)          <span class="hljs-comment"># Loads the image. Also get_width/get_height().</span>
 &lt;Surf&gt; = &lt;Surf&gt;.subsurface(&lt;Rect&gt;)           <span class="hljs-comment"># Creates a new surface object from the cutout.</span>
