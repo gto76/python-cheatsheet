@@ -516,11 +516,11 @@ Numbers
 
 ### Math
 ```python
-import math
-<num> = math.pi/inf/nan                       # `inf*0` and `nan+1` return `nan`.
-<num> = math.sqrt/factorial(<num>)            # `sqrt(-1)` will raise ValueError.
-<num> = math.sin/cos/tan(<num>)               # Also degrees, radians, asin, etc.
-<num> = math.log/log10/log2(<num>)            # Log() can accept 'base' argument.
+import math as mt
+<num> = mt.pi/inf/nan                         # `inf*0` and `nan+1` return `nan`.
+<num> = mt.sqrt/factorial(<num>)              # `sqrt(-1)` will raise ValueError.
+<num> = mt.sin/cos/tan(<num>)                 # Also degrees, radians, asin, etc.
+<num> = mt.log/log10/log2(<num>)              # Log() can accept 'base' argument.
 ```
 
 ### Statistics
@@ -1019,21 +1019,23 @@ class Employee(Person):
 [Employee('Ann', 0), Person('Bob')]
 ```
 
-### Type Hints
+### Type Annotations
 **They are used by type checkers like [mypy](https://pypi.org/project/mypy/) and [Pydantic](https://pypi.org/project/pydantic/), however they are not enforced by CPython interpreter. To annotate a function use `'def f(a: int = 0) -> int: ...'`.**
 ```python
-from collections import abc
+from collections.abc import *
 
 <name>: <type> [| ...] [= <obj>]
-<name>: list/set/abc.Iterable/abc.Sequence[<type>] [= <obj>]
+<name>: list/set/Iterable/Sequence[<type>] [= <obj>]
 <name>: tuple/dict[<type>, ...] [= <obj>]
 ```
 
 ### Dataclass
-**Decorator that adds init(), repr() and eq() methods.**
+**It uses class variables to generate init(), repr() and eq() special methods.**
 ```python
 import dataclasses as dc
+```
 
+```python
 @dc.dataclass(order=False, frozen=False)
 class MyClass:
     <attr_name>: <type>
@@ -1077,7 +1079,7 @@ class Person:
 
 ```python
 class Point:
-    __slots__ = ['x', 'y']
+    __slots__ = ('x', 'y')
 ```
 
 ### Copy
@@ -1577,24 +1579,24 @@ Open
 
 ### File Object
 ```python
-<file>.seek(0)                  # Moves current position to the file's start.
-<file>.seek(offset)             # Moves 'offset' chars/bytes from the start.
-<file>.seek(0, 2)               # Moves current position to the end of file.
-<b_file>.seek(±offset, origin)  # Origin: 0 start, 1 current position, 2 end.
+<file>.seek(0)                    # Moves current position to the file's start.
+<file>.seek(offset)               # Moves 'offset' chars/bytes from the start.
+<file>.seek(0, 2)                 # Moves current position to the end of file.
+<b_file>.seek(±offset, origin)    # Origin: 0 start, 1 current position, 2 end.
 ```
 
 ```python
-<obj>  = <file>.read(size=-1)   # Reads 'size' chars/bytes or until the EOF.
-<obj>  = <file>.readline()      # Returns a line or empty string/bytes on EOF.
-<list> = <file>.readlines()     # Returns remaining lines. Also list(<file>).
-<obj>  = next(<file>)           # Returns a line using the read-ahead buffer.
+<obj>  = <file>.read(size=-1)     # Reads 'size' chars/bytes or until the EOF.
+<obj>  = <file>.readline()        # Returns a line or empty string/bytes on EOF.
+<list> = <file>.readlines()       # Returns remaining lines. Also list(<file>).
+<obj>  = next(<file>)             # Returns a line using the read-ahead buffer.
 ```
 
 ```python
-<file>.write(<obj>)             # Writes str or bytes object to write buffer.
-<file>.writelines(<coll>)       # Writes a coll. of strings or bytes objects.
-<file>.flush()                  # Flushes write buff. Runs every 4096/8192 B.
-<file>.close()                  # Closes a file after flushing write buffer.
+<file>.write(<obj>)               # Writes str or bytes object to write buffer.
+<file>.writelines(<coll>)         # Writes a coll. of strings or bytes objects.
+<file>.flush()                    # Flushes write buff. Runs every 4096/8192 B.
+<file>.close()                    # Closes a file after flushing write buffer.
 ```
 * **Methods do not add or strip trailing newlines, not even writelines().**
 
@@ -1828,7 +1830,7 @@ import csv
 * **Always pass `'newline=""'` argument to open(), or newlines embedded inside quoted fields will flip between '\n' and '\r\n' (in some cases '\r\n' may even change to '\r\r\n'). Also&nbsp;rows won't be terminated with passed or dialect's `'lineterminator'` parameter.**
 * **Open existing file with `'mode="a"'` to append to it or `'mode="w"'` to overwrite it.**
 
-### Parameters
+### Params
 * **`'dialect'` - Master parameter that sets the default values. String or a _csv.Dialect_ object.**
 * **`'delimiter'` - A one-character string that separates fields. Comma, tab, semicolon, etc.**
 * **`'lineterminator'` - Sets how writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.**
@@ -1899,7 +1901,7 @@ with <con>:                            # Exits the block with commit() or rollba
     <con>.execute('INSERT …')          # depending on whether any exception occurred.
 ```
 
-### Placeholders
+### Params
 ```python
 <con>.execute(<sql>, <list/tuple>)     # Replaces every '?' with corresponding item.
 <con>.execute(<sql>, <dict/namedtup>)  # Replaces every ':<key>' with matching value.
@@ -2378,6 +2380,7 @@ async def view(state, scr):
 if __name__ == '__main__':
     curses.wrapper(main)
 ```
+<br>
 
 
 Libraries
@@ -2616,7 +2619,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1        534.1    534.1     67.8      b = set(range(10_000))
 ```
 
-### Call and Flame Graphs
+### Visualizations
 ```bash
 $ apt install graphviz && pip3 install gprof2dot snakeviz  # Or install graphviz.exe.
 $ tail -n +2 test.py > test.tmp && mv test.tmp test.py     # Removes the first line.
@@ -2626,7 +2629,7 @@ $ xdg-open test.png                                        # Displays the call g
 $ snakeviz test.prof                                       # Displays a flame graph.
 ```
 
-### Sampling and Memory Profilers
+### Sampling Profilers
 ```text
 +--------------+-----------+-------------------------------+-------+------+
 | pip3 install |  Profiles |          How to run           | Lines | Live |

@@ -57,7 +57,7 @@
 <body style="margin-top: 17.1px">
   <div class="pagebreak"></div>
   <header>
-    <aside>July 26, 2026</aside>
+    <aside>July 27, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </header>
 
@@ -478,11 +478,11 @@ Point(x=<span class="hljs-number">1</span>, y=<span class="hljs-number">2</span>
 &lt;num&gt; = sum(&lt;coll_of_nums&gt;)                   <span class="hljs-comment"># Also `math.prod(&lt;coll_of_nums&gt;)`.</span>
 </code></pre></div>
 
-<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> math
-&lt;num&gt; = math.pi/inf/nan                       <span class="hljs-comment"># `inf*0` and `nan+1` return `nan`.</span>
-&lt;num&gt; = math.sqrt/factorial(&lt;num&gt;)            <span class="hljs-comment"># `sqrt(-1)` will raise ValueError.</span>
-&lt;num&gt; = math.sin/cos/tan(&lt;num&gt;)               <span class="hljs-comment"># Also degrees, radians, asin, etc.</span>
-&lt;num&gt; = math.log/log10/log2(&lt;num&gt;)            <span class="hljs-comment"># Log() can accept 'base' argument.</span>
+<div><h3 id="math">Math</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> math <span class="hljs-keyword">as</span> mt
+&lt;num&gt; = mt.pi/inf/nan                         <span class="hljs-comment"># `inf*0` and `nan+1` return `nan`.</span>
+&lt;num&gt; = mt.sqrt/factorial(&lt;num&gt;)              <span class="hljs-comment"># `sqrt(-1)` will raise ValueError.</span>
+&lt;num&gt; = mt.sin/cos/tan(&lt;num&gt;)                 <span class="hljs-comment"># Also degrees, radians, asin, etc.</span>
+&lt;num&gt; = mt.log/log10/log2(&lt;num&gt;)              <span class="hljs-comment"># Log() can accept 'base' argument.</span>
 </code></pre></div>
 
 <div><h3 id="statistics">Statistics</h3><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> statistics <span class="hljs-keyword">as</span> st
@@ -867,24 +867,24 @@ str/repr/print(MyDataClass(obj))
 <span class="hljs-meta">&gt;&gt;&gt; </span>sorted(people)
 [Employee(<span class="hljs-string">'Ann'</span>, <span class="hljs-number">0</span>), Person(<span class="hljs-string">'Bob'</span>)]
 </code></pre>
-<div><h3 id="typehints">Type Hints</h3><p><strong>They are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a> and <a href="https://pypi.org/project/pydantic/">Pydantic</a>, however they are not enforced by CPython interpreter. To annotate a function use <code class="python hljs"><span class="hljs-string">'def f(a: int = 0) -&gt; int: ...'</span></code>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> abc
+<div><h3 id="typeannotations">Type Annotations</h3><p><strong>They are used by type checkers like <a href="https://pypi.org/project/mypy/">mypy</a> and <a href="https://pypi.org/project/pydantic/">Pydantic</a>, however they are not enforced by CPython interpreter. To annotate a function use <code class="python hljs"><span class="hljs-string">'def f(a: int = 0) -&gt; int: ...'</span></code>.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> *
 
 &lt;name&gt;: &lt;type&gt; [| ...] [= &lt;obj&gt;]
-&lt;name&gt;: list/set/abc.Iterable/abc.Sequence[&lt;type&gt;] [= &lt;obj&gt;]
+&lt;name&gt;: list/set/Iterable/Sequence[&lt;type&gt;] [= &lt;obj&gt;]
 &lt;name&gt;: tuple/dict[&lt;type&gt;, ...] [= &lt;obj&gt;]
 </code></pre></div>
 
 
-<div><h3 id="dataclass">Dataclass</h3><p><strong>Decorator that adds init(), repr() and eq() methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> dataclasses <span class="hljs-keyword">as</span> dc
+<div><h3 id="dataclass">Dataclass</h3><p><strong>It uses class variables to generate init(), repr() and eq() special methods.</strong></p><pre><code class="python language-python hljs"><span class="hljs-keyword">import</span> dataclasses <span class="hljs-keyword">as</span> dc
+</code></pre></div>
 
-<span class="hljs-meta">@dc.dataclass(order=False, frozen=False)</span>
+
+<pre><code class="python language-python hljs"><span class="hljs-meta">@dc.dataclass(order=False, frozen=False)</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span>:</span>
     &lt;attr_name&gt;: &lt;type&gt;
     &lt;attr_name&gt;: &lt;type&gt; = &lt;obj&gt;
     &lt;attr_name&gt;: list = dc.field(default_factory=list)
-</code></pre></div>
-
-
+</code></pre>
 <ul>
 <li><strong>Objects can be made <a href="#sortable">sortable</a> with <code class="python hljs"><span class="hljs-string">'order=True'</span></code> and immutable with <code class="python hljs"><span class="hljs-string">'frozen=True'</span></code>.</strong></li>
 <li><strong>For object to be <a href="#hashable">hashable</a>, all attributes must be hashable and <code class="python hljs"><span class="hljs-string">'frozen'</span></code> must be <code class="python hljs"><span class="hljs-string">'True'</span></code>.</strong></li>
@@ -913,7 +913,7 @@ P = dc.make_dataclass(<span class="hljs-string">'P'</span>, [(<span class="hljs-
 <span class="hljs-string">'Guido van Rossum'</span>
 </code></pre>
 <div><h3 id="slots">Slots</h3><p><strong>Mechanism restricting objects to listed attributes.</strong></p><pre><code class="python language-python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>:</span>
-    __slots__ = [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>]
+    __slots__ = (<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>)
 </code></pre></div>
 
 
@@ -1346,25 +1346,25 @@ args  = p.parse_args()                                     <span class="hljs-com
 <li><strong><code class="python hljs"><span class="hljs-string">'FileExistsError'</span></code> exception can be raised when writing with <code class="python hljs"><span class="hljs-string">'x'</span></code>.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'IsADirectoryError'</span></code>, <code class="python hljs"><span class="hljs-string">'PermissionError'</span></code> can be raised by any.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'except OSError [as &lt;name&gt;]: …'</span></code> catches all listed exceptions.</strong></li>
-</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                  <span class="hljs-comment"># Moves current position to the file's start.</span>
-&lt;file&gt;.seek(offset)             <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
-&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)               <span class="hljs-comment"># Moves current position to the end of file.</span>
-&lt;b_file&gt;.seek(±offset, origin)  <span class="hljs-comment"># Origin: 0 start, 1 current position, 2 end.</span>
+</ul><div><h3 id="fileobject">File Object</h3><pre><code class="python language-python hljs">&lt;file&gt;.seek(<span class="hljs-number">0</span>)                    <span class="hljs-comment"># Moves current position to the file's start.</span>
+&lt;file&gt;.seek(offset)               <span class="hljs-comment"># Moves 'offset' chars/bytes from the start.</span>
+&lt;file&gt;.seek(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)                 <span class="hljs-comment"># Moves current position to the end of file.</span>
+&lt;b_file&gt;.seek(±offset, origin)    <span class="hljs-comment"># Origin: 0 start, 1 current position, 2 end.</span>
 </code></pre></div></div></div>
 
 
 
 
 
-<pre><code class="python language-python hljs">&lt;obj&gt;  = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)   <span class="hljs-comment"># Reads 'size' chars/bytes or until the EOF.</span>
-&lt;obj&gt;  = &lt;file&gt;.readline()      <span class="hljs-comment"># Returns a line or empty string/bytes on EOF.</span>
-&lt;list&gt; = &lt;file&gt;.readlines()     <span class="hljs-comment"># Returns remaining lines. Also list(&lt;file&gt;).</span>
-&lt;obj&gt;  = next(&lt;file&gt;)           <span class="hljs-comment"># Returns a line using the read-ahead buffer.</span>
+<pre><code class="python language-python hljs">&lt;obj&gt;  = &lt;file&gt;.read(size=<span class="hljs-number">-1</span>)     <span class="hljs-comment"># Reads 'size' chars/bytes or until the EOF.</span>
+&lt;obj&gt;  = &lt;file&gt;.readline()        <span class="hljs-comment"># Returns a line or empty string/bytes on EOF.</span>
+&lt;list&gt; = &lt;file&gt;.readlines()       <span class="hljs-comment"># Returns remaining lines. Also list(&lt;file&gt;).</span>
+&lt;obj&gt;  = next(&lt;file&gt;)             <span class="hljs-comment"># Returns a line using the read-ahead buffer.</span>
 </code></pre>
-<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;obj&gt;)             <span class="hljs-comment"># Writes str or bytes object to write buffer.</span>
-&lt;file&gt;.writelines(&lt;coll&gt;)       <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
-&lt;file&gt;.flush()                  <span class="hljs-comment"># Flushes write buff. Runs every 4096/8192 B.</span>
-&lt;file&gt;.close()                  <span class="hljs-comment"># Closes a file after flushing write buffer.</span>
+<pre><code class="python language-python hljs">&lt;file&gt;.write(&lt;obj&gt;)               <span class="hljs-comment"># Writes str or bytes object to write buffer.</span>
+&lt;file&gt;.writelines(&lt;coll&gt;)         <span class="hljs-comment"># Writes a coll. of strings or bytes objects.</span>
+&lt;file&gt;.flush()                    <span class="hljs-comment"># Flushes write buff. Runs every 4096/8192 B.</span>
+&lt;file&gt;.close()                    <span class="hljs-comment"># Closes a file after flushing write buffer.</span>
 </code></pre>
 <ul>
 <li><strong>Methods do not add or strip trailing newlines, not even writelines().</strong></li>
@@ -1527,7 +1527,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
 <li><strong>Always pass <code class="python hljs"><span class="hljs-string">'newline=""'</span></code> argument to open(), or newlines embedded inside quoted fields will flip between '\n' and '\r\n' (in some cases '\r\n' may even change to '\r\r\n'). Also&nbsp;rows won't be terminated with passed or dialect's <code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> parameter.</strong></li>
 <li><strong>Open existing file with <code class="python hljs"><span class="hljs-string">'mode="a"'</span></code> to append to it or <code class="python hljs"><span class="hljs-string">'mode="w"'</span></code> to overwrite it.</strong></li>
 </ul>
-<div><h3 id="parameters">Parameters</h3><ul>
+<div><h3 id="params">Params</h3><ul>
 <li><strong><code class="python hljs"><span class="hljs-string">'dialect'</span></code> - Master parameter that sets the default values. String or a <em>csv.Dialect</em> object.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'delimiter'</span></code> - A one-character string that separates fields. Comma, tab, semicolon, etc.</strong></li>
 <li><strong><code class="python hljs"><span class="hljs-string">'lineterminator'</span></code> - Sets how writer terminates rows. Reader looks for '\n', '\r' and '\r\n'.</strong></li>
@@ -1582,7 +1582,7 @@ CompletedProcess(args=<span class="hljs-string">'bc'</span>, returncode=<span cl
     &lt;con&gt;.execute(<span class="hljs-string">'INSERT …'</span>)          <span class="hljs-comment"># depending on whether any exception occurred.</span>
 </code></pre></div>
 
-<div><h3 id="placeholders">Placeholders</h3><pre><code class="python language-python hljs">&lt;con&gt;.execute(&lt;sql&gt;, &lt;list/tuple&gt;)     <span class="hljs-comment"># Replaces every '?' with corresponding item.</span>
+<div><h3 id="params-1">Params</h3><pre><code class="python language-python hljs">&lt;con&gt;.execute(&lt;sql&gt;, &lt;list/tuple&gt;)     <span class="hljs-comment"># Replaces every '?' with corresponding item.</span>
 &lt;con&gt;.execute(&lt;sql&gt;, &lt;dict/namedtup&gt;)  <span class="hljs-comment"># Replaces every ':&lt;key&gt;' with matching value.</span>
 &lt;con&gt;.executemany(&lt;sql&gt;, &lt;colls&gt;)      <span class="hljs-comment"># Executes statement once for each collection.</span>
 </code></pre></div>
@@ -1963,6 +1963,7 @@ W, H = <span class="hljs-number">15</span>, <span class="hljs-number">7</span>  
     curses.wrapper(main)
 </code></pre></div>
 
+<p><br></p>
 <div><h1 id="libraries" style="font-size: 64px;">Libraries</h1><div><h2 id="progressbar"><a href="#progressbar" name="progressbar">#</a>Progress Bar</h2><pre><code class="python language-python hljs"><span class="hljs-comment"># $ pip3 install tqdm</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> tqdm, time
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> tqdm.tqdm([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], desc=<span class="hljs-string">'Processing'</span>):
@@ -2148,7 +2149,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      4         1        534.1    534.1     67.8      b = set(range(10_000))
 </code></pre></div>
 
-<div><h3 id="callandflamegraphs">Call and Flame Graphs</h3><pre><code class="bash language-bash hljs">$ apt install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or install graphviz.exe.</span>
+<div><h3 id="visualizations">Visualizations</h3><pre><code class="bash language-bash hljs">$ apt install graphviz &amp;&amp; pip3 install gprof2dot snakeviz  <span class="hljs-comment"># Or install graphviz.exe.</span>
 $ tail -n +2 test.py &gt; test.tmp &amp;&amp; mv test.tmp test.py     <span class="hljs-comment"># Removes the first line.</span>
 $ python3 -m cProfile -o test.prof test.py                 <span class="hljs-comment"># Runs a tracing profiler.</span>
 $ gprof2dot -f pstats test.prof | dot -T png -o test.png   <span class="hljs-comment"># Generates a call graph.</span>
@@ -2156,7 +2157,7 @@ $ xdg-open test.png                                        <span class="hljs-com
 $ snakeviz test.prof                                       <span class="hljs-comment"># Displays a flame graph.</span>
 </code></pre></div>
 
-<div><h3 id="samplingandmemoryprofilers">Sampling and Memory Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━┯━━━━━━┓
+<div><h3 id="samplingprofilers">Sampling Profilers</h3><pre><code class="text language-text">┏━━━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━┯━━━━━━┓
 ┃ pip3 install │  Profiles │          How to run           │ Lines │ Live ┃
 ┠──────────────┼───────────┼───────────────────────────────┼───────┼──────┨
 ┃ pyinstrument │    CPU    │ pyinstrument test.py          │   ×   │  ×   ┃
@@ -2926,7 +2927,7 @@ $ deactivate                   <span class="hljs-comment"># Deactivates the curr
  
 
   <footer>
-    <aside>July 26, 2026</aside>
+    <aside>July 27, 2026</aside>
     <a href="https://gto76.github.io" rel="author">Jure Šorn</a>
   </footer>
 
